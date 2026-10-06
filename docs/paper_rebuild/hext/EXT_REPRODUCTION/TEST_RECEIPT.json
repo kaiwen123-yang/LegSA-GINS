@@ -1,0 +1,225 @@
+{
+  "status": "PASS_SYNTHETIC_EXT03_ADAPTER_AND_EXISTING_CORE",
+  "data_mode": "synthetic_tests",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "implementation_version": "EXT03_REPRODUCTION_OWN_TRANSMIT_EXACT_SIGNAL_V1",
+  "allowed_configuration": {
+    "system_mode": "GPS_BDS_DUAL_FREQUENCY",
+    "constraint_mode": "CONSTRAINED",
+    "baseline_sigma_m": 0.01,
+    "baseline_length_m": 0.35,
+    "baseline_length_source": "PROJECT_PHYSICAL_CONTRACT"
+  },
+  "attempts": [
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/paper_rebuild/test_ext_reproduction_ext03.py",
+        "tests/paper_rebuild/test_horizontal_ext03_yang2024.py",
+        "--junitxml=<EXT_REPRO_ROOT>/tests/EXT03_TEST_ATTEMPT_01.junit.xml"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 4.55302095413208,
+      "data_mode": "PURE_SYNTHETIC_TESTS",
+      "real_native_calls": 0,
+      "evaluator_calls": 0,
+      "real_provider_calls": 0,
+      "reference_reads": 0,
+      "attempt_id": "EXT03_TEST_ATTEMPT_01",
+      "counts_by_file": {
+        "tests.paper_rebuild.test_ext_reproduction_ext03": 17,
+        "tests.paper_rebuild.test_horizontal_ext03_yang2024": 33
+      },
+      "passed": 50,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "stdout_path": "<EXT_REPRO_ROOT>/tests/EXT03_TEST_ATTEMPT_01.log",
+      "stdout_sha256": "f8ddf2e8563d029f6420a85d9b5e520b969d30e10cdc46fe2afd515ce46546ce",
+      "junit_path": "<EXT_REPRO_ROOT>/tests/EXT03_TEST_ATTEMPT_01.junit.xml",
+      "native_mlambda_synthetic_requests": 1
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/paper_rebuild/test_ext_reproduction_ext03.py",
+        "tests/paper_rebuild/test_horizontal_ext03_yang2024.py",
+        "--junitxml=<EXT_REPRO_ROOT>/tests/EXT03_TEST_ATTEMPT_02.junit.xml"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 3.546299695968628,
+      "source_sha256_before": {
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext03.py": "6cb835602b004773fafab37a973b423c5dce23b8fefa5948c4177de65d815434",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "cb098fb05283fb923f8ced007e01c382c2f47f68ac8bcb9999068e4d5070f31e",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/phase3_runner.py": "2154774baaf3ad0426b1fe43726ff8b998bb6e7cc772765a6568ba5f2b2182e5",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/phase3_signal_inventory.py": "0e64aa14d6b7572323ad4d4cafc554b65e3002ee4ed36b7d6c6c359855090194",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "d72548fb9cea3f8d6075bd231ba9a2bb970f71382006edbec045a4c7ea8f6e5a",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+        "tests/paper_rebuild/test_ext_reproduction_ext03.py": "ed3bde26cd1c551f4b1f6f38d7b0d811d9cfcb5899ee6e593f03fe45b8d0e54a",
+        "tests/paper_rebuild/test_horizontal_ext03_yang2024.py": "a85ad1b2fe7b14df515145fe3a536efa2890a5c0f4fd8cafe74a67b29bccae4a"
+      },
+      "source_sha256_after": {
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext03.py": "6cb835602b004773fafab37a973b423c5dce23b8fefa5948c4177de65d815434",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "cb098fb05283fb923f8ced007e01c382c2f47f68ac8bcb9999068e4d5070f31e",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/phase3_runner.py": "2154774baaf3ad0426b1fe43726ff8b998bb6e7cc772765a6568ba5f2b2182e5",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/phase3_signal_inventory.py": "0e64aa14d6b7572323ad4d4cafc554b65e3002ee4ed36b7d6c6c359855090194",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "d72548fb9cea3f8d6075bd231ba9a2bb970f71382006edbec045a4c7ea8f6e5a",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+        "tests/paper_rebuild/test_ext_reproduction_ext03.py": "ed3bde26cd1c551f4b1f6f38d7b0d811d9cfcb5899ee6e593f03fe45b8d0e54a",
+        "tests/paper_rebuild/test_horizontal_ext03_yang2024.py": "a85ad1b2fe7b14df515145fe3a536efa2890a5c0f4fd8cafe74a67b29bccae4a"
+      },
+      "source_hashes_unchanged_during_test": true,
+      "data_mode": "PURE_SYNTHETIC_TESTS",
+      "real_native_calls": 0,
+      "evaluator_calls": 0,
+      "real_provider_calls": 0,
+      "reference_reads": 0,
+      "attempt_id": "EXT03_TEST_ATTEMPT_02",
+      "counts_by_file": {
+        "tests.paper_rebuild.test_ext_reproduction_ext03": 22,
+        "tests.paper_rebuild.test_horizontal_ext03_yang2024": 33
+      },
+      "passed": 55,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "stdout_path": "<EXT_REPRO_ROOT>/tests/EXT03_TEST_ATTEMPT_02.log",
+      "stdout_sha256": "0aa1fdfb1f2fc4b75e8577014a36b1171d2721a850daa208299ae1cad3d698f7",
+      "junit_path": "<EXT_REPRO_ROOT>/tests/EXT03_TEST_ATTEMPT_02.junit.xml",
+      "native_mlambda_synthetic_requests": 1
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/paper_rebuild/test_ext_reproduction_ext03.py",
+        "tests/paper_rebuild/test_horizontal_ext03_yang2024.py",
+        "--junitxml=<EXT_REPRO_ROOT>/tests/EXT03_TEST_ATTEMPT_03.junit.xml"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 3.493295431137085,
+      "source_sha256_before": {
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext03.py": "e4aff2090078caa76e46999f40c096e3bb1c56a824183494a88ce5515d6fca9d",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "cb098fb05283fb923f8ced007e01c382c2f47f68ac8bcb9999068e4d5070f31e",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/phase3_runner.py": "2154774baaf3ad0426b1fe43726ff8b998bb6e7cc772765a6568ba5f2b2182e5",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/phase3_signal_inventory.py": "0e64aa14d6b7572323ad4d4cafc554b65e3002ee4ed36b7d6c6c359855090194",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "d72548fb9cea3f8d6075bd231ba9a2bb970f71382006edbec045a4c7ea8f6e5a",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+        "tests/paper_rebuild/test_ext_reproduction_ext03.py": "f6247cbd64db1395a44095bc4a58525cba1d74dbaf2aeca35d65920714ffdd18",
+        "tests/paper_rebuild/test_horizontal_ext03_yang2024.py": "a85ad1b2fe7b14df515145fe3a536efa2890a5c0f4fd8cafe74a67b29bccae4a"
+      },
+      "source_sha256_after": {
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext03.py": "e4aff2090078caa76e46999f40c096e3bb1c56a824183494a88ce5515d6fca9d",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "cb098fb05283fb923f8ced007e01c382c2f47f68ac8bcb9999068e4d5070f31e",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/phase3_runner.py": "2154774baaf3ad0426b1fe43726ff8b998bb6e7cc772765a6568ba5f2b2182e5",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/phase3_signal_inventory.py": "0e64aa14d6b7572323ad4d4cafc554b65e3002ee4ed36b7d6c6c359855090194",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "d72548fb9cea3f8d6075bd231ba9a2bb970f71382006edbec045a4c7ea8f6e5a",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+        "tests/paper_rebuild/test_ext_reproduction_ext03.py": "f6247cbd64db1395a44095bc4a58525cba1d74dbaf2aeca35d65920714ffdd18",
+        "tests/paper_rebuild/test_horizontal_ext03_yang2024.py": "a85ad1b2fe7b14df515145fe3a536efa2890a5c0f4fd8cafe74a67b29bccae4a"
+      },
+      "source_hashes_unchanged_during_test": true,
+      "data_mode": "PURE_SYNTHETIC_TESTS",
+      "real_native_calls": 0,
+      "evaluator_calls": 0,
+      "real_provider_calls": 0,
+      "reference_reads": 0,
+      "synthetic_failure_examples": "<EXT_REPRO_ROOT>/tests/EXT03_TEST_ATTEMPT_03_evidence/EXT03_STAGE_FAILURE_EXAMPLES.json",
+      "attempt_id": "EXT03_TEST_ATTEMPT_03",
+      "counts_by_file": {
+        "tests.paper_rebuild.test_ext_reproduction_ext03": 24,
+        "tests.paper_rebuild.test_horizontal_ext03_yang2024": 33
+      },
+      "passed": 57,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "stdout_path": "<EXT_REPRO_ROOT>/tests/EXT03_TEST_ATTEMPT_03.log",
+      "stdout_sha256": "0b45147849292f4a3bbab74b2d5bed5d6d590487ae31a6a96b81d0d592e341a5",
+      "junit_path": "<EXT_REPRO_ROOT>/tests/EXT03_TEST_ATTEMPT_03.junit.xml",
+      "native_mlambda_synthetic_requests": 1
+    }
+  ],
+  "final_counts": {
+    "new_tests": 24,
+    "existing_core_tests_rerun": 33,
+    "passed": 57,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "execution_accounting": {
+    "pytest_processes": 3,
+    "test_case_executions": 162,
+    "native_mlambda_synthetic_requests": 3,
+    "native_solver_processes": 0,
+    "real_sequence_solver_calls": 0,
+    "native_spp_provider_calls": 0,
+    "real_raw_or_nav_payload_reads": 0,
+    "reference_reads": 0,
+    "evaluator_calls": 0,
+    "git_operations": 0
+  },
+  "library": {
+    "path": "<HX02_EXTERNAL_ROOT>/rtklib_bridge/lib/librtklib_legsa.so",
+    "recorded_sha256": "28c25b1cc7fade9b956bfdf77005de8fcb0a382c8411ae6e608c83b82bff53f2",
+    "hash_status": "SUPERVISOR_PREVERIFIED_NOT_REHASHED_BY_THIS_WORKER",
+    "recorded_source": "<EXT_REPRO_DOCS>/EXT01_SHARED_TEST_RECEIPT.json#/initial_run/lambda_library_sha256_newly_verified"
+  },
+  "test_environment": {
+    "PYTHONPATH": "<CODE_ROOT>/src",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "EXT_REPRO_LAMBDA_LIBRARY": "<HX02_EXTERNAL_ROOT>/rtklib_bridge/lib/librtklib_legsa.so",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "EXT_REPRO_TEST_EVIDENCE_DIR": "<EXT_REPRO_ROOT>/tests/EXT03_TEST_ATTEMPT_03_evidence"
+  },
+  "final_source_sha256": {
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext03.py": "e4aff2090078caa76e46999f40c096e3bb1c56a824183494a88ce5515d6fca9d",
+    "tests/paper_rebuild/test_ext_reproduction_ext03.py": "f6247cbd64db1395a44095bc4a58525cba1d74dbaf2aeca35d65920714ffdd18",
+    "docs/paper_rebuild/hext/EXT_REPRODUCTION/EXT03_IMPLEMENTATION.md": "217097be78d78746350ad9ad9ca72e5c2f3d710e14174b7b98e09771e7f91084"
+  },
+  "historical_attempt_disposition": "ATTEMPT_01 and ATTEMPT_02 retained unchanged. ATTEMPT_02 adds explicitly authorized raw tracking/pending adaptation; ATTEMPT_03 adds requested three-valued stage evidence without core changes. All three attempts passed; no test failure or tolerance relaxation occurred. Old test results were not reused.",
+  "negative_controls": [
+    "ratio immediately below 3",
+    "exact-pair/week/chronology rejection before SPP",
+    "SPP2 rejection preserving previous KF and successful SPP1 seed",
+    "lambda failure after raw flags",
+    "exact-signal switch surviving lambda failure",
+    "carrier-invalid to valid with no lock drop",
+    "half-cycle-invalid to valid with no lock drop",
+    "invalid raw flags during SPP2 failure",
+    "unused exact component pending preserved without applying to active component",
+    "SPP failure has exact false internal stages before core call; core exception retains null/UNKNOWN internal progress",
+    "ratio rejected float output retains true MLAMBDA/two-candidate completion evidence"
+  ],
+  "claim_limit": "Synthetic formula/history validation only; not paper performance reproduction or real-data applicability. Shared backend tests have their own supervisor receipt.",
+  "synthetic_failure_evidence": {
+    "path": "<EXT_REPRO_ROOT>/tests/EXT03_TEST_ATTEMPT_03_evidence/EXT03_STAGE_FAILURE_EXAMPLES.json",
+    "sha256": "472cd36d1dcbfb91ac0b451125068fb70960c94d03095639ae17572e51ba1581",
+    "record_count": 2,
+    "data_mode": "synthetic_tests",
+    "scientific_results": false
+  }
+}

@@ -1,0 +1,154 @@
+[
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-11-16-59_minimal/userio-raw.csv",
+    "sha256": "48f98bcdaac6ff32dfe30906fda5207e719b179a789a58d795e8536d1d5f1b3e",
+    "bytes": 9170133,
+    "rows": 26711,
+    "message_counts": {
+      "FP_A-ODOMETRY": 3659,
+      "FP_A-ODOMSTATUS": 3659,
+      "FP_A-LLH": 3659,
+      "NOV_B-INSPVAX": 3659,
+      "NMEA-GP-RMC": 3659,
+      "NMEA-GP-HDT": 3659,
+      "NMEA-GP-GGA": 4025,
+      "FP_A-TF": 732
+    },
+    "TF_issues": {},
+    "scope": "message names and TF metadata only; odometry/reference values not decoded",
+    "TF_checked_messages": 732
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-11-25-11_minimal/userio-raw.csv",
+    "sha256": "475dd7407dfa62da622e6187b3c382300e485330a5cdcfab3e38ca6e79a536b5",
+    "bytes": 9056209,
+    "rows": 26360,
+    "message_counts": {
+      "FP_A-ODOMETRY": 3611,
+      "FP_A-ODOMSTATUS": 3611,
+      "FP_A-LLH": 3611,
+      "NOV_B-INSPVAX": 3611,
+      "NMEA-GP-RMC": 3611,
+      "NMEA-GP-HDT": 3611,
+      "NMEA-GP-GGA": 3972,
+      "FP_A-TF": 722
+    },
+    "TF_issues": {},
+    "scope": "message names and TF metadata only; odometry/reference values not decoded",
+    "TF_checked_messages": 722
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-11-32-27_minimal/userio-raw.csv",
+    "sha256": "ab391de00223f162d50b29de1b19ddffc66404b9a36dbf86090ab7069826168f",
+    "bytes": 9605799,
+    "rows": 27976,
+    "message_counts": {
+      "FP_A-ODOMETRY": 3832,
+      "FP_A-ODOMSTATUS": 3832,
+      "FP_A-LLH": 3832,
+      "NOV_B-INSPVAX": 3832,
+      "NMEA-GP-RMC": 3832,
+      "NMEA-GP-HDT": 3832,
+      "NMEA-GP-GGA": 4216,
+      "FP_A-TF": 768
+    },
+    "TF_issues": {},
+    "scope": "message names and TF metadata only; odometry/reference values not decoded",
+    "TF_checked_messages": 768
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-11-39-50_minimal/userio-raw.csv",
+    "sha256": "efd2ae8ee9433839cf5df86e51bb3fb9845175fb376ae3fb3bfc32c3f9c9882a",
+    "bytes": 8927963,
+    "rows": 25981,
+    "message_counts": {
+      "FP_A-ODOMETRY": 3559,
+      "FP_A-ODOMSTATUS": 3559,
+      "FP_A-LLH": 3559,
+      "NOV_B-INSPVAX": 3559,
+      "NMEA-GP-RMC": 3559,
+      "NMEA-GP-HDT": 3559,
+      "NMEA-GP-GGA": 3915,
+      "FP_A-TF": 712
+    },
+    "TF_issues": {},
+    "scope": "message names and TF metadata only; odometry/reference values not decoded",
+    "TF_checked_messages": 712
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-12-25-13_minimal/userio-raw.csv",
+    "sha256": "9faeb0f8f7faf22f19c946870c1ab03415cef89ae1c59abf3a646df02d129bc0",
+    "bytes": 10186171,
+    "rows": 29586,
+    "message_counts": {
+      "FP_A-ODOMETRY": 4053,
+      "FP_A-ODOMSTATUS": 4053,
+      "FP_A-LLH": 4053,
+      "NOV_B-INSPVAX": 4053,
+      "NMEA-GP-RMC": 4053,
+      "NMEA-GP-HDT": 4053,
+      "NMEA-GP-GGA": 4458,
+      "FP_A-TF": 810
+    },
+    "TF_issues": {},
+    "scope": "message names and TF metadata only; odometry/reference values not decoded",
+    "TF_checked_messages": 810
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-12-33-29_minimal/userio-raw.csv",
+    "sha256": "160cedf7a85c5876776b65d8be686652575c9352462e27117d9018442dd8f362",
+    "bytes": 9492115,
+    "rows": 27469,
+    "message_counts": {
+      "FP_A-ODOMETRY": 3763,
+      "FP_A-ODOMSTATUS": 3763,
+      "FP_A-LLH": 3763,
+      "NOV_B-INSPVAX": 3763,
+      "NMEA-GP-RMC": 3763,
+      "NMEA-GP-HDT": 3763,
+      "NMEA-GP-GGA": 4139,
+      "FP_A-TF": 752
+    },
+    "TF_issues": {},
+    "scope": "message names and TF metadata only; odometry/reference values not decoded",
+    "TF_checked_messages": 752
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-12-40-53_minimal/userio-raw.csv",
+    "sha256": "e75e483af36827155cee0f349125d5192283347b0406d51ff3392a8196968682",
+    "bytes": 8861768,
+    "rows": 25651,
+    "message_counts": {
+      "FP_A-ODOMETRY": 3514,
+      "FP_A-ODOMSTATUS": 3514,
+      "FP_A-LLH": 3514,
+      "NOV_B-INSPVAX": 3514,
+      "NMEA-GP-RMC": 3514,
+      "NMEA-GP-HDT": 3514,
+      "NMEA-GP-GGA": 3865,
+      "FP_A-TF": 702
+    },
+    "TF_issues": {},
+    "scope": "message names and TF metadata only; odometry/reference values not decoded",
+    "TF_checked_messages": 702
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-12-49-30_minimal/userio-raw.csv",
+    "sha256": "89e0c36b118b4f04c83e3447196c83ea8cc5551e00553becc6a0edfb87b87e2b",
+    "bytes": 8989523,
+    "rows": 26002,
+    "message_counts": {
+      "FP_A-ODOMETRY": 3562,
+      "FP_A-ODOMSTATUS": 3562,
+      "FP_A-LLH": 3562,
+      "NOV_B-INSPVAX": 3562,
+      "NMEA-GP-RMC": 3562,
+      "NMEA-GP-HDT": 3562,
+      "NMEA-GP-GGA": 3918,
+      "FP_A-TF": 712
+    },
+    "TF_issues": {},
+    "scope": "message names and TF metadata only; odometry/reference values not decoded",
+    "TF_checked_messages": 712
+  }
+]

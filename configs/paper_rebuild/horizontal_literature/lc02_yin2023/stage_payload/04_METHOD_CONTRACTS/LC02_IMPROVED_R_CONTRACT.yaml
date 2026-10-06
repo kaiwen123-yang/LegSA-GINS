@@ -1,0 +1,38 @@
+schema_version: lc02.improved_r.v1
+paper_general_formula: "R_k = PDOP^a Q^b r_k^2"
+paper_selected_exponents: {a: 2, b: 1}
+paper_selected_formula: "R_k = PDOP^2 Q r_k^2"
+measurement_order: [north, east, down]
+r:
+  paper_semantics: "GNSS position standard deviations in N/E/D"
+  units: m
+  scalar_per_axis_provenance_class: PAPER_DIRECT
+  derived_matrix: "diag(r_N^2, r_E^2, r_D^2)"
+  derived_matrix_basis: "Figure 7 describes the diagonal elements; no cross-covariance equation is printed"
+  derived_matrix_provenance_class: PAPER_DERIVED
+Q:
+  type: scalar_measurement_factor
+  registry: LC02_MEASUREMENT_FACTOR_Q_REGISTRY.csv
+  units: dimensionless
+PDOP:
+  units: dimensionless
+  source: UBX_NAV_PVT_pDOP
+  provenance_class: BY2_PHYSICAL_INSTANTIATION
+by2_selected_covariance:
+  source: UBX_NAV_COV
+  paper_faithful_active_form: "R_k=PDOP^2 Q diag(C_NN,C_EE,C_DD)"
+  full_covariance_available: true
+  off_diagonal_use_online: false
+  reason: "The paper prints per-direction r^2 but no cross-covariance rule; the full covariance is retained for audit only."
+  provenance_class: BY2_PHYSICAL_INSTANTIATION
+validity:
+  require_finite: true
+  require_PDOP_gt_zero: true
+  require_Q_unique: true
+  require_positive_variances: true
+  require_posCovValid: true
+  missing_or_ambiguous_policy: reject_epoch_fail_closed
+  policy_provenance_class: PAPER_DERIVED
+  paper_prints_floor_or_cap: false
+  paper_floor_or_cap: null
+  omitted_bound_provenance_class: CURRENTLY_UNKNOWN

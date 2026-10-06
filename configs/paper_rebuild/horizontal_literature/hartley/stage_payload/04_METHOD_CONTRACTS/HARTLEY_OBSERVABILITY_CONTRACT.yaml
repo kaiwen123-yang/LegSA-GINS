@@ -1,0 +1,78 @@
+schema_version: 1
+contract_id: LSE01_HARTLEY_IDEAL_OBSERVABILITY
+contract_status: ANALYTICAL_CONTRACT_CLOSED_NUMERICAL_EXPERIMENT_NOT_EXECUTED
+
+scope:
+  source_type: PAPER_DIRECT
+  formulation: WORLD_CENTRIC_RIGHT_INVARIANT
+  biases: EXCLUDED_FROM_IDEAL_DERIVATION
+  measurements:
+    - IMU_PROPAGATION
+    - RELATIVE_POINT_CONTACT_FORWARD_KINEMATICS
+  external_position_or_heading: false
+
+state_ordering_single_contact:
+  - xi_R
+  - xi_v
+  - xi_p
+  - xi_d
+block_dimension: 3
+state_dimension_single_contact: 12
+
+linear_system:
+  source_type: PAPER_DIRECT
+  gravity_cross: skew_g
+  A_block_rows:
+    - [ZERO, ZERO, ZERO, ZERO]
+    - [SKEW_G, ZERO, ZERO, ZERO]
+    - [ZERO, IDENTITY, ZERO, ZERO]
+    - [ZERO, ZERO, ZERO, ZERO]
+  H_block_row: [ZERO, ZERO, MINUS_IDENTITY, PLUS_IDENTITY]
+  nilpotency_degree: 3
+  Phi_block_rows:
+    - [IDENTITY, ZERO, ZERO, ZERO]
+    - [SKEW_G_TIMES_DT, IDENTITY, ZERO, ZERO]
+    - [ONE_HALF_SKEW_G_TIMES_DT_SQUARED, IDENTITY_TIMES_DT, IDENTITY, ZERO]
+    - [ZERO, ZERO, ZERO, IDENTITY]
+  observability_block_at_time_t:
+    - MINUS_ONE_HALF_SKEW_G_TIMES_T_SQUARED
+    - MINUS_IDENTITY_TIMES_T
+    - MINUS_IDENTITY
+    - PLUS_IDENTITY
+
+known_gauge:
+  source_type: PAPER_DERIVED
+  total_nullity: 4
+  translation_nullity: 3
+  gravity_axis_rotation_nullity: 1
+  single_contact_basis:
+    yaw_about_gravity: [UNIT_GRAVITY_AXIS, ZERO, ZERO, ZERO]
+    translation_x: [ZERO, ZERO, E_X, E_X]
+    translation_y: [ZERO, ZERO, E_Y, E_Y]
+    translation_z: [ZERO, ZERO, E_Z, E_Z]
+  multi_contact_translation_rule: REPEAT_THE_SAME_TRANSLATION_IN_XI_P_AND_EVERY_XI_D_I
+  expected_generic_rank_single_contact: 8
+  expected_generic_rank_N_contacts: 5_plus_3N
+  expected_state_dimension_N_contacts: 9_plus_3N
+
+exact_statement: GLOBAL_POSITION_AND_ROTATION_ABOUT_GRAVITY_ARE_UNOBSERVABLE
+absolute_yaw_metric: NOT_APPLICABLE_WITH_OBSERVABILITY_PROOF
+
+claim_guards:
+  infer_from_large_yaw_error: false
+  infer_from_covariance_growth_only: false
+  extend_to_valid_external_heading_systems: false
+  contact_creates_north_reference: false
+  bias_augmented_rank_equals_ideal_without_analysis: false
+
+contact_boundary_rule:
+  stack_across_state_dimension_change_without_map: false
+  allowed:
+    - KEEP_WINDOW_WITHIN_CONSTANT_CONTACT_ID_SET
+    - TERMINATE_WINDOW_AT_BOUNDARY
+    - USE_EXPLICIT_PAPER_F_OR_M_STATE_MAP
+
+h0_h2_execution:
+  numerical_observability_run: false
+  gauge_ensemble_run: false
+  by2_filter_run: false

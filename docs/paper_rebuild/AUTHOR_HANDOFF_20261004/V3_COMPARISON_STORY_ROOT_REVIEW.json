@@ -1,0 +1,13 @@
+{
+  "reviewed_utc": "2026-10-04T11:10:55.254355+00:00",
+  "new_files": 34,
+  "prior_frozen_files_unchanged": 56,
+  "source_pins": 33,
+  "byte_copies": 20,
+  "metric_rows": 126,
+  "exact_identity_numeric_token_fields": 1008,
+  "new_story_fully_read": true,
+  "final_entry_canonical_yaw_checked": true,
+  "science_or_raw_reference_calls": 0,
+  "all_checks_passed": true
+}

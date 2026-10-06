@@ -1,0 +1,998 @@
+{
+  "scope": "N16_ONLY__RUN_00004",
+  "source_summary": "<VALIDATION_ROOT>/analysis/comparisons/N16_ONLY__RUN_00004/SUMMARY.json",
+  "delta_direction": "candidate minus baseline",
+  "actual_R_rule": "EKF_BEFORE.R only",
+  "first_measurements": {
+    "FIRST_ACTUAL_R_ABOVE_FIXED_TOLERANCE": {
+      "stable_key": "[1,\"go2_horizontal_velocity\",66.200000048]",
+      "status": "PAIRED",
+      "differences": {
+        "actual_R": {
+          "status": "DIFFERENT",
+          "max_abs_delta": 0.008822967122000001,
+          "delta": [
+            [
+              -0.008822967122000001,
+              0.0
+            ],
+            [
+              0.0,
+              -0.008822967122000001
+            ]
+          ],
+          "within_fixed_R_tolerance": false
+        },
+        "actual_delta": {
+          "status": "DIFFERENT",
+          "max_abs_delta": 0.017740952409057847,
+          "delta": [
+            3.709447171525697e-06,
+            1.6692955629563e-05,
+            2.0488420008593823e-06,
+            -0.0029700910355740257,
+            -0.017740952409057847,
+            2.4522772923649234e-06,
+            5.833384903119261e-05,
+            -9.76499247259112e-06,
+            -2.6053652280883498e-05,
+            -1.2606982671309843e-11,
+            2.1772771327362714e-12,
+            9.255995140179077e-12,
+            -1.4149122447210687e-06,
+            -8.04737715472098e-06,
+            -5.703189574064759e-08,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "dx_after": {
+          "status": "DIFFERENT",
+          "max_abs_delta": 0.017740952409057847,
+          "delta": [
+            3.709447171484914e-06,
+            1.6692955629560302e-05,
+            2.048842000834661e-06,
+            -0.0029700910355739962,
+            -0.017740952409057847,
+            2.4522772923696312e-06,
+            5.833384903119261e-05,
+            -9.764992472591086e-06,
+            -2.6053652280882793e-05,
+            -1.2606982671309847e-11,
+            2.1772771327362618e-12,
+            9.255995140179271e-12,
+            -1.4149122447210442e-06,
+            -8.04737715472098e-06,
+            -5.703189574064965e-08,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "baseline": {
+        "source": "go2_horizontal_velocity",
+        "gnss_input_seq": 1,
+        "measurement_time": 66.200000048,
+        "imu_seq": 43,
+        "attempt_pointer": {
+          "byte_length": 1407,
+          "byte_offset": 551387,
+          "event": "MEASUREMENT_ATTEMPT",
+          "event_seq": 296,
+          "run_id": "RUN_00004",
+          "source_line": 296,
+          "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl"
+        },
+        "decision": {
+          "accepted": true,
+          "reason": "ACCEPTED"
+        },
+        "decision_pointer": {
+          "byte_length": 702,
+          "byte_offset": 587927,
+          "event": "MEASUREMENT_DECISION",
+          "event_seq": 302,
+          "run_id": "RUN_00004",
+          "source_line": 302,
+          "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl"
+        },
+        "sa_pointer": {
+          "byte_length": 10187,
+          "byte_offset": 561039,
+          "event": "SA_EVALUATION",
+          "event_seq": 299,
+          "run_id": "RUN_00004",
+          "source_line": 299,
+          "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl"
+        },
+        "sa_begin_pointer": {
+          "byte_length": 7054,
+          "byte_offset": 553985,
+          "event": "SA_EVALUATION_BEGIN",
+          "event_seq": 298,
+          "run_id": "RUN_00004",
+          "source_line": 298,
+          "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl"
+        },
+        "counters_before": {
+          "gnss_update_count": 0,
+          "hv_update_count": 0,
+          "position_update_count": 1,
+          "raw_doppler_update_count": 1,
+          "rp_update_count": 0,
+          "sa_active_evaluation_count": 4,
+          "velocity_update_count": 1,
+          "yaw_attempt_count": 1,
+          "yaw_reject_count": 0
+        },
+        "counters_after": {
+          "gnss_update_count": 0,
+          "hv_update_count": 1,
+          "position_update_count": 1,
+          "raw_doppler_update_count": 1,
+          "rp_update_count": 0,
+          "sa_active_evaluation_count": 5,
+          "velocity_update_count": 1,
+          "yaw_attempt_count": 1,
+          "yaw_reject_count": 0
+        },
+        "sa": {
+          "metadata": {
+            "ant_state": "available",
+            "ant_valid": true,
+            "baseline_length_m": 0,
+            "covariance_available": true,
+            "go2_contact_label": "",
+            "go2_impact_or_rough": false,
+            "go2_in_place_turn": false,
+            "go2_motion_state": "UNKNOWN",
+            "go2_readiness_flag": true,
+            "go2_readiness_low": false,
+            "go2_readiness_metadata_available": false,
+            "go2_readiness_score": 1,
+            "go2_stance_stable": false,
+            "provider_status": "available",
+            "quality_flag": "clean_raw_go2_weak_auxiliary",
+            "rel_acc_m": 0,
+            "rel_valid": true,
+            "residual_norm": 0.817493061869897,
+            "sat_count": 0,
+            "source": "go2_horizontal_velocity",
+            "spike_candidate": false,
+            "std_xyz": [
+              0.132838,
+              0.132838,
+              999
+            ],
+            "time": 66.19904589653,
+            "time_diff_sec": -0.0009541514700117659,
+            "valid": true,
+            "yaw_std_rad": 0.017453292519943295
+          },
+          "expected_basis": "raw_dz",
+          "raw_dz": [
+            -0.7734415180376596,
+            -0.2647321748126207
+          ],
+          "conditional_nu": [
+            -0.059223455915090706,
+            -0.3536816516605228
+          ],
+          "Hdx_before": [
+            -0.7142180621225689,
+            0.08894947684790211
+          ],
+          "raw_nis": 25.198662026785208,
+          "conditional_nis": 4.848996806519777,
+          "recomputed_actual_nis": 25.198662026785208,
+          "recomputed_actual_normalized": 3.5495536357960003,
+          "base_R": {
+            "cols": 2,
+            "data": [
+              0.017645934244000003,
+              0,
+              0,
+              0.017645934244000003
+            ],
+            "layout": "row_major",
+            "rows": 2
+          },
+          "sa_effective_R": {
+            "cols": 2,
+            "data": [
+              0.035291868488000006,
+              0,
+              0,
+              0.035291868488000006
+            ],
+            "layout": "row_major",
+            "rows": 2
+          },
+          "checks": {
+            "base_R_trace": true,
+            "dof": true,
+            "hph_trace": true,
+            "nis": true,
+            "normalized": true,
+            "residual_norm": true,
+            "sa_effective_R": true,
+            "same_pre_policy_snapshot": true,
+            "uses_cov": true
+          },
+          "scales": {
+            "lsim_R_scale": 2,
+            "oim_R_scale": 1.1512241238161658,
+            "combined_R_scale": 2,
+            "source_cap": 10,
+            "accepted": true,
+            "rejected": false,
+            "reason_codes": [
+              "lsim_quality_flag_suspicious",
+              "lsim_go2_horizontal_velocity_std_high",
+              "oim_moderate_normalized_innovation",
+              "oim_go2_horizontal_velocity_innovation_suspicious"
+            ]
+          }
+        },
+        "ekf": {
+          "before_pointer": {
+            "byte_length": 7784,
+            "byte_offset": 571226,
+            "event": "EKF_BEFORE",
+            "event_seq": 300,
+            "run_id": "RUN_00004",
+            "source_line": 300,
+            "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl"
+          },
+          "after_pointer": {
+            "byte_length": 8917,
+            "byte_offset": 579010,
+            "event": "EKF_AFTER",
+            "event_seq": 301,
+            "run_id": "RUN_00004",
+            "source_line": 301,
+            "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl"
+          },
+          "R": {
+            "cols": 2,
+            "data": [
+              0.035291868488000006,
+              0,
+              0,
+              0.035291868488000006
+            ],
+            "layout": "row_major",
+            "rows": 2
+          },
+          "actual_Hdx": [
+            -0.7142180621225689,
+            0.08894947684790211
+          ],
+          "actual_innovation": [
+            -0.059223455915090706,
+            -0.3536816516605228
+          ],
+          "actual_delta": [
+            1.4858572179955586e-05,
+            6.686961562936929e-05,
+            8.207274149617263e-06,
+            -0.011896675749392077,
+            -0.07106787140890793,
+            9.823412699738003e-06,
+            0.00023367756177332573,
+            -3.911359795921552e-05,
+            -0.00010437141422565412,
+            -5.05018941945038e-11,
+            8.721084049176313e-12,
+            3.707961060504008e-11,
+            -5.667444130880486e-06,
+            -3.223671589838025e-05,
+            -2.2845965714536911e-07,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "dx_before": [
+            -0.4509537240096939,
+            -0.16587231259231233,
+            -0.3649014448515279,
+            -0.7142180621225689,
+            0.08894947684790211,
+            -0.15577742698294575,
+            -0.00020145786893901936,
+            -0.0017643435314705956,
+            -0.004879152240770479,
+            2.7949143258460774e-11,
+            2.938893276108365e-10,
+            1.6362579295331998e-09,
+            -0.0003239814062266187,
+            4.340841906228699e-05,
+            -7.256767270985811e-05,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "dx_after": [
+            -0.45093886543751394,
+            -0.16580544297668295,
+            -0.3648932375773783,
+            -0.726114737871961,
+            0.017881605438994183,
+            -0.15576760357024602,
+            3.221969283430636e-05,
+            -0.0018034571294298111,
+            -0.004983523654996134,
+            -2.2552750936043026e-11,
+            3.0261041166001285e-10,
+            1.6733375401382398e-09,
+            -0.0003296488503574992,
+            1.1171703163906738e-05,
+            -7.279613236700348e-05,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "checks": {
+            "actual_Hdx": true,
+            "actual_nu": true
+          }
+        }
+      },
+      "candidate": {
+        "source": "go2_horizontal_velocity",
+        "gnss_input_seq": 1,
+        "measurement_time": 66.200000048,
+        "imu_seq": 43,
+        "attempt_pointer": {
+          "byte_length": 1417,
+          "byte_offset": 612286,
+          "event": "MEASUREMENT_ATTEMPT",
+          "event_seq": 339,
+          "run_id": "N16_ONLY__RUN_00004",
+          "source_line": 339,
+          "source_path": "<VALIDATION_ROOT>/candidates/N16_ONLY/RUN_00004/observer/events.jsonl"
+        },
+        "decision": {
+          "accepted": true,
+          "reason": "ACCEPTED"
+        },
+        "decision_pointer": {
+          "byte_length": 712,
+          "byte_offset": 648995,
+          "event": "MEASUREMENT_DECISION",
+          "event_seq": 345,
+          "run_id": "N16_ONLY__RUN_00004",
+          "source_line": 345,
+          "source_path": "<VALIDATION_ROOT>/candidates/N16_ONLY/RUN_00004/observer/events.jsonl"
+        },
+        "sa_pointer": {
+          "byte_length": 10299,
+          "byte_offset": 621968,
+          "event": "SA_EVALUATION",
+          "event_seq": 342,
+          "run_id": "N16_ONLY__RUN_00004",
+          "source_line": 342,
+          "source_path": "<VALIDATION_ROOT>/candidates/N16_ONLY/RUN_00004/observer/events.jsonl"
+        },
+        "sa_begin_pointer": {
+          "byte_length": 7064,
+          "byte_offset": 614904,
+          "event": "SA_EVALUATION_BEGIN",
+          "event_seq": 341,
+          "run_id": "N16_ONLY__RUN_00004",
+          "source_line": 341,
+          "source_path": "<VALIDATION_ROOT>/candidates/N16_ONLY/RUN_00004/observer/events.jsonl"
+        },
+        "counters_before": {
+          "gnss_update_count": 0,
+          "hv_update_count": 0,
+          "position_update_count": 1,
+          "raw_doppler_update_count": 1,
+          "rp_update_count": 0,
+          "sa_active_evaluation_count": 4,
+          "velocity_update_count": 1,
+          "yaw_attempt_count": 1,
+          "yaw_reject_count": 0
+        },
+        "counters_after": {
+          "gnss_update_count": 0,
+          "hv_update_count": 1,
+          "position_update_count": 1,
+          "raw_doppler_update_count": 1,
+          "rp_update_count": 0,
+          "sa_active_evaluation_count": 5,
+          "velocity_update_count": 1,
+          "yaw_attempt_count": 1,
+          "yaw_reject_count": 0
+        },
+        "sa": {
+          "metadata": {
+            "ant_state": "available",
+            "ant_valid": true,
+            "baseline_length_m": 0,
+            "covariance_available": true,
+            "go2_contact_label": "",
+            "go2_impact_or_rough": false,
+            "go2_in_place_turn": false,
+            "go2_motion_state": "UNKNOWN",
+            "go2_readiness_flag": true,
+            "go2_readiness_low": false,
+            "go2_readiness_metadata_available": false,
+            "go2_readiness_score": 1,
+            "go2_stance_stable": false,
+            "provider_status": "available",
+            "quality_flag": "clean_raw_go2_weak_auxiliary",
+            "rel_acc_m": 0,
+            "rel_valid": true,
+            "residual_norm": 0.817493061869897,
+            "sat_count": 0,
+            "source": "go2_horizontal_velocity",
+            "spike_candidate": false,
+            "std_active_axes": [
+              true,
+              true,
+              false
+            ],
+            "std_xyz": [
+              0.132838,
+              0.132838,
+              999
+            ],
+            "time": 66.19904589653,
+            "time_diff_sec": -0.0009541514700117659,
+            "valid": true,
+            "yaw_std_rad": 0.017453292519943295
+          },
+          "expected_basis": "raw_dz",
+          "raw_dz": [
+            -0.7734415180376596,
+            -0.2647321748126207
+          ],
+          "conditional_nu": [
+            -0.059223455915090706,
+            -0.3536816516605228
+          ],
+          "Hdx_before": [
+            -0.7142180621225689,
+            0.08894947684790211
+          ],
+          "raw_nis": 25.198662026785208,
+          "conditional_nis": 4.848996806519777,
+          "recomputed_actual_nis": 25.198662026785208,
+          "recomputed_actual_normalized": 3.5495536357960003,
+          "base_R": {
+            "cols": 2,
+            "data": [
+              0.017645934244000003,
+              0,
+              0,
+              0.017645934244000003
+            ],
+            "layout": "row_major",
+            "rows": 2
+          },
+          "sa_effective_R": {
+            "cols": 2,
+            "data": [
+              0.026468901366000004,
+              0,
+              0,
+              0.026468901366000004
+            ],
+            "layout": "row_major",
+            "rows": 2
+          },
+          "checks": {
+            "base_R_trace": true,
+            "dof": true,
+            "hph_trace": true,
+            "logged_residual_vector": true,
+            "nis": true,
+            "normalized": true,
+            "residual_norm": true,
+            "sa_effective_R": true,
+            "same_pre_policy_snapshot": true,
+            "uses_cov": true
+          },
+          "scales": {
+            "lsim_R_scale": 1.5,
+            "oim_R_scale": 1.1512241238161658,
+            "combined_R_scale": 1.5,
+            "source_cap": 10,
+            "accepted": true,
+            "rejected": false,
+            "reason_codes": [
+              "lsim_quality_flag_suspicious",
+              "oim_moderate_normalized_innovation",
+              "oim_go2_horizontal_velocity_innovation_suspicious"
+            ]
+          }
+        },
+        "ekf": {
+          "before_pointer": {
+            "byte_length": 7794,
+            "byte_offset": 632267,
+            "event": "EKF_BEFORE",
+            "event_seq": 343,
+            "run_id": "N16_ONLY__RUN_00004",
+            "source_line": 343,
+            "source_path": "<VALIDATION_ROOT>/candidates/N16_ONLY/RUN_00004/observer/events.jsonl"
+          },
+          "after_pointer": {
+            "byte_length": 8934,
+            "byte_offset": 640061,
+            "event": "EKF_AFTER",
+            "event_seq": 344,
+            "run_id": "N16_ONLY__RUN_00004",
+            "source_line": 344,
+            "source_path": "<VALIDATION_ROOT>/candidates/N16_ONLY/RUN_00004/observer/events.jsonl"
+          },
+          "R": {
+            "cols": 2,
+            "data": [
+              0.026468901366000004,
+              0,
+              0,
+              0.026468901366000004
+            ],
+            "layout": "row_major",
+            "rows": 2
+          },
+          "actual_Hdx": [
+            -0.7142180621225689,
+            0.08894947684790211
+          ],
+          "actual_innovation": [
+            -0.059223455915090706,
+            -0.3536816516605228
+          ],
+          "actual_delta": [
+            1.8568019351481283e-05,
+            8.356257125893229e-05,
+            1.0256116150476645e-05,
+            -0.014866766784966103,
+            -0.08880882381796577,
+            1.2275689992102927e-05,
+            0.00029201141080451834,
+            -4.887859043180664e-05,
+            -0.00013042506650653762,
+            -6.310887686581364e-11,
+            1.0898361181912584e-11,
+            4.633560574521916e-11,
+            -7.082356375601554e-06,
+            -4.028409305310123e-05,
+            -2.854915528860167e-07,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "dx_before": [
+            -0.4509537240096939,
+            -0.16587231259231233,
+            -0.3649014448515279,
+            -0.7142180621225689,
+            0.08894947684790211,
+            -0.15577742698294575,
+            -0.00020145786893901936,
+            -0.0017643435314705956,
+            -0.004879152240770479,
+            2.7949143258460774e-11,
+            2.938893276108365e-10,
+            1.6362579295331998e-09,
+            -0.0003239814062266187,
+            4.340841906228699e-05,
+            -7.256767270985811e-05,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "dx_after": [
+            -0.45093515599034245,
+            -0.1657887500210534,
+            -0.36489118873537746,
+            -0.729084828907535,
+            0.00014065302993633566,
+            -0.15576515129295365,
+            9.055354186549898e-05,
+            -0.0018132221219024022,
+            -0.005009577307277017,
+            -3.515973360735287e-11,
+            3.047876887927491e-10,
+            1.682593535278419e-09,
+            -0.00033106376260222023,
+            3.1243260091857582e-06,
+            -7.285316426274413e-05,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "checks": {
+            "actual_Hdx": true,
+            "actual_nu": true
+          }
+        }
+      }
+    },
+    "FIRST_ACTUAL_ACCEPTANCE_DIFFERENCE": null
+  },
+  "registered_D15_old_shadow_control_keys": {},
+  "data_mode": "real_clean",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "first_common_IMU_end_state": {
+    "candidate": {
+      "counters": {
+        "gnss_update_count": 1,
+        "hv_update_count": 1,
+        "position_update_count": 1,
+        "raw_doppler_update_count": 1,
+        "rp_update_count": 1,
+        "sa_active_evaluation_count": 6,
+        "velocity_update_count": 1,
+        "yaw_attempt_count": 1,
+        "yaw_reject_count": 0
+      },
+      "end_boundary": "COVARIANCE_HEALTH",
+      "feedback_count": 1,
+      "health_pointer": {
+        "byte_length": 1366,
+        "byte_offset": 691149,
+        "event": "COVARIANCE_HEALTH",
+        "event_seq": 356,
+        "run_id": "N16_ONLY__RUN_00004",
+        "source_line": 356,
+        "source_path": "<VALIDATION_ROOT>/candidates/N16_ONLY/RUN_00004/observer/events.jsonl"
+      },
+      "imu_seq": 43,
+      "initialized": true,
+      "opportunity_pointer": {
+        "byte_length": 1912,
+        "byte_offset": 452321,
+        "event": "IMU_OPPORTUNITY",
+        "event_seq": 304,
+        "run_id": "N16_ONLY__RUN_00004",
+        "source_line": 304,
+        "source_path": "<VALIDATION_ROOT>/candidates/N16_ONLY/RUN_00004/observer/events.jsonl"
+      },
+      "propagation_count": 1,
+      "res": 2,
+      "split_count": 0,
+      "state": {
+        "Cbn": [
+          [
+            0.9998576660555634,
+            0.016846670289634196,
+            -0.0009150574155941853
+          ],
+          [
+            -0.01685948150247887,
+            0.9997216825481843,
+            -0.01650197947202344
+          ],
+          [
+            0.0006367993318545213,
+            0.01651505807376609,
+            0.9998634143438948
+          ]
+        ],
+        "acc_bias": [
+          -0.0003325238481781051,
+          1.7067264730316208e-05,
+          -7.24128646093019e-05
+        ],
+        "acc_scale": [
+          0,
+          0,
+          0
+        ],
+        "antlever_m": [
+          0.03,
+          0.03,
+          -0.3
+        ],
+        "gyr_bias": [
+          -5.165200084548513e-09,
+          -2.313160676552653e-10,
+          1.6516797410101878e-09
+        ],
+        "gyr_scale": [
+          0,
+          0,
+          0
+        ],
+        "position_blh_rad_m": [
+          0.6978670030231852,
+          2.0305706456046613,
+          41.43403442528971
+        ],
+        "qbn_wxyz": [
+          0.9999303429424025,
+          0.008254834393922219,
+          -0.00038799121318846104,
+          -0.008427124956756762
+        ],
+        "rpy_rad": [
+          0.016515812254071793,
+          -0.0006367993748929716,
+          6.266325023460285
+        ],
+        "time": 66.199046,
+        "velocity_ned_mps": [
+          0.8552662260323615,
+          0.030144129295489226,
+          0.07487163096497532
+        ]
+      },
+      "state_pointer": {
+        "byte_length": 1584,
+        "byte_offset": 689565,
+        "event": "FEEDBACK_AFTER",
+        "event_seq": 355,
+        "run_id": "N16_ONLY__RUN_00004",
+        "source_line": 355,
+        "source_path": "<VALIDATION_ROOT>/candidates/N16_ONLY/RUN_00004/observer/events.jsonl"
+      },
+      "time": 66.199046
+    },
+    "baseline": {
+      "counters": {
+        "gnss_update_count": 1,
+        "hv_update_count": 1,
+        "position_update_count": 1,
+        "raw_doppler_update_count": 1,
+        "rp_update_count": 1,
+        "sa_active_evaluation_count": 6,
+        "velocity_update_count": 1,
+        "yaw_attempt_count": 1,
+        "yaw_reject_count": 0
+      },
+      "end_boundary": "NEXT_IMU_INPUT_OR_OPPORTUNITY_OR_EOF",
+      "feedback_count": 1,
+      "imu_seq": 43,
+      "initialized": true,
+      "opportunity_pointer": {
+        "byte_length": 1902,
+        "byte_offset": 392298,
+        "event": "IMU_OPPORTUNITY",
+        "event_seq": 261,
+        "run_id": "RUN_00004",
+        "source_line": 261,
+        "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl"
+      },
+      "propagation_count": 1,
+      "res": 2,
+      "split_count": 0,
+      "state": {
+        "Cbn": [
+          [
+            0.9998581076397982,
+            0.016820718283511987,
+            -0.0009099579047985378
+          ],
+          [
+            -0.01683343073507049,
+            0.999722592797838,
+            -0.016473404604263796
+          ],
+          [
+            0.0006326109779034518,
+            0.016486384867366193,
+            0.9998638901957384
+          ]
+        ],
+        "acc_bias": [
+          -0.000331103290064467,
+          2.513338383926211e-05,
+          -7.23544170182189e-05
+        ],
+        "acc_scale": [
+          0,
+          0,
+          0
+        ],
+        "antlever_m": [
+          0.03,
+          0.03,
+          -0.3
+        ],
+        "gyr_bias": [
+          -5.162582880208702e-09,
+          -2.317371681235938e-10,
+          1.642397276775876e-09
+        ],
+        "gyr_scale": [
+          0,
+          0,
+          0
+        ],
+        "position_blh_rad_m": [
+          0.6978670030235339,
+          2.030570645606251,
+          41.43403342005906
+        ],
+        "qbn_wxyz": [
+          0.999930571419008,
+          0.008240519495482705,
+          -0.0003856689971267005,
+          -0.008414121435157157
+        ],
+        "rpy_rad": [
+          0.016487135093743107,
+          -0.0006326110200982584,
+          6.266351077975166
+        ],
+        "time": 66.199046,
+        "velocity_ned_mps": [
+          0.8522941490160663,
+          0.012422117698271371,
+          0.07487283519201987
+        ]
+      },
+      "state_pointer": {
+        "byte_length": 1576,
+        "byte_offset": 628262,
+        "event": "FEEDBACK_AFTER",
+        "event_seq": 312,
+        "run_id": "RUN_00004",
+        "source_line": 312,
+        "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl"
+      },
+      "time": 66.199046
+    },
+    "state_delta": {
+      "position_blh_rad_m": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 1.0052306507191133e-06,
+        "delta": [
+          -3.4872105203476167e-13,
+          -1.5898393712632242e-12,
+          1.0052306507191133e-06
+        ],
+        "unit": "rad,rad,m"
+      },
+      "velocity_ned_mps": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 0.017722011597217854,
+        "delta": [
+          0.002972077016295205,
+          0.017722011597217854,
+          -1.2042270445544734e-06
+        ],
+        "unit": "m/s"
+      },
+      "rpy_rad": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 2.8677160328685614e-05,
+        "delta": [
+          2.8677160328685614e-05,
+          -4.188354794713162e-06,
+          -2.6054514880691215e-05
+        ],
+        "unit": "rad"
+      },
+      "Cbn": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 2.8673206399897067e-05,
+        "delta": [
+          [
+            -4.4158423484486065e-07,
+            2.5952006122209603e-05,
+            -5.099510795647478e-06
+          ],
+          [
+            -2.6050767408379583e-05,
+            -9.102496537627403e-07,
+            -2.857486775964535e-05
+          ],
+          [
+            4.18835395106943e-06,
+            2.8673206399897067e-05,
+            -4.7585184359544286e-07
+          ]
+        ],
+        "unit": "dimensionless"
+      },
+      "qbn_wxyz": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 1.4314898439513404e-05,
+        "delta": [
+          -2.2847660552383076e-07,
+          1.4314898439513404e-05,
+          -2.3222160617605197e-06,
+          -1.30035215996048e-05
+        ],
+        "unit": "dimensionless"
+      },
+      "gyr_bias": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 9.282464234311904e-12,
+        "delta": [
+          -2.6172043398110185e-12,
+          4.2110046832849085e-13,
+          9.282464234311904e-12
+        ],
+        "unit": "rad/s"
+      },
+      "acc_bias": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 8.066119108945902e-06,
+        "delta": [
+          -1.4205581136381195e-06,
+          -8.066119108945902e-06,
+          -5.844759108300382e-08
+        ],
+        "unit": "m/s^2"
+      },
+      "gyr_scale": {
+        "status": "EXACTLY_EQUAL",
+        "max_abs_delta": 0.0,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "unit": "dimensionless"
+      },
+      "acc_scale": {
+        "status": "EXACTLY_EQUAL",
+        "max_abs_delta": 0.0,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "unit": "dimensionless"
+      },
+      "antlever_m": {
+        "status": "EXACTLY_EQUAL",
+        "max_abs_delta": 0.0,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "unit": "m"
+      }
+    },
+    "same_recorded_state_time": true,
+    "propagation_counts": {
+      "candidate": 1,
+      "baseline": 1
+    },
+    "split_counts": {
+      "candidate": 0,
+      "baseline": 0
+    },
+    "feedback_counts": {
+      "candidate": 1,
+      "baseline": 1
+    }
+  }
+}

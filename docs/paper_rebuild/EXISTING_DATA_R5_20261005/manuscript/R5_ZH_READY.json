@@ -1,0 +1,19 @@
+{
+  "status": "COMPLETE_CHINESE_TEXT_AND_DOCX",
+  "body_sections": 6,
+  "tables": 6,
+  "display_equations": 6,
+  "references": 13,
+  "chinese_characters": 7769,
+  "source": {
+    "path": "manuscript_gps_solutions_r5_zh.md",
+    "sha256": "8da19b82a98b8ea1356a241464d07f087e02bc3fcfc62cadfa486850c1757f60"
+  },
+  "docx": {
+    "path": "论文初稿_中文_R5.docx",
+    "sha256": "6d4e2ee15754646e747292f009a264090ec9579ed3fbc7583864ac313bdc3ae5"
+  },
+  "final_visual_review": "R5_ZH_FINAL_VISUAL_QA.csv",
+  "original_V3_values_preserved": true,
+  "additional_records_included": 8
+}

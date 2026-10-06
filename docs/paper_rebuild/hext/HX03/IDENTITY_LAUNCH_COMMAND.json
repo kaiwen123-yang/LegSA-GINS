@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "env",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "PYTHONPATH=/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/src",
+    "OPENBLAS_NUM_THREADS=1",
+    "OMP_NUM_THREADS=1",
+    "MKL_NUM_THREADS=1",
+    "NUMEXPR_NUM_THREADS=1",
+    "GIT_OPTIONAL_LOCKS=0",
+    "TMPDIR=/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03_PREPARE",
+    "strace",
+    "-yy",
+    "-s",
+    "4096",
+    "-e",
+    "trace=openat,execve",
+    "-o",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX03_DEGRADATION/00_CONTROL/CONTROLLER_IDENTITY_OPENAT.strace",
+    "python3",
+    "-B",
+    "scripts/paper_rebuild/hx03_execute.py",
+    "--identity-only"
+  ],
+  "launch_script_sha256": "f79a665831687c380a5e388b288011b1028ab9a2c43f0f414e17c41b55c2e7b5"
+}

@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "tests_passed": 3,
+  "runtime_seconds": 0.38,
+  "source": "tests/paper_rebuild/test_hx03r2_observer.py",
+  "source_sha256": "1128b57b02b2268378c155f71fc079842460179375015b2855497d37265d602e",
+  "pytest_command": "python3 -m pytest -q -p no:cacheprovider --basetemp=$SCRATCH/HX03R2/unit_tmp tests/paper_rebuild/test_hx03r2_observer.py",
+  "scope": "synthetic arrays only; not the requested real-data observer validation",
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "reference_opens": 0
+}

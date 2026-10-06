@@ -1,0 +1,248 @@
+{
+  "BY2/EXT01": {
+    "EXT01": {
+      "compared_epochs": 1077,
+      "definition": "wrap180(method body yaw - (GNSS2-GNSS1 HPPOSECEF baseline heading + 90 deg)) on method-valid epochs where both receivers report carrSoln == 2",
+      "fractions": {
+        "within_20_of_0": 0.12349117920148561,
+        "within_20_of_180": 0.2776230269266481,
+        "within_20_of_plus_minus_90": 0.12627669452181986
+      },
+      "hard_stop": false,
+      "mean_circular_deg": 143.83376830911067,
+      "median_deg": 36.70815552525076,
+      "median_near_180": false,
+      "median_near_plus_minus_90": false,
+      "status": "PASS"
+    }
+  },
+  "BY2/EXT02": {
+    "EXT02": {
+      "compared_epochs": 1057,
+      "definition": "wrap180(method body yaw - (GNSS2-GNSS1 HPPOSECEF baseline heading + 90 deg)) on method-valid epochs where both receivers report carrSoln == 2",
+      "fractions": {
+        "within_20_of_0": 0.12204351939451277,
+        "within_20_of_180": 0.2781456953642384,
+        "within_20_of_plus_minus_90": 0.12677388836329234
+      },
+      "hard_stop": false,
+      "mean_circular_deg": 144.2728277969451,
+      "median_deg": 36.97838559208924,
+      "median_near_180": false,
+      "median_near_plus_minus_90": false,
+      "status": "PASS"
+    }
+  },
+  "BY2/EXT03": {
+    "EXT03": {
+      "compared_epochs": 609,
+      "definition": "wrap180(method body yaw - (GNSS2-GNSS1 HPPOSECEF baseline heading + 90 deg)) on method-valid epochs where both receivers report carrSoln == 2",
+      "fractions": {
+        "within_20_of_0": 0.2561576354679803,
+        "within_20_of_180": 0.12807881773399016,
+        "within_20_of_plus_minus_90": 0.029556650246305417
+      },
+      "hard_stop": false,
+      "mean_circular_deg": -24.691485524864493,
+      "median_deg": -16.71663920575645,
+      "median_near_180": false,
+      "median_near_plus_minus_90": false,
+      "status": "PASS"
+    }
+  },
+  "BY2/EXT04": {
+    "EXT04_FAR": {
+      "compared_epochs": 0,
+      "hard_stop": false,
+      "median_deg": null,
+      "status": "UNAVAILABLE_NO_METHOD_VALID_DUAL_FIXED_EPOCH"
+    },
+    "EXT04_PAR": {
+      "compared_epochs": 0,
+      "hard_stop": false,
+      "median_deg": null,
+      "status": "UNAVAILABLE_NO_METHOD_VALID_DUAL_FIXED_EPOCH"
+    }
+  },
+  "BY2/RTKLIB": {
+    "RTKLIB": {
+      "compared_epochs": 177,
+      "definition": "wrap180(method body yaw - (GNSS2-GNSS1 HPPOSECEF baseline heading + 90 deg)) on method-valid epochs where both receivers report carrSoln == 2",
+      "fractions": {
+        "within_20_of_0": 0.9887005649717514,
+        "within_20_of_180": 0.0,
+        "within_20_of_plus_minus_90": 0.0
+      },
+      "hard_stop": false,
+      "mean_circular_deg": -0.3813096905361226,
+      "median_deg": 0.24094291617024055,
+      "median_near_180": false,
+      "median_near_plus_minus_90": false,
+      "status": "PASS"
+    }
+  },
+  "BY2H/EXT01": {
+    "EXT01": {
+      "compared_epochs": 1112,
+      "definition": "wrap180(method body yaw - (GNSS2-GNSS1 HPPOSECEF baseline heading + 90 deg)) on method-valid epochs where both receivers report carrSoln == 2",
+      "fractions": {
+        "within_20_of_0": 0.18255395683453238,
+        "within_20_of_180": 0.18794964028776978,
+        "within_20_of_plus_minus_90": 0.14928057553956833
+      },
+      "hard_stop": false,
+      "mean_circular_deg": -117.52696281406452,
+      "median_deg": -9.724604083180424,
+      "median_near_180": false,
+      "median_near_plus_minus_90": false,
+      "status": "PASS"
+    }
+  },
+  "BY2H/EXT02": {
+    "EXT02": {
+      "compared_epochs": 1081,
+      "definition": "wrap180(method body yaw - (GNSS2-GNSS1 HPPOSECEF baseline heading + 90 deg)) on method-valid epochs where both receivers report carrSoln == 2",
+      "fractions": {
+        "within_20_of_0": 0.18316373728029603,
+        "within_20_of_180": 0.18593894542090658,
+        "within_20_of_plus_minus_90": 0.1498612395929695
+      },
+      "hard_stop": false,
+      "mean_circular_deg": -113.19310655793899,
+      "median_deg": -9.48000494697149,
+      "median_near_180": false,
+      "median_near_plus_minus_90": false,
+      "status": "PASS"
+    }
+  },
+  "BY2H/EXT03": {
+    "EXT03": {
+      "compared_epochs": 513,
+      "definition": "wrap180(method body yaw - (GNSS2-GNSS1 HPPOSECEF baseline heading + 90 deg)) on method-valid epochs where both receivers report carrSoln == 2",
+      "fractions": {
+        "within_20_of_0": 0.15789473684210525,
+        "within_20_of_180": 0.04483430799220273,
+        "within_20_of_plus_minus_90": 0.24366471734892786
+      },
+      "hard_stop": false,
+      "mean_circular_deg": -23.366674260827097,
+      "median_deg": -19.814650850963233,
+      "median_near_180": false,
+      "median_near_plus_minus_90": false,
+      "status": "PASS"
+    }
+  },
+  "BY2H/EXT04": {
+    "EXT04_FAR": {
+      "compared_epochs": 0,
+      "hard_stop": false,
+      "median_deg": null,
+      "status": "UNAVAILABLE_NO_METHOD_VALID_DUAL_FIXED_EPOCH"
+    },
+    "EXT04_PAR": {
+      "compared_epochs": 0,
+      "hard_stop": false,
+      "median_deg": null,
+      "status": "UNAVAILABLE_NO_METHOD_VALID_DUAL_FIXED_EPOCH"
+    }
+  },
+  "BY2H/RTKLIB": {
+    "RTKLIB": {
+      "compared_epochs": 180,
+      "definition": "wrap180(method body yaw - (GNSS2-GNSS1 HPPOSECEF baseline heading + 90 deg)) on method-valid epochs where both receivers report carrSoln == 2",
+      "fractions": {
+        "within_20_of_0": 0.9333333333333333,
+        "within_20_of_180": 0.005555555555555556,
+        "within_20_of_plus_minus_90": 0.027777777777777776
+      },
+      "hard_stop": false,
+      "mean_circular_deg": -2.5304340024150593,
+      "median_deg": 0.5392950582533445,
+      "median_near_180": false,
+      "median_near_plus_minus_90": false,
+      "status": "PASS"
+    }
+  },
+  "BY2O/EXT01": {
+    "EXT01": {
+      "compared_epochs": 1513,
+      "definition": "wrap180(method body yaw - (GNSS2-GNSS1 HPPOSECEF baseline heading + 90 deg)) on method-valid epochs where both receivers report carrSoln == 2",
+      "fractions": {
+        "within_20_of_0": 0.15598149372108394,
+        "within_20_of_180": 0.0991407799074686,
+        "within_20_of_plus_minus_90": 0.23331130204890946
+      },
+      "hard_stop": false,
+      "mean_circular_deg": -33.09458624934323,
+      "median_deg": -13.418657570043706,
+      "median_near_180": false,
+      "median_near_plus_minus_90": false,
+      "status": "PASS"
+    }
+  },
+  "BY2O/EXT02": {
+    "EXT02": {
+      "compared_epochs": 1462,
+      "definition": "wrap180(method body yaw - (GNSS2-GNSS1 HPPOSECEF baseline heading + 90 deg)) on method-valid epochs where both receivers report carrSoln == 2",
+      "fractions": {
+        "within_20_of_0": 0.15800273597811218,
+        "within_20_of_180": 0.09370725034199727,
+        "within_20_of_plus_minus_90": 0.23666210670314639
+      },
+      "hard_stop": false,
+      "mean_circular_deg": -31.992146432408,
+      "median_deg": -13.917135276787747,
+      "median_near_180": false,
+      "median_near_plus_minus_90": false,
+      "status": "PASS"
+    }
+  },
+  "BY2O/EXT03": {
+    "EXT03": {
+      "compared_epochs": 493,
+      "definition": "wrap180(method body yaw - (GNSS2-GNSS1 HPPOSECEF baseline heading + 90 deg)) on method-valid epochs where both receivers report carrSoln == 2",
+      "fractions": {
+        "within_20_of_0": 0.05476673427991886,
+        "within_20_of_180": 0.05273833671399594,
+        "within_20_of_plus_minus_90": 0.02231237322515213
+      },
+      "hard_stop": false,
+      "mean_circular_deg": 55.52837637489506,
+      "median_deg": 45.92095301976053,
+      "median_near_180": false,
+      "median_near_plus_minus_90": false,
+      "status": "PASS"
+    }
+  },
+  "BY2O/EXT04": {
+    "EXT04_FAR": {
+      "compared_epochs": 0,
+      "hard_stop": false,
+      "median_deg": null,
+      "status": "UNAVAILABLE_NO_METHOD_VALID_DUAL_FIXED_EPOCH"
+    },
+    "EXT04_PAR": {
+      "compared_epochs": 0,
+      "hard_stop": false,
+      "median_deg": null,
+      "status": "UNAVAILABLE_NO_METHOD_VALID_DUAL_FIXED_EPOCH"
+    }
+  },
+  "BY2O/RTKLIB": {
+    "RTKLIB": {
+      "compared_epochs": 165,
+      "definition": "wrap180(method body yaw - (GNSS2-GNSS1 HPPOSECEF baseline heading + 90 deg)) on method-valid epochs where both receivers report carrSoln == 2",
+      "fractions": {
+        "within_20_of_0": 0.9878787878787879,
+        "within_20_of_180": 0.012121212121212121,
+        "within_20_of_plus_minus_90": 0.0
+      },
+      "hard_stop": false,
+      "mean_circular_deg": 0.9726895940699993,
+      "median_deg": 1.1095636346372544,
+      "median_near_180": false,
+      "median_near_plus_minus_90": false,
+      "status": "PASS"
+    }
+  }
+}

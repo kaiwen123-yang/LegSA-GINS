@@ -8,36 +8,68 @@
 #include "legsa_v23_port_core/fileio/imu_file_loader.hpp"
 
 #include <fstream>
+#include <cmath>
 #include <sstream>
 #include <stdexcept>
 
 namespace legsa_v23_port_core {
 
-ImuFileLoader::ImuFileLoader(const std::string& path) : rows_(loadSevenColumn(path)) {}
+ImuFileLoader::ImuFileLoader(const std::string& path, std::size_t expected_columns)
+    : rows_(loadSevenColumn(path, expected_columns)) {}
 
-// 中文说明：读取 7 列 IMU 增量输入；本函数不会读取 final_v23 输出或 trace。
-std::vector<ImuData> ImuFileLoader::loadSevenColumn(const std::string& path) {
+// Seven columns retain the frozen legacy convention. Eight columns explicitly
+// carry measured duration and require continuous support; a gap must be handled
+// by the caller's declared restart policy, never by stretching an increment.
+std::vector<ImuData> ImuFileLoader::loadSevenColumn(const std::string& path, std::size_t expected_columns) {
   std::ifstream input(path);
   if (!input) {
     throw std::runtime_error("failed to open IMU file: " + path);
   }
   std::vector<ImuData> rows;
+  std::size_t columns = 0;
   std::string line;
   while (std::getline(input, line)) {
     if (line.empty() || line[0] == '#') {
       continue;
     }
     std::istringstream stream(line);
-    ImuData imu;
-    stream >> imu.time >> imu.dtheta[0] >> imu.dtheta[1] >> imu.dtheta[2] >> imu.dvel[0] >>
-        imu.dvel[1] >> imu.dvel[2];
-    if (stream) {
-      if (!rows.empty()) {
-        imu.dt = imu.time - rows.back().time;
+    std::vector<double> values;
+    std::string token;
+    while (stream >> token) {
+      std::size_t used = 0;
+      const double value = std::stod(token, &used);
+      if (used != token.size() || !std::isfinite(value)) {
+        throw std::runtime_error("IMU_INVALID_NUMERIC_TOKEN");
       }
-      // 中文说明：process_data 已完成 Go2 FLU->FRD，这里只读取增量，不做坐标二次转换。
-      rows.push_back(imu);
+      values.push_back(value);
     }
+    if (values.size() != 7 && values.size() != 8) {
+      throw std::runtime_error("IMU_EXPECTED_SEVEN_OR_EIGHT_COLUMNS");
+    }
+    if (expected_columns && values.size() != expected_columns) {
+      throw std::runtime_error("IMU_CONFIG_DURATION_SCHEMA_MISMATCH");
+    }
+    if (columns && columns != values.size()) {
+      throw std::runtime_error("IMU_MIXED_DURATION_SCHEMAS");
+    }
+    columns = values.size();
+    ImuData imu;
+    imu.time = values[0];
+    for (std::size_t axis = 0; axis < 3; ++axis) {
+      imu.dtheta[axis] = values[axis + 1];
+      imu.dvel[axis] = values[axis + 4];
+    }
+    const double elapsed = rows.empty() ? 0.0 : imu.time - rows.back().time;
+    if (!rows.empty() && elapsed <= 0.0) {
+      throw std::runtime_error("IMU_TIME_NOT_STRICTLY_INCREASING");
+    }
+    imu.dt = columns == 8 ? values[7] : elapsed;
+    if (columns == 8 && (imu.dt <= 0.0 ||
+        (!rows.empty() && std::fabs(elapsed - imu.dt) > 1.1e-6))) {
+      throw std::runtime_error("IMU_INCREMENT_DURATION_DISCONTINUITY");
+    }
+    // process_data already performed FLU->FRD; no second frame transform.
+    rows.push_back(imu);
   }
   return rows;
 }

@@ -1,0 +1,22 @@
+{
+  "schema": "root.all-native.seal.review.v1",
+  "all_required_new_FGO_natives_sealed": true,
+  "reviewed_native_seal_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/ALL_NATIVE_SEALED.json",
+  "reviewed_native_seal_sha256": "3af7f0c6d010d83c2ea6763f97189ae702cb761d374cb7410ce9fd51c14423ab",
+  "new_native_count": 3,
+  "reused_original_full_batch_count": 6,
+  "reference_opens_new_and_reuse": 0,
+  "preregistered_blocks_attempted": {
+    "BY2": 1,
+    "BY2H": 3,
+    "BY2O": 7
+  },
+  "source_snapshot_per_member_checks": 2622,
+  "B_control_rows_independent_exact_checked": 285,
+  "original_solver_events_exact_checked": 285,
+  "new_native_strace_literal_reference_paths_and_basenames_absent": true,
+  "reviewer_raw_reference_reads": 0,
+  "reviewer_native_invocations": 0,
+  "review_source_sha256": "f5053ed72d6c1f96fbf993b33edc4d6a0bea11e0ea582d723ae202a80725f84f",
+  "scope": "native identity and access; not a truth/accuracy certificate"
+}

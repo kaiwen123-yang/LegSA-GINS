@@ -1,0 +1,8 @@
+output_column,source_column,source_path,source_json_pointer_rule,numeric_values,unit
+horizontal_rmse_m,horizontal_rmse_m,<V3_ROOT>/FINAL_EVALUATION_RECORDS.json,ORIGINAL_RUN_VALUES.source_json_pointer + '/' + source_column,original CSV strings unchanged;__FIELD_ABSENT__ remains missing,m
+position_3d_rmse_m,position_3d_rmse_m,<V3_ROOT>/FINAL_EVALUATION_RECORDS.json,ORIGINAL_RUN_VALUES.source_json_pointer + '/' + source_column,original CSV strings unchanged;__FIELD_ABSENT__ remains missing,m
+up_rmse_m,up_rmse_m,<V3_ROOT>/FINAL_EVALUATION_RECORDS.json,ORIGINAL_RUN_VALUES.source_json_pointer + '/' + source_column,original CSV strings unchanged;__FIELD_ABSENT__ remains missing,m
+yaw_rmse_deg,yaw_rmse_deg,<V3_ROOT>/FINAL_EVALUATION_RECORDS.json,ORIGINAL_RUN_VALUES.source_json_pointer + '/' + source_column,original CSV strings unchanged;__FIELD_ABSENT__ remains missing,deg
+yaw_p95_absolute_deg,yaw_p95_absolute_deg,<V3_ROOT>/FINAL_EVALUATION_RECORDS.json,ORIGINAL_RUN_VALUES.source_json_pointer + '/' + source_column,original CSV strings unchanged;__FIELD_ABSENT__ remains missing,deg
+roll_rmse_deg,roll_rmse_deg,<V3_ROOT>/FINAL_EVALUATION_RECORDS.json,ORIGINAL_RUN_VALUES.source_json_pointer + '/' + source_column,original CSV strings unchanged;__FIELD_ABSENT__ remains missing,deg
+pitch_rmse_deg,pitch_rmse_deg,<V3_ROOT>/FINAL_EVALUATION_RECORDS.json,ORIGINAL_RUN_VALUES.source_json_pointer + '/' + source_column,original CSV strings unchanged;__FIELD_ABSENT__ remains missing,deg

@@ -1,0 +1,170 @@
+{
+  "created_utc": "2026-10-05T05:06:29.873702+00:00",
+  "input_preregistration_sha256": "cf4ffe2126501ad994aed07965d1eb32b80046a0c380bdb79dbb43a987ed38fd",
+  "all_sequence_methods": 11,
+  "exposed_members": 22,
+  "internal_gaps": 7,
+  "sequences": {
+    "BY2H": {
+      "window": [
+        413.0,
+        683.0
+      ],
+      "gaps": [
+        {
+          "previous_time": 414.905067,
+          "next_time": 415.081079,
+          "measured_dt": 0.0002968311309814453,
+          "missing_duration": 0.17571516886903282,
+          "source_row": 3008,
+          "policy": "STOP_AND_REINITIALIZE"
+        }
+      ],
+      "segments": [
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/IMU_V3_FIX_20261004/stage_07/INPUTS/BY2H/IMU8_SEGMENT_00.imu",
+          "sha256": "22f32a5405ae2f85880ea4942234bbad2eabf0f9afd3234dccaac260c96ecb8e",
+          "rows": 330,
+          "first": 413.041069,
+          "last": 414.905067
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/IMU_V3_FIX_20261004/stage_07/INPUTS/BY2H/IMU8_SEGMENT_01.imu",
+          "sha256": "1be347524a832ee729b5577c6b80867018b816955d7dbca4a3d7be29b90ffc1e",
+          "rows": 58251,
+          "first": 415.081079,
+          "last": 682.99505
+        }
+      ],
+      "expected_original_output_epochs": 58580
+    },
+    "BY2O": {
+      "window": [
+        3186.0,
+        3563.0
+      ],
+      "gaps": [
+        {
+          "previous_time": 3240.749053,
+          "next_time": 3241.021063,
+          "measured_dt": 0.004002571105957031,
+          "missing_duration": 0.2680074288941796,
+          "source_row": 29179,
+          "policy": "STOP_AND_REINITIALIZE"
+        },
+        {
+          "previous_time": 3301.289052,
+          "next_time": 3301.407062,
+          "measured_dt": 0.008002758026123047,
+          "missing_duration": 0.11000724197401723,
+          "source_row": 41724,
+          "policy": "STOP_AND_REINITIALIZE"
+        },
+        {
+          "previous_time": 3362.013048,
+          "next_time": 3362.393047,
+          "measured_dt": 0.03400063514709473,
+          "missing_duration": 0.3459983648531306,
+          "source_row": 54182,
+          "policy": "STOP_AND_REINITIALIZE"
+        },
+        {
+          "previous_time": 3392.541158,
+          "next_time": 3392.657047,
+          "measured_dt": 0.007984638214111328,
+          "missing_duration": 0.10790436178604068,
+          "source_row": 59856,
+          "policy": "STOP_AND_REINITIALIZE"
+        },
+        {
+          "previous_time": 3483.751066,
+          "next_time": 3484.013061,
+          "measured_dt": 0.09599828720092773,
+          "missing_duration": 0.16599671279936956,
+          "source_row": 77287,
+          "policy": "STOP_AND_REINITIALIZE"
+        },
+        {
+          "previous_time": 3544.833067,
+          "next_time": 3544.993062,
+          "measured_dt": 0.006001949310302734,
+          "missing_duration": 0.15399305068967806,
+          "source_row": 89706,
+          "policy": "STOP_AND_REINITIALIZE"
+        }
+      ],
+      "segments": [
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/IMU_V3_FIX_20261004/stage_07/INPUTS/BY2O/IMU8_SEGMENT_00.imu",
+          "sha256": "976b7c3bbaf29ebd7996579de5d85f02fcdd5bf3e287a9570d9877631f3050fe",
+          "rows": 12035,
+          "first": 3186.00106,
+          "last": 3240.749053
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/IMU_V3_FIX_20261004/stage_07/INPUTS/BY2O/IMU8_SEGMENT_01.imu",
+          "sha256": "f64396282d1630ddd33ed73031d349e070274a92b1acfb7f8425a75e8f982173",
+          "rows": 12545,
+          "first": 3241.021063,
+          "last": 3301.289052
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/IMU_V3_FIX_20261004/stage_07/INPUTS/BY2O/IMU8_SEGMENT_02.imu",
+          "sha256": "476bf9f72bc019c9e9d34a8d03a0677156268802b26da195427f095c5e0a721f",
+          "rows": 12458,
+          "first": 3301.407062,
+          "last": 3362.013048
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/IMU_V3_FIX_20261004/stage_07/INPUTS/BY2O/IMU8_SEGMENT_03.imu",
+          "sha256": "cd24357a0411820536801d67eee3dd3e367e5af0b2140b131f5cc93a9e85e55e",
+          "rows": 5674,
+          "first": 3362.393047,
+          "last": 3392.541158
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/IMU_V3_FIX_20261004/stage_07/INPUTS/BY2O/IMU8_SEGMENT_04.imu",
+          "sha256": "76dc10e51c639530a99728edc2de4a7b0e86152557deb0705805e13fb913a5ef",
+          "rows": 17431,
+          "first": 3392.657047,
+          "last": 3483.751066
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/IMU_V3_FIX_20261004/stage_07/INPUTS/BY2O/IMU8_SEGMENT_05.imu",
+          "sha256": "e6e1c35513066d915cdcbd4e7b1bff301d87138e01152fc4d4ecf4b5ad2963ba",
+          "rows": 12419,
+          "first": 3484.013061,
+          "last": 3544.833067
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/IMU_V3_FIX_20261004/stage_07/INPUTS/BY2O/IMU8_SEGMENT_06.imu",
+          "sha256": "d0523d5c20d7b0010f207f128c8bbe57348eb13495b35723478ba90704b0de8d",
+          "rows": 3987,
+          "first": 3544.993062,
+          "last": 3562.997055
+        }
+      ],
+      "expected_original_output_epochs": 76548
+    }
+  },
+  "domain_definition": {
+    "PRE_5S": "[previous_time-5,previous_time]",
+    "PHYSICAL_GAP": "(previous_time,next_time), no synthetic samples",
+    "FIRST_POST_GAP_RECORD": "exact next_time key",
+    "POST_0_5": "(next_time,next_time+5]",
+    "POST_5_30": "(next_time+5,next_time+30]",
+    "NEAR_GAP_UNION": "union over7within sequence [previous_time-5,next_time+30]; overlapping intervals deduplicated",
+    "FAR_FROM_GAP": "strict measured-key complement of NEAR_GAP_UNION",
+    "FULL": "all original measured output keys"
+  },
+  "common_support": "exact integer microsecond key intersection; no estimator/reference interpolation",
+  "primary_quantities": [
+    "H",
+    "V",
+    "3D",
+    "yaw"
+  ],
+  "comparison": "original V3 vs existing stage07 compound diagnostic version",
+  "new_estimator_or_evaluator_calls": 0,
+  "select_by_error_or_result": false
+}

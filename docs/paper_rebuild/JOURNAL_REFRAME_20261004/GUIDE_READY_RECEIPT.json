@@ -1,0 +1,19 @@
+{
+  "status": "READY",
+  "delivery_file_count": 161,
+  "all_delivery_file_hashes_verified": true,
+  "files": [
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/README.md",
+      "sha256": "f08877c63aecdcadcb189d81b949e37236158c3fea002dbed19bd6d9ba601a10"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/README_先看这里.md",
+      "sha256": "5fe4ffdbb13eff747b9ff438dcc4c28bb10c7e13fe1ca0a1ef380b46674a040b"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/DELIVERY_FILE_MANIFEST.json",
+      "sha256": "ad0b4f9422dd52ab58ecc12bd480f4b60f64259bddd82235670cfb9307c84421"
+    }
+  ]
+}

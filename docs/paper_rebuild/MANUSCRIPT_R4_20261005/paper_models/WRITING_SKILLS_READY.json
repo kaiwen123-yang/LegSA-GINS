@@ -1,0 +1,18 @@
+{
+  "files": [
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/paper_models/WRITING_SKILLS_UPDATE_20261005.md",
+      "sha256": "5ae5392dafb9cd5462c0f74e68c9af34ee10ec3de00d819a583507eb5dc5bd6f"
+    },
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/paper_models/WRITING_SKILLS_UPDATE_MANIFEST.csv",
+      "sha256": "ad5b6e72e9f41b8dc40d88bc86f7c17b8e78a54ae87ebe85d212ca008033f471"
+    },
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/paper_models/WRITING_SKILLS_UPDATE_RECEIPT.json",
+      "sha256": "2f2c4abc45dc921796baec759c956bd72d6095bd8e867f4e746af7807c56c70b"
+    }
+  ],
+  "new_native_runs": 0,
+  "new_formal_evaluations": 0
+}

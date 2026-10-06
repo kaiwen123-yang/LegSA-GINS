@@ -1,0 +1,13 @@
+source_path,source_line_1based,source_byte_offset,source_line_bytes,run_id,event_seq,source,n12_classification,n16_classification
+<MECHANISM_ROOT>/replays/ADD_RUN_00103/observed/observer/events.jsonl,270,411478,8715,ADD_RUN_00103,270,receiver_position,NO_MATERIAL_NIS_OR_R_CHANGE,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/ADD_RUN_00103/observed/observer/events.jsonl,277,446825,9816,ADD_RUN_00103,277,dual_antenna_yaw,NIS_CHANGED_NO_FINAL_R_CHANGE,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/ADD_RUN_00103/observed/observer/events.jsonl,284,483990,10137,ADD_RUN_00103,284,receiver_velocity,NIS_CHANGED_NO_FINAL_R_CHANGE,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/ADD_RUN_00103/observed/observer/events.jsonl,292,524180,10270,ADD_RUN_00103,292,raw_doppler_velocity,SHADOW_FINAL_R_CHANGED,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/ADD_RUN_00103/observed/observer/events.jsonl,299,562231,10191,ADD_RUN_00103,299,go2_horizontal_velocity,OIM_CHANGE_MASKED_BY_LSIM,SHADOW_FINAL_R_CHANGED
+<MECHANISM_ROOT>/replays/ADD_RUN_00103/observed/observer/events.jsonl,306,599440,10134,ADD_RUN_00103,306,go2_attitude_roll_pitch,NIS_CHANGED_NO_FINAL_R_CHANGE,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/ADD_RUN_00103/observed/observer/events.jsonl,580,1113370,10405,ADD_RUN_00103,580,receiver_velocity,SHADOW_FINAL_R_CHANGED,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/ADD_RUN_00103/observed/observer/events.jsonl,588,1154272,10281,ADD_RUN_00103,588,raw_doppler_velocity,NIS_CHANGED_NO_FINAL_R_CHANGE,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/ADD_RUN_00103/observed/observer/events.jsonl,907,1851652,10198,ADD_RUN_00103,907,go2_horizontal_velocity,NIS_CHANGED_NO_FINAL_R_CHANGE,SHADOW_FINAL_R_CHANGED
+<MECHANISM_ROOT>/replays/ADD_RUN_00103/observed/observer/events.jsonl,6727,14090926,10110,ADD_RUN_00103,6727,dual_antenna_yaw,SHADOW_FINAL_R_CHANGED,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/ADD_RUN_00103/observed/observer/events.jsonl,21252,44758007,10557,ADD_RUN_00103,21252,raw_doppler_velocity,RAW_OIM_CHANGE_MASKED_BY_CAP,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/ADD_RUN_00103/observed/observer/events.jsonl,159290,333911254,10402,ADD_RUN_00103,159290,go2_attitude_roll_pitch,OIM_CHANGE_MASKED_BY_LSIM,NOT_ELIGIBLE

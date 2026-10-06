@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "file_count": 12678,
+  "matched": 12678,
+  "mismatches": [],
+  "new_or_missing_files": 0,
+  "baseline": "HX02_TREE_START.json"
+}

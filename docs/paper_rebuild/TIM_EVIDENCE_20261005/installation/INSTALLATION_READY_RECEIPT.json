@@ -1,0 +1,28 @@
+{
+  "manual_pages_visually_checked": [
+    3,
+    9,
+    10
+  ],
+  "manual_text_pages_read": 16,
+  "files": [
+    {
+      "path": "inspect_installation_sources.py",
+      "sha256": "ac13dfbe0ac51fa3d5a1216c462fe46122bdea9486fb3808d98a2cb2b51c9109"
+    },
+    {
+      "path": "installation_sources.json",
+      "sha256": "825695512e7c92348b5caa26b730d3b1d84edcf9402dd523ceb0ce325f93d386"
+    },
+    {
+      "path": "INSTALLATION_EVIDENCE_REVIEW.md",
+      "sha256": "962dddec15dbd0fbfe491154abd4a95ad6df9d589ff7955aa176b26d190d173f"
+    },
+    {
+      "path": "inherited_cad_source_pins.json",
+      "sha256": "5e6f741fc4cdf8511c4259352cbd37cce164d8ae126d30a32d22f6a4bd6b7a71"
+    }
+  ],
+  "solver_calls": 0,
+  "original_sources_modified": false
+}

@@ -1,0 +1,80 @@
+{
+  "checks": [
+    {
+      "method": "LC01",
+      "passed": true,
+      "source_nav_sha256": "ccd25c2e1309ba2870e57e2208f476a6b48eaba69f0d038f26be2f168bb2c695",
+      "type": "D43"
+    },
+    {
+      "method": "LC01",
+      "passed": true,
+      "source_nav_sha256": "ccd25c2e1309ba2870e57e2208f476a6b48eaba69f0d038f26be2f168bb2c695",
+      "type": "D42"
+    },
+    {
+      "method": "LC01",
+      "passed": true,
+      "source_nav_sha256": "ccd25c2e1309ba2870e57e2208f476a6b48eaba69f0d038f26be2f168bb2c695",
+      "type": "D46"
+    },
+    {
+      "method": "LC01",
+      "passed": true,
+      "source_nav_sha256": "ccd25c2e1309ba2870e57e2208f476a6b48eaba69f0d038f26be2f168bb2c695",
+      "type": "D47"
+    },
+    {
+      "method": "LC01",
+      "passed": true,
+      "source_nav_sha256": "ccd25c2e1309ba2870e57e2208f476a6b48eaba69f0d038f26be2f168bb2c695",
+      "type": "D50"
+    },
+    {
+      "d03_sha256": "ebfd30313596f67b3cc45f524b891b55a6aada968083d2186cbd0d9c70f77c12",
+      "d05_sha256": "ebfd30313596f67b3cc45f524b891b55a6aada968083d2186cbd0d9c70f77c12",
+      "method": "LC01",
+      "passed": true,
+      "type": "D05_vs_D03_seed_00"
+    },
+    {
+      "method": "EXT05C",
+      "passed": true,
+      "source_nav_sha256": "915192d6fcefaf7bef33c4028b571d1b723f7e0759063e2955aebd3d1ee7ace8",
+      "type": "D43"
+    },
+    {
+      "method": "EXT05C",
+      "passed": true,
+      "source_nav_sha256": "915192d6fcefaf7bef33c4028b571d1b723f7e0759063e2955aebd3d1ee7ace8",
+      "type": "D42"
+    },
+    {
+      "method": "EXT05C",
+      "passed": true,
+      "source_nav_sha256": "915192d6fcefaf7bef33c4028b571d1b723f7e0759063e2955aebd3d1ee7ace8",
+      "type": "D46"
+    },
+    {
+      "method": "EXT05C",
+      "passed": true,
+      "source_nav_sha256": "915192d6fcefaf7bef33c4028b571d1b723f7e0759063e2955aebd3d1ee7ace8",
+      "type": "D47"
+    },
+    {
+      "method": "EXT05C",
+      "passed": true,
+      "source_nav_sha256": "915192d6fcefaf7bef33c4028b571d1b723f7e0759063e2955aebd3d1ee7ace8",
+      "type": "D50"
+    },
+    {
+      "d03_sha256": "a925e5f8cf9cad2b4f09e2d6b5c4288466f129c516bbc682dc3dcbd52c499ee5",
+      "d05_sha256": "a925e5f8cf9cad2b4f09e2d6b5c4288466f129c516bbc682dc3dcbd52c499ee5",
+      "method": "EXT05C",
+      "passed": true,
+      "type": "D05_vs_D03_seed_00"
+    }
+  ],
+  "ext05c_d31_hash_matches": 9,
+  "passed": true
+}

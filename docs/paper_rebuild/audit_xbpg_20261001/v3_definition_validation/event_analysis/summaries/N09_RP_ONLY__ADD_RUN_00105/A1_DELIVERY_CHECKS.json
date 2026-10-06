@@ -1,0 +1,204 @@
+{
+  "status": "PASS",
+  "scope": "N09_RP_ONLY A1 two completed cache comparisons and derived join correction only",
+  "checks": [
+    {
+      "check": "helper_AST_parse",
+      "pass": true
+    },
+    {
+      "check": "frozen_analyzer_unmodified",
+      "pass": true
+    },
+    {
+      "check": "helper_11_tests_passed_same_script",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00105_receipt_script",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00105_exact_100_keys",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00105_all_exact_and_actual_accept",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00105_20_text_omissions",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00105_old_80_new_100",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00105_original_summary_80_preserved",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00105_consumption_once",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00105_res_counts",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00105_whole_21_delta",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00105_raw_stream_not_reopened",
+      "pass": true
+    },
+    {
+      "check": "summaries/N09_RP_ONLY__ADD_RUN_00105/A1_RP_ONLY_COUNTS.csv_aliases_only",
+      "pass": true
+    },
+    {
+      "check": "summaries/N09_RP_ONLY__ADD_RUN_00105/A1_JOIN_VALIDATION_TEST_RECEIPT.json_aliases_only",
+      "pass": true
+    },
+    {
+      "check": "summaries/N09_RP_ONLY__ADD_RUN_00105/A1_JOIN_VALIDATION_RECEIPT.json_aliases_only",
+      "pass": true
+    },
+    {
+      "check": "summaries/N09_RP_ONLY__ADD_RUN_00105/A1_JOIN_VALIDATION.csv_aliases_only",
+      "pass": true
+    },
+    {
+      "check": "summaries/N09_RP_ONLY__ADD_RUN_00105/A1_EVENT_DETAILS.json_aliases_only",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00103_receipt_script",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00103_exact_100_keys",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00103_all_exact_and_actual_accept",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00103_20_text_omissions",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00103_old_80_new_100",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00103_original_summary_80_preserved",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00103_consumption_once",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00103_res_counts",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00103_whole_21_delta",
+      "pass": true
+    },
+    {
+      "check": "ADD_RUN_00103_raw_stream_not_reopened",
+      "pass": true
+    },
+    {
+      "check": "summaries/N09_RP_ONLY__ADD_RUN_00103/A1_RP_ONLY_COUNTS.csv_aliases_only",
+      "pass": true
+    },
+    {
+      "check": "summaries/N09_RP_ONLY__ADD_RUN_00103/A1_JOIN_VALIDATION_RECEIPT.json_aliases_only",
+      "pass": true
+    },
+    {
+      "check": "summaries/N09_RP_ONLY__ADD_RUN_00103/A1_JOIN_VALIDATION.csv_aliases_only",
+      "pass": true
+    },
+    {
+      "check": "summaries/N09_RP_ONLY__ADD_RUN_00103/A1_EVENT_DETAILS.json_aliases_only",
+      "pass": true
+    },
+    {
+      "check": "link:../V3_DEFINITION_DECISIONS.md",
+      "pass": true
+    },
+    {
+      "check": "link:summaries/N09_RP_ONLY__ADD_RUN_00105/SUMMARY.json",
+      "pass": true
+    },
+    {
+      "check": "link:summaries/N09_RP_ONLY__ADD_RUN_00105/A1_JOIN_VALIDATION.csv",
+      "pass": true
+    },
+    {
+      "check": "link:summaries/N09_RP_ONLY__ADD_RUN_00105/A1_RP_ONLY_COUNTS.csv",
+      "pass": true
+    },
+    {
+      "check": "link:summaries/N09_RP_ONLY__ADD_RUN_00105/A1_EVENT_DETAILS.json",
+      "pass": true
+    },
+    {
+      "check": "link:summaries/N09_RP_ONLY__ADD_RUN_00103/SUMMARY.json",
+      "pass": true
+    },
+    {
+      "check": "link:summaries/N09_RP_ONLY__ADD_RUN_00103/A1_JOIN_VALIDATION.csv",
+      "pass": true
+    },
+    {
+      "check": "link:summaries/N09_RP_ONLY__ADD_RUN_00103/A1_RP_ONLY_COUNTS.csv",
+      "pass": true
+    },
+    {
+      "check": "link:summaries/N09_RP_ONLY__ADD_RUN_00103/A1_EVENT_DETAILS.json",
+      "pass": true
+    },
+    {
+      "check": "link:a1_join_validation.py",
+      "pass": true
+    },
+    {
+      "check": "link:summaries/N09_RP_ONLY__ADD_RUN_00105/A1_JOIN_VALIDATION_TEST_RECEIPT.json",
+      "pass": true
+    },
+    {
+      "check": "link:summaries/N09_RP_ONLY__ADD_RUN_00105/A1_JOIN_VALIDATION_RECEIPT.json",
+      "pass": true
+    },
+    {
+      "check": "link:summaries/N09_RP_ONLY__ADD_RUN_00103/A1_JOIN_VALIDATION_RECEIPT.json",
+      "pass": true
+    },
+    {
+      "check": "link:../../v3_mechanism/groups/A1/INPUT_AND_SCHEDULING_NOTES.md",
+      "pass": true
+    },
+    {
+      "check": "link:../evaluation/results/N09_RP_ONLY/A1_README.md",
+      "pass": true
+    }
+  ],
+  "check_count": 47,
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "provider_reads": 0,
+  "raw_event_payload_opens_this_check": 0,
+  "data_mode": "semisynthetic_derived_validation",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "helper_sha256": "3515dbcda239055ba32c05e029a1339f7f9c4a6ca48dfa37174365a2c509c37b",
+  "readme_sha256": "46c9558436f597b4834b00e17f5dc4057e71ff3c006f3542db77fa9dd9431e1a"
+}

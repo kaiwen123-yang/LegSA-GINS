@@ -1,0 +1,307 @@
+{
+  "item": "N09_C00_EVENTS",
+  "logical_streams": 4,
+  "new_full_payload_reads": 3,
+  "reused_completed_cache_reads": 1,
+  "new_full_read_rows": 1344150,
+  "new_full_read_bytes": 2770663435,
+  "partial_reads": 0,
+  "failures": 0,
+  "retries": 0,
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "provider_calls": 0,
+  "data_mode": "real_clean",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "sources": [
+    {
+      "variant": "BASELINE",
+      "run_id": "RUN_00006",
+      "method_id": "A04",
+      "source_path": "<MECHANISM_ROOT>/replays/RUN_00006/observed/observer/events.jsonl",
+      "source_sha256": "c3270017faed039d307a9fb0fc0313188eb3b03c6047afad19aef93353d24816",
+      "analyzer_sha256": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f",
+      "events_read": 408410,
+      "bytes_read": 861622334,
+      "full_payload_read_this_item": true,
+      "cache_reused_this_item": false,
+      "sa_validation_counts": {
+        "VALIDATED": 7893
+      },
+      "covariance": {
+        "EKF_SNAPSHOT_BASELINE_ONLY": {
+          "count": 15786,
+          "status_counts": {
+            "NONPOSITIVE_DIAGONAL": 15786
+          },
+          "first_anomaly": {
+            "pointer": {
+              "source_path": "<MECHANISM_ROOT>/replays/RUN_00006/observed/observer/events.jsonl",
+              "source_line": 271,
+              "event_seq": 271,
+              "event": "EKF_BEFORE",
+              "run_id": "RUN_00006",
+              "byte_offset": 419124,
+              "byte_length": 6605
+            },
+            "report": {
+              "dimension": 21,
+              "square": true,
+              "status": "NONPOSITIVE_DIAGONAL",
+              "all_finite": true,
+              "positive_diagonal": false,
+              "normalization_attempted": false,
+              "normalized_finite": false,
+              "symmetry_tested": false,
+              "symmetric_within_tolerance": false,
+              "cholesky_attempted": false,
+              "positive_definite_diagnostic": false,
+              "pivots": [],
+              "nonfinite_flat_indices": [],
+              "nonpositive_diagonal_indices": [
+                15,
+                16,
+                17,
+                18,
+                19,
+                20
+              ],
+              "min_diagonal": 0.0,
+              "max_normalized_abs": null,
+              "max_normalized_asymmetry": null,
+              "symmetry_threshold": null,
+              "min_pivot": null,
+              "pivot_threshold": 1e-12,
+              "diagnostic_symmetrization_only": true,
+              "jitter_or_clipping": false,
+              "filter_matrix_modified": false
+            }
+          },
+          "max_normalized_asymmetry": null,
+          "min_pivot": null
+        }
+      },
+      "rp_only_event_counts": {}
+    },
+    {
+      "variant": "N09_RP_ONLY",
+      "run_id": "RUN_00006",
+      "method_id": "A04",
+      "source_path": "<VALIDATION_ROOT>/candidates/N09_RP_ONLY/RUN_00006/observer/events.jsonl",
+      "source_sha256": "1cb9da969e3a051e85f3b7f2f2e296e52018a420f1ce760fcd5c7cdcd6184cf0",
+      "analyzer_sha256": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f",
+      "events_read": 467792,
+      "bytes_read": 952960194,
+      "full_payload_read_this_item": true,
+      "cache_reused_this_item": false,
+      "sa_validation_counts": {
+        "VALIDATED": 7893
+      },
+      "covariance": {
+        "ALL_IMU_END_CANDIDATE": {
+          "count": 56642,
+          "status_counts": {
+            "NONPOSITIVE_DIAGONAL": 56642
+          },
+          "first_anomaly": {
+            "pointer": {
+              "source_path": "<VALIDATION_ROOT>/candidates/N09_RP_ONLY/RUN_00006/observer/events.jsonl",
+              "source_line": 16,
+              "event_seq": 16,
+              "event": "COVARIANCE_HEALTH",
+              "run_id": "N09_RP_ONLY__RUN_00006",
+              "byte_offset": 25785,
+              "byte_length": 1352
+            },
+            "report": {
+              "dimension": 21,
+              "square": true,
+              "all_finite": true,
+              "positive_diagonal": false,
+              "normalization_attempted": false,
+              "normalized_finite": false,
+              "symmetry_tested": false,
+              "symmetric_within_tolerance": false,
+              "cholesky_attempted": false,
+              "positive_definite_diagnostic": false,
+              "nonfinite_flat_indices": [],
+              "nonpositive_diagonal_indices": [
+                15,
+                16,
+                17,
+                18,
+                19,
+                20
+              ],
+              "min_diagonal": 0,
+              "max_normalized_abs": "NaN",
+              "max_normalized_asymmetry": "NaN",
+              "symmetry_threshold": "NaN",
+              "asymmetry_row": 0,
+              "asymmetry_col": 0,
+              "pivots": [],
+              "pivots_evaluated": 0,
+              "min_pivot": "NaN",
+              "pivot_threshold": 1e-12,
+              "status": "NONPOSITIVE_DIAGONAL",
+              "diagnostic_symmetrization_only": true,
+              "jitter_or_clipping": false,
+              "filter_matrix_modified": false
+            }
+          },
+          "max_normalized_asymmetry": null,
+          "min_pivot": null
+        }
+      },
+      "rp_only_event_counts": {
+        "RP_ONLY_INPUT": 1370,
+        "RP_ONLY_CONSUMED": 1369
+      }
+    },
+    {
+      "variant": "BASELINE",
+      "run_id": "RUN_00004",
+      "method_id": "F04",
+      "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl",
+      "source_sha256": "de76add0058d57a8e035bd6d588159175e1cf28ec0d55fb4c7d255ff08170311",
+      "analyzer_sha256": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f",
+      "events_read": 408566,
+      "bytes_read": 864568683,
+      "full_payload_read_this_item": false,
+      "cache_reused_this_item": true,
+      "sa_validation_counts": {
+        "VALIDATED": 7932
+      },
+      "covariance": {
+        "EKF_SNAPSHOT_BASELINE_ONLY": {
+          "count": 15864,
+          "status_counts": {
+            "NONPOSITIVE_DIAGONAL": 15864
+          },
+          "first_anomaly": {
+            "pointer": {
+              "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl",
+              "source_line": 271,
+              "event_seq": 271,
+              "event": "EKF_BEFORE",
+              "run_id": "RUN_00004",
+              "byte_offset": 419113,
+              "byte_length": 6605
+            },
+            "report": {
+              "dimension": 21,
+              "square": true,
+              "status": "NONPOSITIVE_DIAGONAL",
+              "all_finite": true,
+              "positive_diagonal": false,
+              "normalization_attempted": false,
+              "normalized_finite": false,
+              "symmetry_tested": false,
+              "symmetric_within_tolerance": false,
+              "cholesky_attempted": false,
+              "positive_definite_diagnostic": false,
+              "pivots": [],
+              "nonfinite_flat_indices": [],
+              "nonpositive_diagonal_indices": [
+                15,
+                16,
+                17,
+                18,
+                19,
+                20
+              ],
+              "min_diagonal": 0.0,
+              "max_normalized_abs": null,
+              "max_normalized_asymmetry": null,
+              "symmetry_threshold": null,
+              "min_pivot": null,
+              "pivot_threshold": 1e-12,
+              "diagnostic_symmetrization_only": true,
+              "jitter_or_clipping": false,
+              "filter_matrix_modified": false
+            }
+          },
+          "max_normalized_asymmetry": null,
+          "min_pivot": null
+        }
+      },
+      "rp_only_event_counts": {}
+    },
+    {
+      "variant": "N09_RP_ONLY",
+      "run_id": "RUN_00004",
+      "method_id": "F04",
+      "source_path": "<VALIDATION_ROOT>/candidates/N09_RP_ONLY/RUN_00004/observer/events.jsonl",
+      "source_sha256": "c34239db32fd6fba7f1ca8b728c04304d5b740abbc59f8576bfa29e0aab9aae3",
+      "analyzer_sha256": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f",
+      "events_read": 467948,
+      "bytes_read": 956080907,
+      "full_payload_read_this_item": true,
+      "cache_reused_this_item": false,
+      "sa_validation_counts": {
+        "VALIDATED": 7932
+      },
+      "covariance": {
+        "ALL_IMU_END_CANDIDATE": {
+          "count": 56642,
+          "status_counts": {
+            "NONPOSITIVE_DIAGONAL": 56642
+          },
+          "first_anomaly": {
+            "pointer": {
+              "source_path": "<VALIDATION_ROOT>/candidates/N09_RP_ONLY/RUN_00004/observer/events.jsonl",
+              "source_line": 16,
+              "event_seq": 16,
+              "event": "COVARIANCE_HEALTH",
+              "run_id": "N09_RP_ONLY__RUN_00004",
+              "byte_offset": 25784,
+              "byte_length": 1352
+            },
+            "report": {
+              "dimension": 21,
+              "square": true,
+              "all_finite": true,
+              "positive_diagonal": false,
+              "normalization_attempted": false,
+              "normalized_finite": false,
+              "symmetry_tested": false,
+              "symmetric_within_tolerance": false,
+              "cholesky_attempted": false,
+              "positive_definite_diagnostic": false,
+              "nonfinite_flat_indices": [],
+              "nonpositive_diagonal_indices": [
+                15,
+                16,
+                17,
+                18,
+                19,
+                20
+              ],
+              "min_diagonal": 0,
+              "max_normalized_abs": "NaN",
+              "max_normalized_asymmetry": "NaN",
+              "symmetry_threshold": "NaN",
+              "asymmetry_row": 0,
+              "asymmetry_col": 0,
+              "pivots": [],
+              "pivots_evaluated": 0,
+              "min_pivot": "NaN",
+              "pivot_threshold": 1e-12,
+              "status": "NONPOSITIVE_DIAGONAL",
+              "diagnostic_symmetrization_only": true,
+              "jitter_or_clipping": false,
+              "filter_matrix_modified": false
+            }
+          },
+          "max_normalized_asymmetry": null,
+          "min_pivot": null
+        }
+      },
+      "rp_only_event_counts": {
+        "RP_ONLY_INPUT": 1370,
+        "RP_ONLY_CONSUMED": 1369
+      }
+    }
+  ]
+}

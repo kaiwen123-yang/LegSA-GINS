@@ -1,0 +1,104 @@
+{
+  "schema": "paper_reader_method_identity.v1",
+  "algorithm_name": "LegSA-GINS",
+  "full_name": "source-aware dual-antenna GNSS/INS for legged robots",
+  "name_does_not_claim": [
+    "independent leg-kinematic reconstruction",
+    "independent reference truth",
+    "all-original-paper reproduction",
+    "universal superiority or calibrated uncertainty"
+  ],
+  "robot_velocity_term": "robot-reported body velocity (SDK-HV)",
+  "internal_codes_scope": "Reproduction selectors and SI code-to-reader-name map only; no scientific source or result keys renamed.",
+  "mapping": [
+    {
+      "internal_code": "F04",
+      "reader_name": "LegSA-GINS",
+      "legend_name": "LegSA-GINS",
+      "configuration_identity": "AB1111"
+    },
+    {
+      "internal_code": "A01",
+      "reader_name": "LegSA-GINS",
+      "legend_name": "LegSA-GINS",
+      "configuration_identity": "AB1111 alias of F04"
+    },
+    {
+      "internal_code": "F01",
+      "reader_name": "GNSS/INS baseline",
+      "legend_name": "GNSS/INS",
+      "configuration_identity": "No subsequent dual-heading; shared dual-yaw initialization retained"
+    },
+    {
+      "internal_code": "F02",
+      "reader_name": "Basic dual-heading GNSS/INS",
+      "legend_name": "Basic dual heading",
+      "configuration_identity": "No receiver-velocity update; basic online heading"
+    },
+    {
+      "internal_code": "F03",
+      "reader_name": "Gated-heading backbone",
+      "legend_name": "Gated heading",
+      "configuration_identity": "AB0000"
+    },
+    {
+      "internal_code": "A02",
+      "reader_name": "Gated-heading backbone",
+      "legend_name": "Gated heading",
+      "configuration_identity": "AB0000 alias of F03"
+    },
+    {
+      "internal_code": "A03",
+      "reader_name": "LegSA-GINS without Doppler-derived velocity aiding",
+      "legend_name": "Without Doppler aid",
+      "configuration_identity": "AB0111",
+      "receiver_velocity_remains_enabled": true
+    },
+    {
+      "internal_code": "A04",
+      "reader_name": "LegSA-GINS without source-aware weighting",
+      "legend_name": "Without weighting",
+      "configuration_identity": "AB1011"
+    },
+    {
+      "internal_code": "A05",
+      "reader_name": "LegSA-GINS without robot tilt prior",
+      "legend_name": "Without tilt prior",
+      "configuration_identity": "AB1101"
+    },
+    {
+      "internal_code": "A06",
+      "reader_name": "LegSA-GINS without robot-reported horizontal velocity aiding",
+      "legend_name": "Without robot velocity",
+      "configuration_identity": "AB1110",
+      "internal_channel": "SDK-HV"
+    },
+    {
+      "internal_code": "A07",
+      "reader_name": "LegSA-GINS without robot priors",
+      "legend_name": "Without robot priors",
+      "configuration_identity": "AB1100"
+    },
+    {
+      "internal_code": "A08",
+      "reader_name": "Gated-heading backbone with Doppler",
+      "legend_name": "Backbone + Doppler",
+      "configuration_identity": "AB1000"
+    },
+    {
+      "internal_code": "A09",
+      "reader_name": "Gated-heading backbone with source-aware weighting",
+      "legend_name": "Backbone + weighting",
+      "configuration_identity": "AB0100"
+    }
+  ],
+  "version_roles": {
+    "V3": "Author-retained main scientific version and complete historical matrix/results; naming does not modify scientific identity.",
+    "contract_diagnostic": "Previously completed diagnostic variant and targeted repaired-contract runs, reported separately; not a replacement for the author-retained V3 selection."
+  },
+  "target_journals": [
+    "GPS Solutions",
+    "IEEE Transactions on Instrumentation and Measurement"
+  ],
+  "excluded_route": "IEEE/ASME Transactions on Mechatronics removed from this publication plan by user instruction."
+}

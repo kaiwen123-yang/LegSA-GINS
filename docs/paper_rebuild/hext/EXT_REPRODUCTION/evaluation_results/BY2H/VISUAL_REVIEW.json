@@ -1,0 +1,21 @@
+{
+  "adopted_plot": "figures/attempt_002/HEADING_COMPARISON.png",
+  "plot_sha256": "5a8d91bf4bdcb7188083d42f8481865558aadeef932eb5b83c21ce3a2f671a18",
+  "actual_raster_review": "OPENED_AND_REVIEWED",
+  "checks": [
+    "native/reference display both wrap360; residuals unchanged",
+    "isolated points and missing intervals visible",
+    "invalid/native/ratio states separated",
+    "full original baseline magnitude retained; no global navigation trajectory"
+  ],
+  "limitations": [
+    "EXT01/02 overlap often; exact values and independent masks in CSV",
+    "EXT03 large float baseline excursions compress hard-length curves; not clipped"
+  ],
+  "attempt_001": "SUPERSEDED_DISPLAY_ONLY; retained at isolated root; original numerical outputs unchanged",
+  "new_evaluator_invocations": 0,
+  "reference_opens": 0,
+  "plotter_source_sha256": "4032c5f78df9dd9947a7b8e7dd15b20c97bce47f4ae1d6866d92d637129a3186",
+  "error_series_sha256": "a6054656b009193cc03025f7e5659338ee0c6be86a32dce13270113b582e925c",
+  "original_resolution_review": "4200px original opened separately: all axis labels and tick labels intact; apparent cropped labels in earlier downscaled tool view not present in original PNG; no new render needed"
+}

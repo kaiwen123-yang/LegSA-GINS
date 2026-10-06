@@ -1,0 +1,63 @@
+method_id,case_id,system_mode,constraint_mode,baseline_sigma_m,solution_state,paper_ratio_fixed,ambiguity_correctness_known,parameter,value,unit,source,paper_equation_or_RTKLIB_symbol,primary_or_sensitivity,trace_tuned
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,baseline_length,0.35,m,paper-disclosed,Eq. (5),primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,initial_baseline_variance,900.0,m^2,paper-disclosed,initial covariance,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,initial_ambiguity_variance,900.0,cycle^2,paper-disclosed,initial covariance,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,ratio_threshold,3.0,1,paper-disclosed,MLAMBDA ratio,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,baseline_length_sigma,0.01,m,pre-registered engineering prior,Eq. (7),primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,baseline_length_sigma,0.001,m,pre-registered sensitivity envelope,Eq. (7),sensitivity,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,baseline_length_sigma,0.005,m,pre-registered sensitivity envelope,Eq. (7),sensitivity,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,baseline_length_sigma,0.01,m,pre-registered sensitivity envelope,Eq. (7),sensitivity,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,baseline_length_sigma,0.02,m,pre-registered sensitivity envelope,Eq. (7),sensitivity,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,baseline_length_sigma,0.05,m,pre-registered sensitivity envelope,Eq. (7),sensitivity,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,geometry_free_slip_threshold,0.05,m,RTKLIB 180043ee24b6d2b168f98b64be15f69d50046b1a,prcopt_default.thresslip,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,melbourne_wubbena_slip_threshold,10.0,m,RTKLIB 180043ee24b6d2b168f98b64be15f69d50046b1a,ppp.c:THRES_MW_JUMP,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,prior_dd_slip_threshold,0.25,cycle,pre-registered physical threshold,paper textual chain,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,moving_base_position_reset_variance,900.0,m^2,RTKLIB 180043ee24b6d2b168f98b64be15f69d50046b1a,rtkpos.c:udpos PMODE_MOVEB initx(VAR_POS),primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,baseline_process_noise_diagnostic,0.0,m/sqrt(s),diagnostic-only identity/random-walk option,not primary RTKLIB moving-base model,sensitivity,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,ambiguity_process_noise,0.0001,cycle/sqrt(s),RTKLIB 180043ee24b6d2b168f98b64be15f69d50046b1a,rtkpos.c:udbias prcopt_default.prn[0] non-IFLC state,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,code_measurement_sigma_model,sqrt(2*(0.003^2+0.003^2/sin(el)^2))*100,m,RTKLIB 180043ee default,rtkpos.c:varerr err[] eratio[],primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,phase_measurement_sigma_model,sqrt(2*(0.003^2+0.003^2/sin(el)^2)),m,RTKLIB 180043ee default,rtkpos.c:varerr err[],primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,gps_system_weight,1.0,1,RTKLIB 180043ee,rtkpos.c:varerr EFACT_GPS,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,bds_system_weight,1.0,1,RTKLIB 180043ee GPS-factor fallback for non-GLO/SBS,rtkpos.c:varerr EFACT_GPS fallback,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,shared_pivot_covariance_model,diag(nonpivot_SD_variance)+pivot_SD_variance*11T,m2,RTKLIB 180043ee,rtkpos.c:ddcov,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,number_of_frequencies,2,1,RTKLIB 180043ee default,prcopt_default.nf,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,elevation_mask,15.0,deg,RTKLIB 180043ee default,prcopt_default.elmin,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,dynamics,off,bool,RTKLIB 180043ee default,prcopt_default.dynamics,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,tide_correction,off,bool,RTKLIB 180043ee default / RTKLIB_DIAGNOSTIC_ONLY_INACTIVE_IN_PRODUCTION_ADAPTER,prcopt_default.tidecorr,diagnostic,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,relative_filter_iterations,1,iteration,RTKLIB 180043ee default / RTKLIB_DIAGNOSTIC_ONLY_INACTIVE_IN_PRODUCTION_ADAPTER,prcopt_default.niter,diagnostic,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,ambiguity_resolution_mode,continuous,enum,RTKLIB 180043ee default / RTKLIB_DIAGNOSTIC_ONLY_INACTIVE_IN_PRODUCTION_ADAPTER,prcopt_default.modear,diagnostic,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,BDS_ambiguity_resolution,on,bool,RTKLIB 180043ee / RTKLIB_DIAGNOSTIC_ONLY_INACTIVE_IN_PRODUCTION_ADAPTER,prcopt_default.bdsmodear,diagnostic,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,maximum_ambiguity_outage,5,epoch,RTKLIB 180043ee default / RTKLIB_DIAGNOSTIC_ONLY_INACTIVE_IN_PRODUCTION_ADAPTER,prcopt_default.maxout,diagnostic,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,minimum_lock_to_fix,0,epoch,RTKLIB 180043ee default / RTKLIB_DIAGNOSTIC_ONLY_INACTIVE_IN_PRODUCTION_ADAPTER,prcopt_default.minlock,diagnostic,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,minimum_fixes_to_hold,10,epoch,RTKLIB 180043ee default / RTKLIB_DIAGNOSTIC_ONLY_INACTIVE_IN_PRODUCTION_ADAPTER,prcopt_default.minfix,diagnostic,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,AR_maximum_iterations,1,iteration,RTKLIB 180043ee default / RTKLIB_DIAGNOSTIC_ONLY_INACTIVE_IN_PRODUCTION_ADAPTER,prcopt_default.armaxiter,diagnostic,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,phase_constant_error,0.003,m,RTKLIB 180043ee default,prcopt_default.err[1]/varerr,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,phase_elevation_error,0.003,m,RTKLIB 180043ee default,prcopt_default.err[2]/varerr,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,code_phase_error_ratio,100.0,1,RTKLIB 180043ee default,prcopt_default.eratio[0]/varerr,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,GPS_measurement_error_factor,1.0,1,RTKLIB 180043ee,rtklib.h:EFACT_GPS; rtkpos.c:varerr,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,code_phase_error_ratio_frequency2,100.0,1,RTKLIB 180043ee default,prcopt_default.eratio[1],primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,baseline_phase_error,0.0,m_per_10km,RTKLIB 180043ee default,prcopt_default.err[3]/varerr,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,ionosphere_process_noise,0.001,m/sqrt(s),RTKLIB 180043ee default / RTKLIB_DIAGNOSTIC_ONLY_INACTIVE_IN_PRODUCTION_ADAPTER,prcopt_default.prn[1],diagnostic,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,troposphere_process_noise,0.0001,m/sqrt(s),RTKLIB 180043ee default / RTKLIB_DIAGNOSTIC_ONLY_INACTIVE_IN_PRODUCTION_ADAPTER,prcopt_default.prn[2],diagnostic,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,horizontal_acceleration_process_noise,0.1,m/s2/sqrt(s),RTKLIB 180043ee default / RTKLIB_DIAGNOSTIC_ONLY_INACTIVE_IN_PRODUCTION_ADAPTER,prcopt_default.prn[3],diagnostic,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,vertical_acceleration_process_noise,0.01,m/s2/sqrt(s),RTKLIB 180043ee default / RTKLIB_DIAGNOSTIC_ONLY_INACTIVE_IN_PRODUCTION_ADAPTER,prcopt_default.prn[4],diagnostic,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,position_process_noise,0.0,m/sqrt(s),RTKLIB 180043ee moving-base dynamics-off equivalence / RTKLIB_DIAGNOSTIC_ONLY_INACTIVE_IN_PRODUCTION_ADAPTER,prcopt_default.prn[5]/udpos reset,diagnostic,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,initial_ionosphere_standard_deviation,0.03,m,RTKLIB 180043ee default / RTKLIB_DIAGNOSTIC_ONLY_INACTIVE_IN_PRODUCTION_ADAPTER,prcopt_default.std[1],diagnostic,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,initial_troposphere_standard_deviation,0.3,m,RTKLIB 180043ee default / RTKLIB_DIAGNOSTIC_ONLY_INACTIVE_IN_PRODUCTION_ADAPTER,prcopt_default.std[2],diagnostic,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,satellite_clock_stability,5e-12,s/s,RTKLIB 180043ee default / RTKLIB_DIAGNOSTIC_ONLY_INACTIVE_IN_PRODUCTION_ADAPTER,prcopt_default.sclkstab,diagnostic,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,maximum_differential_age,30.0,s,RTKLIB 180043ee default / RTKLIB_DIAGNOSTIC_ONLY_INACTIVE_IN_PRODUCTION_ADAPTER,prcopt_default.maxtdiff,diagnostic,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,innovation_rejection,30.0,m,RTKLIB 180043ee default / RTKLIB_DIAGNOSTIC_ONLY_INACTIVE_IN_PRODUCTION_ADAPTER,prcopt_default.maxinno,diagnostic,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,pntpos_maximum_GDOP,30.0,1,RTKLIB 180043ee default,pntpos.c:valsol; prcopt_default.maxgdop,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,pntpos_code_error_factor,100.0,1,RTKLIB 180043ee default,pntpos.c:varerr; prcopt_default.err[0],primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,pntpos_pseudorange_variance_formula,"EFACT^2*err[0]^2*(err[1]^2+err[2]^2/sin(max(el,5deg)))",m2,RTKLIB 180043ee,pntpos.c:varerr,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,pntpos_minimum_error_elevation,5.0,deg,RTKLIB 180043ee,pntpos.c:MIN_EL,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,pntpos_code_bias_error_sigma,0.3,m,RTKLIB 180043ee,pntpos.c:ERR_CBIAS,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,pntpos_broadcast_ionosphere_error_factor,0.5,1,RTKLIB 180043ee,pntpos.c:ERR_BRDCI,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,pntpos_broadcast_ionosphere_variance,(modeled_ionosphere_delay_m*0.5)^2,m2,RTKLIB 180043ee,pntpos.c:ionocorr IONOOPT_BRDC,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,pntpos_Saastamoinen_variance,(0.3/(sin(el)+0.1))^2,m2,RTKLIB 180043ee,pntpos.c:tropcorr ERR_SAAS,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,pntpos_maximum_iterations,10,iteration,RTKLIB 180043ee,pntpos.c:MAXITR,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,pntpos_satellite_broadcast_variance,ADDED_PER_SATELLITE_FROM_SATPOS_VARE,m2,RTKLIB 180043ee,pntpos.c:rescode vare[i],primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,pntpos_chi_square_validation,residual_vv<=chisqr[nv-nx-1],rule,RTKLIB 180043ee,pntpos.c:valsol; rtkcmn.c:chisqr,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,SPP_Saastamoinen_relative_humidity,0.7,1,RTKLIB 180043ee,pntpos.c:REL_HUMI,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,SPP_Saastamoinen_error_sigma,0.3,m,RTKLIB 180043ee,pntpos.c:ERR_SAAS,primary,false
+EXT03_YANG2024,C00,ALL_AUDITED,NOT_APPLICABLE,,NOT_APPLICABLE,false,false,DD_Saastamoinen_relative_humidity,0.0,1,RTKLIB 180043ee relative zdres hydrostatic model,rtkpos.c:zdres tropmodel humi=0.0,primary,false

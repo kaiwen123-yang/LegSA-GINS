@@ -1,0 +1,246 @@
+{
+  "scope": "Presentation-only existing CSV redraw",
+  "no_solver_calls": true,
+  "no_evaluator_calls": true,
+  "raw_reference_payload_opens": 0,
+  "script_sha256": "22540c893034868c9aa49d6a666312a1200fa04508df7b8e302349f929ac08b1",
+  "utilities_sha256": "e28173802e004aac9c5421b4e5439ae7e277f80e35ca16f2ed8b447673dd9371",
+  "inputs": [
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/CORE_541_SUMMARY_V3.csv",
+      "file_sha256": "1e0181936e4cf40de57bd1e6f0724acdf1644bb7616aaff0121bbd8a54febd35",
+      "decompressed_sha256": "1e0181936e4cf40de57bd1e6f0724acdf1644bb7616aaff0121bbd8a54febd35",
+      "bytes": 11863,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/CORE_541_all_77_summary_rows.csv.gz",
+        "sha256": "2019177c0ac13ac298924a1422a6b30a00e8307640f7c87fc77406e5b0c063a0",
+        "plain_sha256": "17514c505d9c67653767365920040d3f58dba1137e61ee55c8ffaf48d615cf87",
+        "rows": 77,
+        "columns": [
+          "method_id",
+          "metric",
+          "registered_count",
+          "finite_count",
+          "algorithm_failure_count",
+          "unavailable_count",
+          "not_applicable_count",
+          "failure_rate",
+          "mean",
+          "median",
+          "p95",
+          "maximum",
+          "worst_5pct_mean",
+          "worst_5pct_count"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/PAIRWISE_CASE_LEVEL_V3.csv",
+      "file_sha256": "9131dc0f3905f5339cc105919354349031a78657a02ddfb63fe4c193861abcff",
+      "decompressed_sha256": "9131dc0f3905f5339cc105919354349031a78657a02ddfb63fe4c193861abcff",
+      "bytes": 3030539,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/all_saved_single_module_pairs.csv.gz",
+        "sha256": "37cb9809af39e8f655abffaed84e362f733a5c42a0297f84ec32e2dd2cece74b",
+        "plain_sha256": "38d8ca1189f89fcc3862dda171cc75b7eb8296fe336b37d797fc648a7ad457ca",
+        "rows": 4138,
+        "columns": [
+          "comparison",
+          "case_id",
+          "degradation_id",
+          "case_family",
+          "metric_name",
+          "candidate_value",
+          "reference_value",
+          "delta_candidate_minus_reference"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/PAIRWISE_SUMMARY_V3.csv",
+      "file_sha256": "0587815641ff0b9fe94506e51f47672ad6a94cbc0411e2d9dc852c233f86b89a",
+      "decompressed_sha256": "0587815641ff0b9fe94506e51f47672ad6a94cbc0411e2d9dc852c233f86b89a",
+      "bytes": 256292,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/saved_overall_pair_summary.csv.gz",
+        "sha256": "d29d26be4cde2d01c0adbd5e72d9cc1b6e1fdfcc9e62191189dd3ad7af4133b9",
+        "plain_sha256": "20c6ce5b3e26167470622a458fd3956cbcc3432c77b354032b2e4782f9b7958a",
+        "rows": 8,
+        "columns": [
+          "comparison",
+          "metric_name",
+          "scope",
+          "family",
+          "paired_sample_count",
+          "mean_delta_candidate_minus_reference",
+          "median_delta_candidate_minus_reference",
+          "std_delta",
+          "p10_delta",
+          "p90_delta",
+          "mean_ci95_low",
+          "mean_ci95_high",
+          "median_ci95_low",
+          "median_ci95_high",
+          "wilcoxon_p",
+          "wilcoxon_zero_policy",
+          "wilcoxon_approximation",
+          "win_count",
+          "tie_count",
+          "loss_count",
+          "win_rate",
+          "bootstrap_n",
+          "bootstrap_seed",
+          "bootstrap_policy",
+          "delta_definition"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/CORE_541_TABLE_V3.csv",
+      "file_sha256": "dbe3c6cd3de0f04acdb555dcaedfd3fc913d30fefd94ae3bed2dc85acf6fb50d",
+      "decompressed_sha256": "dbe3c6cd3de0f04acdb555dcaedfd3fc913d30fefd94ae3bed2dc85acf6fb50d",
+      "bytes": 57448961,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/all_5951_original_run_statuses.csv.gz",
+        "sha256": "cc2465393248365ca6a52e05246495faff2538609262fc157097421666c2974e",
+        "plain_sha256": "c59e7ef88b6c49b40f1714dda1748b515716691a482101aee5c1872e08236011",
+        "rows": 5951,
+        "columns": [
+          "run_id",
+          "method_id",
+          "case_id",
+          "status",
+          "failure_classification",
+          "matched_epoch_count",
+          "output_epoch_count"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/ADDENDUM_TABLE_V3.csv",
+      "file_sha256": "82aaef841c4e62d13ce4c4a2625b063ec3ac02ffc379db835cf1452486c978bb",
+      "decompressed_sha256": "82aaef841c4e62d13ce4c4a2625b063ec3ac02ffc379db835cf1452486c978bb",
+      "bytes": 4924232,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/all_original_495_ADD_runs.csv.gz",
+        "sha256": "d811ffae1bbab186e7765a16f2b8df0f1baff5b4539d15222e07beb8e35c47a0",
+        "plain_sha256": "cd7e82d31960b0a3a038791758410d46e06525821198b239770f9ae1100ab861",
+        "rows": 495,
+        "columns": [
+          "run_id",
+          "method_id",
+          "case_id",
+          "degradation_type_id",
+          "seed_index",
+          "horizontal_rmse_m",
+          "yaw_rmse_deg",
+          "status",
+          "matched_epoch_count",
+          "output_epoch_count"
+        ]
+      }
+    }
+  ],
+  "figures": [
+    {
+      "id": "R05_CORE_all_11_error_tails",
+      "dominant_claim": "The original full matrix has substantial tails and incomplete finite support.",
+      "caption": "All 11 configurations, each 541 registered cases, use existing median/p95/maximum RMSE summary tokens. Missing/failed cases are not inserted at zero; complete failure types shown separately in R07.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R05_CORE_all_11_error_tails.png",
+          "sha256": "f7214b631c69b709f0151f187dab0fc721d736e645d0b483e4cdc940e9f3ef7c",
+          "bytes": 399132
+        },
+        {
+          "path": "R05_CORE_all_11_error_tails.pdf",
+          "sha256": "55059088c0e1fe62e50492accc9f6f28ca263a2c36d80a2f81db087625a54614",
+          "bytes": 30439
+        },
+        {
+          "path": "R05_CORE_all_11_error_tails.svg",
+          "sha256": "fba511a8c41b8bd366cb531c36c30bab3e03136f21bb55063d0c7ee43946b3b7",
+          "bytes": 47391
+        }
+      ]
+    },
+    {
+      "id": "R06_CORE_single_module_paired_contrasts",
+      "dominant_claim": "Single-module effects have heterogeneous magnitudes and adverse cases.",
+      "caption": "All common-finite original case-level pairs for 4 exact one-toggle comparisons × 2 metrics; nonfinite excluded by existing pair ledger, 541 original registered denominator retained. Only deterministic vertical jitter; no bootstrap, significance calculation, or paired-set recomputation. Diamonds are saved medians.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R06_CORE_single_module_paired_contrasts.png",
+          "sha256": "6b9ba64972f49022ad5df501f847f36ba809c1360c376d6efbb2bbe5ab883bca",
+          "bytes": 595230
+        },
+        {
+          "path": "R06_CORE_single_module_paired_contrasts.pdf",
+          "sha256": "05e08558fa21fd33fe59a27362a4304d15e89bd318f7d3c7bacbd9eb4d2755d2",
+          "bytes": 55792
+        },
+        {
+          "path": "R06_CORE_single_module_paired_contrasts.svg",
+          "sha256": "11d765b4bb905bbde50ee65aa76ae3831fc4c6059ad24909e761369ef3d6e2b2",
+          "bytes": 688002
+        }
+      ]
+    },
+    {
+      "id": "R07_CORE_all_5951_outcomes",
+      "dominant_claim": "Every original registered run and failure remains in the evidence denominator.",
+      "caption": "Exact counts of authoritative original failure_classification tokens for all 5951 rows, including NONE/COMPLETED. Aggregate status NOT_RUN_ALGORITHM_FAILURE is the skipped evaluation status and is not silently relabeled as a finite outcome. No relabeling based on metrics; source table retains run identity and formal matched/output counts.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R07_CORE_all_5951_outcomes.png",
+          "sha256": "a0aab1171e10e4811a16065850e205717f8783acded902d54c871a393b908bb9",
+          "bytes": 392497
+        },
+        {
+          "path": "R07_CORE_all_5951_outcomes.pdf",
+          "sha256": "08e28ebb41cf7daf727379c044464edc7c0b8f4be38498ad807c59340d8e59e4",
+          "bytes": 23375
+        },
+        {
+          "path": "R07_CORE_all_5951_outcomes.svg",
+          "sha256": "06e416ac7342ce4cb811599c5aa93dd36162f5d8d49052b056a59b3ce9acef7a",
+          "bytes": 25089
+        }
+      ]
+    },
+    {
+      "id": "R08_ADD_all_45_conditions",
+      "dominant_claim": "Retained heading and total registered GNSS loss have markedly different application outcomes.",
+      "caption": "Every original ADD case and all 11 configurations; D61 durations10/20/30s with9placements, D62 durations10/20s with9placements. Existing whole-window RMSE values; all output/matched counts retained in adjacent CSV. No causal claim about an unavailable exact raw-GNSS fault stream; original provider definition and common initialization apply.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R08_ADD_all_45_conditions.png",
+          "sha256": "578cddc586f78711ea3a8bc369c3846512c7a90718e0e4627f83a0b8e781ed05",
+          "bytes": 586430
+        },
+        {
+          "path": "R08_ADD_all_45_conditions.pdf",
+          "sha256": "0012bdfafcc9b6dcad23d386146c1d024bfbb6a6bb439b509ff572c64dc942e4",
+          "bytes": 46527
+        },
+        {
+          "path": "R08_ADD_all_45_conditions.svg",
+          "sha256": "fa56fc6e5cc0ed8c37e8bc47b4109d276cdfb68bf89a52a1e6665577b2b78ecd",
+          "bytes": 107802
+        }
+      ]
+    }
+  ],
+  "all_original_CORE_count": 5951,
+  "all_original_ADD_count": 495,
+  "registered_CORE_per_configuration": 541
+}

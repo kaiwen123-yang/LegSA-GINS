@@ -1,0 +1,22 @@
+{
+  "closure_added": "Audit receipts and full CSV text; metric CSV bytes unchanged",
+  "files": {
+    "DEGRADATION_EXTERNAL_SUMMARY.csv": "b6c0f1790675fdd522fded2f8a171b96c5eea33247ca00d32ba3c1023e807a63",
+    "DEGRADATION_EXTERNAL_TABLE.csv": "db78b124bc568c94fa73ce07e412343215eb6d28c11018dbcd7022377bb62d44",
+    "DEGRADATION_EXTERNAL_TABLE_V2.csv": "3064fdbdc4ac99baf6ce815385feca5e9163f440cac93dac9bc057cdf4c745c7",
+    "DEGRADATION_PAIRED.csv": "3bce76a6dbcc38cca2128e093fa429f37f657b117532e28e9233fce3832eb1cc",
+    "HX03_RESULTS.md": "7214111d7d5571a6cfb04752d570a2ca4eb8a00fa6cfee019024b4f805ca7264",
+    "HX03_TABLES_FULL.md": "ab0e6e1e7e57d3dda2e1f555ae3e8e74fdc89686a40e2366bcd0e71c02cb2274"
+  },
+  "legsa_input_tables": {
+    "ADDENDUM_TABLE_V3.csv": "82aaef841c4e62d13ce4c4a2625b063ec3ac02ffc379db835cf1452486c978bb",
+    "CORE_541_DISTRIBUTION_V3.csv": "301cec24cb454781138aa39dd3b86a4b37b7855773e6d28e891b7231047d4c39"
+  },
+  "paired_rows": 744,
+  "quantile_method": "numpy percentile default linear",
+  "reference_opens": 0,
+  "rows_v2": 396,
+  "rows_v3": 396,
+  "scientific_calls": 0,
+  "summary_rows": 186
+}

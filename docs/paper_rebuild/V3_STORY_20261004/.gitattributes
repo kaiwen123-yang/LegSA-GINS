@@ -1,0 +1,2 @@
+# The executed fourth-block builder is archived with its original byte identity.
+/build_fourth_story_block.py -text whitespace=cr-at-eol,-blank-at-eof

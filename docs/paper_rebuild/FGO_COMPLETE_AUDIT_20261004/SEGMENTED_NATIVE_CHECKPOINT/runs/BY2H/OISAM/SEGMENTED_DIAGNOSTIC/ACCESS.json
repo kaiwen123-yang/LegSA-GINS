@@ -1,0 +1,12 @@
+{
+  "actual_reference_open_attempts": 0,
+  "actual_reference_opens": 0,
+  "reference_paths": [
+    "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/trace_vrtk2_a87c6e_2026-03-06-07-52-22_minimal.csv",
+    "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv",
+    "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/trace_vrtk2_a87c6e_2026-03-06-08-06-39_minimal.csv"
+  ],
+  "strace_sha256": "04e5a8666acf2f2c0402704bf69e256c83027261e0dd95743d01f0bdd5689cda",
+  "open_records_including_failed": 3482,
+  "python_guard_also_active": true
+}

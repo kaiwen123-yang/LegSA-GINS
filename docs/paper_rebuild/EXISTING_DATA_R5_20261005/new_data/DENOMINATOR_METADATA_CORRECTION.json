@@ -1,0 +1,30 @@
+[
+  {
+    "sequence": "NMB3",
+    "method": "F03",
+    "initial_metadata_denominator": 81949,
+    "final_actual_IMU8_observed_denominator": 81950,
+    "reason": "Full-field profile excluded one incomplete foot/contact record; IMU/rpy/velocity remain usable. No science output or matched support changed."
+  },
+  {
+    "sequence": "NMB3",
+    "method": "F04",
+    "initial_metadata_denominator": 81949,
+    "final_actual_IMU8_observed_denominator": 81950,
+    "reason": "Full-field profile excluded one incomplete foot/contact record; IMU/rpy/velocity remain usable. No science output or matched support changed."
+  },
+  {
+    "sequence": "NMB4",
+    "method": "F03",
+    "initial_metadata_denominator": 78608,
+    "final_actual_IMU8_observed_denominator": 78609,
+    "reason": "Full-field profile excluded one incomplete foot/contact record; IMU/rpy/velocity remain usable. No science output or matched support changed."
+  },
+  {
+    "sequence": "NMB4",
+    "method": "F04",
+    "initial_metadata_denominator": 78608,
+    "final_actual_IMU8_observed_denominator": 78609,
+    "reason": "Full-field profile excluded one incomplete foot/contact record; IMU/rpy/velocity remain usable. No science output or matched support changed."
+  }
+]

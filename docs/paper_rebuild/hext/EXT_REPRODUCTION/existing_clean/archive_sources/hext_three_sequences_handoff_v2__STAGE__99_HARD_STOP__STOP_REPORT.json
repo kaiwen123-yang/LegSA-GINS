@@ -1,0 +1,354 @@
+{
+  "status": "HARD_STOP_EVALUATOR_CONSISTENCY",
+  "full_task_completed": false,
+  "code_freeze": "c9e5133d244e0e3ab1e1385f322fbbf5948ee6d5",
+  "failed_run_id": "BY2H__EXT05C-S__FILE_START",
+  "failed_version": "v3",
+  "budget": {
+    "comparison_native_attempted": 14,
+    "comparison_native_completed": 14,
+    "prereg_identity_native": 2,
+    "evaluator_attempted": 17,
+    "evaluator_passed": 16,
+    "evaluator_failed": 1,
+    "evaluator_not_run": 11
+  },
+  "failure": {
+    "consistency": {
+      "horizontal_max_m": 3.0600994997077376e+17,
+      "up_max_m": 5.487427392938392e+17,
+      "yaw_max_deg": 1.003047600534046e-08,
+      "matched_epoch_count": 59934,
+      "position_threshold_m": 0.01,
+      "yaw_threshold_deg": 0.01,
+      "passed": false,
+      "source": "publication/canonical541_figures.py:mfig00_reference_comparison",
+      "projection_source_sha256": "55d7390b9e91855a550a55d852f2f62f05dc3ceb79e28e63fe3195c49d552073",
+      "projection_source_lines": [
+        43,
+        47
+      ],
+      "plotting_module_imported": false,
+      "independent_reference": "unchanged evaluator load_trace return; no reconstructed reference",
+      "time_offset_applied": 0.0
+    },
+    "capture_sha256": "638361cfb42717e1ea8192ddeb95421b102cbb8b1fd6f6312a4ee2ab2e95ec30",
+    "audit_sha256": "a17ff1d7cc49bc78f0d78d91815fc439cf43f12adaa54c4ba3f967f6ece764be",
+    "pure_io_passed": true,
+    "exit_code": 0,
+    "trace_open_count": 1,
+    "metrics_admitted": false
+  },
+  "not_produced": [
+    "08_AGGREGATE complete tables",
+    "10_FIGURES/FIG02S"
+  ],
+  "figures_unchanged": true,
+  "scientific_code_unchanged": true,
+  "scientific_source_hashes": {
+    "src/legsa_gins/paper_rebuild/hext/__init__.py": "7ac2c94cefa3d4c96a674e64d270a74152d772663c691286ef882c002ef87baa",
+    "src/legsa_gins/paper_rebuild/hext/aggregate.py": "0ef43ae4312773e7e083296dd817a0fb9a613b6cf83a87a1cfaafaa5929d59aa",
+    "src/legsa_gins/paper_rebuild/hext/config_audit.py": "6a199153e5852b33ad952ee87663b7b33b86598985b48ac2d2cf435b30ef5f95",
+    "src/legsa_gins/paper_rebuild/hext/execution.py": "ef8ca87fac8c73bc67433ebd80d25708a5206b30542f638bf4687b7300178820",
+    "src/legsa_gins/paper_rebuild/hext/ext05_sequence_runner.py": "c8ddb54c639cbcde793dfccbba5307faa9d960d3704f26df0befea35b04b2005",
+    "src/legsa_gins/paper_rebuild/hext/external_evaluation.py": "a68c4b6b7f3d7675112dd629151bf0b0e03c98aed77931759e110db016a85cba",
+    "src/legsa_gins/paper_rebuild/hext/figures.py": "e941b34620b0ca8386c5919efdb45b016fa12d8ffc8a81bde19ac36d1b2a6eb3",
+    "src/legsa_gins/paper_rebuild/hext/identity_gate.py": "d201126e6bad4b37311cbd5b1a67559a5610be67cb4c0ea1dc693eb89c2059f3",
+    "src/legsa_gins/paper_rebuild/hext/legsa_gap_diagnostic.py": "1c1ace26fa89adf90842de25db8ab2f0343d147f21012cefc0fc9d4c23e2e7a8",
+    "src/legsa_gins/paper_rebuild/hext/parameters.py": "9aef05fef3598b8e378fcd688a8d09ff0d663715caa7fa303b6dc25da343b491",
+    "src/legsa_gins/paper_rebuild/hext/probe.py": "7444328b642b08f54b7dd70eb7daa140a882ddb0b1696c8fb0a76a71c4fac2e8",
+    "src/legsa_gins/paper_rebuild/hext/sequence_paths.py": "ece44c62792f8384a905cfde933e931a41a9b3dd9f690753c4a787eccc208194",
+    "configs/paper_rebuild/hext/H_EXT_CONTRACT_V1.yaml": "bbe0ca4d82fead5bc154281d0c53df5445b08e27e7e0c34fd22a9efd40712f3d",
+    "scripts/paper_rebuild/hext02_native.py": "f9eede41eda3c23f5e768e81f97f893a183c8ddaa56242dd8208c446523bac03",
+    "scripts/paper_rebuild/hext02_execute.py": "094cc30eab0634d46aa22c2a31ad2bc594fb309872675eadc6a198bef2368959",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext05_pavlasek.py": "89d5496ac2da1dd7d1fd0d194d47f7f49499ed8984915a31156ae53f669fbab5",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/phase5_runner.py": "9ca29e1e5d679c56ac1a68f70f4f917c484dbc5be11f76f903a9df8b014138db",
+    "configs/paper_rebuild/horizontal_literature/PHASE5_EXT05_PAVLASEK_CONTRACT_V1.yaml": "a9476f909ed65c9b4760ac19dc3cde3d625fa3d390b2f133cae79182e2293392",
+    "configs/paper_rebuild/final_v23_parity_contract.yaml": "2c215e680512bb1d630d46262c4e230a2ec58147ffc0a35b1c6a5ad21805c1da",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext05_provider.py": "8f924bfdc33111e2cb8baf28dcf8ad7f90f0174e6ba55abf2ed6c238e97c8576",
+    "scripts/paper_rebuild/run_horizontal_literature_phase5.py": "96726bb43ac534a9d12532f8c0d8b4c7f456a7c458b59f202fa2cbe051f9a2f2",
+    "src/legsa_gins/__init__.py": "996a06df703fd19f79cb4b8bee3ba2cbf917e35d9f25d06c21a29c7a0831715a",
+    "src/legsa_gins/paper_rebuild/__init__.py": "268d06de2fa275e95ea3319111f359187f492c66e812b1be1ccd07812f6014e9",
+    "src/legsa_gins/paper_rebuild/manifest.py": "05f29a41984518bea5f86b80e2a221dcbde978f9b9616ea61ad21cdad632bc91",
+    "src/legsa_gins/paper_rebuild/paths.py": "8535cca9952f8c7d55c4cf9689031ab287cc79d0d9f0cf9207997e111db4ac0b",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/__init__.py": "aedeaca104c42b628527de21ac068da2e4311fecb42c9ab4907c6552357373fa",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "d72548fb9cea3f8d6075bd231ba9a2bb970f71382006edbec045a4c7ea8f6e5a",
+    "tests/paper_rebuild/test_horizontal_ext05_pavlasek.py": "96b95616917566637d317b7b6771ea0d4966fb8dab536017b0d08e9e157340d4",
+    "tests/paper_rebuild/test_horizontal_phase5_c00.py": "772bc545076878128c551793567cd08f13c3e11b51668e12bc1ac54fd05857ff",
+    "scripts/paper_rebuild/clean5_evaluator_observer/sitecustomize.py": "34d27936e5db9bfcb3c4ea840c2c6a804277b73737d1a0c08a7e3e8dcd17910c",
+    "src/legsa_gins/paper_rebuild/clean5_parity/evaluation.py": "cfd8b276c9fe663f823a5846dab6a54de72664688b798a6591f168dd86044d0a",
+    "src/legsa_gins/paper_rebuild/clean5_parity_p04/evaluation.py": "533b3b3bf0f6b1361fcd914c8011335aaa4c57ac7f29b41b33eeeab594793352",
+    "src/legsa_gins/paper_rebuild/clean5_sequence/evaluation_process.py": "a6d977ed97d4e3b578f7c72b5c8e4950b31266f1a7c3df4ba22333af018f858a",
+    "configs/paper_rebuild/clean5/CLEAN5_SEQUENCE_REGISTRY.yaml": "cf230fa682876be5d572d3754450a7922b558f11272ad65f90b7312245efa1e3",
+    "configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_EXECUTION_CONTRACT.yaml": "698ede92e0251b896d488283544421a9f0dc3f689e2168ff841804e0950bc983",
+    "configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_SENSOR_MODEL.yaml": "4ce6ca6c544c2ba39988ea0b0631a60207a4cea36987c3a2139052fedd3a4871"
+  },
+  "trace_opens_by_sequence": {
+    "BY2": 4,
+    "BY2H": 13,
+    "BY2O": 0
+  },
+  "native_trace_bag_fpl_opens": 0,
+  "raw_trace_postcheck": "21 payload SHA + one declared trace identity/size per sequence; BY2O evaluator handle verification NOT_RUN",
+  "readonly_diagnostic": {
+    "schema_version": "hext.legsa_gap_diagnostic.v1",
+    "data_mode": "frozen_v21_nav_read_only",
+    "synthetic_data_used": false,
+    "semisynthetic_data_used": false,
+    "trace_used_online": false,
+    "trace_open_count": 0,
+    "trace_hash_count": 0,
+    "solver_invocation_count": 0,
+    "evaluator_invocation_count": 0,
+    "code_commit": "c9e5133d244e0e3ab1e1385f322fbbf5948ee6d5",
+    "config_hash": "4ce6ca6c544c2ba39988ea0b0631a60207a4cea36987c3a2139052fedd3a4871",
+    "table_path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/20_FINALIZE/13_AGGREGATE_SEQUENCES/v3/UNIQUE_EVALUATION_RESULTS.csv",
+    "table_expected_sha256": "e26dfcd830d6c711ffbb7debd68293fbf7b7ea28240e16bce582381b61ea6a0b",
+    "items": [
+      {
+        "sequence_id": "BY2H",
+        "method_id": "F04",
+        "status": "UNAVAILABLE",
+        "window": [
+          413.0,
+          683.0
+        ],
+        "gap_events_in_window": 2,
+        "probe_path": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/01_PROBE/BY2H/PROBE.json",
+        "probe_sha256": "f07d51100b9247cee47e4c6a02e9749ab4d9553a194cefd14af41311d7fa39d6",
+        "gaps": [
+          {
+            "gap_index_in_window": 1,
+            "raw_gap_start_s": 412.47904777526855,
+            "raw_gap_end_s": 413.0370919704437,
+            "raw_gap_dt_s": 0.5580441951751709,
+            "status": "UNAVAILABLE",
+            "unavailable_reason": "WHOLE_NATIVE_NAV_ITEM_UNAVAILABLE"
+          },
+          {
+            "gap_index_in_window": 2,
+            "raw_gap_start_s": 414.9050672054291,
+            "raw_gap_end_s": 415.0807819366455,
+            "raw_gap_dt_s": 0.17571473121643066,
+            "status": "UNAVAILABLE",
+            "unavailable_reason": "WHOLE_NATIVE_NAV_ITEM_UNAVAILABLE"
+          }
+        ],
+        "nav_path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2H_F04/P13_cycle010_attempt01/solver/KF_GINS_Navresult.nav",
+        "expected_native_nav_sha256": "1edd454c8a687ec2bc941281966d42c745ceeacf47a69a84dad88748c4a08257",
+        "run_id": "SEQUENCE_BY2H_F04",
+        "decimated_nav_path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2H_F04/P13_cycle010_attempt01/solver/NAV_10HZ.csv.gz",
+        "decimated_nav_exists": true,
+        "decimated_nav_role": "NOT_USED_DECIMATION_CANNOT_ESTABLISH_NATIVE_GAP_STEP_OR_RECOVERY",
+        "unavailable_reason": "Exact frozen native NAV is absent or symlink; no substitute"
+      },
+      {
+        "sequence_id": "BY2H",
+        "method_id": "A04",
+        "status": "UNAVAILABLE",
+        "window": [
+          413.0,
+          683.0
+        ],
+        "gap_events_in_window": 2,
+        "probe_path": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/01_PROBE/BY2H/PROBE.json",
+        "probe_sha256": "f07d51100b9247cee47e4c6a02e9749ab4d9553a194cefd14af41311d7fa39d6",
+        "gaps": [
+          {
+            "gap_index_in_window": 1,
+            "raw_gap_start_s": 412.47904777526855,
+            "raw_gap_end_s": 413.0370919704437,
+            "raw_gap_dt_s": 0.5580441951751709,
+            "status": "UNAVAILABLE",
+            "unavailable_reason": "WHOLE_NATIVE_NAV_ITEM_UNAVAILABLE"
+          },
+          {
+            "gap_index_in_window": 2,
+            "raw_gap_start_s": 414.9050672054291,
+            "raw_gap_end_s": 415.0807819366455,
+            "raw_gap_dt_s": 0.17571473121643066,
+            "status": "UNAVAILABLE",
+            "unavailable_reason": "WHOLE_NATIVE_NAV_ITEM_UNAVAILABLE"
+          }
+        ],
+        "nav_path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2H_A04/P13_cycle010_attempt01/solver/KF_GINS_Navresult.nav",
+        "expected_native_nav_sha256": "c1556deb85f55d4311321e56a01f2731025ff6048c711d8190bdfa1afa77e548",
+        "run_id": "SEQUENCE_BY2H_A04",
+        "decimated_nav_path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2H_A04/P13_cycle010_attempt01/solver/NAV_10HZ.csv.gz",
+        "decimated_nav_exists": true,
+        "decimated_nav_role": "NOT_USED_DECIMATION_CANNOT_ESTABLISH_NATIVE_GAP_STEP_OR_RECOVERY",
+        "unavailable_reason": "Exact frozen native NAV is absent or symlink; no substitute"
+      },
+      {
+        "sequence_id": "BY2O",
+        "method_id": "F04",
+        "status": "UNAVAILABLE",
+        "window": [
+          3186.0,
+          3563.0
+        ],
+        "gap_events_in_window": 6,
+        "probe_path": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/01_PROBE/BY2O/PROBE.json",
+        "probe_sha256": "b882fa562d3dc08f56ea85d0cfd21f54b1ffc312c00d8a56e1dc49ad8ee56443",
+        "gaps": [
+          {
+            "gap_index_in_window": 1,
+            "raw_gap_start_s": 3240.7490525245667,
+            "raw_gap_end_s": 3241.0170600414276,
+            "raw_gap_dt_s": 0.2680075168609619,
+            "status": "UNAVAILABLE",
+            "unavailable_reason": "WHOLE_NATIVE_NAV_ITEM_UNAVAILABLE"
+          },
+          {
+            "gap_index_in_window": 2,
+            "raw_gap_start_s": 3301.2890524864197,
+            "raw_gap_end_s": 3301.3990592956543,
+            "raw_gap_dt_s": 0.11000680923461914,
+            "status": "UNAVAILABLE",
+            "unavailable_reason": "WHOLE_NATIVE_NAV_ITEM_UNAVAILABLE"
+          },
+          {
+            "gap_index_in_window": 3,
+            "raw_gap_start_s": 3362.01304769516,
+            "raw_gap_end_s": 3362.359046459198,
+            "raw_gap_dt_s": 0.34599876403808594,
+            "status": "UNAVAILABLE",
+            "unavailable_reason": "WHOLE_NATIVE_NAV_ITEM_UNAVAILABLE"
+          },
+          {
+            "gap_index_in_window": 4,
+            "raw_gap_start_s": 3392.541158437729,
+            "raw_gap_end_s": 3392.6490621566772,
+            "raw_gap_dt_s": 0.10790371894836426,
+            "status": "UNAVAILABLE",
+            "unavailable_reason": "WHOLE_NATIVE_NAV_ITEM_UNAVAILABLE"
+          },
+          {
+            "gap_index_in_window": 5,
+            "raw_gap_start_s": 3483.751065969467,
+            "raw_gap_end_s": 3483.917062997818,
+            "raw_gap_dt_s": 0.16599702835083008,
+            "status": "UNAVAILABLE",
+            "unavailable_reason": "WHOLE_NATIVE_NAV_ITEM_UNAVAILABLE"
+          },
+          {
+            "gap_index_in_window": 6,
+            "raw_gap_start_s": 3544.833066701889,
+            "raw_gap_end_s": 3544.9870598316193,
+            "raw_gap_dt_s": 0.1539931297302246,
+            "status": "UNAVAILABLE",
+            "unavailable_reason": "WHOLE_NATIVE_NAV_ITEM_UNAVAILABLE"
+          }
+        ],
+        "nav_path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2O_F04/P13_cycle010_attempt01/solver/KF_GINS_Navresult.nav",
+        "expected_native_nav_sha256": "cfa7a97b0f77560b30de24dc1e3a97e20a86768e726d167fbedb0ce1f4057263",
+        "run_id": "SEQUENCE_BY2O_F04",
+        "decimated_nav_path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2O_F04/P13_cycle010_attempt01/solver/NAV_10HZ.csv.gz",
+        "decimated_nav_exists": true,
+        "decimated_nav_role": "NOT_USED_DECIMATION_CANNOT_ESTABLISH_NATIVE_GAP_STEP_OR_RECOVERY",
+        "unavailable_reason": "Exact frozen native NAV is absent or symlink; no substitute"
+      },
+      {
+        "sequence_id": "BY2O",
+        "method_id": "A04",
+        "status": "UNAVAILABLE",
+        "window": [
+          3186.0,
+          3563.0
+        ],
+        "gap_events_in_window": 6,
+        "probe_path": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/01_PROBE/BY2O/PROBE.json",
+        "probe_sha256": "b882fa562d3dc08f56ea85d0cfd21f54b1ffc312c00d8a56e1dc49ad8ee56443",
+        "gaps": [
+          {
+            "gap_index_in_window": 1,
+            "raw_gap_start_s": 3240.7490525245667,
+            "raw_gap_end_s": 3241.0170600414276,
+            "raw_gap_dt_s": 0.2680075168609619,
+            "status": "UNAVAILABLE",
+            "unavailable_reason": "WHOLE_NATIVE_NAV_ITEM_UNAVAILABLE"
+          },
+          {
+            "gap_index_in_window": 2,
+            "raw_gap_start_s": 3301.2890524864197,
+            "raw_gap_end_s": 3301.3990592956543,
+            "raw_gap_dt_s": 0.11000680923461914,
+            "status": "UNAVAILABLE",
+            "unavailable_reason": "WHOLE_NATIVE_NAV_ITEM_UNAVAILABLE"
+          },
+          {
+            "gap_index_in_window": 3,
+            "raw_gap_start_s": 3362.01304769516,
+            "raw_gap_end_s": 3362.359046459198,
+            "raw_gap_dt_s": 0.34599876403808594,
+            "status": "UNAVAILABLE",
+            "unavailable_reason": "WHOLE_NATIVE_NAV_ITEM_UNAVAILABLE"
+          },
+          {
+            "gap_index_in_window": 4,
+            "raw_gap_start_s": 3392.541158437729,
+            "raw_gap_end_s": 3392.6490621566772,
+            "raw_gap_dt_s": 0.10790371894836426,
+            "status": "UNAVAILABLE",
+            "unavailable_reason": "WHOLE_NATIVE_NAV_ITEM_UNAVAILABLE"
+          },
+          {
+            "gap_index_in_window": 5,
+            "raw_gap_start_s": 3483.751065969467,
+            "raw_gap_end_s": 3483.917062997818,
+            "raw_gap_dt_s": 0.16599702835083008,
+            "status": "UNAVAILABLE",
+            "unavailable_reason": "WHOLE_NATIVE_NAV_ITEM_UNAVAILABLE"
+          },
+          {
+            "gap_index_in_window": 6,
+            "raw_gap_start_s": 3544.833066701889,
+            "raw_gap_end_s": 3544.9870598316193,
+            "raw_gap_dt_s": 0.1539931297302246,
+            "status": "UNAVAILABLE",
+            "unavailable_reason": "WHOLE_NATIVE_NAV_ITEM_UNAVAILABLE"
+          }
+        ],
+        "nav_path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2O_A04/P13_cycle010_attempt01/solver/KF_GINS_Navresult.nav",
+        "expected_native_nav_sha256": "4f060dd8dc8dbecb53ef97bde96f4a4ac4c002198e2e8198ba0f6e0b8b945ccf",
+        "run_id": "SEQUENCE_BY2O_A04",
+        "decimated_nav_path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2O_A04/P13_cycle010_attempt01/solver/NAV_10HZ.csv.gz",
+        "decimated_nav_exists": true,
+        "decimated_nav_role": "NOT_USED_DECIMATION_CANNOT_ESTABLISH_NATIVE_GAP_STEP_OR_RECOVERY",
+        "unavailable_reason": "Exact frozen native NAV is absent or symlink; no substitute"
+      }
+    ],
+    "fail_soft_errors": [],
+    "recovery_definition": "first retained post-gap NAV with abs(VD-VD_before)<0.1 m/s within remaining frozen window",
+    "event_time_mapping": "frozen_token(raw relative time,6): .12g -> float -> .6f; exact brackets without time search",
+    "reference_only": "g*dt is a comparison scale, not a reconstructed propagation or causal estimate",
+    "original_frozen_nav_modified": false,
+    "interpolation_used": false,
+    "fallback_nav_used": false,
+    "table_sha256": "e26dfcd830d6c711ffbb7debd68293fbf7b7ea28240e16bce582381b61ea6a0b",
+    "status": "READ_ONLY_COMPLETE_WITH_EXPLICIT_UNAVAILABLE"
+  },
+  "geometric_precondition_failure": "UNAVAILABLE statistics; preserve frozen baseline-horizontal-length guard, no epoch deletion",
+  "completed_by2_selector": {
+    "LC01_S_yaw_rmse_deg": 1.5392385536245534,
+    "LC01_frozen_yaw_rmse_deg": 2.9948274600591076,
+    "selected_configuration": "S",
+    "three_sequence_result_delivery": "NOT_COMPLETED"
+  },
+  "no_retry": true,
+  "no_parameter_change": true,
+  "no_gate_relaxation": true,
+  "data_mode": "real_partial_hard_stop_evidence",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "hashes": {
+    "BY2O_RAW_POST_STOP.json": "516d08fee893b9d20bc7ef70c1f45950bc92cf961876a5c17ea315d6ed420cab",
+    "BY2_RAW_POST_STOP.json": "3d11ef580083d52af5f76068ebab00f58feb02d3acf83b7ad4331e42d2a71335",
+    "FROZEN_FIGURES_POST_STOP.json": "cd1fd95455719c7abd58732d9c068cb69d00d934458c095f4b086f10c01e08ee",
+    "EVALUATION_LEDGER.csv": "58b12a97a42d127478551ca31550269b64b4319f8a87c3212a79d39d6a603b6f",
+    "GEOMETRIC_AUDIT.csv": "b92058d8c50e3e668da204f207f0d430d9225437ca88a0c82e4deca605b29683",
+    "GAP_EVENTS.csv": "8098c7763ca2041d9e056620bdef90c4e0a37f888f4b50c6651a3c4aab44e0e7",
+    "BY2H_RAW_POST_STOP.json": "a83e6313266f00f66cffdbea9a9e906c028a46a50ccf71f4d6d4f84c175929b6"
+  }
+}

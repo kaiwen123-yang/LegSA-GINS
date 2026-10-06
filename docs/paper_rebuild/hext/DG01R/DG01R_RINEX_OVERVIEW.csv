@@ -1,0 +1,7 @@
+sequence,receiver,n_common,bridge_only,convbin_only,C_common,C_nonzero,L_common,L_nonzero,phase_fraction_half,phase_fraction_other,LLI_bit0_different,LLI_bit1_different,S_common,S_convbin_only
+BY2,1,84848,66,0,84848,0,36527,0,0,0,2,0,0,84848
+BY2,2,80268,61,0,80268,0,33838,0,0,0,3,0,0,80268
+BY2H,1,83439,68,0,83439,0,36155,0,0,0,2,0,0,83439
+BY2H,2,81196,65,0,81196,0,35109,0,0,0,5,0,0,81196
+BY2O,1,114683,66,0,114683,0,58782,0,0,0,2,0,0,114683
+BY2O,2,107134,64,0,107134,0,46859,0,0,0,1,0,0,107134

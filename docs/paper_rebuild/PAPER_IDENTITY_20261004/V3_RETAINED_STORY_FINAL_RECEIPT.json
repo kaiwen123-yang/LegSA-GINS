@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "status": "PRIMARY_V3_RETAINED_STORY_AND_GPS_TIM_READINESS_ACCEPTED",
+  "created_utc": "2026-10-04T10:39:05.667898+00:00",
+  "all_checks_passed": true,
+  "submission_ready": false,
+  "actual_counts": {
+    "body_words": 5271,
+    "abstract_words": 198,
+    "keyword_count": 6,
+    "main_tables": 4,
+    "main_figures": 6,
+    "number_checks_passed": 204,
+    "number_checks_failed": 0
+  },
+  "official_word_count_boundary": "GPS Solutions says manuscripts about 5000–5500 words without defining exclusions; this body-only count is not a full submission word-count certification.",
+  "main_all_prose_words": 6095,
+  "primary_role": "Author-retained original V3, entire6468matrix; diagnostic33/135/FGO9/EXT9 separately identified, no substitution",
+  "original_native_scientific_identity": {
+    "source": "7d43b9af26120ed5dde21f53e515386361072ba6",
+    "binary": "96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c",
+    "definition_documentation_anchor": "ca73cb1fb48a020fd2a450d79e520562c34eeb24"
+  },
+  "numeric_invariance": {
+    "created_utc": "2026-10-04T10:36:37.319131+00:00",
+    "all_checks_passed": true,
+    "table_files_byte_exact": 31,
+    "pure_numeric_cells_exact": 3489,
+    "protected_figure_files_byte_exact": 36,
+    "existing_scientific_evidence_files_byte_exact": 13,
+    "first_name_photo_asset_files_unchanged": true,
+    "existing_prose_number_tokens_unchanged_except_three_explicit_primary_abstract_rebindings": true,
+    "abstract_rebinding": [
+      {
+        "sequence": "BY2",
+        "previous_cohort": "later natural33 diagnostic",
+        "current_cohort": "author-retained original V3"
+      },
+      {
+        "sequence": "BY2H",
+        "previous_cohort": "later natural33 diagnostic",
+        "current_cohort": "author-retained original V3"
+      },
+      {
+        "sequence": "BY2O",
+        "previous_cohort": "later natural33 diagnostic",
+        "current_cohort": "author-retained original V3"
+      }
+    ],
+    "new_direct_registry_number_tokens": 9,
+    "number_checks_passed": 204,
+    "number_checks_failed": 0,
+    "science_modules_invoked": 0,
+    "raw_reference_payload_reads": 0,
+    "original_scientific_inputs_or_results_modified": false,
+    "scope": "Publication-source/display-only role changes and inherited registry direct transcription; not new metric evaluation/calibration.",
+    "existing_ledger_entries_other_than_three_abstract_claims_unchanged": 192,
+    "explicit_ledger_rebindings": [
+      {
+        "claim_id": "N00002",
+        "old_value": "1.903",
+        "new_value": "1.886",
+        "old_source": "paper_package/gpss_v0/evidence/natural33.csv",
+        "new_source": "<V3>/07_AGGREGATE/MAIN_TABLE_V3.csv"
+      },
+      {
+        "claim_id": "N00003",
+        "old_value": "1.941",
+        "new_value": "1.934",
+        "old_source": "paper_package/gpss_v0/evidence/natural33.csv",
+        "new_source": "<V3>/07_AGGREGATE/MAIN_TABLE_V3.csv"
+      },
+      {
+        "claim_id": "N00004",
+        "old_value": "2.413",
+        "new_value": "2.434",
+        "old_source": "paper_package/gpss_v0/evidence/natural33.csv",
+        "new_source": "<V3>/07_AGGREGATE/MAIN_TABLE_V3.csv"
+      }
+    ],
+    "comparison_publication_commit": "7538df9563e9eceb50fcb0533a9794f72328c78c"
+  },
+  "read_scope": "Current main345lines and template297/375 source prose fully read; generatedSI1192lines selected current reading plus all31table byte/numeric checks. Not all repository/everyfield manual semantic reading. Exact scope sidecar.",
+  "targets": [
+    "GPS Solutions",
+    "IEEE Transactions on Instrumentation and Measurement"
+  ],
+  "author_facts_and_measured_calibration_complete": false,
+  "full_author_program_and_original_paper_campaign_reproduction_claimed": false,
+  "pending_new_scientific_cohort_numbers_bound": false,
+  "science_calls": {
+    "generator": 0,
+    "native": 0,
+    "evaluator": 0,
+    "raw_reference_read": 0
+  },
+  "git_calls_by_this_agent": {
+    "stage": 0,
+    "commit": 0,
+    "push": 0
+  },
+  "protected_first7_identity_receipt_modified": false,
+  "original_V3_scientific_results_modified": false,
+  "source928_modified_by_this_block": false,
+  "parent_only_git": true,
+  "paths_for_parent_commit": [
+    "docs/paper_rebuild/PAPER_IDENTITY_20261004/GPS_TIM_CLAIMS_AND_READINESS.md",
+    "docs/paper_rebuild/PAPER_IDENTITY_20261004/GPS_TIM_OFFICIAL_READ_COVERAGE.csv",
+    "docs/paper_rebuild/PAPER_IDENTITY_20261004/V3_RETAINED_STORY_CHANGELOG.md",
+    "docs/paper_rebuild/PAPER_IDENTITY_20261004/V3_RETAINED_STORY_COMMIT_PATHS.txt",
+    "docs/paper_rebuild/PAPER_IDENTITY_20261004/V3_RETAINED_STORY_FINAL_RECEIPT.json",
+    "docs/paper_rebuild/PAPER_IDENTITY_20261004/V3_RETAINED_STORY_INVARIANCE.json",
+    "docs/paper_rebuild/PAPER_IDENTITY_20261004/V3_RETAINED_STORY_PRE_CHANGE.json",
+    "docs/paper_rebuild/PAPER_IDENTITY_20261004/V3_RETAINED_STORY_READ_COVERAGE.csv",
+    "paper_package/gpss_v0/CLAIM_SPECS.json",
+    "paper_package/gpss_v0/FINAL_QA.json",
+    "paper_package/gpss_v0/MANUSCRIPT_GPSS_v0.md",
+    "paper_package/gpss_v0/NOTES_ZH.md",
+    "paper_package/gpss_v0/NUMBER_LEDGER.csv",
+    "paper_package/gpss_v0/NUMBER_LEDGER_CHECK.csv",
+    "paper_package/gpss_v0/READ_FILES.json",
+    "paper_package/gpss_v0/SUPPLEMENT_GPSS_v0.md",
+    "paper_package/gpss_v0/TABLE_MAP.csv",
+    "paper_package/gpss_v0/evidence/RESULT_IDENTITY_MAP.json",
+    "paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "paper_package/gpss_v0/figures/scripts/assemble_manuscript.py",
+    "paper_package/gpss_v0/figures/scripts/quality_check.py",
+    "paper_package/gpss_v0/manuscript_source.md",
+    "paper_package/gpss_v0/supplement_source.md"
+  ],
+  "files": {
+    "docs/paper_rebuild/PAPER_IDENTITY_20261004/GPS_TIM_CLAIMS_AND_READINESS.md": {
+      "bytes": 14598,
+      "sha256": "7606cbb27a85c34afc82b54bd53f9e98f45ba4bbf9dd64120dbc6850dfd90db7"
+    },
+    "docs/paper_rebuild/PAPER_IDENTITY_20261004/GPS_TIM_OFFICIAL_READ_COVERAGE.csv": {
+      "bytes": 1006,
+      "sha256": "514b8150d3720fcfb39cb384f76904b308057e0ce926f4cb4dd21dd20704b867"
+    },
+    "docs/paper_rebuild/PAPER_IDENTITY_20261004/V3_RETAINED_STORY_CHANGELOG.md": {
+      "bytes": 2600,
+      "sha256": "36cd3c42a17abbbde4a0444446c3d7f24ceaf2067345232891bd470ce090f513"
+    },
+    "docs/paper_rebuild/PAPER_IDENTITY_20261004/V3_RETAINED_STORY_COMMIT_PATHS.txt": {
+      "bytes": 1298,
+      "sha256": "1975826819238fb96b134a5365ea5cfbbcb742b052c95009408bc0c9b4eaecab"
+    },
+    "docs/paper_rebuild/PAPER_IDENTITY_20261004/V3_RETAINED_STORY_INVARIANCE.json": {
+      "bytes": 2109,
+      "sha256": "587551d22f9de157b73cc9413d900b3bd0371e25a204bfa1d20fc36348f3ef8d"
+    },
+    "docs/paper_rebuild/PAPER_IDENTITY_20261004/V3_RETAINED_STORY_PRE_CHANGE.json": {
+      "bytes": 98743,
+      "sha256": "0d94f44ba4b6f37fe33828f5cfa654412f011fbda39da8e8d75209bb7008ed45"
+    },
+    "docs/paper_rebuild/PAPER_IDENTITY_20261004/V3_RETAINED_STORY_READ_COVERAGE.csv": {
+      "bytes": 12224,
+      "sha256": "997bf514ba201750ff47ce355ca75c7d7328d8dc38aa4423e975a49d102fa8c6"
+    },
+    "paper_package/gpss_v0/CLAIM_SPECS.json": {
+      "bytes": 123861,
+      "sha256": "7fa516d8a6609eb28f66320a954c47f8f43bf69c47fe2481d34d399021be9226"
+    },
+    "paper_package/gpss_v0/FINAL_QA.json": {
+      "bytes": 4396,
+      "sha256": "8143384ad339ae07adda686ef11c40ee8b1af61ad50bd56b801a17ddc9b74476"
+    },
+    "paper_package/gpss_v0/MANUSCRIPT_GPSS_v0.md": {
+      "bytes": 51837,
+      "sha256": "e020f8bca28e500f152cc96b4f3864620e66bc73e85517693f711c0d097afb28"
+    },
+    "paper_package/gpss_v0/NOTES_ZH.md": {
+      "bytes": 3807,
+      "sha256": "cee635322df7ef20f0811ef790b784585b3ec57681c422aca81a41af2e96dc8d"
+    },
+    "paper_package/gpss_v0/NUMBER_LEDGER.csv": {
+      "bytes": 200584,
+      "sha256": "15cd8931ab4346c4236a4ba930d13f95cce8009d82f755e568f41f5e6fd3da59"
+    },
+    "paper_package/gpss_v0/NUMBER_LEDGER_CHECK.csv": {
+      "bytes": 10896,
+      "sha256": "387b91b19ada1aec03360936f0b6733b81582cfed76a79edde2a73a6601d7dcf"
+    },
+    "paper_package/gpss_v0/READ_FILES.json": {
+      "bytes": 32903,
+      "sha256": "cee32276b8b564b94594d7ce01868a009244d1df2448f26fd60d928cd72b9649"
+    },
+    "paper_package/gpss_v0/SUPPLEMENT_GPSS_v0.md": {
+      "bytes": 170809,
+      "sha256": "3b9602c7c1c60a8d8fa48749005c87b9b3c095541199fcca609f79dfb5881270"
+    },
+    "paper_package/gpss_v0/TABLE_MAP.csv": {
+      "bytes": 9341,
+      "sha256": "08a4f81fecb6d23c338fe099cf36db4ba18b3a9fc2c404bc9d28eb03148ccec8"
+    },
+    "paper_package/gpss_v0/evidence/RESULT_IDENTITY_MAP.json": {
+      "bytes": 6456,
+      "sha256": "5b53efd21411db7ad8fe81092ed2dcb69731eb54c34d6deca0f3ef905380f305"
+    },
+    "paper_package/gpss_v0/evidence/original_v3_registry_receipt.json": {
+      "bytes": 5960,
+      "sha256": "3b66d71a339d145a84fa0dd37a4b742ad0378852419fc19b88b7653cedc0f71c"
+    },
+    "paper_package/gpss_v0/figures/scripts/assemble_manuscript.py": {
+      "bytes": 13532,
+      "sha256": "a07d6c5819f61bc22cd3787321a20af74a2fa769e2a8a94037a92da2212b2f4d"
+    },
+    "paper_package/gpss_v0/figures/scripts/quality_check.py": {
+      "bytes": 6517,
+      "sha256": "f5c03fc750ffdd352dc48226a0c30d002b27831633aeb3e5712c7ad6d1b8e0c8"
+    },
+    "paper_package/gpss_v0/manuscript_source.md": {
+      "bytes": 49569,
+      "sha256": "531c8013cbe2a401f06f38e463f9273de96b54ff4332de6bd7e2fd42dd89dd7c"
+    },
+    "paper_package/gpss_v0/supplement_source.md": {
+      "bytes": 60559,
+      "sha256": "ccc03877cd72a2894fc9cdc4767cb29f2840515dc36edf54dac12c229350eba2"
+    }
+  }
+}

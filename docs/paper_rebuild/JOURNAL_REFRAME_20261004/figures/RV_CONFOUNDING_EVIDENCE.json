@@ -1,0 +1,225 @@
+{
+  "time_utc": "2026-10-04T14:28:18.840059+00:00",
+  "comparison_type": "JOINT_RV_AND_YAW_HANDLING_STRUCTURAL_CHANGE",
+  "isolated_RV_effect_identifiable": false,
+  "actual_frozen_F02_std_deg": 2.933193,
+  "registry_fixed_std_contract_deg": 1.5,
+  "registry_default_is_not_actual_run_value": true,
+  "run_manifest_fields": [
+    {
+      "sequence": "BY2",
+      "method": "F02",
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00002/RUN_MANIFEST.json",
+      "sha256": "65397db8aebc5d1c2f0bd35dabea75a7a979ec1e6ba482cbc34ef3b521541244",
+      "algorithm_id": "basic_dual_yaw_EKF",
+      "measurement_update_order": "position_then_basic_yaw_then_feedback",
+      "enable_basic_dual_yaw_baseline": true,
+      "yaw_scheme_C_enabled": false,
+      "basic_dual_yaw_fixed_std_deg": 2.933193,
+      "receiver_velocity_update_count": 0,
+      "dual_yaw_update_count": 1369,
+      "yaw_NORMAL": 1369,
+      "yaw_DOWNWEIGHT": 0,
+      "yaw_REJECT": 0,
+      "source_commit": "5a4471efd4fcfcdc31e258a677af354c652ff16f"
+    },
+    {
+      "sequence": "BY2",
+      "method": "F03",
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00003/RUN_MANIFEST.json",
+      "sha256": "1a1e7a098cb9d8dbb513e7433dc68dd4b833d8fb58a83536b22f53400eccceef",
+      "algorithm_id": "strong_dual_yaw_EKF",
+      "measurement_update_order": "position_then_yaw_then_receiver_velocity_then_feedback",
+      "enable_basic_dual_yaw_baseline": false,
+      "yaw_scheme_C_enabled": true,
+      "basic_dual_yaw_fixed_std_deg": 2.933193,
+      "receiver_velocity_update_count": 1369,
+      "dual_yaw_update_count": 1348,
+      "yaw_NORMAL": 1285,
+      "yaw_DOWNWEIGHT": 63,
+      "yaw_REJECT": 21,
+      "source_commit": "5a4471efd4fcfcdc31e258a677af354c652ff16f"
+    },
+    {
+      "sequence": "BY2H",
+      "method": "F02",
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F02/RUN_MANIFEST.json",
+      "sha256": "2404f19b6ea1ec5f2b7c385a46b0329509c82701f5154a3ee0203bb5fe9cb7e7",
+      "algorithm_id": "basic_dual_yaw_EKF",
+      "measurement_update_order": "position_then_basic_yaw_then_feedback",
+      "enable_basic_dual_yaw_baseline": true,
+      "yaw_scheme_C_enabled": false,
+      "basic_dual_yaw_fixed_std_deg": 2.933193,
+      "receiver_velocity_update_count": 0,
+      "dual_yaw_update_count": 1349,
+      "yaw_NORMAL": 1349,
+      "yaw_DOWNWEIGHT": 0,
+      "yaw_REJECT": 0,
+      "source_commit": "5a4471efd4fcfcdc31e258a677af354c652ff16f"
+    },
+    {
+      "sequence": "BY2H",
+      "method": "F03",
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F03/RUN_MANIFEST.json",
+      "sha256": "0063b3fb0ed96592e803c01de4fa9d503a622ddf4ae4523d36e2c1cedd26bc40",
+      "algorithm_id": "AB0000",
+      "measurement_update_order": "position_then_yaw_then_receiver_velocity_then_feedback",
+      "enable_basic_dual_yaw_baseline": false,
+      "yaw_scheme_C_enabled": true,
+      "basic_dual_yaw_fixed_std_deg": 2.933193,
+      "receiver_velocity_update_count": 1349,
+      "dual_yaw_update_count": 1334,
+      "yaw_NORMAL": 1287,
+      "yaw_DOWNWEIGHT": 47,
+      "yaw_REJECT": 15,
+      "source_commit": "5a4471efd4fcfcdc31e258a677af354c652ff16f"
+    },
+    {
+      "sequence": "BY2O",
+      "method": "F02",
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F02/RUN_MANIFEST.json",
+      "sha256": "a57103244fc248c7a5e0e16a4d535658c0d108bfb1d82b2d91a417e7c315697f",
+      "algorithm_id": "basic_dual_yaw_EKF",
+      "measurement_update_order": "position_then_basic_yaw_then_feedback",
+      "enable_basic_dual_yaw_baseline": true,
+      "yaw_scheme_C_enabled": false,
+      "basic_dual_yaw_fixed_std_deg": 2.933193,
+      "receiver_velocity_update_count": 0,
+      "dual_yaw_update_count": 1591,
+      "yaw_NORMAL": 1591,
+      "yaw_DOWNWEIGHT": 0,
+      "yaw_REJECT": 0,
+      "source_commit": "5a4471efd4fcfcdc31e258a677af354c652ff16f"
+    },
+    {
+      "sequence": "BY2O",
+      "method": "F03",
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F03/RUN_MANIFEST.json",
+      "sha256": "edfa7003e4f91d92e2c9a5110e4d23997c9c6bb9470aaaf6a63d521dfad9da3a",
+      "algorithm_id": "AB0000",
+      "measurement_update_order": "position_then_yaw_then_receiver_velocity_then_feedback",
+      "enable_basic_dual_yaw_baseline": false,
+      "yaw_scheme_C_enabled": true,
+      "basic_dual_yaw_fixed_std_deg": 2.933193,
+      "receiver_velocity_update_count": 1882,
+      "dual_yaw_update_count": 1586,
+      "yaw_NORMAL": 1506,
+      "yaw_DOWNWEIGHT": 80,
+      "yaw_REJECT": 5,
+      "source_commit": "5a4471efd4fcfcdc31e258a677af354c652ff16f"
+    }
+  ],
+  "read_only_source_pins": [
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00002/RUN_MANIFEST.json",
+      "sha256": "65397db8aebc5d1c2f0bd35dabea75a7a979ec1e6ba482cbc34ef3b521541244",
+      "bytes": 20177
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00002/V3_RUNTIME_CONFIG.yaml",
+      "sha256": "3e5c21e94cea327b9c4aa2f7c095f5f7eb9662cafc66a3759d6d4f3d084f8e79",
+      "bytes": 7864
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00002/RUN_STARTED.json",
+      "sha256": "1019658cd5729781e3370f943d59cda885a89d306af60febe3899466c88ea494",
+      "bytes": 8210
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00003/RUN_MANIFEST.json",
+      "sha256": "1a1e7a098cb9d8dbb513e7433dc68dd4b833d8fb58a83536b22f53400eccceef",
+      "bytes": 20194
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00003/V3_RUNTIME_CONFIG.yaml",
+      "sha256": "ecbd659c0d57665c2cff897e71cbbdbbb7d89f19662d748541adf7d6f62c1a4d",
+      "bytes": 7855
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00003/RUN_STARTED.json",
+      "sha256": "a4c27661ea0ff0c8a769c9cf98828c80cb65c5ada916dcc2a3a7e955cfb66afd",
+      "bytes": 8172
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F02/RUN_MANIFEST.json",
+      "sha256": "2404f19b6ea1ec5f2b7c385a46b0329509c82701f5154a3ee0203bb5fe9cb7e7",
+      "bytes": 20157
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F02/V3_RUNTIME_CONFIG.yaml",
+      "sha256": "a5131fb4d6f9e5c8cb9fcbcfe71feb840bdca056f3e304308e51b2e5d94e2575",
+      "bytes": 7963
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F02/RUN_STARTED.json",
+      "sha256": "15c1bc90d9a3dbc13abf54af80e12d4a77d6d34d8857cb3ba4bac9ea3a81607b",
+      "bytes": 7303
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F03/RUN_MANIFEST.json",
+      "sha256": "0063b3fb0ed96592e803c01de4fa9d503a622ddf4ae4523d36e2c1cedd26bc40",
+      "bytes": 20163
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F03/V3_RUNTIME_CONFIG.yaml",
+      "sha256": "b58766c5b4200a6a16d50c9f4b49379a5c9ae8e33e86484a16f382f5aee6aed9",
+      "bytes": 7941
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F03/RUN_STARTED.json",
+      "sha256": "2833901514d755cc20982c3036079f3d0ac4b154423be1daa412ed96f55ed0ed",
+      "bytes": 7265
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F02/RUN_MANIFEST.json",
+      "sha256": "a57103244fc248c7a5e0e16a4d535658c0d108bfb1d82b2d91a417e7c315697f",
+      "bytes": 20166
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F02/V3_RUNTIME_CONFIG.yaml",
+      "sha256": "b2e56de0da9a03a19e1a5976d0b7785839fa9b44bdd75a3662b0fbd8e44cf09d",
+      "bytes": 7970
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F02/RUN_STARTED.json",
+      "sha256": "76788b41c96585f19f220f25b52b117e0fe77f2c1cd7bd3949a4cae72b9e6c70",
+      "bytes": 7476
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F03/RUN_MANIFEST.json",
+      "sha256": "edfa7003e4f91d92e2c9a5110e4d23997c9c6bb9470aaaf6a63d521dfad9da3a",
+      "bytes": 20171
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F03/V3_RUNTIME_CONFIG.yaml",
+      "sha256": "6efc5ebcd925083add3d7fba3a0628fbb8ea5e4fd6fbbe183a208f9f6576d96d",
+      "bytes": 7948
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F03/RUN_STARTED.json",
+      "sha256": "eac9e4fe06e8a6dab969a23ca67524794e4eb629991c5f4203aad305836d056d",
+      "bytes": 7438
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/canonical541/full_method_registry.py",
+      "sha256": "006bb8ac50a902196e57f6062ed6f092ec9a4a3bab7630110926bf42c4c6981f",
+      "bytes": 6193
+    }
+  ],
+  "historical_cpp_corroboration": [
+    {
+      "git_revision": "ca73cb1fb48a020fd2a450d79e520562c34eeb24",
+      "path": "cpp/legsa_v23_port_core/src/config/port_config_loader.cpp",
+      "blob_content_sha256": "52ac341d0bc14637ae7f7f13238632897abc7e570fe3402cd3a45e1972348f88"
+    },
+    {
+      "git_revision": "ca73cb1fb48a020fd2a450d79e520562c34eeb24",
+      "path": "cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp",
+      "blob_content_sha256": "4d2e329a1f6a11ed232941c3150a5569791f7ac5fceb0362e91e5dd856dc6a50"
+    }
+  ],
+  "old_source_commit_field_not_reinterpreted_as_exact_build_identity": true,
+  "no_solver_calls": true,
+  "no_evaluator_calls": true,
+  "raw_reference_payload_opens": 0
+}

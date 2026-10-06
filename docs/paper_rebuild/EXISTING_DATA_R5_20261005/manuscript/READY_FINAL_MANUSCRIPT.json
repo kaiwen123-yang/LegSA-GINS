@@ -1,0 +1,70 @@
+{
+  "status": "FINAL_EDITABLE_DRAFTS_READY",
+  "files": [
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/manuscript/EN_DOCX_AUTHORING_RECEIPT.json",
+      "sha256": "95c5461c9f43354e7c90c8d66fba1d83af9b58cde40abd751c9afcf934c16772"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/manuscript/GPS_Solutions_Draft_R5.docx",
+      "sha256": "77dbbab6c0361660bc4af19e976c046bf570b97256e163bf6be2c43080058f1b"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/manuscript/R5_DOCUMENT_QA.json",
+      "sha256": "77ba5af8b8c20598d80b761559e5f8b96253ebb84addcbbf08b291c928b38687"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/manuscript/R5_EN_FINAL_VISUAL_QA.csv",
+      "sha256": "b1e45edab5917c1d94d74dccee7ee8bb1450ed3e1e8e1ecfc92d65944863eadb"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/manuscript/R5_EN_INITIAL_VISUAL_QA.csv",
+      "sha256": "fa0a9f9d6986bdc8e14ff0ddb39b10587d2c7ff5ab670b9ed1a84da1cde9409f"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/manuscript/R5_ZH_FINAL_VISUAL_QA.csv",
+      "sha256": "739673179e1419c0523661d2db46780d8eb55a3b88b51ecc1e4972a78fe9e5f7"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/manuscript/R5_ZH_INITIAL_VISUAL_QA.csv",
+      "sha256": "d29f627b088ed97b693b9c6e5776136b561404ed84d924021a23f0f1d548e0ee"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/manuscript/R5_ZH_OUTLINE.md",
+      "sha256": "3242346c2410389dadeb50ddb422d4215e8eb8384aa59d7ee73f8db45d3acaf7"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/manuscript/R5_ZH_READY.json",
+      "sha256": "8c9d36d99f63f36d1354a915f201d0f53335b99d834df0dbf54a4ae4f4edf843"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/manuscript/TIM_measurement_analysis_zh.md",
+      "sha256": "06936eebc31ee4a7a28f7b656f91065bb8d687158aad0ed7bfa5c1f56ecd694b"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/manuscript/ZH_DOCX_AUTHORING_RECEIPT.json",
+      "sha256": "5b90d666fd67a69923fd6b703eed7e8db360364363a5b4bc04a7fe4c8135aa0b"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/manuscript/build_manuscript_docx.py",
+      "sha256": "88f9b9853133b5ad63a425564db1119ade314abf54a00d7bc7d96b841b4cafb2"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/manuscript/manuscript_gps_solutions_r5_en.md",
+      "sha256": "c44fe74160e17cb9cb0fa49e4c08ca3a8433235a1797203279192e4255dcf4ce"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/manuscript/manuscript_gps_solutions_r5_zh.md",
+      "sha256": "8da19b82a98b8ea1356a241464d07f087e02bc3fcfc62cadfa486850c1757f60"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/manuscript/论文初稿_中文_R5.docx",
+      "sha256": "6d4e2ee15754646e747292f009a264090ec9579ed3fbc7583864ac313bdc3ae5"
+    }
+  ],
+  "new_native_runs_in_this_document_block": 0,
+  "document_pages": {
+    "zh": 13,
+    "en": 19
+  }
+}

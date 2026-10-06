@@ -1,0 +1,77 @@
+{
+  "status": "PASS_HX02E_OFFICIAL_COMPLETE",
+  "utc": "2026-09-26T09:27:52.622108+00:00",
+  "registration_commit": "1fc59f6067ddd326b578a7a3a47e62138ae3abe4",
+  "counts": {
+    "legsa_native": 0,
+    "legsa_evaluation": 0,
+    "official_real_native": 6,
+    "relative_pose_evaluation": 6,
+    "reference_opens": 6
+  },
+  "official_example_calls": 2,
+  "driver_gate_calls": 4,
+  "controller_launch_attempts": 2,
+  "startup_interruption_before_script_open": true,
+  "native_retries": 0,
+  "evaluator_retries": 0,
+  "reference_child_audits_pass": true,
+  "controller_and_native_reference_opens": 0,
+  "official_head": "ef16e8a1df72f9272111a488880e3fe9d161f59f",
+  "official_before_after_status_porcelain": "",
+  "official_tracked_files_matched": 58,
+  "official_source_and_build_files_matched": 22,
+  "build_copy_matched": 58,
+  "official_listing_sha256": "12eb49db447fd3ed86fb594d147f8d0c2a21df38a0db34a24b91b45bdb2c9cb1",
+  "sealed_checks": {
+    "start": {
+      "matched": 65,
+      "csv_matched": 59,
+      "source": "00_CONTROL/SEALED_START.json",
+      "utc": "2026-09-26T09:08:45.097131+00:00"
+    },
+    "before_first_commit": {
+      "matched": 65,
+      "csv_matched": 59,
+      "source": "00_CONTROL/SEALED_BEFORE_PREREG_COMMIT.json",
+      "utc": "2026-09-26T09:18:41.651944+00:00"
+    },
+    "before_results_commit": {
+      "matched": 65,
+      "csv_matched": 59,
+      "source": "00_CONTROL/SEALED_BEFORE_RESULTS_COMMIT.json",
+      "utc": "2026-09-26T09:25:14.456480+00:00"
+    }
+  },
+  "protected_trees": {
+    "HX02_FIVE_CATEGORY": {
+      "files": 12678,
+      "matched": 12678,
+      "changed": 0,
+      "new_or_missing": 0
+    },
+    "HX02D_HARTLEY_DIAGNOSTIC": {
+      "files": 82,
+      "matched": 82,
+      "changed": 0,
+      "new_or_missing": 0
+    }
+  },
+  "method_body_matched": 423,
+  "unrelated_untracked_matched": 29,
+  "frozen_code_and_config_unchanged": true,
+  "long_table_rows": 96,
+  "long_table_all_values_exact_to_sources": true,
+  "error_series_recalculation_runs": 6,
+  "archive_file_count": 308,
+  "archive_bytes_excluding_receipt": 399946051,
+  "copy_verification_sha256": "8b5660b85fde09cf02caf25fa62608dca63cbedd05e5b05e8923e2eda9ae1c30",
+  "scratch_empty": true,
+  "scratch_bytes": 0,
+  "disk_available_bytes": {
+    "/mnt/e": 128416452608,
+    "/mnt/g": 84857847808
+  },
+  "new_package_created": false,
+  "outcome": "All six official configurations retained as legged-state-estimation comparison rows; HX-02 transplant rows and HX-02D diagnostic assigned to supplementary material"
+}

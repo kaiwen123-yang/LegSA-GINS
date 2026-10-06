@@ -1,0 +1,282 @@
+{
+  "status": "ALL_12_NATIVE_LOADER_CONFIGS_ADMITTED_READY_FOR_REFREEZE",
+  "native_invocations": 0,
+  "evaluation_invocations": 0,
+  "base_commit": "d216bf5387e76de41e71e7deca0752cc00cfe0f1",
+  "binary_sha256": "3805d2d2b0f52063da48d52b23fca2f88c4b5f9ef19adc9bfd48f5fe920701e7",
+  "plan_sha256": "f96251d9d53e6c0323f3f931a56432cef5686ef702a562cf61f74ea80495d3f8",
+  "helper_sha256": "7d8c7e398689b0c5cca2f6d9a24051604b3190e4b37ba45b6db3145f3bfd4250",
+  "unit_tests": {
+    "status": "PASS",
+    "max_body_jacobian_error": 2.97396e-10,
+    "schedule_guards": 5
+  },
+  "production_source_sha256": {
+    "README.md": "150c39d48f57b7ea20a555726907706f0c4d93030a3e114975df7c468dddd5e9",
+    "PORT_MANIFEST.json": "e28168a712d8727a8b7432ddaaa59c741ed1b6e2039115843774af9cc43b889d",
+    "PORT_PROVENANCE.md": "4620abfba69de22ac1365bda6269a582be5f43725913e236dc03e58cf8e9a0db",
+    "include/legsa_v23_port_core/nav_state.hpp": "804067e48398d6a495d4549f69fdb66f9c83f2831ac0a5d04cf1c37baa278093",
+    "include/legsa_v23_port_core/imu.hpp": "7c79c573cd8aae9745ebe9a227a2c681d26c4e846cfb1583b1e4a516f668d728",
+    "include/legsa_v23_port_core/baseline3d.hpp": "a0945eb6787d6873469412987262f19b07b531173afc1ce841f53f07740eb31e",
+    "include/legsa_v23_port_core/gnss.hpp": "0f637470add50cdf4de0d963329f9cb6c2257c68cc899a2ef6798f91c14d3925",
+    "include/legsa_v23_port_core/options.hpp": "54b3757d0ef41c99adbb37fa9b579461a29afe9a10b3da7ae259152644ac1762",
+    "include/legsa_v23_port_core/types.hpp": "ff32237a291905bf9afe68721e687a4391c5a155d80cbaa626d8db3b2d75b9ef",
+    "include/legsa_v23_port_core/runtime/port_runtime.hpp": "eb6523a5a121a90cebee732b2df5ad4e06e6407e3bb631024655234c086bb7f5",
+    "include/legsa_v23_port_core/common/rotation.hpp": "6968d788b9765736fda9470c41243c5d2a01bf4fdb492e05b714b6d6b1892dca",
+    "include/legsa_v23_port_core/common/earth.hpp": "aee6183b334e8c33c9dc4ca08396c8a0f61211444ba1d69d230148445c4dede3",
+    "include/legsa_v23_port_core/fileio/imu_file_loader.hpp": "013a6b0e84914cc4260aad13148a12905f3ae33ff5aa51e339f31c9ded31be25",
+    "include/legsa_v23_port_core/fileio/file_saver.hpp": "c854a616ac5d858890262b5c4801670a553bb629aaecbaeb98c60ced9a97839e",
+    "include/legsa_v23_port_core/fileio/gnss_file_loader.hpp": "234e617143b976332373236068ade5457981c3d1db3ad9f6dc92722785b59a22",
+    "include/legsa_v23_port_core/factors/go2_weak_prior_types.hpp": "5bc45cd3ad33f25d419da94cf97661b4f01c220cfe137fe1bbfaf36a3f7a4737",
+    "include/legsa_v23_port_core/factors/raw_doppler_types.hpp": "c59c1ab797128ca0ab73f9496c1fe12599d8a886f98d16a3e7a0b7ac4e8d56fc",
+    "include/legsa_v23_port_core/factors/raw_doppler_factor.hpp": "ce2e00fdf4697ba6322fe0b3e22c719e86f11b4fcb26001ff67e04db933baea8",
+    "include/legsa_v23_port_core/factors/satellite_state_provider.hpp": "ee899b3c17fd036a7a1cf3841fd15bffa94a3e6adfbe066c6501b31e4845d1f8",
+    "include/legsa_v23_port_core/factors/go2_weak_prior_factor.hpp": "7fe76fc1bf98dd59729194d7eac9a36054e51a9d93c75974c467202475092261",
+    "include/legsa_v23_port_core/factors/raw_doppler_factor_loader.hpp": "1ecb890eac97824e263d75296022d1aafc486b04d5a18917c5474a868dc55d00",
+    "include/legsa_v23_port_core/factors/go2_weak_prior_loader.hpp": "43fea1420dcddfce32e68fc9614a1f8a17eacb4673be65fa550e6c67240e12c0",
+    "include/legsa_v23_port_core/quality_aware/qa_fallback.hpp": "169866841e615dcc936b3ef0b0b4d481b1e121513f5d1ae615c32e0c8ace5ea8",
+    "include/legsa_v23_port_core/config/port_config_loader.hpp": "cd3210d6412ff1c426e9792c2284c6554c1625e19e29e3da6919fb95e6bc2ce9",
+    "include/legsa_v23_port_core/kf_gins/insmech.hpp": "500c44107b8cfa4997e7104783b72ee53a050550c79dedc8c90741b002c4ae6a",
+    "include/legsa_v23_port_core/kf_gins/gi_engine.hpp": "c654aefb42608e3d24936b9515cd5eb8fe8baef23f96b71db5bb33cfda76363d",
+    "include/legsa_v23_port_core/kf_gins/options.hpp": "774b04a17d972af4a57a9ac2c29d1067005b49586dc7950c03b1cf98b34c49fb",
+    "include/legsa_v23_port_core/source_aware/quality_state_manager.hpp": "1f1636baa20c701f972a8895d9e74fd6aa6b59f03243ff9a6fce751b6e0d3cf9",
+    "include/legsa_v23_port_core/source_aware/measurement_source.hpp": "218da13d3f9b3f846182098880f96bd589cfa51db1d9a65efab3b0f0fd623da7",
+    "include/legsa_v23_port_core/source_aware/source_aware_policy.hpp": "e5c0d58d629194f1f1a0ddb35eeb8cb9335dd84f3544acbbe68cde07eb590e49",
+    "include/legsa_v23_port_core/source_aware/source_aware_trace.hpp": "cd2ad52aa811f12ebcad8397634e444c0a426956d36f9327b56646beac9c4811",
+    "include/legsa_v23_port_core/source_aware/quality_state_trace.hpp": "a25e0b963e3b55ff01f824b5e85689cbf5ab48210f359f8011258d72573c2b1f",
+    "include/legsa_v23_port_core/writers/port_writers.hpp": "35fad671a84912ace9636ae98ee3bdeba90ff345828944fba6d57835e30f308c",
+    "include/legsa_v23_port_core/fgo_feedback/fgo_feedback.hpp": "97bc3f0b41ce53d0c5b28b29dd2e9865b16d7d62bc915d619224786b242891e7",
+    "src/baseline3d.cpp": "34e46aba357fb9de5c955f92c1f41eb81a31baf27e5761dec1783e36d3da6fcf",
+    "src/runtime/port_runtime.cpp": "75663a117506582cca32f4836ee80d3be0abe1d43c709817411ce580dc65cdef",
+    "src/common/rotation.cpp": "7dd006b9612a13ee5173b5faa51a0f9bb9d8ccdfcea9c8f1a599269371a01331",
+    "src/common/earth.cpp": "8e9e6f52dc48ce42992f2e43ffa034cb5cc408f7901bb836542f1e0ed4683f82",
+    "src/common/types.cpp": "5a4de8e7d89f38e597587349df5c627a465248e86c67287e738c849ee781081d",
+    "src/fileio/file_saver.cpp": "4bf4b69d3350ae15ff5a94cf3211eb1c508bd9e3148c372444ffcfbfd0a70a27",
+    "src/fileio/imu_file_loader.cpp": "ed064dfb7f50d5fede6cb0865870b42c86f254e4b68389e32e1fa18cfc9e1119",
+    "src/fileio/gnss_file_loader.cpp": "6132f390d2a9fd1a298bc6b3c7a1a3080fdbbe2a2cb1f5a0313fef0d0e6e5726",
+    "src/factors/raw_doppler_factor_loader.cpp": "6634a30568ac943a778c17c3faef133c820a6f93a246d6ed9a9f5b251cec6249",
+    "src/factors/satellite_state_provider.cpp": "78984fe28dbe53aec6a6a7b9c850fc29d38d9a01cb58427585d61a3591eabe10",
+    "src/factors/raw_doppler_factor.cpp": "46786a1a0e4e31db2aba87023d754a5bd2e6480cd57be1eeec4f41f6dcc2946f",
+    "src/factors/go2_weak_prior_loader.cpp": "8973994b1b0f1b1b974fd7108d1cd2a2a622d1735de074476d427a7445949de2",
+    "src/factors/go2_weak_prior_factor.cpp": "d40bfc1b7cfd8d54fb30b167ad8f922ce56c98ecb2097171133cedb4832231d4",
+    "src/quality_aware/qa_fallback.cpp": "76dc1658bcaeb06607c87861011ed9ba3a10e9b33144148e790134a70d09b707",
+    "src/config/port_config_loader.cpp": "af8584dae0e2640e8490543dafb2f86bdf5679075ff932442d3c1502307d8856",
+    "src/demo/legsa_v23_port_core_demo.cpp": "0e2bdf1ba03555f47f6af2b98ca5da86c54322651f60f5352e2ea095c9b07a40",
+    "src/demo/port_demo.cpp": "274bd62f9dbd18b10c1764a02f98ab4452d0e445115f04bd30630f68018be891",
+    "src/kf_gins/gi_engine.cpp": "e7f13769d1475b434d6550fe9b6fb42b00adab857c4f03207479be558bc6daef",
+    "src/kf_gins/insmech.cpp": "eec54b43325af4101722d0b0eb76a712ec75a867f55950087a913642976f231c",
+    "src/source_aware/source_aware_trace.cpp": "16305993507e641ff07c19952a0acb0263daf83ca91de0901df9aa5e529b2144",
+    "src/source_aware/quality_state_trace.cpp": "00af7e8ccb982ed733fe55739555c1f03f9c02e8534c6291724f9348da0bdcde",
+    "src/source_aware/source_aware_policy.cpp": "3efce02c49adc184dc9aa76b9a1fdd1b6eeb1307ad45edeb9ebfb5eea360cb91",
+    "src/source_aware/quality_state_manager.cpp": "ba8511f51e35cfee41a313c114817c1adbe6b2e118a9632a88a24c06ebc8e192",
+    "src/writers/port_writers.cpp": "b8947e623fc8c2c78cd4bbd721328b41559652e9bd17dc0e378e0417ba06af31",
+    "src/fgo_feedback/fgo_feedback.cpp": "6a5742a17c615edef630728a460c2bbf5374b06d03dd8faf790684804591317b"
+  },
+  "sandbox_source_sha256": {
+    "pilot_test.cpp": "6da256eb62414b3166e2fd7fa1e303b2fde0b7f93787767a623541ad7e8f9e19",
+    "CMakeLists.txt": "09d220840c0998a4fe84ec9d616a907338b551d58b40564ec15f386cb6c583de",
+    "core/README.md": "150c39d48f57b7ea20a555726907706f0c4d93030a3e114975df7c468dddd5e9",
+    "core/PORT_MANIFEST.json": "e28168a712d8727a8b7432ddaaa59c741ed1b6e2039115843774af9cc43b889d",
+    "core/PORT_PROVENANCE.md": "4620abfba69de22ac1365bda6269a582be5f43725913e236dc03e58cf8e9a0db",
+    "core/include/legsa_v23_port_core/nav_state.hpp": "804067e48398d6a495d4549f69fdb66f9c83f2831ac0a5d04cf1c37baa278093",
+    "core/include/legsa_v23_port_core/imu.hpp": "7c79c573cd8aae9745ebe9a227a2c681d26c4e846cfb1583b1e4a516f668d728",
+    "core/include/legsa_v23_port_core/baseline3d.hpp": "a0945eb6787d6873469412987262f19b07b531173afc1ce841f53f07740eb31e",
+    "core/include/legsa_v23_port_core/gnss.hpp": "0f637470add50cdf4de0d963329f9cb6c2257c68cc899a2ef6798f91c14d3925",
+    "core/include/legsa_v23_port_core/options.hpp": "54b3757d0ef41c99adbb37fa9b579461a29afe9a10b3da7ae259152644ac1762",
+    "core/include/legsa_v23_port_core/pilot_aiding.hpp": "4c6713469512c792c26d63df5e9f24a8f61392e34cb1ab4cd8e439dfe3ad149e",
+    "core/include/legsa_v23_port_core/types.hpp": "ff32237a291905bf9afe68721e687a4391c5a155d80cbaa626d8db3b2d75b9ef",
+    "core/include/legsa_v23_port_core/runtime/port_runtime.hpp": "eb6523a5a121a90cebee732b2df5ad4e06e6407e3bb631024655234c086bb7f5",
+    "core/include/legsa_v23_port_core/common/rotation.hpp": "6968d788b9765736fda9470c41243c5d2a01bf4fdb492e05b714b6d6b1892dca",
+    "core/include/legsa_v23_port_core/common/earth.hpp": "aee6183b334e8c33c9dc4ca08396c8a0f61211444ba1d69d230148445c4dede3",
+    "core/include/legsa_v23_port_core/fileio/imu_file_loader.hpp": "013a6b0e84914cc4260aad13148a12905f3ae33ff5aa51e339f31c9ded31be25",
+    "core/include/legsa_v23_port_core/fileio/file_saver.hpp": "c854a616ac5d858890262b5c4801670a553bb629aaecbaeb98c60ced9a97839e",
+    "core/include/legsa_v23_port_core/fileio/gnss_file_loader.hpp": "234e617143b976332373236068ade5457981c3d1db3ad9f6dc92722785b59a22",
+    "core/include/legsa_v23_port_core/factors/go2_weak_prior_types.hpp": "5bc45cd3ad33f25d419da94cf97661b4f01c220cfe137fe1bbfaf36a3f7a4737",
+    "core/include/legsa_v23_port_core/factors/raw_doppler_types.hpp": "c59c1ab797128ca0ab73f9496c1fe12599d8a886f98d16a3e7a0b7ac4e8d56fc",
+    "core/include/legsa_v23_port_core/factors/raw_doppler_factor.hpp": "ce2e00fdf4697ba6322fe0b3e22c719e86f11b4fcb26001ff67e04db933baea8",
+    "core/include/legsa_v23_port_core/factors/satellite_state_provider.hpp": "ee899b3c17fd036a7a1cf3841fd15bffa94a3e6adfbe066c6501b31e4845d1f8",
+    "core/include/legsa_v23_port_core/factors/go2_weak_prior_factor.hpp": "7fe76fc1bf98dd59729194d7eac9a36054e51a9d93c75974c467202475092261",
+    "core/include/legsa_v23_port_core/factors/raw_doppler_factor_loader.hpp": "1ecb890eac97824e263d75296022d1aafc486b04d5a18917c5474a868dc55d00",
+    "core/include/legsa_v23_port_core/factors/go2_weak_prior_loader.hpp": "43fea1420dcddfce32e68fc9614a1f8a17eacb4673be65fa550e6c67240e12c0",
+    "core/include/legsa_v23_port_core/quality_aware/qa_fallback.hpp": "169866841e615dcc936b3ef0b0b4d481b1e121513f5d1ae615c32e0c8ace5ea8",
+    "core/include/legsa_v23_port_core/config/port_config_loader.hpp": "cd3210d6412ff1c426e9792c2284c6554c1625e19e29e3da6919fb95e6bc2ce9",
+    "core/include/legsa_v23_port_core/kf_gins/insmech.hpp": "500c44107b8cfa4997e7104783b72ee53a050550c79dedc8c90741b002c4ae6a",
+    "core/include/legsa_v23_port_core/kf_gins/gi_engine.hpp": "11f37e34fa7df2c55597d3bc2e8bb76f2c24ac7cca41bee1b992c91cdebea528",
+    "core/include/legsa_v23_port_core/kf_gins/options.hpp": "774b04a17d972af4a57a9ac2c29d1067005b49586dc7950c03b1cf98b34c49fb",
+    "core/include/legsa_v23_port_core/source_aware/quality_state_manager.hpp": "1f1636baa20c701f972a8895d9e74fd6aa6b59f03243ff9a6fce751b6e0d3cf9",
+    "core/include/legsa_v23_port_core/source_aware/measurement_source.hpp": "218da13d3f9b3f846182098880f96bd589cfa51db1d9a65efab3b0f0fd623da7",
+    "core/include/legsa_v23_port_core/source_aware/source_aware_policy.hpp": "e5c0d58d629194f1f1a0ddb35eeb8cb9335dd84f3544acbbe68cde07eb590e49",
+    "core/include/legsa_v23_port_core/source_aware/source_aware_trace.hpp": "cd2ad52aa811f12ebcad8397634e444c0a426956d36f9327b56646beac9c4811",
+    "core/include/legsa_v23_port_core/source_aware/quality_state_trace.hpp": "a25e0b963e3b55ff01f824b5e85689cbf5ab48210f359f8011258d72573c2b1f",
+    "core/include/legsa_v23_port_core/writers/port_writers.hpp": "35fad671a84912ace9636ae98ee3bdeba90ff345828944fba6d57835e30f308c",
+    "core/include/legsa_v23_port_core/fgo_feedback/fgo_feedback.hpp": "97bc3f0b41ce53d0c5b28b29dd2e9865b16d7d62bc915d619224786b242891e7",
+    "core/src/baseline3d.cpp": "34e46aba357fb9de5c955f92c1f41eb81a31baf27e5761dec1783e36d3da6fcf",
+    "core/src/runtime/port_runtime.cpp": "266c5cd5fdab2a7a3ef9fefee36c01e736e43bf8f44308abb49951237bebd9c3",
+    "core/src/common/rotation.cpp": "7dd006b9612a13ee5173b5faa51a0f9bb9d8ccdfcea9c8f1a599269371a01331",
+    "core/src/common/earth.cpp": "8e9e6f52dc48ce42992f2e43ffa034cb5cc408f7901bb836542f1e0ed4683f82",
+    "core/src/common/types.cpp": "5a4de8e7d89f38e597587349df5c627a465248e86c67287e738c849ee781081d",
+    "core/src/fileio/file_saver.cpp": "4bf4b69d3350ae15ff5a94cf3211eb1c508bd9e3148c372444ffcfbfd0a70a27",
+    "core/src/fileio/imu_file_loader.cpp": "ed064dfb7f50d5fede6cb0865870b42c86f254e4b68389e32e1fa18cfc9e1119",
+    "core/src/fileio/gnss_file_loader.cpp": "6132f390d2a9fd1a298bc6b3c7a1a3080fdbbe2a2cb1f5a0313fef0d0e6e5726",
+    "core/src/factors/raw_doppler_factor_loader.cpp": "6634a30568ac943a778c17c3faef133c820a6f93a246d6ed9a9f5b251cec6249",
+    "core/src/factors/satellite_state_provider.cpp": "78984fe28dbe53aec6a6a7b9c850fc29d38d9a01cb58427585d61a3591eabe10",
+    "core/src/factors/raw_doppler_factor.cpp": "46786a1a0e4e31db2aba87023d754a5bd2e6480cd57be1eeec4f41f6dcc2946f",
+    "core/src/factors/go2_weak_prior_loader.cpp": "8973994b1b0f1b1b974fd7108d1cd2a2a622d1735de074476d427a7445949de2",
+    "core/src/factors/go2_weak_prior_factor.cpp": "d40bfc1b7cfd8d54fb30b167ad8f922ce56c98ecb2097171133cedb4832231d4",
+    "core/src/quality_aware/qa_fallback.cpp": "76dc1658bcaeb06607c87861011ed9ba3a10e9b33144148e790134a70d09b707",
+    "core/src/config/port_config_loader.cpp": "af8584dae0e2640e8490543dafb2f86bdf5679075ff932442d3c1502307d8856",
+    "core/src/demo/legsa_v23_port_core_demo.cpp": "0e2bdf1ba03555f47f6af2b98ca5da86c54322651f60f5352e2ea095c9b07a40",
+    "core/src/demo/port_demo.cpp": "274bd62f9dbd18b10c1764a02f98ab4452d0e445115f04bd30630f68018be891",
+    "core/src/kf_gins/gi_engine.cpp": "6bce1d00ba9149d761b5ad6dc5f80eec84e09a08f7806af7e9b4f89b562b5a6b",
+    "core/src/kf_gins/insmech.cpp": "eec54b43325af4101722d0b0eb76a712ec75a867f55950087a913642976f231c",
+    "core/src/source_aware/source_aware_trace.cpp": "16305993507e641ff07c19952a0acb0263daf83ca91de0901df9aa5e529b2144",
+    "core/src/source_aware/quality_state_trace.cpp": "00af7e8ccb982ed733fe55739555c1f03f9c02e8534c6291724f9348da0bdcde",
+    "core/src/source_aware/source_aware_policy.cpp": "3efce02c49adc184dc9aa76b9a1fdd1b6eeb1307ad45edeb9ebfb5eea360cb91",
+    "core/src/source_aware/quality_state_manager.cpp": "ba8511f51e35cfee41a313c114817c1adbe6b2e118a9632a88a24c06ebc8e192",
+    "core/src/writers/port_writers.cpp": "b8947e623fc8c2c78cd4bbd721328b41559652e9bd17dc0e378e0417ba06af31",
+    "core/src/fgo_feedback/fgo_feedback.cpp": "6a5742a17c615edef630728a460c2bbf5374b06d03dd8faf790684804591317b"
+  },
+  "raw_velocity_rows": 63278,
+  "raw_velocity_metadata": {
+    "sha256": "95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278",
+    "rows": 63278,
+    "fields": [
+      "stamp.sec",
+      "stamp.nanosec",
+      "velocity",
+      "error_code"
+    ],
+    "inherited_scale": 1.0393476222844444,
+    "raw_error_code_all_zero": true,
+    "inherited_go2_source_valid_all_true": true,
+    "frame": "CONDITIONAL_BODY_FLU",
+    "timestamp_check": "exact raw timestamps match inherited RP provider",
+    "gnss_or_reference_read": false
+  },
+  "cases": [
+    {
+      "run_id": "IMUFIX_RESEARCH_AUDIT_C00_M0",
+      "case": "C00",
+      "mode": 0,
+      "config_sha256": "f20651ef4efef28e335a36aa666ddc0bfd46e196a3e154a7e2991d912b3e2d1f",
+      "outage": null
+    },
+    {
+      "run_id": "IMUFIX_RESEARCH_AUDIT_C00_M1",
+      "case": "C00",
+      "mode": 1,
+      "config_sha256": "e9deae5be6a88de4bcf5ab65383ba4599c799c3947d6110b0da6d13b98ab95a6",
+      "outage": null
+    },
+    {
+      "run_id": "IMUFIX_RESEARCH_AUDIT_C00_M2",
+      "case": "C00",
+      "mode": 2,
+      "config_sha256": "4181312ce613ccc9daf514b32b6e2569d06eea9a59c8ee50f5a090f2c140e190",
+      "outage": null
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M0",
+      "case": "D61_20s_seed_00",
+      "mode": 0,
+      "config_sha256": "f174d33ce2226d44fa606dbc3f663297a008ad567449eb3e0540f053550bbbfc",
+      "outage": [
+        196.2,
+        216.2
+      ]
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M1",
+      "case": "D61_20s_seed_00",
+      "mode": 1,
+      "config_sha256": "8efdfbd208a723a4b96298f4ff6010682184283040241fed26480635fdd36bab",
+      "outage": [
+        196.2,
+        216.2
+      ]
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M2",
+      "case": "D61_20s_seed_00",
+      "mode": 2,
+      "config_sha256": "b46c0ccb1caa9b62fda3a7a073058c1ba493e30b49bbf6f909f6e28126f49b10",
+      "outage": [
+        196.2,
+        216.2
+      ]
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_RESEARCH_AUDIT_D62_20s_seed_00_M0",
+      "case": "D62_20s_seed_00",
+      "mode": 0,
+      "config_sha256": "4a90fdf9b205bd5e369725b93a03d4847dfa1f83b24007e463a2233ba8fb483b",
+      "outage": [
+        196.2,
+        216.2
+      ]
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_RESEARCH_AUDIT_D62_20s_seed_00_M1",
+      "case": "D62_20s_seed_00",
+      "mode": 1,
+      "config_sha256": "f90625beb46f859e2671c612cd37c213b07ef82534931fde71f2a33b69cf00c9",
+      "outage": [
+        196.2,
+        216.2
+      ]
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_RESEARCH_AUDIT_D62_20s_seed_00_M2",
+      "case": "D62_20s_seed_00",
+      "mode": 2,
+      "config_sha256": "8deec4b4736c11e36bd299938ffa4e28f8b5634614b2835a44fe81c7e66f52b3",
+      "outage": [
+        196.2,
+        216.2
+      ]
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_RESEARCH_AUDIT_D61_NO_RECORDS_M0",
+      "case": "D61_NO_RECORDS",
+      "mode": 0,
+      "config_sha256": "538186966513f5f5b5f0bbdfa5ccbb80e5e2e0b9e6ffcfbc98c43778bed4b95b",
+      "outage": [
+        196.2,
+        216.2
+      ]
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_RESEARCH_AUDIT_D61_NO_RECORDS_M1",
+      "case": "D61_NO_RECORDS",
+      "mode": 1,
+      "config_sha256": "4d71ca231359787fd811509a033475ee124f848ee86404b8eb6ae16b56b0d1c1",
+      "outage": [
+        196.2,
+        216.2
+      ]
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_RESEARCH_AUDIT_D61_NO_RECORDS_M2",
+      "case": "D61_NO_RECORDS",
+      "mode": 2,
+      "config_sha256": "e677a789671dc853851dc575cbe834d2813fec830aca6b376a28df68eba74cf1",
+      "outage": [
+        196.2,
+        216.2
+      ]
+    }
+  ],
+  "previous_binary_invocations": 2,
+  "previous_input_read": false,
+  "native_state_runs": 0,
+  "active_attempt": "ATTEMPT_03",
+  "config_loader_admission": {
+    "returncode": 0,
+    "configs": 12,
+    "checker_invocations": 1,
+    "native_solver_calls": 0,
+    "checker_sha256": "a791d6601d2f41f460399d7e2acbd3f9b363024bc7e52754aa24fcdacbe690b1",
+    "stdout": "IMUFIX_RESEARCH_AUDIT_C00_M0 V3_NATURAL_SEQUENCE_EXPLICIT_IMU_DURATION PASS\nIMUFIX_RESEARCH_AUDIT_C00_M1 V3_NATURAL_SEQUENCE_EXPLICIT_IMU_DURATION PASS\nIMUFIX_RESEARCH_AUDIT_C00_M2 V3_NATURAL_SEQUENCE_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M0 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M1 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M2 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_RESEARCH_AUDIT_D62_20s_seed_00_M0 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_RESEARCH_AUDIT_D62_20s_seed_00_M1 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_RESEARCH_AUDIT_D62_20s_seed_00_M2 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_RESEARCH_AUDIT_D61_NO_RECORDS_M0 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_RESEARCH_AUDIT_D61_NO_RECORDS_M1 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_RESEARCH_AUDIT_D61_NO_RECORDS_M2 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\n",
+    "stderr": ""
+  }
+}

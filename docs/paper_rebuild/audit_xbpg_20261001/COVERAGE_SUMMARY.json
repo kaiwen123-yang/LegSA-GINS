@@ -1,0 +1,15 @@
+{
+  "baseline_files": 3119,
+  "baseline_lines": 554133,
+  "complete_semantic_files": 248,
+  "complete_semantic_lines": 40419,
+  "depth_counts": {
+    "UNREAD": 2817,
+    "SEMANTIC_REVIEW_COMPLETE": 248,
+    "PARTIAL_SEMANTIC": 14,
+    "DYNAMIC_EXECUTION_ONLY_SEMANTIC_UNREAD": 40
+  },
+  "inventory_recreated": false,
+  "new_audit_code_separate": true,
+  "note": "Complete semantic read does not mean all branches dynamically tested; external frozen evaluator excluded from baseline denominator"
+}

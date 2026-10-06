@@ -1,0 +1,296 @@
+{
+  "status": "COLLECTED_WITH_EXPLICIT_DEPTH_LIMITS",
+  "start_head_recorded": "8fdcfd2f0742be00e84bbab2450cbe849b401f1b",
+  "data_mode": "mixed_existing_real_and_semisynthetic_with_original_roles_preserved",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "new_native_calls": 0,
+  "new_evaluator_calls": 0,
+  "new_provider_calls": 0,
+  "reference_payload_reads": 0,
+  "time_series_payload_reads": 0,
+  "project_modules_imported": 0,
+  "performance_recomputation": 0,
+  "stage_roots": {
+    "HX02": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY",
+    "HX02E": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02E_HARTLEY_OFFICIAL",
+    "HX03": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX03_DEGRADATION",
+    "HX03R2": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX03R2_AUDIT_REEVAL",
+    "HX05": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX05_CLOSEOUT",
+    "HX07": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07",
+    "HX07R": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R"
+  },
+  "stage_counts": {
+    "HX02": {
+      "record_rows": 1107,
+      "run_directories": 24,
+      "full_table_files": 30,
+      "full_metadata_files": 318
+    },
+    "HX02D": {
+      "record_rows": 0,
+      "run_directories": 0,
+      "full_table_files": 0,
+      "full_metadata_files": 3
+    },
+    "HX02E": {
+      "record_rows": 210,
+      "run_directories": 6,
+      "full_table_files": 2,
+      "full_metadata_files": 39
+    },
+    "HX03": {
+      "record_rows": 5856,
+      "run_directories": 381,
+      "full_table_files": 8,
+      "full_metadata_files": 5881
+    },
+    "HX03R": {
+      "record_rows": 0,
+      "run_directories": 0,
+      "full_table_files": 0,
+      "full_metadata_files": 1
+    },
+    "HX03R2": {
+      "record_rows": 8842,
+      "run_directories": 246,
+      "full_table_files": 18,
+      "full_metadata_files": 3946
+    },
+    "HX05": {
+      "record_rows": 245,
+      "run_directories": 3,
+      "full_table_files": 10,
+      "full_metadata_files": 49
+    },
+    "HX07": {
+      "record_rows": 38,
+      "run_directories": 1,
+      "full_table_files": 4,
+      "full_metadata_files": 19
+    },
+    "HX07R": {
+      "record_rows": 692,
+      "run_directories": 13,
+      "full_table_files": 8,
+      "full_metadata_files": 100
+    },
+    "HX_INVENTORY": {
+      "record_rows": 23,
+      "run_directories": 0,
+      "full_table_files": 1,
+      "full_metadata_files": 0
+    },
+    "V3_CITED": {
+      "record_rows": 0,
+      "run_directories": 0,
+      "full_table_files": 2,
+      "full_metadata_files": 0
+    }
+  },
+  "record_rows": 17013,
+  "file_rows": 12903,
+  "run_identity_rows": 674,
+  "record_kinds": {
+    "CSV_ROW": 13144,
+    "NATIVE_RECORD": 1111,
+    "EVALUATION_RECORD": 2084,
+    "RUN_IDENTITY": 674
+  },
+  "read_depth_counts": {
+    "FULL_TABLE_READ": 83,
+    "FULL_RECORD_READ": 10356,
+    "METADATA_ONLY": 2464
+  },
+  "retention_counts": {
+    "PRESENT_READ": 10439,
+    "PRESENT_METADATA_ONLY": 1478,
+    "PRESENT_COMPRESSED_FILE": 986
+  },
+  "issues": [],
+  "documents_read": [
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX02/HX02_RESULTS.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX02E_PREREG.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX02_PREREG.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX02E/HX02E_RESULTS.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX02E_PREREG.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX03/HX03_RESULTS.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX03/HX03_TABLES_FULL.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX03R2_PREREG_R2.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX03_PREREG.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX03R2/HX03R2_RESULTS.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX03R2_PREREG_R2.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX05/CAPTIONS_HX05.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX05/HX05_CLOSEOUT.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX05/MANUSCRIPT_TABLES_FULL.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX05/REGISTRATION_DRAFT.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX05_PREREG.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX07/HX07_EXT_CLOCK_AUDIT.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX07/HX07_REGISTRATION.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX07/HX07_REPORT.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX07R/HX07R_REGISTRATION.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX07R/HX07R_REPORT.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX07R/HX07R_SIGNAL_MAPPING.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX02D/HX02D_HARTLEY_DIAGNOSTIC.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX02D/JUDGMENT_ZH.md",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX02D/FINAL_INTEGRITY.json",
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX03R/HX03R1_D12_DIAGNOSIS.md"
+  ],
+  "numeric_preservation": "CSV values retained as original strings. JSON number lexemes retained as strings; no rounding, RMSE, bootstrap or evaluator recomputation. Path-prefix aliases are reversible via ignored roots map.",
+  "large_payload_policy": "Stat only; no NAV, pos, heading, error-series or reference body reads. Compressed file presence does not assert CRC/member payload readability.",
+  "local_mirror": "<EXT_REPRO_ROOT>/existing_hx.local.csv",
+  "script_sha256": "74ba9db2f44400d79dadb6f76cc4df434ba16b16fc381693860ec0f144c95c8c",
+  "initial_collection_counts": {
+    "record_rows": 59575,
+    "file_rows": 12888,
+    "script_sha256": "74ba9db2f44400d79dadb6f76cc4df434ba16b16fc381693860ec0f144c95c8c",
+    "stage_counts": {
+      "HX02": {
+        "record_rows": 43682,
+        "run_directories": 24,
+        "full_table_files": 30,
+        "full_metadata_files": 305
+      },
+      "HX02E": {
+        "record_rows": 210,
+        "run_directories": 6,
+        "full_table_files": 2,
+        "full_metadata_files": 39
+      },
+      "HX03": {
+        "record_rows": 5856,
+        "run_directories": 381,
+        "full_table_files": 8,
+        "full_metadata_files": 5881
+      },
+      "HX03R2": {
+        "record_rows": 8842,
+        "run_directories": 246,
+        "full_table_files": 18,
+        "full_metadata_files": 3946
+      },
+      "HX05": {
+        "record_rows": 245,
+        "run_directories": 3,
+        "full_table_files": 10,
+        "full_metadata_files": 49
+      },
+      "HX07": {
+        "record_rows": 38,
+        "run_directories": 1,
+        "full_table_files": 4,
+        "full_metadata_files": 19
+      },
+      "HX07R": {
+        "record_rows": 679,
+        "run_directories": 13,
+        "full_table_files": 8,
+        "full_metadata_files": 100
+      }
+    }
+  },
+  "collection_index_normalization": {
+    "prior_collection_receipt_sha256": "f6bb556140ee25f3370768658c2845f221dcb6cfabba807d7ec35b80de504a22",
+    "per_epoch_result_rows_kept_in_original_table_only": 42612,
+    "original_epoch_tables": {
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT01__LIT__CONTRACT_START__NA/native/ARTIFACT/02_EXT01_CLAMBDA/C00_VALIDATED_R2/EXT01_C00_VALIDATED_FAILURE_LEDGER.csv": 311,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT01__LIT__CONTRACT_START__NA/native/ARTIFACT/02_EXT01_CLAMBDA/C00_VALIDATED_R2/EXT01_C00_VALIDATED_RUNTIME.csv": 1423,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT02__LIT__CONTRACT_START__NA/native/ARTIFACT/03_EXT02_CWLS/C00/EXT02_C00_FAILURE_LEDGER.csv": 342,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT02__LIT__CONTRACT_START__NA/native/ARTIFACT/03_EXT02_CWLS/C00/EXT02_C00_RUNTIME.csv": 1423,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT03__LIT__CONTRACT_START__NA/native/ARTIFACT/04_EXT03_YANG2024/C00/EXT03_C00_FAILURE_LEDGER.csv": 910,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT03__LIT__CONTRACT_START__NA/native/ARTIFACT/04_EXT03_YANG2024/C00/EXT03_C00_RUNTIME.csv": 1423,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT04__LIT__CONTRACT_START__NA/native/ARTIFACT/05_EXT04_WU2025_MODULE/C00/EXT04_C00_FAILURE_LEDGER.csv": 2846,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT04__LIT__CONTRACT_START__NA/native/ARTIFACT/05_EXT04_WU2025_MODULE/C00/EXT04_C00_RUNTIME.csv": 2846,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT01__LIT__FILE_START__NA/native/ARTIFACT/02_EXT01_CLAMBDA/C00_VALIDATED_R2/EXT01_C00_VALIDATED_FAILURE_LEDGER.csv": 665,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT01__LIT__FILE_START__NA/native/ARTIFACT/02_EXT01_CLAMBDA/C00_VALIDATED_R2/EXT01_C00_VALIDATED_RUNTIME.csv": 2231,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT02__LIT__FILE_START__NA/native/ARTIFACT/03_EXT02_CWLS/C00/EXT02_C00_FAILURE_LEDGER.csv": 717,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT02__LIT__FILE_START__NA/native/ARTIFACT/03_EXT02_CWLS/C00/EXT02_C00_RUNTIME.csv": 2231,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT03__LIT__FILE_START__NA/native/ARTIFACT/04_EXT03_YANG2024/C00/EXT03_C00_FAILURE_LEDGER.csv": 1738,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT03__LIT__FILE_START__NA/native/ARTIFACT/04_EXT03_YANG2024/C00/EXT03_C00_RUNTIME.csv": 2231,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT04__LIT__FILE_START__NA/native/ARTIFACT/05_EXT04_WU2025_MODULE/C00/EXT04_C00_FAILURE_LEDGER.csv": 4462,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT04__LIT__FILE_START__NA/native/ARTIFACT/05_EXT04_WU2025_MODULE/C00/EXT04_C00_RUNTIME.csv": 4462,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__HARTLEY_LIT__LIT__FILE_START__NA/native/run/RUNTIME.csv": 1,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__HARTLEY_S__S__FILE_START__NA/native/run/RUNTIME.csv": 1,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT01__LIT__C00__NA/native/ARTIFACT/02_EXT01_CLAMBDA/C00_VALIDATED_R2/EXT01_C00_VALIDATED_FAILURE_LEDGER.csv": 432,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT01__LIT__C00__NA/native/ARTIFACT/02_EXT01_CLAMBDA/C00_VALIDATED_R2/EXT01_C00_VALIDATED_RUNTIME.csv": 1509,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT02__LIT__C00__NA/native/ARTIFACT/03_EXT02_CWLS/C00/EXT02_C00_FAILURE_LEDGER.csv": 452,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT02__LIT__C00__NA/native/ARTIFACT/03_EXT02_CWLS/C00/EXT02_C00_RUNTIME.csv": 1509,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT03__LIT__C00__NA/native/ARTIFACT/04_EXT03_YANG2024/C00/EXT03_C00_FAILURE_LEDGER.csv": 900,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT03__LIT__C00__NA/native/ARTIFACT/04_EXT03_YANG2024/C00/EXT03_C00_RUNTIME.csv": 1509,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT04__LIT__C00__NA/native/ARTIFACT/05_EXT04_WU2025_MODULE/C00/EXT04_C00_FAILURE_LEDGER.csv": 3018,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT04__LIT__C00__NA/native/ARTIFACT/05_EXT04_WU2025_MODULE/C00/EXT04_C00_RUNTIME.csv": 3018,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__HARTLEY_LIT__LIT__C00__NA/native/run/RUNTIME.csv": 1,
+      "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__HARTLEY_S__S__C00__NA/native/run/RUNTIME.csv": 1
+    },
+    "supplemental_evaluation_json_records": 50,
+    "source_row_key": "CSV:data_row=N, one-based data record, excluding header; no physical-line claim",
+    "HX02_case_mapping": "Original contract CASE retained; start_policy independently records start_convention; collection-stage supervisor mapping correction, no source changes.",
+    "script_sha256": "c41c4e6b658fddcd52652bed392c25631cfd397bf41f3634aac8714883d5d513",
+    "collector_final_sha256": "1762def903a4c9e011609514d5d683c2c87985f77c6b5ca3959bdb5b6a01b2ea"
+  },
+  "table_files_fully_read": 83,
+  "table_rows_actually_read_physical_sources": 55841,
+  "all_original_epoch_result_tables_read": true,
+  "local_mirror_includes_input_rows": 100,
+  "public_index": {
+    "format": "run identity + evaluation/gate JSON summary + fully read source table links",
+    "record_rows": 1797,
+    "run_identity_rows": 674,
+    "evaluation_or_gate_rows": 1040,
+    "source_table_rows": 83,
+    "key_file_rows": 3469,
+    "full_work_inventory": {
+      "EXISTING_HX_INDEX.csv": {
+        "source_path": "<EXT_REPRO_ROOT>/existing_hx_full/EXISTING_HX_INDEX.csv",
+        "bytes": 40557355,
+        "sha256": "ebc9dc9f7b7dda2578e4512665e284df5def8116ea1b62e4e8b52262f1bfd2f9"
+      },
+      "EXISTING_HX_FILES.csv": {
+        "source_path": "<EXT_REPRO_ROOT>/existing_hx_full/EXISTING_HX_FILES.csv",
+        "bytes": 9964570,
+        "sha256": "977bbcfbd39a1e60f2ccedc6d52c5c8a4bdde8ff4d97c353cd3137024f2f1b83"
+      },
+      "EXISTING_HX_RUNS.csv": {
+        "source_path": "<EXT_REPRO_ROOT>/existing_hx_full/EXISTING_HX_RUNS.csv",
+        "bytes": 4007331,
+        "sha256": "7f3233a81eda397aa22a9cb0b73a7a957b48febfcdeee3929e0f64f0638eb1e0"
+      },
+      "EXISTING_HX_TABLES.csv": {
+        "source_path": "<EXT_REPRO_ROOT>/existing_hx_full/EXISTING_HX_TABLES.csv",
+        "bytes": 74650,
+        "sha256": "b675288de9e8f0f3afe388a6008d3b875b9071f86a250cbbd9738b03138be6da"
+      },
+      "COLLECTION_RECEIPT.json": {
+        "source_path": "<EXT_REPRO_ROOT>/existing_hx_full/COLLECTION_RECEIPT.json",
+        "bytes": 12594,
+        "sha256": "f7696799b67f8463af2c4585f15316e08f68a9f62caf1fa50b0b42859b1f0477"
+      }
+    },
+    "complete_absolute_path_mirror": "<EXT_REPRO_ROOT>/existing_hx.local.csv",
+    "original_metric_values": "Selected unchanged values in public JSON; complete source table/JSON values in original files and full local work index. Public subset is explicitly not all metric columns.",
+    "source_presentation_metadata_read": [
+      {
+        "source_path": "<CODE_ROOT>/docs/paper_rebuild/hext/HX05/SOURCE_CITATIONS.json",
+        "bytes": 821330,
+        "newly_verified_sha256": "5c878699e65daf353d990396f43c4976822dcf96053130d2e0d4414d3f57c746",
+        "read_depth": "FULL_RECORD_READ",
+        "top_level_record_count": 213
+      },
+      {
+        "source_path": "<CODE_ROOT>/docs/paper_rebuild/hext/HX05/FIGURE_MANIFEST.json",
+        "bytes": 61515,
+        "newly_verified_sha256": "893ee3ce53f856c113f4cc5ffca636bc860e6adcf62ac3c46c8429cf45650052",
+        "read_depth": "FULL_RECORD_READ",
+        "top_level_record_count": 2
+      },
+      {
+        "source_path": "<CODE_ROOT>/docs/paper_rebuild/hext/HX05/MANUSCRIPT_DATA.json",
+        "bytes": 1023883,
+        "newly_verified_sha256": "91f1bba426c12dd5f8456519ee0df7a41c298045e4852b364a435386d7ba745a",
+        "read_depth": "FULL_RECORD_READ",
+        "top_level_record_count": 5
+      }
+    ],
+    "script_sha256": "7f5405dbf4111e25f5c54d884741b29dbeb0c938531ae6f236eceee4e5069ac1"
+  }
+}

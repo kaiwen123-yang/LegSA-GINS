@@ -1,0 +1,14 @@
+{
+  "sequence": "BY2O",
+  "epochs": 95859,
+  "cache_sha256": "8786456127571475e88a89a47ab30f118b09a789e521690b82170985e4aaec35",
+  "raw_sha256": "0e5c62e0a5af0b6c32c51b535cc90701677276fc73c5623b72abda66cc148f2e",
+  "integer_ns_match": true,
+  "integration_gaps": {
+    "unobserved_interval_count": 274,
+    "unobserved_duration_s": 1.275670690000041,
+    "policy": "No velocity imputation; zero displacement contribution on unobserved intervals, explicitly incomplete if any."
+  },
+  "zero_contact_epochs": 264,
+  "NAV_placeholder_policy": "Velocity is serialized as zero where unobserved; integration retains NaN gaps. Bias and state_dimension zero mean not estimated."
+}

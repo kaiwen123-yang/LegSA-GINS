@@ -1,0 +1,33 @@
+{
+  "slot_id": "BASELINE__ADD_RUN_00103",
+  "candidate_id": "BASELINE",
+  "run_id": "ADD_RUN_00103",
+  "case_id": "D61_20s_seed_00",
+  "method_id": "F04",
+  "status": "COMPLETED_BASELINE_GATE_PASS",
+  "started_utc": "2026-10-02T09:53:57.724325+00:00",
+  "preparation_commit": "291c6c6f87990430a07ad44882b92ed62337df12",
+  "evaluator_invocation_attempts": 1,
+  "evaluator_child_execs": 1,
+  "reference_child_opens": 1,
+  "parent_reference_payload_reads": 0,
+  "native_calls": 0,
+  "retries": 0,
+  "output_root": "<VALIDATION_ROOT>/evaluations/BASELINE/ADD_RUN_00103",
+  "data_mode": "semisynthetic",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "reference_stat_bytes": 1081436,
+  "native_receipt_path": "<MECHANISM_ROOT>/replays/ADD_RUN_00103/original/REPLAY_RECEIPT.json",
+  "native_nav_sha256": "5df229a0fb404aea5a00f992953cd7d37cd2c32749a7f800e4cd2253fb562d85",
+  "std_sha256": "c69a3dccb0be7bef87793c35a5ad7a1c431136eedb39c267a03655ab5b278ea6",
+  "evaluator_nav_sha256": "cf40e6114e7ffd1c49d0a0391f872fd8e8feecc42bd552c62bd2a15fa907571c",
+  "v3_lever_frd_m": [
+    0.03,
+    -0.148095745932992,
+    -0.3
+  ],
+  "uncertainty_status": "UNTRANSPORTED_STD_DIAGNOSTIC_ONLY",
+  "baseline_gate": "PASS",
+  "finished_utc": "2026-10-02T09:54:05.901523+00:00"
+}

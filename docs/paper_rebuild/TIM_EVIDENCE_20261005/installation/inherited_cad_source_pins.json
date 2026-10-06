@@ -1,0 +1,42 @@
+[
+  {
+    "source_label": "坐标系与外参建模/09_reports/CAD_COORDINATE_AUDIT.md",
+    "status": "inherited_model_record_read_this_turn_not_new_calibration",
+    "sha256": "e8a85f2c809ba23ba8b1798179ff111173d145a46ca4a9e649849b1fb84c4fcd"
+  },
+  {
+    "source_label": "坐标系与外参建模/09_reports/COORDINATE_FRAME_DICTIONARY.md",
+    "status": "inherited_model_record_read_this_turn_not_new_calibration",
+    "sha256": "9ab9b240da1596f68a033758e6e0bc5a835b72acd6fb7ef20176b68d37441648"
+  },
+  {
+    "source_label": "坐标系与外参建模/09_reports/EXTRINSIC_DERIVATION.md",
+    "status": "inherited_model_record_read_this_turn_not_new_calibration",
+    "sha256": "1ff0ac90e5f980779d89bfcac156698fba074456d04314889782c87274f54401"
+  },
+  {
+    "source_label": "坐标系与外参建模/09_reports/MANUAL_ADJUSTMENT_REQUIRED.md",
+    "status": "inherited_model_record_read_this_turn_not_new_calibration",
+    "sha256": "b523876f3408af260d667c22d77adcb38aff1e242df7f0fc0d6a52df3218b14a"
+  },
+  {
+    "source_label": "坐标系与外参建模/09_reports/FIXPOSITION_SOURCE_OF_TRUTH.md",
+    "status": "inherited_model_record_read_this_turn_not_new_calibration",
+    "sha256": "e04b28c09de4b9b93794794cdd52d23f82b3b11cff7c72ffa388409670b8d0fa"
+  },
+  {
+    "source_label": "坐标系与外参建模/03_cad_audit/assembly_comparison.md",
+    "status": "inherited_model_record_read_this_turn_not_new_calibration",
+    "sha256": "75f3e536fc278cf294603cfd2b5f68599e777f4e82fa8b1e842c233a3f0bffcf"
+  },
+  {
+    "source_label": "坐标系与外参建模/03_cad_audit/component_transforms_raw.csv",
+    "status": "inherited_model_record_read_this_turn_not_new_calibration",
+    "sha256": "e60bd26b7bc4cedd43966e425c2d0d3f57c2b9b0bb799221dac4a8b190a78182"
+  },
+  {
+    "source_label": "坐标系与外参建模/06_extrinsics/extrinsics_uncertainty.yaml",
+    "status": "inherited_model_record_read_this_turn_not_new_calibration",
+    "sha256": "096b6a7275b1e2ee61d951e1f528f3d2ee47e1a5a5d046a7384ae5ed24f2dbb0"
+  }
+]

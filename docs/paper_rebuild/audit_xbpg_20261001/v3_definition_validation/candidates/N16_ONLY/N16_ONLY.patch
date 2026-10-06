@@ -1,0 +1,56 @@
+--- a/cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/measurement_source.hpp
++++ b/cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/measurement_source.hpp
+@@ -42,0 +43,2 @@
++  // N16_ONLY: quality follows actual observation axes; retain all original std values.
++  std::array<bool, 3> std_active_axes{{true, true, true}};
+--- a/cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp
++++ b/cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp
+@@ -1269,0 +1270 @@
++    if (horizontal_2d) metadata.std_active_axes = {{true, true, false}};
+--- a/cpp/legsa_v23_port_core/src/kf_gins/gi_observer.cpp
++++ b/cpp/legsa_v23_port_core/src/kf_gins/gi_observer.cpp
+@@ -156,0 +157 @@
++    .add("std_active_axes",m.std_active_axes)
+--- a/cpp/legsa_v23_port_core/src/source_aware/source_aware_policy.cpp
++++ b/cpp/legsa_v23_port_core/src/source_aware/source_aware_policy.cpp
+@@ -15,0 +16 @@
++#include <limits>
+@@ -35,7 +36,22 @@
+-double maxStd(const Vec3& std_xyz) {
+-  return std::max({std::fabs(std_xyz[0]), std::fabs(std_xyz[1]), std::fabs(std_xyz[2])});
+-}
+-
+-bool finiteStd(const Vec3& std_xyz) {
+-  return std::isfinite(std_xyz[0]) && std::isfinite(std_xyz[1]) && std::isfinite(std_xyz[2]) &&
+-         std_xyz[0] > 0.0 && std_xyz[1] > 0.0 && std_xyz[2] > 0.0;
++double maxStd(const Vec3& std_xyz, const std::array<bool, 3>& active_axes) {
++  // Preserve frozen comparison order, including active-NaN behavior.
++  double value = std::numeric_limits<double>::quiet_NaN();
++  bool have_active_axis = false;
++  for (std::size_t axis = 0; axis < active_axes.size(); ++axis) {
++    if (!active_axes[axis]) continue;
++    const double axis_std = std::fabs(std_xyz[axis]);
++    value = have_active_axis ? std::max(value, axis_std) : axis_std;
++    have_active_axis = true;
++  }
++  return value;
++}
++
++bool finiteStd(const Vec3& std_xyz, const std::array<bool, 3>& active_axes) {
++  bool have_active_axis = false;
++  for (std::size_t axis = 0; axis < active_axes.size(); ++axis) {
++    if (!active_axes[axis]) continue;
++    have_active_axis = true;
++    if (!std::isfinite(std_xyz[axis]) || std_xyz[axis] <= 0.0) return false;
++  }
++  // Empty is invalid, not a nominal zero-uncertainty domain.
++  return have_active_axis;
+@@ -64,0 +81,2 @@
++         << ";std_active_axes=(" << metadata.std_active_axes[0] << "/" << metadata.std_active_axes[1]
++         << "/" << metadata.std_active_axes[2] << ")"
+@@ -242 +260 @@
+-  const double std_max = maxStd(metadata.std_xyz);
++  const double std_max = maxStd(metadata.std_xyz, metadata.std_active_axes);
+@@ -336 +354 @@
+-  if (!finiteStd(metadata.std_xyz)) {
++  if (!finiteStd(metadata.std_xyz, metadata.std_active_axes)) {

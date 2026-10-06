@@ -1,0 +1,154 @@
+schema_version: clean5_parity_p05.v1
+authorization_date: '2026-09-09'
+classification: SENSITIVITY_NOT_FROZEN
+p05:
+  starting_commit: 740b1cf0f98eaa9b53d3df4e9ebd77633a687b22
+  executable_sha256: 9c00565c45b654453b2b378f3d5995e5dc21d1271323a9b683acdab75993235f
+  stage_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/13_NOISE_MODEL_SENSITIVITY
+  dataset_id: BY2
+  input_variant: V2is
+  profile: A04
+  base_time: 1772784000
+  window_seconds:
+  - 66
+  - 340
+  cells:
+  - cell_id: N00
+    abstd_mGal: 77.8
+    vrw_mps_sqrt_hour: 0.077
+  - cell_id: N01
+    abstd_mGal: 77.8
+    vrw_mps_sqrt_hour: 0.77
+  - cell_id: N02
+    abstd_mGal: 77.8
+    vrw_mps_sqrt_hour: 7.7
+  - cell_id: N03
+    abstd_mGal: 778
+    vrw_mps_sqrt_hour: 0.077
+  - cell_id: N04
+    abstd_mGal: 778
+    vrw_mps_sqrt_hour: 0.77
+  - cell_id: N05
+    abstd_mGal: 778
+    vrw_mps_sqrt_hour: 7.7
+  - cell_id: N06
+    abstd_mGal: 7780
+    vrw_mps_sqrt_hour: 0.077
+  - cell_id: N07
+    abstd_mGal: 7780
+    vrw_mps_sqrt_hour: 0.77
+  - cell_id: N08
+    abstd_mGal: 7780
+    vrw_mps_sqrt_hour: 7.7
+  execution_order: abstd outer, vrw inner, nine serial native solves including origin;
+    fail-stop, no retry
+  solver_limit: 9
+  evaluator_limit: 18
+  provider_bundle: &id001
+    path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/02_PARITY_PROVIDERS/PARITY_PROVIDER_BUNDLE.json
+    sha256: e28cd6fea67c210c1c97dd5a9cabb666e9259db2075e517af7c54036152898c9
+  source_config:
+    runtime_config: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/03_PARITY_RUNS/CLEAN5_PARITY_V2is_A04/PARITY_RUNTIME_CONFIG.yaml
+    runtime_config_sha256: 8874e6e11d47fcd2131ac14633c4ee0f71b6a38128f9cb215960094c4f3f0168
+  source_pins:
+  - path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/03_PARITY_RUNS/CLEAN5_PARITY_V2is_A04/PARITY_RUNTIME_CONFIG.yaml
+    sha256: 8874e6e11d47fcd2131ac14633c4ee0f71b6a38128f9cb215960094c4f3f0168
+  - *id001
+  - path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/04_PARITY_SEAL/PARITY_OUTPUT_SEAL.json
+    sha256: 7279e7295b2db9b085deeb293b706cc9f6218fb0f03c9a3a68e84ad1ad3f7277
+  - path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/03_PARITY_RUNS/CLEAN5_PARITY_V2is_A04/PARITY_RUN_MANIFEST.json
+    sha256: bf3a228928d284bdf2d900a96f0af66373497fd513cacfcc6d59fdd687f96915
+  origin_reference:
+    nav:
+      path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/03_PARITY_RUNS/CLEAN5_PARITY_V2is_A04/KF_GINS_Navresult.nav
+      sha256: 6d64492c9b514f7294a274cf72e42f898b037479d8d96c1fb9e36571f4f19924
+    std:
+      path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/03_PARITY_RUNS/CLEAN5_PARITY_V2is_A04/KF_GINS_STD.txt
+      sha256: d7fa73dce6642ae61828bc953a24db45a9c4581f99abe26553eb10fe94ac5fee
+  origin_gate: first run before remaining eight; byte identical OR numeric max absolute difference <= 1e-9, NAV and
+    STD independently; fail before evaluations
+  evaluator:
+    path: <CLEAN_ROOT>/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py
+    sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+  trace:
+    path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv
+    sha256: ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c
+  baseline_median_m: 0.356191491865984
+  v3_transform:
+    lever_frd_m:
+    - 0.03
+    - -0.148095745932992
+    - -0.3
+    rotation: NAV roll/pitch/yaw
+    fit_used: false
+    further_correction_used: false
+  parameter_rules:
+    only_scientific_changes:
+    - abstd
+    - vrw
+    abstd_units: mGal; three equal axes
+    vrw_units: (m/s)/sqrt(h); three equal axes
+    arw_unchanged:
+    - 0.985
+    - 0.985
+    - 0.985
+    gbstd_unchanged:
+    - 9.38
+    - 9.38
+    - 9.38
+    initbastd_unchanged:
+    - 77.8
+    - 77.8
+    - 77.8
+    all_other_parameter_bytes: identical to original A04 V2is after allowed identity/path
+      binding
+    non_grid_hash: restore exact original abstd and vrw lines before frozen_parameter_hash;
+      all nine equal
+    actual_parameter_hash: record separately, intentionally differs from frozen parameter
+      hash outside origin
+  evaluation_rules:
+    all_nine_cells_reported: true
+    versions:
+    - v2
+    - v3
+    metrics:
+    - horizontal_rmse_m
+    - position_3d_rmse_m
+    - up_rmse_m
+    - yaw_rmse_deg
+    - yaw_p95_deg
+    body_frame_bias: signed front/right/up mean and population std, NAV yaw rotation
+    consistency: median abs(error)/STD, exact matched epochs <= 1e-7; height STD col3,
+      north1, east2, yaw9
+    v2_consistency: SAME_POINT_STD
+    v3_consistency: ORIGINAL_IMU_STD_DIAGNOSTIC_ONLY; UNTRANSPORTED_STD_DIAGNOSTIC_ONLY;
+      not formal v3 covariance consistency
+    v3_full_covariance: UNAVAILABLE
+    no_best_selection: true
+    no_feedback: true
+    no_adoption: true
+    directional_statements: 增大 abstd/vrw 使高度一致性比从 X 变到 Y，Up RMSE 从 A 变到 B，航向 RMSE
+      从 C 变到 D
+    directional_endpoints: 'v2 only; six comparisons: for each fixed other-parameter
+      value, compare min to max; report all six without selection'
+    allowed_use: reporting this preregistered sensitivity only; no tuning, provider
+      choice, frozen-chain adoption or downstream correction
+  provenance:
+    data_mode: real_by2_raw
+    synthetic_data_used: false
+    semisynthetic_data_used: false
+    trace_used_online: false
+    per_case_tuning: false
+    explicit_noise_sensitivity: true
+    parameter_sweep: true
+    frozen_parameter_contract: false
+    parameter_selection_used: false
+    interpretation: human-preregistered noise sensitivity, not frozen-parameter equivalence
+    receiver_imu_as_body_imu: false
+    final_v23_output_solver_input: false
+    LegSA_output_solver_input: false
+    output_only_correction: false
+    epoch_deleted_for_metric: false
+    old_runtime_input_count: 0
+  before_execution: code and contract committed/pushed, remote equality, clean detached
+    snapshot; raw pre/post checkpoints and all-run seal before evaluation

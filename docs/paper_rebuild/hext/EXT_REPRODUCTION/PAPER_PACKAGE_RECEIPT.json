@@ -1,0 +1,18 @@
+{
+  "archive": "<PAPER_PACKAGE>",
+  "pdf_members": 34,
+  "byte_unique_files": 29,
+  "byte_duplicate_members": 5,
+  "selected_members": 6,
+  "selected_safe_extraction_root": "<PAPER_CACHE>",
+  "hash_scope": "each PDF member streamed once, CRC verified; no disk inventory",
+  "text_conversion": "PyMuPDF 1 process over 6 selected PDFs; pdftotext unavailable before any conversion",
+  "full_paper_read_status": "tracked separately in reproduction notes; conversion/hash alone does not mean paper read",
+  "archive_code_execution": false,
+  "whole_papers_committed": false,
+  "scientific_solver_calls": 0,
+  "evaluator_calls": 0,
+  "data_mode": "literature_document_provenance",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false
+}

@@ -1,0 +1,37 @@
+{
+  "reviewer": "root",
+  "pptx_sha256": "a70b5536e4ee629b34f765a02fb51b3114aee336d29f972c46b37bd136c227ba",
+  "slide_count": 100,
+  "actually_viewed_final_pngs": [
+    {
+      "page": 12,
+      "file": "slide-012.png",
+      "sha256": "df36aef296a31e83f053c90118b9d006d33dfff1067d30d97f55d647ab526b6d",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 32,
+      "file": "slide-032.png",
+      "sha256": "ee0ec25db703bea76c5d1e40261c3b104f69aeb847e9ec9ed9c521441bfb8b87",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 33,
+      "file": "slide-033.png",
+      "sha256": "c08e51feda982180d47318b56c33cca17090753c27275e06dcf17b1ca14e6f25",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 34,
+      "file": "slide-034.png",
+      "sha256": "e02f00cd98f5480c47c7aa365448556688fc374fdf3ddde65ffb63a0c74b776a",
+      "same_as_authoring_png": true
+    }
+  ],
+  "findings": [],
+  "checks": [
+    "P12 strict and half-open threshold boundaries visible; no table overflow",
+    "P32-P34 visible joint RV/yaw statements, full saved curves, denominators and adverse BY2O heading effect retained"
+  ],
+  "status": "PASS_FOR_LISTED_PAGES_ONLY"
+}

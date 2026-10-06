@@ -1,0 +1,27 @@
+schema_version: paper_rebuild.canonical_by2_effect_validation.v1
+stage_id: CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX
+case_count: 541
+required_common_checks:
+  - case_identity
+  - seed_replay
+  - input_hashes
+  - generated_hashes
+  - affected_source_changed_as_expected
+  - unaffected_source_unchanged
+  - affected_epoch_count
+  - timestamp_monotonic
+  - finite_values
+  - physical_sanity
+  - trace_forbidden
+  - algorithm_output_forbidden
+  - raw_mutation_false
+failure_policy:
+  first_handler_failure_report_only: false
+  repair_and_regenerate_same_case: true
+  metric_driven_rerun: false
+source_isolation:
+  D30_D41_single_invariant: true
+  D42_D45_basic_invariant: true
+  D46_D49_single_basic_strong_invariant: true
+  go2_only_single_basic_strong_no_go2_invariant: true
+  metadata_only_no_active_path_invariant: true

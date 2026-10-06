@@ -1,0 +1,11 @@
+{
+  "status": "ACTUAL_TWO_PNG_VISUAL_INSPECTION_COMPLETED",
+  "captured_utc": "2026-10-04T07:57:36.322347+00:00",
+  "inspection": "Both complete PNGs actually displayed via view_image(detail=original); tool display downscaled originals. All45 case rows/five groups/two pairs visible, labels and units readable, no overlap hiding data; heatmaps preserve signed literal values and symmetric actual maximum; placement plots show all9 anchors per condition with no case filtering. PDF generated and hashed but not visually rendered separately.",
+  "files": {
+    "ALL45_PAIRED_HEATMAP.png": "b6fefaeeca5c948e914dbe7bfde71559d73c73b606ade7ef5aaab19657962ace",
+    "PLACEMENT_BLOCK_DIFFERENCES.png": "d1eb940016aedf771c25a47ffffa946976c52e4dd3273781553a8838b9c7a0eb"
+  },
+  "scientific_scope": "Commercial fused reference diagnostic; negative F04-minus-ablation is lower error; nine original placement anchors reused, no independent trial p claim",
+  "plot_warning": "Matplotlib Axes3D unavailable warning; both requested plots are2D and generated successfully."
+}

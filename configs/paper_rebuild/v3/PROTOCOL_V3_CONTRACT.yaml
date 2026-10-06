@@ -1,0 +1,176 @@
+schema_version: protocol_v3.v1
+task: V3-01
+protocol_id: PROTOCOL_V3
+preregistered: true
+execution_ready: true
+requested_start_commit: 6257a4fa46efd11a8b8888c5e466cf923a45336e
+prerequisite_commit: d9df625cdbe80f3a767018c0a36f8974f94451a0
+human_resolution: User explicitly accepted verified 0a frozen finite60 R5finite58 paired57 and new failuresD27D57D60;
+  continueV3-01.
+output_root: <CLEAN_ROOT>/stages/CLEAN8_PROTOCOL_V3
+scratch_root: <PROTOCOL_V3_SCRATCH>
+validity_variant: R5
+selected_validity: BOTH_FIXED
+heading_std_marker_deg: 2.933193
+sole_scientific_change: Dual antenna scalar heading input from exact paired raw HPPOSECEF 5Hz; frozen transforms
+  and parameters unchanged.
+provider_source_index:
+  path: configs/paper_rebuild/v3/V3_PROVIDER_SOURCE_INDEX.json
+  sha256: 130f93315d504bd7daddefc7eeabdbbeb10b763011531ade2766a0448a689a0e
+frozen:
+  executable:
+    path: <CODE_ROOT>/build/p13_v21_cpp/legsa_v23_port_core_demo
+    sha256: 96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c
+  evaluator:
+    path: <CLEAN_ROOT>/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py
+    sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+  t5a_nav:
+    path: <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/03_NATIVE/BY2/F04/R5/KF_GINS_Navresult.nav
+    sha256: 2fda678fbc9d760e7bd4b93b6e7f99861b41ea91aef86252566ea059abbeb0f4
+  r5_providers:
+    BY2:
+      path: <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/02_PROVIDER_TABLES/BY2/R5/T5A.gnss
+      sha256: fc6dd49c0a35c41208fc7d94da1c78ad63fe6938bd8f599021750c3bf5e20760
+    BY2H:
+      path: <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/02_PROVIDER_TABLES/BY2H/R5/T5A.gnss
+      sha256: 4ff6ed07f1d189ab19934bc67c350e9f48f79527170c6fcafc85eba7cf1155bd
+    BY2O:
+      path: <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/02_PROVIDER_TABLES/BY2O/R5/T5A.gnss
+      sha256: 2a0b0ebbcd66b59dd153b84b132c638e9ea31021653e58e3ac125ed21304fa13
+  frozen_heading_conversion:
+    path: src/legsa_gins/input_generation/status_yaw_builder.py
+    commit: f7bf0193c659535e746a66c73049e4f9e267eedd
+    sha256: 4435dd71593b1447152986ab91e2fe0394177470791a4c09815a851b75504193
+  t5a_handoff:
+    path: <HANDOFF_ROOT>/t5a_heading_sensitivity_handoff_v2.zip
+    sha256: b8d1451345d81bd87edb2288017d4f931d8a303f1ceb45feb67972264e7b1b20
+    by2_r5_member: T5A/02_PROVIDER_TABLES/BY2/R5/T5A.gnss
+budget:
+  core_cases: 541
+  unique_profiles: 11
+  core_native: 5951
+  extra_sequence_native: 22
+  addendum_native: 495
+  native_max: 6468
+  evaluator_max: 12936
+  native_workers: 64
+  retry_count: 0
+  identity_runs_reused: 4
+  evaluator_versions:
+  - v3
+  - v2
+profiles:
+- F01
+- F02
+- F03
+- F04
+- A03
+- A04
+- A05
+- A06
+- A07
+- A08
+- A09
+heading_fault_mapping:
+  outage_windows: Frozen exact halfopen [start,end) windows;D06,D30,D31,D39,D61
+  D08_D10: Original deterministic anchor-phased time bins5/2/1Hz on eligible raw heading rows
+  D11_D12: Frozen selected invalid1Hz observations lifted to[t_i,t_i+1) cells without RNG redraw
+  scalar_noise: Frozen wrapped case-minus-base yaw deltas on[t_i,t_i+1),56<=t<357; no RNG redraw
+  D58_D60: Scalar delta cells additionally intersect frozen fault window; recovery retained
+  D36_D37_D38_D60_std: Frozen rowwise std bytes preserved, including1Hz fault exposure; not regenerated
+  D40: Audit-only baseline metadata,no active scalar measurement path
+  D41: Frozen scalar angle perturbation transfer,no3D measurement or geometry variant
+  D57: Exact raw key join only; unmatchedvalid0; no time correction; classify zero valid heading separately
+  A2_D62: Raw heading retained; original nonheading outages andHV retained
+HV_policy: All frozen method/case-specific HV bytes reused. Rotation remains status heading; no regeneration
+  from5Hz heading.
+config_policy: Exactlyone changed gnsspath line; all otherbytes unchanged; actual211 static options match corresponding
+  frozen echo or explicitly proved historical witness before result admission.
+five_gates:
+- 2a_NON_HEADING_BYTE_IDENTITY
+- 2b_BY2_T5A_TABLE_HASH
+- 2c_ALL_CONFIGS_LINE_AND_211_ECHO
+- 2d_THREE_SEQUENCE_F01_NAV
+- 2e_BY2_F04_C00_NAV
+gate2c_order: All line clones and211expected fields before first native; actual211echo per emitted run; unavailableecho
+  neverPASS.
+decision_rule: No numerical performance threshold; full results and failures reported.
+hard_stops:
+- ANY_IDENTITY_GATE_FAILURE
+- NONHEADING_PROVIDER_BYTE_DIFFERENCE
+- BINARY_OR_EVALUATOR_HASH_MISMATCH
+- UNCLASSIFIABLE_FAILURE
+forbidden:
+- C++ modifications
+- parameter changes
+- timeoffset variants
+- 3Dbaseline measurements
+- R5SIGMA/R5W/B3 reruns
+- HV regeneration
+- trace online or controller access
+- retry consumed reservation
+- frozen output modifications
+report_source_index:
+  path: configs/paper_rebuild/v3/V3_REPORT_SOURCE_INDEX.json
+  sha256: 43dbdade50172e191b394dfc5b64815ddc0c6c5b7f73cbda41762d32acbc4704
+registry_sources:
+- path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/FINAL_RUN_RECORDS.json
+  sha256: 4d1f94b37fc5f3f830273b005ba3824b1b912b0f26f33ef7562a4bb9dab13bed
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_001/RUN_RECORDS.json
+  sha256: f94daf5cf166dbda3affc5da4b5e5b7e815b96036d329a59db2eb704b0ad9d2f
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_002/RUN_RECORDS.json
+  sha256: da30ca5552cc655a9d969b7eb811adc9cfd1ab286b7889bb246ada94ada806ae
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_003/RUN_RECORDS.json
+  sha256: 5abf68164f4f72ef2c3ea01842022838d08c834d1f4c9a3647de548fd80cdb9a
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_004/RUN_RECORDS.json
+  sha256: 37e6f00a090c9fa9bc6bfb4bd0c1717b780e628fe210c4477abf49889d719b8e
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_005/RUN_RECORDS.json
+  sha256: 56b9d98de41553b97fbf5a6b16fcfe0ff13ee863ac5eb77e2a4682f5d6d28dab
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_006/RUN_RECORDS.json
+  sha256: b7f661db76fab73612c171967c07e78e7223c7da3a2c80f7fe4eeda39f2ec50c
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_007/RUN_RECORDS.json
+  sha256: 8a6675cbdd339c7bdfceefa7481071496f559cfa927817640457f5e1c199093f
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_009/RUN_RECORDS.json
+  sha256: c454142135f4c19ffec94206bf8c0fa248988083cdf8b50acaef912e261e1b1b
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_010/RUN_RECORDS.json
+  sha256: 02aa772dc3e9c5b05a4694cb96077881fe56b272782a6ac824115842f1c7829a
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_011/RUN_RECORDS.json
+  sha256: 6ff002d04689140b169f7c8794f18291f947f2cc6a95da1c3e5e436ebf92c666
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_012/RUN_RECORDS.json
+  sha256: 581d9e6b4db0fd1c2305ec5edac4156926aaedd2b49a75597289dde5a7e2b39e
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_013/RUN_RECORDS.json
+  sha256: 25c62d416940941909414822e200cd1047918fd825da6438f268e9c9fd6ada9c
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_015/RUN_RECORDS.json
+  sha256: 4318716914ee1700d6d22fc4350a11f29ddd6e242d8ce301de7c3d953aa9710c
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_016/RUN_RECORDS.json
+  sha256: 045d2e4ce1df3defabda55d22f4df1d58a1568d34ec9d53fb6555ce2533f2dfc
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_017/RUN_RECORDS.json
+  sha256: 4f208e69a67f0969c76e570045971858e74a77fb3f0547885715f6d2152b1475
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_018/RUN_RECORDS.json
+  sha256: 2831abe3e85d0cd0bf701bf35d455a791382aeee4bc80329d47e0ffb0b936ff0
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_019/RUN_RECORDS.json
+  sha256: 5e7717a5b37c048ef49f8e993d6530e584ead6eeb15435e4ff0c082fce1aab9b
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_020/RUN_RECORDS.json
+  sha256: 5276e1b6eecdedf105d517913080f17eae0dd8b09d649c6b0173a6433b6b2e7d
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_021/RUN_RECORDS.json
+  sha256: d4237c13a8fb0f4374e278967ff97a76bc6b9d226f78f0f72e22506942400cdc
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_022/RUN_RECORDS.json
+  sha256: 9ae9ef15160dc756e7ccc70f70884050b5f3269c6776faa60d4ff1a3841a440e
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_023/RUN_RECORDS.json
+  sha256: b96388867409a6a10fff16cdcef167bcfe3f0333caf93fd9f824f30fab1afbf5
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_024/RUN_RECORDS.json
+  sha256: 505f47ca7a6f130d1323d51b8ff9878874b1b52a52820773e7d4bb97070871c4
+- path: <CLEAN_ROOT>/stages/CLEAN6_ADDENDUM_FAMILIES_A1_A2/BATCHES/BATCH_001/SOLVER_RECORDS.json
+  sha256: 9ced9cd3ad6c6af3b8d477ca66d32e37a347c5cc92f4ff9944d9e6fff78352ab
+- path: <CLEAN_ROOT>/stages/CLEAN6_ADDENDUM_FAMILIES_A1_A2/BATCHES/BATCH_002/SOLVER_RECORDS.json
+  sha256: 23c711627537f0094873d6563bcf4a1e46c4c84afa0ed595d50a6cf5624ed101
+- path: <CLEAN_ROOT>/stages/CLEAN6_ADDENDUM_FAMILIES_A1_A2/BATCHES/BATCH_003/SOLVER_RECORDS.json
+  sha256: 06a17f68e25563c649b77f96f7474490afe7a4297b032cae60a7257b341c9fed
+- path: <CLEAN_ROOT>/stages/CLEAN6_ADDENDUM_FAMILIES_A1_A2/BATCHES/BATCH_004/SOLVER_RECORDS.json
+  sha256: 5cd623806299529248f83e1fc22d5e6fa5f40d16f76b688f2373e55378f5e7d6
+- path: <CLEAN_ROOT>/stages/CLEAN6_ADDENDUM_FAMILIES_A1_A2/BATCHES/BATCH_005/SOLVER_RECORDS.json
+  sha256: 3079984b607c8179f9bb98ffbcd7c8e09a4f95f60a753a992ebb71177ae99a68
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/IO_RECOVERY/IO_RECOVERY_20260912/BATCH_008_RECOVERY/RUN_RECORDS.json
+  sha256: e15f1258b1f679dc0e0bd11ec5670dd58619b7bc09a0bcb02f44e13a49bb6b6a
+- path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/IO_RECOVERY/IO_RECOVERY_20260912/BATCH_014_BOOKKEEPING_RECOVERY_001/RECOVERED_RUN_RECORDS.json
+  sha256: e76d1ce3e539bb6ca1269f0d65484ec379b60d7a9c7e473d40bf7f1201319163

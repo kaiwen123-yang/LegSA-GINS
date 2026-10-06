@@ -1,0 +1,3 @@
+# Preserve the sealed result and copied proof bytes, including archived CRLF scripts.
+SEGMENTED_RESULTS/** -text
+SEGMENTED_RESULTS/local_instantiation_scripts/** whitespace=cr-at-eol,-blank-at-eof

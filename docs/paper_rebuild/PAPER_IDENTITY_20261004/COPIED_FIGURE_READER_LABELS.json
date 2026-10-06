@@ -1,0 +1,558 @@
+[
+  {
+    "figure": "Fig07",
+    "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX05_CLOSEOUT/90_MANUSCRIPT/FIG02S.svg",
+    "original_svg_sha256": "e891756a6e0c6a19fc3db742d9040c043bbd19d131940a33a295f5cfe91fff6a",
+    "new_svg_sha256": "615553d0633476b15c1198413144e8c2b77300672303ba0bc537dffd7c15155c",
+    "labels": [
+      {
+        "before": "EXT01",
+        "after": "GNSS compass"
+      },
+      {
+        "before": "EXT02",
+        "after": "Wrapped LS"
+      },
+      {
+        "before": "EXT03",
+        "after": "Baseline KF"
+      },
+      {
+        "before": "EXT04 FAR",
+        "after": "Wu full AR"
+      },
+      {
+        "before": "EXT04 PAR",
+        "after": "Wu partial AR"
+      },
+      {
+        "before": "EXT01",
+        "after": "GNSS compass"
+      },
+      {
+        "before": "EXT02",
+        "after": "Wrapped LS"
+      },
+      {
+        "before": "EXT03",
+        "after": "Baseline KF"
+      },
+      {
+        "before": "EXT04 FAR",
+        "after": "Wu full AR"
+      },
+      {
+        "before": "EXT04 PAR",
+        "after": "Wu partial AR"
+      },
+      {
+        "before": "EXT01",
+        "after": "GNSS compass"
+      },
+      {
+        "before": "EXT02",
+        "after": "Wrapped LS"
+      },
+      {
+        "before": "EXT03",
+        "after": "Baseline KF"
+      },
+      {
+        "before": "EXT04 FAR",
+        "after": "Wu full AR"
+      },
+      {
+        "before": "EXT04 PAR",
+        "after": "Wu partial AR"
+      },
+      {
+        "before": "EXT01",
+        "after": "GNSS compass"
+      },
+      {
+        "before": "EXT02",
+        "after": "Wrapped LS"
+      },
+      {
+        "before": "EXT03",
+        "after": "Baseline KF"
+      },
+      {
+        "before": "EXT04 FAR",
+        "after": "Wu full AR"
+      },
+      {
+        "before": "EXT04 PAR",
+        "after": "Wu partial AR"
+      },
+      {
+        "before": "EXT01",
+        "after": "GNSS compass"
+      },
+      {
+        "before": "EXT02",
+        "after": "Wrapped LS"
+      },
+      {
+        "before": "EXT03",
+        "after": "Baseline KF"
+      },
+      {
+        "before": "EXT04 FAR",
+        "after": "Wu full AR"
+      },
+      {
+        "before": "EXT04 PAR",
+        "after": "Wu partial AR"
+      },
+      {
+        "before": "EXT01",
+        "after": "GNSS compass"
+      },
+      {
+        "before": "EXT02",
+        "after": "Wrapped LS"
+      },
+      {
+        "before": "EXT03",
+        "after": "Baseline KF"
+      },
+      {
+        "before": "EXT04 FAR",
+        "after": "Wu full AR"
+      },
+      {
+        "before": "EXT04 PAR",
+        "after": "Wu partial AR"
+      },
+      {
+        "before": "LC01",
+        "after": "Two-RX IEKF"
+      },
+      {
+        "before": "EXT05C",
+        "after": "1-RX update IEKF"
+      },
+      {
+        "before": "F01",
+        "after": "GNSS/INS"
+      },
+      {
+        "before": "LC01",
+        "after": "Two-RX IEKF"
+      },
+      {
+        "before": "EXT05C",
+        "after": "1-RX update IEKF"
+      },
+      {
+        "before": "F01",
+        "after": "GNSS/INS"
+      },
+      {
+        "before": "LC01",
+        "after": "Two-RX IEKF"
+      },
+      {
+        "before": "EXT05C",
+        "after": "1-RX update IEKF"
+      },
+      {
+        "before": "F01",
+        "after": "GNSS/INS"
+      },
+      {
+        "before": "LC01",
+        "after": "Two-RX IEKF"
+      },
+      {
+        "before": "EXT05C",
+        "after": "1-RX update IEKF"
+      },
+      {
+        "before": "F01",
+        "after": "GNSS/INS"
+      },
+      {
+        "before": "LC01",
+        "after": "Two-RX IEKF"
+      },
+      {
+        "before": "EXT05C",
+        "after": "1-RX update IEKF"
+      },
+      {
+        "before": "F01",
+        "after": "GNSS/INS"
+      },
+      {
+        "before": "LC01",
+        "after": "Two-RX IEKF"
+      },
+      {
+        "before": "EXT05C",
+        "after": "1-RX update IEKF"
+      },
+      {
+        "before": "F01",
+        "after": "GNSS/INS"
+      },
+      {
+        "before": "Official LIT",
+        "after": "Author, literature"
+      },
+      {
+        "before": "LEG-DR",
+        "after": "SDK dead reckoning"
+      },
+      {
+        "before": "Official LIT",
+        "after": "Author, literature"
+      },
+      {
+        "before": "LEG-DR",
+        "after": "SDK dead reckoning"
+      },
+      {
+        "before": "Official LIT",
+        "after": "Author, literature"
+      },
+      {
+        "before": "LEG-DR",
+        "after": "SDK dead reckoning"
+      },
+      {
+        "before": "F04 reference",
+        "after": "LegSA-GINS"
+      },
+      {
+        "before": "F02 reference",
+        "after": "Basic heading"
+      }
+    ],
+    "plotted_geometry_and_embedded_images_unchanged": true,
+    "layout_changes": "Expanded white publication canvas; legend placement; SFig02 tick text displaced below data. Numeric text and data marks unchanged.",
+    "renderer": "CairoSVG 2.8.2",
+    "png_dimensions": [
+      4098,
+      5835
+    ]
+  },
+  {
+    "figure": "Fig08",
+    "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX05_CLOSEOUT/90_MANUSCRIPT/FIG02D.svg",
+    "original_svg_sha256": "f502afd384f7fa3a95c9f16db32615c2c32f2d555cefe133867e3e790f380f8c",
+    "new_svg_sha256": "78d3e63e550c8e69339562585fdccda712a9be0450e16039d0362d36efa1c38f",
+    "labels": [
+      {
+        "before": "LC01",
+        "after": "Two-RX IEKF"
+      },
+      {
+        "before": "F02",
+        "after": "Basic heading"
+      },
+      {
+        "before": "F04",
+        "after": "LegSA-GINS"
+      }
+    ],
+    "plotted_geometry_and_embedded_images_unchanged": true,
+    "layout_changes": "Expanded white publication canvas; legend placement; SFig02 tick text displaced below data. Numeric text and data marks unchanged.",
+    "renderer": "CairoSVG 2.8.2",
+    "png_dimensions": [
+      4098,
+      4665
+    ]
+  },
+  {
+    "figure": "SFig01",
+    "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX05_CLOSEOUT/90_MANUSCRIPT/SFIG-HX.svg",
+    "original_svg_sha256": "cbadcd8d9f1f9e03551bd9c1bf856bcecdae7b1083fd92f3cf90dbd70ef5a529",
+    "new_svg_sha256": "2e99740313c5d41daa56864823f0159ba4a62be81edbcf5d823a70c981d071b6",
+    "labels": [
+      {
+        "before": "Port S",
+        "after": "Port, calibrated IMU"
+      },
+      {
+        "before": "Port LIT",
+        "after": "Port, literature"
+      },
+      {
+        "before": "Official LIT",
+        "after": "Author, literature"
+      },
+      {
+        "before": "Official DEF",
+        "after": "Author, default"
+      },
+      {
+        "before": "LEG-DR",
+        "after": "SDK dead reckoning"
+      },
+      {
+        "before": "Port S",
+        "after": "Port, calibrated IMU"
+      },
+      {
+        "before": "Port LIT",
+        "after": "Port, literature"
+      },
+      {
+        "before": "Official LIT",
+        "after": "Author, literature"
+      },
+      {
+        "before": "Official DEF",
+        "after": "Author, default"
+      },
+      {
+        "before": "LEG-DR",
+        "after": "SDK dead reckoning"
+      },
+      {
+        "before": "Port S",
+        "after": "Port, calibrated IMU"
+      },
+      {
+        "before": "Port LIT",
+        "after": "Port, literature"
+      },
+      {
+        "before": "Official LIT",
+        "after": "Author, literature"
+      },
+      {
+        "before": "Official DEF",
+        "after": "Author, default"
+      },
+      {
+        "before": "LEG-DR",
+        "after": "SDK dead reckoning"
+      },
+      {
+        "before": "Port S",
+        "after": "Port, calibrated IMU"
+      },
+      {
+        "before": "Port LIT",
+        "after": "Port, literature"
+      },
+      {
+        "before": "Official LIT",
+        "after": "Author, literature"
+      },
+      {
+        "before": "Official DEF",
+        "after": "Author, default"
+      },
+      {
+        "before": "LEG-DR",
+        "after": "SDK dead reckoning"
+      },
+      {
+        "before": "Port S",
+        "after": "Port, calibrated IMU"
+      },
+      {
+        "before": "Port LIT",
+        "after": "Port, literature"
+      },
+      {
+        "before": "Official LIT",
+        "after": "Author, literature"
+      },
+      {
+        "before": "Official DEF",
+        "after": "Author, default"
+      },
+      {
+        "before": "LEG-DR",
+        "after": "SDK dead reckoning"
+      },
+      {
+        "before": "Port S",
+        "after": "Port, calibrated IMU"
+      },
+      {
+        "before": "Port LIT",
+        "after": "Port, literature"
+      },
+      {
+        "before": "Official LIT",
+        "after": "Author, literature"
+      },
+      {
+        "before": "Official DEF",
+        "after": "Author, default"
+      },
+      {
+        "before": "LEG-DR",
+        "after": "SDK dead reckoning"
+      },
+      {
+        "before": "Port S",
+        "after": "Port, calibrated IMU"
+      },
+      {
+        "before": "Port LIT",
+        "after": "Port, literature"
+      },
+      {
+        "before": "Official LIT",
+        "after": "Author, literature"
+      },
+      {
+        "before": "Official DEF",
+        "after": "Author, default"
+      },
+      {
+        "before": "LEG-DR",
+        "after": "SDK dead reckoning"
+      }
+    ],
+    "plotted_geometry_and_embedded_images_unchanged": true,
+    "layout_changes": "Expanded white publication canvas; legend placement; SFig02 tick text displaced below data. Numeric text and data marks unchanged.",
+    "renderer": "CairoSVG 2.8.2",
+    "png_dimensions": [
+      4098,
+      3289
+    ]
+  },
+  {
+    "figure": "SFig02",
+    "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/08_FIGURES/SFIG01/SFIG01.svg",
+    "original_svg_sha256": "98896e96d207986f77652f53be8273ef9fa7dde8f9945e1577cbfc842323bbca",
+    "new_svg_sha256": "4c7acbe2468ff28a1eb9e15d496866628541110a1c8351f8e9dfb72a06067146",
+    "labels": [
+      {
+        "before": "F01",
+        "after": "GNSS/INS"
+      },
+      {
+        "before": "F02",
+        "after": "Basic heading"
+      },
+      {
+        "before": "F03",
+        "after": "Gated heading"
+      },
+      {
+        "before": "A04",
+        "after": "No weighting"
+      },
+      {
+        "before": "F04",
+        "after": "LegSA-GINS"
+      },
+      {
+        "before": "F01",
+        "after": "GNSS/INS"
+      },
+      {
+        "before": "F02",
+        "after": "Basic heading"
+      },
+      {
+        "before": "F03",
+        "after": "Gated heading"
+      },
+      {
+        "before": "A04",
+        "after": "No weighting"
+      },
+      {
+        "before": "F04",
+        "after": "LegSA-GINS"
+      },
+      {
+        "before": "F01",
+        "after": "GNSS/INS"
+      },
+      {
+        "before": "F02",
+        "after": "Basic heading"
+      },
+      {
+        "before": "F03",
+        "after": "Gated heading"
+      },
+      {
+        "before": "A04",
+        "after": "No weighting"
+      },
+      {
+        "before": "F04",
+        "after": "LegSA-GINS"
+      },
+      {
+        "before": "F01",
+        "after": "GNSS/INS"
+      },
+      {
+        "before": "F02",
+        "after": "Basic heading"
+      },
+      {
+        "before": "F03",
+        "after": "Gated heading"
+      },
+      {
+        "before": "A04",
+        "after": "No weighting"
+      },
+      {
+        "before": "F04",
+        "after": "LegSA-GINS"
+      },
+      {
+        "before": "F01",
+        "after": "GNSS/INS"
+      },
+      {
+        "before": "F02",
+        "after": "Basic heading"
+      },
+      {
+        "before": "F03",
+        "after": "Gated heading"
+      },
+      {
+        "before": "A04",
+        "after": "No weighting"
+      },
+      {
+        "before": "F04",
+        "after": "LegSA-GINS"
+      },
+      {
+        "before": "F01",
+        "after": "GNSS/INS"
+      },
+      {
+        "before": "F02",
+        "after": "Basic heading"
+      },
+      {
+        "before": "F03",
+        "after": "Gated heading"
+      },
+      {
+        "before": "A04",
+        "after": "No weighting"
+      },
+      {
+        "before": "F04",
+        "after": "LegSA-GINS"
+      }
+    ],
+    "plotted_geometry_and_embedded_images_unchanged": true,
+    "layout_changes": "Expanded white publication canvas; legend placement; SFig02 tick text displaced below data. Numeric text and data marks unchanged.",
+    "renderer": "CairoSVG 2.8.2",
+    "png_dimensions": [
+      4098,
+      4569
+    ]
+  }
+]

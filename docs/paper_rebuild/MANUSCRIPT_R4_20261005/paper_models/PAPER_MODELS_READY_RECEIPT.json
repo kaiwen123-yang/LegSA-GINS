@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-05",
+  "status": "READY",
+  "all_checks_passed": true,
+  "selected_papers_full_text_pages": 37,
+  "selected_page_images_actually_viewed": 16,
+  "source_pdf_hashes_unchanged": true,
+  "science_changes": 0,
+  "science_runs": 0,
+  "copyright_fulltext_or_images_committed": false,
+  "submission_ready": false,
+  "outputs": [
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/paper_models/R3_TO_R4_STRUCTURE_MAP.csv",
+      "bytes": 1754,
+      "sha256": "43e75ef26ce30e2187d3175ae1faeda4d9a91e004db7c043f7daa75f5a8a5a73"
+    },
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/paper_models/README.md",
+      "bytes": 827,
+      "sha256": "04da720af0ff05492557ef845f0a1cc3f8cfc59e8472aec9a3bcacac38d02619"
+    },
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/paper_models/READ_COVERAGE.json",
+      "bytes": 15438,
+      "sha256": "6cef6def9c4eba5e20f413d790775cf0ff3c40baa4ea7cdd5ff137d935fc68e1"
+    },
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/paper_models/THREE_PAPER_WRITING_MODELS.md",
+      "bytes": 20962,
+      "sha256": "c5dfa1eec255bbf1cda8fad1cfde14caaf8473dc914d2ed030228e9c6cf85b7f"
+    }
+  ]
+}

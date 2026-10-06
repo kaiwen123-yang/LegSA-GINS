@@ -1,0 +1,46 @@
+{
+  "schema": "paper_identity_photo_smallblock.v1",
+  "all_checks_passed": true,
+  "source_photo_hash_matches_copy": true,
+  "actual_image_viewed": true,
+  "original_pixels_unchanged": true,
+  "scientific_edits": false,
+  "native_generator_evaluator_calls": 0,
+  "git_stage_commit_push_by_this_agent": false,
+  "files": [
+    {
+      "repo_path": "paper_package/gpss_v0/METHOD_IDENTITY.json",
+      "bytes": 3727,
+      "sha256": "65eb5b8820e92a0c20d8b15571f6c1771a0d70d40c9a5c31ce7cd19c460b49f9"
+    },
+    {
+      "repo_path": "paper_package/gpss_v0/assets/installation/author_installation_original.jpg",
+      "bytes": 309781,
+      "sha256": "a5aac11a5cde1e99bd31d0342b5e3351d428e92ae5f74ef5547f9a35508cb64b"
+    },
+    {
+      "repo_path": "paper_package/gpss_v0/assets/installation/author_installation_metadata.json",
+      "bytes": 1285,
+      "sha256": "0c9282aa4d8d442cecc3aa0414ccfdf0002793a3f30b0c0c260c0ee89f63dd51"
+    },
+    {
+      "repo_path": "paper_package/gpss_v0/assets/installation/CAPTION.md",
+      "bytes": 510,
+      "sha256": "3303341483db4690c6cbd918a1cf1837550d901350337907c32ed4d599ea25b2"
+    },
+    {
+      "repo_path": "docs/paper_rebuild/PAPER_IDENTITY_20261004/README.md",
+      "bytes": 1821,
+      "sha256": "e0ad144898d814a7db102369dbd3a797bc05254f83084db29fe5a876620f5dd8"
+    },
+    {
+      "repo_path": "docs/paper_rebuild/PAPER_IDENTITY_20261004/READ_COVERAGE.csv",
+      "bytes": 1507,
+      "sha256": "e8a6608dc528c997bda33fe01095e2683cd55daa00b679b994c09819e32d6371"
+    }
+  ],
+  "reader_name_clarifications": {
+    "A03": "Disables only the separately derived raw-Doppler velocity aiding; receiver velocity remains enabled.",
+    "A06": "Robot-reported horizontal velocity aiding; SDK channel retained as implementation identity."
+  }
+}

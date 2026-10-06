@@ -1,0 +1,450 @@
+{
+  "schema_version": "v3.prerequisites.v1",
+  "task": "V3-01",
+  "status": "BLOCKED_PREREQUISITE_FACT_CONFLICT_PENDING_USER_RESOLUTION",
+  "step0a_status": "FACT_CONFLICT",
+  "step0b_status": "COMPUTED_FROM_SEALED_EXISTING_ERROR_SERIES",
+  "code_commit": "6257a4fa46efd11a8b8888c5e466cf923a45336e",
+  "requested_start_commit": "6257a4fa46efd11a8b8888c5e466cf923a45336e",
+  "script_sha256": "8cdab35c355ab82eb1f38488719121f89b296f80afbbcf1996bc71f79e523a99",
+  "data_mode": "read_only_prior_real_raw_and_semisynthetic_cohorts_separate",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "semisynthetic_scope": "0a degradation subset only; 0b is real-raw prior evaluation evidence",
+  "trace_used_online": false,
+  "receiver_imu_as_body_imu": false,
+  "final_v23_output_solver_input": false,
+  "LegSA_output_solver_input": false,
+  "per_case_tuning": false,
+  "output_only_correction": false,
+  "epoch_deleted_for_metric": false,
+  "old_runtime_input_count": 0,
+  "config_hash": "6b8b03a2af3b2bd68cf4c81fb7c512927489ee139571c7e03f3d347773550601",
+  "config_hash_role": "existing_T5A_CONTRACT_read_only_not_v3_runtime_config",
+  "native_invocations": 0,
+  "evaluator_invocations": 0,
+  "provider_invocations": 0,
+  "trace_open_count": 0,
+  "raw_payload_open_count": 0,
+  "source_files_mutated": 0,
+  "preregistration_approved": false,
+  "code_freeze": "NOT_CREATED",
+  "full_matrix_status": "NOT_RUN",
+  "selected_rule": "BOTH_FIXED",
+  "selection_primary_evaluator": "v3",
+  "selection_rule": "F04 R5F primary yaw RMSE <= F04 R5 primary yaw RMSE implies both fixed/float; otherwise both fixed",
+  "selection_values_deg": {
+    "R5": 0.2325140820805299,
+    "R5F": 1.0351701650068426
+  },
+  "binary_identity_checks": [
+    {
+      "role": "executable",
+      "path": "<CODE_ROOT>/build/p13_v21_cpp/legsa_v23_port_core_demo",
+      "sha256": "96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c",
+      "status": "PASS"
+    },
+    {
+      "role": "evaluator",
+      "path": "<CLEAN_ROOT>/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py",
+      "sha256": "aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da",
+      "status": "PASS"
+    }
+  ],
+  "sums": [
+    {
+      "evaluator": "v3",
+      "variant": "T5A_R5",
+      "sequence_count": 3,
+      "yaw_rmse_sum_deg": "6.2538569227651107",
+      "improvement_from_R5_deg": "0E-16",
+      "reaches_0p3_deg": false
+    },
+    {
+      "evaluator": "v3",
+      "variant": "R5SIGMA",
+      "sequence_count": 3,
+      "yaw_rmse_sum_deg": "6.1442162463454558",
+      "improvement_from_R5_deg": "0.1096406764196549",
+      "reaches_0p3_deg": false
+    },
+    {
+      "evaluator": "v3",
+      "variant": "R5W",
+      "sequence_count": 3,
+      "yaw_rmse_sum_deg": "6.1050993524129546",
+      "improvement_from_R5_deg": "0.1487575703521561",
+      "reaches_0p3_deg": false
+    },
+    {
+      "evaluator": "v2",
+      "variant": "T5A_R5",
+      "sequence_count": 3,
+      "yaw_rmse_sum_deg": "6.2538569227651107",
+      "improvement_from_R5_deg": "0E-16",
+      "reaches_0p3_deg": false
+    },
+    {
+      "evaluator": "v2",
+      "variant": "R5SIGMA",
+      "sequence_count": 3,
+      "yaw_rmse_sum_deg": "6.1442162463454558",
+      "improvement_from_R5_deg": "0.1096406764196549",
+      "reaches_0p3_deg": false
+    },
+    {
+      "evaluator": "v2",
+      "variant": "R5W",
+      "sequence_count": 3,
+      "yaw_rmse_sum_deg": "6.1050993524129546",
+      "improvement_from_R5_deg": "0.1487575703521561",
+      "reaches_0p3_deg": false
+    }
+  ],
+  "finite_counts": [
+    {
+      "evaluator": "v3",
+      "metric": "yaw_rmse_deg",
+      "total_cases": 61,
+      "frozen_finite": 60,
+      "R5_finite": 58,
+      "paired_finite": 57,
+      "frozen_nonfinite": 1,
+      "R5_nonfinite": 3,
+      "R5_failed_on_frozen_completed": 3
+    },
+    {
+      "evaluator": "v3",
+      "metric": "h_rmse_m",
+      "total_cases": 61,
+      "frozen_finite": 60,
+      "R5_finite": 58,
+      "paired_finite": 57,
+      "frozen_nonfinite": 1,
+      "R5_nonfinite": 3,
+      "R5_failed_on_frozen_completed": 3
+    },
+    {
+      "evaluator": "v2",
+      "metric": "yaw_rmse_deg",
+      "total_cases": 61,
+      "frozen_finite": 60,
+      "R5_finite": 58,
+      "paired_finite": 57,
+      "frozen_nonfinite": 1,
+      "R5_nonfinite": 3,
+      "R5_failed_on_frozen_completed": 3
+    },
+    {
+      "evaluator": "v2",
+      "metric": "h_rmse_m",
+      "total_cases": 61,
+      "frozen_finite": 60,
+      "R5_finite": 58,
+      "paired_finite": 57,
+      "frozen_nonfinite": 1,
+      "R5_nonfinite": 3,
+      "R5_failed_on_frozen_completed": 3
+    }
+  ],
+  "five_identity_gates": [
+    {
+      "gate": "2a_NON_HEADING_BYTE_IDENTITY",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "2b_BY2_T5A_TABLE_HASH",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "2c_ALL_CONFIGS_LINE_AND_211_ECHO",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "2d_THREE_SEQUENCE_F01_NAV",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "2e_BY2_F04_C00_NAV",
+      "status": "NOT_RUN"
+    }
+  ],
+  "fact_conflicts": [
+    "User stated frozen finite=57/nonfinite=4; pinned frozen F04 has finite=60/nonfinite=1.",
+    "User requested confirmation R5 has no failures on frozen-completed cases; D27/D57/D60 are all frozen COMPLETED and R5 failed."
+  ],
+  "source_hashes": [
+    {
+      "path": "configs/paper_rebuild/hext/T5BC_FROZEN_SOURCE_INDEX.yaml",
+      "sha256": "aa95097353bd10d810cadc50cf22466c54df01b99a2da9339521089d70a160e3",
+      "expected_sha256": "aa95097353bd10d810cadc50cf22466c54df01b99a2da9339521089d70a160e3",
+      "authority": "git:6257a4fa46efd11a8b8888c5e466cf923a45336e:configs/paper_rebuild/hext/T5BC_FROZEN_SOURCE_INDEX.yaml",
+      "status": "PASS",
+      "size_bytes": 156869
+    },
+    {
+      "path": "configs/paper_rebuild/hext/T5A_CONTRACT_V1.yaml",
+      "sha256": "6b8b03a2af3b2bd68cf4c81fb7c512927489ee139571c7e03f3d347773550601",
+      "expected_sha256": "6b8b03a2af3b2bd68cf4c81fb7c512927489ee139571c7e03f3d347773550601",
+      "authority": "git:6257a4fa46efd11a8b8888c5e466cf923a45336e:configs/paper_rebuild/hext/T5A_CONTRACT_V1.yaml",
+      "status": "PASS",
+      "size_bytes": 18440
+    },
+    {
+      "path": "src/legsa_gins/paper_rebuild/hext/aggregate.py",
+      "sha256": "44e889d6b4ba657861c4ee1a30e10d061538adbd22b63f1965ae7368c6e4cd7f",
+      "expected_sha256": "44e889d6b4ba657861c4ee1a30e10d061538adbd22b63f1965ae7368c6e4cd7f",
+      "authority": "git:6257a4fa46efd11a8b8888c5e466cf923a45336e:src/legsa_gins/paper_rebuild/hext/aggregate.py",
+      "status": "PASS",
+      "size_bytes": 35968
+    },
+    {
+      "path": "<CODE_ROOT>/build/p13_v21_cpp/legsa_v23_port_core_demo",
+      "sha256": "96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c",
+      "expected_sha256": "96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c",
+      "authority": "configs/paper_rebuild/hext/T5A_CONTRACT_V1.yaml:frozen.executable",
+      "status": "PASS",
+      "size_bytes": 759456
+    },
+    {
+      "path": "<CLEAN_ROOT>/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py",
+      "sha256": "aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da",
+      "expected_sha256": "aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da",
+      "authority": "configs/paper_rebuild/hext/T5A_CONTRACT_V1.yaml:frozen.evaluator",
+      "status": "PASS",
+      "size_bytes": 18195
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/05_AGGREGATE/SENSITIVITY_TABLE_V3.csv",
+      "sha256": "fd8ed33b803845a3a3b1c72ac5cf57c59e2a90654509da069f81aa5961328ee6",
+      "expected_sha256": "fd8ed33b803845a3a3b1c72ac5cf57c59e2a90654509da069f81aa5961328ee6",
+      "authority": "configs/paper_rebuild/hext/T5BC_FROZEN_SOURCE_INDEX.yaml:t5a_r.tables.SENSITIVITY_TABLE_V3.csv",
+      "status": "PASS",
+      "size_bytes": 27614
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/05_AGGREGATE/SENSITIVITY_TABLE_V2.csv",
+      "sha256": "9aef9f55b5e19f510f5a8254e104c66f92e8212f5e9a2c685a17da736978d022",
+      "expected_sha256": "9aef9f55b5e19f510f5a8254e104c66f92e8212f5e9a2c685a17da736978d022",
+      "authority": "configs/paper_rebuild/hext/T5BC_FROZEN_SOURCE_INDEX.yaml:t5a_r.tables.SENSITIVITY_TABLE_V2.csv",
+      "status": "PASS",
+      "size_bytes": 27526
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/05_AGGREGATE/BY2O_SEGMENTS_BY_VARIANT.csv",
+      "sha256": "09bb5252540abeed196f75aacbf7b3b8009fe010e603bf6ed7e80c86ad08a297",
+      "expected_sha256": "09bb5252540abeed196f75aacbf7b3b8009fe010e603bf6ed7e80c86ad08a297",
+      "authority": "configs/paper_rebuild/hext/T5BC_FROZEN_SOURCE_INDEX.yaml:t5a_r.tables.BY2O_SEGMENTS_BY_VARIANT.csv",
+      "status": "PASS",
+      "size_bytes": 40066
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/05_AGGREGATE/AGGREGATE_MANIFEST.json",
+      "sha256": "b78c6ce35e68844c5f51c8457dd6da27b27375f987e1a0c728dba2bda4301f84",
+      "expected_sha256": "b78c6ce35e68844c5f51c8457dd6da27b27375f987e1a0c728dba2bda4301f84",
+      "authority": "configs/paper_rebuild/hext/T5BC_FROZEN_SOURCE_INDEX.yaml:t5a_r.tables.AGGREGATE_MANIFEST.json",
+      "status": "PASS",
+      "size_bytes": 32825
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/FINAL_SUMMARY.json",
+      "sha256": "0032357c6b30f0b89e234d3623b2982c083f52834fad9cc55af925d31dc8577b",
+      "expected_sha256": "0032357c6b30f0b89e234d3623b2982c083f52834fad9cc55af925d31dc8577b",
+      "authority": "configs/paper_rebuild/hext/T5BC_FROZEN_SOURCE_INDEX.yaml:t5a_r.final_summary",
+      "status": "PASS",
+      "size_bytes": 156735
+    },
+    {
+      "path": "configs/paper_rebuild/clean5/CLEAN5_DEGRADATION_SUBSET_CONTRACT.yaml",
+      "sha256": "9af4216d1c2e58011e712e60bfcb82ba58ea587034daf14a34c9985cf6b06cd6",
+      "expected_sha256": "9af4216d1c2e58011e712e60bfcb82ba58ea587034daf14a34c9985cf6b06cd6",
+      "authority": "configs/paper_rebuild/hext/T5BC_FROZEN_SOURCE_INDEX.yaml:subset_case_source",
+      "status": "PASS",
+      "size_bytes": 153068
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/20_FINALIZE/13_AGGREGATE/v3/UNIQUE_EVALUATION_RESULTS.csv",
+      "sha256": "45054701213cedb2057523c6f4706dfebd170ccea824bc882e8d281653f892d5",
+      "expected_sha256": "45054701213cedb2057523c6f4706dfebd170ccea824bc882e8d281653f892d5",
+      "authority": "configs/paper_rebuild/hext/T5BC_FROZEN_SOURCE_INDEX.yaml:subset_tables.v3",
+      "status": "PASS",
+      "size_bytes": 110973703
+    },
+    {
+      "path": "docs/paper_rebuild/hext/t5bcr/PILOT_TABLE_V3.csv",
+      "sha256": "1571cb918331135c04364017c490cbd21743705d803aa2741de4b38752f81e79",
+      "expected_sha256": "1571cb918331135c04364017c490cbd21743705d803aa2741de4b38752f81e79",
+      "authority": "git:6257a4fa46efd11a8b8888c5e466cf923a45336e:docs/paper_rebuild/hext/t5bcr/PILOT_TABLE_V3.csv",
+      "status": "PASS",
+      "size_bytes": 59995
+    },
+    {
+      "path": "docs/paper_rebuild/hext/t5bcr/SUBSET61_TABLE_V3.csv",
+      "sha256": "5ba8f6c57ebb7eb03243eb0fcf0fe448c6334f30ec5597499e2e3d898ea3ad0f",
+      "expected_sha256": "5ba8f6c57ebb7eb03243eb0fcf0fe448c6334f30ec5597499e2e3d898ea3ad0f",
+      "authority": "git:6257a4fa46efd11a8b8888c5e466cf923a45336e:docs/paper_rebuild/hext/t5bcr/SUBSET61_TABLE_V3.csv",
+      "status": "PASS",
+      "size_bytes": 5658016
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/20_FINALIZE/13_AGGREGATE/v2/UNIQUE_EVALUATION_RESULTS.csv",
+      "sha256": "abcf4943419c462312a806171de1cc6b11bcb159ab63cd98f9d1ed0fa0ee505d",
+      "expected_sha256": "abcf4943419c462312a806171de1cc6b11bcb159ab63cd98f9d1ed0fa0ee505d",
+      "authority": "configs/paper_rebuild/hext/T5BC_FROZEN_SOURCE_INDEX.yaml:subset_tables.v2",
+      "status": "PASS",
+      "size_bytes": 109903163
+    },
+    {
+      "path": "docs/paper_rebuild/hext/t5bcr/PILOT_TABLE_V2.csv",
+      "sha256": "9d63845d0481f1a1dd7755505f2985661aeff5343f911d6aa15036cc36ca8289",
+      "expected_sha256": "9d63845d0481f1a1dd7755505f2985661aeff5343f911d6aa15036cc36ca8289",
+      "authority": "git:6257a4fa46efd11a8b8888c5e466cf923a45336e:docs/paper_rebuild/hext/t5bcr/PILOT_TABLE_V2.csv",
+      "status": "PASS",
+      "size_bytes": 59942
+    },
+    {
+      "path": "docs/paper_rebuild/hext/t5bcr/SUBSET61_TABLE_V2.csv",
+      "sha256": "2632a7c6e036042a714fe3299e404b7c04e57d8223c5b0359b04d0bf0d278e58",
+      "expected_sha256": "2632a7c6e036042a714fe3299e404b7c04e57d8223c5b0359b04d0bf0d278e58",
+      "authority": "git:6257a4fa46efd11a8b8888c5e466cf923a45336e:docs/paper_rebuild/hext/t5bcr/SUBSET61_TABLE_V2.csv",
+      "status": "PASS",
+      "size_bytes": 5632292
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v3/BY2O/F02/R5/OUTPUT_SEAL.json",
+      "sha256": "82f26abb0fe36c9a664e88fe87d443af5f87dce4d328e273f940d2a3d29669c4",
+      "expected_sha256": "82f26abb0fe36c9a664e88fe87d443af5f87dce4d328e273f940d2a3d29669c4",
+      "authority": "T5a-R pinned AGGREGATE_MANIFEST.source_hashes",
+      "status": "PASS",
+      "size_bytes": 1737
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v3/BY2O/F02/R5/FROZEN_EVALUATOR/error_series.csv",
+      "sha256": "634c90646622dcbbb269ca663038619ea3052c12547e9226ca9848ba2e3a94e0",
+      "expected_sha256": "634c90646622dcbbb269ca663038619ea3052c12547e9226ca9848ba2e3a94e0",
+      "authority": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v3/BY2O/F02/R5/OUTPUT_SEAL.json",
+      "status": "PASS",
+      "size_bytes": 18069876
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v3/BY2O/F02/R5F/OUTPUT_SEAL.json",
+      "sha256": "6785d71cde215b41123cae85130a7dbcb631a58758f4130eafcbcaa69cedacdd",
+      "expected_sha256": "6785d71cde215b41123cae85130a7dbcb631a58758f4130eafcbcaa69cedacdd",
+      "authority": "T5a-R pinned AGGREGATE_MANIFEST.source_hashes",
+      "status": "PASS",
+      "size_bytes": 1737
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v3/BY2O/F02/R5F/FROZEN_EVALUATOR/error_series.csv",
+      "sha256": "704f3754f8f201bd29d1e4560128783c31ed7c94bafcfffb5f9c17c23acdfedb",
+      "expected_sha256": "704f3754f8f201bd29d1e4560128783c31ed7c94bafcfffb5f9c17c23acdfedb",
+      "authority": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v3/BY2O/F02/R5F/OUTPUT_SEAL.json",
+      "status": "PASS",
+      "size_bytes": 18039701
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v3/BY2O/F04/R5/OUTPUT_SEAL.json",
+      "sha256": "941fd71e4b427964b76b79a1a5b24ca9b7a0c583eca520e091ac904b7380bc7f",
+      "expected_sha256": "941fd71e4b427964b76b79a1a5b24ca9b7a0c583eca520e091ac904b7380bc7f",
+      "authority": "T5a-R pinned AGGREGATE_MANIFEST.source_hashes",
+      "status": "PASS",
+      "size_bytes": 1737
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v3/BY2O/F04/R5/FROZEN_EVALUATOR/error_series.csv",
+      "sha256": "b68a673506d818e261ae6c0567fe39b1357d4fe5e4ea8ba99ebd3c691c34086a",
+      "expected_sha256": "b68a673506d818e261ae6c0567fe39b1357d4fe5e4ea8ba99ebd3c691c34086a",
+      "authority": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v3/BY2O/F04/R5/OUTPUT_SEAL.json",
+      "status": "PASS",
+      "size_bytes": 18046932
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v3/BY2O/F04/R5F/OUTPUT_SEAL.json",
+      "sha256": "5d02a2c01b136e6fe5f6f873e0bd2bf1517c2406c610dcb47ef029114d55fb6b",
+      "expected_sha256": "5d02a2c01b136e6fe5f6f873e0bd2bf1517c2406c610dcb47ef029114d55fb6b",
+      "authority": "T5a-R pinned AGGREGATE_MANIFEST.source_hashes",
+      "status": "PASS",
+      "size_bytes": 1737
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v3/BY2O/F04/R5F/FROZEN_EVALUATOR/error_series.csv",
+      "sha256": "a2ed0ccb0af94827d184d24a26067d036777bcc2b600ad7cf2fea97d9cad74d0",
+      "expected_sha256": "a2ed0ccb0af94827d184d24a26067d036777bcc2b600ad7cf2fea97d9cad74d0",
+      "authority": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v3/BY2O/F04/R5F/OUTPUT_SEAL.json",
+      "status": "PASS",
+      "size_bytes": 18018388
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v2/BY2O/F02/R5/OUTPUT_SEAL.json",
+      "sha256": "965eb309b7cb60e3025425f7850982fc496aabc9ab2a3446edba6da4da24d835",
+      "expected_sha256": "965eb309b7cb60e3025425f7850982fc496aabc9ab2a3446edba6da4da24d835",
+      "authority": "T5a-R pinned AGGREGATE_MANIFEST.source_hashes",
+      "status": "PASS",
+      "size_bytes": 1525
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v2/BY2O/F02/R5/FROZEN_EVALUATOR/error_series.csv",
+      "sha256": "2f1fc491c125068c38d2bc903e1d9738414161f72702e047e416775457f001e3",
+      "expected_sha256": "2f1fc491c125068c38d2bc903e1d9738414161f72702e047e416775457f001e3",
+      "authority": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v2/BY2O/F02/R5/OUTPUT_SEAL.json",
+      "status": "PASS",
+      "size_bytes": 17834475
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v2/BY2O/F02/R5F/OUTPUT_SEAL.json",
+      "sha256": "f8e116f65d2aec1ed206264f8ebfb70cba306dff722c6a3a36bbdd70fa7a08fc",
+      "expected_sha256": "f8e116f65d2aec1ed206264f8ebfb70cba306dff722c6a3a36bbdd70fa7a08fc",
+      "authority": "T5a-R pinned AGGREGATE_MANIFEST.source_hashes",
+      "status": "PASS",
+      "size_bytes": 1525
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v2/BY2O/F02/R5F/FROZEN_EVALUATOR/error_series.csv",
+      "sha256": "068d163b00a5661fedad349a10427a32f835f9de3511daed99a8fecc3355fc5b",
+      "expected_sha256": "068d163b00a5661fedad349a10427a32f835f9de3511daed99a8fecc3355fc5b",
+      "authority": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v2/BY2O/F02/R5F/OUTPUT_SEAL.json",
+      "status": "PASS",
+      "size_bytes": 17812167
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v2/BY2O/F04/R5/OUTPUT_SEAL.json",
+      "sha256": "8520c13a900a43c12be92905d919c34f01c921ad760957a25a842c3153eb87c4",
+      "expected_sha256": "8520c13a900a43c12be92905d919c34f01c921ad760957a25a842c3153eb87c4",
+      "authority": "T5a-R pinned AGGREGATE_MANIFEST.source_hashes",
+      "status": "PASS",
+      "size_bytes": 1525
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v2/BY2O/F04/R5/FROZEN_EVALUATOR/error_series.csv",
+      "sha256": "ff112a994be6518ec11fdde5b1517d499867aec23142cd286907b7c4bf17272d",
+      "expected_sha256": "ff112a994be6518ec11fdde5b1517d499867aec23142cd286907b7c4bf17272d",
+      "authority": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v2/BY2O/F04/R5/OUTPUT_SEAL.json",
+      "status": "PASS",
+      "size_bytes": 17816615
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v2/BY2O/F04/R5F/OUTPUT_SEAL.json",
+      "sha256": "44b85a01ad18aa07b4a871618bce82ed6e105e542795d7b61715311d9fdfa8a8",
+      "expected_sha256": "44b85a01ad18aa07b4a871618bce82ed6e105e542795d7b61715311d9fdfa8a8",
+      "authority": "T5a-R pinned AGGREGATE_MANIFEST.source_hashes",
+      "status": "PASS",
+      "size_bytes": 1525
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v2/BY2O/F04/R5F/FROZEN_EVALUATOR/error_series.csv",
+      "sha256": "2bebb3d8b9377229d30acde7c15d07a2a4092dd1e735d0156f6f82b2a31c32dd",
+      "expected_sha256": "2bebb3d8b9377229d30acde7c15d07a2a4092dd1e735d0156f6f82b2a31c32dd",
+      "authority": "<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/04_EVAL/v2/BY2O/F04/R5F/OUTPUT_SEAL.json",
+      "status": "PASS",
+      "size_bytes": 17792102
+    }
+  ],
+  "artifact_sha256": {
+    "F04_THREE_SEQUENCE_SUMS.csv": "615ea533a163da5e55b279f29d0f432b36b50d33c03601a3a4080d42d52f7c00",
+    "SUBSET61_FINITE_COUNTS.csv": "8e5d563c7a295ed4939a02701f53f43ae332ffed64ea05c1c7c2e70e0e3bf118",
+    "SUBSET61_F04_R5_COMPARISON.csv": "df98c61e9ddf7cf053f3cbbd14c60fff97e1af0da4570fa37a25e4e2faaf021b",
+    "SUBSET61_FAILURE_COMPARISON.csv": "216249f1c7668c508907ea586af14631b67eaa0aa09e2b4cd1b632da40ae88a2",
+    "BY2O_T5AR_SEGMENTS.csv": "bea57b00eca678dddffaf46bfa18fe7883462d09c256979ec6711449bc72b92c",
+    "V3_01_PREREQUISITES.md": "2ce1bd24b212e9c209a006a3d5d8de90392c6a499e3ebd087e325fa1f0a08b79"
+  }
+}

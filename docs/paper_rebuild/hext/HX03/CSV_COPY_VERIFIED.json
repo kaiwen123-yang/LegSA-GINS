@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "files": {
+    "DEGRADATION_EXTERNAL_TABLE.csv": "db78b124bc568c94fa73ce07e412343215eb6d28c11018dbcd7022377bb62d44",
+    "DEGRADATION_EXTERNAL_TABLE_V2.csv": "3064fdbdc4ac99baf6ce815385feca5e9163f440cac93dac9bc057cdf4c745c7",
+    "DEGRADATION_EXTERNAL_SUMMARY.csv": "b6c0f1790675fdd522fded2f8a171b96c5eea33247ca00d32ba3c1023e807a63",
+    "DEGRADATION_PAIRED.csv": "3bce76a6dbcc38cca2128e093fa429f37f657b117532e28e9233fce3832eb1cc"
+  },
+  "destinations": [
+    "$HX03/90_AGGREGATE",
+    "$W/docs/paper_rebuild/hext/HX03"
+  ]
+}

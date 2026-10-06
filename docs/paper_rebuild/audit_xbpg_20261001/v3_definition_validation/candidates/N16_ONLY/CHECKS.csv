@@ -1,0 +1,367 @@
+check,status,detail
+baseline unique policy cases,PASS,126
+baseline metadata std bytes preserved,PASS,all 3 stored std values unchanged
+candidate_off unique policy cases,PASS,126
+candidate_off metadata std bytes preserved,PASS,all 3 stored std values unchanged
+candidate_on unique policy cases,PASS,126
+candidate_on metadata std bytes preserved,PASS,all 3 stored std values unchanged
+policy scenario identities equal,PASS,same newly generated synthetic cases
+policy candidate observer toggle parity,PASS,byte-identical direct policy result JSONL
+inactive_D_ordinary active mask preserved,PASS,new interface records requested quality domain
+inactive_D_sentinel999 active mask preserved,PASS,new interface records requested quality domain
+inactive_D_nan active mask preserved,PASS,new interface records requested quality domain
+inactive_D_inf active mask preserved,PASS,new interface records requested quality domain
+inactive_D_negative_inf active mask preserved,PASS,new interface records requested quality domain
+inactive_D_zero active mask preserved,PASS,new interface records requested quality domain
+inactive_D_negative active mask preserved,PASS,new interface records requested quality domain
+active_N_nan active mask preserved,PASS,new interface records requested quality domain
+active_N_inf active mask preserved,PASS,new interface records requested quality domain
+active_N_zero active mask preserved,PASS,new interface records requested quality domain
+active_N_negative active mask preserved,PASS,new interface records requested quality domain
+active_E_nan active mask preserved,PASS,new interface records requested quality domain
+active_E_inf active mask preserved,PASS,new interface records requested quality domain
+active_E_zero active mask preserved,PASS,new interface records requested quality domain
+active_E_negative active mask preserved,PASS,new interface records requested quality domain
+empty_active_domain active mask preserved,PASS,new interface records requested quality domain
+single_E_active active mask preserved,PASS,new interface records requested quality domain
+active_std_at_10 active mask preserved,PASS,new interface records requested quality domain
+active_std_above_10 active mask preserved,PASS,new interface records requested quality domain
+other_quality_remains_1p5 active mask preserved,PASS,new interface records requested quality domain
+time_quality_remains_1p5 active mask preserved,PASS,new interface records requested quality domain
+covariance_missing_remains_1p5 active mask preserved,PASS,new interface records requested quality domain
+provider_unavailable_rejected active mask preserved,PASS,new interface records requested quality domain
+invalid_source_rejected active mask preserved,PASS,new interface records requested quality domain
+oim_masks_lsim_change active mask preserved,PASS,new interface records requested quality domain
+cap_masks_lsim_change active mask preserved,PASS,new interface records requested quality domain
+sa_off active mask preserved,PASS,new interface records requested quality domain
+source_off active mask preserved,PASS,new interface records requested quality domain
+lsim_off active mask preserved,PASS,new interface records requested quality domain
+mode_off active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_receiver_position_nominal active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_receiver_position_nominal old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_receiver_position_high_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_receiver_position_high_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_receiver_position_nan_N active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_receiver_position_nan_N old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_receiver_position_nan_E active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_receiver_position_nan_E old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_receiver_position_nan_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_receiver_position_nan_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_receiver_position_inf_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_receiver_position_inf_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_receiver_position_zero_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_receiver_position_zero_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_receiver_position_negative_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_receiver_position_negative_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_receiver_velocity_nominal active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_receiver_velocity_nominal old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_receiver_velocity_high_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_receiver_velocity_high_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_receiver_velocity_nan_N active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_receiver_velocity_nan_N old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_receiver_velocity_nan_E active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_receiver_velocity_nan_E old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_receiver_velocity_nan_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_receiver_velocity_nan_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_receiver_velocity_inf_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_receiver_velocity_inf_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_receiver_velocity_zero_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_receiver_velocity_zero_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_receiver_velocity_negative_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_receiver_velocity_negative_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_dual_antenna_yaw_nominal active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_dual_antenna_yaw_nominal old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_dual_antenna_yaw_high_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_dual_antenna_yaw_high_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_dual_antenna_yaw_nan_N active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_dual_antenna_yaw_nan_N old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_dual_antenna_yaw_nan_E active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_dual_antenna_yaw_nan_E old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_dual_antenna_yaw_nan_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_dual_antenna_yaw_nan_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_dual_antenna_yaw_inf_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_dual_antenna_yaw_inf_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_dual_antenna_yaw_zero_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_dual_antenna_yaw_zero_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_dual_antenna_yaw_negative_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_dual_antenna_yaw_negative_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_raw_doppler_velocity_nominal active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_raw_doppler_velocity_nominal old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_raw_doppler_velocity_high_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_raw_doppler_velocity_high_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_raw_doppler_velocity_nan_N active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_raw_doppler_velocity_nan_N old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_raw_doppler_velocity_nan_E active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_raw_doppler_velocity_nan_E old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_raw_doppler_velocity_nan_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_raw_doppler_velocity_nan_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_raw_doppler_velocity_inf_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_raw_doppler_velocity_inf_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_raw_doppler_velocity_zero_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_raw_doppler_velocity_zero_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_raw_doppler_velocity_negative_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_raw_doppler_velocity_negative_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_go2_attitude_roll_pitch_nominal active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_go2_attitude_roll_pitch_nominal old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_go2_attitude_roll_pitch_high_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_go2_attitude_roll_pitch_high_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_go2_attitude_roll_pitch_nan_N active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_go2_attitude_roll_pitch_nan_N old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_go2_attitude_roll_pitch_nan_E active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_go2_attitude_roll_pitch_nan_E old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_go2_attitude_roll_pitch_nan_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_go2_attitude_roll_pitch_nan_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_go2_attitude_roll_pitch_inf_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_go2_attitude_roll_pitch_inf_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_go2_attitude_roll_pitch_zero_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_go2_attitude_roll_pitch_zero_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_go2_attitude_roll_pitch_negative_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_go2_attitude_roll_pitch_negative_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_go2_horizontal_velocity_nominal active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_go2_horizontal_velocity_nominal old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_go2_horizontal_velocity_high_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_go2_horizontal_velocity_high_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_go2_horizontal_velocity_nan_N active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_go2_horizontal_velocity_nan_N old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_go2_horizontal_velocity_nan_E active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_go2_horizontal_velocity_nan_E old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_go2_horizontal_velocity_nan_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_go2_horizontal_velocity_nan_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_go2_horizontal_velocity_inf_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_go2_horizontal_velocity_inf_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_go2_horizontal_velocity_zero_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_go2_horizontal_velocity_zero_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_n6b_go2_horizontal_velocity_negative_D active mask preserved,PASS,new interface records requested quality domain
+control3d_n6b_go2_horizontal_velocity_negative_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_receiver_position_nominal active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_receiver_position_nominal old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_receiver_position_high_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_receiver_position_high_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_receiver_position_nan_N active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_receiver_position_nan_N old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_receiver_position_nan_E active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_receiver_position_nan_E old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_receiver_position_nan_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_receiver_position_nan_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_receiver_position_inf_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_receiver_position_inf_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_receiver_position_zero_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_receiver_position_zero_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_receiver_position_negative_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_receiver_position_negative_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_receiver_velocity_nominal active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_receiver_velocity_nominal old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_receiver_velocity_high_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_receiver_velocity_high_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_receiver_velocity_nan_N active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_receiver_velocity_nan_N old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_receiver_velocity_nan_E active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_receiver_velocity_nan_E old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_receiver_velocity_nan_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_receiver_velocity_nan_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_receiver_velocity_inf_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_receiver_velocity_inf_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_receiver_velocity_zero_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_receiver_velocity_zero_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_receiver_velocity_negative_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_receiver_velocity_negative_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_dual_antenna_yaw_nominal active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_dual_antenna_yaw_nominal old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_dual_antenna_yaw_high_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_dual_antenna_yaw_high_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_dual_antenna_yaw_nan_N active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_dual_antenna_yaw_nan_N old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_dual_antenna_yaw_nan_E active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_dual_antenna_yaw_nan_E old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_dual_antenna_yaw_nan_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_dual_antenna_yaw_nan_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_dual_antenna_yaw_inf_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_dual_antenna_yaw_inf_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_dual_antenna_yaw_zero_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_dual_antenna_yaw_zero_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_dual_antenna_yaw_negative_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_dual_antenna_yaw_negative_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_raw_doppler_velocity_nominal active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_raw_doppler_velocity_nominal old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_raw_doppler_velocity_high_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_raw_doppler_velocity_high_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_raw_doppler_velocity_nan_N active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_raw_doppler_velocity_nan_N old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_raw_doppler_velocity_nan_E active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_raw_doppler_velocity_nan_E old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_raw_doppler_velocity_nan_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_raw_doppler_velocity_nan_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_raw_doppler_velocity_inf_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_raw_doppler_velocity_inf_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_raw_doppler_velocity_zero_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_raw_doppler_velocity_zero_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_raw_doppler_velocity_negative_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_raw_doppler_velocity_negative_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_go2_attitude_roll_pitch_nominal active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_go2_attitude_roll_pitch_nominal old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_go2_attitude_roll_pitch_high_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_go2_attitude_roll_pitch_high_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_go2_attitude_roll_pitch_nan_N active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_go2_attitude_roll_pitch_nan_N old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_go2_attitude_roll_pitch_nan_E active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_go2_attitude_roll_pitch_nan_E old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_go2_attitude_roll_pitch_nan_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_go2_attitude_roll_pitch_nan_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_go2_attitude_roll_pitch_inf_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_go2_attitude_roll_pitch_inf_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_go2_attitude_roll_pitch_zero_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_go2_attitude_roll_pitch_zero_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_go2_attitude_roll_pitch_negative_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_go2_attitude_roll_pitch_negative_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_go2_horizontal_velocity_nominal active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_go2_horizontal_velocity_nominal old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_go2_horizontal_velocity_high_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_go2_horizontal_velocity_high_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_go2_horizontal_velocity_nan_N active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_go2_horizontal_velocity_nan_N old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_go2_horizontal_velocity_nan_E active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_go2_horizontal_velocity_nan_E old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_go2_horizontal_velocity_nan_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_go2_horizontal_velocity_nan_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_go2_horizontal_velocity_inf_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_go2_horizontal_velocity_inf_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_go2_horizontal_velocity_zero_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_go2_horizontal_velocity_zero_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+control3d_legacy_go2_horizontal_velocity_negative_D active mask preserved,PASS,new interface records requested quality domain
+control3d_legacy_go2_horizontal_velocity_negative_D old 3D scientific result,PASS,all weights/scores/reasons/acceptance/statistic fields exact; metadata-summary extension separate
+inactive_D_ordinary inactive D has no effect,PASS,nominal N/E; original D retained
+inactive_D_sentinel999 inactive D has no effect,PASS,nominal N/E; original D retained
+inactive_D_nan inactive D has no effect,PASS,nominal N/E; original D retained
+inactive_D_inf inactive D has no effect,PASS,nominal N/E; original D retained
+inactive_D_negative_inf inactive D has no effect,PASS,nominal N/E; original D retained
+inactive_D_zero inactive D has no effect,PASS,nominal N/E; original D retained
+inactive_D_negative inactive D has no effect,PASS,nominal N/E; original D retained
+six old inactive-domain counterexamples retained,PASS,999/NaN/Inf/-Inf/zero/negative inactive D
+active_N_nan invalid active value remains protected,PASS,original std-invalid protection; not forced nominal or forced reject
+active_N_inf invalid active value remains protected,PASS,original std-invalid protection; not forced nominal or forced reject
+active_N_zero invalid active value remains protected,PASS,original std-invalid protection; not forced nominal or forced reject
+active_N_negative invalid active value remains protected,PASS,original std-invalid protection; not forced nominal or forced reject
+active_E_nan invalid active value remains protected,PASS,original std-invalid protection; not forced nominal or forced reject
+active_E_inf invalid active value remains protected,PASS,original std-invalid protection; not forced nominal or forced reject
+active_E_zero invalid active value remains protected,PASS,original std-invalid protection; not forced nominal or forced reject
+active_E_negative invalid active value remains protected,PASS,original std-invalid protection; not forced nominal or forced reject
+empty_active_domain preserves protection,PASS,no collapse of unrelated quality factors to 1
+other_quality_remains_1p5 preserves protection,PASS,no collapse of unrelated quality factors to 1
+time_quality_remains_1p5 preserves protection,PASS,no collapse of unrelated quality factors to 1
+covariance_missing_remains_1p5 preserves protection,PASS,no collapse of unrelated quality factors to 1
+empty domain not valid,PASS,finiteStd empty=false; original n6b protection path
+at least one active axis valid,PASS,inactive N NaN and D Inf ignored
+active threshold remains strict,PASS,"10 and nextafter(10,+Inf)"
+provider_unavailable_rejected,PASS,other source-validity decisions remain
+invalid_source_rejected,PASS,other source-validity decisions remain
+oim_masks_lsim_change,PASS,LSIM changes but final R multiplier does not
+cap_masks_lsim_change,PASS,LSIM changes but final R multiplier does not
+sa_off,PASS,disabled path unchanged
+source_off,PASS,disabled path unchanged
+lsim_off,PASS,disabled path unchanged
+mode_off,PASS,disabled path unchanged
+baseline/hv2d_cap_masked stream complete,PASS,new fixture log read once; no real events read
+baseline/hv2d_cap_masked one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+baseline/hv2d_inf_D stream complete,PASS,new fixture log read once; no real events read
+baseline/hv2d_inf_D one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+baseline/hv2d_nan_D stream complete,PASS,new fixture log read once; no real events read
+baseline/hv2d_nan_D one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+baseline/hv2d_ordinary_D stream complete,PASS,new fixture log read once; no real events read
+baseline/hv2d_ordinary_D one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+baseline/hv2d_quality_1p5 stream complete,PASS,new fixture log read once; no real events read
+baseline/hv2d_quality_1p5 one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+baseline/hv2d_sa_off stream complete,PASS,new fixture log read once; no real events read
+baseline/hv2d_sa_off one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+baseline/hv2d_sentinel999 stream complete,PASS,new fixture log read once; no real events read
+baseline/hv2d_sentinel999 one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+baseline/hv2d_source_off stream complete,PASS,new fixture log read once; no real events read
+baseline/hv2d_source_off one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+baseline/hv3d_ordinary_D stream complete,PASS,new fixture log read once; no real events read
+baseline/hv3d_ordinary_D one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+baseline/hv3d_sentinel_D stream complete,PASS,new fixture log read once; no real events read
+baseline/hv3d_sentinel_D one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+candidate_on/hv2d_cap_masked stream complete,PASS,new fixture log read once; no real events read
+candidate_on/hv2d_cap_masked one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+hv2d_cap_masked full P observation coverage,PASS,three synthetic newImuProcess ends; common diagnostic exercised
+hv2d_cap_masked candidate identity,PASS,common layer installed once
+hv2d_cap_masked other-source default mask,PASS,other source stays three-dimensional
+candidate_on/hv2d_inf_D stream complete,PASS,new fixture log read once; no real events read
+candidate_on/hv2d_inf_D one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+hv2d_inf_D full P observation coverage,PASS,three synthetic newImuProcess ends; common diagnostic exercised
+hv2d_inf_D candidate identity,PASS,common layer installed once
+hv2d_inf_D other-source default mask,PASS,other source stays three-dimensional
+candidate_on/hv2d_nan_D stream complete,PASS,new fixture log read once; no real events read
+candidate_on/hv2d_nan_D one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+hv2d_nan_D full P observation coverage,PASS,three synthetic newImuProcess ends; common diagnostic exercised
+hv2d_nan_D candidate identity,PASS,common layer installed once
+hv2d_nan_D other-source default mask,PASS,other source stays three-dimensional
+candidate_on/hv2d_ordinary_D stream complete,PASS,new fixture log read once; no real events read
+candidate_on/hv2d_ordinary_D one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+hv2d_ordinary_D full P observation coverage,PASS,three synthetic newImuProcess ends; common diagnostic exercised
+hv2d_ordinary_D candidate identity,PASS,common layer installed once
+hv2d_ordinary_D other-source default mask,PASS,other source stays three-dimensional
+candidate_on/hv2d_quality_1p5 stream complete,PASS,new fixture log read once; no real events read
+candidate_on/hv2d_quality_1p5 one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+hv2d_quality_1p5 full P observation coverage,PASS,three synthetic newImuProcess ends; common diagnostic exercised
+hv2d_quality_1p5 candidate identity,PASS,common layer installed once
+hv2d_quality_1p5 other-source default mask,PASS,other source stays three-dimensional
+candidate_on/hv2d_sa_off stream complete,PASS,new fixture log read once; no real events read
+candidate_on/hv2d_sa_off one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+hv2d_sa_off full P observation coverage,PASS,three synthetic newImuProcess ends; common diagnostic exercised
+hv2d_sa_off candidate identity,PASS,common layer installed once
+hv2d_sa_off other-source default mask,PASS,other source stays three-dimensional
+candidate_on/hv2d_sentinel999 stream complete,PASS,new fixture log read once; no real events read
+candidate_on/hv2d_sentinel999 one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+hv2d_sentinel999 full P observation coverage,PASS,three synthetic newImuProcess ends; common diagnostic exercised
+hv2d_sentinel999 candidate identity,PASS,common layer installed once
+hv2d_sentinel999 other-source default mask,PASS,other source stays three-dimensional
+candidate_on/hv2d_source_off stream complete,PASS,new fixture log read once; no real events read
+candidate_on/hv2d_source_off one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+hv2d_source_off full P observation coverage,PASS,three synthetic newImuProcess ends; common diagnostic exercised
+hv2d_source_off candidate identity,PASS,common layer installed once
+hv2d_source_off other-source default mask,PASS,other source stays three-dimensional
+candidate_on/hv3d_ordinary_D stream complete,PASS,new fixture log read once; no real events read
+candidate_on/hv3d_ordinary_D one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+hv3d_ordinary_D full P observation coverage,PASS,three synthetic newImuProcess ends; common diagnostic exercised
+hv3d_ordinary_D candidate identity,PASS,common layer installed once
+hv3d_ordinary_D other-source default mask,PASS,other source stays three-dimensional
+candidate_on/hv3d_sentinel_D stream complete,PASS,new fixture log read once; no real events read
+candidate_on/hv3d_sentinel_D one HV policy event,PASS,"actual GIEngine helper and policy, not duplicated test formula"
+hv3d_sentinel_D full P observation coverage,PASS,three synthetic newImuProcess ends; common diagnostic exercised
+hv3d_sentinel_D candidate identity,PASS,common layer installed once
+hv3d_sentinel_D other-source default mask,PASS,other source stays three-dimensional
+hv2d_cap_masked observation no interference,PASS,full state/quaternion/Cbn/bias/scale/P and scientific counters exact
+hv2d_cap_masked actual matrix dimension sets mask,PASS,"actual H/R, not the vertical-disabled flag alone"
+hv2d_inf_D observation no interference,PASS,full state/quaternion/Cbn/bias/scale/P and scientific counters exact
+hv2d_inf_D actual matrix dimension sets mask,PASS,"actual H/R, not the vertical-disabled flag alone"
+hv2d_nan_D observation no interference,PASS,full state/quaternion/Cbn/bias/scale/P and scientific counters exact
+hv2d_nan_D actual matrix dimension sets mask,PASS,"actual H/R, not the vertical-disabled flag alone"
+hv2d_ordinary_D observation no interference,PASS,full state/quaternion/Cbn/bias/scale/P and scientific counters exact
+hv2d_ordinary_D actual matrix dimension sets mask,PASS,"actual H/R, not the vertical-disabled flag alone"
+hv2d_quality_1p5 observation no interference,PASS,full state/quaternion/Cbn/bias/scale/P and scientific counters exact
+hv2d_quality_1p5 actual matrix dimension sets mask,PASS,"actual H/R, not the vertical-disabled flag alone"
+hv2d_sa_off observation no interference,PASS,full state/quaternion/Cbn/bias/scale/P and scientific counters exact
+hv2d_sa_off actual matrix dimension sets mask,PASS,"actual H/R, not the vertical-disabled flag alone"
+hv2d_sentinel999 observation no interference,PASS,full state/quaternion/Cbn/bias/scale/P and scientific counters exact
+hv2d_sentinel999 actual matrix dimension sets mask,PASS,"actual H/R, not the vertical-disabled flag alone"
+hv2d_sentinel999 sentinel still 999,PASS,not rewritten to zero
+hv2d_source_off observation no interference,PASS,full state/quaternion/Cbn/bias/scale/P and scientific counters exact
+hv2d_source_off actual matrix dimension sets mask,PASS,"actual H/R, not the vertical-disabled flag alone"
+hv3d_ordinary_D observation no interference,PASS,full state/quaternion/Cbn/bias/scale/P and scientific counters exact
+hv3d_ordinary_D actual matrix dimension sets mask,PASS,"actual H/R, not the vertical-disabled flag alone"
+hv3d_sentinel_D observation no interference,PASS,full state/quaternion/Cbn/bias/scale/P and scientific counters exact
+hv3d_sentinel_D actual matrix dimension sets mask,PASS,"actual H/R, not the vertical-disabled flag alone"
+hv3d_sentinel_D sentinel still 999,PASS,not rewritten to zero
+hv2d_ordinary_D actual 2D state invariant,PASS,only inactive provider D differs; old positiveStd preprocessing retained
+hv2d_nan_D actual 2D state invariant,PASS,only inactive provider D differs; old positiveStd preprocessing retained
+hv2d_inf_D actual 2D state invariant,PASS,only inactive provider D differs; old positiveStd preprocessing retained
+hv3d_ordinary_D baseline negative control,PASS,expected unchanged scientific state and counters
+hv3d_sentinel_D baseline negative control,PASS,expected unchanged scientific state and counters
+hv2d_sa_off baseline negative control,PASS,expected unchanged scientific state and counters
+hv2d_source_off baseline negative control,PASS,expected unchanged scientific state and counters
+hv2d_ordinary_D baseline negative control,PASS,expected unchanged scientific state and counters
+hv2d_cap_masked baseline negative control,PASS,expected unchanged scientific state and counters
+hv2d_sentinel999 active-domain change reaches update,PASS,synthetic positive control only; no real performance inference
+hv2d_quality_1p5 active-domain change reaches update,PASS,synthetic positive control only; no real performance inference
+hv2d_inf_D active-domain change reaches update,PASS,synthetic positive control only; no real performance inference
+actual helper cap masking,PASS,same actual effective R despite changed metadata LSIM

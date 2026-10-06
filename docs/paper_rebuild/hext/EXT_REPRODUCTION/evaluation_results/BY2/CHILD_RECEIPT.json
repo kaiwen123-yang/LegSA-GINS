@@ -1,0 +1,22 @@
+{
+  "schema": "ext_reproduction.heading_evaluation.v1",
+  "status": "NUMERICALLY_COMPLETED",
+  "evaluator_child_invocations": 1,
+  "reference_open_count": 1,
+  "reference_open_attempts": 1,
+  "reference_hash_matched": true,
+  "data_mode": "real_raw_offline_heading_evaluation",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "new_native_calls": 0,
+  "reference_sha256_observed": "ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c",
+  "new_method_count": 3,
+  "reused_method_count": 4,
+  "quoted_original_metric_count": 4,
+  "reuse_limitations_count": 0,
+  "original_paired_epochs": 1509,
+  "new_heading_error_rows": 4110,
+  "common_support_result_rows": 150,
+  "common_support_groups": 54,
+  "error_series_sha256": "e1b3c947d070da2f5776aa1812685b606a5cb989fd2b0b706c47df6e966a3310"
+}

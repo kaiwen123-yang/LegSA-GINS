@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "check": "197_and_197_0_match",
+      "status": "PASS"
+    },
+    {
+      "check": "different_actual_time_no_match",
+      "status": "PASS"
+    },
+    {
+      "check": "different_GNSS_identity_no_match",
+      "status": "PASS"
+    },
+    {
+      "check": "different_source_no_match",
+      "status": "PASS"
+    },
+    {
+      "check": "refuse_None",
+      "status": "PASS"
+    },
+    {
+      "check": "refuse_UNKNOWN",
+      "status": "PASS"
+    },
+    {
+      "check": "refuse_NaN",
+      "status": "PASS"
+    },
+    {
+      "check": "refuse_Infinity",
+      "status": "PASS"
+    },
+    {
+      "check": "refuse_-Infinity",
+      "status": "PASS"
+    },
+    {
+      "check": "refuse_True",
+      "status": "PASS"
+    },
+    {
+      "check": "duplicate_numeric_key_refused",
+      "status": "PASS"
+    }
+  ],
+  "validation_kind": "SYNTHETIC_DERIVED_JOIN_HELPER_ONLY",
+  "new_test_script_processes": 1,
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "raw_event_payload_opens": 0,
+  "provider_reads": 0,
+  "data_mode": "synthetic_helper_validation",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "script_sha256": "3515dbcda239055ba32c05e029a1339f7f9c4a6ca48dfa37174365a2c509c37b"
+}

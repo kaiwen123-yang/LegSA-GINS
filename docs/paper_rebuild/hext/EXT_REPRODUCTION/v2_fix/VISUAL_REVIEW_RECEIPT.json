@@ -1,0 +1,51 @@
+{
+  "schema": "ext_v2.visual_review.v1",
+  "status": "ALL_THREE_FIGURES_ACTUALLY_INSPECTED_WITH_QUANTITY_BOUNDARY",
+  "figures": [
+    {
+      "sequence": "BY2",
+      "png_sha256": "7817efcf5e0ab6ca68d1d85846d7b6891ae6280f1b3d0e974024774d77c5773f",
+      "pixels": [
+        4200,
+        4620
+      ],
+      "actual_visual_inspection": true,
+      "findings": "Native projected-heading errors include large jumps and EXT03 multi-metre baseline excursions; invalid status gaps remain visible.",
+      "gap_and_wrap_boundaries_not_bridged": true,
+      "quantity_caption_required": "Panel(a) legacy Body yaw field is fixed lateral-baseline projected heading; black reference is commercial fused Euler yaw, not independent truth",
+      "scientific_source_or_saved_errors_changed": false
+    },
+    {
+      "sequence": "BY2H",
+      "png_sha256": "5e2ba62cdc402ea88ad6e3aba1de82749997682958b9d842efe06b0afcb9b2ec",
+      "pixels": [
+        4200,
+        4620
+      ],
+      "actual_visual_inspection": true,
+      "findings": "Whole-window errors include frequent candidate flips and long EXT03 invalid support; baseline plot retains multi-metre extrema.",
+      "gap_and_wrap_boundaries_not_bridged": true,
+      "quantity_caption_required": "Panel(a) legacy Body yaw field is fixed lateral-baseline projected heading; black reference is commercial fused Euler yaw, not independent truth",
+      "scientific_source_or_saved_errors_changed": false
+    },
+    {
+      "sequence": "BY2O",
+      "png_sha256": "c84a9893828b6be685afaae426a24175105ee3dc2a9486d83784798905e9e0d1",
+      "pixels": [
+        4200,
+        4620
+      ],
+      "actual_visual_inspection": true,
+      "findings": "Native/invalid/fixed lanes expose extensive unavailable EXT03 intervals; original baseline-length excursions near 15 m remain visible.",
+      "gap_and_wrap_boundaries_not_bridged": true,
+      "quantity_caption_required": "Panel(a) legacy Body yaw field is fixed lateral-baseline projected heading; black reference is commercial fused Euler yaw, not independent truth",
+      "scientific_source_or_saved_errors_changed": false
+    }
+  ],
+  "extra_crop_used_for_axis_legibility": "BY2H/LEFT_AXIS_INSPECTION_ONLY; proves full 300/200/100 ticks exist in original; crop is not published figure",
+  "native_or_evaluator_calls": 0,
+  "final_stage_files": 328,
+  "final_stage_logical_bytes": 113306700,
+  "final_stage_ext4_allocated_bytes": 114061312,
+  "captured_utc": "2026-10-04T06:27:05.483483+00:00"
+}

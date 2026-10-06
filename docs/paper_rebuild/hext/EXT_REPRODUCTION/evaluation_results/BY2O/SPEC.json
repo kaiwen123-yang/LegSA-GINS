@@ -1,0 +1,101 @@
+{
+  "schema": "ext_reproduction.heading_evaluation.v1",
+  "sequence_id": "BY2O",
+  "preparation_commit": "7514b562e44b1c8b40aaa55a2f5214797e8aa8f5",
+  "source_pins": {
+    "src/legsa_gins/paper_rebuild/hext/hx02_heading_evaluation.py": "eedb3faf56ccffca222d915c401d3075dc64583ce68a10f08add9f8b705fa994",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": "85112d34e27f1fa8c3043bdcdeb2f418232cd2fffacb40cab3f387f179db6c9b",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_evaluation.py": "4032c5f78df9dd9947a7b8e7dd15b20c97bce47f4ae1d6866d92d637129a3186",
+    "docs/paper_rebuild/hext/EXT_REPRODUCTION/EVALUATION_PROTOCOL.md": "9ec6c297f9b3d8aa5b8611a109c5f6e719847716e66546c7bdf8e9092458e22c"
+  },
+  "input_manifest": "<EXT_REPRO_ROOT>/inputs/BY2O/INPUT.json",
+  "input_manifest_sha256": "17181865614a6e4b250e9ab20fd3eae81ad9f289ef767f1da0f25c83e9f96866",
+  "pair_count": 2231,
+  "base_time": 1772780400.0,
+  "window": [
+    3186.0,
+    3563.0
+  ],
+  "trace": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/trace_vrtk2_a87c6e_2026-03-06-07-52-22_minimal.csv",
+  "trace_sha256": "4f7b3007c6a0b43ce1b0fb4908f23c042891154b4adbc7af4c3d8a47ca363cd9",
+  "methods": [
+    {
+      "method_id": "EXT01",
+      "run_id": "BY2O__EXT01__RAW_REPRO_V1",
+      "run_path": "<EXT_REPRO_ROOT>/runs/BY2O__EXT01__RAW_REPRO_V1/RUN.json",
+      "run_sha256": "c47b7497c8c1e68de8e2b004cc25d480a5fb645ece4e66c2fae50b5409a7ab9d",
+      "heading_table": "<EXT_REPRO_ROOT>/runs/BY2O__EXT01__RAW_REPRO_V1/HEADING.csv",
+      "heading_table_sha256": "489146b71243f7d988af153117bdcba88271a88a577ac497da0d07291b430fcf",
+      "native_status": "COMPLETED",
+      "native_code_commit": "9a844d518c559ca33d852a1c6d81f0f13df0ea59"
+    },
+    {
+      "method_id": "EXT02",
+      "run_id": "BY2O__EXT02__RAW_REPRO_V1",
+      "run_path": "<EXT_REPRO_ROOT>/runs/BY2O__EXT02__RAW_REPRO_V1/RUN.json",
+      "run_sha256": "54858674c9f75aa92f4c9ebdd70604978f87317b18d4decf18e1e58337fa22e7",
+      "heading_table": "<EXT_REPRO_ROOT>/runs/BY2O__EXT02__RAW_REPRO_V1/HEADING.csv",
+      "heading_table_sha256": "dfcb64f857da129557aed38b3326a81b986ca35bd3582f1d0c90f8f95ea50f71",
+      "native_status": "COMPLETED",
+      "native_code_commit": "9a844d518c559ca33d852a1c6d81f0f13df0ea59"
+    },
+    {
+      "method_id": "EXT03",
+      "run_id": "BY2O__EXT03__RAW_REPRO_V1",
+      "run_path": "<EXT_REPRO_ROOT>/runs/BY2O__EXT03__RAW_REPRO_V1/RUN.json",
+      "run_sha256": "5589580bd84b60587e73903472c41670c5cb8ec968fc80460c5a5bac99900080",
+      "heading_table": "<EXT_REPRO_ROOT>/runs/BY2O__EXT03__RAW_REPRO_V1/HEADING.csv",
+      "heading_table_sha256": "68646a9dd774217eb08bef0647a60a50bb3568fa9a1331bb2de523f67f9687a7",
+      "native_status": "COMPLETED",
+      "native_code_commit": "9a844d518c559ca33d852a1c6d81f0f13df0ea59"
+    }
+  ],
+  "reused_variants": [
+    {
+      "method_id": "RTKLIB_V0",
+      "spec_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0/eval/SPEC.json",
+      "spec_sha256": "d2459b88dedfc313e95a1176c4e2219a10025d8d676db597031c4fc623976a38",
+      "heading_table": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0/HEADING_TABLE.csv",
+      "heading_table_sha256": "8a645a0b7a3be563d91120bbb062a3dd3304d97916df0a00966b28b67e073a56",
+      "metrics_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0/eval/OUTPUT/HEADING_METRICS.json",
+      "error_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "error_recorded_pin": null
+    },
+    {
+      "method_id": "RTKLIB_V0E",
+      "spec_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0E/eval/SPEC.json",
+      "spec_sha256": "79ae6a13a22e64946191bd2e5038b4c36d497ed6334ece53cf25029b9fbf1f44",
+      "heading_table": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0E/HEADING_TABLE.csv",
+      "heading_table_sha256": "051b4e81ec46a06315e2b6d5bd35f4045364e1a9751fcd64f2e5a128865079d2",
+      "metrics_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0E/eval/OUTPUT/HEADING_METRICS.json",
+      "error_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0E/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "error_recorded_pin": null
+    },
+    {
+      "method_id": "RTKLIB_V1",
+      "spec_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V1/eval/SPEC.json",
+      "spec_sha256": "c736e22c026b9000244782e358def5f45fd1aae31c9ae8fd3dbce8d0f6ce6263",
+      "heading_table": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V1/HEADING_TABLE.csv",
+      "heading_table_sha256": "66e0330d59a351a7e12b7dff34543d33e32a905524d529bb81fbe30067ac9ad7",
+      "metrics_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V1/eval/OUTPUT/HEADING_METRICS.json",
+      "error_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V1/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "error_recorded_pin": null
+    },
+    {
+      "method_id": "RTKLIB_V2",
+      "spec_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V2/eval/SPEC.json",
+      "spec_sha256": "1890996c9ba5ef1c216aca2571476066b59571b65f63c8a19c7a23cc72a28462",
+      "heading_table": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V2/HEADING_TABLE.csv",
+      "heading_table_sha256": "4637c6a8f9b432fc24b97396b667f8f002d1c5efe65813cd46a2e228a6a94408",
+      "metrics_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V2/eval/OUTPUT/HEADING_METRICS.json",
+      "error_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V2/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "error_recorded_pin": null
+    }
+  ],
+  "v3_table": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/NATURAL_C00_ALL_CONFIGS.csv",
+  "data_mode": "real_raw_offline_heading_evaluation",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "trace_used_online": false,
+  "outdir": "<EXT_REPRO_ROOT>/evaluation/BY2O"
+}

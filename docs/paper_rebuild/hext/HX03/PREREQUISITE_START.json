@@ -1,0 +1,15 @@
+{
+  "utc": "2026-09-26T10:46:33.579860+00:00",
+  "head": "3c36d776b5c6826d156414a34edc564b341d17ae",
+  "sealed_count": 65,
+  "sealed_csv_count": 59,
+  "sealed_changed": [],
+  "method_body_count": 423,
+  "method_body_changed": [],
+  "legsa_native": 0,
+  "legsa_evaluation": 0,
+  "external_native": 0,
+  "external_evaluation": 0,
+  "reference_opens": 0,
+  "status": "PASS"
+}

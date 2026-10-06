@@ -1,0 +1,1659 @@
+{
+  "slide_count": 100,
+  "slides": [
+    {
+      "page": 1,
+      "title": "短基线双天线 GNSS/INS 四足机器人导航研究",
+      "kind": "cover"
+    },
+    {
+      "page": 2,
+      "title": "报告结构",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/PPT_CONTENT_BLUEPRINT_52.json"
+      ]
+    },
+    {
+      "page": 3,
+      "title": "实验平台与真实安装",
+      "kind": "content"
+    },
+    {
+      "page": 4,
+      "title": "机体航向与运动方向",
+      "kind": "content",
+      "sources": [
+        "paper_package/gpss_v0/manuscript_source.md"
+      ]
+    },
+    {
+      "page": 5,
+      "title": "研究问题与验证路径",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/CLAIM_EVIDENCE_MAP.csv"
+      ]
+    },
+    {
+      "page": 6,
+      "title": "短基线几何与评价物理点",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md",
+        "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/SEGMENTED_RESULTS/README.md"
+      ]
+    },
+    {
+      "page": 7,
+      "title": "方法与输入层次",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/04_COMPARISON_INVENTORY_AND_FAIRNESS_STORY.md"
+      ]
+    },
+    {
+      "page": 8,
+      "title": "GNSS/INS 与多来源辅助结构",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/METHOD_SOURCE_MAP.csv",
+        "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md"
+      ]
+    },
+    {
+      "page": 9,
+      "title": "六类观测与真实来源",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md"
+      ]
+    },
+    {
+      "page": 10,
+      "title": "基线投影方向与机体航向",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md",
+        "docs/paper_rebuild/EXT_MEASURAND_20261004/README.md"
+      ]
+    },
+    {
+      "page": 11,
+      "title": "航向构造的时间与状态准入",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md"
+      ]
+    },
+    {
+      "page": 12,
+      "title": "标量航向的残差门限",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md"
+      ]
+    },
+    {
+      "page": 13,
+      "title": "误差状态与惯导更新",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md"
+      ]
+    },
+    {
+      "page": 14,
+      "title": "两条 GNSS 速度来源",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md"
+      ]
+    },
+    {
+      "page": 15,
+      "title": "机器人水平速度的姿态依赖",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md"
+      ]
+    },
+    {
+      "page": 16,
+      "title": "观测有效性与实际更新顺序",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md",
+        "docs/paper_rebuild/V3_STORY_20261004/03_SELECTION_HISTORY_AND_FULL_MATRIX_RESULTS.md"
+      ]
+    },
+    {
+      "page": 17,
+      "title": "来源协方差膨胀",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md"
+      ]
+    },
+    {
+      "page": 18,
+      "title": "估计输出与共享参考的关系",
+      "kind": "content",
+      "sources": [
+        "paper_package/gpss_v0/manuscript_source.md",
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/OFFICIAL_VENUE_AND_ORIGINAL_INPUT_BOUNDARY.md"
+      ]
+    },
+    {
+      "page": 19,
+      "title": "三条实录与评价窗口",
+      "kind": "content",
+      "sources": [
+        "paper_package/gpss_v0/manuscript_source.md"
+      ]
+    },
+    {
+      "page": 20,
+      "title": "完整实验矩阵的构成",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/CURRENT_STORY_INDEX.md",
+        "docs/paper_rebuild/V3_STORY_20261004/03_SELECTION_HISTORY_AND_FULL_MATRIX_RESULTS.md"
+      ]
+    },
+    {
+      "page": 21,
+      "title": "三序列的主结果",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/NATURAL_METHOD_RESULTS.csv"
+      ]
+    },
+    {
+      "page": 22,
+      "title": "BY2：原始轨迹与参考路径",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_02/R03_BY2_original_trajectory.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_02/R03_BY2_original_trajectory.png"
+    },
+    {
+      "page": 23,
+      "title": "BY2：全窗位置与航向",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_01/R01_BY2_full_window.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_01/R01_BY2_full_window.png"
+    },
+    {
+      "page": 24,
+      "title": "BY2H：全窗位置与航向",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_01/R01_BY2H_full_window.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_01/R01_BY2H_full_window.png"
+    },
+    {
+      "page": 25,
+      "title": "BY2O：全窗位置与航向",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_01/R01_BY2O_full_window.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_01/R01_BY2O_full_window.png"
+    },
+    {
+      "page": 26,
+      "title": "BY2：三个姿态分量",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_02/R04_BY2_attitude_errors.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_02/R04_BY2_attitude_errors.png"
+    },
+    {
+      "page": 27,
+      "title": "BY2H：三个姿态分量",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_02/R04_BY2H_attitude_errors.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_02/R04_BY2H_attitude_errors.png"
+    },
+    {
+      "page": 28,
+      "title": "BY2O：三个姿态分量",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_02/R04_BY2O_attitude_errors.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_02/R04_BY2O_attitude_errors.png"
+    },
+    {
+      "page": 29,
+      "title": "自然实录：全部 11 个配置",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_01/R02_natural_all_11_configurations.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_01/R02_natural_all_11_configurations.png"
+    },
+    {
+      "page": 30,
+      "title": "区域结果与全窗结论",
+      "kind": "content",
+      "sources": [
+        "paper_package/gpss_v0/figures/Fig04.png"
+      ],
+      "asset": "paper_package/gpss_v0/figures/Fig04.png"
+    },
+    {
+      "page": 31,
+      "title": "航向准入：实际发生了哪些更新",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_05/R12_BY2_native_heading_decisions.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_05/R12_BY2_native_heading_decisions.png"
+    },
+    {
+      "page": 32,
+      "title": "BY2：接收机速度与航向策略的联合比较",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_05/R11_BY2_receiver_velocity_toggle.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_05/R11_BY2_receiver_velocity_toggle.png"
+    },
+    {
+      "page": 33,
+      "title": "BY2H：接收机速度与航向策略的联合比较",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_05/R11_BY2H_receiver_velocity_toggle.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_05/R11_BY2H_receiver_velocity_toggle.png"
+    },
+    {
+      "page": 34,
+      "title": "BY2O：接收机速度与航向策略的联合比较",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_05/R11_BY2O_receiver_velocity_toggle.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_05/R11_BY2O_receiver_velocity_toggle.png"
+    },
+    {
+      "page": 35,
+      "title": "完整 CORE：典型误差与尾部",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_03/R05_CORE_all_11_error_tails.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_03/R05_CORE_all_11_error_tails.png"
+    },
+    {
+      "page": 36,
+      "title": "完整 CORE：四类单组件效果",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_03/R06_CORE_single_module_paired_contrasts.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_03/R06_CORE_single_module_paired_contrasts.png"
+    },
+    {
+      "page": 37,
+      "title": "同一组件对不同量可能有相反效果",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/SINGLE_MODULE_PAIRED_DIRECTION.csv"
+      ]
+    },
+    {
+      "page": 38,
+      "title": "完整 CORE：成功与失败同报",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_03/R07_CORE_all_5951_outcomes.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_03/R07_CORE_all_5951_outcomes.png"
+    },
+    {
+      "page": 39,
+      "title": "失锁实验的两种信息条件",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/03_SELECTION_HISTORY_AND_FULL_MATRIX_RESULTS.md"
+      ]
+    },
+    {
+      "page": 40,
+      "title": "失锁扩展：全部 45 个案例",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_03/R08_ADD_all_45_conditions.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_03/R08_ADD_all_45_conditions.png"
+    },
+    {
+      "page": 41,
+      "title": "失锁时，保留哪些信息决定结果",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/03_SELECTION_HISTORY_AND_FULL_MATRIX_RESULTS.md"
+      ]
+    },
+    {
+      "page": 42,
+      "title": "IMU 缺测：保留旧结果，说明新诊断",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/README.md"
+      ]
+    },
+    {
+      "page": 43,
+      "title": "横向比较回答什么问题",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/04_COMPARISON_INVENTORY_AND_FAIRNESS_STORY.md"
+      ]
+    },
+    {
+      "page": 44,
+      "title": "BY2：动基线方向与实际支持",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/R09_BY2_moving_base_error_and_support.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/R09_BY2_moving_base_error_and_support.png"
+    },
+    {
+      "page": 45,
+      "title": "BY2H：动基线方向与实际支持",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/R09_BY2H_moving_base_error_and_support.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/R09_BY2H_moving_base_error_and_support.png"
+    },
+    {
+      "page": 46,
+      "title": "BY2O：动基线方向与实际支持",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/R09_BY2O_moving_base_error_and_support.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/R09_BY2O_moving_base_error_and_support.png"
+    },
+    {
+      "page": 47,
+      "title": "动基线：全部四种配置的结果",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/R10_moving_base_all_12_accuracy_coverage.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/R10_moving_base_all_12_accuracy_coverage.png"
+    },
+    {
+      "page": 48,
+      "title": "载波约束比较：九次修订运行",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/EXT_MEASURAND_20261004/README.md",
+        "docs/paper_rebuild/V3_STORY_20261004/FROZEN_EXTERNAL_METRICS_OVERVIEW.csv"
+      ]
+    },
+    {
+      "page": 49,
+      "title": "投影角与 Euler yaw 能解释大误差吗？",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/EXT_MEASURAND_20261004/README.md"
+      ]
+    },
+    {
+      "page": 50,
+      "title": "FGO：已实现的关键方法链",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/README.md"
+      ]
+    },
+    {
+      "page": 51,
+      "title": "OiSAM：连续协议与分段协议",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/SEGMENTED_RESULTS/README.md"
+      ]
+    },
+    {
+      "page": 52,
+      "title": "FGO：自身支持下的位置结果",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/SEGMENTED_RESULTS/README.md"
+      ]
+    },
+    {
+      "page": 53,
+      "title": "FGO：航向成绩的可报告范围",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/SEGMENTED_RESULTS/README.md"
+      ]
+    },
+    {
+      "page": 54,
+      "title": "BY2：载波方向的全窗误差",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_06/R13_BY2_raw_heading_error_support.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_06/R13_BY2_raw_heading_error_support.png"
+    },
+    {
+      "page": 55,
+      "title": "BY2H：载波方向的全窗误差",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_06/R13_BY2H_raw_heading_error_support.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_06/R13_BY2H_raw_heading_error_support.png"
+    },
+    {
+      "page": 56,
+      "title": "BY2O：载波方向的全窗误差",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_06/R13_BY2O_raw_heading_error_support.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_06/R13_BY2O_raw_heading_error_support.png"
+    },
+    {
+      "page": 57,
+      "title": "载波约束：九组合误差与可用率",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_06/R14_raw_heading_all_nine_accuracy_coverage.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_06/R14_raw_heading_all_nine_accuracy_coverage.png"
+    },
+    {
+      "page": 58,
+      "title": "BY2：FGO 全窗位置误差",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/R15_BY2_FGO_position_curves.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/R15_BY2_FGO_position_curves.png"
+    },
+    {
+      "page": 59,
+      "title": "BY2H：FGO 全窗位置误差",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/R15_BY2H_FGO_position_curves.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/R15_BY2H_FGO_position_curves.png"
+    },
+    {
+      "page": 60,
+      "title": "BY2O：FGO 全窗位置误差",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/R15_BY2O_FGO_position_curves.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/R15_BY2O_FGO_position_curves.png"
+    },
+    {
+      "page": 61,
+      "title": "FGO：连续、动态及含初值支持",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/R16_FGO_dynamic_secondary_strict_support.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/R16_FGO_dynamic_secondary_strict_support.png"
+    },
+    {
+      "page": 62,
+      "title": "BY2H：FGO 的 GNSS1 轨迹",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_08/R17_BY2H_FGO_GNSS1_trajectory.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_08/R17_BY2H_FGO_GNSS1_trajectory.png"
+    },
+    {
+      "page": 63,
+      "title": "BY2O：FGO 的 GNSS1 轨迹",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_08/R17_BY2O_FGO_GNSS1_trajectory.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_08/R17_BY2O_FGO_GNSS1_trajectory.png"
+    },
+    {
+      "page": 64,
+      "title": "BY2：FGO 的 GNSS1 轨迹",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_08/R17_BY2_FGO_GNSS1_trajectory.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_08/R17_BY2_FGO_GNSS1_trajectory.png"
+    },
+    {
+      "page": 65,
+      "title": "OiSAM：自身航向的连续曲线",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_08/R18_Oi_own_estimated_yaw.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_08/R18_Oi_own_estimated_yaw.png"
+    },
+    {
+      "page": 66,
+      "title": "现有证据支持的结论",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/manuscript_restructured.md"
+      ]
+    },
+    {
+      "page": 67,
+      "title": "学术命名：先确定核心贡献",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/02_PROVISIONAL_NAMES_AND_TERMS.md"
+      ]
+    },
+    {
+      "page": 68,
+      "title": "GPS Solutions：当前最有证据的主线",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/GPS_SHORT_BASELINE_MOVING_BASE_DECISION.md",
+        "https://link.springer.com/journal/10291/aims-and-scope"
+      ]
+    },
+    {
+      "page": 69,
+      "title": "三种“短基线”处理不能混称",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/GPS_SHORT_BASELINE_MOVING_BASE_DECISION.md"
+      ]
+    },
+    {
+      "page": 70,
+      "title": "若转向载波与 moving-base，需要新增什么",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/GPS_SHORT_BASELINE_MOVING_BASE_DECISION.md"
+      ]
+    },
+    {
+      "page": 71,
+      "title": "载波研究的文献基线",
+      "kind": "content",
+      "sources": [
+        "https://doi.org/10.1007/s00190-010-0380-8",
+        "https://doi.org/10.1007/s10291-012-0299-z",
+        "https://doi.org/10.1007/s40328-024-00441-2",
+        "https://doi.org/10.1186/s43020-026-00216-w"
+      ]
+    },
+    {
+      "page": 72,
+      "title": "论文主图 1–4：从问题到真实结果",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/05_MAIN_FIGURE_ARGUMENT_PLAN.md"
+      ]
+    },
+    {
+      "page": 73,
+      "title": "论文主图 5–8：机制、边界与比较",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/05_MAIN_FIGURE_ARGUMENT_PLAN.md"
+      ]
+    },
+    {
+      "page": 74,
+      "title": "GPS Solutions：稿件结构与篇幅",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/manuscript_restructured.md",
+        "https://link.springer.com/journal/10291/submission-guidelines"
+      ]
+    },
+    {
+      "page": 75,
+      "title": "TIM：把研究对象落到“量”上",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md",
+        "https://ieee-ims.org/publication/ieee-tim/information-authors"
+      ]
+    },
+    {
+      "page": 76,
+      "title": "TIM：短基线的相关误差传播",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md"
+      ]
+    },
+    {
+      "page": 77,
+      "title": "解析示例：短投影与接收机相关性",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U01_projection_correlation.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U01_projection_correlation.png"
+    },
+    {
+      "page": 78,
+      "title": "TIM：时间偏差与安装误差",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md"
+      ]
+    },
+    {
+      "page": 79,
+      "title": "解析示例：短投影放大异步影响",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U03_asynchronous_direction.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U03_asynchronous_direction.png"
+    },
+    {
+      "page": 80,
+      "title": "TIM：姿态依赖的速度不确定度",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md"
+      ]
+    },
+    {
+      "page": 81,
+      "title": "解析示例：交叉相关可改变速度不确定度",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U02_heading_velocity_cross_term.png"
+      ],
+      "asset": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U02_heading_velocity_cross_term.png"
+    },
+    {
+      "page": 82,
+      "title": "TIM：共享参考下的差值协方差",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md"
+      ]
+    },
+    {
+      "page": 83,
+      "title": "TIM：不确定度预算需要哪些输入",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/REQUIRED_RECORDS_AND_ACCEPTANCE.csv",
+        "https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf"
+      ]
+    },
+    {
+      "page": 84,
+      "title": "TIM：怎样验证模型可信",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md"
+      ]
+    },
+    {
+      "page": 85,
+      "title": "两条投稿路线的推进顺序",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/GPS_SHORT_BASELINE_MOVING_BASE_DECISION.md",
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md"
+      ]
+    },
+    {
+      "page": 86,
+      "title": "结论与下一步实质工作",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/manuscript_restructured.md",
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/REQUIRED_RECORDS_AND_ACCEPTANCE.csv"
+      ]
+    },
+    {
+      "page": 87,
+      "title": "附录：配置映射与单开关语义",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/INTERNAL_READER_LABELS.csv"
+      ]
+    },
+    {
+      "page": 88,
+      "title": "附录：结构基线与组合消融",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/INTERNAL_READER_LABELS.csv"
+      ]
+    },
+    {
+      "page": 89,
+      "title": "附录：原故障类型的多量纲图谱",
+      "kind": "content",
+      "sources": [
+        "paper_package/gpss_v0/figures/SFig02.png"
+      ],
+      "asset": "paper_package/gpss_v0/figures/SFig02.png"
+    },
+    {
+      "page": 90,
+      "title": "故障图谱放大：水平、竖直与航向",
+      "kind": "content",
+      "sources": [
+        "paper_package/gpss_v0/figures/SFig02.png"
+      ],
+      "asset": "paper_package/gpss_v0/figures/SFig02.png",
+      "displayCrop": {
+        "left": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0.505
+      }
+    },
+    {
+      "page": 91,
+      "title": "故障图谱放大：横滚、俯仰与三维位置",
+      "kind": "content",
+      "sources": [
+        "paper_package/gpss_v0/figures/SFig02.png"
+      ],
+      "asset": "paper_package/gpss_v0/figures/SFig02.png",
+      "displayCrop": {
+        "left": 0,
+        "top": 0.514,
+        "right": 0,
+        "bottom": 0
+      }
+    },
+    {
+      "page": 92,
+      "title": "附录：接触辅助路线的相对结果",
+      "kind": "content",
+      "sources": [
+        "paper_package/gpss_v0/figures/SFig01.png"
+      ],
+      "asset": "paper_package/gpss_v0/figures/SFig01.png"
+    },
+    {
+      "page": 93,
+      "title": "接触辅助放大：三序列位置漂移",
+      "kind": "content",
+      "sources": [
+        "paper_package/gpss_v0/figures/SFig01.png"
+      ],
+      "asset": "paper_package/gpss_v0/figures/SFig01.png",
+      "displayCrop": {
+        "left": 0,
+        "top": 0.108,
+        "right": 0,
+        "bottom": 0.45
+      }
+    },
+    {
+      "page": 94,
+      "title": "接触辅助放大：三序列航向漂移",
+      "kind": "content",
+      "sources": [
+        "paper_package/gpss_v0/figures/SFig01.png"
+      ],
+      "asset": "paper_package/gpss_v0/figures/SFig01.png",
+      "displayCrop": {
+        "left": 0,
+        "top": 0.587,
+        "right": 0,
+        "bottom": 0
+      }
+    },
+    {
+      "page": 95,
+      "title": "附录：横向比较的保留边界",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/04_COMPARISON_INVENTORY_AND_FAIRNESS_STORY.md"
+      ]
+    },
+    {
+      "page": 96,
+      "title": "附录：结果的时间与版本身份",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/V3_STORY_20261004/CURRENT_STORY_INDEX.md",
+        "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/SEGMENTED_RESULTS/README.md"
+      ]
+    },
+    {
+      "page": 97,
+      "title": "附录：GNSS 几何与验证文献",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/PRIMARY_LITERATURE_AND_CLAIM_MAP.csv"
+      ]
+    },
+    {
+      "page": 98,
+      "title": "附录：测量与状态估计文献",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/PRIMARY_LITERATURE_AND_CLAIM_MAP.csv",
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/manuscript_restructured.md"
+      ]
+    },
+    {
+      "page": 99,
+      "title": "附录：图优化原文与复现记录",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/README.md"
+      ]
+    },
+    {
+      "page": 100,
+      "title": "讨论：下一项最值得验证的问题",
+      "kind": "content",
+      "sources": [
+        "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/RESEARCH_QUESTIONS_AND_MAIN_FIGURE_PLAN.csv"
+      ]
+    }
+  ],
+  "tableOwners": [
+    4,
+    7,
+    9,
+    11,
+    12,
+    16,
+    19,
+    20,
+    21,
+    37,
+    39,
+    41,
+    42,
+    48,
+    49,
+    50,
+    51,
+    52,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    78,
+    83,
+    84,
+    85,
+    87,
+    88,
+    95,
+    96,
+    97,
+    98,
+    99
+  ],
+  "chartOwners": [
+    17,
+    53
+  ],
+  "assets": [
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_02/R03_BY2_original_trajectory.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_01/R01_BY2_full_window.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_01/R01_BY2H_full_window.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_01/R01_BY2O_full_window.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_02/R04_BY2_attitude_errors.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_02/R04_BY2H_attitude_errors.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_02/R04_BY2O_attitude_errors.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_01/R02_natural_all_11_configurations.png",
+    "paper_package/gpss_v0/figures/Fig04.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_05/R12_BY2_native_heading_decisions.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_05/R11_BY2_receiver_velocity_toggle.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_05/R11_BY2H_receiver_velocity_toggle.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_05/R11_BY2O_receiver_velocity_toggle.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_03/R05_CORE_all_11_error_tails.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_03/R06_CORE_single_module_paired_contrasts.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_03/R07_CORE_all_5951_outcomes.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_03/R08_ADD_all_45_conditions.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/R09_BY2_moving_base_error_and_support.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/R09_BY2H_moving_base_error_and_support.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/R09_BY2O_moving_base_error_and_support.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/R10_moving_base_all_12_accuracy_coverage.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_06/R13_BY2_raw_heading_error_support.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_06/R13_BY2H_raw_heading_error_support.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_06/R13_BY2O_raw_heading_error_support.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_06/R14_raw_heading_all_nine_accuracy_coverage.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/R15_BY2_FGO_position_curves.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/R15_BY2H_FGO_position_curves.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/R15_BY2O_FGO_position_curves.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/R16_FGO_dynamic_secondary_strict_support.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_08/R17_BY2H_FGO_GNSS1_trajectory.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_08/R17_BY2O_FGO_GNSS1_trajectory.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_08/R17_BY2_FGO_GNSS1_trajectory.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_08/R18_Oi_own_estimated_yaw.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U01_projection_correlation.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U03_asynchronous_direction.png",
+    "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U02_heading_velocity_cross_term.png",
+    "paper_package/gpss_v0/figures/SFig02.png",
+    "paper_package/gpss_v0/figures/SFig02.png",
+    "paper_package/gpss_v0/figures/SFig02.png",
+    "paper_package/gpss_v0/figures/SFig01.png",
+    "paper_package/gpss_v0/figures/SFig01.png",
+    "paper_package/gpss_v0/figures/SFig01.png"
+  ],
+  "sources": [
+    {
+      "page": 2,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/PPT_CONTENT_BLUEPRINT_52.json",
+      "sha256": "c0bed471c9f977c9a4c99c024278f29f69329e68e1e9016bdeb3f50d8120853a",
+      "bytes": 49619
+    },
+    {
+      "page": 4,
+      "path": "paper_package/gpss_v0/manuscript_source.md",
+      "sha256": "95975f06449a7692574ac6203c18e800b382485f6019f1704af21abf071b7f0e",
+      "bytes": 49862
+    },
+    {
+      "page": 5,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/CLAIM_EVIDENCE_MAP.csv",
+      "sha256": "3944b63f03034ccf817a56da44c36fdeac6b5f720113be2eb216f2d4283df297",
+      "bytes": 2236
+    },
+    {
+      "page": 6,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md",
+      "sha256": "191a3d7f3ed7c496c488743051817588ab2580f5c17832ddcbb31e466e55e048",
+      "bytes": 20649
+    },
+    {
+      "page": 6,
+      "path": "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/SEGMENTED_RESULTS/README.md",
+      "sha256": "30ee1adabe32ba285f2057715cccb6c1d4ed4aa83e15e8ea56197482beaab647",
+      "bytes": 1132
+    },
+    {
+      "page": 7,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/04_COMPARISON_INVENTORY_AND_FAIRNESS_STORY.md",
+      "sha256": "254a41572a1b33092cc47e275e482d377234eb47bfde07b3707e9cdea7d822c3",
+      "bytes": 19197
+    },
+    {
+      "page": 8,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/METHOD_SOURCE_MAP.csv",
+      "sha256": "22fefa59f9a1fe4181cedf1f638dd3ecec36e46923975a7542890bc4626b996f",
+      "bytes": 7795
+    },
+    {
+      "page": 8,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md",
+      "sha256": "191a3d7f3ed7c496c488743051817588ab2580f5c17832ddcbb31e466e55e048",
+      "bytes": 20649
+    },
+    {
+      "page": 9,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md",
+      "sha256": "191a3d7f3ed7c496c488743051817588ab2580f5c17832ddcbb31e466e55e048",
+      "bytes": 20649
+    },
+    {
+      "page": 10,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md",
+      "sha256": "191a3d7f3ed7c496c488743051817588ab2580f5c17832ddcbb31e466e55e048",
+      "bytes": 20649
+    },
+    {
+      "page": 10,
+      "path": "docs/paper_rebuild/EXT_MEASURAND_20261004/README.md",
+      "sha256": "acb0f7b8b736187d0ae4e5844616fabb8535ede03cbc6064b9d33c0112be7716",
+      "bytes": 2908
+    },
+    {
+      "page": 11,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md",
+      "sha256": "191a3d7f3ed7c496c488743051817588ab2580f5c17832ddcbb31e466e55e048",
+      "bytes": 20649
+    },
+    {
+      "page": 12,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md",
+      "sha256": "191a3d7f3ed7c496c488743051817588ab2580f5c17832ddcbb31e466e55e048",
+      "bytes": 20649
+    },
+    {
+      "page": 13,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md",
+      "sha256": "191a3d7f3ed7c496c488743051817588ab2580f5c17832ddcbb31e466e55e048",
+      "bytes": 20649
+    },
+    {
+      "page": 14,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md",
+      "sha256": "191a3d7f3ed7c496c488743051817588ab2580f5c17832ddcbb31e466e55e048",
+      "bytes": 20649
+    },
+    {
+      "page": 15,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md",
+      "sha256": "191a3d7f3ed7c496c488743051817588ab2580f5c17832ddcbb31e466e55e048",
+      "bytes": 20649
+    },
+    {
+      "page": 16,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md",
+      "sha256": "191a3d7f3ed7c496c488743051817588ab2580f5c17832ddcbb31e466e55e048",
+      "bytes": 20649
+    },
+    {
+      "page": 16,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/03_SELECTION_HISTORY_AND_FULL_MATRIX_RESULTS.md",
+      "sha256": "8cd003b3ed87cebb9a3658c1c14525922527555655ac7f8c928406feaa759d12",
+      "bytes": 15130
+    },
+    {
+      "page": 17,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md",
+      "sha256": "191a3d7f3ed7c496c488743051817588ab2580f5c17832ddcbb31e466e55e048",
+      "bytes": 20649
+    },
+    {
+      "page": 18,
+      "path": "paper_package/gpss_v0/manuscript_source.md",
+      "sha256": "95975f06449a7692574ac6203c18e800b382485f6019f1704af21abf071b7f0e",
+      "bytes": 49862
+    },
+    {
+      "page": 18,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/OFFICIAL_VENUE_AND_ORIGINAL_INPUT_BOUNDARY.md",
+      "sha256": "8de46dd6aaf9bfbe3bb40fc136346d1cfdd541871c0f70f5b92ec299c9480929",
+      "bytes": 6158
+    },
+    {
+      "page": 19,
+      "path": "paper_package/gpss_v0/manuscript_source.md",
+      "sha256": "95975f06449a7692574ac6203c18e800b382485f6019f1704af21abf071b7f0e",
+      "bytes": 49862
+    },
+    {
+      "page": 20,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/CURRENT_STORY_INDEX.md",
+      "sha256": "0562ef56c013bac4e1447184c541f694c0d1e9c3dcdc9baa0675d42c9f94db2e",
+      "bytes": 5373
+    },
+    {
+      "page": 20,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/03_SELECTION_HISTORY_AND_FULL_MATRIX_RESULTS.md",
+      "sha256": "8cd003b3ed87cebb9a3658c1c14525922527555655ac7f8c928406feaa759d12",
+      "bytes": 15130
+    },
+    {
+      "page": 21,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/NATURAL_METHOD_RESULTS.csv",
+      "sha256": "a8419158954c52ddeb948ce9460f751998862e09f5e24839461e2f040262aa8e",
+      "bytes": 43923
+    },
+    {
+      "page": 22,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_02/R03_BY2_original_trajectory.png",
+      "sha256": "1b1e8abe00a6cd53d59f62cd2f1e37051e36bb437b5c7c66ce6e6fb41fac3b38",
+      "bytes": 429967
+    },
+    {
+      "page": 23,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_01/R01_BY2_full_window.png",
+      "sha256": "5ad284933006cf3c0e6a3e9124d7b45eaaef8711cdd988496934af7277948bb4",
+      "bytes": 885789
+    },
+    {
+      "page": 24,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_01/R01_BY2H_full_window.png",
+      "sha256": "1927a28921d4c97d69e75bff22eb9cf2183ea41c3405f6d056251c067eb7be94",
+      "bytes": 1024860
+    },
+    {
+      "page": 25,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_01/R01_BY2O_full_window.png",
+      "sha256": "9cffb06d500cb97a9e7cf469697835f2c11ee339221ba353f3b711e27addf2c0",
+      "bytes": 732161
+    },
+    {
+      "page": 26,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_02/R04_BY2_attitude_errors.png",
+      "sha256": "9f10f4f5d1f1d79f1d7d0608b8b616d436d8794973be0c23e8e8b7d5daa3143d",
+      "bytes": 999084
+    },
+    {
+      "page": 27,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_02/R04_BY2H_attitude_errors.png",
+      "sha256": "736b6993bbdd3f06339b8f4a14cdf1a48b4a52dcc72664275e00e9c2a538f4bf",
+      "bytes": 1045300
+    },
+    {
+      "page": 28,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_02/R04_BY2O_attitude_errors.png",
+      "sha256": "fe1d1cf74cb87a5902df86e615d352d8e70536bdbfb5aeb62f9a08802d4eb47d",
+      "bytes": 791195
+    },
+    {
+      "page": 29,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_01/R02_natural_all_11_configurations.png",
+      "sha256": "4f63aec5040da5f101056d7feea49342fe80bf9cfe2c1693f970face1ca9cae4",
+      "bytes": 363193
+    },
+    {
+      "page": 30,
+      "path": "paper_package/gpss_v0/figures/Fig04.png",
+      "sha256": "413b67ce09dea7211cdab14c15be74af7e4633ffb6654c0744287bdf951aa3e1",
+      "bytes": 273802
+    },
+    {
+      "page": 31,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_05/R12_BY2_native_heading_decisions.png",
+      "sha256": "40969f30b9d8e23870d7fe8a71878d26f6f4ea7f46b9e34f1b603321c9d394ae",
+      "bytes": 669569
+    },
+    {
+      "page": 32,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_05/R11_BY2_receiver_velocity_toggle.png",
+      "sha256": "55ca44fa2a9bbbace620b0b71883eaab837760331beba8b09fed793aaea83f64",
+      "bytes": 990621
+    },
+    {
+      "page": 33,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_05/R11_BY2H_receiver_velocity_toggle.png",
+      "sha256": "a46245cda809d195cd5dd1d18883a3be9dfaef65e2a30b1a5a950c428abb0f12",
+      "bytes": 1076778
+    },
+    {
+      "page": 34,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_05/R11_BY2O_receiver_velocity_toggle.png",
+      "sha256": "0753f9a66cead6e910b170ddb6ea141e495aea26c97502edf0f80201e4ae6567",
+      "bytes": 755575
+    },
+    {
+      "page": 35,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_03/R05_CORE_all_11_error_tails.png",
+      "sha256": "f7214b631c69b709f0151f187dab0fc721d736e645d0b483e4cdc940e9f3ef7c",
+      "bytes": 399132
+    },
+    {
+      "page": 36,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_03/R06_CORE_single_module_paired_contrasts.png",
+      "sha256": "6b9ba64972f49022ad5df501f847f36ba809c1360c376d6efbb2bbe5ab883bca",
+      "bytes": 595230
+    },
+    {
+      "page": 37,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/SINGLE_MODULE_PAIRED_DIRECTION.csv",
+      "sha256": "d3d1fdd85b113d86828d24d8ed1963761891e37c1d664888def8ce4bf2bc1baa",
+      "bytes": 16513
+    },
+    {
+      "page": 38,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_03/R07_CORE_all_5951_outcomes.png",
+      "sha256": "a0aab1171e10e4811a16065850e205717f8783acded902d54c871a393b908bb9",
+      "bytes": 392497
+    },
+    {
+      "page": 39,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/03_SELECTION_HISTORY_AND_FULL_MATRIX_RESULTS.md",
+      "sha256": "8cd003b3ed87cebb9a3658c1c14525922527555655ac7f8c928406feaa759d12",
+      "bytes": 15130
+    },
+    {
+      "page": 40,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_03/R08_ADD_all_45_conditions.png",
+      "sha256": "578cddc586f78711ea3a8bc369c3846512c7a90718e0e4627f83a0b8e781ed05",
+      "bytes": 586430
+    },
+    {
+      "page": 41,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/03_SELECTION_HISTORY_AND_FULL_MATRIX_RESULTS.md",
+      "sha256": "8cd003b3ed87cebb9a3658c1c14525922527555655ac7f8c928406feaa759d12",
+      "bytes": 15130
+    },
+    {
+      "page": 42,
+      "path": "docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/README.md",
+      "sha256": "a50671a0373d3a4a4e7d815a65a94d634215ba5ccef994d6271f80c80aa6559e",
+      "bytes": 14916
+    },
+    {
+      "page": 43,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/04_COMPARISON_INVENTORY_AND_FAIRNESS_STORY.md",
+      "sha256": "254a41572a1b33092cc47e275e482d377234eb47bfde07b3707e9cdea7d822c3",
+      "bytes": 19197
+    },
+    {
+      "page": 44,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/R09_BY2_moving_base_error_and_support.png",
+      "sha256": "dfc4e592a9ab1f23b051528073547e4e2a9161d5c4b462b72bb550a94786006d",
+      "bytes": 395549
+    },
+    {
+      "page": 45,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/R09_BY2H_moving_base_error_and_support.png",
+      "sha256": "861ce6fa2f20f7198264f9a22e4d56767196808ed54235d871ef1b64736d9739",
+      "bytes": 411949
+    },
+    {
+      "page": 46,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/R09_BY2O_moving_base_error_and_support.png",
+      "sha256": "023ff3eacac23698750d679484a3e6b68d4ee9ba8a104cce671cf083944de847",
+      "bytes": 397607
+    },
+    {
+      "page": 47,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/R10_moving_base_all_12_accuracy_coverage.png",
+      "sha256": "51336c3da6eadcffbfabc70d50c4854393fa0edae038281ed499e41ba832b6dc",
+      "bytes": 388570
+    },
+    {
+      "page": 48,
+      "path": "docs/paper_rebuild/EXT_MEASURAND_20261004/README.md",
+      "sha256": "acb0f7b8b736187d0ae4e5844616fabb8535ede03cbc6064b9d33c0112be7716",
+      "bytes": 2908
+    },
+    {
+      "page": 48,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/FROZEN_EXTERNAL_METRICS_OVERVIEW.csv",
+      "sha256": "e296d61d3d014524f892e6d8eec9cbcafc2f07a23a2deb73f9d5425fb287e5ae",
+      "bytes": 35022
+    },
+    {
+      "page": 49,
+      "path": "docs/paper_rebuild/EXT_MEASURAND_20261004/README.md",
+      "sha256": "acb0f7b8b736187d0ae4e5844616fabb8535ede03cbc6064b9d33c0112be7716",
+      "bytes": 2908
+    },
+    {
+      "page": 50,
+      "path": "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/README.md",
+      "sha256": "96a354496399378e8a3b90ef27a750477b19b2149110c9802826cb5bcbc9fe4f",
+      "bytes": 2602
+    },
+    {
+      "page": 51,
+      "path": "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/SEGMENTED_RESULTS/README.md",
+      "sha256": "30ee1adabe32ba285f2057715cccb6c1d4ed4aa83e15e8ea56197482beaab647",
+      "bytes": 1132
+    },
+    {
+      "page": 52,
+      "path": "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/SEGMENTED_RESULTS/README.md",
+      "sha256": "30ee1adabe32ba285f2057715cccb6c1d4ed4aa83e15e8ea56197482beaab647",
+      "bytes": 1132
+    },
+    {
+      "page": 53,
+      "path": "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/SEGMENTED_RESULTS/README.md",
+      "sha256": "30ee1adabe32ba285f2057715cccb6c1d4ed4aa83e15e8ea56197482beaab647",
+      "bytes": 1132
+    },
+    {
+      "page": 54,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_06/R13_BY2_raw_heading_error_support.png",
+      "sha256": "db656c00e297e539256a0dced45fec88501ea2581301b7e94356917d14d1ea21",
+      "bytes": 888048
+    },
+    {
+      "page": 55,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_06/R13_BY2H_raw_heading_error_support.png",
+      "sha256": "1e140303530dc73c4535f27ee81b3c27c2bd94ab262e4a98c432dea4e869e538",
+      "bytes": 956556
+    },
+    {
+      "page": 56,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_06/R13_BY2O_raw_heading_error_support.png",
+      "sha256": "c3133414f402c6543a14390664f797cf5aad9821d08a8393e2732cef796258f4",
+      "bytes": 811686
+    },
+    {
+      "page": 57,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_06/R14_raw_heading_all_nine_accuracy_coverage.png",
+      "sha256": "9bac8ed5b635694bdf627bbea9073aa9b2cdc9823ffcd5cc12cc0db7ab54c4a9",
+      "bytes": 401451
+    },
+    {
+      "page": 58,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/R15_BY2_FGO_position_curves.png",
+      "sha256": "024876224b85af23fef890d71ff0a5c700dad32bddf23cb60044d385cf2f5748",
+      "bytes": 804991
+    },
+    {
+      "page": 59,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/R15_BY2H_FGO_position_curves.png",
+      "sha256": "b8fb45ad2ed4c9f85b92ebc6dc866ecbe4742617161af79da8ab533b457b6849",
+      "bytes": 787893
+    },
+    {
+      "page": 60,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/R15_BY2O_FGO_position_curves.png",
+      "sha256": "de8f1e409e78e0eb836e615d2729e32ae3e961843084fa1965ce66cee34b1003",
+      "bytes": 861862
+    },
+    {
+      "page": 61,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/R16_FGO_dynamic_secondary_strict_support.png",
+      "sha256": "bca112c92a4e24a0151e438db0efd2698f62111a7ff6ea9a9ef6bad539b8584c",
+      "bytes": 399046
+    },
+    {
+      "page": 62,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_08/R17_BY2H_FGO_GNSS1_trajectory.png",
+      "sha256": "d69095a45f8cdd04f0814837ce5f54d280b373446ee5537861ca8bdb633c3cb4",
+      "bytes": 403265
+    },
+    {
+      "page": 63,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_08/R17_BY2O_FGO_GNSS1_trajectory.png",
+      "sha256": "03a6b7843d74f19d73c314971ed99b2341834798f1013ee8c09994f577b965dd",
+      "bytes": 431351
+    },
+    {
+      "page": 64,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_08/R17_BY2_FGO_GNSS1_trajectory.png",
+      "sha256": "abc4c6e453c9f24dab2a6af7c069e173c1afcd3c0db8f79c980dd854254716e2",
+      "bytes": 411679
+    },
+    {
+      "page": 65,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_08/R18_Oi_own_estimated_yaw.png",
+      "sha256": "4b3345caad351cdd9be36da1fae0bd51e56b2d56b6063675c7d7e75b658cf130",
+      "bytes": 551015
+    },
+    {
+      "page": 66,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/manuscript_restructured.md",
+      "sha256": "21ac28e1c69ef1039c2e3465e97179b063551982f0e9dc965cedc1187c42ed89",
+      "bytes": 31499
+    },
+    {
+      "page": 67,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/02_PROVISIONAL_NAMES_AND_TERMS.md",
+      "sha256": "19980202228b523ebfa922bba50c46dd95d6e8aa7dfea65d9aca28ec33c94b90",
+      "bytes": 4074
+    },
+    {
+      "page": 68,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/GPS_SHORT_BASELINE_MOVING_BASE_DECISION.md",
+      "sha256": "bd43b8e0fb8a0dcd1c8e45368484a1fcf05a90fd80426e79fb876f564e286c07",
+      "bytes": 13101
+    },
+    {
+      "page": 68,
+      "path": "https://link.springer.com/journal/10291/aims-and-scope",
+      "type": "web"
+    },
+    {
+      "page": 69,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/GPS_SHORT_BASELINE_MOVING_BASE_DECISION.md",
+      "sha256": "bd43b8e0fb8a0dcd1c8e45368484a1fcf05a90fd80426e79fb876f564e286c07",
+      "bytes": 13101
+    },
+    {
+      "page": 70,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/GPS_SHORT_BASELINE_MOVING_BASE_DECISION.md",
+      "sha256": "bd43b8e0fb8a0dcd1c8e45368484a1fcf05a90fd80426e79fb876f564e286c07",
+      "bytes": 13101
+    },
+    {
+      "page": 71,
+      "path": "https://doi.org/10.1007/s00190-010-0380-8",
+      "type": "web"
+    },
+    {
+      "page": 71,
+      "path": "https://doi.org/10.1007/s10291-012-0299-z",
+      "type": "web"
+    },
+    {
+      "page": 71,
+      "path": "https://doi.org/10.1007/s40328-024-00441-2",
+      "type": "web"
+    },
+    {
+      "page": 71,
+      "path": "https://doi.org/10.1186/s43020-026-00216-w",
+      "type": "web"
+    },
+    {
+      "page": 72,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/05_MAIN_FIGURE_ARGUMENT_PLAN.md",
+      "sha256": "76f060855973044c281f232cb06292c7c45597b4ea69046078a79e2fda492091",
+      "bytes": 14739
+    },
+    {
+      "page": 73,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/05_MAIN_FIGURE_ARGUMENT_PLAN.md",
+      "sha256": "76f060855973044c281f232cb06292c7c45597b4ea69046078a79e2fda492091",
+      "bytes": 14739
+    },
+    {
+      "page": 74,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/manuscript_restructured.md",
+      "sha256": "21ac28e1c69ef1039c2e3465e97179b063551982f0e9dc965cedc1187c42ed89",
+      "bytes": 31499
+    },
+    {
+      "page": 74,
+      "path": "https://link.springer.com/journal/10291/submission-guidelines",
+      "type": "web"
+    },
+    {
+      "page": 75,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md",
+      "sha256": "be13d9f87c238853acdacf51d1cf085eed4fcc7f6db337aa4a70f70953ec0c8d",
+      "bytes": 15099
+    },
+    {
+      "page": 75,
+      "path": "https://ieee-ims.org/publication/ieee-tim/information-authors",
+      "type": "web"
+    },
+    {
+      "page": 76,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md",
+      "sha256": "be13d9f87c238853acdacf51d1cf085eed4fcc7f6db337aa4a70f70953ec0c8d",
+      "bytes": 15099
+    },
+    {
+      "page": 77,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U01_projection_correlation.png",
+      "sha256": "c045dd7d60d1b9ad8d353ff87b36e55f6d47cc06f8112f50befdfe6f29a8c745",
+      "bytes": 168416
+    },
+    {
+      "page": 78,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md",
+      "sha256": "be13d9f87c238853acdacf51d1cf085eed4fcc7f6db337aa4a70f70953ec0c8d",
+      "bytes": 15099
+    },
+    {
+      "page": 79,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U03_asynchronous_direction.png",
+      "sha256": "e09aa94fb42dbbca3bbfad454b77d3670b649ef4e8a119a3eee172f4e158b19f",
+      "bytes": 153658
+    },
+    {
+      "page": 80,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md",
+      "sha256": "be13d9f87c238853acdacf51d1cf085eed4fcc7f6db337aa4a70f70953ec0c8d",
+      "bytes": 15099
+    },
+    {
+      "page": 81,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U02_heading_velocity_cross_term.png",
+      "sha256": "43f9d7a5deac759fc610ae795389f4e6f40a2648dcb8415bf9a965c46354248a",
+      "bytes": 176033
+    },
+    {
+      "page": 82,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md",
+      "sha256": "be13d9f87c238853acdacf51d1cf085eed4fcc7f6db337aa4a70f70953ec0c8d",
+      "bytes": 15099
+    },
+    {
+      "page": 83,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/REQUIRED_RECORDS_AND_ACCEPTANCE.csv",
+      "sha256": "d62a7fc518d6554a1f10f033c86e562fdb4a64f65c7455f082333bda8dba6e03",
+      "bytes": 4273
+    },
+    {
+      "page": 83,
+      "path": "https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf",
+      "type": "web"
+    },
+    {
+      "page": 84,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md",
+      "sha256": "be13d9f87c238853acdacf51d1cf085eed4fcc7f6db337aa4a70f70953ec0c8d",
+      "bytes": 15099
+    },
+    {
+      "page": 85,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/GPS_SHORT_BASELINE_MOVING_BASE_DECISION.md",
+      "sha256": "bd43b8e0fb8a0dcd1c8e45368484a1fcf05a90fd80426e79fb876f564e286c07",
+      "bytes": 13101
+    },
+    {
+      "page": 85,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md",
+      "sha256": "be13d9f87c238853acdacf51d1cf085eed4fcc7f6db337aa4a70f70953ec0c8d",
+      "bytes": 15099
+    },
+    {
+      "page": 86,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/manuscript_restructured.md",
+      "sha256": "21ac28e1c69ef1039c2e3465e97179b063551982f0e9dc965cedc1187c42ed89",
+      "bytes": 31499
+    },
+    {
+      "page": 86,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/REQUIRED_RECORDS_AND_ACCEPTANCE.csv",
+      "sha256": "d62a7fc518d6554a1f10f033c86e562fdb4a64f65c7455f082333bda8dba6e03",
+      "bytes": 4273
+    },
+    {
+      "page": 87,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/INTERNAL_READER_LABELS.csv",
+      "sha256": "f254481df73b3c2ab222a8ff97d7ffdbfdbfaa3027162ce7b628849729481da9",
+      "bytes": 5229
+    },
+    {
+      "page": 88,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/INTERNAL_READER_LABELS.csv",
+      "sha256": "f254481df73b3c2ab222a8ff97d7ffdbfdbfaa3027162ce7b628849729481da9",
+      "bytes": 5229
+    },
+    {
+      "page": 89,
+      "path": "paper_package/gpss_v0/figures/SFig02.png",
+      "sha256": "64e9730f4739ad3d87a29020bada3b5f6c0690cd18d4ac5f8b0ec94f1d1baa79",
+      "bytes": 387792
+    },
+    {
+      "page": 90,
+      "path": "paper_package/gpss_v0/figures/SFig02.png",
+      "sha256": "64e9730f4739ad3d87a29020bada3b5f6c0690cd18d4ac5f8b0ec94f1d1baa79",
+      "bytes": 387792
+    },
+    {
+      "page": 91,
+      "path": "paper_package/gpss_v0/figures/SFig02.png",
+      "sha256": "64e9730f4739ad3d87a29020bada3b5f6c0690cd18d4ac5f8b0ec94f1d1baa79",
+      "bytes": 387792
+    },
+    {
+      "page": 92,
+      "path": "paper_package/gpss_v0/figures/SFig01.png",
+      "sha256": "60d33668748ed53d047ed4db75d2d269397a1e66421481b34ea684846e623200",
+      "bytes": 334184
+    },
+    {
+      "page": 93,
+      "path": "paper_package/gpss_v0/figures/SFig01.png",
+      "sha256": "60d33668748ed53d047ed4db75d2d269397a1e66421481b34ea684846e623200",
+      "bytes": 334184
+    },
+    {
+      "page": 94,
+      "path": "paper_package/gpss_v0/figures/SFig01.png",
+      "sha256": "60d33668748ed53d047ed4db75d2d269397a1e66421481b34ea684846e623200",
+      "bytes": 334184
+    },
+    {
+      "page": 95,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/04_COMPARISON_INVENTORY_AND_FAIRNESS_STORY.md",
+      "sha256": "254a41572a1b33092cc47e275e482d377234eb47bfde07b3707e9cdea7d822c3",
+      "bytes": 19197
+    },
+    {
+      "page": 96,
+      "path": "docs/paper_rebuild/V3_STORY_20261004/CURRENT_STORY_INDEX.md",
+      "sha256": "0562ef56c013bac4e1447184c541f694c0d1e9c3dcdc9baa0675d42c9f94db2e",
+      "bytes": 5373
+    },
+    {
+      "page": 96,
+      "path": "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/SEGMENTED_RESULTS/README.md",
+      "sha256": "30ee1adabe32ba285f2057715cccb6c1d4ed4aa83e15e8ea56197482beaab647",
+      "bytes": 1132
+    },
+    {
+      "page": 97,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/PRIMARY_LITERATURE_AND_CLAIM_MAP.csv",
+      "sha256": "43146b5f06ad2c7df701b82d312ee1038c78d2802f4374dfa4664ac794d5b375",
+      "bytes": 7069
+    },
+    {
+      "page": 98,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/PRIMARY_LITERATURE_AND_CLAIM_MAP.csv",
+      "sha256": "43146b5f06ad2c7df701b82d312ee1038c78d2802f4374dfa4664ac794d5b375",
+      "bytes": 7069
+    },
+    {
+      "page": 98,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/story/manuscript_restructured.md",
+      "sha256": "21ac28e1c69ef1039c2e3465e97179b063551982f0e9dc965cedc1187c42ed89",
+      "bytes": 31499
+    },
+    {
+      "page": 99,
+      "path": "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/README.md",
+      "sha256": "96a354496399378e8a3b90ef27a750477b19b2149110c9802826cb5bcbc9fe4f",
+      "bytes": 2602
+    },
+    {
+      "page": 100,
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/RESEARCH_QUESTIONS_AND_MAIN_FIGURE_PLAN.csv",
+      "sha256": "8d7cf364d3a73235acb54ae646bea659843ae7bbc60f706dd8455c5a77ee26b9",
+      "bytes": 2956
+    }
+  ]
+}

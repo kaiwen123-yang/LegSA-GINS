@@ -1,0 +1,531 @@
+{
+  "stage": "R5_JANUARY8_FIXED_PARAMETER_TRANSFER",
+  "binary_sha256": "c53784f418b7bafa3441a0a707bc579ede45c3751e2910efd2ab7615a224eb2f",
+  "implementation_origin": "/home/kaiwen/research/LegSA-GINS-SCRATCH/IMU_V3_FIX_20261004/stage_07",
+  "script_sha256": "8ba97a95d9ba484e276ea0f913b4d3ae52f1fc04aaa18908a0dfe945ad18c791",
+  "reference_used_for_preparation": false,
+  "offset_s": -1.1,
+  "runs": [
+    {
+      "run_id": "IMUFIX_R5_NMB1_F03_T03",
+      "sequence": "NMB1",
+      "method": "F03",
+      "status": "PREPARED",
+      "config": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/CONFIGS/IMUFIX_R5_NMB1_F03_T03.yaml",
+      "config_sha256": "65e761fc0a903822408e8158870d22aeace76a56ec95364c95f81a69e08ce1c1",
+      "changed_config_fields": [
+        "run_id",
+        "run_label",
+        "imupath",
+        "gnsspath",
+        "outputpath",
+        "starttime",
+        "endtime",
+        "initpos",
+        "initatt",
+        "go2_attitude_prior_path",
+        "go2_horizontal_velocity_prior_path",
+        "raw_doppler_factor_path"
+      ]
+    },
+    {
+      "run_id": "IMUFIX_R5_NMB1_F04_T03",
+      "sequence": "NMB1",
+      "method": "F04",
+      "status": "PREPARED",
+      "config": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/CONFIGS/IMUFIX_R5_NMB1_F04_T03.yaml",
+      "config_sha256": "57562acd8db5d01ea217242fe83f12af1a99de8b275f6784b53ba26424415337",
+      "changed_config_fields": [
+        "run_id",
+        "run_label",
+        "imupath",
+        "gnsspath",
+        "outputpath",
+        "starttime",
+        "endtime",
+        "initpos",
+        "initatt",
+        "go2_attitude_prior_path",
+        "go2_horizontal_velocity_prior_path",
+        "raw_doppler_factor_path"
+      ]
+    },
+    {
+      "run_id": "IMUFIX_R5_NMB2_F03_T03",
+      "sequence": "NMB2",
+      "method": "F03",
+      "status": "PREPARED",
+      "config": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/CONFIGS/IMUFIX_R5_NMB2_F03_T03.yaml",
+      "config_sha256": "18da73ed60aa6af5a20b9ad76b97ba82ce158aa957e4ec140daaf50d181dd956",
+      "changed_config_fields": [
+        "run_id",
+        "run_label",
+        "imupath",
+        "gnsspath",
+        "outputpath",
+        "starttime",
+        "endtime",
+        "initpos",
+        "initatt",
+        "go2_attitude_prior_path",
+        "go2_horizontal_velocity_prior_path",
+        "raw_doppler_factor_path"
+      ]
+    },
+    {
+      "run_id": "IMUFIX_R5_NMB2_F04_T03",
+      "sequence": "NMB2",
+      "method": "F04",
+      "status": "PREPARED",
+      "config": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/CONFIGS/IMUFIX_R5_NMB2_F04_T03.yaml",
+      "config_sha256": "fbce04d23ae443d03e77755ff4f7e778bd6d9fce7ac7ca058169c0bb82e38848",
+      "changed_config_fields": [
+        "run_id",
+        "run_label",
+        "imupath",
+        "gnsspath",
+        "outputpath",
+        "starttime",
+        "endtime",
+        "initpos",
+        "initatt",
+        "go2_attitude_prior_path",
+        "go2_horizontal_velocity_prior_path",
+        "raw_doppler_factor_path"
+      ]
+    },
+    {
+      "run_id": "IMUFIX_R5_NMB3_F03_T03",
+      "sequence": "NMB3",
+      "method": "F03",
+      "status": "PREPARED",
+      "config": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/CONFIGS/IMUFIX_R5_NMB3_F03_T03.yaml",
+      "config_sha256": "cb8c589078ffe6bea40353f652f986188fcbfc8e00a7e9123625fd14d5ae8c7a",
+      "changed_config_fields": [
+        "run_id",
+        "run_label",
+        "imupath",
+        "gnsspath",
+        "outputpath",
+        "starttime",
+        "endtime",
+        "initpos",
+        "initatt",
+        "go2_attitude_prior_path",
+        "go2_horizontal_velocity_prior_path",
+        "raw_doppler_factor_path"
+      ]
+    },
+    {
+      "run_id": "IMUFIX_R5_NMB3_F04_T03",
+      "sequence": "NMB3",
+      "method": "F04",
+      "status": "PREPARED",
+      "config": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/CONFIGS/IMUFIX_R5_NMB3_F04_T03.yaml",
+      "config_sha256": "57ae6a35263c029ba482d13258a67201177b63c8653e1c564044ca856a2bb79d",
+      "changed_config_fields": [
+        "run_id",
+        "run_label",
+        "imupath",
+        "gnsspath",
+        "outputpath",
+        "starttime",
+        "endtime",
+        "initpos",
+        "initatt",
+        "go2_attitude_prior_path",
+        "go2_horizontal_velocity_prior_path",
+        "raw_doppler_factor_path"
+      ]
+    },
+    {
+      "run_id": "IMUFIX_R5_NMB4_F03_T03",
+      "sequence": "NMB4",
+      "method": "F03",
+      "status": "PREPARED",
+      "config": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/CONFIGS/IMUFIX_R5_NMB4_F03_T03.yaml",
+      "config_sha256": "cbf2b7cd6681e23baa7ca348bea93daf8c370a8db368f7e1077dc36491e2e42e",
+      "changed_config_fields": [
+        "run_id",
+        "run_label",
+        "imupath",
+        "gnsspath",
+        "outputpath",
+        "starttime",
+        "endtime",
+        "initpos",
+        "initatt",
+        "go2_attitude_prior_path",
+        "go2_horizontal_velocity_prior_path",
+        "raw_doppler_factor_path"
+      ]
+    },
+    {
+      "run_id": "IMUFIX_R5_NMB4_F04_T03",
+      "sequence": "NMB4",
+      "method": "F04",
+      "status": "PREPARED",
+      "config": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/CONFIGS/IMUFIX_R5_NMB4_F04_T03.yaml",
+      "config_sha256": "0ebad74657223d31977b4f5ffe6c843c862a9446288d6ae27af694c34fc7b432",
+      "changed_config_fields": [
+        "run_id",
+        "run_label",
+        "imupath",
+        "gnsspath",
+        "outputpath",
+        "starttime",
+        "endtime",
+        "initpos",
+        "initatt",
+        "go2_attitude_prior_path",
+        "go2_horizontal_velocity_prior_path",
+        "raw_doppler_factor_path"
+      ]
+    },
+    {
+      "run_id": "IMUFIX_R5_XB1_F03_T03",
+      "sequence": "XB1",
+      "method": "F03",
+      "status": "NO_INIT_NO_VALID_DUAL_HEADING",
+      "native_invoked": false
+    },
+    {
+      "run_id": "IMUFIX_R5_XB1_F04_T03",
+      "sequence": "XB1",
+      "method": "F04",
+      "status": "NO_INIT_NO_VALID_DUAL_HEADING",
+      "native_invoked": false
+    },
+    {
+      "run_id": "IMUFIX_R5_XB2_F03_T03",
+      "sequence": "XB2",
+      "method": "F03",
+      "status": "NO_INIT_NO_VALID_DUAL_HEADING",
+      "native_invoked": false
+    },
+    {
+      "run_id": "IMUFIX_R5_XB2_F04_T03",
+      "sequence": "XB2",
+      "method": "F04",
+      "status": "NO_INIT_NO_VALID_DUAL_HEADING",
+      "native_invoked": false
+    },
+    {
+      "run_id": "IMUFIX_R5_XB3_F03_T03",
+      "sequence": "XB3",
+      "method": "F03",
+      "status": "NO_INIT_NO_VALID_DUAL_HEADING",
+      "native_invoked": false
+    },
+    {
+      "run_id": "IMUFIX_R5_XB3_F04_T03",
+      "sequence": "XB3",
+      "method": "F04",
+      "status": "NO_INIT_NO_VALID_DUAL_HEADING",
+      "native_invoked": false
+    },
+    {
+      "run_id": "IMUFIX_R5_XB4_F03_T03",
+      "sequence": "XB4",
+      "method": "F03",
+      "status": "NO_INIT_NO_VALID_DUAL_HEADING",
+      "native_invoked": false
+    },
+    {
+      "run_id": "IMUFIX_R5_XB4_F04_T03",
+      "sequence": "XB4",
+      "method": "F04",
+      "status": "NO_INIT_NO_VALID_DUAL_HEADING",
+      "native_invoked": false
+    }
+  ],
+  "sequences": {
+    "NMB1": {
+      "body": "/mnt/g/LegSA-GINS-project/data/raw/XB_PG/2026-01-05/高层数据/nmb1.txt",
+      "body_sha256": "01d20699dff81fa0f8f13ee8b5d8956d30e1cd64ed59176a4bb65bfc768ec157",
+      "receiver_folder": "vrtk2_a87c6e_2026-01-05-11-16-59_minimal",
+      "expected_observed_epochs": 93265,
+      "window_utc_day_s": [
+        40564.32581486702,
+        40972.56780471802
+      ],
+      "status": "PREPARED",
+      "native_window": [
+        40621.403808498384,
+        40972.56780471802
+      ],
+      "initialization_gnss_time": 40621.40018296242,
+      "initialization_yaw_deg": -0.41511330690934756,
+      "input_gyro_bias": [
+        -0.0073077131689060475,
+        -0.0031555287699866924,
+        -0.0015718264223739291
+      ],
+      "rd_valid_epochs": 961,
+      "heading_epochs": 771,
+      "gps": {
+        "gps_week": 2400,
+        "leap_seconds": 18
+      },
+      "providers": {
+        "GNSS18.gnss": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB1/GNSS18.gnss",
+          "sha256": "769689878e3c6238f7e8da23aa6b0803a5393c72b43f0075e7accd6d3c247f78"
+        },
+        "DUAL_HEADING.csv": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB1/DUAL_HEADING.csv",
+          "sha256": "4b1d203f39e1beb28730887a2f2f3f93655e275c47278c222b9e8d6209161fa3"
+        },
+        "RAW_DOPPLER.csv": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB1/RAW_DOPPLER.csv",
+          "sha256": "b9b8c2f304c19651dbda1428f04df7769fe2941eb861f738f2570f2a5d3095cd"
+        },
+        "IMU8.imu": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB1/IMU8.imu",
+          "sha256": "112add1085b03ae14896241d46fe5d613715b09fea07bd382390ff0658a2f22b"
+        },
+        "GO2_RP.csv": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB1/GO2_RP.csv",
+          "sha256": "064654a68bc4898192c191888e407d9cd0863c54fd4c51b2865d5f5065c732bb"
+        },
+        "GO2_HV.csv": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB1/GO2_HV.csv",
+          "sha256": "8d32734908150e8836077077016701e662840d186d9b908510aa7976f844a2a7"
+        }
+      },
+      "body_offset_s": -1.1,
+      "hv_a1_reassociated_at_shifted_body_time": true
+    },
+    "NMB2": {
+      "body": "/mnt/g/LegSA-GINS-project/data/raw/XB_PG/2026-01-05/高层数据/nmb2.txt",
+      "body_sha256": "9f3a0a2102000acac8cf0a02cb60d609095b0bc69d41c23bfb1ddda008e8f0fa",
+      "receiver_folder": "vrtk2_a87c6e_2026-01-05-11-25-11_minimal",
+      "expected_observed_epochs": 81810,
+      "window_utc_day_s": [
+        41104.43801369667,
+        41467.61380090714
+      ],
+      "status": "PREPARED",
+      "native_window": [
+        41112.80181040764,
+        41467.61380090714
+      ],
+      "initialization_gnss_time": 41112.800201654434,
+      "initialization_yaw_deg": -3.2023497555581457,
+      "input_gyro_bias": [
+        -0.0072800162768689915,
+        -0.0024779492632521103,
+        -0.0010243046676737964
+      ],
+      "rd_valid_epochs": 906,
+      "heading_epochs": 750,
+      "gps": {
+        "gps_week": 2400,
+        "leap_seconds": 18
+      },
+      "providers": {
+        "GNSS18.gnss": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB2/GNSS18.gnss",
+          "sha256": "c3815ffd52682d57cc38772d507155b08c67073c7d8ddf409043d10fff3c6dc0"
+        },
+        "DUAL_HEADING.csv": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB2/DUAL_HEADING.csv",
+          "sha256": "f4617a158049025ed65610bbc829b760ef7c511d6251a98ff89f606074746511"
+        },
+        "RAW_DOPPLER.csv": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB2/RAW_DOPPLER.csv",
+          "sha256": "7671b5e22dfce0c708a288e041db8fcc918d94b1095c59db3453d5f032404608"
+        },
+        "IMU8.imu": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB2/IMU8.imu",
+          "sha256": "362132eadcae81fbbb23fd88239e345aa4d67a3a35594a0dc09d51eba4d299c5"
+        },
+        "GO2_RP.csv": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB2/GO2_RP.csv",
+          "sha256": "6adac6803f0f363758bac60a95b155f6d7a0f2cbb52af526c90b353175578a8e"
+        },
+        "GO2_HV.csv": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB2/GO2_HV.csv",
+          "sha256": "220d9db81a12d46d3854927dd1c816dc4d94075d20e914867c32a246e2f500a8"
+        }
+      },
+      "body_offset_s": -1.1,
+      "hv_a1_reassociated_at_shifted_body_time": true
+    },
+    "NMB3": {
+      "body": "/mnt/g/LegSA-GINS-project/data/raw/XB_PG/2026-01-05/高层数据/nmb3.txt",
+      "body_sha256": "56daf49c6cea2d9484d3a5d4a34329f71ec4bd8609530d40ce7e4cf6cd4ee636",
+      "receiver_folder": "vrtk2_a87c6e_2026-01-05-11-32-27_minimal",
+      "expected_observed_epochs": 81950,
+      "window_utc_day_s": [
+        41564.609815979005,
+        41929.74181237221
+      ],
+      "status": "PREPARED",
+      "native_window": [
+        41569.003810548784,
+        41929.74181237221
+      ],
+      "initialization_gnss_time": 41569.00021481514,
+      "initialization_yaw_deg": 0.752592583620185,
+      "input_gyro_bias": [
+        0.0020953747959574684,
+        0.0004818311359074235,
+        0.0011134838774136144
+      ],
+      "rd_valid_epochs": 1004,
+      "heading_epochs": 904,
+      "gps": {
+        "gps_week": 2400,
+        "leap_seconds": 18
+      },
+      "providers": {
+        "GNSS18.gnss": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB3/GNSS18.gnss",
+          "sha256": "70844ca9a61b6d5b678200320039bc9d4e9dececaeb8502ec90846f21f62765d"
+        },
+        "DUAL_HEADING.csv": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB3/DUAL_HEADING.csv",
+          "sha256": "a16ced49b58f2370a0d8f2715c2cdff6266c160dfc3342e0e57ba75b920ce15e"
+        },
+        "RAW_DOPPLER.csv": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB3/RAW_DOPPLER.csv",
+          "sha256": "9196b42f15b935164b081b4ba8b58c6ec7e2d885d7c212ee0d65248975504e1e"
+        },
+        "IMU8.imu": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB3/IMU8.imu",
+          "sha256": "79ba0d7f75f3a799d48500b83d298a2045a78d840e4bd4e9d4131bf64e6294c7"
+        },
+        "GO2_RP.csv": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB3/GO2_RP.csv",
+          "sha256": "e9f84c072b363b26f1ccee90f5e07897389455df8db8c839fd75bcafd72b7272"
+        },
+        "GO2_HV.csv": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB3/GO2_HV.csv",
+          "sha256": "a8117b8f6a45071a9a4b4be47411174ebeea4462957ab0f9b3178a747cdd2105"
+        }
+      },
+      "body_offset_s": -1.1,
+      "hv_a1_reassociated_at_shifted_body_time": true
+    },
+    "NMB4": {
+      "body": "/mnt/g/LegSA-GINS-project/data/raw/XB_PG/2026-01-05/高层数据/nmb4.txt",
+      "body_sha256": "e4bf521973f91bbca2c17119e2710dfd9aa1e9ee3f845776e6da75e33899ecad",
+      "receiver_folder": "vrtk2_a87c6e_2026-01-05-11-39-50_minimal",
+      "expected_observed_epochs": 78609,
+      "window_utc_day_s": [
+        41990.861807966234,
+        42338.60179510117
+      ],
+      "status": "PREPARED",
+      "native_window": [
+        41996.00179710388,
+        42338.60179510117
+      ],
+      "initialization_gnss_time": 41996.00022172928,
+      "initialization_yaw_deg": 1.2050890028817776,
+      "input_gyro_bias": [
+        -0.007147923523909412,
+        -0.0027253504213140805,
+        -0.001037033081993265
+      ],
+      "rd_valid_epochs": 858,
+      "heading_epochs": 697,
+      "gps": {
+        "gps_week": 2400,
+        "leap_seconds": 18
+      },
+      "providers": {
+        "GNSS18.gnss": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB4/GNSS18.gnss",
+          "sha256": "87612eda444c59f6aba03da59a619423991b3bb4a6ac7047292cfb94005d8a5f"
+        },
+        "DUAL_HEADING.csv": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB4/DUAL_HEADING.csv",
+          "sha256": "a3604a743b11613e6e23d6daf25d55faf812b4717a5ce42a2ee5c861c9e085c5"
+        },
+        "RAW_DOPPLER.csv": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB4/RAW_DOPPLER.csv",
+          "sha256": "21fe1f5bec144eda046bdaa49f56137982044907a405692915b8aff6a2f1c426"
+        },
+        "IMU8.imu": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB4/IMU8.imu",
+          "sha256": "00943b58705044e2566c23ac40cc6c48a0bf2c2b51a157a663ba28875d74e07f"
+        },
+        "GO2_RP.csv": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB4/GO2_RP.csv",
+          "sha256": "fafa8ca2354bd2330bf67bea62eea347695443e3a87d377e1326a5a75505cb87"
+        },
+        "GO2_HV.csv": {
+          "path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB4/GO2_HV.csv",
+          "sha256": "fd85084d98a0b978fbb268218c79409152dd5053fa4beeb1c192254c151003c4"
+        }
+      },
+      "body_offset_s": -1.1,
+      "hv_a1_reassociated_at_shifted_body_time": true
+    },
+    "XB1": {
+      "body": "/mnt/g/LegSA-GINS-project/data/raw/XB_PG/2026-01-05/高层数据/xb1.txt",
+      "body_sha256": "486ee147977177f58e1f5cc337d2aa833ad99d3254d8c7059d0741ace549e5cb",
+      "receiver_folder": "vrtk2_a87c6e_2026-01-05-12-25-13_minimal",
+      "expected_observed_epochs": 91751,
+      "window_utc_day_s": [
+        44715.804621219635,
+        45111.444596767426
+      ],
+      "status": "NO_INIT_NO_VALID_DUAL_HEADING",
+      "body_offset_s": -1.1
+    },
+    "XB2": {
+      "body": "/mnt/g/LegSA-GINS-project/data/raw/XB_PG/2026-01-05/高层数据/xb2.txt",
+      "body_sha256": "7fba7f5072552f0367fe7bcfecd8fecf09bca2f7b6b845ea2a46ea6d897fc9ca",
+      "receiver_folder": "vrtk2_a87c6e_2026-01-05-12-33-29_minimal",
+      "expected_observed_epochs": 84434,
+      "window_utc_day_s": [
+        45219.52577614784,
+        45578.188589811325
+      ],
+      "status": "NO_INIT_NO_VALID_DUAL_HEADING",
+      "body_offset_s": -1.1
+    },
+    "XB3": {
+      "body": "/mnt/g/LegSA-GINS-project/data/raw/XB_PG/2026-01-05/高层数据/xb3.txt",
+      "body_sha256": "ae3c9348cb65d16066e6b110a3f01f4d5dab38642e228c7e8ebeaa03541c0a0f",
+      "receiver_folder": "vrtk2_a87c6e_2026-01-05-12-40-53_minimal",
+      "expected_observed_epochs": 80304,
+      "window_utc_day_s": [
+        45655.64660382271,
+        46002.082597494125
+      ],
+      "status": "NO_INIT_NO_VALID_DUAL_HEADING",
+      "body_offset_s": -1.1
+    },
+    "XB4": {
+      "body": "/mnt/g/LegSA-GINS-project/data/raw/XB_PG/2026-01-05/高层数据/xb4.txt",
+      "body_sha256": "ae70e45ab78902d6993e0024bd297c47a0da6d30478eaee1830a2bfd974b7843",
+      "receiver_folder": "vrtk2_a87c6e_2026-01-05-12-49-30_minimal",
+      "expected_observed_epochs": 79736,
+      "window_utc_day_s": [
+        46168.80458903313,
+        46529.4965941906
+      ],
+      "status": "NO_INIT_NO_VALID_DUAL_HEADING",
+      "body_offset_s": -1.1
+    }
+  },
+  "numerical_parameters_from": {
+    "F03": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/IMU_V3_FIX_20261004/stage_07/CONFIGS/IMUFIX_BY2_F03_S00.yaml",
+      "sha256": "7681b893e04e9df933c8002f969f1f3771057c20315e3d428e177ca36ab20289"
+    },
+    "F04": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/IMU_V3_FIX_20261004/stage_07/CONFIGS/IMUFIX_BY2_F04_S00.yaml",
+      "sha256": "1c55efce0e49cd2408cff4d1f2384e13b056a2a1b4b3cf38e1367f564c7efa34"
+    }
+  },
+  "technical_retry": "Inline serialization only; original numerical parameters and providers retained",
+  "superseded_native_seal_sha256": "7a69fff7c4991453e1c734d41c65286d16bff60b653e3db586af7fc5655e55d0",
+  "alignment": "Effective input-event alignment from GNSS/IMU and GNSS/SDK velocity; not hardware clock calibration",
+  "zero_offset_plan_sha256": "ba73f5476662af14e0dd8376450c7c1db1bf1b686145f1f17ef3ab10e2e9ec31",
+  "zero_offset_native_seal_sha256": "0420aaaa077b083268e0071595778b0dc7da035f3f7d7c0995a80e1f4bdd7f17"
+}

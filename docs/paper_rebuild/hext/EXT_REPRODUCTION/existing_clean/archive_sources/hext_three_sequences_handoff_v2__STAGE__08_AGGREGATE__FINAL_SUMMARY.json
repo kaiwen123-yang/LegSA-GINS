@@ -1,0 +1,476 @@
+{
+  "status": "COMPLETED_H_EXT_03_AGGREGATION",
+  "selection": {
+    "selected_config": "S",
+    "selected_method_id": "LC01-S",
+    "by2_lit_yaw_rmse_deg": 2.9948274600591076,
+    "by2_shared_yaw_rmse_deg": 1.5392385536245534,
+    "rule": "smaller BY2 C00 v3 LC01 yaw; uniform configuration across all sequences; both versions retained",
+    "authorization": "H-EXT-03 prompt 2026-09-16",
+    "decision": "D10_RECORDED_SELECTION",
+    "amended_after_results_seen": true,
+    "paper_primary_starts": {
+      "BY2": "FILE_START",
+      "BY2H": "CONTRACT_START",
+      "BY2O": "FILE_START"
+    }
+  },
+  "primary_starts": {
+    "BY2": "FILE_START",
+    "BY2H": "CONTRACT_START",
+    "BY2O": "FILE_START"
+  },
+  "native_registered_count": 14,
+  "external_evaluation_terminal_records": 28,
+  "row_counts": {
+    "v3": 52,
+    "v2": 52
+  },
+  "new_native_budget": 0,
+  "new_evaluator_budget": 11,
+  "evaluation_disposition_counts": {
+    "COMPLETED": 18,
+    "AVAILABLE_GEOMETRIC_AUDIT_FAIL": 8,
+    "NOT_RUN_ALGORITHM_FAILURE": 2
+  },
+  "failure_classification_counts": {
+    "NONE": 26,
+    "ALGORITHM_FAILURE_DIVERGED": 2
+  },
+  "native_classification_counts": {
+    "COMPLETED": 13,
+    "ALGORITHM_FAILURE_DIVERGED": 1
+  },
+  "budget_ledger": {
+    "native_actual": 0,
+    "native_reused": 14,
+    "evaluator_actual": 10,
+    "reused_evaluations": 16,
+    "skipped_algorithm_failure_slots": 2,
+    "new_unavailable_evaluation_failed": 0,
+    "historical_failed_evaluator_invocations": 1,
+    "historical_evaluator_actual": 17,
+    "native_budget": 0,
+    "evaluator_budget": 11,
+    "prereg_identity_native": 0,
+    "prereg_identity_evaluator": 0,
+    "evaluator_retry_count": 0,
+    "total_evaluator_actual_including_h02": 27,
+    "total_evaluation_terminal_slots": 28
+  },
+  "frozen_sources": {
+    "pins": {
+      "v21_v3": "e26dfcd830d6c711ffbb7debd68293fbf7b7ea28240e16bce582381b61ea6a0b",
+      "v21_v2": "6c5a165eaf68bf762cbc803466b4496a5b522dba968785115db9d0338990044d",
+      "p07_v3": "d91f53aaf855efc8c533a6f15a9c6c933e87bafb2bcc9bd169ba862163c82c01",
+      "parity_summary": "7ad4294999bdb7b3668bb7cd59869f49a42fb0d840f76b83c94b0704aee64d75"
+    },
+    "sources": [
+      {
+        "version": "v3",
+        "v21_source_sha256": "e26dfcd830d6c711ffbb7debd68293fbf7b7ea28240e16bce582381b61ea6a0b"
+      },
+      {
+        "version": "v2",
+        "v21_source_sha256": "6c5a165eaf68bf762cbc803466b4496a5b522dba968785115db9d0338990044d"
+      }
+    ]
+  },
+  "result_sources": [
+    {
+      "run_id": "BY2__LC01-S__FILE_START",
+      "version": "v3",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2__LC01-S__FILE_START/EVALUATION_RESULT.json",
+      "sha256": "1baa2265cca3fddc02182278871ea600bc1058a8cbfd78f94a00975c84952baa",
+      "evaluation_status": "COMPLETED",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2__LC01-S__FILE_START",
+      "version": "v2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v2/BY2__LC01-S__FILE_START/EVALUATION_RESULT.json",
+      "sha256": "6676c54c2980001e6663b2bd64175a41577f7553cf4323e0d19d783a02763a96",
+      "evaluation_status": "COMPLETED",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2__EXT05C-S__FILE_START",
+      "version": "v3",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2__EXT05C-S__FILE_START/EVALUATION_RESULT.json",
+      "sha256": "f8c7cfa4d90d848d2c442a6b531c23228f6b796280f3eabbc58e119c20ed3680",
+      "evaluation_status": "COMPLETED",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2__EXT05C-S__FILE_START",
+      "version": "v2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v2/BY2__EXT05C-S__FILE_START/EVALUATION_RESULT.json",
+      "sha256": "efc8519c89ecef03bbeedc0052ccb30a13cee078dc72fe1c07a4a32e7a41ecd7",
+      "evaluation_status": "COMPLETED",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2H__LC01__FILE_START",
+      "version": "v3",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2H__LC01__FILE_START/EVALUATION_RESULT.json",
+      "sha256": "0c908613467f46b740d0736828a3b52c71102903fde1b5b2a44cb3962b0aec49",
+      "evaluation_status": "AVAILABLE_GEOMETRIC_AUDIT_FAIL",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2H__LC01__FILE_START",
+      "version": "v2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v2/BY2H__LC01__FILE_START/EVALUATION_RESULT.json",
+      "sha256": "066246332f9283d7569538f3f203782ae38239d4f1103b978bc5bc5fca3efe95",
+      "evaluation_status": "AVAILABLE_GEOMETRIC_AUDIT_FAIL",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2H__LC01__CONTRACT_START",
+      "version": "v3",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2H__LC01__CONTRACT_START/EVALUATION_RESULT.json",
+      "sha256": "41beb7a87a2a7116b1cce5bc2e8766d315a2cd4e74d4c464e019e7160d00d715",
+      "evaluation_status": "AVAILABLE_GEOMETRIC_AUDIT_FAIL",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2H__LC01__CONTRACT_START",
+      "version": "v2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v2/BY2H__LC01__CONTRACT_START/EVALUATION_RESULT.json",
+      "sha256": "24111584c7b83bfec64cda54b5b0f2054b372ffdff3896f3d68639c4c4a82da6",
+      "evaluation_status": "AVAILABLE_GEOMETRIC_AUDIT_FAIL",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2H__EXT05C__FILE_START",
+      "version": "v3",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2H__EXT05C__FILE_START/EVALUATION_RESULT.json",
+      "sha256": "c59b06776597a06ac9ca08f476f0acb88e340d62e83c2bdcf436b2eca6c8ba36",
+      "evaluation_status": "COMPLETED",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2H__EXT05C__FILE_START",
+      "version": "v2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v2/BY2H__EXT05C__FILE_START/EVALUATION_RESULT.json",
+      "sha256": "f03bb1d4fe77ce67b003e323b26904b5f2f5ca0a6061810210c3e1ede4f6f2ba",
+      "evaluation_status": "COMPLETED",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2H__EXT05C__CONTRACT_START",
+      "version": "v3",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2H__EXT05C__CONTRACT_START/EVALUATION_RESULT.json",
+      "sha256": "447cecb42ba2392ac1291e5282f56f0a705a8c7937679a2d985875dfaf604918",
+      "evaluation_status": "COMPLETED",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2H__EXT05C__CONTRACT_START",
+      "version": "v2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v2/BY2H__EXT05C__CONTRACT_START/EVALUATION_RESULT.json",
+      "sha256": "15dee1cc4eb82202cce313e6acb4d27a5142663bc85ec5a09f38cf7c79dcfb39",
+      "evaluation_status": "COMPLETED",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2H__LC01-S__FILE_START",
+      "version": "v3",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2H__LC01-S__FILE_START/EVALUATION_RESULT.json",
+      "sha256": "663c7b66c33ddb1281a431213a52dd6a202c5fd786409d2255d694eb2bff95ca",
+      "evaluation_status": "AVAILABLE_GEOMETRIC_AUDIT_FAIL",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2H__LC01-S__FILE_START",
+      "version": "v2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v2/BY2H__LC01-S__FILE_START/EVALUATION_RESULT.json",
+      "sha256": "ff3534b31f01fc2fc50a7fec0dbdeb367f4672a87f8751a4ca82fd235790bd14",
+      "evaluation_status": "AVAILABLE_GEOMETRIC_AUDIT_FAIL",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2H__LC01-S__CONTRACT_START",
+      "version": "v3",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2H__LC01-S__CONTRACT_START/EVALUATION_RESULT.json",
+      "sha256": "8fbfbc6fad6cd781e1050d06e5a4dc1f7caf1e8ea2d0deb096790b24cc305b12",
+      "evaluation_status": "AVAILABLE_GEOMETRIC_AUDIT_FAIL",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2H__LC01-S__CONTRACT_START",
+      "version": "v2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v2/BY2H__LC01-S__CONTRACT_START/EVALUATION_RESULT.json",
+      "sha256": "da7d5e7af04cf6c7b5510c7f5fe9fd707fe04f14047d0641ceb18140e174b70a",
+      "evaluation_status": "AVAILABLE_GEOMETRIC_AUDIT_FAIL",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2H__EXT05C-S__FILE_START",
+      "version": "v3",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/03_CONTINUATION/CLASSIFICATIONS/BY2H__EXT05C-S__FILE_START/v3/EVALUATION_RESULT.json",
+      "sha256": "1eac4a3ff80a1ca1c6d6bfb9701c5491f0650060726f99b24d81d92542501936",
+      "evaluation_status": "NOT_RUN_ALGORITHM_FAILURE",
+      "failure_classification": "ALGORITHM_FAILURE_DIVERGED",
+      "evaluation_invoked": false,
+      "trace_open_count": 0
+    },
+    {
+      "run_id": "BY2H__EXT05C-S__FILE_START",
+      "version": "v2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/03_CONTINUATION/CLASSIFICATIONS/BY2H__EXT05C-S__FILE_START/v2/EVALUATION_RESULT.json",
+      "sha256": "13e319ff17ad89b15f8e749d48914131c149726f666d481ac2a906f0e6d576db",
+      "evaluation_status": "NOT_RUN_ALGORITHM_FAILURE",
+      "failure_classification": "ALGORITHM_FAILURE_DIVERGED",
+      "evaluation_invoked": false,
+      "trace_open_count": 0
+    },
+    {
+      "run_id": "BY2H__EXT05C-S__CONTRACT_START",
+      "version": "v3",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2H__EXT05C-S__CONTRACT_START/EVALUATION_RESULT.json",
+      "sha256": "6f5fa0fb51d8e73ff41d4f5b5ef5e5142d291deeef651c7be9035cff42dff343",
+      "evaluation_status": "COMPLETED",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2H__EXT05C-S__CONTRACT_START",
+      "version": "v2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v2/BY2H__EXT05C-S__CONTRACT_START/EVALUATION_RESULT.json",
+      "sha256": "967c0d70b361f3f315243b5f7c6f97616801264ac23b9eb23486da9e4fef9b1b",
+      "evaluation_status": "COMPLETED",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2O__LC01__FILE_START",
+      "version": "v3",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2O__LC01__FILE_START/EVALUATION_RESULT.json",
+      "sha256": "c53c8082ff767c5425c74c5c4e05513ebec256492d1ce901423c165c66065aa0",
+      "evaluation_status": "COMPLETED",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2O__LC01__FILE_START",
+      "version": "v2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v2/BY2O__LC01__FILE_START/EVALUATION_RESULT.json",
+      "sha256": "da1e3322b16d42333e7f2bb68e5a18a668d47e0de891afb1a389c0a464e69598",
+      "evaluation_status": "COMPLETED",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2O__EXT05C__FILE_START",
+      "version": "v3",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2O__EXT05C__FILE_START/EVALUATION_RESULT.json",
+      "sha256": "3356600858c39cc1edb87cd6a995cee9ad5630dc4d0ea1ec58444bbaccf1b036",
+      "evaluation_status": "COMPLETED",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2O__EXT05C__FILE_START",
+      "version": "v2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v2/BY2O__EXT05C__FILE_START/EVALUATION_RESULT.json",
+      "sha256": "177411fcf819c4d9f02ddd55a506b05642568940abfa296de278625694e05292",
+      "evaluation_status": "COMPLETED",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2O__LC01-S__FILE_START",
+      "version": "v3",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2O__LC01-S__FILE_START/EVALUATION_RESULT.json",
+      "sha256": "43c5321b9134fff78b347c80963c2e3e3dea1cd2a5318b3fb5946f6435142a95",
+      "evaluation_status": "COMPLETED",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2O__LC01-S__FILE_START",
+      "version": "v2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v2/BY2O__LC01-S__FILE_START/EVALUATION_RESULT.json",
+      "sha256": "a6a572c6ac373b77714faa5615f92081bef3b45a8efa6a6379310ceb2b797cb8",
+      "evaluation_status": "COMPLETED",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2O__EXT05C-S__FILE_START",
+      "version": "v3",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2O__EXT05C-S__FILE_START/EVALUATION_RESULT.json",
+      "sha256": "c34de1880df09eb41f73f597cd3c3b3bd1b196832efd83e65756aad0752a0873",
+      "evaluation_status": "COMPLETED",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    },
+    {
+      "run_id": "BY2O__EXT05C-S__FILE_START",
+      "version": "v2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v2/BY2O__EXT05C-S__FILE_START/EVALUATION_RESULT.json",
+      "sha256": "02a60785d4c3ac82ae3e6cc613261211bd51702120553173716136284ea41844",
+      "evaluation_status": "COMPLETED",
+      "failure_classification": "NONE",
+      "evaluation_invoked": true,
+      "trace_open_count": 1
+    }
+  ],
+  "code_commit": "b6aaece1b71737693e39ec72ce0ad0726b188592",
+  "trace_payload_reads": 0,
+  "solver_invocations": 0,
+  "evaluator_invocations": 0,
+  "data_mode": "real_external_and_frozen_comparison",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "files_sha256": {
+    "BODY_FRAME_BIAS.csv": "6aa105f0d6657455beed676de48f97124b1fb7917c7bc60075c957cf06a600c2",
+    "BOUNDED_OUTPUT_GATE.csv": "3196579985a90c7f3d031a1702f3e19c5a2a9c09606ca8873b6fa0a0f039b5b6",
+    "D8_RETROSPECTIVE.json": "d13d78c54d2f5cb765080b9e5c1b715502592c231b4a9f00156c9c9252b2d614",
+    "DELTA_TABLE_V3.csv": "ce7efab8ee106b91e113a090e1148675fb6d60457dbda5702ae657b4aa54c8b9",
+    "FIELD_DEFINITIONS.json": "b7f995a1d6c9a16bfbf239a38ac3bd0817cd98b72d8ccf04c7c2ae3c0f042a4c",
+    "GAP_EVENTS.csv": "6bfc5054ffbe5171faf025e231da9fc47a9e5491e07c4e93cf66d7f0839934c9",
+    "GEOMETRIC_AUDIT.csv": "cfda4d43dd700545b84373792bbaa110a24eacdc72a8ed9fcca5e0cddf9f53ab",
+    "HORIZONTAL_TABLE_V2_THREE_SEQUENCES.csv": "ae8e49a224c56a3ebf224ab32ef0b8843d6522f00aec2cd41edd25e10e7251fd",
+    "HORIZONTAL_TABLE_V3_THREE_SEQUENCES.csv": "8c0535273809777ccb873ded828a5e8f4c2ef4d80ac4b244f1c8ce4f71647348",
+    "LEGSA_GAP_DIAGNOSTIC.csv": "86db2318e1136c6e1d9010d4e2b5d3dd26a8e7c6df374bf0b0bf4c8115acf4bd",
+    "LEGSA_GAP_DIAGNOSTIC.json": "38c28f828018945c558067aff36752ca387fb5b9e89fc74e4edf21686db88b56",
+    "SOURCE_RESOLUTION.json": "4e34c64ab259e5bef035c93634ed862de38dca8a1ee0841cfe35509a39040162",
+    "WINDOW_SEGMENT_SUMMARY.csv": "da3e5037d1fe7c1f2492e2a6521df2dc2e65d68f5a59ced5f8867d0b04f723fe"
+  },
+  "source_resolution_sha256": "4e34c64ab259e5bef035c93634ed862de38dca8a1ee0841cfe35509a39040162",
+  "native_outputs_modified": false,
+  "historical_failed_evaluation_modified": false,
+  "original_hard_stop_package_sha256": "efb64041e5add0b8d47542e446ae80abe3e038a9bdc0ee1d9620f4216764cc15",
+  "readonly_frozen_exact_window_segments": true,
+  "trace_open_count_new": 10,
+  "retrospective_D8": {
+    "evaluations_checked": 16,
+    "all_passed": true,
+    "rows": [
+      {
+        "run_id": "BY2__LC01-S__FILE_START",
+        "version": "v3",
+        "passed": true
+      },
+      {
+        "run_id": "BY2__LC01-S__FILE_START",
+        "version": "v2",
+        "passed": true
+      },
+      {
+        "run_id": "BY2__EXT05C-S__FILE_START",
+        "version": "v3",
+        "passed": true
+      },
+      {
+        "run_id": "BY2__EXT05C-S__FILE_START",
+        "version": "v2",
+        "passed": true
+      },
+      {
+        "run_id": "BY2H__LC01__FILE_START",
+        "version": "v3",
+        "passed": true
+      },
+      {
+        "run_id": "BY2H__LC01__FILE_START",
+        "version": "v2",
+        "passed": true
+      },
+      {
+        "run_id": "BY2H__LC01__CONTRACT_START",
+        "version": "v3",
+        "passed": true
+      },
+      {
+        "run_id": "BY2H__LC01__CONTRACT_START",
+        "version": "v2",
+        "passed": true
+      },
+      {
+        "run_id": "BY2H__EXT05C__FILE_START",
+        "version": "v3",
+        "passed": true
+      },
+      {
+        "run_id": "BY2H__EXT05C__FILE_START",
+        "version": "v2",
+        "passed": true
+      },
+      {
+        "run_id": "BY2H__EXT05C__CONTRACT_START",
+        "version": "v3",
+        "passed": true
+      },
+      {
+        "run_id": "BY2H__EXT05C__CONTRACT_START",
+        "version": "v2",
+        "passed": true
+      },
+      {
+        "run_id": "BY2H__LC01-S__FILE_START",
+        "version": "v3",
+        "passed": true
+      },
+      {
+        "run_id": "BY2H__LC01-S__FILE_START",
+        "version": "v2",
+        "passed": true
+      },
+      {
+        "run_id": "BY2H__LC01-S__CONTRACT_START",
+        "version": "v3",
+        "passed": true
+      },
+      {
+        "run_id": "BY2H__LC01-S__CONTRACT_START",
+        "version": "v2",
+        "passed": true
+      }
+    ],
+    "existing_completed_evaluations_modified": false
+  }
+}

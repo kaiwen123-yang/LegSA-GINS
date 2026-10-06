@@ -1,0 +1,19 @@
+{
+  "group": "A2",
+  "unique_native_identities": 3,
+  "native_invocations": 6,
+  "native_failed": 0,
+  "historical_output_hash_checks": 15,
+  "observed_output_hash_checks": 15,
+  "hash_mismatches": 0,
+  "manifest_mismatches": 0,
+  "new_reference_reads": 0,
+  "new_evaluator_calls": 0,
+  "new_provider_calls": 0,
+  "new_performance_evaluations": 0,
+  "independent_validation_calculation": true,
+  "closed_loop_fix_applied": false,
+  "data_mode": "semisynthetic",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true
+}

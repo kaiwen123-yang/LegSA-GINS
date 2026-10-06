@@ -1,0 +1,221 @@
+{
+  "reviewer": "root",
+  "candidate_sha256": "4b69ee1f18624253d3a7fbef1716efdac0926a3e659888341ea37a4599d93be1",
+  "candidate_slide_count": 96,
+  "actual_individual_visual_review_pages": [
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    53
+  ],
+  "images": [
+    {
+      "page": 21,
+      "file": "slide-021.png",
+      "sha256": "4be0284daceaaa561026c830c45539eb51b50a6f0af1eec3ae99854f6de66f45",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 22,
+      "file": "slide-022.png",
+      "sha256": "16ea15001dfd126e00874d82457d8f8191d2f2c03a51a411f79f1fa194e3a08c",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 23,
+      "file": "slide-023.png",
+      "sha256": "9ecbf9a2f6557e34036ef44544e60b4db221c470374a432ff0b8d76d3eea8ad3",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 24,
+      "file": "slide-024.png",
+      "sha256": "1b8a5d864b12ecf9c33eed0f517ed1328ad6f40e7f088c60bf8c32118e6873af",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 25,
+      "file": "slide-025.png",
+      "sha256": "4ef6535e4a49b37a08d660aae83000b26b735001dcb3e00d4b00731e6fc4a863",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 26,
+      "file": "slide-026.png",
+      "sha256": "761dc44a4f33f3aa1017a56c7af2f6b369fa0ee5fba1ff18f6deb734c4735676",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 27,
+      "file": "slide-027.png",
+      "sha256": "1a874e7adb56f59f51eee02132238fb6889ce9e5ab12f830e54dbf2297b92e8b",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 28,
+      "file": "slide-028.png",
+      "sha256": "a974c9ca9b47f35639548637752c2f2ee4a1e7021202e8b0d5cb68cca90787c0",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 29,
+      "file": "slide-029.png",
+      "sha256": "d0a9e142e65499df852086c2c613f1e8df91a5317dd03dc8aa186d6fda462dc6",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 30,
+      "file": "slide-030.png",
+      "sha256": "613230692f087a588033f48d266d3342d2aa62ef3764db5b90ba4bca39569869",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 31,
+      "file": "slide-031.png",
+      "sha256": "1c9d2cebd83041886243788ae59f97ec011a3d9343c04d2870873568b9d36306",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 32,
+      "file": "slide-032.png",
+      "sha256": "e0da6bd588fc482b797b702821b0fdafba66ceb90539df2ed69664bd52677b7f",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 33,
+      "file": "slide-033.png",
+      "sha256": "a4547eec9b915ed76d0a4036f5d71680a066ba9c1da012ab1b0a96f31b6b68a6",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 34,
+      "file": "slide-034.png",
+      "sha256": "e4e6e2a4b3fd0bd75e7aa33defa5e37c00dfd4ae0b3e5ca8906ae568d6bb4ea7",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 35,
+      "file": "slide-035.png",
+      "sha256": "d09837e35b8ce34218bc4844af074905710e4a4b74e95bff93960cb882a0f05c",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 36,
+      "file": "slide-036.png",
+      "sha256": "646001eb24b7994c8915192f9ae94a5f7f968f4a4693ee6028a2a0fc381074c1",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 37,
+      "file": "slide-037.png",
+      "sha256": "aaaffe865a1ab567e20236ec343bd00c22eb561a6322fbf3f1675114faf4c9de",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 38,
+      "file": "slide-038.png",
+      "sha256": "8856a266f7d4d7c96fc7aea5b317162459f65adad23515df56e706cdae14371d",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 39,
+      "file": "slide-039.png",
+      "sha256": "7b56811e52bc847f140b48340fca3a2229baf1edb227c1ac56848b180f2ec7d3",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 40,
+      "file": "slide-040.png",
+      "sha256": "2749b751b1fbc2e5c86b9b8c3b30720be79cbe6278ee1c2c68114a262b375988",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 41,
+      "file": "slide-041.png",
+      "sha256": "4516fa5188f5fc800469372da7fe1341635386137a7e080196d6fc3553b09e75",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 42,
+      "file": "slide-042.png",
+      "sha256": "8614c18e0d8a358393db1fe34c4d55ca73d593531e7cf16c91b8668d51b875c1",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 43,
+      "file": "slide-043.png",
+      "sha256": "85f0501134e507eb260dbc8b161c40136bc2229b49e7ee932f20bbdd1bc0732e",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 44,
+      "file": "slide-044.png",
+      "sha256": "634c987915202b97caa08126fd9c87ed85e7af96f06cde6328a87df9233e7ff7",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 45,
+      "file": "slide-045.png",
+      "sha256": "57e2d4d94ecb828244b366f2eecd2ac1107c1e3c8cf94e0ebe4959d1b25f445c",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 46,
+      "file": "slide-046.png",
+      "sha256": "79c73ff6094b408cb972ccbf117ccdc56e58d3e1c7b2ed5aba7db0595444bfb9",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 47,
+      "file": "slide-047.png",
+      "sha256": "8e254133fa2bee9ac392bac7a2f5c80638c303b52f54746b932aadd2c8cfade7",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 48,
+      "file": "slide-048.png",
+      "sha256": "260fde73fbe64fbb50473a15a015c2d8165c2236ccc607b536932071e8d47909",
+      "same_as_authoring_png": true
+    },
+    {
+      "page": 53,
+      "file": "slide-053.png",
+      "sha256": "0b99c4ae5ae293a7363a710098c3484283705325f895ed3a7ef3aca0c0ff0be5",
+      "same_as_authoring_png": false
+    }
+  ],
+  "findings": [
+    {
+      "page": 32,
+      "issue": "F02/F03 interpretation must be joint RV and Scheme-C structural comparison; archived numeric results unchanged. Same issue on 33/34.",
+      "required_action": "Correct titles, legends and notes with native-manifest evidence."
+    }
+  ],
+  "review_boundary": "21-32 initially viewed in authoring render, then verified byte-identical final rendered PNG; 33-48 and 53 directly viewed final-exported PNG. Image layout readable. No scientific rerun. Final r2 requires corrected pages and hash linkage.",
+  "final_deck_accepted": false
+}

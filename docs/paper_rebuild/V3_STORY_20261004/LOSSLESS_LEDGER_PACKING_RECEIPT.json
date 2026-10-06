@@ -1,0 +1,62 @@
+{
+  "schema": "v3_story_lossless_ledger_packing.v1",
+  "captured_utc": "2026-10-04T09:52:01.227763+00:00",
+  "all_checks_passed": true,
+  "original_registry_validation_receipt_sha256": "3b66d71a339d145a84fa0dd37a4b742ad0378852419fc19b88b7653cedc0f71c",
+  "archives": [
+    {
+      "csv_name": "TASK_LEDGER.csv",
+      "gzip_name": "TASK_LEDGER.csv.gz",
+      "uncompressed_bytes": 22234632,
+      "uncompressed_sha256": "dec10c497a4c21030a56cc9c5f7c7aa0cc4b3834ed5c1af8784cc47f329d9b70",
+      "compressed_bytes": 1900218,
+      "compressed_sha256": "c2c15bfab666340b7b5bd71970fb18e8109b9cfe92c3a21f75494be2060f155d",
+      "decompressed_data_rows": 6468,
+      "column_count": 47,
+      "gzip_mtime": 0,
+      "gzip_embedded_filename": "",
+      "roundtrip_exact_original_bytes": true
+    },
+    {
+      "csv_name": "METRIC_LEDGER.csv",
+      "gzip_name": "METRIC_LEDGER.csv.gz",
+      "uncompressed_bytes": 42228528,
+      "uncompressed_sha256": "f6a45ef98796ef40699f1395d2f2fbc7b9ffe973ecb7e69e8ec63158cf276f0d",
+      "compressed_bytes": 11957003,
+      "compressed_sha256": "d67f9cbdc3e5ab21653542de6ea63e8d59a3042716fceca5f81072a84610dd95",
+      "decompressed_data_rows": 12936,
+      "column_count": 165,
+      "gzip_mtime": 0,
+      "gzip_embedded_filename": "",
+      "roundtrip_exact_original_bytes": true
+    },
+    {
+      "csv_name": "NATIVE_ACTION_LEDGER.csv",
+      "gzip_name": "NATIVE_ACTION_LEDGER.csv.gz",
+      "uncompressed_bytes": 14614674,
+      "uncompressed_sha256": "e8d10337b8f46fdc1f6cb5c8fbbea3eadb8c8dbc4490eec48d700742cd306d54",
+      "compressed_bytes": 244919,
+      "compressed_sha256": "ded858f2b45d7174cd6d21836674bbe14cfda3ef3f655e063d2bb6b132aa7562",
+      "decompressed_data_rows": 6468,
+      "column_count": 83,
+      "gzip_mtime": 0,
+      "gzip_embedded_filename": "",
+      "roundtrip_exact_original_bytes": true
+    }
+  ],
+  "exact_case_id_and_seed_catalog_checked": true,
+  "case_cells588_all11_methods": true,
+  "original_derived_plain_census_modified": false,
+  "plain_local_copies_preserved": true,
+  "plain3_files_ignored_by_exact_local_names": true,
+  "scientific_original_source_or_results_modified": false,
+  "science_calls": 0,
+  "actual_external_reader_source": "/mnt/g/LegSA-GINS-project/修复_20261004/build_v3_story_ledger.py",
+  "actual_external_reader_sha256_captured_after_run": "1cd771f8a4c95b68f5d6e72bd755c13aa2e10b486b2c6d0f927aba1ebc3f3fee",
+  "portable_cli_reader_derivation": "same ledger logic, machine absolute roots replaced by three required CLI arguments; portable variant not rerun",
+  "portable_builder_sha256": "1d73747625a07c088844c2829990f456836d2721b2c6c6c28fb5b676d3ef0218",
+  "read_helper_sha256": "a9ad87ab4abdfbadb32f6b68656052ad951c55ae5cab398b03b54b4a67af1e6b",
+  "original_plain_output_sizes_sum": 79077834,
+  "tracked_gzip_sizes_sum": 14102140,
+  "coverage_note": "Lossless archive full membership/content checks are machine checks, not perword semantic read."
+}

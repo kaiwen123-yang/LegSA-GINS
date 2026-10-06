@@ -1,0 +1,36 @@
+{
+  "source_files": [
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/NATURAL_METHOD_RESULTS.csv",
+      "sha256": "a8419158954c52ddeb948ce9460f751998862e09f5e24839461e2f040262aa8e"
+    },
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/FULL_MATRIX_OUTCOME_LEDGER.csv",
+      "sha256": "8356405c84e4ebf5cbf4343eb00e23a3f4fce51decf5b8e3226772c38971e492"
+    },
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/SINGLE_MODULE_PAIRED_DIRECTION.csv",
+      "sha256": "d3d1fdd85b113d86828d24d8ed1963761891e37c1d664888def8ce4bf2bc1baa"
+    },
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/editorial/ORIGINAL_V3_ADD_HV_WHOLE_WINDOW_BY_DURATION.csv",
+      "sha256": "3b2b6c20a930354974e25bd2f1646fe99163c9c74f63fb474c4795ea77935f2c"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/manuscript/manuscript_gps_solutions_r3.md",
+      "sha256": "97c8a797f0eac225452e6788b3105272fe9f496b372d8e7c5b8d6e14558997d3"
+    }
+  ],
+  "new_native_runs": 0,
+  "new_evaluators": 0,
+  "original_result_values_edited": false,
+  "new_descriptive_reductions": "Five duration-specific medians over all 45 original outage case pairs; see editorial source pins",
+  "tables_generated_from_source_rows": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "table_1_basis": "V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md section1.4; original source version",
+  "r4_sha256": "d66efc36b40330a2e842b1584fb77e01df2b88524d49d203337b0821360c0fd7"
+}

@@ -1,0 +1,79 @@
+{
+  "status": "PREPARED_FOR_READ_ONLY_REVIEW_NOT_EXECUTED",
+  "baseline_slots": 7,
+  "candidate_slots": 10,
+  "data_mode": "frozen_real_and_semisynthetic_identity_preparation",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "semisynthetic_data_generated": false,
+  "metadata_preparation_script_processes": 1,
+  "synthetic_helper_test_script_processes": 2,
+  "latest_synthetic_helper_test_checks": 74,
+  "latest_synthetic_helper_test_passes": 74,
+  "prior_synthetic_helper_test_checks": 57,
+  "prior_synthetic_helper_test_passes": 57,
+  "failed_test_processes": 0,
+  "native_processes": 0,
+  "evaluator_processes": 0,
+  "reference_payload_reads": 0,
+  "source_NAV_STD_payload_reads": 0,
+  "git_mutations": 0,
+  "files": [
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/evaluation/BASELINE_EXPECTATIONS.json",
+      "bytes": 174185,
+      "sha256": "df5783b219dd6fb4aa3145f8cd5243f9b1257002f3088673272a7cd91809ad06"
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/evaluation/EVAL_MANIFEST.csv",
+      "bytes": 4589,
+      "sha256": "9ed40f54a92d16225ed286842bed13fa99a5765366443b888d1d839c04a5da5d"
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/evaluation/FROZEN_PINS.json",
+      "bytes": 4934,
+      "sha256": "bc2786bf994d063820837678f10ed945a925af2732bee17ef3c5f596368a9e44"
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/evaluation/README.md",
+      "bytes": 5655,
+      "sha256": "90814f66c1f2e41b2dc34608d050764c9984e884cd826f2148cd955341a9e19f"
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/evaluation/SYNTHETIC_CHECKS.csv",
+      "bytes": 2334,
+      "sha256": "5232028afff2ccde7532c9ac0e51d16fdac5c44fd0e2cad1c54b75c8b190f1a0"
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/evaluation/SYNTHETIC_TEST_RECEIPT.json",
+      "bytes": 895,
+      "sha256": "010d7f97a5adb6d01613b7ea4b4a9d0c4044c825287aaa041a1455b44a10d426"
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/evaluation/evaluate_one.py",
+      "bytes": 24490,
+      "sha256": "46378dba98908ea18c9f7592887d8f3e0134c0eedcca04db319bd571c37a6216"
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/evaluation/prepare_contract.py",
+      "bytes": 6372,
+      "sha256": "d16253723220897e1b22cda83a030a25cc17970b671817eedfa828765a6f74a2"
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/evaluation/test_evaluate_one.py",
+      "bytes": 12231,
+      "sha256": "e50e84ed073c3e6397692fcc6df6b5bb3ad985dae24ef293fe03a2677b95c6b7"
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/evaluation/test_history/SYNTHETIC_CHECKS_001.csv",
+      "bytes": 1733,
+      "sha256": "28f5d3e9d9ac177c60938862ff47671bbc69ae45aec54564e36e5ac51be45f34"
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/evaluation/test_history/SYNTHETIC_TEST_RECEIPT_001.json",
+      "bytes": 717,
+      "sha256": "4cb323d078208b846747d3e66eb51511bdc31d94772be0fbfbbb59fefd62a954"
+    }
+  ],
+  "next_gate": "Supervisor review and commit before any explicit singleton evaluation."
+}

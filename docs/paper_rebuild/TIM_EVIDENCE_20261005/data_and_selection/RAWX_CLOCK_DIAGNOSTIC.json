@@ -1,0 +1,210 @@
+[
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-11-16-59_minimal/",
+    "GNSS1_epochs": 1830,
+    "GNSS2_epochs": 1830,
+    "nearest_GNSS2_minus_GNSS1_tow_s": {
+      "n": 1830,
+      "min": -0.00800013542175293,
+      "p01": -0.00800013542175293,
+      "p50": -0.007999897003173828,
+      "p95": -0.007999897003173828,
+      "p99": -0.007999897003173828,
+      "max": -0.007999897003173828
+    },
+    "nearest_abs_delta_s": {
+      "n": 1830,
+      "min": 0.007999897003173828,
+      "p01": 0.007999897003173828,
+      "p50": 0.007999897003173828,
+      "p95": 0.00800013542175293,
+      "p99": 0.00800013542175293,
+      "max": 0.00800013542175293
+    },
+    "pairs_with_abs_delta_le_0p1s": 1830,
+    "rule": "nearest receiver local RAWX time, descriptive only; 0.1 s fixed diagnostic half nominal5Hz spacing, no observation correction",
+    "offset_fitted": false
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-11-25-11_minimal/",
+    "GNSS1_epochs": 1806,
+    "GNSS2_epochs": 1804,
+    "nearest_GNSS2_minus_GNSS1_tow_s": {
+      "n": 1806,
+      "min": -0.00800013542175293,
+      "p01": -0.00800013542175293,
+      "p50": -0.007999897003173828,
+      "p95": -0.007999897003173828,
+      "p99": -0.007999897003173828,
+      "max": 0.192000150680542
+    },
+    "nearest_abs_delta_s": {
+      "n": 1806,
+      "min": 0.007999897003173828,
+      "p01": 0.007999897003173828,
+      "p50": 0.007999897003173828,
+      "p95": 0.00800013542175293,
+      "p99": 0.00800013542175293,
+      "max": 0.192000150680542
+    },
+    "pairs_with_abs_delta_le_0p1s": 1804,
+    "rule": "nearest receiver local RAWX time, descriptive only; 0.1 s fixed diagnostic half nominal5Hz spacing, no observation correction",
+    "offset_fitted": false
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-11-32-27_minimal/",
+    "GNSS1_epochs": 1917,
+    "GNSS2_epochs": 1917,
+    "nearest_GNSS2_minus_GNSS1_tow_s": {
+      "n": 1917,
+      "min": -0.00800013542175293,
+      "p01": -0.00800013542175293,
+      "p50": -0.007999897003173828,
+      "p95": -0.007999897003173828,
+      "p99": -0.007999897003173828,
+      "max": -0.007999897003173828
+    },
+    "nearest_abs_delta_s": {
+      "n": 1917,
+      "min": 0.007999897003173828,
+      "p01": 0.007999897003173828,
+      "p50": 0.007999897003173828,
+      "p95": 0.00800013542175293,
+      "p99": 0.00800013542175293,
+      "max": 0.00800013542175293
+    },
+    "pairs_with_abs_delta_le_0p1s": 1917,
+    "rule": "nearest receiver local RAWX time, descriptive only; 0.1 s fixed diagnostic half nominal5Hz spacing, no observation correction",
+    "offset_fitted": false
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-11-39-50_minimal/",
+    "GNSS1_epochs": 1779,
+    "GNSS2_epochs": 1779,
+    "nearest_GNSS2_minus_GNSS1_tow_s": {
+      "n": 1779,
+      "min": -0.00800013542175293,
+      "p01": -0.00800013542175293,
+      "p50": -0.007999897003173828,
+      "p95": -0.007999897003173828,
+      "p99": -0.007999897003173828,
+      "max": -0.007999897003173828
+    },
+    "nearest_abs_delta_s": {
+      "n": 1779,
+      "min": 0.007999897003173828,
+      "p01": 0.007999897003173828,
+      "p50": 0.007999897003173828,
+      "p95": 0.00800013542175293,
+      "p99": 0.00800013542175293,
+      "max": 0.00800013542175293
+    },
+    "pairs_with_abs_delta_le_0p1s": 1779,
+    "rule": "nearest receiver local RAWX time, descriptive only; 0.1 s fixed diagnostic half nominal5Hz spacing, no observation correction",
+    "offset_fitted": false
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-12-25-13_minimal/",
+    "GNSS1_epochs": 2027,
+    "GNSS2_epochs": 2027,
+    "nearest_GNSS2_minus_GNSS1_tow_s": {
+      "n": 2027,
+      "min": -0.00800013542175293,
+      "p01": -0.00800013542175293,
+      "p50": -0.007999897003173828,
+      "p95": -0.007999897003173828,
+      "p99": -0.007999897003173828,
+      "max": -0.007999897003173828
+    },
+    "nearest_abs_delta_s": {
+      "n": 2027,
+      "min": 0.007999897003173828,
+      "p01": 0.007999897003173828,
+      "p50": 0.007999897003173828,
+      "p95": 0.00800013542175293,
+      "p99": 0.00800013542175293,
+      "max": 0.00800013542175293
+    },
+    "pairs_with_abs_delta_le_0p1s": 2027,
+    "rule": "nearest receiver local RAWX time, descriptive only; 0.1 s fixed diagnostic half nominal5Hz spacing, no observation correction",
+    "offset_fitted": false
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-12-33-29_minimal/",
+    "GNSS1_epochs": 1882,
+    "GNSS2_epochs": 1882,
+    "nearest_GNSS2_minus_GNSS1_tow_s": {
+      "n": 1882,
+      "min": -0.00800013542175293,
+      "p01": -0.00800013542175293,
+      "p50": -0.007999897003173828,
+      "p95": -0.007999897003173828,
+      "p99": -0.007999897003173828,
+      "max": -0.007999897003173828
+    },
+    "nearest_abs_delta_s": {
+      "n": 1882,
+      "min": 0.007999897003173828,
+      "p01": 0.007999897003173828,
+      "p50": 0.007999897003173828,
+      "p95": 0.00800013542175293,
+      "p99": 0.00800013542175293,
+      "max": 0.00800013542175293
+    },
+    "pairs_with_abs_delta_le_0p1s": 1882,
+    "rule": "nearest receiver local RAWX time, descriptive only; 0.1 s fixed diagnostic half nominal5Hz spacing, no observation correction",
+    "offset_fitted": false
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-12-40-53_minimal/",
+    "GNSS1_epochs": 1758,
+    "GNSS2_epochs": 1758,
+    "nearest_GNSS2_minus_GNSS1_tow_s": {
+      "n": 1758,
+      "min": -0.00800013542175293,
+      "p01": -0.00800013542175293,
+      "p50": -0.007999897003173828,
+      "p95": -0.006999969482421875,
+      "p99": -0.006999969482421875,
+      "max": -0.006999969482421875
+    },
+    "nearest_abs_delta_s": {
+      "n": 1758,
+      "min": 0.006999969482421875,
+      "p01": 0.006999969482421875,
+      "p50": 0.007999897003173828,
+      "p95": 0.00800013542175293,
+      "p99": 0.00800013542175293,
+      "max": 0.00800013542175293
+    },
+    "pairs_with_abs_delta_le_0p1s": 1758,
+    "rule": "nearest receiver local RAWX time, descriptive only; 0.1 s fixed diagnostic half nominal5Hz spacing, no observation correction",
+    "offset_fitted": false
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-12-49-30_minimal/",
+    "GNSS1_epochs": 1781,
+    "GNSS2_epochs": 1781,
+    "nearest_GNSS2_minus_GNSS1_tow_s": {
+      "n": 1781,
+      "min": -0.0070002079010009766,
+      "p01": -0.0070002079010009766,
+      "p50": -0.006999969482421875,
+      "p95": -0.006999969482421875,
+      "p99": -0.006999969482421875,
+      "max": -0.006999969482421875
+    },
+    "nearest_abs_delta_s": {
+      "n": 1781,
+      "min": 0.006999969482421875,
+      "p01": 0.006999969482421875,
+      "p50": 0.006999969482421875,
+      "p95": 0.0070002079010009766,
+      "p99": 0.0070002079010009766,
+      "max": 0.0070002079010009766
+    },
+    "pairs_with_abs_delta_le_0p1s": 1781,
+    "rule": "nearest receiver local RAWX time, descriptive only; 0.1 s fixed diagnostic half nominal5Hz spacing, no observation correction",
+    "offset_fitted": false
+  }
+]

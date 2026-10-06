@@ -1,0 +1,151 @@
+{
+  "candidate_id": "N12_ONLY",
+  "data_mode": "synthetic_fixture_only",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "new_native_fixture_processes": 2,
+  "scenarios_per_process": 9,
+  "real_native_calls": 0,
+  "evaluator_calls": 0,
+  "checks": 170,
+  "all_passed": true,
+  "NIS_tolerance": "1e-9 + 1e-8 * abs(recorded)",
+  "new_validation_calculation": true,
+  "fixture_source_sha256": "e490a494907c33746b0327e802ce046cee98d7bcd78c27276b3867de3e2ef4ee",
+  "validator_sha256": "d342aed13a9b53435677df05cd2ad0aa35464bf243bdd4b3385b944c06921ae7",
+  "output_root": "<VALIDATION_BUILD_ROOT>/N12_tests_v1",
+  "scenarios": {
+    "correlated_S": {
+      "SA_events": 1,
+      "state_exact": false,
+      "NIS_baseline": [
+        26.046983656376174
+      ],
+      "NIS_candidate": [
+        5.044626384272969
+      ],
+      "R_scale_baseline": [
+        1.1004443604930192
+      ],
+      "R_scale_candidate": [
+        1
+      ]
+    },
+    "dx_zero": {
+      "SA_events": 1,
+      "state_exact": true,
+      "NIS_baseline": [
+        11.489758951048032
+      ],
+      "NIS_candidate": [
+        11.489758951048032
+      ],
+      "R_scale_baseline": [
+        1.0083546199427365
+      ],
+      "R_scale_candidate": [
+        1.0083546199427365
+      ]
+    },
+    "dz_equals_Hdx": {
+      "SA_events": 1,
+      "state_exact": true,
+      "NIS_baseline": [
+        0.47846889952153115
+      ],
+      "NIS_candidate": [
+        0
+      ],
+      "R_scale_baseline": [
+        1
+      ],
+      "R_scale_candidate": [
+        1
+      ]
+    },
+    "fallback_no_S": {
+      "SA_events": 1,
+      "state_exact": false,
+      "NIS_baseline": [
+        0
+      ],
+      "NIS_candidate": [
+        0
+      ],
+      "R_scale_baseline": [
+        1.0622522618055321
+      ],
+      "R_scale_candidate": [
+        1
+      ]
+    },
+    "rd_saoff_gate": {
+      "SA_events": 0,
+      "state_exact": true,
+      "NIS_baseline": [],
+      "NIS_candidate": [],
+      "R_scale_baseline": [],
+      "R_scale_candidate": []
+    },
+    "sa_off": {
+      "SA_events": 1,
+      "state_exact": true,
+      "NIS_baseline": [
+        22.252992832574318
+      ],
+      "NIS_candidate": [
+        2.5028983557835813
+      ],
+      "R_scale_baseline": [
+        1
+      ],
+      "R_scale_candidate": [
+        1
+      ]
+    },
+    "sequential_general": {
+      "SA_events": 1,
+      "state_exact": false,
+      "NIS_baseline": [
+        22.252992832574318
+      ],
+      "NIS_candidate": [
+        2.5028983557835813
+      ],
+      "R_scale_baseline": [
+        1.0718582800806196
+      ],
+      "R_scale_candidate": [
+        1
+      ]
+    },
+    "two_sequential_SA": {
+      "SA_events": 2,
+      "state_exact": false,
+      "NIS_baseline": [
+        22.252992832574318,
+        219.1039859941904
+      ],
+      "NIS_candidate": [
+        2.5028983557835813,
+        0.08403644699818906
+      ],
+      "R_scale_baseline": [
+        1.0718582800806196,
+        4.177380234513539
+      ],
+      "R_scale_candidate": [
+        1,
+        1
+      ]
+    },
+    "yaw_hard_gate": {
+      "SA_events": 0,
+      "state_exact": true,
+      "NIS_baseline": [],
+      "NIS_candidate": [],
+      "R_scale_baseline": [],
+      "R_scale_candidate": []
+    }
+  }
+}

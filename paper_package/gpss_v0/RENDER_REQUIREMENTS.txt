@@ -1,0 +1,2 @@
+# Publication SVG export only; not estimator dependencies.
+CairoSVG==2.8.2

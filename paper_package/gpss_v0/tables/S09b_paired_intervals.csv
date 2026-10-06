@@ -1,0 +1,57 @@
+sequence,segment,pair_A minus B,metric,n_common,match_method,rmse_A,rmse_B,delta_rmse,se_delta_batch_20s,se_delta_acf,mbb95_low,mbb95_high,corr_squared_errors,parity_threshold,verdict,wording_for_A_vs_B
+BY2,full,LegSA-GINS minus Basic dual-heading GNSS/INS,yaw,56642,EXACT_ROUNDED_1US,1.886,2.232,-0.346,0.188,0.274,-0.692,-0.055,0.906,0.100,RESOLVED,lower
+BY2,full,LegSA-GINS minus Basic dual-heading GNSS/INS,horizontal,56642,EXACT_ROUNDED_1US,0.098,0.102,-0.004,0.003,0.003,-0.008,-0.001,0.994,0.005,RESOLVED_NEGLIGIBLE,comparable (difference below reporting resolution)
+BY2,full,LegSA-GINS minus Gated-heading backbone,yaw,56642,EXACT_ROUNDED_1US,1.886,1.916,-0.029,0.021,0.026,-0.066,0.001,0.998,0.100,PARITY,comparable
+BY2,full,LegSA-GINS minus Gated-heading backbone,horizontal,56642,EXACT_ROUNDED_1US,0.098,0.100,-0.002,0.001,0.001,-0.004,-0.001,0.999,0.005,RESOLVED_NEGLIGIBLE,comparable (difference below reporting resolution)
+BY2,full,LegSA-GINS minus Unweighted LegSA-GINS,yaw,56642,EXACT_ROUNDED_1US,1.886,1.886,0.000,0.002,0.003,-0.004,0.005,1.000,0.100,PARITY,comparable
+BY2,full,LegSA-GINS minus Unweighted LegSA-GINS,horizontal,56642,EXACT_ROUNDED_1US,0.098,0.097,0.001,0.001,0.001,0.000,0.002,1.000,0.005,RESOLVED_NEGLIGIBLE,comparable (difference below reporting resolution)
+BY2,full,Gated-heading backbone minus Basic dual-heading GNSS/INS,yaw,56642,EXACT_ROUNDED_1US,1.916,2.232,-0.316,0.180,0.262,-0.639,-0.014,0.910,0.100,RESOLVED,lower
+BY2,full,Gated-heading backbone minus Basic dual-heading GNSS/INS,horizontal,56642,EXACT_ROUNDED_1US,0.100,0.102,-0.002,0.002,0.001,-0.004,-0.001,0.997,0.005,RESOLVED_NEGLIGIBLE,comparable (difference below reporting resolution)
+BY2,full,Unweighted LegSA-GINS minus Gated-heading backbone,yaw,56642,EXACT_ROUNDED_1US,1.886,1.916,-0.030,0.024,0.029,-0.073,0.006,0.998,0.100,PARITY,comparable
+BY2,full,Unweighted LegSA-GINS minus Gated-heading backbone,horizontal,56642,EXACT_ROUNDED_1US,0.097,0.100,-0.003,0.002,0.002,-0.006,-0.001,0.997,0.005,RESOLVED_NEGLIGIBLE,comparable (difference below reporting resolution)
+BY2,full,Two-receiver IEKF minus LegSA-GINS,yaw,56628,EXACT_ROUNDED_1US,2.997,1.886,1.110,1.149,1.079,-0.215,2.574,0.185,0.100,DIRECTION_ONLY,"higher, interval includes zero"
+BY2,full,Two-receiver IEKF minus LegSA-GINS,horizontal,56628,EXACT_ROUNDED_1US,0.098,0.098,-0.000,0.002,0.002,-0.004,0.003,0.981,0.005,PARITY,comparable
+BY2,full,Two-receiver IEKF minus Basic dual-heading GNSS/INS,yaw,56628,EXACT_ROUNDED_1US,2.997,2.232,0.765,0.997,0.931,-0.511,2.101,0.388,0.100,DIRECTION_ONLY,"higher, interval includes zero"
+BY2,full,Two-receiver IEKF minus Basic dual-heading GNSS/INS,horizontal,56628,EXACT_ROUNDED_1US,0.098,0.102,-0.004,0.005,0.004,-0.011,0.001,0.974,0.005,PARITY,comparable
+BY2,full,Two-receiver IEKF minus Gated-heading backbone,yaw,56628,EXACT_ROUNDED_1US,2.997,1.916,1.081,1.131,1.066,-0.238,2.533,0.203,0.100,DIRECTION_ONLY,"higher, interval includes zero"
+BY2,full,Two-receiver IEKF minus Gated-heading backbone,horizontal,56628,EXACT_ROUNDED_1US,0.098,0.100,-0.002,0.003,0.003,-0.007,0.002,0.977,0.005,PARITY,comparable
+BY2,full,Two-receiver IEKF with project-calibrated IMU minus LegSA-GINS,yaw,56628,EXACT_ROUNDED_1US,1.538,1.886,-0.348,0.139,0.029,-0.590,-0.152,0.790,0.100,RESOLVED,lower
+BY2,full,Two-receiver IEKF with project-calibrated IMU minus LegSA-GINS,horizontal,56628,EXACT_ROUNDED_1US,0.104,0.098,0.006,0.007,0.006,-0.001,0.015,0.958,0.005,DIRECTION_ONLY,"higher, interval includes zero"
+BY2H,full,LegSA-GINS minus Basic dual-heading GNSS/INS,yaw,58580,EXACT_ROUNDED_1US,1.934,2.283,-0.349,0.293,0.048,-0.827,-0.020,0.403,0.100,RESOLVED,lower
+BY2H,full,LegSA-GINS minus Basic dual-heading GNSS/INS,horizontal,58580,EXACT_ROUNDED_1US,0.068,0.072,-0.003,0.002,0.001,-0.006,-0.001,0.980,0.005,RESOLVED_NEGLIGIBLE,comparable (difference below reporting resolution)
+BY2H,full,LegSA-GINS minus Gated-heading backbone,yaw,58580,EXACT_ROUNDED_1US,1.934,1.941,-0.007,0.006,0.002,-0.021,0.002,1.000,0.100,PARITY,comparable
+BY2H,full,LegSA-GINS minus Gated-heading backbone,horizontal,58580,EXACT_ROUNDED_1US,0.068,0.069,-0.000,0.001,0.001,-0.002,0.001,0.994,0.005,PARITY,comparable
+BY2H,full,LegSA-GINS minus Unweighted LegSA-GINS,yaw,58580,EXACT_ROUNDED_1US,1.934,1.934,-0.000,0.001,0.000,-0.001,0.001,1.000,0.100,PARITY,comparable
+BY2H,full,LegSA-GINS minus Unweighted LegSA-GINS,horizontal,58580,EXACT_ROUNDED_1US,0.068,0.070,-0.002,0.002,0.002,-0.006,0.002,0.957,0.005,PARITY,comparable
+BY2H,full,Gated-heading backbone minus Basic dual-heading GNSS/INS,yaw,58580,EXACT_ROUNDED_1US,1.941,2.283,-0.342,0.291,0.048,-0.817,-0.013,0.406,0.100,RESOLVED,lower
+BY2H,full,Gated-heading backbone minus Basic dual-heading GNSS/INS,horizontal,58580,EXACT_ROUNDED_1US,0.069,0.072,-0.003,0.001,0.000,-0.005,-0.002,0.988,0.005,RESOLVED_NEGLIGIBLE,comparable (difference below reporting resolution)
+BY2H,full,Unweighted LegSA-GINS minus Gated-heading backbone,yaw,58580,EXACT_ROUNDED_1US,1.934,1.941,-0.007,0.007,0.008,-0.022,0.003,1.000,0.100,PARITY,comparable
+BY2H,full,Unweighted LegSA-GINS minus Gated-heading backbone,horizontal,58580,EXACT_ROUNDED_1US,0.070,0.069,0.001,0.003,0.003,-0.003,0.006,0.933,0.005,PARITY,comparable
+BY2H,full,Two-receiver IEKF minus LegSA-GINS,yaw,58554,EXACT_ROUNDED_1US,2.208,1.934,0.274,0.160,0.168,-0.052,0.514,0.641,0.100,DIRECTION_ONLY,"higher, interval includes zero"
+BY2H,full,Two-receiver IEKF minus LegSA-GINS,horizontal,58554,EXACT_ROUNDED_1US,0.075,0.068,0.006,0.003,0.004,-0.001,0.011,0.974,0.005,DIRECTION_ONLY,"higher, interval includes zero"
+BY2H,full,Two-receiver IEKF minus Basic dual-heading GNSS/INS,yaw,58554,EXACT_ROUNDED_1US,2.208,2.283,-0.075,0.346,0.277,-0.698,0.325,0.207,0.100,PARITY,comparable
+BY2H,full,Two-receiver IEKF minus Basic dual-heading GNSS/INS,horizontal,58554,EXACT_ROUNDED_1US,0.075,0.072,0.003,0.002,0.004,-0.006,0.008,0.967,0.005,PARITY,comparable
+BY2H,full,Two-receiver IEKF minus Gated-heading backbone,yaw,58554,EXACT_ROUNDED_1US,2.208,1.941,0.267,0.160,0.167,-0.061,0.511,0.640,0.100,DIRECTION_ONLY,"higher, interval includes zero"
+BY2H,full,Two-receiver IEKF minus Gated-heading backbone,horizontal,58554,EXACT_ROUNDED_1US,0.075,0.069,0.006,0.003,0.005,-0.002,0.011,0.971,0.005,DIRECTION_ONLY,"higher, interval includes zero"
+BY2O,full,LegSA-GINS minus Basic dual-heading GNSS/INS,yaw,76548,EXACT_ROUNDED_1US,2.434,2.309,0.124,0.076,0.099,-0.034,0.219,0.996,0.100,DIRECTION_ONLY,"higher, interval includes zero"
+BY2O,full,LegSA-GINS minus Basic dual-heading GNSS/INS,horizontal,76548,EXACT_ROUNDED_1US,0.055,0.055,-0.000,0.000,0.000,-0.001,0.001,0.997,0.005,PARITY,comparable
+BY2O,full,LegSA-GINS minus Gated-heading backbone,yaw,76548,EXACT_ROUNDED_1US,2.434,2.432,0.002,0.002,0.003,-0.003,0.005,1.000,0.100,PARITY,comparable
+BY2O,full,LegSA-GINS minus Gated-heading backbone,horizontal,76548,EXACT_ROUNDED_1US,0.055,0.055,-0.000,0.000,0.000,-0.001,0.000,1.000,0.005,PARITY,comparable
+BY2O,full,LegSA-GINS minus Unweighted LegSA-GINS,yaw,76548,EXACT_ROUNDED_1US,2.434,2.429,0.005,0.003,0.004,-0.000,0.009,1.000,0.100,PARITY,comparable
+BY2O,full,LegSA-GINS minus Unweighted LegSA-GINS,horizontal,76548,EXACT_ROUNDED_1US,0.055,0.054,0.001,0.000,0.000,0.000,0.001,1.000,0.005,RESOLVED_NEGLIGIBLE,comparable (difference below reporting resolution)
+BY2O,full,Gated-heading backbone minus Basic dual-heading GNSS/INS,yaw,76548,EXACT_ROUNDED_1US,2.432,2.309,0.123,0.075,0.097,-0.030,0.212,0.996,0.100,DIRECTION_ONLY,"higher, interval includes zero"
+BY2O,full,Gated-heading backbone minus Basic dual-heading GNSS/INS,horizontal,76548,EXACT_ROUNDED_1US,0.055,0.055,-0.000,0.001,0.000,-0.001,0.001,0.997,0.005,PARITY,comparable
+BY2O,full,Unweighted LegSA-GINS minus Gated-heading backbone,yaw,76548,EXACT_ROUNDED_1US,2.429,2.432,-0.003,0.002,0.003,-0.006,0.002,1.000,0.100,PARITY,comparable
+BY2O,full,Unweighted LegSA-GINS minus Gated-heading backbone,horizontal,76548,EXACT_ROUNDED_1US,0.054,0.055,-0.001,0.000,0.000,-0.002,-0.000,0.999,0.005,RESOLVED_NEGLIGIBLE,comparable (difference below reporting resolution)
+BY2O,full,Two-receiver IEKF minus LegSA-GINS,yaw,76166,EXACT_ROUNDED_1US,2.453,2.435,0.017,0.802,0.776,-1.344,1.401,0.004,0.100,PARITY,comparable
+BY2O,full,Two-receiver IEKF minus LegSA-GINS,horizontal,76166,EXACT_ROUNDED_1US,0.054,0.055,-0.000,0.002,0.002,-0.003,0.004,0.987,0.005,PARITY,comparable
+BY2O,full,Two-receiver IEKF minus Basic dual-heading GNSS/INS,yaw,76166,EXACT_ROUNDED_1US,2.453,2.311,0.142,0.758,0.718,-1.069,1.451,0.009,0.100,DIRECTION_ONLY,"higher, interval includes zero"
+BY2O,full,Two-receiver IEKF minus Basic dual-heading GNSS/INS,horizontal,76166,EXACT_ROUNDED_1US,0.054,0.055,-0.000,0.002,0.001,-0.003,0.004,0.987,0.005,PARITY,comparable
+BY2O,full,Two-receiver IEKF minus Gated-heading backbone,yaw,76166,EXACT_ROUNDED_1US,2.453,2.434,0.019,0.801,0.774,-1.336,1.458,0.005,0.100,PARITY,comparable
+BY2O,full,Two-receiver IEKF minus Gated-heading backbone,horizontal,76166,EXACT_ROUNDED_1US,0.054,0.055,-0.000,0.001,0.002,-0.003,0.003,0.986,0.005,PARITY,comparable
+BY2O,primary,LegSA-GINS minus Basic dual-heading GNSS/INS,yaw,7612,EXACT_ROUNDED_1US,0.233,0.863,-0.631,0.180,0.151,-0.713,-0.579,0.740,0.100,RESOLVED,lower
+BY2O,primary,LegSA-GINS minus Basic dual-heading GNSS/INS,horizontal,7612,EXACT_ROUNDED_1US,0.024,0.024,0.000,0.000,0.000,0.000,0.001,0.954,0.005,RESOLVED_NEGLIGIBLE,comparable (difference below reporting resolution)
+BY2O,primary,Two-receiver IEKF minus LegSA-GINS,yaw,7576,EXACT_ROUNDED_1US,4.009,0.233,3.776,1.972,1.836,2.197,4.438,0.702,0.100,RESOLVED,higher
+BY2O,primary,Two-receiver IEKF minus LegSA-GINS,horizontal,7576,EXACT_ROUNDED_1US,0.040,0.024,0.015,0.002,0.003,0.013,0.018,0.365,0.005,RESOLVED,higher
+BY2O,primary,LegSA-GINS minus Unweighted LegSA-GINS,yaw,7612,EXACT_ROUNDED_1US,0.233,0.247,-0.015,0.011,0.009,-0.023,-0.008,0.995,0.100,RESOLVED_NEGLIGIBLE,comparable (difference below reporting resolution)
+BY2O,primary,LegSA-GINS minus Unweighted LegSA-GINS,horizontal,7612,EXACT_ROUNDED_1US,0.024,0.024,-0.000,0.000,0.000,-0.000,0.000,0.975,0.005,PARITY,comparable

@@ -1,0 +1,496 @@
+{
+  "scope": "Presentation-only existing CSV redraw",
+  "no_solver_calls": true,
+  "no_evaluator_calls": true,
+  "raw_reference_payload_opens": 0,
+  "script_sha256": "01c2de5d0fba7ed8aa95f39865fd97b423ed2b837f4dac558908abfa9ca91ef2",
+  "utilities_sha256": "e28173802e004aac9c5421b4e5439ae7e277f80e35ca16f2ed8b447673dd9371",
+  "inputs": [
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/ALL_OFFLINE_COMPLETE.json",
+      "file_sha256": "374cee2501ab7fcfa2432567e056eb9dd6842c7db8a1bda989b5027bce1c815d",
+      "bytes": 10249,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/EVALUATION.json",
+      "file_sha256": "c641033c685816a76ff573a7c359397afcbaa0e86bab3923eca14bbc7c402d9f",
+      "bytes": 36353,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/METRICS.csv",
+      "file_sha256": "9f66289454f9fe03037d74409a4986969130d2256cbcdfe177734ddf8d1f292d",
+      "decompressed_sha256": "9f66289454f9fe03037d74409a4986969130d2256cbcdfe177734ddf8d1f292d",
+      "bytes": 8754,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/OISAM_PRIMARY_DYNAMIC_ONLY_TRAJECTORY.csv",
+      "file_sha256": "54509d0ff60a08ab746414429063a27b1c148a220d88732c81eb289437544794",
+      "decompressed_sha256": "54509d0ff60a08ab746414429063a27b1c148a220d88732c81eb289437544794",
+      "bytes": 33535,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2_OISAM_saved_GNSS1_trajectory.csv.gz",
+        "sha256": "398578f519d098237e2d81dbb0200ac6eaf344c3338b8edd3cc770fa0d7749fd",
+        "plain_sha256": "54509d0ff60a08ab746414429063a27b1c148a220d88732c81eb289437544794",
+        "rows": 275,
+        "columns": [
+          "time",
+          "valid",
+          "prior_only",
+          "x_ecef_m",
+          "y_ecef_m",
+          "z_ecef_m",
+          "truth_x_ecef_m",
+          "truth_y_ecef_m",
+          "truth_z_ecef_m"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/OISAM_PRIMARY_DYNAMIC_ONLY_ERRORS.csv",
+      "file_sha256": "244d164d16832a7dcfe9787a84abf102686ca061c07e8642d69b103025344ceb",
+      "decompressed_sha256": "244d164d16832a7dcfe9787a84abf102686ca061c07e8642d69b103025344ceb",
+      "bytes": 54626,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2_Oi_all_saved_yaw_and_status.csv.gz",
+        "sha256": "b22e680b5dc91f8b571e11bab84d1c9794a58a0ec583da2c71041e7d229b95d3",
+        "plain_sha256": "244d164d16832a7dcfe9787a84abf102686ca061c07e8642d69b103025344ceb",
+        "rows": 275,
+        "columns": [
+          "time",
+          "expected_second",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "valid",
+          "prior_only",
+          "native_status",
+          "reference_left_s",
+          "reference_right_s",
+          "reference_bracket_span_s",
+          "block_id",
+          "yaw_err_deg"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/WEN_TC_PRIMARY_DYNAMIC_ONLY_TRAJECTORY.csv",
+      "file_sha256": "d65292e83025399519f9e8ffa9e2a60e936f2b6f329be2164c571ca1d949f310",
+      "decompressed_sha256": "d65292e83025399519f9e8ffa9e2a60e936f2b6f329be2164c571ca1d949f310",
+      "bytes": 36795,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2_WEN_TC_saved_GNSS1_trajectory.csv.gz",
+        "sha256": "4b28595d3c8022dfe74415e7f5fee2943b59d0654f1cc8696403a60c858169b4",
+        "plain_sha256": "d65292e83025399519f9e8ffa9e2a60e936f2b6f329be2164c571ca1d949f310",
+        "rows": 274,
+        "columns": [
+          "time",
+          "valid",
+          "prior_only",
+          "x_ecef_m",
+          "y_ecef_m",
+          "z_ecef_m",
+          "truth_x_ecef_m",
+          "truth_y_ecef_m",
+          "truth_z_ecef_m"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/GNC_PRIMARY_DYNAMIC_ONLY_TRAJECTORY.csv",
+      "file_sha256": "b3fb7a38d54f58f0dceefdfaa825141deccc49d7c41de0b4faf88273813c2dc8",
+      "decompressed_sha256": "b3fb7a38d54f58f0dceefdfaa825141deccc49d7c41de0b4faf88273813c2dc8",
+      "bytes": 36805,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2_GNC_saved_GNSS1_trajectory.csv.gz",
+        "sha256": "cb588a94602dec613a151e14e8efb6badb24172878e37fa71ebbe566accd58a0",
+        "plain_sha256": "b3fb7a38d54f58f0dceefdfaa825141deccc49d7c41de0b4faf88273813c2dc8",
+        "rows": 274,
+        "columns": [
+          "time",
+          "valid",
+          "prior_only",
+          "x_ecef_m",
+          "y_ecef_m",
+          "z_ecef_m",
+          "truth_x_ecef_m",
+          "truth_y_ecef_m",
+          "truth_z_ecef_m"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/EVALUATION.json",
+      "file_sha256": "bbbc5603814b25084556d4268961efa9ac503e74c35c42f95e600acf2785c202",
+      "bytes": 36376,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/METRICS.csv",
+      "file_sha256": "d0faa1ee6ab434458ec7acfe53751d7b2443ef6c8f98eebbd38808552440eb20",
+      "decompressed_sha256": "d0faa1ee6ab434458ec7acfe53751d7b2443ef6c8f98eebbd38808552440eb20",
+      "bytes": 8840,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/OISAM_PRIMARY_DYNAMIC_ONLY_TRAJECTORY.csv",
+      "file_sha256": "c5e970a26eed3ad93ca567ecd61982584b71303b788576ed1c4d21fa2b998916",
+      "decompressed_sha256": "c5e970a26eed3ad93ca567ecd61982584b71303b788576ed1c4d21fa2b998916",
+      "bytes": 32902,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2H_OISAM_saved_GNSS1_trajectory.csv.gz",
+        "sha256": "76e2fbbd0dbe98c85a3258fe60f79f814e58ec311c2b917be778123499129395",
+        "plain_sha256": "c5e970a26eed3ad93ca567ecd61982584b71303b788576ed1c4d21fa2b998916",
+        "rows": 271,
+        "columns": [
+          "time",
+          "valid",
+          "prior_only",
+          "x_ecef_m",
+          "y_ecef_m",
+          "z_ecef_m",
+          "truth_x_ecef_m",
+          "truth_y_ecef_m",
+          "truth_z_ecef_m"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/OISAM_PRIMARY_DYNAMIC_ONLY_ERRORS.csv",
+      "file_sha256": "0304d4b54ff7739555f1a88cca9d360a4f4eb69f1970ba6f5320e6f50647e4e5",
+      "decompressed_sha256": "0304d4b54ff7739555f1a88cca9d360a4f4eb69f1970ba6f5320e6f50647e4e5",
+      "bytes": 53993,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2H_Oi_all_saved_yaw_and_status.csv.gz",
+        "sha256": "70fc5a478391118a03a70457a842633fb4b4bc666f6b2cb909edf07e0c4f012e",
+        "plain_sha256": "0304d4b54ff7739555f1a88cca9d360a4f4eb69f1970ba6f5320e6f50647e4e5",
+        "rows": 271,
+        "columns": [
+          "time",
+          "expected_second",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "valid",
+          "prior_only",
+          "native_status",
+          "reference_left_s",
+          "reference_right_s",
+          "reference_bracket_span_s",
+          "block_id",
+          "yaw_err_deg"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/WEN_TC_PRIMARY_DYNAMIC_ONLY_TRAJECTORY.csv",
+      "file_sha256": "9cdf4d22725dae3149a48550fee774afd20399f672d4740cc4b39d26174a00a4",
+      "decompressed_sha256": "9cdf4d22725dae3149a48550fee774afd20399f672d4740cc4b39d26174a00a4",
+      "bytes": 36125,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2H_WEN_TC_saved_GNSS1_trajectory.csv.gz",
+        "sha256": "35c84f8259031701920817931884eba6d9dce08ed9cc6d2e1bddf0747c81f12f",
+        "plain_sha256": "9cdf4d22725dae3149a48550fee774afd20399f672d4740cc4b39d26174a00a4",
+        "rows": 270,
+        "columns": [
+          "time",
+          "valid",
+          "prior_only",
+          "x_ecef_m",
+          "y_ecef_m",
+          "z_ecef_m",
+          "truth_x_ecef_m",
+          "truth_y_ecef_m",
+          "truth_z_ecef_m"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/GNC_PRIMARY_DYNAMIC_ONLY_TRAJECTORY.csv",
+      "file_sha256": "37166a6cad119262a1404fb54c9b7b0558160c9983d47dbba0b5e91613dc9b17",
+      "decompressed_sha256": "37166a6cad119262a1404fb54c9b7b0558160c9983d47dbba0b5e91613dc9b17",
+      "bytes": 36104,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2H_GNC_saved_GNSS1_trajectory.csv.gz",
+        "sha256": "857160ae4c829cecc56d0752fff480e34e86561065b53c3a935937595a359b85",
+        "plain_sha256": "37166a6cad119262a1404fb54c9b7b0558160c9983d47dbba0b5e91613dc9b17",
+        "rows": 270,
+        "columns": [
+          "time",
+          "valid",
+          "prior_only",
+          "x_ecef_m",
+          "y_ecef_m",
+          "z_ecef_m",
+          "truth_x_ecef_m",
+          "truth_y_ecef_m",
+          "truth_z_ecef_m"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/EVALUATION.json",
+      "file_sha256": "a0d7d7fa10884b89c0b3b352a14bd9272d969a5e8592f4eb48e7419813a7b35e",
+      "bytes": 39408,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/METRICS.csv",
+      "file_sha256": "369befe2362008d84bcae1a618ae8494e5ca96e9e3dc575ffb7362e1fa62eec9",
+      "decompressed_sha256": "369befe2362008d84bcae1a618ae8494e5ca96e9e3dc575ffb7362e1fa62eec9",
+      "bytes": 8838,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/OISAM_PRIMARY_DYNAMIC_ONLY_TRAJECTORY.csv",
+      "file_sha256": "ffd3362af3bb2b8b26c6c274219a0ee52607257713fb71e74fdfb3005fac9304",
+      "decompressed_sha256": "ffd3362af3bb2b8b26c6c274219a0ee52607257713fb71e74fdfb3005fac9304",
+      "bytes": 46095,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2O_OISAM_saved_GNSS1_trajectory.csv.gz",
+        "sha256": "268f59b3a67abe98bd188e2d007bca1b92c84686105691e9e9693627c646f5b2",
+        "plain_sha256": "ffd3362af3bb2b8b26c6c274219a0ee52607257713fb71e74fdfb3005fac9304",
+        "rows": 378,
+        "columns": [
+          "time",
+          "valid",
+          "prior_only",
+          "x_ecef_m",
+          "y_ecef_m",
+          "z_ecef_m",
+          "truth_x_ecef_m",
+          "truth_y_ecef_m",
+          "truth_z_ecef_m"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/OISAM_PRIMARY_DYNAMIC_ONLY_ERRORS.csv",
+      "file_sha256": "2e15543cb2db95bc3a26d1df28b0ba104db121215ae94b73517e2ecbbed4066d",
+      "decompressed_sha256": "2e15543cb2db95bc3a26d1df28b0ba104db121215ae94b73517e2ecbbed4066d",
+      "bytes": 76237,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2O_Oi_all_saved_yaw_and_status.csv.gz",
+        "sha256": "b30504156e61d92f44d96449a0d98fdb26dec78a5c6a163d3189a446f32ffbbc",
+        "plain_sha256": "2e15543cb2db95bc3a26d1df28b0ba104db121215ae94b73517e2ecbbed4066d",
+        "rows": 378,
+        "columns": [
+          "time",
+          "expected_second",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "valid",
+          "prior_only",
+          "native_status",
+          "reference_left_s",
+          "reference_right_s",
+          "reference_bracket_span_s",
+          "block_id",
+          "yaw_err_deg"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/WEN_TC_PRIMARY_DYNAMIC_ONLY_TRAJECTORY.csv",
+      "file_sha256": "942176a37973b0c7d6d718a51e2566e8fdc61994854e6374263db91ea9de0a51",
+      "decompressed_sha256": "942176a37973b0c7d6d718a51e2566e8fdc61994854e6374263db91ea9de0a51",
+      "bytes": 50014,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2O_WEN_TC_saved_GNSS1_trajectory.csv.gz",
+        "sha256": "8a3e317840abd38698c5050e985fb133b7e28fde09995224135b2d33d18f940e",
+        "plain_sha256": "942176a37973b0c7d6d718a51e2566e8fdc61994854e6374263db91ea9de0a51",
+        "rows": 377,
+        "columns": [
+          "time",
+          "valid",
+          "prior_only",
+          "x_ecef_m",
+          "y_ecef_m",
+          "z_ecef_m",
+          "truth_x_ecef_m",
+          "truth_y_ecef_m",
+          "truth_z_ecef_m"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/GNC_PRIMARY_DYNAMIC_ONLY_TRAJECTORY.csv",
+      "file_sha256": "a0b87d78a0249eeac2fc2e1b8fbfef9449175068a86860830c0e11517374d599",
+      "decompressed_sha256": "a0b87d78a0249eeac2fc2e1b8fbfef9449175068a86860830c0e11517374d599",
+      "bytes": 49989,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2O_GNC_saved_GNSS1_trajectory.csv.gz",
+        "sha256": "1c538ac09db8dcb83fe765fde067cdfc10f24af1295a001503bd9d1e314413ca",
+        "plain_sha256": "a0b87d78a0249eeac2fc2e1b8fbfef9449175068a86860830c0e11517374d599",
+        "rows": 377,
+        "columns": [
+          "time",
+          "valid",
+          "prior_only",
+          "x_ecef_m",
+          "y_ecef_m",
+          "z_ecef_m",
+          "truth_x_ecef_m",
+          "truth_y_ecef_m",
+          "truth_z_ecef_m"
+        ]
+      }
+    }
+  ],
+  "figures": [
+    {
+      "id": "R17_BY2_FGO_GNSS1_trajectory",
+      "dominant_claim": "The saved outputs follow distinct trajectories and have unequal input layers.",
+      "caption": "Fixed saved anchor ECEF to East/North display only; all primary dynamic samples retain original support and block gaps. Reference path comes from saved matched XYZ columns.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R17_BY2_FGO_GNSS1_trajectory.png",
+          "sha256": "abc4c6e453c9f24dab2a6af7c069e173c1afcd3c0db8f79c980dd854254716e2",
+          "bytes": 411679
+        },
+        {
+          "path": "R17_BY2_FGO_GNSS1_trajectory.pdf",
+          "sha256": "60e879d130b5db21e3c5620e226561ad6fc1054b510e065c01a415e6e361c901",
+          "bytes": 49955
+        },
+        {
+          "path": "R17_BY2_FGO_GNSS1_trajectory.svg",
+          "sha256": "ef724ce6cd871f8110084db328b791c1e7e3df9d5a6d283aec5817f288edb42c",
+          "bytes": 128219
+        }
+      ],
+      "equal_aspect": true,
+      "alignment_fitting": false,
+      "new_interpolation": false
+    },
+    {
+      "id": "R17_BY2H_FGO_GNSS1_trajectory",
+      "dominant_claim": "The saved outputs follow distinct trajectories and have unequal input layers.",
+      "caption": "Fixed saved anchor ECEF to East/North display only; all primary dynamic samples retain original support and block gaps. Reference path comes from saved matched XYZ columns.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R17_BY2H_FGO_GNSS1_trajectory.png",
+          "sha256": "d69095a45f8cdd04f0814837ce5f54d280b373446ee5537861ca8bdb633c3cb4",
+          "bytes": 403265
+        },
+        {
+          "path": "R17_BY2H_FGO_GNSS1_trajectory.pdf",
+          "sha256": "f427a9ca7e6d7b54a1566c85cdc5af0eec5734f039d515b8faaf5a8c8817aaa0",
+          "bytes": 49607
+        },
+        {
+          "path": "R17_BY2H_FGO_GNSS1_trajectory.svg",
+          "sha256": "7731de853689007da95757cdeba8760d7ebc014b6ec380d2b584c273b64804eb",
+          "bytes": 126623
+        }
+      ],
+      "equal_aspect": true,
+      "alignment_fitting": false,
+      "new_interpolation": false
+    },
+    {
+      "id": "R17_BY2O_FGO_GNSS1_trajectory",
+      "dominant_claim": "The saved outputs follow distinct trajectories and have unequal input layers.",
+      "caption": "Fixed saved anchor ECEF to East/North display only; all primary dynamic samples retain original support and block gaps. Reference path comes from saved matched XYZ columns.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R17_BY2O_FGO_GNSS1_trajectory.png",
+          "sha256": "03a6b7843d74f19d73c314971ed99b2341834798f1013ee8c09994f577b965dd",
+          "bytes": 431351
+        },
+        {
+          "path": "R17_BY2O_FGO_GNSS1_trajectory.pdf",
+          "sha256": "d2f87c2b9df3e261185c06765cc61e8b4174a77b69700a484c20f32b96307600",
+          "bytes": 60027
+        },
+        {
+          "path": "R17_BY2O_FGO_GNSS1_trajectory.svg",
+          "sha256": "9895965babcf8871314effa7332316331ff9a57fdbf835819710a33c02db4d27",
+          "bytes": 172237
+        }
+      ],
+      "equal_aspect": true,
+      "alignment_fitting": false,
+      "new_interpolation": false
+    },
+    {
+      "id": "R18_Oi_own_estimated_yaw",
+      "dominant_claim": "Only OiSAM estimates an attitude state in this comparison.",
+      "caption": "Full saved dynamic yaw errors for all three later Oi runs, each on its own formal-window clock; no Wen/GNC proxy yaw or reference-fed attitude score.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R18_Oi_own_estimated_yaw.png",
+          "sha256": "4b3345caad351cdd9be36da1fae0bd51e56b2d56b6063675c7d7e75b658cf130",
+          "bytes": 551015
+        },
+        {
+          "path": "R18_Oi_own_estimated_yaw.pdf",
+          "sha256": "af50c0638b67483613fabb34e129fe12ed6b48362212f1c0b77707bae97cfe67",
+          "bytes": 45638
+        },
+        {
+          "path": "R18_Oi_own_estimated_yaw.svg",
+          "sha256": "17550c3b7271023cf644b095dd0074e0678c623b63ed952f381c9658a04b6463",
+          "bytes": 145559
+        }
+      ]
+    }
+  ],
+  "display_coordinate_metadata": {
+    "BY2": {
+      "anchor_llh_deg_m": [
+        39.98483235673775,
+        116.34312645721558,
+        41.768108564286415
+      ],
+      "frame": "fixed WGS84 East/North display, not trajectory alignment",
+      "reference_clean_epoch_count": 6040
+    },
+    "BY2H": {
+      "anchor_llh_deg_m": [
+        39.98486613024361,
+        116.34312557475268,
+        41.71942887786745
+      ],
+      "frame": "fixed WGS84 East/North display, not trajectory alignment",
+      "reference_clean_epoch_count": 5936
+    },
+    "BY2O": {
+      "anchor_llh_deg_m": [
+        39.984821707390566,
+        116.34312607087466,
+        41.770439366249136
+      ],
+      "frame": "fixed WGS84 East/North display, not trajectory alignment",
+      "reference_clean_epoch_count": 8928
+    }
+  },
+  "no_original_V3_trajectory_substitution": true,
+  "new_Oi_calls": 3,
+  "reused_Wen_GNC_calls": 6
+}

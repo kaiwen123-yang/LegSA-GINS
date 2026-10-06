@@ -1,0 +1,77 @@
+[
+  {
+    "actual": {
+      "hold_rmse_deg": 58.24105244214757,
+      "q2_count": 416,
+      "q2_rmse_deg": 90.78504575299291,
+      "valid_count": 153,
+      "valid_rmse_deg": 14.566166015767248
+    },
+    "checks": {
+      "hold_rmse_deg": true,
+      "q2_count": true,
+      "q2_rmse_deg": true,
+      "valid_count": true,
+      "valid_rmse_deg": true
+    },
+    "expected": {
+      "hold_rmse_deg": 58.241052,
+      "q2_count": 416,
+      "q2_rmse_deg": 90.785046,
+      "valid_count": 153,
+      "valid_rmse_deg": 14.566166
+    },
+    "passed": true,
+    "sequence": "BY2"
+  },
+  {
+    "actual": {
+      "hold_rmse_deg": 55.117992602685284,
+      "q2_count": 286,
+      "q2_rmse_deg": 104.89156315431579,
+      "valid_count": 179,
+      "valid_rmse_deg": 27.0111690896743
+    },
+    "checks": {
+      "hold_rmse_deg": true,
+      "q2_count": true,
+      "q2_rmse_deg": true,
+      "valid_count": true,
+      "valid_rmse_deg": true
+    },
+    "expected": {
+      "hold_rmse_deg": 55.117993,
+      "q2_count": 286,
+      "q2_rmse_deg": 104.891563,
+      "valid_count": 179,
+      "valid_rmse_deg": 27.011169
+    },
+    "passed": true,
+    "sequence": "BY2H"
+  },
+  {
+    "actual": {
+      "hold_rmse_deg": 129.98822323173354,
+      "q2_count": 168,
+      "q2_rmse_deg": 91.73547418365372,
+      "valid_count": 112,
+      "valid_rmse_deg": 23.138949511295703
+    },
+    "checks": {
+      "hold_rmse_deg": true,
+      "q2_count": true,
+      "q2_rmse_deg": true,
+      "valid_count": true,
+      "valid_rmse_deg": true
+    },
+    "expected": {
+      "hold_rmse_deg": 129.988223,
+      "q2_count": 168,
+      "q2_rmse_deg": 91.735474,
+      "valid_count": 112,
+      "valid_rmse_deg": 23.13895
+    },
+    "passed": true,
+    "sequence": "BY2O"
+  }
+]

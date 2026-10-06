@@ -1,0 +1,19 @@
+ordinal,commit,committed_at,subject
+1,5b51592861027e939534d1b19a924193291c0339,2026-10-04T17:29:42+08:00,Record author scope and per-milestone GitHub updates
+2,f456e46f4e5bd298a9fe1285b645b8565850ba5b,2026-10-04T17:32:38+08:00,Formalize LegSA-GINS identity and document actual installation
+3,54146905c31943dd9276733a7df58ec148121f18,2026-10-04T17:38:51+08:00,Preserve validated paper-branch FGO implementations and strict results
+4,4952eb6942a655b0c0166be6132156584453285b,2026-10-04T17:45:27+08:00,Preserve EXT complete executions and separate heading-boundary guard
+5,6603986601c2f258521549c7c685569fe9a6c29a,2026-10-04T17:45:39+08:00,Preserve IMU diagnostic work separately from author-retained V3
+6,1e7a28f16f5c22255a1c1c719544a940b4e018ba,2026-10-04T17:51:27+08:00,Document full FGO chains and minimal supported execution protocol
+7,baf4e9157c7b82d611271f15ae9b7e68f3014ab3,2026-10-04T17:57:30+08:00,Read and preserve all original V3 tasks configurations and metrics
+8,ecbd783014d7bf3f70265fb9fc4977e563e94ba0,2026-10-04T18:03:45+08:00,Preregister fixed EXT projected-heading interpretation check
+9,7538df9563e9eceb50fcb0533a9794f72328c78c,2026-10-04T18:14:57+08:00,Use formal method names across manuscript tables and figures
+10,db4d106427f307db47fe7f018ba36c107c11098f,2026-10-04T18:25:52+08:00,"docs: connect frozen V3 source, methods, configurations and full metric definitions"
+11,9d80ef33b3a40914cfa92f41835419d62152fa88,2026-10-04T18:29:49+08:00,feat: preregister source-continuous OiSAM diagnostic and sealed GNSS1 evaluation
+12,ea2ed47029033bdc3e685dc8358f0e46d24f132c,2026-10-04T18:41:02+08:00,docs: retain poor EXT results after preregistered nominal heading-quantity check
+13,98d2e9d717953901be0ffbdf29e69ca105e1ff5e,2026-10-04T18:44:58+08:00,docs: retain original V3 as manuscript main evidence and define GPS Solutions and TIM gaps
+14,62f2f09ec42344cec4655c858d23101e96151a23,2026-10-04T18:45:04+08:00,"docs: preserve complete V3 selection history, failure denominators and conditional outcomes"
+15,73059ec1cfaece949e01b918d1b1853920c2a635,2026-10-04T18:45:12+08:00,docs: seal three OiSAM diagnostic executions and six full-batch baseline identities
+16,25e437bbffff96102d9706420eaf850a7e976231,2026-10-04T19:06:08+08:00,docs(fgo): publish segmented comparison results and complete failure ledger
+17,b663f8ece1ff9cf8d778ab059588b07444fcfb2e,2026-10-04T19:10:55+08:00,docs(v3): complete external comparison inventory and evidence boundaries
+18,05f971df6aa5a06edcd32a585a6320dc8f219925,2026-10-04T19:12:55+08:00,docs(paper): bind accepted FGO and heading diagnostics without replacing V3

@@ -1,0 +1,125 @@
+{
+  "data_mode": "synthetic_tests",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "existing_native_related": {
+    "passed": 21,
+    "receipt": "NATIVE_EXISTING_TESTS.json",
+    "includes_builds": true
+  },
+  "raw_gnss_tests": {
+    "passed": 48,
+    "strict_xfailed": 25,
+    "overlaps_new_suite": true,
+    "receipt": "<AUDIT_ROOT>/data_audit/raw_gnss_review/TEST_RECEIPT.json"
+  },
+  "shared_sensor_tests": {
+    "passed": 18,
+    "strict_xfailed": 10,
+    "overlaps_new_suite": true,
+    "receipt": "<AUDIT_ROOT>/data_audit/shared_sensor_review/TEST_RECEIPT.json"
+  },
+  "classifier_development_attempts": [
+    {
+      "attempt": 1,
+      "imu_times": [
+        0,
+        0.1,
+        0.2
+      ],
+      "gnss_times": [
+        0.1,
+        0.2
+      ],
+      "assumed_position_updates": 2,
+      "actual_replayed_position_updates": 1,
+      "result": "2 failed, 4 passed",
+      "returncode": 1
+    },
+    {
+      "attempt": 2,
+      "imu_times": [
+        0,
+        0.1,
+        0.2
+      ],
+      "gnss_times": [
+        0,
+        0.1,
+        0.2
+      ],
+      "assumed_position_updates": 2,
+      "actual_replayed_position_updates": 1,
+      "result": "2 failed, 4 passed",
+      "returncode": 1
+    },
+    {
+      "attempt": 3,
+      "imu_times": [
+        0,
+        0.1,
+        0.2
+      ],
+      "gnss_times": [
+        0.05,
+        0.15
+      ],
+      "actual_replayed_position_updates": 2,
+      "result": "6 passed",
+      "returncode": 0
+    }
+  ],
+  "classifier_development_record_scope": "Post-hoc receipt from actual tool exit/results and retained fixture definitions; first two failures exposed endpoint refresh semantics, no production code modified",
+  "native_synthetic_program_receipts": [
+    "NATIVE_TEST_RESULTS.json",
+    "NATIVE_EXTRA_RESULTS.json",
+    "NATIVE_CONFIG_SMOKE.json",
+    "NATIVE_FROZEN_COMPARISON.json",
+    "NATIVE_CANDIDATE_RESULTS.json",
+    "NATIVE_OTHER_RESULTS.json"
+  ],
+  "count_warning": "Do not sum overlapping pytest groups or count 20001 angle points / 24 byte comparisons as independent experiments",
+  "contract_tests": {
+    "command": "PYTHONPATH=src python3 -m pytest -q -rx tests/paper_rebuild/audit_xbpg/test_contract_findings.py tests/paper_rebuild/test_manifest.py tests/paper_rebuild/test_paths.py tests/paper_rebuild/test_clean1_formal_contract.py::test_process_guard_terminates_whole_group_and_classifies_launch_failure",
+    "passed": 9,
+    "strict_xfailed": 4,
+    "unexpected_failures": 1,
+    "returncode": 1,
+    "receipt": "<AUDIT_ROOT>/verification/contract_tests.json",
+    "stdout": "<AUDIT_ROOT>/verification/contract_tests.stdout.log",
+    "failure": "Existing test_manifest.py expects old 7 path keys; actual tracked example additionally contains BY2H/O four keys; retained unchanged",
+    "overlaps_final_new_audit_suite": true
+  },
+  "retained_pre_additional_contract_suite": {
+    "command": "PYTHONPATH=src OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python3 -m pytest -q -rx tests/paper_rebuild/audit_xbpg",
+    "passed": 49,
+    "strict_xfailed": 42,
+    "unexpected_failures": 0,
+    "returncode": 0,
+    "warning_count": 14,
+    "stdout": "<AUDIT_ROOT>/verification/audit_python_tests.stdout.log",
+    "note": "strict xfail proves unrepaired deficiencies, not green scientific implementation; warnings are Matplotlib/pyparsing environment, 2D plots successfully rendered"
+  },
+  "final_new_python_audit_suite": {
+    "command": "PYTHONPATH=src OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python3 -m pytest -q -rx tests/paper_rebuild/audit_xbpg",
+    "passed": 60,
+    "strict_xfailed": 59,
+    "unexpected_failures": 0,
+    "returncode": 0,
+    "warning_count": 14,
+    "receipt": "<AUDIT_ROOT>/verification/final_audit_python_tests.json",
+    "stdout": "<AUDIT_ROOT>/verification/final_audit_python_tests.stdout.log",
+    "note": "After all added contract/formal-control tests; overlaps subgroup runs, not independent experiments; does not erase existing 1 failure"
+  },
+  "formal_control_tests": {
+    "passed": 28,
+    "strict_xfailed": 13,
+    "returncodes": [
+      0,
+      0
+    ],
+    "receipt": "<AUDIT_ROOT>/data_audit/formal_control_review/TEST_RECEIPT.json",
+    "overlaps_final_new_audit_suite": true,
+    "real_native_and_evaluator_calls": 0
+  }
+}

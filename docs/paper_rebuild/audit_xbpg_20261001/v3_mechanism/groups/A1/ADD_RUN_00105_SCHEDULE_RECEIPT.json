@@ -1,0 +1,51 @@
+{
+  "run_id": "ADD_RUN_00105",
+  "rows_read": 403330,
+  "event_counts": {
+    "OBSERVER_BEGIN": 1,
+    "CONFIGURATION": 1,
+    "INITIALIZED": 1,
+    "IMU_INPUT": 56643,
+    "IMU_COMPENSATE_BEFORE": 57357,
+    "IMU_COMPENSATE_AFTER": 57357,
+    "GNSS_INPUT": 1370,
+    "IMU_OPPORTUNITY": 56642,
+    "PROPAGATION_BEFORE": 57356,
+    "PROPAGATION_AFTER": 57356,
+    "GNSS_UPDATE_ENTRY": 1269,
+    "GNSS_DISPATCH": 1269,
+    "MEASUREMENT_ATTEMPT": 7614,
+    "SA_EVALUATION_BEGIN": 7289,
+    "SA_EVALUATION": 7289,
+    "EKF_BEFORE": 7289,
+    "EKF_AFTER": 7289,
+    "MEASUREMENT_DECISION": 7614,
+    "YAW_GATE_INPUT": 1269,
+    "VELOCITY_KINEMATICS": 1269,
+    "MEASUREMENT_SELECTED": 3542,
+    "RAW_DOPPLER_KINEMATICS": 1008,
+    "GNSS_UPDATE_CONSUMED": 1269,
+    "FEEDBACK_BEFORE": 1269,
+    "FEEDBACK_AFTER": 1269,
+    "IMU_SPLIT_BEFORE": 714,
+    "IMU_SPLIT_AFTER": 714,
+    "OBSERVER_END": 1
+  },
+  "stream_complete": true,
+  "validation_calculation": true,
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "data_mode": "semisynthetic",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "roll_range_rad_at_yaw_attempt": [
+    -0.1576021602604628,
+    0.18242712265220665
+  ],
+  "pitch_range_rad_at_yaw_attempt": [
+    -0.08662398834076697,
+    0.07265284012476474
+  ],
+  "baseline_vector": "NOT_IN_GNSS_STRUCT; not reconstructed from error",
+  "available_time": "UNKNOWN"
+}

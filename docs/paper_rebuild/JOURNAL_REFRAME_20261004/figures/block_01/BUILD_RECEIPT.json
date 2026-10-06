@@ -1,0 +1,266 @@
+{
+  "scope": "PRESENTATION_ONLY; original frozen V3 and historical LC01",
+  "no_solver_calls": true,
+  "no_evaluator_calls": true,
+  "raw_reference_payload_opens": 0,
+  "input_pin_index_sha256": "46c0deeffe0779ad2b63430aff5512f3096c93006b9382e443879999d1015a2c",
+  "inputs": [
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+      "file_sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+      "decompressed_sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+      "file_bytes": 51910,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv",
+      "file_sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+      "decompressed_sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+      "file_bytes": 323074,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00004/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "file_sha256": "a98f1a5f7591c2365b0fd73b6a1146e0d6df3de2a06414fd067fc9b66b928548",
+      "decompressed_sha256": "cce51f6da0474d6e28802cd9f19e107869b994b352ce7e6548e959e4b76c7da0",
+      "file_bytes": 5786321,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "relative_path": "data/BY2_F04_errors.csv.gz",
+        "rows": 56642,
+        "columns": [
+          "time",
+          "horizontal_err_m",
+          "yaw_err_deg",
+          "roll_err_deg",
+          "pitch_err_deg"
+        ],
+        "sha256": "67ead67d927a5aad81382628bda5fa6afbecff573dbc9451f409f8cc6a5cfb70",
+        "plain_sha256": "714792014cac8444e11ce781396b859ca9c81f6b0b30ec3534e50a19da14c17f"
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_DEGSUBSET_BY2/09_HORIZONTAL_V3/LC01_EXT05A/FROZEN_EVALUATOR/error_series.csv",
+      "file_sha256": "b7af06c18399d525f31e57e86357f196413f5f505999877a5cf9f9fe5a9179c1",
+      "decompressed_sha256": "b7af06c18399d525f31e57e86357f196413f5f505999877a5cf9f9fe5a9179c1",
+      "file_bytes": 10492283,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "relative_path": "data/BY2_LC01_errors.csv.gz",
+        "rows": 58014,
+        "columns": [
+          "time",
+          "horizontal_err_m",
+          "yaw_err_deg",
+          "roll_err_deg",
+          "pitch_err_deg"
+        ],
+        "sha256": "a35640eb3b1bad8507204409ab6b236c826f7fc1d38c18ddcb1948d9cbb9f15e",
+        "plain_sha256": "481f2c8ebd412296ae96e2bda6a1056f5175fab2a6a61ac6c88beac5096eed66"
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F04/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "file_sha256": "eef9485bb7420ba23a32bfe6a4eb9d2882f31001892c0435297a44b9b8b67dfb",
+      "decompressed_sha256": "328a6f0cd3086cf8c67e125cae38460755e02205d0075c2c05c4922832df3de1",
+      "file_bytes": 5985885,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "relative_path": "data/BY2H_F04_errors.csv.gz",
+        "rows": 58580,
+        "columns": [
+          "time",
+          "horizontal_err_m",
+          "yaw_err_deg",
+          "roll_err_deg",
+          "pitch_err_deg"
+        ],
+        "sha256": "d9f61f31ce6743b25aace4899b2d4140c53e0950a837ce8bf192eb11612f312a",
+        "plain_sha256": "0c1d7ae61910015c6f7cee08e9e592243d67565d736223358f77468d98a26185"
+      }
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2H__LC01__CONTRACT_START/EXACT_EVALUATOR_OUTPUT/error_series.csv",
+      "file_sha256": "9d7888364ccea06ea01051da48d778565ecf5751884543f68cd19d93707f412c",
+      "decompressed_sha256": "9d7888364ccea06ea01051da48d778565ecf5751884543f68cd19d93707f412c",
+      "file_bytes": 10813393,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "relative_path": "data/BY2H_LC01_errors.csv.gz",
+        "rows": 59934,
+        "columns": [
+          "time",
+          "horizontal_err_m",
+          "yaw_err_deg",
+          "roll_err_deg",
+          "pitch_err_deg"
+        ],
+        "sha256": "4cba57ea3a83a9816e0ce6f3f0c17dfe5d9e79a10dfcfaaf7854b08cad86acdf",
+        "plain_sha256": "461595acb2823e931f1db2954a2b7b380529f388468513260774b77f4a020ad5"
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F04/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "file_sha256": "7c89c024b6088b3d2ba7f1b647a5b742e18e411695f4c39bd821e0eb1cc8a67b",
+      "decompressed_sha256": "b68a673506d818e261ae6c0567fe39b1357d4fe5e4ea8ba99ebd3c691c34086a",
+      "file_bytes": 7788877,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "relative_path": "data/BY2O_F04_errors.csv.gz",
+        "rows": 76548,
+        "columns": [
+          "time",
+          "horizontal_err_m",
+          "yaw_err_deg",
+          "roll_err_deg",
+          "pitch_err_deg"
+        ],
+        "sha256": "f2a4e1d6513a84b31becf20eae7c561b68871270d8931fe5669bfc11344c7e86",
+        "plain_sha256": "826a3237bbc216d5cc1ac2b8339c98b159b3479ae9445f3682fe1d7446d22afb"
+      }
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_03/07_OFFLINE_EVALUATION/v3/BY2O__LC01__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv",
+      "file_sha256": "bccd253cef7e498c7155ecd4dfc7b2d3475f462da0473579872d6d7e6eca94ce",
+      "decompressed_sha256": "bccd253cef7e498c7155ecd4dfc7b2d3475f462da0473579872d6d7e6eca94ce",
+      "file_bytes": 14160381,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "relative_path": "data/BY2O_LC01_errors.csv.gz",
+        "rows": 78441,
+        "columns": [
+          "time",
+          "horizontal_err_m",
+          "yaw_err_deg",
+          "roll_err_deg",
+          "pitch_err_deg"
+        ],
+        "sha256": "be0e623d6c4a4c25d05f4287d7d475d23101dad4c36ecae7070cb75620f742e8",
+        "plain_sha256": "4816d45d2dfe1acb91a76bf22d63026bc41723e53773fd8ba42485beb8f96cee"
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv",
+      "file_sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+      "decompressed_sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+      "file_bytes": 323074,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "relative_path": "data/natural_all_33.csv",
+        "rows": 33,
+        "columns": [
+          "sequence_id",
+          "method_id",
+          "effective_profile",
+          "horizontal_rmse_m",
+          "yaw_rmse_deg",
+          "matched_epoch_count",
+          "output_epoch_count",
+          "unmatched_epoch_count",
+          "status",
+          "run_id"
+        ],
+        "sha256": "45967269a6f25b9b7747fd3519fce067edadccf71e577fb9ac3417ddda816253"
+      }
+    }
+  ],
+  "figures": [
+    {
+      "id": "R01_BY2_full_window",
+      "dominant_claim": "Continuous errors and adverse excursions are visible throughout the original formal window.",
+      "panel_role": "case illustration; position above, heading below",
+      "caption": "Original V3 F04 versus LC01 (FILE_START); all saved matched samples are drawn without smoothing. Fractions use each method observed output denominator, not a nominal time grid, common support or independent sample count. No interpolation across gaps; no alignment or new scoring. Saved evaluator v3; declared dual-antenna midpoint; shared-GNSS commercial reference.",
+      "exports": [
+        {
+          "path": "R01_BY2_full_window.png",
+          "sha256": "5ad284933006cf3c0e6a3e9124d7b45eaaef8711cdd988496934af7277948bb4",
+          "bytes": 885789
+        },
+        {
+          "path": "R01_BY2_full_window.pdf",
+          "sha256": "a30a6bb60b7aeeaf88fdeccd2eb623af1a0166d9758da063437b290ef98d2ac6",
+          "bytes": 2129357
+        },
+        {
+          "path": "R01_BY2_full_window.svg",
+          "sha256": "be00dc5721613484f139013916d1db1c5410a05509d4711f5da6863c5a61da3d",
+          "bytes": 5687921
+        }
+      ],
+      "all_saved_formal_samples_drawn": true
+    },
+    {
+      "id": "R01_BY2H_full_window",
+      "dominant_claim": "Continuous errors and adverse excursions are visible throughout the original formal window.",
+      "panel_role": "case illustration; position above, heading below",
+      "caption": "Original V3 F04 versus LC01 (CONTRACT_START); all saved matched samples are drawn without smoothing. Fractions use each method observed output denominator, not a nominal time grid, common support or independent sample count. No interpolation across gaps; no alignment or new scoring. Saved evaluator v3; declared dual-antenna midpoint; shared-GNSS commercial reference.  IEKF geometric audit: FAIL.",
+      "exports": [
+        {
+          "path": "R01_BY2H_full_window.png",
+          "sha256": "1927a28921d4c97d69e75bff22eb9cf2183ea41c3405f6d056251c067eb7be94",
+          "bytes": 1024860
+        },
+        {
+          "path": "R01_BY2H_full_window.pdf",
+          "sha256": "69a7de3987e8d30b5408ebd77c13e29908073fa24f1d46be79e5b1ec8f9b2f26",
+          "bytes": 2232025
+        },
+        {
+          "path": "R01_BY2H_full_window.svg",
+          "sha256": "a1cb54d3c8bf628e3d7b5660a02d7ab21fa1286cc174f9ff322bcd30e74ab4f9",
+          "bytes": 5881375
+        }
+      ],
+      "all_saved_formal_samples_drawn": true
+    },
+    {
+      "id": "R01_BY2O_full_window",
+      "dominant_claim": "Continuous errors and adverse excursions are visible throughout the original formal window.",
+      "panel_role": "case illustration; position above, heading below",
+      "caption": "Original V3 F04 versus LC01 (FILE_START); all saved matched samples are drawn without smoothing. Fractions use each method observed output denominator, not a nominal time grid, common support or independent sample count. No interpolation across gaps; no alignment or new scoring. Saved evaluator v3; declared dual-antenna midpoint; shared-GNSS commercial reference.",
+      "exports": [
+        {
+          "path": "R01_BY2O_full_window.png",
+          "sha256": "9cffb06d500cb97a9e7cf469697835f2c11ee339221ba353f3b711e27addf2c0",
+          "bytes": 732161
+        },
+        {
+          "path": "R01_BY2O_full_window.pdf",
+          "sha256": "39a8d0d5e2d60ba51eb7f28db05f609971a79a895652de9056bf03f0b3773a9b",
+          "bytes": 2818500
+        },
+        {
+          "path": "R01_BY2O_full_window.svg",
+          "sha256": "fe474f96361e921c02e883c8b1fd9ae1e314003a761bdb11932cfdb676696743",
+          "bytes": 7685978
+        }
+      ],
+      "all_saved_formal_samples_drawn": true
+    },
+    {
+      "id": "R02_natural_all_11_configurations",
+      "dominant_claim": "The complete natural-sequence ablation retains non-monotone and small effects.",
+      "panel_role": "single-module evidence separated from multi-input configurations",
+      "caption": "Existing horizontal/yaw RMSE tokens from FULL_ABLATION_TABLE_V3, 33/33 COMPLETED; actual matched/output counts retained in the adjacent source CSV. Every method has the common historical dual-heading initialization. No statistics or evaluation recomputed.",
+      "exports": [
+        {
+          "path": "R02_natural_all_11_configurations.png",
+          "sha256": "4f63aec5040da5f101056d7feea49342fe80bf9cfe2c1693f970face1ca9cae4",
+          "bytes": 363193
+        },
+        {
+          "path": "R02_natural_all_11_configurations.pdf",
+          "sha256": "d9e7a0ec6f9411b7dfdfc9d79a87b07c3a0ec6f88098ba97da632a4e3367d9f4",
+          "bytes": 26697
+        },
+        {
+          "path": "R02_natural_all_11_configurations.svg",
+          "sha256": "4d18f824531512154167baea4e53296ca2815ca4604fd5641a943b141e6aac22",
+          "bytes": 30048
+        }
+      ],
+      "all_saved_formal_samples_drawn": true
+    }
+  ],
+  "script_sha256": "c4d2093734e153ce595ecb144d50a09d756ec7f2deb88ac38f1e34ab224848cd"
+}

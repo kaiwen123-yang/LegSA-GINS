@@ -1,0 +1,52 @@
+{
+  "expected_error_series": 2308,
+  "full_read_error_series": 2308,
+  "error_series_with_numeric_check": 2308,
+  "retained_completed_native": 1154,
+  "evaluator_counts": {
+    "v3": 1154,
+    "v2": 1154
+  },
+  "matched_trajectory_files": 1,
+  "matched_trajectory_full_read": 1,
+  "rows_all": 131266946,
+  "rows_error_series": 131210304,
+  "compressed_bytes": 13314046312,
+  "metric_check_status_counts": {
+    "MATCH": 381501,
+    "MATCH_NULL": 332,
+    "NOT_RECOMPUTABLE_FROM_RETAINED_FIELDS": 20777
+  },
+  "eof_receipts": {
+    "FULL_STREAM_TO_GZIP_EOF_CRC_CHECKED": 2309
+  },
+  "full_read_counts": {
+    "FULL_PAYLOAD_READ": 2309
+  },
+  "main_scan_count_distribution": {
+    "1": 2309
+  },
+  "sha256_status_counts": {
+    "MATCH": 2309
+  },
+  "nonfinite_cells": 0,
+  "duplicate_timestamps": 0,
+  "backward_timestamps": 0,
+  "data_mode": "validation_of_existing_real_and_semisynthetic_results",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "semisynthetic_data_generated": false,
+  "validation_calculation": true,
+  "payload_opens_by_consolidator": 0,
+  "solver_calls": 0,
+  "provider_generator_calls": 0,
+  "original_evaluator_calls": 0,
+  "controller_calls": 0,
+  "bootstrap_calls": 0,
+  "raw_reference_opens": 0,
+  "nav_std_payload_opens": 0,
+  "source_series_writes": 0,
+  "scope_limit": "Each file partially numerically reproducible; not native/input replay or scientific correctness certification",
+  "known_window_omissions": "D22_seed_00 and D39_seed_00; see WINDOW_LIMITATIONS.csv; no second payload pass",
+  "retention_baseline": "Prior collection: 10062 released error-series, 566 not generated, 6378 NAV and 6378 STD released; not re-inventoried here"
+}

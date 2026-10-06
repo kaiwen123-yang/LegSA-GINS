@@ -1,0 +1,278 @@
+claim_id,table,selector,column,expected,tolerance,used_in
+yaw_BY2_F04_rmse,yawdec,sequence=BY2;method=F04,rmse_deg,1.886,0.0006,"UNC01 §2,D1"
+yaw_BY2_F04_bias,yawdec,sequence=BY2;method=F04,bias_deg,-1.086,0.0006,UNC01 §2
+yaw_BY2_F04_slow,yawdec,sequence=BY2;method=F04,std_slow_deg,0.816,0.0006,UNC01 §2
+yaw_BY2_F04_fast,yawdec,sequence=BY2;method=F04,std_fast_deg,1.305,0.0006,UNC01 §2
+yaw_BY2_F04_share_bias,yawdec,sequence=BY2;method=F04,share_bias,0.33,0.006,UNC01 §2
+yaw_BY2_F04_share_slow,yawdec,sequence=BY2;method=F04,share_slow,0.19,0.006,UNC01 §2
+yaw_BY2_F04_share_fast,yawdec,sequence=BY2;method=F04,share_fast,0.48,0.006,UNC01 §2
+yaw_BY2_F04_own,yawdec,sequence=BY2;method=F04,estimator_specific_deg,1.36,0.006,UNC01 §2
+yaw_BY2_F02_rmse,yawdec,sequence=BY2;method=F02,rmse_deg,2.232,0.0006,"UNC01 §2,D1"
+yaw_BY2_F02_bias,yawdec,sequence=BY2;method=F02,bias_deg,-1.39,0.0006,UNC01 §2
+yaw_BY2_F02_slow,yawdec,sequence=BY2;method=F02,std_slow_deg,1.153,0.0006,UNC01 §2
+yaw_BY2_F02_fast,yawdec,sequence=BY2;method=F02,std_fast_deg,1.307,0.0006,UNC01 §2
+yaw_BY2_LC01_rmse,yawdec,sequence=BY2;method=LC01,rmse_deg,2.995,0.0006,"UNC01 §2,D1"
+yaw_BY2_LC01_bias,yawdec,sequence=BY2;method=LC01,bias_deg,-1.353,0.0006,UNC01 §2
+yaw_BY2_LC01_slow,yawdec,sequence=BY2;method=LC01,std_slow_deg,2.216,0.0006,UNC01 §2
+yaw_BY2_LC01_fast,yawdec,sequence=BY2;method=LC01,std_fast_deg,1.272,0.0006,UNC01 §2
+yaw_BY2_LC01_share_slow,yawdec,sequence=BY2;method=LC01,share_slow,0.55,0.006,UNC01 §2
+yaw_BY2_LC01-S_rmse,yawdec,sequence=BY2;method=LC01-S,rmse_deg,1.539,0.0006,"UNC01 §2,D1"
+yaw_BY2_LC01-S_bias,yawdec,sequence=BY2;method=LC01-S,bias_deg,-0.357,0.0006,UNC01 §2
+yaw_BY2_LC01-S_slow,yawdec,sequence=BY2;method=LC01-S,std_slow_deg,0.844,0.0006,UNC01 §2
+yaw_BY2_LC01-S_fast,yawdec,sequence=BY2;method=LC01-S,std_fast_deg,1.229,0.0006,UNC01 §2
+yaw_BY2H_F04_rmse,yawdec,sequence=BY2H;method=F04,rmse_deg,1.934,0.0006,"UNC01 §2,D1"
+yaw_BY2H_F04_bias,yawdec,sequence=BY2H;method=F04,bias_deg,-0.538,0.0006,UNC01 §2
+yaw_BY2H_F04_slow,yawdec,sequence=BY2H;method=F04,std_slow_deg,1.222,0.0006,UNC01 §2
+yaw_BY2H_F04_fast,yawdec,sequence=BY2H;method=F04,std_fast_deg,1.405,0.0006,UNC01 §2
+yaw_BY2H_F04_share_bias,yawdec,sequence=BY2H;method=F04,share_bias,0.08,0.006,UNC01 §2
+yaw_BY2H_F04_share_slow,yawdec,sequence=BY2H;method=F04,share_slow,0.4,0.006,UNC01 §2
+yaw_BY2H_F04_share_fast,yawdec,sequence=BY2H;method=F04,share_fast,0.53,0.006,UNC01 §2
+yaw_BY2H_F04_own,yawdec,sequence=BY2H;method=F04,estimator_specific_deg,1.34,0.006,UNC01 §2
+yaw_BY2H_LC01_rmse,yawdec,sequence=BY2H;method=LC01,rmse_deg,2.209,0.0006,"UNC01 §2,D1"
+yaw_BY2H_LC01_bias,yawdec,sequence=BY2H;method=LC01,bias_deg,-0.805,0.0006,UNC01 §2
+yaw_BY2H_LC01_slow,yawdec,sequence=BY2H;method=LC01,std_slow_deg,1.445,0.0006,UNC01 §2
+yaw_BY2H_LC01_fast,yawdec,sequence=BY2H;method=LC01,std_fast_deg,1.391,0.0006,UNC01 §2
+yaw_BY2O_F04_rmse,yawdec,sequence=BY2O;method=F04,rmse_deg,2.434,0.0006,"UNC01 §2,D1"
+yaw_BY2O_F04_bias,yawdec,sequence=BY2O;method=F04,bias_deg,0.339,0.0006,UNC01 §2
+yaw_BY2O_F04_slow,yawdec,sequence=BY2O;method=F04,std_slow_deg,2.076,0.0006,UNC01 §2
+yaw_BY2O_F04_fast,yawdec,sequence=BY2O;method=F04,std_fast_deg,1.078,0.0006,UNC01 §2
+yaw_BY2O_F04_share_bias,yawdec,sequence=BY2O;method=F04,share_bias,0.02,0.006,UNC01 §2
+yaw_BY2O_F04_share_slow,yawdec,sequence=BY2O;method=F04,share_slow,0.73,0.006,UNC01 §2
+yaw_BY2O_F04_share_fast,yawdec,sequence=BY2O;method=F04,share_fast,0.2,0.006,UNC01 §2
+yaw_BY2O_F04_own,yawdec,sequence=BY2O;method=F04,estimator_specific_deg,2.1,0.006,UNC01 §2
+yaw_BY2O_LC01_rmse,yawdec,sequence=BY2O;method=LC01,rmse_deg,2.454,0.0006,"UNC01 §2,D1"
+yaw_BY2O_LC01_bias,yawdec,sequence=BY2O;method=LC01,bias_deg,0.3,0.0006,UNC01 §2
+yaw_BY2O_LC01_slow,yawdec,sequence=BY2O;method=LC01,std_slow_deg,2.075,0.0006,UNC01 §2
+yaw_BY2O_LC01_fast,yawdec,sequence=BY2O;method=LC01,std_fast_deg,1.065,0.0006,UNC01 §2
+yaw_BY2_F04_own_spec,yawdec,sequence=BY2;method=F04,estimator_specific_minus_ref_spec_deg,0.73,0.006,UNC01 §2
+yaw_BY2_F04_own_fused,yawdec,sequence=BY2;method=F04,estimator_specific_minus_ref_fused_deg,1.03,0.006,UNC01 §2
+yaw_BY2H_F04_own_spec,yawdec,sequence=BY2H;method=F04,estimator_specific_minus_ref_spec_deg,0.69,0.006,UNC01 §2
+yaw_BY2H_F04_own_fused,yawdec,sequence=BY2H;method=F04,estimator_specific_minus_ref_fused_deg,0.98,0.006,UNC01 §2
+fast_BY2_min,fast,sequence=BY2,fast_min,1.229,0.0006,UNC01 §2; paragraphs
+fast_BY2_max,fast,sequence=BY2,fast_max,1.311,0.0006,UNC01 §2; paragraphs
+fast_BY2_n,fast,sequence=BY2,n_estimators,13.0,0.0,UNC01 §2
+fast_BY2H_min,fast,sequence=BY2H,fast_min,1.391,0.0006,UNC01 §2; paragraphs
+fast_BY2H_max,fast,sequence=BY2H,fast_max,1.415,0.0006,UNC01 §2; paragraphs
+fast_BY2H_n,fast,sequence=BY2H,n_estimators,12.0,0.0,UNC01 §2
+fast_BY2O_min,fast,sequence=BY2O,fast_min,1.053,0.0006,UNC01 §2; paragraphs
+fast_BY2O_max,fast,sequence=BY2O,fast_max,1.079,0.0006,UNC01 §2; paragraphs
+fast_BY2O_n,fast,sequence=BY2O,n_estimators,12.0,0.0,UNC01 §2
+seg_F04_primary_yaw,bands,method=F04;segment=primary,rmse_yaw,0.2325,0.0006,UNC01 §2
+seg_F04_primary_fast,bands,method=F04;segment=primary,std_fast,0.059,0.0006,UNC01 §2; paragraphs
+seg_F04_primary_slow,bands,method=F04;segment=primary,std_slow,0.182,0.0006,UNC01 §2
+seg_F04_primary_mean,bands,method=F04;segment=primary,mean_yaw,-0.124,0.0006,UNC01 §2
+seg_F04_primary_n,bands,method=F04;segment=primary,n,7612.0,0.0,UNC01 §2
+seg_F04_primary_h,bands,method=F04;segment=primary,rmse_h,0.0242,6e-05,UNC01 §2
+seg_F04_primary_up,bands,method=F04;segment=primary,rmse_up,0.0158,6e-05,UNC01 §2
+seg_F01_primary_fast,bands,method=F01;segment=primary,std_fast,0.058,0.0006,UNC01 §2
+seg_F04_outside_yaw,bands,method=F04;segment=outside,rmse_yaw,2.589,0.0006,UNC02 §3
+seg_LC01_primary_yaw,bands,method=LC01;segment=primary,rmse_yaw,4.008,0.0006,UNC02 §3
+seg_LC01_outside_yaw,bands,method=LC01;segment=outside,rmse_yaw,1.878,0.0006,UNC02 §3
+seg_LC01_primary_fast,bands,method=LC01;segment=primary,std_fast,0.271,0.0006,UNC01 §2
+real_BY2_F04_yaw_err_deg_b20,real,sequence=BY2;method=F04;series=yaw_err_deg,se_rmse_batch_20s,0.153,0.0006,UNC01 §4
+real_BY2_F04_yaw_err_deg_b40,real,sequence=BY2;method=F04;series=yaw_err_deg,se_rmse_batch_40s,0.206,0.0006,UNC01 §4
+real_BY2_F04_yaw_err_deg_lo,real,sequence=BY2;method=F04;series=yaw_err_deg,rmse_mbb_low,1.604,0.0006,UNC01 §4; paragraphs
+real_BY2_F04_yaw_err_deg_hi,real,sequence=BY2;method=F04;series=yaw_err_deg,rmse_mbb_high,2.158,0.0006,UNC01 §4; paragraphs
+real_BY2H_F04_yaw_err_deg_b20,real,sequence=BY2H;method=F04;series=yaw_err_deg,se_rmse_batch_20s,0.164,0.0006,UNC01 §4
+real_BY2H_F04_yaw_err_deg_b40,real,sequence=BY2H;method=F04;series=yaw_err_deg,se_rmse_batch_40s,0.141,0.0006,UNC01 §4
+real_BY2H_F04_yaw_err_deg_lo,real,sequence=BY2H;method=F04;series=yaw_err_deg,rmse_mbb_low,1.602,0.0006,UNC01 §4; paragraphs
+real_BY2H_F04_yaw_err_deg_hi,real,sequence=BY2H;method=F04;series=yaw_err_deg,rmse_mbb_high,2.037,0.0006,UNC01 §4; paragraphs
+real_BY2O_F04_yaw_err_deg_b20,real,sequence=BY2O;method=F04;series=yaw_err_deg,se_rmse_batch_20s,0.661,0.0006,UNC01 §4
+real_BY2O_F04_yaw_err_deg_b40,real,sequence=BY2O;method=F04;series=yaw_err_deg,se_rmse_batch_40s,0.717,0.0006,UNC01 §4
+real_BY2O_F04_yaw_err_deg_lo,real,sequence=BY2O;method=F04;series=yaw_err_deg,rmse_mbb_low,1.364,0.0006,UNC01 §4; paragraphs
+real_BY2O_F04_yaw_err_deg_hi,real,sequence=BY2O;method=F04;series=yaw_err_deg,rmse_mbb_high,3.613,0.0006,UNC01 §4; paragraphs
+real_BY2_LC01_yaw_err_deg_b20,real,sequence=BY2;method=LC01;series=yaw_err_deg,se_rmse_batch_20s,0.863,0.0006,UNC01 §4
+real_BY2_LC01_yaw_err_deg_b40,real,sequence=BY2;method=LC01;series=yaw_err_deg,se_rmse_batch_40s,1.094,0.0006,UNC01 §4
+real_BY2_LC01_yaw_err_deg_lo,real,sequence=BY2;method=LC01;series=yaw_err_deg,rmse_mbb_low,1.618,0.0006,UNC01 §4; paragraphs
+real_BY2_LC01_yaw_err_deg_hi,real,sequence=BY2;method=LC01;series=yaw_err_deg,rmse_mbb_high,4.554,0.0006,UNC01 §4; paragraphs
+real_BY2H_LC01_yaw_err_deg_b20,real,sequence=BY2H;method=LC01;series=yaw_err_deg,se_rmse_batch_20s,0.162,0.0006,UNC01 §4
+real_BY2H_LC01_yaw_err_deg_b40,real,sequence=BY2H;method=LC01;series=yaw_err_deg,se_rmse_batch_40s,0.18,0.0006,UNC01 §4
+real_BY2H_LC01_yaw_err_deg_lo,real,sequence=BY2H;method=LC01;series=yaw_err_deg,rmse_mbb_low,1.744,0.0006,UNC01 §4; paragraphs
+real_BY2H_LC01_yaw_err_deg_hi,real,sequence=BY2H;method=LC01;series=yaw_err_deg,rmse_mbb_high,2.421,0.0006,UNC01 §4; paragraphs
+real_BY2O_LC01_yaw_err_deg_b20,real,sequence=BY2O;method=LC01;series=yaw_err_deg,se_rmse_batch_20s,0.329,0.0006,UNC01 §4
+real_BY2O_LC01_yaw_err_deg_b40,real,sequence=BY2O;method=LC01;series=yaw_err_deg,se_rmse_batch_40s,0.439,0.0006,UNC01 §4
+real_BY2O_LC01_yaw_err_deg_lo,real,sequence=BY2O;method=LC01;series=yaw_err_deg,rmse_mbb_low,1.707,0.0006,UNC01 §4; paragraphs
+real_BY2O_LC01_yaw_err_deg_hi,real,sequence=BY2O;method=LC01;series=yaw_err_deg,rmse_mbb_high,3.139,0.0006,UNC01 §4; paragraphs
+real_BY2_F04_horizontal_err_m_b20,real,sequence=BY2;method=F04;series=horizontal_err_m,se_rmse_batch_20s,0.0246,6e-05,UNC01 §4
+real_BY2_F04_horizontal_err_m_b40,real,sequence=BY2;method=F04;series=horizontal_err_m,se_rmse_batch_40s,0.0404,6e-05,UNC01 §4
+real_BY2_F04_horizontal_err_m_lo,real,sequence=BY2;method=F04;series=horizontal_err_m,rmse_mbb_low,0.0452,6e-05,UNC01 §4; paragraphs
+real_BY2_F04_horizontal_err_m_hi,real,sequence=BY2;method=F04;series=horizontal_err_m,rmse_mbb_high,0.152,6e-05,UNC01 §4; paragraphs
+real_BY2H_F04_horizontal_err_m_b20,real,sequence=BY2H;method=F04;series=horizontal_err_m,se_rmse_batch_20s,0.0068,6e-05,UNC01 §4
+real_BY2H_F04_horizontal_err_m_b40,real,sequence=BY2H;method=F04;series=horizontal_err_m,se_rmse_batch_40s,0.0106,6e-05,UNC01 §4
+real_BY2H_F04_horizontal_err_m_lo,real,sequence=BY2H;method=F04;series=horizontal_err_m,rmse_mbb_low,0.0452,6e-05,UNC01 §4; paragraphs
+real_BY2H_F04_horizontal_err_m_hi,real,sequence=BY2H;method=F04;series=horizontal_err_m,rmse_mbb_high,0.0853,6e-05,UNC01 §4; paragraphs
+real_BY2O_F04_horizontal_err_m_b20,real,sequence=BY2O;method=F04;series=horizontal_err_m,se_rmse_batch_20s,0.0115,6e-05,UNC01 §4
+real_BY2O_F04_horizontal_err_m_b40,real,sequence=BY2O;method=F04;series=horizontal_err_m,se_rmse_batch_40s,0.0028,6e-05,UNC01 §4
+real_BY2O_F04_horizontal_err_m_lo,real,sequence=BY2O;method=F04;series=horizontal_err_m,rmse_mbb_low,0.0376,6e-05,UNC01 §4; paragraphs
+real_BY2O_F04_horizontal_err_m_hi,real,sequence=BY2O;method=F04;series=horizontal_err_m,rmse_mbb_high,0.073,6e-05,UNC01 §4; paragraphs
+real_BY2_F04_err_u_m_b20,real,sequence=BY2;method=F04;series=err_u_m,se_rmse_batch_20s,0.0036,6e-05,UNC01 §4
+real_BY2_F04_err_u_m_b40,real,sequence=BY2;method=F04;series=err_u_m,se_rmse_batch_40s,0.0058,6e-05,UNC01 §4
+real_BY2_F04_err_u_m_lo,real,sequence=BY2;method=F04;series=err_u_m,rmse_mbb_low,0.0407,6e-05,UNC01 §4; paragraphs
+real_BY2_F04_err_u_m_hi,real,sequence=BY2;method=F04;series=err_u_m,rmse_mbb_high,0.057,6e-05,UNC01 §4; paragraphs
+real_BY2_F04_yaw_tau,real,sequence=BY2;method=F04;series=yaw_err_deg,tau_int_s,0.64,0.006,UNC01 §4
+real_BY2O_F04_yaw_tau,real,sequence=BY2O;method=F04;series=yaw_err_deg,tau_int_s,7.98,0.006,UNC01 §4
+real_BY2O_F04_yaw_neff,real,sequence=BY2O;method=F04;series=yaw_err_deg,n_eff,38.5,0.06,UNC01 §4
+real_BY2_F04_h_tau,real,sequence=BY2;method=F04;series=horizontal_err_m,tau_int_s,12.2,0.06,UNC01 §4
+real_BY2_F04_h_neff,real,sequence=BY2;method=F04;series=horizontal_err_m,n_eff,18.6,0.06,UNC01 §4
+dist_BY2_full_LC01-F04_yaw_delta,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,delta_rmse,1.11,0.0006,UNC02 table
+dist_BY2_full_LC01-F04_yaw_lo,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,mbb95_low,-0.215,0.0006,UNC02 table
+dist_BY2_full_LC01-F04_yaw_hi,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,mbb95_high,2.574,0.0006,UNC02 table
+dist_BY2H_full_LC01-F04_yaw_delta,dist,sequence=BY2H;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,delta_rmse,0.274,0.0006,UNC02 table
+dist_BY2H_full_LC01-F04_yaw_lo,dist,sequence=BY2H;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,mbb95_low,-0.052,0.0006,UNC02 table
+dist_BY2H_full_LC01-F04_yaw_hi,dist,sequence=BY2H;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,mbb95_high,0.514,0.0006,UNC02 table
+dist_BY2O_full_LC01-F04_yaw_delta,dist,sequence=BY2O;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,delta_rmse,0.018,0.0006,UNC02 table
+dist_BY2O_full_LC01-F04_yaw_lo,dist,sequence=BY2O;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,mbb95_low,-1.344,0.0006,UNC02 table
+dist_BY2O_full_LC01-F04_yaw_hi,dist,sequence=BY2O;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,mbb95_high,1.401,0.0006,UNC02 table
+dist_BY2O_primary_LC01-F04_yaw_delta,dist,sequence=BY2O;segment=primary;pair_A_minus_B=LC01-F04;metric=yaw,delta_rmse,3.776,0.0006,UNC02 table
+dist_BY2O_primary_LC01-F04_yaw_lo,dist,sequence=BY2O;segment=primary;pair_A_minus_B=LC01-F04;metric=yaw,mbb95_low,2.197,0.0006,UNC02 table
+dist_BY2O_primary_LC01-F04_yaw_hi,dist,sequence=BY2O;segment=primary;pair_A_minus_B=LC01-F04;metric=yaw,mbb95_high,4.438,0.0006,UNC02 table
+dist_BY2_full_LC01-S-F04_yaw_delta,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-S-F04;metric=yaw,delta_rmse,-0.348,0.0006,UNC02 table
+dist_BY2_full_LC01-S-F04_yaw_lo,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-S-F04;metric=yaw,mbb95_low,-0.59,0.0006,UNC02 table
+dist_BY2_full_LC01-S-F04_yaw_hi,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-S-F04;metric=yaw,mbb95_high,-0.152,0.0006,UNC02 table
+dist_BY2_full_F04-F02_yaw_delta,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-F02;metric=yaw,delta_rmse,-0.346,0.0006,UNC02 table
+dist_BY2_full_F04-F02_yaw_lo,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-F02;metric=yaw,mbb95_low,-0.692,0.0006,UNC02 table
+dist_BY2_full_F04-F02_yaw_hi,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-F02;metric=yaw,mbb95_high,-0.055,0.0006,UNC02 table
+dist_BY2H_full_F04-F02_yaw_delta,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-F02;metric=yaw,delta_rmse,-0.35,0.0006,UNC02 table
+dist_BY2H_full_F04-F02_yaw_lo,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-F02;metric=yaw,mbb95_low,-0.827,0.0006,UNC02 table
+dist_BY2H_full_F04-F02_yaw_hi,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-F02;metric=yaw,mbb95_high,-0.02,0.0006,UNC02 table
+dist_BY2O_full_F04-F02_yaw_delta,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-F02;metric=yaw,delta_rmse,0.124,0.0006,UNC02 table
+dist_BY2O_full_F04-F02_yaw_lo,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-F02;metric=yaw,mbb95_low,-0.034,0.0006,UNC02 table
+dist_BY2O_full_F04-F02_yaw_hi,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-F02;metric=yaw,mbb95_high,0.219,0.0006,UNC02 table
+dist_BY2_full_F04-F03_yaw_delta,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-F03;metric=yaw,delta_rmse,-0.029,0.0006,UNC02 table
+dist_BY2_full_F04-F03_yaw_lo,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-F03;metric=yaw,mbb95_low,-0.066,0.0006,UNC02 table
+dist_BY2_full_F04-F03_yaw_hi,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-F03;metric=yaw,mbb95_high,0.001,0.0006,UNC02 table
+dist_BY2H_full_F04-F03_yaw_delta,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-F03;metric=yaw,delta_rmse,-0.007,0.0006,UNC02 table
+dist_BY2H_full_F04-F03_yaw_lo,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-F03;metric=yaw,mbb95_low,-0.021,0.0006,UNC02 table
+dist_BY2H_full_F04-F03_yaw_hi,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-F03;metric=yaw,mbb95_high,0.002,0.0006,UNC02 table
+dist_BY2O_full_F04-F03_yaw_delta,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-F03;metric=yaw,delta_rmse,0.002,0.0006,UNC02 table
+dist_BY2O_full_F04-F03_yaw_lo,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-F03;metric=yaw,mbb95_low,-0.003,0.0006,UNC02 table
+dist_BY2O_full_F04-F03_yaw_hi,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-F03;metric=yaw,mbb95_high,0.005,0.0006,UNC02 table
+dist_BY2_full_F04-A04_yaw_delta,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-A04;metric=yaw,delta_rmse,0.0003,0.0006,UNC02 table
+dist_BY2_full_F04-A04_yaw_lo,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-A04;metric=yaw,mbb95_low,-0.004,0.0006,UNC02 table
+dist_BY2_full_F04-A04_yaw_hi,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-A04;metric=yaw,mbb95_high,0.005,0.0006,UNC02 table
+dist_BY2H_full_F04-A04_yaw_delta,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-A04;metric=yaw,delta_rmse,-0.0001,0.0006,UNC02 table
+dist_BY2H_full_F04-A04_yaw_lo,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-A04;metric=yaw,mbb95_low,-0.001,0.0006,UNC02 table
+dist_BY2H_full_F04-A04_yaw_hi,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-A04;metric=yaw,mbb95_high,0.001,0.0006,UNC02 table
+dist_BY2O_full_F04-A04_yaw_delta,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-A04;metric=yaw,delta_rmse,0.005,0.0006,UNC02 table
+dist_BY2O_full_F04-A04_yaw_lo,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-A04;metric=yaw,mbb95_low,-0.0002,0.0006,UNC02 table
+dist_BY2O_full_F04-A04_yaw_hi,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-A04;metric=yaw,mbb95_high,0.009,0.0006,UNC02 table
+dist_BY2_full_F03-F02_yaw_delta,dist,sequence=BY2;segment=full;pair_A_minus_B=F03-F02;metric=yaw,delta_rmse,-0.316,0.0006,UNC02 table
+dist_BY2_full_F03-F02_yaw_lo,dist,sequence=BY2;segment=full;pair_A_minus_B=F03-F02;metric=yaw,mbb95_low,-0.639,0.0006,UNC02 table
+dist_BY2_full_F03-F02_yaw_hi,dist,sequence=BY2;segment=full;pair_A_minus_B=F03-F02;metric=yaw,mbb95_high,-0.014,0.0006,UNC02 table
+dist_BY2H_full_F03-F02_yaw_delta,dist,sequence=BY2H;segment=full;pair_A_minus_B=F03-F02;metric=yaw,delta_rmse,-0.342,0.0006,UNC02 table
+dist_BY2H_full_F03-F02_yaw_lo,dist,sequence=BY2H;segment=full;pair_A_minus_B=F03-F02;metric=yaw,mbb95_low,-0.817,0.0006,UNC02 table
+dist_BY2H_full_F03-F02_yaw_hi,dist,sequence=BY2H;segment=full;pair_A_minus_B=F03-F02;metric=yaw,mbb95_high,-0.013,0.0006,UNC02 table
+dist_BY2O_primary_F04-F02_yaw_delta,dist,sequence=BY2O;segment=primary;pair_A_minus_B=F04-F02;metric=yaw,delta_rmse,-0.631,0.0006,UNC02 table
+dist_BY2O_primary_F04-F02_yaw_lo,dist,sequence=BY2O;segment=primary;pair_A_minus_B=F04-F02;metric=yaw,mbb95_low,-0.713,0.0006,UNC02 table
+dist_BY2O_primary_F04-F02_yaw_hi,dist,sequence=BY2O;segment=primary;pair_A_minus_B=F04-F02;metric=yaw,mbb95_high,-0.579,0.0006,UNC02 table
+dist_BY2_full_F04-F02_horizontal_delta,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-F02;metric=horizontal,delta_rmse,-0.004,6e-05,UNC02 table
+dist_BY2_full_F04-F02_horizontal_lo,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-F02;metric=horizontal,mbb95_low,-0.008,6e-05,UNC02 table
+dist_BY2_full_F04-F02_horizontal_hi,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-F02;metric=horizontal,mbb95_high,-0.0013,6e-05,UNC02 table
+dist_BY2H_full_F04-F02_horizontal_delta,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-F02;metric=horizontal,delta_rmse,-0.0031,6e-05,UNC02 table
+dist_BY2H_full_F04-F02_horizontal_lo,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-F02;metric=horizontal,mbb95_low,-0.0061,6e-05,UNC02 table
+dist_BY2H_full_F04-F02_horizontal_hi,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-F02;metric=horizontal,mbb95_high,-0.0014,6e-05,UNC02 table
+dist_BY2_full_F04-A04_horizontal_delta,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-A04;metric=horizontal,delta_rmse,0.001,6e-05,UNC02 table
+dist_BY2_full_F04-A04_horizontal_lo,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-A04;metric=horizontal,mbb95_low,0.0002,6e-05,UNC02 table
+dist_BY2_full_F04-A04_horizontal_hi,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-A04;metric=horizontal,mbb95_high,0.0023,6e-05,UNC02 table
+dist_BY2_full_LC01-F04_horizontal_delta,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-F04;metric=horizontal,delta_rmse,-0.0003,6e-05,UNC02 table
+dist_BY2_full_LC01-F04_horizontal_lo,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-F04;metric=horizontal,mbb95_low,-0.0039,6e-05,UNC02 table
+dist_BY2_full_LC01-F04_horizontal_hi,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-F04;metric=horizontal,mbb95_high,0.0026,6e-05,UNC02 table
+dist_BY2H_full_LC01-F04_horizontal_delta,dist,sequence=BY2H;segment=full;pair_A_minus_B=LC01-F04;metric=horizontal,delta_rmse,0.0064,6e-05,UNC02 table
+dist_BY2H_full_LC01-F04_horizontal_lo,dist,sequence=BY2H;segment=full;pair_A_minus_B=LC01-F04;metric=horizontal,mbb95_low,-0.0015,6e-05,UNC02 table
+dist_BY2H_full_LC01-F04_horizontal_hi,dist,sequence=BY2H;segment=full;pair_A_minus_B=LC01-F04;metric=horizontal,mbb95_high,0.0107,6e-05,UNC02 table
+dist_BY2O_full_LC01-F04_horizontal_delta,dist,sequence=BY2O;segment=full;pair_A_minus_B=LC01-F04;metric=horizontal,delta_rmse,-0.0002,6e-05,UNC02 table
+dist_BY2O_full_LC01-F04_horizontal_lo,dist,sequence=BY2O;segment=full;pair_A_minus_B=LC01-F04;metric=horizontal,mbb95_low,-0.0028,6e-05,UNC02 table
+dist_BY2O_full_LC01-F04_horizontal_hi,dist,sequence=BY2O;segment=full;pair_A_minus_B=LC01-F04;metric=horizontal,mbb95_high,0.0037,6e-05,UNC02 table
+dist_BY2O_primary_LC01-F04_horizontal_delta,dist,sequence=BY2O;segment=primary;pair_A_minus_B=LC01-F04;metric=horizontal,delta_rmse,0.0154,6e-05,UNC02 table
+dist_BY2O_primary_LC01-F04_horizontal_lo,dist,sequence=BY2O;segment=primary;pair_A_minus_B=LC01-F04;metric=horizontal,mbb95_low,0.0132,6e-05,UNC02 table
+dist_BY2O_primary_LC01-F04_horizontal_hi,dist,sequence=BY2O;segment=primary;pair_A_minus_B=LC01-F04;metric=horizontal,mbb95_high,0.0176,6e-05,UNC02 table
+dist_BY2_LC01F04_corr,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,corr_squared_errors,0.185,0.0006,UNC02 table
+dist_BY2O_LC01F04_corr,dist,sequence=BY2O;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,corr_squared_errors,0.005,0.0006,UNC02 table
+dist_BY2_LC01F04_ncommon,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,n_common,56628.0,0.0,UNC02 table
+dist_BY2O_F04F02_ncommon,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-F02;metric=yaw,n_common,76548.0,0.0,UNC02 table
+seed_F04_yaw_median,seeds,method=F04;metric=yaw_rmse_deg,median_sd,0.0023,6e-05,UNC01 §5
+seed_F04_yaw_p90,seeds,method=F04;metric=yaw_rmse_deg,p90_sd,0.268,0.0006,UNC01 §5
+seed_F04_yaw_lt01,seeds,method=F04;metric=yaw_rmse_deg,n_sd_lt_0.1,50.0,0.0,UNC01 §5; paragraphs
+seed_F04_yaw_lt001,seeds,method=F04;metric=yaw_rmse_deg,n_sd_lt_0.01,33.0,0.0,UNC01 §5
+seed_F04_h_median,seeds,method=F04;metric=horizontal_rmse_m,median_sd,0.00045,6e-06,UNC01 §5
+seed_F04_h_p90,seeds,method=F04;metric=horizontal_rmse_m,p90_sd,0.0204,6e-05,UNC01 §5
+seed_F04_h_lt01,seeds,method=F04;metric=horizontal_rmse_m,n_sd_lt_0.1,55.0,0.0,UNC01 §5
+tsd_F04_D32_yaw_med,tsd,method=F04;metric=yaw_rmse_deg;type=D32,median,1.913,0.0006,UNC01 §5
+tsd_F04_D32_yaw_sd,tsd,method=F04;metric=yaw_rmse_deg;type=D32,sd,0.052,0.0006,UNC01 §5
+tsd_F04_D33_yaw_med,tsd,method=F04;metric=yaw_rmse_deg;type=D33,median,2.215,0.0006,UNC01 §5
+tsd_F04_D33_yaw_sd,tsd,method=F04;metric=yaw_rmse_deg;type=D33,sd,0.23,0.0006,UNC01 §5
+tsd_F04_D35_yaw_med,tsd,method=F04;metric=yaw_rmse_deg;type=D35,median,1.903,0.0006,UNC01 §5
+tsd_F04_D35_yaw_sd,tsd,method=F04;metric=yaw_rmse_deg;type=D35,sd,0.069,0.0006,UNC01 §5
+tsd_F04_D03_h_med,tsd,method=F04;metric=horizontal_rmse_m;type=D03,median,0.1003,6e-05,UNC01 §5
+tsd_F04_D03_h_sd,tsd,method=F04;metric=horizontal_rmse_m;type=D03,sd,0.0025,6e-05,UNC01 §5
+tsd_F04_D04_h_med,tsd,method=F04;metric=horizontal_rmse_m;type=D04,median,0.1142,6e-05,UNC01 §5
+tsd_F04_D04_h_sd,tsd,method=F04;metric=horizontal_rmse_m;type=D04,sd,0.0079,6e-05,UNC01 §5
+tsd_F04_D05_h_med,tsd,method=F04;metric=horizontal_rmse_m;type=D05,median,0.1198,6e-05,UNC01 §5
+tsd_F04_D05_h_sd,tsd,method=F04;metric=horizontal_rmse_m;type=D05,sd,0.0148,6e-05,UNC01 §5
+tsd_F04_D06_h_med,tsd,method=F04;metric=horizontal_rmse_m;type=D06,median,10.29,0.006,UNC01 §5
+tsd_F04_D06_h_sd,tsd,method=F04;metric=horizontal_rmse_m;type=D06,sd,3.98,0.006,UNC01 §5
+ext_LC01F04_D32_mean,ext,pair=LC01-F04;metric=yaw_rmse_deg;type=D32,mean,1.142,0.0006,UNC01 §5; UNC02
+ext_LC01F04_D32_sd,ext,pair=LC01-F04;metric=yaw_rmse_deg;type=D32,sd,0.062,0.0006,UNC01 §5; UNC02
+ext_LC01F04_D33_mean,ext,pair=LC01-F04;metric=yaw_rmse_deg;type=D33,mean,1.657,0.0006,UNC01 §5; UNC02
+ext_LC01F04_D33_sd,ext,pair=LC01-F04;metric=yaw_rmse_deg;type=D33,sd,0.273,0.0006,UNC01 §5; UNC02
+ext_LC01F04_D35_mean,ext,pair=LC01-F04;metric=yaw_rmse_deg;type=D35,mean,1.348,0.0006,UNC01 §5; UNC02
+ext_LC01F04_D35_sd,ext,pair=LC01-F04;metric=yaw_rmse_deg;type=D35,sd,0.101,0.0006,UNC01 §5; UNC02
+ext_LC01F04_D31_min,ext,pair=LC01-F04;metric=yaw_rmse_deg;type=D31,min,0.923,0.0006,UNC02
+povr_F04F02_yaw_med,povr,pair=F04-F02;metric=yaw_rmse_deg,median,-0.346,0.0006,UNC01 §5
+povr_F04F02_yaw_frac,povr,pair=F04-F02;metric=yaw_rmse_deg,frac_negative,0.988,0.0006,UNC01 §5
+povr_F04F02_yaw_n,povr,pair=F04-F02;metric=yaw_rmse_deg,n_pairs,497.0,0.0,UNC01 §5
+povr_F04F03_yaw_med,povr,pair=F04-F03;metric=yaw_rmse_deg,median,-0.029,0.0006,UNC01 §5
+povr_F04F03_yaw_frac,povr,pair=F04-F03;metric=yaw_rmse_deg,frac_negative,0.988,0.0006,UNC01 §5
+povr_F04A04_yaw_frac,povr,pair=F04-A04;metric=yaw_rmse_deg,frac_negative,0.371,0.0006,UNC01 §5
+povr_F04F02_h_med,povr,pair=F04-F02;metric=horizontal_rmse_m,median,-0.004,6e-05,UNC01 §5
+povr_F04F02_h_frac,povr,pair=F04-F02;metric=horizontal_rmse_m,frac_negative,0.893,0.0006,UNC01 §5
+povr_F04A04_h_frac,povr,pair=F04-A04;metric=horizontal_rmse_m,frac_negative,0.225,0.0006,UNC01 §5
+quant_F04_yaw_p95,quant,method=F04;metric=yaw_rmse_deg,p95,2.447,0.0006,UNC01 §5
+quant_F04_yaw_p95_clo,quant,method=F04;metric=yaw_rmse_deg,cluster_q95_low,2.0,0.006,UNC01 §5
+quant_F04_yaw_p95_chi,quant,method=F04;metric=yaw_rmse_deg,cluster_q95_high,4.18,0.006,UNC01 §5
+quant_F04_yaw_p95_nlo,quant,method=F04;metric=yaw_rmse_deg,naive_q95_low,2.11,0.006,UNC01 §5
+quant_F04_yaw_p95_nhi,quant,method=F04;metric=yaw_rmse_deg,naive_q95_high,2.7,0.006,UNC01 §5
+quant_F04_yaw_nfin,quant,method=F04;metric=yaw_rmse_deg,n_finite,519.0,0.0,UNC01 §5
+quant_F04_yaw_nfail,quant,method=F04;metric=yaw_rmse_deg,n_failure,22.0,0.0,UNC01 §5
+quant_F04_h_p95,quant,method=F04;metric=horizontal_rmse_m,p95,3.551,0.0006,UNC01 §5
+quant_F04_h_p95_clo,quant,method=F04;metric=horizontal_rmse_m,cluster_q95_low,1.52,0.006,UNC01 §5
+quant_F04_h_p95_chi,quant,method=F04;metric=horizontal_rmse_m,cluster_q95_high,4.92,0.006,UNC01 §5
+addp_D62_10_F04F03_h_mean,addp,type=D62;duration_s=10;pair=F04-F03;metric=horizontal_rmse_m,mean,-1.61,0.006,UNC01 §6
+addp_D62_10_F04F03_h_sd,addp,type=D62;duration_s=10;pair=F04-F03;metric=horizontal_rmse_m,sd,0.87,0.006,UNC01 §6
+addp_D62_10_F04F03_h_p95,addp,type=D62;duration_s=10;pair=F04-F03;metric=horizontal_rmse_m,p95,-0.33,0.006,UNC01 §6
+addp_D62_20_F04F03_h_mean,addp,type=D62;duration_s=20;pair=F04-F03;metric=horizontal_rmse_m,mean,-10.5,0.06,UNC01 §6
+addp_D62_20_F04F03_h_sd,addp,type=D62;duration_s=20;pair=F04-F03;metric=horizontal_rmse_m,sd,5.7,0.06,UNC01 §6
+addp_D62_20_F04F03_h_p95,addp,type=D62;duration_s=20;pair=F04-F03;metric=horizontal_rmse_m,p95,-2.6,0.06,UNC01 §6
+adds_D62_10_F04_h_median,adds,type=D62;duration_s=10;method=F04;metric=horizontal_rmse_m,median,0.126,0.0006,UNC01 §6
+adds_D62_10_F04_h_sd,adds,type=D62;duration_s=10;method=F04;metric=horizontal_rmse_m,sd,0.015,0.0006,UNC01 §6
+adds_D62_20_F04_h_median,adds,type=D62;duration_s=20;method=F04;metric=horizontal_rmse_m,median,0.241,0.0006,UNC01 §6
+adds_D62_20_F04_h_sd,adds,type=D62;duration_s=20;method=F04;metric=horizontal_rmse_m,sd,0.043,0.0006,UNC01 §6
+adds_D62_10_F03_h_mean,adds,type=D62;duration_s=10;method=F03;metric=horizontal_rmse_m,mean,1.74,0.006,UNC01 §6
+adds_D62_20_F03_h_mean,adds,type=D62;duration_s=20;method=F03;metric=horizontal_rmse_m,mean,10.8,0.06,UNC01 §6
+adds_D62_10_F04_up_mean,adds,type=D62;duration_s=10;method=F04;metric=up_rmse_m,mean,0.328,0.0006,UNC01 §6
+adds_D62_20_F04_up_mean,adds,type=D62;duration_s=20;method=F04;metric=up_rmse_m,mean,1.025,0.0006,UNC01 §6
+adds_D61_30_F04_h_mean,adds,type=D61;duration_s=30;method=F04;metric=horizontal_rmse_m,mean,30.8,0.06,UNC01 §6
+motion_BY2_yawrate_rms,motion,sequence=BY2;kind=yaw_rate,rms,18.0,0.06,UNC01 §3
+motion_BY2_yawrate_frac10,motion,sequence=BY2;kind=yaw_rate,time_fraction_abs_gt_10_deg_s,0.618,0.0006,UNC01 §3
+motion_BY2_speed_mean,motion,sequence=BY2;kind=horizontal_speed,mean,1.187,0.0006,UNC01 §3
+motion_BY2H_yawrate_rms,motion,sequence=BY2H;kind=yaw_rate,rms,17.5,0.06,UNC01 §3
+motion_BY2H_yawrate_frac10,motion,sequence=BY2H;kind=yaw_rate,time_fraction_abs_gt_10_deg_s,0.62,0.0006,UNC01 §3
+motion_BY2H_speed_mean,motion,sequence=BY2H;kind=horizontal_speed,mean,1.196,0.0006,UNC01 §3
+motion_BY2O_yawrate_rms,motion,sequence=BY2O;kind=yaw_rate,rms,15.4,0.06,UNC01 §3
+motion_BY2O_yawrate_frac10,motion,sequence=BY2O;kind=yaw_rate,time_fraction_abs_gt_10_deg_s,0.463,0.0006,UNC01 §3
+motion_BY2O_speed_mean,motion,sequence=BY2O;kind=horizontal_speed,mean,0.892,0.0006,UNC01 §3
+motion_BY2O_static_frac,motion,sequence=BY2O;kind=horizontal_speed,fraction_speed_lt_0p2_m_s,0.243,0.0006,UNC01 §3
+body_BY2_F04_fwd,body,sequence=BY2;method=F04,forward_mean_m,0.0444,6e-05,UNC01 §3
+body_BY2_F04_fwdshare,body,sequence=BY2;method=F04,share_forward_bias,0.204,0.0006,UNC01 §3
+body_BY2_F04_up,body,sequence=BY2;method=F04,up_mean_m,-0.017,6e-05,UNC01 §3
+body_BY2_F04_upshare,body,sequence=BY2;method=F04,share_up_bias,0.12,0.0006,UNC01 §3
+body_BY2H_F04_fwd,body,sequence=BY2H;method=F04,forward_mean_m,0.0303,6e-05,UNC01 §3
+body_BY2H_F04_fwdshare,body,sequence=BY2H;method=F04,share_forward_bias,0.193,0.0006,UNC01 §3
+body_BY2H_F04_up,body,sequence=BY2H;method=F04,up_mean_m,-0.0072,6e-05,UNC01 §3
+body_BY2H_F04_upshare,body,sequence=BY2H;method=F04,share_up_bias,0.025,0.0006,UNC01 §3
+body_BY2O_F04_fwd,body,sequence=BY2O;method=F04,forward_mean_m,0.0282,6e-05,UNC01 §3
+body_BY2O_F04_fwdshare,body,sequence=BY2O;method=F04,share_forward_bias,0.25,0.0006,UNC01 §3
+body_BY2O_F04_up,body,sequence=BY2O;method=F04,up_mean_m,-0.0188,6e-05,UNC01 §3
+body_BY2O_F04_upshare,body,sequence=BY2O;method=F04,share_up_bias,0.168,0.0006,UNC01 §3
+body_BY2_F04_fwdrand,body,sequence=BY2;method=F04,share_forward_random,0.624,0.0006,UNC01 §3
+body_BY2_F04_rightrand,body,sequence=BY2;method=F04,share_right_random,0.172,0.0006,UNC01 §3

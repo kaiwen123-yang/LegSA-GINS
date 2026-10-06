@@ -1,0 +1,814 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-04T14:22:54.759501+00:00",
+  "reviewer": "venue_readiness_audit",
+  "status": "52_PAGES_ACTUALLY_REVIEWED_WITH_REMAINING_ISSUES",
+  "scope": "49–96 plus10/15/18/19 individually viewed;53 re-viewed from final_exported",
+  "actual_unique_page_count": 52,
+  "actual_individual_view_calls": 53,
+  "final_export_identity_matches": 52,
+  "corrected_phase1_pages_approved": [
+    10,
+    15,
+    18,
+    19
+  ],
+  "final_export_identity_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\FINAL_RENDER_IDENTITY.json",
+  "final_export_identity_sha256": "0e30dae15372e3d5aa363490371a65879d29ad29b4a9813c9b77f63f9ea93a9e",
+  "candidate_pptx_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\output\\LegSA_GINS_完整研究汇报_20261004.pptx",
+  "candidate_pptx_sha256": "4b69ee1f18624253d3a7fbef1716efdac0926a3e659888341ea37a4599d93be1",
+  "candidate_pptx_hash_matches_identity": true,
+  "slides": [
+    {
+      "slide": 10,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-010.png",
+      "viewed_png_sha256": "0dc2e1cc45fe8454469faca3461e3081025f0a6dd545901c5d558267844ecd81",
+      "initial_candidate_sha256": "0dc2e1cc45fe8454469faca3461e3081025f0a6dd545901c5d558267844ecd81",
+      "final_exported_sha256_at_close": "0dc2e1cc45fe8454469faca3461e3081025f0a6dd545901c5d558267844ecd81",
+      "matches_final_export_identity": true,
+      "view_note": "Radian unit and horizontal/transverse definitions now explicit; corrected page passes.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 15,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-015.png",
+      "viewed_png_sha256": "d3f0a9d965e05d5e73e760f6e0a9107b4b87df5d6a31471e99914b26507b1a43",
+      "initial_candidate_sha256": "d3f0a9d965e05d5e73e760f6e0a9107b4b87df5d6a31471e99914b26507b1a43",
+      "final_exported_sha256_at_close": "d3f0a9d965e05d5e73e760f6e0a9107b4b87df5d6a31471e99914b26507b1a43",
+      "matches_final_export_identity": true,
+      "view_note": "Ĉ/kHV/FLU input plus engineering-transform footer includes FRD conversion/negativepitch/scale; pre-generated heading and arrow directions correct.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 18,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-018.png",
+      "viewed_png_sha256": "fbe947aa7dac081521d9d576b91e537073fb7f1974fdf23070b187fffa24f6bf",
+      "initial_candidate_sha256": "fbe947aa7dac081521d9d576b91e537073fb7f1974fdf23070b187fffa24f6bf",
+      "final_exported_sha256_at_close": "fbe947aa7dac081521d9d576b91e537073fb7f1974fdf23070b187fffa24f6bf",
+      "matches_final_export_identity": true,
+      "view_note": "Shared GNSS alone forks to both estimators; Go2 IMU/SDK only to Proposed; corrected lineage passes.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 19,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-019.png",
+      "viewed_png_sha256": "ac9428f0ed6c337fd20fadad22d5e00a1e6e5f981efdcbc911956699604cef2f",
+      "initial_candidate_sha256": "ac9428f0ed6c337fd20fadad22d5e00a1e6e5f981efdcbc911956699604cef2f",
+      "final_exported_sha256_at_close": "ac9428f0ed6c337fd20fadad22d5e00a1e6e5f981efdcbc911956699604cef2f",
+      "matches_final_export_identity": true,
+      "view_note": "Historical reference/O-result visibility explicitly disclosed; not blindtransfer; corrected page passes.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 49,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-049.png",
+      "viewed_png_sha256": "f58d4183879014c5e6456e8d05bdd2bd1410c7b4db495c4053b212094b835a5d",
+      "initial_candidate_sha256": "f58d4183879014c5e6456e8d05bdd2bd1410c7b4db495c4053b212094b835a5d",
+      "final_exported_sha256_at_close": "f58d4183879014c5e6456e8d05bdd2bd1410c7b4db495c4053b212094b835a5d",
+      "matches_final_export_identity": true,
+      "view_note": "Small nominal geometric difference and tiny RMSEchange cannot explain64–104deg; support-domain slash needs clarification.",
+      "issue_ids": [
+        "FINAL-049-SUPPORT"
+      ],
+      "status": "REVIEWED_MINOR_NOTES"
+    },
+    {
+      "slide": 50,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-050.png",
+      "viewed_png_sha256": "825bf5be8e2faf52babcc43d3ae9c24ef9f95ac9c0177f4d018dea389c435eb2",
+      "initial_candidate_sha256": "825bf5be8e2faf52babcc43d3ae9c24ef9f95ac9c0177f4d018dea389c435eb2",
+      "final_exported_sha256_at_close": "825bf5be8e2faf52babcc43d3ae9c24ef9f95ac9c0177f4d018dea389c435eb2",
+      "matches_final_export_identity": true,
+      "view_note": "Implemented selected method chains distinguished from all-author experimental equivalence; readable.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 51,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-051.png",
+      "viewed_png_sha256": "236d5a4a037c19b0a07dd76caf591661e398dc483eb542bb459bc5fabe83f5ac",
+      "initial_candidate_sha256": "236d5a4a037c19b0a07dd76caf591661e398dc483eb542bb459bc5fabe83f5ac",
+      "final_exported_sha256_at_close": "236d5a4a037c19b0a07dd76caf591661e398dc483eb542bb459bc5fabe83f5ac",
+      "matches_final_export_identity": true,
+      "view_note": "Strict0/271,55/378;1/3/7blocks;prior-only exclusion and denominator retained; exact strict label suggested.",
+      "issue_ids": [
+        "FINAL-051-LABEL"
+      ],
+      "status": "REVIEWED_MINOR_NOTES"
+    },
+    {
+      "slide": 52,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-052.png",
+      "viewed_png_sha256": "be01254b5fbf99ad1d597b44504010e484b89a2836d9809780e4d03be3d18790",
+      "initial_candidate_sha256": "be01254b5fbf99ad1d597b44504010e484b89a2836d9809780e4d03be3d18790",
+      "final_exported_sha256_at_close": "be01254b5fbf99ad1d597b44504010e484b89a2836d9809780e4d03be3d18790",
+      "matches_final_export_identity": true,
+      "view_note": "Own-support RMSE table readable; GNSS1point and input/support fairness preserved; no new numeric recomputation.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 53,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-053.png",
+      "viewed_png_sha256": "0b99c4ae5ae293a7363a710098c3484283705325f895ed3a7ef3aca0c0ff0be5",
+      "initial_candidate_sha256": "f49b63140ecc0be4ff37a0909a929a699b8df5292d62c4bf338e58fdfab44a6b",
+      "final_exported_sha256_at_close": "0b99c4ae5ae293a7363a710098c3484283705325f895ed3a7ef3aca0c0ff0be5",
+      "matches_final_export_identity": true,
+      "view_note": "Final-exported page re-viewed with six-decimal yaw4.652921/2.534907/3.971789; no Wen/GNC estimated-heading score.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 54,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-054.png",
+      "viewed_png_sha256": "e76e922eff6ae46f4a56bc1ece7e972893fb4753b2a16467d60e432f1059b501",
+      "initial_candidate_sha256": "e76e922eff6ae46f4a56bc1ece7e972893fb4753b2a16467d60e432f1059b501",
+      "final_exported_sha256_at_close": "e76e922eff6ae46f4a56bc1ece7e972893fb4753b2a16467d60e432f1059b501",
+      "matches_final_export_identity": true,
+      "view_note": "BY2 rawheading curves/support strips readable; wrap breaks, guardless execution and reference scope retained.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 55,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-055.png",
+      "viewed_png_sha256": "9727e1d2d09d12083d78c4a3b0121dae54518f8f71c2b3c9c9d6eb722e709a3e",
+      "initial_candidate_sha256": "9727e1d2d09d12083d78c4a3b0121dae54518f8f71c2b3c9c9d6eb722e709a3e",
+      "final_exported_sha256_at_close": "9727e1d2d09d12083d78c4a3b0121dae54518f8f71c2b3c9c9d6eb722e709a3e",
+      "matches_final_export_identity": true,
+      "view_note": "BY2H rawheading curves/support strips readable; errors and missing outputs shown.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 56,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-056.png",
+      "viewed_png_sha256": "afeaa87e027f10267470872178881929bc24ce00b0a016cf9189b9c7e041ff47",
+      "initial_candidate_sha256": "afeaa87e027f10267470872178881929bc24ce00b0a016cf9189b9c7e041ff47",
+      "final_exported_sha256_at_close": "afeaa87e027f10267470872178881929bc24ce00b0a016cf9189b9c7e041ff47",
+      "matches_final_export_identity": true,
+      "view_note": "BY2O rawheading curves/support strips readable; large failures not deleted.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 57,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-057.png",
+      "viewed_png_sha256": "7e6b7b0684db8877caca5220836ae7881b1afa2ab94078bcc9d3ddc3bf3f9294",
+      "initial_candidate_sha256": "7e6b7b0684db8877caca5220836ae7881b1afa2ab94078bcc9d3ddc3bf3f9294",
+      "final_exported_sha256_at_close": "7e6b7b0684db8877caca5220836ae7881b1afa2ab94078bcc9d3ddc3bf3f9294",
+      "matches_final_export_identity": true,
+      "view_note": "Nine-case RMSE/availability preserves formal denominators, own support and diagnostic scope.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 58,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-058.png",
+      "viewed_png_sha256": "ba29af63e4d3886ce040c682c010dea5971c917f8a7a0d7d52c6506a6ecf2b18",
+      "initial_candidate_sha256": "ba29af63e4d3886ce040c682c010dea5971c917f8a7a0d7d52c6506a6ecf2b18",
+      "final_exported_sha256_at_close": "ba29af63e4d3886ce040c682c010dea5971c917f8a7a0d7d52c6506a6ecf2b18",
+      "matches_final_export_identity": true,
+      "view_note": "BY2 FGO logH/symlogUp curves readable;3new+6reuse, dynamic-only, GNSS1 and shared-reference bounds present.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 59,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-059.png",
+      "viewed_png_sha256": "267966dc7240589b61c48db316f3bd81289b5d6372fe0538381a399c1fc958f3",
+      "initial_candidate_sha256": "267966dc7240589b61c48db316f3bd81289b5d6372fe0538381a399c1fc958f3",
+      "final_exported_sha256_at_close": "267966dc7240589b61c48db316f3bd81289b5d6372fe0538381a399c1fc958f3",
+      "matches_final_export_identity": true,
+      "view_note": "BY2H FGO curves readable; gaps/seed states not bridged.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 60,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-060.png",
+      "viewed_png_sha256": "f2fedf80f07a4a44728d61388781b9a8e413a5340b1207f534cdce271bbc25d3",
+      "initial_candidate_sha256": "f2fedf80f07a4a44728d61388781b9a8e413a5340b1207f534cdce271bbc25d3",
+      "final_exported_sha256_at_close": "f2fedf80f07a4a44728d61388781b9a8e413a5340b1207f534cdce271bbc25d3",
+      "matches_final_export_identity": true,
+      "view_note": "BY2O FGO curves readable;3286 usable-not-converged annotation and missing/reset gaps retained.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 61,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-061.png",
+      "viewed_png_sha256": "6fb0fc60030015e224c83bf8e0bbaf86bb2ad332cc4a5f10564194e5622dc5d2",
+      "initial_candidate_sha256": "6fb0fc60030015e224c83bf8e0bbaf86bb2ad332cc4a5f10564194e5622dc5d2",
+      "final_exported_sha256_at_close": "6fb0fc60030015e224c83bf8e0bbaf86bb2ad332cc4a5f10564194e5622dc5d2",
+      "matches_final_export_identity": true,
+      "view_note": "Strict/primary/secondary counts correct by rendered labels;0/55 marker and prior-only hatch/description retained.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 62,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-062.png",
+      "viewed_png_sha256": "00c873d22714bfc5953bf7e9b691de975ae6c5656776c126f764e6e4ab6b5464",
+      "initial_candidate_sha256": "00c873d22714bfc5953bf7e9b691de975ae6c5656776c126f764e6e4ab6b5464",
+      "final_exported_sha256_at_close": "00c873d22714bfc5953bf7e9b691de975ae6c5656776c126f764e6e4ab6b5464",
+      "matches_final_export_identity": true,
+      "view_note": "BY2H GNSS1 trajectory readable; equal metre scales/nofit/ownattitude point transport explicit.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 63,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-063.png",
+      "viewed_png_sha256": "da5b84ba07dc1b8a839ff12baadb4be79d917195d0f4a58e5820aaacb22ff496",
+      "initial_candidate_sha256": "da5b84ba07dc1b8a839ff12baadb4be79d917195d0f4a58e5820aaacb22ff496",
+      "final_exported_sha256_at_close": "da5b84ba07dc1b8a839ff12baadb4be79d917195d0f4a58e5820aaacb22ff496",
+      "matches_final_export_identity": true,
+      "view_note": "BY2O GNSS1 trajectory readable; gaps/reset breaks; distinct from original V3midpoint.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 64,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-064.png",
+      "viewed_png_sha256": "d8ae33dceeb118f09f17a186be854e134cd080120bcbe98cbc296893f65b8595",
+      "initial_candidate_sha256": "d8ae33dceeb118f09f17a186be854e134cd080120bcbe98cbc296893f65b8595",
+      "final_exported_sha256_at_close": "d8ae33dceeb118f09f17a186be854e134cd080120bcbe98cbc296893f65b8595",
+      "matches_final_export_identity": true,
+      "view_note": "BY2 GNSS1 trajectory readable; later engineering identity and sixreuses explicit.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 65,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-065.png",
+      "viewed_png_sha256": "e8407189ca920cef1c9667501335b400825666f67c34d10af371d6b779b46043",
+      "initial_candidate_sha256": "e8407189ca920cef1c9667501335b400825666f67c34d10af371d6b779b46043",
+      "final_exported_sha256_at_close": "e8407189ca920cef1c9667501335b400825666f67c34d10af371d6b779b46043",
+      "matches_final_export_identity": true,
+      "view_note": "Own Oi yaw dynamic-support curves readable; block discontinuities and3286 status retained.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 66,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-066.png",
+      "viewed_png_sha256": "3bac25af922ae7979122cb63e1e3c799bb7c04b3c91f11e78336dcec75abdd4b",
+      "initial_candidate_sha256": "3bac25af922ae7979122cb63e1e3c799bb7c04b3c91f11e78336dcec75abdd4b",
+      "final_exported_sha256_at_close": "3bac25af922ae7979122cb63e1e3c799bb7c04b3c91f11e78336dcec75abdd4b",
+      "matches_final_export_identity": true,
+      "view_note": "Conditional conclusions and new-installation validation boundary correct; first-item awkward phrase wrap.",
+      "issue_ids": [
+        "FINAL-066-096-WRAP"
+      ],
+      "status": "REVIEWED_MINOR_NOTES"
+    },
+    {
+      "slide": 67,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-067.png",
+      "viewed_png_sha256": "80c8efe3fc237a463446a0fcad4352176a0ef620f460ad094a7293bf43aa9178",
+      "initial_candidate_sha256": "80c8efe3fc237a463446a0fcad4352176a0ef620f460ad094a7293bf43aa9178",
+      "final_exported_sha256_at_close": "80c8efe3fc237a463446a0fcad4352176a0ef620f460ad094a7293bf43aa9178",
+      "matches_final_export_identity": true,
+      "view_note": "Descriptive provisional naming, no internalAR/legkinematics/calibratedintegrity implication.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 68,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-068.png",
+      "viewed_png_sha256": "868944604f9ece52d8ddcfd17dc400cd84e82b82f7f43bf0216834e9d2af915f",
+      "initial_candidate_sha256": "868944604f9ece52d8ddcfd17dc400cd84e82b82f7f43bf0216834e9d2af915f",
+      "final_exported_sha256_at_close": "868944604f9ece52d8ddcfd17dc400cd84e82b82f7f43bf0216834e9d2af915f",
+      "matches_final_export_identity": true,
+      "view_note": "CurrentGPS conditionalfusion and no compulsoryAR scope correct; pureRV identity needs confirmation.",
+      "issue_ids": [
+        "FINAL-068-088-RV"
+      ],
+      "status": "REQUIRES_CORRECTION_OR_SCOPE_CONFIRMATION"
+    },
+    {
+      "slide": 69,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-069.png",
+      "viewed_png_sha256": "26df94a1efdfc83886ce9363e4f2606580ca84172c8c9aeb155d250075310242",
+      "initial_candidate_sha256": "26df94a1efdfc83886ce9363e4f2606580ca84172c8c9aeb155d250075310242",
+      "final_exported_sha256_at_close": "26df94a1efdfc83886ce9363e4f2606580ca84172c8c9aeb155d250075310242",
+      "matches_final_export_identity": true,
+      "view_note": "UpstreamRTK, solutiondifference and internalmovingbaseinteger solver separated correctly.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 70,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-070.png",
+      "viewed_png_sha256": "9af748eece702b001f95386c0f0ebdcb2c072172670925fad04e5fc45c6b47e8",
+      "initial_candidate_sha256": "9af748eece702b001f95386c0f0ebdcb2c072172670925fad04e5fc45c6b47e8",
+      "final_exported_sha256_at_close": "9af748eece702b001f95386c0f0ebdcb2c072172670925fad04e5fc45c6b47e8",
+      "matches_final_export_identity": true,
+      "view_note": "Futurecarrier model/physical records/correctness validation proposed, not oldV3 feature; arrows correct.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 71,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-071.png",
+      "viewed_png_sha256": "00e2c8be9f8e383b09eea240644aae1ed4e1c4690d2b3300501d344536ef982a",
+      "initial_candidate_sha256": "00e2c8be9f8e383b09eea240644aae1ed4e1c4690d2b3300501d344536ef982a",
+      "final_exported_sha256_at_close": "00e2c8be9f8e383b09eea240644aae1ed4e1c4690d2b3300501d344536ef982a",
+      "matches_final_export_identity": true,
+      "view_note": "ConstrainedILS/ratio/Farkas literature baseline readable; use of mature methods alone not novel.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 72,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-072.png",
+      "viewed_png_sha256": "c970aec052b1876b131432fd1f40a6e4adfddd9f5caf47db80f46dff33ebd461",
+      "initial_candidate_sha256": "c970aec052b1876b131432fd1f40a6e4adfddd9f5caf47db80f46dff33ebd461",
+      "final_exported_sha256_at_close": "c970aec052b1876b131432fd1f40a6e4adfddd9f5caf47db80f46dff33ebd461",
+      "matches_final_export_identity": true,
+      "view_note": "Mainfigures1–4 mapped to quantity/admission/naturaldata/conditionalpairedoutcomes.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 73,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-073.png",
+      "viewed_png_sha256": "29389047d247fba97936d5a927d9f43d3bb2bac074c5de7525f0b271688aa53d",
+      "initial_candidate_sha256": "29389047d247fba97936d5a927d9f43d3bb2bac074c5de7525f0b271688aa53d",
+      "final_exported_sha256_at_close": "29389047d247fba97936d5a927d9f43d3bb2bac074c5de7525f0b271688aa53d",
+      "matches_final_export_identity": true,
+      "view_note": "Mainfigures5–8 mapped to failures/denominators/mechanisms/headingdependent aid/fairness.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 74,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-074.png",
+      "viewed_png_sha256": "84391e6566d05a70d7aca94235f69823e4731f6e615242fc6a5d6e152e4cc100",
+      "initial_candidate_sha256": "84391e6566d05a70d7aca94235f69823e4731f6e615242fc6a5d6e152e4cc100",
+      "final_exported_sha256_at_close": "84391e6566d05a70d7aca94235f69823e4731f6e615242fc6a5d6e152e4cc100",
+      "matches_final_export_identity": true,
+      "view_note": "GPS structure/wholearticle length/abstract/keyword ranges correct; notsubmissionready.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 75,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-075.png",
+      "viewed_png_sha256": "89365807ba21c12fee973401378e1ecfec93926ea0d19837ce3c0bdbeb29628b",
+      "initial_candidate_sha256": "89365807ba21c12fee973401378e1ecfec93926ea0d19837ce3c0bdbeb29628b",
+      "final_exported_sha256_at_close": "89365807ba21c12fee973401378e1ecfec93926ea0d19837ce3c0bdbeb29628b",
+      "matches_final_export_identity": true,
+      "view_note": "TIM quantities/jointmodel/independent-or-identifiable reference/heldoutcoverage correct; RMSE/R not U.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 76,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-076.png",
+      "viewed_png_sha256": "a4d50ef2d4d3ec8b3ce575624544008603cd6b0bb25aebe510e66c0c405f32fe",
+      "initial_candidate_sha256": "a4d50ef2d4d3ec8b3ce575624544008603cd6b0bb25aebe510e66c0c405f32fe",
+      "final_exported_sha256_at_close": "a4d50ef2d4d3ec8b3ce575624544008603cd6b0bb25aebe510e66c0c405f32fe",
+      "matches_final_export_identity": true,
+      "view_note": "Baselinecrosscovariance and Jacobian algebra correct; explicit errorcovariance andrad units recommended.",
+      "issue_ids": [
+        "FINAL-076-DEFINITIONS"
+      ],
+      "status": "REVIEWED_MINOR_NOTES"
+    },
+    {
+      "slide": 77,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-077.png",
+      "viewed_png_sha256": "91d7b125439a809a60bed1d479b675fa83f9fee89dd4e54a9f6484e8310b362d",
+      "initial_candidate_sha256": "91d7b125439a809a60bed1d479b675fa83f9fee89dd4e54a9f6484e8310b362d",
+      "final_exported_sha256_at_close": "91d7b125439a809a60bed1d479b675fa83f9fee89dd4e54a9f6484e8310b362d",
+      "matches_final_export_identity": true,
+      "view_note": "U01 visibly ASSUMED NOT FIELD CALIBRATION;1mm peraxis,rho/unvalidatedtarget assumptions readable.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 78,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-078.png",
+      "viewed_png_sha256": "ec146f8097c3b95bb6b84a790ca56cc297c8ec3a861b2fdeb75c46ed9178cd45",
+      "initial_candidate_sha256": "ec146f8097c3b95bb6b84a790ca56cc297c8ec3a861b2fdeb75c46ed9178cd45",
+      "final_exported_sha256_at_close": "ec146f8097c3b95bb6b84a790ca56cc297c8ec3a861b2fdeb75c46ed9178cd45",
+      "matches_final_export_identity": true,
+      "view_note": "Time/installation requiredrecords correct; commontranslation approximation/sign need definition.",
+      "issue_ids": [
+        "FINAL-078-DOMAIN"
+      ],
+      "status": "REVIEWED_MINOR_NOTES"
+    },
+    {
+      "slide": 79,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-079.png",
+      "viewed_png_sha256": "e03e40399f48680dcd4c63562128d9fee89f83e8e455bf4171f73ef0384b8a14",
+      "initial_candidate_sha256": "e03e40399f48680dcd4c63562128d9fee89f83e8e455bf4171f73ef0384b8a14",
+      "final_exported_sha256_at_close": "e03e40399f48680dcd4c63562128d9fee89f83e8e455bf4171f73ef0384b8a14",
+      "matches_final_export_identity": true,
+      "view_note": "U03 clearly constant transverse translation toy, not actualclockerror/uncertainty/V3fault; readable.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 80,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-080.png",
+      "viewed_png_sha256": "48dab6c6e3933f1397b7c953846ba97d4681ee3bd50224ddd55fb387c5ad1672",
+      "initial_candidate_sha256": "48dab6c6e3933f1397b7c953846ba97d4681ee3bd50224ddd55fb387c5ad1672",
+      "final_exported_sha256_at_close": "48dab6c6e3933f1397b7c953846ba97d4681ee3bd50224ddd55fb387c5ad1672",
+      "matches_final_export_identity": true,
+      "view_note": "Jointcovariance/cross-information concept correct, but angular frame/side of genericvelocity perturbation undefined.",
+      "issue_ids": [
+        "FINAL-080-FRAME"
+      ],
+      "status": "REQUIRES_CORRECTION_OR_SCOPE_CONFIRMATION"
+    },
+    {
+      "slide": 81,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-081.png",
+      "viewed_png_sha256": "2ce73e3cce7fe2a1343017339ceb1e751ad81cfb12aa220092adfbcba727b81b",
+      "initial_candidate_sha256": "2ce73e3cce7fe2a1343017339ceb1e751ad81cfb12aa220092adfbcba727b81b",
+      "final_exported_sha256_at_close": "2ce73e3cce7fe2a1343017339ceb1e751ad81cfb12aa220092adfbcba727b81b",
+      "matches_final_export_identity": true,
+      "view_note": "U02 assumed example, correlation may raise/lower propagateduncertainty, noactualrho estimated.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 82,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-082.png",
+      "viewed_png_sha256": "b44be01148f3302780b9ab8d59700e4ba3a8c78b66d4e88728d042ae1ff0cb88",
+      "initial_candidate_sha256": "b44be01148f3302780b9ab8d59700e4ba3a8c78b66d4e88728d042ae1ff0cb88",
+      "final_exported_sha256_at_close": "b44be01148f3302780b9ab8d59700e4ba3a8c78b66d4e88728d042ae1ff0cb88",
+      "matches_final_export_identity": true,
+      "view_note": "Sharedreference covariance includes bothcross terms; nonidentifiability andunknowncorrelation clear.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 83,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-083.png",
+      "viewed_png_sha256": "1101d416dc1c1912d8e4857644896c5b8b359ce865ff96af8d9733b2d7a4cd4e",
+      "initial_candidate_sha256": "1101d416dc1c1912d8e4857644896c5b8b359ce865ff96af8d9733b2d7a4cd4e",
+      "final_exported_sha256_at_close": "1101d416dc1c1912d8e4857644896c5b8b359ce865ff96af8d9733b2d7a4cd4e",
+      "matches_final_export_identity": true,
+      "view_note": "Geometry/clock/jointerror/IMU-SDK/reference records explicit; TypeA/B terminology correct.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 84,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-084.png",
+      "viewed_png_sha256": "520d6ca260c777cafb9a5a984002f3488ec2cf4f308919d07dc3a8e289b41f79",
+      "initial_candidate_sha256": "520d6ca260c777cafb9a5a984002f3488ec2cf4f308919d07dc3a8e289b41f79",
+      "final_exported_sha256_at_close": "520d6ca260c777cafb9a5a984002f3488ec2cf4f308919d07dc3a8e289b41f79",
+      "matches_final_export_identity": true,
+      "view_note": "Freeze model then heldoutcoverage/failures path correct; lefttoright arrows and plannedstatus clear.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 85,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-085.png",
+      "viewed_png_sha256": "3ffb18b4fcd131d91896d4f17bb5755f023b026230d64ce48e9196072f3b3a16",
+      "initial_candidate_sha256": "3ffb18b4fcd131d91896d4f17bb5755f023b026230d64ce48e9196072f3b3a16",
+      "final_exported_sha256_at_close": "3ffb18b4fcd131d91896d4f17bb5755f023b026230d64ce48e9196072f3b3a16",
+      "matches_final_export_identity": true,
+      "view_note": "Routeorder appropriate; currentbudget should be called framework, not calibratedbudget.",
+      "issue_ids": [
+        "FINAL-085-BUDGET"
+      ],
+      "status": "REQUIRES_CORRECTION_OR_SCOPE_CONFIRMATION"
+    },
+    {
+      "slide": 86,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-086.png",
+      "viewed_png_sha256": "5c023a3dd4b37131e4e3e46aca7d86b0ae48d8c4dbe7b3c7b886800d381bf3de",
+      "initial_candidate_sha256": "5c023a3dd4b37131e4e3e46aca7d86b0ae48d8c4dbe7b3c7b886800d381bf3de",
+      "final_exported_sha256_at_close": "5c023a3dd4b37131e4e3e46aca7d86b0ae48d8c4dbe7b3c7b886800d381bf3de",
+      "matches_final_export_identity": true,
+      "view_note": "Current evidence versus remainingphysical/reference/newAR/uncertainty research separated.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 87,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-087.png",
+      "viewed_png_sha256": "176aadac8c84c3bc3301ac75c794886e73079307410d3e240835c4a71792dc95",
+      "initial_candidate_sha256": "176aadac8c84c3bc3301ac75c794886e73079307410d3e240835c4a71792dc95",
+      "final_exported_sha256_at_close": "176aadac8c84c3bc3301ac75c794886e73079307410d3e240835c4a71792dc95",
+      "matches_final_export_identity": true,
+      "view_note": "InternalIDs appendixonly;RD-onlyoff retainsRV;SDK/SAbaseline labels readable.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 88,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-088.png",
+      "viewed_png_sha256": "69b6f347b45badf849328d7ff7598f2fa62317e6b298b52932728ebf2e7875df",
+      "initial_candidate_sha256": "69b6f347b45badf849328d7ff7598f2fa62317e6b298b52932728ebf2e7875df",
+      "final_exported_sha256_at_close": "69b6f347b45badf849328d7ff7598f2fa62317e6b298b52932728ebf2e7875df",
+      "matches_final_export_identity": true,
+      "view_note": "F01 dualheadinginit disclosed; structural/composite labels present; F02/F03gateconfounding should be explicit.",
+      "issue_ids": [
+        "FINAL-068-088-RV"
+      ],
+      "status": "REQUIRES_CORRECTION_OR_SCOPE_CONFIRMATION"
+    },
+    {
+      "slide": 89,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-089.png",
+      "viewed_png_sha256": "f2e65c04ddcf7ce46d19093065c1fa17404545f0a45184c19d0890f79d59d0c5",
+      "initial_candidate_sha256": "f2e65c04ddcf7ce46d19093065c1fa17404545f0a45184c19d0890f79d59d0c5",
+      "final_exported_sha256_at_close": "f2e65c04ddcf7ce46d19093065c1fa17404545f0a45184c19d0890f79d59d0c5",
+      "matches_final_export_identity": true,
+      "view_note": "Retainedheatmap visually preserved but row/column/colorbar labels unreadable at pageview; requires enlarged details.",
+      "issue_ids": [
+        "FINAL-089-READABILITY"
+      ],
+      "status": "REQUIRES_CORRECTION_OR_SCOPE_CONFIRMATION"
+    },
+    {
+      "slide": 90,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-090.png",
+      "viewed_png_sha256": "0a9e15ba850bdfac311d5f67d9e1b99a65a2de5a3f9d754a711765efde82373c",
+      "initial_candidate_sha256": "0a9e15ba850bdfac311d5f67d9e1b99a65a2de5a3f9d754a711765efde82373c",
+      "final_exported_sha256_at_close": "0a9e15ba850bdfac311d5f67d9e1b99a65a2de5a3f9d754a711765efde82373c",
+      "matches_final_export_identity": true,
+      "view_note": "Contactaid proxy/relativegauge andstoppedinit boundaries present; tinylabels needprojectionimprovement.",
+      "issue_ids": [
+        "FINAL-090-READABILITY"
+      ],
+      "status": "REVIEWED_MINOR_NOTES"
+    },
+    {
+      "slide": 91,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-091.png",
+      "viewed_png_sha256": "54f26c91c6755397cae8acdd8535bc813e00b9833b02f852b310198377dc08e2",
+      "initial_candidate_sha256": "54f26c91c6755397cae8acdd8535bc813e00b9833b02f852b310198377dc08e2",
+      "final_exported_sha256_at_close": "54f26c91c6755397cae8acdd8535bc813e00b9833b02f852b310198377dc08e2",
+      "matches_final_export_identity": true,
+      "view_note": "Externalfailure/adaptation/gauge boundaries clear; no30completeauthorreplication claim.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 92,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-092.png",
+      "viewed_png_sha256": "a118e6fa32a8656fbedb049a58a67ce0666862b32bf50d6afd96bb5b01212582",
+      "initial_candidate_sha256": "a118e6fa32a8656fbedb049a58a67ce0666862b32bf50d6afd96bb5b01212582",
+      "final_exported_sha256_at_close": "a118e6fa32a8656fbedb049a58a67ce0666862b32bf50d6afd96bb5b01212582",
+      "matches_final_export_identity": true,
+      "view_note": "OriginalV3 versusEXT/33+135/strict/segmented versions separate;3new+6reuse andprior-onlypolicy retained.",
+      "issue_ids": [
+        "FINAL-051-LABEL"
+      ],
+      "status": "REVIEWED_MINOR_NOTES"
+    },
+    {
+      "slide": 93,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-093.png",
+      "viewed_png_sha256": "ee091a1fa98e37aa75562ac9d1a8395eef5fdcd9039188724fe84c52ffceb2ca",
+      "initial_candidate_sha256": "ee091a1fa98e37aa75562ac9d1a8395eef5fdcd9039188724fe84c52ffceb2ca",
+      "final_exported_sha256_at_close": "ee091a1fa98e37aa75562ac9d1a8395eef5fdcd9039188724fe84c52ffceb2ca",
+      "matches_final_export_identity": true,
+      "view_note": "Geometry/validation author/DOI table readable; topics are abbreviated descriptions.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 94,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-094.png",
+      "viewed_png_sha256": "3fbe9754eddd871867f5b6ec5072640fa3ee8facf46110694e4756b60f639251",
+      "initial_candidate_sha256": "3fbe9754eddd871867f5b6ec5072640fa3ee8facf46110694e4756b60f639251",
+      "final_exported_sha256_at_close": "3fbe9754eddd871867f5b6ec5072640fa3ee8facf46110694e4756b60f639251",
+      "matches_final_export_identity": true,
+      "view_note": "TIM/KF/GUM reference table readable; DOI/arXiv/standard identifiers render correctly.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_BLOCKING_ISSUE_SEEN"
+    },
+    {
+      "slide": 95,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-095.png",
+      "viewed_png_sha256": "82294f37decf161a7e37b9450c860528555754cf92473c0bd1c1f5925c79cea4",
+      "initial_candidate_sha256": "82294f37decf161a7e37b9450c860528555754cf92473c0bd1c1f5925c79cea4",
+      "final_exported_sha256_at_close": "82294f37decf161a7e37b9450c860528555754cf92473c0bd1c1f5925c79cea4",
+      "matches_final_export_identity": true,
+      "view_note": "FGO paper andrecord table readable; longdirectory date wrap minor; noexactallauthorreplication claim.",
+      "issue_ids": [
+        "FINAL-095-PATH"
+      ],
+      "status": "REVIEWED_MINOR_NOTES"
+    },
+    {
+      "slide": 96,
+      "actual_individual_view": true,
+      "viewed_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\venue_review_snapshot_049_096\\slide-096.png",
+      "viewed_png_sha256": "c015ef6aecac4dadb70bdb134db323669c6a17a66dff0576fd513351e36f7ddd",
+      "initial_candidate_sha256": "c015ef6aecac4dadb70bdb134db323669c6a17a66dff0576fd513351e36f7ddd",
+      "final_exported_sha256_at_close": "c015ef6aecac4dadb70bdb134db323669c6a17a66dff0576fd513351e36f7ddd",
+      "matches_final_export_identity": true,
+      "view_note": "FutureGPS/TIM/carrier questions conditional; venue name wraps awkwardly; notsubmissionready.",
+      "issue_ids": [
+        "FINAL-066-096-WRAP"
+      ],
+      "status": "REVIEWED_MINOR_NOTES"
+    }
+  ],
+  "issues": [
+    {
+      "id": "FINAL-080-FRAME",
+      "pages": [
+        80
+      ],
+      "priority": "P1",
+      "type": "equation_convention",
+      "observation": "Displayed −[v^n]×δθ requires a navigation-frame left perturbation; frame/side is not defined.",
+      "requested_change": "Define C_true=Exp([δθ^n]×)C_nom, rad; or use right-body −C[v^b]×δα^b and define it. Do not imply native PHI identity.",
+      "scientific_result_change_needed": false
+    },
+    {
+      "id": "FINAL-085-BUDGET",
+      "pages": [
+        85
+      ],
+      "priority": "P1",
+      "type": "measurement_readiness",
+      "observation": "Current completion says 10 models and budget, while physical calibrated budget is not complete.",
+      "requested_change": "Use model equations and uncertainty-budget framework/required-record ledger.",
+      "scientific_result_change_needed": false
+    },
+    {
+      "id": "FINAL-089-READABILITY",
+      "pages": [
+        89
+      ],
+      "priority": "P1",
+      "type": "appendix_readability",
+      "observation": "Six-panel heatmap only fills middle width; labels/color scales too small to read at1280px.",
+      "requested_change": "Enlarge to usable width and/or add zoomed panel-group pages; overview may remain with readable separate details. Preserve all values/failure blanks.",
+      "scientific_result_change_needed": false
+    },
+    {
+      "id": "FINAL-068-088-RV",
+      "pages": [
+        68,
+        88
+      ],
+      "priority": "P1_SCOPE_CONFIRMATION",
+      "type": "causal_control_identity",
+      "observation": "Page68 says RV single switch. Historical F02→F03 also changed heading gate; reviewed PNGs do not identify a separate matched pure-RV control.",
+      "requested_change": "If actual pure-RV control exists, name its identity. Otherwise say RV configuration comparison and disclose F02/F03 gate co-change.",
+      "scientific_result_change_needed": false
+    },
+    {
+      "id": "FINAL-049-SUPPORT",
+      "pages": [
+        49
+      ],
+      "priority": "P2",
+      "type": "denominator_domain",
+      "observation": "7689/9100 slash pair joins formal score support to full-native valid records, different domains.",
+      "requested_change": "State7689 formal-window supported keys and9100 full-native valid records separately; formal denominator13815 retained, no one-domain availability inference.",
+      "scientific_result_change_needed": false
+    },
+    {
+      "id": "FINAL-051-LABEL",
+      "pages": [
+        51,
+        92
+      ],
+      "priority": "P2",
+      "type": "protocol_name",
+      "observation": "Strict continuous can imply complete uninterrupted trajectory; old strict identity is single-initialization with failures/partial support.",
+      "requested_change": "Prefer strict single-initialization identity; keep0/55 and all resets visible.",
+      "scientific_result_change_needed": false
+    },
+    {
+      "id": "FINAL-076-DEFINITIONS",
+      "pages": [
+        76
+      ],
+      "priority": "P2",
+      "type": "uncertainty_notation",
+      "observation": "Correct covariance/Jacobian equations lack error-crosscovariance and rad unit definitions.",
+      "requested_change": "Define C12=Cov(e1,e2), not moving trajectory covariance; uψ in rad.",
+      "scientific_result_change_needed": false
+    },
+    {
+      "id": "FINAL-078-DOMAIN",
+      "pages": [
+        78
+      ],
+      "priority": "P2",
+      "type": "time_domain",
+      "observation": "δb_t≈vΔt is common-translation approximation; Δt sign unspecified.",
+      "requested_change": "Define Δt=τ2−τ1; for rotation/general case use v2δτ2−v1δτ1. Next toy page is correctly limited.",
+      "scientific_result_change_needed": false
+    },
+    {
+      "id": "FINAL-090-READABILITY",
+      "pages": [
+        90
+      ],
+      "priority": "P2",
+      "type": "appendix_readability",
+      "observation": "Contact-aid six-panel labels very small for projected viewing; pattern/failures visible.",
+      "requested_change": "Enlarge/split position and heading rows or supply zoomed detail; retain proxy/relative-gauge scope.",
+      "scientific_result_change_needed": false
+    },
+    {
+      "id": "FINAL-066-096-WRAP",
+      "pages": [
+        66,
+        96
+      ],
+      "priority": "P2",
+      "type": "layout",
+      "observation": "Awkward short-first-line wraps split 约0.35m/的 and GPS/Solutions.",
+      "requested_change": "Rephrase or keep noun phrase/nonbreaking venue name together.",
+      "scientific_result_change_needed": false
+    },
+    {
+      "id": "FINAL-095-PATH",
+      "pages": [
+        95
+      ],
+      "priority": "P2",
+      "type": "layout",
+      "observation": "Directory name date is split as202610/04.",
+      "requested_change": "Shorter visible label, complete path in notes.",
+      "scientific_result_change_needed": false
+    }
+  ],
+  "final_deck_accepted": false,
+  "submission_ready": false,
+  "builder_or_scientific_source_changes": 0,
+  "scientific_runs": 0,
+  "raw_or_reference_payload_reads": 0,
+  "limits": [
+    "Not an independent numerical recomputation of plotted scientific results",
+    "No PPTX/builder editing",
+    "Otherpages1–48 not re-viewed here except10/15/18/19",
+    "Laterexports need exactPNGidentity equivalence or changedpage actualview",
+    "Physicalcalibration/crosscovariance/clockfacts notfilled byvisualreview"
+  ],
+  "math_peer_context": "Peer selectedTIMdocument48–160 T1–T10 sign/frame/cross review passed; not nativePHI/fieldcalibration orplot-scriptacceptance."
+}

@@ -1,0 +1,21 @@
+{
+  "candidate_id": "N12_ONLY",
+  "binary": "<VALIDATION_BUILD_ROOT>/build_N12_ONLY/legsa_v23_port_core_demo",
+  "binary_sha256": "72ceed0e037500498368c64adbdaab0659f3d625725be17abca41a4c8a83e2c4",
+  "source_manifest": "FINAL_SOURCE_MANIFEST.csv",
+  "source_manifest_sha256": "699d8d6426d32c25a6c82410a61e32cb423d3083fcb828c4d97070726354fb16",
+  "source_patch": "candidate.patch",
+  "source_patch_sha256": "027d0cde6def2f9a02dc6b59f82f52f79130e252946d5b7cebc0be264638ed90",
+  "total_patch": "TOTAL_CANDIDATE_AND_OBSERVER.patch",
+  "total_patch_sha256": "5285322953aa67a244eb3f26c38398052732e10c4aaa7a9a34be3fad1d760019",
+  "native_tests_passed": true,
+  "new_native_fixture_processes": 2,
+  "scenarios_per_process": 9,
+  "checks_passed": 170,
+  "real_native_calls": 0,
+  "evaluator_calls": 0,
+  "formal_source_commit": "ca73cb1fb48a020fd2a450d79e520562c34eeb24",
+  "observation_parent": "v3_mechanism/observer",
+  "common_observation_commit": "6979459bb69154d70b6e88220e3dff29e3356568",
+  "output_identity": "NEW_SINGLE_FACTOR_CANDIDATE_NOT_ORIGINAL_V3"
+}

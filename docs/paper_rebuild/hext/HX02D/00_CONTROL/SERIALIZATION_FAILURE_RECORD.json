@@ -1,0 +1,13 @@
+{
+  "status": "DIAGNOSTIC_JSON_SERIALIZATION_FAILURE",
+  "exception": "TypeError: Object of type int64 is not JSON serializable",
+  "reference_free_child_calls": 1,
+  "reference_children": 0,
+  "native_legsa": 0,
+  "native_external": 0,
+  "trace_opens": 0,
+  "write_scope_pass": true,
+  "failure_artifacts_preserved": true,
+  "continuation_root": "EXECUTION_V2",
+  "correction_scope": "New diagnostic JSON encoder only; no scientific formula or source output change."
+}

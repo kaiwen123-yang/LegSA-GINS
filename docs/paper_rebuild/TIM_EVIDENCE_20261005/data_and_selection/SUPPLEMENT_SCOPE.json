@@ -1,0 +1,11 @@
+{
+  "helper_sha256": "5a45fd87c89d43b5e91620374bdfdad34130d9019ad8c3d2d0c01c756b48d881",
+  "native_executions": 0,
+  "evaluator_executions": 0,
+  "offset_fitting": 0,
+  "members_extracted": 0,
+  "RAWX_members": 16,
+  "frame_members": 16,
+  "userio_members": 8,
+  "raw_member_hashes_match_prior_full_stream": true
+}

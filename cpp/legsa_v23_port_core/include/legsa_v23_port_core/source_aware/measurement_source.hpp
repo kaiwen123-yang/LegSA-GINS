@@ -40,6 +40,7 @@ struct SourceMetadata {
   double time = 0.0;
   bool valid = true;
   Vec3 std_xyz = makeVec3(1.0, 1.0, 1.0);
+  std::size_t active_dimensions = 3;
   double yaw_std_rad = D2R;
   double residual_norm = 0.0;
   double time_diff_sec = 0.0;

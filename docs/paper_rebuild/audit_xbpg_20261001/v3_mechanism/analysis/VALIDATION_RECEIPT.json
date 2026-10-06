@@ -1,0 +1,207 @@
+{
+  "receipt_kind": "OFFLINE_INNOVATION_ANALYZER_VALIDATION",
+  "recorded_at_utc": "2026-10-02T04:55:18.243401+00:00",
+  "status": "PASS",
+  "data_mode": "synthetic_fixture_only",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "real_observer_logs_read_by_this_worker": 0,
+  "scientific_source_commit": "ca73cb1fb48a020fd2a450d79e520562c34eeb24",
+  "protocol_source": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_mechanism/MECHANISM_PROTOCOL.md",
+  "schema_source": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_mechanism/observer/SCHEMA.md",
+  "source_files": [
+    {
+      "source_path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_mechanism/analysis/analyze_innovation.py",
+      "sha256": "5439a6bcd576db37e2adbeb56160d5d74ae87a891ac8839f4c416afb6ed51fb5",
+      "bytes": 37113,
+      "hash_status": "NEWLY_COMPUTED_SMALL_CODE_FILE"
+    },
+    {
+      "source_path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_mechanism/analysis/test_analyze_innovation.py",
+      "sha256": "bae35e697f2be1a65fba9816e642f773fa21f1e8971e5ea61e5c4d67e547c2e2",
+      "bytes": 17923,
+      "hash_status": "NEWLY_COMPUTED_SMALL_CODE_FILE"
+    }
+  ],
+  "previous_validation": {
+    "unit_tests_passed": 25,
+    "status": "PASS_BEFORE_STATUS_GATE_REVISION",
+    "analysis_source_sha256": "66d912c75b853d8aa7ba85ac6b8a8bf8f31489e3e38e1504075eb2b75fa0dbcc",
+    "test_source_sha256": "8f5f18855b2ecd36a5339ba44161eaf8bc3de8552c9676a28b85bb89f056f399",
+    "existing_synthetic_logs": 11,
+    "SA_events_validated": 304,
+    "revision_reason": "Separate stream completeness from analysis validation; a failed/unavailable SA row or absent SA events must not exit successfully."
+  },
+  "final_unit_validation": {
+    "status": "PASS",
+    "tests_run": 27,
+    "passed": 27,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "unittest_reported_seconds": null,
+    "command": "PYTHONDONTWRITEBYTECODE=1 python3 docs/paper_rebuild/audit_xbpg_20261001/v3_mechanism/analysis/test_analyze_innovation.py",
+    "cwd": "<CODE_ROOT>",
+    "added_cases": [
+      "complete stream with failed SA preserves detailed evidence and returns nonzero analysis exit code",
+      "complete stream without SA is NO_SA_EVENTS and returns nonzero analysis exit code"
+    ],
+    "coverage": [
+      "full off-diagonal same-snapshot NIS and dz-Hdx hand calculation",
+      "fixed normalized/LSIM threshold endpoints and boundary ambiguity",
+      "source/global cap and LSIM masking",
+      "SA off and source masks",
+      "N16 exact 999 metadata with actual 2D std/R and preserved other LSIM/OIM/cap conditions",
+      "small R uses dimensionless scale tolerance",
+      "old-value validation failure, unsupported fallback/QM/schema and singular inverse",
+      "original/observed history/access/manifest identity gates",
+      "continuous event sequence and direct BEGIN/END footer schema"
+    ],
+    "timing_note": "27 tests passed after output-directory isolation; elapsed time is non-scientific and not used as evidence."
+  },
+  "final_synthetic_interface_validation": {
+    "status": "PASS",
+    "source_kind": "EXISTING_SYNTHETIC_OBSERVER_LOGS_FROM_OTHER_WORKER",
+    "new_fixture_generation": false,
+    "new_native_calls": 0,
+    "files": 11,
+    "SA_events_validated": 304,
+    "failed_SA_events": 0,
+    "unavailable_SA_events": 0,
+    "input_payload_hashes_recomputed": 0,
+    "command": "PYTHONDONTWRITEBYTECODE=1 python3 - <<'PY'\nimport io,json,sys,tempfile\nfrom pathlib import Path\nbase=Path('docs/paper_rebuild/audit_xbpg_20261001/v3_mechanism/analysis').resolve()\nsys.path.insert(0,str(base)); import analyze_innovation as a\naliases=json.loads(Path('configs/paper_rebuild/V3_MECHANISM_ROOTS.local.json').read_text())['aliases']\nfixture=Path(aliases['<MECHANISM_BUILD_ROOT>'])/'synthetic_fixture_v1/observed_on'\nnames=('all_active_sa','disabled_aux','no_rows','no_match','source_off','sa_off','prior_sa_off','quality_reject','no_eligible_hv','rd_residual_gate','policy_reject')\nreceipts=[]\nfor name in names:\n raw=(fixture/name/'observer/events.jsonl').read_bytes(); run=json.loads(raw.splitlines()[0])['run_id']\n with tempfile.TemporaryDirectory(dir=base) as out:\n  alias=f'<MECHANISM_BUILD_ROOT>/synthetic_fixture_v1/observed_on/{name}/observer/events.jsonl'\n  summary,_=a.analyze_stream(io.BytesIO(raw),alias,run,Path(out))\n  assert summary['stream_status']=='COMPLETE' and summary['analysis_status']=='VALIDATED' and a.analysis_exit_code(summary)==0,(name,summary)\n  receipts.append({'source_path':alias,'stream_status':summary['stream_status'],'analysis_status':summary['analysis_status'],'validated_SA_events':summary['validated_SA_events'],'failed_SA_events':summary['failed_SA_events'],'unavailable_SA_events':summary['unavailable_SA_events']})\nprint(json.dumps({'files':len(receipts),'validated_SA_events':sum(r['validated_SA_events'] for r in receipts),'new_native_calls':0,'receipts':receipts}))\nPY",
+    "cwd": "<CODE_ROOT>",
+    "files_and_counts": [
+      {
+        "source_path": "<MECHANISM_BUILD_ROOT>/synthetic_fixture_v1/observed_on/all_active_sa/observer/events.jsonl",
+        "stream_status": "COMPLETE",
+        "analysis_status": "VALIDATED",
+        "validated_SA_events": 35,
+        "failed_SA_events": 0,
+        "unavailable_SA_events": 0
+      },
+      {
+        "source_path": "<MECHANISM_BUILD_ROOT>/synthetic_fixture_v1/observed_on/disabled_aux/observer/events.jsonl",
+        "stream_status": "COMPLETE",
+        "analysis_status": "VALIDATED",
+        "validated_SA_events": 22,
+        "failed_SA_events": 0,
+        "unavailable_SA_events": 0
+      },
+      {
+        "source_path": "<MECHANISM_BUILD_ROOT>/synthetic_fixture_v1/observed_on/no_rows/observer/events.jsonl",
+        "stream_status": "COMPLETE",
+        "analysis_status": "VALIDATED",
+        "validated_SA_events": 22,
+        "failed_SA_events": 0,
+        "unavailable_SA_events": 0
+      },
+      {
+        "source_path": "<MECHANISM_BUILD_ROOT>/synthetic_fixture_v1/observed_on/no_match/observer/events.jsonl",
+        "stream_status": "COMPLETE",
+        "analysis_status": "VALIDATED",
+        "validated_SA_events": 22,
+        "failed_SA_events": 0,
+        "unavailable_SA_events": 0
+      },
+      {
+        "source_path": "<MECHANISM_BUILD_ROOT>/synthetic_fixture_v1/observed_on/source_off/observer/events.jsonl",
+        "stream_status": "COMPLETE",
+        "analysis_status": "VALIDATED",
+        "validated_SA_events": 22,
+        "failed_SA_events": 0,
+        "unavailable_SA_events": 0
+      },
+      {
+        "source_path": "<MECHANISM_BUILD_ROOT>/synthetic_fixture_v1/observed_on/sa_off/observer/events.jsonl",
+        "stream_status": "COMPLETE",
+        "analysis_status": "VALIDATED",
+        "validated_SA_events": 35,
+        "failed_SA_events": 0,
+        "unavailable_SA_events": 0
+      },
+      {
+        "source_path": "<MECHANISM_BUILD_ROOT>/synthetic_fixture_v1/observed_on/prior_sa_off/observer/events.jsonl",
+        "stream_status": "COMPLETE",
+        "analysis_status": "VALIDATED",
+        "validated_SA_events": 29,
+        "failed_SA_events": 0,
+        "unavailable_SA_events": 0
+      },
+      {
+        "source_path": "<MECHANISM_BUILD_ROOT>/synthetic_fixture_v1/observed_on/quality_reject/observer/events.jsonl",
+        "stream_status": "COMPLETE",
+        "analysis_status": "VALIDATED",
+        "validated_SA_events": 22,
+        "failed_SA_events": 0,
+        "unavailable_SA_events": 0
+      },
+      {
+        "source_path": "<MECHANISM_BUILD_ROOT>/synthetic_fixture_v1/observed_on/no_eligible_hv/observer/events.jsonl",
+        "stream_status": "COMPLETE",
+        "analysis_status": "VALIDATED",
+        "validated_SA_events": 32,
+        "failed_SA_events": 0,
+        "unavailable_SA_events": 0
+      },
+      {
+        "source_path": "<MECHANISM_BUILD_ROOT>/synthetic_fixture_v1/observed_on/rd_residual_gate/observer/events.jsonl",
+        "stream_status": "COMPLETE",
+        "analysis_status": "VALIDATED",
+        "validated_SA_events": 28,
+        "failed_SA_events": 0,
+        "unavailable_SA_events": 0
+      },
+      {
+        "source_path": "<MECHANISM_BUILD_ROOT>/synthetic_fixture_v1/observed_on/policy_reject/observer/events.jsonl",
+        "stream_status": "COMPLETE",
+        "analysis_status": "VALIDATED",
+        "validated_SA_events": 35,
+        "failed_SA_events": 0,
+        "unavailable_SA_events": 0
+      }
+    ],
+    "output_disposition": "Test CSV and selected snapshots were written only into self-created temporary directories under analysis/ and removed after assertions; durable evidence is this receipt. No real analysis output was created."
+  },
+  "historical_unit_suite_invocation_count": "unknown",
+  "historical_unit_suite_count_note": "No durable per-invocation journal was maintained; do not infer the total from the final test count.",
+  "new_execution_counts_for_this_analysis_worker": {
+    "native": 0,
+    "evaluator": 0,
+    "provider_generator": 0,
+    "controller": 0,
+    "bootstrap": 0,
+    "real_observer_log_reads": 0,
+    "retained_error_series_reads": 0,
+    "raw_reference_payload_reads": 0,
+    "NAV_STD_payload_reads": 0,
+    "git_mutations": 0
+  },
+  "final_status_contract": {
+    "stream_status": [
+      "COMPLETE",
+      "INCOMPLETE_EVENT_STREAM"
+    ],
+    "analysis_status": [
+      "VALIDATED",
+      "VALIDATION_FAILED",
+      "NO_SA_EVENTS"
+    ],
+    "exit_codes": {
+      "VALIDATED": 0,
+      "VALIDATION_FAILED": 2,
+      "NO_SA_EVENTS": 2
+    },
+    "detailed_and_compact_evidence_written_before_analysis_exit": true,
+    "actual_R_mutated": false,
+    "shadow_decision_applied": false,
+    "closedloop_not_tested": true
+  },
+  "output_layout": {
+    "event_tables_and_full_snapshots": "<MECHANISM_ROOT>/analysis/<run_id>/innovation/",
+    "separate_existing_scope": "<MECHANISM_ROOT>/analysis/<run_id>/schedule/",
+    "compact_tables": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_mechanism/analysis/<run_id>/",
+    "refuses_existing_innovation_output": true,
+    "parent_schedule_directory_does_not_block": true
+  }
+}

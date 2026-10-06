@@ -1,0 +1,20 @@
+schema: lc02_chang2021.formal_admission_rubric.v1
+candidate: LC02_CHANG2021_FSTCKF
+required_outcome_for_admission: ALL_GATES_PASS
+gates:
+  - {gate: paper_and_source_identity_closed, result: PASS, evidence: "15-page binary/license/DOI/full visual review and attributable search frozen"}
+  - {gate: base_15_state_dynamics_closed, result: FAIL, evidence: "full F/G/Qc/discretization/feedback/reset not source-closed"}
+  - {gate: six_dimensional_measurement_closed, result: PASS, evidence: "Eq3 residual order/sign and 6x15 H are explicit"}
+  - {gate: ckf_core_identity_unique, result: PASS, evidence: "enum A literal printed linear error-state recursion uniquely selected"}
+  - {gate: eq12_generalized_inverse_unique, result: FAIL, evidence: "ordinary inverse of 6x15 H is impossible and no unique completion is sourced"}
+  - {gate: beta_to_all_fifteen_ai_unique, result: FAIL, evidence: "measurement-space beta1/beta2 is not a 15-state mapping"}
+  - {gate: innovation_expectation_and_startup_unique, result: FAIL, evidence: "Eq14 and rho=.95 print but N-window/nonfinite startup policy is absent"}
+  - {gate: fig4_membership_functions_exact, result: PASS, evidence: "all six intervals formulas and boundary values including mu_L2_medium(15)=1 are frozen"}
+  - {gate: ts_aggregation_unique, result: FAIL, evidence: "Fig4/Eqs26-27 close local pieces but not T-S firing normalization aggregation or clipping"}
+  - {gate: all_parameters_closed, result: FAIL, evidence: "Q/R/initial covariance and multiple numerical policies remain unknown"}
+  - {gate: by2_input_compatible, result: FAIL, evidence: "required fields exist but LLH-vs-metric covariance and physical-point instantiation are not faithful-source closed"}
+  - {gate: distinct_from_lc01, result: PASS, evidence: "one receiver 6D solution update and fuzzy strong tracking differ from two-receiver invariant geometry"}
+decision: NO_GO_LC02_CHANG2021_FSTCKF_AS_FORMAL_PRIMARY
+formal_lc02_admission: false
+implementation_authorized: false
+C00_authorized: false

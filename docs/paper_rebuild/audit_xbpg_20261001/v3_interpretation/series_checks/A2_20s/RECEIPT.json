@@ -1,0 +1,72 @@
+{
+  "checkpoint_reuse_without_payload_open": 0,
+  "completed_at_utc": "2026-10-02T03:55:16.882090+00:00",
+  "completed_files": 198,
+  "compressed_bytes_for_fully_read_files": 1137925740,
+  "controller_calls": 0,
+  "data_mode": "semisynthetic",
+  "data_mode_counts": {
+    "semisynthetic": 198
+  },
+  "expected_files": 198,
+  "group": "A2_20s",
+  "group_release": "SUPERVISOR_RELEASED:A2_20s",
+  "metric_check_status_counts": {
+    "MATCH": 32652,
+    "MATCH_NULL": 18,
+    "NOT_RECOMPUTABLE_FROM_RETAINED_FIELDS": 1782
+  },
+  "nav_std_payload_opens": 0,
+  "new_full_stream_reads": 198,
+  "new_validation_statistic_cells": 32652,
+  "original_evaluator_calls": 0,
+  "outputs": [
+    {
+      "file": "FILE_CHECKS.csv",
+      "row_count": 198,
+      "sha256": "d01079eb64659b07d9bd2c70ed134dc5af64e6af1921742bd21565264266fd2c",
+      "size_bytes": 202614
+    },
+    {
+      "file": "METRIC_CHECKS.csv",
+      "row_count": 34452,
+      "sha256": "c7a1bb29ab6e5e20af9731c5d4ebbbd6c885033fab9cb483edd87f7cdd2202c3",
+      "size_bytes": 15090291
+    },
+    {
+      "file": "WINDOW_SUMMARY.csv",
+      "row_count": 1386,
+      "sha256": "9b860da240b585e1d1bcbf448778544ecd2d6fe7b51aa4dd4e019418da906a1d",
+      "size_bytes": 1919816
+    },
+    {
+      "file": "FIELD_QUALITY.csv",
+      "row_count": 2574,
+      "sha256": "cded1cc556ee64bf17cd0e9f36ed2395954c4f5b30bdd7a8c73819324eba1074",
+      "size_bytes": 501976
+    }
+  ],
+  "payload_kind_counts": {
+    "error_series": 198
+  },
+  "preparation_commit": "0593770b2b3837012d155254cfc73448d76990b2",
+  "prior_collection_receipt_unchanged": true,
+  "provider_generator_calls": 0,
+  "raw_reference_payload_opens": 0,
+  "scan_manifest_sha256": "51dda2a4390f97af6e9a5fcfc11f9f019c81a79bd94b1c79bf25e19a148a482c",
+  "script_sha256": "655c230b1813cc737efd9f33dd5746c0c7e61768cfd60a12b149c56ee9b7c0cd",
+  "semisynthetic_data_generated": false,
+  "semisynthetic_data_used": true,
+  "sha256_status_counts": {
+    "MATCH": 198
+  },
+  "solver_calls": 0,
+  "source_series_writes": 0,
+  "started_at_utc": "2026-10-02T03:54:14.170062+00:00",
+  "status": "GROUP_COMPLETE_STOP_FOR_SUPERVISOR_REVIEW_AND_PUSH",
+  "synthetic_data_used": false,
+  "uncompressed_row_count_fully_read": 11215116,
+  "unreadable_or_incomplete_files": 0,
+  "validation_calculation": true,
+  "workers": 4
+}

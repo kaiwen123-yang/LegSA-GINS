@@ -1,0 +1,33 @@
+{
+  "slot_id": "N16_ONLY__RUN_01401",
+  "candidate_id": "N16_ONLY",
+  "run_id": "RUN_01401",
+  "case_id": "D15_seed_00",
+  "method_id": "F04",
+  "status": "COMPLETED_CANDIDATE_COMPARABLE",
+  "started_utc": "2026-10-02T09:50:55.117648+00:00",
+  "preparation_commit": "c7280d1f138cd05fa9fa45b5409c46f69902926e",
+  "evaluator_invocation_attempts": 1,
+  "evaluator_child_execs": 1,
+  "reference_child_opens": 1,
+  "parent_reference_payload_reads": 0,
+  "native_calls": 0,
+  "retries": 0,
+  "output_root": "<VALIDATION_ROOT>/evaluations/N16_ONLY/RUN_01401",
+  "data_mode": "semisynthetic",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "reference_stat_bytes": 1081436,
+  "native_receipt_path": "<VALIDATION_ROOT>/candidates/N16_ONLY/RUN_01401/CANDIDATE_RECEIPT.json",
+  "native_nav_sha256": "5868e23b16442af2ec507ea4869cca2a3a9c3ff18f47883da1a44218f261efa2",
+  "std_sha256": "8c9a4a6c014bc3d9aaec62c862a9fa6fcbf3fd5a533e9f2227b68901cbb6fd76",
+  "evaluator_nav_sha256": "2085a11a30560e8fbb4f40e21c09c2d22dd6655c43ca568b8317a418ae1123c2",
+  "v3_lever_frd_m": [
+    0.03,
+    -0.148095745932992,
+    -0.3
+  ],
+  "uncertainty_status": "UNTRANSPORTED_STD_DIAGNOSTIC_ONLY",
+  "baseline_gate": "PASS",
+  "finished_utc": "2026-10-02T09:51:03.513583+00:00"
+}

@@ -1,0 +1,290 @@
+schema_version: paper_rebuild.clean5.calibrated_execution.v1
+task: P-06 B/C
+stage_root: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL
+family: CLEAN5_CALIBRATED
+classification: NOT_THE_PREREGISTERED_COMPARISON_PROTOCOL
+sensor_contract:
+  path: <CODE_ROOT>/configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_SENSOR_MODEL_CONTRACT.yaml
+  sha256: 79d9e4521999e1e5fa328f1921ca455df859a89559473b3864ed5f92c1600948
+model:
+  path: <CODE_ROOT>/configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_SENSOR_MODEL.yaml
+  sha256: 4ce6ca6c544c2ba39988ea0b0631a60207a4cea36987c3a2139052fedd3a4871
+model_freeze_commit: 73d71c18ec21332c901f21fe1c4a82564472e6e8
+admission:
+  path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/00_CALIBRATION/AUDIT_CLASSIFICATION_REVIEW/CALIBRATION_ACCEPTANCE.json
+  sha256: 0ddd3c93700ab8177497650d10739ef1357d8e5664183b09a4a7d4ae082e2e07
+dataset_order:
+- BY2
+- BY2H
+- BY2O
+run_profiles:
+- F01
+- F02
+- F03
+- A04
+- F04
+solver_limit: 15
+evaluator_limit: 30
+serial_only: true
+retry_count: 0
+scientific_solver_commit: 64c81965b17ef1bf8ae2ce3e4dd7b1ae35110b00
+executable_sha256: 9c00565c45b654453b2b378f3d5995e5dc21d1271323a9b683acdab75993235f
+evaluator:
+  path: <CLEAN_ROOT>/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py
+  sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+allowed_scientific_config_changes:
+- vrw
+- abstd
+preserve_explicit_initbastd: true
+provider_scale_policy: One BY2 frozen s on all three sequences; frozen current-sample V2s integration; never external
+  ZOH or per-sequence scale estimation.
+raw_checkpoint_policy: Only four actual raw input roles, locked hashes; no trace/bag/fpl even for hash-only checkpoints.
+trace_policy: Resolve/stat only in parent; expected SHA from raw-lock metadata; read/hash only in frozen evaluator
+  subprocess after all 15 outputs sealed.
+v3_std_policy: UNTRANSPORTED_STD_DIAGNOSTIC_ONLY for position; unchanged yaw state STD; no full transformed covariance
+  consistency claim.
+data_mode: real_three_sequence_calibrated
+synthetic_data_used: false
+semisynthetic_data_used: false
+trace_used_online: false
+receiver_imu_as_body_imu: false
+final_v23_output_solver_input: false
+LegSA_output_solver_input: false
+per_case_tuning: false
+output_only_correction: false
+epoch_deleted_for_metric: false
+old_runtime_input_count: 0
+sequences:
+  BY2:
+    dataset_id: BY2
+    data_mode: real_by2_raw
+    base_time: 1772784000.0
+    window_seconds:
+    - 66.0
+    - 340.0
+    case_id: C00_clean_normal
+    case_meta:
+      case_id: C00_clean_normal
+      case_family: clean
+      degradation_id: C00
+      degradation_parameters_json: '{}'
+    source_bundle:
+      path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/02_PARITY_PROVIDERS/PARITY_PROVIDER_BUNDLE.json
+      sha256: e28cd6fea67c210c1c97dd5a9cabb666e9259db2075e517af7c54036152898c9
+    source_variant: V2s
+    original_imu:
+      path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/02_PARITY_PROVIDERS/V2s/PARITY_IMU.imu
+      sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+    raw_inputs:
+      body:
+        path: <RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by2.txt
+        sha256: 95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278
+      status:
+        path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-status.csv
+        sha256: 9761d2d7055356857bd7b26a251fdd60fdf6c2b18a882dac74bc35d164e42e08
+      gnss1:
+        path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv
+        sha256: 5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027
+      gnss2:
+        path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss2-raw.csv
+        sha256: 39249696329530452a1049b5b39e2c1d8f7e89ae2190d2c95bce70f5b4f44583
+    raw_lock:
+      path: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK.csv
+      sha256: f6e5d7965d17857e5b4a846501883f4675f2331a1164fab3de9e5ba9470f1ad7
+    original_configs:
+      F01:
+        runtime_config: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/08_FULL_ALGORITHM_RUNS/RUN_00001/CANONICAL541_RUNTIME_CONFIG.yaml
+        runtime_config_sha256: 8f02e95e65668a4dc3e9654a195a2e9435a4e53a2a89afd2abae99926c19fae6
+      F02:
+        runtime_config: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/08_FULL_ALGORITHM_RUNS/RUN_00002/CANONICAL541_RUNTIME_CONFIG.yaml
+        runtime_config_sha256: 3fc2cd412c926a171d372741c8769441204af2955985af78d18b7cf8bd9e3ad2
+      F03:
+        runtime_config: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/08_FULL_ALGORITHM_RUNS/RUN_00003/CANONICAL541_RUNTIME_CONFIG.yaml
+        runtime_config_sha256: 165f5e76ebd46c579fc3327c1b626703add04649d357b0fbd81b304ec3194726
+      A04:
+        runtime_config: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/10_INTERNAL_ABLATION_RUNS/RUN_00006/CANONICAL541_RUNTIME_CONFIG.yaml
+        runtime_config_sha256: 8f2b51509ba7d811e2f42dea6acf199f6206260ca8fbd811bd1d32bb730669c1
+      F04:
+        runtime_config: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/08_FULL_ALGORITHM_RUNS/RUN_00004/CANONICAL541_RUNTIME_CONFIG.yaml
+        runtime_config_sha256: f4713a5aa33076a4bc0f2ed5e2aea838602f5124ad95bec9828153d5f0a02a59
+    frozen_sequence_contract:
+      path: <CODE_ROOT>/configs/paper_rebuild/clean5/CLEAN5_PARITY_CONTRACT.yaml
+      sha256: b50e6d23cd26d005199793f862d8e03ab0624c273fb4ec6bd23a797393e3287e
+    baseline_median_m: 0.356191491865984
+    trace:
+      path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv
+      sha256: ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c
+      role: EVALUATOR_CHILD_ONLY
+      parent_may_hash: false
+    frozen_main_table:
+      path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/12_OFFLINE_EVALUATION/LOGICAL_EVALUATION_RESULTS.csv
+      sha256: 4ff53072585d67620e3ee1f661b144efe05d485e8791a8cfe17f0e4982ff842c
+    v3_lever_frd_m:
+    - 0.03
+    - -0.148095745932992
+    - -0.3
+    frozen_a1_provider:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/providers/dual_yaw_provider.csv
+      sha256: ccf442f32a0037ba742d199d7ab078d5af112aea5981effce1f23a80510bdd86
+  BY2H:
+    dataset_id: BY2H
+    data_mode: real_by2h_raw
+    base_time: 1772784000.0
+    window_seconds:
+    - 413.0
+    - 683.0
+    case_id: CLEAN5_BY2H_NATURAL
+    case_meta:
+      case_id: CLEAN5_BY2H_NATURAL
+      case_family: natural_sequence
+      degradation_type_name: ''
+      degradation_parameters_json: '{}'
+      dataset_id: BY2H
+    source_bundle:
+      path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/12_PARITY_GENERALIZATION/BY2H/02_PARITY_PROVIDERS/PARITY_PROVIDER_BUNDLE.json
+      sha256: 691d7c7e669ca83e372cf80d154952c2ff89590d1fb94072985c0654b2d0fc8c
+    source_variant: V2
+    original_imu:
+      path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/02_PROVIDER_FREEZE/FINAL_V23_CLEAN_FRESH.imu
+      sha256: 9702f053553c0d9b2778602daf585901a43aad6949a977375a3374024c6a0921
+    raw_inputs:
+      body:
+        path: <RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by3.txt
+        sha256: b2e80763c613a5a0d6739aea90ea3ed4f8c9170cf5f2f6b73e5a000a666f0c49
+      status:
+        path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss1-status.csv
+        sha256: 6e169474adea70ef9899ef02409015f7cd225aadf1efbe63e51af2a39e297ef2
+      gnss1:
+        path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss1-raw.csv
+        sha256: b6e0e3108b0902350eb7655fe1a2db23a8f320136ddc6c54bcd7e5dbe2d17508
+      gnss2:
+        path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss2-raw.csv
+        sha256: 87e4056c85b58595792578a62aeceb1b594475d654e4e49eb7fccaf5bfff56aa
+    raw_lock:
+      path: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK_CLEAN5.csv
+      sha256: faa31580c7fff73b52fcf6d27c97cfdd9187e67a55968a2ab42e6737b0eabb67
+    original_configs:
+      F01:
+        runtime_config: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/03_RUNTIME_CONFIGS_V2/F01.yaml
+        runtime_config_sha256: f90f14e6079b4a32b1c1cf55825b12893928fa448d76618925a0979db284c294
+      F02:
+        runtime_config: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/03_RUNTIME_CONFIGS_V2/F02.yaml
+        runtime_config_sha256: d23b5758b2d955b8e0e691f83aa498032b81ceefd8552f22a5ec166d00ed003f
+      F03:
+        runtime_config: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/03_RUNTIME_CONFIGS_V2/AB0000.yaml
+        runtime_config_sha256: 9b50600226332691bf793c04cad59ac8469bc4eacd2003290a060b34d27adcb8
+      A04:
+        runtime_config: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/03_RUNTIME_CONFIGS_V2/AB1011.yaml
+        runtime_config_sha256: 962a1db80cfb6c48714d42a12b3250530ff46c6d3836a7c3a8cd6a2c0e2379b1
+      F04:
+        runtime_config: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/03_RUNTIME_CONFIGS_V2/AB1111.yaml
+        runtime_config_sha256: efc6d9903c9356479d5e567c1374ccc37f75245a2fe32f4e927783d1eb53fcc6
+    frozen_sequence_contract:
+      path: <CODE_ROOT>/configs/paper_rebuild/clean5/CLEAN5_BY2H_SEQUENCE_CONTRACT.yaml
+      sha256: 64bf78d5d4241294922fbc6c18eaeb8ad4c2e40663ba8e5306ab67e1d07d4e19
+    baseline_median_m: 0.35418777593777223
+    trace:
+      path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/trace_vrtk2_a87c6e_2026-03-06-08-06-39_minimal.csv
+      sha256: 8d11fe360753bfcdbc54f7bf793fcb25850c0997b7aaad4ec1c9f10859c0f84f
+      role: EVALUATOR_CHILD_ONLY
+      parent_may_hash: false
+    frozen_main_table:
+      path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/08_AGGREGATE/UNIQUE_EVALUATION_RESULTS.csv
+      sha256: 98734e2c580c9aef1afffaa3c24b12d14c1b5d9f86cb56bca991cea2e6f1dab3
+    v3_lever_frd_m:
+    - 0.03
+    - -0.14709388796888612
+    - -0.3
+  BY2O:
+    dataset_id: BY2O
+    data_mode: real_by2o_raw
+    base_time: 1772780400.0
+    window_seconds:
+    - 3186.0
+    - 3563.0
+    case_id: CLEAN5_BY2O_NATURAL
+    case_meta:
+      case_id: CLEAN5_BY2O_NATURAL
+      case_family: natural_sequence
+      degradation_type_name: ''
+      degradation_parameters_json: '{"end_s":3411.951585292816,"secondary_runs":[[3495.939144849777,3508.9415624141693]],"source":"pre_registered_input_side_gnss2_fix_type","start_s":3369.943066596985}'
+      dataset_id: BY2O
+    source_bundle:
+      path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/12_PARITY_GENERALIZATION/BY2O/02_PARITY_PROVIDERS/PARITY_PROVIDER_BUNDLE.json
+      sha256: fb6eeb1ac9429bf095c84b0a36bce166645ae5c07363d90e8e74ffc0c02bc131
+    source_variant: V2
+    original_imu:
+      path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/02_PROVIDER_FREEZE/FINAL_V23_CLEAN_FRESH.imu
+      sha256: 6e8344dda6a90239f3fcfceea1bf3b7a298f2a93250f00dd1fc11e046257b37d
+    raw_inputs:
+      body:
+        path: <RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by1.txt
+        sha256: 0e5c62e0a5af0b6c32c51b535cc90701677276fc73c5623b72abda66cc148f2e
+      status:
+        path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss1-status.csv
+        sha256: c3958ba9442c1a84b25c3be6ab649cc3aad2e5976c3f525127a2136d9b72255f
+      gnss1:
+        path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss1-raw.csv
+        sha256: 6035d50419eaa0ff29d9a4b053dbed5d715fd2bec38f44ad4b4be02ca54a4ba9
+      gnss2:
+        path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss2-raw.csv
+        sha256: 4f18ec7d618c675238d5c40a868ba01802a9d2da9325877d715f75f2f939119f
+    raw_lock:
+      path: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK_CLEAN5.csv
+      sha256: faa31580c7fff73b52fcf6d27c97cfdd9187e67a55968a2ab42e6737b0eabb67
+    original_configs:
+      F01:
+        runtime_config: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/03_RUNTIME_CONFIGS_V2/F01.yaml
+        runtime_config_sha256: 3bfacc151ae2728756a6749337dc4a3d0a085494bdb0a271df99f2a27cd7ef35
+      F02:
+        runtime_config: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/03_RUNTIME_CONFIGS_V2/F02.yaml
+        runtime_config_sha256: f90c5ec8f1f4209550de68e7a857788ec3bbf5a1ff7519fe49fbc19c95140bab
+      F03:
+        runtime_config: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/03_RUNTIME_CONFIGS_V2/AB0000.yaml
+        runtime_config_sha256: 93764e1002ccf71a0d28ca5a32c721d580c056c41e88919ab937836e49841f7d
+      A04:
+        runtime_config: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/03_RUNTIME_CONFIGS_V2/AB1011.yaml
+        runtime_config_sha256: c4ac31c57d89cb309cb2bb6c418f987ef57c84601e843cad93d0d608e9bf6d3e
+      F04:
+        runtime_config: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/03_RUNTIME_CONFIGS_V2/AB1111.yaml
+        runtime_config_sha256: 77cd17dc03229132c2e7d8a109adaeefd5eb00b7145539b42eb4745c4360e837
+    frozen_sequence_contract:
+      path: <CODE_ROOT>/configs/paper_rebuild/clean5/CLEAN5_BY2O_SEQUENCE_CONTRACT.yaml
+      sha256: bf42b2bee9ed96bd81d479bbb8b5533c58c6fce2ddbb5d9eabdeaf60cfd1144d
+    baseline_median_m: 0.35013463864843675
+    trace:
+      path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/trace_vrtk2_a87c6e_2026-03-06-07-52-22_minimal.csv
+      sha256: 4f7b3007c6a0b43ce1b0fb4908f23c042891154b4adbc7af4c3d8a47ca363cd9
+      role: EVALUATOR_CHILD_ONLY
+      parent_may_hash: false
+    frozen_main_table:
+      path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/08_AGGREGATE/UNIQUE_EVALUATION_RESULTS.csv
+      sha256: aa68bc4ba865842eb37358b9c4ccea3e230233e8602ec1610b390f8ffc2c4ced
+    v3_lever_frd_m:
+    - 0.03
+    - -0.14506731932421837
+    - -0.3
+    occlusion_window:
+      path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/01_SEQUENCE_CONTRACT/OCCLUSION_WINDOW.json
+      sha256: 4ffabd12c71ef08ec3bb43bb5969fe97883b657c6d68aec2fc827f1fb56e349f
+external_by2_v3:
+  results:
+    path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/08_AGGREGATE/v3/UNIQUE_EVALUATION_RESULTS.csv
+    sha256: 3c49f054450a10a7b83bfca6263329166ad78ff8f283c471995557a52543b18f
+  methods:
+  - LC01
+  - EXT05C
+  policy: Frozen CSV rows reused only; no solver or evaluator calls.
+robustness:
+  rule:
+    path: <CODE_ROOT>/docs/paper_rebuild/A04_F04_ROLE_DECISION_RULE.md
+    sha256: a69803bdf8117601af61c20003f7dd64b6843d44d35b7ea1b93f43170202475a
+  old_decision_inputs:
+    path: <CLEAN_ROOT>/stages/CLEAN5_DECISION/A04_F04_DECISION_INPUTS.json
+    sha256: d9867e64d9e57caea19cfd83b7c7dfba5e9fc95e789859fefbc1820b8230ef1e
+  versions:
+  - v2
+  - v3
+  threshold_equality: strict_pass; preserve inclusive_comparison and threshold_equal fields; equality remains A04
+  outcome_changed: false
+  purpose: REVIEW_NOT_DECISION

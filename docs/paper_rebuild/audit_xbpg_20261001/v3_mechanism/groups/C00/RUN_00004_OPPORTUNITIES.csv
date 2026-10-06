@@ -1,0 +1,5 @@
+window,reason,res,imu_opportunities,source_path
+full,GNSS_INPUT_NOT_PENDING,0,586,<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl
+full,GNSS_UPDATE_SCHEDULED,2,595,<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl
+full,GNSS_UPDATE_SCHEDULED,3,774,<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl
+full,NOT_DUE,0,54687,<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl

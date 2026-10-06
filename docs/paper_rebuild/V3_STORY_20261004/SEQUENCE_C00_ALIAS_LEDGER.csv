@@ -1,0 +1,23 @@
+source_table,source_line,run_id,method_id,sequence_id,actual_registered_domain,role
+SEQUENCE_TABLE_V3.csv,24,RUN_00001,F01,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V3.csv,25,RUN_00002,F02,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V3.csv,26,RUN_00003,F03,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V3.csv,27,RUN_00004,F04,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V3.csv,28,RUN_00005,A03,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V3.csv,29,RUN_00006,A04,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V3.csv,30,RUN_00007,A05,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V3.csv,31,RUN_00008,A06,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V3.csv,32,RUN_00009,A07,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V3.csv,33,RUN_00010,A08,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V3.csv,34,RUN_00011,A09,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V2.csv,24,RUN_00001,F01,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V2.csv,25,RUN_00002,F02,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V2.csv,26,RUN_00003,F03,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V2.csv,27,RUN_00004,F04,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V2.csv,28,RUN_00005,A03,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V2.csv,29,RUN_00006,A04,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V2.csv,30,RUN_00007,A05,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V2.csv,31,RUN_00008,A06,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V2.csv,32,RUN_00009,A07,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V2.csv,33,RUN_00010,A08,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls
+SEQUENCE_TABLE_V2.csv,34,RUN_00011,A09,BY2,CORE,alias of CORE C00; zero extra native/evaluator calls

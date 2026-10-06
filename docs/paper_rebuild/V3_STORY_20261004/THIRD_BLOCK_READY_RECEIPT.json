@@ -1,0 +1,131 @@
+{
+  "schema": "v3_story.third_block.ready.v1",
+  "captured_utc": "2026-10-04T10:40:13.139432+00:00",
+  "all_checks_passed": true,
+  "prior29_unchanged": true,
+  "previous_blocks_commits": [
+    "baf4e9157c7b82d611271f15ae9b7e68f3014ab3",
+    "db4d106427f307db47fe7f018ba36c107c11098f"
+  ],
+  "original_science_freeze": "7d43b9af26120ed5dde21f53e515386361072ba6",
+  "new_files": {
+    "READ_COVERAGE_03.csv": {
+      "sha256": "fb91f2fbf4e56aea6f27c56a7a5803f793ccdc11086aacc0f9b42017c7243c65",
+      "bytes": 18083
+    },
+    "SINGLE_MODULE_PAIRED_DIRECTION.csv": {
+      "sha256": "d3d1fdd85b113d86828d24d8ed1963761891e37c1d664888def8ce4bf2bc1baa",
+      "bytes": 16513
+    },
+    "FULL_MATRIX_OUTCOME_LEDGER.csv": {
+      "sha256": "8356405c84e4ebf5cbf4343eb00e23a3f4fce51decf5b8e3226772c38971e492",
+      "bytes": 19017
+    },
+    "THIRD_BLOCK_DATA_RECEIPT.json": {
+      "sha256": "4ae1e5bc3b2e52232daa249a24ce4d80075b629abd4b2d941a1daab09bc6f5a6",
+      "bytes": 14622
+    },
+    "CASE_TYPE_STORY.csv": {
+      "sha256": "d2a67af1d49496d5200f957cd92605d18a0cf0bbc5e3888ffafef02bea15d5c2",
+      "bytes": 810300
+    },
+    "03_SELECTION_HISTORY_AND_FULL_MATRIX_RESULTS.md": {
+      "sha256": "8cd003b3ed87cebb9a3658c1c14525922527555655ac7f8c928406feaa759d12",
+      "bytes": 15130
+    },
+    "SUMMARY_ARITHMETIC_CHECKS.csv": {
+      "sha256": "1a736d5dc723e89dc66b773484379c9246319395212fe4fcf22b0b50620b829f",
+      "bytes": 781645
+    },
+    "build_third_story_block.py": {
+      "sha256": "19438645940cec5fcca90505e16bacfb94099ba626b9aef4f6a4d899fd6e2cbe",
+      "bytes": 10560
+    },
+    "SELECTION_HISTORY_LEDGER.csv": {
+      "sha256": "417b9b2b229af7ae4f8bc9f8d64f0b64d08b678d39c0ce415d69cea8a8da6931",
+      "bytes": 6837
+    },
+    "RESULT_SUMMARIES/T5BCR_REFERENCE_SUBSET61_TAIL_SUMMARY.csv": {
+      "sha256": "a4aa65e0552ec4480e92da344ef5bdf410c01232204aa452738eb4149d02d35e",
+      "bytes": 3648
+    },
+    "RESULT_SUMMARIES/PAIRWISE_SUMMARY_V3.csv": {
+      "sha256": "0587815641ff0b9fe94506e51f47672ad6a94cbc0411e2d9dc852c233f86b89a",
+      "bytes": 256292
+    },
+    "RESULT_SUMMARIES/ADDENDUM_FAMILY_SUMMARY_V3.csv": {
+      "sha256": "0b0c1306cf063e3943d21be6169d3795d73ff87952cf199c3333b22426f5752f",
+      "bytes": 20876
+    },
+    "RESULT_SUMMARIES/ADDENDUM_SUMMARY_V2.csv": {
+      "sha256": "d8e78de4ad19a929e27e29eceb46cea741a4a177b164e68b85aada384ddda70e",
+      "bytes": 10259
+    },
+    "RESULT_SUMMARIES/CORE_541_TYPE_SUMMARY_V2.csv": {
+      "sha256": "b0ef6a21ceddfeaa4c90e9d4fad42f2bd86bc03db832a86f0fdb8f60b8fd8fde",
+      "bytes": 629592
+    },
+    "RESULT_SUMMARIES/CORE_541_TYPE_SUMMARY_V3.csv": {
+      "sha256": "dda9093a2258a4c41cc26a932fe526a9168a57933fe569e81dc8922eaf0d6266",
+      "bytes": 632820
+    },
+    "RESULT_SUMMARIES/PAIRWISE_SUMMARY_V2.csv": {
+      "sha256": "3b681c1f34fd813841bce4ac42465cd1c753d73da967e66761f57bbfc0c7a70d",
+      "bytes": 255910
+    },
+    "RESULT_SUMMARIES/FAILURE_COMPARISON.csv": {
+      "sha256": "4d5a19abbc40228a3c98f8dfb7f32ce616f3af5cbd6ac65fec8eea66460b536f",
+      "bytes": 9453
+    },
+    "RESULT_SUMMARIES/ADDENDUM_SUMMARY_V3.csv": {
+      "sha256": "ab88f5703eb0d9441915984e69ab7fa45fb587a1592dcf00ff54c3d65efdf890",
+      "bytes": 10280
+    },
+    "RESULT_SUMMARIES/CORE_541_SUMMARY_V3.csv": {
+      "sha256": "1e0181936e4cf40de57bd1e6f0724acdf1644bb7616aaff0121bbd8a54febd35",
+      "bytes": 11863
+    },
+    "RESULT_SUMMARIES/SUBSET61_SUMMARY_V2.csv": {
+      "sha256": "be54762dacc8ff345eff43d140d84b18b63683b62d28cafce545b0f91a00fb24",
+      "bytes": 11505
+    },
+    "RESULT_SUMMARIES/ADDENDUM_FAMILY_SUMMARY_V2.csv": {
+      "sha256": "e46266ecd093a4a4effb128935c60829246567f76306f5c19857ad51a7d697dc",
+      "bytes": 20879
+    },
+    "RESULT_SUMMARIES/CORE_541_FAMILY_SUMMARY_V3.csv": {
+      "sha256": "1f630c70679896c82855769b7580dc2921e9b5cc78add46b3be41f37bd17429d",
+      "bytes": 105743
+    },
+    "RESULT_SUMMARIES/CORE_541_SUMMARY_V2.csv": {
+      "sha256": "bea055fce46c0869f883cf28667b5ab9a6e23c55c1383e74e0939064091b1fc4",
+      "bytes": 11841
+    },
+    "RESULT_SUMMARIES/BY2O_SEGMENT_TABLE.csv": {
+      "sha256": "13a2c4e8de7638fa8672bb49d6556f531061a3924fe7dbf6911adfcf53779876",
+      "bytes": 67539
+    },
+    "RESULT_SUMMARIES/SUBSET61_SUMMARY_V3.csv": {
+      "sha256": "8c4f55d32ebe2f9c124db70fef3eccfffd5467251f6adfa5809480b0798f20e6",
+      "bytes": 11536
+    },
+    "RESULT_SUMMARIES/CORE_541_FAMILY_SUMMARY_V2.csv": {
+      "sha256": "05de983ccc2fb13d67dbcbbc28dd121040fd98cfd8e6f44d0300299c018452c3",
+      "bytes": 105360
+    }
+  },
+  "new_file_count_excluding_this_receipt": 26,
+  "coverage_entries": 40,
+  "semantic_coverage_not_machine_claim": true,
+  "statistic_rows_checked": 11550,
+  "statistic_scalar_fields_checked": 138600,
+  "science_calls": {
+    "native": 0,
+    "evaluator": 0,
+    "provider_generator": 0,
+    "raw_or_trace_payload_reads": 0,
+    "failure_reclassification": 0
+  },
+  "original_outputs_not_modified": true,
+  "release_handoff": "Root owns stage/commit/push; first and second blocks immutable. Only newly named story assets are eligible."
+}

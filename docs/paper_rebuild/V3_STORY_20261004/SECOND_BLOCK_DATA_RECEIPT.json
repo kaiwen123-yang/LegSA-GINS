@@ -1,0 +1,78 @@
+{
+  "schema": "v3_story.second_block.v1",
+  "all_checks_passed": true,
+  "captured_utc": "2026-10-04T10:15:13.418444+00:00",
+  "original_science_freeze": "7d43b9af26120ed5dde21f53e515386361072ba6",
+  "first_block_commit": "baf4e9157c7b82d611271f15ae9b7e68f3014ab3",
+  "first_block_before_pins": {
+    "01_FULL_TASK_LEDGER.md": "b38dd2f5a1d8f3d0c35506cc8d2a809f3eb31f04d2e99779ea4c2beb238123a7",
+    "METHOD_READER_NAME_MAP.csv": "1c54effcd5c23a36a6db80ea210c2ad1aee65de16f5f97832ada93aee3b974a3",
+    "README.md": "52a3458de295f65ad86d518c895281eb870be1fdf8d1371fd6c6af2d80c22464",
+    "READ_COVERAGE.csv": "64145ac3ae91a5fb4be6a83707ba804dd1fbe12d23125aa80ad8a492fc1628a2",
+    "NATIVE_ACTION_LEDGER.csv.gz": "ded858f2b45d7174cd6d21836674bbe14cfda3ef3f655e063d2bb6b132aa7562",
+    "SEQUENCE_C00_ALIAS_LEDGER.csv": "0606a5cd0a97ec854733bc6be21eb9d9948be4c14c6cc53bb594bcd534c3379b",
+    "CONFIG_FIELD_DISTRIBUTIONS.csv": "d3a71ab18f956995835c1c251244a7765cad8d359cd8ce7d7624426dd80ed5e4",
+    "build_story_ledger.py": "1d73747625a07c088844c2829990f456836d2721b2c6c6c28fb5b676d3ef0218",
+    "TASK_LEDGER.csv.gz": "c2c15bfab666340b7b5bd71970fb18e8109b9cfe92c3a21f75494be2060f155d",
+    "CASE_LEDGER.csv": "7d4ed9ea31494cd8d7622ec814b2266b9015bac3d2868641b112700a361e0f6e",
+    "read_ledger.py": "a9ad87ab4abdfbadb32f6b68656052ad951c55ae5cab398b03b54b4a67af1e6b",
+    ".gitignore": "22ad2e6fe42f77a68ad9b510b1df16a72dc1b1eb8314c5ce9bcfdd257ab6cfa6",
+    "METRIC_LEDGER.csv.gz": "d67f9cbdc3e5ab21653542de6ea63e8d59a3042716fceca5f81072a84610dd95",
+    "CONFIG_MODEL_FACTORS.json": "734a551ed6f7bc1a60458a35b2476fd2c690ee75c5f0e181ea83a3f033184a14",
+    "FIRST_BLOCK_READY_RECEIPT.json": "babfc5d698b7487a0396c52e1fb11b454fdd82521d88ed2402310038f0e14deb",
+    "REGISTRY_VALIDATION_RECEIPT.json": "3b66d71a339d145a84fa0dd37a4b742ad0378852419fc19b88b7653cedc0f71c",
+    "LOSSLESS_LEDGER_PACKING_RECEIPT.json": "494c06f6d47f47cf215a50d86e61d239c3908a87e0d517f5e007da9a00fcd4af",
+    "AGGREGATE_SOURCE_INDEX.csv": "a89744c451d6592c8cf5a5b35a972decf31e227186311e2fb91466a97e2636db"
+  },
+  "first_block_after_pins": {
+    "01_FULL_TASK_LEDGER.md": "b38dd2f5a1d8f3d0c35506cc8d2a809f3eb31f04d2e99779ea4c2beb238123a7",
+    "METHOD_READER_NAME_MAP.csv": "1c54effcd5c23a36a6db80ea210c2ad1aee65de16f5f97832ada93aee3b974a3",
+    "README.md": "52a3458de295f65ad86d518c895281eb870be1fdf8d1371fd6c6af2d80c22464",
+    "READ_COVERAGE.csv": "64145ac3ae91a5fb4be6a83707ba804dd1fbe12d23125aa80ad8a492fc1628a2",
+    "NATIVE_ACTION_LEDGER.csv.gz": "ded858f2b45d7174cd6d21836674bbe14cfda3ef3f655e063d2bb6b132aa7562",
+    "SEQUENCE_C00_ALIAS_LEDGER.csv": "0606a5cd0a97ec854733bc6be21eb9d9948be4c14c6cc53bb594bcd534c3379b",
+    "CONFIG_FIELD_DISTRIBUTIONS.csv": "d3a71ab18f956995835c1c251244a7765cad8d359cd8ce7d7624426dd80ed5e4",
+    "build_story_ledger.py": "1d73747625a07c088844c2829990f456836d2721b2c6c6c28fb5b676d3ef0218",
+    "TASK_LEDGER.csv.gz": "c2c15bfab666340b7b5bd71970fb18e8109b9cfe92c3a21f75494be2060f155d",
+    "CASE_LEDGER.csv": "7d4ed9ea31494cd8d7622ec814b2266b9015bac3d2868641b112700a361e0f6e",
+    "read_ledger.py": "a9ad87ab4abdfbadb32f6b68656052ad951c55ae5cab398b03b54b4a67af1e6b",
+    ".gitignore": "22ad2e6fe42f77a68ad9b510b1df16a72dc1b1eb8314c5ce9bcfdd257ab6cfa6",
+    "METRIC_LEDGER.csv.gz": "d67f9cbdc3e5ab21653542de6ea63e8d59a3042716fceca5f81072a84610dd95",
+    "CONFIG_MODEL_FACTORS.json": "734a551ed6f7bc1a60458a35b2476fd2c690ee75c5f0e181ea83a3f033184a14",
+    "FIRST_BLOCK_READY_RECEIPT.json": "babfc5d698b7487a0396c52e1fb11b454fdd82521d88ed2402310038f0e14deb",
+    "REGISTRY_VALIDATION_RECEIPT.json": "3b66d71a339d145a84fa0dd37a4b742ad0378852419fc19b88b7653cedc0f71c",
+    "LOSSLESS_LEDGER_PACKING_RECEIPT.json": "494c06f6d47f47cf215a50d86e61d239c3908a87e0d517f5e007da9a00fcd4af",
+    "AGGREGATE_SOURCE_INDEX.csv": "a89744c451d6592c8cf5a5b35a972decf31e227186311e2fb91466a97e2636db"
+  },
+  "first_block_unchanged": true,
+  "input_rows": {
+    "tasks": 6468,
+    "metrics": 12936,
+    "unique_nontransport_models": 33
+  },
+  "output_data_rows": {
+    "CONFIG_CONTEXT_STORY.csv": 33,
+    "CONFIG_COMPARISON_DIFFS.csv": 30,
+    "NATURAL_METHOD_RESULTS.csv": 66,
+    "METRIC_QUANTITY_DICTIONARY.csv": 128,
+    "METHOD_SOURCE_MAP.csv": 21
+  },
+  "four_single_switch_pair_checks": 12,
+  "old_cpp_0625_same_blob_checks": 33,
+  "science_calls": {
+    "native": 0,
+    "evaluator": 0,
+    "provider_generator": 0,
+    "raw_or_trace_payload_reads": 0
+  },
+  "reader_helper_sha256": "4f040a74b5f2fa8c052e1a27219a4b7c515888fd10735c7c8d26076b85dce982",
+  "files": {
+    "CONFIG_CONTEXT_STORY.csv": "f4f6809984a2462ec5423512e7e34eb8453297dc031bdbe339b25c7141bebedb",
+    "CONFIG_COMPARISON_DIFFS.csv": "c7f7cd1940283ffba0082b2183d78fa9837ccb04a1a502014344f65fcd3362e3",
+    "NATURAL_METHOD_RESULTS.csv": "a8419158954c52ddeb948ce9460f751998862e09f5e24839461e2f040262aa8e",
+    "METRIC_QUANTITY_DICTIONARY.csv": "24edf160d6f0865cc9d6c37b83b3f690b11d83696a2939a3d25d7d9e8556095a",
+    "METHOD_SOURCE_MAP.csv": "22fefa59f9a1fe4181cedf1f638dd3ecec36e46923975a7542890bc4626b996f",
+    "ORIGINAL_CPP_INHERITED_READ_IDENTITY.json": "53486717b8e3c3fe7604fb6cc1becd30055e2f4e26cf56829ad34284b5800995"
+  },
+  "limitation": "Structured task/config/metric traversal is machine reading. Original C++ inherited full semantic coverage is same-blob verified; selected new reads are registered separately. No matrix validation rerun or new scientific result."
+}

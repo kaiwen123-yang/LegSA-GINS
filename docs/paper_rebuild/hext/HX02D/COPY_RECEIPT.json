@@ -1,0 +1,37 @@
+{
+  "status": "PASS_PARTIAL_PREREQUISITE_RECORD_COPY_ONLY",
+  "files": [
+    {
+      "path": "00_CONTROL/SEALED_TABLES_PREREQUISITE_STOP.json",
+      "bytes": 20762,
+      "sha256": "b9e637631274e0ae92cbc5457c5c3320f39292045f63edf9d0af90485fa15220",
+      "g_match": true,
+      "repository_copy_match": true
+    },
+    {
+      "path": "00_CONTROL/SEALED_TABLES_START.json",
+      "bytes": 20762,
+      "sha256": "0df0d1b281935933aa5f4d84c4a0785df9e5b3c441d69fac936bd0b4e9a2b94e",
+      "g_match": true,
+      "repository_copy_match": true
+    },
+    {
+      "path": "PREREQUISITE_CHECK.json",
+      "bytes": 12278,
+      "sha256": "9bdb4fa0838d270477625f10bb8bc20a742f96bb8328659289b1113347738bb6",
+      "g_match": true,
+      "repository_copy_match": true
+    },
+    {
+      "path": "PREREQUISITE_CHECK.md",
+      "bytes": 9257,
+      "sha256": "5567b3532ecb038462377793056ebbdc7ef17eea95b84b9c00be5175140046e3",
+      "g_match": true,
+      "repository_copy_match": true
+    }
+  ],
+  "package_created": false,
+  "scratch_files_removed": 4,
+  "scratch_bytes_after_cleanup": 0,
+  "cleanup_scope": "Only files created by this HX02D preflight; parent scratch originally empty."
+}

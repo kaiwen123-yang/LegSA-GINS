@@ -1,0 +1,102 @@
+{
+  "data_mode": "real_raw",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "methods": [
+    {
+      "method": "EXT01",
+      "trace": "<EXT_REPRO_ROOT>/batches/BY2/EXT01.openat",
+      "checked_successful_read_openat_payload_suffixes": [
+        "csv",
+        "ubx",
+        "obs",
+        "nav",
+        "pos",
+        "npy",
+        "npz",
+        "mat",
+        "gz"
+      ],
+      "data_reads": [
+        "<EXT_REPRO_ROOT>/inputs/BY2/cache/paired_epochs.npy",
+        "<EXT_REPRO_ROOT>/inputs/BY2/cache/receiver1_measurements.npy",
+        "<EXT_REPRO_ROOT>/inputs/BY2/cache/receiver2_measurements.npy",
+        "<EXT_REPRO_ROOT>/inputs/BY2/gnss1.nav",
+        "<EXT_REPRO_ROOT>/inputs/BY2/gnss2.nav",
+        "<EXT_REPRO_ROOT>/runs/BY2__EXT01__RAW_REPRO_V1/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_ROOT>/runs/BY2__EXT01__RAW_REPRO_V1/HEADING.csv"
+      ],
+      "reference_or_unclassified_data_reads": [],
+      "limit": "file-open role check; imported Python source is not reference payload; not a proof of all mathematical correctness",
+      "actually_opened_rtklib_libraries": [
+        "<EXT_REPRO_BUILD>/lib/liblegsa_rtklib_bridge.so",
+        "<EXT_REPRO_BUILD>/lib/librtklib_legsa.so"
+      ]
+    },
+    {
+      "method": "EXT02",
+      "trace": "<EXT_REPRO_ROOT>/batches/BY2/EXT02.openat",
+      "checked_successful_read_openat_payload_suffixes": [
+        "csv",
+        "ubx",
+        "obs",
+        "nav",
+        "pos",
+        "npy",
+        "npz",
+        "mat",
+        "gz"
+      ],
+      "data_reads": [
+        "<EXT_REPRO_ROOT>/inputs/BY2/cache/paired_epochs.npy",
+        "<EXT_REPRO_ROOT>/inputs/BY2/cache/receiver1_measurements.npy",
+        "<EXT_REPRO_ROOT>/inputs/BY2/cache/receiver2_measurements.npy",
+        "<EXT_REPRO_ROOT>/inputs/BY2/gnss1.nav",
+        "<EXT_REPRO_ROOT>/inputs/BY2/gnss2.nav",
+        "<EXT_REPRO_ROOT>/runs/BY2__EXT02__RAW_REPRO_V1/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_ROOT>/runs/BY2__EXT02__RAW_REPRO_V1/HEADING.csv"
+      ],
+      "reference_or_unclassified_data_reads": [],
+      "limit": "file-open role check; imported Python source is not reference payload; not a proof of all mathematical correctness",
+      "actually_opened_rtklib_libraries": [
+        "<EXT_REPRO_BUILD>/lib/liblegsa_rtklib_bridge.so",
+        "<EXT_REPRO_BUILD>/lib/librtklib_legsa.so"
+      ]
+    },
+    {
+      "method": "EXT03",
+      "trace": "<EXT_REPRO_ROOT>/batches/BY2/EXT03.openat",
+      "checked_successful_read_openat_payload_suffixes": [
+        "csv",
+        "ubx",
+        "obs",
+        "nav",
+        "pos",
+        "npy",
+        "npz",
+        "mat",
+        "gz"
+      ],
+      "data_reads": [
+        "<EXT_REPRO_ROOT>/inputs/BY2/cache/paired_epochs.npy",
+        "<EXT_REPRO_ROOT>/inputs/BY2/cache/receiver1_measurements.npy",
+        "<EXT_REPRO_ROOT>/inputs/BY2/cache/receiver2_measurements.npy",
+        "<EXT_REPRO_ROOT>/inputs/BY2/gnss1.nav",
+        "<EXT_REPRO_ROOT>/inputs/BY2/gnss2.nav",
+        "<EXT_REPRO_ROOT>/runs/BY2__EXT03__RAW_REPRO_V1/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_ROOT>/runs/BY2__EXT03__RAW_REPRO_V1/HEADING.csv"
+      ],
+      "reference_or_unclassified_data_reads": [],
+      "limit": "file-open role check; imported Python source is not reference payload; not a proof of all mathematical correctness",
+      "actually_opened_rtklib_libraries": [
+        "<EXT_REPRO_BUILD>/lib/liblegsa_rtklib_bridge.so",
+        "<EXT_REPRO_BUILD>/lib/librtklib_legsa.so"
+      ]
+    }
+  ],
+  "native_method_sequence_calls": 3,
+  "evaluator_calls": 0,
+  "reference_payload_reads_detected": 0,
+  "parser_revision": "R2 joins unfinished/resumed by process/thread before testing successful read; previous evidence retained; scientific outputs unchanged",
+  "payload_read_sets_after_resumed_join": "IDENTICAL_TO_PREVIOUS; only library proof added"
+}

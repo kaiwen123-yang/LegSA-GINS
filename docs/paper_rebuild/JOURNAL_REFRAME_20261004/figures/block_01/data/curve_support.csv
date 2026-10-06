@@ -1,0 +1,7 @@
+sequence,method,matched,observed_output_denominator,window_start_s,window_end_s,scope
+BY2,F04,56642,56642,66.0,340.0,saved matched/output; not nominal time-grid coverage
+BY2,LC01,58014,58014,66.0,340.0,saved matched/output; not nominal time-grid coverage
+BY2H,F04,58580,58580,413.0,683.0,saved matched/output; not nominal time-grid coverage
+BY2H,LC01,59934,59934,413.0,683.0,saved matched/output; not nominal time-grid coverage
+BY2O,F04,76548,76548,3186.0,3563.0,saved matched/output; not nominal time-grid coverage
+BY2O,LC01,78441,78441,3186.0,3563.0,saved matched/output; not nominal time-grid coverage

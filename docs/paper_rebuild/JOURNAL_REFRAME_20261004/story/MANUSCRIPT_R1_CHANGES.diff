@@ -1,0 +1,22 @@
+--- manuscript_restructured.md
++++ manuscript_restructured_r1.md
+@@ -110,7 +110,7 @@
+ 
+ The external inventory distinguishes position-solution filters, raw-observation compasses, official moving-base processing, factor graphs and relative contact-aided routes. Their native input layers, initialization information, output quantities, physical points and unavailable support are declared before numerical comparison. The two-receiver IEKF is the closest receiver-output comparator, while its project-parameter variant is retained separately. A single-receiver-update diagnostic still uses dual-receiver initialization. Raw C-LAMBDA, C-WLS and length-constrained DD-KF adapters retain the selected author cores together with their project observation, quality and rejection strategies.
+ 
+-Factor-graph routes use different observations and estimated states. OiSAM provides its own inertial attitude estimate; the Wen pseudorange/AHRS route uses externally prepared attitude information, while the GNC route supplies position without its own heading state. Strict continuous and later segmented OiSAM results are separate protocols. Relative contact-aided outputs use their specified gauge treatment and cannot be ranked as absolute GNSS navigation errors. These distinctions prevent a mixed-input table from being described as a solver-only benchmark.
++Factor-graph routes use different observations and estimated states. In the retained implementations, OiSAM-FGO (Yang et al. 2025) provides its own inertial attitude estimate; the Wen pseudorange/AHRS route (Wen et al. 2021) uses externally prepared attitude information, while the FGO-GNC route (Wen et al. 2022) supplies position without its own heading state. Strict continuous and later segmented OiSAM results are separate protocols. Relative contact-aided outputs use their specified gauge treatment and cannot be ranked as absolute GNSS navigation errors. These distinctions prevent a mixed-input table from being described as a solver-only benchmark.
+ 
+ ## 4 Results
+ 
+@@ -180,4 +180,10 @@
+ 
+ Verhagen S, Teunissen PJG (2013) The ratio test for future GNSS ambiguity resolution. GPS Solutions 17:535–548. https://doi.org/10.1007/s10291-012-0299-z
+ 
++Wen W, Pfeifer T, Bai X, Hsu L-T (2021) Factor graph optimization for GNSS/INS integration: A comparison with the extended Kalman filter. NAVIGATION 68(2):315–331. https://doi.org/10.1002/navi.421
++
++Wen W, Zhang G, Hsu L-T (2022) GNSS Outlier Mitigation via Graduated Non-Convexity Factor Graph Optimization. IEEE Transactions on Vehicular Technology 71(1):297–310. https://doi.org/10.1109/TVT.2021.3130909
++
++Yang Z, Ding X, Yang Y, Wang Q (2025) OiSAM-FGO: an efficient factor graph optimization algorithm for GNSS/INS integrated navigation system. Satellite Navigation 6:23. https://doi.org/10.1186/s43020-025-00173-w
++
+ Zaminpardaz S, Teunissen PJG (2019) DIA-datasnooping and identifiability. Journal of Geodesy 93:85–101. https://doi.org/10.1007/s00190-018-1141-3

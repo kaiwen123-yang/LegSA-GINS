@@ -1,0 +1,19 @@
+method,segment,paired_epochs,valid_epochs,availability,valid_rmse_deg,hold_rmse_deg,status
+GNSS-compass branch,occlusion_primary,210,38,0.181,106.100,120.346,AVAILABLE
+GNSS-compass branch,occlusion_secondary,65,15,0.231,82.467,59.690,AVAILABLE
+GNSS-compass branch,outside,1610,1175,0.730,102.126,106.165,AVAILABLE
+Wrapped-LS branch,occlusion_primary,210,37,0.176,105.253,120.200,AVAILABLE
+Wrapped-LS branch,occlusion_secondary,65,15,0.231,82.467,59.690,AVAILABLE
+Wrapped-LS branch,outside,1610,1139,0.707,100.886,105.897,AVAILABLE
+Baseline-constrained filter,occlusion_primary,210,0,0.000,UNAVAILABLE_NO_VALID_EPOCHS,36.141,NO_VALID_HEADING
+Baseline-constrained filter,occlusion_secondary,65,0,0.000,UNAVAILABLE_NO_VALID_EPOCHS,109.058,NO_VALID_HEADING
+Baseline-constrained filter,outside,1610,269,0.167,112.432,115.275,AVAILABLE
+Wu full-ambiguity heading module,occlusion_primary,210,0,0.000,UNAVAILABLE_NO_VALID_EPOCHS,UNAVAILABLE_NO_PREVIOUS_VALID_HEADING,NO_VALID_HEADING
+Wu full-ambiguity heading module,occlusion_secondary,65,0,0.000,UNAVAILABLE_NO_VALID_EPOCHS,UNAVAILABLE_NO_PREVIOUS_VALID_HEADING,NO_VALID_HEADING
+Wu full-ambiguity heading module,outside,1610,0,0.000,UNAVAILABLE_NO_VALID_EPOCHS,UNAVAILABLE_NO_PREVIOUS_VALID_HEADING,NO_VALID_HEADING
+Wu partial-ambiguity heading module,occlusion_primary,210,0,0.000,UNAVAILABLE_NO_VALID_EPOCHS,UNAVAILABLE_NO_PREVIOUS_VALID_HEADING,NO_VALID_HEADING
+Wu partial-ambiguity heading module,occlusion_secondary,65,0,0.000,UNAVAILABLE_NO_VALID_EPOCHS,UNAVAILABLE_NO_PREVIOUS_VALID_HEADING,NO_VALID_HEADING
+Wu partial-ambiguity heading module,outside,1610,0,0.000,UNAVAILABLE_NO_VALID_EPOCHS,UNAVAILABLE_NO_PREVIOUS_VALID_HEADING,NO_VALID_HEADING
+RTKLIB moving-base,occlusion_primary,210,0,0.000,UNAVAILABLE_NO_VALID_EPOCHS,176.655,NO_VALID_HEADING
+RTKLIB moving-base,occlusion_secondary,65,0,0.000,UNAVAILABLE_NO_VALID_EPOCHS,173.057,NO_VALID_HEADING
+RTKLIB moving-base,outside,1610,112,0.070,23.139,120.430,AVAILABLE

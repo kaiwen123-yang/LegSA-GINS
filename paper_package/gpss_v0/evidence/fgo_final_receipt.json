@@ -1,0 +1,84 @@
+{
+  "schema": "fgo_final_completion_receipt.v1",
+  "closed_utc": "2026-10-04T06:33:57.334348+00:00",
+  "stage_id": "FGO_REPRODUCTION_FINAL_20261004T054410Z",
+  "actual_stage_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z",
+  "classification": {
+    "selected_paper_algorithm_branches": "implemented, targeted regression and real application executions; identity/ambiguities/engineering adapters declared",
+    "robot_matrix_execution": "9 terminal real identities; all nine sealed before 3 offline reference evaluations",
+    "whole_window_valid_output": "not achieved for OiSAM BY2H/BY2O; 0/271 and 55/378 retained",
+    "complete_original_author_programs_and_all_paper_experiments": "not established; original Oi/Wen/GNC precise programs/devices/full datasets/parameters and all experiment matrices unavailable or not run"
+  },
+  "main_native_count": 9,
+  "main_evaluation_count": 3,
+  "main_native_online_reference_opens": 0,
+  "offline_reference_opens": 3,
+  "all_nine_sealed_before_any_offline_reference_open": true,
+  "main_oisam_formal_support": {
+    "BY2": [
+      275,
+      275
+    ],
+    "BY2H": [
+      0,
+      271
+    ],
+    "BY2O": [
+      55,
+      378
+    ]
+  },
+  "supplemental_author_continuous": {
+    "native_count": 1,
+    "evaluation_count": 0,
+    "valid_nodes": 601,
+    "expected_nodes": 601,
+    "reference_payload_opens": 0,
+    "not_matrix_member": true,
+    "not_original_oisam_author_program": true
+  },
+  "prior_author_obgins_full_demo_count": 1,
+  "frozen_joint_unique_regression_tests": 69,
+  "independent_metrics_and_native_bindings_verified": true,
+  "current_22source_exactly_preregistered": true,
+  "source_aggregate_sha256": "1ae538d65e116028f90d80f0a721619b23ff514f0c11159a908cf303b6e009bd",
+  "fgo_owned_diff_check_exit_code": 0,
+  "active_scientific_fgo_processes_at_close": [],
+  "old_results_overwritten": false,
+  "commit_or_push": false,
+  "artifact_sha256": {
+    "STEP1_FGO_FINAL_IMPLEMENTATION_AND_REPRODUCTION.md": "a5150a2801dabd7922e009ee3fe3755b01e7981f7370e8805dc7d81339530324",
+    "FGO_FINAL_MANUAL_READ_COVERAGE.csv": "1a42a6c720db12b06d929e440d4c586032257278b24d1126e84ac943ccdc2c2f",
+    "FGO_ALL_NINE_NATIVE_SEAL.json": "67f66361b39c613a58d4f2e8b84ad9ed6e605dc9a072aac01b2ae5b08ca669b3",
+    "FGO_FINAL_OFFLINE_EVALUATION_JOURNAL.json": "660bfebd4670c65c51a450b160a39777bd3041d9eb495f4a116fe290e309638f",
+    "FGO_FINAL_SOURCE_PREREGISTRATION.json": "89814c48b56ef51c41dd6244e07f3be724e66d2d9163f40b2eeab2fecdf1a42a",
+    "FGO_FINAL_INPUT_BINDING.json": "37d9d05b7a91e669cdda2640cc15f4b8f78b656c599473632a0616f88827b26c",
+    "FGO_FINAL_NUMERICAL_VERIFICATION.json": "956187b751e0e07d9d7f7d87588100f88d04774a3c01715f340e2a78b177a3ad",
+    "FGO_FINAL_FROZEN_JOINT_REGRESSION.log": "813a6b3d5519183fb732895850fd4170a9b14133c34fd67676a03c9f65e81bef",
+    "FGO_FINAL_FROZEN_JOINT_REGRESSION.xml": "91400b40a484f1d086a9ac92bf9d83b3ea3bad5f0bccdbb56a66b54c2af1c403",
+    "FGO_FINAL_IDENTITY_GATE_RECEIPT.json": "5d700cb5120aa1abaaef50ac85578aaf97c18deeef02433c29c2eb8b64b67fd1",
+    "FGO_FINAL_VISUAL_QA.json": "5529d850a7bf07b2a2f2ad7cbc111990e9806309bcf9a4409436208c348031e0",
+    "FGO_FINAL_LAYOUT_ONLY_RECEIPT.json": "e097a2bf9f9484f08bb45e0c7e4d5849c1169fc63bb514349ca4bf4a0a846324",
+    "FGO_AUTHOR_CONTINUOUS600_RECEIPT.json": "643eda87238a3802cd9e2e6c5918c76dd5484398d85bafd6deeaab28eb4f06c3",
+    "FGO_AUTHOR_CONTINUOUS600_ACCESS.json": "400ed8d0d174e280b410540434847e35c89c0a35b972fa0d59be325c9727dfbf",
+    "FGO_FINAL_ARTIFACT_IDENTITY.json": "4d94629831ed7496c98ed39d1004fca7c593fd604a38f46654b935848756bf23",
+    "FGO_FINAL/METRICS.csv": "ca94b8f945e7b2d5cde1725b480e7991a4286f98c7239b41ddc20d7dd8aa3357",
+    "FGO_FINAL/COMPARISON_TABLE.csv": "8a1063fe9153cd40660887b9094043caa762840d8c1c76451343254f98747b14",
+    "FGO_FINAL/RUNS.csv": "b931f43a9dab9c2b5fe85a009401dc20229946b18c92f4bfcef32c975748bb59",
+    "FGO_FINAL/README.md": "d067fe14c3b4ada00cf804dbfa2fd32b05bd597f23fde630bf212343aa052c79",
+    "FGO_FINAL/REPRODUCTION_NOTES.md": "a5150a2801dabd7922e009ee3fe3755b01e7981f7370e8805dc7d81339530324",
+    "FGO_FINAL/RUN_REPRODUCE.md": "e0984422485dcf75d5e39698d8fc397d84d46623e802d699181751ec632b6f56",
+    "FGO_FINAL/figures/FGO_BY2.pdf": "b9dba123df8b959c413f87123aa76608a8a9517621ffd5aa7f17352815b9ae7d",
+    "FGO_FINAL/figures/FGO_BY2.png": "f37c7c1443852cb98d24100555c58f65ab2993f2c24a92cab02bebc5ae18f8bd",
+    "FGO_FINAL/figures/FGO_BY2.svg": "c4a1eb1abf6bcd2606f9a633f21cc0a630f297f8934da3b19a0d2d9445a3d706",
+    "FGO_FINAL/figures/FGO_BY2H.pdf": "96db0c82c51628b9b3fd39078b972909dc52155ac7d49703751ba1c0861f1900",
+    "FGO_FINAL/figures/FGO_BY2H.png": "4de1647bf9d7b47cd2b2b1da47968b31100694d323dea6aa9a32dfb362573b81",
+    "FGO_FINAL/figures/FGO_BY2H.svg": "563714b5b3e487267b4fe9ff9bd8d19e10947fc45b3cca8870661e851e6ea318",
+    "FGO_FINAL/figures/FGO_BY2O.pdf": "1eb21f9bebb1e2aee4312280c5e9509ac1116607d1371cee786a516668398022",
+    "FGO_FINAL/figures/FGO_BY2O.png": "8370ef036a3a703dbebdc9a75db58c9506df8840839315fbb530631acef39773",
+    "FGO_FINAL/figures/FGO_BY2O.svg": "730a564a70c3568ccc0fed7a5bd1f955589e70319c43531c8bbbc78672db18fd",
+    "FGO_FINAL_ORCHESTRATION_AND_AUTHOR_MODEL_IDENTITY.json": "eefe679cae113bd2ba18c69719753fe1ac992323b32a705fc62f14821106599c"
+  },
+  "manual_coverage_row_count": 44,
+  "scope_notice": "completion of authorized implementation and new application matrix, not claim all author experiments/global mathematical proof/literal entire-repository semantic audit"
+}

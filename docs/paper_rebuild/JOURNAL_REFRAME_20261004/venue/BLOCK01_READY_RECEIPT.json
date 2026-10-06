@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "block": "01_official_venue_and_original_input_boundary",
+  "created_utc": "2026-10-04T13:22:06.638132+00:00",
+  "base_commit": "e52a260ab4c1e96c5833580ae8b13f3408432d61",
+  "status": "READY_FOR_ROOT_REVIEW",
+  "submission_ready": false,
+  "science_runs": 0,
+  "science_source_changes": 0,
+  "raw_or_reference_reads": 0,
+  "scope": "new venue documentation only; current selected semantic reads plus explicitly inherited project evidence",
+  "checks": {
+    "source_links_recorded": true,
+    "actual_read_ranges_separate": true,
+    "original_v3_not_relabelled_internal_AR": true,
+    "official_requirement_vs_judgment_separate": true,
+    "TIM_RMSE_not_uncertainty": true,
+    "no_full_repository_read_claim": true
+  },
+  "files": [
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/BLOCK01_OFFICIAL_SOURCES.csv",
+      "bytes": 1479,
+      "lines": 7,
+      "sha256": "d7dc26006d10dc3a517fd954eb633e1e7ef3d6190113e383f8c62803819d9529"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/BLOCK01_READ_COVERAGE.csv",
+      "bytes": 2668,
+      "lines": 14,
+      "sha256": "63795476a36a441e43966391333ed4a809e86b3013177b6cae71caf9096a7de5"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/OFFICIAL_VENUE_AND_ORIGINAL_INPUT_BOUNDARY.md",
+      "bytes": 6158,
+      "lines": 44,
+      "sha256": "8de46dd6aaf9bfbe3bb40fc136346d1cfdd541871c0f70f5b92ec299c9480929"
+    }
+  ],
+  "root_wording_review_applied": [
+    "same rigid platform receiver pair clarified",
+    "previous provisional reader name rather than author final naming"
+  ]
+}

@@ -1,0 +1,11 @@
+# EXT baseline projection versus Euler yaw: fixed post-result diagnostic
+
+This is an offline interpretation check on the completed EXT V2 results, with no estimator changes or new native executions. The original Euler-yaw scores, all failures and original denominators remain unchanged. It is registered before new reference payload access and is run only after all new FGO native outputs are sealed.
+
+For the declared lateral body baseline [0,-L,0], rotate it by Rz(yaw)Ry(pitch)Rx(roll). Its horizontal azimuth plus90 degrees differs from Euler yaw by delta=atan2(-sin(pitch)sin(roll),cos(roll)). Use the original saved NED reference yaw and the frozen evaluator's linear roll/pitch interpolation at the original formal native-valid/reference-supported keys. No estimated output interpolation, fitted timing, fitted mounting rotation, sign swap, ambiguity adjustment, clipping, or best-key selection is allowed.
+
+Undefined nominal reference projection (horizontal ratio squared <=1e-12) receives a separate unsupported count; it is not assigned a zero error. Publish both the original Euler scores and nominal projected-reference scores on their explicit supports and unchanged denominators. The saved original Euler errors and9RMSE values must recompute within1e-9 degrees before the nominal table is accepted.
+
+The baseline direction and reference RP coordinate convention are the declared project model, not surveyed installation evidence. This diagnostic can quantify the effect of that nominal measurement-definition difference; it cannot establish physical calibration, independent reference truth, complete author-program reproduction or universal method superiority. Poor residual results remain valid observations of these retained implementations under those conditions.
+
+`nominal_ext_measurand_diagnostic.py register --repo <repo> --stage <new stage> --roots <existing roots>` pins3spec/error/metrics files, original trace hashes and this source/protocol without reading a trace. `run` requires the immutable registration and a root review binding the completed new FGO native seal. It reads each of the3traces once; summaries are tracked, per-key derived payloads remain in the local stage. The7independent rotated-vector cases plus a vertical-axis refusal are checked during registration.

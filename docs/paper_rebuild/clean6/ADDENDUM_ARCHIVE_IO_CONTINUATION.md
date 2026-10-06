@@ -1,0 +1,15 @@
+# Addendum archive I/O continuation
+
+The BOM continuation frozen at `3a61d157ef82af4bfb12f3d1f5c6491742da592c` completed all 198 first-batch evaluation identities, including the first v3 result reused from the original execution. The 99 original native outputs were not solved again. Before interruption, 54 retained archives had published matching `ARCHIVE_VERIFIED` receipts in both the destination and the continuation report.
+
+Observed archive 44/45/46 preparation-plus-copy durations were 1.217/1.179/1.191 s. Their subsequent receipt-to-storage-ledger intervals were 25.617/27.060/26.788 s. The original `owned_sizes` implementation repeatedly walked the entire growing attempt and performed multiple metadata queries per file. This is storage-accounting overhead; these timings are not algorithm-performance results.
+
+At 2026-09-13T07:52:36Z, the controller received SIGINT after the flushed `ARCHIVE ADD_RUN_00054 ARCHIVE_VERIFIED` record. The resulting traceback ended in the read-only directory scan. The controller exited, the resource summary was written, and the observed scene contained 99 native records, 198 evaluation records and 54 matching archive-receipt pairs. There was no partial destination archive, cleanup had not started, and batch 2 had not started. No atomic stop boundary is assumed merely from the log line; those scene checks were performed after exit.
+
+The request and current post-interruption bookkeeping snapshot are retained at `<HANDOFF_ROOT>/P09D_P10_AUDIT/ARCHIVE_IO_INTERRUPT_REQUEST.json` and `ARCHIVE_IO_INTERRUPT_TERMINAL.json`. The interrupted BOM continuation, its freeze, records, resource samples and log remain preserved. SIGINT is recorded as an intentional bookkeeping interruption, not a native algorithm failure or a newly invented `STOPPED_GATE_FAILURE` record.
+
+The separate archive continuation reuses the 99 native outputs, all 198 completed evaluation identities and all 54 verified archives. It may archive only the 45 first-batch identities without a completed archive and then execute the still-unstarted batches 2–5. It does not invoke providers, the native solver or the evaluator for batch 1. Partial or inconsistent recovery evidence fails closed.
+
+Only the new controller installs the storage-accounting callback. Sealed retained archives, sealed providers and closed prior report trees contribute cached file counts and logical/allocated bytes. Mutable metadata and scratch are measured afresh. Immutable snapshots are reconciled at batch boundaries. The 250 GB attempt-owned storage limit, receipt verification, persistence of resolved paths, whole-batch archive gate and original exact-file cleanup remain enforced. The previously frozen solver/evaluator and numerical aggregation modules remain byte-identical.
+
+This note records the implementation boundary and the verified interrupted scene. Final completion, actual continuation counters, timings and resource peaks must be read from the eventual sealed terminal record; this note alone does not assert completion.

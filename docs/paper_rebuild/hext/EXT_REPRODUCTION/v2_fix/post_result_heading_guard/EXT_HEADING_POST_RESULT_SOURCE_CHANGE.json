@@ -1,0 +1,92 @@
+{
+  "schema": "post_result_ext_heading_source_change.v1",
+  "captured_utc": "2026-10-04T08:17:33.734474+00:00",
+  "source_freeze_release_receipt_sha256": "9120b27ef47cf5a97fceba439287eca8c78774062024c21ea10957d10f8b5669",
+  "old_sources": {
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0"
+  },
+  "new_sources": {
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "d28604a587655623537bdf9125afc24a929388b218696829fe42c9ffd2192ede",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "4d4ef06794fe9d0f51417de2162b21bead31f171908619ae0cb8acbeb465d3a4",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": "1a2e6e5876b80ece568e18733809a7786cea32387c233c83b14df97988200095"
+  },
+  "old_nine_runs": {
+    "BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2": {
+      "manifest_sha256": "e1b1f0d710def72fc6914b8ab9f108e8fb338001ca4ee627765240f5b8b96e46",
+      "executed_source_pins": {
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0"
+      }
+    },
+    "BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2": {
+      "manifest_sha256": "11284bc39c929781130643e0fb550135fc0faeec33aebec364d950aa009d65cb",
+      "executed_source_pins": {
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0"
+      }
+    },
+    "BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2": {
+      "manifest_sha256": "ae0d40ea235f70b930509e2380078eca08b1c1b7ae441bec68cbdebcc65e2bde",
+      "executed_source_pins": {
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0"
+      }
+    },
+    "BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2": {
+      "manifest_sha256": "5c6eebe24545f7e6e6f9207218018d03ddf7d6343cb905baaea86d5c5f9c798c",
+      "executed_source_pins": {
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0"
+      }
+    },
+    "BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2": {
+      "manifest_sha256": "3b117453b07b095ed2dd85f08e20f1de8b13c20ecd4f567e1151ae22cc73c79e",
+      "executed_source_pins": {
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0"
+      }
+    },
+    "BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2": {
+      "manifest_sha256": "89ef7075c1eac9d82b32e6cee6e237be8843fa71739b1714f08428e29fe36f56",
+      "executed_source_pins": {
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0"
+      }
+    },
+    "BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2": {
+      "manifest_sha256": "471358ebcecc1991e5786fb6f221240637b3ab287489641e1dfc3a68c29f48bf",
+      "executed_source_pins": {
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0"
+      }
+    },
+    "BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2": {
+      "manifest_sha256": "7045dd83a671bf34d48e3c8406ceb701666be43ad29cdcc23cfa4e9969a2dcc9",
+      "executed_source_pins": {
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0"
+      }
+    },
+    "BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2": {
+      "manifest_sha256": "646489ff32818b0a1552ee65dcbca9cde95cb50da6b023eef58cc18012820741",
+      "executed_source_pins": {
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0"
+      }
+    }
+  },
+  "old_results_not_modified": true,
+  "no_solver_or_evaluator": true,
+  "new_identity_role": "POST_RESULT_SOURCE_REPAIR_NOT_EXECUTED_FOR_OLD_9_OR_135"
+}

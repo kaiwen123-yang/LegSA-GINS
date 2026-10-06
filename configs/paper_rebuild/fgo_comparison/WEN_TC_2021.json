@@ -1,0 +1,58 @@
+{
+  "method_id": "WEN_TC_2021",
+  "paper_doi": "10.1002/navi.421",
+  "implementation_identity": "independent implementation of TC-FGO Eqs. 3, 10, 21-23, 25-27, 30, 32",
+  "state": ["p_ECEF_m", "v_ECEF_mps", "accelerometer_bias_corrected_body_mps2", "GPS_clock_m", "BDS_clock_m"],
+  "output_point": "GNSS1_ANTENNA",
+  "attitude_output": false,
+  "graph_node_period_s": 1.0,
+  "solve_mode": "OFFLINE_FULL_BATCH_LM",
+  "future_observations_used": true,
+  "motion_sigma_m": 0.3,
+  "bias_between_sigma_mps2": 0.01,
+  "velocity_link_sigma_mps": 0.15,
+  "max_iterations": 100,
+  "max_linear_solves": 250,
+  "initial_damping": 0.001,
+  "gradient_tolerance": 1e-7,
+  "relative_cost_tolerance": 1e-10,
+  "step_tolerance": 1e-8,
+  "rank_relative_tolerance": 1e-10,
+  "rank_policy": "remove strict zero Jacobian columns; check clock-eliminated motion/bias/INS chain nullspace by column-scaled SVD before and after optimization; no added prior",
+  "pseudorange_sigma_source": "prepared Wen Eq.16 elevation/CN0 covariance; one source correction of satellite clock, atmosphere, TGD and Earth rotation",
+  "initialization": "sensor-only raw-code WLS per epoch; interpolation only for initial variables, no trajectory prior or output filling; finite-difference WLS velocity; zero body bias",
+  "preparation": {
+    "execution_contract": "<CODE_ROOT>/configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_EXECUTION_CONTRACT.yaml",
+    "provider_bundle_template": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/{sequence}/CALIBRATED_PROVIDER_BUNDLE.json",
+    "imu_install_rpy_deg": [-1.0, 0.0, 0.0],
+    "imu_to_gnss1_lever_body_m": [0.03, 0.03, -0.30],
+    "maximum_ahrs_gap_s": 0.1,
+    "heading_initialization": "one first valid A1 body-yaw plus GNSS1 LLH with Go2/IMU support; fixed world-yaw gauge thereafter",
+    "orientation_formula": "R_E_N * Rz(alpha) * D * R_quaternion_wxyz * D * R_install.T",
+    "imu_input": "already calibrated current-sample measured-dt FRD increments; do not reapply acceleration scale or installation",
+    "lever_velocity": "delta of R_E_B*(omega_body cross lever) at graph interval endpoints",
+    "missing_interval": "omit only unsupported INS link; retain graph nodes and code/motion/bias factors; record coverage"
+  },
+  "engineering_differences": [
+    "Go2 AHRS relative attitude initialized by one A1 heading replaces the paper commercial AHRS; no continuous heading factor",
+    "raw calibrated specific-force increments plus fixed local normal gravity replace the paper's supplied linear acceleration",
+    "independent observed GPS/BDS epoch clocks instead of one combined receiver clock; absent clocks are omitted variables",
+    "known IMU-to-GNSS1 lever velocity difference permits antenna-state velocity factors",
+    "all calibrated IMU samples are integrated between the paper's one-second GNSS graph nodes, holding body bias constant at the interval left node",
+    "fixed iteration/convergence limits are disclosed engineering settings; no reference-based fitting"
+  ],
+  "frozen_provider_sha256": {
+    "BY2": {
+      "imupath": "74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647",
+      "gnsspath": "68ed8de7f91b267072bab09e968a9cab4b5220bc5eb116140adacdfde0382e7a"
+    },
+    "BY2H": {
+      "imupath": "d32e4891080e300e6edde4526146636f15ec54df945a0470c57fbbdc3aa5115c",
+      "gnsspath": "88d18be4ec1b4efe4d74f8fc59683d7209fc803f52c60268a763ce457fa55f00"
+    },
+    "BY2O": {
+      "imupath": "48943f3e704ceebbf517bfb073856c1c215b5216e3a5d8b6cd91e7ea7586e49b",
+      "gnsspath": "96ffaa3a88f97d2519381baf20c1e139269665281ff0de2f56fb55f0b2446394"
+    }
+  }
+}

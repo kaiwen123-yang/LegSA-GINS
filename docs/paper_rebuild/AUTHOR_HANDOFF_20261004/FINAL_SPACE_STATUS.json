@@ -1,0 +1,9 @@
+{
+  "observed_utc": "2026-10-04T11:14:22.8235672Z",
+  "drive": "G",
+  "file_system": "exFAT",
+  "total_bytes": 1000185266176,
+  "free_bytes": 90958200832,
+  "historical_cleanup_net_freed_bytes": 107152408576,
+  "cleanup_gain_is_not_current_free_space": true
+}

@@ -1,0 +1,30 @@
+figure_id,title,kind,gps_solutions_section,tim_section,primary_evaluator,proposed_method,edition_origin,publication_role
+MFIG00,C00 reference trajectory and attitude,Reissued,Results: nominal sequence,Experimental results: nominal sequence,v3,F04,Reissued,Main
+MFIG01,Canonical-541 matrix overview,Reissued,Results: degradation library,Robustness evaluation,v3,F04,Reissued,Main
+MFIG02,A04 versus F03 seed consistency,Reissued,Ablation study,Ablation study,v3,F04,Reissued,Main
+MFIG03,Source-Aware paired tradeoffs,Reissued,Robustness: quality weighting,Protective weighting analysis,v3,F04,Reissued,Main
+MFIG04,Five-configuration ablation ladder,Reissued,Method ablation,Component verification,v3,F04,Reissued,Main
+MFIG05,Favorable and adverse representative cases,Reissued,Degradation case study,Failure and recovery cases,v3,F04,Reissued,Main
+MFIG06,Mechanism action counters,Reissued,Mechanism evidence,Measurement update diagnostics,v3,F04,Reissued,Main
+MFIG07,Yaw RMSE distributions and worst-five-percent means,New,Tail robustness,Tail error assessment,v3,F04,New,Main
+MFIG08,Individual-module yaw tails,New,Ablation: tail behavior,Component tail sensitivity,v3,F04,New,Main
+MFIG09,D05 velocity-aid outage trajectories,New,Velocity redundancy,Degradation and redundancy,v3,F04,New,Main
+MFIG10,A1 all-GNSS outage trajectories,New,Addendum A1,Complete-GNSS outage study,v3,F04,New,Main
+MFIG11,A2 heading-retained outage trajectories,New,Addendum A2,Heading-retained outage study,v3,F04,New,Main
+MFIG12,Outage-end horizontal error versus duration,New,Velocity redundancy addendum,Duration-dependent degradation,v3,F04,New,Main
+MFIG13,Algorithm failures by family,New,Failure-aware results,Failure accounting,v3,F04,New,Main
+MFIG14,All-yaw-rejected timeline and F02 control,New,Adverse mechanism example,Gating failure diagnostics,v3,F04,New,Main
+MFIG15,Three-sequence five-configuration error histories,New,Real-sequence transfer,Cross-sequence verification,v3,F04,New,Main
+MFIG16,Yaw errors and heading-provider quality,New,Observation quality,Input-quality diagnostics,v3,F04,New,Main
+MFIG17,Error-budget parity steps,New,Error budget,Uncertainty and systematic effects,v3,F04,New,Main
+MFIG18,Three-sequence body-frame bias,New,Body-frame error analysis,Systematic-error diagnostics,v3,F04,New,Main
+MFIG19,Frozen nine-setting noise sensitivity,New,Noise-model sensitivity,Sensor model sensitivity,v3,F04,New,Main
+MFIG20,Frozen calibration regression,New,Sensor-noise calibration,Calibration methodology,v3,F04,New,Main
+MFIG21,Platform and antenna geometry,New,System setup,Measurement geometry,v3,F04,New,Main
+MFIG22,Protocol v1–v2 comparison and effect scale,New,Protocol comparison,Protocol sensitivity,v3,F04,New,Main
+SFIG01,Type-by-configuration error heatmaps,Supplementary,Supplement: degradation tables,Supplement: complete robustness grid,v3,F04,Reissued,Supplementary
+SFIG02,External-method v3 point comparability,Supplementary,Literature comparison,Benchmark comparability,v3,F04,New,Supplementary
+FIG01,Horizontal comparison information hierarchy,New horizontal,Comparison information hierarchy,Measurement information hierarchy,NOT_APPLICABLE_NATIVE_DIAGNOSTIC,F04,New,Main
+FIG02,Formal C00 solution-level navigation comparison,New horizontal,Solution-level comparison,Navigation benchmark,v3,F04,New,Main
+FIG03,Raw dual-antenna BY2 applicability,New horizontal,Raw-observation method applicability,Raw GNSS method applicability,NOT_APPLICABLE_NATIVE_DIAGNOSTIC,F04,New,Main
+FIG04,Hartley yaw unobservability,New horizontal,Proprioceptive observability,Gauge and observability analysis,NOT_APPLICABLE_NATIVE_DIAGNOSTIC,F04,New,Main

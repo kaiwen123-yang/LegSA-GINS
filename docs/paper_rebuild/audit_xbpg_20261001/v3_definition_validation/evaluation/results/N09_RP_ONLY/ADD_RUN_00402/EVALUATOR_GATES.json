@@ -1,0 +1,19 @@
+{
+  "audit_passed": true,
+  "exit_zero": true,
+  "one_reference_open": true,
+  "one_raw_reference_only": true,
+  "instrumented_child_role": true,
+  "no_bag_fpl": true,
+  "write_scope": true,
+  "same_handle_hash": true,
+  "capture_evaluator_identity": true,
+  "selected_columns": true,
+  "fixed_window": true,
+  "D12_passed": true,
+  "D12_policy": true,
+  "D12_fixed_thresholds": true,
+  "D12_no_offset": true,
+  "D12_observation_only": true,
+  "resources_available": true
+}

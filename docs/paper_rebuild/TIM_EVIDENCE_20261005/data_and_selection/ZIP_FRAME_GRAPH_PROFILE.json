@@ -1,0 +1,226 @@
+[
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-11-16-59_minimal/tf.csv",
+    "sha256": "634524d31244f6aac77690f818b0b4a98f9b63dc0aa187f4ed0d2c676b835f57",
+    "bytes": 1505305,
+    "rows": 4090,
+    "edge_counts": {
+      "('ENU', 'BODY')": 4090
+    },
+    "candidate_rigid_transforms": {},
+    "scope": "frame graph identities; dynamic navigation transforms not used for alignment or metrics"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-11-16-59_minimal/tf_static.csv",
+    "sha256": "2baa22a98513770bdee698117bc6aff892c3040a5583374e212ad5b573449575",
+    "bytes": 952,
+    "rows": 1,
+    "edge_counts": {
+      "('ENU', 'VISION')": 1,
+      "('BODY', 'CAM')": 1,
+      "('ECEF', 'ENU')": 1
+    },
+    "candidate_rigid_transforms": {
+      "('BODY', 'CAM')": [
+        "\n  translation: \n    x: -0.07660365044377176\n    y: -0.003169386958835959\n    z: -0.0009936735223135108\n  rotation: \n    x: 0.5065405429076759\n    y: -0.49585076200722056\n    z: -0.5030618777238746\n    w: 0.49444660721718464"
+      ]
+    },
+    "scope": "frame graph identities; dynamic navigation transforms not used for alignment or metrics"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-11-25-11_minimal/tf.csv",
+    "sha256": "dca272e84a60a910b14200d0cf42f1bdef5f193b46cfd19ddf32ca08a12ac140",
+    "bytes": 1528302,
+    "rows": 4154,
+    "edge_counts": {
+      "('ENU', 'BODY')": 4154
+    },
+    "candidate_rigid_transforms": {},
+    "scope": "frame graph identities; dynamic navigation transforms not used for alignment or metrics"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-11-25-11_minimal/tf_static.csv",
+    "sha256": "b4ed68cb640f12c6f2327da4d48c2901ca66979bce37c91aebf9eec8358e1ef2",
+    "bytes": 952,
+    "rows": 1,
+    "edge_counts": {
+      "('ENU', 'VISION')": 1,
+      "('BODY', 'CAM')": 1,
+      "('ECEF', 'ENU')": 1
+    },
+    "candidate_rigid_transforms": {
+      "('BODY', 'CAM')": [
+        "\n  translation: \n    x: -0.07660365044377176\n    y: -0.003169386958835959\n    z: -0.0009936735223135108\n  rotation: \n    x: 0.5065405429076759\n    y: -0.49585076200722056\n    z: -0.5030618777238746\n    w: 0.49444660721718464"
+      ]
+    },
+    "scope": "frame graph identities; dynamic navigation transforms not used for alignment or metrics"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-11-32-27_minimal/tf.csv",
+    "sha256": "fc76449f223597489ec5a16030e7c393ec55ef48a203d6b145fb3fefc5c4d7d2",
+    "bytes": 1540065,
+    "rows": 4186,
+    "edge_counts": {
+      "('ENU', 'BODY')": 4186
+    },
+    "candidate_rigid_transforms": {},
+    "scope": "frame graph identities; dynamic navigation transforms not used for alignment or metrics"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-11-32-27_minimal/tf_static.csv",
+    "sha256": "68a79ede0cecc36cb1b95580f8763ad1d7b6f251412c2a66c64c31d6c1a05c9a",
+    "bytes": 952,
+    "rows": 1,
+    "edge_counts": {
+      "('ENU', 'VISION')": 1,
+      "('BODY', 'CAM')": 1,
+      "('ECEF', 'ENU')": 1
+    },
+    "candidate_rigid_transforms": {
+      "('BODY', 'CAM')": [
+        "\n  translation: \n    x: -0.07660365044377176\n    y: -0.003169386958835959\n    z: -0.0009936735223135108\n  rotation: \n    x: 0.5065405429076759\n    y: -0.49585076200722056\n    z: -0.5030618777238746\n    w: 0.49444660721718464"
+      ]
+    },
+    "scope": "frame graph identities; dynamic navigation transforms not used for alignment or metrics"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-11-39-50_minimal/tf.csv",
+    "sha256": "47ad9ede2e0698e6e5444d560e46a747c87e818a4cfdba65a7d4d0e6f8f30f42",
+    "bytes": 1493471,
+    "rows": 4056,
+    "edge_counts": {
+      "('ENU', 'BODY')": 4056
+    },
+    "candidate_rigid_transforms": {},
+    "scope": "frame graph identities; dynamic navigation transforms not used for alignment or metrics"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-11-39-50_minimal/tf_static.csv",
+    "sha256": "33f0e6cde3015b270a666de711b5bb995d122ca6fd6f71157587b34c39844e84",
+    "bytes": 951,
+    "rows": 1,
+    "edge_counts": {
+      "('ENU', 'VISION')": 1,
+      "('BODY', 'CAM')": 1,
+      "('ECEF', 'ENU')": 1
+    },
+    "candidate_rigid_transforms": {
+      "('BODY', 'CAM')": [
+        "\n  translation: \n    x: -0.07660365044377176\n    y: -0.003169386958835959\n    z: -0.0009936735223135108\n  rotation: \n    x: 0.5065405429076759\n    y: -0.49585076200722056\n    z: -0.5030618777238746\n    w: 0.49444660721718464"
+      ]
+    },
+    "scope": "frame graph identities; dynamic navigation transforms not used for alignment or metrics"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-12-25-13_minimal/tf.csv",
+    "sha256": "070f60c8065cff9016d583ad5627db79b510331f803f3257c145dffbca56c07e",
+    "bytes": 1590540,
+    "rows": 4322,
+    "edge_counts": {
+      "('ENU', 'BODY')": 4322
+    },
+    "candidate_rigid_transforms": {},
+    "scope": "frame graph identities; dynamic navigation transforms not used for alignment or metrics"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-12-25-13_minimal/tf_static.csv",
+    "sha256": "568331cae9b8c6aba818f9007d1a87fce0590138f2112fb8273c81cc94938a93",
+    "bytes": 952,
+    "rows": 1,
+    "edge_counts": {
+      "('ENU', 'VISION')": 1,
+      "('BODY', 'CAM')": 1,
+      "('ECEF', 'ENU')": 1
+    },
+    "candidate_rigid_transforms": {
+      "('BODY', 'CAM')": [
+        "\n  translation: \n    x: -0.07660365044377176\n    y: -0.003169386958835959\n    z: -0.0009936735223135108\n  rotation: \n    x: 0.5065405429076759\n    y: -0.49585076200722056\n    z: -0.5030618777238746\n    w: 0.49444660721718464"
+      ]
+    },
+    "scope": "frame graph identities; dynamic navigation transforms not used for alignment or metrics"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-12-33-29_minimal/tf.csv",
+    "sha256": "44c88f36f0ddeba9a42aabcb3c270499de565fd10093a251524372752f3fd3e9",
+    "bytes": 1495817,
+    "rows": 4070,
+    "edge_counts": {
+      "('ENU', 'BODY')": 4070
+    },
+    "candidate_rigid_transforms": {},
+    "scope": "frame graph identities; dynamic navigation transforms not used for alignment or metrics"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-12-33-29_minimal/tf_static.csv",
+    "sha256": "3a8ee5819e99c869d003449a2097794da5fe7a0214ebeb0289b92649f35c630c",
+    "bytes": 952,
+    "rows": 1,
+    "edge_counts": {
+      "('ENU', 'VISION')": 1,
+      "('BODY', 'CAM')": 1,
+      "('ECEF', 'ENU')": 1
+    },
+    "candidate_rigid_transforms": {
+      "('BODY', 'CAM')": [
+        "\n  translation: \n    x: -0.07660365044377176\n    y: -0.003169386958835959\n    z: -0.0009936735223135108\n  rotation: \n    x: 0.5065405429076759\n    y: -0.49585076200722056\n    z: -0.5030618777238746\n    w: 0.49444660721718464"
+      ]
+    },
+    "scope": "frame graph identities; dynamic navigation transforms not used for alignment or metrics"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-12-40-53_minimal/tf.csv",
+    "sha256": "78aaaf34e4ebd770a4668b70c125ab4b3ecaceedf7aac379d45f28565415b514",
+    "bytes": 1397288,
+    "rows": 3796,
+    "edge_counts": {
+      "('ENU', 'BODY')": 3796
+    },
+    "candidate_rigid_transforms": {},
+    "scope": "frame graph identities; dynamic navigation transforms not used for alignment or metrics"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-12-40-53_minimal/tf_static.csv",
+    "sha256": "824c2e478a2e904c6f6259a15c7954ba65e9b961507d5e98209e7e4ac29cf21c",
+    "bytes": 951,
+    "rows": 1,
+    "edge_counts": {
+      "('ENU', 'VISION')": 1,
+      "('BODY', 'CAM')": 1,
+      "('ECEF', 'ENU')": 1
+    },
+    "candidate_rigid_transforms": {
+      "('BODY', 'CAM')": [
+        "\n  translation: \n    x: -0.07660365044377176\n    y: -0.003169386958835959\n    z: -0.0009936735223135108\n  rotation: \n    x: 0.5065405429076759\n    y: -0.49585076200722056\n    z: -0.5030618777238746\n    w: 0.49444660721718464"
+      ]
+    },
+    "scope": "frame graph identities; dynamic navigation transforms not used for alignment or metrics"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-12-49-30_minimal/tf.csv",
+    "sha256": "eedfa86911ccd8f65ba5a1ba57e45a6875b0a05ba025bf968f9357b55fd6646a",
+    "bytes": 1414040,
+    "rows": 3850,
+    "edge_counts": {
+      "('ENU', 'BODY')": 3850
+    },
+    "candidate_rigid_transforms": {},
+    "scope": "frame graph identities; dynamic navigation transforms not used for alignment or metrics"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-12-49-30_minimal/tf_static.csv",
+    "sha256": "d5db266647d9cfc8c674a4730646b5808e8bc95abf8055b031d9600fd69cb6f4",
+    "bytes": 952,
+    "rows": 1,
+    "edge_counts": {
+      "('ENU', 'VISION')": 1,
+      "('BODY', 'CAM')": 1,
+      "('ECEF', 'ENU')": 1
+    },
+    "candidate_rigid_transforms": {
+      "('BODY', 'CAM')": [
+        "\n  translation: \n    x: -0.07660365044377176\n    y: -0.003169386958835959\n    z: -0.0009936735223135108\n  rotation: \n    x: 0.5065405429076759\n    y: -0.49585076200722056\n    z: -0.5030618777238746\n    w: 0.49444660721718464"
+      ]
+    },
+    "scope": "frame graph identities; dynamic navigation transforms not used for alignment or metrics"
+  }
+]

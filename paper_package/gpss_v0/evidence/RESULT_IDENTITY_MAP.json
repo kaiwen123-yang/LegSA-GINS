@@ -1,0 +1,204 @@
+{
+  "created_utc": "2026-10-04T08:29:56.213625+00:00",
+  "copies": [
+    {
+      "copy": "natural33.csv",
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_NATURAL_FINAL/CORRECTED_RESULTS.csv",
+      "sha256": "3a2ace239d757daed6d196b8dbce44a74b7e228f819e0a73bbbded9dea61f6fc",
+      "bytes": 8047
+    },
+    {
+      "copy": "claim135.csv",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/FULL_135_RESULTS.csv",
+      "sha256": "ce9b02c5fe7d2451eb60c23e61f9f4d752c428ff806933704f8e02bf649565ed",
+      "bytes": 71584
+    },
+    {
+      "copy": "claim_pairs2520.csv",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/PAIRED_ALL_90_CASES_DOMAINS.csv",
+      "sha256": "4a1aab0babf454e29be65cd8e10928798c1bc2c8b3ddb62f90c5ac70111faf20",
+      "bytes": 556341
+    },
+    {
+      "copy": "claim_placement280.csv",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/PLACEMENT_BLOCK_SUMMARY.csv",
+      "sha256": "e2097761bd1e04fc38ca5ea3902975195c789f8766acda3afb926be01d18d2ad",
+      "bytes": 39229
+    },
+    {
+      "copy": "fault_accepted_source_counts.csv",
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_ACCEPTED_FAULT_SOURCE_COUNTS.csv",
+      "sha256": "e37c71de3a49380c773cb395804232e120543bcc6832a9b9402d6a59f4014e2d",
+      "bytes": 34935
+    },
+    {
+      "copy": "fgo_metrics.csv",
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/FGO_FINAL/METRICS.csv",
+      "sha256": "ca94b8f945e7b2d5cde1725b480e7991a4286f98c7239b41ddc20d7dd8aa3357",
+      "bytes": 23899
+    },
+    {
+      "copy": "ext_comparison.csv",
+      "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/COMPARISON_TABLE.csv",
+      "sha256": "3eb691decd6a7f76920fc9b2a6806396b265e727d2646247680e06f63b88722b",
+      "bytes": 60941
+    },
+    {
+      "copy": "natural_receipt.json",
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_NATURAL_FINAL/PUBLICATION_RECEIPT.json",
+      "sha256": "f12eebe54f1e29b5e70b37eece3f1e93d47e08d4d625130bb7e2909138f012b8",
+      "bytes": 2180
+    },
+    {
+      "copy": "claim_final_receipt.json",
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_135_FINAL_DELIVERY_RECEIPT.json",
+      "sha256": "9120b27ef47cf5a97fceba439287eca8c78774062024c21ea10957d10f8b5669",
+      "bytes": 8302
+    },
+    {
+      "copy": "fgo_final_receipt.json",
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/FGO_FINAL_COMPLETE_RECEIPT.json",
+      "sha256": "722c9399928747e54f9ec8be51f5f3ecf24ab12f8dce62ab31131c20c3f7663b",
+      "bytes": 5560
+    },
+    {
+      "copy": "ext_final_receipt.json",
+      "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/FINAL_EXECUTION_RECEIPT.json",
+      "sha256": "e61c93d2db61f470b26a75dccf8503113ca37204a49d2ef44b0722c1ac9a431f",
+      "bytes": 7613
+    },
+    {
+      "copy": "ext_heading_post_result_repair.json",
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_REPAIR_RECEIPT.json",
+      "sha256": "cc7c70dccfbd454ada1d51efec26b9630613c6a470da0cc093a30002cafe27d3",
+      "bytes": 54230,
+      "identity_scope": "Post-result heading-domain source repair; old accepted executions not rebound"
+    },
+    {
+      "copy": "ext_heading_post_result_peer.json",
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_INDEPENDENT_PEER_REVIEW.json",
+      "sha256": "4a945f84e699385ab0353de819e22089cb90ac3ca38b051348089e3efe5e51b6",
+      "bytes": 4107,
+      "identity_scope": "Post-result heading-domain source repair; old accepted executions not rebound"
+    },
+    {
+      "copy": "original_v3_registry_receipt.json",
+      "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/V3_STORY_20261004/REGISTRY_VALIDATION_RECEIPT.json",
+      "sha256": "3b66d71a339d145a84fa0dd37a4b742ad0378852419fc19b88b7653cedc0f71c",
+      "bytes": 5960,
+      "identity_scope": "Read-only audit of the complete original matrix; inherited machine census, not new scientific execution or manual reading of every metric"
+    },
+    {
+      "copy": "ext_nominal_summary.csv",
+      "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/EXT_MEASURAND_20261004/SUMMARY.csv",
+      "sha256": "7c5b570b2f06353bea91ff707b73ce8f3261adcb98218d9cbd9c41fba5fc356a",
+      "bytes": 2219,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "ext_nominal_result_receipt.json",
+      "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/EXT_MEASURAND_20261004/RESULT_RECEIPT.json",
+      "sha256": "3c997227ea57c0059cc1083ebe5d8f0143b0488758a50ee5cfab0d7c5f5df0f0",
+      "bytes": 1947,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "ext_nominal_root_review.json",
+      "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/EXT_MEASURAND_20261004/ROOT_OFFLINE_RESULT_REVIEW.json",
+      "sha256": "a9b08c9a99a25da5f0f7f2e6d8760fe7b9e626a0d31c1fca52c3e5c7b91b6844",
+      "bytes": 1393,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_primary_own.csv",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION/PRIMARY_DYNAMIC_ONLY_OWN_VALID.csv",
+      "sha256": "909423246d8944c1f39e7069e37c011bbcef1cba57dbac6173836b778c530a27",
+      "bytes": 6606,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_all36.csv",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION/ALL_36_METRIC_ROWS.csv",
+      "sha256": "d2a1e2b016230beabbbc9fb56f39c0910581182b00866f43787e209e88f76e29",
+      "bytes": 24929,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_initializations.csv",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION/ALL_11_INITIALIZATION_RECORDS.csv",
+      "sha256": "bb935108dda9d2b8b85a2714b11693fa57fa1e923af0078e77c72cdf75c3a027",
+      "bytes": 3950,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_publication_receipt.json",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION/PUBLICATION_RECEIPT.json",
+      "sha256": "dc1a5ccbfe2d55a74f427b100b12aefa9e9a70dbbda3c3eb1860e596ebdcfeba",
+      "bytes": 2493,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_root_review.json",
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/FGO_SEGMENTED_ROOT_INDEPENDENT_REVIEW.json",
+      "sha256": "93eaed3a7ac9c280d6be895668c01cc96e7fc3e39e528ab3e829c18c14ea06f8",
+      "bytes": 9866,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_preregistration.json",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PREREGISTRATION.json",
+      "sha256": "20a4ac31da1ef0cb0759e23bac60eb059373e1e7e9fa2dcff52fd065d0238b24",
+      "bytes": 167707,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_native_seal.json",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/ALL_NATIVE_SEALED.json",
+      "sha256": "3af7f0c6d010d83c2ea6763f97189ae702cb761d374cb7410ce9fd51c14423ab",
+      "bytes": 24861,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_offline_complete.json",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/ALL_OFFLINE_COMPLETE.json",
+      "sha256": "374cee2501ab7fcfa2432567e056eb9dd6842c7db8a1bda989b5027bce1c815d",
+      "bytes": 10249,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_BY2_control.json",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/BY2_NO_RESTART_CONTROL.json",
+      "sha256": "8208b6ba3a2fca55d1efe83cd8b449f4258f9a1baceeb32a87f4a056d57524d6",
+      "bytes": 398,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    }
+  ],
+  "natural33_binary": "c53784f418b7bafa3441a0a707bc579ede45c3751e2910efd2ab7615a224eb2f",
+  "claim135_binary": "7ca1568ea75f11dad63aec5f16966c28f3ce6596207eb234c1b0f878b95fbe42",
+  "FGO_source22_aggregate": "1ae538d65e116028f90d80f0a721619b23ff514f0c11159a908cf303b6e009bd",
+  "EXT_execution": "EXT_REPRO_V2_TECH_RETRY_2",
+  "no_science_invoked": true,
+  "EXT_post_result_repair_execution_scope": "No rerun of old nine EXT or 135 claim runs; pure saved-vector conversion and bounded regression evidence only",
+  "author_retained_V3": {
+    "role": "Primary author-retained scientific method/full matrix; later diagnostics do not replace it",
+    "scientific_source_revision": "7d43b9af26120ed5dde21f53e515386361072ba6",
+    "native_binary_sha256": "96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c",
+    "definition_documentation_anchor": "ca73cb1fb48a020fd2a450d79e520562c34eeb24",
+    "definition_anchor_is_native_execution_identity": false,
+    "original_registry_receipt_copy": "original_v3_registry_receipt.json",
+    "registered_tasks": 6468,
+    "retained_matrix_root": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3",
+    "payload_availability_boundary": "Receipt/index distinguishes retained result/config metadata from intentionally released or cold-archived payloads; no universal hot-payload claim"
+  },
+  "cohort_roles": {
+    "natural33": "Later joint-contract diagnostic version; segmented GNSS restart policy; not primary V3 replacement",
+    "claim135": "Later controlled single-component diagnostic subset, distinct guarded source/binary; dependent placements; not full primary matrix replay",
+    "FGO9": "Accepted selected paper-branch reproduction cohort with strict support/failure limits; not a same-input primary V3 replacement",
+    "EXT9": "Accepted adapted carrier-heading cohort; nominal declared geometry and projected-versus-Euler measurand boundary; not universal carrier failure evidence",
+    "pending_cohorts": "Not bound to manuscript result cells until separately accepted",
+    "FGO_segmented_diagnostic": "Three new OiSAM sequence attempts across predeclared real gaps, plus six explicitly reused Wen/GNC batch identities; primary support excludes every prior-only row; original strict results retained",
+    "EXT_nominal_quantity": "Post-result offline nominal -y projection check on the same 7689 original scored keys; no new solver execution, sign/mount/time fitting or historical metric replacement"
+  },
+  "FGO_segmented_stage": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z",
+  "EXT_nominal_quantity_preregistration_sha256": "b041cc31ba3966bb54d6c1a932ddb17fe0c259827f859e3635047858d3f945ed"
+}

@@ -1,0 +1,590 @@
+{
+  "D43.LC01.yaw_rmse_deg": {
+    "display": "D43 velocity-noise supplement",
+    "metrics": {
+      "median": 2.9948274600591076,
+      "p95": 2.9948274600591076,
+      "finite_n": 9,
+      "registered_n": 9,
+      "failure_n": 0
+    },
+    "sources": [
+      {
+        "file": "$HX03R2/90_AGGREGATE/DEGRADATION_EXTERNAL_SUMMARY_R2.csv",
+        "sha256": "2be556867bfb134605d62d29a08c393712573303910c7b810c60e8d588d03b69",
+        "lines": [
+          140
+        ],
+        "fields": [
+          "median",
+          "p95",
+          "finite_n",
+          "registered_n",
+          "failure_n"
+        ],
+        "operation": "exact archived field; display rounded to six decimal places"
+      }
+    ],
+    "notes": ""
+  },
+  "D43.LC01.horizontal_rmse_m": {
+    "display": "D43 velocity-noise supplement",
+    "metrics": {
+      "median": 0.0975479714305497,
+      "p95": 0.0975479714305497,
+      "finite_n": 9,
+      "registered_n": 9,
+      "failure_n": 0
+    },
+    "sources": [
+      {
+        "file": "$HX03R2/90_AGGREGATE/DEGRADATION_EXTERNAL_SUMMARY_R2.csv",
+        "sha256": "2be556867bfb134605d62d29a08c393712573303910c7b810c60e8d588d03b69",
+        "lines": [
+          141
+        ],
+        "fields": [
+          "median",
+          "p95",
+          "finite_n",
+          "registered_n",
+          "failure_n"
+        ],
+        "operation": "exact archived field; display rounded to six decimal places"
+      }
+    ],
+    "notes": ""
+  },
+  "D43.LC01.up_rmse_m": {
+    "display": "D43 velocity-noise supplement",
+    "metrics": {
+      "median": 0.05066431825806066,
+      "p95": 0.05066431825806066,
+      "finite_n": 9,
+      "registered_n": 9,
+      "failure_n": 0
+    },
+    "sources": [
+      {
+        "file": "$HX03R2/90_AGGREGATE/DEGRADATION_EXTERNAL_SUMMARY_R2.csv",
+        "sha256": "2be556867bfb134605d62d29a08c393712573303910c7b810c60e8d588d03b69",
+        "lines": [
+          142
+        ],
+        "fields": [
+          "median",
+          "p95",
+          "finite_n",
+          "registered_n",
+          "failure_n"
+        ],
+        "operation": "exact archived field; display rounded to six decimal places"
+      }
+    ],
+    "notes": ""
+  },
+  "D43.EXT05C.yaw_rmse_deg": {
+    "display": "D43 velocity-noise supplement",
+    "metrics": {
+      "median": 12.048641737808111,
+      "p95": 12.048641737808111,
+      "finite_n": 9,
+      "registered_n": 9,
+      "failure_n": 0
+    },
+    "sources": [
+      {
+        "file": "$HX03R2/90_AGGREGATE/DEGRADATION_EXTERNAL_SUMMARY_R2.csv",
+        "sha256": "2be556867bfb134605d62d29a08c393712573303910c7b810c60e8d588d03b69",
+        "lines": [
+          143
+        ],
+        "fields": [
+          "median",
+          "p95",
+          "finite_n",
+          "registered_n",
+          "failure_n"
+        ],
+        "operation": "exact archived field; display rounded to six decimal places"
+      }
+    ],
+    "notes": ""
+  },
+  "D43.EXT05C.horizontal_rmse_m": {
+    "display": "D43 velocity-noise supplement",
+    "metrics": {
+      "median": 0.0877508129138417,
+      "p95": 0.0877508129138417,
+      "finite_n": 9,
+      "registered_n": 9,
+      "failure_n": 0
+    },
+    "sources": [
+      {
+        "file": "$HX03R2/90_AGGREGATE/DEGRADATION_EXTERNAL_SUMMARY_R2.csv",
+        "sha256": "2be556867bfb134605d62d29a08c393712573303910c7b810c60e8d588d03b69",
+        "lines": [
+          144
+        ],
+        "fields": [
+          "median",
+          "p95",
+          "finite_n",
+          "registered_n",
+          "failure_n"
+        ],
+        "operation": "exact archived field; display rounded to six decimal places"
+      }
+    ],
+    "notes": ""
+  },
+  "D43.EXT05C.up_rmse_m": {
+    "display": "D43 velocity-noise supplement",
+    "metrics": {
+      "median": 0.05646995229568549,
+      "p95": 0.05646995229568549,
+      "finite_n": 9,
+      "registered_n": 9,
+      "failure_n": 0
+    },
+    "sources": [
+      {
+        "file": "$HX03R2/90_AGGREGATE/DEGRADATION_EXTERNAL_SUMMARY_R2.csv",
+        "sha256": "2be556867bfb134605d62d29a08c393712573303910c7b810c60e8d588d03b69",
+        "lines": [
+          145
+        ],
+        "fields": [
+          "median",
+          "p95",
+          "finite_n",
+          "registered_n",
+          "failure_n"
+        ],
+        "operation": "exact archived field; display rounded to six decimal places"
+      }
+    ],
+    "notes": ""
+  },
+  "D43.F02.yaw_rmse_deg": {
+    "display": "D43 velocity-noise supplement",
+    "metrics": {
+      "median": 2.231952255808013,
+      "p95": 2.231952255808013,
+      "finite_n": 9,
+      "registered_n": 9,
+      "failure_n": 0
+    },
+    "sources": [
+      {
+        "file": "$V3/07_AGGREGATE/CORE_541_DISTRIBUTION_V3.csv",
+        "sha256": "301cec24cb454781138aa39dd3b86a4b37b7855773e6d28e891b7231047d4c39",
+        "lines": [
+          5365,
+          5366,
+          5367,
+          5368,
+          5369,
+          5370,
+          5371,
+          5372,
+          5373
+        ],
+        "fields": [
+          "case_id",
+          "method_id",
+          "metric",
+          "value"
+        ],
+        "operation": "D43 nine seeds; finite median and linear P95"
+      }
+    ],
+    "notes": ""
+  },
+  "D43.F02.horizontal_rmse_m": {
+    "display": "D43 velocity-noise supplement",
+    "metrics": {
+      "median": 0.10192187334932777,
+      "p95": 0.10192187334932777,
+      "finite_n": 9,
+      "registered_n": 9,
+      "failure_n": 0
+    },
+    "sources": [
+      {
+        "file": "$V3/07_AGGREGATE/CORE_541_DISTRIBUTION_V3.csv",
+        "sha256": "301cec24cb454781138aa39dd3b86a4b37b7855773e6d28e891b7231047d4c39",
+        "lines": [
+          3752,
+          3753,
+          3754,
+          3755,
+          3756,
+          3757,
+          3758,
+          3759,
+          3760
+        ],
+        "fields": [
+          "case_id",
+          "method_id",
+          "metric",
+          "value"
+        ],
+        "operation": "D43 nine seeds; finite median and linear P95"
+      }
+    ],
+    "notes": ""
+  },
+  "D43.F02.up_rmse_m": {
+    "display": "D43 velocity-noise supplement",
+    "metrics": {
+      "median": 0.04806842213318387,
+      "p95": 0.04806842213318387,
+      "finite_n": 9,
+      "registered_n": 9,
+      "failure_n": 0
+    },
+    "sources": [
+      {
+        "file": "$V3/07_AGGREGATE/CORE_541_DISTRIBUTION_V3.csv",
+        "sha256": "301cec24cb454781138aa39dd3b86a4b37b7855773e6d28e891b7231047d4c39",
+        "lines": [
+          4747,
+          4748,
+          4749,
+          4750,
+          4751,
+          4752,
+          4753,
+          4754,
+          4755
+        ],
+        "fields": [
+          "case_id",
+          "method_id",
+          "metric",
+          "value"
+        ],
+        "operation": "D43 nine seeds; finite median and linear P95"
+      }
+    ],
+    "notes": ""
+  },
+  "D43.F03.yaw_rmse_deg": {
+    "display": "D43 velocity-noise supplement",
+    "metrics": {
+      "median": 1.9217254000498154,
+      "p95": 1.9541222277598558,
+      "finite_n": 9,
+      "registered_n": 9,
+      "failure_n": 0
+    },
+    "sources": [
+      {
+        "file": "$V3/07_AGGREGATE/CORE_541_DISTRIBUTION_V3.csv",
+        "sha256": "301cec24cb454781138aa39dd3b86a4b37b7855773e6d28e891b7231047d4c39",
+        "lines": [
+          8689,
+          8715,
+          8716,
+          8792,
+          9039,
+          9041,
+          9043,
+          9076,
+          9090
+        ],
+        "fields": [
+          "case_id",
+          "method_id",
+          "metric",
+          "value"
+        ],
+        "operation": "D43 nine seeds; finite median and linear P95"
+      }
+    ],
+    "notes": ""
+  },
+  "D43.F03.horizontal_rmse_m": {
+    "display": "D43 velocity-noise supplement",
+    "metrics": {
+      "median": 0.11465871350282264,
+      "p95": 0.11576173149532057,
+      "finite_n": 9,
+      "registered_n": 9,
+      "failure_n": 0
+    },
+    "sources": [
+      {
+        "file": "$V3/07_AGGREGATE/CORE_541_DISTRIBUTION_V3.csv",
+        "sha256": "301cec24cb454781138aa39dd3b86a4b37b7855773e6d28e891b7231047d4c39",
+        "lines": [
+          7482,
+          7485,
+          7487,
+          7490,
+          7491,
+          7492,
+          7493,
+          7494,
+          7495
+        ],
+        "fields": [
+          "case_id",
+          "method_id",
+          "metric",
+          "value"
+        ],
+        "operation": "D43 nine seeds; finite median and linear P95"
+      }
+    ],
+    "notes": ""
+  },
+  "D43.F03.up_rmse_m": {
+    "display": "D43 velocity-noise supplement",
+    "metrics": {
+      "median": 0.05871867065289963,
+      "p95": 0.059955157780858796,
+      "finite_n": 9,
+      "registered_n": 9,
+      "failure_n": 0
+    },
+    "sources": [
+      {
+        "file": "$V3/07_AGGREGATE/CORE_541_DISTRIBUTION_V3.csv",
+        "sha256": "301cec24cb454781138aa39dd3b86a4b37b7855773e6d28e891b7231047d4c39",
+        "lines": [
+          8522,
+          8523,
+          8524,
+          8526,
+          8528,
+          8529,
+          8530,
+          8531,
+          8533
+        ],
+        "fields": [
+          "case_id",
+          "method_id",
+          "metric",
+          "value"
+        ],
+        "operation": "D43 nine seeds; finite median and linear P95"
+      }
+    ],
+    "notes": ""
+  },
+  "D43.A04.yaw_rmse_deg": {
+    "display": "D43 velocity-noise supplement",
+    "metrics": {
+      "median": 1.892212080565382,
+      "p95": 1.9201922853651865,
+      "finite_n": 9,
+      "registered_n": 9,
+      "failure_n": 0
+    },
+    "sources": [
+      {
+        "file": "$V3/07_AGGREGATE/CORE_541_DISTRIBUTION_V3.csv",
+        "sha256": "301cec24cb454781138aa39dd3b86a4b37b7855773e6d28e891b7231047d4c39",
+        "lines": [
+          19566,
+          19572,
+          19587,
+          19658,
+          19891,
+          19896,
+          19903,
+          19925,
+          19935
+        ],
+        "fields": [
+          "case_id",
+          "method_id",
+          "metric",
+          "value"
+        ],
+        "operation": "D43 nine seeds; finite median and linear P95"
+      }
+    ],
+    "notes": ""
+  },
+  "D43.A04.horizontal_rmse_m": {
+    "display": "D43 velocity-noise supplement",
+    "metrics": {
+      "median": 0.10732443566721218,
+      "p95": 0.10805178486309533,
+      "finite_n": 9,
+      "registered_n": 9,
+      "failure_n": 0
+    },
+    "sources": [
+      {
+        "file": "$V3/07_AGGREGATE/CORE_541_DISTRIBUTION_V3.csv",
+        "sha256": "301cec24cb454781138aa39dd3b86a4b37b7855773e6d28e891b7231047d4c39",
+        "lines": [
+          18287,
+          18289,
+          18291,
+          18292,
+          18295,
+          18296,
+          18297,
+          18301,
+          18302
+        ],
+        "fields": [
+          "case_id",
+          "method_id",
+          "metric",
+          "value"
+        ],
+        "operation": "D43 nine seeds; finite median and linear P95"
+      }
+    ],
+    "notes": ""
+  },
+  "D43.A04.up_rmse_m": {
+    "display": "D43 velocity-noise supplement",
+    "metrics": {
+      "median": 0.059839195501119706,
+      "p95": 0.06114748194438532,
+      "finite_n": 9,
+      "registered_n": 9,
+      "failure_n": 0
+    },
+    "sources": [
+      {
+        "file": "$V3/07_AGGREGATE/CORE_541_DISTRIBUTION_V3.csv",
+        "sha256": "301cec24cb454781138aa39dd3b86a4b37b7855773e6d28e891b7231047d4c39",
+        "lines": [
+          19333,
+          19334,
+          19335,
+          19336,
+          19355,
+          19356,
+          19357,
+          19358,
+          19359
+        ],
+        "fields": [
+          "case_id",
+          "method_id",
+          "metric",
+          "value"
+        ],
+        "operation": "D43 nine seeds; finite median and linear P95"
+      }
+    ],
+    "notes": ""
+  },
+  "D43.F04.yaw_rmse_deg": {
+    "display": "D43 velocity-noise supplement",
+    "metrics": {
+      "median": 1.8738111713293852,
+      "p95": 1.893940973289789,
+      "finite_n": 9,
+      "registered_n": 9,
+      "failure_n": 0
+    },
+    "sources": [
+      {
+        "file": "$V3/07_AGGREGATE/CORE_541_DISTRIBUTION_V3.csv",
+        "sha256": "301cec24cb454781138aa39dd3b86a4b37b7855773e6d28e891b7231047d4c39",
+        "lines": [
+          12308,
+          12335,
+          12345,
+          12353,
+          12357,
+          12398,
+          12400,
+          12621,
+          12676
+        ],
+        "fields": [
+          "case_id",
+          "method_id",
+          "metric",
+          "value"
+        ],
+        "operation": "D43 nine seeds; finite median and linear P95"
+      }
+    ],
+    "notes": ""
+  },
+  "D43.F04.horizontal_rmse_m": {
+    "display": "D43 velocity-noise supplement",
+    "metrics": {
+      "median": 0.10394824562346916,
+      "p95": 0.10526507408052825,
+      "finite_n": 9,
+      "registered_n": 9,
+      "failure_n": 0
+    },
+    "sources": [
+      {
+        "file": "$V3/07_AGGREGATE/CORE_541_DISTRIBUTION_V3.csv",
+        "sha256": "301cec24cb454781138aa39dd3b86a4b37b7855773e6d28e891b7231047d4c39",
+        "lines": [
+          11052,
+          11055,
+          11056,
+          11058,
+          11059,
+          11061,
+          11062,
+          11063,
+          11065
+        ],
+        "fields": [
+          "case_id",
+          "method_id",
+          "metric",
+          "value"
+        ],
+        "operation": "D43 nine seeds; finite median and linear P95"
+      }
+    ],
+    "notes": ""
+  },
+  "D43.F04.up_rmse_m": {
+    "display": "D43 velocity-noise supplement",
+    "metrics": {
+      "median": 0.053472358302841055,
+      "p95": 0.05454619870614771,
+      "finite_n": 9,
+      "registered_n": 9,
+      "failure_n": 0
+    },
+    "sources": [
+      {
+        "file": "$V3/07_AGGREGATE/CORE_541_DISTRIBUTION_V3.csv",
+        "sha256": "301cec24cb454781138aa39dd3b86a4b37b7855773e6d28e891b7231047d4c39",
+        "lines": [
+          12080,
+          12083,
+          12105,
+          12107,
+          12108,
+          12109,
+          12110,
+          12111,
+          12112
+        ],
+        "fields": [
+          "case_id",
+          "method_id",
+          "metric",
+          "value"
+        ],
+        "operation": "D43 nine seeds; finite median and linear P95"
+      }
+    ],
+    "notes": ""
+  }
+}

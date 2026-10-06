@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "payload_file_count": 19,
+  "files_sha256": {
+    "CONTROL_SELECTION.json": "f5f3b1517d8beacf3dcbceb3615a537481e60ced8703e00b77f822086304e037",
+    "D12_DIAGNOSIS.csv": "b5a75872ee2c347d3876ac57c517865c3019fcb13f4e99c91b29cd51708ecf28",
+    "DIAGNOSTIC_ACCESS_AUDIT.json": "1dc2cdd6c3dc9730ff53f38130b0d909438473e75804b81c3864d76471630081",
+    "DIAGNOSTIC_OPENAT.strace": "7f03cf73b4308d5cd9929604af29d58ba52478605861f59ff3e48ff84aa04fd9",
+    "DIAGNOSTIC_STATISTICS.json": "702632c52eeea9920f305d2f429d2a79dc1dacbcebb9160623e3ad8046f9c3f4",
+    "DIAGNOSTIC_STDERR.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "DIAGNOSTIC_STDOUT.log": "e4c728dbdb23618db90335354ce8865483f7f807645da88ab34aa878e1c539f3",
+    "FINAL_VERIFICATION.json": "7738c750241d7a55b8a9ce0791b0737d13b5bb4f63beabd2e5f6e832d4a5abb7",
+    "HX03R1_D12_DIAGNOSIS.md": "8dfdd5e86c8a167dbe00bb7aae7a2123ea475858576b5bfdf116bcbfce9bb0a8",
+    "HX03_EXISTING_METADATA_BEFORE.json": "c0586db5441ec91758e637e3be0a98b0a7abb2075b42217c57699b5d7e4488f7",
+    "INPUT_HASHES.json": "3e34da68dc927aa281bac18833da63cf7af0d232d23a7c4688627b032df369f8",
+    "SOURCE_CODE_HASHES.json": "caa0de36233955da26b49a0a436e64bf923215aff407d39ff21d27488207e74d",
+    "TABLE_VALIDATION.json": "4d1bd2d4a57d2889c1a6df7737cdba6b3a9c8c21bcf061671eb83462632f15d4",
+    "V3_D03_D04_CONTROLS.csv": "a9bf7a866c7e7cebf79ede0e836d2c2b1b1c4732ea61180925f732cb593ce83f",
+    "VERIFICATION_STDERR.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "VERIFICATION_STDOUT.log": "6b70df542a69713d0f071b468485f9df56952b6b5c34797fa04226d4cf75b0b5",
+    "diagnose_retained.py": "124493a29bb3574690123cfaf1b8712a6908330d3125ef722a155f545a0e7580",
+    "verify_closeout.py": "531c693f43085dd4a6f69be23fb2734353005487198a2395892a4f6ec6ab80c6",
+    "PREREQUISITE_CHECK.json": "6aeed5d7fbaa8ce20f303b0c33871ffe65e82febb56bab0e086b40917cac44b7"
+  },
+  "archive_root": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX03_DEGRADATION/95_D12_DIAGNOSIS",
+  "repository_copy": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX03R",
+  "verification": "scratch to archive and archive to repository, each payload SHA256 equal; receipt excludes itself",
+  "scratch_cleanup_scope": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03R1",
+  "scratch_payload_bytes": 2800278
+}

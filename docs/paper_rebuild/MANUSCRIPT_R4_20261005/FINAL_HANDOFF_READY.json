@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/README.md",
+      "sha256": "8618bab49748d7098fa4a7c4f23a6c7aebca6a815db338ec768f8cb16d5cf08a"
+    },
+    {
+      "path": "docs/paper_rebuild/NEXT_ACTIONS.md",
+      "sha256": "96f2d5cb737968c7c46acd31b9189c251c3cbec5399ae04316bcfc385a20c759"
+    }
+  ],
+  "new_native_runs": 0,
+  "new_formal_evaluations": 0,
+  "final_docx_sha256": "1ff346a1d32bd220835eebfbb4894e209fd39b00c1716de55884ad33a87f2959",
+  "scientific_result_edits": false,
+  "submission_ready": false
+}

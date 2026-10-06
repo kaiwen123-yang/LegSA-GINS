@@ -1,0 +1,139 @@
+{
+  "schema": "ext_heading_post_result_document_copy.v1",
+  "captured_utc": "2026-10-04T08:37:13.059618+00:00",
+  "all_checks_passed": true,
+  "repair_receipt_sha256": "cc7c70dccfbd454ada1d51efec26b9630613c6a470da0cc093a30002cafe27d3",
+  "independent_peer_receipt_sha256": "4a945f84e699385ab0353de819e22089cb90ac3ca38b051348089e3efe5e51b6",
+  "files": [
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_REPAIR_RECEIPT.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/EXT_HEADING_POST_RESULT_REPAIR_RECEIPT.json",
+      "bytes": 54230,
+      "sha256": "cc7c70dccfbd454ada1d51efec26b9630613c6a470da0cc093a30002cafe27d3"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_INDEPENDENT_PEER_REVIEW.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/EXT_HEADING_POST_RESULT_INDEPENDENT_PEER_REVIEW.json",
+      "bytes": 4107,
+      "sha256": "4a945f84e699385ab0353de819e22089cb90ac3ca38b051348089e3efe5e51b6"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_INDEPENDENT_PEER_REVIEW.md",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/EXT_HEADING_POST_RESULT_INDEPENDENT_PEER_REVIEW.md",
+      "bytes": 3490,
+      "sha256": "bb43937461e309c9c36e0bf7ce163b1d46f09d801cf9b1ba46b7e6b5b8f2b1df"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_PAYLOAD_COMPATIBILITY.csv",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/EXT_HEADING_POST_RESULT_PAYLOAD_COMPATIBILITY.csv",
+      "bytes": 1421,
+      "sha256": "34c65d33b42be5e615425f04283b6fd6cd7b2c6fd0a8520286e2453819af2b9a"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_ONLY.diff",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/EXT_HEADING_POST_RESULT_ONLY.diff",
+      "bytes": 4103,
+      "sha256": "219d77f6ea0e879140d6f64e0a62b855d241af0354dd3ef6b117410d093e8461"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_SOURCE_CHANGE.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/EXT_HEADING_POST_RESULT_SOURCE_CHANGE.json",
+      "bytes": 7039,
+      "sha256": "54cb7a45d2fb7f250d1a76033e17bb3fc1dc0fef0218413eb9c9746294bfdf40"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_TEST_LOCATION_RECEIPT.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/EXT_HEADING_POST_RESULT_TEST_LOCATION_RECEIPT.json",
+      "bytes": 2386,
+      "sha256": "e2a661459054992c864e5f30f3e3692d6b9bfb09f354f3912e940cba43816333"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_READ_COVERAGE.csv",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/EXT_HEADING_POST_RESULT_READ_COVERAGE.csv",
+      "bytes": 4164,
+      "sha256": "660783ada2c6ae14d383299d4327ccf2e40ef8dd71984eba4813e6191aaa63d3"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/test_ext_projected_heading_guard.py",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/test_ext_projected_heading_guard.py",
+      "bytes": 3662,
+      "sha256": "f17003ace668400c4ab5cdcd8e8cd3407436b011d0fe06c1d39cb4b53299b1bd"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_GUARD_RED.xml",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/EXT_HEADING_GUARD_RED.xml",
+      "bytes": 7733,
+      "sha256": "107a7dc3da8a3ebb20d3bb7e59acd867c9566867e5e9a6ca018d74d7b5ec5c61"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_GUARD_GREEN.xml",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/EXT_HEADING_GUARD_GREEN.xml",
+      "bytes": 3421,
+      "sha256": "79262e03cfc3ffaa27e4ab2b0d5f1bb99fd0e97024fa8ea4b54bd2ea399d8112"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_BOUNDED_REGRESSION.xml",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/EXT_HEADING_BOUNDED_REGRESSION.xml",
+      "bytes": 12550,
+      "sha256": "9a15d932a50deb40173cc836b32b4467eb7933023d0e03717ebb4acf9b80153a"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/apply_ext_heading_post_result_fix.py",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/apply_ext_heading_post_result_fix.py",
+      "bytes": 5893,
+      "sha256": "86b4756875f8ad510e738b76ebad4f4f26588bd416335c39d107d649c498f486"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/audit_ext_heading_post_result_payloads.py",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/audit_ext_heading_post_result_payloads.py",
+      "bytes": 8752,
+      "sha256": "068780951e5580df836a2858060cf9244c4c14a51db43a75ac603c2886c673cc"
+    },
+    {
+      "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/SOURCE_AFTER/ext01_clambda.py",
+      "bytes": 47978,
+      "sha256": "d28604a587655623537bdf9125afc24a929388b218696829fe42c9ffd2192ede"
+    },
+    {
+      "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/SOURCE_AFTER/ext03_yang2024.py",
+      "bytes": 50508,
+      "sha256": "4d4ef06794fe9d0f51417de2162b21bead31f171908619ae0cb8acbeb465d3a4"
+    },
+    {
+      "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/SOURCE_AFTER/reproduction_runner.py",
+      "bytes": 20946,
+      "sha256": "1a2e6e5876b80ece568e18733809a7786cea32387c233c83b14df97988200095"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_SOURCE_BEFORE/ext01_clambda.py",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/SOURCE_BEFORE/ext01_clambda.py",
+      "bytes": 46862,
+      "sha256": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_SOURCE_BEFORE/ext03_yang2024.py",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/SOURCE_BEFORE/ext03_yang2024.py",
+      "bytes": 50420,
+      "sha256": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_SOURCE_BEFORE/reproduction_runner.py",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/post_result_heading_guard/SOURCE_BEFORE/reproduction_runner.py",
+      "bytes": 20717,
+      "sha256": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0"
+    }
+  ],
+  "report_sha256": "011978821e1de29dd559906325172ef8a0a21fe6907faf9069d9d036fcea2680",
+  "post_result_readme_sha256": "132d178782f3313d2a5c639b35c25c7033609f60625c99fba1bb6dce4795ef5d",
+  "v2_entry_readme_prior_sha256": "a1e04966adbcb77fbd7b028ec8e94e5575bb88eca51d6509c548a9d80c417649",
+  "v2_entry_readme_document_addendum_sha256": "4dd1809504a1573f366b7ad321cc3c87bcf1cac35db3df180ad18fdcc49b2459",
+  "original_run_source_identity_unchanged": true,
+  "old_result_table_or_figure_modified": false,
+  "science_source_modified_in_document_helper": false,
+  "new_solver_or_evaluator_calls": 0,
+  "no_commit_push": true,
+  "coverage_note": "Selectedfields allrows are separate from fullsemantic declarations; hash and structured machine traversal are not fullword read."
+}

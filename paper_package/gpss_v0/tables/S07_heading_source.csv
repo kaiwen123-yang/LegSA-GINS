@@ -1,0 +1,7 @@
+Method,Input,BY2,BY2H,BY2O
+Basic dual-heading GNSS/INS,"Status heading, 1 Hz",2.313,1.657,2.900
+Basic dual-heading GNSS/INS,"Raw heading, 1 Hz",2.282,1.716,2.688
+Basic dual-heading GNSS/INS,"Raw heading, 5 Hz",2.232,2.283,2.309
+LegSA-GINS,"Status heading, 1 Hz",2.221,1.773,3.197
+LegSA-GINS,"Raw heading, 1 Hz",2.149,1.876,2.865
+LegSA-GINS,"Raw heading, 5 Hz",1.886,1.934,2.434

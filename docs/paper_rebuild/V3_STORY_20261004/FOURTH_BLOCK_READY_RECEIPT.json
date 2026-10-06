@@ -1,0 +1,265 @@
+{
+  "schema": "v3_story.fourth_block.ready.v1",
+  "created_utc": "2026-10-04T11:09:20.587964+00:00",
+  "all_checks_passed": true,
+  "new_file_count_including_this_receipt": 34,
+  "new_file_pins_excluding_self": {
+    "04_COMPARISON_INVENTORY_AND_FAIRNESS_STORY.md": {
+      "sha256": "254a41572a1b33092cc47e275e482d377234eb47bfde07b3707e9cdea7d822c3",
+      "bytes": 19197
+    },
+    "COMPARISON_FAIRNESS_CONTRACTS.csv": {
+      "sha256": "566a07eadee6d005a94f4db643b5c6df738886dc71f95cbedc5bfeb7a1893a22",
+      "bytes": 4511
+    },
+    "COMPARISON_SOURCES/EXT_NOMINAL_QUANTITY_SUMMARY.csv": {
+      "sha256": "7c5b570b2f06353bea91ff707b73ce8f3261adcb98218d9cbd9c41fba5fc356a",
+      "bytes": 2219
+    },
+    "COMPARISON_SOURCES/EXT_V1_V2_SAME_METHOD_COMMON_SUPPORT.csv": {
+      "sha256": "55204927c8c6ce10f4cae75e3bdcb1eccccd0b35bc7664f85296808a3ba6ac41",
+      "bytes": 7800
+    },
+    "COMPARISON_SOURCES/EXT_V2_COMMON_SUPPORT_ALL.csv": {
+      "sha256": "8ccfd00d1fc8e689d466c098de075ed28941e91db332eb9537e3ba112f33de47",
+      "bytes": 296494
+    },
+    "COMPARISON_SOURCES/EXT_V2_COMPARISON_TABLE.csv": {
+      "sha256": "3eb691decd6a7f76920fc9b2a6806396b265e727d2646247680e06f63b88722b",
+      "bytes": 60941
+    },
+    "COMPARISON_SOURCES/FGO_SEGMENTED_ALL_NATIVE_SEALED.json": {
+      "sha256": "3af7f0c6d010d83c2ea6763f97189ae702cb761d374cb7410ce9fd51c14423ab",
+      "bytes": 24861
+    },
+    "COMPARISON_SOURCES/FGO_SEGMENTED_ALL_OFFLINE_COMPLETE.json": {
+      "sha256": "374cee2501ab7fcfa2432567e056eb9dd6842c7db8a1bda989b5027bce1c815d",
+      "bytes": 10249
+    },
+    "COMPARISON_SOURCES/FGO_SEGMENTED_BY2H_METRICS.csv": {
+      "sha256": "d0faa1ee6ab434458ec7acfe53751d7b2443ef6c8f98eebbd38808552440eb20",
+      "bytes": 8840
+    },
+    "COMPARISON_SOURCES/FGO_SEGMENTED_BY2O_METRICS.csv": {
+      "sha256": "369befe2362008d84bcae1a618ae8494e5ca96e9e3dc575ffb7362e1fa62eec9",
+      "bytes": 8838
+    },
+    "COMPARISON_SOURCES/FGO_SEGMENTED_BY2_METRICS.csv": {
+      "sha256": "9f66289454f9fe03037d74409a4986969130d2256cbcdfe177734ddf8d1f292d",
+      "bytes": 8754
+    },
+    "COMPARISON_SOURCES/FGO_SEGMENTED_PREREGISTRATION.json": {
+      "sha256": "20a4ac31da1ef0cb0759e23bac60eb059373e1e7e9fa2dcff52fd065d0238b24",
+      "bytes": 167707
+    },
+    "COMPARISON_SOURCES/FGO_STRICT_COMPARISON_TABLE.csv": {
+      "sha256": "8a1063fe9153cd40660887b9094043caa762840d8c1c76451343254f98747b14",
+      "bytes": 71262
+    },
+    "COMPARISON_SOURCES/FGO_STRICT_METRICS.csv": {
+      "sha256": "ca94b8f945e7b2d5cde1725b480e7991a4286f98c7239b41ddc20d7dd8aa3357",
+      "bytes": 23899
+    },
+    "COMPARISON_SOURCES/HISTORICAL_20261003_ENHANCED_INVENTORY.csv": {
+      "sha256": "ad9d89be270ffbd12f9b0a3e377d01d528ce4947ac5244ce6257608abb7299c4",
+      "bytes": 93932
+    },
+    "COMPARISON_SOURCES/HX05_HISTORICAL_MANUSCRIPT.csv": {
+      "sha256": "aab7c835b0f1e087311423b2159caa23555990bf004a4402a271ff5086c75b6e",
+      "bytes": 6710
+    },
+    "COMPARISON_SOURCES/HX05_HISTORICAL_SUPPLEMENT.csv": {
+      "sha256": "ada0d203708cd7149a1f9a1742c5ae63bdf6e04115f1770a83d7726b00c16e1e",
+      "bytes": 5733
+    },
+    "COMPARISON_SOURCES/ORIGINAL_EXTERNAL_REGISTRY.csv": {
+      "sha256": "b1680fc326971494740632a0129ae16dfd4d6e168be355a0bc3a9126b8457815",
+      "bytes": 83011
+    },
+    "COMPARISON_SOURCES/ORIGINAL_V3_MAIN_TABLE_V2.csv": {
+      "sha256": "965b558280119a5e256872f488794f2d1bdb731326d891bc56c475e9a2e9bd3e",
+      "bytes": 52185
+    },
+    "COMPARISON_SOURCES/ORIGINAL_V3_MAIN_TABLE_V3.csv": {
+      "sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+      "bytes": 51910
+    },
+    "COMPARISON_SOURCES/RTKLIB_HX07R_MANUSCRIPT_ROWS.csv": {
+      "sha256": "ad43323a8d893e504173c33e9cbc3688f9e25fbd582629c4236e57ad09e8b773",
+      "bytes": 1585
+    },
+    "COMPARISON_SOURCES/RTKLIB_HX07R_SUPPLEMENT_ROWS.csv": {
+      "sha256": "ad7a28040e676c43bade11a53ef095d408d7983601caefad6a518ae934506b5f",
+      "bytes": 6341
+    },
+    "COMPARISON_SOURCE_ASSET_INDEX.csv": {
+      "sha256": "d6ef4d11d5e68c4af7fafda600e6fa6176d5103744caeea31344c083e6044505",
+      "bytes": 15306
+    },
+    "COMPARISON_TIMELINE.csv": {
+      "sha256": "379565e7f182914a3da14ddb66fd2e6a378fa8bd0a6deb511c3121bf363e9626",
+      "bytes": 2482
+    },
+    "CURRENT_STORY_INDEX.md": {
+      "sha256": "0562ef56c013bac4e1447184c541f694c0d1e9c3dcdc9baa0675d42c9f94db2e",
+      "bytes": 5373
+    },
+    "EXTERNAL_METHOD_STORY.csv": {
+      "sha256": "e60aabfbb6f744e4e67cb6ba7a86386237eb312491bb7ef11d20980d84de1a1d",
+      "bytes": 32500
+    },
+    "FOURTH_BLOCK_DATA_RECEIPT.json": {
+      "sha256": "ffb29a437a74719efd57bac03cf9af97235827c32373cce030aa321201caecfd",
+      "bytes": 36789
+    },
+    "FOURTH_BLOCK_VALIDATION_RECEIPT.json": {
+      "sha256": "3eec6dd7b3932ebea22928a8d5bc97f72c020456850262f5086dccbc00bf8cd5",
+      "bytes": 928
+    },
+    "FROZEN_EXTERNAL_METRICS_OVERVIEW.csv": {
+      "sha256": "e296d61d3d014524f892e6d8eec9cbcafc2f07a23a2deb73f9d5425fb287e5ae",
+      "bytes": 35022
+    },
+    "INTERNAL_ROBUST_ANALOGUE_SCOPE.csv": {
+      "sha256": "6b5fa5028e83d79fe6895a47db55cabd010cf7487c8f1254272084139b2e07cd",
+      "bytes": 2925
+    },
+    "READ_COVERAGE_04.csv": {
+      "sha256": "5bc334c6eb0a7d09edf05d5b517d2d3ba6cfe626bf0f2a64d7e23439f751b996",
+      "bytes": 8005
+    },
+    "build_fourth_story_block.py": {
+      "sha256": "72b5ebe09f96f995da7d80253a9bb1d8cfc5f39a6b42d7cac87c2e6723e4c7d2",
+      "bytes": 23082
+    },
+    "verify_fourth_story_block.py": {
+      "sha256": "d1338fabc73621f18f384e9831f70bc7dadfc49d9db63d8717933bfae4b650de",
+      "bytes": 4562
+    }
+  },
+  "new_bytes_excluding_this_receipt": 1183953,
+  "prior56_file_pins": {
+    "READ_COVERAGE_02.csv": "21fdf231a1762f0a06219f103bf40394aaca203b3901d4da9b9b4d94007120a4",
+    "NATURAL_METHOD_RESULTS.csv": "a8419158954c52ddeb948ce9460f751998862e09f5e24839461e2f040262aa8e",
+    "ORIGINAL_CPP_INHERITED_READ_IDENTITY.json": "53486717b8e3c3fe7604fb6cc1becd30055e2f4e26cf56829ad34284b5800995",
+    "01_FULL_TASK_LEDGER.md": "b38dd2f5a1d8f3d0c35506cc8d2a809f3eb31f04d2e99779ea4c2beb238123a7",
+    "THIRD_BLOCK_READY_RECEIPT.json": "71b333645e6241f6b2611369eb0fc8411a4696a7129b7f1efdf4517d3d47c5e9",
+    "METHOD_READER_NAME_MAP.csv": "1c54effcd5c23a36a6db80ea210c2ad1aee65de16f5f97832ada93aee3b974a3",
+    "02_METHOD_CONFIG_METRIC_STORY.md": "191a3d7f3ed7c496c488743051817588ab2580f5c17832ddcbb31e466e55e048",
+    "READ_COVERAGE_03.csv": "fb91f2fbf4e56aea6f27c56a7a5803f793ccdc11086aacc0f9b42017c7243c65",
+    "SINGLE_MODULE_PAIRED_DIRECTION.csv": "d3d1fdd85b113d86828d24d8ed1963761891e37c1d664888def8ce4bf2bc1baa",
+    "README.md": "52a3458de295f65ad86d518c895281eb870be1fdf8d1371fd6c6af2d80c22464",
+    "build_second_story_block.py": "4f040a74b5f2fa8c052e1a27219a4b7c515888fd10735c7c8d26076b85dce982",
+    "READ_COVERAGE.csv": "64145ac3ae91a5fb4be6a83707ba804dd1fbe12d23125aa80ad8a492fc1628a2",
+    "FULL_MATRIX_OUTCOME_LEDGER.csv": "8356405c84e4ebf5cbf4343eb00e23a3f4fce51decf5b8e3226772c38971e492",
+    "THIRD_BLOCK_DATA_RECEIPT.json": "4ae1e5bc3b2e52232daa249a24ce4d80075b629abd4b2d941a1daab09bc6f5a6",
+    "NATIVE_ACTION_LEDGER.csv.gz": "ded858f2b45d7174cd6d21836674bbe14cfda3ef3f655e063d2bb6b132aa7562",
+    "SEQUENCE_C00_ALIAS_LEDGER.csv": "0606a5cd0a97ec854733bc6be21eb9d9948be4c14c6cc53bb594bcd534c3379b",
+    "CONFIG_FIELD_DISTRIBUTIONS.csv": "d3a71ab18f956995835c1c251244a7765cad8d359cd8ce7d7624426dd80ed5e4",
+    "build_story_ledger.py": "1d73747625a07c088844c2829990f456836d2721b2c6c6c28fb5b676d3ef0218",
+    "TASK_LEDGER.csv.gz": "c2c15bfab666340b7b5bd71970fb18e8109b9cfe92c3a21f75494be2060f155d",
+    "CASE_LEDGER.csv": "7d4ed9ea31494cd8d7622ec814b2266b9015bac3d2868641b112700a361e0f6e",
+    "METHOD_SOURCE_MAP.csv": "22fefa59f9a1fe4181cedf1f638dd3ecec36e46923975a7542890bc4626b996f",
+    "read_ledger.py": "a9ad87ab4abdfbadb32f6b68656052ad951c55ae5cab398b03b54b4a67af1e6b",
+    ".gitignore": "22ad2e6fe42f77a68ad9b510b1df16a72dc1b1eb8314c5ce9bcfdd257ab6cfa6",
+    "CASE_TYPE_STORY.csv": "d2a67af1d49496d5200f957cd92605d18a0cf0bbc5e3888ffafef02bea15d5c2",
+    "CONFIG_COMPARISON_DIFFS.csv": "c7f7cd1940283ffba0082b2183d78fa9837ccb04a1a502014344f65fcd3362e3",
+    "METRIC_QUANTITY_DICTIONARY.csv": "24edf160d6f0865cc9d6c37b83b3f690b11d83696a2939a3d25d7d9e8556095a",
+    "SECOND_BLOCK_READY_RECEIPT.json": "af9760b614faf43bc0e876a6650ad24104ea12ad8880d7f9c0f3701fbd5ad941",
+    "METRIC_LEDGER.csv.gz": "d67f9cbdc3e5ab21653542de6ea63e8d59a3042716fceca5f81072a84610dd95",
+    "03_SELECTION_HISTORY_AND_FULL_MATRIX_RESULTS.md": "8cd003b3ed87cebb9a3658c1c14525922527555655ac7f8c928406feaa759d12",
+    "SUMMARY_ARITHMETIC_CHECKS.csv": "1a736d5dc723e89dc66b773484379c9246319395212fe4fcf22b0b50620b829f",
+    "CONFIG_MODEL_FACTORS.json": "734a551ed6f7bc1a60458a35b2476fd2c690ee75c5f0e181ea83a3f033184a14",
+    "SECOND_BLOCK_DATA_RECEIPT.json": "718da5dad755f71f2d72d52d98052f0f87ddfb85094823ea108ac373753510f0",
+    "FIRST_BLOCK_READY_RECEIPT.json": "babfc5d698b7487a0396c52e1fb11b454fdd82521d88ed2402310038f0e14deb",
+    "build_third_story_block.py": "19438645940cec5fcca90505e16bacfb94099ba626b9aef4f6a4d899fd6e2cbe",
+    "SELECTION_HISTORY_LEDGER.csv": "417b9b2b229af7ae4f8bc9f8d64f0b64d08b678d39c0ce415d69cea8a8da6931",
+    "CONFIG_CONTEXT_STORY.csv": "f4f6809984a2462ec5423512e7e34eb8453297dc031bdbe339b25c7141bebedb",
+    "REGISTRY_VALIDATION_RECEIPT.json": "3b66d71a339d145a84fa0dd37a4b742ad0378852419fc19b88b7653cedc0f71c",
+    "LOSSLESS_LEDGER_PACKING_RECEIPT.json": "494c06f6d47f47cf215a50d86e61d239c3908a87e0d517f5e007da9a00fcd4af",
+    "AGGREGATE_SOURCE_INDEX.csv": "a89744c451d6592c8cf5a5b35a972decf31e227186311e2fb91466a97e2636db",
+    "RESULT_SUMMARIES/T5BCR_REFERENCE_SUBSET61_TAIL_SUMMARY.csv": "a4aa65e0552ec4480e92da344ef5bdf410c01232204aa452738eb4149d02d35e",
+    "RESULT_SUMMARIES/PAIRWISE_SUMMARY_V3.csv": "0587815641ff0b9fe94506e51f47672ad6a94cbc0411e2d9dc852c233f86b89a",
+    "RESULT_SUMMARIES/ADDENDUM_FAMILY_SUMMARY_V3.csv": "0b0c1306cf063e3943d21be6169d3795d73ff87952cf199c3333b22426f5752f",
+    "RESULT_SUMMARIES/ADDENDUM_SUMMARY_V2.csv": "d8e78de4ad19a929e27e29eceb46cea741a4a177b164e68b85aada384ddda70e",
+    "RESULT_SUMMARIES/CORE_541_TYPE_SUMMARY_V2.csv": "b0ef6a21ceddfeaa4c90e9d4fad42f2bd86bc03db832a86f0fdb8f60b8fd8fde",
+    "RESULT_SUMMARIES/CORE_541_TYPE_SUMMARY_V3.csv": "dda9093a2258a4c41cc26a932fe526a9168a57933fe569e81dc8922eaf0d6266",
+    "RESULT_SUMMARIES/PAIRWISE_SUMMARY_V2.csv": "3b681c1f34fd813841bce4ac42465cd1c753d73da967e66761f57bbfc0c7a70d",
+    "RESULT_SUMMARIES/FAILURE_COMPARISON.csv": "4d5a19abbc40228a3c98f8dfb7f32ce616f3af5cbd6ac65fec8eea66460b536f",
+    "RESULT_SUMMARIES/ADDENDUM_SUMMARY_V3.csv": "ab88f5703eb0d9441915984e69ab7fa45fb587a1592dcf00ff54c3d65efdf890",
+    "RESULT_SUMMARIES/CORE_541_SUMMARY_V3.csv": "1e0181936e4cf40de57bd1e6f0724acdf1644bb7616aaff0121bbd8a54febd35",
+    "RESULT_SUMMARIES/SUBSET61_SUMMARY_V2.csv": "be54762dacc8ff345eff43d140d84b18b63683b62d28cafce545b0f91a00fb24",
+    "RESULT_SUMMARIES/ADDENDUM_FAMILY_SUMMARY_V2.csv": "e46266ecd093a4a4effb128935c60829246567f76306f5c19857ad51a7d697dc",
+    "RESULT_SUMMARIES/CORE_541_FAMILY_SUMMARY_V3.csv": "1f630c70679896c82855769b7580dc2921e9b5cc78add46b3be41f37bd17429d",
+    "RESULT_SUMMARIES/CORE_541_SUMMARY_V2.csv": "bea055fce46c0869f883cf28667b5ab9a6e23c55c1383e74e0939064091b1fc4",
+    "RESULT_SUMMARIES/BY2O_SEGMENT_TABLE.csv": "13a2c4e8de7638fa8672bb49d6556f531061a3924fe7dbf6911adfcf53779876",
+    "RESULT_SUMMARIES/SUBSET61_SUMMARY_V3.csv": "8c4f55d32ebe2f9c124db70fef3eccfffd5467251f6adfa5809480b0798f20e6",
+    "RESULT_SUMMARIES/CORE_541_FAMILY_SUMMARY_V2.csv": "05de983ccc2fb13d67dbcbbc28dd121040fd98cfd8e6f44d0300299c018452c3"
+  },
+  "prior56_unchanged": true,
+  "validation_final_after_entry_alignment": {
+    "all_checks_passed": true,
+    "prior56_unchanged": true,
+    "33_source_pins_and20_original_byte_copies": true,
+    "registry23_exact_members": true,
+    "reader_identities30_unique": true,
+    "analogues7_explicit_no_complete_author_algorithm": true,
+    "metric_rows126_exact_original_tokens": true,
+    "checked_numeric_and_identity_fields": 1008,
+    "original_main52_status_counts": {
+      "COMPLETED": 26,
+      "UNAVAILABLE": 21,
+      "AVAILABLE_GEOMETRIC_AUDIT_FAIL": 4,
+      "NOT_RUN_ALGORITHM_FAILURE": 1
+    },
+    "segmented_native3_reused6_roles_separate": true,
+    "fairness_contracts8": true,
+    "timeline14": true,
+    "local_doc_links_exist_except_pending_final_seal": true,
+    "scientific_package_imports": 0,
+    "native_evaluator_generator_calls": 0,
+    "raw_reference_trace_payload_reads": 0,
+    "checker_sha256": "d1338fabc73621f18f384e9831f70bc7dadfc49d9db63d8717933bfae4b650de",
+    "created_utc": "2026-10-04T11:09:20.583586+00:00"
+  },
+  "canonical_LegSA_GINS_natural_v3_yaw": [
+    {
+      "sequence_id": "BY2",
+      "evaluator_contract": "evaluator_contract_v3",
+      "yaw_rmse_deg": "1.8862718548526467",
+      "registered_table_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/CORE_541_TABLE_V3.csv",
+      "registered_table_line": "5"
+    },
+    {
+      "sequence_id": "BY2H",
+      "evaluator_contract": "evaluator_contract_v3",
+      "yaw_rmse_deg": "1.93377013508875",
+      "registered_table_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/SEQUENCE_TABLE_V3.csv",
+      "registered_table_line": "12"
+    },
+    {
+      "sequence_id": "BY2O",
+      "evaluator_contract": "evaluator_contract_v3",
+      "yaw_rmse_deg": "2.433814932823714",
+      "registered_table_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/SEQUENCE_TABLE_V3.csv",
+      "registered_table_line": "23"
+    }
+  ],
+  "published_FGO_update": "Final SEGMENTED_RESULTS at root verified/pushed25e437b; old20receivedcopies/33sourcepins not amended",
+  "ready_paths": [
+    "04_COMPARISON_INVENTORY_AND_FAIRNESS_STORY.md",
+    "CURRENT_STORY_INDEX.md",
+    "EXTERNAL_METHOD_STORY.csv",
+    "COMPARISON_FAIRNESS_CONTRACTS.csv",
+    "FROZEN_EXTERNAL_METRICS_OVERVIEW.csv",
+    "READ_COVERAGE_04.csv",
+    "COMPARISON_SOURCES/",
+    "FOURTH_BLOCK_DATA_RECEIPT.json",
+    "FOURTH_BLOCK_VALIDATION_RECEIPT.json"
+  ],
+  "scientific_originals_untouched": true,
+  "scientific_calls": 0,
+  "science_source_configuration_or_result_edits": 0,
+  "git_stage_commit_push_by_this_agent": 0,
+  "limitations": "Full structured reading/identity validation is not human full every-word repository review; source semantic scopes explicit. Engineering assumptions/poor metrics never prove identical input or universal original method unsuitability."
+}

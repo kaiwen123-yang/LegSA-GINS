@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-04T13:30:22.028637+00:00",
+  "evidence_type": "ASSUMED_ANALYTICAL_ILLUSTRATION_NOT_CALIBRATION",
+  "actual_png_views": 3,
+  "images": [
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U01_projection_correlation.png",
+      "sha256": "c045dd7d60d1b9ad8d353ff87b36e55f6d47cc06f8112f50befdfe6f29a8c745",
+      "bytes": 168416,
+      "actual_viewed": true,
+      "assumption_banner_visible": true,
+      "axes_units_legible": true,
+      "legend_does_not_hide_claim_bearing_curves": true,
+      "footer_visible": true
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U02_heading_velocity_cross_term.png",
+      "sha256": "43f9d7a5deac759fc610ae795389f4e6f40a2648dcb8415bf9a965c46354248a",
+      "bytes": 176033,
+      "actual_viewed": true,
+      "assumption_banner_visible": true,
+      "axes_units_legible": true,
+      "legend_does_not_hide_claim_bearing_curves": true,
+      "footer_visible": true
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U03_asynchronous_direction.png",
+      "sha256": "e09aa94fb42dbbca3bbfad454b77d3670b649ef4e8a119a3eee172f4e158b19f",
+      "bytes": 153658,
+      "actual_viewed": true,
+      "assumption_banner_visible": true,
+      "axes_units_legible": true,
+      "legend_does_not_hide_claim_bearing_curves": true,
+      "footer_visible": true
+    }
+  ],
+  "peer_algebra_review": {
+    "reviewer": "fgo_reproduction_audit",
+    "scope": "three stated equations and prerequisites as messaged; explicitly not script/output inspection",
+    "passed": true
+  },
+  "all_visual_checks_passed": true,
+  "scientific_runs": 0,
+  "raw_reference_reads": 0
+}

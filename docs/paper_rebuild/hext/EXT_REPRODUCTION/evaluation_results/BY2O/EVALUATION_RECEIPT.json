@@ -1,0 +1,21 @@
+{
+  "schema": "ext_reproduction.heading_evaluation.v1",
+  "sequence_id": "BY2O",
+  "evaluation_status": "COMPLETED",
+  "plot_status": "COMPLETED_VISUAL_REVIEW_PENDING",
+  "evaluator_child_attempts": 1,
+  "evaluator_child_invocations": 1,
+  "parent_reference_opens": 0,
+  "automatic_retries": 0,
+  "new_native_calls": 0,
+  "data_mode": "real_raw_offline_heading_evaluation",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "preparation_commit": "7514b562e44b1c8b40aaa55a2f5214797e8aa8f5",
+  "started_unix": 1790950181.325304,
+  "child_exit_code": 0,
+  "reference_hash_matched": true,
+  "actual_reference_open_count": 1,
+  "numeric_child_status": "NUMERICALLY_COMPLETED",
+  "finished_unix": 1790950183.9851253
+}

@@ -1,0 +1,598 @@
+{
+  "schema": "fgo.segmented.final-delivery.v1",
+  "created_utc": "2026-10-04T11:01:56.022460+00:00",
+  "assembler_sha256": "26a5cc896f188edde5f1099549cbed3cecddf1fe34546be86e618ba9c79e19d5",
+  "registered_commit": "9d80ef33b3a40914cfa92f41835419d62152fa88",
+  "stage": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z",
+  "byte_identical_copies": [
+    {
+      "path": "ALL_OFFLINE_COMPLETE.json",
+      "sha256": "374cee2501ab7fcfa2432567e056eb9dd6842c7db8a1bda989b5027bce1c815d",
+      "bytes": 10249,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/ALL_OFFLINE_COMPLETE.json",
+      "byte_identical": true
+    },
+    {
+      "path": "OFFLINE_JOURNAL.json",
+      "sha256": "c84e52ac812177d52fdc2b7dcbcd2edc076bab6d48b92140c2dd81ac1d5ea583",
+      "bytes": 9336,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/OFFLINE_JOURNAL.json",
+      "byte_identical": true
+    },
+    {
+      "path": "OFFLINE_CONTROLLER_LAUNCH.json",
+      "sha256": "d0297532dbf5161eb1497a22eef9968887df800343b8dee03da0cc6d48bea199",
+      "bytes": 573,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/OFFLINE_CONTROLLER_LAUNCH.json",
+      "byte_identical": true
+    },
+    {
+      "path": "evaluation/BY2/EVALUATION.json",
+      "sha256": "c641033c685816a76ff573a7c359397afcbaa0e86bab3923eca14bbc7c402d9f",
+      "bytes": 36353,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/EVALUATION.json",
+      "byte_identical": true
+    },
+    {
+      "path": "evaluation/BY2/METRICS.csv",
+      "sha256": "9f66289454f9fe03037d74409a4986969130d2256cbcdfe177734ddf8d1f292d",
+      "bytes": 8754,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/METRICS.csv",
+      "byte_identical": true
+    },
+    {
+      "path": "evaluation/BY2/ACCESS.json",
+      "sha256": "75550bd2f33e37af937c84fde8f6527a1102ccfa22c78d9cd625d25c41da92b7",
+      "bytes": 479,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/ACCESS.json",
+      "byte_identical": true
+    },
+    {
+      "path": "evaluation/BY2H/EVALUATION.json",
+      "sha256": "bbbc5603814b25084556d4268961efa9ac503e74c35c42f95e600acf2785c202",
+      "bytes": 36376,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/EVALUATION.json",
+      "byte_identical": true
+    },
+    {
+      "path": "evaluation/BY2H/METRICS.csv",
+      "sha256": "d0faa1ee6ab434458ec7acfe53751d7b2443ef6c8f98eebbd38808552440eb20",
+      "bytes": 8840,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/METRICS.csv",
+      "byte_identical": true
+    },
+    {
+      "path": "evaluation/BY2H/ACCESS.json",
+      "sha256": "fae1909767a89786c7a2408c69a6bfdff4b522f44bbe7722fe82640359c2c96a",
+      "bytes": 479,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/ACCESS.json",
+      "byte_identical": true
+    },
+    {
+      "path": "evaluation/BY2O/EVALUATION.json",
+      "sha256": "a0d7d7fa10884b89c0b3b352a14bd9272d969a5e8592f4eb48e7419813a7b35e",
+      "bytes": 39408,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/EVALUATION.json",
+      "byte_identical": true
+    },
+    {
+      "path": "evaluation/BY2O/METRICS.csv",
+      "sha256": "369befe2362008d84bcae1a618ae8494e5ca96e9e3dc575ffb7362e1fa62eec9",
+      "bytes": 8838,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/METRICS.csv",
+      "byte_identical": true
+    },
+    {
+      "path": "evaluation/BY2O/ACCESS.json",
+      "sha256": "95c8d40e101572ccd85362955903a1e58d4d1382452841b7bd2b8097417aaeeb",
+      "bytes": 479,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/ACCESS.json",
+      "byte_identical": true
+    },
+    {
+      "path": "independent_review/FGO_SEGMENTED_INDEPENDENT_REVIEW.json",
+      "sha256": "55e2ea4782c8f441ae8b9ba9d09a0c419814e8a64fff2566247c0c5f5fb33280",
+      "bytes": 2500,
+      "source_path": "/mnt/g/LegSA-GINS-project/修复_20261004/FGO_SEGMENTED_INDEPENDENT_REVIEW.json",
+      "byte_identical": true
+    },
+    {
+      "path": "independent_review/FGO_SEGMENTED_INDEPENDENT_STATISTICS.csv",
+      "sha256": "cf4d24e502fae24d47676c81106916fac6d2e18a9d63514689e76531039a8289",
+      "bytes": 56034,
+      "source_path": "/mnt/g/LegSA-GINS-project/修复_20261004/FGO_SEGMENTED_INDEPENDENT_STATISTICS.csv",
+      "byte_identical": true
+    },
+    {
+      "path": "independent_review/FGO_SEGMENTED_INDEPENDENT_SUPPORT.csv",
+      "sha256": "e5cb409c8529bd687262a5dd81da909e2e998b3878e6f2e775d21a36590c0f19",
+      "bytes": 2372,
+      "source_path": "/mnt/g/LegSA-GINS-project/修复_20261004/FGO_SEGMENTED_INDEPENDENT_SUPPORT.csv",
+      "byte_identical": true
+    },
+    {
+      "path": "independent_review/FGO_SEGMENTED_INDEPENDENT_BLOCKS.csv",
+      "sha256": "217ba1cfb8d6310813924a6028053dfd1f2bd5dfb88c468e02fc400ecb502ecb",
+      "bytes": 451,
+      "source_path": "/mnt/g/LegSA-GINS-project/修复_20261004/FGO_SEGMENTED_INDEPENDENT_BLOCKS.csv",
+      "byte_identical": true
+    },
+    {
+      "path": "independent_review/FGO_SEGMENTED_COMPLETE_UNAVAILABLE_TIMELINE.csv",
+      "sha256": "cf210621316c1ca63ca1e3b7da132b0fbbd8a016a4a0d697e2ce69652fc5996f",
+      "bytes": 599,
+      "source_path": "/mnt/g/LegSA-GINS-project/修复_20261004/FGO_SEGMENTED_COMPLETE_UNAVAILABLE_TIMELINE.csv",
+      "byte_identical": true
+    },
+    {
+      "path": "independent_review/FGO_SEGMENTED_ALL_METHODS_PRIMARY_MISSING_BUDGET.csv",
+      "sha256": "886c011264b316b3b986fc7663906bdde41f746362cd7cfee652f3c69262466d",
+      "bytes": 2996,
+      "source_path": "/mnt/g/LegSA-GINS-project/修复_20261004/FGO_SEGMENTED_ALL_METHODS_PRIMARY_MISSING_BUDGET.csv",
+      "byte_identical": true
+    },
+    {
+      "path": "independent_review/FGO_SEGMENTED_ROOT_INDEPENDENT_REVIEW.json",
+      "sha256": "93eaed3a7ac9c280d6be895668c01cc96e7fc3e39e528ab3e829c18c14ea06f8",
+      "bytes": 9866,
+      "source_path": "/mnt/g/LegSA-GINS-project/修复_20261004/FGO_SEGMENTED_ROOT_INDEPENDENT_REVIEW.json",
+      "byte_identical": true
+    },
+    {
+      "path": "independent_review/ROOT_FGO_SEGMENTED_VISUAL_QA.json",
+      "sha256": "f9ec5bfacea8510002910bf84429b4e3a9bf7d75fc5a71e6dfee5c9f63d4dd63",
+      "bytes": 2052,
+      "source_path": "/mnt/g/LegSA-GINS-project/修复_20261004/ROOT_FGO_SEGMENTED_VISUAL_QA.json",
+      "byte_identical": true
+    },
+    {
+      "path": "local_instantiation_scripts/run_fgo_segmented_offline.py",
+      "sha256": "b51a35b6e2a71912968ac475b44cec34a4b8383bb51dd04591ec900af9f32237",
+      "bytes": 7904,
+      "source_path": "/mnt/g/LegSA-GINS-project/修复_20261004/run_fgo_segmented_offline.py",
+      "byte_identical": true
+    },
+    {
+      "path": "local_instantiation_scripts/check_fgo_segmented_saved_results.py",
+      "sha256": "11e37665e027a144ee3dffafe316e02946fc9373fd102a547b1a201cb98b118b",
+      "bytes": 14337,
+      "source_path": "/mnt/g/LegSA-GINS-project/修复_20261004/check_fgo_segmented_saved_results.py",
+      "byte_identical": true
+    },
+    {
+      "path": "local_instantiation_scripts/review_fgo_segmented_root.py",
+      "sha256": "430efaacf2f5f29bd9c7f688dad0640c3e96f419b2f0cf23de67f40894a24c58",
+      "bytes": 7918,
+      "source_path": "/mnt/g/LegSA-GINS-project/修复_20261004/review_fgo_segmented_root.py",
+      "byte_identical": true
+    },
+    {
+      "path": "local_instantiation_scripts/publish_fgo_segmented_saved_results.py",
+      "sha256": "50cdd0ef6821933d54714f86a6b91dabc2c5537aa5f541d70b9c68d6a8c5214e",
+      "bytes": 13773,
+      "source_path": "/mnt/g/LegSA-GINS-project/修复_20261004/publish_fgo_segmented_saved_results.py",
+      "byte_identical": true
+    },
+    {
+      "path": "local_instantiation_scripts/publish_fgo_segmented_layout_v2.py",
+      "sha256": "9f7d956e8452be68aea55e98738affaa222fff709907065d8c593a8634bbfa1d",
+      "bytes": 13857,
+      "source_path": "/mnt/g/LegSA-GINS-project/修复_20261004/publish_fgo_segmented_layout_v2.py",
+      "byte_identical": true
+    },
+    {
+      "path": "publication/ALL_11_INITIALIZATION_RECORDS.csv",
+      "sha256": "bb935108dda9d2b8b85a2714b11693fa57fa1e923af0078e77c72cdf75c3a027",
+      "bytes": 3950,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION_LAYOUT_V2/ALL_11_INITIALIZATION_RECORDS.csv",
+      "byte_identical": true
+    },
+    {
+      "path": "publication/ALL_36_METRIC_ROWS.csv",
+      "sha256": "d2a1e2b016230beabbbc9fb56f39c0910581182b00866f43787e209e88f76e29",
+      "bytes": 24929,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION_LAYOUT_V2/ALL_36_METRIC_ROWS.csv",
+      "byte_identical": true
+    },
+    {
+      "path": "publication/ALL_SELECTED_NATIVE_EPOCH_LEDGER.csv",
+      "sha256": "947c8e8217e9c2c753a5aa3504bc2de17fa1e06a887583cfc95baa59249cbb3c",
+      "bytes": 933812,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION_LAYOUT_V2/ALL_SELECTED_NATIVE_EPOCH_LEDGER.csv",
+      "byte_identical": true
+    },
+    {
+      "path": "publication/BY2H_FULL_WINDOW.pdf",
+      "sha256": "70aa1c4b20908097bf928bf39a4fe2a33514a24ba3de554c0f30afb15514eb9c",
+      "bytes": 57450,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION_LAYOUT_V2/BY2H_FULL_WINDOW.pdf",
+      "byte_identical": true
+    },
+    {
+      "path": "publication/BY2H_FULL_WINDOW.png",
+      "sha256": "0571a5b3c286b3b4a8e96aca6b2c65938fc43dfcff43bdf8525aa32089d8fd0b",
+      "bytes": 572219,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION_LAYOUT_V2/BY2H_FULL_WINDOW.png",
+      "byte_identical": true
+    },
+    {
+      "path": "publication/BY2O_FULL_WINDOW.pdf",
+      "sha256": "e847eba3cf51420ce75691c7b433b3495355d6ce7949601e95ba2ca8710fe61c",
+      "bytes": 66187,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION_LAYOUT_V2/BY2O_FULL_WINDOW.pdf",
+      "byte_identical": true
+    },
+    {
+      "path": "publication/BY2O_FULL_WINDOW.png",
+      "sha256": "c23121a770e7eb490fcf5778543fa82ce045426993f5bd1ecc5e4e9a1d689959",
+      "bytes": 585002,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION_LAYOUT_V2/BY2O_FULL_WINDOW.png",
+      "byte_identical": true
+    },
+    {
+      "path": "publication/BY2_FULL_WINDOW.pdf",
+      "sha256": "481635fac3dd7c548968f42e7d6564df145faf04c86dc11a6806f260b1854345",
+      "bytes": 59411,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION_LAYOUT_V2/BY2_FULL_WINDOW.pdf",
+      "byte_identical": true
+    },
+    {
+      "path": "publication/BY2_FULL_WINDOW.png",
+      "sha256": "317fbd83046377bb87ca5633a64b6bc2ae2b39d0889206e5737f02e332e6fbcb",
+      "bytes": 586425,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION_LAYOUT_V2/BY2_FULL_WINDOW.png",
+      "byte_identical": true
+    },
+    {
+      "path": "publication/PRIMARY_DYNAMIC_ONLY_COMMON_THREE_TIME_KEYS.csv",
+      "sha256": "6bdac8756158df36526fd783cb9acbaa881ec4b9ccaf6b24631005809cd111eb",
+      "bytes": 6878,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION_LAYOUT_V2/PRIMARY_DYNAMIC_ONLY_COMMON_THREE_TIME_KEYS.csv",
+      "byte_identical": true
+    },
+    {
+      "path": "publication/PRIMARY_DYNAMIC_ONLY_OWN_VALID.csv",
+      "sha256": "909423246d8944c1f39e7069e37c011bbcef1cba57dbac6173836b778c530a27",
+      "bytes": 6606,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION_LAYOUT_V2/PRIMARY_DYNAMIC_ONLY_OWN_VALID.csv",
+      "byte_identical": true
+    },
+    {
+      "path": "publication/PUBLICATION_RECEIPT.json",
+      "sha256": "6e9e862f1bd148f8580a5a5e41488137864fb6272bf92d78ac5bb1c5acde568c",
+      "bytes": 2493,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION_LAYOUT_V2/PUBLICATION_RECEIPT.json",
+      "byte_identical": true
+    },
+    {
+      "path": "publication/SECONDARY_ALL_VALID_POSITION_COMMON_THREE_TIME_KEYS.csv",
+      "sha256": "12ea47edbc2f73dfd5706f7cc82854468208e244685eff154e88eacbbe42eaa4",
+      "bytes": 6952,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION_LAYOUT_V2/SECONDARY_ALL_VALID_POSITION_COMMON_THREE_TIME_KEYS.csv",
+      "byte_identical": true
+    },
+    {
+      "path": "publication/SECONDARY_ALL_VALID_POSITION_OWN_VALID.csv",
+      "sha256": "395615ae01df8e00a6a8c4131c4a8c39ff218284335512cdbc83a3468db1cfb1",
+      "bytes": 6674,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION_LAYOUT_V2/SECONDARY_ALL_VALID_POSITION_OWN_VALID.csv",
+      "byte_identical": true
+    },
+    {
+      "path": "target_3286/3286_CERES_FINAL.json",
+      "sha256": "06b0ef20629a89d9e1ce3b56e1a74649d40def140a8861b4c1fba16a8b305f5e",
+      "bytes": 1181,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/TARGET_DIAGNOSTICS/3286_CERES_FINAL.json",
+      "byte_identical": true
+    },
+    {
+      "path": "target_3286/3286_CERES_FINAL.npz",
+      "sha256": "46ea8c1d4233d63fc8d2e4869c0ec1484f099751e28056b30aac72c9569b6237",
+      "bytes": 149757,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/TARGET_DIAGNOSTICS/3286_CERES_FINAL.npz",
+      "byte_identical": true
+    },
+    {
+      "path": "target_3286/3286_CERES_INITIAL.json",
+      "sha256": "77f24e5ea65c5780f5c6646b663d65452de4cdfb109dddc47f9ee390f3c25378",
+      "bytes": 1184,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/TARGET_DIAGNOSTICS/3286_CERES_INITIAL.json",
+      "byte_identical": true
+    },
+    {
+      "path": "target_3286/3286_CERES_INITIAL.npz",
+      "sha256": "0003891c77144476c2c5ee436ea308664e2de75d2024cf839ebfc32fd6ada39d",
+      "bytes": 149725,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/TARGET_DIAGNOSTICS/3286_CERES_INITIAL.npz",
+      "byte_identical": true
+    },
+    {
+      "path": "target_3286/3286_STEP_OUTPUT.json",
+      "sha256": "d9878ebc4ac0ffbe59754cd2e39c471bab476ed350c814b6fdd427816b3426fe",
+      "bytes": 1174,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/TARGET_DIAGNOSTICS/3286_STEP_OUTPUT.json",
+      "byte_identical": true
+    },
+    {
+      "path": "target_3286/3286_STEP_OUTPUT.npz",
+      "sha256": "92a723f04d0593ff0c49ef7d0209e76231665dd4078b1bb5ef541560302929f4",
+      "bytes": 144521,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/TARGET_DIAGNOSTICS/3286_STEP_OUTPUT.npz",
+      "byte_identical": true
+    },
+    {
+      "path": "target_3286/TARGET_EVENT.json",
+      "sha256": "1b5a2cd51bd3b21294d97f5005a829f398524ba66418dd25cc4034e3781381ae",
+      "bytes": 790,
+      "source_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/TARGET_DIAGNOSTICS/TARGET_EVENT.json",
+      "byte_identical": true
+    },
+    {
+      "path": "FGO_SEGMENTED_SOURCE_FREEZE_RELEASE.json",
+      "sha256": "01f6bf05fc65cca2a2f08dadd48a47a778ce56a5d6b98019913edb2d1b77622e",
+      "bytes": 1151,
+      "source_path": "/mnt/g/LegSA-GINS-project/修复_20261004/FGO_SEGMENTED_SOURCE_FREEZE_RELEASE.json",
+      "byte_identical": true
+    }
+  ],
+  "all_files_except_this_index": [
+    {
+      "path": "ALL_OFFLINE_COMPLETE.json",
+      "sha256": "374cee2501ab7fcfa2432567e056eb9dd6842c7db8a1bda989b5027bce1c815d",
+      "bytes": 10249
+    },
+    {
+      "path": "FGO_SEGMENTED_SOURCE_FREEZE_RELEASE.json",
+      "sha256": "01f6bf05fc65cca2a2f08dadd48a47a778ce56a5d6b98019913edb2d1b77622e",
+      "bytes": 1151
+    },
+    {
+      "path": "OFFLINE_CONTROLLER_LAUNCH.json",
+      "sha256": "d0297532dbf5161eb1497a22eef9968887df800343b8dee03da0cc6d48bea199",
+      "bytes": 573
+    },
+    {
+      "path": "OFFLINE_JOURNAL.json",
+      "sha256": "c84e52ac812177d52fdc2b7dcbcd2edc076bab6d48b92140c2dd81ac1d5ea583",
+      "bytes": 9336
+    },
+    {
+      "path": "README.md",
+      "sha256": "30ee1adabe32ba285f2057715cccb6c1d4ed4aa83e15e8ea56197482beaab647",
+      "bytes": 1132
+    },
+    {
+      "path": "RESULTS_AND_LIMITATIONS.md",
+      "sha256": "178565ef92f362e8e4ef1d92223af09bc912d8c32ac74f6bfc38004248e425dc",
+      "bytes": 14553
+    },
+    {
+      "path": "evaluation/BY2/ACCESS.json",
+      "sha256": "75550bd2f33e37af937c84fde8f6527a1102ccfa22c78d9cd625d25c41da92b7",
+      "bytes": 479
+    },
+    {
+      "path": "evaluation/BY2/EVALUATION.json",
+      "sha256": "c641033c685816a76ff573a7c359397afcbaa0e86bab3923eca14bbc7c402d9f",
+      "bytes": 36353
+    },
+    {
+      "path": "evaluation/BY2/METRICS.csv",
+      "sha256": "9f66289454f9fe03037d74409a4986969130d2256cbcdfe177734ddf8d1f292d",
+      "bytes": 8754
+    },
+    {
+      "path": "evaluation/BY2H/ACCESS.json",
+      "sha256": "fae1909767a89786c7a2408c69a6bfdff4b522f44bbe7722fe82640359c2c96a",
+      "bytes": 479
+    },
+    {
+      "path": "evaluation/BY2H/EVALUATION.json",
+      "sha256": "bbbc5603814b25084556d4268961efa9ac503e74c35c42f95e600acf2785c202",
+      "bytes": 36376
+    },
+    {
+      "path": "evaluation/BY2H/METRICS.csv",
+      "sha256": "d0faa1ee6ab434458ec7acfe53751d7b2443ef6c8f98eebbd38808552440eb20",
+      "bytes": 8840
+    },
+    {
+      "path": "evaluation/BY2O/ACCESS.json",
+      "sha256": "95c8d40e101572ccd85362955903a1e58d4d1382452841b7bd2b8097417aaeeb",
+      "bytes": 479
+    },
+    {
+      "path": "evaluation/BY2O/EVALUATION.json",
+      "sha256": "a0d7d7fa10884b89c0b3b352a14bd9272d969a5e8592f4eb48e7419813a7b35e",
+      "bytes": 39408
+    },
+    {
+      "path": "evaluation/BY2O/METRICS.csv",
+      "sha256": "369befe2362008d84bcae1a618ae8494e5ca96e9e3dc575ffb7362e1fa62eec9",
+      "bytes": 8838
+    },
+    {
+      "path": "independent_review/FGO_SEGMENTED_ALL_METHODS_PRIMARY_MISSING_BUDGET.csv",
+      "sha256": "886c011264b316b3b986fc7663906bdde41f746362cd7cfee652f3c69262466d",
+      "bytes": 2996
+    },
+    {
+      "path": "independent_review/FGO_SEGMENTED_COMPLETE_UNAVAILABLE_TIMELINE.csv",
+      "sha256": "cf210621316c1ca63ca1e3b7da132b0fbbd8a016a4a0d697e2ce69652fc5996f",
+      "bytes": 599
+    },
+    {
+      "path": "independent_review/FGO_SEGMENTED_INDEPENDENT_BLOCKS.csv",
+      "sha256": "217ba1cfb8d6310813924a6028053dfd1f2bd5dfb88c468e02fc400ecb502ecb",
+      "bytes": 451
+    },
+    {
+      "path": "independent_review/FGO_SEGMENTED_INDEPENDENT_REVIEW.json",
+      "sha256": "55e2ea4782c8f441ae8b9ba9d09a0c419814e8a64fff2566247c0c5f5fb33280",
+      "bytes": 2500
+    },
+    {
+      "path": "independent_review/FGO_SEGMENTED_INDEPENDENT_STATISTICS.csv",
+      "sha256": "cf4d24e502fae24d47676c81106916fac6d2e18a9d63514689e76531039a8289",
+      "bytes": 56034
+    },
+    {
+      "path": "independent_review/FGO_SEGMENTED_INDEPENDENT_SUPPORT.csv",
+      "sha256": "e5cb409c8529bd687262a5dd81da909e2e998b3878e6f2e775d21a36590c0f19",
+      "bytes": 2372
+    },
+    {
+      "path": "independent_review/FGO_SEGMENTED_ROOT_INDEPENDENT_REVIEW.json",
+      "sha256": "93eaed3a7ac9c280d6be895668c01cc96e7fc3e39e528ab3e829c18c14ea06f8",
+      "bytes": 9866
+    },
+    {
+      "path": "independent_review/ROOT_FGO_SEGMENTED_VISUAL_QA.json",
+      "sha256": "f9ec5bfacea8510002910bf84429b4e3a9bf7d75fc5a71e6dfee5c9f63d4dd63",
+      "bytes": 2052
+    },
+    {
+      "path": "local_instantiation_scripts/check_fgo_segmented_saved_results.py",
+      "sha256": "11e37665e027a144ee3dffafe316e02946fc9373fd102a547b1a201cb98b118b",
+      "bytes": 14337
+    },
+    {
+      "path": "local_instantiation_scripts/publish_fgo_segmented_layout_v2.py",
+      "sha256": "9f7d956e8452be68aea55e98738affaa222fff709907065d8c593a8634bbfa1d",
+      "bytes": 13857
+    },
+    {
+      "path": "local_instantiation_scripts/publish_fgo_segmented_saved_results.py",
+      "sha256": "50cdd0ef6821933d54714f86a6b91dabc2c5537aa5f541d70b9c68d6a8c5214e",
+      "bytes": 13773
+    },
+    {
+      "path": "local_instantiation_scripts/review_fgo_segmented_root.py",
+      "sha256": "430efaacf2f5f29bd9c7f688dad0640c3e96f419b2f0cf23de67f40894a24c58",
+      "bytes": 7918
+    },
+    {
+      "path": "local_instantiation_scripts/run_fgo_segmented_offline.py",
+      "sha256": "b51a35b6e2a71912968ac475b44cec34a4b8383bb51dd04591ec900af9f32237",
+      "bytes": 7904
+    },
+    {
+      "path": "publication/ALL_11_INITIALIZATION_RECORDS.csv",
+      "sha256": "bb935108dda9d2b8b85a2714b11693fa57fa1e923af0078e77c72cdf75c3a027",
+      "bytes": 3950
+    },
+    {
+      "path": "publication/ALL_36_METRIC_ROWS.csv",
+      "sha256": "d2a1e2b016230beabbbc9fb56f39c0910581182b00866f43787e209e88f76e29",
+      "bytes": 24929
+    },
+    {
+      "path": "publication/ALL_SELECTED_NATIVE_EPOCH_LEDGER.csv",
+      "sha256": "947c8e8217e9c2c753a5aa3504bc2de17fa1e06a887583cfc95baa59249cbb3c",
+      "bytes": 933812
+    },
+    {
+      "path": "publication/BY2H_FULL_WINDOW.pdf",
+      "sha256": "70aa1c4b20908097bf928bf39a4fe2a33514a24ba3de554c0f30afb15514eb9c",
+      "bytes": 57450
+    },
+    {
+      "path": "publication/BY2H_FULL_WINDOW.png",
+      "sha256": "0571a5b3c286b3b4a8e96aca6b2c65938fc43dfcff43bdf8525aa32089d8fd0b",
+      "bytes": 572219
+    },
+    {
+      "path": "publication/BY2O_FULL_WINDOW.pdf",
+      "sha256": "e847eba3cf51420ce75691c7b433b3495355d6ce7949601e95ba2ca8710fe61c",
+      "bytes": 66187
+    },
+    {
+      "path": "publication/BY2O_FULL_WINDOW.png",
+      "sha256": "c23121a770e7eb490fcf5778543fa82ce045426993f5bd1ecc5e4e9a1d689959",
+      "bytes": 585002
+    },
+    {
+      "path": "publication/BY2_FULL_WINDOW.pdf",
+      "sha256": "481635fac3dd7c548968f42e7d6564df145faf04c86dc11a6806f260b1854345",
+      "bytes": 59411
+    },
+    {
+      "path": "publication/BY2_FULL_WINDOW.png",
+      "sha256": "317fbd83046377bb87ca5633a64b6bc2ae2b39d0889206e5737f02e332e6fbcb",
+      "bytes": 586425
+    },
+    {
+      "path": "publication/PRIMARY_DYNAMIC_ONLY_COMMON_THREE_TIME_KEYS.csv",
+      "sha256": "6bdac8756158df36526fd783cb9acbaa881ec4b9ccaf6b24631005809cd111eb",
+      "bytes": 6878
+    },
+    {
+      "path": "publication/PRIMARY_DYNAMIC_ONLY_OWN_VALID.csv",
+      "sha256": "909423246d8944c1f39e7069e37c011bbcef1cba57dbac6173836b778c530a27",
+      "bytes": 6606
+    },
+    {
+      "path": "publication/PUBLICATION_RECEIPT.json",
+      "sha256": "6e9e862f1bd148f8580a5a5e41488137864fb6272bf92d78ac5bb1c5acde568c",
+      "bytes": 2493
+    },
+    {
+      "path": "publication/SECONDARY_ALL_VALID_POSITION_COMMON_THREE_TIME_KEYS.csv",
+      "sha256": "12ea47edbc2f73dfd5706f7cc82854468208e244685eff154e88eacbbe42eaa4",
+      "bytes": 6952
+    },
+    {
+      "path": "publication/SECONDARY_ALL_VALID_POSITION_OWN_VALID.csv",
+      "sha256": "395615ae01df8e00a6a8c4131c4a8c39ff218284335512cdbc83a3468db1cfb1",
+      "bytes": 6674
+    },
+    {
+      "path": "target_3286/3286_CERES_FINAL.json",
+      "sha256": "06b0ef20629a89d9e1ce3b56e1a74649d40def140a8861b4c1fba16a8b305f5e",
+      "bytes": 1181
+    },
+    {
+      "path": "target_3286/3286_CERES_FINAL.npz",
+      "sha256": "46ea8c1d4233d63fc8d2e4869c0ec1484f099751e28056b30aac72c9569b6237",
+      "bytes": 149757
+    },
+    {
+      "path": "target_3286/3286_CERES_INITIAL.json",
+      "sha256": "77f24e5ea65c5780f5c6646b663d65452de4cdfb109dddc47f9ee390f3c25378",
+      "bytes": 1184
+    },
+    {
+      "path": "target_3286/3286_CERES_INITIAL.npz",
+      "sha256": "0003891c77144476c2c5ee436ea308664e2de75d2024cf839ebfc32fd6ada39d",
+      "bytes": 149725
+    },
+    {
+      "path": "target_3286/3286_STEP_OUTPUT.json",
+      "sha256": "d9878ebc4ac0ffbe59754cd2e39c471bab476ed350c814b6fdd427816b3426fe",
+      "bytes": 1174
+    },
+    {
+      "path": "target_3286/3286_STEP_OUTPUT.npz",
+      "sha256": "92a723f04d0593ff0c49ef7d0209e76231665dd4078b1bb5ef541560302929f4",
+      "bytes": 144521
+    },
+    {
+      "path": "target_3286/TARGET_EVENT.json",
+      "sha256": "1b5a2cd51bd3b21294d97f5005a829f398524ba66418dd25cc4034e3781381ae",
+      "bytes": 790
+    }
+  ],
+  "new_native_count": 3,
+  "reused_complete_native_count": 6,
+  "new_offline_count": 3,
+  "metric_rows": 36,
+  "review_statistics": 480,
+  "primary_all_methods_missing_budget_rows": 18,
+  "primary_OiSAM_missing_rows": 12,
+  "selected_native_epoch_ledger_rows": 3948,
+  "init_records": 11,
+  "source872_final_match": true,
+  "publication_7CSV_v1_v2_byte_exact": true,
+  "source_freeze_release_sha256": "01f6bf05fc65cca2a2f08dadd48a47a778ce56a5d6b98019913edb2d1b77622e",
+  "old_scientific_payloads_or_receipts_overwritten": false
+}

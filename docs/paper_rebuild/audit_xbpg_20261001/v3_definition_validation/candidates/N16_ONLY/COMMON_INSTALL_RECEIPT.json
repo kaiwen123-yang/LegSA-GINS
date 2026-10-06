@@ -1,0 +1,14 @@
+{
+  "command": [
+    "python3",
+    "docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/common/install_observation.py",
+    "--roots",
+    "configs/paper_rebuild/V3_DEFINITION_ROOTS.local.json",
+    "--candidate",
+    "N16_ONLY"
+  ],
+  "returncode": 0,
+  "stdout": "{\"candidate_id\": \"N16_ONLY\", \"source_root\": \"<VALIDATION_BUILD_ROOT>/source_N16_ONLY\", \"new_diagnostic_header_sha256\": \"65d30fb58ce9fe6e560360a7635e79539287d06aa7002c86e2bac2138b1c83e6\", \"scientific_matrix_modified\": false, \"source_writes\": 3, \"native_calls\": 0, \"evaluator_calls\": 0}\n",
+  "stderr": "",
+  "native_calls": 0
+}

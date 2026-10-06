@@ -1,0 +1,30 @@
+{
+  "schema": "claim135_independent_actual_png_review.v1",
+  "created_utc": "2026-10-04T08:09:46.142211+00:00",
+  "status": "TWO_COMPLETE_PNGS_ACTUALLY_VIEWED_ORIGINAL_RESOLUTION",
+  "tool": "view_image detail original; two full images emitted and inspected",
+  "images": {
+    "ALL45_PAIRED_HEATMAP.png": {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/ALL45_PAIRED_HEATMAP.png",
+      "sha256": "b6fefaeeca5c948e914dbe7bfde71559d73c73b606ade7ef5aaab19657962ace"
+    },
+    "PLACEMENT_BLOCK_DIFFERENCES.png": {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/PLACEMENT_BLOCK_DIFFERENCES.png",
+      "sha256": "d1eb940016aedf771c25a47ffffa946976c52e4dd3273781553a8838b9c7a0eb"
+    }
+  },
+  "all45_cases_and90_pairs_visible": true,
+  "all9_original_placement_points_per_condition_retained": true,
+  "worsening_results_retained": true,
+  "no_case_selection_or_axis_color_clip_observed": true,
+  "four_fixed_panels_only": [
+    "fault H",
+    "outage_end H",
+    "fault yaw",
+    "outage_end yaw"
+  ],
+  "labels_units_sign_and_repeated_anchor_limit_visible": true,
+  "PDF_status": "HASH_VERIFIED_NOT_INDEPENDENTLY_RENDERED_OR_VISUALLY_REVIEWED",
+  "figure_generation_receipt_sha256": "0e20f0d256bc885dd30cb3ee22b67af9042d0d8d65cf5d48967612ce2c064110",
+  "source_or_data_edited": false
+}

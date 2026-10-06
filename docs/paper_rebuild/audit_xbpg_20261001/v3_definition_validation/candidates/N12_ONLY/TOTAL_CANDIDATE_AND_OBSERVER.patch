@@ -1,0 +1,129 @@
+--- a/cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/covariance_diagnostics.hpp
++++ b/cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/covariance_diagnostics.hpp
+@@ -0,0 +1,95 @@
++#pragma once
++// Pure observation: never writes P or supplies a matrix to the filter.
++#include "legsa_v23_port_core/kf_gins/mechanism_observer.hpp"
++#include <algorithm>
++#include <limits>
++#include <vector>
++
++namespace legsa_v23_port_core::candidate_diagnostics {
++struct CovarianceReport {
++  std::size_t dimension=0;
++  bool square=false, all_finite=false, positive_diagonal=false;
++  bool normalization_attempted=false, normalized_finite=false;
++  bool symmetry_tested=false, symmetric_within_tolerance=false;
++  bool cholesky_attempted=false, positive_definite_diagnostic=false;
++  std::vector<std::size_t> nonfinite_flat_indices, nonpositive_diagonal_indices;
++  std::vector<double> pivots;
++  double min_diagonal=std::numeric_limits<double>::quiet_NaN();
++  double max_normalized_abs=std::numeric_limits<double>::quiet_NaN();
++  double max_normalized_asymmetry=std::numeric_limits<double>::quiet_NaN();
++  double symmetry_threshold=std::numeric_limits<double>::quiet_NaN();
++  double min_pivot=std::numeric_limits<double>::quiet_NaN();
++  std::size_t asymmetry_row=0,asymmetry_col=0;
++  std::string status="NOT_CHECKED";
++  mechanism_observer::Json json() const {
++    mechanism_observer::Json j;
++    j.add("dimension",dimension).add("square",square).add("all_finite",all_finite)
++      .add("positive_diagonal",positive_diagonal).add("normalization_attempted",normalization_attempted)
++      .add("normalized_finite",normalized_finite).add("symmetry_tested",symmetry_tested)
++      .add("symmetric_within_tolerance",symmetric_within_tolerance)
++      .add("cholesky_attempted",cholesky_attempted).add("positive_definite_diagnostic",positive_definite_diagnostic)
++      .add("nonfinite_flat_indices",nonfinite_flat_indices).add("nonpositive_diagonal_indices",nonpositive_diagonal_indices)
++      .add("min_diagonal",min_diagonal).add("max_normalized_abs",max_normalized_abs)
++      .add("max_normalized_asymmetry",max_normalized_asymmetry).add("symmetry_threshold",symmetry_threshold)
++      .add("asymmetry_row",asymmetry_row).add("asymmetry_col",asymmetry_col)
++      .add("pivots",pivots).add("pivots_evaluated",pivots.size()).add("min_pivot",min_pivot)
++      .add("pivot_threshold",1e-12).add("status",status)
++      .add("diagnostic_symmetrization_only",true).add("jitter_or_clipping",false).add("filter_matrix_modified",false);
++    return j;
++  }
++};
++
++inline CovarianceReport inspect(const Matrix& p) {
++  CovarianceReport r;r.dimension=p.rows;
++  r.square=p.rows>0&&p.rows==p.cols&&p.data.size()==p.rows*p.cols;
++  if(!r.square){r.status="INVALID_SHAPE";return r;}
++  const std::size_t n=p.rows;
++  for(std::size_t i=0;i<p.data.size();++i)if(!std::isfinite(p.data[i]))r.nonfinite_flat_indices.push_back(i);
++  r.all_finite=r.nonfinite_flat_indices.empty();
++  r.min_diagonal=std::numeric_limits<double>::infinity();
++  for(std::size_t i=0;i<n;++i){
++    const double d=p(i,i);
++    if(!std::isfinite(d)||d<=0.0)r.nonpositive_diagonal_indices.push_back(i);
++    if(std::isfinite(d))r.min_diagonal=std::min(r.min_diagonal,d);
++  }
++  r.positive_diagonal=r.nonpositive_diagonal_indices.empty();
++  if(!r.all_finite){r.status="NONFINITE_MATRIX";return r;}
++  if(!r.positive_diagonal){r.status="NONPOSITIVE_DIAGONAL";return r;}
++  r.normalization_attempted=true;
++  Matrix c(n,n,0.0);std::vector<double> d(n);
++  for(std::size_t i=0;i<n;++i)d[i]=std::sqrt(p(i,i));
++  r.max_normalized_abs=0.0;r.normalized_finite=true;
++  for(std::size_t i=0;i<n;++i)for(std::size_t j=0;j<n;++j){
++    c(i,j)=p(i,j)/d[i]/d[j];
++    if(!std::isfinite(c(i,j)))r.normalized_finite=false;
++    else r.max_normalized_abs=std::max(r.max_normalized_abs,std::fabs(c(i,j)));
++  }
++  if(!r.normalized_finite){r.status="NONFINITE_NORMALIZATION";return r;}
++  r.symmetry_tested=true;r.max_normalized_asymmetry=0.0;
++  for(std::size_t i=0;i<n;++i)for(std::size_t j=0;j<i;++j){
++    const double a=std::fabs(c(i,j)-c(j,i));
++    if(a>r.max_normalized_asymmetry){r.max_normalized_asymmetry=a;r.asymmetry_row=i;r.asymmetry_col=j;}
++  }
++  r.symmetry_threshold=1e-10*std::max(1.0,r.max_normalized_abs);
++  r.symmetric_within_tolerance=r.max_normalized_asymmetry<=r.symmetry_threshold;
++  if(!r.symmetric_within_tolerance){r.status="ASYMMETRIC";return r;}
++  r.cholesky_attempted=true;r.min_pivot=std::numeric_limits<double>::infinity();
++  Matrix l(n,n,0.0);
++  for(std::size_t i=0;i<n;++i){
++    for(std::size_t j=0;j<i;++j){
++      double q=0.5*c(i,j)+0.5*c(j,i);
++      for(std::size_t k=0;k<j;++k)q-=l(i,k)*l(j,k);
++      l(i,j)=q/l(j,j);
++    }
++    double q=c(i,i);
++    for(std::size_t k=0;k<i;++k)q-=l(i,k)*l(i,k);
++    r.pivots.push_back(q);
++    if(!std::isfinite(q)){r.status="NONFINITE_CHOLESKY";return r;}
++    r.min_pivot=std::min(r.min_pivot,q);
++    if(q < -1e-12){r.status="CHOLESKY_NEGATIVE_PIVOT_RISK";return r;}
++    if(q <= 1e-12){r.status="NEAR_SINGULAR_NUMERICALLY_UNRESOLVED";return r;}
++    l(i,i)=std::sqrt(q);
++  }
++  r.positive_definite_diagnostic=true;r.status="POSITIVE_DEFINITE_WITHIN_FIXED_NUMERIC_DIAGNOSTIC";return r;
++}
++} // namespace legsa_v23_port_core::candidate_diagnostics
+--- a/cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp
++++ b/cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp
+@@ -8,0 +9 @@
++#include "legsa_v23_port_core/kf_gins/covariance_diagnostics.hpp"
+@@ -550,0 +552 @@
++  if (observer_.enabled()) observerWrite("COVARIANCE_HEALTH",candidate_diagnostics::inspect(Cov_).json());
+@@ -1536,0 +1539 @@
++  // N12_ONLY: conditional innovation at this sequential event; EKF still receives raw dz.
+@@ -1538 +1541,5 @@
+-  innovation.residual_norm = vectorNorm(dz);
++  const std::vector<double> decision_Hdx = multiply(H, dx_);
++  for (std::size_t i = 0; i < innovation.residual.size(); ++i) {
++    innovation.residual[i] -= decision_Hdx[i];
++  }
++  innovation.residual_norm = vectorNorm(innovation.residual);
+@@ -1549,2 +1556,2 @@
+-      const std::vector<double> weighted_residual = multiply(s_inv, dz);
+-      innovation.nis = std::max(0.0, dotVector(dz, weighted_residual));
++      const std::vector<double> weighted_residual = multiply(s_inv, innovation.residual);
++      innovation.nis = std::max(0.0, dotVector(innovation.residual, weighted_residual));
+@@ -1564 +1571,2 @@
+-  metadata_copy.residual_norm = innovation.residual_norm;
++  // Metadata keeps its raw-residual diagnostic role; OIM uses the conditional norm above.
++  metadata_copy.residual_norm = vectorNorm(dz);
+--- a/cpp/legsa_v23_port_core/src/kf_gins/gi_observer.cpp
++++ b/cpp/legsa_v23_port_core/src/kf_gins/gi_observer.cpp
+@@ -150,0 +151 @@
++  observerWrite("CANDIDATE_DEFINITION",Json().add("candidate_id","N12_ONLY").add("sa_statistic","conditional_innovation").add("raw_residual_metadata_norm_preserved",true).add("covariance_diagnostic","POST_IMU_COMPLETE_MATRIX_NO_FILTER_WRITE"));
+@@ -175 +176 @@
+-    .add("used_innovation_covariance",i.used_innovation_covariance).add("residual_norm",i.residual_norm)
++    .add("used_innovation_covariance",i.used_innovation_covariance).add("residual_norm",i.residual_norm).add("residual_vector",i.residual)

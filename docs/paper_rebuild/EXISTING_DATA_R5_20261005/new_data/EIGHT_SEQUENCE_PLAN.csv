@@ -1,0 +1,9 @@
+sequence,body_file,receiver_folder,body_span_s,overlap_s,both_fixed_heading_epochs,body_gaps_gt_100ms,methods,planned_status,time_mapping
+NMB1,nmb1.txt,vrtk2_a87c6e_2026-01-05-11-16-59_minimal,408.246018409729,353.47165036201477,771,0,F03;F04,RUN_FIRST_VALID_INITIALIZATION,"recorded UTC/GPS versus Unix body stamp; offset 0, no reference fit"
+NMB2,nmb2.txt,vrtk2_a87c6e_2026-01-05-11-25-11_minimal,363.1757872104645,357.5135991573334,750,0,F03;F04,RUN_FIRST_VALID_INITIALIZATION,"recorded UTC/GPS versus Unix body stamp; offset 0, no reference fit"
+NMB3,nmb3.txt,vrtk2_a87c6e_2026-01-05-11-32-27_minimal,365.13199639320374,365.13199639320374,904,0,F03;F04,RUN_FIRST_VALID_INITIALIZATION,"recorded UTC/GPS versus Unix body stamp; offset 0, no reference fit"
+NMB4,nmb4.txt,vrtk2_a87c6e_2026-01-05-11-39-50_minimal,347.7399868965149,347.7399868965149,697,0,F03;F04,RUN_FIRST_VALID_INITIALIZATION,"recorded UTC/GPS versus Unix body stamp; offset 0, no reference fit"
+XB1,xb1.txt,vrtk2_a87c6e_2026-01-05-12-25-13_minimal,395.6399755477905,395.6399755477905,0,1,F03;F04,NO_INIT_NO_VALID_DUAL_HEADING,"recorded UTC/GPS versus Unix body stamp; offset 0, no reference fit"
+XB2,xb2.txt,vrtk2_a87c6e_2026-01-05-12-33-29_minimal,358.66281366348267,358.66281366348267,0,1,F03;F04,NO_INIT_NO_VALID_DUAL_HEADING,"recorded UTC/GPS versus Unix body stamp; offset 0, no reference fit"
+XB3,xb3.txt,vrtk2_a87c6e_2026-01-05-12-40-53_minimal,346.43599367141724,346.43599367141724,0,2,F03;F04,NO_INIT_NO_VALID_DUAL_HEADING,"recorded UTC/GPS versus Unix body stamp; offset 0, no reference fit"
+XB4,xb4.txt,vrtk2_a87c6e_2026-01-05-12-49-30_minimal,360.6920051574707,356.2000403404236,0,0,F03;F04,NO_INIT_NO_VALID_DUAL_HEADING,"recorded UTC/GPS versus Unix body stamp; offset 0, no reference fit"

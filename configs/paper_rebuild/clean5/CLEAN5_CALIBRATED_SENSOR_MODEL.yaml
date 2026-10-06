@@ -1,0 +1,496 @@
+data_mode: real_by2_raw_trace_free_calibration
+synthetic_data_used: false
+semisynthetic_data_used: false
+trace_used_online: false
+receiver_imu_as_body_imu: false
+final_v23_output_solver_input: false
+LegSA_output_solver_input: false
+per_case_tuning: false
+output_only_correction: false
+epoch_deleted_for_metric: false
+old_runtime_input_count: 0
+solver_invocation_count: 0
+evaluator_invocation_count: 0
+code_commit: 8ea4076bb3a6c259ceddc225533b0d522620da00
+config_hash: 79d9e4521999e1e5fa328f1921ca455df859a89559473b3864ed5f92c1600948
+contract_sha256: 79d9e4521999e1e5fa328f1921ca455df859a89559473b3864ed5f92c1600948
+input_sha256:
+  a1:
+    path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/providers/dual_yaw_provider.csv
+    sha256: ccf442f32a0037ba742d199d7ab078d5af112aea5981effce1f23a80510bdd86
+  gnss_v2:
+    path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/02_PARITY_PROVIDERS/V2/PARITY.gnss
+    sha256: 68ed8de7f91b267072bab09e968a9cab4b5220bc5eb116140adacdfde0382e7a
+  go2_body:
+    path: <RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by2.txt
+    sha256: 95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278
+  imu_increment:
+    path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/02_PARITY_PROVIDERS/V2s/PARITY_IMU.imu
+    sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+  provider_bundle:
+    path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/02_PARITY_PROVIDERS/PARITY_PROVIDER_BUNDLE.json
+    sha256: e28cd6fea67c210c1c97dd5a9cabb666e9259db2075e517af7c54036152898c9
+  pvt_raw:
+    path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv
+    sha256: 5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027
+  raw_lock:
+    path: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK.csv
+    sha256: f6e5d7965d17857e5b4a846501883f4675f2331a1164fab3de9e5ba9470f1ad7
+  status:
+    path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-status.csv
+    sha256: 9761d2d7055356857bd7b26a251fdd60fdf6c2b18a882dac74bc35d164e42e08
+raw_source_hashes:
+  go2_body: 95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278
+  pvt_raw: 5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027
+  status: 9761d2d7055356857bd7b26a251fdd60fdf6c2b18a882dac74bc35d164e42e08
+provider_hashes:
+  provider_bundle: e28cd6fea67c210c1c97dd5a9cabb666e9259db2075e517af7c54036152898c9
+  imu_increment: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+  gnss_v2: 68ed8de7f91b267072bab09e968a9cab4b5220bc5eb116140adacdfde0382e7a
+  a1: ccf442f32a0037ba742d199d7ab078d5af112aea5981effce1f23a80510bdd86
+process_source_sha256:
+  scripts/paper_rebuild/clean5_calibrate_sensors.py: 00b12fa1ab27a85965f05ff21ffefccf419c8145bd85e90e0074f4657fad34e7
+  src/legsa_gins/__init__.py: 996a06df703fd19f79cb4b8bee3ba2cbf917e35d9f25d06c21a29c7a0831715a
+  src/legsa_gins/datasets/__init__.py: b8f7be4063e2e23d81b6e6de15ab99a0eb4b299a56c0d9698f22562169a21bd2
+  src/legsa_gins/datasets/by2/__init__.py: 8bd7c44e31f57e00caef52e129a6c30998ae56c0925122da5d3059d9608a6e06
+  src/legsa_gins/datasets/by2/go2_body_state_parser.py: 3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6
+  src/legsa_gins/datasets/by2/unitree_imu_semantics.py: ca557c43b52e783ce66b74906e340e2a8146f28ea77c7cd8b9276e142f3f432c
+  src/legsa_gins/go2_prior/__init__.py: e4f4c3c34902a10ef2c516f6b316a28fd15d79eea7c78f241c2e956326d90de4
+  src/legsa_gins/go2_prior/go2_contact_state.py: ff8cf0832526538ca7c712bbb687361ab122d73b9e0a7b080263ea31ef82c19d
+  src/legsa_gins/go2_prior/go2_velocity_frame_review.py: ecb1e61abaa2f917b22d94d7cc70a91b7fe6d173711d359f8b014021ca2cad2c
+  src/legsa_gins/go2_prior/go2_velocity_quality.py: 975211c761f258eca7fde340b6c88ea73b1eb7e77969d5eab862c17d7eb5ee99
+  src/legsa_gins/input_generation/__init__.py: ab018e75b867aaced2344e57d4498ae2b6f0a0ddea63334c5b3d2ed59123a252
+  src/legsa_gins/input_generation/imu_txt_builder.py: dcc20ae00cb23d2c4685578e5104cf373204413d90ce26c36a15135ad42522ce
+  src/legsa_gins/input_generation/process_data_compat.py: 97dcd3aec7c22eb99fb7b6fa621e7ee095c447e532f9e39d5d7157c2a4a7494a
+  src/legsa_gins/input_generation/process_data_coverage.py: 92f304ecc7ebb43ae0940074d1e348a4348b16e0d69d92f465694721d91d267d
+  src/legsa_gins/input_generation/status_yaw_builder.py: 4435dd71593b1447152986ab91e2fe0394177470791a4c09815a851b75504193
+  src/legsa_gins/input_generation/ubx_nav_pvt.py: 2178ec1cce394ef6ccd0facd6168b5a645b0dbf3991aa8fa8920fe729115d313
+  src/legsa_gins/paper_rebuild/__init__.py: 268d06de2fa275e95ea3319111f359187f492c66e812b1be1ccd07812f6014e9
+  src/legsa_gins/paper_rebuild/canonical541/__init__.py: 3c39105d39f89cd24d4b94339adc8e7058a6fe385dc7ae2ef4757ff51f9fbf47
+  src/legsa_gins/paper_rebuild/canonical541/ablation_registry.py: 666e7e5327aef9e32530e4fb8b168d1750731831f50192b3aceb22323deb6f39
+  src/legsa_gins/paper_rebuild/canonical541/full_method_registry.py: 006bb8ac50a902196e57f6062ed6f092ec9a4a3bab7630110926bf42c4c6981f
+  src/legsa_gins/paper_rebuild/canonical541/matrix_spec.py: 803138e8aa15f5eb0604b0fcab4db70ac9e9d22121ae4023172e5979501502ed
+  src/legsa_gins/paper_rebuild/clean5_calibrated/__init__.py: eeafc35b5d868f06b8979986762365794e684471db346805dea8891a65fe69cd
+  src/legsa_gins/paper_rebuild/clean5_calibrated/calibration.py: c0f9812d0d22c22bced29823e5eedb5038f75fb5e00a4a936653572d9c0b501b
+  src/legsa_gins/paper_rebuild/clean5_calibrated/calibration_runner.py: 19946a2affdd93326e2570059853b1ca3086eb98b8050ee0e5248656884e1a78
+  src/legsa_gins/paper_rebuild/clean5_parity/__init__.py: ae1c680f2b717a88885274c2573a1c5dac9f56f6e5cc23e6cd4fbac53edaeaf2
+  src/legsa_gins/paper_rebuild/clean5_parity/input_audit.py: da6fefef6d5166369c01b785177999e0ecd552496c2738402d6a36a6caa9e9d9
+  src/legsa_gins/paper_rebuild/clean5_parity/runtime.py: 72f9933bead806fcb56d3079246c40afbb290d9e94bfb6c2bdb78b7d6fbe5d64
+  src/legsa_gins/paper_rebuild/clean5_sequence/__init__.py: 3999106ab53f91a48dba19fb0a08aa7495bc2e1b1e85799d039e93595951099f
+  src/legsa_gins/paper_rebuild/clean5_sequence/generation_audit.py: c850d68694dbc2e4b5498199204200691c3165b6ddb88372048852e1a74cbf21
+  src/legsa_gins/paper_rebuild/clean5_sequence/io_audit.py: 418819bff1b4eec124850314ef12a83c2d935b10dc1b1db7b9b5110098ed12d7
+  src/legsa_gins/paper_rebuild/clean5_sequence/profile_expectations.py: 00c7480ab6270b6242aa1cb89af5ff3bf8da4977e259ceece9c99f91bdfecd8d
+  src/legsa_gins/paper_rebuild/clean5_sequence/raw_lock.py: 61fe1b98a2eca7ca24c92918b125cc87e1f6e63ffbfecfd9db30541324dfd3fb
+  src/legsa_gins/paper_rebuild/clean5_sequence/registry.py: 5adf6962e2ce5735fdf6b6bd6ae48d6e021d8a4d9c58fe0a2fe3df4e81536f15
+  src/legsa_gins/paper_rebuild/clean5_sequence/runtime_config.py: b47c8c478e84976784bd48572a2fad106af8747cf51c2a310eb15641a9bc3582
+  src/legsa_gins/paper_rebuild/clean5_sequence/solver_runner.py: 33e488005450733ecd84c295d55105e823ff20b9ba3426da16e43063fb58711e
+  src/legsa_gins/paper_rebuild/clean5_sequence/solver_seal.py: 34ea5ac7ef0bbe5629d6b0dfb54cededad1be896a0d5f922a2e8c6440993c495
+  src/legsa_gins/paper_rebuild/clean5_sequence/solver_validation.py: 87631d1edcba4e0913290d6e8bd5e841bd9e09423c146bc217acdc3bb9aa1ae3
+  src/legsa_gins/paper_rebuild/evidence.py: c60b6d61cb2d1aae5431a3b973c8ea67f391df85964201c6ad03463b144dfa5a
+  src/legsa_gins/paper_rebuild/final_v23_clean_input.py: e1b67d4e72a4c2bf12de3d309c310e8e37a25058bead6581c5094152f493e2ef
+  src/legsa_gins/paper_rebuild/final_v23_clean_parity.py: 18a46ec71ba323d014f1d1d2f9fc611de7c1f9c146950fb2a68dac6b09d625b0
+  src/legsa_gins/paper_rebuild/horizontal_literature/__init__.py: aedeaca104c42b628527de21ac068da2e4311fecb42c9ab4907c6552357373fa
+  src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py: a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d
+  src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py: d72548fb9cea3f8d6075bd231ba9a2bb970f71382006edbec045a4c7ea8f6e5a
+  src/legsa_gins/paper_rebuild/manifest.py: 05f29a41984518bea5f86b80e2a221dcbde978f9b9616ea61ad21cdad632bc91
+  src/legsa_gins/paper_rebuild/paths.py: 8535cca9952f8c7d55c4cf9689031ab287cc79d0d9f0cf9207997e111db4ac0b
+  src/legsa_gins/paper_rebuild/providers.py: 8a6852f84f3fc0fe6a22c44e57b05828f3ff191eb8f9dabf8055a77e239dfcd1
+  src/legsa_gins/paper_rebuild/subprocess_guard.py: e582ee3d29dbd17246398e8e35bf8f006cf48e8aa71de92550739666ae39fac7
+  src/legsa_gins/paper_rebuild/ubx_nav_pvt.py: 4672a3a9d8c5ba4aefb67726f90463a6cef64b569122560d56ac91569c608707
+  src/legsa_gins/raw_gnss/__init__.py: f6a5adb0a1f026160b49111c13284f49502c5e7bd72be292ebfbcc15b94cc51b
+  src/legsa_gins/raw_gnss/ubx_raw_binary_rebuilder.py: eb4475b49adfe59a222a88859e944eccf25aaa185f18afacbca8ff51fbff4f10
+process_sha256: 58643fbcf04efd628cc29cd733b4ba3f7a56f379bc5f503987ac4ecd882c3349
+status: CALIBRATION_COMPLETE
+axis_order:
+- north
+- east
+- down
+axes:
+  north:
+    status: CALIBRATED
+    fallback_reasons: []
+    q_m2ps3: 0.024955479759623252
+    c_m2ps2: 0.010830809489394968
+    ols_lag_count: 6
+    nonempty_window_count: 4
+    window_mean_acceleration_std_mps2: 0.04817482008954474
+    estimated_vrw_mps_sqrt_hour: 9.478382094779873
+    estimated_abstd_mGal: 4817.482008954474
+    vrw_mps_sqrt_hour: 9.478382094779873
+    abstd_mGal: 4817.482008954474
+  east:
+    status: CALIBRATED
+    fallback_reasons: []
+    q_m2ps3: 0.026591815116529294
+    c_m2ps2: 0.013550612232080246
+    ols_lag_count: 6
+    nonempty_window_count: 4
+    window_mean_acceleration_std_mps2: 0.08259572423450164
+    estimated_vrw_mps_sqrt_hour: 9.784198200134004
+    estimated_abstd_mGal: 8259.572423450163
+    vrw_mps_sqrt_hour: 9.784198200134004
+    abstd_mGal: 8259.572423450163
+  down:
+    status: CALIBRATED
+    fallback_reasons: []
+    q_m2ps3: 0.01618043453873932
+    c_m2ps2: 0.020536668097236248
+    ols_lag_count: 6
+    nonempty_window_count: 4
+    window_mean_acceleration_std_mps2: 0.02257241538343225
+    estimated_vrw_mps_sqrt_hour: 7.6321402201126745
+    estimated_abstd_mGal: 2257.241538343225
+    vrw_mps_sqrt_hour: 7.6321402201126745
+    abstd_mGal: 2257.241538343225
+fallback_axis_count: 0
+vrw:
+- 9.478382094779873
+- 9.784198200134004
+- 7.6321402201126745
+abstd:
+- 4817.482008954474
+- 8259.572423450163
+- 2257.241538343225
+window_s:
+- 66.0
+- 340.0
+g_local_mps2: 9.801554354839126
+complete_bias_window_count: 4
+unused_partial_bias_window_s:
+- 306.0
+- 340.0
+a1_gap_intervals_s: []
+rotation: Rz(A1 NED yaw) Ry(raw Go2 pitch) Rx(raw Go2 roll)
+increment_convention: V2s already scaled; frozen current-sample measured-dt increments;
+  no second dt/scale/install
+coriolis_included: false
+gnss_velocity_interpolation: false
+residual_clipping: false
+missing_imu_interval_filling: false
+ned_axis_values_written_without_rotation_fitting: true
+residual_count: 8201
+unavailable_pair_count: 0
+schema_version: paper_rebuild.clean5.calibrated_sensor_model.values.v1
+family: CLEAN5_CALIBRATED
+classification: NOT_THE_PREREGISTERED_COMPARISON_PROTOCOL
+s: 1.0308398903907543
+calibration_dataset: BY2
+calibration_count: 1
+blind_transfer_datasets:
+- BY2H
+- BY2O
+refit_allowed: false
+q:
+- 0.024955479759623252
+- 0.026591815116529294
+- 0.01618043453873932
+c:
+- 0.010830809489394968
+- 0.013550612232080246
+- 0.020536668097236248
+window_counts:
+- 4
+- 4
+- 4
+lag_sample_counts:
+  200: 1370
+  400: 1369
+  600: 1368
+  800: 1367
+  1000: 1366
+  1500: 0
+  2000: 1361
+lag_variances:
+- axis: north
+  lag_ms: 200
+  lag_s: 0.2
+  exact_pair_count: 1370
+  sample_count: 1370
+  ddof: 1
+  variance_m2ps2: 0.024537905066082697
+  mean_residual_mps: -0.000816719882225895
+  status: AVAILABLE
+- axis: east
+  lag_ms: 200
+  lag_s: 0.2
+  exact_pair_count: 1370
+  sample_count: 1370
+  ddof: 1
+  variance_m2ps2: 0.02820850489234666
+  mean_residual_mps: 0.0014656343176049182
+  status: AVAILABLE
+- axis: down
+  lag_ms: 200
+  lag_s: 0.2
+  exact_pair_count: 1370
+  sample_count: 1370
+  ddof: 1
+  variance_m2ps2: 0.015570559355558506
+  mean_residual_mps: 0.022803227807435343
+  status: AVAILABLE
+- axis: north
+  lag_ms: 400
+  lag_s: 0.4
+  exact_pair_count: 1369
+  sample_count: 1369
+  ddof: 1
+  variance_m2ps2: 0.016668063033687612
+  mean_residual_mps: -0.001694385806449712
+  status: AVAILABLE
+- axis: east
+  lag_ms: 400
+  lag_s: 0.4
+  exact_pair_count: 1369
+  sample_count: 1369
+  ddof: 1
+  variance_m2ps2: 0.02015801284776913
+  mean_residual_mps: 0.002842538852341218
+  status: AVAILABLE
+- axis: down
+  lag_ms: 400
+  lag_s: 0.4
+  exact_pair_count: 1369
+  sample_count: 1369
+  ddof: 1
+  variance_m2ps2: 0.033100626394219824
+  mean_residual_mps: 0.045761100111170336
+  status: AVAILABLE
+- axis: north
+  lag_ms: 600
+  lag_s: 0.6
+  exact_pair_count: 1368
+  sample_count: 1368
+  ddof: 1
+  variance_m2ps2: 0.023759190059108568
+  mean_residual_mps: -0.002437681623705628
+  status: AVAILABLE
+- axis: east
+  lag_ms: 600
+  lag_s: 0.6
+  exact_pair_count: 1368
+  sample_count: 1368
+  ddof: 1
+  variance_m2ps2: 0.026035741773151377
+  mean_residual_mps: 0.004399251255881389
+  status: AVAILABLE
+- axis: down
+  lag_ms: 600
+  lag_s: 0.6
+  exact_pair_count: 1368
+  sample_count: 1368
+  ddof: 1
+  variance_m2ps2: 0.041563699820744836
+  mean_residual_mps: 0.06858928545432208
+  status: AVAILABLE
+- axis: north
+  lag_ms: 800
+  lag_s: 0.8
+  exact_pair_count: 1367
+  sample_count: 1367
+  ddof: 1
+  variance_m2ps2: 0.03466825456257017
+  mean_residual_mps: -0.0034572279969725035
+  status: AVAILABLE
+- axis: east
+  lag_ms: 800
+  lag_s: 0.8
+  exact_pair_count: 1367
+  sample_count: 1367
+  ddof: 1
+  variance_m2ps2: 0.04066286690525002
+  mean_residual_mps: 0.00573026829334384
+  status: AVAILABLE
+- axis: down
+  lag_ms: 800
+  lag_s: 0.8
+  exact_pair_count: 1367
+  sample_count: 1367
+  ddof: 1
+  variance_m2ps2: 0.03490378824289428
+  mean_residual_mps: 0.09117552084626247
+  status: AVAILABLE
+- axis: north
+  lag_ms: 1000
+  lag_s: 1.0
+  exact_pair_count: 1366
+  sample_count: 1366
+  ddof: 1
+  variance_m2ps2: 0.024944587981647975
+  mean_residual_mps: -0.004162915634131855
+  status: AVAILABLE
+- axis: east
+  lag_ms: 1000
+  lag_s: 1.0
+  exact_pair_count: 1366
+  sample_count: 1366
+  ddof: 1
+  variance_m2ps2: 0.027629574936006564
+  mean_residual_mps: 0.0074266069455903045
+  status: AVAILABLE
+- axis: down
+  lag_ms: 1000
+  lag_s: 1.0
+  exact_pair_count: 1366
+  sample_count: 1366
+  ddof: 1
+  variance_m2ps2: 0.02418059321659022
+  mean_residual_mps: 0.11381245948999588
+  status: AVAILABLE
+- axis: north
+  lag_ms: 1500
+  lag_s: 1.5
+  exact_pair_count: 0
+  sample_count: 0
+  ddof: 1
+  variance_m2ps2: null
+  mean_residual_mps: null
+  status: UNAVAILABLE
+- axis: east
+  lag_ms: 1500
+  lag_s: 1.5
+  exact_pair_count: 0
+  sample_count: 0
+  ddof: 1
+  variance_m2ps2: null
+  mean_residual_mps: null
+  status: UNAVAILABLE
+- axis: down
+  lag_ms: 1500
+  lag_s: 1.5
+  exact_pair_count: 0
+  sample_count: 0
+  ddof: 1
+  variance_m2ps2: null
+  mean_residual_mps: null
+  status: UNAVAILABLE
+- axis: north
+  lag_ms: 2000
+  lag_s: 2.0
+  exact_pair_count: 1361
+  sample_count: 1361
+  ddof: 1
+  variance_m2ps2: 0.06518425503138911
+  mean_residual_mps: -0.009356659360269208
+  status: AVAILABLE
+- axis: east
+  lag_ms: 2000
+  lag_s: 2.0
+  exact_pair_count: 1361
+  sample_count: 1361
+  ddof: 1
+  variance_m2ps2: 0.07156804762060427
+  mean_residual_mps: 0.015301429204265705
+  status: AVAILABLE
+- axis: down
+  lag_ms: 2000
+  lag_s: 2.0
+  exact_pair_count: 1361
+  sample_count: 1361
+  ddof: 1
+  variance_m2ps2: 0.05480291424710643
+  mean_residual_mps: 0.22942755987567254
+  status: AVAILABLE
+window_means:
+- axis: north
+  window_index: 0
+  window_start_s: 66.0
+  window_end_s: 126.0
+  sample_count: 296
+  mean_residual_acceleration_mps2: -0.05570374637108451
+  status: AVAILABLE
+- axis: east
+  window_index: 0
+  window_start_s: 66.0
+  window_end_s: 126.0
+  sample_count: 296
+  mean_residual_acceleration_mps2: -0.06772208679278863
+  status: AVAILABLE
+- axis: down
+  window_index: 0
+  window_start_s: 66.0
+  window_end_s: 126.0
+  sample_count: 296
+  mean_residual_acceleration_mps2: 0.1257728093911521
+  status: AVAILABLE
+- axis: north
+  window_index: 1
+  window_start_s: 126.0
+  window_end_s: 186.0
+  sample_count: 296
+  mean_residual_acceleration_mps2: -0.04705993460926742
+  status: AVAILABLE
+- axis: east
+  window_index: 1
+  window_start_s: 126.0
+  window_end_s: 186.0
+  sample_count: 296
+  mean_residual_acceleration_mps2: 0.02263644514433051
+  status: AVAILABLE
+- axis: down
+  window_index: 1
+  window_start_s: 126.0
+  window_end_s: 186.0
+  sample_count: 296
+  mean_residual_acceleration_mps2: 0.1416768377031093
+  status: AVAILABLE
+- axis: north
+  window_index: 2
+  window_start_s: 186.0
+  window_end_s: 246.0
+  sample_count: 296
+  mean_residual_acceleration_mps2: -0.03308359593786521
+  status: AVAILABLE
+- axis: east
+  window_index: 2
+  window_start_s: 186.0
+  window_end_s: 246.0
+  sample_count: 296
+  mean_residual_acceleration_mps2: 0.12148568746690054
+  status: AVAILABLE
+- axis: down
+  window_index: 2
+  window_start_s: 186.0
+  window_end_s: 246.0
+  sample_count: 296
+  mean_residual_acceleration_mps2: 0.09474612013029422
+  status: AVAILABLE
+- axis: north
+  window_index: 3
+  window_start_s: 246.0
+  window_end_s: 306.0
+  sample_count: 296
+  mean_residual_acceleration_mps2: 0.04924704039782077
+  status: AVAILABLE
+- axis: east
+  window_index: 3
+  window_start_s: 246.0
+  window_end_s: 306.0
+  sample_count: 296
+  mean_residual_acceleration_mps2: -0.03289260415208413
+  status: AVAILABLE
+- axis: down
+  window_index: 3
+  window_start_s: 246.0
+  window_end_s: 306.0
+  sample_count: 296
+  mean_residual_acceleration_mps2: 0.1435114415840997
+  status: AVAILABLE
+fallback_status:
+  north: CALIBRATED
+  east: CALIBRATED
+  down: CALIBRATED
+frozen_arw:
+- 0.985
+- 0.985
+- 0.985
+frozen_gbstd:
+- 9.38
+- 9.38
+- 9.38
+frozen_initbastd:
+- 77.8
+- 77.8
+- 77.8
+arw_policy: Frozen. Under this protocol the 1.5 degree A1 heading noise does not identify
+  gyro random walk; arw is not calibrated.
+c_role: GNSS_VELOCITY_NOISE_DIAGNOSTIC_ONLY

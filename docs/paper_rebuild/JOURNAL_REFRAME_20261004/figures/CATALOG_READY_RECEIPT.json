@@ -1,0 +1,35 @@
+{
+  "status": "READY",
+  "time_utc": "2026-10-04T14:32:32.367013+00:00",
+  "scope": "32 figures; block05 editorial RV-confounding correction only",
+  "superseded_catalog_ready_sha256": "e2412262b9257eab499f61f90b23cc335c569af309924b410dee1bcdb17074ba",
+  "seven_other_READY_blocks_untouched": true,
+  "no_science_calls": true,
+  "files": [
+    {
+      "path": "build_figure_catalog.py",
+      "bytes": 5777,
+      "sha256": "de2777dc5500c0a34e8a1527a497b5eb4297226391626f532b97683ae0017b6c"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3477,
+      "sha256": "6249bedf72086cdc77beaee8904fd0707eeafc421f20784a62cba22fd22ca39e"
+    },
+    {
+      "path": "FIGURE_CATALOG.csv",
+      "bytes": 34661,
+      "sha256": "a5bed6bec51dd508252d9535e33bbfa513926ff1ab381325a5637c50496f5f95"
+    },
+    {
+      "path": "EXISTING_ASSET_INVENTORY.csv",
+      "bytes": 43320,
+      "sha256": "a426f71b24125f4ce5b3ba441a1a8c43a72fdf4980a02fa4a41c09bcd6d95c88"
+    },
+    {
+      "path": "CATALOG_RECEIPT.json",
+      "bytes": 4143,
+      "sha256": "88021efc9deec4fee840ecf1cc89f0edc4c29d3aeaade4558619d5db9988b0ac"
+    }
+  ]
+}

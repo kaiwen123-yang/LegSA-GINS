@@ -1,0 +1,59 @@
+{
+  "time_rel_s": 3286.0,
+  "phase": "CERES_FINAL",
+  "state_indices": [
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44
+  ],
+  "dimension": 450,
+  "factors": {
+    "CustomFactor:dim3:keys1": {
+      "factor_count": 30,
+      "residual_squared_sum": 6.69810334696433
+    },
+    "CustomFactor:dim15:keys6": {
+      "factor_count": 29,
+      "residual_squared_sum": 230.47404294613278
+    },
+    "LinearContainerFactor:dim15:keys3": {
+      "factor_count": 1,
+      "residual_squared_sum": 127.37210070390353
+    }
+  },
+  "factor_half_squared_residual_cost": 182.27212349850032,
+  "scaled_normal_rank_relative_1e_12": 450,
+  "scaled_normal_eigenvalue_min": 2.0942318304723613e-06,
+  "scaled_normal_eigenvalue_max": 2.007256827797132,
+  "scaled_normal_condition_positive": 958469.2576009545,
+  "condition_note": "Normal-matrix condition; approximately squared Jacobian condition. Diagnostic only, not an admission threshold.",
+  "solver_options_unchanged": true,
+  "reference_read_count": 0
+}

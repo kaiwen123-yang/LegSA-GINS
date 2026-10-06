@@ -1,0 +1,57 @@
+{
+  "schema": "comparison.final.block03.delivery.v1",
+  "utc": "2026-10-05T03:37:06.513674+00:00",
+  "files": [
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/ESTIMATION_CHAIN_AND_FAIRNESS_MATRIX.csv",
+      "sha256": "775e27e57b055476462ba8c19e7776ce24ee849ec88d21de75e20fa814d4a4cf"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/UNRESOLVED_BLOCKERS_AND_MINIMUM_ACTIONS.csv",
+      "sha256": "f6e94b0d6e8f1394f51e405b923811baa1fdc0cb33f75e84bc8c41497b3088e2"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/SOURCE_AND_IMPLEMENTATION_FINDINGS.md",
+      "sha256": "abb6d2b9bbe4f1f4dde5bced5570225079b73ecc86ed55966a6e8e71664aa005"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/READ_COVERAGE.csv",
+      "sha256": "32ef238d5b67494d7bdbfeada0cdb8a5250f677e8b59faccc9f3327b662238b2"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/COMPARISON_ACCEPTANCE_REPORT.md",
+      "sha256": "9397f9ec05954ea2b071b92f1f407aec9f091540e67ce6c4cacbe81453b694b3"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/README.md",
+      "sha256": "254839f393d1d44956cd845c5bead922923d71969319183efd51e74fcaeb0bfb"
+    }
+  ],
+  "method_count": 30,
+  "robust_internal_analogue_count": 7,
+  "overall_counts": {
+    "PARTIAL": 18,
+    "BLOCKED": 12
+  },
+  "selected_chain_counts": {
+    "PASS": 15,
+    "PARTIAL": 3,
+    "BLOCKED": 12
+  },
+  "blocked_method_identity_count": 12,
+  "additional_claim_boundary_count": 15,
+  "indexed_condition_support_rows": 67,
+  "performed_rmse_checks": 313,
+  "performed_identity_checks": 3316,
+  "inherited_review_receipt_sha256": "50c3f4907429c8ac68a93a1acb3731c812d15bccaa6dede3d4c5c64d3d56b31f",
+  "all_delivery_metadata_checks_passed": true,
+  "new_native_solver_calls": 0,
+  "new_evaluator_calls": 0,
+  "new_raw_reference_payload_opens": 0,
+  "new_algorithm_tests_run": 0,
+  "scientific_code_edits": 0,
+  "scientific_data_edits": 0,
+  "author_all_experiments_complete_claimed": false,
+  "source_line_by_line_universal_read_claimed": false,
+  "git_operations_performed_by_this_agent": 0
+}

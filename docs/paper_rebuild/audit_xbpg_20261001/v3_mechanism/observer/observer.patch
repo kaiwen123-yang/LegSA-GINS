@@ -1,0 +1,478 @@
+--- a/cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/gi_engine.hpp
++++ b/cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/gi_engine.hpp
+@@ -10,0 +11 @@
++#include "legsa_v23_port_core/kf_gins/mechanism_observer.hpp"
+@@ -127,0 +129,28 @@
++
++  // All observer state is separate from scientific counters, inputs and history.
++  mechanism_observer::Json observerContext() const;
++  mechanism_observer::Json observerState() const;
++  void observerWrite(const std::string& event, const mechanism_observer::Json& data) const;
++  void observerBeginMeasurement(const std::string& source, double time);
++  void observerDecision(const std::string& reason, bool accepted=false);
++  void observerSelected(std::size_t row, const mechanism_observer::Json& input);
++  void observerCacheAuxiliary(double time);
++  void observerConfiguration();
++  mechanism_observer::Json observerImu(const ImuData& imu) const;
++  mechanism_observer::Json observerInput(const GnssData& input) const;
++  mechanism_observer::Json observerInput(const RawDopplerVelocityMeasurement& input) const;
++  mechanism_observer::Json observerInput(const Go2AttitudeWeakPriorMeasurement& input) const;
++  mechanism_observer::Json observerInput(const Go2VelocityDiagnosticPriorMeasurement& input) const;
++  void observerWeight(const source_aware::SourceMetadata& metadata,
++                      const source_aware::ObservationInnovation& innovation,
++                      const source_aware::SourceWeightResult& result,
++                      const std::vector<double>& dz,const Matrix& H,const Matrix& R,
++                      const Matrix& effective_R,bool source_enabled,bool qm_active);
++
++  mutable mechanism_observer::Log observer_;
++  std::size_t observer_imu_seq_=0, observer_gnss_seq_=0, observer_attempt_seq_=0;
++  std::size_t observer_sa_seq_=0, observer_current_sa_=0, observer_ekf_seq_=0;
++  int observer_res_=-1;
++  long long observer_row_id_=-1;
++  std::string observer_source_="NONE", observer_aux_cache_="{}";
++  double observer_measurement_time_=0.0;
+--- /dev/null
++++ b/cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/mechanism_observer.hpp
+@@ -0,0 +1,87 @@
++#pragma once
++// Observation-only JSONL transport. No filter/policy calculations or shared state.
++#include "legsa_v23_port_core/types.hpp"
++#include <cmath>
++#include <cstdlib>
++#include <filesystem>
++#include <fstream>
++#include <iomanip>
++#include <iostream>
++#include <locale>
++#include <sstream>
++#include <stdexcept>
++#include <type_traits>
++
++namespace legsa_v23_port_core::mechanism_observer {
++inline void quote(std::ostream& s, const std::string& v) {
++  s << '"';
++  for (unsigned char c : v) {
++    if (c == '"' || c == '\\') s << '\\' << c;
++    else if (c == '\n') s << "\\n";
++    else if (c == '\r') s << "\\r";
++    else if (c == '\t') s << "\\t";
++    else if (c < 32) { const char* h="0123456789abcdef"; s << "\\u00" << h[c>>4] << h[c&15]; }
++    else s << c;
++  }
++  s << '"';
++}
++inline void value(std::ostream& s, const std::string& x) { quote(s,x); }
++inline void value(std::ostream& s, const char* x) { quote(s,x); }
++inline void value(std::ostream& s, bool x) { s << (x ? "true" : "false"); }
++template<typename T, typename std::enable_if<std::is_integral<T>::value && !std::is_same<T,bool>::value,int>::type=0>
++inline void value(std::ostream& s, T x) { s << x; }
++inline void value(std::ostream& s, double x) {
++  if (std::isfinite(x)) s << std::setprecision(17) << x;
++  else quote(s, std::isnan(x) ? "NaN" : (x > 0 ? "Infinity" : "-Infinity"));
++}
++template<typename T, std::size_t N> inline void value(std::ostream& s, const std::array<T,N>& x) {
++  s << '['; for (std::size_t i=0;i<x.size();++i) { if(i)s<<','; value(s,x[i]); } s << ']';
++}
++template<typename T> inline void value(std::ostream& s, const std::vector<T>& x) {
++  s << '['; for (std::size_t i=0;i<x.size();++i) { if(i)s<<','; value(s,x[i]); } s << ']';
++}
++inline void value(std::ostream& s, const Matrix& x) {
++  s << "{\"rows\":" << x.rows << ",\"cols\":" << x.cols << ",\"layout\":\"row_major\",\"data\":";
++  value(s,x.data);s << '}';
++}
++class Json {
++ public:
++  Json() { stream_.imbue(std::locale::classic()); stream_ << '{'; }
++  template<typename T> Json& add(const std::string& k, const T& v) { key(k); value(stream_,v); return *this; }
++  Json& raw(const std::string& k, const std::string& v) { key(k); stream_ << v; return *this; }
++  std::string str() const { return stream_.str() + '}'; }
++ private:
++  void key(const std::string& k) { if(!first_)stream_<<',';first_=false;quote(stream_,k);stream_<<':'; }
++  std::ostringstream stream_; bool first_=true;
++};
++class Log {
++ public:
++  Log() {
++    const char* dir=std::getenv("LEGSA_V3_OBSERVER_DIR");
++    if (!dir || !*dir) return;
++    const std::filesystem::path root(dir), path=root/"events.jsonl";
++    if(std::filesystem::exists(path))throw std::runtime_error("Observer refuses existing events.jsonl");
++    std::filesystem::create_directories(root);
++    output_.open(path,std::ios::out);output_.imbue(std::locale::classic());
++    if(!output_)throw std::runtime_error("Observer cannot open events.jsonl");
++    const char* id=std::getenv("LEGSA_V3_OBSERVER_RUN_ID");run_=id&&*id?id:root.filename().string();
++    write("OBSERVER_BEGIN",Json().add("schema","V3_MECHANISM_OBSERVER_1").add("double_precision",17).add("row_id_basis","zero_based_loaded_vector").add("shadow_formula_executed",false).str());
++  }
++  ~Log() noexcept {
++    if(!enabled())return;
++    try { write("OBSERVER_END",Json().add("prior_event_count",sequence_).str()); output_.flush();
++      if(!output_)std::cerr << "Observer final flush failed; event receipt incomplete\n";
++    } catch(const std::exception& e) { std::cerr << "Observer incomplete: " << e.what() << '\n'; }
++  }
++  bool enabled() const { return output_.is_open(); }
++  void write(const std::string& kind,const std::string& payload) {
++    if(!enabled())return;
++    Json envelope;envelope.add("event_seq",++sequence_).add("run_id",run_).add("event",kind).add("available_time","UNKNOWN").raw("data",payload);
++    output_<<envelope.str()<<'\n';
++    if(sequence_%128==0)output_.flush();
++    if(!output_)throw std::runtime_error("Observer event write failed");
++  }
++ private:
++  std::ofstream output_;std::string run_;std::size_t sequence_=0;
++};
++}  // namespace legsa_v23_port_core::mechanism_observer
+--- a/cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/measurement_source.hpp
++++ b/cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/measurement_source.hpp
+@@ -79,0 +80,5 @@
++  // Diagnostic copy of an already-computed local; never consumed by a policy.
++  bool observer_oim_alpha_available = false;
++  double observer_oim_alpha = 0.0;
++  double observer_oim_multiplier = 1.0;
++  double observer_oim_raw_scale = 1.0;
+--- a/cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp
++++ b/cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp
+@@ -26,0 +27 @@
++using mechanism_observer::Json;
+@@ -105,0 +107 @@
++  observerConfiguration();
+@@ -120,0 +123 @@
++  if (observer_.enabled()) observerWrite("INITIALIZED", Json().raw("state",observerState().str()).add("P",Cov_).add("dx",dx_));
+@@ -238,0 +242 @@
++  if (observer_.enabled()) observerWrite("IMU_INPUT", Json().raw("input",observerImu(imu).str()).add("compensate_argument",compensate));
+@@ -256,0 +261,6 @@
++  if (observer_.enabled()) {
++    ++observer_gnss_seq_; observer_source_="GNSS_INPUT";observer_row_id_=-1;observer_current_sa_=0;observer_measurement_time_=gnss.time;
++    observerCacheAuxiliary(gnss.time);
++    observerWrite("GNSS_INPUT",Json().raw("original",observerInput(gnss).str()).raw("effective",observerInput(gnssdata_).str())
++      .raw("auxiliary_candidates",observer_aux_cache_).add("original_gnss_row_id","UNKNOWN_NOT_PASSED_TO_ENGINE"));
++  }
+@@ -279,0 +290 @@
++  if (observer_.enabled()) observerWrite("IMU_SPLIT_BEFORE",Json().raw("previous",observerImu(previous).str()).raw("current",observerImu(current).str()).add("split_time",time));
+@@ -293,0 +305 @@
++  if (observer_.enabled()) observerWrite("IMU_SPLIT_AFTER",Json().raw("mid",observerImu(midimu).str()).raw("remainder",observerImu(current).str()));
+@@ -304,0 +317 @@
++  if (observer_.enabled()) observerWrite("IMU_COMPENSATE_BEFORE",Json().raw("imu",observerImu(imu).str()).raw("state",observerState().str()).add("skipped_already_compensated",imu.compensated));
+@@ -312,0 +326 @@
++  if (observer_.enabled()) observerWrite("IMU_COMPENSATE_AFTER",Json().raw("imu",observerImu(imu).str()));
+@@ -320,0 +335 @@
++  if (observer_.enabled()) observerWrite("PROPAGATION_BEFORE",Json().raw("previous_imu",observerImu(imupre).str()).raw("current_imu",observerImu(imucur).str()).raw("state",observerState().str()));
+@@ -330,0 +346 @@
++  if (observer_.enabled()) observerWrite("PROPAGATION_AFTER",Json().raw("previous_imu",observerImu(imupre).str()).raw("current_imu",observerImu(imucur).str()).raw("state",observerState().str()));
+@@ -340,0 +357 @@
++  if (observer_.enabled()) observerWrite("GNSS_UPDATE_ENTRY",Json().raw("input",observerInput(gnss).str()));
+@@ -341,0 +359 @@
++    if (observer_.enabled()) observerWrite("GNSS_UPDATE_BLOCKED",Json().add("reason","GNSS_NOT_VALID"));
+@@ -360,0 +379,5 @@
++  if (observer_.enabled()) observerWrite("GNSS_DISPATCH",Json().raw("policy_gnss",observerInput(policy_gnss).str()).add("qa_active",qa_active)
++    .add("qa_position_action",qa_decision.gnss_position_action).add("qa_yaw_action",qa_decision.a1_measurement_action)
++    .add("qa_raw_doppler_action",qa_decision.raw_doppler_action).add("qa_go2_action",qa_decision.go2_aux_action)
++    .add("receiver_velocity_enabled",options_.enable_receiver_velocity_update).add("receiver_velocity_stress_mode",options_.receiver_velocity_stress_mode)
++    .add("yaw_enabled",options_.enable_dual_yaw_update).add("yaw_scheme_C",options_.yaw_scheme_C_enabled));
+@@ -414,0 +438 @@
++  if (observer_.enabled()) observerWrite("GNSS_UPDATE_CONSUMED",Json().add("isvalid_after",gnss.isvalid));
+@@ -436,0 +461 @@
++  if (observer_.enabled()) { ++observer_ekf_seq_; observerWrite("EKF_BEFORE",Json().add("dz",dz).add("H",H).add("R",R).add("dx_before",dx_).add("P_before",Cov_).raw("state",observerState().str())); }
+@@ -451,0 +477,2 @@
++  if (observer_.enabled()) observerWrite("EKF_AFTER",Json().add("actual_innovation",residual).add("actual_Hdx",Hdx).add("actual_S",S).add("actual_K",K).add("actual_delta",delta)
++    .add("dx_after",dx_).add("P_after",Cov_).raw("state",observerState().str()));
+@@ -455,0 +483 @@
++  if (observer_.enabled()) observerWrite("FEEDBACK_BEFORE",Json().add("dx",dx_).raw("state",observerState().str()));
+@@ -482,0 +511 @@
++  if (observer_.enabled()) observerWrite("FEEDBACK_AFTER",Json().add("dx",dx_).raw("state",observerState().str()));
+@@ -486,0 +516 @@
++  if (observer_.enabled()) ++observer_imu_seq_;
+@@ -487,0 +518 @@
++    if (observer_.enabled()) observerWrite("IMU_OPPORTUNITY",Json().add("reason","NOT_INITIALIZED").add("initialized",false));
+@@ -492,0 +524,8 @@
++  if (observer_.enabled()) {
++    observer_res_=res;
++    const char* reason=res!=0?"GNSS_UPDATE_SCHEDULED":!gnssdata_.isvalid?(gnssdata_.has_position||gnssdata_.has_velocity||gnssdata_.has_yaw?"GNSS_INPUT_NOT_PENDING":"GNSS_ALL_FLAGS_FALSE"):(gnssdata_.time>imucur_.time?"NOT_DUE":"NO_TIME_BRACKET");
++    observerWrite("IMU_OPPORTUNITY",Json().add("initialized",true).add("reason",reason).add("res",res).add("effective_update_time",updatetime)
++      .raw("gnss",observerInput(gnssdata_).str()).raw("previous_imu",observerImu(imupre_).str()).raw("current_imu",observerImu(imucur_).str())
++      .add("auxiliary_match_snapshot_gnss_seq",observer_gnss_seq_).add("raw_doppler_config_enabled",options_.raw_doppler_config.enable_raw_doppler)
++      .add("rp_config_enabled",options_.go2_attitude_prior_config.enable_go2_attitude_weak_prior).add("hv_config_enabled",options_.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic));
++  }
+@@ -828,0 +868 @@
++  observerBeginMeasurement("receiver_position", gnss.time);
+@@ -844,0 +885 @@
++    observerDecision("ACCEPTED_BASIC_POSITION",true);
+@@ -855,0 +897 @@
++    observerDecision("SOURCE_AWARE_REJECT");
+@@ -859,0 +902 @@
++  observerDecision("ACCEPTED",true);
+@@ -904,0 +948 @@
++  observerBeginMeasurement("receiver_velocity", gnss.time);
+@@ -907,0 +952 @@
++  if (observer_.enabled()) observerWrite("VELOCITY_KINEMATICS",Json().add("actual_dt_used",dt).add("actual_omega_b",omega_b).add("actual_antenna_velocity",antenna_vel).raw("imu_at_update",observerImu(imucur_).str()).raw("state",observerState().str()));
+@@ -923,0 +969 @@
++    observerDecision("SOURCE_AWARE_REJECT");
+@@ -927,0 +974 @@
++  observerDecision("ACCEPTED",true);
+@@ -931,0 +979 @@
++  observerBeginMeasurement("dual_antenna_yaw", gnss.time);
+@@ -937,0 +986 @@
++  if (observer_.enabled()) observerWrite("YAW_GATE_INPUT",Json().add("yaw_observed",yaw_obs).add("yaw_predicted",yaw_pred).add("yaw_std",yaw_std).add("actual_residual",residual).add("absolute_residual",abs_res).raw("state",observerState().str()));
+@@ -939,0 +989 @@
++    observerDecision("YAW_HARD_STD_OR_RESIDUAL_GATE");
+@@ -962,0 +1013 @@
++    observerDecision("SOURCE_AWARE_REJECT");
+@@ -972,0 +1024 @@
++  observerDecision("ACCEPTED",true);
+@@ -978,0 +1031 @@
++  observerBeginMeasurement("basic_dual_yaw", gnss.time);
+@@ -993,0 +1047 @@
++  observerDecision("ACCEPTED_BASIC_YAW",true);
+@@ -996,0 +1051 @@
++  observerBeginMeasurement("raw_doppler_velocity", update_time);
+@@ -997,0 +1053 @@
++    observerDecision(!options_.raw_doppler_config.enable_raw_doppler?"DISABLED_BY_CONFIG":"SOLVER_OR_PROVIDER_NOT_ENABLED");
+@@ -1010,2 +1066,4 @@
+-    return;
+-  }
++    observerDecision(raw_doppler_measurements_.empty()?"NO_LOADED_ROWS":"NO_TIME_MATCH");
++    return;
++  }
++  if (observer_.enabled()) observerSelected(static_cast<std::size_t>(best-raw_doppler_measurements_.data()),observerInput(*best).add("actual_match_abs_dt",best_dt));
+@@ -1013,0 +1072 @@
++    observerDecision("PROVIDER_VALIDITY_LINEAGE_OR_SATELLITE_REJECT");
+@@ -1021,0 +1081 @@
++  if (observer_.enabled()) observerWrite("RAW_DOPPLER_KINEMATICS",Json().add("actual_dt_used",imu_dt).add("actual_omega_b",omega_b).add("actual_lever_velocity",lever_vel_n).add("actual_antenna_velocity",antenna_vel_n).add("actual_residual",residual_vec).add("actual_residual_norm",residual).raw("imu_at_update",observerImu(imucur_).str()).raw("state",observerState().str()));
+@@ -1025,0 +1086 @@
++    observerDecision("RAW_DOPPLER_RESIDUAL_GATE_SA_OFF");
+@@ -1052,0 +1114 @@
++    observerDecision("SOURCE_AWARE_REJECT");
+@@ -1077,0 +1140 @@
++  observerDecision("ACCEPTED",true);
+@@ -1080,0 +1144 @@
++  observerBeginMeasurement("go2_attitude_roll_pitch", update_time);
+@@ -1082,0 +1147 @@
++    observerDecision(!options_.go2_attitude_prior_config.enable_go2_attitude_weak_prior?"DISABLED_BY_CONFIG":"SOLVER_OR_PROVIDER_NOT_ENABLED");
+@@ -1095,2 +1160,4 @@
+-    return;
+-  }
++    observerDecision(go2_attitude_priors_.empty()?"NO_LOADED_ROWS":"NO_TIME_MATCH");
++    return;
++  }
++  if (observer_.enabled()) observerSelected(static_cast<std::size_t>(best-go2_attitude_priors_.data()),observerInput(*best).add("actual_match_abs_dt",best_dt));
+@@ -1098,0 +1166 @@
++    observerDecision("INACTIVE_OR_NONPOSITIVE_STD");
+@@ -1118,0 +1187 @@
++      observerDecision("SOURCE_AWARE_REJECT");
+@@ -1134,0 +1204 @@
++  observerDecision("ACCEPTED",true);
+@@ -1137,0 +1208 @@
++  observerBeginMeasurement("go2_horizontal_velocity", update_time);
+@@ -1142,0 +1214 @@
++    observerDecision(!options_.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic?"DISABLED_BY_CONFIG":!go2_velocity_diagnostic_prior_status_.solver_enabled?"SOLVER_OR_PROVIDER_NOT_ENABLED":"DIAGNOSTIC_MODE_NOT_ALLOWED");
+@@ -1158,2 +1230,4 @@
+-    return;
+-  }
++    observerDecision(go2_velocity_diagnostic_priors_.empty()?"NO_LOADED_ROWS":"NO_UPDATE_FLAG_ELIGIBLE_TIME_MATCH");
++    return;
++  }
++  if (observer_.enabled()) observerSelected(static_cast<std::size_t>(best-go2_velocity_diagnostic_priors_.data()),observerInput(*best).add("actual_match_abs_dt",best_dt));
+@@ -1163,0 +1238 @@
++    observerDecision("INACTIVE_OR_DIAGNOSTIC_OR_TRUTH_CLAIM_REJECT");
+@@ -1203,0 +1279 @@
++      observerDecision("SOURCE_AWARE_REJECT");
+@@ -1214,0 +1291 @@
++  observerDecision("ACCEPTED",true);
+@@ -1488,0 +1566 @@
++  if (observer_.enabled()) { observer_current_sa_=++observer_sa_seq_; observerWrite("SA_EVALUATION_BEGIN",Json().add("dz",dz).add("H",H).add("dx_before",dx_).add("P_before",Cov_).add("base_R",R)); }
+@@ -1518,0 +1597 @@
++  observerWeight(metadata_copy,innovation,result,dz,H,R,scaled_R,source_aware_active,qm_active_scaling);
+--- /dev/null
++++ b/cpp/legsa_v23_port_core/src/kf_gins/gi_observer.cpp
+@@ -0,0 +1,181 @@
++// Observation-only methods: all inputs const; no policy/filter calculation.
++#include "legsa_v23_port_core/kf_gins/gi_engine.hpp"
++#include <limits>
++#include <cmath>
++namespace legsa_v23_port_core {
++using mechanism_observer::Json;
++Json GIEngine::observerContext() const {
++  Json x;x.add("imu_seq",observer_imu_seq_).add("gnss_input_seq",observer_gnss_seq_)
++    .add("measurement_attempt_seq",observer_attempt_seq_).add("sa_seq",observer_current_sa_)
++    .add("ekf_seq",observer_ekf_seq_).add("source",observer_source_).add("row_id",observer_row_id_)
++    .add("measurement_time",observer_measurement_time_).add("gnss_time",gnssdata_.time)
++    .add("imu_previous_time",imupre_.time).add("imu_current_time",imucur_.time)
++    .add("state_time",pvacur_.time).add("res",observer_res_)
++    .add("gnss_update_count",update_count_).add("position_update_count",position_update_count_)
++    .add("velocity_update_count",velocity_update_count_).add("yaw_attempt_count",yaw_update_count_)
++    .add("yaw_reject_count",yaw_reject_count_).add("sa_active_evaluation_count",source_aware_evaluation_count_)
++    .add("raw_doppler_update_count",raw_doppler_status_.update_count)
++    .add("rp_update_count",go2_attitude_prior_status_.update_count)
++    .add("hv_update_count",go2_velocity_diagnostic_prior_status_.update_count);
++  return x;
++}
++Json GIEngine::observerState() const {
++  Json x;x.add("time",pvacur_.time).add("position_blh_rad_m",pvacur_.pos_blh_rad_m)
++    .add("velocity_ned_mps",pvacur_.vel_ned_mps).add("rpy_rad",pvacur_.euler_rad)
++    .add("Cbn",pvacur_.cbn).add("qbn_wxyz",std::array<double,4>{pvacur_.qbn.w,pvacur_.qbn.x,pvacur_.qbn.y,pvacur_.qbn.z})
++    .add("gyr_bias",imuerror_.gyrbias).add("acc_bias",imuerror_.accbias)
++    .add("gyr_scale",imuerror_.gyrscale).add("acc_scale",imuerror_.accscale)
++    .add("antlever_m",options_.antlever_m);
++  return x;
++}
++Json GIEngine::observerImu(const ImuData& a) const {
++  Json x;x.add("time",a.time).add("dt",a.dt).add("dtheta",a.dtheta).add("dvel",a.dvel).add("compensated",a.compensated);return x;
++}
++Json GIEngine::observerInput(const GnssData& a) const {
++  Json x;x.add("time",a.time).add("position_blh_rad_m",a.blh_rad_m).add("std_ned_m",a.std_ned_m)
++    .add("velocity_ned_mps",a.vel_ned_mps).add("vel_std_mps",a.vel_std_mps)
++    .add("yaw_rad",a.yaw_rad).add("yaw_std_rad",a.yaw_std_rad).add("yaw_deg",a.yaw_deg).add("yaw_std_deg",a.yaw_std_deg)
++    .add("has_position",a.has_position).add("has_velocity",a.has_velocity).add("has_yaw",a.has_yaw)
++    .add("flags_or",a.has_position||a.has_velocity||a.has_yaw).add("validity_explicit",a.validity_explicit)
++    .add("isvalid",a.isvalid).add("baseline_vector","UNKNOWN_NOT_IN_GNSS_STRUCT");return x;
++}
++Json GIEngine::observerInput(const RawDopplerVelocityMeasurement& a) const {
++  Json x;x.add("time",a.time).add("source_time",a.source_time).add("velocity_ned_mps",a.velocity_ned_mps)
++    .add("std_ned_mps",a.std_ned_mps).add("sat_count",a.sat_count).add("gdop_like",a.gdop_like)
++    .add("provider_status",a.provider_status).add("quality",a.quality).add("valid",a.valid)
++    .add("lineage_valid",a.lineage_valid).add("backend",a.raw_doppler_backend_id).add("covariance_policy",a.covariance_policy)
++    .add("update_flag","NOT_PRESENT").add("source_active","NOT_PRESENT");return x;
++}
++Json GIEngine::observerInput(const Go2AttitudeWeakPriorMeasurement& a) const {
++  Json x;x.add("time",a.time).add("roll_rad",a.roll_rad).add("pitch_rad",a.pitch_rad)
++    .add("std_roll_rad",a.std_roll_rad).add("std_pitch_rad",a.std_pitch_rad)
++    .add("source_status",a.source_status).add("quality_flag",a.quality_flag).add("mode",a.mode)
++    .add("gait_type",a.gait_type).add("foot_force_sum",a.foot_force_sum).add("body_height",a.body_height)
++    .add("valid","NOT_PRESENT").add("update_flag","NOT_PRESENT");return x;
++}
++Json GIEngine::observerInput(const Go2VelocityDiagnosticPriorMeasurement& a) const {
++  Json x;x.add("time",a.time).add("velocity_ned_mps",a.velocity_ned_mps).add("std_ned_mps",a.std_ned_mps)
++    .add("source_status",a.source_status).add("quality_flag",a.quality_flag).add("contact_model",a.contact_model)
++    .add("contact_label",a.contact_label).add("frame_candidate",a.frame_candidate).add("prior_policy",a.prior_policy)
++    .add("update_flag",a.update_flag).add("diagnostic_only",a.diagnostic_only).add("go2_velocity_truth_claim",a.go2_velocity_truth_claim)
++    .add("valid","NOT_PRESENT");return x;
++}
++void GIEngine::observerWrite(const std::string& event,const Json& data) const {
++  if(!observer_.enabled())return;
++  Json x;x.raw("context",observerContext().str()).raw("snapshot",data.str());observer_.write(event,x.str());
++}
++void GIEngine::observerBeginMeasurement(const std::string& source,double time) {
++  if(!observer_.enabled())return;
++  observer_source_=source;observer_measurement_time_=time;observer_row_id_=-1;observer_current_sa_=0;++observer_attempt_seq_;
++  observerWrite("MEASUREMENT_ATTEMPT",Json().raw("state",observerState().str()));
++}
++void GIEngine::observerDecision(const std::string& reason,bool accepted) {
++  if(!observer_.enabled())return;
++  observerWrite("MEASUREMENT_DECISION",Json().add("accepted",accepted).add("reason",reason));
++}
++void GIEngine::observerSelected(std::size_t row,const Json& input) {
++  if(!observer_.enabled())return;
++  observer_row_id_=static_cast<long long>(row);
++  observerWrite("MEASUREMENT_SELECTED",input);
++}
++void GIEngine::observerCacheAuxiliary(double time) {
++  if(!observer_.enabled())return;
++  // This independent observer scan runs once per new GNSS input, never per IMU.
++  // It does not replace or advance the original helper selection. Equal distances
++  // choose the last vector row exactly as the original <= matching loop does.
++  auto candidates=[&](const auto& rows,double tolerance,auto eligible,bool config_enabled,bool solver_enabled,const std::string& provider) {
++    long long any=-1,selected=-1;double nearest=std::numeric_limits<double>::infinity(),selected_dt=tolerance;
++    std::size_t eligible_rows=0;
++    for(std::size_t i=0;i<rows.size();++i) {
++      const double dt=std::fabs(rows[i].time-time);
++      if(dt<=nearest){nearest=dt;any=static_cast<long long>(i);}
++      if(!eligible(rows[i]))continue;
++      ++eligible_rows;
++      if(dt<=selected_dt){selected_dt=dt;selected=static_cast<long long>(i);}
++    }
++    Json x;x.add("loaded_rows",rows.size()).add("selection_eligible_rows",eligible_rows).add("config_enabled",config_enabled)
++      .add("solver_enabled",solver_enabled).add("provider_status",provider).add("time_tolerance_sec",tolerance)
++      .add("nearest_any_row_id",any).add("selected_row_id",selected).add("measurement_time",time)
++      .add("match_found",selected>=0).add("tie_rule","LAST_VECTOR_ROW_AT_EQUAL_ABSOLUTE_TIME_DIFFERENCE");
++    if(any>=0)x.add("nearest_any_abs_dt",nearest).raw("nearest_any_input",observerInput(rows[any]).str());
++    if(selected>=0)x.add("selected_abs_dt",selected_dt).raw("selected_input",observerInput(rows[selected]).str());
++    x.add("match_reason",rows.empty()?"NO_LOADED_ROWS":eligible_rows==0?"NO_SELECTION_ELIGIBLE_ROWS":selected<0?"NO_TIME_MATCH":"TIME_MATCH_FOUND");return x.str();
++  };
++  Json x;x.raw("raw_doppler",candidates(raw_doppler_measurements_,options_.raw_doppler_config.raw_doppler_time_tolerance_sec,[](const auto&){return true;},options_.raw_doppler_config.enable_raw_doppler,raw_doppler_status_.solver_enabled,raw_doppler_status_.provider_status))
++    .raw("go2_roll_pitch",candidates(go2_attitude_priors_,options_.go2_attitude_prior_config.go2_attitude_prior_time_tolerance_sec,[](const auto&){return true;},options_.go2_attitude_prior_config.enable_go2_attitude_weak_prior,go2_attitude_prior_status_.solver_enabled,go2_attitude_prior_status_.provider_status))
++    .raw("go2_horizontal_velocity",candidates(go2_velocity_diagnostic_priors_,options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_tolerance_sec,[](const auto& a){return a.update_flag;},options_.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic,go2_velocity_diagnostic_prior_status_.solver_enabled,go2_velocity_diagnostic_prior_status_.provider_status));
++  observer_aux_cache_=x.str();
++}
++void GIEngine::observerConfiguration() {
++  if(!observer_.enabled())return;
++  const auto& c=options_.source_aware_policy_config;
++  Json sources;
++  for(std::size_t i=0;i<c.sources.size();++i){const auto& s=c.sources[i];sources.raw(source_aware::toString(static_cast<source_aware::MeasurementSource>(i)),Json().add("enabled",s.enabled).add("lsim_enabled",s.lsim_enabled).add("oim_enabled",s.oim_enabled).str());}
++  Json x;x.add("enable_source_aware_weighting",c.enable_source_aware_weighting).add("policy_version",c.source_aware_policy_version)
++    .add("mode",c.source_aware_mode).add("method_family",c.source_aware_method_family)
++    .add("deadband",c.source_aware_deadband_normalized).add("moderate",c.source_aware_moderate_normalized).add("strong",c.source_aware_strong_normalized)
++    .add("global_cap",c.source_aware_global_cap).add("max_R_scale",c.source_aware_max_R_scale)
++    .add("position_cap",c.source_aware_receiver_position_cap).add("receiver_velocity_cap",c.source_aware_receiver_velocity_cap)
++    .add("yaw_cap",c.source_aware_dual_yaw_cap).add("raw_doppler_cap",c.source_aware_raw_doppler_cap)
++    .add("rp_cap",c.source_aware_go2_attitude_cap).add("hv_cap",c.source_aware_go2_horizontal_velocity_cap)
++    .add("source_aware_go2_readiness_lsim_enabled",c.source_aware_go2_readiness_lsim_enabled)
++    .add("source_aware_go2_readiness_low_scale",c.source_aware_go2_readiness_low_scale)
++    .add("source_aware_go2_impact_or_rough_scale",c.source_aware_go2_impact_or_rough_scale)
++    .add("source_aware_go2_motion_unknown_scale",c.source_aware_go2_motion_unknown_scale)
++    .add("source_aware_go2_in_place_turn_scale",c.source_aware_go2_in_place_turn_scale)
++    .add("qa_active",qa_fallback_supervisor_.activeMode()).add("fgo_enabled",options_.fgo_feedback_config.enable_fgo_feedback)
++    .add("reject_extreme",c.source_aware_reject_extreme).add("no_R_shrink",c.source_aware_no_R_shrink)
++    .add("use_innovation_covariance",c.source_aware_use_innovation_covariance)
++    .add("rolling_enabled",c.source_aware_enable_rolling_innovation_baseline).add("rolling_size",c.source_aware_rolling_window_size)
++    .raw("sources",sources.str()).add("TIME_ALIGN_ERR",TIME_ALIGN_ERR)
++    .add("raw_doppler_enabled",options_.raw_doppler_config.enable_raw_doppler)
++    .add("rp_enabled",options_.go2_attitude_prior_config.enable_go2_attitude_weak_prior)
++    .add("hv_diagnostic_enabled",options_.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic)
++    .add("hv_horizontal_enabled",options_.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior)
++    .add("hv_vertical_disabled",options_.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_vertical_disabled)
++    .add("hv_mode",options_.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_mode)
++    .add("yaw_scheme_C_enabled",options_.yaw_scheme_C_enabled).add("dual_yaw_enabled",options_.enable_dual_yaw_update)
++    .add("receiver_velocity_enabled",options_.enable_receiver_velocity_update)
++    .add("clean_final_v23_parity_mode",options_.clean_final_v23_parity_mode).add("basic_dual_yaw",options_.enable_basic_dual_yaw_baseline)
++    .add("raw_doppler_tolerance",options_.raw_doppler_config.raw_doppler_time_tolerance_sec)
++    .add("rp_tolerance",options_.go2_attitude_prior_config.go2_attitude_prior_time_tolerance_sec)
++    .add("hv_tolerance",options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_tolerance_sec)
++    .add("raw_doppler_min_sat",options_.raw_doppler_config.raw_doppler_min_sat)
++    .add("raw_doppler_residual_gate_mps",options_.raw_doppler_config.raw_doppler_residual_gate_mps)
++    .add("rp_sourceaware",options_.go2_attitude_prior_config.go2_attitude_prior_sourceaware)
++    .add("hv_sourceaware",options_.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_source_aware_enabled)
++    .add("hv_diagnostic_only",options_.go2_velocity_prior_diagnostic_config.go2_diagnostic_prior_only)
++    .add("yaw_std_min_deg",options_.yaw_std_min_deg).add("yaw_std_soft_deg",options_.yaw_std_soft_deg).add("yaw_std_hard_deg",options_.yaw_std_hard_deg)
++    .add("yaw_res_soft_deg",options_.yaw_res_soft_deg).add("yaw_res_hard_deg",options_.yaw_res_hard_deg).add("yaw_downweight_scale",options_.yaw_downweight_scale);
++  observerWrite("CONFIGURATION",x);
++}
++void GIEngine::observerWeight(const source_aware::SourceMetadata& m,const source_aware::ObservationInnovation& i,
++                             const source_aware::SourceWeightResult& r,const std::vector<double>& dz,
++                             const Matrix& H,const Matrix& R,const Matrix& effective_R,bool source_enabled,bool qm_active) {
++  if(!observer_.enabled())return;
++  Json md;md.add("source",source_aware::toString(m.source)).add("time",m.time).add("valid",m.valid).add("std_xyz",m.std_xyz)
++    .add("yaw_std_rad",m.yaw_std_rad).add("residual_norm",m.residual_norm).add("time_diff_sec",m.time_diff_sec).add("sat_count",m.sat_count)
++    .add("provider_status",m.provider_status).add("quality_flag",m.quality_flag).add("covariance_available",m.covariance_available)
++    .add("rel_valid",m.rel_valid).add("ant_valid",m.ant_valid).add("ant_state",m.ant_state).add("baseline_length_m",m.baseline_length_m)
++    .add("rel_acc_m",m.rel_acc_m).add("spike_candidate",m.spike_candidate).add("go2_readiness_metadata_available",m.go2_readiness_metadata_available)
++    .add("go2_motion_state",m.go2_motion_state).add("go2_contact_label",m.go2_contact_label).add("go2_readiness_score",m.go2_readiness_score)
++    .add("go2_readiness_flag",m.go2_readiness_flag).add("go2_stance_stable",m.go2_stance_stable).add("go2_in_place_turn",m.go2_in_place_turn)
++    .add("go2_impact_or_rough",m.go2_impact_or_rough).add("go2_readiness_low",m.go2_readiness_low);
++  Json result;result.add("policy_version",r.policy_version).add("mode",r.mode).add("lsim_score",r.lsim_score).add("oim_score",r.oim_score)
++    .add("lsim_R_scale",r.lsim_R_scale).add("oim_R_scale",r.oim_R_scale).add("combined_R_scale",r.combined_R_scale).add("source_cap",r.source_cap)
++    .add("residual_norm",r.residual_norm).add("normalized_innovation",r.normalized_innovation).add("nis",r.nis).add("dof",r.dof)
++    .add("innovation_cov_trace",r.innovation_cov_trace).add("used_innovation_covariance",r.used_innovation_covariance)
++    .add("base_R_trace",r.base_R_trace).add("scaled_R_trace",r.scaled_R_trace).add("accepted",r.accepted).add("rejected",r.rejected)
++    .add("rolling_median",r.rolling_normalized_median).add("rolling_mad",r.rolling_normalized_mad).add("relative_anomaly_score",r.relative_anomaly_score)
++    .add("reason_codes",r.reason_codes).add("metadata_summary",r.metadata_summary)
++    .add("oim_alpha_available",r.observer_oim_alpha_available).add("oim_alpha",r.observer_oim_alpha_available?r.observer_oim_alpha:std::numeric_limits<double>::quiet_NaN())
++    .add("oim_multiplier",r.observer_oim_alpha_available?r.observer_oim_multiplier:std::numeric_limits<double>::quiet_NaN())
++    .add("oim_raw_scale",r.observer_oim_alpha_available?r.observer_oim_raw_scale:std::numeric_limits<double>::quiet_NaN());
++  Json original;original.add("nis",i.nis).add("dof",i.dof).add("normalized_innovation",i.normalized_innovation)
++    .add("used_innovation_covariance",i.used_innovation_covariance).add("residual_norm",i.residual_norm)
++    .add("base_R_trace",i.base_R_trace).add("hph_trace",i.hph_trace).add("innovation_cov_trace",i.innovation_cov_trace);
++  observerWrite("SA_EVALUATION",Json().add("dz",dz).add("H",H).add("dx_before",dx_).add("P_before",Cov_).add("base_R",R)
++    .add("effective_R",effective_R).raw("state",observerState().str()).raw("metadata",md.str()).raw("innovation",original.str())
++    .raw("result",result.str()).add("source_enabled",source_enabled).add("qm_active_scaling",qm_active));
++}
++} // namespace legsa_v23_port_core
+--- a/cpp/legsa_v23_port_core/src/source_aware/source_aware_policy.cpp
++++ b/cpp/legsa_v23_port_core/src/source_aware/source_aware_policy.cpp
+@@ -621,0 +622,2 @@
++  result.observer_oim_alpha = alpha;
++  result.observer_oim_alpha_available = true;
+@@ -624,0 +627 @@
++    result.observer_oim_multiplier = 1.6;
+@@ -627,0 +631 @@
++    result.observer_oim_multiplier = 1.2;
+@@ -645,0 +650 @@
++  result.observer_oim_raw_scale = scale_value;

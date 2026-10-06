@@ -1,0 +1,122 @@
+{
+  "assumptions": {
+    "evidence_type": "ASSUMED_ANALYTICAL_ILLUSTRATION_NOT_CALIBRATION",
+    "scientific_or_reference_files_read": 0,
+    "scientific_runs": 0,
+    "observed_project_metrics_used": false,
+    "fig1": {
+      "receiver_per_axis_sigma_m": 0.001,
+      "receiver_N_E_axes_independent": true,
+      "receiver_cross_covariance": "rho*sigma^2*I",
+      "rho_values": [
+        0.0,
+        0.5,
+        0.9
+      ],
+      "horizontal_projection_r_m": [
+        0.02,
+        0.35
+      ],
+      "model": "local first-order heading; u=sqrt(2*(1-rho))*sigma/r",
+      "example_target_heading_deg": 1.0,
+      "target_is_practical_validity_threshold": false
+    },
+    "fig2": {
+      "body_velocity_perpendicular_sigma_mps": 0.05,
+      "heading_sigma_deg": 2.0,
+      "speed_values_mps": [
+        0.5,
+        1.0,
+        2.0
+      ],
+      "rho_range": [
+        -0.95,
+        0.95
+      ],
+      "model": "horizontal local toy: delta(v_E)=delta(w_E)+V*delta(psi)",
+      "model_variance": "sigma_w^2+(V*sigma_psi)^2+2*rho*sigma_w*V*sigma_psi"
+    },
+    "fig3": {
+      "constant_translation_perpendicular_to_baseline_mps": 1.0,
+      "horizontal_projection_r_values_m": [
+        0.35,
+        0.1,
+        0.02
+      ],
+      "unsigned_time_difference_ms_range": [
+        0,
+        20
+      ],
+      "true_baseline": "[r,0]",
+      "asynchronous_difference": "[r,V*delta_t]",
+      "angle_difference": "atan2(V*delta_t,r)",
+      "is_standard_uncertainty": false,
+      "rotation_acceleration_clock_estimation_model": false
+    }
+  },
+  "checks": [
+    {
+      "kind": "declared covariance matrix versus scalar expression",
+      "r_m": 0.35,
+      "rho": 0,
+      "matrix_deg": 0.23150990986897016,
+      "scalar_deg": 0.23150990986897016,
+      "passed": true
+    },
+    {
+      "kind": "declared covariance matrix versus scalar expression",
+      "r_m": 0.1,
+      "rho": 0.5,
+      "matrix_deg": 0.5729577951308232,
+      "scalar_deg": 0.5729577951308232,
+      "passed": true
+    },
+    {
+      "kind": "declared covariance matrix versus scalar expression",
+      "r_m": 0.02,
+      "rho": 0.9,
+      "matrix_deg": 1.281172578150919,
+      "scalar_deg": 1.2811725781509187,
+      "passed": true
+    },
+    {
+      "kind": "declared 2-input PSD and propagated variance",
+      "rho": -0.95,
+      "min_eigenvalue": 8.166565543696021e-05,
+      "matrix_mps": 0.020058516903241088,
+      "scalar_mps": 0.020058516903241085,
+      "passed": true
+    },
+    {
+      "kind": "declared 2-input PSD and propagated variance",
+      "rho": 0,
+      "min_eigenvalue": 0.0012184696791468343,
+      "matrix_mps": 0.060979256138024795,
+      "scalar_mps": 0.060979256138024795,
+      "passed": true
+    },
+    {
+      "kind": "declared 2-input PSD and propagated variance",
+      "rho": 0.95,
+      "min_eigenvalue": 8.166565543696021e-05,
+      "matrix_mps": 0.08387249404862157,
+      "scalar_mps": 0.08387249404862157,
+      "passed": true
+    },
+    {
+      "kind": "time toy exact zero difference",
+      "passed": true
+    },
+    {
+      "kind": "CSV row counts",
+      "counts": [
+        498,
+        573,
+        603
+      ],
+      "passed": true
+    }
+  ],
+  "all_calculation_checks_passed": true,
+  "visual_review": "PENDING_ACTUAL_PNG_VIEW"
+}

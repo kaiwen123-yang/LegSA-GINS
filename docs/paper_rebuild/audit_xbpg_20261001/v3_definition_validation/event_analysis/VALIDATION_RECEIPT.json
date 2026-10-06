@@ -1,0 +1,314 @@
+{
+  "status": "READY_FOR_ROOT_REVIEW_NOT_REAL_SCANNED",
+  "data_mode": "synthetic_fixture_only",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "source_hashes": {
+    "README.md": "d045008b71da0e0d7371a129675092d71cffcc0d690eb0966b22c0f1c5ffb70f",
+    "analyze_events.py": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f",
+    "test_analyze_events.py": "8e80c2f4222c5e591b3b820e78503a34747a96dda1177696a55f41ca6437981b",
+    "validate_native_fixtures.py": "9dedace1ebc85693b12d769c81b3db95281f08e1e586beebee14d46ece699e7b"
+  },
+  "unit_suites": [
+    {
+      "version": "v1",
+      "tests": 28,
+      "passed": 28,
+      "failed": 0,
+      "analyzer_sha256": "0708896bb6b95c05461e6f464758e4c868c16757930315b090e7d79c6abd1f0e",
+      "test_source_sha256": "76f567f91c677bf0d989d3b0229658689eaa9a2625b3ab287718ab292ce88e5f",
+      "receipt": "<VALIDATION_ROOT>/analysis/event_analysis_unit_v1/TEST_RECEIPT.json"
+    },
+    {
+      "version": "v2",
+      "tests": 35,
+      "passed": 35,
+      "failed": 0,
+      "analyzer_sha256": "c82179fadf8252e2992a0c500889c99d8d187ec114824c540477d891a7207ef7",
+      "test_source_sha256": "3be62507c888feceebbccfb53dca0ca1407c7b8b1a4f3f442018aa6b19dbbda5",
+      "receipt": "<VALIDATION_ROOT>/analysis/event_analysis_unit_v2/TEST_RECEIPT.json"
+    },
+    {
+      "version": "v3",
+      "tests": 37,
+      "passed": 37,
+      "failed": 0,
+      "analyzer_sha256": "024c384ccfe9fe7723d2f386dc9b72e306f5957f08f2f5012b6ed74ebc77fd3a",
+      "test_source_sha256": "cff152ec4313b8cd919df014e0d54e614a19e14ea5cc127312f33bdcc6cedd11",
+      "receipt": "<VALIDATION_ROOT>/analysis/event_analysis_unit_v3/TEST_RECEIPT.json"
+    },
+    {
+      "version": "v4_final",
+      "tests": 41,
+      "passed": 41,
+      "failed": 0,
+      "analyzer_sha256": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f",
+      "test_source_sha256": "8e80c2f4222c5e591b3b820e78503a34747a96dda1177696a55f41ca6437981b",
+      "receipt": "<VALIDATION_ROOT>/analysis/event_analysis_unit_v4/TEST_RECEIPT.json"
+    }
+  ],
+  "initial_schema_check": {
+    "complete_new_synthetic_stream_reads": 2,
+    "event_rows": 100,
+    "stream_statuses": [
+      "COMPLETE",
+      "COMPLETE"
+    ],
+    "initial_comparison_status": "FAILED_RETAINED",
+    "failure": "state.Cbn nested 3x3 array was initially passed to Matrix-object parser; MATRIX_SCHEMA_OR_LAYOUT",
+    "correction": "state_diff now accepts original nested Cbn array; test_state_Cbn_nested_array and final two comparisons passed",
+    "preserved_root": "<VALIDATION_ROOT>/analysis/event_analysis_synthetic_v1",
+    "same_native_fixture_payload_rescans": 0
+  },
+  "execution_commands": [
+    [
+      "python3",
+      "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/event_analysis/test_analyze_events.py",
+      "--output",
+      "<VALIDATION_ROOT>/analysis/event_analysis_unit_v1"
+    ],
+    [
+      "python3",
+      "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/event_analysis/test_analyze_events.py",
+      "--output",
+      "<VALIDATION_ROOT>/analysis/event_analysis_unit_v2"
+    ],
+    [
+      "python3",
+      "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/event_analysis/validate_native_fixtures.py",
+      "--roots",
+      "<CODE_ROOT>/configs/paper_rebuild/V3_DEFINITION_ROOTS.local.json",
+      "--output-alias",
+      "<VALIDATION_ROOT>/analysis/event_analysis_native_fixture_v1"
+    ],
+    [
+      "python3",
+      "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/event_analysis/test_analyze_events.py",
+      "--output",
+      "<VALIDATION_ROOT>/analysis/event_analysis_unit_v3"
+    ],
+    [
+      "python3",
+      "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/event_analysis/test_analyze_events.py",
+      "--output",
+      "<VALIDATION_ROOT>/analysis/event_analysis_unit_v4"
+    ]
+  ],
+  "total_existing_new_native_fixture_streams_read": 8,
+  "total_existing_new_native_fixture_event_rows_read": 347,
+  "new_native_processes": 0,
+  "real_event_payload_reads": 0,
+  "old_mechanism_queue_scans": 0,
+  "old_2308_error_series_reads": 0,
+  "NAV_payload_reads": 0,
+  "reference_reads": 0,
+  "evaluator_calls": 0,
+  "provider_calls": 0,
+  "boundary": "Root reviews/commits before explicitly releasing any real stream analysis; no NAV scanning added.",
+  "existing_native_fixture_stream_checks": {
+    "status": "PASS",
+    "data_mode": "synthetic_fixture_only",
+    "synthetic_data_used": true,
+    "semisynthetic_data_used": false,
+    "streams": [
+      {
+        "label": "n16_baseline",
+        "source_path": "<VALIDATION_BUILD_ROOT>/fixtures_N16_ONLY/baseline/hv2d_quality_1p5/observer/events.jsonl",
+        "candidate_id": "BASELINE",
+        "run_id": "hv2d_quality_1p5",
+        "stream_status": "COMPLETE",
+        "analysis_status": "VALIDATED",
+        "events_read": 48,
+        "source_sha256": "a199392ad2a70d4bfc45c1c5598ca69e8579958454958642b9614e5924380634",
+        "SA_counts": {
+          "VALIDATED": 2
+        },
+        "covariance": {
+          "EKF_SNAPSHOT_BASELINE_ONLY": {
+            "count": 4,
+            "status_counts": {
+              "POSITIVE_DEFINITE_WITHIN_FIXED_NUMERIC_DIAGNOSTIC": 4
+            },
+            "first_anomaly": null,
+            "max_normalized_asymmetry": 6.938893903907228e-18,
+            "min_pivot": 0.9994027359218202
+          }
+        },
+        "stream_error": null,
+        "diagnostic_anomalies": []
+      },
+      {
+        "label": "n16_candidate",
+        "source_path": "<VALIDATION_BUILD_ROOT>/fixtures_N16_ONLY/candidate_on/hv2d_quality_1p5/observer/events.jsonl",
+        "candidate_id": "N16_ONLY",
+        "run_id": "hv2d_quality_1p5",
+        "stream_status": "COMPLETE",
+        "analysis_status": "VALIDATED",
+        "events_read": 52,
+        "source_sha256": "15e4a3aa786501665b2e15b2355667134dc7cab4db86aea534f3b8fa201b7b53",
+        "SA_counts": {
+          "VALIDATED": 2
+        },
+        "covariance": {
+          "ALL_IMU_END_CANDIDATE": {
+            "count": 3,
+            "status_counts": {
+              "POSITIVE_DEFINITE_WITHIN_FIXED_NUMERIC_DIAGNOSTIC": 3
+            },
+            "first_anomaly": null,
+            "max_normalized_asymmetry": 6.938893903907228e-18,
+            "min_pivot": 0.9988041736161809
+          }
+        },
+        "stream_error": null,
+        "diagnostic_anomalies": []
+      },
+      {
+        "label": "n12_baseline",
+        "source_path": "<VALIDATION_BUILD_ROOT>/N12_tests_v1/baseline/dx_zero/observer/events.jsonl",
+        "candidate_id": "BASELINE",
+        "run_id": "dx_zero",
+        "stream_status": "COMPLETE",
+        "analysis_status": "VALIDATED",
+        "events_read": 23,
+        "source_sha256": "235f792721f3826ec90b5297adfb27cf2eb25f2c0e172639fa1967f9f02dce06",
+        "SA_counts": {
+          "VALIDATED": 1
+        },
+        "covariance": {
+          "EKF_SNAPSHOT_BASELINE_ONLY": {
+            "count": 2,
+            "status_counts": {
+              "POSITIVE_DEFINITE_WITHIN_FIXED_NUMERIC_DIAGNOSTIC": 2
+            },
+            "first_anomaly": null,
+            "max_normalized_asymmetry": 0.0,
+            "min_pivot": 0.9999999999999998
+          }
+        },
+        "stream_error": null,
+        "diagnostic_anomalies": []
+      },
+      {
+        "label": "n12_candidate",
+        "source_path": "<VALIDATION_BUILD_ROOT>/N12_tests_v1/candidate/dx_zero/observer/events.jsonl",
+        "candidate_id": "N12_ONLY",
+        "run_id": "dx_zero",
+        "stream_status": "COMPLETE",
+        "analysis_status": "VALIDATED",
+        "events_read": 24,
+        "source_sha256": "9fc3960ca2a529fa7788ca83a219f287bbd6ffc4d9aee3ee01a5a67fa2fd7109",
+        "SA_counts": {
+          "VALIDATED": 1
+        },
+        "covariance": {},
+        "stream_error": null,
+        "diagnostic_anomalies": []
+      },
+      {
+        "label": "n09_accepted_res3",
+        "source_path": "<VALIDATION_BUILD_ROOT>/N09_RP_ONLY_fixture_v1/candidate_on/accepted_res3/observer/events.jsonl",
+        "candidate_id": "N09_RP_ONLY",
+        "run_id": "accepted_res3",
+        "stream_status": "COMPLETE",
+        "analysis_status": "VALIDATED",
+        "events_read": 51,
+        "source_sha256": "e72bf196e667e800f07dc83a588932c8c087f5ce5c75860cba1104075e1445e2",
+        "SA_counts": {
+          "VALIDATED": 1
+        },
+        "covariance": {
+          "ALL_IMU_END_CANDIDATE": {
+            "count": 3,
+            "status_counts": {
+              "POSITIVE_DEFINITE_WITHIN_FIXED_NUMERIC_DIAGNOSTIC": 3
+            },
+            "first_anomaly": null,
+            "max_normalized_asymmetry": 1.3877787807814457e-17,
+            "min_pivot": 0.9877616326184077
+          }
+        },
+        "stream_error": null,
+        "diagnostic_anomalies": []
+      },
+      {
+        "label": "n09_rejected_res3",
+        "source_path": "<VALIDATION_BUILD_ROOT>/N09_RP_ONLY_fixture_v1/candidate_on/rejected_res3/observer/events.jsonl",
+        "candidate_id": "N09_RP_ONLY",
+        "run_id": "rejected_res3",
+        "stream_status": "COMPLETE",
+        "analysis_status": "VALIDATED",
+        "events_read": 49,
+        "source_sha256": "e50eb7d2065eb0a020d786fc1166e81a9d3a2345fa12090099ced4d5a2bee927",
+        "SA_counts": {
+          "VALIDATED": 1
+        },
+        "covariance": {
+          "ALL_IMU_END_CANDIDATE": {
+            "count": 3,
+            "status_counts": {
+              "POSITIVE_DEFINITE_WITHIN_FIXED_NUMERIC_DIAGNOSTIC": 3
+            },
+            "first_anomaly": null,
+            "max_normalized_asymmetry": 2.7755575615628914e-17,
+            "min_pivot": 0.985224591698785
+          }
+        },
+        "stream_error": null,
+        "diagnostic_anomalies": []
+      }
+    ],
+    "comparisons": [
+      {
+        "name": "n16",
+        "status": "VALIDATED",
+        "measurements": {
+          "PAIRED": 4
+        },
+        "first_differences": [
+          "FIRST_ACTUAL_R_EXACT_DIFFERENCE",
+          "FIRST_ACTUAL_R_ABOVE_FIXED_TOLERANCE",
+          "FIRST_ACTUAL_DELTA_DIFFERENCE",
+          "FIRST_DX_AFTER_DIFFERENCE",
+          "FIRST_COMMON_IMU_END_STATE_DIFFERENCE"
+        ],
+        "common_IMU_counts": {
+          "EXACTLY_EQUAL": 1,
+          "DIFFERENT_OR_UNRESOLVED": 2
+        }
+      },
+      {
+        "name": "n12",
+        "status": "VALIDATED",
+        "measurements": {
+          "PAIRED": 4
+        },
+        "first_differences": [],
+        "common_IMU_counts": {}
+      }
+    ],
+    "selected_existing_new_synthetic_streams": 6,
+    "complete_stream_scans": 6,
+    "raw_event_lines_read": 247,
+    "new_native_processes": 0,
+    "real_native_calls": 0,
+    "evaluator_calls": 0,
+    "provider_calls": 0,
+    "real_event_reads": 0,
+    "source_sha256": "9dedace1ebc85693b12d769c81b3db95281f08e1e586beebee14d46ece699e7b",
+    "analyzer_sha256": "c82179fadf8252e2992a0c500889c99d8d187ec114824c540477d891a7207ef7",
+    "output_root": "<VALIDATION_ROOT>/analysis/event_analysis_native_fixture_v1",
+    "coverage_notes": [
+      "N12 dx_zero uses public helper calls without newImuProcess, so COVARIANCE_HEALTH coverage is zero, not missing IMU coverage.",
+      "N09 accepted/rejected res3 streams validate scheduler schema; no baseline native fixture was rerun.",
+      "These are analyst tests over synthetic inputs, never real-data performance evidence."
+    ]
+  },
+  "post_review_gate_changes": {
+    "strict_native_count": "Only exact int 1 or str 1; bool/float/UNKNOWN rejected",
+    "read_accounting": "open attempts, physical EOF, valid stream and partial/full hash distinguished",
+    "cache_gate": "schema/current analyzer SHA/registered run,candidate,source must match before comparison",
+    "verification": "41 final pure synthetic unit tests passed; six earlier fixture streams not re-read; their prior analyzer hash retained",
+    "scientific_arithmetic_change_after_native_fixture_check": false
+  }
+}

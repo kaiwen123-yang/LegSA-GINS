@@ -1,0 +1,278 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-04T13:53:38.136479+00:00",
+  "scope": "Document and source-link bookkeeping only, not a numerical scientific oracle",
+  "checks_passed": 22,
+  "checks_failed": 0,
+  "all_checks_passed": true,
+  "checks": [
+    {
+      "name": "new_files_nonempty",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "all_local_markdown_links_resolve",
+      "passed": true,
+      "detail": "15 links; imminent own receipt exempted until write"
+    },
+    {
+      "name": "row_count_PRIMARY_LITERATURE_AND_CLAIM_MAP.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "unique_ids_PRIMARY_LITERATURE_AND_CLAIM_MAP.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "access_dates_PRIMARY_LITERATURE_AND_CLAIM_MAP.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "row_count_REQUIRED_RECORDS_AND_ACCEPTANCE.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "unique_ids_REQUIRED_RECORDS_AND_ACCEPTANCE.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "row_count_RESEARCH_QUESTIONS_AND_MAIN_FIGURE_PLAN.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "unique_ids_RESEARCH_QUESTIONS_AND_MAIN_FIGURE_PLAN.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "row_count_BLOCK03_READ_COVERAGE.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "access_dates_BLOCK03_READ_COVERAGE.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "no_reference_placeholders",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "prior_two_block_pins_unchanged",
+      "passed": true,
+      "detail": "16 prior files"
+    },
+    {
+      "name": "ten_measurement_equations",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ten_candidate_directions",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "original_not_internal_AR",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "reference_cross_terms_retained",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "assumptions_not_measurement",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "physical_versus_software_clock_separate",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "not_submission_ready",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "all_source_URLs_recorded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "new_scope_git_diff_check",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "csv_rows": {
+    "PRIMARY_LITERATURE_AND_CLAIM_MAP.csv": 16,
+    "REQUIRED_RECORDS_AND_ACCEPTANCE.csv": 13,
+    "RESEARCH_QUESTIONS_AND_MAIN_FIGURE_PLAN.csv": 8,
+    "BLOCK03_READ_COVERAGE.csv": 23
+  },
+  "local_links": [
+    {
+      "file": "README.md",
+      "target": "OFFICIAL_VENUE_AND_ORIGINAL_INPUT_BOUNDARY.md",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "GPS_SHORT_BASELINE_MOVING_BASE_DECISION.md",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "assumed_sensitivity/README.md",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "PRIMARY_LITERATURE_AND_CLAIM_MAP.csv",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "REQUIRED_RECORDS_AND_ACCEPTANCE.csv",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "RESEARCH_QUESTIONS_AND_MAIN_FIGURE_PLAN.csv",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "BLOCK01_READY_RECEIPT.json",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "BLOCK02_ASSUMED_FIGURES_READY_RECEIPT.json",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "BLOCK03_READY_RECEIPT.json",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "BLOCK01_READ_COVERAGE.csv",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "BLOCK03_READ_COVERAGE.csv",
+      "exists": true
+    },
+    {
+      "file": "TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md",
+      "target": "assumed_sensitivity/Fig_U01_projection_correlation.png",
+      "exists": true
+    },
+    {
+      "file": "TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md",
+      "target": "assumed_sensitivity/Fig_U02_heading_velocity_cross_term.png",
+      "exists": true
+    },
+    {
+      "file": "TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md",
+      "target": "assumed_sensitivity/Fig_U03_asynchronous_direction.png",
+      "exists": true
+    }
+  ],
+  "prior_block_pin_checks": [
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/BLOCK01_OFFICIAL_SOURCES.csv",
+      "unchanged": true
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/BLOCK01_READ_COVERAGE.csv",
+      "unchanged": true
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/OFFICIAL_VENUE_AND_ORIGINAL_INPUT_BOUNDARY.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/build_assumed_sensitivity_figures.py",
+      "unchanged": true
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/ACTUAL_VISUAL_REVIEW.json",
+      "unchanged": true
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/ASSUMPTIONS_AND_CALCULATION_CHECKS.json",
+      "unchanged": true
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U01_projection_correlation.csv",
+      "unchanged": true
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U01_projection_correlation.png",
+      "unchanged": true
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U01_projection_correlation.svg",
+      "unchanged": true
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U02_heading_velocity_cross_term.csv",
+      "unchanged": true
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U02_heading_velocity_cross_term.png",
+      "unchanged": true
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U02_heading_velocity_cross_term.svg",
+      "unchanged": true
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U03_asynchronous_direction.csv",
+      "unchanged": true
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U03_asynchronous_direction.png",
+      "unchanged": true
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U03_asynchronous_direction.svg",
+      "unchanged": true
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/README.md",
+      "unchanged": true
+    }
+  ],
+  "human_semantic_review": {
+    "current_TIM178_lines_read": true,
+    "current_GPS94_lines_read": true,
+    "science_runs": 0,
+    "raw_or_reference_payload_reads": 0,
+    "calibration_completed": false,
+    "submission_ready": false
+  },
+  "peer_algebra_review": "Only U01–U03 equations reviewed by peer message; not peer script/numerical output acceptance."
+}

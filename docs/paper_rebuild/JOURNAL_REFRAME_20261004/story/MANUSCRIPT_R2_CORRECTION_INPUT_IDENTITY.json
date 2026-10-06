@@ -1,0 +1,271 @@
+{
+  "utc": "2026-10-04T14:35:19.039632+00:00",
+  "scope": "DOCUMENT_ATTRIBUTION_ONLY",
+  "old_story_files_before": {
+    "03_ENGLISH_TITLE_ABSTRACT_CONTRIBUTIONS.md": {
+      "sha256": "d8d64b70bf4b76cf8bf1db4d31412f2e5aab286cf6ed897fc2f2a42ac981780b",
+      "bytes": 3384
+    },
+    "06_DRAFT_COMPLETION_AND_SOURCE_SCOPE.md": {
+      "sha256": "09c48dc3952387667c84bd515c7247815acf44dca8c1ed816cd6ce8efd4de759",
+      "bytes": 2273
+    },
+    "MANUSCRIPT_FIGURE_INPUT_PINS.json": {
+      "sha256": "f37c170e67f2900cb9646bf40124e18071b836378b28af441c7a316e6b988228",
+      "bytes": 4330
+    },
+    "INTERNAL_READER_LABELS.csv": {
+      "sha256": "f254481df73b3c2ab222a8ff97d7ffdbfdbfaa3027162ce7b628849729481da9",
+      "bytes": 5229
+    },
+    "manuscript_restructured.md": {
+      "sha256": "21ac28e1c69ef1039c2e3465e97179b063551982f0e9dc965cedc1187c42ed89",
+      "bytes": 31499
+    },
+    "MAIN_FIGURE_PANEL_PLAN.csv": {
+      "sha256": "6a82b86dc1fb7693fda17cce34606bfccaa697e1bbf7235657eb4fa137aa6e70",
+      "bytes": 8811
+    },
+    "MANUSCRIPT_R1_CHANGES.diff": {
+      "sha256": "9450d58a2b23ca9a68bb844388254354e830985f955539243859e126712b2949",
+      "bytes": 3011
+    },
+    "DOCX_R1_AUTHORING_RECEIPT.json": {
+      "sha256": "2c080328ca34583c5ff74e3dedefb0097b3ea152634e06befca3e9904cdcac56",
+      "bytes": 569
+    },
+    "04_PPT_CONTENT_BLUEPRINT_52.md": {
+      "sha256": "01a1a442638f3e862136a606e078c712facec169b966c18d720b5f915334c067",
+      "bytes": 34812
+    },
+    "05_MAIN_FIGURE_ARGUMENT_PLAN.md": {
+      "sha256": "76f060855973044c281f232cb06292c7c45597b4ea69046078a79e2fda492091",
+      "bytes": 14739
+    },
+    "CURRENT_FIGURE_EVIDENCE_REVIEW.csv": {
+      "sha256": "1cfb1f053bd6d97d797d65c7f5ab21a6e630699c441fca6b2ac986f269ed851b",
+      "bytes": 3956
+    },
+    "WORD_R1_QA_RECEIPT.json": {
+      "sha256": "0fd30a29881f8a0167eb430a79a7bac3744b8fe337584ac25f1f8d3836e47bca",
+      "bytes": 6567
+    },
+    "REVERSE_OUTLINE.csv": {
+      "sha256": "d55d3055c1bf46591f6798bea755eade537a18150fefde9ff839a1861bcd620d",
+      "bytes": 1531
+    },
+    "BIBLIOGRAPHY_ADDENDUM_R1.csv": {
+      "sha256": "ba39a1ecca19ff54a5bd833511cf1d91e3c478b6ff8912dd63fe8f1cb9cde2a8",
+      "bytes": 2454
+    },
+    "MANUSCRIPT_FIGURE_READY_RECEIPT.json": {
+      "sha256": "6a3dab0e97f9bb301c10821ebf71701247c9c319ebb0784e2f979cfacce00150",
+      "bytes": 1796
+    },
+    "02_PROVISIONAL_NAMES_AND_TERMS.md": {
+      "sha256": "19980202228b523ebfa922bba50c46dd95d6e8aa7dfea65d9aca28ec33c94b90",
+      "bytes": 4074
+    },
+    "MAIN_FIGURE_PLAN.json": {
+      "sha256": "9547527ede3731840a9acabf4bd03ed6c10806be6d0a94a06a426a06606142d3",
+      "bytes": 22352
+    },
+    "WORD_R1_READY_RECEIPT.json": {
+      "sha256": "a64931f3e86cfd856746c367e565db40161fc24b832cef6898ad5e8eb408cf1b",
+      "bytes": 2842
+    },
+    "EXTERNAL_READER_LABELS.csv": {
+      "sha256": "056004d05e8659a7c1bcebd7e9a618b681d8c8bde212ea836349b4a7fb581385",
+      "bytes": 12889
+    },
+    "STORY_READ_COVERAGE.csv": {
+      "sha256": "592e2cb781c75aeb2cf98ff20d09f3797e904355ab951e1c96ed706a9d51d48b",
+      "bytes": 3839
+    },
+    "PPT_CONTENT_BLUEPRINT_52.json": {
+      "sha256": "c0bed471c9f977c9a4c99c024278f29f69329e68e1e9016bdeb3f50d8120853a",
+      "bytes": 49619
+    },
+    "manuscript_restructured_r1.md": {
+      "sha256": "16e52b8678e4ab420bed5a04ba4f8f02581e65863307fd5d37db12a179cf9eb9",
+      "bytes": 32407
+    },
+    "PPT_CONTENT_READY_RECEIPT.json": {
+      "sha256": "7a41d914d612fb6e10dab29a3f6208296b5ca35f2b6c40ceb2484f5e66e25663",
+      "bytes": 751
+    },
+    "manuscript_restructured_r1_preview.pdf": {
+      "sha256": "ce1bd224e427f8d842632dd6ec3112e8e158b7cad7634bfee837352536f696ae",
+      "bytes": 282608
+    },
+    "INPUT_SOURCE_PINS_BLOCK1.json": {
+      "sha256": "991f2af1f59f8f742ecc786210498c775c2f5a40d1d7b89833ff8eb6d0449d6f",
+      "bytes": 2106
+    },
+    "build_word_r1.py": {
+      "sha256": "5e9dfa82a0c4648845a5c5af5e451b86835229f4d417123a2714fe395d06fd5e",
+      "bytes": 8432
+    },
+    "BLOCK1_READY_RECEIPT.json": {
+      "sha256": "3e78a13ba8918c0831e2910cdf8bbf9a35b720a19118dfbcb30fbb4ab087d3fc",
+      "bytes": 1915
+    },
+    "01_ARGUMENT_REFRAME_ZH.md": {
+      "sha256": "04496fb6496f554fd6bdba5a234547c2f909f8b41f249591c464e3609e0a1de9",
+      "bytes": 8396
+    },
+    "manuscript_restructured_r1.docx": {
+      "sha256": "0b2ba4b1ac6a1ee464e53c2a33bd0d759b021193878dfff208ade260735eb293",
+      "bytes": 52007
+    },
+    "07_BIBLIOGRAPHY_AND_WORD_R1.md": {
+      "sha256": "030cd99c714813df7b95bec180b38f1df91cc84d1e217194832033c1b4899067",
+      "bytes": 2104
+    },
+    "WORD_R1_PAGE_VISUAL_REVIEW.csv": {
+      "sha256": "7a2684850b3ed65fdc29bfb919eefba7c990e9375a108e5a5241b4b59f29b6fe",
+      "bytes": 2834
+    },
+    "CLAIM_EVIDENCE_MAP.csv": {
+      "sha256": "3944b63f03034ccf817a56da44c36fdeac6b5f720113be2eb216f2d4283df297",
+      "bytes": 2236
+    },
+    "PPT_CONTENT_BLUEPRINT_52.csv": {
+      "sha256": "38edf65955c8d39eeca55c4ef6b650b929b05e493826c1b9525d029646b0d1d5",
+      "bytes": 34172
+    }
+  },
+  "actual_native_metadata_pins": [
+    {
+      "sequence": "BY2",
+      "method_id": "F02",
+      "path": "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN8_PROTOCOL_V3\\03_NATIVE\\RUN_00002\\RUN_MANIFEST.json",
+      "sha256": "65397db8aebc5d1c2f0bd35dabea75a7a979ec1e6ba482cbc34ef3b521541244",
+      "bytes": 20177,
+      "audit_scope": "SELECTED_METADATA_FIELDS_AND_CONFIG_BRANCH_NOT_FULL_RAW_READ"
+    },
+    {
+      "sequence": "BY2",
+      "method_id": "F02",
+      "path": "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN8_PROTOCOL_V3\\03_NATIVE\\RUN_00002\\V3_RUNTIME_CONFIG.yaml",
+      "sha256": "3e5c21e94cea327b9c4aa2f7c095f5f7eb9662cafc66a3759d6d4f3d084f8e79",
+      "bytes": 7864,
+      "audit_scope": "SELECTED_METADATA_FIELDS_AND_CONFIG_BRANCH_NOT_FULL_RAW_READ"
+    },
+    {
+      "sequence": "BY2",
+      "method_id": "F03",
+      "path": "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN8_PROTOCOL_V3\\03_NATIVE\\RUN_00003\\RUN_MANIFEST.json",
+      "sha256": "1a1e7a098cb9d8dbb513e7433dc68dd4b833d8fb58a83536b22f53400eccceef",
+      "bytes": 20194,
+      "audit_scope": "SELECTED_METADATA_FIELDS_AND_CONFIG_BRANCH_NOT_FULL_RAW_READ"
+    },
+    {
+      "sequence": "BY2",
+      "method_id": "F03",
+      "path": "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN8_PROTOCOL_V3\\03_NATIVE\\RUN_00003\\V3_RUNTIME_CONFIG.yaml",
+      "sha256": "ecbd659c0d57665c2cff897e71cbbdbbb7d89f19662d748541adf7d6f62c1a4d",
+      "bytes": 7855,
+      "audit_scope": "SELECTED_METADATA_FIELDS_AND_CONFIG_BRANCH_NOT_FULL_RAW_READ"
+    },
+    {
+      "sequence": "BY2H",
+      "method_id": "F02",
+      "path": "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN8_PROTOCOL_V3\\03_NATIVE\\V3R_CONTINUATION\\SEQUENCE_BY2H_F02\\RUN_MANIFEST.json",
+      "sha256": "2404f19b6ea1ec5f2b7c385a46b0329509c82701f5154a3ee0203bb5fe9cb7e7",
+      "bytes": 20157,
+      "audit_scope": "SELECTED_METADATA_FIELDS_AND_CONFIG_BRANCH_NOT_FULL_RAW_READ"
+    },
+    {
+      "sequence": "BY2H",
+      "method_id": "F02",
+      "path": "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN8_PROTOCOL_V3\\03_NATIVE\\V3R_CONTINUATION\\SEQUENCE_BY2H_F02\\V3_RUNTIME_CONFIG.yaml",
+      "sha256": "a5131fb4d6f9e5c8cb9fcbcfe71feb840bdca056f3e304308e51b2e5d94e2575",
+      "bytes": 7963,
+      "audit_scope": "SELECTED_METADATA_FIELDS_AND_CONFIG_BRANCH_NOT_FULL_RAW_READ"
+    },
+    {
+      "sequence": "BY2H",
+      "method_id": "F03",
+      "path": "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN8_PROTOCOL_V3\\03_NATIVE\\V3R_CONTINUATION\\SEQUENCE_BY2H_F03\\RUN_MANIFEST.json",
+      "sha256": "0063b3fb0ed96592e803c01de4fa9d503a622ddf4ae4523d36e2c1cedd26bc40",
+      "bytes": 20163,
+      "audit_scope": "SELECTED_METADATA_FIELDS_AND_CONFIG_BRANCH_NOT_FULL_RAW_READ"
+    },
+    {
+      "sequence": "BY2H",
+      "method_id": "F03",
+      "path": "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN8_PROTOCOL_V3\\03_NATIVE\\V3R_CONTINUATION\\SEQUENCE_BY2H_F03\\V3_RUNTIME_CONFIG.yaml",
+      "sha256": "b58766c5b4200a6a16d50c9f4b49379a5c9ae8e33e86484a16f382f5aee6aed9",
+      "bytes": 7941,
+      "audit_scope": "SELECTED_METADATA_FIELDS_AND_CONFIG_BRANCH_NOT_FULL_RAW_READ"
+    },
+    {
+      "sequence": "BY2O",
+      "method_id": "F02",
+      "path": "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN8_PROTOCOL_V3\\03_NATIVE\\V3R_CONTINUATION\\SEQUENCE_BY2O_F02\\RUN_MANIFEST.json",
+      "sha256": "a57103244fc248c7a5e0e16a4d535658c0d108bfb1d82b2d91a417e7c315697f",
+      "bytes": 20166,
+      "audit_scope": "SELECTED_METADATA_FIELDS_AND_CONFIG_BRANCH_NOT_FULL_RAW_READ"
+    },
+    {
+      "sequence": "BY2O",
+      "method_id": "F02",
+      "path": "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN8_PROTOCOL_V3\\03_NATIVE\\V3R_CONTINUATION\\SEQUENCE_BY2O_F02\\V3_RUNTIME_CONFIG.yaml",
+      "sha256": "b2e56de0da9a03a19e1a5976d0b7785839fa9b44bdd75a3662b0fbd8e44cf09d",
+      "bytes": 7970,
+      "audit_scope": "SELECTED_METADATA_FIELDS_AND_CONFIG_BRANCH_NOT_FULL_RAW_READ"
+    },
+    {
+      "sequence": "BY2O",
+      "method_id": "F03",
+      "path": "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN8_PROTOCOL_V3\\03_NATIVE\\V3R_CONTINUATION\\SEQUENCE_BY2O_F03\\RUN_MANIFEST.json",
+      "sha256": "edfa7003e4f91d92e2c9a5110e4d23997c9c6bb9470aaaf6a63d521dfad9da3a",
+      "bytes": 20171,
+      "audit_scope": "SELECTED_METADATA_FIELDS_AND_CONFIG_BRANCH_NOT_FULL_RAW_READ"
+    },
+    {
+      "sequence": "BY2O",
+      "method_id": "F03",
+      "path": "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN8_PROTOCOL_V3\\03_NATIVE\\V3R_CONTINUATION\\SEQUENCE_BY2O_F03\\V3_RUNTIME_CONFIG.yaml",
+      "sha256": "6efc5ebcd925083add3d7fba3a0628fbb8ea5e4fd6fbbe183a208f9f6576d96d",
+      "bytes": 7948,
+      "audit_scope": "SELECTED_METADATA_FIELDS_AND_CONFIG_BRANCH_NOT_FULL_RAW_READ"
+    }
+  ],
+  "peer_report": {
+    "path": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\REVIEW_RV_CONFOUNDING_CORRECTION.md",
+    "sha256": "9fc2dc466ff084d948baa9f0b0f7af7641fdc401143fc91db1ef4ccf71575b03"
+  },
+  "peer_evidence": {
+    "path": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\RV_CONFOUNDING_EVIDENCE.json",
+    "sha256": "d75a812bf57af89b58122b5078ca476adc6a23117a1ad2691ebbd668dc760b26"
+  },
+  "old_results_section_and_references_byte_exact": true,
+  "old_table1_byte_exact": true,
+  "old_figure_panel_source_and_scope_unchanged": true,
+  "scientific_execution": 0,
+  "frozen_source_selected_read": {
+    "commit": "7d43b9af26120ed5dde21f53e515386361072ba6",
+    "path": "cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp",
+    "blob_sha256": "19962a218121639dd85e646e20c1e922273ae739d3beac856c8dd9c04aea15b2",
+    "selected_line_ranges": [
+      [
+        382,
+        421
+      ],
+      [
+        955,
+        980
+      ],
+      [
+        1001,
+        1021
+      ]
+    ],
+    "scope": "SELECTED_SEMANTIC_READ_FROZEN_STORY_SOURCE_NOT_FULL_FILE_READ",
+    "native_branch_claim_basis": "actual saved config/manifest/counters; no inference from current diagnostic source"
+  },
+  "old_story_files_after_match_before": true,
+  "actual_native_metadata_after_match_before": true
+}

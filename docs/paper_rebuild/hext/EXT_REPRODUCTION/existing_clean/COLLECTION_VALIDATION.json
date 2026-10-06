@@ -1,0 +1,60 @@
+{
+  "collect_horizontal_tables.py": "AST_PARSE_PASS_NO_IMPORT_NO_EXECUTION",
+  "collect_linked_archives.py": "AST_PARSE_PASS_NO_IMPORT_NO_EXECUTION",
+  "index_records": 4443,
+  "default_csv_field_limit_pass": true,
+  "C4__12_FINAL_EVIDENCE_INTEGRATION__FINAL_C00_NATIVE_FORMAL_RESULTS.csv": {
+    "rows": 6,
+    "status": "PASS"
+  },
+  "C4__12_FINAL_EVIDENCE_INTEGRATION__FINAL_C00_COMMON_SUPPORT_DIAGNOSTIC.csv": {
+    "rows": 6,
+    "status": "PASS"
+  },
+  "C4__04_EXT03_YANG2024__C00__EXT03_C00_MODE_SUMMARY.csv": {
+    "rows": 10,
+    "status": "PASS"
+  },
+  "C4__04_EXT03_YANG2024__C00__EXT03_C00_NATIVE_HEADING_RESULTS.csv": {
+    "rows": 15090,
+    "status": "PASS"
+  },
+  "C4__04_EXT03_YANG2024__C00__EXT03_C00_FAILURE_LEDGER.csv": {
+    "rows": 7968,
+    "status": "PASS"
+  },
+  "C7__08_AGGREGATE__HORIZONTAL_TABLE_V2_THREE_SEQUENCES.csv": {
+    "rows": 52,
+    "status": "PASS"
+  },
+  "C7__08_AGGREGATE__HORIZONTAL_TABLE_V3_THREE_SEQUENCES.csv": {
+    "rows": 52,
+    "status": "PASS"
+  },
+  "C7__11_READONLY_CLOSEOUT_H_EXT_04L__BY2O_SEGMENT_SUMMARY.csv": {
+    "rows": 90,
+    "status": "PASS"
+  },
+  "native_ledger_statuses": {
+    "COMPLETED": 13,
+    "ALGORITHM_FAILURE_DIVERGED": 1
+  },
+  "portable_path_check": "PASS",
+  "source_values": "Original strings retained. Validation counts rows/statuses, does not recompute performance.",
+  "data_mode": "read_only_collection_validation",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "new_native_calls": 0,
+  "new_evaluator_calls": 0,
+  "new_provider_calls": 0,
+  "new_hashes": 0,
+  "raw_evaluation_row_statuses": {
+    "COMPLETED": 26,
+    "NOT_RUN_ALGORITHM_FAILURE": 2
+  },
+  "final_evaluation_dispositions": {
+    "COMPLETED": 18,
+    "AVAILABLE_GEOMETRIC_AUDIT_FAIL": 8,
+    "NOT_RUN_ALGORITHM_FAILURE": 2
+  }
+}

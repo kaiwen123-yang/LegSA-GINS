@@ -1,0 +1,14 @@
+path,bytes,total_lines,sha256,actual_read_scope,mode
+docs/paper_rebuild/PAPER_IDENTITY_20261004/GPS_TIM_CLAIMS_AND_READINESS.md,16599,98,a4794eee5389c4d38a4bcdb0bdc1be642418c26944d7e8178cd507b598c1022d,current full file,readonly
+docs/paper_rebuild/V3_STORY_20261004/README.md,1429,11,52a3458de295f65ad86d518c895281eb870be1fdf8d1371fd6c6af2d80c22464,current full file,readonly
+docs/paper_rebuild/V3_STORY_20261004/CURRENT_STORY_INDEX.md,5373,31,0562ef56c013bac4e1447184c541f694c0d1e9c3dcdc9baa0675d42c9f94db2e,current full file,readonly
+docs/paper_rebuild/PROTOCOL_V2_METHOD_STATEMENT.md,13605,208,b8da7b09e3755d64d076d42c705894a18f0e9701ceb0da45dd1bd884533c5b1d,current full 208 lines; historical layers separated,readonly
+docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md,20649,131,191a3d7f3ed7c496c488743051817588ab2580f5c17832ddcbb31e466e55e048,"selected keyword lines 29,31,55,57,59,61,69,71,77,87; not full131",readonly
+src/legsa_gins/paper_rebuild/clean6_sensor_v21/providers.py,29878,520,86002aba39c524887264d7b65a707bc1824dc5c0d266ead3cfd45acb25c87a4d,"selected lines1–50,201–291; earlier same-blob HV157–194 inherited",readonly
+src/legsa_gins/paper_rebuild/protocol_v3/providers.py,16202,303,e352c6106a4623d39615c71d669d94b9593efe26609dea7822b641986dd77df4,selected R5/function lines; not full303,readonly
+src/legsa_gins/paper_rebuild/hext/t5a_provider.py,19357,316,386c20d8f9f89488aa59d01e945128a1227b3e2adf7c5b0ccbff10a80a20b025,"selected lines1–60,150–295; not full316",readonly
+configs/paper_rebuild/final_v23_parity_contract.yaml,21004,487,2c215e680512bb1d630d46262c4e230a2ec58147ffc0a35b1c6a5ad21805c1da,selected displayed early CLEAN1 contract; truncated output; not full487; not finalV3 parameter evidence,readonly
+C:/Users/ykw/.codex/skills/manuscript-optimizer/SKILL.md,11602,328,e26220433bfa504e9880d01118eeb0f16b9b808b672b112f49c4fd00bd877004,"current full read; earlier displayed invocation, not reopened wholesale",readonly skill
+C:/Users/ykw/.codex/skills/academic-research/SKILL.md,4711,94,3896cde650d1827d1bec64a0dc288d9da285793cced582d920ce580a2c87b8db,"current full read; earlier displayed invocation, not reopened wholesale",readonly skill
+C:/Users/ykw/.codex/skills/academic-research/idea-generation/SKILL.md,12785,388,f388806a510c2b009a79ffe1c241b2ebfb72873660b512a7e9000da364de9a1f,"current full read; earlier displayed invocation, not reopened wholesale",readonly skill
+C:/Users/ykw/.codex/skills/academic-research/experiment-design/SKILL.md,9705,336,c95d0a4c820332f156f0a308d80e61f9366f218076040b5d194e7c86b5fcc6c7,"current full read; earlier displayed invocation, not reopened wholesale",readonly skill

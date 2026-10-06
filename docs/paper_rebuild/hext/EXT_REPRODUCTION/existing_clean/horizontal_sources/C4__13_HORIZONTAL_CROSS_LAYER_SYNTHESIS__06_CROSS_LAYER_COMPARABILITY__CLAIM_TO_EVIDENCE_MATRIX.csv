@@ -1,0 +1,21 @@
+claim_id,claim,claim_state,evidence_table,row_key_or_guard,cross_layer_flat_ranking_allowed,notes
+CLM001,Three primary raw methods are RAW01/RAW02/RAW03,ALLOWED,FINAL_METHOD_REGISTRY_V2.csv,formal_method_counted=true and Layer A; EXT04 excluded,false,Use only within stated evidence layer.
+CLM002,EXT04 is supplementary and zero-acceptance,ALLOWED,EXT04_SUPPLEMENTARY_DIAGNOSTIC_SUMMARY.csv,27 policy-mode rows; accepted_count=0,false,Use only within stated evidence layer.
+CLM003,RAW methods share one fix-success definition,FORBIDDEN,RAW_AVAILABILITY_AND_STATE_SUMMARY.csv,native state vocabularies differ,false,Use only within stated evidence layer.
+CLM004,LC01 is a valid two-receiver solution-level comparator,ALLOWED,SOLUTION_LEVEL_LC_C00_FORMAL_SUMMARY.csv,LC01_STANDALONE_FULL_C00,false,Use only within stated evidence layer.
+CLM005,GINav has low availability and poor BY2 accuracy,ALLOWED,SOLUTION_LEVEL_LC_C00_FORMAL_SUMMARY.csv,77/275 and H/3D/yaw RMSE,false,Use only within stated evidence layer.
+CLM006,GINav difference is only coverage,FORBIDDEN,SOLUTION_LEVEL_LC_FAILURE_MECHANISM.md,accuracy is also poor,false,Use only within stated evidence layer.
+CLM007,Hartley has a 4D global gauge,ALLOWED,HARTLEY_OBSERVABILITY_SUMMARY.csv,nullity 4 across windows/models,false,Use only within stated evidence layer.
+CLM008,Hartley absolute yaw/position RMSE can be ranked,FORBIDDEN,HARTLEY_CLAIM_BOUNDARY.md,absolute metrics null; reference extrinsic limitation,false,Use only within stated evidence layer.
+CLM009,A04 current C00 yaw is 1.9340756561653565 deg,ALLOWED,INTERNAL_FORMAL_C00_SUMMARY.csv,A04 exact UNIQUE row,false,Use only within stated evidence layer.
+CLM010,F04 current C00 yaw is 1.9549590248265367 deg,ALLOWED,INTERNAL_FORMAL_C00_SUMMARY.csv,F04 exact UNIQUE row,false,Use only within stated evidence layer.
+CLM011,2.231/2.226 deg are formal A04/F04 C00,FORBIDDEN,FINAL_RESULT_IDENTITY_LEDGER.csv,77-epoch diagnostic only,false,Use only within stated evidence layer.
+CLM012,legacy 1.813898 deg is current Canonical C00,FORBIDDEN,LEGACY_FINAL_V23_IDENTITY.csv,legacy semisynthetic identity,false,Use only within stated evidence layer.
+CLM013,Canonical-541 mean can replace C00,FORBIDDEN,INTERNAL_CANONICAL541_SUMMARY.csv,record_type/scope separation,false,Use only within stated evidence layer.
+CLM014,A04 is core candidate and F04 tail-protection extension,ALLOWED_PROVISIONAL,A04_VS_F04_ROLE_SUMMARY.md,C00 + 541 mixed profile,false,Use only within stated evidence layer.
+CLM015,F04 universally outperforms A04,FORBIDDEN,INTERNAL_CANONICAL541_SUMMARY.csv,mixed means/medians/wins across metrics,false,Use only within stated evidence layer.
+CLM016,Fixposition reference is independent ground truth,FORBIDDEN,INTERNAL_FORMAL_C00_SUMMARY.csv,reference_is_independent_ground_truth=false,false,Use only within stated evidence layer.
+CLM017,Cross-layer methods form a flat filter-formula ranking,FORBIDDEN,CROSS_LAYER_COMPARABILITY_MATRIX.csv,different information and output layers,false,Use only within stated evidence layer.
+CLM018,Current cross-layer algorithmic-route coverage is comprehensive,ALLOWED_WITH_SCOPE,HORIZONTAL_COMPARISON_COMPLETENESS_AUDIT.md,listed routes covered; generalization gaps remain,false,Use only within stated evidence layer.
+CLM019,Corrected Classic-18 is required now,FORBIDDEN,CORRECTED_CLASSIC18_NECESSITY_DECISION.md,only conditionally required for an external-degradation superiority claim,false,Use only within stated evidence layer.
+CLM020,Plotting is complete,FORBIDDEN,PLOT_LINKAGE_PENDING.csv,pending separate parallel plotting task; no access in this task,false,Use only within stated evidence layer.

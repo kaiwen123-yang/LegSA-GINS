@@ -1,0 +1,148 @@
+{
+  "schema": "claim135_independent_final_delivery_and_source_freeze_release.v1",
+  "created_utc": "2026-10-04T08:09:46.142211+00:00",
+  "status": "ALL135_NATIVE_OFFLINE_AND_SAVED_ERROR_PUBLICATION_INDEPENDENT_REVIEW_ACCEPTED",
+  "source_freeze_status": "SOURCE928_FREEZE_RELEASE_AUTHORIZED_FOR_NEW_IDENTITIES_AFTER_THIS_TIMESTAMP",
+  "freeze_release_utc": "2026-10-04T08:09:46.142211+00:00",
+  "source928_last_current_matches_saved_snapshot": true,
+  "accepted_identity_scope": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z",
+  "accepted135": 135,
+  "unavailable135": 0,
+  "full_rmse540": 540,
+  "own_domain810_rows": 810,
+  "paired2520_rows": 2520,
+  "placement280_rows": 280,
+  "full_rmse_max_abs_difference": 3.907985046680551e-14,
+  "original_observed_denominator_per_run": 56642,
+  "all135_matched_observed_epochs": 56642,
+  "offline_reference_opens": 135,
+  "native_online_reference_opens": 0,
+  "review_raw_reference_reads": 0,
+  "review_science_invocations": 0,
+  "review_scientific_artifacts_edited": false,
+  "final_numeric_accepted_utc": "2026-10-04T07:59:27.208813+00:00",
+  "native_seal_sha256": "1f041d1180032b6552af8d43d1f0eb3b9256ad3f11c64a1e98fdf7cebaade60b",
+  "preregistration_sha256": "50674d262162968a06640c2870b80e28b64af57def0f950d27abc35bb3e4505b",
+  "corrected_results_sha256": "a0f004962971f9ca22926e503f7c51f7eebf11857727c2dc60eacc9e665d9576",
+  "reduction_receipt_sha256": "8fe4f7321202600c1befd68416ad64e9806f24a7a789f4a7439f4ed56001bc26",
+  "final_helpers": {
+    "publisher_sha256": "bbc9ddaa51370dc2deab2bcf389ddbc7d2982d0f18a392b4b482405a85527afd",
+    "plot_sha256": "1b158eadd64e8b4ca0283cf446c3164cb7990d28db8591d45312100ba1599356"
+  },
+  "publication_csv_hashes": {
+    "FULL_135_RESULTS.csv": "ce9b02c5fe7d2451eb60c23e61f9f4d752c428ff806933704f8e02bf649565ed",
+    "OWN_SUPPORT_DOMAINS.csv": "ea0d859d809d8a5ffcf53f8287f2fa0c4a5800bd6f4e412c9efe1877667177c1",
+    "PAIRED_ALL_90_CASES_DOMAINS.csv": "4a1aab0babf454e29be65cd8e10928798c1bc2c8b3ddb62f90c5ac70111faf20",
+    "PLACEMENT_BLOCK_SUMMARY.csv": "e2097761bd1e04fc38ca5ea3902975195c789f8766acda3afb926be01d18d2ad",
+    "INDEPENDENT_RECOMPUTATION.csv": "065079afc9e490bce15414ab3e97d14b6a0b2b23d0c9bbb59cc144320f29e112",
+    "REFERENCE_ACCESS_AUDIT.csv": "b27b040da93b03c89d2cf1e543aea33a2440a13f50ca9ae8ffadd22d285bd485",
+    "NATIVE_RUN_SUMMARY.csv": "a551679681a2f4e510f63be4c57268068b8e4d3d670d8891eefa1c24408fe0ef"
+  },
+  "accepted_source_event_clock_ledger_passed": true,
+  "actual_twoPNG_visual_passed": true,
+  "PDF_visual_status": "NOT_RENDERED_THIS_REVIEW",
+  "future_source_changes_do_not_invalidate_saved_928_snapshot_identity": true,
+  "files": {
+    "IMU_CLAIM_135_INDEPENDENT_FINAL_REVIEW.md": {
+      "path": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_135_INDEPENDENT_FINAL_REVIEW.md",
+      "bytes": 6464,
+      "sha256": "9bd91d84d813dd489ed4a4b31d19b6979178aaa548e8957e230701e9e99d93c5"
+    },
+    "IMU_CLAIM_135_INDEPENDENT_FINAL_NUMERICAL_REVIEW.json": {
+      "path": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_135_INDEPENDENT_FINAL_NUMERICAL_REVIEW.json",
+      "bytes": 38243,
+      "sha256": "748034cd9f663c8fc0cd680f3f3405b8483ac168c781c24f20b8d95f1778c5aa"
+    },
+    "IMU_CLAIM_135_FULL_RMSE_INDEPENDENT.csv": {
+      "path": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_135_FULL_RMSE_INDEPENDENT.csv",
+      "bytes": 50781,
+      "sha256": "e4e7ce60c90afbc6dbcdbc546a10f351505ef21c6be97e08e488c4a036208cfc"
+    },
+    "IMU_CLAIM_135_OWN_DOMAINS_INDEPENDENT.csv": {
+      "path": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_135_OWN_DOMAINS_INDEPENDENT.csv",
+      "bytes": 136305,
+      "sha256": "9a03472db7080863635bf190117ed7d31c863bfce1e1d740e953f475c2d7fbd0"
+    },
+    "IMU_CLAIM_90_PAIR_DOMAINS_INDEPENDENT.csv": {
+      "path": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_90_PAIR_DOMAINS_INDEPENDENT.csv",
+      "bytes": 392052,
+      "sha256": "63dad2454dc0bbd06f43d365aba7998919263feb9fcf8d689de36c4f28cc7f39"
+    },
+    "IMU_CLAIM_PLACEMENT_SUMMARY_INDEPENDENT.csv": {
+      "path": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_PLACEMENT_SUMMARY_INDEPENDENT.csv",
+      "bytes": 39241,
+      "sha256": "fdf91d42d0eb16c6aa3ccaa7081e1eaa53bfdd28a05dd422e68b675cb71e0842"
+    },
+    "review_claim_135_final_saved_errors_independent.py": {
+      "path": "/mnt/g/LegSA-GINS-project/修复_20261004/review_claim_135_final_saved_errors_independent.py",
+      "bytes": 18841,
+      "sha256": "d8ca62abafa191f414476b4a87eb9423ad744f8191959dc4a8dfaa9538ac7542"
+    },
+    "IMU_CLAIM_135_INDEPENDENT_NATIVE_REVIEW.json": {
+      "path": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_135_INDEPENDENT_NATIVE_REVIEW.json",
+      "bytes": 1001681,
+      "sha256": "5370a6354d041f2680ff8b18734d23c0b9ea590896e22b832623ee973190c85b"
+    },
+    "IMU_CLAIM_135_INDEPENDENT_NATIVE_REVIEW.csv": {
+      "path": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_135_INDEPENDENT_NATIVE_REVIEW.csv",
+      "bytes": 23205,
+      "sha256": "9b26e417fa7d57ffaaa9aa31cf78bd2e3caff2520d900a5283fb609a3ff1256b"
+    },
+    "IMU_CLAIM_135_INDEPENDENT_NATIVE_REVIEW.md": {
+      "path": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_135_INDEPENDENT_NATIVE_REVIEW.md",
+      "bytes": 2716,
+      "sha256": "24eaa879a07c63dd4204fe54edd126ace03401be6c10a5c42029c87464a62f7e"
+    },
+    "review_claim_135_native_independent.py": {
+      "path": "/mnt/g/LegSA-GINS-project/修复_20261004/review_claim_135_native_independent.py",
+      "bytes": 12626,
+      "sha256": "a79fcb7c86f662956f595114bf58baabc95c72f70760294a9030181a24b23eaf"
+    },
+    "IMU_CLAIM_135_NATIVE_INPUT_ROLE_INITIAL_DIAGNOSTIC.json": {
+      "path": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_135_NATIVE_INPUT_ROLE_INITIAL_DIAGNOSTIC.json",
+      "bytes": 1010854,
+      "sha256": "3517b2f2b03c0598352dcc323b426503f94652fe4e91bb05e2e1563dff58d32e"
+    },
+    "IMU_CLAIM_ACCEPTED_FAULT_SOURCE_COUNTS.json": {
+      "path": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_ACCEPTED_FAULT_SOURCE_COUNTS.json",
+      "bytes": 1192,
+      "sha256": "0b6f5f4f4d20b9b61dc5ca0e7f00540a140b393b188b8b99c319b9694b3670d8"
+    },
+    "IMU_CLAIM_ACCEPTED_FAULT_SOURCE_COUNTS.csv": {
+      "path": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_ACCEPTED_FAULT_SOURCE_COUNTS.csv",
+      "bytes": 34935,
+      "sha256": "e37c71de3a49380c773cb395804232e120543bcc6832a9b9402d6a59f4014e2d"
+    },
+    "review_claim_saved_fault_source_accepts.py": {
+      "path": "/mnt/g/LegSA-GINS-project/修复_20261004/review_claim_saved_fault_source_accepts.py",
+      "bytes": 4529,
+      "sha256": "c5ae37651b7177ce94e566123daf899e066fb37ce2fcf634c4a15fc243cc39b3"
+    },
+    "IMU_CLAIM_SOURCE_SAMPLE_TIME_INITIAL_DIAGNOSTIC.json": {
+      "path": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_SOURCE_SAMPLE_TIME_INITIAL_DIAGNOSTIC.json",
+      "bytes": 1013,
+      "sha256": "54bfb8763d1a4de7d536053490d6ce44e5ee6c212d1373f438982c3f3408c598"
+    },
+    "IMU_CLAIM_SOURCE_SAMPLE_TIME_INITIAL_DIAGNOSTIC.csv": {
+      "path": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_SOURCE_SAMPLE_TIME_INITIAL_DIAGNOSTIC.csv",
+      "bytes": 26007,
+      "sha256": "1b2299e3290debf7b1ad3d04009ecbb85e4e01e3f7e6cc8c3690e21b811e9790"
+    },
+    "IMU_CLAIM_135_INDEPENDENT_ACTUAL_FIGURE_REVIEW.json": {
+      "path": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_135_INDEPENDENT_ACTUAL_FIGURE_REVIEW.json",
+      "bytes": 1426,
+      "sha256": "161d8f21b4848f58ec365e40fbb1b95acf3205cdbe87bd35aabf441734a2fa9e"
+    },
+    "IMU_CLAIM_135_FINAL_READ_COVERAGE.csv": {
+      "path": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_135_FINAL_READ_COVERAGE.csv",
+      "bytes": 1490,
+      "sha256": "bf38089e710da14037d6bff1f2025867b0ed4010b29956972fd2218f953aa8b3"
+    }
+  },
+  "remaining_scientific_limits": [
+    "Arithmetic verified saved shared-reference errors, not independent absolute truth",
+    "RMSEs and differences remain support-conditional; original observed-record denominators explicitly retained",
+    "Nine reused placements are not45 independent samples and no confirmatory p claimed",
+    "No single-repair causal benefit attributed; native saved-P proof remains recorded-boundary active15 only"
+  ]
+}

@@ -1,0 +1,375 @@
+{
+  "scope": "N12_ONLY / RUN_00004 and RUN_01401 only",
+  "published_analyzer_commit": "291c6c6f87990430a07ad44882b92ed62337df12",
+  "analyzer_sha256": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f",
+  "commands": [
+    "python3 docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/event_analysis/analyze_events.py scan --roots configs/paper_rebuild/V3_DEFINITION_ROOTS.local.json --candidate-id N12_ONLY --run-id RUN_00004",
+    "python3 docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/event_analysis/analyze_events.py compare --roots configs/paper_rebuild/V3_DEFINITION_ROOTS.local.json --candidate-id N12_ONLY --run-id RUN_00004",
+    "python3 docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/event_analysis/analyze_events.py scan --roots configs/paper_rebuild/V3_DEFINITION_ROOTS.local.json --candidate-id N12_ONLY --run-id RUN_01401",
+    "python3 docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/event_analysis/analyze_events.py compare --roots configs/paper_rebuild/V3_DEFINITION_ROOTS.local.json --candidate-id N12_ONLY --run-id RUN_01401"
+  ],
+  "records": [
+    {
+      "schema": "V3_DEFINITION_EVENT_CACHE_1",
+      "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl",
+      "run_id": "RUN_00004",
+      "candidate_id": "BASELINE",
+      "group": "C00",
+      "source_sha256": "de76add0058d57a8e035bd6d588159175e1cf28ec0d55fb4c7d255ff08170311",
+      "bytes_read_sha256": "de76add0058d57a8e035bd6d588159175e1cf28ec0d55fb4c7d255ff08170311",
+      "hash_scope": "FULL_STABLE_FILE",
+      "analyzer_sha256": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f",
+      "identity_gate": {
+        "checks": {
+          "slot": true,
+          "status": true,
+          "access": true,
+          "manifest": true,
+          "exit": true,
+          "native_count": true,
+          "identity": true,
+          "outputs": true
+        },
+        "receipt_sha256": "ea697ceee0a87d6263aaaa35666c51c02cc2d32945887fffdec65e261ef64ab4",
+        "access_sha256": "51ca71909779932c7bd52e4c52105196445835a514744c0c0b3f2d1b6aff0b71"
+      },
+      "stream_status": "COMPLETE",
+      "stream_error": null,
+      "analysis_status": "VALIDATED",
+      "events_read": 408566,
+      "bytes_read": 864568683,
+      "complete_payload_scan_count": 1,
+      "event_payload_opens_this_call": 1,
+      "payload_open_attempts_this_call": 1,
+      "physical_eof_reached": true,
+      "complete_valid_stream": true,
+      "cache_reused": false,
+      "sa_validation_counts": {
+        "VALIDATED": 7932
+      },
+      "numeric_tolerances": {
+        "nis_abs": 1e-09,
+        "nis_rel": 1e-08,
+        "R_abs": 1e-10,
+        "R_rel": 1e-10,
+        "covariance_symmetry_rel": 1e-10,
+        "covariance_pivot": 1e-12
+      },
+      "final_actual_counters": {
+        "gnss_update_count": 1369,
+        "position_update_count": 1369,
+        "velocity_update_count": 1369,
+        "yaw_attempt_count": 1369,
+        "yaw_reject_count": 21,
+        "sa_active_evaluation_count": 7932,
+        "raw_doppler_update_count": 1108,
+        "rp_update_count": 1369,
+        "hv_update_count": 1369
+      },
+      "data_mode": "real_clean",
+      "synthetic_data_used": false,
+      "semisynthetic_data_used": false,
+      "raw_provider_reference_reads": 0,
+      "new_native_calls": 0,
+      "evaluator_calls": 0,
+      "provider_calls": 0,
+      "elapsed_seconds": 164.62448072433472,
+      "numpy_version": "1.26.4",
+      "numeric_library_threads": 1,
+      "source_receipt": "<VALIDATION_ROOT>/analysis/event_cache/BASELINE__RUN_00004/SCAN_RECEIPT.json",
+      "source_metadata_unchanged": true
+    },
+    {
+      "schema": "V3_DEFINITION_EVENT_CACHE_1",
+      "source_path": "<VALIDATION_ROOT>/candidates/N12_ONLY/RUN_00004/observer/events.jsonl",
+      "run_id": "N12_ONLY__RUN_00004",
+      "candidate_id": "N12_ONLY",
+      "group": "C00",
+      "source_sha256": "060435ceb8318a329356a42bb19a8a6a0801c36d898f2fe67aedc7c830ba843b",
+      "bytes_read_sha256": "060435ceb8318a329356a42bb19a8a6a0801c36d898f2fe67aedc7c830ba843b",
+      "hash_scope": "FULL_STABLE_FILE",
+      "analyzer_sha256": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f",
+      "identity_gate": {
+        "checks": {
+          "slot": true,
+          "status": true,
+          "access": true,
+          "native_count": true,
+          "exit": true,
+          "config": true,
+          "outputs": true
+        },
+        "receipt_sha256": "35779b098f3c45e38bc9f7e817aef07a033d87493ea495857ac7194a4619dff1",
+        "access_sha256": "e4a33fc12d6b2c30e34b2ef286f9a489aadc1d5189bdab4288b3f4c565d366c1"
+      },
+      "stream_status": "COMPLETE",
+      "stream_error": null,
+      "analysis_status": "VALIDATED",
+      "events_read": 465209,
+      "bytes_read": 946585742,
+      "complete_payload_scan_count": 1,
+      "event_payload_opens_this_call": 1,
+      "payload_open_attempts_this_call": 1,
+      "physical_eof_reached": true,
+      "complete_valid_stream": true,
+      "cache_reused": false,
+      "sa_validation_counts": {
+        "VALIDATED": 7932
+      },
+      "numeric_tolerances": {
+        "nis_abs": 1e-09,
+        "nis_rel": 1e-08,
+        "R_abs": 1e-10,
+        "R_rel": 1e-10,
+        "covariance_symmetry_rel": 1e-10,
+        "covariance_pivot": 1e-12
+      },
+      "final_actual_counters": {
+        "gnss_update_count": 1369,
+        "position_update_count": 1369,
+        "velocity_update_count": 1369,
+        "yaw_attempt_count": 1369,
+        "yaw_reject_count": 21,
+        "sa_active_evaluation_count": 7932,
+        "raw_doppler_update_count": 1108,
+        "rp_update_count": 1369,
+        "hv_update_count": 1369
+      },
+      "data_mode": "real_clean",
+      "synthetic_data_used": false,
+      "semisynthetic_data_used": false,
+      "raw_provider_reference_reads": 0,
+      "new_native_calls": 0,
+      "evaluator_calls": 0,
+      "provider_calls": 0,
+      "elapsed_seconds": 174.73238849639893,
+      "numpy_version": "1.26.4",
+      "numeric_library_threads": 1,
+      "source_receipt": "<VALIDATION_ROOT>/analysis/event_cache/N12_ONLY__RUN_00004/SCAN_RECEIPT.json",
+      "source_metadata_unchanged": true
+    },
+    {
+      "schema": "V3_DEFINITION_EVENT_CACHE_1",
+      "source_path": "<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl",
+      "run_id": "RUN_01401",
+      "candidate_id": "BASELINE",
+      "group": "D15",
+      "source_sha256": "5414549783be475dd6b7467b4e7246b77c6600aea425db92d102168257c4ee3a",
+      "bytes_read_sha256": "5414549783be475dd6b7467b4e7246b77c6600aea425db92d102168257c4ee3a",
+      "hash_scope": "FULL_STABLE_FILE",
+      "analyzer_sha256": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f",
+      "identity_gate": {
+        "checks": {
+          "slot": true,
+          "status": true,
+          "access": true,
+          "manifest": true,
+          "exit": true,
+          "native_count": true,
+          "identity": true,
+          "outputs": true
+        },
+        "receipt_sha256": "5e0c3b58426dea7cd87f7656c2a09cae8c54e1338fd9fe9b2dc7046254dbfada",
+        "access_sha256": "69f1e9af3b06b37ffc2209fb72c8bdecea2eae8f8db20f209a41ddd15f33b82f"
+      },
+      "stream_status": "COMPLETE",
+      "stream_error": null,
+      "analysis_status": "VALIDATED",
+      "events_read": 408558,
+      "bytes_read": 863772898,
+      "complete_payload_scan_count": 1,
+      "event_payload_opens_this_call": 1,
+      "payload_open_attempts_this_call": 1,
+      "physical_eof_reached": true,
+      "complete_valid_stream": true,
+      "cache_reused": false,
+      "sa_validation_counts": {
+        "VALIDATED": 7930
+      },
+      "numeric_tolerances": {
+        "nis_abs": 1e-09,
+        "nis_rel": 1e-08,
+        "R_abs": 1e-10,
+        "R_rel": 1e-10,
+        "covariance_symmetry_rel": 1e-10,
+        "covariance_pivot": 1e-12
+      },
+      "final_actual_counters": {
+        "gnss_update_count": 1369,
+        "position_update_count": 1369,
+        "velocity_update_count": 1369,
+        "yaw_attempt_count": 1369,
+        "yaw_reject_count": 23,
+        "sa_active_evaluation_count": 7930,
+        "raw_doppler_update_count": 1108,
+        "rp_update_count": 1369,
+        "hv_update_count": 1369
+      },
+      "data_mode": "semisynthetic",
+      "synthetic_data_used": false,
+      "semisynthetic_data_used": true,
+      "raw_provider_reference_reads": 0,
+      "new_native_calls": 0,
+      "evaluator_calls": 0,
+      "provider_calls": 0,
+      "elapsed_seconds": 177.03492522239685,
+      "numpy_version": "1.26.4",
+      "numeric_library_threads": 1,
+      "source_receipt": "<VALIDATION_ROOT>/analysis/event_cache/BASELINE__RUN_01401/SCAN_RECEIPT.json",
+      "source_metadata_unchanged": true
+    },
+    {
+      "schema": "V3_DEFINITION_EVENT_CACHE_1",
+      "source_path": "<VALIDATION_ROOT>/candidates/N12_ONLY/RUN_01401/observer/events.jsonl",
+      "run_id": "N12_ONLY__RUN_01401",
+      "candidate_id": "N12_ONLY",
+      "group": "D15",
+      "source_sha256": "6d56a24a6689922f861e7e3df149283d474112003003395f4e99f4ed9df43e7e",
+      "bytes_read_sha256": "6d56a24a6689922f861e7e3df149283d474112003003395f4e99f4ed9df43e7e",
+      "hash_scope": "FULL_STABLE_FILE",
+      "analyzer_sha256": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f",
+      "identity_gate": {
+        "checks": {
+          "slot": true,
+          "status": true,
+          "access": true,
+          "native_count": true,
+          "exit": true,
+          "config": true,
+          "outputs": true
+        },
+        "receipt_sha256": "c296e0c71c38c834e116743f465b243f89c9004acec41408b47291a25d57026d",
+        "access_sha256": "c6924d6eb1068c726dfaa8318826950944d8781dcc9ce185909fa74b3bfe339f"
+      },
+      "stream_status": "COMPLETE",
+      "stream_error": null,
+      "analysis_status": "VALIDATED",
+      "events_read": 465197,
+      "bytes_read": 945538252,
+      "complete_payload_scan_count": 1,
+      "event_payload_opens_this_call": 1,
+      "payload_open_attempts_this_call": 1,
+      "physical_eof_reached": true,
+      "complete_valid_stream": true,
+      "cache_reused": false,
+      "sa_validation_counts": {
+        "VALIDATED": 7929
+      },
+      "numeric_tolerances": {
+        "nis_abs": 1e-09,
+        "nis_rel": 1e-08,
+        "R_abs": 1e-10,
+        "R_rel": 1e-10,
+        "covariance_symmetry_rel": 1e-10,
+        "covariance_pivot": 1e-12
+      },
+      "final_actual_counters": {
+        "gnss_update_count": 1369,
+        "position_update_count": 1369,
+        "velocity_update_count": 1369,
+        "yaw_attempt_count": 1369,
+        "yaw_reject_count": 24,
+        "sa_active_evaluation_count": 7929,
+        "raw_doppler_update_count": 1108,
+        "rp_update_count": 1369,
+        "hv_update_count": 1369
+      },
+      "data_mode": "semisynthetic",
+      "synthetic_data_used": false,
+      "semisynthetic_data_used": true,
+      "raw_provider_reference_reads": 0,
+      "new_native_calls": 0,
+      "evaluator_calls": 0,
+      "provider_calls": 0,
+      "elapsed_seconds": 189.6402931213379,
+      "numpy_version": "1.26.4",
+      "numeric_library_threads": 1,
+      "source_receipt": "<VALIDATION_ROOT>/analysis/event_cache/N12_ONLY__RUN_01401/SCAN_RECEIPT.json",
+      "source_metadata_unchanged": true
+    }
+  ],
+  "totals": {
+    "selected_event_streams": 4,
+    "event_payload_open_attempts": 4,
+    "complete_valid_stream_scans": 4,
+    "partial_stream_reads": 0,
+    "failed_streams": 0,
+    "event_lines": 1747530,
+    "bytes_read": 3620465575,
+    "SA_evaluations_validated": 31723,
+    "SA_failed_or_unavailable": 0,
+    "compare_calls": 2,
+    "comparison_event_payload_reads": 0,
+    "new_native_calls": 0,
+    "evaluator_calls": 0,
+    "provider_calls": 0,
+    "raw_provider_reference_NAV_STD_reads": 0
+  },
+  "large_outputs": "Remain under <VALIDATION_ROOT>/analysis/event_cache and comparisons; public files are summaries and exact first-event pointers only.",
+  "summary_count_provenance": "Each existing MEASUREMENT_COMPARISON.csv and IMU_STATE_COMPARISON.csv was fully read once for these summary counts; no event payload was reopened. D15 additionally had one header/first-row schema probe, not a full table read.",
+  "stream_retry_count": 0,
+  "interpretation": "VALIDATED denotes stream/association/arithmetic gates; it does not mean covariance positive definiteness or demonstrated accuracy improvement.",
+  "data_mode": "mixed_real_clean_and_semisynthetic_sources",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "covariance_pattern_query": "SELECT json_extract(data,'$.report.nonpositive_diagonal_indices'), json_extract(data,'$.report.min_diagonal'), json_extract(data,'$.report.all_finite'), COUNT(*) FROM covariance GROUP BY 1,2,3",
+  "covariance_pattern_query_scope": "Previously completed read-only query on each derived event cache, not event payload rereading; each cache produced exactly one pattern row.",
+  "covariance_pattern_query_results": [
+    {
+      "cache": "<VALIDATION_ROOT>/analysis/event_cache/BASELINE__RUN_00004/cache.sqlite",
+      "nonpositive_diagonal_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "min_diagonal": 0,
+      "all_finite": true,
+      "matching_rows": 15864
+    },
+    {
+      "cache": "<VALIDATION_ROOT>/analysis/event_cache/N12_ONLY__RUN_00004/cache.sqlite",
+      "nonpositive_diagonal_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "min_diagonal": 0,
+      "all_finite": true,
+      "matching_rows": 56642
+    },
+    {
+      "cache": "<VALIDATION_ROOT>/analysis/event_cache/BASELINE__RUN_01401/cache.sqlite",
+      "nonpositive_diagonal_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "min_diagonal": 0,
+      "all_finite": true,
+      "matching_rows": 15860
+    },
+    {
+      "cache": "<VALIDATION_ROOT>/analysis/event_cache/N12_ONLY__RUN_01401/cache.sqlite",
+      "nonpositive_diagonal_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "min_diagonal": 0,
+      "all_finite": true,
+      "matching_rows": 56642
+    }
+  ]
+}

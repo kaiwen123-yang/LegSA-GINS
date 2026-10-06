@@ -1,0 +1,30 @@
+{
+  "schema": "root.EXT.nominal.measurand.saved-result.review.v1",
+  "all_checks_passed": true,
+  "same_original_scored_key_checks": 7689,
+  "independent_summary_fields_checked": 45,
+  "max_statistic_difference_deg": 0.0,
+  "old_bound_file_pins_unchanged": 9,
+  "old_Euler_error_max_diff_deg": 0.0,
+  "old_Euler_RMSE_max_diff_deg": 1.4210854715202004e-14,
+  "nominal_projection_unsupported_count": 0,
+  "actual_strace_reference_opens": {
+    "BY2": 1,
+    "BY2H": 1,
+    "BY2O": 1
+  },
+  "actual_strace_sha256": "54859e2bcbd7c74e01b9e3c43eba792d8c52cbbd743b1c8480c249dbcb1c9709",
+  "nominal_quantity_max_abs_delta_deg": 0.4544071833082033,
+  "nominal_quantity_RMSE_range_deg": [
+    0.031091564448270263,
+    0.043576512186021814
+  ],
+  "maximum_nominal_vs_Euler_RMSE_change_deg": 0.004278311271292523,
+  "preregistration_sha256": "b041cc31ba3966bb54d6c1a932ddb17fe0c259827f859e3635047858d3f945ed",
+  "result_receipt_sha256": "3c997227ea57c0059cc1083ebe5d8f0143b0488758a50ee5cfab0d7c5f5df0f0",
+  "review_source_sha256": "452d0018528a22c2e281ea8fb3064bb9d48e93828a5ace31f65266e6d9b2f64b",
+  "review_reference_payload_reads": 0,
+  "new_native_invocations": 0,
+  "old_files_written": 0,
+  "interpretation": "Nominal tilt quantity difference cannot explain retained64-104deg errors; actual mount/antenna-order calibration remains unknown, no universal unsuitability or same-input ranking claim"
+}

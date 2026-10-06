@@ -1,0 +1,46 @@
+case_id,family,duration_s,seed_index,provider_sha256,outage_HV_rows,outage_HV_valid_rows,outage_A1_heading_valid_rows,outage_Go2_source_valid_rows,pure_GNSS_independent_HV_claim_supported,interpretation
+D61_10s_seed_00,D61,10,seed_00,b53a45e32d771ec560f1b21a5a57a2686240f94ae481247c1b7935287514426d,1850,0,0,1850,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_10s_seed_01,D61,10,seed_01,fd1b4c3e1913424f6ebce4de2df58c1239d13d088d13d7b018e2fd1bfa4b45b4,2152,0,0,2152,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_10s_seed_02,D61,10,seed_02,ba9bdfb4879848b5710566a0cd53c617cebbe92f8d410c97e67025bffda33707,1933,0,0,1933,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_10s_seed_03,D61,10,seed_03,c4b1827d9307fa6c153e5ad2f9b1529731bc677d8a8491d87cd24f587cbea8f7,1745,0,0,1745,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_10s_seed_04,D61,10,seed_04,9580e715531bda430abc5870b39677abfd13cff7a0ba79da6721ed2a0949b47b,2060,0,0,2060,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_10s_seed_05,D61,10,seed_05,e9fcc85a253293c949373a9fe202d4db4c1ab9bf19f2c65688500e5f4c971845,1727,0,0,1727,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_10s_seed_06,D61,10,seed_06,b01cc563120861c9127e6e4da8a14dcd05ee018db7fddd311d214bf748fdf6ac,2271,0,0,2271,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_10s_seed_07,D61,10,seed_07,b5db4495bbafe273abfa129d5f09f95e3ada8210aaf967715887091e816bef36,2164,0,0,2164,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_10s_seed_08,D61,10,seed_08,39cfec0ef001fe61777afa82a41b8d2307db04ec9f05cab06e8d48959e6690c6,2259,0,0,2259,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_20s_seed_00,D61,20,seed_00,76f02209f0522d44d9ad4e2484b7495dba625697e01c90c6a00b5304e40001c4,3678,0,0,3678,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_20s_seed_01,D61,20,seed_01,75777bb6b848d3ac5d4c921c987eca20ec54987e13cc18cbf5fc2b837a7849fe,4419,0,0,4419,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_20s_seed_02,D61,20,seed_02,9b1e452ba4fb8ccc9608219d5dcc4671269e7c3e61038a642829bfe5bf695bb0,3776,0,0,3776,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_20s_seed_03,D61,20,seed_03,a9ea133102917e8f2664f6ab48ef85a6484ec25f2c2faa5dfc113ef93f17b688,3446,0,0,3446,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_20s_seed_04,D61,20,seed_04,8345ee6b54acc4d213cb2e9d59e7208e488c77c960675c5f8216c763616138cf,4081,0,0,4081,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_20s_seed_05,D61,20,seed_05,5abe0bfd32b64a29c41ece5857df1cdc84e3e63a8167c82f7ffc1e17f921cf57,3417,0,0,3417,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_20s_seed_06,D61,20,seed_06,4f0e39a22c74afa41613745fdb3be8f89b5844f67dc64bcd3d75437a98713c89,4545,0,0,4545,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_20s_seed_07,D61,20,seed_07,8bea7fafce4f2e38e3c9d5ecbc5a3d1810364941d51f01d582af334661efa5b6,4193,0,0,4193,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_20s_seed_08,D61,20,seed_08,aa8284196b35a37f9c9520c0f83c7e73c24d4ea3ee67928c4282740800809672,4550,0,0,4550,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_30s_seed_00,D61,30,seed_00,9b40281a3444cced41203dd7a53ce811c40f22d3f34614a136b5121fd898d2c8,5411,0,0,5411,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_30s_seed_01,D61,30,seed_01,5d9517150870469eb10f042a578ece5bdbff6119c009324e366b25173b3d80d9,6700,0,0,6700,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_30s_seed_02,D61,30,seed_02,4dec7590a8300a1d7204c68fc644cbbb4a1f982c580b6226f9c33389081662c9,5649,0,0,5649,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_30s_seed_03,D61,30,seed_03,7155489b6dbdae14ae46e911048d71e45ea0a8cc3e58972aa8d7991d4405b21e,5209,0,0,5209,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_30s_seed_04,D61,30,seed_04,ad75473e4bda86866e4afc85c5d8c138417a679f6755bb3b4d79b8fac432a900,6121,0,0,6121,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_30s_seed_05,D61,30,seed_05,59ecb4e7340f6bfff582251862f0fdbcede039cdcbfdc321712e984e7044f481,5222,0,0,5222,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_30s_seed_06,D61,30,seed_06,33f2fe8e0c3b8c8890c48f70a04e0b2b0b237c0379e862efdc909eec35d2189b,6737,0,0,6737,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_30s_seed_07,D61,30,seed_07,8afcb61b2113c52c893c69c3a13e801abe8373300c628445865ae43df7d17b92,6222,0,0,6222,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D61_30s_seed_08,D61,30,seed_08,2e9e7589602bd91e1e09dec0daef67a9525220d65cc26bd63e358709adcb054c,6567,0,0,6567,False,HV unavailable within outage; compare carried pre-outage state/covariance and recovery
+D62_10s_seed_00,D62,10,seed_00,3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e,1850,1850,1850,1850,False,HV remains conditional on retained A1 GNSS heading
+D62_10s_seed_01,D62,10,seed_01,3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e,2152,2152,2152,2152,False,HV remains conditional on retained A1 GNSS heading
+D62_10s_seed_02,D62,10,seed_02,3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e,1933,1933,1933,1933,False,HV remains conditional on retained A1 GNSS heading
+D62_10s_seed_03,D62,10,seed_03,3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e,1745,1745,1745,1745,False,HV remains conditional on retained A1 GNSS heading
+D62_10s_seed_04,D62,10,seed_04,3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e,2060,2060,2060,2060,False,HV remains conditional on retained A1 GNSS heading
+D62_10s_seed_05,D62,10,seed_05,3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e,1727,1727,1727,1727,False,HV remains conditional on retained A1 GNSS heading
+D62_10s_seed_06,D62,10,seed_06,3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e,2271,2271,2271,2271,False,HV remains conditional on retained A1 GNSS heading
+D62_10s_seed_07,D62,10,seed_07,3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e,2164,2164,2164,2164,False,HV remains conditional on retained A1 GNSS heading
+D62_10s_seed_08,D62,10,seed_08,3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e,2259,2259,2259,2259,False,HV remains conditional on retained A1 GNSS heading
+D62_20s_seed_00,D62,20,seed_00,3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e,3678,3678,3678,3678,False,HV remains conditional on retained A1 GNSS heading
+D62_20s_seed_01,D62,20,seed_01,3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e,4419,4419,4419,4419,False,HV remains conditional on retained A1 GNSS heading
+D62_20s_seed_02,D62,20,seed_02,3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e,3776,3776,3776,3776,False,HV remains conditional on retained A1 GNSS heading
+D62_20s_seed_03,D62,20,seed_03,3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e,3446,3446,3446,3446,False,HV remains conditional on retained A1 GNSS heading
+D62_20s_seed_04,D62,20,seed_04,3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e,4081,4081,4081,4081,False,HV remains conditional on retained A1 GNSS heading
+D62_20s_seed_05,D62,20,seed_05,3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e,3417,3417,3417,3417,False,HV remains conditional on retained A1 GNSS heading
+D62_20s_seed_06,D62,20,seed_06,3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e,4545,4545,4545,4545,False,HV remains conditional on retained A1 GNSS heading
+D62_20s_seed_07,D62,20,seed_07,3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e,4193,4193,4193,4193,False,HV remains conditional on retained A1 GNSS heading
+D62_20s_seed_08,D62,20,seed_08,3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e,4550,4550,4550,4550,False,HV remains conditional on retained A1 GNSS heading

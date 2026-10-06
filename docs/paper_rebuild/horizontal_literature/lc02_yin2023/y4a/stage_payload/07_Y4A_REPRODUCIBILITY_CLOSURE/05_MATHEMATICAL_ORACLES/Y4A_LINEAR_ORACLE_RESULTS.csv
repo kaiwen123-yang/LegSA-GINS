@@ -1,0 +1,29 @@
+oracle_id,claim,observed,expected,tolerance,passed,meaning
+AKF_DENOMINATOR_STATE_TRACE,printed state-trace statistic,0.830454798537,sqrt(20/29),1e-12,true,One literal reading of Yin Eq. (6).
+AKF_DENOMINATOR_INNOVATION_TRACE,measurement-space alternative statistic,1.05409255339,sqrt(20/18),1e-12,true,A dimensionally compatible completion gives a different statistic.
+AKF_ALPHA_BRANCH_DIVERGENCE,candidate denominators select different alpha,0.0513167019495,>0.05,0,true,The source omission is algorithmically material.
+STANDARDIZER_R_DIAGONAL,measurement-noise denominator,6,6,1e-12,true,This candidate rejects the component under Yin thresholds.
+STANDARDIZER_S_DIAGONAL,innovation-covariance denominator,1.5,1.5,1e-12,true,This cited-source candidate only downweights the same component.
+STANDARDIZER_WEIGHT_DIVERGENCE,R- and S-based standardizers yield different IGGIII decisions,0.547684953298,>0,0,true,No numerical oracle can choose the missing source definition.
+IGGIII_K0_CONTINUITY,printed exponent-three weight equals one at k0,1,1,1e-12,true,Scalar Eq. (10) is executable at the lower boundary.
+IGGIII_K1_ZERO,printed exponent-three weight reaches zero at k1,0,0,1e-12,true,The next printed inverse is undefined at this exact weight.
+IGGIII_LEFT_WEIGHT_NONSYMMETRY,left multiplication of correlated precision is nonsymmetric,0.464038825154,>0,0,true,The scalar per-component equation does not define a valid general matrix rule.
+IGGIII_SYMMETRIC_SANDWICH_PSD,square-root sandwich remains positive definite,0.169987966584,>0,0,true,"This is one defensible correlated completion, not uniquely Yin's."
+IGGIII_MATRIX_COMPLETIONS_DIFFER,left and symmetric completions differ,0.24172294934,>0,0,true,Off-diagonal handling is algorithmically material.
+ZERO_WEIGHT_SCALAR_LIMIT,positive-weight limit approaches row omission,1.33333322161e-09,<2e-9,2e-09,true,The limit is defined; direct inversion at weight zero is not.
+ZERO_WEIGHT_DIAGONAL_ROW_OMISSION,diagonal infinite-variance limit equals omission,1.18920134467e-09,<2e-9,2e-09,true,Equivalence holds only under the stated diagonal construction.
+ZERO_WEIGHT_CORRELATED_PATH_DEPENDENCE,correlated inflation limit differs from direct row deletion,0.0927096604992,>1e-3,0.001,true,"A zero-weight operation must be specified, not inferred from scalar notation."
+RAEKF_PRINTED_FUSION_PSD,printed convex covariance fusion is positive definite,1.45,>0,0,true,PSD does not establish the covariance's probabilistic interpretation.
+RAEKF_INDEPENDENT_LINEAR_COVARIANCE_DIFFERS,independent linear-combination covariance differs from Eq. (13),0.901561146013,>0,0,true,Cross-covariance assumptions are absent.
+RAEKF_MIXTURE_COVARIANCE_DIFFERS,mixture covariance with branch-mean spread differs from Eq. (13),0.51,>0,0,true,Eq. (13) is executable but not a uniquely justified uncertainty law.
+L_Z_SYMBOL_NONIDENTITY,different observation symbols can produce different innovations,0.2,>0,0,true,"Only a source statement, not algebra, can authorize L_k=Z_k."
+EKF_1D_UPDATE_IDENTITY,"one-dimensional EKF gain, state, and covariance identity",0,0,1e-12,true,Standalone nominal EKF identity; no navigation data are used.
+EKF_3D_UPDATE_IDENTITY,three-dimensional diagonal EKF update identity,3.03764566556e-16,0,1e-12,true,Verifies the nominal three-axis algebra independently of Yin policy choices.
+AKF_ALPHA_ONE_EQUALS_EKF,Yin AKF equations reduce to EKF when alpha equals one,0,0,1e-12,true,"This identity closes a printed special case, not the ambiguous alpha statistic."
+IGGIII_INLIER_INFORMATION_NOMINAL,declared PAPER_DERIVED conventional Eq.11 split preserves nominal information for an inlier,0,0,1e-12,true,"Eq.10 Greek omega equals one PAPER_DIRECT; the author response says its weighting function enters Eq.11's Latin w multiplier, but mapping it to A_equivalent=omega*A_base remains an unselected PAPER_DERIVED candidate."
+IGGIII_MIDDLE_WEIGHT_FINITE_POSITIVE,middle-band exponent-three scalar weight is finite and positive,0.235301273757,0<w<1,0,true,This does not define the missing general matrix construction.
+ZERO_WEIGHT_NO_UNIQUE_YIN_POLICY,one printed singular path and at least two executable completions remain source-unselected,2,>=2_EXECUTABLE_COMPLETIONS_PLUS_1_NONEXECUTABLE_PRINTED_PATH,0,true,The printed zero-information inverse is non-executable; row omission and a positive infinite-variance limit are executable but unselected.
+EQ12_STATE_WEIGHTED_FUSION_EXACT,Eq.12 convex state fusion evaluates exactly,0,0,1e-12,true,The printed state-fusion equation is source-closed.
+EQ13_COVARIANCE_WEIGHTED_FUSION_EXACT,Eq.13 convex covariance fusion evaluates exactly,3.14018491737e-16,0,1e-12,true,"Cross-covariance is an interpretation limit, not an ambiguity in executable Eq.13."
+NED_PERMUTATION_EQUIVARIANCE,diagonal three-axis update is equivariant under N/E/D permutation,0,0,1e-12,true,"Axis ordering must be permuted consistently for state, covariance, and measurement."
+DIAGONAL_R_UNIT_EXPONENT_M2,computed unit exponent 2*PDOP(0)+Q(0)+2*r(1) equals square metres,2,2 (m^2),0,true,The diagonal improved-R entry retains covariance units m^2.

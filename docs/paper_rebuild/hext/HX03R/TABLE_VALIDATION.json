@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "logical_rows": 146,
+  "physical_runs": 113,
+  "controls": 20,
+  "csv_identity_unique": true,
+  "missing_observer_and_argmax_not_filled": true,
+  "frozen_summary_recheck_max_relative_error": 2.0622221185631925e-16,
+  "native_calls": 0,
+  "evaluator_calls": 0
+}

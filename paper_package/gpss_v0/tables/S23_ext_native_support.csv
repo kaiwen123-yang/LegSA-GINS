@@ -1,0 +1,10 @@
+Sequence,Method,Valid,Expected pairs,Projected-heading versus Euler RMSE (deg)
+BY2,GNSS-compass branch,980,1370,85.01547170149344
+BY2,Wrapped-LS branch,961,1370,85.17979534428157
+BY2,Baseline-constrained filter,541,1370,79.93184477512393
+BY2H,GNSS-compass branch,1059,1350,89.12738833212403
+BY2H,Wrapped-LS branch,1029,1350,89.19292278722824
+BY2H,Baseline-constrained filter,467,1350,63.99455641404237
+BY2O,GNSS-compass branch,1173,1885,81.27346536636341
+BY2O,Wrapped-LS branch,1210,1885,81.48607092261156
+BY2O,Baseline-constrained filter,269,1885,103.75420005976044

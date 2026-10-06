@@ -1,0 +1,200 @@
+schema_version: 1
+registry_id: HARTLEY_BACKEND_IDENTITY_REGISTRY_H3_H5
+registry_status: H3_H4_PRESERVED_H5_REPORTED_BACKEND_ONLY
+method_id: LSE01_HARTLEY_CONTACT_AIDED_INEKF
+navigation_frame: WORLD_CENTRIC
+error_definition: RIGHT_INVARIANT
+
+backend_identities:
+  HARTLEY_IJRR2020_REPORTED_BACKEND:
+    role: PRODUCTION_PAPER_FAITHFUL_BACKEND
+    primary: true
+    deterministic_mean: IJRR_EQ_50_EXACT_ZERO_ORDER_HOLD
+    state_transition: IJRR_EQS_58_OR_60_ANALYTICAL_RIGHT_INVARIANT_PHI
+    discrete_process_covariance: IJRR_EQ_61_PAPER_REPORTED_APPROXIMATION
+    exact_qd_integral_claim: false
+    article_reported_result_path: true
+  EXACT_QD_REFERENCE_DIAGNOSTIC:
+    role: MATHEMATICAL_REFERENCE_DIAGNOSTIC
+    primary: false
+    deterministic_mean: IJRR_EQ_50_EXACT_ZERO_ORDER_HOLD
+    state_transition: SAME_ANALYTICAL_RIGHT_INVARIANT_PHI
+    discrete_process_covariance: IJRR_EQ_52_INDEPENDENT_HIGH_ACCURACY_INTEGRAL
+    production_replacement_allowed: false
+    article_reported_result_path: false
+    available_in_h5_runtime: false
+  OFFICIAL_CPP_EARLY_REGRESSION:
+    role: PINNED_EARLY_OFFICIAL_IMPLEMENTATION_REGRESSION
+    primary: false
+    deterministic_mean: FROZEN_R_VELOCITY_POSITION_APPROXIMATION
+    state_transition: PHI_EQUALS_I_PLUS_A_DT
+    discrete_process_covariance: OFFICIAL_MAPPED_Q_APPROXIMATION
+    event_lifecycle: OFFICIAL_EVENT_LIFECYCLE
+    official_identity: RossHartley/invariant-ekf@ef16e8a1df72f9272111a488880e3fe9d161f59f
+    full_ijrr_backend_claim: false
+  identities_may_not_be_conflated: true
+
+implementation:
+  language: C++17
+  linear_algebra: Eigen
+  public_header: src/legsa_gins/paper_rebuild/horizontal_literature/hartley_inekf/include/hartley_inekf/backend.hpp
+  implementation_source: src/legsa_gins/paper_rebuild/horizontal_literature/hartley_inekf/src/backend.cpp
+  cpp_tests: src/legsa_gins/paper_rebuild/horizontal_literature/hartley_inekf/tests/backend_tests.cpp
+  validation_tool: src/legsa_gins/paper_rebuild/horizontal_literature/hartley_inekf/tools/validate_backend.cpp
+  public_lie_group_functions:
+    - gamma0
+    - gamma1
+    - gamma2
+    - psi1
+    - psi2
+    - expSO3
+    - logSO3
+    - expSEK3
+    - logSEK3
+    - adjointSEK3
+  public_noise_interface_functions:
+    - continuousPsdFromDensity
+    - discreteSampleStdFromDensity
+    - isotropicMeasurementCovariance
+    - contactMeasurementCovarianceFromPaperTable1JointEncoder
+    - H5Eq61NoisePolicy
+    - PaperTable1ProcessStd
+  backend_class: HartleyInEkf
+  state_and_diagnostic_api:
+    - stateMean
+    - stateCovariance
+    - activeContactIdentities
+    - propagate
+    - correctContacts
+    - augmentContacts
+    - removeContacts
+    - diagnostics
+    - h5RuntimeDiagnostics
+    - processContactLifecycle
+    - initializeContactsEq32WithIndependentPrior
+  mathematical_api:
+    - exactMeanStep
+    - officialEarlyMeanStep
+    - continuousA
+    - continuousL
+    - continuousQc
+    - analyticalPhi
+    - analyticalPhiEq60
+    - eq61ProcessCovariance
+    - eq61MappedQbarPaperTable1
+    - eq61ProcessCovariancePaperTable1
+    - eq61MappedQbarGo2ImuPaperContact
+    - eq61ProcessCovarianceGo2ImuPaperContact
+    - eq52ProcessCovarianceGaussLegendre64
+
+noise_interface_types:
+  density_cpp_type: ContinuousNoiseDensity
+  density_semantics: CONTINUOUS_AMPLITUDE_SPECTRAL_DENSITY_WITH_UNITS_IN_FIELD_NAMES
+  continuous_psd_cpp_type: ContinuousNoisePsd
+  discrete_sample_std_cpp_type: DiscreteSampleStd
+  discrete_covariance_cpp_type: Eigen_MatrixXd
+  discrete_covariance_api_quantity: Qd
+  fk_measurement_std: MeasurementStdMeters
+  paper_table1_native: PaperTable1DiscreteStd
+  paper_table1_semantics: PAPER_NATIVE_DISCRETE_STD_FIVE_PROCESS_EQ61_QBAR_PLUS_ONE_ENCODER_MEASUREMENT_R
+  paper_table1_contact_std_m_per_s: 0.05
+  paper_table1_joint_encoder_std_deg: 1.0
+  paper_table1_joint_encoder_measurement_covariance_api: contactMeasurementCovarianceFromPaperTable1JointEncoder
+  paper_table1_joint_encoder_mapping: R_EQUALS_J_SIGMA_RAD_SQUARED_I_J_TRANSPOSE
+  paper_table1_joint_encoder_deg_to_meter_scalar_allowed: false
+  paper_table1_contact_reinterpreted_as_continuous_asd: false
+  go2_h5_mixed_adapter: HartleyInEkf::eq61ProcessCovarianceGo2ImuPaperContact
+  h5_stateful_policy_type: H5Eq61NoisePolicy
+  h5_paper_process_type: PaperTable1ProcessStd
+  h5_paper_process_field_count: 5
+  h5_joint_encoder_runtime_status: NOT_APPLICABLE_TO_BY2_WITHOUT_RAW_JOINTS_AND_JACOBIAN
+  fk_measurement_covariance_api: isotropicMeasurementCovariance
+  fk_measurement_enters_qc: false
+  density_to_psd_rule: SQUARE_EXACTLY_ONCE_WITH_NO_SQRT_DT_PREPROCESSING
+
+preregistered_validation_tolerances:
+  exp_log_rotation_frobenius:
+    normal: 2.0e-11
+    near_pi_stress: 2.0e-9
+  gamma_psi_oracle_relative_error:
+    normal: 2.0e-11
+    stress: 2.0e-9
+  small_angle_branch_continuity:
+    normal: 5.0e-12
+  adjoint_conjugation_relative_error:
+    normal: 5.0e-11
+    stress: 2.0e-9
+  eq50_rotation_geodesic_rad:
+    normal: 2.0e-10
+    stress: 2.0e-8
+  eq50_velocity_position_mixed_error:
+    normal: 2.0e-10
+    stress: 2.0e-8
+  eq58_vs_eq60_relative_frobenius:
+    normal: 1.0e-11
+    stress: 1.0e-9
+  five_point_invariant_error_fd_phi_max_abs:
+    finite_difference_h: 1.0e-5
+    normal: 2.0e-7
+    stress: 2.0e-5
+  five_point_invariant_error_fd_phi_block_relative:
+    finite_difference_h: 1.0e-5
+    normal: 1.0e-6
+    stress: 5.0e-5
+  zero_dt_phi_identity_max_abs:
+    normal: 5.0e-12
+  eq52_gauss_legendre64_vs_dop853_relative_frobenius:
+    normal: 2.0e-8
+    stress: 2.0e-6
+    oracle_method: SCIPY_DOP853
+    oracle_rtol: 1.0e-12
+    oracle_atol: 1.0e-14
+  covariance_normalized_asymmetry:
+    normal: 1.0e-12
+    stress: 1.0e-10
+  covariance_psd_minimum_eigenvalue:
+    normal_lower_bound: "-1.0e-12 * max(1, lambda_max)"
+    stress_lower_bound: "-1.0e-10 * max(1, lambda_max)"
+  lifecycle_direct_map_max_abs:
+    normal: 2.0e-12
+    stress: 1.0e-10
+  gauge_state_and_bias_after_inverse_gauge:
+    normal: 2.0e-9
+    stress: 2.0e-7
+  gauge_covariance_relative_frobenius:
+    normal: 2.0e-8
+    stress: 2.0e-6
+  official_sequence_state_max_abs_or_geodesic:
+    normal: 5.0e-8
+  official_sequence_covariance_relative_frobenius:
+    normal: 2.0e-7
+  official_rounded_stdout_fields:
+    normal: 5.0e-6
+
+ideal_observability_tolerances:
+  rank_tolerance: max(1.0e-12,1.0e-9*sigma_max)
+  rank_tolerance_multipliers: [0.1, 1.0, 10.0]
+  O_times_G_residual_max: 1.0e-9
+  gauge_nullspace_residual_max: 1.0e-7
+  maximum_principal_angle_deg: 1.0e-5
+  contact_dimension_crossing_without_explicit_state_map: false
+
+execution_boundary:
+  historical_h3_h4_snapshot:
+    synthetic_validation_only_in_h3_h4: true
+    real_BY2_navigation_executed: false
+    reference_opened: false
+    ext06_executed: false
+    canonical541_executed: false
+    external_stage_publication: true
+    external_stage_hash_parity_verified: true
+    ready_for_real_by2_h5: false
+    h5_execution_authorization: HUMAN_AUTHORIZATION_REQUIRED
+  h5_native_snapshot:
+    real_BY2_navigation_execution_status: FOUR_NATIVE_RUNS_FROZEN_LOCAL_ONLY
+    real_BY2_EQ52_run: false
+    external_stage_publication: false
+    reference_open_count: 0
+    trace_open_count: 0
+  h5_runtime_backend_identity: HARTLEY_IJRR2020_REPORTED_BACKEND
+  h5_runtime_eq52_available: false

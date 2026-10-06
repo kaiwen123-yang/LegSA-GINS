@@ -1,0 +1,112 @@
+{
+  "candidate": "N16_ONLY",
+  "data_mode": "synthetic_fixture_only",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "real_native_calls": 0,
+  "evaluator_calls": 0,
+  "provider_calls": 0,
+  "real_payload_reads": 0,
+  "compiles": [
+    {
+      "label": "baseline",
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O3",
+        "-DNDEBUG",
+        "-I<OBSERVED_SOURCE>/cpp/legsa_v23_port_core/include",
+        "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/candidates/N16_ONLY/native_fixture.cpp",
+        "<MECHANISM_BUILD_ROOT>/build_observed/liblegsa_v23_port_core.a",
+        "-o",
+        "<VALIDATION_BUILD_ROOT>/fixtures_N16_ONLY/fixture_baseline"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.331457764001243,
+      "log": "<VALIDATION_BUILD_ROOT>/fixtures_N16_ONLY/compile_baseline.log",
+      "linked_library": "<MECHANISM_BUILD_ROOT>/build_observed/liblegsa_v23_port_core.a",
+      "linked_library_sha256": "7487a1ac2297348399a940b6b3fbf72ca6d39700542b1f2ec2a88c49a41ca3ee",
+      "binary_sha256": "1c11bb0004c697292fb985e7bb0ccf6a21eb82500d0d9772c24ffd2f8e5abc71"
+    },
+    {
+      "label": "candidate",
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O3",
+        "-DNDEBUG",
+        "-I<VALIDATION_BUILD_ROOT>/source_N16_ONLY/cpp/legsa_v23_port_core/include",
+        "-DN16_ACTIVE_AXES=1",
+        "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/candidates/N16_ONLY/native_fixture.cpp",
+        "<VALIDATION_BUILD_ROOT>/build_N16_ONLY/liblegsa_v23_port_core.a",
+        "-o",
+        "<VALIDATION_BUILD_ROOT>/fixtures_N16_ONLY/fixture_candidate"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.1617959890027123,
+      "log": "<VALIDATION_BUILD_ROOT>/fixtures_N16_ONLY/compile_candidate.log",
+      "linked_library": "<VALIDATION_BUILD_ROOT>/build_N16_ONLY/liblegsa_v23_port_core.a",
+      "linked_library_sha256": "8151e1019a1f7b34169ad48726ecc11cf061238ffa90e36af99f531bd154d6d1",
+      "binary_sha256": "5d40c22a6dc7b922388ac7417bfe1a72de8c9a14c762925156a08f63c5d03faa"
+    }
+  ],
+  "fixture_processes": [
+    {
+      "label": "baseline",
+      "command": [
+        "<VALIDATION_BUILD_ROOT>/fixtures_N16_ONLY/fixture_baseline",
+        "<VALIDATION_BUILD_ROOT>/fixtures_N16_ONLY/baseline",
+        "observer_on"
+      ],
+      "native_fixture_exec_count": 1,
+      "real_native_exec_count": 0,
+      "status": "COMPLETED",
+      "output": "<VALIDATION_BUILD_ROOT>/fixtures_N16_ONLY/baseline",
+      "exit_code": 0,
+      "elapsed_seconds": 0.026970439997967333
+    },
+    {
+      "label": "candidate_off",
+      "command": [
+        "<VALIDATION_BUILD_ROOT>/fixtures_N16_ONLY/fixture_candidate",
+        "<VALIDATION_BUILD_ROOT>/fixtures_N16_ONLY/candidate_off",
+        "observer_off"
+      ],
+      "native_fixture_exec_count": 1,
+      "real_native_exec_count": 0,
+      "status": "COMPLETED",
+      "output": "<VALIDATION_BUILD_ROOT>/fixtures_N16_ONLY/candidate_off",
+      "exit_code": 0,
+      "elapsed_seconds": 0.010018128003139282
+    },
+    {
+      "label": "candidate_on",
+      "command": [
+        "<VALIDATION_BUILD_ROOT>/fixtures_N16_ONLY/fixture_candidate",
+        "<VALIDATION_BUILD_ROOT>/fixtures_N16_ONLY/candidate_on",
+        "observer_on"
+      ],
+      "native_fixture_exec_count": 1,
+      "real_native_exec_count": 0,
+      "status": "COMPLETED",
+      "output": "<VALIDATION_BUILD_ROOT>/fixtures_N16_ONLY/candidate_on",
+      "exit_code": 0,
+      "elapsed_seconds": 0.026362119999248534
+    }
+  ],
+  "common_target_containment": "3/3 regular targets and parents; no symlink; inside candidate source",
+  "compiler": "11.4.0",
+  "fixture_source_sha256": "9441a5d7622d7a05bea2d1f86a7e4c6885701f9839e0ba20d59ece2ba4aa3d8f",
+  "retry_count": 0,
+  "status": "PASS",
+  "checks": 366,
+  "failed_checks": 0,
+  "policy_scenarios_per_process": 126,
+  "integration_scenarios_per_process": 10,
+  "native_fixture_process_count": 3,
+  "scenario_executions": 408,
+  "old_target_contract_failures_retained": 6,
+  "three_dimensional_control_cases": 96,
+  "fixture_logs_read": "new pure-synthetic logs only; once each",
+  "covariance_common_suite": "separate root-owned receipt; not counted as this candidate's tests"
+}

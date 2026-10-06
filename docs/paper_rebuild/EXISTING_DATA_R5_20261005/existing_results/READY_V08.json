@@ -1,0 +1,42 @@
+{
+  "block": "R5_V08_SAVED135_DOMAIN_RESULTS",
+  "all_checks_passed": true,
+  "all2520_pair_rows_retained": true,
+  "all280_groups_recomputed": true,
+  "new_estimator_calls": 0,
+  "new_evaluator_calls": 0,
+  "raw_or_reference_opens": 0,
+  "original_v3_writes": 0,
+  "files": [
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/summarize_saved_135_domains.py",
+      "bytes": 5482,
+      "sha256": "0e96d7557710227f7e4c48d47a5d5ab03f85f362139ee91e8af36bf1522a1207"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/DIAGNOSTIC135_ALL_FIXED_DOMAINS_280.csv",
+      "bytes": 86863,
+      "sha256": "68bd9e6de92509787e2b403c21ef3abadd60410ff7a3421db71f1d537274e234"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/DIAGNOSTIC135_HV_H_OUTAGE_RECOVERY_25.csv",
+      "bytes": 8226,
+      "sha256": "75f85f6c5e602e1dd0e7cb1d3ba861cddbfa085ac9a42137f3b617b23c970933"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/DIAGNOSTIC135_ACTUAL_FAULT_UPDATES_90.csv",
+      "bytes": 7790,
+      "sha256": "3371bee8137c66d73457458a47ce3f82e4924a1f90a496362c4751072790aa59"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/DIAGNOSTIC135_REDUCTION.json",
+      "bytes": 1776,
+      "sha256": "b4f820f976d6368ba12234a8d8768c7082130ff560a956fa9939607bb74ce8d2"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/DIAGNOSTIC135_PAPER_RESULTS.md",
+      "bytes": 4532,
+      "sha256": "5dc528233bdd78ed1c33920f0b177b54758346571626c53b695731a2c54fcad5"
+    }
+  ]
+}

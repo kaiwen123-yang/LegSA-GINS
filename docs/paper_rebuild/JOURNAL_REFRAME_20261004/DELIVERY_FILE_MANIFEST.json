@@ -1,0 +1,971 @@
+{
+  "files": [
+    {
+      "path": "LegSA_GINS_研究汇报_20261004.pptx",
+      "bytes": 23972572,
+      "sha256": "5c210e9561ff1fac9d9595e0c2aea789d744d32fc4f46f515fc383a5132d699f",
+      "source": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\output\\LegSA_GINS_研究汇报_20261004.pptx"
+    },
+    {
+      "path": "LegSA_GINS_研究汇报_20261004.pdf",
+      "bytes": 13676799,
+      "sha256": "b87a0c3f4fdeb0d3f85cf424738546fad3cfea3e2cc128b678fba48cc04b1940",
+      "source": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\output\\LegSA_GINS_研究汇报_20261004.pdf"
+    },
+    {
+      "path": "论文草稿\\manuscript_restructured_r2.docx",
+      "bytes": 52334,
+      "sha256": "514ccb54b5d0ce687f7e1160a9ce3f4c1764a179118e4cfd2a792301f0b9c017",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\story\\manuscript_restructured_r2.docx"
+    },
+    {
+      "path": "论文草稿\\manuscript_restructured_r2.md",
+      "bytes": 33056,
+      "sha256": "0bab2de80236516ab582d31c02a30ea8c9513b66d19230c9f678ec031d329f03",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\story\\manuscript_restructured_r2.md"
+    },
+    {
+      "path": "论文草稿\\manuscript_restructured_r2_preview.pdf",
+      "bytes": 284288,
+      "sha256": "21f071d2814b0ed8880677a8afe26b14ccd72f9c4a72d1ea156e01ef62c8aba6",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\story\\manuscript_restructured_r2_preview.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_01\\R01_BY2_full_window.pdf",
+      "bytes": 2129357,
+      "sha256": "a30a6bb60b7aeeaf88fdeccd2eb623af1a0166d9758da063437b290ef98d2ac6",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_01\\R01_BY2_full_window.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_01\\R01_BY2_full_window.png",
+      "bytes": 885789,
+      "sha256": "5ad284933006cf3c0e6a3e9124d7b45eaaef8711cdd988496934af7277948bb4",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_01\\R01_BY2_full_window.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_01\\R01_BY2_full_window.svg",
+      "bytes": 5687921,
+      "sha256": "be00dc5721613484f139013916d1db1c5410a05509d4711f5da6863c5a61da3d",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_01\\R01_BY2_full_window.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_01\\R01_BY2H_full_window.pdf",
+      "bytes": 2232025,
+      "sha256": "69a7de3987e8d30b5408ebd77c13e29908073fa24f1d46be79e5b1ec8f9b2f26",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_01\\R01_BY2H_full_window.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_01\\R01_BY2H_full_window.png",
+      "bytes": 1024860,
+      "sha256": "1927a28921d4c97d69e75bff22eb9cf2183ea41c3405f6d056251c067eb7be94",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_01\\R01_BY2H_full_window.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_01\\R01_BY2H_full_window.svg",
+      "bytes": 5881375,
+      "sha256": "a1cb54d3c8bf628e3d7b5660a02d7ab21fa1286cc174f9ff322bcd30e74ab4f9",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_01\\R01_BY2H_full_window.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_01\\R01_BY2O_full_window.pdf",
+      "bytes": 2818500,
+      "sha256": "39a8d0d5e2d60ba51eb7f28db05f609971a79a895652de9056bf03f0b3773a9b",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_01\\R01_BY2O_full_window.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_01\\R01_BY2O_full_window.png",
+      "bytes": 732161,
+      "sha256": "9cffb06d500cb97a9e7cf469697835f2c11ee339221ba353f3b711e27addf2c0",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_01\\R01_BY2O_full_window.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_01\\R01_BY2O_full_window.svg",
+      "bytes": 7685978,
+      "sha256": "fe474f96361e921c02e883c8b1fd9ae1e314003a761bdb11932cfdb676696743",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_01\\R01_BY2O_full_window.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_01\\R02_natural_all_11_configurations.pdf",
+      "bytes": 26697,
+      "sha256": "d9e7a0ec6f9411b7dfdfc9d79a87b07c3a0ec6f88098ba97da632a4e3367d9f4",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_01\\R02_natural_all_11_configurations.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_01\\R02_natural_all_11_configurations.png",
+      "bytes": 363193,
+      "sha256": "4f63aec5040da5f101056d7feea49342fe80bf9cfe2c1693f970face1ca9cae4",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_01\\R02_natural_all_11_configurations.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_01\\R02_natural_all_11_configurations.svg",
+      "bytes": 30048,
+      "sha256": "4d18f824531512154167baea4e53296ca2815ca4604fd5641a943b141e6aac22",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_01\\R02_natural_all_11_configurations.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_02\\R03_BY2_original_trajectory.pdf",
+      "bytes": 986455,
+      "sha256": "414a0d62be5316c9ed3789a34cecfc7cb367d8ae0dc7e02b50658144ad70af7e",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_02\\R03_BY2_original_trajectory.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_02\\R03_BY2_original_trajectory.png",
+      "bytes": 429967,
+      "sha256": "1b1e8abe00a6cd53d59f62cd2f1e37051e36bb437b5c7c66ce6e6fb41fac3b38",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_02\\R03_BY2_original_trajectory.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_02\\R03_BY2_original_trajectory.svg",
+      "bytes": 2779103,
+      "sha256": "5709fff93eaa70c6fdbf0d2094ca97d274c2ce32d336ac40aa9ff5b907aaee7c",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_02\\R03_BY2_original_trajectory.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_02\\R04_BY2_attitude_errors.pdf",
+      "bytes": 1595968,
+      "sha256": "8f53e3ce8ac253e4f9b83e564e6eff4a4d951aa6ace6f60cad61f29d5012d3b8",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_02\\R04_BY2_attitude_errors.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_02\\R04_BY2_attitude_errors.png",
+      "bytes": 999084,
+      "sha256": "9f10f4f5d1f1d79f1d7d0608b8b616d436d8794973be0c23e8e8b7d5daa3143d",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_02\\R04_BY2_attitude_errors.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_02\\R04_BY2_attitude_errors.svg",
+      "bytes": 4193674,
+      "sha256": "81a114e55d1987c3f1fd1d02ce72db3d5c18943407e449ffa4568b7ebeddbfc7",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_02\\R04_BY2_attitude_errors.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_02\\R04_BY2H_attitude_errors.pdf",
+      "bytes": 1661223,
+      "sha256": "c236b86f001a23d7fc1f4d34d2f3f2beba70af0599aac47f511c42990bda6f25",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_02\\R04_BY2H_attitude_errors.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_02\\R04_BY2H_attitude_errors.png",
+      "bytes": 1045300,
+      "sha256": "736b6993bbdd3f06339b8f4a14cdf1a48b4a52dcc72664275e00e9c2a538f4bf",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_02\\R04_BY2H_attitude_errors.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_02\\R04_BY2H_attitude_errors.svg",
+      "bytes": 4328016,
+      "sha256": "f8f8634a4a590ea689151bb3985fbd3e22db501348ab0fce3b47e1145b8ee486",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_02\\R04_BY2H_attitude_errors.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_02\\R04_BY2O_attitude_errors.pdf",
+      "bytes": 2103227,
+      "sha256": "03a86b62a87514ff8c570cc96a0eacbc6bae87b8c01bde168d09025da5a0cfde",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_02\\R04_BY2O_attitude_errors.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_02\\R04_BY2O_attitude_errors.png",
+      "bytes": 791195,
+      "sha256": "fe1d1cf74cb87a5902df86e615d352d8e70536bdbfb5aeb62f9a08802d4eb47d",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_02\\R04_BY2O_attitude_errors.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_02\\R04_BY2O_attitude_errors.svg",
+      "bytes": 5658770,
+      "sha256": "fa2167aba61add86dd11cf91b0ebef33b2f24b3c7fcbac462e0c4beb9c0e6068",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_02\\R04_BY2O_attitude_errors.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_03\\R05_CORE_all_11_error_tails.pdf",
+      "bytes": 30439,
+      "sha256": "55059088c0e1fe62e50492accc9f6f28ca263a2c36d80a2f81db087625a54614",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_03\\R05_CORE_all_11_error_tails.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_03\\R05_CORE_all_11_error_tails.png",
+      "bytes": 399132,
+      "sha256": "f7214b631c69b709f0151f187dab0fc721d736e645d0b483e4cdc940e9f3ef7c",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_03\\R05_CORE_all_11_error_tails.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_03\\R05_CORE_all_11_error_tails.svg",
+      "bytes": 47391,
+      "sha256": "fba511a8c41b8bd366cb531c36c30bab3e03136f21bb55063d0c7ee43946b3b7",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_03\\R05_CORE_all_11_error_tails.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_03\\R06_CORE_single_module_paired_contrasts.pdf",
+      "bytes": 55792,
+      "sha256": "05e08558fa21fd33fe59a27362a4304d15e89bd318f7d3c7bacbd9eb4d2755d2",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_03\\R06_CORE_single_module_paired_contrasts.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_03\\R06_CORE_single_module_paired_contrasts.png",
+      "bytes": 595230,
+      "sha256": "6b9ba64972f49022ad5df501f847f36ba809c1360c376d6efbb2bbe5ab883bca",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_03\\R06_CORE_single_module_paired_contrasts.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_03\\R06_CORE_single_module_paired_contrasts.svg",
+      "bytes": 688002,
+      "sha256": "11d765b4bb905bbde50ee65aa76ae3831fc4c6059ad24909e761369ef3d6e2b2",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_03\\R06_CORE_single_module_paired_contrasts.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_03\\R07_CORE_all_5951_outcomes.pdf",
+      "bytes": 23375,
+      "sha256": "08e28ebb41cf7daf727379c044464edc7c0b8f4be38498ad807c59340d8e59e4",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_03\\R07_CORE_all_5951_outcomes.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_03\\R07_CORE_all_5951_outcomes.png",
+      "bytes": 392497,
+      "sha256": "a0aab1171e10e4811a16065850e205717f8783acded902d54c871a393b908bb9",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_03\\R07_CORE_all_5951_outcomes.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_03\\R07_CORE_all_5951_outcomes.svg",
+      "bytes": 25089,
+      "sha256": "06e416ac7342ce4cb811599c5aa93dd36162f5d8d49052b056a59b3ce9acef7a",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_03\\R07_CORE_all_5951_outcomes.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_03\\R08_ADD_all_45_conditions.pdf",
+      "bytes": 46527,
+      "sha256": "0012bdfafcc9b6dcad23d386146c1d024bfbb6a6bb439b509ff572c64dc942e4",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_03\\R08_ADD_all_45_conditions.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_03\\R08_ADD_all_45_conditions.png",
+      "bytes": 586430,
+      "sha256": "578cddc586f78711ea3a8bc369c3846512c7a90718e0e4627f83a0b8e781ed05",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_03\\R08_ADD_all_45_conditions.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_03\\R08_ADD_all_45_conditions.svg",
+      "bytes": 107802,
+      "sha256": "fa56fc6e5cc0ed8c37e8bc47b4109d276cdfb68bf89a52a1e6665577b2b78ecd",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_03\\R08_ADD_all_45_conditions.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_04\\R09_BY2_moving_base_error_and_support.pdf",
+      "bytes": 31523,
+      "sha256": "3e724e7aacd4615e9a3935c60280481082ae8d8fdc13164a0a938dd2424e1f41",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_04\\R09_BY2_moving_base_error_and_support.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_04\\R09_BY2_moving_base_error_and_support.png",
+      "bytes": 395549,
+      "sha256": "dfc4e592a9ab1f23b051528073547e4e2a9161d5c4b462b72bb550a94786006d",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_04\\R09_BY2_moving_base_error_and_support.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_04\\R09_BY2_moving_base_error_and_support.svg",
+      "bytes": 173645,
+      "sha256": "948d3cde6415ce40f4a119689e3859f1a050898b95fe50d2834eb2e01661c9fd",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_04\\R09_BY2_moving_base_error_and_support.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_04\\R09_BY2H_moving_base_error_and_support.pdf",
+      "bytes": 33513,
+      "sha256": "ab843172ea02d2f63cb0200d8d6e613cc9f4eeccaf6efa9508cbf751be2010b3",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_04\\R09_BY2H_moving_base_error_and_support.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_04\\R09_BY2H_moving_base_error_and_support.png",
+      "bytes": 411949,
+      "sha256": "861ce6fa2f20f7198264f9a22e4d56767196808ed54235d871ef1b64736d9739",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_04\\R09_BY2H_moving_base_error_and_support.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_04\\R09_BY2H_moving_base_error_and_support.svg",
+      "bytes": 220541,
+      "sha256": "21b6cda903f53547a1eef64986024c0c2042b75f4510d19d11db4924f49e2973",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_04\\R09_BY2H_moving_base_error_and_support.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_04\\R09_BY2O_moving_base_error_and_support.pdf",
+      "bytes": 32040,
+      "sha256": "9c0f22a1c47ff0b81304d5f092fec97bf4e9f76923eef2fa9768351296874305",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_04\\R09_BY2O_moving_base_error_and_support.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_04\\R09_BY2O_moving_base_error_and_support.png",
+      "bytes": 397607,
+      "sha256": "023ff3eacac23698750d679484a3e6b68d4ee9ba8a104cce671cf083944de847",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_04\\R09_BY2O_moving_base_error_and_support.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_04\\R09_BY2O_moving_base_error_and_support.svg",
+      "bytes": 172970,
+      "sha256": "e9f74c8f3f2ae2e508a631764e94b9c2c64f03ec775d38d25d88f464620c4d9c",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_04\\R09_BY2O_moving_base_error_and_support.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_04\\R10_moving_base_all_12_accuracy_coverage.pdf",
+      "bytes": 28730,
+      "sha256": "6f29184f18913a0b7ec67f1416387e125c43a654399a40448cbfde54b03a7ae2",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_04\\R10_moving_base_all_12_accuracy_coverage.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_04\\R10_moving_base_all_12_accuracy_coverage.png",
+      "bytes": 388570,
+      "sha256": "51336c3da6eadcffbfabc70d50c4854393fa0edae038281ed499e41ba832b6dc",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_04\\R10_moving_base_all_12_accuracy_coverage.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_04\\R10_moving_base_all_12_accuracy_coverage.svg",
+      "bytes": 38161,
+      "sha256": "c54275dc4a913952f80a796ff8ebea6e812c88eec4c6dcebf4123e0bebc109a1",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_04\\R10_moving_base_all_12_accuracy_coverage.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_05\\R11_BY2_receiver_velocity_toggle.pdf",
+      "bytes": 2126214,
+      "sha256": "8602202f63a8bded05fe31f49bc4f2d77ddd4dc2903686d44ea6f473740d5100",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_05\\R11_BY2_receiver_velocity_toggle.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_05\\R11_BY2_receiver_velocity_toggle.png",
+      "bytes": 990621,
+      "sha256": "55ca44fa2a9bbbace620b0b71883eaab837760331beba8b09fed793aaea83f64",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_05\\R11_BY2_receiver_velocity_toggle.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_05\\R11_BY2_receiver_velocity_toggle.svg",
+      "bytes": 5395123,
+      "sha256": "5d0e3a9e6d8513e9bee4570d577ba3dda337e95afc17467f6b857bf2557b357d",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_05\\R11_BY2_receiver_velocity_toggle.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_05\\R11_BY2H_receiver_velocity_toggle.pdf",
+      "bytes": 2208970,
+      "sha256": "b3bdba9910a5507406cdae7b1ff83c00dfabbc740d910b8570a1f52f5558e8bc",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_05\\R11_BY2H_receiver_velocity_toggle.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_05\\R11_BY2H_receiver_velocity_toggle.png",
+      "bytes": 1076778,
+      "sha256": "a46245cda809d195cd5dd1d18883a3be9dfaef65e2a30b1a5a950c428abb0f12",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_05\\R11_BY2H_receiver_velocity_toggle.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_05\\R11_BY2H_receiver_velocity_toggle.svg",
+      "bytes": 5577592,
+      "sha256": "28d67baa904160991c06f895b204b8bda06a862e4365d1a349c5db92db39e033",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_05\\R11_BY2H_receiver_velocity_toggle.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_05\\R11_BY2O_receiver_velocity_toggle.pdf",
+      "bytes": 2776177,
+      "sha256": "07a3ce11c2d5d98d110e13f027af4d2b7eeccbc1a37ed6c39dbac13e25a93330",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_05\\R11_BY2O_receiver_velocity_toggle.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_05\\R11_BY2O_receiver_velocity_toggle.png",
+      "bytes": 755575,
+      "sha256": "0753f9a66cead6e910b170ddb6ea141e495aea26c97502edf0f80201e4ae6567",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_05\\R11_BY2O_receiver_velocity_toggle.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_05\\R11_BY2O_receiver_velocity_toggle.svg",
+      "bytes": 7291797,
+      "sha256": "55df5c7a4ad3b8784971279736aa3845c80f25b6dab2ccf8aea0bd204a91f4ba",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_05\\R11_BY2O_receiver_velocity_toggle.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_05\\R12_BY2_native_heading_decisions.pdf",
+      "bytes": 565750,
+      "sha256": "41f90a8f94faed02d257add09a08e131551b57769dd08c56bb30987001488443",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_05\\R12_BY2_native_heading_decisions.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_05\\R12_BY2_native_heading_decisions.png",
+      "bytes": 669569,
+      "sha256": "40969f30b9d8e23870d7fe8a71878d26f6f4ea7f46b9e34f1b603321c9d394ae",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_05\\R12_BY2_native_heading_decisions.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_05\\R12_BY2_native_heading_decisions.svg",
+      "bytes": 1534134,
+      "sha256": "2af91dc85d27eb469e6e077968563258e22ce751ffb0a7b582258b5fd99cb2ef",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_05\\R12_BY2_native_heading_decisions.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_06\\R13_BY2_raw_heading_error_support.pdf",
+      "bytes": 138995,
+      "sha256": "1252a1bbb0cfdfd2075a641305d1def3c641a32f622995df314ac3d95fd7f378",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_06\\R13_BY2_raw_heading_error_support.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_06\\R13_BY2_raw_heading_error_support.png",
+      "bytes": 888048,
+      "sha256": "db656c00e297e539256a0dced45fec88501ea2581301b7e94356917d14d1ea21",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_06\\R13_BY2_raw_heading_error_support.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_06\\R13_BY2_raw_heading_error_support.svg",
+      "bytes": 703605,
+      "sha256": "9a269e5d772ee66d8040f7c14695910d56351bedc61700b30df99070ce397ba7",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_06\\R13_BY2_raw_heading_error_support.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_06\\R13_BY2H_raw_heading_error_support.pdf",
+      "bytes": 154150,
+      "sha256": "8e916ee8c977c0fbb2e7347fb66a7f8eb7367ebde1e21ec65a9b48ac0d322a91",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_06\\R13_BY2H_raw_heading_error_support.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_06\\R13_BY2H_raw_heading_error_support.png",
+      "bytes": 956556,
+      "sha256": "1e140303530dc73c4535f27ee81b3c27c2bd94ab262e4a98c432dea4e869e538",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_06\\R13_BY2H_raw_heading_error_support.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_06\\R13_BY2H_raw_heading_error_support.svg",
+      "bytes": 734762,
+      "sha256": "49f9e17b026a1514d62fc6522ec4f9b1a9e9f5ff1e072d0fb68fcc95c5b8080f",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_06\\R13_BY2H_raw_heading_error_support.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_06\\R13_BY2O_raw_heading_error_support.pdf",
+      "bytes": 152280,
+      "sha256": "b36339f6d3ded23e26bb936b19009a971fdaad0475c5f142901371f513ef874a",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_06\\R13_BY2O_raw_heading_error_support.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_06\\R13_BY2O_raw_heading_error_support.png",
+      "bytes": 811686,
+      "sha256": "c3133414f402c6543a14390664f797cf5aad9821d08a8393e2732cef796258f4",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_06\\R13_BY2O_raw_heading_error_support.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_06\\R13_BY2O_raw_heading_error_support.svg",
+      "bytes": 756545,
+      "sha256": "95874b82b6e569058cfa6380b57348a65800a13aba560cce2c7805a725436e15",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_06\\R13_BY2O_raw_heading_error_support.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_06\\R14_raw_heading_all_nine_accuracy_coverage.pdf",
+      "bytes": 26338,
+      "sha256": "e1225d1e153d4eea9dc7b88e02a717e625ac3229d34270eb42d2037242b3f576",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_06\\R14_raw_heading_all_nine_accuracy_coverage.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_06\\R14_raw_heading_all_nine_accuracy_coverage.png",
+      "bytes": 401451,
+      "sha256": "9bac8ed5b635694bdf627bbea9073aa9b2cdc9823ffcd5cc12cc0db7ab54c4a9",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_06\\R14_raw_heading_all_nine_accuracy_coverage.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_06\\R14_raw_heading_all_nine_accuracy_coverage.svg",
+      "bytes": 27631,
+      "sha256": "dae4173d077701397c15653189b20fe36e7d896a262a5e5996b4c779afc51b3a",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_06\\R14_raw_heading_all_nine_accuracy_coverage.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_07\\R15_BY2_FGO_position_curves.pdf",
+      "bytes": 57871,
+      "sha256": "153079eecf3e39e01474e72482c1e48a78fd38920f67e4d68283e00905061f40",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_07\\R15_BY2_FGO_position_curves.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_07\\R15_BY2_FGO_position_curves.png",
+      "bytes": 804991,
+      "sha256": "024876224b85af23fef890d71ff0a5c700dad32bddf23cb60044d385cf2f5748",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_07\\R15_BY2_FGO_position_curves.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_07\\R15_BY2_FGO_position_curves.svg",
+      "bytes": 239214,
+      "sha256": "1d028748139ab0f7d14d17a15c27e28107399372653ff090c80f29d3bbc7937a",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_07\\R15_BY2_FGO_position_curves.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_07\\R15_BY2H_FGO_position_curves.pdf",
+      "bytes": 56090,
+      "sha256": "4db2672ff893148ce451822960acadd93f6e28e735e9bcb1d284efe4e484b467",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_07\\R15_BY2H_FGO_position_curves.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_07\\R15_BY2H_FGO_position_curves.png",
+      "bytes": 787893,
+      "sha256": "b8fb45ad2ed4c9f85b92ebc6dc866ecbe4742617161af79da8ab533b457b6849",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_07\\R15_BY2H_FGO_position_curves.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_07\\R15_BY2H_FGO_position_curves.svg",
+      "bytes": 235329,
+      "sha256": "8349aa2843b8def2d75b1e37d406cf09dff363506d926b15f1b74170a34babb5",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_07\\R15_BY2H_FGO_position_curves.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_07\\R15_BY2O_FGO_position_curves.pdf",
+      "bytes": 73557,
+      "sha256": "9d3b7e7bce19aa0e6fde4bd5a5e3fb681f3d39d7244c1a0a78bf8852b96a9d99",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_07\\R15_BY2O_FGO_position_curves.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_07\\R15_BY2O_FGO_position_curves.png",
+      "bytes": 861862,
+      "sha256": "de8f1e409e78e0eb836e615d2729e32ae3e961843084fa1965ce66cee34b1003",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_07\\R15_BY2O_FGO_position_curves.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_07\\R15_BY2O_FGO_position_curves.svg",
+      "bytes": 323811,
+      "sha256": "faf27faf67310cb982cd689c5a92f37184f7cde0060685ea7295cda61d5bcb37",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_07\\R15_BY2O_FGO_position_curves.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_07\\R16_FGO_dynamic_secondary_strict_support.pdf",
+      "bytes": 25020,
+      "sha256": "d77f0d30a3c2761a02ce3ae299388c56e6b707d39d23fabec491188405f48a45",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_07\\R16_FGO_dynamic_secondary_strict_support.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_07\\R16_FGO_dynamic_secondary_strict_support.png",
+      "bytes": 399046,
+      "sha256": "bca112c92a4e24a0151e438db0efd2698f62111a7ff6ea9a9ef6bad539b8584c",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_07\\R16_FGO_dynamic_secondary_strict_support.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_07\\R16_FGO_dynamic_secondary_strict_support.svg",
+      "bytes": 17887,
+      "sha256": "ef1df1b2ae7f8031a90560b5c130e21fb96f51b02c73fa8fa72ec922402082c7",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_07\\R16_FGO_dynamic_secondary_strict_support.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_08\\R17_BY2_FGO_GNSS1_trajectory.pdf",
+      "bytes": 49955,
+      "sha256": "60e879d130b5db21e3c5620e226561ad6fc1054b510e065c01a415e6e361c901",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_08\\R17_BY2_FGO_GNSS1_trajectory.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_08\\R17_BY2_FGO_GNSS1_trajectory.png",
+      "bytes": 411679,
+      "sha256": "abc4c6e453c9f24dab2a6af7c069e173c1afcd3c0db8f79c980dd854254716e2",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_08\\R17_BY2_FGO_GNSS1_trajectory.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_08\\R17_BY2_FGO_GNSS1_trajectory.svg",
+      "bytes": 128219,
+      "sha256": "ef724ce6cd871f8110084db328b791c1e7e3df9d5a6d283aec5817f288edb42c",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_08\\R17_BY2_FGO_GNSS1_trajectory.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_08\\R17_BY2H_FGO_GNSS1_trajectory.pdf",
+      "bytes": 49607,
+      "sha256": "f427a9ca7e6d7b54a1566c85cdc5af0eec5734f039d515b8faaf5a8c8817aaa0",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_08\\R17_BY2H_FGO_GNSS1_trajectory.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_08\\R17_BY2H_FGO_GNSS1_trajectory.png",
+      "bytes": 403265,
+      "sha256": "d69095a45f8cdd04f0814837ce5f54d280b373446ee5537861ca8bdb633c3cb4",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_08\\R17_BY2H_FGO_GNSS1_trajectory.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_08\\R17_BY2H_FGO_GNSS1_trajectory.svg",
+      "bytes": 126623,
+      "sha256": "7731de853689007da95757cdeba8760d7ebc014b6ec380d2b584c273b64804eb",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_08\\R17_BY2H_FGO_GNSS1_trajectory.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_08\\R17_BY2O_FGO_GNSS1_trajectory.pdf",
+      "bytes": 60027,
+      "sha256": "d2f87c2b9df3e261185c06765cc61e8b4174a77b69700a484c20f32b96307600",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_08\\R17_BY2O_FGO_GNSS1_trajectory.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_08\\R17_BY2O_FGO_GNSS1_trajectory.png",
+      "bytes": 431351,
+      "sha256": "03a6b7843d74f19d73c314971ed99b2341834798f1013ee8c09994f577b965dd",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_08\\R17_BY2O_FGO_GNSS1_trajectory.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_08\\R17_BY2O_FGO_GNSS1_trajectory.svg",
+      "bytes": 172237,
+      "sha256": "9895965babcf8871314effa7332316331ff9a57fdbf835819710a33c02db4d27",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_08\\R17_BY2O_FGO_GNSS1_trajectory.svg"
+    },
+    {
+      "path": "论文图\\实际结果\\block_08\\R18_Oi_own_estimated_yaw.pdf",
+      "bytes": 45638,
+      "sha256": "af50c0638b67483613fabb34e129fe12ed6b48362212f1c0b77707bae97cfe67",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_08\\R18_Oi_own_estimated_yaw.pdf"
+    },
+    {
+      "path": "论文图\\实际结果\\block_08\\R18_Oi_own_estimated_yaw.png",
+      "bytes": 551015,
+      "sha256": "4b3345caad351cdd9be36da1fae0bd51e56b2d56b6063675c7d7e75b658cf130",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_08\\R18_Oi_own_estimated_yaw.png"
+    },
+    {
+      "path": "论文图\\实际结果\\block_08\\R18_Oi_own_estimated_yaw.svg",
+      "bytes": 145559,
+      "sha256": "17550c3b7271023cf644b095dd0074e0678c623b63ed952f381c9658a04b6463",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\block_08\\R18_Oi_own_estimated_yaw.svg"
+    },
+    {
+      "path": "论文图\\假设敏感性_不是标定结果\\Fig_U01_projection_correlation.png",
+      "bytes": 168416,
+      "sha256": "c045dd7d60d1b9ad8d353ff87b36e55f6d47cc06f8112f50befdfe6f29a8c745",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\venue\\assumed_sensitivity\\Fig_U01_projection_correlation.png"
+    },
+    {
+      "path": "论文图\\假设敏感性_不是标定结果\\Fig_U01_projection_correlation.svg",
+      "bytes": 19134,
+      "sha256": "a039c2a792102597956d671c24c76f8b9c37b837c04cc7cf37f06c2c13b8199f",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\venue\\assumed_sensitivity\\Fig_U01_projection_correlation.svg"
+    },
+    {
+      "path": "论文图\\假设敏感性_不是标定结果\\Fig_U02_heading_velocity_cross_term.png",
+      "bytes": 176033,
+      "sha256": "43f9d7a5deac759fc610ae795389f4e6f40a2648dcb8415bf9a965c46354248a",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\venue\\assumed_sensitivity\\Fig_U02_heading_velocity_cross_term.png"
+    },
+    {
+      "path": "论文图\\假设敏感性_不是标定结果\\Fig_U02_heading_velocity_cross_term.svg",
+      "bytes": 16915,
+      "sha256": "4b6d0399ca0611f88987e3951097d8e17cea52cd1946c9b674cfa72336aeefc7",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\venue\\assumed_sensitivity\\Fig_U02_heading_velocity_cross_term.svg"
+    },
+    {
+      "path": "论文图\\假设敏感性_不是标定结果\\Fig_U03_asynchronous_direction.png",
+      "bytes": 153658,
+      "sha256": "e09aa94fb42dbbca3bbfad454b77d3670b649ef4e8a119a3eee172f4e158b19f",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\venue\\assumed_sensitivity\\Fig_U03_asynchronous_direction.png"
+    },
+    {
+      "path": "论文图\\假设敏感性_不是标定结果\\Fig_U03_asynchronous_direction.svg",
+      "bytes": 14562,
+      "sha256": "83bfbd960df72c38126a4761558ce0b5204a17183427c600d697b96d1ada2ba1",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\venue\\assumed_sensitivity\\Fig_U03_asynchronous_direction.svg"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig01.pdf",
+      "bytes": 3051230,
+      "sha256": "0b4d20e6792b7e46c9b5a98892f154a406596b0214af331d5f19708880a65f00",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig01.pdf"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig01.png",
+      "bytes": 3701195,
+      "sha256": "fbb36e528e3883b1ff2b7a98fd410798d26155927d0990065089e2c490f37758",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig01.png"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig01.svg",
+      "bytes": 4372221,
+      "sha256": "11a740de325c33320152bfd5bbf49ade56aa3814ee31438efa48e5d8024daa08",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig01.svg"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig02.pdf",
+      "bytes": 17739,
+      "sha256": "3b3cfdbd7676e04e7ec498dc7953e59af56a57b7577ef4d2bbefa07951f1629f",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig02.pdf"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig02.png",
+      "bytes": 386765,
+      "sha256": "4196317480b2983eba9ec19c019ec20852c10438f9bf340b4214eb580d3be74e",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig02.png"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig02.svg",
+      "bytes": 11140,
+      "sha256": "ad47475546a7183dae8fd2e25eff569d32a6484128486c23d47ab60da47d6fca",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig02.svg"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig03.pdf",
+      "bytes": 302334,
+      "sha256": "c1974b8ff049fd5680bd54d4fbc6a7c8b99acfb2d85f130a9ba4bdae5e529c3d",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig03.pdf"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig03.png",
+      "bytes": 785652,
+      "sha256": "72712b1c93d4dedde1d8f93fcf06294abd1ec29d9b59de035f830af0eafb1944",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig03.png"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig03.svg",
+      "bytes": 715224,
+      "sha256": "5ecf54891e2a2bebe2064f4bb44ad83bf0be6bc0fd8a0c587dcd7f4388c154ab",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig03.svg"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig04.pdf",
+      "bytes": 65409,
+      "sha256": "817a2c67c56ff62bc51bd984f352a0121317ce1afbd5759071aa5b8bba58e2d8",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig04.pdf"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig04.png",
+      "bytes": 273802,
+      "sha256": "413b67ce09dea7211cdab14c15be74af7e4633ffb6654c0744287bdf951aa3e1",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig04.png"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig04.svg",
+      "bytes": 152503,
+      "sha256": "a03518f6385a25bd9e636d1fb1ec48facbcb5c435262db5d2f8ceaba4ed339b2",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig04.svg"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig05.pdf",
+      "bytes": 35154,
+      "sha256": "afde0e18e45b0fd739145d1ab913cd8ccb7b45cd72f27485e252dd51acb9a978",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig05.pdf"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig05.png",
+      "bytes": 248087,
+      "sha256": "ac118a76c456e17eb2ec7495304cc56290cc447a228338453f15b81947ad7453",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig05.png"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig05.svg",
+      "bytes": 58423,
+      "sha256": "cc6e1658a89406db231c60ab647bf73ed00d78555cfd5b52cc0774c708e82553",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig05.svg"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig06.pdf",
+      "bytes": 25191,
+      "sha256": "5fc188901d1e6b94765f5aada31d8d24a2efc5734d2b332064a117d328efef9c",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig06.pdf"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig06.png",
+      "bytes": 275264,
+      "sha256": "f3a4ffe71dd120f691939b4185e7e22cac14728cb4c95eb6c9f91826aed2befb",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig06.png"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig06.svg",
+      "bytes": 44347,
+      "sha256": "cfdfbc528e65110464c033866ef7a0d06422fdc44cbe0ec7ebc5d4d7f46e223b",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig06.svg"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig07.pdf",
+      "bytes": 43893,
+      "sha256": "653e89798562c1b582a86b267372a9f17e5d6080fc7c746cd4aee4f4f25ea864",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig07.pdf"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig07.png",
+      "bytes": 539837,
+      "sha256": "929ca006c68492ec4dbeab03a2456dda13fe7e66329fa0e0e42a3de58a4f7c9c",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig07.png"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig07.svg",
+      "bytes": 157539,
+      "sha256": "615553d0633476b15c1198413144e8c2b77300672303ba0bc537dffd7c15155c",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig07.svg"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig08.pdf",
+      "bytes": 32837,
+      "sha256": "3340c9ff42b08e5c5da660dea236352ed1336c321e8f617367257248a990bb30",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig08.pdf"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig08.png",
+      "bytes": 401714,
+      "sha256": "9817ba0814464b96a3ac3b6dc05f71538fcceba10b12c4ad9df2a96c96a85328",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig08.png"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\Fig08.svg",
+      "bytes": 88271,
+      "sha256": "78d3e63e550c8e69339562585fdccda712a9be0450e16039d0362d36efa1c38f",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\Fig08.svg"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\SFig01.pdf",
+      "bytes": 22820,
+      "sha256": "ad52df4b12fcd281341a33be2909a43b78ec814d2259ce16261c9ae6e468aa93",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\SFig01.pdf"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\SFig01.png",
+      "bytes": 334184,
+      "sha256": "60d33668748ed53d047ed4db75d2d269397a1e66421481b34ea684846e623200",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\SFig01.png"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\SFig01.svg",
+      "bytes": 47907,
+      "sha256": "2e99740313c5d41daa56864823f0159ba4a62be81edbcf5d823a70c981d071b6",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\SFig01.svg"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\SFig02.pdf",
+      "bytes": 178966,
+      "sha256": "25445d51277ac77b3de198996a91bc00e8facad7e254ceb16220ad781a0c876e",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\SFig02.pdf"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\SFig02.png",
+      "bytes": 387792,
+      "sha256": "64e9730f4739ad3d87a29020bada3b5f6c0690cd18d4ac5f8b0ec94f1d1baa79",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\SFig02.png"
+    },
+    {
+      "path": "论文图\\原论文图_保留原值与原标签\\SFig02.svg",
+      "bytes": 163669,
+      "sha256": "4c7acbe2468ff28a1eb9e15d496866628541110a1c8351f8e9dfb72a06067146",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\SFig02.svg"
+    },
+    {
+      "path": "论文图\\实物与局部放大\\Original_installation.jpg",
+      "bytes": 309781,
+      "sha256": "a5aac11a5cde1e99bd31d0342b5e3351d428e92ae5f74ef5547f9a35508cb64b",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\presentation\\platform\\Original_installation.jpg"
+    },
+    {
+      "path": "论文图\\实物与局部放大\\Platform_photograph_and_detail.png",
+      "bytes": 2717963,
+      "sha256": "7db3d1c4d226045d5fbc88aeeadce3fc7ee97ed2f4af894ee34ee70e084c673e",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\presentation\\platform\\Platform_photograph_and_detail.png"
+    },
+    {
+      "path": "论文图\\实物与局部放大\\README.md",
+      "bytes": 1373,
+      "sha256": "c10b32abb9cf750b8728251478a439cddc80a71cd9e476285827cefa819be8a2",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\presentation\\platform\\README.md"
+    },
+    {
+      "path": "论文图\\来源与目录\\FIGURE_CATALOG.csv",
+      "bytes": 34661,
+      "sha256": "a5bed6bec51dd508252d9535e33bbfa513926ff1ab381325a5637c50496f5f95",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\FIGURE_CATALOG.csv"
+    },
+    {
+      "path": "论文图\\来源与目录\\EXISTING_ASSET_INVENTORY.csv",
+      "bytes": 43320,
+      "sha256": "a426f71b24125f4ce5b3ba441a1a8c43a72fdf4980a02fa4a41c09bcd6d95c88",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\EXISTING_ASSET_INVENTORY.csv"
+    },
+    {
+      "path": "论文图\\来源与目录\\README.md",
+      "bytes": 3477,
+      "sha256": "6249bedf72086cdc77beaee8904fd0707eeafc421f20784a62cba22fd22ca39e",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\README.md"
+    },
+    {
+      "path": "论文图\\来源与目录\\REVIEW_RV_CONFOUNDING_CORRECTION.md",
+      "bytes": 4806,
+      "sha256": "9fc2dc466ff084d948baa9f0b0f7af7641fdc401143fc91db1ef4ccf71575b03",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\figures\\REVIEW_RV_CONFOUNDING_CORRECTION.md"
+    },
+    {
+      "path": "投稿路线与补充证据\\BLOCK01_OFFICIAL_SOURCES.csv",
+      "bytes": 1479,
+      "sha256": "d7dc26006d10dc3a517fd954eb633e1e7ef3d6190113e383f8c62803819d9529",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\venue\\BLOCK01_OFFICIAL_SOURCES.csv"
+    },
+    {
+      "path": "投稿路线与补充证据\\BLOCK01_READ_COVERAGE.csv",
+      "bytes": 2668,
+      "sha256": "63795476a36a441e43966391333ed4a809e86b3013177b6cae71caf9096a7de5",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\venue\\BLOCK01_READ_COVERAGE.csv"
+    },
+    {
+      "path": "投稿路线与补充证据\\BLOCK03_READ_COVERAGE.csv",
+      "bytes": 7155,
+      "sha256": "b433ec77d8a4cbbc086740cca7b2527cda2abf12c35776bc5b8ed8bc60d4f018",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\venue\\BLOCK03_READ_COVERAGE.csv"
+    },
+    {
+      "path": "投稿路线与补充证据\\GPS_SHORT_BASELINE_MOVING_BASE_DECISION.md",
+      "bytes": 13101,
+      "sha256": "bd43b8e0fb8a0dcd1c8e45368484a1fcf05a90fd80426e79fb876f564e286c07",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\venue\\GPS_SHORT_BASELINE_MOVING_BASE_DECISION.md"
+    },
+    {
+      "path": "投稿路线与补充证据\\OFFICIAL_VENUE_AND_ORIGINAL_INPUT_BOUNDARY.md",
+      "bytes": 6158,
+      "sha256": "8de46dd6aaf9bfbe3bb40fc136346d1cfdd541871c0f70f5b92ec299c9480929",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\venue\\OFFICIAL_VENUE_AND_ORIGINAL_INPUT_BOUNDARY.md"
+    },
+    {
+      "path": "投稿路线与补充证据\\PRIMARY_LITERATURE_AND_CLAIM_MAP.csv",
+      "bytes": 7069,
+      "sha256": "43146b5f06ad2c7df701b82d312ee1038c78d2802f4374dfa4664ac794d5b375",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\venue\\PRIMARY_LITERATURE_AND_CLAIM_MAP.csv"
+    },
+    {
+      "path": "投稿路线与补充证据\\README.md",
+      "bytes": 3507,
+      "sha256": "a645ee9c08a2a235cd3839383ab0356faf1d55c08b9ce1127250aa3743495489",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\venue\\README.md"
+    },
+    {
+      "path": "投稿路线与补充证据\\REQUIRED_RECORDS_AND_ACCEPTANCE.csv",
+      "bytes": 4273,
+      "sha256": "d62a7fc518d6554a1f10f033c86e562fdb4a64f65c7455f082333bda8dba6e03",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\venue\\REQUIRED_RECORDS_AND_ACCEPTANCE.csv"
+    },
+    {
+      "path": "投稿路线与补充证据\\RESEARCH_QUESTIONS_AND_MAIN_FIGURE_PLAN.csv",
+      "bytes": 2956,
+      "sha256": "8d7cf364d3a73235acb54ae646bea659843ae7bbc60f706dd8455c5a77ee26b9",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\venue\\RESEARCH_QUESTIONS_AND_MAIN_FIGURE_PLAN.csv"
+    },
+    {
+      "path": "投稿路线与补充证据\\RV_ATTRIBUTION_BOUNDARY.md",
+      "bytes": 2676,
+      "sha256": "bd0341aada7c5a66b430e47ea8b4762bd5889dae0d00d0e8e896e0bdfc0b2881",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\venue\\RV_ATTRIBUTION_BOUNDARY.md"
+    },
+    {
+      "path": "投稿路线与补充证据\\TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md",
+      "bytes": 15099,
+      "sha256": "be13d9f87c238853acdacf51d1cf085eed4fcc7f6db337aa4a70f70953ec0c8d",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\venue\\TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md"
+    },
+    {
+      "path": "投稿路线与补充证据\\02_PROVISIONAL_NAMES_AND_TERMS.md",
+      "bytes": 4074,
+      "sha256": "19980202228b523ebfa922bba50c46dd95d6e8aa7dfea65d9aca28ec33c94b90",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\story\\02_PROVISIONAL_NAMES_AND_TERMS.md"
+    },
+    {
+      "path": "投稿路线与补充证据\\05_MAIN_FIGURE_ARGUMENT_PLAN_R2.md",
+      "bytes": 15114,
+      "sha256": "2a6d5ee9469364118a7f7057c05aa7819c358086d37c20cc8831519f888460ee",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\story\\05_MAIN_FIGURE_ARGUMENT_PLAN_R2.md"
+    },
+    {
+      "path": "投稿路线与补充证据\\08_RV_ATTRIBUTION_CORRECTION_R2.md",
+      "bytes": 3927,
+      "sha256": "6a52d38f03cb374bce8246aa350b091480d92684c073a063f788b5b86635f0ab",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\story\\08_RV_ATTRIBUTION_CORRECTION_R2.md"
+    },
+    {
+      "path": "投稿路线与补充证据\\INTERNAL_READER_LABELS_R2.csv",
+      "bytes": 7830,
+      "sha256": "fd4b7c6ee9e092fded99ddfbef13a19047bb72504a70c300e5bb02cf8335d0d8",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\story\\INTERNAL_READER_LABELS_R2.csv"
+    },
+    {
+      "path": "投稿路线与补充证据\\MAIN_FIGURE_PANEL_PLAN_R2.csv",
+      "bytes": 8859,
+      "sha256": "184049aa5de1c61124a7370b27a128550d721a993894169c1f89aa2c5f108f91",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\story\\MAIN_FIGURE_PANEL_PLAN_R2.csv"
+    },
+    {
+      "path": "README_先看这里.md",
+      "bytes": 7307,
+      "sha256": "5fe4ffdbb13eff747b9ff438dcc4c28bb10c7e13fe1ca0a1ef380b46674a040b",
+      "source": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\JOURNAL_REFRAME_20261004\\README_先看这里.md"
+    }
+  ],
+  "note": "Copies checked by SHA256. Original V3 results and external experiment archives were not modified. The complete source and review receipts are version-controlled in the WSL repository."
+}

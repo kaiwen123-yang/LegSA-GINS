@@ -1,0 +1,6 @@
+Method,GNSS position,Receiver velocity,Shared dual-yaw initialization,Online heading,Residual gate,Raw Doppler,Source-aware,Roll/pitch,Horizontal velocity
+GNSS/INS baseline,On,On,On,Off,Off,Off,Off,Off,Off
+Basic dual-heading GNSS/INS,On,Off,On,On,Off,Off,Off,Off,Off
+Gated-heading backbone,On,On,On,On,On,Off,Off,Off,Off
+Unweighted LegSA-GINS,On,On,On,On,On,On,Off,On,On
+LegSA-GINS,On,On,On,On,On,On,On,On,On

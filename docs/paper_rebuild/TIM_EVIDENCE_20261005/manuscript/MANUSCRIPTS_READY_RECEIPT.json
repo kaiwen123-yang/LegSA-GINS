@@ -1,0 +1,63 @@
+{
+  "files": [
+    {
+      "path": "GPS_DOCX_AUTHORING_RECEIPT.json",
+      "sha256": "e9f0a0ade54788676abd4f4a83a88ce5ec14decfb090c8681ce589fab2360b0a"
+    },
+    {
+      "path": "GPS_R3_CHANGES.diff",
+      "sha256": "a5c10ee9989f6a80d9b792a11566f80e496121e212d8827c33e913bae7eee299"
+    },
+    {
+      "path": "MANUSCRIPT_R3_CHANGES.diff",
+      "sha256": "1210d09c2210dc5e6206519a13314646eb91ddec33a52b5b17cd83e73df7cb2b"
+    },
+    {
+      "path": "MANUSCRIPT_R3_SOURCE_IDENTITY.json",
+      "sha256": "6be2618312f69cb15e798e873e4edc7de690f3415c775785fad9631cf40d6c62"
+    },
+    {
+      "path": "R3_CLAIM_EVIDENCE_MAP.csv",
+      "sha256": "3354fc1c174b0313058f681426242eeead65dcd4c60e25c5bbb7b11ebb802372"
+    },
+    {
+      "path": "R3_REVERSE_OUTLINE.csv",
+      "sha256": "8ea798bd3a2c7a6a8324c20d1a8f3368f76fd9327011e0bc901ba6ad59f24566"
+    },
+    {
+      "path": "TIM_DOCX_AUTHORING_RECEIPT.json",
+      "sha256": "539b70d8a404163990754c4fe7475d4993c905883812819ece570b9bc84a4aa7"
+    },
+    {
+      "path": "WORD_R3_PAGE_VISUAL_REVIEW.csv",
+      "sha256": "861ea15a58a4d2d02d5fbc1a862a16c8fc77d5e28d908defe590da46c1c474b3"
+    },
+    {
+      "path": "WORD_R3_QA_RECEIPT.json",
+      "sha256": "27918ae949f7ce7b1d3dca83f61676a7e2f1baa4859a69f47eb2f77be803e573"
+    },
+    {
+      "path": "build_manuscript_docx.py",
+      "sha256": "893edb8e7dde3641addf811703f08bcd779aabd79a23ac54c870072cbc3d26ed"
+    },
+    {
+      "path": "manuscript_gps_solutions_r3.docx",
+      "sha256": "cf7a978eeaccaa6982f28257a1377d5481eddea3e5a736f349a3d9d05df95c05"
+    },
+    {
+      "path": "manuscript_gps_solutions_r3.md",
+      "sha256": "97c8a797f0eac225452e6788b3105272fe9f496b372d8e7c5b8d6e14558997d3"
+    },
+    {
+      "path": "manuscript_tim_r3.docx",
+      "sha256": "2f38e89e583e9ade7926079cdf7eaa72abf085b9a815e4decc165fdfa2bf3c61"
+    },
+    {
+      "path": "manuscript_tim_r3.md",
+      "sha256": "3415c6380110b44bd55db36642b7e4f82372853b98be943e64a65bede4007843"
+    }
+  ],
+  "source_r2_unchanged": true,
+  "science_calls": 0,
+  "visual_review_pages": 34
+}

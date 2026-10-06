@@ -1,0 +1,4472 @@
+{
+  "M|BY2|F01|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F01",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 8.089647422454789,
+    "digits": 3
+  },
+  "M|BY2|F01|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F01",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.09177145533263088,
+    "digits": 3
+  },
+  "M|BY2|F01|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F01",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.04788054380877193,
+    "digits": 3
+  },
+  "M|BY2|F01|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F01",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 3.3312964026882526,
+    "digits": 3
+  },
+  "M|BY2|F01|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F01",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.933247658474164,
+    "digits": 3
+  },
+  "M|BY2|F01|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F01",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 56642.0,
+    "digits": 0
+  },
+  "M|BY2|F02|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F02",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.231952255808013,
+    "digits": 3
+  },
+  "M|BY2|F02|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F02",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.10192187334932777,
+    "digits": 3
+  },
+  "M|BY2|F02|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F02",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.04806842213318387,
+    "digits": 3
+  },
+  "M|BY2|F02|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F02",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 3.3352522481511127,
+    "digits": 3
+  },
+  "M|BY2|F02|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F02",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.9227955239249788,
+    "digits": 3
+  },
+  "M|BY2|F02|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F02",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 56642.0,
+    "digits": 0
+  },
+  "M|BY2|F03|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F03",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.9155910498740765,
+    "digits": 3
+  },
+  "M|BY2|F03|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F03",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.09992032386709424,
+    "digits": 3
+  },
+  "M|BY2|F03|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F03",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.047873659683683206,
+    "digits": 3
+  },
+  "M|BY2|F03|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F03",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 3.324661278109598,
+    "digits": 3
+  },
+  "M|BY2|F03|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F03",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.9289100041971015,
+    "digits": 3
+  },
+  "M|BY2|F03|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F03",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 56642.0,
+    "digits": 0
+  },
+  "M|BY2|A04|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "A04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.886000833151237,
+    "digits": 3
+  },
+  "M|BY2|A04|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "A04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.09691990156944293,
+    "digits": 3
+  },
+  "M|BY2|A04|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "A04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.05001891586618585,
+    "digits": 3
+  },
+  "M|BY2|A04|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "A04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.067087299693141,
+    "digits": 3
+  },
+  "M|BY2|A04|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "A04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.141149184458976,
+    "digits": 3
+  },
+  "M|BY2|A04|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "A04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 56642.0,
+    "digits": 0
+  },
+  "M|BY2|F04|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.8862718548526467,
+    "digits": 3
+  },
+  "M|BY2|F04|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.09790607774950152,
+    "digits": 3
+  },
+  "M|BY2|F04|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.04899590433188947,
+    "digits": 3
+  },
+  "M|BY2|F04|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.254340402339318,
+    "digits": 3
+  },
+  "M|BY2|F04|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.265490744005314,
+    "digits": 3
+  },
+  "M|BY2|F04|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 56642.0,
+    "digits": 0
+  },
+  "M|BY2|LC01|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "LC01",
+        "start_convention": "FILE_START"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.9948274600591076,
+    "digits": 3
+  },
+  "M|BY2|LC01|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "LC01",
+        "start_convention": "FILE_START"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.0975479714305497,
+    "digits": 3
+  },
+  "M|BY2|LC01|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "LC01",
+        "start_convention": "FILE_START"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.05066431825806066,
+    "digits": 3
+  },
+  "M|BY2|LC01|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "LC01",
+        "start_convention": "FILE_START"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.2095627529559005,
+    "digits": 3
+  },
+  "M|BY2|LC01|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "LC01",
+        "start_convention": "FILE_START"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.5676244070222307,
+    "digits": 3
+  },
+  "M|BY2|LC01|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "LC01",
+        "start_convention": "FILE_START"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 58014.0,
+    "digits": 0
+  },
+  "M|BY2|LC01-S|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "LC01-S",
+        "start_convention": "FILE_START"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.5392385536245534,
+    "digits": 3
+  },
+  "M|BY2|LC01-S|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "LC01-S",
+        "start_convention": "FILE_START"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.10352490362681992,
+    "digits": 3
+  },
+  "M|BY2|LC01-S|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "LC01-S",
+        "start_convention": "FILE_START"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.045250085330977255,
+    "digits": 3
+  },
+  "M|BY2|LC01-S|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "LC01-S",
+        "start_convention": "FILE_START"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 4.243477935993363,
+    "digits": 3
+  },
+  "M|BY2|LC01-S|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "LC01-S",
+        "start_convention": "FILE_START"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.990040090051533,
+    "digits": 3
+  },
+  "M|BY2|LC01-S|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "LC01-S",
+        "start_convention": "FILE_START"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 58014.0,
+    "digits": 0
+  },
+  "M|BY2|EXT05C|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "EXT05C",
+        "start_convention": "FILE_START"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 12.048641737808111,
+    "digits": 3
+  },
+  "M|BY2|EXT05C|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "EXT05C",
+        "start_convention": "FILE_START"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.0877508129138417,
+    "digits": 3
+  },
+  "M|BY2|EXT05C|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "EXT05C",
+        "start_convention": "FILE_START"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.05646995229568549,
+    "digits": 3
+  },
+  "M|BY2|EXT05C|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "EXT05C",
+        "start_convention": "FILE_START"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.8788931818645456,
+    "digits": 3
+  },
+  "M|BY2|EXT05C|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "EXT05C",
+        "start_convention": "FILE_START"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.5693319197843218,
+    "digits": 3
+  },
+  "M|BY2|EXT05C|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "EXT05C",
+        "start_convention": "FILE_START"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 58014.0,
+    "digits": 0
+  },
+  "M|BY2H|F01|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F01",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 7.137487572272005,
+    "digits": 3
+  },
+  "M|BY2H|F01|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F01",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.06292589316025435,
+    "digits": 3
+  },
+  "M|BY2H|F01|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F01",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.04490416746278954,
+    "digits": 3
+  },
+  "M|BY2H|F01|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F01",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.7849178101091736,
+    "digits": 3
+  },
+  "M|BY2H|F01|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F01",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.8837935867303504,
+    "digits": 3
+  },
+  "M|BY2H|F01|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F01",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 58580.0,
+    "digits": 0
+  },
+  "M|BY2H|F02|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F02",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.2832413876665534,
+    "digits": 3
+  },
+  "M|BY2H|F02|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F02",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.07150053377515339,
+    "digits": 3
+  },
+  "M|BY2H|F02|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F02",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.045410027457013925,
+    "digits": 3
+  },
+  "M|BY2H|F02|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F02",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.7823340778479824,
+    "digits": 3
+  },
+  "M|BY2H|F02|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F02",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.882583919732426,
+    "digits": 3
+  },
+  "M|BY2H|F02|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F02",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 58580.0,
+    "digits": 0
+  },
+  "M|BY2H|F03|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F03",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.9408005859002146,
+    "digits": 3
+  },
+  "M|BY2H|F03|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F03",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.06866690198053112,
+    "digits": 3
+  },
+  "M|BY2H|F03|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F03",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.044900829685629695,
+    "digits": 3
+  },
+  "M|BY2H|F03|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F03",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.784099484114239,
+    "digits": 3
+  },
+  "M|BY2H|F03|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F03",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.8821764919004356,
+    "digits": 3
+  },
+  "M|BY2H|F03|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F03",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 58580.0,
+    "digits": 0
+  },
+  "M|BY2H|A04|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "A04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.9339066257262114,
+    "digits": 3
+  },
+  "M|BY2H|A04|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "A04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.07004625078548787,
+    "digits": 3
+  },
+  "M|BY2H|A04|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "A04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.04589460672660459,
+    "digits": 3
+  },
+  "M|BY2H|A04|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "A04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.8372741245157689,
+    "digits": 3
+  },
+  "M|BY2H|A04|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "A04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.659245181008094,
+    "digits": 3
+  },
+  "M|BY2H|A04|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "A04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 58580.0,
+    "digits": 0
+  },
+  "M|BY2H|F04|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.93377013508875,
+    "digits": 3
+  },
+  "M|BY2H|F04|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.06836245149191253,
+    "digits": 3
+  },
+  "M|BY2H|F04|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.04535210822197352,
+    "digits": 3
+  },
+  "M|BY2H|F04|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.9662527055856234,
+    "digits": 3
+  },
+  "M|BY2H|F04|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.6982952989112554,
+    "digits": 3
+  },
+  "M|BY2H|F04|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 58580.0,
+    "digits": 0
+  },
+  "M|BY2H|LC01|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "LC01",
+        "start_convention": "CONTRACT_START"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.208612313835051,
+    "digits": 3
+  },
+  "M|BY2H|LC01|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "LC01",
+        "start_convention": "CONTRACT_START"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.0746064486934978,
+    "digits": 3
+  },
+  "M|BY2H|LC01|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "LC01",
+        "start_convention": "CONTRACT_START"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.04480400773175869,
+    "digits": 3
+  },
+  "M|BY2H|LC01|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "LC01",
+        "start_convention": "CONTRACT_START"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.1679878463679607,
+    "digits": 3
+  },
+  "M|BY2H|LC01|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "LC01",
+        "start_convention": "CONTRACT_START"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.8254202884875959,
+    "digits": 3
+  },
+  "M|BY2H|LC01|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "LC01",
+        "start_convention": "CONTRACT_START"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 59934.0,
+    "digits": 0
+  },
+  "M|BY2H|LC01-S|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "LC01-S",
+        "start_convention": "CONTRACT_START"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.9430028350481119,
+    "digits": 3
+  },
+  "M|BY2H|LC01-S|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "LC01-S",
+        "start_convention": "CONTRACT_START"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.08373314985151889,
+    "digits": 3
+  },
+  "M|BY2H|LC01-S|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "LC01-S",
+        "start_convention": "CONTRACT_START"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.0403641769018664,
+    "digits": 3
+  },
+  "M|BY2H|LC01-S|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "LC01-S",
+        "start_convention": "CONTRACT_START"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 4.364596129834245,
+    "digits": 3
+  },
+  "M|BY2H|LC01-S|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "LC01-S",
+        "start_convention": "CONTRACT_START"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.725063976847397,
+    "digits": 3
+  },
+  "M|BY2H|LC01-S|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "LC01-S",
+        "start_convention": "CONTRACT_START"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 59934.0,
+    "digits": 0
+  },
+  "M|BY2H|EXT05C|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "EXT05C",
+        "start_convention": "CONTRACT_START"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 20.108223061254332,
+    "digits": 3
+  },
+  "M|BY2H|EXT05C|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "EXT05C",
+        "start_convention": "CONTRACT_START"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.06918972281588827,
+    "digits": 3
+  },
+  "M|BY2H|EXT05C|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "EXT05C",
+        "start_convention": "CONTRACT_START"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.05064624712585625,
+    "digits": 3
+  },
+  "M|BY2H|EXT05C|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "EXT05C",
+        "start_convention": "CONTRACT_START"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.0394222311510497,
+    "digits": 3
+  },
+  "M|BY2H|EXT05C|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "EXT05C",
+        "start_convention": "CONTRACT_START"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.8190075775467118,
+    "digits": 3
+  },
+  "M|BY2H|EXT05C|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "EXT05C",
+        "start_convention": "CONTRACT_START"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 59934.0,
+    "digits": 0
+  },
+  "M|BY2O|F01|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F01",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 5.739037942642961,
+    "digits": 3
+  },
+  "M|BY2O|F01|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F01",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.06284210260933396,
+    "digits": 3
+  },
+  "M|BY2O|F01|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F01",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.043746385631304584,
+    "digits": 3
+  },
+  "M|BY2O|F01|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F01",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.8638937566682607,
+    "digits": 3
+  },
+  "M|BY2O|F01|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F01",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.7427301533457709,
+    "digits": 3
+  },
+  "M|BY2O|F01|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F01",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 76548.0,
+    "digits": 0
+  },
+  "M|BY2O|F02|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F02",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.309490986722553,
+    "digits": 3
+  },
+  "M|BY2O|F02|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F02",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.054724671058797664,
+    "digits": 3
+  },
+  "M|BY2O|F02|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F02",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.04617448708387419,
+    "digits": 3
+  },
+  "M|BY2O|F02|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F02",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.8794633592686152,
+    "digits": 3
+  },
+  "M|BY2O|F02|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F02",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.731210391662891,
+    "digits": 3
+  },
+  "M|BY2O|F02|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F02",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 76548.0,
+    "digits": 0
+  },
+  "M|BY2O|F03|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F03",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.4321841493167162,
+    "digits": 3
+  },
+  "M|BY2O|F03|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F03",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.05470913757288693,
+    "digits": 3
+  },
+  "M|BY2O|F03|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F03",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.043711582963203474,
+    "digits": 3
+  },
+  "M|BY2O|F03|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F03",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.874914777972241,
+    "digits": 3
+  },
+  "M|BY2O|F03|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F03",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.7340246990007653,
+    "digits": 3
+  },
+  "M|BY2O|F03|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F03",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 76548.0,
+    "digits": 0
+  },
+  "M|BY2O|A04|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "A04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.4291725340537145,
+    "digits": 3
+  },
+  "M|BY2O|A04|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "A04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.05394152069657263,
+    "digits": 3
+  },
+  "M|BY2O|A04|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "A04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.0441769680957712,
+    "digits": 3
+  },
+  "M|BY2O|A04|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "A04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.4500630869715752,
+    "digits": 3
+  },
+  "M|BY2O|A04|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "A04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.6784116921221246,
+    "digits": 3
+  },
+  "M|BY2O|A04|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "A04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 76548.0,
+    "digits": 0
+  },
+  "M|BY2O|F04|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.433814932823714,
+    "digits": 3
+  },
+  "M|BY2O|F04|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.054543210912875166,
+    "digits": 3
+  },
+  "M|BY2O|F04|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.04585890723786377,
+    "digits": 3
+  },
+  "M|BY2O|F04|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.5071123881620372,
+    "digits": 3
+  },
+  "M|BY2O|F04|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.6950312543923702,
+    "digits": 3
+  },
+  "M|BY2O|F04|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F04",
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 76548.0,
+    "digits": 0
+  },
+  "M|BY2O|LC01|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "LC01",
+        "start_convention": "FILE_START"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.4536970334279924,
+    "digits": 3
+  },
+  "M|BY2O|LC01|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "LC01",
+        "start_convention": "FILE_START"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.05430420090026619,
+    "digits": 3
+  },
+  "M|BY2O|LC01|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "LC01",
+        "start_convention": "FILE_START"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.04475161716620303,
+    "digits": 3
+  },
+  "M|BY2O|LC01|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "LC01",
+        "start_convention": "FILE_START"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.3651213087955518,
+    "digits": 3
+  },
+  "M|BY2O|LC01|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "LC01",
+        "start_convention": "FILE_START"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.4638875207183732,
+    "digits": 3
+  },
+  "M|BY2O|LC01|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "LC01",
+        "start_convention": "FILE_START"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 78441.0,
+    "digits": 0
+  },
+  "M|BY2O|LC01-S|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "LC01-S",
+        "start_convention": "FILE_START"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 4.015602467888004,
+    "digits": 3
+  },
+  "M|BY2O|LC01-S|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "LC01-S",
+        "start_convention": "FILE_START"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.06046245535470896,
+    "digits": 3
+  },
+  "M|BY2O|LC01-S|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "LC01-S",
+        "start_convention": "FILE_START"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.03993000337367851,
+    "digits": 3
+  },
+  "M|BY2O|LC01-S|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "LC01-S",
+        "start_convention": "FILE_START"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 4.074428765017513,
+    "digits": 3
+  },
+  "M|BY2O|LC01-S|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "LC01-S",
+        "start_convention": "FILE_START"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 3.3006897967468083,
+    "digits": 3
+  },
+  "M|BY2O|LC01-S|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "LC01-S",
+        "start_convention": "FILE_START"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 78441.0,
+    "digits": 0
+  },
+  "M|BY2O|EXT05C|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "EXT05C",
+        "start_convention": "FILE_START"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 5.845502312798482,
+    "digits": 3
+  },
+  "M|BY2O|EXT05C|h_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "EXT05C",
+        "start_convention": "FILE_START"
+      },
+      "column": "h_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.05195371361637804,
+    "digits": 3
+  },
+  "M|BY2O|EXT05C|up_rmse_m": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "EXT05C",
+        "start_convention": "FILE_START"
+      },
+      "column": "up_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.0489029709338383,
+    "digits": 3
+  },
+  "M|BY2O|EXT05C|roll_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "EXT05C",
+        "start_convention": "FILE_START"
+      },
+      "column": "roll_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.8088236694848384,
+    "digits": 3
+  },
+  "M|BY2O|EXT05C|pitch_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "EXT05C",
+        "start_convention": "FILE_START"
+      },
+      "column": "pitch_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.4538836646873523,
+    "digits": 3
+  },
+  "M|BY2O|EXT05C|matched_epoch_count": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "EXT05C",
+        "start_convention": "FILE_START"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 78441.0,
+    "digits": 0
+  },
+  "D|unc3|0.35": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 7,
+      "line_end": 7,
+      "literal": "0.35",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": 0.35,
+    "digits": 2
+  },
+  "D|contract|0.03": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/configs/paper_rebuild/final_v23_parity_contract.yaml",
+    "locator": {
+      "line_start": 282,
+      "line_end": 282,
+      "literal": "0.03",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": 0.03,
+    "digits": 2
+  },
+  "D|contract|-0.30": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/configs/paper_rebuild/final_v23_parity_contract.yaml",
+    "locator": {
+      "line_start": 282,
+      "line_end": 282,
+      "literal": "-0.30",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": -0.3,
+    "digits": 2
+  },
+  "D|geometry|0.356191491865984": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05_PREREG.md",
+    "locator": {
+      "line_start": 23,
+      "line_end": 23,
+      "literal": "0.356191491865984",
+      "display_digits": 15
+    },
+    "mode": "DOC",
+    "value": 0.356191491865984,
+    "digits": 15
+  },
+  "G|BY2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05_PREREG.md",
+    "locator": {
+      "line_start": 23,
+      "line_end": 23,
+      "literal": "0.356191491865984",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 0.356191491865984,
+    "digits": 3
+  },
+  "D|geometry|0.35418777593777223": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05_PREREG.md",
+    "locator": {
+      "line_start": 23,
+      "line_end": 23,
+      "literal": "0.35418777593777223",
+      "display_digits": 17
+    },
+    "mode": "DOC",
+    "value": 0.35418777593777223,
+    "digits": 17
+  },
+  "G|BY2H": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05_PREREG.md",
+    "locator": {
+      "line_start": 23,
+      "line_end": 23,
+      "literal": "0.35418777593777223",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 0.35418777593777223,
+    "digits": 3
+  },
+  "D|geometry|0.35013463864843675": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05_PREREG.md",
+    "locator": {
+      "line_start": 23,
+      "line_end": 23,
+      "literal": "0.35013463864843675",
+      "display_digits": 17
+    },
+    "mode": "DOC",
+    "value": 0.35013463864843675,
+    "digits": 17
+  },
+  "G|BY2O": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05_PREREG.md",
+    "locator": {
+      "line_start": 23,
+      "line_end": 23,
+      "literal": "0.35013463864843675",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 0.35013463864843675,
+    "digits": 3
+  },
+  "D|replacement|5": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/V3_01R_MANUSCRIPT_REPLACEMENT.md",
+    "locator": {
+      "line_start": 7,
+      "line_end": 7,
+      "literal": "5",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 5.0,
+    "digits": 0
+  },
+  "D|contract|90": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/configs/paper_rebuild/final_v23_parity_contract.yaml",
+    "locator": {
+      "line_start": 211,
+      "line_end": 211,
+      "literal": "90",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 90.0,
+    "digits": 0
+  },
+  "D|contract|0.5": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/configs/paper_rebuild/final_v23_parity_contract.yaml",
+    "locator": {
+      "line_start": 293,
+      "line_end": 293,
+      "literal": "0.5",
+      "display_digits": 1
+    },
+    "mode": "DOC",
+    "value": 0.5,
+    "digits": 1
+  },
+  "D|contract|3.0": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/configs/paper_rebuild/final_v23_parity_contract.yaml",
+    "locator": {
+      "line_start": 294,
+      "line_end": 294,
+      "literal": "3.0",
+      "display_digits": 1
+    },
+    "mode": "DOC",
+    "value": 3.0,
+    "digits": 1
+  },
+  "D|contract|6.0": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/configs/paper_rebuild/final_v23_parity_contract.yaml",
+    "locator": {
+      "line_start": 295,
+      "line_end": 295,
+      "literal": "6.0",
+      "display_digits": 1
+    },
+    "mode": "DOC",
+    "value": 6.0,
+    "digits": 1
+  },
+  "D|contract|15.0": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/configs/paper_rebuild/final_v23_parity_contract.yaml",
+    "locator": {
+      "line_start": 297,
+      "line_end": 297,
+      "literal": "15.0",
+      "display_digits": 1
+    },
+    "mode": "DOC",
+    "value": 15.0,
+    "digits": 1
+  },
+  "D|method|1.2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/PROTOCOL_V2_METHOD_STATEMENT.md",
+    "locator": {
+      "line_start": 20,
+      "line_end": 20,
+      "literal": "1.2",
+      "display_digits": 1
+    },
+    "mode": "DOC",
+    "value": 1.2,
+    "digits": 1
+  },
+  "D|geometry|27": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05_PREREG.md",
+    "locator": {
+      "line_start": 87,
+      "line_end": 87,
+      "literal": "27",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 27.0,
+    "digits": 0
+  },
+  "D|geometry|18": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05_PREREG.md",
+    "locator": {
+      "line_start": 39,
+      "line_end": 39,
+      "literal": "18",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 18.0,
+    "digits": 0
+  },
+  "S|F04|occlusion_primary|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv",
+    "locator": {
+      "where": {
+        "method_id": "F04",
+        "segment_id": "occlusion_primary",
+        "variant": "PROTOCOL_V3",
+        "evaluator_contract": "evaluator_contract_v3"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.2325140820805299,
+    "digits": 3
+  },
+  "S|LC01|occlusion_primary|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv",
+    "locator": {
+      "where": {
+        "method_id": "LC01",
+        "segment_id": "occlusion_primary",
+        "variant": "",
+        "evaluator_contract": "evaluator_contract_v3"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 4.008201405335621,
+    "digits": 3
+  },
+  "D|unc3|3.78": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 19,
+      "line_end": 19,
+      "literal": "3.78",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": 3.78,
+    "digits": 2
+  },
+  "D|unc3|2.20": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 19,
+      "line_end": 19,
+      "literal": "2.20",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": 2.2,
+    "digits": 2
+  },
+  "D|unc3|4.44": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 19,
+      "line_end": 19,
+      "literal": "4.44",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": 4.44,
+    "digits": 2
+  },
+  "D|replacement|6,468": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/V3_01R_MANUSCRIPT_REPLACEMENT.md",
+    "locator": {
+      "line_start": 68,
+      "line_end": 68,
+      "literal": "6,468",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 6468.0,
+    "digits": 0
+  },
+  "D|replacement|283": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/V3_01R_MANUSCRIPT_REPLACEMENT.md",
+    "locator": {
+      "line_start": 78,
+      "line_end": 78,
+      "literal": "283",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 283.0,
+    "digits": 0
+  },
+  "D|replacement|193": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/V3_01R_MANUSCRIPT_REPLACEMENT.md",
+    "locator": {
+      "line_start": 78,
+      "line_end": 78,
+      "literal": "193",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 193.0,
+    "digits": 0
+  },
+  "D|replacement|90": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/V3_01R_MANUSCRIPT_REPLACEMENT.md",
+    "locator": {
+      "line_start": 79,
+      "line_end": 79,
+      "literal": "90",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 90.0,
+    "digits": 0
+  },
+  "NAT|BY2|F04|yaw_RMSE_deg": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/natural33.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F04"
+      },
+      "column": "yaw_RMSE_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.90266201392062,
+    "digits": 3
+  },
+  "NAT|BY2H|F04|yaw_RMSE_deg": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/natural33.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F04"
+      },
+      "column": "yaw_RMSE_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.9414758146710627,
+    "digits": 3
+  },
+  "NAT|BY2O|F04|yaw_RMSE_deg": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/natural33.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F04"
+      },
+      "column": "yaw_RMSE_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.4125224716896723,
+    "digits": 3
+  },
+  "NAT|BY2|F04|H_RMSE_m": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/natural33.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F04"
+      },
+      "column": "H_RMSE_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.09756038132131692,
+    "digits": 3
+  },
+  "NAT|BY2H|F04|H_RMSE_m": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/natural33.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F04"
+      },
+      "column": "H_RMSE_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.06805593881816448,
+    "digits": 3
+  },
+  "NAT|BY2O|F04|H_RMSE_m": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/natural33.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F04"
+      },
+      "column": "H_RMSE_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.05444403287422519,
+    "digits": 3
+  },
+  "NAT|BY2H|F04|matched_epochs": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/natural33.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F04"
+      },
+      "column": "matched_epochs",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 58556.0,
+    "digits": 0
+  },
+  "NAT|BY2H|F04|expected_original_output_epochs": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/natural33.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F04"
+      },
+      "column": "expected_original_output_epochs",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 58580.0,
+    "digits": 0
+  },
+  "NAT|BY2O|F04|matched_epochs": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/natural33.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F04"
+      },
+      "column": "matched_epochs",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 72810.0,
+    "digits": 0
+  },
+  "NAT|BY2O|F04|expected_original_output_epochs": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/natural33.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F04"
+      },
+      "column": "expected_original_output_epochs",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 76548.0,
+    "digits": 0
+  },
+  "CLM|D62|10|A06|fault|H|mean_of_placement_RMSE_or_endpoint_deltas|3": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/claim_placement280.csv",
+    "locator": {
+      "where": {
+        "family": "D62",
+        "duration_s": "10",
+        "ablation_method": "A06",
+        "domain": "fault",
+        "metric": "H"
+      },
+      "column": "mean_of_placement_RMSE_or_endpoint_deltas",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": -7.439889597909058,
+    "digits": 3
+  },
+  "CLM|D62|20|A06|fault|H|mean_of_placement_RMSE_or_endpoint_deltas|3": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/claim_placement280.csv",
+    "locator": {
+      "where": {
+        "family": "D62",
+        "duration_s": "20",
+        "ablation_method": "A06",
+        "domain": "fault",
+        "metric": "H"
+      },
+      "column": "mean_of_placement_RMSE_or_endpoint_deltas",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": -29.614411360942807,
+    "digits": 3
+  },
+  "CLM|D62|10|A06|fault|V|worsened|0": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/claim_placement280.csv",
+    "locator": {
+      "where": {
+        "family": "D62",
+        "duration_s": "10",
+        "ablation_method": "A06",
+        "domain": "fault",
+        "metric": "V"
+      },
+      "column": "worsened",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 7.0,
+    "digits": 0
+  },
+  "CLM|D62|20|A06|fault|V|worsened|0": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/claim_placement280.csv",
+    "locator": {
+      "where": {
+        "family": "D62",
+        "duration_s": "20",
+        "ablation_method": "A06",
+        "domain": "fault",
+        "metric": "V"
+      },
+      "column": "worsened",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 6.0,
+    "digits": 0
+  },
+  "CLM|D62|10|A06|fault|V|mean_of_placement_RMSE_or_endpoint_deltas|3": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/claim_placement280.csv",
+    "locator": {
+      "where": {
+        "family": "D62",
+        "duration_s": "10",
+        "ablation_method": "A06",
+        "domain": "fault",
+        "metric": "V"
+      },
+      "column": "mean_of_placement_RMSE_or_endpoint_deltas",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.10823838409626088,
+    "digits": 3
+  },
+  "CLM|D62|20|A06|fault|V|mean_of_placement_RMSE_or_endpoint_deltas|3": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/claim_placement280.csv",
+    "locator": {
+      "where": {
+        "family": "D62",
+        "duration_s": "20",
+        "ablation_method": "A06",
+        "domain": "fault",
+        "metric": "V"
+      },
+      "column": "mean_of_placement_RMSE_or_endpoint_deltas",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.18889564820558707,
+    "digits": 3
+  },
+  "FGO|BY2H|OISAM|matched_epoch_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_metrics.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "OISAM",
+        "support": "OWN_VALID"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 0.0,
+    "digits": 0
+  },
+  "FGO|BY2H|OISAM|expected_epoch_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_metrics.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "OISAM",
+        "support": "OWN_VALID"
+      },
+      "column": "expected_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 271.0,
+    "digits": 0
+  },
+  "FGO|BY2O|OISAM|matched_epoch_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_metrics.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "OISAM",
+        "support": "OWN_VALID"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 55.0,
+    "digits": 0
+  },
+  "FGO|BY2O|OISAM|expected_epoch_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_metrics.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "OISAM",
+        "support": "OWN_VALID"
+      },
+      "column": "expected_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 378.0,
+    "digits": 0
+  },
+  "FGO|BY2O|OISAM|position_3d_rmse_m": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_metrics.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "OISAM",
+        "support": "OWN_VALID"
+      },
+      "column": "position_3d_rmse_m",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.05637584107970911,
+    "digits": 3
+  },
+  "P|BY2|LC01-F04|yaw|delta_rmse|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2",
+        "segment": "full",
+        "pair_A_minus_B": "LC01-F04",
+        "metric": "yaw"
+      },
+      "column": "delta_rmse",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": 1.1103372814582677,
+    "digits": 2
+  },
+  "P|BY2|LC01-F04|yaw|mbb95_high|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2",
+        "segment": "full",
+        "pair_A_minus_B": "LC01-F04",
+        "metric": "yaw"
+      },
+      "column": "mbb95_high",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": 2.5738499973094195,
+    "digits": 2
+  },
+  "P|BY2|LC01-F04|yaw|mbb95_low|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2",
+        "segment": "full",
+        "pair_A_minus_B": "LC01-F04",
+        "metric": "yaw"
+      },
+      "column": "mbb95_low",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": -0.2151695911095197,
+    "digits": 2
+  },
+  "P|BY2H|LC01-F04|yaw|delta_rmse|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2H",
+        "segment": "full",
+        "pair_A_minus_B": "LC01-F04",
+        "metric": "yaw"
+      },
+      "column": "delta_rmse",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": 0.2741892278945445,
+    "digits": 2
+  },
+  "P|BY2H|LC01-F04|yaw|mbb95_high|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2H",
+        "segment": "full",
+        "pair_A_minus_B": "LC01-F04",
+        "metric": "yaw"
+      },
+      "column": "mbb95_high",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": 0.5142639522923124,
+    "digits": 2
+  },
+  "P|BY2H|LC01-F04|yaw|mbb95_low|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2H",
+        "segment": "full",
+        "pair_A_minus_B": "LC01-F04",
+        "metric": "yaw"
+      },
+      "column": "mbb95_low",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": -0.0520599344381443,
+    "digits": 2
+  },
+  "D|unc3|95": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 7,
+      "line_end": 7,
+      "literal": "95",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 95.0,
+    "digits": 0
+  },
+  "D|unc3|1.60": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 15,
+      "line_end": 15,
+      "literal": "1.60",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": 1.6,
+    "digits": 2
+  },
+  "D|unc3|2.16": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 15,
+      "line_end": 15,
+      "literal": "2.16",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": 2.16,
+    "digits": 2
+  },
+  "D|unc3|2.04": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 15,
+      "line_end": 15,
+      "literal": "2.04",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": 2.04,
+    "digits": 2
+  },
+  "D|unc3|1.36": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 15,
+      "line_end": 15,
+      "literal": "1.36",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": 1.36,
+    "digits": 2
+  },
+  "D|unc3|3.61": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 15,
+      "line_end": 15,
+      "literal": "3.61",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": 3.61,
+    "digits": 2
+  },
+  "D|unc3|0.045": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 15,
+      "line_end": 15,
+      "literal": "0.045",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 0.045,
+    "digits": 3
+  },
+  "D|unc3|0.152": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 15,
+      "line_end": 15,
+      "literal": "0.152",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 0.152,
+    "digits": 3
+  },
+  "D|unc3|0.085": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 15,
+      "line_end": 15,
+      "literal": "0.085",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 0.085,
+    "digits": 3
+  },
+  "D|unc3|0.038": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 15,
+      "line_end": 15,
+      "literal": "0.038",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 0.038,
+    "digits": 3
+  },
+  "D|unc3|0.073": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 15,
+      "line_end": 15,
+      "literal": "0.073",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 0.073,
+    "digits": 3
+  },
+  "P|BY2|F03-F02|yaw|delta_rmse|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2",
+        "segment": "full",
+        "pair_A_minus_B": "F03-F02",
+        "metric": "yaw"
+      },
+      "column": "delta_rmse",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": -0.3163612059339366,
+    "digits": 2
+  },
+  "P|BY2H|F03-F02|yaw|delta_rmse|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2H",
+        "segment": "full",
+        "pair_A_minus_B": "F03-F02",
+        "metric": "yaw"
+      },
+      "column": "delta_rmse",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": -0.3424408017663387,
+    "digits": 2
+  },
+  "P|BY2|F03-F02|yaw|mbb95_low|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2",
+        "segment": "full",
+        "pair_A_minus_B": "F03-F02",
+        "metric": "yaw"
+      },
+      "column": "mbb95_low",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": -0.6385843461387779,
+    "digits": 2
+  },
+  "P|BY2|F03-F02|yaw|mbb95_high|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2",
+        "segment": "full",
+        "pair_A_minus_B": "F03-F02",
+        "metric": "yaw"
+      },
+      "column": "mbb95_high",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": -0.0140485089609116,
+    "digits": 2
+  },
+  "P|BY2H|F03-F02|yaw|mbb95_low|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2H",
+        "segment": "full",
+        "pair_A_minus_B": "F03-F02",
+        "metric": "yaw"
+      },
+      "column": "mbb95_low",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": -0.8174006878608853,
+    "digits": 2
+  },
+  "P|BY2H|F03-F02|yaw|mbb95_high|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2H",
+        "segment": "full",
+        "pair_A_minus_B": "F03-F02",
+        "metric": "yaw"
+      },
+      "column": "mbb95_high",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": -0.0125432894447936,
+    "digits": 2
+  },
+  "P|BY2|F04-F03|yaw|delta_rmse|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2",
+        "segment": "full",
+        "pair_A_minus_B": "F04-F03",
+        "metric": "yaw"
+      },
+      "column": "delta_rmse",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": -0.0293191950214297,
+    "digits": 2
+  },
+  "P|BY2H|F04-F03|yaw|delta_rmse|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2H",
+        "segment": "full",
+        "pair_A_minus_B": "F04-F03",
+        "metric": "yaw"
+      },
+      "column": "delta_rmse",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": -0.0070304508114646,
+    "digits": 2
+  },
+  "P|BY2O|F04-F03|yaw|delta_rmse|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2O",
+        "segment": "full",
+        "pair_A_minus_B": "F04-F03",
+        "metric": "yaw"
+      },
+      "column": "delta_rmse",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": 0.0016307835069979,
+    "digits": 2
+  },
+  "P|BY2O|F04-F02|yaw|delta_rmse|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2O",
+        "segment": "full",
+        "pair_A_minus_B": "F04-F02",
+        "metric": "yaw"
+      },
+      "column": "delta_rmse",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": 0.1243239461011613,
+    "digits": 2
+  },
+  "P|BY2O|F04-F02|yaw|mbb95_low|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2O",
+        "segment": "full",
+        "pair_A_minus_B": "F04-F02",
+        "metric": "yaw"
+      },
+      "column": "mbb95_low",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": -0.0336709672210277,
+    "digits": 2
+  },
+  "P|BY2O|F04-F02|yaw|mbb95_high|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2O",
+        "segment": "full",
+        "pair_A_minus_B": "F04-F02",
+        "metric": "yaw"
+      },
+      "column": "mbb95_high",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": 0.2192205046241588,
+    "digits": 2
+  },
+  "C|F04|yaw_rmse_deg|finite_count|0": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/CORE_541_SUMMARY_V3.csv",
+    "locator": {
+      "where": {
+        "method_id": "F04",
+        "metric": "yaw_rmse_deg"
+      },
+      "column": "finite_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 519.0,
+    "digits": 0
+  },
+  "C|F04|yaw_rmse_deg|algorithm_failure_count|0": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/CORE_541_SUMMARY_V3.csv",
+    "locator": {
+      "where": {
+        "method_id": "F04",
+        "metric": "yaw_rmse_deg"
+      },
+      "column": "algorithm_failure_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 22.0,
+    "digits": 0
+  },
+  "C|F04|yaw_rmse_deg|registered_count|0": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/CORE_541_SUMMARY_V3.csv",
+    "locator": {
+      "where": {
+        "method_id": "F04",
+        "metric": "yaw_rmse_deg"
+      },
+      "column": "registered_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 541.0,
+    "digits": 0
+  },
+  "C|F02|yaw_rmse_deg|algorithm_failure_count|0": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/CORE_541_SUMMARY_V3.csv",
+    "locator": {
+      "where": {
+        "method_id": "F02",
+        "metric": "yaw_rmse_deg"
+      },
+      "column": "algorithm_failure_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 43.0,
+    "digits": 0
+  },
+  "D|budget|\u22120.346": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
+    "locator": {
+      "line_start": 90,
+      "line_end": 90,
+      "literal": "\u22120.346",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": -0.346,
+    "digits": 2
+  },
+  "D|budget|98.8": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
+    "locator": {
+      "line_start": 90,
+      "line_end": 90,
+      "literal": "98.8",
+      "display_digits": 1
+    },
+    "mode": "DOC",
+    "value": 98.8,
+    "digits": 1
+  },
+  "D|budget|497": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
+    "locator": {
+      "line_start": 90,
+      "line_end": 90,
+      "literal": "497",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 497.0,
+    "digits": 0
+  },
+  "D|budget|\u22120.029": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
+    "locator": {
+      "line_start": 90,
+      "line_end": 90,
+      "literal": "\u22120.029",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": -0.029,
+    "digits": 2
+  },
+  "UA|f04_f03_yaw_pairs": {
+    "path": "docs/paper_rebuild/v3/uncertainty/UA01_PAIRED_OVERALL.csv",
+    "locator": {
+      "where": {
+        "pair": "F04-F03",
+        "metric": "yaw_rmse_deg"
+      },
+      "column": "n_pairs_finite",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 511.0,
+    "source_value": "511",
+    "digits": 0
+  },
+  "UA|paired_fault_registered": {
+    "path": "docs/paper_rebuild/v3/uncertainty/UA01_PAIRED_OVERALL.csv",
+    "locator": {
+      "where": {
+        "pair": "F04-F03",
+        "metric": "yaw_rmse_deg"
+      },
+      "column": "n_registered",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 540.0,
+    "source_value": "540",
+    "digits": 0
+  },
+  "D|budget|+0.0003": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
+    "locator": {
+      "line_start": 90,
+      "line_end": 90,
+      "literal": "+0.0003",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": 0.0003,
+    "digits": 2
+  },
+  "D|budget|37.1": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
+    "locator": {
+      "line_start": 90,
+      "line_end": 90,
+      "literal": "37.1",
+      "display_digits": 1
+    },
+    "mode": "DOC",
+    "value": 37.1,
+    "digits": 1
+  },
+  "C|F04|yaw_rmse_deg|p95|3": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/CORE_541_SUMMARY_V3.csv",
+    "locator": {
+      "where": {
+        "method_id": "F04",
+        "metric": "yaw_rmse_deg"
+      },
+      "column": "p95",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.4465376134717114,
+    "digits": 3
+  },
+  "D|budget|2.00": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
+    "locator": {
+      "line_start": 91,
+      "line_end": 91,
+      "literal": "2.00",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": 2.0,
+    "digits": 2
+  },
+  "D|budget|4.18": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
+    "locator": {
+      "line_start": 91,
+      "line_end": 91,
+      "literal": "4.18",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": 4.18,
+    "digits": 2
+  },
+  "UA|f04_yaw_median_ci_low": {
+    "path": "docs/paper_rebuild/v3/uncertainty/UA01_DISTRIBUTION_QUANTILES.csv",
+    "locator": {
+      "where": {
+        "method": "F04",
+        "metric": "yaw_rmse_deg"
+      },
+      "column": "cluster_q50_low",
+      "display_digits": 16
+    },
+    "mode": "CSV",
+    "value": 1.8859878395987226,
+    "source_value": "1.8859878395987226",
+    "digits": 16
+  },
+  "UA|f04_yaw_median_ci_high": {
+    "path": "docs/paper_rebuild/v3/uncertainty/UA01_DISTRIBUTION_QUANTILES.csv",
+    "locator": {
+      "where": {
+        "method": "F04",
+        "metric": "yaw_rmse_deg"
+      },
+      "column": "cluster_q50_high",
+      "display_digits": 16
+    },
+    "mode": "CSV",
+    "value": 1.8862718548526467,
+    "source_value": "1.8862718548526467",
+    "digits": 16
+  },
+  "D|budget|0.0023": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
+    "locator": {
+      "line_start": 28,
+      "line_end": 28,
+      "literal": "0.0023",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 0.0023,
+    "digits": 3
+  },
+  "D|budget|\u22121.61": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
+    "locator": {
+      "line_start": 95,
+      "line_end": 95,
+      "literal": "\u22121.61",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": -1.61,
+    "digits": 2
+  },
+  "D|budget|10": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
+    "locator": {
+      "line_start": 21,
+      "line_end": 21,
+      "literal": "10",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 10.0,
+    "digits": 0
+  },
+  "UA|a2_20_h_delta": {
+    "path": "docs/paper_rebuild/v3/uncertainty/UA01_ADDENDUM_PAIRED.csv",
+    "locator": {
+      "where": {
+        "type": "D62",
+        "duration_s": "20",
+        "pair": "F04-F03",
+        "metric": "horizontal_rmse_m"
+      },
+      "column": "mean",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": -10.510165904595015,
+    "source_value": "-10.510165904595015",
+    "digits": 2
+  },
+  "D|budget|20": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
+    "locator": {
+      "line_start": 21,
+      "line_end": 21,
+      "literal": "20",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 20.0,
+    "digits": 0
+  },
+  "D|budget|9": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
+    "locator": {
+      "line_start": 3,
+      "line_end": 3,
+      "literal": "9",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 9.0,
+    "digits": 0
+  },
+  "D|budget|0.126": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
+    "locator": {
+      "line_start": 95,
+      "line_end": 95,
+      "literal": "0.126",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 0.126,
+    "digits": 3
+  },
+  "D|budget|0.241": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
+    "locator": {
+      "line_start": 95,
+      "line_end": 95,
+      "literal": "0.241",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 0.241,
+    "digits": 3
+  },
+  "D|budget|0.328": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
+    "locator": {
+      "line_start": 95,
+      "line_end": 95,
+      "literal": "0.328",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 0.328,
+    "digits": 3
+  },
+  "D|budget|1.025": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
+    "locator": {
+      "line_start": 95,
+      "line_end": 95,
+      "literal": "1.025",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 1.025,
+    "digits": 3
+  },
+  "UA|a1_30_h_mean": {
+    "path": "docs/paper_rebuild/v3/uncertainty/UA01_ADDENDUM_STATS.csv",
+    "locator": {
+      "where": {
+        "type": "D61",
+        "duration_s": "30",
+        "method": "F04",
+        "metric": "horizontal_rmse_m"
+      },
+      "column": "mean",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 30.80599245730669,
+    "source_value": "30.80599245730669",
+    "digits": 3
+  },
+  "D|budget|30": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
+    "locator": {
+      "line_start": 43,
+      "line_end": 43,
+      "literal": "30",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 30.0,
+    "digits": 0
+  },
+  "D|hx|0.111679": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/HX05_CLOSEOUT.md",
+    "locator": {
+      "line_start": 23,
+      "line_end": 23,
+      "literal": "0.111679",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 0.111679,
+    "digits": 3
+  },
+  "D|hx|0.132593": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/HX05_CLOSEOUT.md",
+    "locator": {
+      "line_start": 23,
+      "line_end": 23,
+      "literal": "0.132593",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 0.132593,
+    "digits": 3
+  },
+  "D|hx|0.059416": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/HX05_CLOSEOUT.md",
+    "locator": {
+      "line_start": 23,
+      "line_end": 23,
+      "literal": "0.059416",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 0.059416,
+    "digits": 3
+  },
+  "D|hx|14.566166": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/HX05_CLOSEOUT.md",
+    "locator": {
+      "line_start": 23,
+      "line_end": 23,
+      "literal": "14.566166",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 14.566166,
+    "digits": 3
+  },
+  "D|hx|27.011169": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/HX05_CLOSEOUT.md",
+    "locator": {
+      "line_start": 23,
+      "line_end": 23,
+      "literal": "27.011169",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 27.011169,
+    "digits": 3
+  },
+  "D|hx|23.138950": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/HX05_CLOSEOUT.md",
+    "locator": {
+      "line_start": 23,
+      "line_end": 23,
+      "literal": "23.138950",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 23.13895,
+    "digits": 3
+  },
+  "D|hx|33.633600": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/HX05_CLOSEOUT.md",
+    "locator": {
+      "line_start": 25,
+      "line_end": 25,
+      "literal": "33.633600",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 33.6336,
+    "digits": 3
+  },
+  "D|hx|47.525517": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/HX05_CLOSEOUT.md",
+    "locator": {
+      "line_start": 25,
+      "line_end": 25,
+      "literal": "47.525517",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 47.525517,
+    "digits": 3
+  },
+  "D|hx|28.558852": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/HX05_CLOSEOUT.md",
+    "locator": {
+      "line_start": 25,
+      "line_end": 25,
+      "literal": "28.558852",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 28.558852,
+    "digits": 3
+  },
+  "D|geometry|100": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05_PREREG.md",
+    "locator": {
+      "line_start": 31,
+      "line_end": 31,
+      "literal": "100",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 100.0,
+    "digits": 0
+  },
+  "D|hx|1.407350": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/HX05_CLOSEOUT.md",
+    "locator": {
+      "line_start": 27,
+      "line_end": 27,
+      "literal": "1.407350",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 1.40735,
+    "digits": 3
+  },
+  "D|hx|7.769345": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/HX05_CLOSEOUT.md",
+    "locator": {
+      "line_start": 27,
+      "line_end": 27,
+      "literal": "7.769345",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 7.769345,
+    "digits": 3
+  },
+  "D|hx|18": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/HX05_CLOSEOUT.md",
+    "locator": {
+      "line_start": 13,
+      "line_end": 13,
+      "literal": "18",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 18.0,
+    "digits": 0
+  },
+  "D|hx|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/HX05_CLOSEOUT.md",
+    "locator": {
+      "line_start": 9,
+      "line_end": 9,
+      "literal": "2",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 2.0,
+    "digits": 0
+  },
+  "D|hx|271": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/HX05_CLOSEOUT.md",
+    "locator": {
+      "line_start": 9,
+      "line_end": 9,
+      "literal": "271",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 271.0,
+    "digits": 0
+  },
+  "D|hx|2.894928": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/HX05_CLOSEOUT.md",
+    "locator": {
+      "line_start": 29,
+      "line_end": 29,
+      "literal": "2.894928",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 2.894928,
+    "digits": 3
+  },
+  "D|hx|6.209111": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/HX05_CLOSEOUT.md",
+    "locator": {
+      "line_start": 25,
+      "line_end": 25,
+      "literal": "6.209111",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 6.209111,
+    "digits": 3
+  },
+  "D|hx|9.178417": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/HX05_CLOSEOUT.md",
+    "locator": {
+      "line_start": 25,
+      "line_end": 25,
+      "literal": "9.178417",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 9.178417,
+    "digits": 3
+  },
+  "D|hx|6.322412": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/HX05_CLOSEOUT.md",
+    "locator": {
+      "line_start": 25,
+      "line_end": 25,
+      "literal": "6.322412",
+      "display_digits": 3
+    },
+    "mode": "DOC",
+    "value": 6.322412,
+    "digits": 3
+  },
+  "D|dist|18": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UNC02_DISTINGUISHABILITY.md",
+    "locator": {
+      "line_start": 44,
+      "line_end": 44,
+      "literal": "18",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 18.0,
+    "digits": 0
+  },
+  "X|A2|F04|horizontal_rmse_m|median": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/DEGRADATION_MANUSCRIPT.csv",
+    "locator": {
+      "where": {
+        "family": "A2"
+      },
+      "column": "F04",
+      "display_digits": 3,
+      "regex": "horizontal_rmse_m=([-+\\d.eE]+)/"
+    },
+    "mode": "CSV",
+    "value": 0.176671,
+    "digits": 3
+  },
+  "X|A2|LC01|horizontal_rmse_m|median": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/DEGRADATION_MANUSCRIPT.csv",
+    "locator": {
+      "where": {
+        "family": "A2"
+      },
+      "column": "LC01",
+      "display_digits": 3,
+      "regex": "horizontal_rmse_m=([-+\\d.eE]+)/"
+    },
+    "mode": "CSV",
+    "value": 1.40735,
+    "digits": 3
+  },
+  "X|A2|F02|horizontal_rmse_m|median": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/DEGRADATION_MANUSCRIPT.csv",
+    "locator": {
+      "where": {
+        "family": "A2"
+      },
+      "column": "F02",
+      "display_digits": 3,
+      "regex": "horizontal_rmse_m=([-+\\d.eE]+)/"
+    },
+    "mode": "CSV",
+    "value": 2.91322,
+    "digits": 3
+  },
+  "X|A2|F04|horizontal_rmse_m|p95": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/DEGRADATION_MANUSCRIPT.csv",
+    "locator": {
+      "where": {
+        "family": "A2"
+      },
+      "column": "F04",
+      "display_digits": 3,
+      "regex": "horizontal_rmse_m=[-+\\d.eE]+/([-+\\d.eE]+)"
+    },
+    "mode": "CSV",
+    "value": 0.287747,
+    "digits": 3
+  },
+  "X|A2|LC01|horizontal_rmse_m|p95": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/DEGRADATION_MANUSCRIPT.csv",
+    "locator": {
+      "where": {
+        "family": "A2"
+      },
+      "column": "LC01",
+      "display_digits": 3,
+      "regex": "horizontal_rmse_m=[-+\\d.eE]+/([-+\\d.eE]+)"
+    },
+    "mode": "CSV",
+    "value": 7.769345,
+    "digits": 3
+  },
+  "X|A2|F02|horizontal_rmse_m|p95": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/DEGRADATION_MANUSCRIPT.csv",
+    "locator": {
+      "where": {
+        "family": "A2"
+      },
+      "column": "F02",
+      "display_digits": 3,
+      "regex": "horizontal_rmse_m=[-+\\d.eE]+/([-+\\d.eE]+)"
+    },
+    "mode": "CSV",
+    "value": 17.077198,
+    "digits": 3
+  },
+  "BR": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/EXTERNAL_THREE_SEQUENCE_SUPPLEMENT.csv",
+    "locator": {
+      "where": {
+        "method": "LC01-BR"
+      },
+      "column": "BY2",
+      "display_digits": 3,
+      "regex": "horizontal_rmse_m=([-+\\d.eE]+)"
+    },
+    "mode": "CSV",
+    "value": 2.785782,
+    "digits": 3
+  },
+  "X|\u4f4d\u7f6e\u504f\u5dee|LC01|horizontal_rmse_m|median": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/DEGRADATION_MANUSCRIPT.csv",
+    "locator": {
+      "where": {
+        "family": "\u4f4d\u7f6e\u504f\u5dee"
+      },
+      "column": "LC01",
+      "display_digits": 3,
+      "regex": "horizontal_rmse_m=([-+\\d.eE]+)/"
+    },
+    "mode": "CSV",
+    "value": 1.610601,
+    "digits": 3
+  },
+  "X|\u4f4d\u7f6e\u504f\u5dee|F04|horizontal_rmse_m|median": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX05/DEGRADATION_MANUSCRIPT.csv",
+    "locator": {
+      "where": {
+        "family": "\u4f4d\u7f6e\u504f\u5dee"
+      },
+      "column": "F04",
+      "display_digits": 3,
+      "regex": "horizontal_rmse_m=([-+\\d.eE]+)/"
+    },
+    "mode": "CSV",
+    "value": 1.610689,
+    "digits": 3
+  },
+  "D|unc3|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 7,
+      "line_end": 7,
+      "literal": "2",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 2.0,
+    "digits": 0
+  },
+  "D|unc3|1.1": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 7,
+      "line_end": 7,
+      "literal": "1.1",
+      "display_digits": 1
+    },
+    "mode": "DOC",
+    "value": 1.1,
+    "digits": 1
+  },
+  "D|unc3|0.4": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 7,
+      "line_end": 7,
+      "literal": "0.4",
+      "display_digits": 1
+    },
+    "mode": "DOC",
+    "value": 0.4,
+    "digits": 1
+  },
+  "D|unc3|1": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 7,
+      "line_end": 7,
+      "literal": "1",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 1.0,
+    "digits": 0
+  },
+  "D|unc3|0.9": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 7,
+      "line_end": 7,
+      "literal": "0.9",
+      "display_digits": 1
+    },
+    "mode": "DOC",
+    "value": 0.9,
+    "digits": 1
+  },
+  "D|unc3|1.0": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 7,
+      "line_end": 7,
+      "literal": "1.0",
+      "display_digits": 1
+    },
+    "mode": "DOC",
+    "value": 1.0,
+    "digits": 1
+  },
+  "D|unc3|0.02": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 7,
+      "line_end": 7,
+      "literal": "0.02",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": 0.02,
+    "digits": 2
+  },
+  "D|unc3|0.05": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 7,
+      "line_end": 7,
+      "literal": "0.05",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": 0.05,
+    "digits": 2
+  },
+  "D|unc3|5": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 7,
+      "line_end": 7,
+      "literal": "5",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 5.0,
+    "digits": 0
+  },
+  "D|unc3|1.4": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 7,
+      "line_end": 7,
+      "literal": "1.4",
+      "display_digits": 1
+    },
+    "mode": "DOC",
+    "value": 1.4,
+    "digits": 1
+  },
+  "D|unc3|0.06": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 7,
+      "line_end": 7,
+      "literal": "0.06",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": 0.06,
+    "digits": 2
+  },
+  "D|unc3|0.03": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 7,
+      "line_end": 7,
+      "literal": "0.03",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": 0.03,
+    "digits": 2
+  },
+  "D|unc3|0.04": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 7,
+      "line_end": 7,
+      "literal": "0.04",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": 0.04,
+    "digits": 2
+  },
+  "D|unc3|0.3": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
+    "locator": {
+      "line_start": 7,
+      "line_end": 7,
+      "literal": "0.3",
+      "display_digits": 1
+    },
+    "mode": "DOC",
+    "value": 0.3,
+    "digits": 1
+  },
+  "VR|core_case_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "locator": {
+      "key_path": [
+        "core_case_count"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 541,
+    "digits": 0
+  },
+  "VR|unique_physical_configurations": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "locator": {
+      "key_path": [
+        "unique_physical_configurations"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 11,
+    "digits": 0
+  },
+  "VR|addendum_case_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "locator": {
+      "key_path": [
+        "addendum_case_count"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 45,
+    "digits": 0
+  },
+  "VR|additional_natural_sequence_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "locator": {
+      "key_path": [
+        "additional_natural_sequence_count"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 2,
+    "digits": 0
+  },
+  "VR|registered_tasks": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "locator": {
+      "key_path": [
+        "registered_tasks"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 6468,
+    "digits": 0
+  },
+  "VR|native_terminal_counts|COMPLETED": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "locator": {
+      "key_path": [
+        "native_terminal_counts",
+        "COMPLETED"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 6185,
+    "digits": 0
+  },
+  "VR|evaluator_terminal_slots": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "locator": {
+      "key_path": [
+        "evaluator_terminal_slots"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 12936,
+    "digits": 0
+  },
+  "VR|actual_evaluator_completions": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "locator": {
+      "key_path": [
+        "actual_evaluator_completions"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 12370,
+    "digits": 0
+  },
+  "VR|not_invoked_algorithm_failure_slots": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "locator": {
+      "key_path": [
+        "not_invoked_algorithm_failure_slots"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 566,
+    "digits": 0
+  },
+  "EXTQ|same_original_scored_key_checks|0": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/ext_nominal_root_review.json",
+    "locator": {
+      "key_path": [
+        "same_original_scored_key_checks"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 7689,
+    "digits": 0
+  },
+  "EXTQ|nominal_projection_unsupported_count|0": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/ext_nominal_root_review.json",
+    "locator": {
+      "key_path": [
+        "nominal_projection_unsupported_count"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 0,
+    "digits": 0
+  },
+  "EXTQ|nominal_quantity_RMSE_range_deg|0|6": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/ext_nominal_root_review.json",
+    "locator": {
+      "key_path": [
+        "nominal_quantity_RMSE_range_deg",
+        0
+      ],
+      "display_digits": 6
+    },
+    "mode": "YAML",
+    "value": 0.031091564448270263,
+    "digits": 6
+  },
+  "EXTQ|nominal_quantity_RMSE_range_deg|1|6": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/ext_nominal_root_review.json",
+    "locator": {
+      "key_path": [
+        "nominal_quantity_RMSE_range_deg",
+        1
+      ],
+      "display_digits": 6
+    },
+    "mode": "YAML",
+    "value": 0.043576512186021814,
+    "digits": 6
+  },
+  "EXTQ|nominal_quantity_max_abs_delta_deg|6": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/ext_nominal_root_review.json",
+    "locator": {
+      "key_path": [
+        "nominal_quantity_max_abs_delta_deg"
+      ],
+      "display_digits": 6
+    },
+    "mode": "YAML",
+    "value": 0.4544071833082033,
+    "digits": 6
+  },
+  "EXTQ|maximum_nominal_vs_Euler_RMSE_change_deg|6": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/ext_nominal_root_review.json",
+    "locator": {
+      "key_path": [
+        "maximum_nominal_vs_Euler_RMSE_change_deg"
+      ],
+      "display_digits": 6
+    },
+    "mode": "YAML",
+    "value": 0.004278311271292523,
+    "digits": 6
+  },
+  "SEG|BY2|OISAM|matched_epoch_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "OISAM",
+        "support_role": "PRIMARY_DYNAMIC_ONLY",
+        "support": "OWN_VALID"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 275.0,
+    "digits": 0
+  },
+  "SEG|BY2|OISAM|expected_epoch_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "OISAM",
+        "support_role": "PRIMARY_DYNAMIC_ONLY",
+        "support": "OWN_VALID"
+      },
+      "column": "expected_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 275.0,
+    "digits": 0
+  },
+  "SEG|BY2H|OISAM|matched_epoch_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "OISAM",
+        "support_role": "PRIMARY_DYNAMIC_ONLY",
+        "support": "OWN_VALID"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 267.0,
+    "digits": 0
+  },
+  "SEG|BY2H|OISAM|expected_epoch_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "OISAM",
+        "support_role": "PRIMARY_DYNAMIC_ONLY",
+        "support": "OWN_VALID"
+      },
+      "column": "expected_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 271.0,
+    "digits": 0
+  },
+  "SEG|BY2O|OISAM|matched_epoch_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "OISAM",
+        "support_role": "PRIMARY_DYNAMIC_ONLY",
+        "support": "OWN_VALID"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 370.0,
+    "digits": 0
+  },
+  "SEG|BY2O|OISAM|expected_epoch_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "OISAM",
+        "support_role": "PRIMARY_DYNAMIC_ONLY",
+        "support": "OWN_VALID"
+      },
+      "column": "expected_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 378.0,
+    "digits": 0
+  },
+  "SEG|BY2|OISAM|position_3d_rmse_m": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "OISAM",
+        "support_role": "PRIMARY_DYNAMIC_ONLY",
+        "support": "OWN_VALID"
+      },
+      "column": "position_3d_rmse_m",
+      "display_digits": 6
+    },
+    "mode": "CSV",
+    "value": 0.10759377795402363,
+    "digits": 6
+  },
+  "SEG|BY2H|OISAM|position_3d_rmse_m": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "OISAM",
+        "support_role": "PRIMARY_DYNAMIC_ONLY",
+        "support": "OWN_VALID"
+      },
+      "column": "position_3d_rmse_m",
+      "display_digits": 6
+    },
+    "mode": "CSV",
+    "value": 0.0772217225041729,
+    "digits": 6
+  },
+  "SEG|BY2O|OISAM|position_3d_rmse_m": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "OISAM",
+        "support_role": "PRIMARY_DYNAMIC_ONLY",
+        "support": "OWN_VALID"
+      },
+      "column": "position_3d_rmse_m",
+      "display_digits": 6
+    },
+    "mode": "CSV",
+    "value": 0.0648258172976916,
+    "digits": 6
+  }
+}

@@ -1,0 +1,13 @@
+sequence,scope,metric,n,event_count,fraction,longest_s,source,missing
+BY2,fix_joint,both_fixed,1371,1371,1,273.99994773864188,BY2_FIX_DETAIL.csv.gz,
+BY2,fix_joint,one_fixed,1371,0,0,0,BY2_FIX_DETAIL.csv.gz,
+BY2,fix_joint,neither_fixed,1371,0,0,0,BY2_FIX_DETAIL.csv.gz,
+BY2,yaw_valid,agreement,1371,1371,1,,<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/02_PROVIDER_TABLES/BY2/R5/T5A.gnss,0
+BY2H,fix_joint,both_fixed,1351,1351,1,269.99994850158151,BY2H_FIX_DETAIL.csv.gz,
+BY2H,fix_joint,one_fixed,1351,0,0,0,BY2H_FIX_DETAIL.csv.gz,
+BY2H,fix_joint,neither_fixed,1351,0,0,0,BY2H_FIX_DETAIL.csv.gz,
+BY2H,yaw_valid,agreement,1351,1351,1,,<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/02_PROVIDER_TABLES/BY2H/R5/T5A.gnss,0
+BY2O,fix_joint,both_fixed,1886,1595,0.84570519618239659,183.39996509551852,BY2O_FIX_DETAIL.csv.gz,
+BY2O,fix_joint,one_fixed,1886,291,0.15429480381760338,43.399991607666081,BY2O_FIX_DETAIL.csv.gz,
+BY2O,fix_joint,neither_fixed,1886,0,0,0,BY2O_FIX_DETAIL.csv.gz,
+BY2O,yaw_valid,agreement,1886,1886,1,,<CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/02_PROVIDER_TABLES/BY2O/R5/T5A.gnss,0

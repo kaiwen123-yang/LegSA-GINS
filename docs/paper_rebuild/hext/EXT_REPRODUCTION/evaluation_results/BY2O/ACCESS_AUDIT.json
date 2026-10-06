@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "reference_successful_opens": 1,
+  "reference_all_read_only": true,
+  "other_raw_open_paths": [],
+  "successful_execve_count": 1,
+  "audit_scope": "single evaluator child under strace; parent does not open reference in code"
+}

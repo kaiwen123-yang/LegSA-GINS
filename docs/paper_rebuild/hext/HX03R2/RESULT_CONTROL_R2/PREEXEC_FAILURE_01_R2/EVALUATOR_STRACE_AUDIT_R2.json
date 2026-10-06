@@ -1,0 +1,56 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-m",
+    "legsa_gins.paper_rebuild.hext.hx03r2_observer",
+    "--spec",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03R2/RUNS/BY2__LC01__LIT__C00__NA__v3/SPEC.json"
+  ],
+  "environment": {
+    "GIT_OPTIONAL_LOCKS": "0",
+    "MKL_NUM_THREADS": "1",
+    "MPLBACKEND": "Agg",
+    "MPLCONFIGDIR": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03R2/RUNS/BY2__LC01__LIT__C00__NA__v3/OUTPUT/.matplotlib",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/src",
+    "XDG_CACHE_HOME": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03R2/RUNS/BY2__LC01__LIT__C00__NA__v3/OUTPUT/.cache"
+  },
+  "execve_programs": [],
+  "exit_code": 1,
+  "failures": [
+    "evaluator_returncode=1",
+    "reference must be opened exactly once, successfully and read-only"
+  ],
+  "kind": "HX03R2_FROZEN",
+  "module": "legsa_gins.paper_rebuild.hext.hx03r2_observer",
+  "passed": false,
+  "raw_open_count": 0,
+  "runtime_seconds": 0.07734715400147252,
+  "spec_sha256": "b6fb2d17616a3bd5c9ec852935259690c58de9c929b692d32000e5ad6d0e3867",
+  "strace_sha256": "e3e43701a3fe4bdd79502bc4858abf5d190271aa09db0aa2482d515abb161d48",
+  "trace_open_count": 0,
+  "trace_open_records": [],
+  "trace_read_role": "registered_evaluator_child_only",
+  "write_scope": {
+    "allowed_anonymous_pipe_write_count": 0,
+    "allowed_anonymous_pipe_write_records": [],
+    "allowed_device_write_count": 0,
+    "allowed_device_write_records": [],
+    "clean_root_outside_run_write_count": 0,
+    "outside_run_write_open_count": 0,
+    "outside_run_write_open_records": [],
+    "pass": true,
+    "raw_write_open_count": 0,
+    "write_open_count": 0,
+    "write_open_records": [],
+    "write_outside_run_count": 0,
+    "write_scope_exceptions": [
+      "/dev/null",
+      "/dev/pts/*",
+      "kernel-identified anonymous pipe"
+    ]
+  }
+}

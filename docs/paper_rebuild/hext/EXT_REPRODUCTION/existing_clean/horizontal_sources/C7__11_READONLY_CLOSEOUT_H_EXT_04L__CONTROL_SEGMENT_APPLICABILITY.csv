@@ -1,0 +1,3 @@
+sequence_id,segment_id,status,outside_definition,window_start_s,window_end_s
+BY2,inside_union,NOT_APPLICABLE_NO_REGISTERED_OCCLUSION,entire closed registered window,66.0,340.0
+BY2H,inside_union,NOT_APPLICABLE_NO_REGISTERED_OCCLUSION,entire closed registered window,413.0,683.0

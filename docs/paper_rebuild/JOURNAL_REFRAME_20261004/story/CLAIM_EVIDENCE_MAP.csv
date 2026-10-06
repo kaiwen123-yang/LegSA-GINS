@@ -1,0 +1,11 @@
+claim_id,claim,status,evidence,proposed_display,scope
+C1,Compact lateral baseline needs conditional heading admission,DEFINED_AND_IMPLEMENTED,exact iTOW/BOTH_FIXED/wrap; original method source map,Fig1–2,No calibrated probability or new integer AR
+C2,Natural sequences show bounded agreement with fusion reference,SUPPORTED_WITHIN_RECORDINGS,canonical F04 V3 natural3rows,Fig3,Shared reference; no independent absolute accuracy
+C3,A selected BY2O region has lower yaw disagreement than IEKF,SUPPORTED_REGIONAL,BY2O primary and paired CI; outside reversal retained,Fig4,Region selected after BY2O review; no global ranking/causal attribution
+C4,Whole fault matrix contains finite improvement and real failures,SUPPORTED_CONDITIONAL,6468 total; CORE11×541; 283 allCORE failures,Fig5,Finite ECDF must show original denominator; dependent placements
+C5,Robot HV often lowers H but does not improve all axes,SUPPORTED_MIXED,519 complete pairs H472better/47worse Up154better/365worse,Fig6,Only same frozen providers; not universal module gain
+C6,Robot HV can aid with heading retained; cannot independently bridge full GNSS loss,SUPPORTED_SCHEDULING_BOUNDARY,original D61/D62 data availability and ADD495; distinct135 update ledger,Fig7,Original whole-window metrics differ from newer fault-window diagnostic
+C7,RD provides uniformly better yaw or independent outage information,NOT_SUPPORTED,original paired yaw81better/437worse; D62 RD no in-fault observations,SI paired effects,Do not state; use conditional complementary information hypothesis
+C8,Main method outperforms all external approaches,NOT_SUPPORTED,"different raw/PVT layers, initialization, POI, supports, reference sharing",Fig8,Compare only declared conditions and quantities; no same-input solver rank
+C9,Source-aware R inflation isolates faults or provides calibrated uncertainty,NOT_SUPPORTED,bounded engineering metadata/innovation scales only,Method+SI,Use admission/weighting; no integrity guarantee or GUM U
+C10,Reproducible identity and complete outcome bookkeeping,SUPPORTED_EXECUTION_RECORD,frozen full task ledger and method output pins,SI reproducibility,"Evidence availability is not novelty, independent truth or authors whole-suite reproduction"

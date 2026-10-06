@@ -1,0 +1,34 @@
+table,column_zero_based,count,finite_count,nonfinite_count,first_value,last_value,minimum,maximum,role
+native_NAV,0,56642,56642,0,0.0,0.0,0.0,0.0,native state/support diagnostic
+native_NAV,1,56642,56642,0,66.005054,339.997056,66.005054,339.997056,native state/support diagnostic
+native_NAV,2,56642,56642,0,39.98482973,39.98474855,39.983871493,39.984928017,native state/support diagnostic
+native_NAV,3,56642,56642,0,116.34312609,116.343157782,116.341800791,116.343189413,native state/support diagnostic
+native_NAV,4,56642,56642,0,41.802064615,41.49722489,41.200445529,53.007214411,native state/support diagnostic
+native_NAV,5,56642,56642,0,0.002687311,1.018285997,-7.996936511,1.406872342,NAV own velocity; no velocity truth/RMSE
+native_NAV,6,56642,56642,0,-0.001962463,-0.481048302,-1.510735056,4.174928353,NAV own velocity; no velocity truth/RMSE
+native_NAV,7,56642,56642,0,0.008188803,0.059043616,-1.275452066,0.380497044,NAV own velocity; no velocity truth/RMSE
+native_NAV,8,56642,56642,0,-0.003891454,3.016964174,-9.460704314,10.485851247,native state/support diagnostic
+native_NAV,9,56642,56642,0,0.016811026,1.382453693,-5.010577755,4.833874,native state/support diagnostic
+native_NAV,10,56642,56642,0,0.70249034,334.912574643,0.000306595,359.995953248,native state/support diagnostic
+native_STD_untransported,0,56642,56642,0,66.005054,339.997056,66.005054,339.997056,native state/support diagnostic
+native_STD_untransported,1,56642,56642,0,10.000000808,0.019481542,0.010542721,10.045568498,native state/support diagnostic
+native_STD_untransported,2,56642,56642,0,10.000000808,0.019590783,0.010563867,10.001926462,native state/support diagnostic
+native_STD_untransported,3,56642,56642,0,10.000000808,0.016632161,0.008240754,10.001923192,native state/support diagnostic
+native_STD_untransported,4,56642,56642,0,1.000050761,0.088064094,0.051243462,1.004925577,native state/support diagnostic
+native_STD_untransported,5,56642,56642,0,1.000054051,0.08933474,0.05126048,1.005094277,native state/support diagnostic
+native_STD_untransported,6,56642,56642,0,1.00003254,0.074327215,0.047514535,1.001639551,native state/support diagnostic
+native_STD_untransported,7,56642,56642,0,2.000000271,0.105645069,0.101192753,2.000013273,native state/support diagnostic
+native_STD_untransported,8,56642,56642,0,2.000000271,0.104366612,0.101786625,2.000013273,native state/support diagnostic
+native_STD_untransported,9,56642,56642,0,2.000000271,0.182690468,0.182399822,2.000013273,native state/support diagnostic
+native_STD_untransported,10,56642,56642,0,9.38,5.222857164,5.222230727,9.38,native state/support diagnostic
+native_STD_untransported,11,56642,56642,0,9.38,5.21705721,5.216429451,9.38,native state/support diagnostic
+native_STD_untransported,12,56642,56642,0,9.38,5.051585624,5.050919169,9.38,native state/support diagnostic
+native_STD_untransported,13,56642,56642,0,4817.482008951,1457.289906778,1456.509969995,4817.482008951,native state/support diagnostic
+native_STD_untransported,14,56642,56642,0,4817.492439968,1894.21209321,1888.254739583,4818.293375281,native state/support diagnostic
+native_STD_untransported,15,56642,56642,0,4817.477811503,881.831975218,881.568075016,4817.477811503,native state/support diagnostic
+native_STD_untransported,16,56642,56642,0,0.0,0.0,0.0,0.0,native state/support diagnostic
+native_STD_untransported,17,56642,56642,0,0.0,0.0,0.0,0.0,native state/support diagnostic
+native_STD_untransported,18,56642,56642,0,0.0,0.0,0.0,0.0,native state/support diagnostic
+native_STD_untransported,19,56642,56642,0,0.0,0.0,0.0,0.0,native state/support diagnostic
+native_STD_untransported,20,56642,56642,0,0.0,0.0,0.0,0.0,native state/support diagnostic
+native_STD_untransported,21,56642,56642,0,0.0,0.0,0.0,0.0,native state/support diagnostic

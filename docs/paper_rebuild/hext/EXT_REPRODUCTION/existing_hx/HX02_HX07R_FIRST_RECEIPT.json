@@ -1,0 +1,1019 @@
+{
+  "status": "FIRST_SUBSET_COLLECTED",
+  "data_mode": "existing_real_data_results",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "new_native_calls": 0,
+  "new_evaluator_calls": 0,
+  "new_provider_calls": 0,
+  "time_series_payload_reads": 0,
+  "reference_payload_reads": 0,
+  "counts": {
+    "HX02": {
+      "row_records": 562,
+      "physical_directories": 24,
+      "native_COMMAND_files": 24,
+      "evaluation_audit_files": 24
+    },
+    "HX07R": {
+      "row_records": 65,
+      "physical_directories": 13,
+      "native_COMMAND_files": 12,
+      "evaluation_audit_files": 13
+    }
+  },
+  "index_rows": 629,
+  "files": {
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX02/EXTERNAL_FIVE_CATEGORY_TABLE.csv": {
+      "bytes": 212458,
+      "rows": 480,
+      "sha256_newly_verified": "7475d7ef9780cdc9b2d82943dc786d58732076b9bad819f945f5010346190fba",
+      "read_depth": "FULL_TABLE_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT01__LIT__CONTRACT_START__NA/COMMAND.json": {
+      "bytes": 2744,
+      "sha256_newly_verified": "dc6caea345abd03d2a17445f0d97156ae6273da31a8c36273827eda96dcd1d0f",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT01__LIT__CONTRACT_START__NA/DONE.json": {
+      "bytes": 2146,
+      "sha256_newly_verified": "f9728006d9bc8ac56f96675b8deb70342ea3cf86f060bdfd42957a9e509b4e26",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT01__LIT__CONTRACT_START__NA/eval/HEADING/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3587,
+      "sha256_newly_verified": "4e5d84e522b94453ba6136e4e9338964f60a72cf76c52770811c097a86321599",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT01__LIT__CONTRACT_START__NA/eval/HEADING/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 2769,
+      "sha256_newly_verified": "22cc9a96841cf58ebf7e36d55aa7d2bc1f4a6956f604f0be07c03ac017020f45",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT01__LIT__CONTRACT_START__NA/native/HX02_HEADING_TABLES/HX02_HEADING_TABLE_EXT01.csv": {
+      "bytes": 76595,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT02__LIT__CONTRACT_START__NA/COMMAND.json": {
+      "bytes": 2772,
+      "sha256_newly_verified": "c1117b322834d1ce87048ace3bf0e39c97af1fcf5a3ce6215966605af9f1b358",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT02__LIT__CONTRACT_START__NA/DONE.json": {
+      "bytes": 2143,
+      "sha256_newly_verified": "2f85a863c8a2bc4dcfac5f7cbed70ceacbc8f36a9d30ced260095c2cad4d155f",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT02__LIT__CONTRACT_START__NA/eval/HEADING/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3587,
+      "sha256_newly_verified": "99d6952ab6d434ebb882b14f46beeec8b5550e0f5962017728843ca0cb437a28",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT02__LIT__CONTRACT_START__NA/eval/HEADING/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 2768,
+      "sha256_newly_verified": "2590437b04e33ea52b6f0ac8e24b719716df9120d439466e0593868a8b390770",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT02__LIT__CONTRACT_START__NA/native/HX02_HEADING_TABLES/HX02_HEADING_TABLE_EXT02.csv": {
+      "bytes": 75533,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT03__LIT__CONTRACT_START__NA/COMMAND.json": {
+      "bytes": 2777,
+      "sha256_newly_verified": "cd0b1cdc71a104810930cf6a94d360a75b6288cac28ceb2f67a6c8682f636373",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT03__LIT__CONTRACT_START__NA/DONE.json": {
+      "bytes": 2148,
+      "sha256_newly_verified": "b532646330e3c69db4792b273a3d113c5686f0de7dbbcabaf942561a5750ca7c",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT03__LIT__CONTRACT_START__NA/eval/HEADING/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3586,
+      "sha256_newly_verified": "7c68f91691ed56e2cae03ede6c616e5f40dbda24948903fe45d69d125b938088",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT03__LIT__CONTRACT_START__NA/eval/HEADING/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 3165,
+      "sha256_newly_verified": "11c93b91005878cd65d77c06dc31ad8f4f5b60535b0af8fbff8be8db951a163a",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT03__LIT__CONTRACT_START__NA/native/HX02_HEADING_TABLES/HX02_HEADING_TABLE_EXT03.csv": {
+      "bytes": 68541,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT04__LIT__CONTRACT_START__NA/COMMAND.json": {
+      "bytes": 2774,
+      "sha256_newly_verified": "07de61c6854c994a74410fc4f90ca953656d5cab68b26e1244f99b4e33ada73b",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT04__LIT__CONTRACT_START__NA/DONE.json": {
+      "bytes": 2208,
+      "sha256_newly_verified": "09e70f1f89b1ead1ebd69e0e9e6d644770e50c4208b44a3363515bcae90fced2",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT04__LIT__CONTRACT_START__NA/eval/HEADING/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 4122,
+      "sha256_newly_verified": "39989b7623aef20192889a4f10f55eeef051f9c6a853a76315319000f332326b",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT04__LIT__CONTRACT_START__NA/eval/HEADING/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 4685,
+      "sha256_newly_verified": "a70fb2e275c37e58ce40dadd9bc65ecb53fd2ca55a2a8ee049f9253a57788707",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT04__LIT__CONTRACT_START__NA/native/HX02_HEADING_TABLES/HX02_HEADING_TABLE_EXT04_FAR.csv": {
+      "bytes": 56735,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT04__LIT__CONTRACT_START__NA/native/HX02_HEADING_TABLES/HX02_HEADING_TABLE_EXT04_PAR.csv": {
+      "bytes": 56735,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__GINAV__NONE__CONTRACT_START__NA/COMMAND.json": {
+      "bytes": 2857,
+      "sha256_newly_verified": "23cd25e49657e7ccf83c5caa6c2565c27466ff1535dff5e3086dacc80a1a1ab6",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__GINAV__NONE__CONTRACT_START__NA/DONE.json": {
+      "bytes": 1095,
+      "sha256_newly_verified": "19380c935a61f90f7c8f53b07696717e1d77c44fd3586ba2f5b5ec6a03c65d49",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__GINAV__NONE__CONTRACT_START__NA/eval/COVERAGE/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 2544,
+      "sha256_newly_verified": "62ca2a0a9c34402b4cdd2b8479ebe9051b44466945e8e3eb4a9a7de3d8a35e7c",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__GINAV__NONE__CONTRACT_START__NA/eval/COVERAGE/OUTPUT/COVERAGE_METRICS.json": {
+      "bytes": 1179,
+      "sha256_newly_verified": "d499bcfb8c91dcc9e9261c150c1ff7b395de2b91293584ae47d896a7e4e0e07f",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__GINAV__NONE__CONTRACT_START__NA/eval/D8_BOUNDED_GATE.json": {
+      "bytes": 834,
+      "sha256_newly_verified": "5ec81992f1606915a20f5b4f7b5b11477f4fa53e2da5b6e41c02e1db9cd376c0",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__GINAV__NONE__CONTRACT_START__NA/eval/GINAV_EVALUATION.json": {
+      "bytes": 17381,
+      "sha256_newly_verified": "5b488d60ded438e1270f864ae4e22c9cfd069c360fde6c551788a5d1af183991",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__GINAV__NONE__CONTRACT_START__NA/eval/v2/EVALUATION_RESULT.json": {
+      "bytes": 13821,
+      "sha256_newly_verified": "73a3ab1502ea6573a7dab1730ddea81e6a8f30d193fd897b628f30ff6074f98e",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__GINAV__NONE__CONTRACT_START__NA/eval/v2/EXACT_EVALUATOR_OUTPUT/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 4899,
+      "sha256_newly_verified": "b626002402945aa9b3c15256168986fe6d02605dc522b18f210fd0c3fabaddd6",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__GINAV__NONE__CONTRACT_START__NA/eval/v3/EVALUATION_RESULT.json": {
+      "bytes": 14362,
+      "sha256_newly_verified": "707d73d5fbae45609a492c780e980cf6bf5502d1ffd5f42784afb108a2a2a880",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__GINAV__NONE__CONTRACT_START__NA/eval/v3/EXACT_EVALUATOR_OUTPUT/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 4903,
+      "sha256_newly_verified": "4e5d8040e9919672adc0d4a7be96c29d3759f7537b40cb2a1c4dc2a27b54126c",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__HARTLEY_LIT__LIT__CONTRACT_START__NA/COMMAND.json": {
+      "bytes": 2749,
+      "sha256_newly_verified": "b07bb1d4ebcc9bccf15390672d9b9107db18f726b8c6507ec74c5eadd4a1a815",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__HARTLEY_LIT__LIT__CONTRACT_START__NA/DONE.json": {
+      "bytes": 1121,
+      "sha256_newly_verified": "d3d67e033fbc3b7680cf208ebb8fb6d30b9110d06578c8e5b6c0a3118534b3ec",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__HARTLEY_LIT__LIT__CONTRACT_START__NA/FAILURE.json": {
+      "bytes": 1194,
+      "sha256_newly_verified": "af0d13e8abf16493034e764290c890342e2511baf649f157e77af41dba21908a",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__HARTLEY_S__S__CONTRACT_START__NA/COMMAND.json": {
+      "bytes": 2725,
+      "sha256_newly_verified": "7917eed5e068acc8cb8a329dc3f872fed501a0418c195863df4dd40580a703e5",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__HARTLEY_S__S__CONTRACT_START__NA/DONE.json": {
+      "bytes": 1117,
+      "sha256_newly_verified": "c5fe529e55a349daad534ebb823b0c081e769d95028b0ff388da04792cf983ea",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__HARTLEY_S__S__CONTRACT_START__NA/FAILURE.json": {
+      "bytes": 1190,
+      "sha256_newly_verified": "2cfcd94101f4bf670f73342c6456a12bd510f2c50d514bcd1c0ceb77f62486fb",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/COMMAND.json": {
+      "bytes": 2604,
+      "sha256_newly_verified": "f3f009c011ef6f9ae200d3f248d015915196ce7e978d91ed7881ee60bf02e1b8",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/DONE.json": {
+      "bytes": 2099,
+      "sha256_newly_verified": "4766662c97c0e22586b71f8b4d7cf25b11f33ce79bc773474e29af43e17f9be0",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/eval/HEADING/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3603,
+      "sha256_newly_verified": "4a9e957f9ccc279e3beb25577be09ecfd566123b3a10d85d99837c1eb249b4ae",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/eval/HEADING/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 3536,
+      "sha256_newly_verified": "80103506b82da5c48a96913b81f0b9e5802f39aec08c004dac1d9728572b3dee",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/HX02_HEADING_TABLES/HX02_HEADING_TABLE_RTKLIB.csv": {
+      "bytes": 69480,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT01__LIT__FILE_START__NA/COMMAND.json": {
+      "bytes": 2726,
+      "sha256_newly_verified": "04aee2b04778e9eb24d6fb01db91f4329435c787214b445249fac243c135ae4b",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT01__LIT__FILE_START__NA/DONE.json": {
+      "bytes": 2137,
+      "sha256_newly_verified": "7be4539a84f1ab94a4a5f29c45e24df28aaf9c70ec6072205ad97650840d0e58",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT01__LIT__FILE_START__NA/eval/HEADING/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3558,
+      "sha256_newly_verified": "35085a01ede510848ad9968b01a18db512bbb2a195089865c917ed745c54cf1d",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT01__LIT__FILE_START__NA/eval/HEADING/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 2771,
+      "sha256_newly_verified": "06cf737507929fd79be46458018a9eec791fc2b4101481de3206678600802b44",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT01__LIT__FILE_START__NA/native/HX02_HEADING_TABLES/HX02_HEADING_TABLE_EXT01.csv": {
+      "bytes": 117712,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT02__LIT__FILE_START__NA/COMMAND.json": {
+      "bytes": 2752,
+      "sha256_newly_verified": "dca0bdf839820e2afb24100b62e124b53accd810ea17a581b0869adad03b073a",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT02__LIT__FILE_START__NA/DONE.json": {
+      "bytes": 2135,
+      "sha256_newly_verified": "415b85495d7fcf704202b15f7f4a7ee5dfcbb3a4b32917e10c81334d499849fb",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT02__LIT__FILE_START__NA/eval/HEADING/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3559,
+      "sha256_newly_verified": "a8af8cbdc8483e849c8f138ad7000e44e50deb5b78f0d3df75e4a7dc67f74bd8",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT02__LIT__FILE_START__NA/eval/HEADING/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 2769,
+      "sha256_newly_verified": "49778dbe524595d49a45f579f1f901dbe01f6591fd9f09b6a63c7a171fd13ba2",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT02__LIT__FILE_START__NA/native/HX02_HEADING_TABLES/HX02_HEADING_TABLE_EXT02.csv": {
+      "bytes": 115892,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT03__LIT__FILE_START__NA/COMMAND.json": {
+      "bytes": 2759,
+      "sha256_newly_verified": "ba8d1cc07b54abce6edbbaa173df6ef6066e6927393afd3fbe235ae8975d0791",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT03__LIT__FILE_START__NA/DONE.json": {
+      "bytes": 2136,
+      "sha256_newly_verified": "07346c77bfb3ff0acf29909c41f59f977069ab83d2dd8c704cd03d23c44face1",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT03__LIT__FILE_START__NA/eval/HEADING/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3558,
+      "sha256_newly_verified": "badfdad5fe10daeaa8af97dc70835adbb24910bbfe8fa2af6745c95c04ffaf0d",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT03__LIT__FILE_START__NA/eval/HEADING/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 3157,
+      "sha256_newly_verified": "66e53188360baadaee32563f6b5111f976b72389fd2053e4ca030a79cb7921d4",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT03__LIT__FILE_START__NA/native/HX02_HEADING_TABLES/HX02_HEADING_TABLE_EXT03.csv": {
+      "bytes": 102549,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT04__LIT__FILE_START__NA/COMMAND.json": {
+      "bytes": 2757,
+      "sha256_newly_verified": "27bd8ca29e1edb64b3c4874bc7f26db83e539ca736899d8b9beb561f0301c155",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT04__LIT__FILE_START__NA/DONE.json": {
+      "bytes": 2196,
+      "sha256_newly_verified": "c6973c0cbd7ce27c0878188e2aa7546f46ec23eb0c1af4e62850bf58351c1c09",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT04__LIT__FILE_START__NA/eval/HEADING/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 4086,
+      "sha256_newly_verified": "26ef213a836b4b9c31105a2b2bc6bff567d7e03e6c1652d1cc69a4f3c17e9fbc",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT04__LIT__FILE_START__NA/eval/HEADING/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 4689,
+      "sha256_newly_verified": "26c6bd0750b25fdbbefc65d028691f451ba95a80761638a2df3258ff63055a35",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT04__LIT__FILE_START__NA/native/HX02_HEADING_TABLES/HX02_HEADING_TABLE_EXT04_FAR.csv": {
+      "bytes": 89535,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT04__LIT__FILE_START__NA/native/HX02_HEADING_TABLES/HX02_HEADING_TABLE_EXT04_PAR.csv": {
+      "bytes": 89535,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__GINAV__NONE__FILE_START__NA/COMMAND.json": {
+      "bytes": 2838,
+      "sha256_newly_verified": "0ec861aa78152a125d7fbfa84f64151feb88cd08a992481eebf475282a516b62",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__GINAV__NONE__FILE_START__NA/DONE.json": {
+      "bytes": 1107,
+      "sha256_newly_verified": "72d52d3e736d8bf2863eedf89edcecb01d9c2749c24f6a52338fd2c710f07f38",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__GINAV__NONE__FILE_START__NA/eval/COVERAGE/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 2523,
+      "sha256_newly_verified": "80f0a816df907e569f994d8761ce7b707f993552fd803ad6044e400c0acf9fcf",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__GINAV__NONE__FILE_START__NA/eval/COVERAGE/OUTPUT/COVERAGE_METRICS.json": {
+      "bytes": 1198,
+      "sha256_newly_verified": "94f88d35635a684e87f6e2221a8ee5754d3684ea1f6bf75fa40143c374782eee",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__GINAV__NONE__FILE_START__NA/eval/D8_BOUNDED_GATE.json": {
+      "bytes": 1107,
+      "sha256_newly_verified": "7bc7d4a0c9d42960373e5ee803ad8afaffc0a647d39691dd903c04efd301b83c",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__GINAV__NONE__FILE_START__NA/eval/GINAV_EVALUATION.json": {
+      "bytes": 2672,
+      "sha256_newly_verified": "82256629c74394754b5f5d15264ee237910679c7bc6c8857730bd7928828390b",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__HARTLEY_LIT__LIT__FILE_START__NA/COMMAND.json": {
+      "bytes": 2721,
+      "sha256_newly_verified": "acc44f9fb081d90424249881411c73b334561ca85c878adfb8bb28b0b1475b6d",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__HARTLEY_LIT__LIT__FILE_START__NA/DONE.json": {
+      "bytes": 1096,
+      "sha256_newly_verified": "9dd15ddf8d33aeb495f5757037ad6651e86cead13e8e69ae6383c545373bac04",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__HARTLEY_LIT__LIT__FILE_START__NA/eval/DIVERGENCE_GATE.json": {
+      "bytes": 412,
+      "sha256_newly_verified": "29136b089663c2a672fe867a635c0790d2b5aec378b572770c969aee34c76e4a",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__HARTLEY_LIT__LIT__FILE_START__NA/eval/RELATIVE_POSE/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3695,
+      "sha256_newly_verified": "14e459920df57352cbc8b7abf8b013af2a7eacccc1e3876fbe68f7a06a8f6ef1",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__HARTLEY_LIT__LIT__FILE_START__NA/eval/RELATIVE_POSE/OUTPUT/RELATIVE_POSE_METRICS.json": {
+      "bytes": 2982,
+      "sha256_newly_verified": "6755be826734b90bc2140721561bfe7b52a7b7f110f900e7d80868c9e7efff1d",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__HARTLEY_S__S__FILE_START__NA/COMMAND.json": {
+      "bytes": 2698,
+      "sha256_newly_verified": "5077ab1ba070c9dc63e6ea0f1017023679eb8304e4bfd0f6c7258e714ffab60f",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__HARTLEY_S__S__FILE_START__NA/DONE.json": {
+      "bytes": 1092,
+      "sha256_newly_verified": "810b71b3e6c978460f2297be7853e774751e917db55111ed755eac4009ebfe66",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__HARTLEY_S__S__FILE_START__NA/eval/DIVERGENCE_GATE.json": {
+      "bytes": 413,
+      "sha256_newly_verified": "89570785428936a21005cd2abfacd29ac821f8c2bc7e3266c437c15dbfd10077",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__HARTLEY_S__S__FILE_START__NA/eval/RELATIVE_POSE/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3662,
+      "sha256_newly_verified": "207d8c8411e1d3c6a35b298e1c2bf2c7771ef6a4d34cf38c001f2aa963149a34",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__HARTLEY_S__S__FILE_START__NA/eval/RELATIVE_POSE/OUTPUT/RELATIVE_POSE_METRICS.json": {
+      "bytes": 2977,
+      "sha256_newly_verified": "8e24c8dd13cbf96d58b00cbd0a717f726f53415b533f1c635b46f3f84b1493a3",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/COMMAND.json": {
+      "bytes": 2590,
+      "sha256_newly_verified": "7bc011ecc8a63cfbdf53ba3468032841d97ae9a29d4c1f190897d2b4d9430684",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/DONE.json": {
+      "bytes": 2073,
+      "sha256_newly_verified": "2e709254b685809f52811e90f413e7074bbb15ec8ec106a3bd109d52ad7566ce",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/eval/HEADING/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3574,
+      "sha256_newly_verified": "d0d25f02c5a4cb861d345eac218acdd90413161f08d1205dab71516a223cd7c9",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/eval/HEADING/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 3544,
+      "sha256_newly_verified": "036f8d3ffe999673a322102d18bf0a6647a50150e2d6f65de4feaacf9f1da0cf",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/HX02_HEADING_TABLES/HX02_HEADING_TABLE_RTKLIB.csv": {
+      "bytes": 104514,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT01__LIT__C00__NA/COMMAND.json": {
+      "bytes": 2643,
+      "sha256_newly_verified": "74e3b8120b7bef6a1e1de5777c60e6e2abe344a6e4c160502b99c97df650df60",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT01__LIT__C00__NA/DONE.json": {
+      "bytes": 2111,
+      "sha256_newly_verified": "b8ccb3e8f53bb411bce1e08c327235426e979005dbbd29ffa3962fa255fee144",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT01__LIT__C00__NA/eval/HEADING/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3503,
+      "sha256_newly_verified": "5d87f35284caa1d1ac9b94a28ef7fed1a7fb0584bbdf9d9808313b4de23b8a62",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT01__LIT__C00__NA/eval/HEADING/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 2793,
+      "sha256_newly_verified": "0a49ea5cb923f1ea7fc6ed428749acb0a008adb7587cf0fcd916e52e59ba889c",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT01__LIT__C00__NA/native/HX02_HEADING_TABLES/HX02_HEADING_TABLE_EXT01.csv": {
+      "bytes": 79252,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT02__LIT__C00__NA/COMMAND.json": {
+      "bytes": 2673,
+      "sha256_newly_verified": "beca08d23ffada8d4106c6daeb294f40eb8d79a0834f77b06a0047b9905c0b62",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT02__LIT__C00__NA/DONE.json": {
+      "bytes": 2109,
+      "sha256_newly_verified": "7457704db8fd829dc4308a6c9b457796cc53f395888a95ba30cf9c06b3480ee4",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT02__LIT__C00__NA/eval/HEADING/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3502,
+      "sha256_newly_verified": "4f829ccea8b84ca1b0881052cf5691da2516ac368c60db8d38f282e083de888c",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT02__LIT__C00__NA/eval/HEADING/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 2791,
+      "sha256_newly_verified": "deade46361995139006825ac21500510fe97dab15bbfea61aad6511eb5a9fbfd",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT02__LIT__C00__NA/native/HX02_HEADING_TABLES/HX02_HEADING_TABLE_EXT02.csv": {
+      "bytes": 78543,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT03__LIT__C00__NA/COMMAND.json": {
+      "bytes": 2675,
+      "sha256_newly_verified": "9b6051d81353278ec05561e9f3a3c24e061f650e5b6a2c04898bd69765f424d7",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT03__LIT__C00__NA/DONE.json": {
+      "bytes": 2115,
+      "sha256_newly_verified": "5055d957cf7ee75689c35a8d9a767897b7fae598bff6019ce25c7062ac7762c0",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT03__LIT__C00__NA/eval/HEADING/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3503,
+      "sha256_newly_verified": "44a4ec9dac6dc0511a63b8f4a8f184f09bc791edb39487625e1bb4462a806f08",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT03__LIT__C00__NA/eval/HEADING/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 3158,
+      "sha256_newly_verified": "74e8326f592d861b4578b94496cde0b7eb8343c69aee5dc0ecfb79c3912905c3",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT03__LIT__C00__NA/native/HX02_HEADING_TABLES/HX02_HEADING_TABLE_EXT03.csv": {
+      "bytes": 73894,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT04__LIT__C00__NA/COMMAND.json": {
+      "bytes": 2675,
+      "sha256_newly_verified": "3f2fa3c34f502c6b64a496328e5371268527490afd22a635443c76dd6e6edce9",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT04__LIT__C00__NA/DONE.json": {
+      "bytes": 2164,
+      "sha256_newly_verified": "4138a6ed8f8e35dd2f5fe796018ab320f93fc2b55eddb39defc763f4ac47dd8c",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT04__LIT__C00__NA/eval/HEADING/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 4013,
+      "sha256_newly_verified": "551b369b7cda651cc69070ea0fa7fc9cbd8bfa8ff5d967bf0ec7cdb37ea0c72e",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT04__LIT__C00__NA/eval/HEADING/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 4682,
+      "sha256_newly_verified": "2e0ac070fbe1d0d590847c03896649ed935be25a1cee3aa9782fde30ba16dd33",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT04__LIT__C00__NA/native/HX02_HEADING_TABLES/HX02_HEADING_TABLE_EXT04_FAR.csv": {
+      "bytes": 60225,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT04__LIT__C00__NA/native/HX02_HEADING_TABLES/HX02_HEADING_TABLE_EXT04_PAR.csv": {
+      "bytes": 60225,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__GINAV__NONE__C00__NA/COMMAND.json": {
+      "bytes": 2755,
+      "sha256_newly_verified": "aec61fdf5c3388546a1c5caf47d9de743126b9800c925cf5ba46ce76fd0c893f",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__GINAV__NONE__C00__NA/DONE.json": {
+      "bytes": 1091,
+      "sha256_newly_verified": "e173426777b453e901b4195245fcda91885392a95405c7c5500a727a8b3d88b1",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__GINAV__NONE__C00__NA/eval/COVERAGE/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 2483,
+      "sha256_newly_verified": "e044a7e65e2363b063205df973fec9570ae9c622110b2a4e6f547e3404cae28f",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__GINAV__NONE__C00__NA/eval/COVERAGE/OUTPUT/COVERAGE_METRICS.json": {
+      "bytes": 1167,
+      "sha256_newly_verified": "310698a032db35658e18ae57a09ce147f314e845e1221290e7d35462338c1906",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__GINAV__NONE__C00__NA/eval/D8_BOUNDED_GATE.json": {
+      "bytes": 1125,
+      "sha256_newly_verified": "7ea5aa68e042d58034fb0ee1076a78733ddd9e5bbeeb8a7594aa06245839250b",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__GINAV__NONE__C00__NA/eval/GINAV_EVALUATION.json": {
+      "bytes": 2660,
+      "sha256_newly_verified": "ddfcef36cc801a58436286c60a10ea5a2ba38b9fbe739748131f7dc373d706e5",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__HARTLEY_LIT__LIT__C00__NA/COMMAND.json": {
+      "bytes": 2620,
+      "sha256_newly_verified": "33c36ea4dc379904a62acbbe7d7bbe64ff04a4be0de0a04c75c5104d1f9c23b3",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__HARTLEY_LIT__LIT__C00__NA/DONE.json": {
+      "bytes": 1080,
+      "sha256_newly_verified": "29c6df09f449a642976b99e30ce1fc5729da50f6239a9ce0d96426a7c22f8eae",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__HARTLEY_LIT__LIT__C00__NA/eval/DIVERGENCE_GATE.json": {
+      "bytes": 412,
+      "sha256_newly_verified": "fe22f5207719737c26af324e15780ac094f65a43fad70df6f45593087982286c",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__HARTLEY_LIT__LIT__C00__NA/eval/RELATIVE_POSE/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3639,
+      "sha256_newly_verified": "4f5dde373d3428b1bf0104fb6589b977757c5f2becdbe9c5998d67405d5fd152",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__HARTLEY_LIT__LIT__C00__NA/eval/RELATIVE_POSE/OUTPUT/RELATIVE_POSE_METRICS.json": {
+      "bytes": 2975,
+      "sha256_newly_verified": "93d6450df6d6973519eee726f302dd0956e433abfed2933b2ffdfb8a1dd24d41",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__HARTLEY_S__S__C00__NA/COMMAND.json": {
+      "bytes": 2598,
+      "sha256_newly_verified": "791992aea030b696412687875495dc9fa6e284f8938694dc7e93c5a65b2d1ffe",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__HARTLEY_S__S__C00__NA/DONE.json": {
+      "bytes": 1076,
+      "sha256_newly_verified": "93e163d553cd1b77a4bbcadf7562a4c0c0570b69d938acb105c97f1e84217813",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__HARTLEY_S__S__C00__NA/eval/DIVERGENCE_GATE.json": {
+      "bytes": 411,
+      "sha256_newly_verified": "775379092181acb65d2d83a9dc91ee321d3416379e5fc3893358d04cac98fbf3",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__HARTLEY_S__S__C00__NA/eval/RELATIVE_POSE/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3608,
+      "sha256_newly_verified": "ebb53d83b5ca349d4f07fbf612f5edd1c38251cb30d7bd31254fb6418752c79a",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__HARTLEY_S__S__C00__NA/eval/RELATIVE_POSE/OUTPUT/RELATIVE_POSE_METRICS.json": {
+      "bytes": 2967,
+      "sha256_newly_verified": "70378fd3cba038f54ecf30f244c663f48679c166b88466c52fd5c68a938251c4",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/COMMAND.json": {
+      "bytes": 2502,
+      "sha256_newly_verified": "ba7530b05b40904bae8b0658314a96cc27f8302f7bfed2ef1ca7730c5197cf32",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/DONE.json": {
+      "bytes": 2034,
+      "sha256_newly_verified": "1cca4b833718f17d92fd9619aee4b4010dbb0562f616b002a569974e5eb3b784",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/eval/HEADING/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3519,
+      "sha256_newly_verified": "43bb45557b0988daedd1875a96beba5fb8c98fa2266918afc7cd7ef1c8abdfcb",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/eval/HEADING/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 3537,
+      "sha256_newly_verified": "d16dea154dec7dd788cd3375c004e3a90bedf3849203be0945ab1b555751ba48",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/HX02_HEADING_TABLES/HX02_HEADING_TABLE_RTKLIB.csv": {
+      "bytes": 75595,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/SUMMARY.csv": {
+      "bytes": 3037,
+      "rows": 13,
+      "sha256_newly_verified": "51f110d5f42afe39c0505124b690655d89fff886ee80147d369bb1661e87b9d9",
+      "read_depth": "FULL_TABLE_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/VALID_DIAGNOSTICS.csv": {
+      "bytes": 2714,
+      "rows": 13,
+      "sha256_newly_verified": "d0e5a6586f22c589879efaea21f4191aead64782e20b76f64467140d48d571ed",
+      "read_depth": "FULL_TABLE_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0/COMMAND.json": {
+      "bytes": 3915,
+      "sha256_newly_verified": "bd099d685b5004c669a573163a92735381333d3094f6504dd51866ed74205d60",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0/ASSOCIATION_SUMMARY.json": {
+      "bytes": 426,
+      "sha256_newly_verified": "7f05a0901a97c75b08fd1b78ae4bab0f736d3fa9cbe56f86eb3be96c82914cd2",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0/eval/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3463,
+      "sha256_newly_verified": "b8e085f3ba6efcc0e08268cb12b1e70c7f88755c97cc33f7900066dc59d2cca3",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0/eval/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 3536,
+      "sha256_newly_verified": "80103506b82da5c48a96913b81f0b9e5802f39aec08c004dac1d9728572b3dee",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0/solution.pos": {
+      "bytes": 72230,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0/HEADING_TABLE.csv": {
+      "bytes": 69480,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0E/COMMAND.json": {
+      "bytes": 3427,
+      "sha256_newly_verified": "01964a66228db9bc34df4857053a4bbb33eba2d8b093047ab952db844ff98a1a",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0E/ASSOCIATION_SUMMARY.json": {
+      "bytes": 426,
+      "sha256_newly_verified": "280d0082748b0b2b559a580214a7f7ff3a58b22a01927da6a98acdbfd780ed87",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0E/eval/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3469,
+      "sha256_newly_verified": "cd3846fc14316088bd2c14e4eea67aebae60db0675971f8057f619a347eba605",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0E/eval/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 3537,
+      "sha256_newly_verified": "4eb73883150d70856f2064950bb61a4e89c8b48589e290fd510751fdd751a7bf",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0E/solution.pos": {
+      "bytes": 121951,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0E/HEADING_TABLE.csv": {
+      "bytes": 75393,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V1/COMMAND.json": {
+      "bytes": 3425,
+      "sha256_newly_verified": "8785644072b8147c876ad267b030a022ac23b969920c41cdba1a73913fc92950",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V1/ASSOCIATION_SUMMARY.json": {
+      "bytes": 426,
+      "sha256_newly_verified": "a462dd535b2bf6598cd922dee52ef29ceb323b1f9b28b82f086d5e45146093f9",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V1/eval/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3462,
+      "sha256_newly_verified": "324fb8e64089fda36f0d2a5e9d2efac586ab50dd4e4ffb78244329443f7dbd2d",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V1/eval/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 3506,
+      "sha256_newly_verified": "135a1ed595c443c5e105d02ef3241c00b071ba2e8033d09de549704a735a8296",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V1/solution.pos": {
+      "bytes": 119756,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V1/HEADING_TABLE.csv": {
+      "bytes": 75030,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V2/COMMAND.json": {
+      "bytes": 3425,
+      "sha256_newly_verified": "e1195d9316aa6f772784d70996472a47f2ba19c542ad95e9045ba07d53441e83",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V2/ASSOCIATION_SUMMARY.json": {
+      "bytes": 426,
+      "sha256_newly_verified": "e94fe739cd5de85d5d47f49bbc30a53ae90200234771cf011d0f7e922e4e5223",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V2/eval/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3462,
+      "sha256_newly_verified": "b79cde38c88f45b014a13d4765dbbaf4d11f98a6582bd55933e1a7f4eee3e4e8",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V2/eval/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 3528,
+      "sha256_newly_verified": "4b0a6b919bf5225c184480e0c7ad4b04e523e2554c25832b3d1fea0cd36bb49d",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V2/solution.pos": {
+      "bytes": 119758,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V2/HEADING_TABLE.csv": {
+      "bytes": 75025,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0/COMMAND.json": {
+      "bytes": 3761,
+      "sha256_newly_verified": "a7f374ccbbbe0abaf8f1ce5d7f817306cf573392582d4c415e6142b167c8962e",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0/ASSOCIATION_SUMMARY.json": {
+      "bytes": 427,
+      "sha256_newly_verified": "70afa715e631b159339cb65b38c0a87dbb06a7744bfcb8dd30a2e3b48e4d872b",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0/eval/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3463,
+      "sha256_newly_verified": "a4c8eef8c296e6e599716d51f2140599875af43eead3183528b0741f823b8d67",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0/eval/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 3544,
+      "sha256_newly_verified": "036f8d3ffe999673a322102d18bf0a6647a50150e2d6f65de4feaacf9f1da0cf",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0/solution.pos": {
+      "bytes": 71110,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0/HEADING_TABLE.csv": {
+      "bytes": 104514,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0E/COMMAND.json": {
+      "bytes": 3289,
+      "sha256_newly_verified": "beff4dae391f3c9b0a090c68ce87146e4a43ffa957fc919ca102e762e08f0cef",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0E/ASSOCIATION_SUMMARY.json": {
+      "bytes": 429,
+      "sha256_newly_verified": "87b6d8df94d997af82979b15c2769e47ef49cdabf62e849258c1151798afd541",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0E/eval/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3470,
+      "sha256_newly_verified": "19f49f6ee5237d67957115daec3a14181e8fcd7f80ba9677db8d3cfb9ba3e8d7",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0E/eval/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 3533,
+      "sha256_newly_verified": "3320ef8da7c63dcfc1541d947a56e962b773140124cbb16f5716f7c71b189d3e",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0E/solution.pos": {
+      "bytes": 193151,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0E/HEADING_TABLE.csv": {
+      "bytes": 119085,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V1/COMMAND.json": {
+      "bytes": 3287,
+      "sha256_newly_verified": "fd17f37d427586f9d366c076ee109d74de511f3d5c9f2e13d84184b0ef0d805b",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V1/ASSOCIATION_SUMMARY.json": {
+      "bytes": 429,
+      "sha256_newly_verified": "57cbd478b7d815124e716eda7810ab95f014712a71ac0575da7eb48823ec77c0",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V1/eval/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3462,
+      "sha256_newly_verified": "ab2557bf889052b2e59af95009c44ff37db0609cc7ea03c42eaed2e0e0cb7332",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V1/eval/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 3535,
+      "sha256_newly_verified": "8d60ed383c39ed27a9ef13607f3ca5889feeced03de3cd8a0fea24f475f6118e",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V1/solution.pos": {
+      "bytes": 181020,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V1/HEADING_TABLE.csv": {
+      "bytes": 117559,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V2/COMMAND.json": {
+      "bytes": 3287,
+      "sha256_newly_verified": "ae70faa8177c82d8b1f28958446823ac7a4867d23f9568b439b9957b85e00757",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V2/ASSOCIATION_SUMMARY.json": {
+      "bytes": 427,
+      "sha256_newly_verified": "642839c81578c50f42bb4bdef52f0cba75397ab2437282461d7814a3e77b9165",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V2/eval/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3463,
+      "sha256_newly_verified": "9206a30e93471fd96f5c0605709f991747179920e5f5a27483948a0e8e22da1f",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V2/eval/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 3526,
+      "sha256_newly_verified": "3ec1d24d6c58a013b58fbf4783e0578aede1756cd10e1d93c27dc99c97272511",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V2/solution.pos": {
+      "bytes": 181022,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V2/HEADING_TABLE.csv": {
+      "bytes": 117723,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0/COMMAND.json": {
+      "bytes": 3647,
+      "sha256_newly_verified": "8b4c39a3c1cf01ced206767744f9b53acced41df209009af61404c0d45d260d7",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0/ASSOCIATION_SUMMARY.json": {
+      "bytes": 426,
+      "sha256_newly_verified": "34549a84ebbda187936743d30e9aacf0bfce23a9af184bfa9774467b6eef56b9",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0/eval/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3456,
+      "sha256_newly_verified": "fbe7cd6caec87df57ab729597f6433b55af768803ff5bc54c5f30dcb9104f8c8",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0/eval/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 3537,
+      "sha256_newly_verified": "d16dea154dec7dd788cd3375c004e3a90bedf3849203be0945ab1b555751ba48",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0/solution.pos": {
+      "bytes": 92606,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0/HEADING_TABLE.csv": {
+      "bytes": 75595,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0E/COMMAND.json": {
+      "bytes": 3207,
+      "sha256_newly_verified": "b287cfcf54c3b9d51c44b5070de3e318b379b02acf4708374d73658d0ca9fa6e",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0E/ASSOCIATION_SUMMARY.json": {
+      "bytes": 426,
+      "sha256_newly_verified": "2771eb827f752a0624beef70e0ad55d1289918ec7d4fcc94d2ca3b31d1558f17",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0E/eval/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3461,
+      "sha256_newly_verified": "f461dda5a05fc87d10db2640a0e66731727dc8db17068535407a3460c2558dfb",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0E/eval/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 3535,
+      "sha256_newly_verified": "48072908cd8b0b1210634c9119fd795647c059c73f874310823a12ca377c9dcc",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0E/solution.pos": {
+      "bytes": 133657,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0E/HEADING_TABLE.csv": {
+      "bytes": 80466,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0convbin/eval/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3505,
+      "sha256_newly_verified": "630d6f66f1f3ac9fd78a323652e051bd9cf08662968eed1df28f95caac23d986",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0convbin/eval/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 3519,
+      "sha256_newly_verified": "a92732ba13eabdbc3a9c5a2c494d68d1cdf256d943f27c7914d0d25587e1b26b",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V1/COMMAND.json": {
+      "bytes": 3205,
+      "sha256_newly_verified": "108196868e034926e41366cb890cda68ded92da1231e2aa65c4ee77a2a874538",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V1/ASSOCIATION_SUMMARY.json": {
+      "bytes": 426,
+      "sha256_newly_verified": "a256673109acf877bb1a218c7f7264ca2d9b50f5c5133a0cd1f6beb67101fb2c",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V1/eval/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3455,
+      "sha256_newly_verified": "e5474e2aa27948dd4a20c4fcec8dc27b6b525c4f8dfa2ea19b24f2554dfd4eeb",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V1/eval/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 3538,
+      "sha256_newly_verified": "402b3bdd98345712f17ba72c5a2c55cfc3d0e9ba3005fe65681b491054674cd7",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V1/solution.pos": {
+      "bytes": 133394,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V1/HEADING_TABLE.csv": {
+      "bytes": 80490,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V2/COMMAND.json": {
+      "bytes": 3205,
+      "sha256_newly_verified": "f81ae83aeb97df973ee9cd4ec73d83bd7f4a934d456bf04fe7199a29a124725a",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V2/ASSOCIATION_SUMMARY.json": {
+      "bytes": 422,
+      "sha256_newly_verified": "2cbcb14754da2e3bc5a295e5817fc35a340c88c6fde3f1764a0fceadced82ff8",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V2/eval/EVALUATOR_STRACE_AUDIT.json": {
+      "bytes": 3456,
+      "sha256_newly_verified": "019ae0bac9103136aa99381244f6407bebf5ffaec959eb8899d7b869520df1f3",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V2/eval/OUTPUT/HEADING_METRICS.json": {
+      "bytes": 3508,
+      "sha256_newly_verified": "e69bde1a77c43a24bd439f908eceda64850527751848fa169f0b1719284dbc19",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V2/solution.pos": {
+      "bytes": 133396,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V2/HEADING_TABLE.csv": {
+      "bytes": 80513,
+      "read_depth": "METADATA_ONLY"
+    },
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX02/COUNTERS.json": {
+      "bytes": 622,
+      "sha256_newly_verified": "a1387ea0f0b858ae8b3b2c80004c007b0b4d793c2d5d745e517343de032e6dae",
+      "read_depth": "FULL_RECORD_READ"
+    },
+    "<CODE_ROOT>/docs/paper_rebuild/hext/HX07R/HX07R_EXECUTION_COUNTS.json": {
+      "bytes": 315,
+      "sha256_newly_verified": "22f062b5dda1a401a7ff4e2268ae5aa5640e18f68f8bd08aecd16f8854b01457",
+      "read_depth": "FULL_RECORD_READ"
+    }
+  },
+  "script_sha256": "18293d37dd715952227018660e33f2c2e7786b4d7a7743cdc6e7a877b297d4b6",
+  "not_total_hx_collection": true,
+  "field_mapping_source": "<CODE_ROOT>/configs/paper_rebuild/hext/HX02_CONTRACT_V1.yaml",
+  "field_mapping_source_sha256_newly_verified": "d38bf6de11c64f6b52190eb6eb07cb27781cbb3aec7fe17b49f985427b2d7da4",
+  "mapping_correction": "Original HX02 CASE words restored after supervisor checked the contract; start_policy independently records start_convention."
+}

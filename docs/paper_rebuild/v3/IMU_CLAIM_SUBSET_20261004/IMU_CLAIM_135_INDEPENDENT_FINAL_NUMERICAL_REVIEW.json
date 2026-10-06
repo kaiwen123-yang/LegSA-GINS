@@ -1,0 +1,1257 @@
+{
+  "schema": "independent_claim135_final_saved_error_numerical_review.v1",
+  "created_utc": "2026-10-04T07:59:27.208813+00:00",
+  "stage_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z",
+  "all_checks_passed": true,
+  "issues": [],
+  "accepted135_cases": 135,
+  "unavailable135_cases": 0,
+  "independently_recomputed_full_rmse_count": 540,
+  "own_domain_rows_recomputed": 810,
+  "paired_domain_metric_rows_recomputed": 2520,
+  "placement_summary_rows_recomputed": 280,
+  "max_full_rmse_abs_difference": 3.907985046680551e-14,
+  "source_snapshot_count": 928,
+  "source_before_after_matches_preregistration": true,
+  "publication_csv_hashes": {
+    "FULL_135_RESULTS.csv": "ce9b02c5fe7d2451eb60c23e61f9f4d752c428ff806933704f8e02bf649565ed",
+    "OWN_SUPPORT_DOMAINS.csv": "ea0d859d809d8a5ffcf53f8287f2fa0c4a5800bd6f4e412c9efe1877667177c1",
+    "PAIRED_ALL_90_CASES_DOMAINS.csv": "4a1aab0babf454e29be65cd8e10928798c1bc2c8b3ddb62f90c5ac70111faf20",
+    "PLACEMENT_BLOCK_SUMMARY.csv": "e2097761bd1e04fc38ca5ea3902975195c789f8766acda3afb926be01d18d2ad",
+    "INDEPENDENT_RECOMPUTATION.csv": "065079afc9e490bce15414ab3e97d14b6a0b2b23d0c9bbb59cc144320f29e112",
+    "REFERENCE_ACCESS_AUDIT.csv": "b27b040da93b03c89d2cf1e543aea33a2440a13f50ca9ae8ffadd22d285bd485",
+    "NATIVE_RUN_SUMMARY.csv": "a551679681a2f4e510f63be4c57268068b8e4d3d670d8891eefa1c24408fe0ef"
+  },
+  "native_review_sha256": "5370a6354d041f2680ff8b18734d23c0b9ea590896e22b832623ee973190c85b",
+  "preregistration_sha256": "50674d262162968a06640c2870b80e28b64af57def0f950d27abc35bb3e4505b",
+  "native_seal_sha256": "1f041d1180032b6552af8d43d1f0eb3b9256ad3f11c64a1e98fdf7cebaade60b",
+  "raw_reference_payload_reads": 0,
+  "publisher_functions_used_as_oracle": false,
+  "solver_evaluator_or_publisher_invoked": false,
+  "scientific_sources_or_configs_edited": false,
+  "script_sha256": "d8ca62abafa191f414476b4a87eb9423ad744f8191959dc4a8dfaa9538ac7542",
+  "transport_rows": [
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_00_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_00_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_00_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_01_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_01_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_01_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_02_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_02_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_02_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_03_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_03_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_03_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_04_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_04_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_04_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_05_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_05_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_05_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_06_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_06_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_06_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_07_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_07_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_07_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_08_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_08_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_10s_seed_08_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_00_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_00_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_00_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_01_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_01_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_01_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_02_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_02_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_02_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_03_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_03_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_03_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_04_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_04_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_04_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_05_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_05_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_05_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_06_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_06_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_06_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_07_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_07_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_07_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_08_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_08_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_20s_seed_08_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_00_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_00_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_00_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_01_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_01_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_01_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_02_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_02_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_02_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_03_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_03_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_03_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_04_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_04_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_04_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_05_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_05_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_05_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_06_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_06_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_06_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_07_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_07_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_07_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_08_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_08_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D61_30s_seed_08_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_00_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_00_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_00_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_01_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_01_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_01_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_02_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_02_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_02_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_03_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_03_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_03_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_04_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_04_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_04_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_05_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_05_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_05_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_06_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_06_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_06_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_07_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_07_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_07_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_08_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_08_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_10s_seed_08_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_00_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_00_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_00_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_01_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_01_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_01_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_02_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_02_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_02_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_03_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_03_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_03_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_04_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_04_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_04_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_05_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_05_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_05_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_06_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_06_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_06_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_07_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_07_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_07_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_08_F04",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_08_A03",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    },
+    {
+      "run_id": "IMUFIX_CLAIM_D62_20s_seed_08_A06",
+      "status": "COMPLETED_SEGMENTED",
+      "native_trace_opens": 0,
+      "offline_trace_opens": 1,
+      "audit_passed": true,
+      "consistency_passed": true,
+      "saved_matched_epochs": 56642
+    }
+  ],
+  "visual_review": "PENDING_SEPARATE_ACTUAL_IMAGE_VIEW",
+  "limits": [
+    "Arithmetic verified saved shared-reference errors, not independent absolute truth",
+    "RMSEs and differences remain support-conditional; original observed-record denominators explicitly retained",
+    "Nine reused placements are not45 independent samples and no confirmatory p claimed",
+    "No single-repair causal benefit attributed; native saved-P proof remains recorded-boundary active15 only"
+  ]
+}

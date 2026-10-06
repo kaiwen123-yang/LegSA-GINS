@@ -1,0 +1,269 @@
+{
+  "scope": "N16_ONLY__RUN_01401",
+  "source_path": "<VALIDATION_ROOT>/analysis/comparisons/N16_ONLY__RUN_01401/MEASUREMENT_COMPARISON.csv",
+  "actual_comparison_csv_complete_reads": 1,
+  "original_event_payload_reads": 0,
+  "counts": {
+    "PAIRED": 8214,
+    "joint_actual_EKF_updates": 7930,
+    "actual_R_changed": 1765,
+    "actual_delta_changed": 7926,
+    "dx_after_changed": 7926,
+    "actual_R_above_tolerance": 1759,
+    "dx_before_changed": 6557,
+    "actual_innovation_changed": 7925,
+    "state_before_changed": 7924,
+    "actual_R_exact_only_within_tolerance": 6,
+    "actual_acceptance_changed": 0,
+    "actual_EKF_presence_changed": 0,
+    "acceptance_false_to_true": 0,
+    "acceptance_true_to_false": 0
+  },
+  "by_source": {
+    "receiver_position": {
+      "registered_pairs": 1369,
+      "joint_actual_EKF_updates": 1369,
+      "actual_delta_changed": 1368,
+      "dx_after_changed": 1368,
+      "actual_innovation_changed": 1368,
+      "state_before_changed": 1368,
+      "actual_R_changed": 1275,
+      "actual_R_above_tolerance": 1272,
+      "actual_R_exact_only_within_tolerance": 3,
+      "dx_before_changed": 0,
+      "actual_acceptance_changed": 0,
+      "actual_EKF_presence_changed": 0,
+      "acceptance_false_to_true": 0,
+      "acceptance_true_to_false": 0
+    },
+    "dual_antenna_yaw": {
+      "registered_pairs": 1369,
+      "joint_actual_EKF_updates": 1346,
+      "actual_delta_changed": 1345,
+      "dx_after_changed": 1345,
+      "dx_before_changed": 1345,
+      "actual_innovation_changed": 1345,
+      "state_before_changed": 1345,
+      "actual_R_changed": 151,
+      "actual_R_above_tolerance": 148,
+      "actual_R_exact_only_within_tolerance": 3,
+      "actual_acceptance_changed": 0,
+      "actual_EKF_presence_changed": 0,
+      "acceptance_false_to_true": 0,
+      "acceptance_true_to_false": 0
+    },
+    "receiver_velocity": {
+      "registered_pairs": 1369,
+      "joint_actual_EKF_updates": 1369,
+      "actual_R_changed": 22,
+      "actual_delta_changed": 1368,
+      "dx_after_changed": 1368,
+      "dx_before_changed": 1368,
+      "actual_innovation_changed": 1368,
+      "state_before_changed": 1368,
+      "actual_R_above_tolerance": 22,
+      "actual_acceptance_changed": 0,
+      "actual_EKF_presence_changed": 0,
+      "actual_R_exact_only_within_tolerance": 0,
+      "acceptance_false_to_true": 0,
+      "acceptance_true_to_false": 0
+    },
+    "raw_doppler_velocity": {
+      "registered_pairs": 1369,
+      "joint_actual_EKF_updates": 1108,
+      "actual_delta_changed": 1107,
+      "dx_after_changed": 1107,
+      "dx_before_changed": 1107,
+      "actual_innovation_changed": 1107,
+      "state_before_changed": 1107,
+      "actual_R_changed": 76,
+      "actual_R_above_tolerance": 76,
+      "actual_acceptance_changed": 0,
+      "actual_EKF_presence_changed": 0,
+      "actual_R_exact_only_within_tolerance": 0,
+      "acceptance_false_to_true": 0,
+      "acceptance_true_to_false": 0
+    },
+    "go2_horizontal_velocity": {
+      "registered_pairs": 1369,
+      "joint_actual_EKF_updates": 1369,
+      "actual_R_changed": 230,
+      "actual_delta_changed": 1369,
+      "dx_after_changed": 1369,
+      "actual_R_above_tolerance": 230,
+      "dx_before_changed": 1368,
+      "actual_innovation_changed": 1368,
+      "state_before_changed": 1368,
+      "actual_acceptance_changed": 0,
+      "actual_EKF_presence_changed": 0,
+      "actual_R_exact_only_within_tolerance": 0,
+      "acceptance_false_to_true": 0,
+      "acceptance_true_to_false": 0
+    },
+    "go2_attitude_roll_pitch": {
+      "registered_pairs": 1369,
+      "joint_actual_EKF_updates": 1369,
+      "actual_delta_changed": 1369,
+      "dx_after_changed": 1369,
+      "dx_before_changed": 1369,
+      "actual_innovation_changed": 1369,
+      "state_before_changed": 1368,
+      "actual_R_changed": 11,
+      "actual_R_above_tolerance": 11,
+      "actual_acceptance_changed": 0,
+      "actual_EKF_presence_changed": 0,
+      "actual_R_exact_only_within_tolerance": 0,
+      "acceptance_false_to_true": 0,
+      "acceptance_true_to_false": 0
+    }
+  },
+  "difference_status_counts": {
+    "actual_R:DIFFERENT": 1765,
+    "actual_delta:DIFFERENT": 7926,
+    "dx_after:DIFFERENT": 7926,
+    "dx_before:DIFFERENT": 6557,
+    "actual_innovation:DIFFERENT": 7925,
+    "state_before:NOT_APPLICABLE": 7924
+  },
+  "acceptance_2x2": {
+    "True_to_True": 7930,
+    "False_to_False": 284,
+    "True_to_False": 0,
+    "False_to_True": 0
+  },
+  "all_acceptance_flips": [],
+  "metadata_patterns": [
+    {
+      "side": "baseline",
+      "source": "receiver_position",
+      "std_active_axes": "NOT_RECORDED",
+      "count": 1369
+    },
+    {
+      "side": "candidate",
+      "source": "receiver_position",
+      "std_active_axes": [
+        true,
+        true,
+        true
+      ],
+      "count": 1369
+    },
+    {
+      "side": "baseline",
+      "source": "dual_antenna_yaw",
+      "std_active_axes": "NOT_RECORDED",
+      "count": 1346
+    },
+    {
+      "side": "candidate",
+      "source": "dual_antenna_yaw",
+      "std_active_axes": [
+        true,
+        true,
+        true
+      ],
+      "count": 1346
+    },
+    {
+      "side": "baseline",
+      "source": "receiver_velocity",
+      "std_active_axes": "NOT_RECORDED",
+      "count": 1369
+    },
+    {
+      "side": "candidate",
+      "source": "receiver_velocity",
+      "std_active_axes": [
+        true,
+        true,
+        true
+      ],
+      "count": 1369
+    },
+    {
+      "side": "baseline",
+      "source": "raw_doppler_velocity",
+      "std_active_axes": "NOT_RECORDED",
+      "count": 1108
+    },
+    {
+      "side": "candidate",
+      "source": "raw_doppler_velocity",
+      "std_active_axes": [
+        true,
+        true,
+        true
+      ],
+      "count": 1108
+    },
+    {
+      "actual_R_rows": 2,
+      "lsim_R_scale": 2,
+      "quality_flag": "clean_raw_go2_weak_auxiliary",
+      "side": "baseline",
+      "source": "go2_horizontal_velocity",
+      "std_active_axes": "NOT_RECORDED",
+      "std_xyz": [
+        0.132838,
+        0.132838,
+        999
+      ],
+      "count": 1369
+    },
+    {
+      "actual_R_rows": 2,
+      "lsim_R_scale": 1.5,
+      "quality_flag": "clean_raw_go2_weak_auxiliary",
+      "side": "candidate",
+      "source": "go2_horizontal_velocity",
+      "std_active_axes": [
+        true,
+        true,
+        false
+      ],
+      "std_xyz": [
+        0.132838,
+        0.132838,
+        999
+      ],
+      "count": 1369
+    },
+    {
+      "side": "baseline",
+      "source": "go2_attitude_roll_pitch",
+      "std_active_axes": "NOT_RECORDED",
+      "count": 1369
+    },
+    {
+      "side": "candidate",
+      "source": "go2_attitude_roll_pitch",
+      "std_active_axes": [
+        true,
+        true,
+        true
+      ],
+      "count": 1369
+    }
+  ],
+  "interpretation": "Across two closed-loop executions, not same-state shadow intervention counts.",
+  "count_definition": "One count per non-equal comparison field. Numeric update differences use only joint actual EKF updates; actual acceptance uses all paired slots.",
+  "data_mode": "semisynthetic",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "IMU_comparison": {
+    "source_path": "<VALIDATION_ROOT>/analysis/comparisons/N16_ONLY__RUN_01401/IMU_STATE_COMPARISON.csv",
+    "complete_csv_reads": 1,
+    "row_status_counts": {
+      "EXACTLY_EQUAL": 42,
+      "DIFFERENT_OR_UNRESOLVED": 56600
+    },
+    "field_status_counts": {
+      "EXACTLY_EQUAL": 170220,
+      "DIFFERENT": 396200
+    },
+    "nonfinite_or_unresolved_rows": 0,
+    "recorded_state_time_mismatch_rows": 0,
+    "actual_event_payload_reads": 0
+  }
+}

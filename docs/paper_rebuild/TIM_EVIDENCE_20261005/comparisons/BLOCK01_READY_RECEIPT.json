@@ -1,0 +1,66 @@
+{
+  "created_utc": "2026-10-05T03:07:27.894296+00:00",
+  "base_head": "4e64aa9658cfb0d9d33f37bd97ee964d5605cbc1",
+  "scope": "BLOCK01_CONTRACT_AND_ALL_IDENTITIES_NOT_FINAL_PAYLOAD_REVIEW",
+  "method_rows": 30,
+  "module_rows": 7,
+  "blocked_performance_members": 12,
+  "source_pins": [
+    {
+      "repo_relative": "docs/paper_rebuild/V3_STORY_20261004/EXTERNAL_METHOD_STORY.csv",
+      "sha256": "e60aabfbb6f744e4e67cb6ba7a86386237eb312491bb7ef11d20980d84de1a1d",
+      "bytes": 32500,
+      "reading": "NEW_TARGETED_SEMANTIC_AND_INHERITED_ACCEPTED_EVIDENCE"
+    },
+    {
+      "repo_relative": "docs/paper_rebuild/V3_STORY_20261004/INTERNAL_ROBUST_ANALOGUE_SCOPE.csv",
+      "sha256": "6b5fa5028e83d79fe6895a47db55cabd010cf7487c8f1254272084139b2e07cd",
+      "bytes": 2925,
+      "reading": "NEW_TARGETED_SEMANTIC_AND_INHERITED_ACCEPTED_EVIDENCE"
+    },
+    {
+      "repo_relative": "docs/paper_rebuild/V3_STORY_20261004/COMPARISON_SOURCE_ASSET_INDEX.csv",
+      "sha256": "d6ef4d11d5e68c4af7fafda600e6fa6176d5103744caeea31344c083e6044505",
+      "bytes": 15306,
+      "reading": "NEW_TARGETED_SEMANTIC_AND_INHERITED_ACCEPTED_EVIDENCE"
+    },
+    {
+      "repo_relative": "docs/paper_rebuild/V3_STORY_20261004/04_COMPARISON_INVENTORY_AND_FAIRNESS_STORY.md",
+      "sha256": "254a41572a1b33092cc47e275e482d377234eb47bfde07b3707e9cdea7d822c3",
+      "bytes": 19197,
+      "reading": "NEW_TARGETED_SEMANTIC_AND_INHERITED_ACCEPTED_EVIDENCE"
+    },
+    {
+      "repo_relative": "docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/README.md",
+      "sha256": "4dd1809504a1573f366b7ad321cc3c87bcf1cac35db3df180ad18fdcc49b2459",
+      "bytes": 6616,
+      "reading": "NEW_TARGETED_SEMANTIC_AND_INHERITED_ACCEPTED_EVIDENCE"
+    },
+    {
+      "repo_relative": "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/AUTHOR_MATERIALS.md",
+      "sha256": "c8212b760a8fe9d7104ae13c0af262ce22835c0488d862f741e3b177483dff25",
+      "bytes": 2744,
+      "reading": "NEW_TARGETED_SEMANTIC_AND_INHERITED_ACCEPTED_EVIDENCE"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/ACCEPTANCE_CONTRACT.md",
+      "sha256": "6b9690fab23be4471856ac7ef097c45f7c2b685549408c2f3897a63c50af1234",
+      "bytes": 4112
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/METHOD_ACCEPTANCE_MATRIX.csv",
+      "sha256": "3590c821f97ac5c3b7072ca0f70a6860a6f4d005ddfc52168c88cf1c60a8122d",
+      "bytes": 46161
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/ROBUST_MODULE_ACCEPTANCE_MATRIX.csv",
+      "sha256": "7c40ff4c91b82066367b5a453ab958cc9f170b3d94b7f7acbb6c2711e3a71641",
+      "bytes": 4064
+    }
+  ],
+  "new_solver_calls": 0,
+  "new_evaluator_calls": 0,
+  "new_reference_payload_opens": 0
+}

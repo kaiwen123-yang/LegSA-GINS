@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "block": "03_research_questions_measurement_models_and_required_records",
+  "created_utc": "2026-10-04T13:53:38.136902+00:00",
+  "status": "READY_FOR_ROOT_REVIEW",
+  "all_checks_passed": true,
+  "document_checks_passed": 22,
+  "document_checks_failed": 0,
+  "submission_ready": false,
+  "scientific_runs": 0,
+  "scientific_source_changes": 0,
+  "scientific_result_changes": 0,
+  "raw_or_reference_payload_reads": 0,
+  "source_count": 16,
+  "required_records_count": 13,
+  "research_question_figure_rows": 8,
+  "read_coverage_rows": 23,
+  "peer_scope": "U01–U03 equations only; no claim of peer full script/Block03 acceptance",
+  "files": [
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md",
+      "bytes": 14909,
+      "lines": 178,
+      "sha256": "48b0af04be1e906c3d1921ecd0f63399c67180fd6a3d4bf4d8e500171d8738dc"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/GPS_SHORT_BASELINE_MOVING_BASE_DECISION.md",
+      "bytes": 12918,
+      "lines": 94,
+      "sha256": "ef3d1843789e5b9ce7715b5ec51ba0b19b2e63f9e8ebdb3478a6a7edaf48b477"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/PRIMARY_LITERATURE_AND_CLAIM_MAP.csv",
+      "bytes": 7069,
+      "lines": 17,
+      "sha256": "43146b5f06ad2c7df701b82d312ee1038c78d2802f4374dfa4664ac794d5b375"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/REQUIRED_RECORDS_AND_ACCEPTANCE.csv",
+      "bytes": 4273,
+      "lines": 14,
+      "sha256": "d62a7fc518d6554a1f10f033c86e562fdb4a64f65c7455f082333bda8dba6e03"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/RESEARCH_QUESTIONS_AND_MAIN_FIGURE_PLAN.csv",
+      "bytes": 2956,
+      "lines": 9,
+      "sha256": "8d7cf364d3a73235acb54ae646bea659843ae7bbc60f706dd8455c5a77ee26b9"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/BLOCK03_READ_COVERAGE.csv",
+      "bytes": 7155,
+      "lines": 24,
+      "sha256": "b433ec77d8a4cbbc086740cca7b2527cda2abf12c35776bc5b8ed8bc60d4f018"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/README.md",
+      "bytes": 3020,
+      "lines": 21,
+      "sha256": "94c96a6c3abe509764c947291f9fd3527de6e926e76e71dc482fd3edf3995840"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/BLOCK03_DOCUMENT_QA.json",
+      "bytes": 7647,
+      "lines": 278,
+      "sha256": "0bb957ae33c396d69d7eb50cac565669ee1d5a5d67a256b60e3de72e0fc90961"
+    }
+  ],
+  "original_scientific_role": "Retained V3 = conditional solution-level fusion; future carrier-phase AR is a separate proposed study",
+  "limitations": [
+    "No physical geometry or clock calibration was performed",
+    "No actual receiver/SDK joint covariance was estimated",
+    "No held-out instrument uncertainty coverage has been validated",
+    "All external reading scopes explicitly limited; no full-repository semantic-read claim",
+    "Current naming is provisional, author is reconsidering final name"
+  ]
+}

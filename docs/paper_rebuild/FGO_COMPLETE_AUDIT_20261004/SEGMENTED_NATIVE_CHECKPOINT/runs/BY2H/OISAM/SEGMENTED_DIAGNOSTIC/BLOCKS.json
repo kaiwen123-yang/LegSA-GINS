@@ -1,0 +1,919 @@
+[
+  {
+    "block_id": 1,
+    "imu_interval_first_index": 0,
+    "imu_interval_last_index": 2676,
+    "start_s": 394.9430739879608,
+    "end_s": 407.01705837249756,
+    "node_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "scheduled_nodes": 6,
+    "first_node_s": 402.0,
+    "last_node_s": 407.0,
+    "attempted": true,
+    "actual_rows": 6,
+    "prior_only_count": 1,
+    "dynamic_valid_nodes": 5,
+    "singleton_prior_only": false,
+    "initializations": [
+      {
+        "segment_id": 1,
+        "start_s": 402.0,
+        "reason": "INITIAL_SENSOR_ALIGNMENT",
+        "initialization_source": "same_epoch_GNSS1_position_A1_yaw_and_completed_calibrated_IMU_rate",
+        "A1_yaw_initialization_count": 1,
+        "initial_yaw_deg": -8.880872,
+        "initial_body_rate": {
+          "source": "CALIBRATED_IMU_dtheta_div_original_current_sample_dt",
+          "duration_source": "unrounded_source_raw_stamps",
+          "provider_row_index_zero_based": 1550,
+          "provider_timestamp_rel_s": 401.999051,
+          "interval_start_rel_s": 401.9950511455536,
+          "interval_end_rel_s": 401.99905133247375,
+          "effective_timestamp_rel_s": 401.99905133247375,
+          "age_at_initialization_s": 0.0009486675262451172,
+          "body_rate_frd_radps": [
+            0.008077122555727739,
+            -0.0038323209154845633,
+            -0.001794916123495053
+          ],
+          "earth_rate_or_installation_reapplied": false
+        },
+        "initial_velocity": {
+          "mode": "GNSS1_velocity_minus_R_omega_cross_lever",
+          "gnss1_velocity_ned_mps": [
+            0.014,
+            0.003,
+            0.001
+          ],
+          "lever_velocity_ned_mps": [
+            0.001554887210347525,
+            0.0021550812160946392,
+            0.0003572833041363691
+          ],
+          "imu_velocity_ned_mps": [
+            0.012445112789652475,
+            0.0008449187839053608,
+            0.0006427166958636309
+          ],
+          "prior_std_mps": [
+            0.05,
+            0.05,
+            0.05
+          ]
+        },
+        "initial_gyro_bias_radps": [
+          -5.520340933005959e-05,
+          -8.625742791176887e-06,
+          4.685802254642048e-05
+        ],
+        "end_s": 407.0,
+        "core_counts": {
+          "full_relinearizations": 5,
+          "incremental_updates": 0,
+          "initial_qr_builds": 0,
+          "marginalized_nodes": 0,
+          "imu_factors": 5,
+          "gnss_factors": 6,
+          "heading_factors": 0,
+          "initial_attitude_priors": 1,
+          "givens_rotations": 0,
+          "nonlinear_max_iterations": 5,
+          "attitude_triggers": 0,
+          "window_triggers": 0,
+          "nonlinear_converged_calls": 5,
+          "nonlinear_usable_limit_calls": 0
+        },
+        "block_id": 1,
+        "gnss_provider_time_rel_s": 402.0,
+        "initialization_expected_second": 402,
+        "position_llh_deg_m": [
+          39.984832626921,
+          116.3431297249,
+          41.77137799
+        ],
+        "position_std_ned_m": [
+          0.014,
+          0.014,
+          0.01
+        ],
+        "velocity_gnss1_ned_mps": [
+          0.014,
+          0.003,
+          0.001
+        ],
+        "velocity_std_ned_mps": [
+          0.05,
+          0.05,
+          0.05
+        ],
+        "yaw_deg": -8.880872,
+        "yaw_std_deg": 1.5,
+        "reference_used": false,
+        "prior_only_output_is_dynamic_solution": false
+      }
+    ],
+    "execution": {
+      "expected_nodes": 6,
+      "actual_rows": 6,
+      "finite_nodes": 6,
+      "unavailable_nodes": 0,
+      "segments": [
+        {
+          "segment_id": 1,
+          "start_s": 402.0,
+          "reason": "INITIAL_SENSOR_ALIGNMENT",
+          "initialization_source": "same_epoch_GNSS1_position_A1_yaw_and_completed_calibrated_IMU_rate",
+          "A1_yaw_initialization_count": 1,
+          "initial_yaw_deg": -8.880872,
+          "initial_body_rate": {
+            "source": "CALIBRATED_IMU_dtheta_div_original_current_sample_dt",
+            "duration_source": "unrounded_source_raw_stamps",
+            "provider_row_index_zero_based": 1550,
+            "provider_timestamp_rel_s": 401.999051,
+            "interval_start_rel_s": 401.9950511455536,
+            "interval_end_rel_s": 401.99905133247375,
+            "effective_timestamp_rel_s": 401.99905133247375,
+            "age_at_initialization_s": 0.0009486675262451172,
+            "body_rate_frd_radps": [
+              0.008077122555727739,
+              -0.0038323209154845633,
+              -0.001794916123495053
+            ],
+            "earth_rate_or_installation_reapplied": false
+          },
+          "initial_velocity": {
+            "mode": "GNSS1_velocity_minus_R_omega_cross_lever",
+            "gnss1_velocity_ned_mps": [
+              0.014,
+              0.003,
+              0.001
+            ],
+            "lever_velocity_ned_mps": [
+              0.001554887210347525,
+              0.0021550812160946392,
+              0.0003572833041363691
+            ],
+            "imu_velocity_ned_mps": [
+              0.012445112789652475,
+              0.0008449187839053608,
+              0.0006427166958636309
+            ],
+            "prior_std_mps": [
+              0.05,
+              0.05,
+              0.05
+            ]
+          },
+          "initial_gyro_bias_radps": [
+            -5.520340933005959e-05,
+            -8.625742791176887e-06,
+            4.685802254642048e-05
+          ],
+          "end_s": 407.0,
+          "core_counts": {
+            "full_relinearizations": 5,
+            "incremental_updates": 0,
+            "initial_qr_builds": 0,
+            "marginalized_nodes": 0,
+            "imu_factors": 5,
+            "gnss_factors": 6,
+            "heading_factors": 0,
+            "initial_attitude_priors": 1,
+            "givens_rotations": 0,
+            "nonlinear_max_iterations": 5,
+            "attitude_triggers": 0,
+            "window_triggers": 0,
+            "nonlinear_converged_calls": 5,
+            "nonlinear_usable_limit_calls": 0
+          }
+        }
+      ],
+      "initialization_count": 1,
+      "A1_yaw_initialization_count": 1,
+      "failures": [],
+      "core_counts": {
+        "full_relinearizations": 5,
+        "incremental_updates": 0,
+        "initial_qr_builds": 0,
+        "marginalized_nodes": 0,
+        "imu_factors": 5,
+        "gnss_factors": 6,
+        "heading_factors": 0,
+        "initial_attitude_priors": 1,
+        "givens_rotations": 0,
+        "nonlinear_max_iterations": 5,
+        "attitude_triggers": 0,
+        "window_triggers": 0,
+        "nonlinear_converged_calls": 5,
+        "nonlinear_usable_limit_calls": 0
+      },
+      "numerical_failure": null,
+      "mandatory_input_failure": null,
+      "maximum_imu_endpoint_wait_s": 0.005344390869140625
+    }
+  },
+  {
+    "block_id": 2,
+    "imu_interval_first_index": 2677,
+    "imu_interval_last_index": 3006,
+    "start_s": 413.0370919704437,
+    "end_s": 414.9050672054291,
+    "node_indices": [
+      12
+    ],
+    "scheduled_nodes": 1,
+    "first_node_s": 414.0,
+    "last_node_s": 414.0,
+    "attempted": true,
+    "actual_rows": 1,
+    "prior_only_count": 1,
+    "dynamic_valid_nodes": 0,
+    "singleton_prior_only": true,
+    "initializations": [
+      {
+        "segment_id": 1,
+        "start_s": 414.0,
+        "reason": "INITIAL_SENSOR_ALIGNMENT",
+        "initialization_source": "same_epoch_GNSS1_position_A1_yaw_and_completed_calibrated_IMU_rate",
+        "A1_yaw_initialization_count": 1,
+        "initial_yaw_deg": -6.744007,
+        "initial_body_rate": {
+          "source": "CALIBRATED_IMU_dtheta_div_original_current_sample_dt",
+          "duration_source": "unrounded_source_raw_stamps",
+          "provider_row_index_zero_based": 2856,
+          "provider_timestamp_rel_s": 413.99705,
+          "interval_start_rel_s": 413.99306201934814,
+          "interval_end_rel_s": 413.9970500469208,
+          "effective_timestamp_rel_s": 413.9970500469208,
+          "age_at_initialization_s": 0.002949953079223633,
+          "body_rate_frd_radps": [
+            -0.05264256482094817,
+            0.14770208813056734,
+            -0.10991649180367072
+          ],
+          "earth_rate_or_installation_reapplied": false
+        },
+        "initial_velocity": {
+          "mode": "GNSS1_velocity_minus_R_omega_cross_lever",
+          "gnss1_velocity_ned_mps": [
+            1.08,
+            0.025,
+            0.035
+          ],
+          "lever_velocity_ned_mps": [
+            -0.04297118839926746,
+            -0.014141857212247881,
+            -0.006010339588545465
+          ],
+          "imu_velocity_ned_mps": [
+            1.1229711883992675,
+            0.03914185721224788,
+            0.04101033958854547
+          ],
+          "prior_std_mps": [
+            0.05,
+            0.05,
+            0.05
+          ]
+        },
+        "initial_gyro_bias_radps": [
+          -5.548661072024064e-05,
+          -6.561388159441841e-06,
+          4.685806583208608e-05
+        ],
+        "end_s": 414.0,
+        "core_counts": {
+          "full_relinearizations": 0,
+          "incremental_updates": 0,
+          "initial_qr_builds": 0,
+          "marginalized_nodes": 0,
+          "imu_factors": 0,
+          "gnss_factors": 1,
+          "heading_factors": 0,
+          "initial_attitude_priors": 1,
+          "givens_rotations": 0,
+          "nonlinear_max_iterations": 0,
+          "attitude_triggers": 0,
+          "window_triggers": 0,
+          "nonlinear_converged_calls": 0,
+          "nonlinear_usable_limit_calls": 0
+        },
+        "block_id": 2,
+        "gnss_provider_time_rel_s": 414.0,
+        "initialization_expected_second": 414,
+        "position_llh_deg_m": [
+          39.984877014653,
+          116.343126482429,
+          41.674176859
+        ],
+        "position_std_ned_m": [
+          0.014,
+          0.014,
+          0.011
+        ],
+        "velocity_gnss1_ned_mps": [
+          1.08,
+          0.025,
+          0.035
+        ],
+        "velocity_std_ned_mps": [
+          0.05,
+          0.05,
+          0.05
+        ],
+        "yaw_deg": -6.744007,
+        "yaw_std_deg": 1.5,
+        "reference_used": false,
+        "prior_only_output_is_dynamic_solution": false
+      }
+    ],
+    "execution": {
+      "expected_nodes": 1,
+      "actual_rows": 1,
+      "finite_nodes": 1,
+      "unavailable_nodes": 0,
+      "segments": [
+        {
+          "segment_id": 1,
+          "start_s": 414.0,
+          "reason": "INITIAL_SENSOR_ALIGNMENT",
+          "initialization_source": "same_epoch_GNSS1_position_A1_yaw_and_completed_calibrated_IMU_rate",
+          "A1_yaw_initialization_count": 1,
+          "initial_yaw_deg": -6.744007,
+          "initial_body_rate": {
+            "source": "CALIBRATED_IMU_dtheta_div_original_current_sample_dt",
+            "duration_source": "unrounded_source_raw_stamps",
+            "provider_row_index_zero_based": 2856,
+            "provider_timestamp_rel_s": 413.99705,
+            "interval_start_rel_s": 413.99306201934814,
+            "interval_end_rel_s": 413.9970500469208,
+            "effective_timestamp_rel_s": 413.9970500469208,
+            "age_at_initialization_s": 0.002949953079223633,
+            "body_rate_frd_radps": [
+              -0.05264256482094817,
+              0.14770208813056734,
+              -0.10991649180367072
+            ],
+            "earth_rate_or_installation_reapplied": false
+          },
+          "initial_velocity": {
+            "mode": "GNSS1_velocity_minus_R_omega_cross_lever",
+            "gnss1_velocity_ned_mps": [
+              1.08,
+              0.025,
+              0.035
+            ],
+            "lever_velocity_ned_mps": [
+              -0.04297118839926746,
+              -0.014141857212247881,
+              -0.006010339588545465
+            ],
+            "imu_velocity_ned_mps": [
+              1.1229711883992675,
+              0.03914185721224788,
+              0.04101033958854547
+            ],
+            "prior_std_mps": [
+              0.05,
+              0.05,
+              0.05
+            ]
+          },
+          "initial_gyro_bias_radps": [
+            -5.548661072024064e-05,
+            -6.561388159441841e-06,
+            4.685806583208608e-05
+          ],
+          "end_s": 414.0,
+          "core_counts": {
+            "full_relinearizations": 0,
+            "incremental_updates": 0,
+            "initial_qr_builds": 0,
+            "marginalized_nodes": 0,
+            "imu_factors": 0,
+            "gnss_factors": 1,
+            "heading_factors": 0,
+            "initial_attitude_priors": 1,
+            "givens_rotations": 0,
+            "nonlinear_max_iterations": 0,
+            "attitude_triggers": 0,
+            "window_triggers": 0,
+            "nonlinear_converged_calls": 0,
+            "nonlinear_usable_limit_calls": 0
+          }
+        }
+      ],
+      "initialization_count": 1,
+      "A1_yaw_initialization_count": 1,
+      "failures": [],
+      "core_counts": {
+        "full_relinearizations": 0,
+        "incremental_updates": 0,
+        "initial_qr_builds": 0,
+        "marginalized_nodes": 0,
+        "imu_factors": 0,
+        "gnss_factors": 1,
+        "heading_factors": 0,
+        "initial_attitude_priors": 1,
+        "givens_rotations": 0,
+        "nonlinear_max_iterations": 0,
+        "attitude_triggers": 0,
+        "window_triggers": 0,
+        "nonlinear_converged_calls": 0,
+        "nonlinear_usable_limit_calls": 0
+      },
+      "numerical_failure": null,
+      "mandatory_input_failure": null,
+      "maximum_imu_endpoint_wait_s": 0.0
+    }
+  },
+  {
+    "block_id": 3,
+    "imu_interval_first_index": 3007,
+    "imu_interval_last_index": 63216,
+    "start_s": 415.0807819366455,
+    "end_s": 692.9191179275513,
+    "node_indices": [
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188,
+      189,
+      190,
+      191,
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      199,
+      200,
+      201,
+      202,
+      203,
+      204,
+      205,
+      206,
+      207,
+      208,
+      209,
+      210,
+      211,
+      212,
+      213,
+      214,
+      215,
+      216,
+      217,
+      218,
+      219,
+      220,
+      221,
+      222,
+      223,
+      224,
+      225,
+      226,
+      227,
+      228,
+      229,
+      230,
+      231,
+      232,
+      233,
+      234,
+      235,
+      236,
+      237,
+      238,
+      239,
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249,
+      250,
+      251,
+      252,
+      253,
+      254,
+      255,
+      256,
+      257,
+      258,
+      259,
+      260,
+      261,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271,
+      272,
+      273,
+      274,
+      275,
+      276,
+      277,
+      278,
+      279,
+      280,
+      281
+    ],
+    "scheduled_nodes": 268,
+    "first_node_s": 416.0,
+    "last_node_s": 683.0,
+    "attempted": true,
+    "actual_rows": 268,
+    "prior_only_count": 1,
+    "dynamic_valid_nodes": 267,
+    "singleton_prior_only": false,
+    "initializations": [
+      {
+        "segment_id": 1,
+        "start_s": 416.0,
+        "reason": "INITIAL_SENSOR_ALIGNMENT",
+        "initialization_source": "same_epoch_GNSS1_position_A1_yaw_and_completed_calibrated_IMU_rate",
+        "A1_yaw_initialization_count": 1,
+        "initial_yaw_deg": -36.326263,
+        "initial_body_rate": {
+          "source": "CALIBRATED_IMU_dtheta_div_original_current_sample_dt",
+          "duration_source": "unrounded_source_raw_stamps",
+          "provider_row_index_zero_based": 3180,
+          "provider_timestamp_rel_s": 415.997053,
+          "interval_start_rel_s": 415.9930417537689,
+          "interval_end_rel_s": 415.9970533847809,
+          "effective_timestamp_rel_s": 415.9970533847809,
+          "age_at_initialization_s": 0.002946615219116211,
+          "body_rate_frd_radps": [
+            -0.1282770021633187,
+            0.3995382414834185,
+            0.03484617592773089
+          ],
+          "earth_rate_or_installation_reapplied": false
+        },
+        "initial_velocity": {
+          "mode": "GNSS1_velocity_minus_R_omega_cross_lever",
+          "gnss1_velocity_ned_mps": [
+            0.934,
+            -0.596,
+            0.038
+          ],
+          "lever_velocity_ned_mps": [
+            -0.11958688481117737,
+            0.04146115962905233,
+            -0.015834457309402115
+          ],
+          "imu_velocity_ned_mps": [
+            1.0535868848111773,
+            -0.6374611596290523,
+            0.05383445730940212
+          ],
+          "prior_std_mps": [
+            0.05,
+            0.05,
+            0.05
+          ]
+        },
+        "initial_gyro_bias_radps": [
+          -4.501462214779401e-05,
+          -3.309830546827189e-05,
+          4.685808452490131e-05
+        ],
+        "end_s": 683.0,
+        "core_counts": {
+          "full_relinearizations": 63,
+          "incremental_updates": 203,
+          "initial_qr_builds": 36,
+          "marginalized_nodes": 230,
+          "imu_factors": 267,
+          "gnss_factors": 268,
+          "heading_factors": 0,
+          "initial_attitude_priors": 1,
+          "givens_rotations": 503595,
+          "nonlinear_max_iterations": 18,
+          "attitude_triggers": 21,
+          "window_triggers": 14,
+          "nonlinear_converged_calls": 63,
+          "nonlinear_usable_limit_calls": 0
+        },
+        "block_id": 3,
+        "gnss_provider_time_rel_s": 416.0,
+        "initialization_expected_second": 416,
+        "position_llh_deg_m": [
+          39.984896183402,
+          116.343117210777,
+          41.684428549
+        ],
+        "position_std_ned_m": [
+          0.014,
+          0.014,
+          0.01
+        ],
+        "velocity_gnss1_ned_mps": [
+          0.934,
+          -0.596,
+          0.038
+        ],
+        "velocity_std_ned_mps": [
+          0.05,
+          0.05,
+          0.05
+        ],
+        "yaw_deg": -36.326263,
+        "yaw_std_deg": 1.5,
+        "reference_used": false,
+        "prior_only_output_is_dynamic_solution": false
+      }
+    ],
+    "execution": {
+      "expected_nodes": 268,
+      "actual_rows": 268,
+      "finite_nodes": 268,
+      "unavailable_nodes": 0,
+      "segments": [
+        {
+          "segment_id": 1,
+          "start_s": 416.0,
+          "reason": "INITIAL_SENSOR_ALIGNMENT",
+          "initialization_source": "same_epoch_GNSS1_position_A1_yaw_and_completed_calibrated_IMU_rate",
+          "A1_yaw_initialization_count": 1,
+          "initial_yaw_deg": -36.326263,
+          "initial_body_rate": {
+            "source": "CALIBRATED_IMU_dtheta_div_original_current_sample_dt",
+            "duration_source": "unrounded_source_raw_stamps",
+            "provider_row_index_zero_based": 3180,
+            "provider_timestamp_rel_s": 415.997053,
+            "interval_start_rel_s": 415.9930417537689,
+            "interval_end_rel_s": 415.9970533847809,
+            "effective_timestamp_rel_s": 415.9970533847809,
+            "age_at_initialization_s": 0.002946615219116211,
+            "body_rate_frd_radps": [
+              -0.1282770021633187,
+              0.3995382414834185,
+              0.03484617592773089
+            ],
+            "earth_rate_or_installation_reapplied": false
+          },
+          "initial_velocity": {
+            "mode": "GNSS1_velocity_minus_R_omega_cross_lever",
+            "gnss1_velocity_ned_mps": [
+              0.934,
+              -0.596,
+              0.038
+            ],
+            "lever_velocity_ned_mps": [
+              -0.11958688481117737,
+              0.04146115962905233,
+              -0.015834457309402115
+            ],
+            "imu_velocity_ned_mps": [
+              1.0535868848111773,
+              -0.6374611596290523,
+              0.05383445730940212
+            ],
+            "prior_std_mps": [
+              0.05,
+              0.05,
+              0.05
+            ]
+          },
+          "initial_gyro_bias_radps": [
+            -4.501462214779401e-05,
+            -3.309830546827189e-05,
+            4.685808452490131e-05
+          ],
+          "end_s": 683.0,
+          "core_counts": {
+            "full_relinearizations": 63,
+            "incremental_updates": 203,
+            "initial_qr_builds": 36,
+            "marginalized_nodes": 230,
+            "imu_factors": 267,
+            "gnss_factors": 268,
+            "heading_factors": 0,
+            "initial_attitude_priors": 1,
+            "givens_rotations": 503595,
+            "nonlinear_max_iterations": 18,
+            "attitude_triggers": 21,
+            "window_triggers": 14,
+            "nonlinear_converged_calls": 63,
+            "nonlinear_usable_limit_calls": 0
+          }
+        }
+      ],
+      "initialization_count": 1,
+      "A1_yaw_initialization_count": 1,
+      "failures": [],
+      "core_counts": {
+        "full_relinearizations": 63,
+        "incremental_updates": 203,
+        "initial_qr_builds": 36,
+        "marginalized_nodes": 230,
+        "imu_factors": 267,
+        "gnss_factors": 268,
+        "heading_factors": 0,
+        "initial_attitude_priors": 1,
+        "givens_rotations": 503595,
+        "nonlinear_max_iterations": 18,
+        "attitude_triggers": 21,
+        "window_triggers": 14,
+        "nonlinear_converged_calls": 63,
+        "nonlinear_usable_limit_calls": 0
+      },
+      "numerical_failure": null,
+      "mandatory_input_failure": null,
+      "maximum_imu_endpoint_wait_s": 0.009074211120605469
+    }
+  }
+]

@@ -32,13 +32,20 @@ void addReason(SourceWeightResult& result, const std::string& reason) {
   result.reason_codes.push_back(reason);
 }
 
-double maxStd(const Vec3& std_xyz) {
-  return std::max({std::fabs(std_xyz[0]), std::fabs(std_xyz[1]), std::fabs(std_xyz[2])});
+double maxStd(const SourceMetadata& metadata) {
+  double maximum = 0.0;
+  for (std::size_t i = 0; i < std::min<std::size_t>(3, metadata.active_dimensions); ++i) {
+    maximum = std::max(maximum, std::fabs(metadata.std_xyz[i]));
+  }
+  return maximum;
 }
 
-bool finiteStd(const Vec3& std_xyz) {
-  return std::isfinite(std_xyz[0]) && std::isfinite(std_xyz[1]) && std::isfinite(std_xyz[2]) &&
-         std_xyz[0] > 0.0 && std_xyz[1] > 0.0 && std_xyz[2] > 0.0;
+bool finiteStd(const SourceMetadata& metadata) {
+  if (metadata.active_dimensions < 1 || metadata.active_dimensions > 3) return false;
+  for (std::size_t i = 0; i < metadata.active_dimensions; ++i) {
+    if (!std::isfinite(metadata.std_xyz[i]) || metadata.std_xyz[i] <= 0.0) return false;
+  }
+  return true;
 }
 
 double medianOf(std::vector<double> values) {
@@ -62,6 +69,7 @@ std::string metadataSummary(const SourceMetadata& metadata) {
   std::ostringstream stream;
   stream << "valid=" << (metadata.valid ? "true" : "false")
          << ";std=(" << metadata.std_xyz[0] << "/" << metadata.std_xyz[1] << "/" << metadata.std_xyz[2] << ")"
+         << ";active_dimensions=" << metadata.active_dimensions
          << ";yaw_std_rad=" << metadata.yaw_std_rad
          << ";sat_count=" << metadata.sat_count
          << ";provider_status=" << metadata.provider_status
@@ -239,7 +247,7 @@ void SourceAwarePolicy::applyRollingBaseline(MeasurementSource source,
 double SourceAwarePolicy::lsimScale(const SourceMetadata& metadata, SourceWeightResult& result) const {
   // 中文说明：LSIM 是来源级质量度量，只使用观测源自身 metadata，不读取 residual、评价 trace 或输出误差。
   double scale_value = 1.0;
-  const double std_max = maxStd(metadata.std_xyz);
+  const double std_max = maxStd(metadata);
   if (!n6bPolicyEnabled()) {
     if (!metadata.valid) {
       result.rejected = true;
@@ -333,7 +341,7 @@ double SourceAwarePolicy::lsimScale(const SourceMetadata& metadata, SourceWeight
     scale_value = std::max(scale_value, 1.5);
     addReason(result, "lsim_covariance_missing");
   }
-  if (!finiteStd(metadata.std_xyz)) {
+  if (!finiteStd(metadata)) {
     scale_value = std::max(scale_value, 1.5);
     addReason(result, "lsim_std_nonfinite_or_missing");
   }

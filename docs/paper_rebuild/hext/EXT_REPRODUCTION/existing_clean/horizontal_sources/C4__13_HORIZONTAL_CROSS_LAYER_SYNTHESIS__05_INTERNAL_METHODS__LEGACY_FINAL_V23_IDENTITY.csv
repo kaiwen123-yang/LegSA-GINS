@@ -1,0 +1,2 @@
+result_identity,case_id,horizontal_rmse_m,position_3d_rmse_m,roll_rmse_deg,pitch_rmse_deg,yaw_rmse_deg,not_current_canonical_C00,not_used_for_current_ranking,formal_or_diagnostic,source_file,source_row_key,notes
+LEGACY_FINAL_V23_RESULT,E001_single_nominal_none,NA,NA,NA,NA,1.813898158169119,true,true,LEGACY_DIAGNOSTIC_ONLY,<CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/12_FINAL_EVIDENCE_INTEGRATION/RESULT_IDENTITY_LEDGER.csv,result_identity=LEGACY_FINAL_V23,Archived semisynthetic final_v23 identity; all non-yaw metrics deliberately NA here.

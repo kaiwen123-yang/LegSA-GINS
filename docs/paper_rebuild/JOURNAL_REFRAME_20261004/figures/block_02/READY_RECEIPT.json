@@ -1,0 +1,108 @@
+{
+  "status": "READY",
+  "time_utc": "2026-10-04T13:31:30.223655+00:00",
+  "actual_visual_review": "4 final wide PNGs individually opened; PDF/SVG not separately rendered",
+  "build_receipt_sha256": "4b443cb6dc867dbc364aa83a9a4ba4c06b08967b0cfd179ee124028634502b88",
+  "no_solver_or_evaluator": true,
+  "utilities": {
+    "path": "../plot_utils.py",
+    "sha256": "e28173802e004aac9c5421b4e5439ae7e277f80e35ca16f2ed8b447673dd9371"
+  },
+  "files": [
+    {
+      "path": "BUILD_RECEIPT.json",
+      "sha256": "4b443cb6dc867dbc364aa83a9a4ba4c06b08967b0cfd179ee124028634502b88",
+      "bytes": 8793
+    },
+    {
+      "path": "R03_BY2_original_trajectory.pdf",
+      "sha256": "414a0d62be5316c9ed3789a34cecfc7cb367d8ae0dc7e02b50658144ad70af7e",
+      "bytes": 986455
+    },
+    {
+      "path": "R03_BY2_original_trajectory.png",
+      "sha256": "1b1e8abe00a6cd53d59f62cd2f1e37051e36bb437b5c7c66ce6e6fb41fac3b38",
+      "bytes": 429967
+    },
+    {
+      "path": "R03_BY2_original_trajectory.svg",
+      "sha256": "5709fff93eaa70c6fdbf0d2094ca97d274c2ce32d336ac40aa9ff5b907aaee7c",
+      "bytes": 2779103
+    },
+    {
+      "path": "R04_BY2H_attitude_errors.pdf",
+      "sha256": "c236b86f001a23d7fc1f4d34d2f3f2beba70af0599aac47f511c42990bda6f25",
+      "bytes": 1661223
+    },
+    {
+      "path": "R04_BY2H_attitude_errors.png",
+      "sha256": "736b6993bbdd3f06339b8f4a14cdf1a48b4a52dcc72664275e00e9c2a538f4bf",
+      "bytes": 1045300
+    },
+    {
+      "path": "R04_BY2H_attitude_errors.svg",
+      "sha256": "f8f8634a4a590ea689151bb3985fbd3e22db501348ab0fce3b47e1145b8ee486",
+      "bytes": 4328016
+    },
+    {
+      "path": "R04_BY2O_attitude_errors.pdf",
+      "sha256": "03a86b62a87514ff8c570cc96a0eacbc6bae87b8c01bde168d09025da5a0cfde",
+      "bytes": 2103227
+    },
+    {
+      "path": "R04_BY2O_attitude_errors.png",
+      "sha256": "fe1d1cf74cb87a5902df86e615d352d8e70536bdbfb5aeb62f9a08802d4eb47d",
+      "bytes": 791195
+    },
+    {
+      "path": "R04_BY2O_attitude_errors.svg",
+      "sha256": "fa2167aba61add86dd11cf91b0ebef33b2f24b3c7fcbac462e0c4beb9c0e6068",
+      "bytes": 5658770
+    },
+    {
+      "path": "R04_BY2_attitude_errors.pdf",
+      "sha256": "8f53e3ce8ac253e4f9b83e564e6eff4a4d951aa6ace6f60cad61f29d5012d3b8",
+      "bytes": 1595968
+    },
+    {
+      "path": "R04_BY2_attitude_errors.png",
+      "sha256": "9f10f4f5d1f1d79f1d7d0608b8b616d436d8794973be0c23e8e8b7d5daa3143d",
+      "bytes": 999084
+    },
+    {
+      "path": "R04_BY2_attitude_errors.svg",
+      "sha256": "81a114e55d1987c3f1fd1d02ce72db3d5c18943407e449ffa4568b7ebeddbfc7",
+      "bytes": 4193674
+    },
+    {
+      "path": "README.md",
+      "sha256": "a81dcf05e5b2a92a825a204e908d956116da020d6fc196c62c7ff7966abc68e7",
+      "bytes": 1676
+    },
+    {
+      "path": "build_trajectory_attitude.py",
+      "sha256": "0f770abad91bbec26d7217df5a527acdb22f400b7d45463e1d5b02ee61934258",
+      "bytes": 5104
+    },
+    {
+      "path": "data/BY2H_Proposed_attitude_errors.csv.gz",
+      "sha256": "f4ddb901f5b337b8bfc2b2e2c9e9ea3f7261fd3a397f6997a1f20a40df5d29cb",
+      "bytes": 1833849
+    },
+    {
+      "path": "data/BY2O_Proposed_attitude_errors.csv.gz",
+      "sha256": "0923da8afd5388e2fbeaeec54373303fc42406789c5cdc1f83035bd6ad196354",
+      "bytes": 2377328
+    },
+    {
+      "path": "data/BY2_Proposed_attitude_errors.csv.gz",
+      "sha256": "8bcae0d944041d2c37252f1c21dec197ca9d270d19a206a8e56d08cddd2633a0",
+      "bytes": 1770635
+    },
+    {
+      "path": "data/BY2_original_matched_trajectory.csv.gz",
+      "sha256": "897c5f3fa9327f9f9e7491036020c6f302a93f173899dd6ac39b2f4fba00b162",
+      "bytes": 3239776
+    }
+  ]
+}

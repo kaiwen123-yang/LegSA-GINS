@@ -1,0 +1,11 @@
+--- HX02_original.conf
++++ V1.conf
+@@ -9,7 +9,7 @@
+ pos1-tropopt       =saas
+ pos1-sateph        =brdc
+ pos1-exclsats      =
+-pos1-navsys        =33
++pos1-navsys        =57
+ pos2-armode        =continuous
+ pos2-gloarmode     =off
+ pos2-bdsarmode     =on

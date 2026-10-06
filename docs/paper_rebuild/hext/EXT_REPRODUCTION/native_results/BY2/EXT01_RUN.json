@@ -1,0 +1,170 @@
+{
+  "run_id": "BY2__EXT01__RAW_REPRO_V1",
+  "sequence": "BY2",
+  "method": "EXT01",
+  "status": "COMPLETED",
+  "attempt": 1,
+  "start_unix": 1790948098.9372919,
+  "code_commit": "801ffe359c10466d8efd3d600a341cac1463aabf",
+  "source_hashes": {
+    "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "d72548fb9cea3f8d6075bd231ba9a2bb970f71382006edbec045a4c7ea8f6e5a",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py": "ea65b90282fdeee943eca4764da18fb05fcb9a46b9a7cf44d477d3ff60976f2c",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": "85112d34e27f1fa8c3043bdcdeb2f418232cd2fffacb40cab3f387f179db6c9b",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/phase3_runner.py": "2154774baaf3ad0426b1fe43726ff8b998bb6e7cc772765a6568ba5f2b2182e5",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/phase3_signal_inventory.py": "0e64aa14d6b7572323ad4d4cafc554b65e3002ee4ed36b7d6c6c359855090194",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "cb098fb05283fb923f8ced007e01c382c2f47f68ac8bcb9999068e4d5070f31e",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext02.py": "87db20cb95b1f36970c7cc4e74e73967ad2f12883534f6d7b9bf007744f457f1",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext03.py": "e4aff2090078caa76e46999f40c096e3bb1c56a824183494a88ce5515d6fca9d",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": "5763d6e91fb44e29b8d2e324bb209463b0b87bb77f18cda63430d98cb5c1b7e6"
+  },
+  "config_hash": "94e39922e194e0cd151ee8bdd27318010d5f997686a72260a1ba432fd62478de",
+  "config": {
+    "schema": "ext_reproduction.config.v1",
+    "data_mode": "real_raw",
+    "synthetic_data_used": false,
+    "semisynthetic_data_used": false,
+    "input_history": "complete original paired file history",
+    "baseline_length_m": 0.35,
+    "receiver_order": "GNSS2_MINUS_GNSS1",
+    "body_yaw": "wrap360(atan2(b_E,b_N) degrees + 90)",
+    "method_versions": {
+      "EXT01": "existing exact C-ILS core plus own-transmit DD v1",
+      "EXT02": "journal CWLS tangent fix v1 plus own-transmit DD v1",
+      "EXT03": "Yang2024 declared KF engineering instance plus own-transmit exact-signal tracking v1"
+    },
+    "EXT01": {
+      "lambda_seed_count": 8,
+      "node_limit": 1000000,
+      "wall_budget_seconds": 60.0,
+      "acceptance_test": null,
+      "output_requires_global_search_certificate": true
+    },
+    "EXT02": {
+      "delta_Delta": 0.05,
+      "K": "all unique candidates",
+      "refinement_max_iterations": 20,
+      "direction_tolerance": 1e-10,
+      "any_candidate_failure": "whole epoch invalid",
+      "round_boundary": "original half-down implementation and literal Eq75; edge caveat documented"
+    },
+    "EXT03": {
+      "system_mode": "GPS_BDS_DUAL_FREQUENCY",
+      "constraint_mode": "CONSTRAINED",
+      "baseline_sigma_m": 0.01,
+      "ratio_threshold": 3.0,
+      "initial_baseline_variance_m2": 900.0,
+      "initial_ambiguity_variance_cycles2": 900.0,
+      "other_parameters": "inherited engineering defaults in reproduction_ext03.parameter_registry; not paper disclosed"
+    },
+    "workers_independent_epochs": 8,
+    "windows": {
+      "BY2": {
+        "base_time": 1772784000.0,
+        "seconds": [
+          66.0,
+          340.0
+        ]
+      },
+      "BY2H": {
+        "base_time": 1772784000.0,
+        "seconds": [
+          413.0,
+          683.0
+        ]
+      },
+      "BY2O": {
+        "base_time": 1772780400.0,
+        "seconds": [
+          3186.0,
+          3563.0
+        ]
+      }
+    },
+    "reference_used_online": false,
+    "parameter_search": false,
+    "new_raw_degradation_matrix": false,
+    "evaluation": "frozen hx02 heading functions; native-valid / ratio-fixed / causal-held separate, plus common support; no temporal or angle tuning"
+  },
+  "input_manifest": "<EXT_REPRO_ROOT>/inputs/BY2/INPUT.json",
+  "input_manifest_sha256": "8d016923133d6c2971a2d3bee286696a43c055a241a61e76a04a1b50c0e21501",
+  "cache_manifest_sha256": "171fabf46db40656e68b7cfe87451dabbcec39ba8fe62732674f01f4b726e7b7",
+  "cache_files_verified": {
+    "epochs": {
+      "filename": "paired_epochs.npy",
+      "sha256": "712f134012e49b9946543b00f148995da9bcb4253dec6d74857000137e98a485",
+      "size_bytes": 63762
+    },
+    "receiver1_measurements": {
+      "filename": "receiver1_measurements.npy",
+      "sha256": "30c13aa28157b76029bd887d72dd2e8cabb84a350d0068281fb47acaee8bf43e",
+      "size_bytes": 3294514
+    },
+    "receiver2_measurements": {
+      "filename": "receiver2_measurements.npy",
+      "sha256": "ba5ddeb9107108026f5a4154b1dd3d7b4eab998c124039790644afefd121cc6b",
+      "size_bytes": 3113879
+    }
+  },
+  "library_hashes_verified": {
+    "liblegsa_rtklib_bridge.so": "6df66600892404dd1c892879fe6e10693e808995fe359e32a6afc983629f8a3b",
+    "librtklib_legsa.so": "28c25b1cc7fade9b956bfdf77005de8fcb0a382c8411ae6e608c83b82bff53f2"
+  },
+  "data_mode": "real_raw",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "trace_used_online": false,
+  "receiver_imu_as_body_imu": false,
+  "final_v23_output_solver_input": false,
+  "LegSA_output_solver_input": false,
+  "per_case_tuning": false,
+  "output_only_correction": false,
+  "epoch_deleted_for_metric": false,
+  "old_runtime_input_count": 0,
+  "input_reuse_role": "verified raw-derived UBX/NAV; no prior estimate reused",
+  "planned_paired_epochs": 1509,
+  "new_method_sequence_calls": 1,
+  "evaluator_calls": 0,
+  "completed_epochs": 1509,
+  "valid_epochs": 1077,
+  "failure_counts": {
+    "INSUFFICIENT_DD_DIMENSION": 1,
+    "INSUFFICIENT_HALF_CYCLE_VALID": 374,
+    "INSUFFICIENT_SATELLITE_STATES": 46,
+    "INSUFFICIENT_CP_VALID": 11
+  },
+  "state_counts": {
+    "CERTIFIED_INTEGER_CANDIDATE": 1077,
+    "INVALID": 432
+  },
+  "float_solved_epochs": 1077,
+  "float_stage_applicability": "DEFINED",
+  "search_attempted_epochs": 1077,
+  "search_complete_epochs": 1077,
+  "candidate_returned_epochs": 1077,
+  "unknown_stage_counts": {
+    "float_solved": 0,
+    "search_attempted": 0,
+    "search_complete": 0,
+    "candidate_returned": 0
+  },
+  "ratio_fixed_epochs": 0,
+  "spp_attempts": 1509,
+  "total_satellite_state_calls": 36303,
+  "elapsed_s": 364.41085696599475,
+  "end_unix": 1790948476.151545,
+  "outputs": {
+    "HEADING.csv": {
+      "path": "<EXT_REPRO_ROOT>/runs/BY2__EXT01__RAW_REPRO_V1/HEADING.csv",
+      "sha256": "3a96fc53c3d5563ae159cffdf5055b38f1c88ebaa32d015367028c07ee66c6c3",
+      "bytes": 265025
+    },
+    "EPOCH_EVIDENCE.jsonl.gz": {
+      "path": "<EXT_REPRO_ROOT>/runs/BY2__EXT01__RAW_REPRO_V1/EPOCH_EVIDENCE.jsonl.gz",
+      "sha256": "904c600520687cbf3d4e0b1be7f128252422758bf2989b16227741f197e24813",
+      "bytes": 1930951
+    }
+  }
+}

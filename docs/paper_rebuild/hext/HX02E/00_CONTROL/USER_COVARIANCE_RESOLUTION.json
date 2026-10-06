@@ -1,0 +1,5 @@
+{
+  "decision": "OFF-DEF FK translation covariance is 0.010^2 I, declared Go2 platform input configuration; official contact example noise and initial state covariance retained",
+  "user_answer": "采用 0.010²·I，明确披露平台配置（推荐）",
+  "source": "Current task clarification"
+}

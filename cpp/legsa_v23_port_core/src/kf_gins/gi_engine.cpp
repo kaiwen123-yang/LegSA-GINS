@@ -102,6 +102,17 @@ GIEngine::GIEngine(PortOptions options)
       qa_fallback_supervisor_(options_.qa_fallback_config),
       source_aware_policy_(options_.source_aware_policy_config),
       quality_state_manager_(options_.quality_state_manager_config) {
+  if (options_.dual_antenna_measurement_model == "baseline3d") {
+    if (!std::isfinite(options_.baseline3d_length_m) || options_.baseline3d_length_m <= 0.0 ||
+        !std::isfinite(options_.baseline3d_k_b) || options_.baseline3d_k_b <= 0.0) {
+      throw std::runtime_error("BASELINE3D_REQUIRED_POSITIVE_CONFIG");
+    }
+    if (options_.quality_state_manager_config.enable_multi_state_qm ||
+        options_.qa_fallback_config.enable_qa_fallback || options_.qa_fallback_config.qa_active_mode ||
+        options_.algorithm_id == quality_aware::kLegsaQaFallbackEkf) {
+      throw std::runtime_error("BASELINE3D_SCOPE_REQUIRES_QA_QM_OFF");
+    }
+  }
   initializeQc();
 }
 
@@ -254,6 +265,10 @@ void GIEngine::addGnssData(const GnssData& gnss) {
     gnssdata_.has_yaw = true;
   }
   gnssdata_.isvalid = gnssdata_.has_position || gnssdata_.has_velocity || gnssdata_.has_yaw;
+  if (options_.dual_antenna_measurement_model == "baseline3d") {
+    // A valid baseline remains an A1 observation during position/RV outages.
+    gnssdata_.isvalid = gnssdata_.isvalid || gnssdata_.baseline3d.valid;
+  }
 }
 
 int GIEngine::isToUpdate() const {
@@ -350,7 +365,7 @@ void GIEngine::gnssUpdate(GnssData& gnss) {
     if (qa_active && qa_decision.gnss_position_action == "DOWNWEIGHT") {
       policy_gnss.std_ned_m = scale(policy_gnss.std_ned_m, std::sqrt(std::max(1.0, qa_decision.gnss_pos_R_scale)));
     }
-    if (qa_active &&
+    if (options_.dual_antenna_measurement_model != "baseline3d" && qa_active &&
         (qa_decision.a1_measurement_action == "DOWNWEIGHT" ||
          qa_decision.a1_measurement_action == "RECOVERY_RAMP")) {
       policy_gnss.yaw_std_rad *= std::sqrt(std::max(1.0, qa_decision.yaw_R_scale));
@@ -365,7 +380,9 @@ void GIEngine::gnssUpdate(GnssData& gnss) {
     applyPositionUpdate(policy_gnss);
   }
   if (options_.enable_basic_dual_yaw_baseline) {
-    if (policy_gnss.has_yaw && options_.enable_dual_yaw_update) {
+    if (options_.dual_antenna_measurement_model == "baseline3d" && options_.enable_dual_yaw_update) {
+      applyBaseline3dUpdate(policy_gnss, true, "INACTIVE", 1.0);
+    } else if (policy_gnss.has_yaw && options_.enable_dual_yaw_update) {
       applyBasicDualYawUpdate(policy_gnss);
     }
     gnss.isvalid = false;
@@ -374,6 +391,14 @@ void GIEngine::gnssUpdate(GnssData& gnss) {
   }
   const bool qa_reject_yaw = qa_active && qa_decision.a1_measurement_action == "REJECT";
   auto apply_yaw = [&]() {
+    if (options_.dual_antenna_measurement_model == "baseline3d") {
+      if (options_.enable_dual_yaw_update && options_.yaw_scheme_C_enabled) {
+        applyBaseline3dUpdate(policy_gnss, false,
+                             qa_active ? qa_decision.a1_measurement_action : "INACTIVE",
+                             qa_active ? qa_decision.yaw_R_scale : 1.0);
+      }
+      return;
+    }
     if (!qa_reject_yaw && policy_gnss.has_yaw && options_.enable_dual_yaw_update &&
         options_.yaw_scheme_C_enabled) {
       applyYawUpdate(policy_gnss);
@@ -509,7 +534,12 @@ void GIEngine::newImuProcess() {
     pvapre_ = pvacur_;
     insPropagation(midimu, imucur_);
   }
-  checkCov();
+  if (!checkCov()) {
+    ++cov_health_fail_count_;
+    if (cov_health_fail_count_ == 1) {
+      cov_health_first_failure_time_ = timestamp_;
+    }
+  }
   pvapre_ = pvacur_;
   imupre_ = imucur_;
 }
@@ -541,6 +571,14 @@ double GIEngine::timestamp() const {
 
 std::size_t GIEngine::propagationCount() const {
   return propagation_count_;
+}
+
+std::size_t GIEngine::covHealthFailCount() const {
+  return cov_health_fail_count_;
+}
+
+double GIEngine::covHealthFirstFailureTime() const {
+  return cov_health_first_failure_time_;
 }
 
 std::size_t GIEngine::updateCount() const {
@@ -887,15 +925,31 @@ GnssData GIEngine::receiverVelocityStressView(const GnssData& gnss) const {
   return out;
 }
 
-// 中文说明：velocity update 使用 antenna velocity - GNSS velocity；若 lever velocity evidence 缺失则保持保守项。
-void GIEngine::applyVelocityUpdate(GnssData& gnss) {
-  const double dt = imucur_.dt > 0.0 ? imucur_.dt : 0.01;
-  const Vec3 omega_b = scale(imucur_.dtheta, 1.0 / dt);
-  const Vec3 antenna_vel = add(pvacur_.vel_ned_mps, multiply(pvacur_.cbn, cross(omega_b, options_.antlever_m)));
-  const Vec3 dz_vec = subtract(antenna_vel, gnss.vel_ned_mps);
+Vec3 GIEngine::compensatedAngularRate() const {
+  // res=1 and res=3 can update before the current buffer is compensated.
+  // A copy keeps propagation's exactly-once compensation flag unchanged.
+  const ImuData compensated = imuCompensate(imucur_);
+  if (compensated.dt <= 0.0) throw std::runtime_error("VELOCITY_UPDATE_NO_SUPPORTED_IMU_DURATION");
+  return scale(compensated.dtheta, 1.0 / compensated.dt);
+}
+
+Matrix GIEngine::antennaVelocityJacobian(const Vec3& omega_b) const {
   Matrix H(3, RANK, 0.0);
   setBlockIdentity(H, 0, V_ID);
-  setBlock(H, 0, PHI_ID, Rotation::skewSymmetric(multiply(pvacur_.cbn, cross(omega_b, options_.antlever_m))));
+  const Vec3 lever_velocity = multiply(pvacur_.cbn, cross(omega_b, options_.antlever_m));
+  setBlock(H, 0, PHI_ID, Rotation::skewSymmetric(lever_velocity));
+  const Matrix3 bias = scale(multiply(pvacur_.cbn, Rotation::skewSymmetric(options_.antlever_m)), -1.0);
+  setBlock(H, 0, BG_ID, bias);
+  setBlock(H, 0, SG_ID, multiply(bias, diag3(cwiseDivide(omega_b, add(makeVec3(1.,1.,1.), imuerror_.gyrscale)))));
+  return H;
+}
+
+// Velocity observation is evaluated at the GNSS1 antenna with compensated rate.
+void GIEngine::applyVelocityUpdate(GnssData& gnss) {
+  const Vec3 omega_b = compensatedAngularRate();
+  const Vec3 antenna_vel = add(pvacur_.vel_ned_mps, multiply(pvacur_.cbn, cross(omega_b, options_.antlever_m)));
+  const Vec3 dz_vec = subtract(antenna_vel, gnss.vel_ned_mps);
+  Matrix H = antennaVelocityJacobian(omega_b);
   Vec3 stdv = add(positiveStd(gnss.vel_std_mps, 1.0e-3), makeVec3(0.05, 0.05, 0.05));
   Matrix R = diagonalMatrix(cwiseProduct(stdv, stdv));
   const std::vector<double> dz{dz_vec[0], dz_vec[1], dz_vec[2]};
@@ -914,11 +968,35 @@ void GIEngine::applyVelocityUpdate(GnssData& gnss) {
   ++velocity_update_count_;
 }
 
+double GIEngine::dualAntennaYawPrediction() const {
+  if (options_.stage_id != "IMU_V3_TIME_CONTRACT_FIX_20261004") return pvacur_.euler_rad[2];
+  // The frozen provider's heading is azimuth of body -y plus pi/2.
+  // At nonzero roll/pitch this is not the ZYX Euler yaw.
+  const Vec3 baseline = multiply(pvacur_.cbn, makeVec3(0., -1., 0.));
+  const double horizontal_squared = baseline[0]*baseline[0] + baseline[1]*baseline[1];
+  if (!(horizontal_squared > 1.e-12)) throw std::runtime_error("DUAL_YAW_HORIZONTAL_PROJECTION_UNSUPPORTED");
+  return wrapYawResidual(std::atan2(baseline[1], baseline[0]) + 0.5 * M_PI);
+}
+
+Matrix GIEngine::dualAntennaYawJacobian() const {
+  Matrix H(1, RANK, 0.0);
+  H(0, PHI_ID + 2) = -1.0;
+  if (options_.stage_id == "IMU_V3_TIME_CONTRACT_FIX_20261004") {
+    const Vec3 baseline = multiply(pvacur_.cbn, makeVec3(0., -1., 0.));
+    const double horizontal_squared = baseline[0]*baseline[0] + baseline[1]*baseline[1];
+    if (!(horizontal_squared > 1.e-12)) throw std::runtime_error("DUAL_YAW_HORIZONTAL_PROJECTION_UNSUPPORTED");
+    // Error convention: C_true=Exp(phi) C_nominal; residual=predicted-observed.
+    H(0, PHI_ID) = baseline[0]*baseline[2]/horizontal_squared;
+    H(0, PHI_ID + 1) = baseline[1]*baseline[2]/horizontal_squared;
+  }
+  return H;
+}
+
 // 中文说明：scheme_C 只对 dual-antenna yaw 观测做鲁棒门控，不放宽 hard=15 deg。
 void GIEngine::applyYawUpdate(GnssData& gnss) {
   ++yaw_update_count_;
   const double yaw_obs = gnss.yaw_rad;
-  const double yaw_pred = pvacur_.euler_rad[2];
+  const double yaw_pred = dualAntennaYawPrediction();
   const double yaw_std = std::max(gnss.yaw_std_rad, options_.yaw_std_min_deg * D2R);
   const double residual = wrapYawResidual(yaw_pred - yaw_obs);
   const double abs_res = std::fabs(residual);
@@ -932,8 +1010,7 @@ void GIEngine::applyYawUpdate(GnssData& gnss) {
     scale_value = options_.yaw_downweight_scale;
     scheme_downweighted = true;
   }
-  Matrix H(1, RANK, 0.0);
-  H(0, PHI_ID + 2) = -1.0;
+  Matrix H = dualAntennaYawJacobian();
   Matrix R(1, 1, scale_value * yaw_std * yaw_std);
   const std::vector<double> dz{residual};
   source_aware::SourceMetadata metadata;
@@ -965,19 +1042,149 @@ void GIEngine::applyYawUpdate(GnssData& gnss) {
 void GIEngine::applyBasicDualYawUpdate(GnssData& gnss) {
   ++yaw_update_count_;
   const double yaw_obs = gnss.yaw_rad;
-  const double yaw_pred = pvacur_.euler_rad[2];
+  const double yaw_pred = dualAntennaYawPrediction();
   // 中文说明：残差定义为 pred - obs；结合 H_phi_z=-1 后，EKFUpdate 内部的 dz-Hdx 与
   // stateFeedback 的 qpn 左乘反馈符号一致。该符号由 PAPER10E0 数值扰动测试验证。
   const double residual = wrapYawResidual(yaw_pred - yaw_obs);
   const double yaw_std = std::max(options_.basic_dual_yaw_fixed_std_deg * D2R, 1.0e-6);
-  Matrix H(1, RANK, 0.0);
-  // 中文说明：H_yaw 只作用于姿态误差状态块的 yaw 分量，列数等于 KF-GINS 21 维误差状态。
-  H(0, PHI_ID + 2) = -1.0;
+  // Frozen stages retain their scalar approximation; correction stage uses
+  // derivatives of the actual tilted lateral-baseline horizontal projection.
+  Matrix H = dualAntennaYawJacobian();
   // 中文说明：R_yaw 使用固定角度标准差，内部单位为 rad^2；不使用 dynamic yaw_std 或 source-aware 放大。
   Matrix R(1, 1, yaw_std * yaw_std);
   const std::vector<double> dz{residual};
   EKFUpdate(dz, H, R);
   ++yaw_normal_count_;
+}
+
+void GIEngine::applyBaseline3dUpdate(const GnssData& gnss, bool basic,
+                                    const std::string& qa_action, double qa_R_scale) {
+  Baseline3dDiagnostics row;
+  row.time = gnss.time;
+  row.present = gnss.baseline3d.present;
+  row.valid = gnss.baseline3d.valid;
+  row.qa_action = qa_action;
+  if (!gnss.baseline3d.valid) {
+    ++baseline3d_counts_.invalid;
+    if (!gnss.baseline3d.present) ++baseline3d_counts_.missing;
+    row.reason = gnss.baseline3d.reason;
+    baseline3d_diagnostics_.push_back(row);
+    return;
+  }
+  ++baseline3d_counts_.attempts;
+  ++yaw_update_count_;  // Existing formal A1 slot; separate B3 counters identify its model.
+  row.attempted = true;
+  row.observed_m = gnss.baseline3d.ned_m;
+  row.pacc1_m = gnss.baseline3d.pacc1_m;
+  row.pacc2_m = gnss.baseline3d.pacc2_m;
+  const double variance = options_.baseline3d_k_b * options_.baseline3d_k_b *
+      (row.pacc1_m * row.pacc1_m + row.pacc2_m * row.pacc2_m);
+  if (!std::isfinite(variance) || variance <= 0.0) {
+    ++baseline3d_counts_.rejected;
+    ++yaw_reject_count_;
+    row.reason = "REJECT_INVALID_COVARIANCE";
+    baseline3d_diagnostics_.push_back(row);
+    return;
+  }
+  const auto model = buildBaseline3dModel(pvacur_.cbn, gnss.baseline3d,
+                                         options_.baseline3d_length_m, options_.baseline3d_k_b);
+  row.model_available = true;
+  row.observed_m = gnss.baseline3d.ned_m;
+  row.predicted_m = model.predicted_m;
+  row.residual_m = model.residual_m;
+  row.pacc1_m = gnss.baseline3d.pacc1_m;
+  row.pacc2_m = gnss.baseline3d.pacc2_m;
+  row.base_variance_m2 = model.R(0, 0);
+  row.along_axis_residual_m = model.along_axis_residual_m;
+  row.length_mismatch_m = model.length_mismatch_m;
+  const std::vector<double> dz(model.residual_m.begin(), model.residual_m.end());
+  const auto hdx = multiply(model.H, dx_);
+  std::vector<double> innovation = dz;
+  for (std::size_t i = 0; i < 3; ++i) {
+    innovation[i] -= hdx[i];
+    row.innovation_m[i] = innovation[i];
+  }
+  // Retain the A1 action contract even though T5bc permits only QA/QM off.
+  if (!basic && (qa_action == "DOWNWEIGHT" || qa_action == "RECOVERY_RAMP")) {
+    row.qa_R_scale = std::max(1.0, qa_R_scale);
+  }
+  Matrix R = scale(model.R, row.qa_R_scale);
+  const Matrix S = add(multiply(multiply(model.H, Cov_), transpose(model.H)), R);
+  row.nis = dotVector(innovation, multiply(inverse(S), innovation));
+  row.nis_available = std::isfinite(row.nis);
+  auto reject = [&](const std::string& reason) {
+    ++baseline3d_counts_.rejected;
+    ++yaw_reject_count_;
+    row.reason = reason;
+    baseline3d_diagnostics_.push_back(row);
+  };
+  if (!row.nis_available) throw std::runtime_error("BASELINE3D_NONFINITE_NIS");
+  if (!basic && qa_action == "REJECT") { reject("QA_REJECT"); return; }
+  // Only the opt-in 3D nonbasic scheme-C slot uses this 3-DOF threshold.
+  if (!basic && row.nis > 11.34) { reject("NIS_3DOF_REJECT"); return; }
+  Matrix scaled_R = R;
+  if (!basic) {
+    source_aware::SourceMetadata metadata;
+    metadata.source = source_aware::MeasurementSource::kDualAntennaYaw;
+    metadata.time = gnss.time;
+    metadata.valid = true;
+    metadata.baseline_length_m = norm(gnss.baseline3d.ned_m);
+    metadata.rel_acc_m = std::sqrt(model.R(0, 0));
+    metadata.yaw_std_rad = metadata.rel_acc_m / options_.baseline3d_length_m;
+    metadata.std_xyz = makeVec3(metadata.rel_acc_m, metadata.rel_acc_m, metadata.rel_acc_m);
+    metadata.provider_status = "baseline3d";
+    metadata.quality_flag = "nominal";
+    // Preserve existing SA semantics: its helper uses dz, while the B3 hard NIS
+    // above uses dz-Hdx at this sequential update slot. Neither changes scalar SA.
+    const auto weight = applySourceAwareWeighting(metadata.source, metadata, dz,
+                                                  model.H, R, scaled_R);
+    row.sa_R_scale = weight.combined_R_scale;
+    if (weight.rejected) { reject("SOURCE_AWARE_REJECT"); return; }
+  }
+  EKFUpdate(dz, model.H, scaled_R);
+  row.accepted = true;
+  row.reason = basic ? "BASIC_ACCEPT" : "ACCEPT";
+  ++baseline3d_counts_.accepted;
+  if (row.qa_R_scale > 1.0 || (!basic &&
+      options_.source_aware_policy_config.enable_source_aware_weighting && row.sa_R_scale > 1.0)) {
+    ++yaw_downweight_count_;
+  } else {
+    ++yaw_normal_count_;
+  }
+  baseline3d_diagnostics_.push_back(row);
+}
+
+void GIEngine::writeBaseline3dDiagnostics(const std::string& output_dir) const {
+  if (options_.dual_antenna_measurement_model != "baseline3d") return;
+  std::filesystem::create_directories(output_dir);
+  std::ofstream out(std::filesystem::path(output_dir) / "BASELINE3D_DIAGNOSTICS.csv");
+  if (!out) throw std::runtime_error("BASELINE3D_DIAGNOSTICS_OPEN_FAILED");
+  out << std::setprecision(17);
+  out << "time,model,present,valid,attempt,accepted,rejected,reason,"
+         "z_n_m,z_e_m,z_d_m,h_n_m,h_e_m,h_d_m,dz_n_m,dz_e_m,dz_d_m,"
+         "innovation_n_m,innovation_e_m,innovation_d_m,pAcc1_m,pAcc2_m,base_variance_m2,"
+         "along_axis_residual_m,length_mismatch_m,nis_actual_innovation,dof,qa_action,qa_R_scale,sa_R_scale\n";
+  for (const auto& row : baseline3d_diagnostics_) {
+    out << row.time << ",baseline3d," << row.present << ',' << row.valid << ','
+        << row.attempted << ',' << row.accepted << ','
+        << (row.attempted && !row.accepted) << ',' << row.reason;
+    auto cell = [&](double value, bool available) {
+      out << ',';
+      if (available) out << value;
+    };
+    for (double value : row.observed_m) cell(value, row.valid);
+    for (const auto& vector : {row.predicted_m, row.residual_m, row.innovation_m}) {
+      for (double value : vector) cell(value, row.model_available);
+    }
+    cell(row.pacc1_m, row.valid);
+    cell(row.pacc2_m, row.valid);
+    cell(row.base_variance_m2, row.model_available);
+    cell(row.along_axis_residual_m, row.model_available);
+    cell(row.length_mismatch_m, row.model_available);
+    cell(row.nis, row.nis_available);
+    out << ",3," << row.qa_action << ',' << row.qa_R_scale << ',' << row.sa_R_scale << '\n';
+  }
+  if (!out) throw std::runtime_error("BASELINE3D_DIAGNOSTICS_WRITE_FAILED");
 }
 
 void GIEngine::applyRawDopplerUpdateForTime(double update_time) {
@@ -1000,7 +1207,10 @@ void GIEngine::applyRawDopplerUpdateForTime(double update_time) {
     ++raw_doppler_status_.reject_count;
     return;
   }
-  const Vec3 residual_vec = subtract(pvacur_.vel_ned_mps, best->velocity_ned_mps);
+  const Vec3 omega_b = compensatedAngularRate();
+  const Vec3 lever_vel_n = multiply(pvacur_.cbn, cross(omega_b, options_.antlever_m));
+  const Vec3 antenna_vel_n = add(pvacur_.vel_ned_mps, lever_vel_n);
+  const Vec3 residual_vec = subtract(antenna_vel_n, best->velocity_ned_mps);
   const double residual = norm(residual_vec);
   if (!options_.source_aware_policy_config.enable_source_aware_weighting &&
       residual > options_.raw_doppler_config.raw_doppler_residual_gate_mps) {
@@ -1008,11 +1218,11 @@ void GIEngine::applyRawDopplerUpdateForTime(double update_time) {
     raw_doppler_residual_norms_.push_back(residual);
     return;
   }
-  Matrix H(3, RANK, 0.0);
-  setBlockIdentity(H, 0, V_ID);
+  Matrix H = antennaVelocityJacobian(omega_b);
   const Vec3 stdv = RawDopplerFactor::positiveStd(*best);
   Matrix R = diagonalMatrix(scale(cwiseProduct(stdv, stdv), options_.raw_doppler_config.raw_doppler_R_scale));
-  // 中文说明：dz = nav.vel - raw_doppler_velocity_ned，与现有 receiver-native velocity residual 同号。
+  // 中文说明：dz = GNSS1 天线相位中心速度 - raw Doppler velocity；
+  // 杆臂速度与 receiver-native velocity update 使用相同的 antlever_m 及 H_phi 符号。
   const std::vector<double> dz{residual_vec[0], residual_vec[1], residual_vec[2]};
   source_aware::SourceMetadata metadata;
   metadata.source = source_aware::MeasurementSource::kRawDopplerVelocity;
@@ -1080,7 +1290,7 @@ void GIEngine::applyGo2AttitudeWeakPriorForTime(double update_time) {
     return;
   }
   const std::vector<double> dz = Go2WeakPriorFactor::residual(pvacur_, *best);
-  Matrix H = Go2WeakPriorFactor::designMatrix();
+  Matrix H = Go2WeakPriorFactor::designMatrix(pvacur_);
   Matrix R = Go2WeakPriorFactor::covariance(*best, options_.go2_attitude_prior_config);
   source_aware::SourceMetadata metadata;
   metadata.source = source_aware::MeasurementSource::kGo2AttitudeRollPitch;
@@ -1173,6 +1383,7 @@ void GIEngine::applyGo2VelocityDiagnosticPriorForTime(double update_time) {
     metadata.time = best->time;
     metadata.valid = best->source_status == "active";
     metadata.std_xyz = makeVec3(stdv[0], stdv[1], options_.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_vertical_disabled ? 999.0 : stdv[2]);
+    metadata.active_dimensions = horizontal_2d ? 2 : 3;
     metadata.residual_norm = horizontal_2d ? std::sqrt(residual_vec[0] * residual_vec[0] + residual_vec[1] * residual_vec[1])
                                            : norm(residual_vec);
     metadata.time_diff_sec = best->time - update_time;
@@ -1346,7 +1557,9 @@ quality_aware::QAObservation GIEngine::buildQAObservation(const GnssData& gnss) 
   observation.algorithm_id = options_.algorithm_id.empty() ? options_.run_label : options_.algorithm_id;
   observation.case_id = options_.ablation_variant;
   observation.dataset_id = options_.clean_input_provenance_label;
-  observation.a1_available = gnss.has_yaw && std::isfinite(gnss.yaw_rad) && std::isfinite(gnss.yaw_std_rad);
+  const bool baseline3d = options_.dual_antenna_measurement_model == "baseline3d";
+  observation.a1_available = baseline3d ? gnss.baseline3d.valid :
+      gnss.has_yaw && std::isfinite(gnss.yaw_rad) && std::isfinite(gnss.yaw_std_rad);
   const bool explicit_a1_quality =
       options_.qa_fallback_config.a1_quality_source.find("relpos_diff") != std::string::npos ||
       options_.qa_fallback_config.a1_quality_source.find("status_yaw") != std::string::npos;
@@ -1359,10 +1572,19 @@ quality_aware::QAObservation GIEngine::buildQAObservation(const GnssData& gnss) 
   observation.a1_baseline_expected_available = true;
   observation.a1_valid_ratio_window = options_.qa_fallback_config.a1_valid_ratio_default;
   observation.a1_valid_ratio_available = options_.qa_fallback_config.a1_valid_ratio_default_available;
-  observation.a1_yaw_std_deg = std::fabs(gnss.yaw_std_rad) * R2D;
-  observation.a1_yaw_std_available = observation.a1_available;
-  observation.a1_yaw_residual_deg = wrapYawResidual(pvacur_.euler_rad[2] - gnss.yaw_rad) * R2D;
-  observation.a1_yaw_residual_available = observation.a1_available;
+  if (baseline3d) {
+    observation.a1_baseline_m = gnss.baseline3d.valid ? norm(gnss.baseline3d.ned_m) : 0.0;
+    observation.a1_baseline_available = gnss.baseline3d.valid;
+    observation.a1_baseline_expected_m = options_.baseline3d_length_m;
+    // Passive QA explicitly marks scalar-yaw diagnostics unavailable.
+    observation.a1_yaw_std_available = false;
+    observation.a1_yaw_residual_available = false;
+  } else {
+    observation.a1_yaw_std_deg = std::fabs(gnss.yaw_std_rad) * R2D;
+    observation.a1_yaw_std_available = observation.a1_available;
+    observation.a1_yaw_residual_deg = wrapYawResidual(dualAntennaYawPrediction() - gnss.yaw_rad) * R2D;
+    observation.a1_yaw_residual_available = observation.a1_available;
+  }
   observation.gnss_pos_available = gnss.isvalid;
   observation.gnss_pos_valid = gnss.isvalid;
   observation.gnss_status_or_fix = gnss.isvalid ? "runtime_15col_valid" : "invalid";
@@ -1438,8 +1660,13 @@ source_aware::SourceWeightResult GIEngine::applySourceAwareWeighting(
     Matrix& scaled_R) {
   scaled_R = R;
   source_aware::ObservationInnovation innovation;
-  innovation.residual = dz;
-  innovation.residual_norm = vectorNorm(dz);
+  // Sequential updates retain a nonzero dx until stateFeedback. Use the same
+  // conditional innovation as EKFUpdate, with the current conditional covariance.
+  const std::vector<double> hdx = multiply(H, dx_);
+  std::vector<double> conditional_residual = dz;
+  for (std::size_t i = 0; i < dz.size(); ++i) conditional_residual[i] -= hdx[i];
+  innovation.residual = conditional_residual;
+  innovation.residual_norm = vectorNorm(conditional_residual);
   innovation.base_R_trace = matrixTrace(R);
   const Matrix hph = multiply(multiply(H, Cov_), transpose(H));
   const Matrix innovation_covariance = add(hph, R);
@@ -1450,8 +1677,8 @@ source_aware::SourceWeightResult GIEngine::applySourceAwareWeighting(
   if (options_.source_aware_policy_config.source_aware_use_innovation_covariance && !dz.empty()) {
     try {
       const Matrix s_inv = inverse(innovation_covariance);
-      const std::vector<double> weighted_residual = multiply(s_inv, dz);
-      innovation.nis = std::max(0.0, dotVector(dz, weighted_residual));
+      const std::vector<double> weighted_residual = multiply(s_inv, conditional_residual);
+      innovation.nis = std::max(0.0, dotVector(conditional_residual, weighted_residual));
       innovation.normalized_innovation =
           std::sqrt(std::max(0.0, innovation.nis / static_cast<double>(std::max<std::size_t>(1, innovation.dof))));
       innovation.used_innovation_covariance = true;

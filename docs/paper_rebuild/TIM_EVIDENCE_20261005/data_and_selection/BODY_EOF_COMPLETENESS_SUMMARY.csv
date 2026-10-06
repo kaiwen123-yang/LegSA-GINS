@@ -1,0 +1,9 @@
+file,last512bytes_sha256,last_data_frame_terminated,last_message_incomplete,classification
+nmb1.txt,7184b4c76b21dc1cc7bc192cc3fc7110229d881f59331101d3db7468108ea190,False,True,Unterminated final data message; do not complete missing characters/fields
+nmb2.txt,a42b94be9f84dd9f55fcd7d9cc3ec3e786b8edeb196735e025c5c04b62232d6e,True,False,Complete final data frame then Ctrl-C
+nmb3.txt,35cbe97ed9094d967920e89efd6a8ccc3f2ccd9d8ea18b213ea9a7e2712c77a3,False,True,Unterminated final data message; do not complete missing characters/fields
+nmb4.txt,2c5b94eb795a8adfbb54ff45942d82aa480d5fc6a95823280197ec741e1e057f,False,True,Unterminated final data message; do not complete missing characters/fields
+xb1.txt,3c3707afa8456d3c0c74e9ccf4291ffb6dd056ea05c5e22a1169240d9eee22a9,False,True,Unterminated final data message; do not complete missing characters/fields
+xb2.txt,5aeecb1b84d404498d76fe0d1577f5e202102db9264a4f7d90da97d50f40e326,False,True,Unterminated final data message; do not complete missing characters/fields
+xb3.txt,364ea5cb16b171e972477e7acfc9bfaa2d5ec151610b96d756a3a458a5099691,False,True,Unterminated final data message; do not complete missing characters/fields
+xb4.txt,455d199aa54f08693621042a40b7cdc955fa60b1f389a23640fcbde0b47189b5,False,True,Unterminated final data message; do not complete missing characters/fields

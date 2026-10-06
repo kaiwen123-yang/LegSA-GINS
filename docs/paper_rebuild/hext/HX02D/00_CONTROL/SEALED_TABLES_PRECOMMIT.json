@@ -1,0 +1,483 @@
+{
+  "utc": "2026-09-26T08:45:59.985910+00:00",
+  "baseline_json": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/00_CONTROL/FIGURE_CLOSEOUT_SECOND_CONTINUATION/BASELINE.json",
+  "baseline_json_sha256": "7830a1a596077558d0f2289c066dbd81b1f53e6c25adc8ec0c8833ee055a503b",
+  "registered_count": 65,
+  "counts": {
+    "MATCH": 65,
+    "MISMATCH": 0,
+    "MISSING": 0,
+    "UNREGISTERED": 0
+  },
+  "csv_count": 59,
+  "csv_match": 59,
+  "value_checks": [
+    {
+      "table": "07_AGGREGATE/MAIN_TABLE_V3.csv",
+      "line": 17,
+      "identity": {
+        "sequence_id": "BY2",
+        "method_id": "LC01",
+        "config": "LIT",
+        "start_convention": "FILE_START"
+      },
+      "identity_ok": true,
+      "yaw_rmse_deg_token": "2.9948274600591076",
+      "rounded": "2.994827460",
+      "expected": "2.994827460",
+      "pass": true
+    },
+    {
+      "table": "07_AGGREGATE/MAIN_TABLE_V3.csv",
+      "line": 18,
+      "identity": {
+        "sequence_id": "BY2",
+        "method_id": "EXT05C",
+        "config": "LIT",
+        "start_convention": "FILE_START"
+      },
+      "identity_ok": true,
+      "yaw_rmse_deg_token": "12.048641737808111",
+      "rounded": "12.048642",
+      "expected": "12.048642",
+      "pass": true
+    },
+    {
+      "table": "07_AGGREGATE/MAIN_TABLE_V3.csv",
+      "line": 4,
+      "identity": {
+        "sequence_id": "BY2",
+        "method_id": "F04"
+      },
+      "identity_ok": true,
+      "yaw_rmse_deg_token": "1.8862718548526467",
+      "rounded": "1.886272",
+      "expected": "1.886272",
+      "pass": true
+    },
+    {
+      "table": "07_AGGREGATE/MAIN_TABLE_V3.csv",
+      "line": 9,
+      "identity": {
+        "sequence_id": "BY2H",
+        "method_id": "F04"
+      },
+      "identity_ok": true,
+      "yaw_rmse_deg_token": "1.93377013508875",
+      "rounded": "1.933770",
+      "expected": "1.933770",
+      "pass": true
+    },
+    {
+      "table": "07_AGGREGATE/MAIN_TABLE_V3.csv",
+      "line": 13,
+      "identity": {
+        "sequence_id": "BY2O",
+        "method_id": "F04"
+      },
+      "identity_ok": true,
+      "yaw_rmse_deg_token": "2.433814932823714",
+      "rounded": "2.433815",
+      "expected": "2.433815",
+      "pass": true
+    }
+  ],
+  "values_pass": true,
+  "seal_pass": true,
+  "status": "PASS",
+  "files": [
+    {
+      "path": "07C_FAILURE_FAMILY_CONFIG/CORE_541_V21_COMPARISON_V2.csv",
+      "registered_sha256": "ed49b04064b40ab531cae56fb339a35926b30fe864b12e0045c92402a07a0cd5",
+      "current_sha256": "ed49b04064b40ab531cae56fb339a35926b30fe864b12e0045c92402a07a0cd5",
+      "state": "MATCH"
+    },
+    {
+      "path": "07C_FAILURE_FAMILY_CONFIG/CORE_541_V21_COMPARISON_V3.csv",
+      "registered_sha256": "e0bcac20f368c49e2be9cf96656a6710d34e5b39850380d8421da95099ce764d",
+      "current_sha256": "e0bcac20f368c49e2be9cf96656a6710d34e5b39850380d8421da95099ce764d",
+      "state": "MATCH"
+    },
+    {
+      "path": "07C_FAILURE_FAMILY_CONFIG/FAILURE_FAMILY_CONFIG.csv",
+      "registered_sha256": "d374c4370952dc54c328bf868548848059d398801851e021fb664b349773cb50",
+      "current_sha256": "d374c4370952dc54c328bf868548848059d398801851e021fb664b349773cb50",
+      "state": "MATCH"
+    },
+    {
+      "path": "07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V2.csv",
+      "registered_sha256": "8ca53668a12a0a0db3d9765277fcbbeb6be91184addf97b784f02c6ccf42c76f",
+      "current_sha256": "8ca53668a12a0a0db3d9765277fcbbeb6be91184addf97b784f02c6ccf42c76f",
+      "state": "MATCH"
+    },
+    {
+      "path": "07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv",
+      "registered_sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+      "current_sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+      "state": "MATCH"
+    },
+    {
+      "path": "07C_FAILURE_FAMILY_CONFIG/MANIFEST.json",
+      "registered_sha256": "a2b83104c14b497eda6af3ef93bf092606bc12e95b4bb0803136f16621fc63c6",
+      "current_sha256": "a2b83104c14b497eda6af3ef93bf092606bc12e95b4bb0803136f16621fc63c6",
+      "state": "MATCH"
+    },
+    {
+      "path": "07C_FAILURE_FAMILY_CONFIG/MANUSCRIPT_FULL_ABLATION_AND_FAILURES.md",
+      "registered_sha256": "d37f091e6ef6d39792af47528237ebd70477192d83b9da453b8e86c10cfd46f6",
+      "current_sha256": "d37f091e6ef6d39792af47528237ebd70477192d83b9da453b8e86c10cfd46f6",
+      "state": "MATCH"
+    },
+    {
+      "path": "07C_FAILURE_FAMILY_CONFIG/SUBSET61_V21_COMPARISON_V2.csv",
+      "registered_sha256": "6bfb6c0fb0b3b62c77e8a694cbaac4b81a503685dc93b55a9cb7fed120ffdadb",
+      "current_sha256": "6bfb6c0fb0b3b62c77e8a694cbaac4b81a503685dc93b55a9cb7fed120ffdadb",
+      "state": "MATCH"
+    },
+    {
+      "path": "07C_FAILURE_FAMILY_CONFIG/SUBSET61_V21_COMPARISON_V3.csv",
+      "registered_sha256": "732583a54c07300f7d1774d950721854072e07b8614b1991e6880d9963e5040a",
+      "current_sha256": "732583a54c07300f7d1774d950721854072e07b8614b1991e6880d9963e5040a",
+      "state": "MATCH"
+    },
+    {
+      "path": "07D_CLASSIFICATION_PROVENANCE/F01_IDENTICAL_NAV_CLASSIFICATION.csv",
+      "registered_sha256": "c309991a31a07afbcdd54a2934f06513e9d557b2de42384bededd66d2219026c",
+      "current_sha256": "c309991a31a07afbcdd54a2934f06513e9d557b2de42384bededd66d2219026c",
+      "state": "MATCH"
+    },
+    {
+      "path": "07D_CLASSIFICATION_PROVENANCE/MANIFEST.json",
+      "registered_sha256": "000a6797920e9b7e1faec876a1badeba24242d9a762bf5e13baa08d5bf38e7ff",
+      "current_sha256": "000a6797920e9b7e1faec876a1badeba24242d9a762bf5e13baa08d5bf38e7ff",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/ABLATION_TABLE_V2.csv",
+      "registered_sha256": "d2ec61913fa3953b2cea189cc553eed8479d3bd8464502b6bae843392800b1d0",
+      "current_sha256": "d2ec61913fa3953b2cea189cc553eed8479d3bd8464502b6bae843392800b1d0",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/ABLATION_TABLE_V3.csv",
+      "registered_sha256": "8c5fed7e2ef022e94e19b095e2e3b7b68dae94a3676e16afc5b6e0cb4bb30a75",
+      "current_sha256": "8c5fed7e2ef022e94e19b095e2e3b7b68dae94a3676e16afc5b6e0cb4bb30a75",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V2.csv",
+      "registered_sha256": "e46266ecd093a4a4effb128935c60829246567f76306f5c19857ad51a7d697dc",
+      "current_sha256": "e46266ecd093a4a4effb128935c60829246567f76306f5c19857ad51a7d697dc",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv",
+      "registered_sha256": "0b0c1306cf063e3943d21be6169d3795d73ff87952cf199c3333b22426f5752f",
+      "current_sha256": "0b0c1306cf063e3943d21be6169d3795d73ff87952cf199c3333b22426f5752f",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/ADDENDUM_SUMMARY_V2.csv",
+      "registered_sha256": "d8e78de4ad19a929e27e29eceb46cea741a4a177b164e68b85aada384ddda70e",
+      "current_sha256": "d8e78de4ad19a929e27e29eceb46cea741a4a177b164e68b85aada384ddda70e",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/ADDENDUM_SUMMARY_V3.csv",
+      "registered_sha256": "ab88f5703eb0d9441915984e69ab7fa45fb587a1592dcf00ff54c3d65efdf890",
+      "current_sha256": "ab88f5703eb0d9441915984e69ab7fa45fb587a1592dcf00ff54c3d65efdf890",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/ADDENDUM_TABLE_V2.csv",
+      "registered_sha256": "13c3a9c790ecab766694d7fca79eaef08f41b9a00c066c376ccb881d12dcb86a",
+      "current_sha256": "13c3a9c790ecab766694d7fca79eaef08f41b9a00c066c376ccb881d12dcb86a",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/ADDENDUM_TABLE_V3.csv",
+      "registered_sha256": "82aaef841c4e62d13ce4c4a2625b063ec3ac02ffc379db835cf1452486c978bb",
+      "current_sha256": "82aaef841c4e62d13ce4c4a2625b063ec3ac02ffc379db835cf1452486c978bb",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/ADDENDUM_V21_COMPARISON_V2.csv",
+      "registered_sha256": "599ba72d06bd8684e62d1f7e471d93896ce9dc62b49cfa9e6168e43deeaa72b5",
+      "current_sha256": "599ba72d06bd8684e62d1f7e471d93896ce9dc62b49cfa9e6168e43deeaa72b5",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/ADDENDUM_V21_COMPARISON_V3.csv",
+      "registered_sha256": "2882956ac280bb4f7df06326e2dd0e6d856e048dbae1272c11f9e820080a7c3d",
+      "current_sha256": "2882956ac280bb4f7df06326e2dd0e6d856e048dbae1272c11f9e820080a7c3d",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/AGGREGATE_MANIFEST.json",
+      "registered_sha256": "11b6779460ef4ade860b034cba88abe5f89fa6bb7eb125ee4b7d7bccb9f0464a",
+      "current_sha256": "11b6779460ef4ade860b034cba88abe5f89fa6bb7eb125ee4b7d7bccb9f0464a",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/BY2O_SEGMENT_TABLE.csv",
+      "registered_sha256": "13a2c4e8de7638fa8672bb49d6556f531061a3924fe7dbf6911adfcf53779876",
+      "current_sha256": "13a2c4e8de7638fa8672bb49d6556f531061a3924fe7dbf6911adfcf53779876",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/CORE_541_DISTRIBUTION_V2.csv",
+      "registered_sha256": "ec76e858f0535792fc1e449208db5b7121b66490ec203c54ea79942fb0709009",
+      "current_sha256": "ec76e858f0535792fc1e449208db5b7121b66490ec203c54ea79942fb0709009",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/CORE_541_DISTRIBUTION_V3.csv",
+      "registered_sha256": "301cec24cb454781138aa39dd3b86a4b37b7855773e6d28e891b7231047d4c39",
+      "current_sha256": "301cec24cb454781138aa39dd3b86a4b37b7855773e6d28e891b7231047d4c39",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/CORE_541_FAMILY_SUMMARY_V2.csv",
+      "registered_sha256": "05de983ccc2fb13d67dbcbbc28dd121040fd98cfd8e6f44d0300299c018452c3",
+      "current_sha256": "05de983ccc2fb13d67dbcbbc28dd121040fd98cfd8e6f44d0300299c018452c3",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/CORE_541_FAMILY_SUMMARY_V3.csv",
+      "registered_sha256": "1f630c70679896c82855769b7580dc2921e9b5cc78add46b3be41f37bd17429d",
+      "current_sha256": "1f630c70679896c82855769b7580dc2921e9b5cc78add46b3be41f37bd17429d",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/CORE_541_SUMMARY_V2.csv",
+      "registered_sha256": "bea055fce46c0869f883cf28667b5ab9a6e23c55c1383e74e0939064091b1fc4",
+      "current_sha256": "bea055fce46c0869f883cf28667b5ab9a6e23c55c1383e74e0939064091b1fc4",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/CORE_541_SUMMARY_V3.csv",
+      "registered_sha256": "1e0181936e4cf40de57bd1e6f0724acdf1644bb7616aaff0121bbd8a54febd35",
+      "current_sha256": "1e0181936e4cf40de57bd1e6f0724acdf1644bb7616aaff0121bbd8a54febd35",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/CORE_541_TABLE_V2.csv",
+      "registered_sha256": "fd3fd890b9b9239d83885b8d01378ab7bb5f79842d94e61f69acde5f1fa0ca81",
+      "current_sha256": "fd3fd890b9b9239d83885b8d01378ab7bb5f79842d94e61f69acde5f1fa0ca81",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/CORE_541_TABLE_V3.csv",
+      "registered_sha256": "dbe3c6cd3de0f04acdb555dcaedfd3fc913d30fefd94ae3bed2dc85acf6fb50d",
+      "current_sha256": "dbe3c6cd3de0f04acdb555dcaedfd3fc913d30fefd94ae3bed2dc85acf6fb50d",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/CORE_541_TYPE_SUMMARY_V2.csv",
+      "registered_sha256": "b0ef6a21ceddfeaa4c90e9d4fad42f2bd86bc03db832a86f0fdb8f60b8fd8fde",
+      "current_sha256": "b0ef6a21ceddfeaa4c90e9d4fad42f2bd86bc03db832a86f0fdb8f60b8fd8fde",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/CORE_541_TYPE_SUMMARY_V3.csv",
+      "registered_sha256": "dda9093a2258a4c41cc26a932fe526a9168a57933fe569e81dc8922eaf0d6266",
+      "current_sha256": "dda9093a2258a4c41cc26a932fe526a9168a57933fe569e81dc8922eaf0d6266",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/CORE_541_V21_COMPARISON_V2.csv",
+      "registered_sha256": "98d338d8c192864cc4905993f0c60787f44219087a8b3ef247b3e6537c74b25a",
+      "current_sha256": "98d338d8c192864cc4905993f0c60787f44219087a8b3ef247b3e6537c74b25a",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/CORE_541_V21_COMPARISON_V3.csv",
+      "registered_sha256": "51b90d5834fe1347aea5467fb7253812a44708287d5871823d71efa0953e2b5c",
+      "current_sha256": "51b90d5834fe1347aea5467fb7253812a44708287d5871823d71efa0953e2b5c",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/ERROR_SERIES_INDEX.csv",
+      "registered_sha256": "affc8caae6231dec61d8c10e76624b4aaf8ec4e9791b17f47bf3691032a89142",
+      "current_sha256": "affc8caae6231dec61d8c10e76624b4aaf8ec4e9791b17f47bf3691032a89142",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/FAILURE_COMPARISON.csv",
+      "registered_sha256": "4d5a19abbc40228a3c98f8dfb7f32ce616f3af5cbd6ac65fec8eea66460b536f",
+      "current_sha256": "4d5a19abbc40228a3c98f8dfb7f32ce616f3af5cbd6ac65fec8eea66460b536f",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/HORIZONTAL_REPLACEMENT_AUDIT.csv",
+      "registered_sha256": "9b20741c137d42e98617808478a264634a849ef64fe7349094b8833ab57e00c9",
+      "current_sha256": "9b20741c137d42e98617808478a264634a849ef64fe7349094b8833ab57e00c9",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/MAIN_TABLE_V2.csv",
+      "registered_sha256": "965b558280119a5e256872f488794f2d1bdb731326d891bc56c475e9a2e9bd3e",
+      "current_sha256": "965b558280119a5e256872f488794f2d1bdb731326d891bc56c475e9a2e9bd3e",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/MAIN_TABLE_V3.csv",
+      "registered_sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+      "current_sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/MANUSCRIPT_REPLACEMENT_TEXT.md",
+      "registered_sha256": "47cacf1bea39848e01732ec87823729c4a73cf0d143d8783b4f203119eafef5b",
+      "current_sha256": "47cacf1bea39848e01732ec87823729c4a73cf0d143d8783b4f203119eafef5b",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/PAIRWISE_CASE_LEVEL_V2.csv",
+      "registered_sha256": "68a29577b441583519a3cd630dcade0c40fb67f58065cd23238feb9889ac1324",
+      "current_sha256": "68a29577b441583519a3cd630dcade0c40fb67f58065cd23238feb9889ac1324",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/PAIRWISE_CASE_LEVEL_V3.csv",
+      "registered_sha256": "9131dc0f3905f5339cc105919354349031a78657a02ddfb63fe4c193861abcff",
+      "current_sha256": "9131dc0f3905f5339cc105919354349031a78657a02ddfb63fe4c193861abcff",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/PAIRWISE_SUMMARY_V2.csv",
+      "registered_sha256": "3b681c1f34fd813841bce4ac42465cd1c753d73da967e66761f57bbfc0c7a70d",
+      "current_sha256": "3b681c1f34fd813841bce4ac42465cd1c753d73da967e66761f57bbfc0c7a70d",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/PAIRWISE_SUMMARY_V3.csv",
+      "registered_sha256": "0587815641ff0b9fe94506e51f47672ad6a94cbc0411e2d9dc852c233f86b89a",
+      "current_sha256": "0587815641ff0b9fe94506e51f47672ad6a94cbc0411e2d9dc852c233f86b89a",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/REPORT_SOURCE_INDEX.json",
+      "registered_sha256": "43dbdade50172e191b394dfc5b64815ddc0c6c5b7f73cbda41762d32acbc4704",
+      "current_sha256": "43dbdade50172e191b394dfc5b64815ddc0c6c5b7f73cbda41762d32acbc4704",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/SEQUENCE_FAMILY_SUMMARY_V2.csv",
+      "registered_sha256": "f8d0bd8b04a1a0f69abe38bd74ecbcd86379804ce1d24f02a454a276ab1cf096",
+      "current_sha256": "f8d0bd8b04a1a0f69abe38bd74ecbcd86379804ce1d24f02a454a276ab1cf096",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/SEQUENCE_FAMILY_SUMMARY_V3.csv",
+      "registered_sha256": "065356028ce32c5a6bba73adc7b1b913f6b16566c73adaf305fee5cca0362288",
+      "current_sha256": "065356028ce32c5a6bba73adc7b1b913f6b16566c73adaf305fee5cca0362288",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/SEQUENCE_SUMMARY_V2.csv",
+      "registered_sha256": "b14ae9b08df15434bbeb8dccb71ea4f11e9fe35e53f3b0ea49c960e8a0bf6841",
+      "current_sha256": "b14ae9b08df15434bbeb8dccb71ea4f11e9fe35e53f3b0ea49c960e8a0bf6841",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/SEQUENCE_SUMMARY_V3.csv",
+      "registered_sha256": "9d33e393c69e25490f761b5c5e2510f289f9989c3e2cc2010547176105fab2ee",
+      "current_sha256": "9d33e393c69e25490f761b5c5e2510f289f9989c3e2cc2010547176105fab2ee",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/SEQUENCE_TABLE_V2.csv",
+      "registered_sha256": "8ca53668a12a0a0db3d9765277fcbbeb6be91184addf97b784f02c6ccf42c76f",
+      "current_sha256": "8ca53668a12a0a0db3d9765277fcbbeb6be91184addf97b784f02c6ccf42c76f",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/SEQUENCE_TABLE_V3.csv",
+      "registered_sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+      "current_sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/SEQUENCE_V21_COMPARISON_V2.csv",
+      "registered_sha256": "1048772e2ca1f75d029dedb6ff210c2b3e34387962eb49dcba10cfed4aeefa30",
+      "current_sha256": "1048772e2ca1f75d029dedb6ff210c2b3e34387962eb49dcba10cfed4aeefa30",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/SEQUENCE_V21_COMPARISON_V3.csv",
+      "registered_sha256": "57778389cd9d107c77c1fbcd5438eaa378c98bef6f364cd97daf735dfb42db40",
+      "current_sha256": "57778389cd9d107c77c1fbcd5438eaa378c98bef6f364cd97daf735dfb42db40",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/SUBSET61_SUMMARY_V2.csv",
+      "registered_sha256": "be54762dacc8ff345eff43d140d84b18b63683b62d28cafce545b0f91a00fb24",
+      "current_sha256": "be54762dacc8ff345eff43d140d84b18b63683b62d28cafce545b0f91a00fb24",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/SUBSET61_SUMMARY_V3.csv",
+      "registered_sha256": "8c4f55d32ebe2f9c124db70fef3eccfffd5467251f6adfa5809480b0798f20e6",
+      "current_sha256": "8c4f55d32ebe2f9c124db70fef3eccfffd5467251f6adfa5809480b0798f20e6",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/SUBSET61_TABLE_V2.csv",
+      "registered_sha256": "391737b611ad79d8c0fe1e6cb5f412dbe8ada9be84b8df6d3e18bb15c241ab06",
+      "current_sha256": "391737b611ad79d8c0fe1e6cb5f412dbe8ada9be84b8df6d3e18bb15c241ab06",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/SUBSET61_TABLE_V3.csv",
+      "registered_sha256": "f88d4a82e81fc881cba46db9ab1b511164dbcc2508842259a54a37947c4d0519",
+      "current_sha256": "f88d4a82e81fc881cba46db9ab1b511164dbcc2508842259a54a37947c4d0519",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/SUBSET61_V21_COMPARISON_V2.csv",
+      "registered_sha256": "b87087c543a42260353d517284c6a680b47ab910ca4f8bf4ef2111042d0f018c",
+      "current_sha256": "b87087c543a42260353d517284c6a680b47ab910ca4f8bf4ef2111042d0f018c",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/SUBSET61_V21_COMPARISON_V3.csv",
+      "registered_sha256": "f4a05c889f374b37d9452c37531b6e93351d6e9d30f1f71ebe70348ffaccf2b9",
+      "current_sha256": "f4a05c889f374b37d9452c37531b6e93351d6e9d30f1f71ebe70348ffaccf2b9",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/T5BCR_REFERENCE_SUBSET61_TAIL_SUMMARY.csv",
+      "registered_sha256": "a4aa65e0552ec4480e92da344ef5bdf410c01232204aa452738eb4149d02d35e",
+      "current_sha256": "a4aa65e0552ec4480e92da344ef5bdf410c01232204aa452738eb4149d02d35e",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/T5BCR_REFERENCE_SUBSET61_V2.csv",
+      "registered_sha256": "bf8c68c1f3b25c957d1d8c378817cd36073185f7c09e33fe6bc2e69ae5050d54",
+      "current_sha256": "bf8c68c1f3b25c957d1d8c378817cd36073185f7c09e33fe6bc2e69ae5050d54",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/T5BCR_REFERENCE_SUBSET61_V3.csv",
+      "registered_sha256": "92f0d5c874591ff48c978436e7a4a5fd1f3c21a53670ae5a0592cd4d25cf9ef5",
+      "current_sha256": "92f0d5c874591ff48c978436e7a4a5fd1f3c21a53670ae5a0592cd4d25cf9ef5",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/T5BCR_REFERENCE_THREE_SEQUENCES_V2.csv",
+      "registered_sha256": "9c59de133c20918f7412f1540168f11c569f2c52e49bd9e00a4eb5eb7c394282",
+      "current_sha256": "9c59de133c20918f7412f1540168f11c569f2c52e49bd9e00a4eb5eb7c394282",
+      "state": "MATCH"
+    },
+    {
+      "path": "07_AGGREGATE/T5BCR_REFERENCE_THREE_SEQUENCES_V3.csv",
+      "registered_sha256": "eedb79e24acdc9da064118e84be0960d1c755daf83d9e9acb0e16f34bf5f677e",
+      "current_sha256": "eedb79e24acdc9da064118e84be0960d1c755daf83d9e9acb0e16f34bf5f677e",
+      "state": "MATCH"
+    }
+  ],
+  "solver_calls": 0,
+  "evaluator_calls": 0,
+  "reference_trajectory_opens": 0
+}

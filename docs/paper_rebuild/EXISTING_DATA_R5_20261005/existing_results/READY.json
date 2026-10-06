@@ -1,0 +1,39 @@
+{
+  "block": "R5_EXISTING_RESULTS_COMPLETE_ENTRY",
+  "all_checks_passed": true,
+  "subblock_ready": [
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/READY_V08.json",
+      "sha256": "faa2132cc7c70d73efe41f37f4b5a04fac3473d933a91fad762581b8a1ab3c0a"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/READY_V07.json",
+      "sha256": "f390758c7d5543fd8f8ac7afc12c379df88fc3c134c18fb9a6258885c702e7af"
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/README.md",
+      "bytes": 1794,
+      "sha256": "f6f7d5db4084f697b642d75d30be02a9ab9f0e9e4fa223eedd0c0d97c9e003e8"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/READ_SCOPE.csv",
+      "bytes": 60227,
+      "sha256": "1a89015d7c446b5acd2018b1159ea261e571a214cc27dd02c24d48f7cc58a8d9"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/GAP22_SAVED_EVALUATION_BINDINGS.json",
+      "bytes": 16045,
+      "sha256": "4b233aaf4ec62292ed1d35a673ccfaa759c95932de00595e80c3b9915080ed95"
+    }
+  ],
+  "new_estimator_calls": 0,
+  "new_evaluator_calls": 0,
+  "new_provider_calls": 0,
+  "raw_or_reference_opens": 0,
+  "original_v3_writes": 0,
+  "same_evaluator_reference_identity_all22": true,
+  "git_actions": 0,
+  "all_subblock_output_file_hashes_reverified": true
+}

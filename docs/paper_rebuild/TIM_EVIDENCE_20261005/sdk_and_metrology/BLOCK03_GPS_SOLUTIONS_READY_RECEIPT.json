@@ -1,0 +1,25 @@
+{
+  "status": "READY_DOCUMENTATION_ONLY",
+  "date": "2026-10-05",
+  "submission_ready": false,
+  "original_v3_unchanged": true,
+  "no_scientific_run": true,
+  "no_raw_reference_read": true,
+  "no_new_plot": true,
+  "no_editor_contact": true,
+  "scope": "GPS Solutions scope/requirements and factual GPS-vs-TIM positioning; no new AR implementation",
+  "files": [
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/sdk_and_metrology/GPS_SOLUTIONS_POSITIONING_AND_REQUIREMENTS_20261005.md",
+      "bytes": 9946,
+      "lines": 74,
+      "sha256": "09cc8e00e9a1c8401555ed68906a1c26f512b0990287b2632b87d4203d3a41bc"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/sdk_and_metrology/GPS_SOLUTIONS_OFFICIAL_SOURCE_MAP_20261005.csv",
+      "bytes": 1071,
+      "lines": 5,
+      "sha256": "ae57f1a6f7b030a6ffbd795409849b1afd95762fbf57f26593845b943acff509"
+    }
+  ]
+}

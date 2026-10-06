@@ -1,0 +1,1053 @@
+{
+  "schema": "N09_A1_DERIVED_CACHE_DETAILS_1",
+  "candidate_id": "N09_RP_ONLY",
+  "run_id": "ADD_RUN_00103",
+  "method": "F04",
+  "data_mode": "semisynthetic",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "derivation": "Lossless selections from completed cache comparison SUMMARY and RP_ONLY_EVENTS; counts by fixed GNSS-event-time windows. No original stream reopened.",
+  "new_native_calls": 0,
+  "evaluator_calls": 0,
+  "provider_reads": 0,
+  "raw_event_payload_opens_this_derivation": 0,
+  "source_summary": "<VALIDATION_ROOT>/analysis/comparisons/N09_RP_ONLY__ADD_RUN_00103/SUMMARY.json",
+  "source_summary_sha256": "9676fb282669ab27371b7333d54ac1e55384e4385c9565703b94ce56a1938272",
+  "source_RP_events": "<VALIDATION_ROOT>/analysis/event_cache/N09_RP_ONLY__ADD_RUN_00103/RP_ONLY_EVENTS.csv",
+  "original_summary_join_limit": "original_RP_opportunities reports 80 due to integer/float text keys. A1_JOIN_VALIDATION.csv supersedes those join counts only; original SUMMARY preserved.",
+  "windows": {
+    "before": "[66,196.2)",
+    "fault": "[196.2,216.2)",
+    "after": "[216.2,340]"
+  },
+  "scan_receipts": {
+    "baseline": {
+      "source_receipt": "<VALIDATION_ROOT>/analysis/event_cache/BASELINE__ADD_RUN_00103/SCAN_RECEIPT.json",
+      "source_path": "<MECHANISM_ROOT>/replays/ADD_RUN_00103/observed/observer/events.jsonl",
+      "source_sha256": "01d0a5801fc96cdd4f8d0fa5336e5495b66b89123f8662b0e80915cbeb567938",
+      "analyzer_sha256": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f",
+      "events_read": 403486,
+      "bytes_read": 841547644,
+      "complete_payload_scan_count": 1,
+      "event_payload_opens_this_call": 1,
+      "physical_eof_reached": true,
+      "cache_reused": false,
+      "stream_status": "COMPLETE",
+      "analysis_status": "VALIDATED",
+      "sa_validation_counts": {
+        "VALIDATED": 7328
+      }
+    },
+    "candidate": {
+      "source_receipt": "<VALIDATION_ROOT>/analysis/event_cache/N09_RP_ONLY__ADD_RUN_00103/SCAN_RECEIPT.json",
+      "source_path": "<VALIDATION_ROOT>/candidates/N09_RP_ONLY/ADD_RUN_00103/observer/events.jsonl",
+      "source_sha256": "672bf77f8e94f58a889bb1736e99f0ec3401389d23c50eb6bdeee440dd2e9f3d",
+      "analyzer_sha256": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f",
+      "events_read": 464528,
+      "bytes_read": 939006643,
+      "complete_payload_scan_count": 1,
+      "event_payload_opens_this_call": 1,
+      "physical_eof_reached": true,
+      "cache_reused": false,
+      "stream_status": "COMPLETE",
+      "analysis_status": "VALIDATED",
+      "sa_validation_counts": {
+        "VALIDATED": 7428
+      }
+    }
+  },
+  "full_measurement_counts": {
+    "PAIRED": 7614,
+    "ADDED_CANDIDATE_MEASUREMENT": 100
+  },
+  "full_common_IMU_counts": {
+    "EXACTLY_EQUAL": 27387,
+    "DIFFERENT_OR_UNRESOLVED": 29255
+  },
+  "actual_final_native_counters": {
+    "candidate": {
+      "gnss_update_count": 1269,
+      "position_update_count": 1269,
+      "velocity_update_count": 1269,
+      "yaw_attempt_count": 1269,
+      "yaw_reject_count": 21,
+      "sa_active_evaluation_count": 7428,
+      "raw_doppler_update_count": 1008,
+      "rp_update_count": 1369,
+      "hv_update_count": 1265
+    },
+    "baseline": {
+      "gnss_update_count": 1269,
+      "position_update_count": 1269,
+      "velocity_update_count": 1269,
+      "yaw_attempt_count": 1269,
+      "yaw_reject_count": 21,
+      "sa_active_evaluation_count": 7328,
+      "raw_doppler_update_count": 1008,
+      "rp_update_count": 1269,
+      "hv_update_count": 1265
+    }
+  },
+  "independent_RP_ONLY_final_counters": {
+    "accepted_count": 100,
+    "attempt_count": 100,
+    "consumed_records": 1369,
+    "eligible_count": 100,
+    "feedback_count": 100,
+    "input_records": 1370,
+    "invalid_records": 100,
+    "opportunity_count": 100,
+    "rejected_count": 0,
+    "rp_only_consumed_count": 100,
+    "skipped_count": 0,
+    "superseded_records": 0
+  },
+  "last_RP_ONLY_record": {
+    "pointer": {
+      "byte_length": 2920,
+      "byte_offset": 938581228,
+      "event": "RP_ONLY_INPUT",
+      "event_seq": 464254,
+      "run_id": "N09_RP_ONLY__ADD_RUN_00103",
+      "source_line": 464254,
+      "source_path": "<VALIDATION_ROOT>/candidates/N09_RP_ONLY/ADD_RUN_00103/observer/events.jsonl"
+    },
+    "input_id": 1370,
+    "gnss_event_time": 340,
+    "pending": true
+  },
+  "fault_branch_res_counts": {
+    "1": 0,
+    "2": 40,
+    "3": 60
+  },
+  "fault_consumption": {
+    "unique_ids": 100,
+    "minimum_input_id": 651,
+    "maximum_input_id": 750,
+    "consumption_multiplicity_counts": {
+      "1": 100
+    }
+  },
+  "full_consumption": {
+    "unique_ids": 1369,
+    "minimum_input_id": 1,
+    "maximum_input_id": 1369,
+    "consumption_multiplicity_counts": {
+      "1": 1369
+    }
+  },
+  "first_RP_ONLY_attempt": {
+    "context": {
+      "ekf_seq": 3797,
+      "gnss_input_seq": 651,
+      "gnss_time": 196.200000048,
+      "gnss_update_count": 650,
+      "hv_update_count": 650,
+      "imu_current_time": 196.201064,
+      "imu_previous_time": 196.195062,
+      "imu_seq": 27388,
+      "measurement_attempt_seq": 3900,
+      "measurement_time": 196.200000048,
+      "position_update_count": 650,
+      "raw_doppler_update_count": 547,
+      "res": 3,
+      "row_id": -1,
+      "rp_update_count": 650,
+      "sa_active_evaluation_count": 3797,
+      "sa_seq": 0,
+      "source": "GNSS_INPUT",
+      "state_time": 196.200000048,
+      "velocity_update_count": 650,
+      "yaw_attempt_count": 650,
+      "yaw_reject_count": 0
+    },
+    "pointer": {
+      "byte_length": 2953,
+      "byte_offset": 460484948,
+      "event": "RP_ONLY_ATTEMPT",
+      "event_seq": 225836,
+      "run_id": "N09_RP_ONLY__ADD_RUN_00103",
+      "source_line": 225836,
+      "source_path": "<VALIDATION_ROOT>/candidates/N09_RP_ONLY/ADD_RUN_00103/observer/events.jsonl"
+    },
+    "snapshot": {
+      "candidate": "N09_RP_ONLY",
+      "candidate_abs_dt": 0.0010638233840154498,
+      "candidate_present": true,
+      "candidate_row_id": 31924,
+      "candidate_time": 196.201063871384,
+      "counters": {
+        "accepted_count": 0,
+        "attempt_count": 1,
+        "consumed_records": 650,
+        "eligible_count": 1,
+        "feedback_count": 0,
+        "input_records": 651,
+        "invalid_records": 1,
+        "opportunity_count": 1,
+        "rejected_count": 0,
+        "rp_only_consumed_count": 0,
+        "skipped_count": 0,
+        "superseded_records": 0
+      },
+      "definition": "explicit_invalid_gnss_opportunity_original_rp_v1",
+      "dx": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "explicit_all_invalid": true,
+      "gnss": {
+        "baseline_vector": "UNKNOWN_NOT_IN_GNSS_STRUCT",
+        "flags_or": false,
+        "has_position": false,
+        "has_velocity": false,
+        "has_yaw": false,
+        "isvalid": false,
+        "position_blh_rad_m": [
+          0.6978620532431075,
+          2.03054795009042,
+          41.756698536
+        ],
+        "std_ned_m": [
+          0.014,
+          0.014,
+          0.011
+        ],
+        "time": 196.200000048,
+        "validity_explicit": true,
+        "vel_std_mps": [
+          0.05,
+          0.05,
+          0.05
+        ],
+        "velocity_ned_mps": [
+          -0.505,
+          0.916,
+          0.001
+        ],
+        "yaw_deg": 120.623271,
+        "yaw_rad": 2.105273233475393,
+        "yaw_std_deg": 2.933193,
+        "yaw_std_rad": 0.051193875446450036
+      },
+      "gnss_event_time": 196.200000048,
+      "input_id": 651,
+      "loaded_rp_rows": 63278,
+      "pending": true,
+      "preinnovation_qualified": true,
+      "qualification_reason": "PREINNOVATION_QUALIFIED",
+      "reason": "ORIGINAL_RP_HELPER",
+      "rp_config_enabled": true,
+      "rp_only_res": 3,
+      "rp_solver_enabled": true,
+      "state": {
+        "Cbn": [
+          [
+            -0.4810883210457517,
+            -0.873439252789178,
+            0.07521900717546595
+          ],
+          [
+            0.8758947510998915,
+            -0.48250169436501,
+            -0.0007070576739884732
+          ],
+          [
+            0.03691087033706348,
+            0.06554377637867405,
+            0.9971667869664447
+          ]
+        ],
+        "acc_bias": [
+          0.12172262573383257,
+          0.03861426283475959,
+          0.10289843537466305
+        ],
+        "acc_scale": [
+          0,
+          0,
+          0
+        ],
+        "antlever_m": [
+          0.03,
+          0.03,
+          -0.3
+        ],
+        "gyr_bias": [
+          -0.000560817640892105,
+          0.00018503512455085035,
+          0.00011686796579950072
+        ],
+        "gyr_scale": [
+          0,
+          0,
+          0
+        ],
+        "position_blh_rad_m": [
+          0.6978620568406491,
+          2.030547949940521,
+          41.45718568819539
+        ],
+        "qbn_wxyz": [
+          -0.5083248891102234,
+          -0.0325829186569187,
+          -0.018840380266180443,
+          -0.8603424902876189
+        ],
+        "rpy_rad": [
+          0.06563558741177182,
+          -0.036919256783951186,
+          2.0730662840511163
+        ],
+        "time": 196.200000048,
+        "velocity_ned_mps": [
+          -0.7678571285615469,
+          0.8957335531461221,
+          -0.062402900519894396
+        ]
+      },
+      "time_tolerance_sec": 0.02
+    }
+  },
+  "first_added_measurement": {
+    "source_summary_pointer": "#/first_differences/FIRST_ADDED_ACCEPTED_UPDATE",
+    "baseline": null,
+    "candidate": {
+      "attempt": 3901,
+      "gnss_input_seq": 651,
+      "imu_seq": 27388,
+      "measurement_time": 196.200000048,
+      "source": "go2_attitude_roll_pitch",
+      "attempt_pointer": {
+        "byte_length": 1549,
+        "byte_offset": 460487901,
+        "event": "MEASUREMENT_ATTEMPT",
+        "event_seq": 225837,
+        "run_id": "N09_RP_ONLY__ADD_RUN_00103",
+        "source_line": 225837,
+        "source_path": "<VALIDATION_ROOT>/candidates/N09_RP_ONLY/ADD_RUN_00103/observer/events.jsonl"
+      },
+      "selected_input": {
+        "actual_match_abs_dt": 0.0010638233840154498,
+        "body_height": 0,
+        "foot_force_sum": 0,
+        "gait_type": 1,
+        "mode": 3,
+        "pitch_rad": -0.006962357088923454,
+        "quality_flag": "clean_raw_go2_weak_auxiliary",
+        "roll_rad": 0.009115084074437618,
+        "source_status": "active",
+        "std_pitch_rad": 0.027925268031909273,
+        "std_roll_rad": 0.027925268031909273,
+        "time": 196.201063871384,
+        "update_flag": "NOT_PRESENT",
+        "valid": "NOT_PRESENT"
+      },
+      "selected_pointer": {
+        "byte_length": 1097,
+        "byte_offset": 460489450,
+        "event": "MEASUREMENT_SELECTED",
+        "event_seq": 225838,
+        "run_id": "N09_RP_ONLY__ADD_RUN_00103",
+        "source_line": 225838,
+        "source_path": "<VALIDATION_ROOT>/candidates/N09_RP_ONLY/ADD_RUN_00103/observer/events.jsonl"
+      },
+      "selected_row_id": 31924,
+      "decision": {
+        "accepted": true,
+        "reason": "ACCEPTED"
+      },
+      "decision_pointer": {
+        "byte_length": 746,
+        "byte_offset": 460524357,
+        "event": "MEASUREMENT_DECISION",
+        "event_seq": 225843,
+        "run_id": "N09_RP_ONLY__ADD_RUN_00103",
+        "source_line": 225843,
+        "source_path": "<VALIDATION_ROOT>/candidates/N09_RP_ONLY/ADD_RUN_00103/observer/events.jsonl"
+      },
+      "sa_pointer": {
+        "byte_length": 10158,
+        "byte_offset": 460497432,
+        "event": "SA_EVALUATION",
+        "event_seq": 225840,
+        "run_id": "N09_RP_ONLY__ADD_RUN_00103",
+        "source_line": 225840,
+        "source_path": "<VALIDATION_ROOT>/candidates/N09_RP_ONLY/ADD_RUN_00103/observer/events.jsonl"
+      },
+      "sa_effective_R_equals_actual_EKF_R": true
+    },
+    "ekf": {
+      "R": {
+        "cols": 2,
+        "data": [
+          0.001169730891980961,
+          0,
+          0,
+          0.001169730891980961
+        ],
+        "layout": "row_major",
+        "rows": 2
+      },
+      "actual_Hdx": [
+        0,
+        0
+      ],
+      "actual_delta": [
+        -3.549490323028239e-05,
+        -2.4587242623267634e-05,
+        -3.293123874849999e-06,
+        -0.0006365298739208964,
+        -0.00015920562698238665,
+        4.981770801200661e-05,
+        4.640051500220575e-06,
+        -0.0002258273848395361,
+        3.1495821114312667e-06,
+        -7.128768542607882e-07,
+        -1.1912475445342737e-06,
+        -7.543386993241158e-09,
+        -0.0005182811116268224,
+        4.308047927002224e-05,
+        3.6463422801864144e-07,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "actual_innovation": [
+        0.0565205033373342,
+        -0.029956899695027732
+      ],
+      "before_pointer": {
+        "byte_length": 7713,
+        "byte_offset": 460507590,
+        "event": "EKF_BEFORE",
+        "event_seq": 225841,
+        "run_id": "N09_RP_ONLY__ADD_RUN_00103",
+        "source_line": 225841,
+        "source_path": "<VALIDATION_ROOT>/candidates/N09_RP_ONLY/ADD_RUN_00103/observer/events.jsonl"
+      },
+      "after_pointer": {
+        "byte_length": 9054,
+        "byte_offset": 460515303,
+        "event": "EKF_AFTER",
+        "event_seq": 225842,
+        "run_id": "N09_RP_ONLY__ADD_RUN_00103",
+        "source_line": 225842,
+        "source_path": "<VALIDATION_ROOT>/candidates/N09_RP_ONLY/ADD_RUN_00103/observer/events.jsonl"
+      },
+      "checks": {
+        "actual_Hdx": true,
+        "actual_nu": true
+      },
+      "dx_after": [
+        -3.549490323028239e-05,
+        -2.4587242623267634e-05,
+        -3.293123874849999e-06,
+        -0.0006365298739208964,
+        -0.00015920562698238665,
+        4.981770801200661e-05,
+        4.640051500220575e-06,
+        -0.0002258273848395361,
+        3.1495821114312667e-06,
+        -7.128768542607882e-07,
+        -1.1912475445342737e-06,
+        -7.543386993241158e-09,
+        -0.0005182811116268224,
+        4.308047927002224e-05,
+        3.6463422801864144e-07,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "dx_before": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "dz": [
+        0.0565205033373342,
+        -0.029956899695027732
+      ],
+      "post_R_actual_nis": 3.485867362545915
+    },
+    "sa": {
+      "source_enabled": true,
+      "recorded_result": {
+        "accepted": true,
+        "base_R_trace": 0.001559641189307948,
+        "combined_R_scale": 1.5,
+        "dof": 2,
+        "innovation_cov_trace": 0.0015680146564181776,
+        "lsim_R_scale": 1.5,
+        "lsim_score": 0.6666666666666666,
+        "metadata_summary": "valid=true;std=(0.0279253/0.0279253/0.0279253);yaw_std_rad=0.0279253;sat_count=0;provider_status=available;quality_flag=clean_raw_go2_weak_auxiliary;time_diff_sec=0.00106382;covariance_available=true;go2_readiness_metadata_available=false;go2_motion_state=UNKNOWN;go2_contact_label=;go2_readiness_score=1;go2_readiness_flag=true",
+        "mode": "lsim_oim",
+        "nis": 5.219581024867464,
+        "normalized_innovation": 1.6154846060652301,
+        "oim_R_scale": 1.0002667338847608,
+        "oim_alpha": 0.02,
+        "oim_alpha_available": true,
+        "oim_multiplier": 1,
+        "oim_raw_scale": 1.0002667338847608,
+        "oim_score": 0.9997333372432322,
+        "policy_version": "clean_v1_conservative_innovation_covariance",
+        "reason_codes": [
+          "lsim_quality_flag_suspicious",
+          "oim_mild_normalized_innovation"
+        ],
+        "rejected": false,
+        "relative_anomaly_score": 0.16470731949796846,
+        "residual_norm": 0.06396861055895743,
+        "rolling_mad": 0.5,
+        "rolling_median": 1.533130946316246,
+        "scaled_R_trace": 0.002339461783961922,
+        "source_cap": 10,
+        "used_innovation_covariance": true
+      },
+      "base_R": {
+        "cols": 2,
+        "data": [
+          0.000779820594653974,
+          0,
+          0,
+          0.000779820594653974
+        ],
+        "layout": "row_major",
+        "rows": 2
+      },
+      "sa_effective_R": {
+        "cols": 2,
+        "data": [
+          0.001169730891980961,
+          0,
+          0,
+          0.001169730891980961
+        ],
+        "layout": "row_major",
+        "rows": 2
+      },
+      "validation_status": "VALIDATED"
+    },
+    "actual_delta_block_units": [
+      "local_position_error_m",
+      "velocity_error_m_per_s",
+      "attitude_error_rad",
+      "gyro_bias_rad_per_s",
+      "acc_bias_m_per_s2",
+      "gyro_scale_dimensionless",
+      "acc_scale_dimensionless"
+    ]
+  },
+  "first_common_IMU_end": {
+    "candidate": {
+      "counters": {
+        "gnss_update_count": 650,
+        "hv_update_count": 650,
+        "position_update_count": 650,
+        "raw_doppler_update_count": 547,
+        "rp_update_count": 651,
+        "sa_active_evaluation_count": 3798,
+        "velocity_update_count": 650,
+        "yaw_attempt_count": 650,
+        "yaw_reject_count": 0
+      },
+      "end_boundary": "COVARIANCE_HEALTH",
+      "feedback_count": 1,
+      "health_pointer": {
+        "byte_length": 1392,
+        "byte_offset": 460544722,
+        "event": "COVARIANCE_HEALTH",
+        "event_seq": 225853,
+        "run_id": "N09_RP_ONLY__ADD_RUN_00103",
+        "source_line": 225853,
+        "source_path": "<VALIDATION_ROOT>/candidates/N09_RP_ONLY/ADD_RUN_00103/observer/events.jsonl"
+      },
+      "imu_seq": 27388,
+      "initialized": true,
+      "opportunity_pointer": {
+        "byte_length": 1956,
+        "byte_offset": 460470859,
+        "event": "IMU_OPPORTUNITY",
+        "event_seq": 225828,
+        "run_id": "N09_RP_ONLY__ADD_RUN_00103",
+        "source_line": 225828,
+        "source_path": "<VALIDATION_ROOT>/candidates/N09_RP_ONLY/ADD_RUN_00103/observer/events.jsonl"
+      },
+      "propagation_count": 2,
+      "res": 0,
+      "split_count": 1,
+      "state": {
+        "Cbn": [
+          [
+            -0.48036219285744064,
+            -0.8738570012608836,
+            0.07500736644175066
+          ],
+          [
+            0.8762925244909457,
+            -0.4817785745596159,
+            -0.0009036684071340451
+          ],
+          [
+            0.03692661905016976,
+            0.06529430635699222,
+            0.9971825702261762
+          ]
+        ],
+        "acc_bias": [
+          0.12120434462220574,
+          0.03865734331402961,
+          0.10289880000889107
+        ],
+        "acc_scale": [
+          0,
+          0,
+          0
+        ],
+        "antlever_m": [
+          0.03,
+          0.03,
+          -0.3
+        ],
+        "gyr_bias": [
+          -0.0005615305177463658,
+          0.0001838438770063161,
+          0.00011686042241250748
+        ],
+        "gyr_scale": [
+          0,
+          0,
+          0
+        ],
+        "position_blh_rad_m": [
+          0.6978620567179191,
+          2.0305479501402055,
+          41.4572502225682
+        ],
+        "qbn_wxyz": [
+          -0.5086850211105886,
+          -0.03253387264067619,
+          -0.01871528834702119,
+          -0.8601341955827638
+        ],
+        "rpy_rad": [
+          0.06538544875732746,
+          -0.03693501624074001,
+          2.072237778707211
+        ],
+        "time": 196.201064,
+        "velocity_ned_mps": [
+          -0.7672155647676445,
+          0.8948637818808363,
+          -0.06504832822308135
+        ]
+      },
+      "state_pointer": {
+        "byte_length": 2030,
+        "byte_offset": 460539724,
+        "event": "PROPAGATION_AFTER",
+        "event_seq": 225851,
+        "run_id": "N09_RP_ONLY__ADD_RUN_00103",
+        "source_line": 225851,
+        "source_path": "<VALIDATION_ROOT>/candidates/N09_RP_ONLY/ADD_RUN_00103/observer/events.jsonl"
+      },
+      "time": 196.201064
+    },
+    "baseline": {
+      "counters": {
+        "gnss_update_count": 650,
+        "hv_update_count": 650,
+        "position_update_count": 650,
+        "raw_doppler_update_count": 547,
+        "rp_update_count": 650,
+        "sa_active_evaluation_count": 3797,
+        "velocity_update_count": 650,
+        "yaw_attempt_count": 650,
+        "yaw_reject_count": 0
+      },
+      "end_boundary": "NEXT_IMU_INPUT_OR_OPPORTUNITY_OR_EOF",
+      "feedback_count": 0,
+      "imu_seq": 27388,
+      "initialized": true,
+      "opportunity_pointer": {
+        "byte_length": 1943,
+        "byte_offset": 416315854,
+        "event": "IMU_OPPORTUNITY",
+        "event_seq": 197139,
+        "run_id": "ADD_RUN_00103",
+        "source_line": 197139,
+        "source_path": "<MECHANISM_ROOT>/replays/ADD_RUN_00103/observed/observer/events.jsonl"
+      },
+      "propagation_count": 1,
+      "res": 0,
+      "split_count": 0,
+      "state": {
+        "Cbn": [
+          [
+            -0.4803510788196357,
+            -0.8738437506249337,
+            0.07523257652481014
+          ],
+          [
+            0.8762942109571152,
+            -0.481775515332288,
+            -0.0008992604493963594
+          ],
+          [
+            0.037031026448905345,
+            0.0654939105570719,
+            0.9971656084924323
+          ]
+        ],
+        "acc_bias": [
+          0.12172262573383257,
+          0.03861426283475959,
+          0.10289843537466305
+        ],
+        "acc_scale": [
+          0,
+          0,
+          0
+        ],
+        "antlever_m": [
+          0.03,
+          0.03,
+          -0.3
+        ],
+        "gyr_bias": [
+          -0.000560817640892105,
+          0.00018503512455085035,
+          0.00011686796579950072
+        ],
+        "gyr_scale": [
+          0,
+          0,
+          0
+        ],
+        "position_blh_rad_m": [
+          0.6978620567122319,
+          2.0305479501351495,
+          41.45725346362061
+        ],
+        "qbn_wxyz": [
+          -0.5086843358951869,
+          -0.032629848376217935,
+          -0.018774683718478073,
+          -0.8601296708410244
+        ],
+        "rpy_rad": [
+          0.06558587215875758,
+          -0.037039495097896155,
+          2.072227214999183
+        ],
+        "time": 196.201064,
+        "velocity_ned_mps": [
+          -0.7678548387836382,
+          0.8947047040780151,
+          -0.06499850536420851
+        ]
+      },
+      "state_pointer": {
+        "byte_length": 1993,
+        "byte_offset": 416322516,
+        "event": "PROPAGATION_AFTER",
+        "event_seq": 197143,
+        "run_id": "ADD_RUN_00103",
+        "source_line": 197143,
+        "source_path": "<MECHANISM_ROOT>/replays/ADD_RUN_00103/observed/observer/events.jsonl"
+      },
+      "time": 196.201064
+    },
+    "state_delta": {
+      "position_blh_rad_m": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 3.241052411340206e-06,
+        "delta": [
+          5.687228465944827e-12,
+          5.055955654142963e-12,
+          -3.241052411340206e-06
+        ],
+        "unit": "rad,rad,m"
+      },
+      "velocity_ned_mps": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 0.0006392740159937293,
+        "delta": [
+          0.0006392740159937293,
+          0.00015907780282120587,
+          -4.982285887283888e-05
+        ],
+        "unit": "m/s"
+      },
+      "rpy_rad": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 0.0002004234014301165,
+        "delta": [
+          -0.0002004234014301165,
+          0.0001044788571561428,
+          1.0563708027877539e-05
+        ],
+        "unit": "rad"
+      },
+      "Cbn": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 0.00022521008305947943,
+        "delta": [
+          [
+            -1.111403780496012e-05,
+            -1.3250635949924039e-05,
+            -0.00022521008305947943
+          ],
+          [
+            -1.6864661694926397e-06,
+            -3.0592273279062e-06,
+            -4.407957737685708e-06
+          ],
+          [
+            -0.00010440739873558702,
+            -0.00019960420007968105,
+            1.696173374388099e-05
+          ]
+        ],
+        "unit": "dimensionless"
+      },
+      "qbn_wxyz": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 9.597573554174371e-05,
+        "delta": [
+          -6.852154016412371e-07,
+          9.597573554174371e-05,
+          5.9395371456882895e-05,
+          -4.524741739397875e-06
+        ],
+        "unit": "dimensionless"
+      },
+      "gyr_bias": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 1.1912475445342646e-06,
+        "delta": [
+          -7.128768542607935e-07,
+          -1.1912475445342646e-06,
+          -7.543386993240126e-09
+        ],
+        "unit": "rad/s"
+      },
+      "acc_bias": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 0.0005182811116268282,
+        "delta": [
+          -0.0005182811116268282,
+          4.30804792700204e-05,
+          3.646342280200221e-07
+        ],
+        "unit": "m/s^2"
+      },
+      "gyr_scale": {
+        "status": "EXACTLY_EQUAL",
+        "max_abs_delta": 0.0,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "unit": "dimensionless"
+      },
+      "acc_scale": {
+        "status": "EXACTLY_EQUAL",
+        "max_abs_delta": 0.0,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "unit": "dimensionless"
+      },
+      "antlever_m": {
+        "status": "EXACTLY_EQUAL",
+        "max_abs_delta": 0.0,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "unit": "m"
+      }
+    },
+    "same_recorded_state_time": true,
+    "propagation_counts": {
+      "candidate": 2,
+      "baseline": 1
+    },
+    "split_counts": {
+      "candidate": 1,
+      "baseline": 0
+    },
+    "feedback_counts": {
+      "candidate": 1,
+      "baseline": 0
+    }
+  },
+  "covariance_coverage": {
+    "candidate": {
+      "ALL_IMU_END_CANDIDATE": {
+        "count": 56642,
+        "status_counts": {
+          "NONPOSITIVE_DIAGONAL": 56642
+        },
+        "first_anomaly": {
+          "pointer": {
+            "source_path": "<VALIDATION_ROOT>/candidates/N09_RP_ONLY/ADD_RUN_00103/observer/events.jsonl",
+            "source_line": 16,
+            "event_seq": 16,
+            "event": "COVARIANCE_HEALTH",
+            "run_id": "N09_RP_ONLY__ADD_RUN_00103",
+            "byte_offset": 25844,
+            "byte_length": 1356
+          },
+          "report": {
+            "dimension": 21,
+            "square": true,
+            "all_finite": true,
+            "positive_diagonal": false,
+            "normalization_attempted": false,
+            "normalized_finite": false,
+            "symmetry_tested": false,
+            "symmetric_within_tolerance": false,
+            "cholesky_attempted": false,
+            "positive_definite_diagnostic": false,
+            "nonfinite_flat_indices": [],
+            "nonpositive_diagonal_indices": [
+              15,
+              16,
+              17,
+              18,
+              19,
+              20
+            ],
+            "min_diagonal": 0,
+            "max_normalized_abs": "NaN",
+            "max_normalized_asymmetry": "NaN",
+            "symmetry_threshold": "NaN",
+            "asymmetry_row": 0,
+            "asymmetry_col": 0,
+            "pivots": [],
+            "pivots_evaluated": 0,
+            "min_pivot": "NaN",
+            "pivot_threshold": 1e-12,
+            "status": "NONPOSITIVE_DIAGONAL",
+            "diagnostic_symmetrization_only": true,
+            "jitter_or_clipping": false,
+            "filter_matrix_modified": false
+          }
+        },
+        "max_normalized_asymmetry": null,
+        "min_pivot": null
+      }
+    },
+    "baseline": {
+      "EKF_SNAPSHOT_BASELINE_ONLY": {
+        "count": 14656,
+        "status_counts": {
+          "NONPOSITIVE_DIAGONAL": 14656
+        },
+        "first_anomaly": {
+          "pointer": {
+            "source_path": "<MECHANISM_ROOT>/replays/ADD_RUN_00103/observed/observer/events.jsonl",
+            "source_line": 271,
+            "event_seq": 271,
+            "event": "EKF_BEFORE",
+            "run_id": "ADD_RUN_00103",
+            "byte_offset": 420193,
+            "byte_length": 6609
+          },
+          "report": {
+            "dimension": 21,
+            "square": true,
+            "status": "NONPOSITIVE_DIAGONAL",
+            "all_finite": true,
+            "positive_diagonal": false,
+            "normalization_attempted": false,
+            "normalized_finite": false,
+            "symmetry_tested": false,
+            "symmetric_within_tolerance": false,
+            "cholesky_attempted": false,
+            "positive_definite_diagnostic": false,
+            "pivots": [],
+            "nonfinite_flat_indices": [],
+            "nonpositive_diagonal_indices": [
+              15,
+              16,
+              17,
+              18,
+              19,
+              20
+            ],
+            "min_diagonal": 0.0,
+            "max_normalized_abs": null,
+            "max_normalized_asymmetry": null,
+            "symmetry_threshold": null,
+            "min_pivot": null,
+            "pivot_threshold": 1e-12,
+            "diagnostic_symmetrization_only": true,
+            "jitter_or_clipping": false,
+            "filter_matrix_modified": false
+          }
+        },
+        "max_normalized_asymmetry": null,
+        "min_pivot": null
+      }
+    }
+  },
+  "actual_arrival_time": "UNKNOWN",
+  "limits": [
+    "context.measurement_time/stable-key time is GNSS event time for these RP attempts, not selected_input.time.",
+    "No baseline state exists at the inserted intermediate RP update. First common IMU end is used without interpolation.",
+    "RP_ONLY res and old GNSS IMU_OPPORTUNITY res are separate fields.",
+    "NONPOSITIVE_DIAGONAL prevents positive-definite normalization/Cholesky diagnosis; zero diagonal alone does not prove a negative eigenvalue.",
+    "This optional scheduling extension is not established as a historical V3 design violation."
+  ]
+}

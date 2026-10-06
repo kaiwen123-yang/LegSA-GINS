@@ -1,0 +1,58 @@
+[
+  {
+    "case": "inactive_D_sentinel999",
+    "status": "EXPECTED_OLD_CONTRACT_FAILURE_RETAINED",
+    "baseline_lsim": 2,
+    "candidate_lsim": 1,
+    "baseline_reasons": [
+      "lsim_go2_horizontal_velocity_std_high"
+    ]
+  },
+  {
+    "case": "inactive_D_nan",
+    "status": "EXPECTED_OLD_CONTRACT_FAILURE_RETAINED",
+    "baseline_lsim": 1.5,
+    "candidate_lsim": 1,
+    "baseline_reasons": [
+      "lsim_std_nonfinite_or_missing"
+    ]
+  },
+  {
+    "case": "inactive_D_inf",
+    "status": "EXPECTED_OLD_CONTRACT_FAILURE_RETAINED",
+    "baseline_lsim": 2,
+    "candidate_lsim": 1,
+    "baseline_reasons": [
+      "lsim_std_nonfinite_or_missing",
+      "lsim_go2_horizontal_velocity_std_high"
+    ]
+  },
+  {
+    "case": "inactive_D_negative_inf",
+    "status": "EXPECTED_OLD_CONTRACT_FAILURE_RETAINED",
+    "baseline_lsim": 2,
+    "candidate_lsim": 1,
+    "baseline_reasons": [
+      "lsim_std_nonfinite_or_missing",
+      "lsim_go2_horizontal_velocity_std_high"
+    ]
+  },
+  {
+    "case": "inactive_D_zero",
+    "status": "EXPECTED_OLD_CONTRACT_FAILURE_RETAINED",
+    "baseline_lsim": 1.5,
+    "candidate_lsim": 1,
+    "baseline_reasons": [
+      "lsim_std_nonfinite_or_missing"
+    ]
+  },
+  {
+    "case": "inactive_D_negative",
+    "status": "EXPECTED_OLD_CONTRACT_FAILURE_RETAINED",
+    "baseline_lsim": 1.5,
+    "candidate_lsim": 1,
+    "baseline_reasons": [
+      "lsim_std_nonfinite_or_missing"
+    ]
+  }
+]

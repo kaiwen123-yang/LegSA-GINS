@@ -1,0 +1,499 @@
+{
+  "scope": "Presentation-only existing CSV redraw",
+  "no_solver_calls": true,
+  "no_evaluator_calls": true,
+  "raw_reference_payload_opens": 0,
+  "script_sha256": "9feab586ada240392b5008f5c398230462ae3a87986200ac9295e4ad36cbad90",
+  "utilities_sha256": "e28173802e004aac9c5421b4e5439ae7e277f80e35ca16f2ed8b447673dd9371",
+  "inputs": [
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/ALL_OFFLINE_COMPLETE.json",
+      "file_sha256": "374cee2501ab7fcfa2432567e056eb9dd6842c7db8a1bda989b5027bce1c815d",
+      "bytes": 10249,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/METRICS.csv",
+      "file_sha256": "9f66289454f9fe03037d74409a4986969130d2256cbcdfe177734ddf8d1f292d",
+      "decompressed_sha256": "9f66289454f9fe03037d74409a4986969130d2256cbcdfe177734ddf8d1f292d",
+      "bytes": 8754,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/OISAM_PRIMARY_DYNAMIC_ONLY_ERRORS.csv",
+      "file_sha256": "244d164d16832a7dcfe9787a84abf102686ca061c07e8642d69b103025344ceb",
+      "decompressed_sha256": "244d164d16832a7dcfe9787a84abf102686ca061c07e8642d69b103025344ceb",
+      "bytes": 54626,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2_OISAM_primary_saved_errors.csv.gz",
+        "sha256": "b22e680b5dc91f8b571e11bab84d1c9794a58a0ec583da2c71041e7d229b95d3",
+        "plain_sha256": "244d164d16832a7dcfe9787a84abf102686ca061c07e8642d69b103025344ceb",
+        "rows": 275,
+        "columns": [
+          "time",
+          "expected_second",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "valid",
+          "prior_only",
+          "native_status",
+          "reference_left_s",
+          "reference_right_s",
+          "reference_bracket_span_s",
+          "block_id",
+          "yaw_err_deg"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/WEN_TC_PRIMARY_DYNAMIC_ONLY_ERRORS.csv",
+      "file_sha256": "0136ea55f0eb61788316f7413a063fb714698036d20984c8d3cb3287761c3326",
+      "decompressed_sha256": "0136ea55f0eb61788316f7413a063fb714698036d20984c8d3cb3287761c3326",
+      "bytes": 51310,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2_WEN_TC_primary_saved_errors.csv.gz",
+        "sha256": "52fc06f1e554a6a4097c9797c8ba1464fca02c3502504c0fee5f5119a330e108",
+        "plain_sha256": "0136ea55f0eb61788316f7413a063fb714698036d20984c8d3cb3287761c3326",
+        "rows": 274,
+        "columns": [
+          "time",
+          "expected_second",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "valid",
+          "prior_only",
+          "native_status",
+          "reference_left_s",
+          "reference_right_s",
+          "reference_bracket_span_s"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/GNC_PRIMARY_DYNAMIC_ONLY_ERRORS.csv",
+      "file_sha256": "4ec12efde126d30e3974e6efdc804a01ac5372551c685f7ce31e0f522648236e",
+      "decompressed_sha256": "4ec12efde126d30e3974e6efdc804a01ac5372551c685f7ce31e0f522648236e",
+      "bytes": 51152,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2_GNC_primary_saved_errors.csv.gz",
+        "sha256": "6ed3675ff037dbe2665ab9201f6fd2d9e848e578a1fb5121fe5e9efd955777f1",
+        "plain_sha256": "4ec12efde126d30e3974e6efdc804a01ac5372551c685f7ce31e0f522648236e",
+        "rows": 274,
+        "columns": [
+          "time",
+          "expected_second",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "valid",
+          "prior_only",
+          "native_status",
+          "reference_left_s",
+          "reference_right_s",
+          "reference_bracket_span_s"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/METRICS.csv",
+      "file_sha256": "d0faa1ee6ab434458ec7acfe53751d7b2443ef6c8f98eebbd38808552440eb20",
+      "decompressed_sha256": "d0faa1ee6ab434458ec7acfe53751d7b2443ef6c8f98eebbd38808552440eb20",
+      "bytes": 8840,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/OISAM_PRIMARY_DYNAMIC_ONLY_ERRORS.csv",
+      "file_sha256": "0304d4b54ff7739555f1a88cca9d360a4f4eb69f1970ba6f5320e6f50647e4e5",
+      "decompressed_sha256": "0304d4b54ff7739555f1a88cca9d360a4f4eb69f1970ba6f5320e6f50647e4e5",
+      "bytes": 53993,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2H_OISAM_primary_saved_errors.csv.gz",
+        "sha256": "70fc5a478391118a03a70457a842633fb4b4bc666f6b2cb909edf07e0c4f012e",
+        "plain_sha256": "0304d4b54ff7739555f1a88cca9d360a4f4eb69f1970ba6f5320e6f50647e4e5",
+        "rows": 271,
+        "columns": [
+          "time",
+          "expected_second",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "valid",
+          "prior_only",
+          "native_status",
+          "reference_left_s",
+          "reference_right_s",
+          "reference_bracket_span_s",
+          "block_id",
+          "yaw_err_deg"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/WEN_TC_PRIMARY_DYNAMIC_ONLY_ERRORS.csv",
+      "file_sha256": "5cc737535dc9674c17d98e0b398052e850259430e38de719b34743496bcad087",
+      "decompressed_sha256": "5cc737535dc9674c17d98e0b398052e850259430e38de719b34743496bcad087",
+      "bytes": 50143,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2H_WEN_TC_primary_saved_errors.csv.gz",
+        "sha256": "9dc1606ad27566318ad877563b16f8446fadb0702cb00c3b044915377bb8e51a",
+        "plain_sha256": "5cc737535dc9674c17d98e0b398052e850259430e38de719b34743496bcad087",
+        "rows": 270,
+        "columns": [
+          "time",
+          "expected_second",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "valid",
+          "prior_only",
+          "native_status",
+          "reference_left_s",
+          "reference_right_s",
+          "reference_bracket_span_s"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/GNC_PRIMARY_DYNAMIC_ONLY_ERRORS.csv",
+      "file_sha256": "35797f3709bfe7ffacd5488a693c3f5c1702aaa0321de8a495394eb14be0a0d1",
+      "decompressed_sha256": "35797f3709bfe7ffacd5488a693c3f5c1702aaa0321de8a495394eb14be0a0d1",
+      "bytes": 50013,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2H_GNC_primary_saved_errors.csv.gz",
+        "sha256": "c56264dd6697df3800c9fea523bae6f4b5541e093eb6c797b8169e8edf79469f",
+        "plain_sha256": "35797f3709bfe7ffacd5488a693c3f5c1702aaa0321de8a495394eb14be0a0d1",
+        "rows": 270,
+        "columns": [
+          "time",
+          "expected_second",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "valid",
+          "prior_only",
+          "native_status",
+          "reference_left_s",
+          "reference_right_s",
+          "reference_bracket_span_s"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/METRICS.csv",
+      "file_sha256": "369befe2362008d84bcae1a618ae8494e5ca96e9e3dc575ffb7362e1fa62eec9",
+      "decompressed_sha256": "369befe2362008d84bcae1a618ae8494e5ca96e9e3dc575ffb7362e1fa62eec9",
+      "bytes": 8838,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/OISAM_PRIMARY_DYNAMIC_ONLY_ERRORS.csv",
+      "file_sha256": "2e15543cb2db95bc3a26d1df28b0ba104db121215ae94b73517e2ecbbed4066d",
+      "decompressed_sha256": "2e15543cb2db95bc3a26d1df28b0ba104db121215ae94b73517e2ecbbed4066d",
+      "bytes": 76237,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2O_OISAM_primary_saved_errors.csv.gz",
+        "sha256": "b30504156e61d92f44d96449a0d98fdb26dec78a5c6a163d3189a446f32ffbbc",
+        "plain_sha256": "2e15543cb2db95bc3a26d1df28b0ba104db121215ae94b73517e2ecbbed4066d",
+        "rows": 378,
+        "columns": [
+          "time",
+          "expected_second",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "valid",
+          "prior_only",
+          "native_status",
+          "reference_left_s",
+          "reference_right_s",
+          "reference_bracket_span_s",
+          "block_id",
+          "yaw_err_deg"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/WEN_TC_PRIMARY_DYNAMIC_ONLY_ERRORS.csv",
+      "file_sha256": "5e971d3ae42e33f3c1f6f5d20a5f4490374d002f8b3c0573abdd1f0862bf0dba",
+      "decompressed_sha256": "5e971d3ae42e33f3c1f6f5d20a5f4490374d002f8b3c0573abdd1f0862bf0dba",
+      "bytes": 70315,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2O_WEN_TC_primary_saved_errors.csv.gz",
+        "sha256": "5afe762ab35f12f080cdef19caaba8d5e5df8cd93e5532dc95eb9349f24fa98a",
+        "plain_sha256": "5e971d3ae42e33f3c1f6f5d20a5f4490374d002f8b3c0573abdd1f0862bf0dba",
+        "rows": 377,
+        "columns": [
+          "time",
+          "expected_second",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "valid",
+          "prior_only",
+          "native_status",
+          "reference_left_s",
+          "reference_right_s",
+          "reference_bracket_span_s"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/GNC_PRIMARY_DYNAMIC_ONLY_ERRORS.csv",
+      "file_sha256": "87c78f2617e5a3ad1f53d458f603cb0c568af45d6495b5db170cf30dba574555",
+      "decompressed_sha256": "87c78f2617e5a3ad1f53d458f603cb0c568af45d6495b5db170cf30dba574555",
+      "bytes": 70321,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/all_36_saved_metrics.csv.gz",
+        "sha256": "06d73c6473eb1d516302d8c0b2c9729f17f0290fde943208997e0f531822b1fe",
+        "plain_sha256": "ae5bfeb3105247fc43714895765c81bed544cd9a64308a868b0632ba2353b2e7",
+        "rows": 36,
+        "columns": [
+          "sequence_id",
+          "method_id",
+          "support_role",
+          "support",
+          "physical_point",
+          "status",
+          "expected_epoch_count",
+          "actual_epoch_count",
+          "finite_epoch_count",
+          "matched_epoch_count",
+          "missing_or_invalid_count",
+          "coverage_fraction",
+          "prior_only_native_count",
+          "prior_only_primary_excluded_count",
+          "first_output_s",
+          "last_output_s",
+          "window_start_s",
+          "window_end_s",
+          "reference_bracket_max_s_on_support",
+          "original_native_identity_reused",
+          "attitude_is_estimated",
+          "input_layer",
+          "solver_and_adapter_elapsed_s",
+          "comparison_boundary",
+          "horizontal_rmse_m",
+          "horizontal_p50_m",
+          "horizontal_p95_m",
+          "horizontal_max_m",
+          "vertical_rmse_m",
+          "vertical_p50_m",
+          "vertical_p95_m",
+          "vertical_max_m",
+          "position_3d_rmse_m",
+          "position_3d_p50_m",
+          "position_3d_p95_m",
+          "position_3d_max_m",
+          "yaw_rmse_deg",
+          "yaw_p50_deg",
+          "yaw_p95_deg",
+          "yaw_max_deg",
+          "native_run_sha256",
+          "own_matched_epoch_count",
+          "common_time_tolerance_s"
+        ]
+      }
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/FGO_REPRODUCTION_FIX_20261004/COMPARISON_TABLE.csv",
+      "file_sha256": "8a1063fe9153cd40660887b9094043caa762840d8c1c76451343254f98747b14",
+      "decompressed_sha256": "8a1063fe9153cd40660887b9094043caa762840d8c1c76451343254f98747b14",
+      "bytes": 71262,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/earlier_strict_Oi_identity_metrics.csv.gz",
+        "sha256": "e11d2618d32be8ecf62893b9634d38657faad94712b076f62fd76777c5474a0b",
+        "plain_sha256": "22030b8a29c922e3f9de3288ef2930fadd3cf36c31b045d23e60ebc5e61fb5d7",
+        "rows": 3,
+        "columns": [
+          "sequence_id",
+          "method_id",
+          "start_policy",
+          "support",
+          "status",
+          "physical_point",
+          "input_layer",
+          "expected_epoch_count",
+          "actual_epoch_count",
+          "finite_epoch_count",
+          "matched_epoch_count",
+          "missing_or_invalid_count",
+          "own_actual_epoch_count",
+          "own_finite_epoch_count",
+          "own_matched_epoch_count",
+          "epoch_count_scope",
+          "common_nominal_gate_s",
+          "paired_epoch_denominator",
+          "reference_epoch_count",
+          "coverage_fraction",
+          "coverage_denominator",
+          "horizontal_rmse_m",
+          "vertical_rmse_m",
+          "position_3d_rmse_m",
+          "horizontal_p95_m",
+          "vertical_p95_m",
+          "position_3d_p95_m",
+          "yaw_rmse_deg",
+          "roll_rmse_deg",
+          "pitch_rmse_deg",
+          "yaw_p95_deg",
+          "attitude_is_estimated",
+          "first_output_s",
+          "last_output_s",
+          "maximum_gap_with_window_edges_s",
+          "native_invalid_epochs_in_window",
+          "native_valid_maximum_gap_s",
+          "maximum_uncovered_interval_with_window_edges_s",
+          "held_age_max_s",
+          "gap_events_in_window",
+          "solver_and_adapter_elapsed_s",
+          "native_runtime_seconds",
+          "runtime_boundary",
+          "solve_mode",
+          "old_result_reused",
+          "metric_origin",
+          "geometric_audit_status",
+          "failure_classification",
+          "comparison_boundary",
+          "base_time",
+          "window_start_s",
+          "window_end_s",
+          "source_path",
+          "source_row_key",
+          "error_path"
+        ]
+      }
+    }
+  ],
+  "figures": [
+    {
+      "id": "R15_BY2_FGO_position_curves",
+      "dominant_claim": "The three methods have different input layers and distinct position-error scales.",
+      "caption": "All saved primary dynamic own-support H and signed-Up errors at GNSS1; log/symlog reveal scales without clipping. O3286 nonconvergence remains visible.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R15_BY2_FGO_position_curves.png",
+          "sha256": "024876224b85af23fef890d71ff0a5c700dad32bddf23cb60044d385cf2f5748",
+          "bytes": 804991
+        },
+        {
+          "path": "R15_BY2_FGO_position_curves.pdf",
+          "sha256": "153079eecf3e39e01474e72482c1e48a78fd38920f67e4d68283e00905061f40",
+          "bytes": 57871
+        },
+        {
+          "path": "R15_BY2_FGO_position_curves.svg",
+          "sha256": "1d028748139ab0f7d14d17a15c27e28107399372653ff090c80f29d3bbc7937a",
+          "bytes": 239214
+        }
+      ],
+      "all_saved_valid_samples": true,
+      "reference_or_native_opens": 0
+    },
+    {
+      "id": "R15_BY2H_FGO_position_curves",
+      "dominant_claim": "The three methods have different input layers and distinct position-error scales.",
+      "caption": "All saved primary dynamic own-support H and signed-Up errors at GNSS1; log/symlog reveal scales without clipping. O3286 nonconvergence remains visible.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R15_BY2H_FGO_position_curves.png",
+          "sha256": "b8fb45ad2ed4c9f85b92ebc6dc866ecbe4742617161af79da8ab533b457b6849",
+          "bytes": 787893
+        },
+        {
+          "path": "R15_BY2H_FGO_position_curves.pdf",
+          "sha256": "4db2672ff893148ce451822960acadd93f6e28e735e9bcb1d284efe4e484b467",
+          "bytes": 56090
+        },
+        {
+          "path": "R15_BY2H_FGO_position_curves.svg",
+          "sha256": "8349aa2843b8def2d75b1e37d406cf09dff363506d926b15f1b74170a34babb5",
+          "bytes": 235329
+        }
+      ],
+      "all_saved_valid_samples": true,
+      "reference_or_native_opens": 0
+    },
+    {
+      "id": "R15_BY2O_FGO_position_curves",
+      "dominant_claim": "The three methods have different input layers and distinct position-error scales.",
+      "caption": "All saved primary dynamic own-support H and signed-Up errors at GNSS1; log/symlog reveal scales without clipping. O3286 nonconvergence remains visible.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R15_BY2O_FGO_position_curves.png",
+          "sha256": "de8f1e409e78e0eb836e615d2729e32ae3e961843084fa1965ce66cee34b1003",
+          "bytes": 861862
+        },
+        {
+          "path": "R15_BY2O_FGO_position_curves.pdf",
+          "sha256": "9d3b7e7bce19aa0e6fde4bd5a5e3fb681f3d39d7244c1a0a78bf8852b96a9d99",
+          "bytes": 73557
+        },
+        {
+          "path": "R15_BY2O_FGO_position_curves.svg",
+          "sha256": "faf27faf67310cb982cd689c5a92f37184f7cde0060685ea7295cda61d5bcb37",
+          "bytes": 323811
+        }
+      ],
+      "all_saved_valid_samples": true,
+      "reference_or_native_opens": 0
+    },
+    {
+      "id": "R16_FGO_dynamic_secondary_strict_support",
+      "dominant_claim": "Explicit gap recovery changes available support, not the earlier strict result.",
+      "caption": "Nine registered full-window denominators; primary dynamic versus secondary prior-inclusive support and separate earlier strict Oi counts. No zero-error replacement for missing output.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R16_FGO_dynamic_secondary_strict_support.png",
+          "sha256": "bca112c92a4e24a0151e438db0efd2698f62111a7ff6ea9a9ef6bad539b8584c",
+          "bytes": 399046
+        },
+        {
+          "path": "R16_FGO_dynamic_secondary_strict_support.pdf",
+          "sha256": "d77f0d30a3c2761a02ce3ae299388c56e6b707d39d23fabec491188405f48a45",
+          "bytes": 25020
+        },
+        {
+          "path": "R16_FGO_dynamic_secondary_strict_support.svg",
+          "sha256": "ef1df1b2ae7f8031a90560b5c130e21fb96f51b02c73fa8fa72ec922402082c7",
+          "bytes": 17887
+        }
+      ]
+    }
+  ],
+  "new_Oi_calls": 3,
+  "reused_Wen_GNC_calls": 6,
+  "score_recalculation": false,
+  "old_strict_results_untouched": true
+}

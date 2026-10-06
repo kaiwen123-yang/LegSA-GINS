@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "source": "src/legsa_gins/paper_rebuild/clean6_canonical_v2/evaluation.py",
+  "source_lines": [
+    39,
+    85
+  ],
+  "source_sha256": "8dfacf094879e7c091f1ddf1d5dcb3164f43923dc0903734cb6d29e05eeccc10",
+  "v3_science_freeze": "7d43b9af26120ed5dde21f53e515386361072ba6",
+  "git_blob_at_v3_freeze_sha256": "8dfacf094879e7c091f1ddf1d5dcb3164f43923dc0903734cb6d29e05eeccc10",
+  "v3_call_site": "src/legsa_gins/paper_rebuild/protocol_v3/runtime.py:244",
+  "policy": "canonical_v2_wgs84_full_support",
+  "archived_controls_count": 20,
+  "archived_control_max_h_m": 3.351623381340333e-14,
+  "legsa_evaluation_calls": 0
+}

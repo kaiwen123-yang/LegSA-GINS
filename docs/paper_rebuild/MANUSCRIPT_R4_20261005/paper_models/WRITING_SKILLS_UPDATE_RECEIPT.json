@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-05",
+  "status": "UPDATED_AND_POSTCHECK_PASSED",
+  "all_checks_passed": true,
+  "nature_updated_existing_skills": 14,
+  "necessary_shared_support_packages_added": 1,
+  "unrelated_new_skills_installed": 0,
+  "upstream_files_sha_verified": 445,
+  "backup_prior_files_sha_verified": 354,
+  "manifest_local_reference_checks_passed": 224,
+  "manifest_local_reference_checks_failed": 0,
+  "local_only_files_preserved": 11,
+  "local_only_files_are_prior_python_cache": true,
+  "prior_unknown_modification_origin_preserved_not_inferred": true,
+  "old_shared_unchanged": true,
+  "source_repositories": {
+    "Yuan1z0825/nature-skills": "6655831b8270e0bb48cbcdec22220a56c561de58",
+    "Boom5426/Nature-Paper-Skills": "6ff6c50f5e44b83ba5185da52b3a33cd7c601b5e"
+  },
+  "backup_root": "C:\\Users\\ykw\\.codex\\backups\\writing-skills-20261005T041927Z",
+  "private_backup_receipt_sha256": "9f328a09e2fb3aa14c0a7e819393064c341752481308760adfa50d45ffbeb3a4",
+  "private_before_manifest_sha256": "50f5e1b61b6decf56c44a9fc1d1aa22b5af10f94ec484cff7f94f13655539085",
+  "private_planned_update_manifest_sha256": "3679477779c8e3cd6a82b27281cb12d60860b0adf19e1f6035be8b12046d7ba3",
+  "private_diff_sha256": "3f248f6c022cfaa74026812a61dc44885c7358f4eaf6d58222ed38d50415e98c",
+  "private_postcheck_receipt_sha256": "68df93be85f45db4e2657249b236416186e98435bb26f28cc67dcdc4ae5b90f4",
+  "paper_spine": {
+    "current_version": "3.0.0",
+    "detected_update_version": "4.0.1",
+    "action": "HELD_LAYOUT_MIGRATION",
+    "upstream_repository": "https://github.com/WUBING2023/PaperSpine",
+    "upstream_commit": "f7e3dabaf499b2aef1eabdd1cd5d64f173d7dcc3",
+    "official_compat_archive_sha256": "c704bf4f5b0612a1d7b5c0d0dceebd946cfa802a1fdc0233062f3d57a689ba1d",
+    "actual_old_validator_result": "FAILED: old twelve-skill layout requirements differ from current official package layout",
+    "old_SKILL_files_sha_unchanged": [
+      {
+        "name": "paper-spine",
+        "skill_sha256": "37545ad32bdcc18c2730a6d84345f1a0709f898ac82c60e2b4f086ecb60597eb",
+        "source_unchanged": true
+      },
+      {
+        "name": "paper-spine-audit",
+        "skill_sha256": "1381f939ead1ea18621c79b63f270e2f6713622d0fb92816785dc684412bd3a5",
+        "source_unchanged": true
+      },
+      {
+        "name": "paper-spine-build",
+        "skill_sha256": "06cf4cb2e145ef7d9b46af709e954fd9b369b45497438059c026425f515316f2",
+        "source_unchanged": true
+      },
+      {
+        "name": "paper-spine-citation",
+        "skill_sha256": "41ed74877d5cfb49fe476cb478cad93287a173bce02ba72f59af5e5d39840a34",
+        "source_unchanged": true
+      },
+      {
+        "name": "paper-spine-humanize",
+        "skill_sha256": "b83662ebdfb4be4687dd01be1de7010ff23693b905c1ceb0bbd1087de15dbf73",
+        "source_unchanged": true
+      },
+      {
+        "name": "paper-spine-intake",
+        "skill_sha256": "88d6168cd7aea4bb34a824fbe9e9e8b5520a4d938ce8e171f4698460e200b9f6",
+        "source_unchanged": true
+      },
+      {
+        "name": "paper-spine-latex",
+        "skill_sha256": "24e95cb03523af4ddea39fd24d40a97ac4d247d781794db01de0e82d227a286e",
+        "source_unchanged": true
+      },
+      {
+        "name": "paper-spine-research",
+        "skill_sha256": "f049e366ad720a4ab5fd76108ff562523381a27cd7a73e03e7f7ffb4c2cd8341",
+        "source_unchanged": true
+      },
+      {
+        "name": "paper-spine-rewrite",
+        "skill_sha256": "ff2386dc2f37b24592fa4785ca46e3e59647cff50b455ea47dc1c473cf6dd04d",
+        "source_unchanged": true
+      },
+      {
+        "name": "paper-spine-translate",
+        "skill_sha256": "d7209949662e0a439cf25acf0e054ffc842236f03302577a25b1266850cfbbf5",
+        "source_unchanged": true
+      },
+      {
+        "name": "paper-spine-ui",
+        "skill_sha256": "b066997256af441d061b165e2053879fc060cd4dfdc487ba180c40a5de853705",
+        "source_unchanged": true
+      },
+      {
+        "name": "paper-spine-update",
+        "skill_sha256": "912ea2959be450f3c1e6962807feb55bbe7b879ed8baaa63e93a81c128f64f85",
+        "source_unchanged": true
+      }
+    ],
+    "old_version_manifest_unchanged": true
+  },
+  "activation": "complete backup then per-file atomic replacements; original directory refusal confirmed no changes",
+  "functional_workflow_regression_run": false,
+  "session_skill_catalog_refresh_verified": false,
+  "science_code_changes": 0,
+  "science_runs": 0,
+  "project_git_mutations": 0,
+  "memory_edits": 0,
+  "background_update_task_created": false,
+  "submission_ready": false,
+  "project_artifacts": [
+    {
+      "relative_path": "WRITING_SKILLS_UPDATE_20261005.md",
+      "bytes": 7806,
+      "sha256": "5ae5392dafb9cd5462c0f74e68c9af34ee10ec3de00d819a583507eb5dc5bd6f"
+    },
+    {
+      "relative_path": "WRITING_SKILLS_UPDATE_MANIFEST.csv",
+      "bytes": 3599,
+      "sha256": "ad5b6e72e9f41b8dc40d88bc86f7c17b8e78a54ae87ebe85d212ca008033f471"
+    }
+  ],
+  "paper_models_first_five_files_not_modified": true
+}

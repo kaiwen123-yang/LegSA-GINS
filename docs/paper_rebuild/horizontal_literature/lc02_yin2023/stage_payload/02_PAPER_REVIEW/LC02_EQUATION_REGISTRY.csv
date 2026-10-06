@@ -1,0 +1,23 @@
+equation_id,page,subject,transcription,dimension_or_value,provenance_class,closure
+1,4,error dynamics,"delta_x_dot=F delta_x+G w","21 state; 18 noise",PAPER_DIRECT,"F/G completed from cited KF-GINS"
+2,4,measurement,"Z_k=H_k X_k+v_k","Z 3; H 3x21",PAPER_DIRECT,closed
+3,4,state,"[delta_r_INS^n; delta_v_INS^n; phi; b_g; b_a; s_g; s_a]","7 blocks x 3=21",PAPER_DIRECT,closed
+4,4,position H,"[I3,0_3,(C_b^n l_GNSS^b x),0_3,0_3,0_3,0_3]",3x21,PAPER_DIRECT,closed
+5,6,improved R,"R=PDOP^a Q^b r^2; selected a=2,b=1",3x3,PAPER_DIRECT,closed
+6,6,adaptive statistic,"Delta_X_tilde=sqrt(V^T V/tr(P_Vk))",scalar,PAPER_DIRECT,"printed but dimensionally unclear"
+7,6,adaptive alpha,"1 if abs(stat)<=k; k/abs(stat) otherwise",k=1,PAPER_DIRECT,closed_as_printed
+AKF-K,7,adaptive gain,"K_a=(P^-/alpha)H^T[H(P^-/alpha)H^T+R]^-1",21x3,PAPER_DIRECT,closed_as_printed
+AKF-X,7,adaptive state,"X_a=X^-+K_a(Z-HX^-)",21,PAPER_DIRECT,closed_as_printed
+AKF-P,7,adaptive covariance,"P_a=(1/alpha)(I-K_a H)P^-",21x21,PAPER_DIRECT,closed_as_printed
+8,7,robust innovation,"V_hat=L-HX^-",3,PAPER_DIRECT,"L_k relation to Z_k CURRENTLY_UNKNOWN; L_k=Z_k only PAPER_DERIVED"
+9,7,robust objective,"Omega=V^T A V+alpha V_x^T A_X V_x=min",scalar,PAPER_DIRECT,closed_as_printed
+10,7,IGGIII weight,"1; (k0/abs(v))*((k1-abs(v))/(k1-k0))^3; 0",k0=1.15;k1=4.45,PAPER_DIRECT,"standardizer and zero inversion unresolved"
+11,7,equivalent precision,"Abar_i=R_i^-1*w_i",per component,PAPER_DIRECT,"singular at w_i=0"
+RKF-K,7,robust gain,"K_r=P^-H^T(HP^-H^T+Abar^-1)^-1",21x3,PAPER_DIRECT,"not executable for zero weight as printed"
+RKF-X,7,robust state,"X_r=X^-+K_r(Z-HX^-)",21,PAPER_DIRECT,depends_on_RKF_K
+RKF-P,7,robust covariance,"P_r=(I-K_r H)P^-",21x21,PAPER_DIRECT,depends_on_RKF_K
+12,7,state fusion,"X=omega X_a+(1-omega)X_r",21,PAPER_DIRECT,closed
+13,7,covariance fusion,"P=omega P_a+(1-omega)P_r",21x21,PAPER_DIRECT,"formula closed; P_r input unresolved"
+14,7,fusion weight,"omega=0.85 if abs(stat)<=c; 0.15 otherwise",c=1,PAPER_DIRECT,closed
+Z-POS,5,printed residual,"Z=[delta r_N,delta r_E,delta r_D]^T",3,PAPER_DIRECT,closed
+F-G,4,unprinted dynamics,"full 21-state F/G blocks",F21x21;G21x18,CITED_SOURCE,"KF-GINS commit 08f9fce"

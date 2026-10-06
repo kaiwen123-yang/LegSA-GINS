@@ -1,0 +1,150 @@
+{
+  "candidate_id": "N12_ONLY",
+  "data_mode": "synthetic_fixture_only",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "real_native_calls": 0,
+  "evaluator_calls": 0,
+  "native_fixture_processes": 2,
+  "commands": [
+    {
+      "label": "configure",
+      "argv": [
+        "cmake",
+        "-S",
+        "<VALIDATION_BUILD_ROOT>/source_N12_ONLY/cpp",
+        "-B",
+        "<VALIDATION_BUILD_ROOT>/build_N12_ONLY",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_CXX_FLAGS=",
+        "-DCMAKE_CXX_FLAGS_RELEASE=-O3 -DNDEBUG",
+        "-DCMAKE_EXE_LINKER_FLAGS="
+      ],
+      "native_fixture": false,
+      "started_utc": "2026-10-02T09:21:44.173592+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-10-02T09:21:44.754088+00:00",
+      "stdout": "<VALIDATION_BUILD_ROOT>/N12_tests_v1/configure.stdout",
+      "stderr": "<VALIDATION_BUILD_ROOT>/N12_tests_v1/configure.stderr"
+    },
+    {
+      "label": "build",
+      "argv": [
+        "cmake",
+        "--build",
+        "<VALIDATION_BUILD_ROOT>/build_N12_ONLY",
+        "--target",
+        "legsa_v23_port_core_demo",
+        "-j",
+        "2"
+      ],
+      "native_fixture": false,
+      "started_utc": "2026-10-02T09:21:44.754329+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-10-02T09:21:54.510462+00:00",
+      "stdout": "<VALIDATION_BUILD_ROOT>/N12_tests_v1/build.stdout",
+      "stderr": "<VALIDATION_BUILD_ROOT>/N12_tests_v1/build.stderr"
+    },
+    {
+      "label": "compile_baseline",
+      "argv": [
+        "g++",
+        "-O3",
+        "-DNDEBUG",
+        "-std=c++17",
+        "-I",
+        "<OBSERVED_SOURCE>/cpp/legsa_v23_port_core/include",
+        "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/candidates/N12_ONLY/fixture.cpp",
+        "<MECHANISM_BUILD_ROOT>/build_observed/liblegsa_v23_port_core.a",
+        "-o",
+        "<VALIDATION_BUILD_ROOT>/N12_tests_v1/fixture_baseline"
+      ],
+      "native_fixture": false,
+      "started_utc": "2026-10-02T09:21:54.511114+00:00",
+      "exit_code": 1,
+      "finished_utc": "2026-10-02T09:21:54.900353+00:00",
+      "stdout": "<VALIDATION_BUILD_ROOT>/N12_tests_v1/compile_baseline.stdout",
+      "stderr": "<VALIDATION_BUILD_ROOT>/N12_tests_v1/compile_baseline.stderr"
+    },
+    {
+      "label": "compile_baseline_public_api",
+      "argv": [
+        "g++",
+        "-O3",
+        "-DNDEBUG",
+        "-std=c++17",
+        "-I",
+        "<OBSERVED_SOURCE>/cpp/legsa_v23_port_core/include",
+        "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/candidates/N12_ONLY/fixture.cpp",
+        "<MECHANISM_BUILD_ROOT>/build_observed/liblegsa_v23_port_core.a",
+        "-o",
+        "<VALIDATION_BUILD_ROOT>/N12_tests_v1/fixture_baseline"
+      ],
+      "native_fixture": false,
+      "started_utc": "2026-10-02T09:26:11.557899+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-10-02T09:26:12.528959+00:00",
+      "stdout": "<VALIDATION_BUILD_ROOT>/N12_tests_v1/compile_baseline_public_api.stdout",
+      "stderr": "<VALIDATION_BUILD_ROOT>/N12_tests_v1/compile_baseline_public_api.stderr"
+    },
+    {
+      "label": "execute_baseline",
+      "argv": [
+        "<VALIDATION_BUILD_ROOT>/N12_tests_v1/fixture_baseline",
+        "<VALIDATION_BUILD_ROOT>/N12_tests_v1/baseline"
+      ],
+      "native_fixture": true,
+      "started_utc": "2026-10-02T09:26:12.530161+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-10-02T09:26:12.541518+00:00",
+      "stdout": "<VALIDATION_BUILD_ROOT>/N12_tests_v1/execute_baseline.stdout",
+      "stderr": "<VALIDATION_BUILD_ROOT>/N12_tests_v1/execute_baseline.stderr"
+    },
+    {
+      "label": "compile_candidate_public_api",
+      "argv": [
+        "g++",
+        "-O3",
+        "-DNDEBUG",
+        "-std=c++17",
+        "-I",
+        "<VALIDATION_BUILD_ROOT>/source_N12_ONLY/cpp/legsa_v23_port_core/include",
+        "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/candidates/N12_ONLY/fixture.cpp",
+        "<VALIDATION_BUILD_ROOT>/build_N12_ONLY/liblegsa_v23_port_core.a",
+        "-o",
+        "<VALIDATION_BUILD_ROOT>/N12_tests_v1/fixture_candidate"
+      ],
+      "native_fixture": false,
+      "started_utc": "2026-10-02T09:26:12.541808+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-10-02T09:26:13.475719+00:00",
+      "stdout": "<VALIDATION_BUILD_ROOT>/N12_tests_v1/compile_candidate_public_api.stdout",
+      "stderr": "<VALIDATION_BUILD_ROOT>/N12_tests_v1/compile_candidate_public_api.stderr"
+    },
+    {
+      "label": "execute_candidate",
+      "argv": [
+        "<VALIDATION_BUILD_ROOT>/N12_tests_v1/fixture_candidate",
+        "<VALIDATION_BUILD_ROOT>/N12_tests_v1/candidate"
+      ],
+      "native_fixture": true,
+      "started_utc": "2026-10-02T09:26:13.476012+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-10-02T09:26:13.487122+00:00",
+      "stdout": "<VALIDATION_BUILD_ROOT>/N12_tests_v1/execute_candidate.stdout",
+      "stderr": "<VALIDATION_BUILD_ROOT>/N12_tests_v1/execute_candidate.stderr"
+    }
+  ],
+  "automatic_retry_count": 0,
+  "technical_compile_retries": 1,
+  "compile_failure_reason": "Fixture attempted private covariance setters/readers; fixed using public EKFPredict(Phi=0,Qd=P) and getCovariance; no solver change.",
+  "validator_technical_failure": {
+    "type": "KeyError: snapshot",
+    "reason": "Configuration records have a different schema; validator now skips non-snapshot records. No native re-execution.",
+    "count": 1
+  },
+  "native_fixture_binary_sha256": {
+    "baseline": "36522990710061b673530a201ef1c56752887781b34a2e35ecc582f625921907",
+    "candidate": "49c326f73e8eb7c8ba79ef7635d27fb3915a17e41084592594b5a45bf19684ef"
+  }
+}

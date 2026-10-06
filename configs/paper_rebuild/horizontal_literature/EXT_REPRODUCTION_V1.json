@@ -1,0 +1,67 @@
+{
+  "schema": "ext_reproduction.config.v1",
+  "data_mode": "real_raw",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "input_history": "complete original paired file history",
+  "baseline_length_m": 0.35,
+  "receiver_order": "GNSS2_MINUS_GNSS1",
+  "body_yaw": "wrap360(atan2(b_E,b_N) degrees + 90)",
+  "method_versions": {
+    "EXT01": "existing exact C-ILS core plus own-transmit DD v1",
+    "EXT02": "journal CWLS tangent fix v1 plus own-transmit DD v1",
+    "EXT03": "Yang2024 declared KF engineering instance plus own-transmit exact-signal tracking v1"
+  },
+  "EXT01": {
+    "lambda_seed_count": 8,
+    "node_limit": 1000000,
+    "wall_budget_seconds": 60.0,
+    "acceptance_test": null,
+    "output_requires_global_search_certificate": true
+  },
+  "EXT02": {
+    "delta_Delta": 0.05,
+    "K": "all unique candidates",
+    "refinement_max_iterations": 20,
+    "direction_tolerance": 1e-10,
+    "any_candidate_failure": "whole epoch invalid",
+    "round_boundary": "original half-down implementation and literal Eq75; edge caveat documented"
+  },
+  "EXT03": {
+    "system_mode": "GPS_BDS_DUAL_FREQUENCY",
+    "constraint_mode": "CONSTRAINED",
+    "baseline_sigma_m": 0.01,
+    "ratio_threshold": 3.0,
+    "initial_baseline_variance_m2": 900.0,
+    "initial_ambiguity_variance_cycles2": 900.0,
+    "other_parameters": "inherited engineering defaults in reproduction_ext03.parameter_registry; not paper disclosed"
+  },
+  "workers_independent_epochs": 8,
+  "windows": {
+    "BY2": {
+      "base_time": 1772784000.0,
+      "seconds": [
+        66.0,
+        340.0
+      ]
+    },
+    "BY2H": {
+      "base_time": 1772784000.0,
+      "seconds": [
+        413.0,
+        683.0
+      ]
+    },
+    "BY2O": {
+      "base_time": 1772780400.0,
+      "seconds": [
+        3186.0,
+        3563.0
+      ]
+    }
+  },
+  "reference_used_online": false,
+  "parameter_search": false,
+  "new_raw_degradation_matrix": false,
+  "evaluation": "frozen hx02 heading functions; native-valid / ratio-fixed / causal-held separate, plus common support; no temporal or angle tuning"
+}

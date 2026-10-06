@@ -1,0 +1,462 @@
+{
+  "scope": "Presentation-only existing CSV redraw",
+  "no_solver_calls": true,
+  "no_evaluator_calls": true,
+  "raw_reference_payload_opens": 0,
+  "script_sha256": "8a9b9beeab2a46a2b2f169ebdc2f037b3bb0c8183da871259d2cdec0242710f2",
+  "utilities_sha256": "e28173802e004aac9c5421b4e5439ae7e277f80e35ca16f2ed8b447673dd9371",
+  "inputs": [
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0/eval/OUTPUT/HEADING_METRICS.json",
+      "file_sha256": "d16dea154dec7dd788cd3375c004e3a90bedf3849203be0945ab1b555751ba48",
+      "bytes": 3537,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "file_sha256": "3ab6dfacda2cd984d3e34c4e8fdecf1a279dcfe07acf20161dca0959e6a24a77",
+      "decompressed_sha256": "3ab6dfacda2cd984d3e34c4e8fdecf1a279dcfe07acf20161dca0959e6a24a77",
+      "bytes": 99439,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2_V0_full_saved_heading.csv.gz",
+        "sha256": "a01f65c44060ccb37d3b8d659cbafdb756225279f146b006043b7fd26ab105cb",
+        "plain_sha256": "c261cad357d7f587af0972dcbc9504b8d41264e291290994c2cf8343a673c2b3",
+        "rows": 1370,
+        "columns": [
+          "epoch_index",
+          "t_rel_s",
+          "valid",
+          "reference_supported",
+          "error_valid_deg",
+          "hold_available",
+          "error_hold_deg",
+          "rtklib_q"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0E/eval/OUTPUT/HEADING_METRICS.json",
+      "file_sha256": "48072908cd8b0b1210634c9119fd795647c059c73f874310823a12ca377c9dcc",
+      "bytes": 3535,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0E/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "file_sha256": "4347ce1c18ad20d964c558ecb2051c45b49a153ed2029b366a686e6614b81544",
+      "decompressed_sha256": "4347ce1c18ad20d964c558ecb2051c45b49a153ed2029b366a686e6614b81544",
+      "bytes": 100189,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2_V0E_full_saved_heading.csv.gz",
+        "sha256": "bb44910e654b8410470236a51d4f9a349fbc211206e2437d054ec239f829e868",
+        "plain_sha256": "09db0d6e75d09c820c14fb58ad845f6045094fa65a90f885d2a6a1e87e543310",
+        "rows": 1370,
+        "columns": [
+          "epoch_index",
+          "t_rel_s",
+          "valid",
+          "reference_supported",
+          "error_valid_deg",
+          "hold_available",
+          "error_hold_deg",
+          "rtklib_q"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V1/eval/OUTPUT/HEADING_METRICS.json",
+      "file_sha256": "402b3bdd98345712f17ba72c5a2c55cfc3d0e9ba3005fe65681b491054674cd7",
+      "bytes": 3538,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V1/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "file_sha256": "82e0ddb79716faf28b63701f713822448dc9d9343b0a88e38867d12f901a3f5c",
+      "decompressed_sha256": "82e0ddb79716faf28b63701f713822448dc9d9343b0a88e38867d12f901a3f5c",
+      "bytes": 99345,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2_V1_full_saved_heading.csv.gz",
+        "sha256": "bd42c6ea5a1b5bbbd7f803ba9ba8358fa90e726fcfed15047d098ebf88517b6f",
+        "plain_sha256": "7c836e719e2a8db45de0817bbc23804b426badf2fa13c32bb64546784a0a17be",
+        "rows": 1370,
+        "columns": [
+          "epoch_index",
+          "t_rel_s",
+          "valid",
+          "reference_supported",
+          "error_valid_deg",
+          "hold_available",
+          "error_hold_deg",
+          "rtklib_q"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V2/eval/OUTPUT/HEADING_METRICS.json",
+      "file_sha256": "e69bde1a77c43a24bd439f908eceda64850527751848fa169f0b1719284dbc19",
+      "bytes": 3508,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V2/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "file_sha256": "f3465e5a64284edac80d920611e73ff6c91a8d7169374f756e0b2b2c8971a1e8",
+      "decompressed_sha256": "f3465e5a64284edac80d920611e73ff6c91a8d7169374f756e0b2b2c8971a1e8",
+      "bytes": 97982,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2_V2_full_saved_heading.csv.gz",
+        "sha256": "4487192df2b113d4912a774e9ce74418138f05d46ddb394326284dbe5aa4228b",
+        "plain_sha256": "2ae383bc996e58d5172cab327894f1169842b0157aae470f86e1d0808bc296ab",
+        "rows": 1370,
+        "columns": [
+          "epoch_index",
+          "t_rel_s",
+          "valid",
+          "reference_supported",
+          "error_valid_deg",
+          "hold_available",
+          "error_hold_deg",
+          "rtklib_q"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0/eval/OUTPUT/HEADING_METRICS.json",
+      "file_sha256": "80103506b82da5c48a96913b81f0b9e5802f39aec08c004dac1d9728572b3dee",
+      "bytes": 3536,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "file_sha256": "7032f57c55f1f27d90fe5a7ccebc994749996348ff57a05566fd5b9d50f8aece",
+      "decompressed_sha256": "7032f57c55f1f27d90fe5a7ccebc994749996348ff57a05566fd5b9d50f8aece",
+      "bytes": 97488,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2H_V0_full_saved_heading.csv.gz",
+        "sha256": "9703befc72207ba6453eef96507f06139355784f295261763f5faa6df9b414c0",
+        "plain_sha256": "cb5b4fb4dfe894aef8d90e4c121d091cd9cc875bb1edfe3c59b75946f1552c73",
+        "rows": 1350,
+        "columns": [
+          "epoch_index",
+          "t_rel_s",
+          "valid",
+          "reference_supported",
+          "error_valid_deg",
+          "hold_available",
+          "error_hold_deg",
+          "rtklib_q"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0E/eval/OUTPUT/HEADING_METRICS.json",
+      "file_sha256": "4eb73883150d70856f2064950bb61a4e89c8b48589e290fd510751fdd751a7bf",
+      "bytes": 3537,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0E/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "file_sha256": "d28ccc144170b66faa0579aed501a88abcf518fe30bd035adc9081b8158464a1",
+      "decompressed_sha256": "d28ccc144170b66faa0579aed501a88abcf518fe30bd035adc9081b8158464a1",
+      "bytes": 97492,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2H_V0E_full_saved_heading.csv.gz",
+        "sha256": "a2a7bd082815a7b2b19610e14a8655a8779a9deff2e9626a01e6676bb6ccb622",
+        "plain_sha256": "0535c2da84f80f83e7d7580e5ea792175e24cc66793850d824210daf36fb9cf2",
+        "rows": 1350,
+        "columns": [
+          "epoch_index",
+          "t_rel_s",
+          "valid",
+          "reference_supported",
+          "error_valid_deg",
+          "hold_available",
+          "error_hold_deg",
+          "rtklib_q"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V1/eval/OUTPUT/HEADING_METRICS.json",
+      "file_sha256": "135a1ed595c443c5e105d02ef3241c00b071ba2e8033d09de549704a735a8296",
+      "bytes": 3506,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V1/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "file_sha256": "873cd6613e6b33157d0dff2de4a3d187d6481b977bae1ded16bc2b4cedd87617",
+      "decompressed_sha256": "873cd6613e6b33157d0dff2de4a3d187d6481b977bae1ded16bc2b4cedd87617",
+      "bytes": 97304,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2H_V1_full_saved_heading.csv.gz",
+        "sha256": "360dd09a1ba02b9d08de26e9460c414216df2da7f938cf436a6bd8d0fdbd137d",
+        "plain_sha256": "fece422a252fc046d2330f48e48fc8c18c08e681e6506dc50d35b3b2a2d6011d",
+        "rows": 1350,
+        "columns": [
+          "epoch_index",
+          "t_rel_s",
+          "valid",
+          "reference_supported",
+          "error_valid_deg",
+          "hold_available",
+          "error_hold_deg",
+          "rtklib_q"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V2/eval/OUTPUT/HEADING_METRICS.json",
+      "file_sha256": "4b0a6b919bf5225c184480e0c7ad4b04e523e2554c25832b3d1fea0cd36bb49d",
+      "bytes": 3528,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V2/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "file_sha256": "0ed8264512ff868038a037576db6e0df6ed7c3d004ca2e621fdbf29dfc2d2bb4",
+      "decompressed_sha256": "0ed8264512ff868038a037576db6e0df6ed7c3d004ca2e621fdbf29dfc2d2bb4",
+      "bytes": 96759,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2H_V2_full_saved_heading.csv.gz",
+        "sha256": "a51530f0600d2de9dd7cd1a070ac4846f8930f9cd3500466c838a1cf3a51d083",
+        "plain_sha256": "a6251e663d6fe41d645a4c3e6f5b90771cec9a56e715eede1c2b910b28117737",
+        "rows": 1350,
+        "columns": [
+          "epoch_index",
+          "t_rel_s",
+          "valid",
+          "reference_supported",
+          "error_valid_deg",
+          "hold_available",
+          "error_hold_deg",
+          "rtklib_q"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0/eval/OUTPUT/HEADING_METRICS.json",
+      "file_sha256": "036f8d3ffe999673a322102d18bf0a6647a50150e2d6f65de4feaacf9f1da0cf",
+      "bytes": 3544,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "file_sha256": "86a716ed4142295420747ac2f2216abaff8e67ce7c526e9c44ae2fabdc6fa059",
+      "decompressed_sha256": "86a716ed4142295420747ac2f2216abaff8e67ce7c526e9c44ae2fabdc6fa059",
+      "bytes": 135625,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2O_V0_full_saved_heading.csv.gz",
+        "sha256": "1d55884fb332714ce73c6fd1761190bcc1baf85e66b5e6b1b3adf93308a23cdb",
+        "plain_sha256": "7c1e5339649741db79f76126a8daaf74cc8bc3280b6f351c6a0677207bc53736",
+        "rows": 1885,
+        "columns": [
+          "epoch_index",
+          "t_rel_s",
+          "valid",
+          "reference_supported",
+          "error_valid_deg",
+          "hold_available",
+          "error_hold_deg",
+          "rtklib_q"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0E/eval/OUTPUT/HEADING_METRICS.json",
+      "file_sha256": "3320ef8da7c63dcfc1541d947a56e962b773140124cbb16f5716f7c71b189d3e",
+      "bytes": 3533,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0E/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "file_sha256": "b1bad40ed926ff521c0131f71592c2d6266a91ace28880cad24b55b54b3bac8a",
+      "decompressed_sha256": "b1bad40ed926ff521c0131f71592c2d6266a91ace28880cad24b55b54b3bac8a",
+      "bytes": 137152,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2O_V0E_full_saved_heading.csv.gz",
+        "sha256": "fb2e1be8840e53300c3a44a8a0cac3390267bb0d034201a2ba9e6da80f1b08a8",
+        "plain_sha256": "c18b5ca16aa612ffd8643380e4c708324e4df95f06040039b6b165f1d7e7b43c",
+        "rows": 1885,
+        "columns": [
+          "epoch_index",
+          "t_rel_s",
+          "valid",
+          "reference_supported",
+          "error_valid_deg",
+          "hold_available",
+          "error_hold_deg",
+          "rtklib_q"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V1/eval/OUTPUT/HEADING_METRICS.json",
+      "file_sha256": "8d60ed383c39ed27a9ef13607f3ca5889feeced03de3cd8a0fea24f475f6118e",
+      "bytes": 3535,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V1/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "file_sha256": "ac85aeffb07ed5881400a14a15bd56536a8b8fc7dd63dfdb966c5065d910e4b3",
+      "decompressed_sha256": "ac85aeffb07ed5881400a14a15bd56536a8b8fc7dd63dfdb966c5065d910e4b3",
+      "bytes": 135896,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2O_V1_full_saved_heading.csv.gz",
+        "sha256": "eee2f2417d9ead6e4cab12edb783e64f9d4607befe58a6b31101686c16e33762",
+        "plain_sha256": "6073618d5450da37f9bbac5b37636ee65d61e42650a334d926d397fe73652c7c",
+        "rows": 1885,
+        "columns": [
+          "epoch_index",
+          "t_rel_s",
+          "valid",
+          "reference_supported",
+          "error_valid_deg",
+          "hold_available",
+          "error_hold_deg",
+          "rtklib_q"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V2/eval/OUTPUT/HEADING_METRICS.json",
+      "file_sha256": "3ec1d24d6c58a013b58fbf4783e0578aede1756cd10e1d93c27dc99c97272511",
+      "bytes": 3526,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V2/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "file_sha256": "f883f05ff1f3776990849fdb20c09892cf886c4b0cc29373bb0337ee3dcbfcae",
+      "decompressed_sha256": "f883f05ff1f3776990849fdb20c09892cf886c4b0cc29373bb0337ee3dcbfcae",
+      "bytes": 135417,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/all_12_saved_RTKLIB_condition_metrics.csv.gz",
+        "sha256": "9cc5bb185b081bf1fccea03c74e377330e3d20617afc796ff58eb910f5944be9",
+        "plain_sha256": "421db8aebbf81d571859090efda0e3dcc2c48bdbc01c31aca110f8154897d649",
+        "rows": 12,
+        "columns": [
+          "sequence",
+          "variant",
+          "condition",
+          "native_valid_count",
+          "paired_epoch_denominator",
+          "native_valid_rmse_deg",
+          "availability",
+          "hold_rmse_deg",
+          "hold_scored_count"
+        ]
+      }
+    }
+  ],
+  "figures": [
+    {
+      "id": "R09_BY2_moving_base_error_and_support",
+      "dominant_claim": "Accuracy must be read together with sparse native-valid support.",
+      "caption": "All four preregistered HX07R RTKLIB conditions, every saved formal paired epoch. Native-valid fixed error points only; no lines across missing epochs, no hold interpolation. Fixed counts and original 1370/1350/1885 denominators shown. Shared-GNSS commercial fusion reference; these configuration conditions are not four separate papers.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R09_BY2_moving_base_error_and_support.png",
+          "sha256": "dfc4e592a9ab1f23b051528073547e4e2a9161d5c4b462b72bb550a94786006d",
+          "bytes": 395549
+        },
+        {
+          "path": "R09_BY2_moving_base_error_and_support.pdf",
+          "sha256": "3e724e7aacd4615e9a3935c60280481082ae8d8fdc13164a0a938dd2424e1f41",
+          "bytes": 31523
+        },
+        {
+          "path": "R09_BY2_moving_base_error_and_support.svg",
+          "sha256": "948d3cde6415ce40f4a119689e3859f1a050898b95fe50d2834eb2e01661c9fd",
+          "bytes": 173645
+        }
+      ],
+      "all_saved_epoch_rows_retained": true
+    },
+    {
+      "id": "R09_BY2H_moving_base_error_and_support",
+      "dominant_claim": "Accuracy must be read together with sparse native-valid support.",
+      "caption": "All four preregistered HX07R RTKLIB conditions, every saved formal paired epoch. Native-valid fixed error points only; no lines across missing epochs, no hold interpolation. Fixed counts and original 1370/1350/1885 denominators shown. Shared-GNSS commercial fusion reference; these configuration conditions are not four separate papers.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R09_BY2H_moving_base_error_and_support.png",
+          "sha256": "861ce6fa2f20f7198264f9a22e4d56767196808ed54235d871ef1b64736d9739",
+          "bytes": 411949
+        },
+        {
+          "path": "R09_BY2H_moving_base_error_and_support.pdf",
+          "sha256": "ab843172ea02d2f63cb0200d8d6e613cc9f4eeccaf6efa9508cbf751be2010b3",
+          "bytes": 33513
+        },
+        {
+          "path": "R09_BY2H_moving_base_error_and_support.svg",
+          "sha256": "21b6cda903f53547a1eef64986024c0c2042b75f4510d19d11db4924f49e2973",
+          "bytes": 220541
+        }
+      ],
+      "all_saved_epoch_rows_retained": true
+    },
+    {
+      "id": "R09_BY2O_moving_base_error_and_support",
+      "dominant_claim": "Accuracy must be read together with sparse native-valid support.",
+      "caption": "All four preregistered HX07R RTKLIB conditions, every saved formal paired epoch. Native-valid fixed error points only; no lines across missing epochs, no hold interpolation. Fixed counts and original 1370/1350/1885 denominators shown. Shared-GNSS commercial fusion reference; these configuration conditions are not four separate papers.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R09_BY2O_moving_base_error_and_support.png",
+          "sha256": "023ff3eacac23698750d679484a3e6b68d4ee9ba8a104cce671cf083944de847",
+          "bytes": 397607
+        },
+        {
+          "path": "R09_BY2O_moving_base_error_and_support.pdf",
+          "sha256": "9c0f22a1c47ff0b81304d5f092fec97bf4e9f76923eef2fa9768351296874305",
+          "bytes": 32040
+        },
+        {
+          "path": "R09_BY2O_moving_base_error_and_support.svg",
+          "sha256": "e9f74c8f3f2ae2e508a631764e94b9c2c64f03ec775d38d25d88f464620c4d9c",
+          "bytes": 172970
+        }
+      ],
+      "all_saved_epoch_rows_retained": true
+    },
+    {
+      "id": "R10_moving_base_all_12_accuracy_coverage",
+      "dominant_claim": "The favorable fixed RMSE values can coincide with very low availability.",
+      "caption": "Token-only display of all 12 saved HX07R metric JSONs: native-valid fixed RMSE, hold-last RMSE and fixed counts/original paired denominators. Hold RMSE denominators are individually retained in adjacent data and are not assumed equal to valid fixed support.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R10_moving_base_all_12_accuracy_coverage.png",
+          "sha256": "51336c3da6eadcffbfabc70d50c4854393fa0edae038281ed499e41ba832b6dc",
+          "bytes": 388570
+        },
+        {
+          "path": "R10_moving_base_all_12_accuracy_coverage.pdf",
+          "sha256": "6f29184f18913a0b7ec67f1416387e125c43a654399a40448cbfde54b03a7ae2",
+          "bytes": 28730
+        },
+        {
+          "path": "R10_moving_base_all_12_accuracy_coverage.svg",
+          "sha256": "c54275dc4a913952f80a796ff8ebea6e812c88eec4c6dcebf4123e0bebc109a1",
+          "bytes": 38161
+        }
+      ]
+    }
+  ],
+  "registered_conditions": 12,
+  "original_epoch_denominators": [
+    1370,
+    1350,
+    1885
+  ]
+}

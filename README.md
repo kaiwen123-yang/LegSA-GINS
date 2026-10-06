@@ -1,32 +1,28 @@
-# LegSA-GINS Clean Paper Rebuild
+# LegSA-GINS
 
-LegSA-GINS is rebuilding its paper evidence from immutable raw data. All pre-202607 experiment results, figures, provider payloads, exports, aggregates, and runtime packages have exited active evidence.
+LegSA-GINS studies short lateral dual-GNSS heading and robot-aided, source-aware GNSS/INS estimation on a quadruped platform. The navigation backbone is an error-state EKF; the current paper method does not solve carrier-phase integer ambiguities or implement a complete contact/kinematic odometry estimator.
 
-## Active Identity
+## Current reading order
 
-- Git line: `paper-rebuild/202607`
-- Active implementation: `src/legsa_gins/paper_rebuild/`
-- Active entrypoints: `scripts/paper_rebuild/`
-- Active configuration: `configs/paper_rebuild/`
-- Active context: `docs/paper_rebuild/ACTIVE_CONTEXT.md`
-- Raw inputs: `<RAW_ROOT>`
-- Clean generated assets: `<CLEAN_ROOT>`
-- Historical freeze: `<LEGACY_FREEZE_ROOT>`
+1. [Research audit and bounded upgrade study (2026-10-06)](docs/paper_rebuild/RESEARCH_AUDIT_20261006/README.md).
+2. [Latest completed manuscript and eight-record transfer results (R5)](docs/paper_rebuild/EXISTING_DATA_R5_20261005/README.md).
+3. [Original V3 method, evidence and provenance](docs/paper_rebuild/V3_STORY_20261004/CURRENT_STORY_INDEX.md).
+4. [Comparison acceptance and implementation scope](docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/COMPARISON_ACCEPTANCE_REPORT.md).
+5. [Current author directions](docs/paper_rebuild/NEXT_ACTIONS.md) and [agent rules](AGENTS.md).
 
-Local absolute paths belong only in the ignored `configs/paper_rebuild/DATA_PATHS.local.yaml`. Tracked files use aliases.
+The current maintained branch is `fix/fgo-v3-reproduction-20261004`. The `main` branch and `docs/paper_rebuild/ACTIVE_CONTEXT.md` describe earlier stages. Original V3 remains the selected paper identity; later corrected diagnostic cohorts, FGO variants and transfer runs retain separate identities. The October 6 exploratory pilot does not replace the original matrix.
 
-## Paper Method
+## Implementation and data
 
-`LegSA_Paper_V1` is a source-backed EKF with lateral short-baseline dual-antenna body yaw, Raw Doppler auxiliary velocity, source-aware measurement weighting, and weak Go2 roll/pitch plus horizontal-velocity priors. selected feedback, active nine-factor FGO, QA fallback, and multi-state QM as a main innovation are outside this method.
+Active code: `src/legsa_gins/paper_rebuild/`, `cpp/legsa_v23_port_core/`; entrypoints: `scripts/paper_rebuild/`; configuration: `configs/paper_rebuild/`. Local paths belong in ignored local configuration. Raw inputs and large runtime outputs remain outside Git.
 
-## Evidence Rules
+## Evidence boundaries
 
-- Every result starts from a raw hash lock and freshly generated providers.
-- Trace is evaluation-only.
-- final_v23 and LegSA outputs are not solver inputs.
-- Go2 observations are not truth.
-- No per-case tuning, output-only correction, or metric-driven epoch deletion.
-- Synthetic and semi-synthetic results never enter real-data result tables.
-- Old results cannot be restored as active evidence by copying or summarizing them.
+- Trace is an offline commercial fused reference with shared GNSS lineage, not independent ground truth.
+- Robot SDK states are auxiliary inputs, not truth. SDK aiding and complete leg odometry have different evidential requirements.
+- Real natural sequences, controlled semisynthetic faults, and synthetic unit fixtures are separate.
+- Report failures, missing support and unfavorable results; do not tune against reference errors, replace outputs or delete epochs to improve metrics.
+- Compare external methods by input information, initialization, measurement point and temporal support. Method ports and module analogues are not automatically complete author reproductions.
+- Pre-clean legacy evidence stays retired; maintained completed stages are identified by their own source/configuration/evaluation contracts.
 
-Read [the clean active context](docs/paper_rebuild/ACTIVE_CONTEXT.md) before any work. Pre-clean history is summarized under `docs/legacy/202607/` and is history only.
+The preserved historical clean-rebuild rules are under `docs/paper_rebuild/`; pre-clean history is under `docs/legacy/202607/`. Algorithm changes and tests for the current study run in Ubuntu 22.04 WSL.

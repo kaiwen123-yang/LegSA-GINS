@@ -1,0 +1,5 @@
+id,url,access_date,actual_read_ranges,supports,limit
+GPS-SCOPE,https://link.springer.com/journal/10291/aims-and-scope,2026-10-05,61-64 core selected,GNSS system design/mathematical models/data/user hardware/applications,scope does not promise acceptance or require new AR
+GPS-GUIDE,https://link.springer.com/journal/10291/submission-guidelines,2026-10-05,82-109;112-208;212-280;288-353;356-386;620-655 selected,Word/length/abstract/kw/citation/editable material/declarations/DAS; posting restriction wording,selected only not full839line semantic read; length not body-only certificate
+SN-PREPRINT,https://support.springernature.com/en/support/solutions/articles/6000258807-preprints,2026-10-05,9-18 selected,preprint not prior publication publisher wording,conflict with specific journal wording requires clarification not automatic verdict
+TIM-COMPARE,https://ieee-ims.org/publication/ieee-tim/information-authors,2026-10-05,92-103;134-153 selected,I&M novelty/chain/U vs RMSE distinction/exclusive submission,two drafts are alternatives; not cosmetic duplicate papers

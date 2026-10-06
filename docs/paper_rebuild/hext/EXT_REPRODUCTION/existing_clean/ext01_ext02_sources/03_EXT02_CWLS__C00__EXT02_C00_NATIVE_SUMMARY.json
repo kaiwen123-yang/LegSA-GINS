@@ -1,0 +1,708 @@
+{
+  "EXT01_output_solver_input": false,
+  "Go2_yaw_solver_input": false,
+  "HPPOSECEF_semantic_decode_count": 0,
+  "HPPOSECEF_solver_input": false,
+  "K_policy": "ALL_UNIQUE_CANDIDATES",
+  "LegSA_output_solver_input": false,
+  "RTKLIB_position_solver_input": false,
+  "accepted_wrapped_solution_count": 1057,
+  "accepted_wrapped_solution_rate": 0.7004638833664678,
+  "ambiguity_correctness_known": false,
+  "ambiguity_success_rate": "NA",
+  "baseline_length_m": 0.35,
+  "cache_fingerprint": "03e3b7141de02872991f295f76ebab289b03a7c7873ca3a27bebd8308b4666c3",
+  "case_id": "C00",
+  "code_commit": "407edc840340989b1351d1d1aef050637aacd2df",
+  "code_commit_role": "BASE_HEAD_ONLY_NOT_COMPLETE_RUNTIME_SOURCE_IDENTITY",
+  "common_backbone_yaw_std_deg": 1.5,
+  "config_hash": "6bef7c1cd767f6ac180f89e272a1460905538801cc1ccde923c159416c5b71b7",
+  "contract_hash": "ecfeaeddb8707ed5097746db2c6fe03b5c17367084db0ff354f76643b2139ba7",
+  "data_mode": "real_by2_raw",
+  "determinism_probe": {
+    "actual_process_count": 16,
+    "cache_read_io_probe": {
+      "bytes_read": 6472155,
+      "combined_read_sha256": "1127fa075242ff63c385ec90a3be18341112572cbaf0e7a3d35b4113dc1bd14f",
+      "elapsed_seconds": 0.02528655600053753,
+      "file_count": 3,
+      "memory_map_mode": "read_only",
+      "throughput_bytes_per_second": 255952412.01935202,
+      "worker_raw_csv_read_count": 0
+    },
+    "excluded_fields": [
+      "runtime_seconds",
+      "worker_pid",
+      "worker_max_rss_bytes",
+      "shard_id"
+    ],
+    "peak_per_worker_rss_bytes": 170242048,
+    "per_worker_max_rss_bytes": {
+      "90793": 170242048,
+      "90794": 169652224,
+      "90795": 170045440,
+      "90796": 169848832,
+      "90797": 170045440,
+      "90798": 169652224,
+      "90799": 169848832,
+      "90800": 169848832,
+      "90801": 168865792,
+      "90802": 169848832,
+      "90803": 169848832,
+      "90804": 168669184,
+      "90805": 169848832,
+      "90806": 168669184,
+      "90807": 169848832,
+      "90808": 169848832
+    },
+    "probe_worker_failure_count": 0,
+    "probe_worker_failures": [],
+    "projected_total_worker_rss_bytes": 2723872768,
+    "rejection_reasons": [],
+    "resource_admission": {
+      "admitted": true,
+      "checks": {
+        "actual_process_count_matches_requested": {
+          "observed": 16,
+          "passed": true,
+          "required": 16
+        },
+        "adequate_disk_for_deterministic_output_projection": {
+          "available_bytes_conservative": 154683572224,
+          "passed": true,
+          "required_available_bytes": 2723151872
+        },
+        "maximum20_temperature_available_and_stable": {
+          "passed": true,
+          "required_for_selected_workers": false,
+          "temperature_evidence": {
+            "available": false,
+            "maximum_absolute_delta_c": null,
+            "stability_limit_c": 5.0,
+            "stable": false,
+            "zone_delta_c": {}
+          }
+        },
+        "maximum20_zero_swap_activity": {
+          "passed": true,
+          "required_for_selected_workers": false,
+          "swap_activity_delta_pages": {
+            "in": 0,
+            "out": 0
+          }
+        },
+        "positive_cache_read_io": {
+          "bytes_read": 6472155,
+          "elapsed_seconds": 0.02528655600053753,
+          "passed": true,
+          "throughput_bytes_per_second": 255952412.01935202
+        },
+        "projected_rss_below_70_percent_available_ram": {
+          "available_ram_bytes_conservative": 22941396992,
+          "exclusive_limit_bytes": 16058977894,
+          "limit_fraction": 0.7,
+          "passed": true,
+          "projected_rss_bytes": 2723872768
+        },
+        "zero_worker_failures": {
+          "observed": 0,
+          "passed": true,
+          "required": 0
+        }
+      },
+      "deterministic_output_size_projection": {
+        "bytes_per_epoch": 1048576,
+        "disk_safety_reserve_bytes": 1073741824,
+        "fixed_bytes": 67108864,
+        "formula": "1509*bytes_per_epoch+fixed_bytes+disk_safety_reserve_bytes",
+        "paired_epoch_count": 1509,
+        "projected_output_bytes": 1649410048,
+        "required_available_bytes": 2723151872
+      },
+      "maximum20_extra_gate_applied": false,
+      "rejection_reasons": [],
+      "schema": "horizontal_literature.phase2.resource_admission.v1",
+      "selected_workers": 16
+    },
+    "resource_after": {
+      "configured_clean_storage": {
+        "available_bytes": 154683572224,
+        "free_bytes": 154683572224,
+        "path": "<CLEAN_ROOT>",
+        "total_bytes": 1000185266176
+      },
+      "cpu_count": 24,
+      "load_average_1m_5m_15m": [
+        3.48486328125,
+        6.06591796875,
+        5.93017578125
+      ],
+      "ram_available_bytes": 22941396992,
+      "ram_total_bytes": 25197436928,
+      "swap_free_bytes": 68719476736,
+      "swap_in_pages": 0,
+      "swap_out_pages": 0,
+      "swap_total_bytes": 68719476736,
+      "swap_used_bytes": 0,
+      "thermal": {
+        "status": "UNAVAILABLE",
+        "zones": []
+      }
+    },
+    "resource_before": {
+      "configured_clean_storage": {
+        "available_bytes": 154683572224,
+        "free_bytes": 154683572224,
+        "path": "<CLEAN_ROOT>",
+        "total_bytes": 1000185266176
+      },
+      "cpu_count": 24,
+      "load_average_1m_5m_15m": [
+        3.70166015625,
+        6.15185546875,
+        5.95703125
+      ],
+      "ram_available_bytes": 22944157696,
+      "ram_total_bytes": 25197436928,
+      "swap_free_bytes": 68719476736,
+      "swap_in_pages": 0,
+      "swap_out_pages": 0,
+      "swap_total_bytes": 68719476736,
+      "swap_used_bytes": 0,
+      "thermal": {
+        "status": "UNAVAILABLE",
+        "zones": []
+      }
+    },
+    "sample_original_epoch_indices": [
+      0,
+      100,
+      201,
+      301,
+      402,
+      502,
+      603,
+      703,
+      804,
+      904,
+      1005,
+      1105,
+      1206,
+      1306,
+      1407,
+      1508
+    ],
+    "scientific_comparisons": {
+      "0": true,
+      "100": true,
+      "1005": true,
+      "1105": true,
+      "1206": true,
+      "1306": true,
+      "1407": true,
+      "1508": true,
+      "201": true,
+      "301": true,
+      "402": true,
+      "502": true,
+      "603": true,
+      "703": true,
+      "804": true,
+      "904": true
+    },
+    "scientific_digest": "2d9c392e8b5117e51729f0f5f967374d1140449400ef4a2cbc7eb86e8c42d39a",
+    "source_fingerprint": "03e3b7141de02872991f295f76ebab289b03a7c7873ca3a27bebd8308b4666c3",
+    "status": "PASS",
+    "swap_activity_delta_pages": {
+      "in": 0,
+      "out": 0
+    },
+    "worker_pids": [
+      90793,
+      90794,
+      90795,
+      90796,
+      90797,
+      90798,
+      90799,
+      90800,
+      90801,
+      90802,
+      90803,
+      90804,
+      90805,
+      90806,
+      90807,
+      90808
+    ],
+    "worker_selection": {
+      "decision": "DEFAULT_16_SELECTED_MAX20_NOT_USED",
+      "default_workers": 16,
+      "maximum_20_used": false,
+      "maximum_workers": 20,
+      "selected_workers": 16
+    },
+    "workers_compared": 16,
+    "workers_reference": 1
+  },
+  "epoch_deleted_for_metric": false,
+  "evaluation": "NOT_EVALUATED",
+  "failure_row_count": 452,
+  "final_v23_output_solver_input": false,
+  "fixed_rate": "NA",
+  "float_rate": "NA",
+  "git_source_state": {
+    "authorized_dirty_runtime_delta_allowed": true,
+    "authorized_dirty_runtime_delta_entries": [
+      " M configs/paper_rebuild/horizontal_literature/STANDARD_HEADING_STREAM_SCHEMA_V1.yaml",
+      " M src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py",
+      "?? configs/paper_rebuild/horizontal_literature/PHASE2_EXT02_CWLS_CONTRACT_V1.yaml",
+      "?? scripts/paper_rebuild/run_horizontal_literature_phase2.py",
+      "?? src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py",
+      "?? src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py"
+    ],
+    "authorized_dirty_runtime_delta_present": true,
+    "code_commit_role": "BASE_HEAD_ONLY_NOT_COMPLETE_RUNTIME_SOURCE_IDENTITY",
+    "runtime_source_identity_role": "SOURCE_HASHES_PLUS_SOURCE_FINGERPRINT",
+    "runtime_source_paths": [
+      "configs/paper_rebuild/horizontal_literature/PHASE2_EXT02_CWLS_CONTRACT_V1.yaml",
+      "configs/paper_rebuild/horizontal_literature/STANDARD_HEADING_STREAM_SCHEMA_V1.yaml",
+      "scripts/paper_rebuild/run_horizontal_literature_phase2.py",
+      "src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py",
+      "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py",
+      "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py"
+    ]
+  },
+  "heading_schema_hash": "0d524fcc219ec580638a30ddf8665f4d67521df99568deffea6360440c4c62c9",
+  "method_id": "EXT02_CWLS",
+  "native_descriptive_statistics": {
+    "accepted_continuity": {
+      "continuity_definition": "segments split when accepted original epoch indices are nonconsecutive",
+      "longest_segment_epochs": 285,
+      "maximum_gap_seconds": 13.799999999988358,
+      "segment_count": 30,
+      "valid_count": 1057
+    },
+    "accepted_coverage": 0.7004638833664678,
+    "baseline_elevation_deg": {
+      "count": 1057,
+      "max": 87.54583267141803,
+      "mean": -3.2980854587514883,
+      "median": -18.305467531932607,
+      "min": -80.01369406520324,
+      "p95": 81.31472327649558,
+      "rms": 51.13569583881161
+    },
+    "baseline_heading_wrapaware_deg": {
+      "circular_mean_deg": 334.2077473057059,
+      "count": 1057,
+      "resultant_length": 0.25143567226938046,
+      "wrapsafe_max_abs_about_mean_deg": 179.90106606380814,
+      "wrapsafe_rms_about_mean_deg": 88.79015633260836
+    },
+    "baseline_length_hard_constraint": {
+      "count": 1057,
+      "identity_m": 0.35,
+      "maximum_absolute_norm_error_m": 1.6653345369377348e-16,
+      "maximum_m": 0.35000000000000014,
+      "minimum_m": 0.34999999999999987
+    },
+    "body_yaw_wrapaware_deg": {
+      "circular_mean_deg": 64.20774730570591,
+      "count": 1057,
+      "resultant_length": 0.25143567226938046,
+      "wrapsafe_max_abs_about_mean_deg": 179.90106606380817,
+      "wrapsafe_rms_about_mean_deg": 88.79015633260836
+    },
+    "candidate_search_completion": {
+      "accepted_count": 1057,
+      "accepted_search_complete_count": 1057,
+      "all_accepted_search_complete": true,
+      "rejected_incomplete_search_epoch_count": 20
+    },
+    "circle_count": {
+      "count": 1509,
+      "max": 28.0,
+      "mean": 7.992710404241219,
+      "median": 7.0,
+      "min": 0.0,
+      "p95": 19.0,
+      "rms": 10.278784600145883
+    },
+    "circle_pair_count": {
+      "count": 1509,
+      "max": 338.0,
+      "mean": 38.770046388336645,
+      "median": 14.0,
+      "min": 0.0,
+      "p95": 148.0,
+      "rms": 68.88768819720786
+    },
+    "constrained_objective": {
+      "count": 1057,
+      "max": 577.2817931131216,
+      "mean": 29.708887618134767,
+      "median": 4.462057244785509,
+      "min": 0.020243735741121933,
+      "p95": 211.00123179051204,
+      "rms": 79.374257180655
+    },
+    "degenerate_pair_count": {
+      "count": 1509,
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "min": 0.0,
+      "p95": 0.0,
+      "rms": 0.0
+    },
+    "failure_code_counts": {
+      "INSUFFICIENT_CP_VALID": 11,
+      "INSUFFICIENT_DD_DIMENSION": 1,
+      "INSUFFICIENT_HALF_CYCLE_VALID": 374,
+      "INSUFFICIENT_SATELLITE_STATES": 46,
+      "NUMERICAL_FAILURE": 20
+    },
+    "gps_l1_dd_stage_counts": {
+      "common_cp_valid_satellite_count": {
+        "count": 1509,
+        "max": 9.0,
+        "mean": 6.418820410868125,
+        "median": 6.0,
+        "min": 3.0,
+        "p95": 9.0,
+        "rms": 6.554355489143456
+      },
+      "common_half_cycle_valid_satellite_count": {
+        "count": 1509,
+        "max": 9.0,
+        "mean": 4.358515573227303,
+        "median": 4.0,
+        "min": 2.0,
+        "p95": 7.0,
+        "rms": 4.555453187576561
+      },
+      "common_integer_compatible_satellite_count": {
+        "count": 1509,
+        "max": 9.0,
+        "mean": 4.357852882703777,
+        "median": 4.0,
+        "min": 2.0,
+        "p95": 7.0,
+        "rms": 4.554798516892896
+      },
+      "common_pr_cp_valid_satellite_count": {
+        "count": 1509,
+        "max": 9.0,
+        "mean": 6.418820410868125,
+        "median": 6.0,
+        "min": 3.0,
+        "p95": 9.0,
+        "rms": 6.554355489143456
+      },
+      "common_pr_valid_satellite_count": {
+        "count": 1509,
+        "max": 10.0,
+        "mean": 7.960901259111995,
+        "median": 8.0,
+        "min": 5.0,
+        "p95": 9.0,
+        "rms": 8.031457370141668
+      },
+      "common_raw_satellite_count": {
+        "count": 1509,
+        "max": 10.0,
+        "mean": 7.960901259111995,
+        "median": 8.0,
+        "min": 5.0,
+        "p95": 9.0,
+        "rms": 8.031457370141668
+      },
+      "dd_dimension": {
+        "count": 1057,
+        "max": 8.0,
+        "mean": 3.8003784295175023,
+        "median": 3.0,
+        "min": 3.0,
+        "p95": 7.0,
+        "rms": 3.967106950805538
+      },
+      "dd_eligible_satellite_count": {
+        "count": 1509,
+        "max": 9.0,
+        "mean": 3.4446653412856194,
+        "median": 4.0,
+        "min": 0.0,
+        "p95": 7.0,
+        "rms": 4.189987750487811
+      },
+      "elevation_eligible_satellite_count": {
+        "count": 1509,
+        "max": 9.0,
+        "mean": 3.536779324055666,
+        "median": 4.0,
+        "min": 0.0,
+        "p95": 7.0,
+        "rms": 4.223149305866672
+      },
+      "satellite_state_available_count": {
+        "count": 1509,
+        "max": 9.0,
+        "mean": 3.536779324055666,
+        "median": 4.0,
+        "min": 0.0,
+        "p95": 7.0,
+        "rms": 4.223149305866672
+      }
+    },
+    "intersecting_pair_count": {
+      "count": 1509,
+      "max": 201.0,
+      "mean": 23.67925778661365,
+      "median": 10.0,
+      "min": 0.0,
+      "p95": 96.59999999999991,
+      "rms": 43.165608011970306
+    },
+    "near_tangent_candidate_count": {
+      "count": 1509,
+      "max": 18.0,
+      "mean": 1.5798542080848244,
+      "median": 1.0,
+      "min": 0.0,
+      "p95": 6.0,
+      "rms": 2.8270209963347805
+    },
+    "phase_row_count": {
+      "count": 1509,
+      "max": 8.0,
+      "mean": 2.728959575878065,
+      "median": 3.0,
+      "min": 0.0,
+      "p95": 6.0,
+      "rms": 3.3731878526007217
+    },
+    "pseudorange_residual_rms_m": {
+      "count": 1057,
+      "max": 4.846403270120831,
+      "mean": 0.7766260421529081,
+      "median": 0.6398975946065276,
+      "min": 0.019701750407108108,
+      "p95": 2.0149422481811063,
+      "rms": 1.025006091807657
+    },
+    "raw_candidate_count": {
+      "count": 1057,
+      "max": 420.0,
+      "mean": 67.24976348155155,
+      "median": 43.0,
+      "min": 12.0,
+      "p95": 314.0,
+      "rms": 103.62063751226606
+    },
+    "refined_candidate_count": {
+      "count": 1057,
+      "max": 420.0,
+      "mean": 67.24976348155155,
+      "median": 43.0,
+      "min": 12.0,
+      "p95": 314.0,
+      "rms": 103.62063751226606
+    },
+    "runtime_seconds": {
+      "count": 1509,
+      "max": 0.4750414760001149,
+      "mean": 0.037351880182256124,
+      "median": 0.017950976000065566,
+      "min": 0.001033722999636666,
+      "p95": 0.15054738979979446,
+      "rms": 0.06815318955215603
+    },
+    "selected_refinement_iterations": {
+      "count": 1057,
+      "max": 4.0,
+      "mean": 2.0179754020813623,
+      "median": 2.0,
+      "min": 2.0,
+      "p95": 2.0,
+      "rms": 2.0251493515125945
+    },
+    "unique_candidate_count": {
+      "count": 1057,
+      "max": 420.0,
+      "mean": 67.24976348155155,
+      "median": 43.0,
+      "min": 12.0,
+      "p95": 314.0,
+      "rms": 103.62063751226606
+    },
+    "worker_max_rss_bytes": {
+      "count": 1509,
+      "max": 179236864.0,
+      "mean": 178298383.26838967,
+      "median": 178253824.0,
+      "min": 176484352.0,
+      "p95": 179040256.0,
+      "rms": 178299094.61167312
+    },
+    "wrapped_phase_max_abs_cycles": {
+      "count": 1057,
+      "max": 0.3754401977491284,
+      "mean": 0.0675994716748466,
+      "median": 0.037654640447502885,
+      "min": 4.478820043640752e-05,
+      "p95": 0.22391050798484427,
+      "rms": 0.09819728750416162
+    },
+    "wrapped_phase_p95_cycles": {
+      "count": 1057,
+      "max": 0.3065331434677513,
+      "mean": 0.06344334600686577,
+      "median": 0.03669159417868393,
+      "min": 4.4040918676468975e-05,
+      "p95": 0.1977502960492421,
+      "rms": 0.09013044380765413
+    },
+    "wrapped_phase_rms_cycles": {
+      "count": 1057,
+      "max": 0.16951748732411961,
+      "mean": 0.043423593425623505,
+      "median": 0.02742438023141448,
+      "min": 3.9077183543808657e-05,
+      "p95": 0.1274976011847274,
+      "rms": 0.0594417283483267
+    }
+  },
+  "native_metric": "accepted_wrapped_solution_rate",
+  "objective_oracle_all_comparisons_pass": true,
+  "objective_oracle_evaluated_count": 11,
+  "objective_oracle_indices": [
+    0,
+    150,
+    300,
+    450,
+    600,
+    750,
+    900,
+    1050,
+    1200,
+    1350,
+    1500
+  ],
+  "objective_oracle_not_evaluated_count": 0,
+  "objective_oracle_selected_count": 11,
+  "official_code_search": {
+    "implementation_lineage": "INDEPENDENT_CLEAN_ROOM_IMPLEMENTATION",
+    "result": "NO_ATTRIBUTABLE_OFFICIAL_SOURCE_CODE_OR_SUPPLEMENTARY_IMPLEMENTATION_LOCATED",
+    "search_scope": [
+      "current_clean_repository",
+      "configured_external_source_root",
+      "IEEE",
+      "author_university_records",
+      "arXiv",
+      "GitHub",
+      "publisher_supplements"
+    ],
+    "searched": true
+  },
+  "old_runtime_input_count": 0,
+  "output_hashes": {
+    "candidate_diagnostics": "add9db13bfb9f35f08f6e49c08196fd2b9cee4a3efce24814ea05d2f5409b24f",
+    "dd_diagnostics": "b49727932e0b57f995180a20962908351478ad3eea3088f244624c718429c339",
+    "failure_ledger": "0b0280cf66a45bd2262c8d38ef33f852e4fe9ea169d55dd033b1195d17767288",
+    "heading_results": "ab7d3b011d2b6477f50269181ae045823cc07198a9ef0b71ee441efc03e8b677",
+    "objective_oracle_diagnostics": "6579723dc79fb993c931ced428b11105f621be587afd2acf392f9cf68db24c10",
+    "refinement_diagnostics": "3a979b3d666f43c01b73ac8b8fc6060cc7e71baa88c41f575fe97ec4f0f547e7",
+    "runtime": "95213e702e3ad70e5e6c89b4ef5d9f598cd8ebd8912d435adde316e9097c3db7",
+    "tracking_diagnostics": "ae2644caff3ef7df7e41ec7965e24ec9c1cbed3f53e3089e88f473801e3bd647"
+  },
+  "output_only_correction": false,
+  "paired_epoch_count": 1509,
+  "paper_source_identity": {
+    "article_number": 8005315,
+    "authors": [
+      "Xing Liu",
+      "Tarig Ballal",
+      "Hui Chen",
+      "Tareq Y. Al-Naffouri"
+    ],
+    "doi": "10.1109/TIM.2022.3193412",
+    "journal": "IEEE Transactions on Instrumentation and Measurement",
+    "official_code_search": {
+      "implementation_lineage": "INDEPENDENT_CLEAN_ROOM_IMPLEMENTATION",
+      "result": "NO_ATTRIBUTABLE_OFFICIAL_SOURCE_CODE_OR_SUPPLEMENTARY_IMPLEMENTATION_LOCATED",
+      "search_scope": [
+        "current_clean_repository",
+        "configured_external_source_root",
+        "IEEE",
+        "author_university_records",
+        "arXiv",
+        "GitHub",
+        "publisher_supplements"
+      ],
+      "searched": true
+    },
+    "source_id": "LIU_BALLAL_CHEN_AL_NAFFOURI_TIM_2022_8005315",
+    "title": "Constrained Wrapped Least Squares: A Tool for High-Accuracy GNSS Attitude Determination",
+    "typesetting_crosscheck": {
+      "role": "TYPESETTING_CROSSCHECK_ONLY",
+      "source_id": "ARXIV_2112_14813"
+    },
+    "volume": 71,
+    "year": 2022
+  },
+  "per_case_tuning": false,
+  "phase_bias_calibration": "NONE",
+  "phase_id": "PHASE2",
+  "provider_hashes": {
+    "bridge_source_sha256::legsa_rtklib_bridge.c": "ff08935c2ac6b000d9dddd6ba2cb225b771a41d96200b8b4808e15cc2bb50e0f",
+    "bridge_source_sha256::legsa_rtklib_bridge.h": "680c95983aa0155af9b047e84aec3b98bec572f306e3766bc4fa97c073880ff6",
+    "bridge_source_sha256::rtklib_compat.c": "16062d34e6d269c81d9ed7d51e25d843ad9dd71e808c77422549cf9dcc688850",
+    "bridge_source_sha256::test_bridge.c": "83e47571e84bf5dc0c2db266ce0d531b893a2e118b0739c491266413e461704b",
+    "convbin_sha256": "85b6b981374c7df957492d9423a3c650a35cb5e7253598651070adf4d9f1df2a",
+    "gnss1_reconstructed_nav": "0a0861544e0f2e5cd46cee62d876232d5d2afdf6f7287d1c9bbcaf91bb6a5e92",
+    "gnss1_reconstructed_obs": "54e1f3cb535740645d0c6d1e4e5d2dbbe54959e9b758939d6e1b7eebbd09bb43",
+    "gnss1_reconstructed_ubx": "24177f2d6f25c0b614f769e66c4e4147eea727f3a7f55e22d5e04419eaa10f8b",
+    "gnss2_reconstructed_nav": "eaf382e3214f40aa0aacb1691a84110e2e12d8d897e95019c74ae1c21f9a0de8",
+    "gnss2_reconstructed_obs": "4ce6deff4b74573db8c7ac1f46aabe8a11e9bae4b0e45f31c2dde18a6caf4c89",
+    "gnss2_reconstructed_ubx": "0876d7e67441ddfce66b4ce8e39838b4245bddab3d6d3cce60d5eb9bad42c2c2",
+    "rtklib_bridge_sha256": "6cc83e59ec017d2a187dc6606af80d12508054e49cacc5fe2a632e2cb4ac1398",
+    "rtklib_commit": "180043ee24b6d2b168f98b64be15f69d50046b1a",
+    "rtklib_license": "BSD-2-Clause",
+    "rtklib_license_sha256": "219747832d49ee958457b2934080ab8d94bd9d8e45fcb1c36f89776fd2c5ed8a",
+    "rtklib_remote": "https://github.com/tomojitakasu/RTKLIB.git",
+    "rtklib_tracked_worktree_clean": "true"
+  },
+  "raw_source_hashes": {
+    "gnss1_raw": "5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027",
+    "gnss2_raw": "39249696329530452a1049b5b39e2c1d8f7e89ae2190d2c95bce70f5b4f44583",
+    "raw_hash_lock": "f6e5d7965d17857e5b4a846501883f4675f2331a1164fab3de9e5ba9470f1ad7"
+  },
+  "ready_for_paper_claims": false,
+  "receiver_imu_as_body_imu": false,
+  "row_conservation": true,
+  "runtime_source_hashes": {
+    "configs/paper_rebuild/horizontal_literature/PHASE2_EXT02_CWLS_CONTRACT_V1.yaml": "ecfeaeddb8707ed5097746db2c6fe03b5c17367084db0ff354f76643b2139ba7",
+    "configs/paper_rebuild/horizontal_literature/STANDARD_HEADING_STREAM_SCHEMA_V1.yaml": "0d524fcc219ec580638a30ddf8665f4d67521df99568deffea6360440c4c62c9",
+    "scripts/paper_rebuild/run_horizontal_literature_phase2.py": "8810712f2b50bd63587b121fce55ba14ca623fc485f533f6a9703a758268835f",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py": "ea65b90282fdeee943eca4764da18fb05fcb9a46b9a7cf44d477d3ff60976f2c",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": "82fccd3a6df1af6dee30739954934d7210339f0c1723a06d6c0b7486d41682a7",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "976e837207d7bd05d6d0a9e72406fd8f8244968c60f18e9e0bfd3d94fe9b04a5"
+  },
+  "schema_version": "horizontal_literature.phase2.native_summary.v1",
+  "semisynthetic_data_used": false,
+  "source_fingerprint": "03e3b7141de02872991f295f76ebab289b03a7c7873ca3a27bebd8308b4666c3",
+  "status_baseline_solver_input": false,
+  "success_row_count": 1057,
+  "synthetic_data_used": false,
+  "terminal_status": "PASS_PHASE2_EXT02_CWLS_C00_READY_FOR_NATIVE_COMPARISON",
+  "thread_environment": {
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  },
+  "trace_open_count": 0,
+  "trace_used_online": false,
+  "workers": 16
+}

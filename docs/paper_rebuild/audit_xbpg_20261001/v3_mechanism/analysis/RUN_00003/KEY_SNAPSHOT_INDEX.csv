@@ -1,0 +1,4 @@
+source_path,source_line_1based,source_byte_offset,source_line_bytes,run_id,event_seq,source,n12_classification,n16_classification
+<MECHANISM_ROOT>/replays/RUN_00003/observed/observer/events.jsonl,270,407485,8721,RUN_00003,270,receiver_position,SA_DISABLED_SHADOW_NOT_APPLIED,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_00003/observed/observer/events.jsonl,277,442814,9822,RUN_00003,277,dual_antenna_yaw,SA_DISABLED_SHADOW_NOT_APPLIED,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_00003/observed/observer/events.jsonl,284,479961,10143,RUN_00003,284,receiver_velocity,SA_DISABLED_SHADOW_NOT_APPLIED,NOT_ELIGIBLE

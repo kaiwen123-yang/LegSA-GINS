@@ -1,0 +1,7 @@
+candidate_id,scope,original_definition,candidate_definition,preserved,classification
+N12_ONLY,OIM mean and quadratic form,dz with current P,nu=dz-Hdx_before with same current P H pre-SA R,dof normalization thresholds caps LSIM gates Joseph EKF raw dz,conditional_innovation_contract_defect
+N12_ONLY,diagnostic norm fields,metadata innovation and result norms all raw dz,metadata remains raw dz while innovation and result norms are conditional nu,raw dz retained in events and EKF arguments,necessary_field_semantic_change_not_parameter_tuning
+N16_ONLY,std quality dimension domain,all std_xyz axes including disabled D sentinel,explicit active-axis mask default all with horizontal_2d NE only,actual std values H R dof other metadata OIM cap,active_observation_domain_defect
+N09_RP_ONLY,invalid GNSS record RP scheduling,all-invalid GNSS record has no scheduled update time,separate pending event with qualified RP-only original res branch,valid GNSS path and flags other sources gates input and windows,narrow_design_scope_extension_for_confirmed_short_circuit
+N09_RP_ONLY,counts and splitting,GNSS updateCount reflects GNSS epochs,keep count plus separate RP-only consumption and possible extra propagation segment,original runtime counter validator and original source-row reuse,necessary_execution_and_diagnostic_scope
+COMMON_OBSERVER,full covariance diagnostics,old checkCov diagonal-only remains,read-only full21 covariance diagnostics at each candidate IMU end,original P scientific checks and stopping rules,observation_only_not_a_covariance_fix

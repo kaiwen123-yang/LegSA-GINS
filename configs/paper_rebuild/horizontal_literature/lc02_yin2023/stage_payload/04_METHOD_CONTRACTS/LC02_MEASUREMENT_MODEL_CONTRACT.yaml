@@ -1,0 +1,23 @@
+schema_version: lc02.measurement_model.v1
+scope: POSITION_ONLY_PAPER_FAITHFUL
+measurement_dimension: 3
+ordering: [north, east, down]
+residual:
+  definition: "Z_k = r_INS,predicted_antenna^n - r_GNSS,antenna^n"
+  units: m
+  sign_provenance: CITED_SOURCE
+H:
+  dimension: [3, 21]
+  blocks: [I3, ZERO3, "skew(C_b^n*l_GNSS^b)", ZERO3, ZERO3, ZERO3, ZERO3]
+  attitude_block_dimension: [3, 3]
+  attitude_block_sign: positive
+  provenance_class: PAPER_DIRECT
+R:
+  dimension: [3, 3]
+  ordering: [north, east, down]
+  construction_contract: LC02_IMPROVED_R_CONTRACT.yaml
+gnss_velocity:
+  present_in_BY2: true
+  used_online: false
+  reason: "No source-closed paper velocity measurement equation."
+quality_fields_are_measurement_metadata: true

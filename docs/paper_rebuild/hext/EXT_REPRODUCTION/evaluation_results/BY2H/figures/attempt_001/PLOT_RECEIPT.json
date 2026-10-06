@@ -1,0 +1,16 @@
+{
+  "status": "COMPLETED_VISUAL_REVIEW_PENDING",
+  "attempt": 1,
+  "sequence_id": "BY2H",
+  "source": "ERROR_SERIES.csv",
+  "source_sha256": "a6054656b009193cc03025f7e5659338ee0c6be86a32dce13270113b582e925c",
+  "reference_opens": 0,
+  "evaluator_invocations": 0,
+  "outputs": [
+    "HEADING_COMPARISON.png",
+    "HEADING_COMPARISON.pdf"
+  ],
+  "png_width_pixels": 4200,
+  "reference_label_note": "Fixposition-derived reference; not independent truth",
+  "plot_gap_rule_seconds": 0.300001
+}

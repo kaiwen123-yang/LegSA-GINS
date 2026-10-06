@@ -1,0 +1,379 @@
+{
+  "scope": "Presentation-only existing CSV redraw",
+  "no_solver_calls": true,
+  "no_evaluator_calls": true,
+  "raw_reference_payload_opens": 0,
+  "script_sha256": "cbfa62e34ed1ff677d8d5445ef92037adcf896f0216a933f2d3f0d5723b75461",
+  "utilities_sha256": "e28173802e004aac9c5421b4e5439ae7e277f80e35ca16f2ed8b447673dd9371",
+  "inputs": [
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UA01_INPUT_SHA256.json",
+      "file_sha256": "46c0deeffe0779ad2b63430aff5512f3096c93006b9382e443879999d1015a2c",
+      "bytes": 21522,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv",
+      "file_sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+      "decompressed_sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+      "bytes": 323074,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/original_natural_velocity_pair_metrics.csv.gz",
+        "sha256": "aca163ae23ccee46840c945df29c2de0486d507bbde9648388b70699f4d3a9fc",
+        "plain_sha256": "8a19a930576c3b3097e1b5e68d3d3e8871be52aa1a32ad7af4c4a44f87408d47",
+        "rows": 6,
+        "columns": [
+          "run_id",
+          "sequence_id",
+          "configuration_id",
+          "horizontal_rmse_m",
+          "yaw_rmse_deg",
+          "matched_epoch_count",
+          "output_epoch_count"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00002/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "file_sha256": "77549e7b3d05d29d6101ea866bec0dcd3900d0a6b94adebc12a575857371812f",
+      "decompressed_sha256": "fd663490b69d2399bc65fdf2d104b21e8417e027c0c171fd3e891e16675e9f05",
+      "bytes": 5787163,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2_F02_full_saved_errors.csv.gz",
+        "sha256": "0baf0831ed80488f48289a3a898f74dc3385aeed062fdc8e83f07e5cce605200",
+        "plain_sha256": "9b4c335512b26c3edb68ac4a9bfb95649b75710f6d81daa80331f17aff5ed575",
+        "rows": 56642,
+        "columns": [
+          "time",
+          "horizontal_err_m",
+          "yaw_err_deg"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00002/V3_RUNTIME_CONFIG.yaml",
+      "file_sha256": "3e5c21e94cea327b9c4aa2f7c095f5f7eb9662cafc66a3759d6d4f3d084f8e79",
+      "bytes": 7864,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00003/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "file_sha256": "6aa5848dac4666630bc899c3b37627f50348d21cba17106bbd1d4bd1996cda57",
+      "decompressed_sha256": "fb8b713a1bb383e9d00f0a223de2cb08721d3cb368a205df04fe50135101f40f",
+      "bytes": 5787391,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2_F03_full_saved_errors.csv.gz",
+        "sha256": "dd2572cb9bb3b6e98b8376a3b4ab4fec44ef24da9ae5af52e97fe0401f33405d",
+        "plain_sha256": "58eb04752e5943970534b17482d94d171bb824ba3b784eaa8f246e877cd3660b",
+        "rows": 56642,
+        "columns": [
+          "time",
+          "horizontal_err_m",
+          "yaw_err_deg"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00003/V3_RUNTIME_CONFIG.yaml",
+      "file_sha256": "ecbd659c0d57665c2cff897e71cbbdbbb7d89f19662d748541adf7d6f62c1a4d",
+      "bytes": 7855,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00002/RUN_MANIFEST.json",
+      "file_sha256": "65397db8aebc5d1c2f0bd35dabea75a7a979ec1e6ba482cbc34ef3b521541244",
+      "bytes": 20177,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00003/RUN_MANIFEST.json",
+      "file_sha256": "1a1e7a098cb9d8dbb513e7433dc68dd4b833d8fb58a83536b22f53400eccceef",
+      "bytes": 20194,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F02/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "file_sha256": "13b20be5f3145e5b041701f0cfcf993928143d361e112baada69abaef83002f9",
+      "decompressed_sha256": "b39d2619b41d77b4c6a66e4d10ce7e45f0e6fbed2bb27262b7d1fdf918093f58",
+      "bytes": 5982464,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2H_F02_full_saved_errors.csv.gz",
+        "sha256": "93406e8e934f0d9e56e9b4e9e681d6e25a81092176cafea4ef3957b4eb27241d",
+        "plain_sha256": "5c13c5d0c9c148c2c607aa1c934dfcb9e249a673b9ed1553eda4456e1e91b9a2",
+        "rows": 58580,
+        "columns": [
+          "time",
+          "horizontal_err_m",
+          "yaw_err_deg"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F02/V3_RUNTIME_CONFIG.yaml",
+      "file_sha256": "a5131fb4d6f9e5c8cb9fcbcfe71feb840bdca056f3e304308e51b2e5d94e2575",
+      "bytes": 7963,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F03/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "file_sha256": "4a9ded9aa8d2c3523c271aff8c9d8eb59961549a95e9dd2098518455ad1ee922",
+      "decompressed_sha256": "56c9f8c1ebd88814596453d746086fe97e3f48e7a1df724ade0fb58d9b2431d3",
+      "bytes": 5990603,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2H_F03_full_saved_errors.csv.gz",
+        "sha256": "34299976c0def6997722c6911cd5d45f3ea323ef44d77216ce7f5b11c31274fc",
+        "plain_sha256": "472368b0351304ae22d705f296598c560af26492018551f15b4c9a7e6c4a5870",
+        "rows": 58580,
+        "columns": [
+          "time",
+          "horizontal_err_m",
+          "yaw_err_deg"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F03/V3_RUNTIME_CONFIG.yaml",
+      "file_sha256": "b58766c5b4200a6a16d50c9f4b49379a5c9ae8e33e86484a16f382f5aee6aed9",
+      "bytes": 7941,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F02/RUN_MANIFEST.json",
+      "file_sha256": "2404f19b6ea1ec5f2b7c385a46b0329509c82701f5154a3ee0203bb5fe9cb7e7",
+      "bytes": 20157,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F03/RUN_MANIFEST.json",
+      "file_sha256": "0063b3fb0ed96592e803c01de4fa9d503a622ddf4ae4523d36e2c1cedd26bc40",
+      "bytes": 20163,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F02/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "file_sha256": "f9ea3df87aff0aff26876bc6f3933ad48e269383f5c0ebaaaea570f235998c45",
+      "decompressed_sha256": "634c90646622dcbbb269ca663038619ea3052c12547e9226ca9848ba2e3a94e0",
+      "bytes": 7794926,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2O_F02_full_saved_errors.csv.gz",
+        "sha256": "b9b149a511a77cb59c70d25ccc385544f763e7a24195a2933ef9885024536fde",
+        "plain_sha256": "ab21850f881df8e0ac3b1354e7741be22be3b6c21d04ad32e56257a40470f6e9",
+        "rows": 76548,
+        "columns": [
+          "time",
+          "horizontal_err_m",
+          "yaw_err_deg"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F02/V3_RUNTIME_CONFIG.yaml",
+      "file_sha256": "b2e56de0da9a03a19e1a5976d0b7785839fa9b44bdd75a3662b0fbd8e44cf09d",
+      "bytes": 7970,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F03/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "file_sha256": "1e551aa58a8465a6b2c3f29bc43cb44848d75cf9b958481f8c52a5fa33840426",
+      "decompressed_sha256": "2d6524f79c810e087533d5c9292803702012744b48faf4a7b65f5c8282559a20",
+      "bytes": 7790061,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2O_F03_full_saved_errors.csv.gz",
+        "sha256": "cc4e3bce9708fff43da24ad7fe8ce05055dc5a34a4cd1d802bb8d07ce7a8497e",
+        "plain_sha256": "28a5091006dcd6d88a0fd92838d7d20898594c5a992727e8f9af8e72f8e75bb2",
+        "rows": 76548,
+        "columns": [
+          "time",
+          "horizontal_err_m",
+          "yaw_err_deg"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F03/V3_RUNTIME_CONFIG.yaml",
+      "file_sha256": "6efc5ebcd925083add3d7fba3a0628fbb8ea5e4fd6fbbe183a208f9f6576d96d",
+      "bytes": 7948,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F02/RUN_MANIFEST.json",
+      "file_sha256": "a57103244fc248c7a5e0e16a4d535658c0d108bfb1d82b2d91a417e7c315697f",
+      "bytes": 20166,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F03/RUN_MANIFEST.json",
+      "file_sha256": "edfa7003e4f91d92e2c9a5110e4d23997c9c6bb9470aaaf6a63d521dfad9da3a",
+      "bytes": 20171,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00004/PORT_GNSS_UPDATE_TRACE.csv.gz",
+      "file_sha256": "316ccf3d2bb9cd327ebe6917a0d1147bba339b5edf48cb929e43a02ec9679fd7",
+      "decompressed_sha256": "f79aef0a0dd0a2fa291a493dc5ac56408adccd57c28024f855529c47431b5781",
+      "bytes": 19811,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2_all_1369_native_heading_update_modes.csv.gz",
+        "sha256": "634880982079d82ab56ebc70c9b388dd842b89949e9a081100cdcda0af658a94",
+        "plain_sha256": "f79aef0a0dd0a2fa291a493dc5ac56408adccd57c28024f855529c47431b5781",
+        "rows": 1369,
+        "columns": [
+          "update_index",
+          "gnss_time",
+          "imu_pre_time",
+          "imu_cur_time",
+          "res",
+          "position_update",
+          "velocity_update",
+          "yaw_update",
+          "yaw_mode",
+          "yaw_residual_deg",
+          "residual_pos_norm",
+          "residual_vel_norm"
+        ]
+      }
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00004/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "file_sha256": "a98f1a5f7591c2365b0fd73b6a1146e0d6df3de2a06414fd067fc9b66b928548",
+      "decompressed_sha256": "cce51f6da0474d6e28802cd9f19e107869b994b352ce7e6548e959e4b76c7da0",
+      "bytes": 5786321,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2_Proposed_yaw_errors.csv.gz",
+        "sha256": "160a351c09d5f59344afeb234de23a24cc9d59dc19934d24c1c472f9350314b5",
+        "plain_sha256": "e0f393e6f991bc01b9d3a68e24470aaedd5c13f3120a13489372b4e57a6276d4",
+        "rows": 56642,
+        "columns": [
+          "time",
+          "yaw_err_deg"
+        ]
+      }
+    }
+  ],
+  "figures": [
+    {
+      "id": "R11_BY2_receiver_velocity_toggle",
+      "dominant_claim": "The joint velocity and heading-handling contrast has sequence-dependent outcomes.",
+      "caption": "Full saved F02/F03 H/yaw curves; F02 uses fixed 2.933193-degree yaw weighting without Scheme-C, while F03 enables RV and quality/residual yaw gating. This is not a single-factor RV contrast. No rescore, smoothing or interpolation.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R11_BY2_receiver_velocity_toggle.png",
+          "sha256": "55ca44fa2a9bbbace620b0b71883eaab837760331beba8b09fed793aaea83f64",
+          "bytes": 990621
+        },
+        {
+          "path": "R11_BY2_receiver_velocity_toggle.pdf",
+          "sha256": "8602202f63a8bded05fe31f49bc4f2d77ddd4dc2903686d44ea6f473740d5100",
+          "bytes": 2126214
+        },
+        {
+          "path": "R11_BY2_receiver_velocity_toggle.svg",
+          "sha256": "5d0e3a9e6d8513e9bee4570d577ba3dda337e95afc17467f6b857bf2557b357d",
+          "bytes": 5395123
+        }
+      ],
+      "source_identity": "ORIGINAL_V3",
+      "all_saved_samples": true,
+      "comparison_type": "JOINT_RV_AND_YAW_HANDLING_STRUCTURAL_CHANGE",
+      "isolated_receiver_velocity_effect_identifiable": false,
+      "legacy_filename_locator_only": true
+    },
+    {
+      "id": "R11_BY2H_receiver_velocity_toggle",
+      "dominant_claim": "The joint velocity and heading-handling contrast has sequence-dependent outcomes.",
+      "caption": "Full saved F02/F03 H/yaw curves; F02 uses fixed 2.933193-degree yaw weighting without Scheme-C, while F03 enables RV and quality/residual yaw gating. This is not a single-factor RV contrast. No rescore, smoothing or interpolation.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R11_BY2H_receiver_velocity_toggle.png",
+          "sha256": "a46245cda809d195cd5dd1d18883a3be9dfaef65e2a30b1a5a950c428abb0f12",
+          "bytes": 1076778
+        },
+        {
+          "path": "R11_BY2H_receiver_velocity_toggle.pdf",
+          "sha256": "b3bdba9910a5507406cdae7b1ff83c00dfabbc740d910b8570a1f52f5558e8bc",
+          "bytes": 2208970
+        },
+        {
+          "path": "R11_BY2H_receiver_velocity_toggle.svg",
+          "sha256": "28d67baa904160991c06f895b204b8bda06a862e4365d1a349c5db92db39e033",
+          "bytes": 5577592
+        }
+      ],
+      "source_identity": "ORIGINAL_V3",
+      "all_saved_samples": true,
+      "comparison_type": "JOINT_RV_AND_YAW_HANDLING_STRUCTURAL_CHANGE",
+      "isolated_receiver_velocity_effect_identifiable": false,
+      "legacy_filename_locator_only": true
+    },
+    {
+      "id": "R11_BY2O_receiver_velocity_toggle",
+      "dominant_claim": "The joint velocity and heading-handling contrast has sequence-dependent outcomes.",
+      "caption": "Full saved F02/F03 H/yaw curves; F02 uses fixed 2.933193-degree yaw weighting without Scheme-C, while F03 enables RV and quality/residual yaw gating. This is not a single-factor RV contrast. No rescore, smoothing or interpolation.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R11_BY2O_receiver_velocity_toggle.png",
+          "sha256": "0753f9a66cead6e910b170ddb6ea141e495aea26c97502edf0f80201e4ae6567",
+          "bytes": 755575
+        },
+        {
+          "path": "R11_BY2O_receiver_velocity_toggle.pdf",
+          "sha256": "07a3ce11c2d5d98d110e13f027af4d2b7eeccbc1a37ed6c39dbac13e25a93330",
+          "bytes": 2776177
+        },
+        {
+          "path": "R11_BY2O_receiver_velocity_toggle.svg",
+          "sha256": "55df5c7a4ad3b8784971279736aa3845c80f25b6dab2ccf8aea0bd204a91f4ba",
+          "bytes": 7291797
+        }
+      ],
+      "source_identity": "ORIGINAL_V3",
+      "all_saved_samples": true,
+      "comparison_type": "JOINT_RV_AND_YAW_HANDLING_STRUCTURAL_CHANGE",
+      "isolated_receiver_velocity_effect_identifiable": false,
+      "legacy_filename_locator_only": true
+    },
+    {
+      "id": "R12_BY2_native_heading_decisions",
+      "dominant_claim": "Normal/downweight/reject decisions occurred in the original native run.",
+      "caption": "1369 saved categorical native decisions alongside all saved Proposed yaw errors; no inferred innovation or causal attribution.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R12_BY2_native_heading_decisions.png",
+          "sha256": "40969f30b9d8e23870d7fe8a71878d26f6f4ea7f46b9e34f1b603321c9d394ae",
+          "bytes": 669569
+        },
+        {
+          "path": "R12_BY2_native_heading_decisions.pdf",
+          "sha256": "41f90a8f94faed02d257add09a08e131551b57769dd08c56bb30987001488443",
+          "bytes": 565750
+        },
+        {
+          "path": "R12_BY2_native_heading_decisions.svg",
+          "sha256": "2af91dc85d27eb469e6e077968563258e22ce751ffb0a7b582258b5fd99cb2ef",
+          "bytes": 1534134
+        }
+      ]
+    }
+  ],
+  "heading_native_event_counts": {
+    "NORMAL": 1225,
+    "DOWNWEIGHT": 123,
+    "REJECT": 21
+  },
+  "original_evaluation_identity_preserved": true,
+  "editorial_rv_confounding_correction": true,
+  "no_isolated_RV_causal_claim": true
+}

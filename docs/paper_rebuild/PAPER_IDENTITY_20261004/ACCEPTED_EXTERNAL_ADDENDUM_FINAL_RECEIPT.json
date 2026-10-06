@@ -1,0 +1,328 @@
+{
+  "schema": "gpss.accepted.external.diagnostic.addendum.v1",
+  "completed_utc": "2026-10-04T11:07:54.819215+00:00",
+  "all_checks_passed": true,
+  "submission_ready": false,
+  "actual_counts": {
+    "body_words": 5303,
+    "abstract_words": 198,
+    "keyword_count": 6,
+    "main_tables": 4,
+    "main_figures": 6,
+    "number_checks_passed": 219,
+    "number_checks_failed": 0,
+    "all_main_prose_words": 6127
+  },
+  "counts_boundary": "Body excludes captions/tables/headings/equations/abstract/declarations/references; all-prose is6127, not whole-article word-limit certification",
+  "base_commit_at_prior_story": "98d2e9d717953901be0ffbdf29e69ca105e1ff5e",
+  "current_base_commit": "25e437bbffff96102d9706420eaf850a7e976231",
+  "invariance_receipt": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/PAPER_IDENTITY_20261004/ACCEPTED_EXTERNAL_ADDENDUM_INVARIANCE.json",
+    "sha256": "80c15423f9f6384ad877ed4b2e680023612a46693e9c01a56449fd0efa29007f"
+  },
+  "old204_number_fields_unchanged": true,
+  "old31_tables_and36_figure_QA_assets_unchanged": true,
+  "prior_abstract_and_primary6_1_to6_5_text_exact": true,
+  "accepted_new_table_rows": 9,
+  "accepted_new_table_numeric_cells_checked": 48,
+  "upstream_accepted_evidence_byte_copies": [
+    {
+      "copy": "ext_nominal_summary.csv",
+      "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/EXT_MEASURAND_20261004/SUMMARY.csv",
+      "sha256": "7c5b570b2f06353bea91ff707b73ce8f3261adcb98218d9cbd9c41fba5fc356a",
+      "bytes": 2219,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "ext_nominal_result_receipt.json",
+      "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/EXT_MEASURAND_20261004/RESULT_RECEIPT.json",
+      "sha256": "3c997227ea57c0059cc1083ebe5d8f0143b0488758a50ee5cfab0d7c5f5df0f0",
+      "bytes": 1947,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "ext_nominal_root_review.json",
+      "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/EXT_MEASURAND_20261004/ROOT_OFFLINE_RESULT_REVIEW.json",
+      "sha256": "a9b08c9a99a25da5f0f7f2e6d8760fe7b9e626a0d31c1fca52c3e5c7b91b6844",
+      "bytes": 1393,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_primary_own.csv",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION/PRIMARY_DYNAMIC_ONLY_OWN_VALID.csv",
+      "sha256": "909423246d8944c1f39e7069e37c011bbcef1cba57dbac6173836b778c530a27",
+      "bytes": 6606,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_all36.csv",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION/ALL_36_METRIC_ROWS.csv",
+      "sha256": "d2a1e2b016230beabbbc9fb56f39c0910581182b00866f43787e209e88f76e29",
+      "bytes": 24929,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_initializations.csv",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION/ALL_11_INITIALIZATION_RECORDS.csv",
+      "sha256": "bb935108dda9d2b8b85a2714b11693fa57fa1e923af0078e77c72cdf75c3a027",
+      "bytes": 3950,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_publication_receipt.json",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION/PUBLICATION_RECEIPT.json",
+      "sha256": "dc1a5ccbfe2d55a74f427b100b12aefa9e9a70dbbda3c3eb1860e596ebdcfeba",
+      "bytes": 2493,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_root_review.json",
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/FGO_SEGMENTED_ROOT_INDEPENDENT_REVIEW.json",
+      "sha256": "93eaed3a7ac9c280d6be895668c01cc96e7fc3e39e528ab3e829c18c14ea06f8",
+      "bytes": 9866,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_preregistration.json",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PREREGISTRATION.json",
+      "sha256": "20a4ac31da1ef0cb0759e23bac60eb059373e1e7e9fa2dcff52fd065d0238b24",
+      "bytes": 167707,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_native_seal.json",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/ALL_NATIVE_SEALED.json",
+      "sha256": "3af7f0c6d010d83c2ea6763f97189ae702cb761d374cb7410ce9fd51c14423ab",
+      "bytes": 24861,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_offline_complete.json",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/ALL_OFFLINE_COMPLETE.json",
+      "sha256": "374cee2501ab7fcfa2432567e056eb9dd6842c7db8a1bda989b5027bce1c815d",
+      "bytes": 10249,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_BY2_control.json",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/BY2_NO_RESTART_CONTROL.json",
+      "sha256": "8208b6ba3a2fca55d1efe83cd8b449f4258f9a1baceeb32a87f4a056d57524d6",
+      "bytes": 398,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    }
+  ],
+  "peer_document_review": {
+    "reviewer": "/root/fgo_reproduction_audit",
+    "actual_scope": "S26 generated1195-1223/source378-396 and all9table rows",
+    "message_conclusion": "No blocking factual issue; suggested single-initialization wording adopted",
+    "boundary": "Document/source-role/transcription review, not a new native/evaluator/calibration/measurement oracle"
+  },
+  "scientific_native_generator_evaluator_invocations": 0,
+  "reviewer_raw_reference_payload_opens": 0,
+  "scientific_source_changes": 0,
+  "old_sealed_stage_or_receipt_changes": 0,
+  "main_figures_regenerated": 0,
+  "git_stage_commit_push_by_this_agent": false,
+  "remaining_author_and_measurement_facts": "Physical acquisition/installation-session mapping, phase-centre geometry/uncertainty, timing/latency, SDK semantics, reference POI/cross covariance/independence, author declarations; N08/N17/gyro lever approximation retained. Formal Word/bibliography and whole-article length remain later work. No full6468rerun or T-Mech requirement.",
+  "files": [
+    {
+      "path": "docs/paper_rebuild/PAPER_IDENTITY_20261004/ACCEPTED_EXTERNAL_ADDENDUM_CHANGELOG.md",
+      "bytes": 2319,
+      "sha256": "0c11dab19aaeb8e64c8321bf2fb5d39ed6609fde8692b19bd7bdfd41eae540f0",
+      "before_sha256": null
+    },
+    {
+      "path": "docs/paper_rebuild/PAPER_IDENTITY_20261004/ACCEPTED_EXTERNAL_ADDENDUM_COMMIT_PATHS.txt",
+      "bytes": 2020,
+      "sha256": "ab40c8b8fff84e28e0093ce1f294ed9b5db9d739952b694818a70b69d5cac2db",
+      "before_sha256": null
+    },
+    {
+      "path": "docs/paper_rebuild/PAPER_IDENTITY_20261004/ACCEPTED_EXTERNAL_ADDENDUM_INVARIANCE.json",
+      "bytes": 15356,
+      "sha256": "80c15423f9f6384ad877ed4b2e680023612a46693e9c01a56449fd0efa29007f",
+      "before_sha256": null
+    },
+    {
+      "path": "docs/paper_rebuild/PAPER_IDENTITY_20261004/ACCEPTED_EXTERNAL_ADDENDUM_PRE_CHANGE.json",
+      "bytes": 262648,
+      "sha256": "d3806e370dbe9e3612cda4ed94f12b5c74a41138bdbea32dd18892401b9f445e",
+      "before_sha256": null
+    },
+    {
+      "path": "docs/paper_rebuild/PAPER_IDENTITY_20261004/ACCEPTED_EXTERNAL_ADDENDUM_READ_COVERAGE.csv",
+      "bytes": 6683,
+      "sha256": "82d69c67ce32b741129f405c88b069d794dd907fc0122e26fb0fc309d3dc1e88",
+      "before_sha256": null
+    },
+    {
+      "path": "docs/paper_rebuild/PAPER_IDENTITY_20261004/GPS_TIM_CLAIMS_AND_READINESS.md",
+      "bytes": 16599,
+      "sha256": "a4794eee5389c4d38a4bcdb0bdc1be642418c26944d7e8178cd507b598c1022d",
+      "before_sha256": null
+    },
+    {
+      "path": "paper_package/gpss_v0/CLAIM_SPECS.json",
+      "bytes": 130743,
+      "sha256": "07d1dc2d3fed69eab51510f4376241ebdc46d78da98f3f2224fa36e7f5540969",
+      "before_sha256": "7fa516d8a6609eb28f66320a954c47f8f43bf69c47fe2481d34d399021be9226"
+    },
+    {
+      "path": "paper_package/gpss_v0/FINAL_QA.json",
+      "bytes": 4437,
+      "sha256": "dc7eb99a6cc3aa44f306485da82e5d66324cec07ca0db02f963db98a8a5c944c",
+      "before_sha256": "8143384ad339ae07adda686ef11c40ee8b1af61ad50bd56b801a17ddc9b74476"
+    },
+    {
+      "path": "paper_package/gpss_v0/MANUSCRIPT_GPSS_v0.md",
+      "bytes": 52130,
+      "sha256": "e96eb4b8390a981d8ffe25b7b43b6e310e2b203daf6880ae472ce6e9cb3a2e15",
+      "before_sha256": "e020f8bca28e500f152cc96b4f3864620e66bc73e85517693f711c0d097afb28"
+    },
+    {
+      "path": "paper_package/gpss_v0/NOTES_ZH.md",
+      "bytes": 4458,
+      "sha256": "0b7d3f6c716da936e06e630fce615c4b314b1b6b9cc5d7daf766f8e3d40db28b",
+      "before_sha256": "cee635322df7ef20f0811ef790b784585b3ec57681c422aca81a41af2e96dc8d"
+    },
+    {
+      "path": "paper_package/gpss_v0/NUMBER_LEDGER.csv",
+      "bytes": 215145,
+      "sha256": "2b3a5e40a82a91f5a65b5511d332075cab7618a9982969d183ccebcb418cebf2",
+      "before_sha256": "15cd8931ab4346c4236a4ba930d13f95cce8009d82f755e568f41f5e6fd3da59"
+    },
+    {
+      "path": "paper_package/gpss_v0/NUMBER_LEDGER_CHECK.csv",
+      "bytes": 11747,
+      "sha256": "b08eb08a5454f0d106829c5d50d7ad3fd4400015cdc267a4ec9f5a907b806200",
+      "before_sha256": "387b91b19ada1aec03360936f0b6733b81582cfed76a79edde2a73a6601d7dcf"
+    },
+    {
+      "path": "paper_package/gpss_v0/READ_FILES.json",
+      "bytes": 33408,
+      "sha256": "4fbee078313dd6577ccc271309202eea9edb10766f6fbd8b395d5b9d2dbb8ed1",
+      "before_sha256": "cee32276b8b564b94594d7ce01868a009244d1df2448f26fd60d928cd72b9649"
+    },
+    {
+      "path": "paper_package/gpss_v0/SUPPLEMENT_GPSS_v0.md",
+      "bytes": 176540,
+      "sha256": "2889ac076f33ffb0b36ae305136da3cd0a82f04432e132e3709390db4a1d2f7d",
+      "before_sha256": "3b9602c7c1c60a8d8fa48749005c87b9b3c095541199fcca609f79dfb5881270"
+    },
+    {
+      "path": "paper_package/gpss_v0/TABLE_MAP.csv",
+      "bytes": 9596,
+      "sha256": "50fa302e69ad93fe442edf42b6b8a40fa5379c430542227ea8fb3ef15c119630",
+      "before_sha256": "08a4f81fecb6d23c338fe099cf36db4ba18b3a9fc2c404bc9d28eb03148ccec8"
+    },
+    {
+      "path": "paper_package/gpss_v0/evidence/RESULT_IDENTITY_MAP.json",
+      "bytes": 12391,
+      "sha256": "a8a18374aac393389d3d7c75dfd577128419807725227388dc788319a550fce9",
+      "before_sha256": "5b53efd21411db7ad8fe81092ed2dcb69731eb54c34d6deca0f3ef905380f305"
+    },
+    {
+      "path": "paper_package/gpss_v0/evidence/ext_nominal_result_receipt.json",
+      "bytes": 1947,
+      "sha256": "3c997227ea57c0059cc1083ebe5d8f0143b0488758a50ee5cfab0d7c5f5df0f0",
+      "before_sha256": null
+    },
+    {
+      "path": "paper_package/gpss_v0/evidence/ext_nominal_root_review.json",
+      "bytes": 1393,
+      "sha256": "a9b08c9a99a25da5f0f7f2e6d8760fe7b9e626a0d31c1fca52c3e5c7b91b6844",
+      "before_sha256": null
+    },
+    {
+      "path": "paper_package/gpss_v0/evidence/ext_nominal_summary.csv",
+      "bytes": 2219,
+      "sha256": "7c5b570b2f06353bea91ff707b73ce8f3261adcb98218d9cbd9c41fba5fc356a",
+      "before_sha256": null
+    },
+    {
+      "path": "paper_package/gpss_v0/evidence/fgo_segmented_BY2_control.json",
+      "bytes": 398,
+      "sha256": "8208b6ba3a2fca55d1efe83cd8b449f4258f9a1baceeb32a87f4a056d57524d6",
+      "before_sha256": null
+    },
+    {
+      "path": "paper_package/gpss_v0/evidence/fgo_segmented_all36.csv",
+      "bytes": 24929,
+      "sha256": "d2a1e2b016230beabbbc9fb56f39c0910581182b00866f43787e209e88f76e29",
+      "before_sha256": null
+    },
+    {
+      "path": "paper_package/gpss_v0/evidence/fgo_segmented_initializations.csv",
+      "bytes": 3950,
+      "sha256": "bb935108dda9d2b8b85a2714b11693fa57fa1e923af0078e77c72cdf75c3a027",
+      "before_sha256": null
+    },
+    {
+      "path": "paper_package/gpss_v0/evidence/fgo_segmented_native_seal.json",
+      "bytes": 24861,
+      "sha256": "3af7f0c6d010d83c2ea6763f97189ae702cb761d374cb7410ce9fd51c14423ab",
+      "before_sha256": null
+    },
+    {
+      "path": "paper_package/gpss_v0/evidence/fgo_segmented_offline_complete.json",
+      "bytes": 10249,
+      "sha256": "374cee2501ab7fcfa2432567e056eb9dd6842c7db8a1bda989b5027bce1c815d",
+      "before_sha256": null
+    },
+    {
+      "path": "paper_package/gpss_v0/evidence/fgo_segmented_preregistration.json",
+      "bytes": 167707,
+      "sha256": "20a4ac31da1ef0cb0759e23bac60eb059373e1e7e9fa2dcff52fd065d0238b24",
+      "before_sha256": null
+    },
+    {
+      "path": "paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+      "bytes": 6606,
+      "sha256": "909423246d8944c1f39e7069e37c011bbcef1cba57dbac6173836b778c530a27",
+      "before_sha256": null
+    },
+    {
+      "path": "paper_package/gpss_v0/evidence/fgo_segmented_publication_receipt.json",
+      "bytes": 2493,
+      "sha256": "dc1a5ccbfe2d55a74f427b100b12aefa9e9a70dbbda3c3eb1860e596ebdcfeba",
+      "before_sha256": null
+    },
+    {
+      "path": "paper_package/gpss_v0/evidence/fgo_segmented_root_review.json",
+      "bytes": 9866,
+      "sha256": "93eaed3a7ac9c280d6be895668c01cc96e7fc3e39e528ab3e829c18c14ea06f8",
+      "before_sha256": null
+    },
+    {
+      "path": "paper_package/gpss_v0/figures/scripts/assemble_manuscript.py",
+      "bytes": 14388,
+      "sha256": "e917c9234c921f9853c35c3426ba78c91fbe29946028922688f4702a0217d512",
+      "before_sha256": "a07d6c5819f61bc22cd3787321a20af74a2fa769e2a8a94037a92da2212b2f4d"
+    },
+    {
+      "path": "paper_package/gpss_v0/figures/scripts/quality_check.py",
+      "bytes": 6908,
+      "sha256": "89bd965e52570a115998a380a27bd08d8437cd0e56a3797d4538d65c6624e349",
+      "before_sha256": "f5c03fc750ffdd352dc48226a0c30d002b27831633aeb3e5712c7ad6d1b8e0c8"
+    },
+    {
+      "path": "paper_package/gpss_v0/manuscript_source.md",
+      "bytes": 49862,
+      "sha256": "95975f06449a7692574ac6203c18e800b382485f6019f1704af21abf071b7f0e",
+      "before_sha256": "531c8013cbe2a401f06f38e463f9273de96b54ff4332de6bd7e2fd42dd89dd7c"
+    },
+    {
+      "path": "paper_package/gpss_v0/supplement_source.md",
+      "bytes": 65905,
+      "sha256": "a332f12a67c7512d75b3215c1189bd530502d8317393f913b4bb821a36780bda",
+      "before_sha256": "ccc03877cd72a2894fc9cdc4767cb29f2840515dc36edf54dac12c229350eba2"
+    },
+    {
+      "path": "paper_package/gpss_v0/tables/S26_later_fgo_dynamic_support.csv",
+      "bytes": 754,
+      "sha256": "8380142cef8e30e253fb5a1ab8c9e7837f5e9f7cc0e01e1b1d9754b262f8efad",
+      "before_sha256": null
+    }
+  ],
+  "accepted_FGO_final_document_commit": "25e437bbffff96102d9706420eaf850a7e976231"
+}

@@ -1,0 +1,78 @@
+method_id,metric_or_evidence_family,availability_state,primary_table_eligible,gap_or_boundary
+RAW01,raw_ambiguity_state,AVAILABLE,false,NA
+RAW01,native_baseline_heading,LIMITED,false,NA
+RAW01,full_navigation_position,NOT_AVAILABLE,false,"raw heading backend, not full NAV"
+RAW01,full_navigation_attitude,NOT_AVAILABLE,false,"raw heading backend, not full NAV"
+RAW01,formal_C00_coverage,LIMITED,false,NA
+RAW01,gauge_observability,NOT_AVAILABLE,false,NA
+RAW01,canonical541_robustness,NOT_APPLICABLE,false,NA
+RAW02,raw_ambiguity_state,AVAILABLE,false,NA
+RAW02,native_baseline_heading,LIMITED,false,NA
+RAW02,full_navigation_position,NOT_AVAILABLE,false,"raw heading backend, not full NAV"
+RAW02,full_navigation_attitude,NOT_AVAILABLE,false,"raw heading backend, not full NAV"
+RAW02,formal_C00_coverage,LIMITED,false,NA
+RAW02,gauge_observability,NOT_AVAILABLE,false,NA
+RAW02,canonical541_robustness,NOT_APPLICABLE,false,NA
+RAW03,raw_ambiguity_state,AVAILABLE,false,NA
+RAW03,native_baseline_heading,LIMITED,false,NA
+RAW03,full_navigation_position,NOT_AVAILABLE,false,"raw heading backend, not full NAV"
+RAW03,full_navigation_attitude,NOT_AVAILABLE,false,"raw heading backend, not full NAV"
+RAW03,formal_C00_coverage,LIMITED,false,NA
+RAW03,gauge_observability,NOT_AVAILABLE,false,NA
+RAW03,canonical541_robustness,NOT_APPLICABLE,false,NA
+EXT04,raw_ambiguity_state,ZERO_ACCEPTANCE,false,policy acceptance zero
+EXT04,native_baseline_heading,ZERO_ACCEPTANCE,false,policy acceptance zero
+EXT04,full_navigation_position,NOT_AVAILABLE,false,policy acceptance zero
+EXT04,full_navigation_attitude,NOT_AVAILABLE,false,policy acceptance zero
+EXT04,formal_C00_coverage,ZERO_ACCEPTANCE,false,policy acceptance zero
+EXT04,gauge_observability,NOT_AVAILABLE,false,policy acceptance zero
+EXT04,canonical541_robustness,NOT_APPLICABLE,false,policy acceptance zero
+LC01,raw_ambiguity_state,NOT_APPLICABLE,false,NA
+LC01,native_baseline_heading,NOT_APPLICABLE,false,NA
+LC01,full_navigation_position,AVAILABLE,true,NA
+LC01,full_navigation_attitude,AVAILABLE,true,NA
+LC01,formal_C00_coverage,AVAILABLE,true,NA
+LC01,gauge_observability,NOT_APPLICABLE,false,NA
+LC01,canonical541_robustness,NOT_APPLICABLE,false,NA
+LC02,raw_ambiguity_state,NOT_APPLICABLE,false,low formal coverage and poor accuracy
+LC02,native_baseline_heading,NOT_APPLICABLE,false,low formal coverage and poor accuracy
+LC02,full_navigation_position,LIMITED,true,low formal coverage and poor accuracy
+LC02,full_navigation_attitude,LIMITED,true,low formal coverage and poor accuracy
+LC02,formal_C00_coverage,LIMITED,true,low formal coverage and poor accuracy
+LC02,gauge_observability,NOT_APPLICABLE,false,low formal coverage and poor accuracy
+LC02,canonical541_robustness,NOT_APPLICABLE,false,low formal coverage and poor accuracy
+LSE01,raw_ambiguity_state,NOT_APPLICABLE,false,NA
+LSE01,native_baseline_heading,NOT_APPLICABLE,false,NA
+LSE01,full_navigation_position,NOT_AVAILABLE,false,reference extrinsic/frame prevents absolute metric
+LSE01,full_navigation_attitude,NOT_AVAILABLE,false,reference extrinsic/frame prevents absolute metric
+LSE01,formal_C00_coverage,STRUCTURAL_ONLY,false,NA
+LSE01,gauge_observability,AVAILABLE,false,NA
+LSE01,canonical541_robustness,NOT_APPLICABLE,false,NA
+F02,raw_ambiguity_state,NOT_APPLICABLE,false,NA
+F02,native_baseline_heading,NOT_APPLICABLE,false,NA
+F02,full_navigation_position,AVAILABLE,true,NA
+F02,full_navigation_attitude,AVAILABLE,true,NA
+F02,formal_C00_coverage,AVAILABLE,true,NA
+F02,gauge_observability,NOT_APPLICABLE,false,NA
+F02,canonical541_robustness,AVAILABLE,false,NA
+F03,raw_ambiguity_state,NOT_APPLICABLE,false,NA
+F03,native_baseline_heading,NOT_APPLICABLE,false,NA
+F03,full_navigation_position,AVAILABLE,true,NA
+F03,full_navigation_attitude,AVAILABLE,true,NA
+F03,formal_C00_coverage,AVAILABLE,true,NA
+F03,gauge_observability,NOT_APPLICABLE,false,NA
+F03,canonical541_robustness,AVAILABLE,false,NA
+A04,raw_ambiguity_state,NOT_APPLICABLE,false,NA
+A04,native_baseline_heading,NOT_APPLICABLE,false,NA
+A04,full_navigation_position,AVAILABLE,true,NA
+A04,full_navigation_attitude,AVAILABLE,true,NA
+A04,formal_C00_coverage,AVAILABLE,true,NA
+A04,gauge_observability,NOT_APPLICABLE,false,NA
+A04,canonical541_robustness,AVAILABLE,false,NA
+F04,raw_ambiguity_state,NOT_APPLICABLE,false,NA
+F04,native_baseline_heading,NOT_APPLICABLE,false,NA
+F04,full_navigation_position,AVAILABLE,true,NA
+F04,full_navigation_attitude,AVAILABLE,true,NA
+F04,formal_C00_coverage,AVAILABLE,true,NA
+F04,gauge_observability,NOT_APPLICABLE,false,NA
+F04,canonical541_robustness,AVAILABLE,false,NA

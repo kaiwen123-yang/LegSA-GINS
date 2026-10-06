@@ -1,0 +1,18 @@
+route,section,paragraph_function
+TIM,Abstract,Availability result and uncertainty interpretation
+TIM,Introduction,Conditional observations and metrology question
+TIM,Methods 2.1,Nominal geometry and author installation facts
+TIM,Methods 2.2 to 2.5,Original implemented models retained
+TIM,Methods 2.6,Joint covariance and event timing model
+TIM,Design 3.1,BY2 numerical tuning and disclosed later choices
+TIM,Design 3.2 to 3.4,Original experiment and external contracts
+TIM,Results 4,Original values and run identities
+TIM,Discussion,Agreement and uncertainty identifiability
+TIM,Conclusions,Tested availability benefits and physical validation required
+GPS Solutions,Abstract,GNSS heading availability and velocity-aiding limits
+GPS Solutions,Introduction,Position-derived heading versus carrier-level ambiguity resolution
+GPS Solutions,Methods 2.1 to 2.5,Installation and frozen observation admission models
+GPS Solutions,Design 3,"Original matrix, transfer and selection boundaries"
+GPS Solutions,Results 4,Original values and separately identified comparison protocols
+GPS Solutions,Discussion,"Conditional utility, shared reference and physical limits"
+GPS Solutions,Conclusions,"Tested GNSS information conditions, not a new integer solver"

@@ -1,0 +1,1550 @@
+{
+  "HPPOSECEF_solver_input": false,
+  "applicability_classification": "OBSERVED_ACCEPTED_WRAPPED_SOLUTION_AVAILABILITY",
+  "compact_cache_validation_fingerprint_role": "NATIVE_SOURCE_FINGERPRINT",
+  "descriptive_aggregates": {
+    "fractional_dd_epoch_mean_cycles": {
+      "count": 1057,
+      "max": 0.1354280370960134,
+      "mean": -0.0027686207049889594,
+      "median": -0.002311896941447363,
+      "min": -0.15035447821191106,
+      "p95": 0.08056862451439041,
+      "rms": 0.043583929787810775
+    },
+    "fractional_dd_epoch_rms_cycles": {
+      "count": 1057,
+      "max": 0.16951748732411961,
+      "mean": 0.04342359342562351,
+      "median": 0.02742438023141448,
+      "min": 3.9077183543808657e-05,
+      "p95": 0.1274976011847274,
+      "rms": 0.0594417283483267
+    },
+    "fractional_dd_relationships": {
+      "fractional_rms_vs_abs_trace_yaw_error": {
+        "paired_count": 964,
+        "pearson_correlation": 0.10776367439615221,
+        "role": "DESCRIPTIVE_ONLY_NOT_SELECTION_OR_TUNING"
+      },
+      "fractional_rms_vs_native_objective": {
+        "paired_count": 1057,
+        "pearson_correlation": 0.6920050716468352,
+        "role": "DESCRIPTIVE_ONLY_NOT_SELECTION_OR_TUNING"
+      },
+      "fractional_rms_vs_proxy_vector_angle": {
+        "paired_count": 1057,
+        "pearson_correlation": 0.04515066594894081,
+        "role": "DESCRIPTIVE_ONLY_NOT_SELECTION_OR_TUNING"
+      },
+      "fractional_rms_vs_unique_candidate_count": {
+        "paired_count": 1057,
+        "pearson_correlation": 0.7540178112888336,
+        "role": "DESCRIPTIVE_ONLY_NOT_SELECTION_OR_TUNING"
+      },
+      "proxy_objective_gap_vs_vector_angle": {
+        "paired_count": 1057,
+        "pearson_correlation": 0.029726359009222925,
+        "role": "DESCRIPTIVE_ONLY_NOT_SELECTION_OR_TUNING"
+      }
+    },
+    "fractional_dd_tracking_identity_groups": {
+      "phase_bias_calibration": "NONE",
+      "role": "POST_NATIVE_DESCRIPTIVE_ONLY_NO_CORRECTION_OR_SELECTION",
+      "stable_satellite_pivot_subHalfCyc_groups": [
+        {
+          "epoch_count": 47,
+          "first_epoch_index": 1134,
+          "last_epoch_index": 1237,
+          "observation_count": 47,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:17:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": -0.0008116616526455189,
+            "circular_scatter_cycles": 0.024266233043024433,
+            "count": 47,
+            "resultant_length": 0.9884438567354206
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.4420697824400886,
+            "circular_scatter_cycles": 0.07318166973334639,
+            "count": 47,
+            "resultant_length": 0.8996815121905974
+          },
+          "r1_subHalfCyc": "True",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:11:0:0"
+        },
+        {
+          "epoch_count": 9,
+          "first_epoch_index": 1224,
+          "last_epoch_index": 1232,
+          "observation_count": 9,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:17:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.010430471057389826,
+            "circular_scatter_cycles": 0.029154978503319093,
+            "count": 9,
+            "resultant_length": 0.9833613968228538
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.10012935133228693,
+            "circular_scatter_cycles": 0.07799947921415652,
+            "count": 9,
+            "resultant_length": 0.8868390719798908
+          },
+          "r1_subHalfCyc": "False",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:14:0:0"
+        },
+        {
+          "epoch_count": 18,
+          "first_epoch_index": 1134,
+          "last_epoch_index": 1208,
+          "observation_count": 18,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:17:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": -0.0022931924483273183,
+            "circular_scatter_cycles": 0.03994584991084008,
+            "count": 18,
+            "resultant_length": 0.968993590591307
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.1514906464561229,
+            "circular_scatter_cycles": 0.1433365895097221,
+            "count": 18,
+            "resultant_length": 0.6666104050227037
+          },
+          "r1_subHalfCyc": "True",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:14:0:0"
+        },
+        {
+          "epoch_count": 3,
+          "first_epoch_index": 1134,
+          "last_epoch_index": 1136,
+          "observation_count": 3,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:17:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.004825397003530338,
+            "circular_scatter_cycles": 0.004874727987857706,
+            "count": 3,
+            "resultant_length": 0.9995310477075839
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.43262171881119255,
+            "circular_scatter_cycles": 0.03502866018675806,
+            "count": 3,
+            "resultant_length": 0.9760708060136479
+          },
+          "r1_subHalfCyc": "False",
+          "r2_subHalfCyc": "False",
+          "satellite_identity": "0:22:0:0"
+        },
+        {
+          "epoch_count": 44,
+          "first_epoch_index": 1194,
+          "last_epoch_index": 1237,
+          "observation_count": 44,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:17:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.0005100274399897156,
+            "circular_scatter_cycles": 0.039306696165069745,
+            "count": 44,
+            "resultant_length": 0.9699629533854462
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": -0.2784667278814063,
+            "circular_scatter_cycles": 0.06796833913847229,
+            "count": 44,
+            "resultant_length": 0.9128450512190086
+          },
+          "r1_subHalfCyc": "False",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:22:0:0"
+        },
+        {
+          "epoch_count": 41,
+          "first_epoch_index": 1197,
+          "last_epoch_index": 1237,
+          "observation_count": 41,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:17:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": -0.0019119311441472874,
+            "circular_scatter_cycles": 0.040022869175375786,
+            "count": 41,
+            "resultant_length": 0.9688757910084321
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": -0.15689597584749004,
+            "circular_scatter_cycles": 0.05009832331167496,
+            "count": 41,
+            "resultant_length": 0.9516649063594997
+          },
+          "r1_subHalfCyc": "False",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:3:0:0"
+        },
+        {
+          "epoch_count": 462,
+          "first_epoch_index": 84,
+          "last_epoch_index": 556,
+          "observation_count": 462,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": -0.02439164640070639,
+            "circular_scatter_cycles": 0.047188353078141974,
+            "count": 462,
+            "resultant_length": 0.9569978836640385
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.2165414862371598,
+            "circular_scatter_cycles": 0.058784875447238844,
+            "count": 462,
+            "resultant_length": 0.9340624075278142
+          },
+          "r1_subHalfCyc": "False",
+          "r2_subHalfCyc": "False",
+          "satellite_identity": "0:11:0:0"
+        },
+        {
+          "epoch_count": 55,
+          "first_epoch_index": 0,
+          "last_epoch_index": 58,
+          "observation_count": 55,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.04852914332603423,
+            "circular_scatter_cycles": 0.06562832930678578,
+            "count": 55,
+            "resultant_length": 0.9184954719010918
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.2502183037906014,
+            "circular_scatter_cycles": 0.08050078154622942,
+            "count": 55,
+            "resultant_length": 0.8799259774199208
+          },
+          "r1_subHalfCyc": "False",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:11:0:0"
+        },
+        {
+          "epoch_count": 103,
+          "first_epoch_index": 624,
+          "last_epoch_index": 1508,
+          "observation_count": 103,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.0342579262990263,
+            "circular_scatter_cycles": 0.10760088171509852,
+            "count": 103,
+            "resultant_length": 0.7956948128994163
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.1591753363514509,
+            "circular_scatter_cycles": 0.06933003165062979,
+            "count": 103,
+            "resultant_length": 0.9094824905828478
+          },
+          "r1_subHalfCyc": "True",
+          "r2_subHalfCyc": "False",
+          "satellite_identity": "0:11:0:0"
+        },
+        {
+          "epoch_count": 1,
+          "first_epoch_index": 714,
+          "last_epoch_index": 714,
+          "observation_count": 1,
+          "persistent_multiple_epochs": false,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.043115431051809594,
+            "circular_scatter_cycles": 0.0,
+            "count": 1,
+            "resultant_length": 1.0
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.18638454943824453,
+            "circular_scatter_cycles": 0.0,
+            "count": 1,
+            "resultant_length": 1.0
+          },
+          "r1_subHalfCyc": "True",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:11:0:0"
+        },
+        {
+          "epoch_count": 16,
+          "first_epoch_index": 834,
+          "last_epoch_index": 1508,
+          "observation_count": 16,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.31716602353482876,
+            "circular_scatter_cycles": 0.07510266087847313,
+            "count": 16,
+            "resultant_length": 0.8946370047824789
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": -0.26121202527461984,
+            "circular_scatter_cycles": 0.07924645111122179,
+            "count": 16,
+            "resultant_length": 0.8834132054014258
+          },
+          "r1_subHalfCyc": "False",
+          "r2_subHalfCyc": "False",
+          "satellite_identity": "0:12:0:0"
+        },
+        {
+          "epoch_count": 10,
+          "first_epoch_index": 564,
+          "last_epoch_index": 602,
+          "observation_count": 10,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.07715517629231895,
+            "circular_scatter_cycles": 0.03308230688397976,
+            "count": 10,
+            "resultant_length": 0.9786283207190403
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.08751755720418337,
+            "circular_scatter_cycles": 0.12614008184259398,
+            "count": 10,
+            "resultant_length": 0.7304628733631362
+          },
+          "r1_subHalfCyc": "False",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:12:0:0"
+        },
+        {
+          "epoch_count": 1,
+          "first_epoch_index": 774,
+          "last_epoch_index": 774,
+          "observation_count": 1,
+          "persistent_multiple_epochs": false,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.0005027467011755604,
+            "circular_scatter_cycles": 0.0,
+            "count": 1,
+            "resultant_length": 1.0
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.006268202206117124,
+            "circular_scatter_cycles": 0.0,
+            "count": 1,
+            "resultant_length": 1.0
+          },
+          "r1_subHalfCyc": "True",
+          "r2_subHalfCyc": "False",
+          "satellite_identity": "0:12:0:0"
+        },
+        {
+          "epoch_count": 13,
+          "first_epoch_index": 894,
+          "last_epoch_index": 906,
+          "observation_count": 13,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": -0.018819851812083482,
+            "circular_scatter_cycles": 0.06651452959961439,
+            "count": 13,
+            "resultant_length": 0.9163747657501511
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": -0.09930597858422024,
+            "circular_scatter_cycles": 0.08514755844484444,
+            "count": 13,
+            "resultant_length": 0.866657543723154
+          },
+          "r1_subHalfCyc": "True",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:12:0:0"
+        },
+        {
+          "epoch_count": 15,
+          "first_epoch_index": 1494,
+          "last_epoch_index": 1508,
+          "observation_count": 15,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.038667783132098184,
+            "circular_scatter_cycles": 0.020107313552449553,
+            "count": 15,
+            "resultant_length": 0.9920511185522578
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": -0.4217584095221453,
+            "circular_scatter_cycles": 0.044080798815399405,
+            "count": 15,
+            "resultant_length": 0.9623706718859416
+          },
+          "r1_subHalfCyc": "False",
+          "r2_subHalfCyc": "False",
+          "satellite_identity": "0:14:0:0"
+        },
+        {
+          "epoch_count": 6,
+          "first_epoch_index": 1254,
+          "last_epoch_index": 1259,
+          "observation_count": 6,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.02941667641521115,
+            "circular_scatter_cycles": 0.07739279490147677,
+            "count": 6,
+            "resultant_length": 0.888490923086581
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": -0.2800530096507754,
+            "circular_scatter_cycles": 0.13162404075151946,
+            "count": 6,
+            "resultant_length": 0.7103627075005933
+          },
+          "r1_subHalfCyc": "False",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:14:0:0"
+        },
+        {
+          "epoch_count": 1,
+          "first_epoch_index": 1404,
+          "last_epoch_index": 1404,
+          "observation_count": 1,
+          "persistent_multiple_epochs": false,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.04337776088209466,
+            "circular_scatter_cycles": 0.0,
+            "count": 1,
+            "resultant_length": 1.0
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": -0.27131713479178643,
+            "circular_scatter_cycles": 0.0,
+            "count": 1,
+            "resultant_length": 1.0
+          },
+          "r1_subHalfCyc": "True",
+          "r2_subHalfCyc": "False",
+          "satellite_identity": "0:14:0:0"
+        },
+        {
+          "epoch_count": 171,
+          "first_epoch_index": 0,
+          "last_epoch_index": 978,
+          "observation_count": 171,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": -0.007858626093940755,
+            "circular_scatter_cycles": 0.07931417777740009,
+            "count": 171,
+            "resultant_length": 0.8832259636664072
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": -0.08283535196447532,
+            "circular_scatter_cycles": 0.05892448020640376,
+            "count": 171,
+            "resultant_length": 0.933759474652716
+          },
+          "r1_subHalfCyc": "True",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:14:0:0"
+        },
+        {
+          "epoch_count": 15,
+          "first_epoch_index": 1494,
+          "last_epoch_index": 1508,
+          "observation_count": 15,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": -0.002103851464525028,
+            "circular_scatter_cycles": 0.02721296415750762,
+            "count": 15,
+            "resultant_length": 0.9854885404275037
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.34985039193592377,
+            "circular_scatter_cycles": 0.025844629997270805,
+            "count": 15,
+            "resultant_length": 0.9869018336231471
+          },
+          "r1_subHalfCyc": "False",
+          "r2_subHalfCyc": "False",
+          "satellite_identity": "0:17:0:0"
+        },
+        {
+          "epoch_count": 832,
+          "first_epoch_index": 0,
+          "last_epoch_index": 1421,
+          "observation_count": 832,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": -0.014054498728861848,
+            "circular_scatter_cycles": 0.05600042856148932,
+            "count": 832,
+            "resultant_length": 0.9399739599644232
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": -0.2635788222674666,
+            "circular_scatter_cycles": 0.058528270221273694,
+            "count": 832,
+            "resultant_length": 0.9346176041943851
+          },
+          "r1_subHalfCyc": "True",
+          "r2_subHalfCyc": "False",
+          "satellite_identity": "0:17:0:0"
+        },
+        {
+          "epoch_count": 461,
+          "first_epoch_index": 357,
+          "last_epoch_index": 1508,
+          "observation_count": 461,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.004969815814440382,
+            "circular_scatter_cycles": 0.057249496988070914,
+            "count": 461,
+            "resultant_length": 0.9373529810227025
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.49104190004215964,
+            "circular_scatter_cycles": 0.09440038279774518,
+            "count": 461,
+            "resultant_length": 0.8386979725635972
+          },
+          "r1_subHalfCyc": "False",
+          "r2_subHalfCyc": "False",
+          "satellite_identity": "0:22:0:0"
+        },
+        {
+          "epoch_count": 105,
+          "first_epoch_index": 894,
+          "last_epoch_index": 1279,
+          "observation_count": 105,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": -0.009286316779354688,
+            "circular_scatter_cycles": 0.027836658785621828,
+            "count": 105,
+            "resultant_length": 0.9848208725025407
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.4951332622597797,
+            "circular_scatter_cycles": 0.08781587573245635,
+            "count": 105,
+            "resultant_length": 0.8587980909546594
+          },
+          "r1_subHalfCyc": "False",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:22:0:0"
+        },
+        {
+          "epoch_count": 86,
+          "first_epoch_index": 0,
+          "last_epoch_index": 90,
+          "observation_count": 86,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.03302656184649318,
+            "circular_scatter_cycles": 0.09812305606572062,
+            "count": 86,
+            "resultant_length": 0.8269163399150333
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.4129249609629489,
+            "circular_scatter_cycles": 0.09093650482630126,
+            "count": 86,
+            "resultant_length": 0.8493938012103663
+          },
+          "r1_subHalfCyc": "True",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:22:0:0"
+        },
+        {
+          "epoch_count": 89,
+          "first_epoch_index": 714,
+          "last_epoch_index": 1508,
+          "observation_count": 89,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.030592202552451347,
+            "circular_scatter_cycles": 0.04368393596337388,
+            "count": 89,
+            "resultant_length": 0.9630325559390233
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": -0.4802049023746714,
+            "circular_scatter_cycles": 0.057055002158459225,
+            "count": 89,
+            "resultant_length": 0.9377644144627388
+          },
+          "r1_subHalfCyc": "False",
+          "r2_subHalfCyc": "False",
+          "satellite_identity": "0:3:0:0"
+        },
+        {
+          "epoch_count": 115,
+          "first_epoch_index": 0,
+          "last_epoch_index": 1279,
+          "observation_count": 115,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.002626353838857071,
+            "circular_scatter_cycles": 0.09211643736881779,
+            "count": 115,
+            "resultant_length": 0.8457801415444489
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": -0.42946373429160856,
+            "circular_scatter_cycles": 0.07576975646060063,
+            "count": 115,
+            "resultant_length": 0.8928614127731462
+          },
+          "r1_subHalfCyc": "False",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:3:0:0"
+        },
+        {
+          "epoch_count": 8,
+          "first_epoch_index": 237,
+          "last_epoch_index": 244,
+          "observation_count": 8,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.005004303039233958,
+            "circular_scatter_cycles": 0.08229797969965624,
+            "count": 8,
+            "resultant_length": 0.8748587610787919
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": -0.2788072727141599,
+            "circular_scatter_cycles": 0.19292228014289484,
+            "count": 8,
+            "resultant_length": 0.4796619306793614
+          },
+          "r1_subHalfCyc": "True",
+          "r2_subHalfCyc": "False",
+          "satellite_identity": "0:3:0:0"
+        },
+        {
+          "epoch_count": 4,
+          "first_epoch_index": 114,
+          "last_epoch_index": 117,
+          "observation_count": 4,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.030859378965242962,
+            "circular_scatter_cycles": 0.03454885922791043,
+            "count": 4,
+            "resultant_length": 0.9767142106951442
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": -0.42806780765734065,
+            "circular_scatter_cycles": 0.05182837800223263,
+            "count": 4,
+            "resultant_length": 0.9483581212533071
+          },
+          "r1_subHalfCyc": "True",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:3:0:0"
+        },
+        {
+          "epoch_count": 4,
+          "first_epoch_index": 504,
+          "last_epoch_index": 509,
+          "observation_count": 4,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.041656788244004886,
+            "circular_scatter_cycles": 0.14092078445266165,
+            "count": 4,
+            "resultant_length": 0.6757079086357015
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.2550188576443051,
+            "circular_scatter_cycles": 0.09617447891911089,
+            "count": 4,
+            "resultant_length": 0.8331193149851812
+          },
+          "r1_subHalfCyc": "False",
+          "r2_subHalfCyc": "False",
+          "satellite_identity": "0:4:0:0"
+        },
+        {
+          "epoch_count": 40,
+          "first_epoch_index": 564,
+          "last_epoch_index": 632,
+          "observation_count": 40,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": -0.0028824329147758287,
+            "circular_scatter_cycles": 0.07870629272690431,
+            "count": 40,
+            "resultant_length": 0.8849022499178747
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.4890081638547638,
+            "circular_scatter_cycles": 0.13188959333591868,
+            "count": 40,
+            "resultant_length": 0.7093821713501103
+          },
+          "r1_subHalfCyc": "False",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:4:0:0"
+        },
+        {
+          "epoch_count": 54,
+          "first_epoch_index": 114,
+          "last_epoch_index": 1508,
+          "observation_count": 54,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.09518390893866577,
+            "circular_scatter_cycles": 0.08038855192619887,
+            "count": 54,
+            "resultant_length": 0.8802396582826219
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.4599650857046918,
+            "circular_scatter_cycles": 0.11389892469419541,
+            "count": 54,
+            "resultant_length": 0.7740830852756638
+          },
+          "r1_subHalfCyc": "True",
+          "r2_subHalfCyc": "False",
+          "satellite_identity": "0:4:0:0"
+        },
+        {
+          "epoch_count": 100,
+          "first_epoch_index": 0,
+          "last_epoch_index": 1410,
+          "observation_count": 100,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.03503518316353413,
+            "circular_scatter_cycles": 0.14200118395725653,
+            "count": 100,
+            "resultant_length": 0.6716431921703127
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": -0.4811522638433799,
+            "circular_scatter_cycles": 0.07589738530805464,
+            "count": 100,
+            "resultant_length": 0.892520321053118
+          },
+          "r1_subHalfCyc": "True",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:4:0:0"
+        },
+        {
+          "epoch_count": 812,
+          "first_epoch_index": 0,
+          "last_epoch_index": 978,
+          "observation_count": 812,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": -0.00765653921470333,
+            "circular_scatter_cycles": 0.06262193501933878,
+            "count": 812,
+            "resultant_length": 0.9255126854514828
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.03364211438724681,
+            "circular_scatter_cycles": 0.05369439446578688,
+            "count": 812,
+            "resultant_length": 0.9446792038281975
+          },
+          "r1_subHalfCyc": "True",
+          "r2_subHalfCyc": "False",
+          "satellite_identity": "0:6:0:0"
+        },
+        {
+          "epoch_count": 120,
+          "first_epoch_index": 1347,
+          "last_epoch_index": 1508,
+          "observation_count": 120,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:19:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.0195935433818293,
+            "circular_scatter_cycles": 0.047244579774291987,
+            "count": 120,
+            "resultant_length": 0.9568975875739075
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.03737039202828153,
+            "circular_scatter_cycles": 0.06290785602293472,
+            "count": 120,
+            "resultant_length": 0.9248572179731289
+          },
+          "r1_subHalfCyc": "True",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:6:0:0"
+        },
+        {
+          "epoch_count": 52,
+          "first_epoch_index": 984,
+          "last_epoch_index": 1065,
+          "observation_count": 52,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:6:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.0037817773523887,
+            "circular_scatter_cycles": 0.020817189338756363,
+            "count": 52,
+            "resultant_length": 0.9914823899756777
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": -0.15167426310010515,
+            "circular_scatter_cycles": 0.055020535270094297,
+            "count": 52,
+            "resultant_length": 0.9419946315167445
+          },
+          "r1_subHalfCyc": "True",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:14:0:0"
+        },
+        {
+          "epoch_count": 52,
+          "first_epoch_index": 984,
+          "last_epoch_index": 1065,
+          "observation_count": 52,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:6:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": 0.0009705245120888406,
+            "circular_scatter_cycles": 0.009930651964723184,
+            "count": 52,
+            "resultant_length": 0.9980552551694387
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": -0.2905247726333532,
+            "circular_scatter_cycles": 0.05531061230377368,
+            "count": 52,
+            "resultant_length": 0.9413997198641572
+          },
+          "r1_subHalfCyc": "True",
+          "r2_subHalfCyc": "False",
+          "satellite_identity": "0:17:0:0"
+        },
+        {
+          "epoch_count": 22,
+          "first_epoch_index": 1044,
+          "last_epoch_index": 1065,
+          "observation_count": 22,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:6:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": -0.006369511659126932,
+            "circular_scatter_cycles": 0.02653163260568573,
+            "count": 22,
+            "resultant_length": 0.9862011170901269
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.42901597584515144,
+            "circular_scatter_cycles": 0.07059440294158523,
+            "count": 22,
+            "resultant_length": 0.9063119437589324
+          },
+          "r1_subHalfCyc": "False",
+          "r2_subHalfCyc": "False",
+          "satellite_identity": "0:22:0:0"
+        },
+        {
+          "epoch_count": 30,
+          "first_epoch_index": 984,
+          "last_epoch_index": 1013,
+          "observation_count": 30,
+          "persistent_multiple_epochs": true,
+          "pivot_identity": "0:6:0:0",
+          "production_fractional_circular": {
+            "circular_mean_cycles": -0.0036838026246192325,
+            "circular_scatter_cycles": 0.033628755997260444,
+            "count": 30,
+            "resultant_length": 0.977924375503226
+          },
+          "proxy_implied_fractional_circular": {
+            "circular_mean_cycles": 0.46317422604133046,
+            "circular_scatter_cycles": 0.0649366718570481,
+            "count": 30,
+            "resultant_length": 0.9201342182427262
+          },
+          "r1_subHalfCyc": "False",
+          "r2_subHalfCyc": "True",
+          "satellite_identity": "0:22:0:0"
+        }
+      ],
+      "stratified_tracking_and_dimension_statistics": {
+        "cycle_slip=false": {
+          "epoch_count": 300,
+          "production_circular": {
+            "circular_mean_cycles": 0.012572715038352653,
+            "circular_scatter_cycles": 0.08903190233288262,
+            "count": 1294,
+            "resultant_length": 0.8551602639587971
+          },
+          "production_linear": {
+            "count": 1294,
+            "max": 0.3754401977491284,
+            "mean": 0.014907082865225778,
+            "median": 0.002919110095535693,
+            "min": -0.28026873577448064,
+            "p95": 0.163945110630194,
+            "rms": 0.09234446447302001
+          },
+          "production_observation_count": 1294,
+          "proxy_circular": {
+            "circular_mean_cycles": -0.369534782840459,
+            "circular_scatter_cycles": 0.3788277203870877,
+            "count": 1294,
+            "resultant_length": 0.05884887424568874
+          },
+          "proxy_linear": {
+            "count": 1294,
+            "max": 0.49989010953110125,
+            "mean": -0.015250400160465562,
+            "median": -0.002468972623939969,
+            "min": -0.4998545442801259,
+            "p95": 0.4705636891464067,
+            "rms": 0.30269296952835206
+          },
+          "proxy_observation_count": 1294
+        },
+        "cycle_slip=true": {
+          "epoch_count": 757,
+          "production_circular": {
+            "circular_mean_cycles": -0.0072730173704934,
+            "circular_scatter_cycles": 0.05528499704217664,
+            "count": 2723,
+            "resultant_length": 0.9414523643186657
+          },
+          "production_linear": {
+            "count": 2723,
+            "max": 0.34514912826091404,
+            "mean": -0.007194684111323515,
+            "median": -0.0027487253476010665,
+            "min": -0.26883363078864164,
+            "p95": 0.0837495043785997,
+            "rms": 0.056599382920779186
+          },
+          "production_observation_count": 2723,
+          "proxy_circular": {
+            "circular_mean_cycles": -0.11958241547467281,
+            "circular_scatter_cycles": 0.3421899887840936,
+            "count": 2723,
+            "resultant_length": 0.09912806420379548
+          },
+          "proxy_linear": {
+            "count": 2723,
+            "max": 0.49982218397162903,
+            "mean": -0.028531517296045538,
+            "median": -0.005892409375595875,
+            "min": -0.4999931640781945,
+            "p95": 0.4543690298615062,
+            "rms": 0.27847188839489045
+          },
+          "proxy_observation_count": 2723
+        },
+        "lock_reset=false": {
+          "epoch_count": 895,
+          "production_circular": {
+            "circular_mean_cycles": -0.0010954659684469785,
+            "circular_scatter_cycles": 0.07068819567206451,
+            "count": 3450,
+            "resultant_length": 0.9060749109299047
+          },
+          "production_linear": {
+            "count": 3450,
+            "max": 0.3754401977491284,
+            "mean": 0.00033741050766618124,
+            "median": -0.0011690202855518805,
+            "min": -0.28026873577448064,
+            "p95": 0.13131192302599345,
+            "rms": 0.07267122751826534
+          },
+          "production_observation_count": 3450,
+          "proxy_circular": {
+            "circular_mean_cycles": -0.17759676038343805,
+            "circular_scatter_cycles": 0.373098884352998,
+            "count": 3450,
+            "resultant_length": 0.06407168841461183
+          },
+          "proxy_linear": {
+            "count": 3450,
+            "max": 0.49989010953110125,
+            "mean": -0.02364111579424696,
+            "median": -0.00389001798907751,
+            "min": -0.4999931640781945,
+            "p95": 0.4618859419904677,
+            "rms": 0.2881706426604179
+          },
+          "proxy_observation_count": 3450
+        },
+        "lock_reset=true": {
+          "epoch_count": 162,
+          "production_circular": {
+            "circular_mean_cycles": -0.0024450146732374954,
+            "circular_scatter_cycles": 0.05138589735945123,
+            "count": 567,
+            "resultant_length": 0.949213447747917
+          },
+          "production_linear": {
+            "count": 567,
+            "max": 0.22812959037861447,
+            "mean": -0.0025845253244798946,
+            "median": -0.0006940772489230085,
+            "min": -0.25339371112222864,
+            "p95": 0.08450900917684319,
+            "rms": 0.05207965354984587
+          },
+          "production_observation_count": 567,
+          "proxy_circular": {
+            "circular_mean_cycles": -0.11293131777205409,
+            "circular_scatter_cycles": 0.33305867120928484,
+            "count": 567,
+            "resultant_length": 0.11195788525641374
+          },
+          "proxy_linear": {
+            "count": 567,
+            "max": 0.49941716692956106,
+            "mean": -0.027977936357358804,
+            "median": -0.011743534732231886,
+            "min": -0.4975699795501374,
+            "p95": 0.4517955395663136,
+            "rms": 0.2761015325405303
+          },
+          "proxy_observation_count": 567
+        },
+        "low_dd_dimension=false": {
+          "epoch_count": 491,
+          "production_circular": {
+            "circular_mean_cycles": 2.1463625667397473e-05,
+            "circular_scatter_cycles": 0.08923870708558299,
+            "count": 2319,
+            "resultant_length": 0.8545381649587481
+          },
+          "production_linear": {
+            "count": 2319,
+            "max": 0.3754401977491284,
+            "mean": 0.001969614523983389,
+            "median": -0.0008407247435400222,
+            "min": -0.28026873577448064,
+            "p95": 0.1513898494627156,
+            "rms": 0.09041258474158227
+          },
+          "production_observation_count": 2319,
+          "proxy_circular": {
+            "circular_mean_cycles": -0.4816224528730034,
+            "circular_scatter_cycles": 0.40484529976781364,
+            "count": 2319,
+            "resultant_length": 0.03935033733676468
+          },
+          "proxy_linear": {
+            "count": 2319,
+            "max": 0.49989010953110125,
+            "mean": -0.004637668912067466,
+            "median": 0.010860327903708722,
+            "min": -0.49988637953620696,
+            "p95": 0.47047663002688506,
+            "rms": 0.30175838967404206
+          },
+          "proxy_observation_count": 2319
+        },
+        "low_dd_dimension=true": {
+          "epoch_count": 566,
+          "production_circular": {
+            "circular_mean_cycles": -0.002842596210109095,
+            "circular_scatter_cycles": 0.021470472606446595,
+            "count": 1698,
+            "resultant_length": 0.9909418702504528
+          },
+          "production_linear": {
+            "count": 1698,
+            "max": 0.10600108841545186,
+            "mean": -0.0028674297341868384,
+            "median": -0.0010709686476721991,
+            "min": -0.09832391612274449,
+            "p95": 0.030683201541229138,
+            "rms": 0.021721724194128104
+          },
+          "production_observation_count": 1698,
+          "proxy_circular": {
+            "circular_mean_cycles": -0.12276971173895014,
+            "circular_scatter_cycles": 0.28832193702356024,
+            "count": 1698,
+            "resultant_length": 0.19380334197250607
+          },
+          "proxy_linear": {
+            "count": 1698,
+            "max": 0.49982218397162903,
+            "mean": -0.05104274746624852,
+            "median": -0.040656958679501365,
+            "min": -0.4999931640781945,
+            "p95": 0.4359954522840585,
+            "rms": 0.26423633088356463
+          },
+          "proxy_observation_count": 1698
+        },
+        "pivot_changed=false": {
+          "epoch_count": 1054,
+          "production_circular": {
+            "circular_mean_cycles": -0.0013166604355126731,
+            "circular_scatter_cycles": 0.06832805172918645,
+            "count": 4007,
+            "resultant_length": 0.9119620594174482
+          },
+          "production_linear": {
+            "count": 4007,
+            "max": 0.3754401977491284,
+            "mean": -9.313877509641534e-05,
+            "median": -0.0010762868222258248,
+            "min": -0.28026873577448064,
+            "p95": 0.12716266036792442,
+            "rms": 0.07021219106940482
+          },
+          "production_observation_count": 4007,
+          "proxy_circular": {
+            "circular_mean_cycles": -0.1610561248833619,
+            "circular_scatter_cycles": 0.3670823736260671,
+            "count": 4007,
+            "resultant_length": 0.06995886132114504
+          },
+          "proxy_linear": {
+            "count": 4007,
+            "max": 0.49989010953110125,
+            "mean": -0.024549261471121384,
+            "median": -0.004402946503692107,
+            "min": -0.4999931640781945,
+            "p95": 0.46093437643419716,
+            "rms": 0.28632131968294977
+          },
+          "proxy_observation_count": 4007
+        },
+        "pivot_changed=true": {
+          "epoch_count": 3,
+          "production_circular": {
+            "circular_mean_cycles": 0.00716483186224618,
+            "circular_scatter_cycles": 0.019127150316473263,
+            "count": 10,
+            "resultant_length": 0.992804465042466
+          },
+          "production_linear": {
+            "count": 10,
+            "max": 0.04594743919851396,
+            "mean": 0.007184746427955979,
+            "median": 0.0023531948323993745,
+            "min": -0.023931122028177043,
+            "p95": 0.03853488380232831,
+            "rms": 0.020429054224864955
+          },
+          "production_observation_count": 10,
+          "proxy_circular": {
+            "circular_mean_cycles": -0.40593749439662274,
+            "circular_scatter_cycles": 0.21457330496251137,
+            "count": 10,
+            "resultant_length": 0.40299674534995134
+          },
+          "proxy_linear": {
+            "count": 10,
+            "max": 0.49961844978902814,
+            "mean": 0.09435513100089461,
+            "median": 0.07814596908934757,
+            "min": -0.3463070182137784,
+            "p95": 0.49172674993065035,
+            "rms": 0.3501607850911699
+          },
+          "proxy_observation_count": 10
+        },
+        "subHalfCyc=BOTH_RECEIVERS": {
+          "epoch_count": 705,
+          "production_circular": {
+            "circular_mean_cycles": 0.003001439878048945,
+            "circular_scatter_cycles": 0.07616072750193764,
+            "count": 2828,
+            "resultant_length": 0.8918151308461844
+          },
+          "production_linear": {
+            "count": 2828,
+            "max": 0.3754401977491284,
+            "mean": 0.004532075432560984,
+            "median": 7.963391462295633e-05,
+            "min": -0.28026873577448064,
+            "p95": 0.13948048802866864,
+            "rms": 0.0782208844044356
+          },
+          "production_observation_count": 2828,
+          "proxy_circular": {
+            "circular_mean_cycles": -0.3048840834787447,
+            "circular_scatter_cycles": 0.3315386057949016,
+            "count": 2828,
+            "resultant_length": 0.11421286491231386
+          },
+          "proxy_linear": {
+            "count": 2828,
+            "max": 0.49989010953110125,
+            "mean": -0.03721875875661689,
+            "median": -0.03239879494245246,
+            "min": -0.4999931640781945,
+            "p95": 0.4666329121354778,
+            "rms": 0.302469410715073
+          },
+          "proxy_observation_count": 2828
+        },
+        "subHalfCyc=GNSS1_ONLY": {
+          "epoch_count": 352,
+          "production_circular": {
+            "circular_mean_cycles": -0.010758568741924946,
+            "circular_scatter_cycles": 0.043689200477600255,
+            "count": 1189,
+            "resultant_length": 0.9630238120433358
+          },
+          "production_linear": {
+            "count": 1189,
+            "max": 0.23538969828210554,
+            "mean": -0.011032858646605751,
+            "median": -0.004771921193916562,
+            "min": -0.20009398999883388,
+            "p95": 0.05040904535180521,
+            "rms": 0.04543548476742827
+          },
+          "production_observation_count": 1189,
+          "proxy_circular": {
+            "circular_mean_cycles": 0.039246373620587915,
+            "circular_scatter_cycles": 0.2766688539693659,
+            "count": 1189,
+            "resultant_length": 0.22070006699945843
+          },
+          "proxy_linear": {
+            "count": 1189,
+            "max": 0.49962849074029236,
+            "mean": 0.006584785835944602,
+            "median": 0.04015470980155733,
+            "min": -0.49798633218438226,
+            "p95": 0.42237718938764596,
+            "rms": 0.24435121396472642
+          },
+          "proxy_observation_count": 1189
+        }
+      }
+    },
+    "native_minus_proxy_body_yaw_wrapsafe": {
+      "circular_wrapsafe_bias_deg": 144.27282779694508,
+      "continuity_definition": "segments split when accepted original epoch indices are nonconsecutive",
+      "longest_segment_epochs": 285,
+      "mae_deg": 105.9365204947798,
+      "matched_count": 1057,
+      "max_absolute_deg": 179.99748731114653,
+      "maximum_gap_seconds": 13.799999999988358,
+      "median_absolute_deg": 117.04083937102814,
+      "p90_absolute_deg": 176.2554724570363,
+      "p95_absolute_deg": 178.05148084694483,
+      "p99_absolute_deg": 179.49620619852266,
+      "rmse_deg": 120.98227411490542,
+      "segment_count": 30,
+      "valid_count": 1057,
+      "valid_coverage": 1.0,
+      "valid_denominator": 1057,
+      "wrapsafe_bias_deg": 19.268443725313993
+    },
+    "native_minus_proxy_heading_wrapsafe": {
+      "circular_wrapsafe_bias_deg": 144.27282779694508,
+      "continuity_definition": "segments split when accepted original epoch indices are nonconsecutive",
+      "longest_segment_epochs": 285,
+      "mae_deg": 105.9365204947798,
+      "matched_count": 1057,
+      "max_absolute_deg": 179.99748731114653,
+      "maximum_gap_seconds": 13.799999999988358,
+      "median_absolute_deg": 117.04083937102814,
+      "p90_absolute_deg": 176.2554724570363,
+      "p95_absolute_deg": 178.0514808469448,
+      "p99_absolute_deg": 179.49620619852269,
+      "rmse_deg": 120.98227411490542,
+      "segment_count": 30,
+      "valid_count": 1057,
+      "valid_coverage": 1.0,
+      "valid_denominator": 1057,
+      "wrapsafe_bias_deg": 19.268443725313993
+    },
+    "native_proxy_vector_angle_deg": {
+      "count": 1057,
+      "max": 172.24157262345673,
+      "mean": 95.59588854483489,
+      "median": 103.05122472537859,
+      "min": 8.304121051207588,
+      "p95": 136.7368382906496,
+      "rms": 102.2606189938092
+    },
+    "oracle_gated_accepted_count": 11,
+    "oracle_gated_proxy_objective_evaluated_count": 11,
+    "proxy_association_policy": "UNIQUE_NEAREST_ON_SORTED_COMMON_HPPOSECEF_ITOW_GRID_STRICTLY_WITHIN_HALF_LOCAL_CADENCE_MONOTONIC_ONE_TO_ONE",
+    "proxy_association_status_counts": {
+      "ASSOCIATED_UNIQUE_NEAREST_COMMON_ITOW": 1509
+    },
+    "proxy_available_count": 1509,
+    "proxy_implied_fractional_dd_epoch_rms_cycles": {
+      "count": 1057,
+      "max": 0.43968682590576397,
+      "mean": 0.2747217392563736,
+      "median": 0.2820716188735627,
+      "min": 0.10461531106400851,
+      "p95": 0.3666260704611259,
+      "rms": 0.280525267269529
+    },
+    "proxy_itow_minus_rawx_ms": {
+      "count": 1509,
+      "max": 2.0,
+      "mean": 2.0,
+      "median": 2.0,
+      "min": 2.0,
+      "p95": 2.0,
+      "rms": 2.0
+    },
+    "proxy_length_m": {
+      "count": 1509,
+      "max": 0.4742458223772615,
+      "mean": 0.3504740132398221,
+      "median": 0.35125902150330224,
+      "min": 0.12037861076216591,
+      "p95": 0.39566085108383275,
+      "rms": 0.351869745371859
+    },
+    "proxy_minus_production_objective": {
+      "count": 1057,
+      "max": 4785.341501573077,
+      "mean": 446.8939123194786,
+      "median": 327.60955253930007,
+      "min": 9.75603372236621,
+      "p95": 1220.1024011388215,
+      "rms": 663.885128547721
+    },
+    "proxy_objective_eligible_accepted_count": 1057,
+    "proxy_objective_evaluated_count": 1057,
+    "proxy_objective_not_evaluated_accepted_count": 0,
+    "relationship_role": "DESCRIPTIVE_ONLY_NOT_ASSUMPTION_THRESHOLD_OR_TUNING",
+    "trace_native_yaw_error_deg": {
+      "circular_wrapsafe_bias_deg": 141.07743603205643,
+      "continuity_definition": "segments split when accepted original epoch indices are nonconsecutive",
+      "longest_segment_epochs": 285,
+      "mae_deg": 105.15307519592537,
+      "matched_count": 964,
+      "max_absolute_deg": 179.96605423604268,
+      "maximum_gap_seconds": 13.799999999988358,
+      "median_absolute_deg": 115.82441764111354,
+      "p90_absolute_deg": 176.277140202669,
+      "p95_absolute_deg": 178.30403175914398,
+      "p99_absolute_deg": 179.48903217966563,
+      "rmse_deg": 120.52876042302128,
+      "segment_count": 25,
+      "valid_count": 964,
+      "valid_coverage": 0.7036496350364964,
+      "valid_denominator": 1370,
+      "wrapsafe_bias_deg": 15.432854880527305
+    },
+    "trace_window_match_count": 1370
+  },
+  "fixed_evaluator_contract": {
+    "base_time_unix_seconds": 1772784000.0,
+    "epoch_deleted": false,
+    "gps_to_unix_seconds": "315964800 + gps_week*604800 + gps_tow_seconds - leap_seconds",
+    "leap_second_evidence": {
+      "all_receiver_epoch_values_identical": true,
+      "expected_and_observed_leap_seconds": 18,
+      "paired_epoch_count_verified": 1509,
+      "receiver_epoch_field_count_verified": 3018,
+      "source": "COMPACT_CACHE_PAIRED_EPOCHS_R1_R2_LEAP_FIELDS"
+    },
+    "matched_native_time_must_be_bracketed_by_trace": true,
+    "native_epoch_match_gate_seconds": [
+      66.0,
+      340.0
+    ],
+    "search_or_alignment": false,
+    "time_offset_seconds": 0.0,
+    "trace_csv": {
+      "exact_columns": [
+        "time",
+        "lat",
+        "lon",
+        "height",
+        "processed_lat",
+        "processed_lon",
+        "processed_height",
+        "yaw",
+        "pitch",
+        "roll"
+      ],
+      "first_column": "time",
+      "observed_column_count": 10,
+      "timestamp_alias_accepted": false
+    },
+    "trace_unwrap_domain": "FULL_VALIDATED_MONOTONIC_TRACE_BEFORE_NATIVE_WINDOW_GATE",
+    "window_seconds": [
+      66.0,
+      340.0
+    ],
+    "yaw": "unwrap_enu_then_interpolate_then_wrap360(90-yaw)"
+  },
+  "fractional_dd_epoch_row_count": 1509,
+  "native_code_commit": "407edc840340989b1351d1d1aef050637aacd2df",
+  "native_freeze_revalidated_before_proxy_open": true,
+  "native_freeze_revalidated_before_trace_open": true,
+  "native_freeze_sha256": "c1d8260df693ed213c004ae90f3446e546e88f599b662ec40879711b8b3f060d",
+  "native_output_hashes_revalidated": {
+    "candidate_diagnostics": "add9db13bfb9f35f08f6e49c08196fd2b9cee4a3efce24814ea05d2f5409b24f",
+    "dd_diagnostics": "b49727932e0b57f995180a20962908351478ad3eea3088f244624c718429c339",
+    "failure_ledger": "0b0280cf66a45bd2262c8d38ef33f852e4fe9ea169d55dd033b1195d17767288",
+    "heading_results": "ab7d3b011d2b6477f50269181ae045823cc07198a9ef0b71ee441efc03e8b677",
+    "native_summary": "50be11c14ab65bb88c6d543e36611d624f9d382b33911678d98a0d367ccaef00",
+    "objective_oracle_diagnostics": "6579723dc79fb993c931ced428b11105f621be587afd2acf392f9cf68db24c10",
+    "refinement_diagnostics": "3a979b3d666f43c01b73ac8b8fc6060cc7e71baa88c41f575fe97ec4f0f547e7",
+    "runtime": "95213e702e3ad70e5e6c89b4ef5d9f598cd8ebd8912d435adde316e9097c3db7",
+    "tracking_diagnostics": "ae2644caff3ef7df7e41ec7965e24ec9c1cbed3f53e3089e88f473801e3bd647"
+  },
+  "native_outputs_mutated": false,
+  "native_runtime_source_hashes": {
+    "configs/paper_rebuild/horizontal_literature/PHASE2_EXT02_CWLS_CONTRACT_V1.yaml": "ecfeaeddb8707ed5097746db2c6fe03b5c17367084db0ff354f76643b2139ba7",
+    "configs/paper_rebuild/horizontal_literature/STANDARD_HEADING_STREAM_SCHEMA_V1.yaml": "0d524fcc219ec580638a30ddf8665f4d67521df99568deffea6360440c4c62c9",
+    "scripts/paper_rebuild/run_horizontal_literature_phase2.py": "8810712f2b50bd63587b121fce55ba14ca623fc485f533f6a9703a758268835f",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py": "ea65b90282fdeee943eca4764da18fb05fcb9a46b9a7cf44d477d3ff60976f2c",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": "82fccd3a6df1af6dee30739954934d7210339f0c1723a06d6c0b7486d41682a7",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "976e837207d7bd05d6d0a9e72406fd8f8244968c60f18e9e0bfd3d94fe9b04a5"
+  },
+  "native_source_fingerprint": "03e3b7141de02872991f295f76ebab289b03a7c7873ca3a27bebd8308b4666c3",
+  "native_source_fingerprint_verified_against_native_summary": true,
+  "objective_oracle_evaluated_count": 11,
+  "objective_oracle_not_evaluated_count": 0,
+  "objective_oracle_selected_count": 11,
+  "oracle_gated_proxy_objective_evaluated_count": 11,
+  "post_native_code_commit": "407edc840340989b1351d1d1aef050637aacd2df",
+  "post_native_git_source_state": {
+    "authorized_dirty_runtime_delta_allowed": true,
+    "authorized_dirty_runtime_delta_entries": [
+      " M configs/paper_rebuild/horizontal_literature/STANDARD_HEADING_STREAM_SCHEMA_V1.yaml",
+      " M src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py",
+      "?? configs/paper_rebuild/horizontal_literature/PHASE2_EXT02_CWLS_CONTRACT_V1.yaml",
+      "?? scripts/paper_rebuild/run_horizontal_literature_phase2.py",
+      "?? src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py",
+      "?? src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py"
+    ],
+    "authorized_dirty_runtime_delta_present": true,
+    "code_commit_role": "BASE_HEAD_ONLY_NOT_COMPLETE_RUNTIME_SOURCE_IDENTITY",
+    "runtime_source_identity_role": "SOURCE_HASHES_PLUS_SOURCE_FINGERPRINT",
+    "runtime_source_paths": [
+      "configs/paper_rebuild/horizontal_literature/PHASE2_EXT02_CWLS_CONTRACT_V1.yaml",
+      "configs/paper_rebuild/horizontal_literature/STANDARD_HEADING_STREAM_SCHEMA_V1.yaml",
+      "scripts/paper_rebuild/run_horizontal_literature_phase2.py",
+      "src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py",
+      "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py",
+      "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py"
+    ]
+  },
+  "post_native_output_hashes": {
+    "fractional_dd_diagnostics": "9422c32fde20db90cec6248dfa0f934b663578f9d1be369e84b199c59b8366e3",
+    "objective_diagnostics": "46761bd6e74fdd5a7ad6b33c5667b26445242cc9d7b46eeff933b14c9e978a19",
+    "proxy_diagnostics": "afeb1d5127158cee1c33420b9d8c6c2859ecfce55b0b6673a203ee2545c89edf",
+    "trace_diagnostics": "ea98cf2bd41285c89d8d5963b9068c6d9819ac0133a0da4a4466a0aa74d90e8e"
+  },
+  "post_native_runtime_source_hashes": {
+    "configs/paper_rebuild/horizontal_literature/PHASE2_EXT02_CWLS_CONTRACT_V1.yaml": "107e2afc8388f58abd45ffac471133c41f37c99dfa0c8bc80e1fc6ac5a858b71",
+    "configs/paper_rebuild/horizontal_literature/STANDARD_HEADING_STREAM_SCHEMA_V1.yaml": "0d524fcc219ec580638a30ddf8665f4d67521df99568deffea6360440c4c62c9",
+    "scripts/paper_rebuild/run_horizontal_literature_phase2.py": "472f1855696d8f3fa1285f10b0ad751a84b5237afd7a4d83918c270e9804c464",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py": "ea65b90282fdeee943eca4764da18fb05fcb9a46b9a7cf44d477d3ff60976f2c",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": "27d5e19bb250da49353700da64bb17c346ecdcb63fa752d4939398c829160965",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "976e837207d7bd05d6d0a9e72406fd8f8244968c60f18e9e0bfd3d94fe9b04a5"
+  },
+  "post_native_source_fingerprint": "7ae3e21598578e7c2fba5468c9e888869e52667fdb4610b46d8413abce845988",
+  "post_only_source_fingerprint_diverged_from_native": true,
+  "post_output_root": "<CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/03_EXT02_CWLS/C00/POST_NATIVE_RECOVERY_PROXY_TIME_ASSOCIATION_R1",
+  "post_recovery_id": "PROXY_TIME_ASSOCIATION_R1",
+  "post_report_path": "<CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/11_REPORT/PHASE2_EXT02_C00_REPORT_PROXY_TIME_ASSOCIATION_R1.md",
+  "post_status_path": "<CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/11_REPORT/PHASE2_STATUS_PROXY_TIME_ASSOCIATION_R1.json",
+  "prior_failed_post_native_attempts_not_in_successful_invocation_counts": true,
+  "prior_primary_post_inventory": {
+    "files": {
+      "post_native::fractional_dd_diagnostics": {
+        "absolute_path": "<CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/03_EXT02_CWLS/C00/EXT02_C00_FRACTIONAL_DD_DIAGNOSTICS.csv",
+        "sha256": "dea7928202695afc161528e47ac06efb2b3b6037c078a86ca8f7480b43041897",
+        "size_bytes": 1441152
+      },
+      "post_native::objective_diagnostics": {
+        "absolute_path": "<CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/03_EXT02_CWLS/C00/EXT02_C00_POST_NATIVE_OBJECTIVE_DIAGNOSTICS.csv",
+        "sha256": "407f1666d5aa4635290baf23e80a1013f422eb5f67cbccd57b64a3cc7b599c09",
+        "size_bytes": 52539
+      },
+      "post_native::post_native_manifest": {
+        "absolute_path": "<CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/03_EXT02_CWLS/C00/EXT02_C00_POST_NATIVE_DIAGNOSTICS_MANIFEST.json",
+        "sha256": "fb516505a2328a0c9b4010ff148138845019e7db205838e77c91f0e2de87ad92",
+        "size_bytes": 54564
+      },
+      "post_native::proxy_diagnostics": {
+        "absolute_path": "<CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/03_EXT02_CWLS/C00/EXT02_C00_PROXY_DIAGNOSTICS.csv",
+        "sha256": "e26f0e1daada9e4248c007ca9b940d1335ab0c60af7625529f7a5300f01f6026",
+        "size_bytes": 172250
+      },
+      "post_native::trace_diagnostics": {
+        "absolute_path": "<CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/03_EXT02_CWLS/C00/EXT02_C00_TRACE_DIAGNOSTICS.csv",
+        "sha256": "ea98cf2bd41285c89d8d5963b9068c6d9819ac0133a0da4a4466a0aa74d90e8e",
+        "size_bytes": 237490
+      },
+      "report::phase2_report": {
+        "absolute_path": "<CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/11_REPORT/PHASE2_EXT02_C00_REPORT.md",
+        "sha256": "1d89c0f33ef6fd5d83f8d1da4ec76b48154571ae0af803b228d7d1e5804a7390",
+        "size_bytes": 38948
+      },
+      "report::phase2_status": {
+        "absolute_path": "<CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/11_REPORT/PHASE2_STATUS.json",
+        "sha256": "e8b6210dbd1e2177f214c64871f40055aac0d67d9c16a742fc7df22a0d932d3b",
+        "size_bytes": 1577
+      }
+    },
+    "inventory_sha256": "82d205974339cf2f4fcde9d927ab08aa5495ab5d6222835013cbb1b5045d4e60",
+    "role": "IMMUTABLE_PRIMARY_POST_EVIDENCE_INPUT_ONLY",
+    "schema_version": "horizontal_literature.phase2.prior_post_inventory.v1"
+  },
+  "prior_primary_post_inventory_revalidated_immediately_before_recovery_write": true,
+  "proxy_materially_lower_eligible_accepted_epochs": [],
+  "proxy_materially_lower_oracle_gated_epochs": [],
+  "proxy_objective_evaluated_count": 1057,
+  "ready_for_paper_claims": false,
+  "schema_version": "horizontal_literature.phase2.post_native_diagnostics.v1",
+  "successful_post_native_invocation_attempt_count": 1,
+  "successful_post_native_invocation_hpposecef_decode_pass_count": 2,
+  "successful_post_native_invocation_hpposecef_decode_pass_count_unit": "GNSS_RECEIVER_STREAM",
+  "successful_post_native_invocation_hpposecef_semantic_decode_count": 3020,
+  "successful_post_native_invocation_trace_open_count": 1,
+  "supersedes_for_proxy_diagnostics_only": true,
+  "terminal_status": "PASS_PHASE2_EXT02_IMPLEMENTATION_VALIDATED_BY2_C00_APPLICABILITY_RESULT",
+  "trace_sha256": "ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c",
+  "trace_used_online": false,
+  "zero_availability_is_validated_poor_applicability_not_unsupported": true
+}

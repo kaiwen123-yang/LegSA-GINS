@@ -1,0 +1,46 @@
+{
+  "data_mode": "synthetic_fixture_only",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "compile_exit_code": 0,
+  "native_fixture_processes": 1,
+  "real_native_calls": 0,
+  "evaluator_calls": 0,
+  "retry_count": 0,
+  "output_root": "<VALIDATION_BUILD_ROOT>/common_tests",
+  "started_utc": "2026-10-02T09:15:40.593147+00:00",
+  "fixture_exit_code": 0,
+  "scenario_count": 12,
+  "failed": 0,
+  "all_source_matrices_unchanged": true,
+  "source_identity_verified_after_test_no_source_changes": [
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/common/covariance_diagnostics.hpp",
+      "sha256": "65d30fb58ce9fe6e560360a7635e79539287d06aa7002c86e2bac2138b1c83e6"
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/common/test_covariance_diagnostics.cpp",
+      "sha256": "7f3ac4e0c39bf4b562ed531bf350a5f821a0760419fa6df2f866b3476e48be0f"
+    }
+  ],
+  "fixture_binary_sha256": "eeb0a48eb399cfefeb7a0291b19d4be439d00d9992aa601e2625cde4872eec01",
+  "compile_argv": [
+    "g++",
+    "-O3",
+    "-DNDEBUG",
+    "-std=c++17",
+    "-I",
+    "<OBSERVED_SOURCE>/cpp/legsa_v23_port_core/include",
+    "-I",
+    "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/common",
+    "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/common/test_covariance_diagnostics.cpp",
+    "<MECHANISM_BUILD_ROOT>/build_frozen_fixture/liblegsa_v23_port_core.a",
+    "-o",
+    "<VALIDATION_BUILD_ROOT>/common_tests/covariance_fixture"
+  ],
+  "fixture_argv": [
+    "<VALIDATION_BUILD_ROOT>/common_tests/covariance_fixture"
+  ],
+  "installer_guard_added_after_fixture_without_scientific_source_change": true,
+  "already_installed_N12_write_paths_checked_no_symlinks": true
+}

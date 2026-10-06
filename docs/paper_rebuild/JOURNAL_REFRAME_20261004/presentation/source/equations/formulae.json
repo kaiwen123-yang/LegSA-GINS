@@ -1,0 +1,21 @@
+{
+  "baseline": "$\\mathbf{b}^{n}=\\mathbf{p}_{2}^{n}-\\mathbf{p}_{1}^{n}$",
+  "heading": "$\\psi_b=\\operatorname{atan2}(b_E,b_N)+90^{\\circ}$",
+  "sensitivity": "$\\delta\\psi\\simeq\\delta b_{\\perp}/\\|\\mathbf{b}_{H}\\|$",
+  "residual": "$r_{\\psi}=\\operatorname{wrap}(\\psi_{\\mathrm{pred}}-\\psi_{\\mathrm{obs}})$",
+  "state": "$\\delta\\mathbf{x}=[\\delta\\mathbf{p},\\delta\\mathbf{v},\\delta\\boldsymbol{\\theta},\\delta\\mathbf{b}_{g},\\delta\\mathbf{b}_{a}]^{T}$",
+  "covariance": "$\\mathbf{P}^{-}=\\boldsymbol{\\Phi}\\mathbf{P}^{+}\\boldsymbol{\\Phi}^{T}+\\mathbf{Q}$",
+  "innovation": "$\\mathbf{S}=\\mathbf{H}\\mathbf{P}^{-}\\mathbf{H}^{T}+\\mathbf{R}$",
+  "gain": "$\\mathbf{K}=\\mathbf{P}^{-}\\mathbf{H}^{T}\\mathbf{S}^{-1}$",
+  "correction": "$\\delta\\mathbf{x}^{+}=\\delta\\mathbf{x}^{-}+\\mathbf{K}\\mathbf{r}$",
+  "hv": "$\\mathbf{v}_{H}^{n}=\\boldsymbol{\\Pi}_{H}\\widehat{\\mathbf{C}}\\,k_{\\mathrm{HV}}\\mathbf{v}_{\\mathrm{SDK}}^{\\mathrm{FLU}}$",
+  "difference": "$\\mathbf{d}=\\widehat{\\mathbf{x}}-\\mathbf{x}_{\\mathrm{ref}}$",
+  "baseline_cov": "$\\mathbf{C}_{b}=\\mathbf{C}_{p_1}+\\mathbf{C}_{p_2}-\\mathbf{C}_{12}-\\mathbf{C}_{12}^{T}$",
+  "heading_jac": "$\\mathbf{J}_{\\psi}=[-b_E,\\ b_N]/(b_N^2+b_E^2)$",
+  "heading_cov": "$u_{\\psi}^{2}\\simeq\\mathbf{J}_{\\psi}\\mathbf{C}_{b,NE}\\mathbf{J}_{\\psi}^{T}$",
+  "gum": "$\\mathbf{C}_{y}\\simeq\\mathbf{J}\\mathbf{C}_{z}\\mathbf{J}^{T}$",
+  "ref_cov": "$\\mathbf{C}_{d}=\\mathbf{C}_{\\hat{x}}+\\mathbf{C}_{\\mathrm{ref}}-\\mathbf{C}_{\\hat{x},\\mathrm{ref}}-\\mathbf{C}_{\\hat{x},\\mathrm{ref}}^{T}$",
+  "timing": "$\\delta\\mathbf{b}_{t}\\simeq\\mathbf{v}\\,\\Delta t$",
+  "rotation": "$\\delta\\mathbf{v}^{n}\\simeq\\mathbf{C}_{b}^{n}\\delta\\mathbf{v}^{b}-\\mathbf{C}_{b}^{n}[\\mathbf{v}^{b}]_{\\times}\\delta\\boldsymbol{\\alpha}^{b}$",
+  "coverage": "$\\widehat{c}=\\#\\{e\\in\\mathcal{I}_{p}\\}/N$"
+}

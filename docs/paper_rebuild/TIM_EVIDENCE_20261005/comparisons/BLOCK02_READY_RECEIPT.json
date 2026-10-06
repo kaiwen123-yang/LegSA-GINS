@@ -1,0 +1,47 @@
+{
+  "schema": "comparison.block02.delivery.v1",
+  "utc": "2026-10-05T03:25:37.073218+00:00",
+  "files": [
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/verify_existing_comparisons.py",
+      "sha256": "6784330051a0783697a01e845383dc67c9eb0ce838f21dec5b4e83a10b193310"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/AUDIT_HELPER_DEVELOPMENT_NOTES.md",
+      "sha256": "c5083922096979eb79c22772f221c946dc0e186fe6e8e3131ac4be607d9d872a"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/RUN_EVALUATION_INDEX.csv",
+      "sha256": "d32373c250bdb1f8fbec8dcdf0191f1d47b3caef7e978ef690774278285f2f4a"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/INDEPENDENT_SAVED_ERROR_RMSE_CHECKS.csv",
+      "sha256": "ca0610777452f043cc9f8b1f439d6cdb340f017ab95e60cdf9a7bd6923e61ea8"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/ARTIFACT_IDENTITY_CHECKS.csv",
+      "sha256": "b1d50ca8f2bb58ee8d1eed451d86e99aff830e0913268b7a2eee6ed768e21107"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/ARTIFACT_SCOPE_LIMITS.csv",
+      "sha256": "e048f850603d61f48712a38ef5c50d936117bbec9efd7500d5118c625892703b"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/BLOCK02_ACCEPTANCE_REVIEW.json",
+      "sha256": "50c3f4907429c8ac68a93a1acb3731c812d15bccaa6dede3d4c5c64d3d56b31f"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/BLOCK02_EXISTING_ARTIFACT_REVIEW.md",
+      "sha256": "aa9ca63439c38e14c1cca0c2426f7f13feca4cadedfe0cfa6b4317975df57db1"
+    }
+  ],
+  "native_solver_calls": 0,
+  "evaluator_calls": 0,
+  "raw_reference_payload_opens": 0,
+  "scientific_source_edits": 0,
+  "all_performed_checks_passed": true,
+  "indexed_condition_support_rows": 67,
+  "rmse_checks": 313,
+  "identity_checks": 3316,
+  "whole_author_paper_replication_claimed": false
+}

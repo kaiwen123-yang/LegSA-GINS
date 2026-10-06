@@ -1,0 +1,98 @@
+[
+  {
+    "check": "BY2_R1_single_epoch_arc_is_unavailable",
+    "passed": true
+  },
+  {
+    "check": "BY2_R2_single_epoch_arc_is_unavailable",
+    "passed": true
+  },
+  {
+    "check": "BY2_DD_wrap_range",
+    "passed": true
+  },
+  {
+    "check": "BY2_fix_states_partition",
+    "passed": true
+  },
+  {
+    "check": "BY2H_R1_single_epoch_arc_is_unavailable",
+    "passed": true
+  },
+  {
+    "check": "BY2H_R2_single_epoch_arc_is_unavailable",
+    "passed": true
+  },
+  {
+    "check": "BY2H_DD_wrap_range",
+    "passed": true
+  },
+  {
+    "check": "BY2H_fix_states_partition",
+    "passed": true
+  },
+  {
+    "check": "BY2O_R1_single_epoch_arc_is_unavailable",
+    "passed": true
+  },
+  {
+    "check": "BY2O_R2_single_epoch_arc_is_unavailable",
+    "passed": true
+  },
+  {
+    "check": "BY2O_DD_wrap_range",
+    "passed": true
+  },
+  {
+    "check": "BY2O_fix_states_partition",
+    "passed": true
+  },
+  {
+    "check": "BY2_R1_raw_sha256",
+    "passed": true
+  },
+  {
+    "check": "BY2_R1_status_sha256",
+    "passed": true
+  },
+  {
+    "check": "BY2_R2_raw_sha256",
+    "passed": true
+  },
+  {
+    "check": "BY2_R2_status_sha256",
+    "passed": true
+  },
+  {
+    "check": "BY2H_R1_raw_sha256",
+    "passed": true
+  },
+  {
+    "check": "BY2H_R1_status_sha256",
+    "passed": true
+  },
+  {
+    "check": "BY2H_R2_raw_sha256",
+    "passed": true
+  },
+  {
+    "check": "BY2H_R2_status_sha256",
+    "passed": true
+  },
+  {
+    "check": "BY2O_R1_raw_sha256",
+    "passed": true
+  },
+  {
+    "check": "BY2O_R1_status_sha256",
+    "passed": true
+  },
+  {
+    "check": "BY2O_R2_raw_sha256",
+    "passed": true
+  },
+  {
+    "check": "BY2O_R2_status_sha256",
+    "passed": true
+  }
+]

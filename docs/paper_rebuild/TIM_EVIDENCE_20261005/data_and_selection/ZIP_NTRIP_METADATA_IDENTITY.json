@@ -1,0 +1,42 @@
+[
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-11-16-59_minimal/ntrip-info.csv",
+    "bytes": 8248,
+    "sha256": "7b9cddd055f68a403095bc2e5344aa53ff5861b6de053cfb2bd25cbb816b9f09"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-11-25-11_minimal/ntrip-info.csv",
+    "bytes": 8150,
+    "sha256": "8ffd57e4c8e6997d7884b4f33bc09971fc8a773d26595177931c60416786dbbf"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-11-32-27_minimal/ntrip-info.csv",
+    "bytes": 8712,
+    "sha256": "7a4cb40321ca69d7ec77b726f45792e4424385957a6b2e10da90caeb21da6bf7"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-11-39-50_minimal/ntrip-info.csv",
+    "bytes": 8046,
+    "sha256": "26cf9afcc3103d1375b37c75f7830371fd3a2c3297c6f20014953958a027d2d7"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-12-25-13_minimal/ntrip-info.csv",
+    "bytes": 9259,
+    "sha256": "7542a55e8b8d34b4462edb6ecc43d0c5510ca4144b5c1ea6a6808c5c1930b555"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-12-33-29_minimal/ntrip-info.csv",
+    "bytes": 8489,
+    "sha256": "fb0af4bb99387144a86a642fe30c6347880a32192e394f3e082ecae10ba753c9"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-12-40-53_minimal/ntrip-info.csv",
+    "bytes": 8048,
+    "sha256": "772227a00be7f39c89d56010aca05cc00321400fd81b07eebf98b92c3832d4cb"
+  },
+  {
+    "member": "vrtk2_a87c6e_2026-01-05-12-49-30_minimal/ntrip-info.csv",
+    "bytes": 8044,
+    "sha256": "340e20f93c63f589f5190c7f2cd879d606173f6ea9a3a8fd417d35ca71b50aa8"
+  }
+]

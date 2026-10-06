@@ -1,0 +1,14 @@
+{
+  "reviewed_utc": "2026-10-04T11:12:43.089714+00:00",
+  "new_modified_frozen_files": 34,
+  "protected_files_byte_exact": 86,
+  "original204_numeric_bindings_unchanged": true,
+  "checks_PASS": 219,
+  "copy_sources_byte_exact": 12,
+  "new_table_display_numeric_fields_exact": 48,
+  "abstract_primary6_1_to6_5_text_exact": true,
+  "generated_S26_fully_read": true,
+  "submission_ready": false,
+  "science_source_or_native_evaluator_calls": 0,
+  "all_checks_passed": true
+}

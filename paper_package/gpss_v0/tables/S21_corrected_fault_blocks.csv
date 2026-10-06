@@ -1,0 +1,21 @@
+Family,Duration (s),Ablation,Metric,Mean paired delta (m),Improved,Worsened,Unavailable
+D61,10,Doppler-aid ablation,H,-0.05387742294261787,7,2,0
+D61,10,Doppler-aid ablation,V,-0.01386111146690077,6,3,0
+D61,10,Robot-velocity ablation,H,-0.006992680844239985,5,4,0
+D61,10,Robot-velocity ablation,V,-0.00046862026224579897,6,3,0
+D61,20,Doppler-aid ablation,H,-0.13492379230353851,6,3,0
+D61,20,Doppler-aid ablation,V,-0.0006128366365693645,5,4,0
+D61,20,Robot-velocity ablation,H,-0.048617801846256095,6,3,0
+D61,20,Robot-velocity ablation,V,0.002048202651304201,4,5,0
+D61,30,Doppler-aid ablation,H,0.009531292960878722,6,3,0
+D61,30,Doppler-aid ablation,V,-0.0278880314949945,5,4,0
+D61,30,Robot-velocity ablation,H,-0.08434062988899092,5,4,0
+D61,30,Robot-velocity ablation,V,0.006439389680548777,4,5,0
+D62,10,Doppler-aid ablation,H,0.0006908259125325248,4,5,0
+D62,10,Doppler-aid ablation,V,-0.015402781260678226,6,3,0
+D62,10,Robot-velocity ablation,H,-7.439889597909058,9,0,0
+D62,10,Robot-velocity ablation,V,0.10823838409626088,2,7,0
+D62,20,Doppler-aid ablation,H,0.0008963316345197178,4,5,0
+D62,20,Doppler-aid ablation,V,-0.014689776584131694,6,3,0
+D62,20,Robot-velocity ablation,H,-29.614411360942807,9,0,0
+D62,20,Robot-velocity ablation,V,0.18889564820558707,3,6,0

@@ -1,0 +1,40 @@
+{
+  "fixture_cases": 4,
+  "passed": 4,
+  "cases": [
+    {
+      "case": "21x21 diagonal; first 15 ones and six zero scale states",
+      "passed": true,
+      "expected": "441 finite; asymmetry 0; six scale rows/cols zero; no PD PASS"
+    },
+    {
+      "case": "set P[0,1]=1e-15 only",
+      "passed": true,
+      "expected": "max absolute asymmetry 1e-15 at [1,0]; no tolerance classification"
+    },
+    {
+      "case": "replace P[0,1] with NaN",
+      "passed": true,
+      "expected": "440 finite; asymmetry UNKNOWN"
+    },
+    {
+      "case": "nested full P_before object",
+      "passed": true,
+      "expected": "one matrix with exact JSON field pointer"
+    }
+  ],
+  "prior_inline_fixture_cases": 4,
+  "total_fixture_case_executions": 8,
+  "repeat_reason": "persist reproducible tests and bind final script after read-identity gate correction",
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "event_payload_reads": 0,
+  "reference_reads": 0,
+  "new_tolerance": false,
+  "data_mode": "synthetic_fixture_only",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "tested_script_sha256": "c550cb80db3da56d5a8bc93cb654eb61bc081bb67378f300a35f50cd4c9a86cc",
+  "current_script_sha256": "e2bada12c28e385bf8a34bd5ebdbd3fa7882dc8078b03e846d9fb73f501e8efd",
+  "post_test_change": "Added per-row and summary data-mode labels only; describe/find_covariances arithmetic unchanged; no new test execution claimed"
+}

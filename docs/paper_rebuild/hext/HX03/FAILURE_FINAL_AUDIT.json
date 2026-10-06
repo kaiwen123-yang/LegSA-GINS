@@ -1,0 +1,402 @@
+{
+  "failures": [
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 57.3970468044281,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 57.40000009536743
+      },
+      "run_id": "BY2__EXT05C__LIT__D14_seed_00__seed_00"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 57.797053813934326,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 57.799999952316284
+      },
+      "run_id": "BY2__EXT05C__LIT__D14_seed_01__seed_01"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 61.595046281814575,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 61.59999990463257
+      },
+      "run_id": "BY2__EXT05C__LIT__D14_seed_02__seed_02"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 57.99304938316345,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 58.0
+      },
+      "run_id": "BY2__EXT05C__LIT__D14_seed_03__seed_03"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 57.3970468044281,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 57.40000009536743
+      },
+      "run_id": "BY2__EXT05C__LIT__D14_seed_04__seed_04"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 57.59704899787903,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 57.59999990463257
+      },
+      "run_id": "BY2__EXT05C__LIT__D14_seed_05__seed_05"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 57.3970468044281,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 57.40000009536743
+      },
+      "run_id": "BY2__EXT05C__LIT__D14_seed_06__seed_06"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 58.395060539245605,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 58.40000009536743
+      },
+      "run_id": "BY2__EXT05C__LIT__D14_seed_07__seed_07"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 57.3970468044281,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 57.40000009536743
+      },
+      "run_id": "BY2__EXT05C__LIT__D14_seed_08__seed_08"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 58.19905996322632,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 58.200000047683716
+      },
+      "run_id": "BY2__EXT05C__LIT__D21_seed_00__seed_00"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 73.59507417678833,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 73.59999990463257
+      },
+      "run_id": "BY2__EXT05C__LIT__D21_seed_01__seed_01"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 67.59907793998718,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 67.59999990463257
+      },
+      "run_id": "BY2__EXT05C__LIT__D21_seed_02__seed_02"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 58.995054721832275,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 59.0
+      },
+      "run_id": "BY2__EXT05C__LIT__D21_seed_03__seed_03"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 70.19907641410828,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 70.20000004768372
+      },
+      "run_id": "BY2__EXT05C__LIT__D21_seed_04__seed_04"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 59.79904747009277,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 59.799999952316284
+      },
+      "run_id": "BY2__EXT05C__LIT__D21_seed_05__seed_05"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 85.99706625938416,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 86.0
+      },
+      "run_id": "BY2__EXT05C__LIT__D21_seed_06__seed_06"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 64.99506211280823,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 65.0
+      },
+      "run_id": "BY2__EXT05C__LIT__D21_seed_07__seed_07"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 71.50910711288452,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 71.51306104660034
+      },
+      "run_id": "BY2__EXT05C__LIT__D21_seed_08__seed_08"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 62.555116415023804,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 62.561054944992065
+      },
+      "run_id": "BY2__LC01__LIT__D14_seed_00__seed_00"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 57.19705390930176,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 57.200000047683716
+      },
+      "run_id": "BY2__LC01__LIT__D14_seed_01__seed_01"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 57.46705412864685,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 57.47104835510254
+      },
+      "run_id": "BY2__LC01__LIT__D14_seed_02__seed_02"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 59.79904747009277,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 59.799999952316284
+      },
+      "run_id": "BY2__LC01__LIT__D14_seed_03__seed_03"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 59.99905586242676,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 60.0
+      },
+      "run_id": "BY2__LC01__LIT__D14_seed_04__seed_04"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 57.3970468044281,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 57.40000009536743
+      },
+      "run_id": "BY2__LC01__LIT__D14_seed_05__seed_05"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 61.39506220817566,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 61.40000009536743
+      },
+      "run_id": "BY2__LC01__LIT__D14_seed_06__seed_06"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 58.599058389663696,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 58.59999990463257
+      },
+      "run_id": "BY2__LC01__LIT__D14_seed_07__seed_07"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 57.3970468044281,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 57.40000009536743
+      },
+      "run_id": "BY2__LC01__LIT__D14_seed_08__seed_08"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 60.597060680389404,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 60.59999990463257
+      },
+      "run_id": "BY2__LC01__LIT__D21_seed_00__seed_00"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 73.59507417678833,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 73.59999990463257
+      },
+      "run_id": "BY2__LC01__LIT__D21_seed_01__seed_01"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 59.99905586242676,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 60.0
+      },
+      "run_id": "BY2__LC01__LIT__D21_seed_02__seed_02"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 57.99304938316345,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 58.0
+      },
+      "run_id": "BY2__LC01__LIT__D21_seed_03__seed_03"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 96.03103160858154,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 96.03504920005798
+      },
+      "run_id": "BY2__LC01__LIT__D21_seed_04__seed_04"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 60.197062253952026,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 60.200000047683716
+      },
+      "run_id": "BY2__LC01__LIT__D21_seed_05__seed_05"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 126.59780836105347,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 126.59999990463257
+      },
+      "run_id": "BY2__LC01__LIT__D21_seed_06__seed_06"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 60.597060680389404,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 60.59999990463257
+      },
+      "run_id": "BY2__LC01__LIT__D21_seed_07__seed_07"
+    },
+    {
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "message": {
+        "exception": "Diverged",
+        "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+        "last_retained_time_seconds": 59.59505653381348,
+        "message": "D8 displacement>10000m, speed>50m/s or height excursion>1000m",
+        "time_seconds": 59.59999990463257
+      },
+      "run_id": "BY2__LC01__LIT__D21_seed_08__seed_08"
+    }
+  ],
+  "native_denominator": 285,
+  "native_failure_count": 36
+}

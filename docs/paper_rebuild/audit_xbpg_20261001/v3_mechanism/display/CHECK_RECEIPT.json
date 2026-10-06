@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "checks": 287,
+  "failures": 0,
+  "baseline_commit": "b0fdb81f103a5f0e7c7432e5247a9341524c7fa6",
+  "data_mode": "mixed_existing_records_display_only",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "semisynthetic_data_generated": false,
+  "original_assembler_imported": false,
+  "original_assembler_main_calls": 0,
+  "original_assembler_controller_calls": 0,
+  "selected_render_functions_tested_in_memory": true,
+  "original_ledger_ids_preserved": 207,
+  "appended_ledger_ids": [
+    "N00208",
+    "N00209",
+    "N00210",
+    "N00211"
+  ],
+  "solver_calls": 0,
+  "provider_calls": 0,
+  "evaluator_calls": 0,
+  "bootstrap_calls": 0,
+  "payload_opens": 0,
+  "figure_redraws": 0,
+  "original_performance_csv_writes": 0,
+  "git_mutations": 0,
+  "protected_small_files": 11,
+  "targets": {
+    "paper_package/gpss_v0/MANUSCRIPT_GPSS_v0.md": "f196c2562c3fd74e0a36cb2ddae6b327391d67a0711980717c3656545ff86744",
+    "paper_package/gpss_v0/manuscript_source.md": "525f7fa39f69cf47072ed1aa017b9bb96d32a4278337d7e65d232f79707efe46",
+    "paper_package/gpss_v0/SUPPLEMENT_GPSS_v0.md": "5810c0292f92b883d64bedabd676495e8eaf54e9fe4264d7add4d82be9086d40",
+    "paper_package/gpss_v0/supplement_source.md": "354a6ed1ea36e39d5a4ba7ca87316f09ecd6ead989ef7e290da1f60ad2853a31",
+    "paper_package/gpss_v0/NUMBER_LEDGER.csv": "574c5bd098b144fc8a9132e3c60e290b3c584c5ee4c529a7af732504fe669be5",
+    "paper_package/gpss_v0/CLAIM_SPECS.json": "23d404b7e4b06d1a5284cfd4bd19c593e58a86bf3645d1f708666b37d41a81ae",
+    "paper_package/gpss_v0/figures/scripts/assemble_manuscript.py": "42a93be8a79a764acf8b02defb55c92afc92701005039eb2729a6d31c15725c8"
+  }
+}

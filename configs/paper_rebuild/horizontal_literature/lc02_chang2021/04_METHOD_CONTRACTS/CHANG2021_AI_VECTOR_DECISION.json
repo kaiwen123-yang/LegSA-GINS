@@ -1,0 +1,10 @@
+{
+  "schema": "lc02_chang2021.ai_vector.v1",
+  "paper_symbol": "a=[a1,a2,...,an]",
+  "paper_dimension": 15,
+  "paper_role": "coefficient vector whose i-th element matches M_k,ii in Eq. 11",
+  "decision": "UNRESOLVED",
+  "gate_result": "FAIL",
+  "reason": "The paper criticizes all a_i=1 and replaces Eq. 11 by Eq. 15, but Eq. 12 still cannot produce a unique 15x15 N and no beta1/beta2-to-a_i relation is printed.",
+  "implementation_authorized": false
+}

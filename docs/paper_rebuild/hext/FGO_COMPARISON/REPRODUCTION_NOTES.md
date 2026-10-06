@@ -1,0 +1,65 @@
+> **2026-10-04历史身份说明：** 本页保留旧14次FGO结果。修正后的严格一次初始化主分支与新9身份见[新阶段](../FGO_REPRODUCTION_FIX_20261004/README.md)；BY2H 0/271、BY2O55/378。旧H/O2/7次初始化成绩不能与新协议混用，旧结果未覆盖。
+
+# FGO 实现与评价约定
+
+三篇身份和输入边界见 [FGO_SELECTION.md](FGO_SELECTION.md)。实现均独立编写，未声称作者代码逐字复现；真实参数在 `configs/paper_rebuild/fgo_comparison/` 首次主运行前固定。真实数据与合成计算测试分开；合成结果不进入性能表。
+
+## 原文—函数—配置
+
+| 方法/环节 | 原文 | 函数 | 固定配置与差异 |
+|---|---|---|---|
+| 原始未差分GNSS | Wen2021 Eq10/13–16；GNC2022 Eq4–13 | `raw_inputs.prepare / solve_code_wls / doppler_wls / code_sigma` | GNSS1 GPS L1CA/BDS B1I，广播钟差/相对论、Klobuchar、Saastamoinen、TGD与一次地球自转；单星座观测不分配另一钟偏。码STD用作者实现的cofactor平方根，明确解决Wen2021 Eq15/16权重命名矛盾。 |
+| GNC伪距/Doppler图 | Eq5/13 | `gnc._Graph.residual_jacobian` | ECEF位置、每历元实际观测系统的米制钟偏；不分配自由速度。Doppler从原始频率解算，图STD 0.6m/s沿作者factor实际分母，保存WLS实际协方差诊断。 |
+| GNC鲁棒机制 | Eq17–21、Algorithm1 | `gnc.gm_loss / gnc_weight / solve` | cGM=2，theta初值max(1,3max(r²)/c²)，每轮/1.4至1；按Eq21驻点用平方权重，Eq22印刷矛盾明示。完整批处理使用未来观测；无滑窗边缘化。 |
+| GNC数值求解与缺测 | Eq23，未公开数值项 | `gnc._fixed_weight_solve / _prepare_graph` | 稀疏GN/回溯；固定收敛容差与足够预算见GNC_2022.json。WLS初值，缺初值仅在有锚分量内Doppler传播；无先验补秩。缺Doppler切断边；秩亏/不收敛分量主输出NaN，全部节点/观测分母仍保留。 |
+| Wen TC状态与码/运动因子 | Eq21–23、30、32 | `wen_tc.TCProblem / solve` | ECEF p/v、体坐标加计偏置、实际观测星座钟偏；运动0.3m、偏置差0.01m/s²、INS联系0.15m/s。全批LM，无姿态状态/额外Doppler因子。缺末INS时未约束末速度不进入求解、输出NaN；其余图消元判秩，无阻尼冒充先验。 |
+| Wen外部AHRS/INS速度联系 | Eq3、25–27 | `wen_ahrs.prepare_ahrs / wen_tc` | Go2 quaternion经既有FLU/FRD安装关系、一次A1初始全球定向；校准比力积分加正常重力及杆臂速度差。原始stamp重建精确增量dt；缺口不填。区间内以左端偏置积分，为原文逐点右端加速度偏置式的固定离散适配。 |
+| OiSAM状态、因子 | Eq4–6 | `oisam.preintegrate / gnss_factor / marginalize_oldest` | GTSAM4.2只提供15维局部姿态/位置/速度/两偏置因子及预积分；不调用iSAM/iSAM2。GNSS杆臂、偏置随机游走、固定局部NED一阶地球率/Coriolis；与OB-GINS完整地球模型有明确差异。边缘化只消除触及旧节点的因子，不重复保留因子。 |
+| OiSAM结构化更新 | Eq13–14、Algorithm1、Fig4–5 | `oisam.BandedMatrix / IncrementalQR` | 每行4m带状存储、Givens消元、前缀变换后的2m尾缓存，增量与完整QR小例一致；重线性化前保持固定线性化锚。 |
+| OiSAM A-JSWR | Algorithm2 | `OiSAMGraph.step / ceres_relinearize.optimize` | T1/T2=30/40；相邻最优姿态变化RP3°/yaw15°或上限触发；真实Ceres2.2.0（pyceres2.6）重线性化，单线程LM+稀疏Cholesky，最多20迭代。按算法框删至29节点。当前节点输出，不回填过去输出。 |
+
+`raw_inputs` 复用既有RAWX缓存和广播库，不调用动基线求解器。缓存内容校验绑定前轮独立登记的INPUT身份；两接收机历元数与配对数均为1509/1483/2231且无配对失败，不因配对裁掉本次GNSS1历元。1Hz按距离整秒最近的实际RAWX时刻（容差0.05s）选取，保留实际时刻，不改写成整秒；原始/选中/名义缺失/各级筛选数量登记。传输与大气更正在原始码SPP近似位置计算，不借用任何完整导航轨迹。
+
+## 初始化与缺测的事前处置
+
+OiSAM与Wen AHRS只使用合法传感器初始化。BY2H体IMU在407.017–413.041s有真实缺口，BY2O亦有短缺口，已在主运行前从provider时间确认。OiSAM不跨缺口填IMU：保留失败节点，下一段连续IMU及合法GNSS位置/A1 yaw支持时独立重新初始化；每段一次初始yaw登记次数/来源，不形成连续航向因子。Wen保留码/运动/偏置图，仅缺失的INS速度边不可用。所有规则三序列相同。
+
+OiSAM实际使用原始stamp恢复的精确IMU增量区间，不能把provider舍入时间差当积分dt。输入独立pin及raw锁核对通过：三序列63277/63217/95853区间。原始陀螺预处理已减初始均值，因此初始残余偏置设为解析量 `-R0.T @ omega_ie`，不重新拟合；噪声密度从已校准stationary sigma按 `sigma*sqrt(2/tau)` 转换。初始roll/pitch=0±10°、加计偏置不确定度取已校准stationary sigma；不是后验调参。右端样本拆边界最多等待下一个IMU样本，逐节点保存可用时间；不能宣称绝对零未来输入或将离线总耗时当实时延迟。
+
+隔离依赖在 `<FGO_BUILD>/oisam_venv`：NumPy1.26.4、GTSAM4.2、pyceres2.6/Ceres2.2.0。主系统科学环境未更改。[Ceres绑定](https://github.com/cvg/pyceres)只用于非线性重线性化分支，普通优化库没有替代OiSAM结构化增量算法。
+
+## 输出与评价
+
+OiSAM提供位置/速度/自身姿态，当前节点输出不回填历史；Wen TC输出位置/速度/偏置/钟偏，AHRS姿态只作输入；GNC仅GNSS定位，姿态字段不存在。Wen和GNC完整批处理使用未来观测；总离线时间不能解释为在线最坏延迟。
+
+沿用每序列base_time及66–340、413–683、3186–3563s闭窗。1Hz名义窗口分母为275/271/378，另报告实际原生节点、有限节点、匹配节点与参考历元数，边界附近RAWX实际时刻不强制移入窗口。参考仅在独立离线评价进程读取，使用既有固定WGS84、参考插值和wrap角误差，不插值方法输出。GNSS-only输出点为GNSS1；reference中点按固定[0,b/2,0]FRD及reference自身姿态转到GNSS1。OiSAM使用既有IMU→POI转换。共同时间支持单列，不能消除不同输入/评价物理点的应用比较边界。
+
+## 有原因保留的修复记录
+
+首次OiSAM MAIN使用天线速度初始化IMU点，末轮代码review用已知转速/杆臂合成例发现这一物理点错误。INIT_VELOCITY_FIX统一减去 `R(omega_body × lever)`，使用最近已完成校准IMU增量的原始dt，缺合法rate保留NaN并等待；不是从参考误差挑选符号、初值或参数。三序列一致修复，旧MAIN及其BY2离线评价保留；仅OiSAM重跑。另修跨段“最大迭代”累加统计，原输出不动。最终表/图只链接明确的新attempt。
+
+## 表格支持与运行身份
+
+`OWN_VALID`保留名义/实际/有限/参考匹配四个计数；`COMMON_*`的actual/finite/matched表示所选共同子集，`own_*`另存原始全窗计数。名义秒门为**每个方法距同一整秒不超过5ms**，不是方法间差不超过5ms（最大可10ms）；高频旧V3只按时间距离取最近实际样本，不看误差。V3共同支持从留存error CSV派生，原指标另以`RETAINED_OWN_VALID`原值保留。旧航向方法继续用原paired分母，不能替换为275/271/378。未登记的旧名义分母留空。
+
+参考是既有商业系统评价参考，并非独立真值；图例沿用Truth称谓。平面图公共ENU原点只用于显示坐标，不是事后轨迹对齐。参考插值沿既定定义，方法输出不插值；旧NAV释放则只画留存误差，BY2已有真实匹配轨迹可画，BY2H/BY2O的V3轨迹不重建。位置误差图用固定±1m线性区的symlog完整容纳极值；放大的局部轨迹如有出现，主图仍保留全部输出。
+
+每个RUN.json保留启动Git SHA及逐文件hash。BY2O最终OiSAM运行过程中提交了仅报告代码的657f5a0，故外层启动SHA为7922e5b、内层结束SHA为657f5a0；三份native实现文件hash逐一相同，不伪称同一个Git快照、不因此重跑。最终OiSAM的3286s节点有一次Ceres达到原文20步上限但返回可用状态，保留该状态及终止类别；其它两序列无此事件。9个最终运行完成不等于所有内部非线性调用均宣告收敛。
+
+## 广播钟差冲突的输入修复
+
+BY2O的初次评价暴露Wen TC公里级位置偏差。随后仅用raw/nav和图目标项诊断：C13的两份同toc/toe/AODE/AODC/轨道广播，其af0相差228.8818359375微秒（68617.048187m），af2也不一致；两路UBX校验通过、92条码prValid均真。没有证据按接收机、重复次数或参考误差选中某份钟差，不能将该版本的成绩归为论文方法能力。原输入、GNC/Wen MAIN输出及对应评价、图全部保留。
+
+`broadcast_identity.BroadcastClockGate`按完整广播物理身份及公开量化单位检查冲突；`raw_inputs.apply_broadcast_gate`在原始state/码/Doppler/粗初值前拒绝依赖冲突身份的观测，保留时间节点、原始/候选计数及排除原因。原NAV不删改，避免删除坏版本后无声回退；对冲突卫星还借既有`ephemeris_audit`确认RTKLIB去重后的实际选择。无clock冲突的合法版本保留，不新增残差门或更换损失函数。规则及参数跨序列一致，RAW_INPUT配置hash为`0df8c2cb24f264ce39121fe1eb2d4f8957523e50486d4c8c7bf667880699b6e2`。
+
+此项是在结果见后发现并修复的输入适配错误，有明确广播字段依据，不是调参择优。10项raw合成测试（原4项加6项冲突/版本/去重回退/缺身份/分母回归）通过，独立只读复核通过。新的输入在`<FGO_ROOT>/inputs_clock_conflict/`；逐数组等同性决定未受影响序列是否复用，只有实际改变输入的两个RAWX方法重跑，OiSAM链不变。
+
+实际准备结果如下；完整23数组shape/dtype/逐字节比较、NPZ与manifest哈希及零参考访问回执在`<FGO_ROOT>/diagnostics/INPUT_CLOCK_FIX_REUSE.json`。
+
+| 序列 | 保留节点（含窗前） | 原/新码因子候选 | 冲突排除数 | 运行处置 |
+|---|---:|---:|---:|---|
+| BY2 | 285 | 5438/5438 | 0 | 23数组及NPZ哈希完全一致，复用两方法MAIN |
+| BY2H | 282 | 5500/5500 | 0 | 23数组及NPZ哈希完全一致，复用两方法MAIN |
+| BY2O | 420 | 7569/7477 | 92 | 时间/节点不变，420个WLS初值可用；两方法均另建CLOCK_CONFLICT_FIX |
+
+新版准备各耗时0.710/0.650/0.925s，包含输入检查和更正生成，不包含前阶段既有原始缓存生成/依赖构建。它们不混入RUNS的native求解与适配计时，也不计作FGO方法×序列运行。

@@ -1,0 +1,39 @@
+{
+  "data_mode": "real_xb_pg_raw",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "figures": [
+    {
+      "path": "figures/S1_diagnostics.png",
+      "sha256": "364abac483d294f068f957f3f57ce52edc7054571f57ab340659688214d809a6",
+      "bytes": 317836,
+      "actual_raster_review": "PASS",
+      "review": "Axes/units/full denominator/no-solution and different POI point clear; no artificial solver trajectory; S2 all 7 points in inset",
+      "reviewer": "root_with_read_only_reviewer"
+    },
+    {
+      "path": "figures/S2_diagnostics.png",
+      "sha256": "ce84fe7f3e800a80d8eb86761b9ef3f9b77b700b58029d32b0d286f8e7eb7365",
+      "bytes": 338234,
+      "actual_raster_review": "PASS",
+      "review": "Axes/units/full denominator/no-solution and different POI point clear; no artificial solver trajectory; S2 all 7 points in inset",
+      "reviewer": "root_with_read_only_reviewer"
+    },
+    {
+      "path": "figures/S3_diagnostics.png",
+      "sha256": "d8374f51cd160d5c9c8cd34b9b1b63267cb1320055b39ec7bcd080fb6255f54a",
+      "bytes": 314190,
+      "actual_raster_review": "PASS",
+      "review": "Axes/units/full denominator/no-solution and different POI point clear; no artificial solver trajectory; S2 all 7 points in inset",
+      "reviewer": "root_with_read_only_reviewer"
+    },
+    {
+      "path": "figures/S4_diagnostics.png",
+      "sha256": "8442e61cccf70914e40051c9829cc2aaafd6e70d71bd0d0c486a0c4b16f2c66b",
+      "bytes": 377793,
+      "actual_raster_review": "PASS",
+      "review": "Axes/units/full denominator/no-solution and different POI point clear; no artificial solver trajectory; S2 all 7 points in inset",
+      "reviewer": "root_with_read_only_reviewer"
+    }
+  ]
+}

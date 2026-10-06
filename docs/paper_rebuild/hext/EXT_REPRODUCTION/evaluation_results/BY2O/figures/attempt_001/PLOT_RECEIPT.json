@@ -1,0 +1,24 @@
+{
+  "status": "COMPLETED_VISUAL_REVIEW_PENDING",
+  "attempt": 1,
+  "sequence_id": "BY2O",
+  "source": "ERROR_SERIES.csv",
+  "source_sha256": "5edcff1792afbbd9370a8016b4afddbc41bf86d84355f858d6d064006e451e8d",
+  "reference_opens": 0,
+  "evaluator_invocations": 0,
+  "outputs": [
+    "HEADING_COMPARISON.png",
+    "HEADING_COMPARISON.pdf"
+  ],
+  "png_width_pixels": 4200,
+  "reference_label_note": "Fixposition-derived reference; not independent truth",
+  "plot_gap_rule_seconds": 0.300001,
+  "plot_implementation": "WRAP360_STATUS_LANES_V2",
+  "heading_display_rule": "native/reference wrap360 then gap/wrap breaks; display only; errors unchanged",
+  "status_offsets": {
+    "invalid": -0.16,
+    "native_valid": 0.0,
+    "ratio_fixed": 0.16
+  },
+  "baseline_display_rule": "original finite relative-baseline values; no clipping"
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "block": "02_assumed_analytical_figures",
+  "status": "READY_FOR_ROOT_REVIEW",
+  "created_utc": "2026-10-04T13:30:22.030548+00:00",
+  "submission_ready": false,
+  "scientific_runs": 0,
+  "scientific_or_reference_files_read": 0,
+  "analytical_illustration_count": 3,
+  "csv_rows": [
+    498,
+    573,
+    603
+  ],
+  "calculation_checks_passed": 8,
+  "actual_png_views": 3,
+  "all_checks_passed": true,
+  "files": [
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/build_assumed_sensitivity_figures.py",
+      "bytes": 7813,
+      "sha256": "27620fcabe3cb4350689f5efc08b4c61b7c2570b54b42d5f908935bb491d5270"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/ACTUAL_VISUAL_REVIEW.json",
+      "bytes": 1784,
+      "sha256": "dba893848907f1da6155beee88cecf56baa2e49b20120756f09fb246b5329062"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/ASSUMPTIONS_AND_CALCULATION_CHECKS.json",
+      "bytes": 3268,
+      "sha256": "5cd8f32f9cea62e837c7a5f03fe5cf2c89f1187596dfbee02ee29742c669944b"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U01_projection_correlation.csv",
+      "bytes": 27406,
+      "sha256": "fdc90e3df341226922f48a058fe0931bcb6228abde52f3d24c8d1c17207d504c"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U01_projection_correlation.png",
+      "bytes": 168416,
+      "sha256": "c045dd7d60d1b9ad8d353ff87b36e55f6d47cc06f8112f50befdfe6f29a8c745"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U01_projection_correlation.svg",
+      "bytes": 19134,
+      "sha256": "a039c2a792102597956d671c24c76f8b9c37b837c04cc7cf37f06c2c13b8199f"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U02_heading_velocity_cross_term.csv",
+      "bytes": 45002,
+      "sha256": "78040b4612a68e117ca7b5554dd665d9ac2610bc4e136b4fd891cac9a38ed834"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U02_heading_velocity_cross_term.png",
+      "bytes": 176033,
+      "sha256": "43f9d7a5deac759fc610ae795389f4e6f40a2648dcb8415bf9a965c46354248a"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U02_heading_velocity_cross_term.svg",
+      "bytes": 16915,
+      "sha256": "4b6d0399ca0611f88987e3951097d8e17cea52cd1946c9b674cfa72336aeefc7"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U03_asynchronous_direction.csv",
+      "bytes": 34296,
+      "sha256": "00e7ccf010a8692442070c7f1887ee58f4baad58a4e8df05547a1c4f2398f892"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U03_asynchronous_direction.png",
+      "bytes": 153658,
+      "sha256": "e09aa94fb42dbbca3bbfad454b77d3670b649ef4e8a119a3eee172f4e158b19f"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/Fig_U03_asynchronous_direction.svg",
+      "bytes": 14562,
+      "sha256": "83bfbd960df72c38126a4761558ce0b5204a17183427c600d697b96d1ada2ba1"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/assumed_sensitivity/README.md",
+      "bytes": 3189,
+      "sha256": "a51e0d88620a07f28edc3202c2bcc192bdbc56fdca61f549b8a397a96608f161"
+    }
+  ],
+  "limitation": "only declared constant inputs; not actual instrument calibration, covariance estimation, or new V3 performance"
+}

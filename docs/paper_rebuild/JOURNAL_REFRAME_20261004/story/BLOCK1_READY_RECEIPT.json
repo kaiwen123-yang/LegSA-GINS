@@ -1,0 +1,61 @@
+{
+  "status": "BLOCK1_READY",
+  "utc": "2026-10-04T13:26:14.888894+00:00",
+  "scientific_actions": {
+    "native_calls": 0,
+    "evaluator_calls": 0,
+    "provider_generation": 0,
+    "source_edits": 0,
+    "old_result_edits": 0,
+    "git_stage_commit_push": 0
+  },
+  "naming_status": "PROVISIONAL_AUTHOR_DISCUSSION_NO_ARCHIVED_RENAME",
+  "abstract_word_count": 204,
+  "internal_labels": 11,
+  "external_labels": 30,
+  "claim_rows": 10,
+  "source_before_after_identical": true,
+  "files": [
+    {
+      "path": "01_ARGUMENT_REFRAME_ZH.md",
+      "bytes": 8396,
+      "sha256": "04496fb6496f554fd6bdba5a234547c2f909f8b41f249591c464e3609e0a1de9"
+    },
+    {
+      "path": "02_PROVISIONAL_NAMES_AND_TERMS.md",
+      "bytes": 4074,
+      "sha256": "19980202228b523ebfa922bba50c46dd95d6e8aa7dfea65d9aca28ec33c94b90"
+    },
+    {
+      "path": "03_ENGLISH_TITLE_ABSTRACT_CONTRIBUTIONS.md",
+      "bytes": 3384,
+      "sha256": "d8d64b70bf4b76cf8bf1db4d31412f2e5aab286cf6ed897fc2f2a42ac981780b"
+    },
+    {
+      "path": "CLAIM_EVIDENCE_MAP.csv",
+      "bytes": 2236,
+      "sha256": "3944b63f03034ccf817a56da44c36fdeac6b5f720113be2eb216f2d4283df297"
+    },
+    {
+      "path": "EXTERNAL_READER_LABELS.csv",
+      "bytes": 12889,
+      "sha256": "056004d05e8659a7c1bcebd7e9a618b681d8c8bde212ea836349b4a7fb581385"
+    },
+    {
+      "path": "INPUT_SOURCE_PINS_BLOCK1.json",
+      "bytes": 2106,
+      "sha256": "991f2af1f59f8f742ecc786210498c775c2f5a40d1d7b89833ff8eb6d0449d6f"
+    },
+    {
+      "path": "INTERNAL_READER_LABELS.csv",
+      "bytes": 5229,
+      "sha256": "f254481df73b3c2ab222a8ff97d7ffdbfdbfaa3027162ce7b628849729481da9"
+    },
+    {
+      "path": "REVERSE_OUTLINE.csv",
+      "bytes": 1531,
+      "sha256": "d55d3055c1bf46591f6798bea755eade537a18150fefde9ff839a1861bcd620d"
+    }
+  ],
+  "word_budget_note": "Main prose target4200; reserve whole-manuscript5000–5500 for abstract/legends/references"
+}

@@ -1,0 +1,156 @@
+[
+  {
+    "command_id": 1,
+    "label": "configure",
+    "argv": [
+      "cmake",
+      "-S",
+      "<VALIDATION_BUILD_ROOT>/source_N09_RP_ONLY/cpp",
+      "-B",
+      "<VALIDATION_BUILD_ROOT>/build_N09_RP_ONLY",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DCMAKE_CXX_COMPILER=/usr/bin/g++",
+      "-DCMAKE_CXX_FLAGS=",
+      "-DCMAKE_CXX_FLAGS_RELEASE=-O3 -DNDEBUG"
+    ],
+    "started_unix": 1790932857.8390758,
+    "status": "COMPLETED",
+    "log": "<VALIDATION_BUILD_ROOT>/N09_RP_ONLY_fixture_v1/command_logs/configure.log",
+    "synthetic_native_process": false,
+    "real_native_process": false,
+    "evaluator_process": false,
+    "retry_of": null,
+    "exit_code": 0,
+    "ended_unix": 1790932858.589108
+  },
+  {
+    "command_id": 2,
+    "label": "build_candidate",
+    "argv": [
+      "cmake",
+      "--build",
+      "<VALIDATION_BUILD_ROOT>/build_N09_RP_ONLY",
+      "--target",
+      "legsa_v23_port_core_demo",
+      "-j",
+      "2"
+    ],
+    "started_unix": 1790932858.5895793,
+    "status": "COMPLETED",
+    "log": "<VALIDATION_BUILD_ROOT>/N09_RP_ONLY_fixture_v1/command_logs/build_candidate.log",
+    "synthetic_native_process": false,
+    "real_native_process": false,
+    "evaluator_process": false,
+    "retry_of": null,
+    "exit_code": 0,
+    "ended_unix": 1790932868.9549453
+  },
+  {
+    "command_id": 3,
+    "label": "compile_fixture_baseline",
+    "argv": [
+      "/usr/bin/g++",
+      "-O3",
+      "-DNDEBUG",
+      "-std=c++17",
+      "-I",
+      "<OBSERVED_SOURCE>/cpp/legsa_v23_port_core/include",
+      "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/candidates/N09_RP_ONLY/native_fixture.cpp",
+      "<MECHANISM_BUILD_ROOT>/build_observed/liblegsa_v23_port_core.a",
+      "-o",
+      "<VALIDATION_BUILD_ROOT>/N09_RP_ONLY_fixture_v1/fixture_baseline"
+    ],
+    "started_unix": 1790932868.9555852,
+    "status": "COMPLETED",
+    "log": "<VALIDATION_BUILD_ROOT>/N09_RP_ONLY_fixture_v1/command_logs/compile_fixture_baseline.log",
+    "synthetic_native_process": false,
+    "real_native_process": false,
+    "evaluator_process": false,
+    "retry_of": null,
+    "exit_code": 0,
+    "ended_unix": 1790932870.6457775
+  },
+  {
+    "command_id": 4,
+    "label": "compile_fixture_candidate",
+    "argv": [
+      "/usr/bin/g++",
+      "-O3",
+      "-DNDEBUG",
+      "-std=c++17",
+      "-DN09_CANDIDATE=1",
+      "-I",
+      "<VALIDATION_BUILD_ROOT>/source_N09_RP_ONLY/cpp/legsa_v23_port_core/include",
+      "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/candidates/N09_RP_ONLY/native_fixture.cpp",
+      "<VALIDATION_BUILD_ROOT>/build_N09_RP_ONLY/liblegsa_v23_port_core.a",
+      "-o",
+      "<VALIDATION_BUILD_ROOT>/N09_RP_ONLY_fixture_v1/fixture_candidate"
+    ],
+    "started_unix": 1790932870.6461184,
+    "status": "COMPLETED",
+    "log": "<VALIDATION_BUILD_ROOT>/N09_RP_ONLY_fixture_v1/command_logs/compile_fixture_candidate.log",
+    "synthetic_native_process": false,
+    "real_native_process": false,
+    "evaluator_process": false,
+    "retry_of": null,
+    "exit_code": 0,
+    "ended_unix": 1790932872.2979968
+  },
+  {
+    "command_id": 5,
+    "label": "baseline",
+    "argv": [
+      "<VALIDATION_BUILD_ROOT>/N09_RP_ONLY_fixture_v1/fixture_baseline",
+      "<VALIDATION_BUILD_ROOT>/N09_RP_ONLY_fixture_v1/baseline",
+      "observer_off"
+    ],
+    "started_unix": 1790932918.6685715,
+    "status": "COMPLETED",
+    "log": "<VALIDATION_BUILD_ROOT>/N09_RP_ONLY_fixture_v1/command_logs/baseline.log",
+    "synthetic_native_process": true,
+    "real_native_process": false,
+    "evaluator_process": false,
+    "retry_of": null,
+    "binary_sha256": "ebb1d4394cb9ef52b821b07cba6cc3c65c02b16663db72c6b6f7c04fd47f299e",
+    "exit_code": 0,
+    "ended_unix": 1790932918.70541
+  },
+  {
+    "command_id": 6,
+    "label": "candidate_off",
+    "argv": [
+      "<VALIDATION_BUILD_ROOT>/N09_RP_ONLY_fixture_v1/fixture_candidate",
+      "<VALIDATION_BUILD_ROOT>/N09_RP_ONLY_fixture_v1/candidate_off",
+      "observer_off"
+    ],
+    "started_unix": 1790932918.7057364,
+    "status": "COMPLETED",
+    "log": "<VALIDATION_BUILD_ROOT>/N09_RP_ONLY_fixture_v1/command_logs/candidate_off.log",
+    "synthetic_native_process": true,
+    "real_native_process": false,
+    "evaluator_process": false,
+    "retry_of": null,
+    "binary_sha256": "b1ef86da4be5706ccc1e41a4a9ea887aab7cfcaffa2f1601daa6be8c24c1f0cb",
+    "exit_code": 0,
+    "ended_unix": 1790932918.746449
+  },
+  {
+    "command_id": 7,
+    "label": "candidate_on",
+    "argv": [
+      "<VALIDATION_BUILD_ROOT>/N09_RP_ONLY_fixture_v1/fixture_candidate",
+      "<VALIDATION_BUILD_ROOT>/N09_RP_ONLY_fixture_v1/candidate_on",
+      "observer_on"
+    ],
+    "started_unix": 1790932918.7467744,
+    "status": "COMPLETED",
+    "log": "<VALIDATION_BUILD_ROOT>/N09_RP_ONLY_fixture_v1/command_logs/candidate_on.log",
+    "synthetic_native_process": true,
+    "real_native_process": false,
+    "evaluator_process": false,
+    "retry_of": null,
+    "binary_sha256": "b1ef86da4be5706ccc1e41a4a9ea887aab7cfcaffa2f1601daa6be8c24c1f0cb",
+    "exit_code": 0,
+    "ended_unix": 1790932918.843178
+  }
+]

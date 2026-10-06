@@ -1,0 +1,7 @@
+event_type,res,imu_compensated,nonzero_gyr_bias,events,source_path,scope
+RAW_DOPPLER_KINEMATICS,2,True,False,1,<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl,condition observed; no corrected closed loop
+RAW_DOPPLER_KINEMATICS,2,True,True,462,<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl,condition observed; no corrected closed loop
+RAW_DOPPLER_KINEMATICS,3,False,True,645,<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl,condition observed; no corrected closed loop
+VELOCITY_KINEMATICS,2,True,False,1,<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl,condition observed; no corrected closed loop
+VELOCITY_KINEMATICS,2,True,True,594,<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl,condition observed; no corrected closed loop
+VELOCITY_KINEMATICS,3,False,True,774,<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl,condition observed; no corrected closed loop

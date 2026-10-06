@@ -1,0 +1,13 @@
+{
+  "schema": "lc01_vs_lc02_chang2021.identity.v1",
+  "decision": "DISTINCT_COMPLEMENTARY_METHOD",
+  "performance_numbers_used": false,
+  "reasons": [
+    "LC01 uses two GNSS receiver positions and the full rigid P2-P1 relative vector.",
+    "Chang uses one receiver's six-dimensional position/velocity solution measurement and no direct baseline heading.",
+    "LC01 is a 9-state invariant error model; Chang prints a conventional 15-state error model.",
+    "Chang's scientific mechanism is innovation-history, fuzzy smoothing, and multiple fading rather than invariant two-receiver geometry."
+  ],
+  "formal_lc02_admission": false,
+  "claim_boundary": "Structural distinctness passes, but Chang's independent mathematical admission gates fail."
+}

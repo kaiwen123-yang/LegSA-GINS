@@ -1,0 +1,60 @@
+{
+  "schema": "v3_story.second_block.ready.v1",
+  "captured_utc": "2026-10-04T10:21:00.423699+00:00",
+  "all_checks_passed": true,
+  "first_block_commit": "baf4e9157c7b82d611271f15ae9b7e68f3014ab3",
+  "first18_unchanged": true,
+  "original_science_freeze": "7d43b9af26120ed5dde21f53e515386361072ba6",
+  "science_calls": {
+    "native": 0,
+    "evaluator": 0,
+    "provider_generator": 0,
+    "raw_or_trace_payload_reads": 0
+  },
+  "new_files": {
+    "02_METHOD_CONFIG_METRIC_STORY.md": {
+      "sha256": "191a3d7f3ed7c496c488743051817588ab2580f5c17832ddcbb31e466e55e048",
+      "bytes": 20649
+    },
+    "CONFIG_CONTEXT_STORY.csv": {
+      "sha256": "f4f6809984a2462ec5423512e7e34eb8453297dc031bdbe339b25c7141bebedb",
+      "bytes": 27430
+    },
+    "CONFIG_COMPARISON_DIFFS.csv": {
+      "sha256": "c7f7cd1940283ffba0082b2183d78fa9837ccb04a1a502014344f65fcd3362e3",
+      "bytes": 17603
+    },
+    "NATURAL_METHOD_RESULTS.csv": {
+      "sha256": "a8419158954c52ddeb948ce9460f751998862e09f5e24839461e2f040262aa8e",
+      "bytes": 43923
+    },
+    "METRIC_QUANTITY_DICTIONARY.csv": {
+      "sha256": "24edf160d6f0865cc9d6c37b83b3f690b11d83696a2939a3d25d7d9e8556095a",
+      "bytes": 44597
+    },
+    "METHOD_SOURCE_MAP.csv": {
+      "sha256": "22fefa59f9a1fe4181cedf1f638dd3ecec36e46923975a7542890bc4626b996f",
+      "bytes": 7795
+    },
+    "ORIGINAL_CPP_INHERITED_READ_IDENTITY.json": {
+      "sha256": "53486717b8e3c3fe7604fb6cc1becd30055e2f4e26cf56829ad34284b5800995",
+      "bytes": 14920
+    },
+    "SECOND_BLOCK_DATA_RECEIPT.json": {
+      "sha256": "718da5dad755f71f2d72d52d98052f0f87ddfb85094823ea108ac373753510f0",
+      "bytes": 5427
+    },
+    "READ_COVERAGE_02.csv": {
+      "sha256": "21fdf231a1762f0a06219f103bf40394aaca203b3901d4da9b9b4d94007120a4",
+      "bytes": 22956
+    },
+    "build_second_story_block.py": {
+      "sha256": "4f040a74b5f2fa8c052e1a27219a4b7c515888fd10735c7c8d26076b85dce982",
+      "bytes": 15104
+    }
+  },
+  "coverage_entries": 59,
+  "inherited_cpp_full_same_blob": 32,
+  "inherited_cpp_selected_same_blob": 1,
+  "limitations": "Existing results/configs source unchanged; first CSV full machine field validation is not human semantic full repository reading; no original V3 correction or rerun. Root exclusively commits/pushes."
+}

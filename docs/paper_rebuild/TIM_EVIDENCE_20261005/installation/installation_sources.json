@@ -1,0 +1,478 @@
+{
+  "schema": "installation-source-inspection-v1",
+  "source_files": [
+    {
+      "source_label": "a1-底座a.SLDPRT",
+      "bytes": 197830,
+      "sha256": "daed04d24faa4c02e89677a9ccf43905199e5e3d402faf195745ecdf3436154b"
+    },
+    {
+      "source_label": "a1-底座b.SLDPRT",
+      "bytes": 161043,
+      "sha256": "4552e169600c48f078350bd14615e9b3f801d166ab79604631b2587ac2b75ae4"
+    },
+    {
+      "source_label": "b1-亚克力板.SLDPRT",
+      "bytes": 143387,
+      "sha256": "b217b2c251df3817e1a2b818593d543994ddac09165ba8409c01f1e1e3aec683"
+    },
+    {
+      "source_label": "print/a1-底座a.STEP",
+      "bytes": 194544,
+      "sha256": "2e5908397564fee8990b1febda91ce544980d5191314fa9a3efcde4b2bfed948",
+      "si_unit_declarations": [
+        "SI_UNIT ( .MILLI., .METRE. ) );",
+        "SI_UNIT ( $, .STERADIAN. ) SOLID_ANGLE_UNIT ( ) );",
+        "SI_UNIT ( $, .RADIAN. ) );",
+        "SI_UNIT ( .MILLI., .METRE. ) );",
+        "SI_UNIT ( $, .RADIAN. ) );",
+        "SI_UNIT ( $, .STERADIAN. ) SOLID_ANGLE_UNIT ( ) );"
+      ],
+      "product_declarations": [
+        "PRODUCT ( 'a1-\\X2\\5e955ea7\\X0\\a', 'a1-\\X2\\5e955ea7\\X0\\a', '', ( #471 ) ) ;"
+      ],
+      "cartesian_point_entities": 440,
+      "interpretation": "Neutral-file structure inspected; not a solid-model survey or measured antenna phase center."
+    },
+    {
+      "source_label": "print/a1-底座b.STEP",
+      "bytes": 147312,
+      "sha256": "e1fdd0f766c011a462e8dfa1c39724316aa6b1c2d82e970be91fe67f41ccdbb2",
+      "si_unit_declarations": [
+        "SI_UNIT ( $, .RADIAN. ) );",
+        "SI_UNIT ( $, .STERADIAN. ) SOLID_ANGLE_UNIT ( ) );",
+        "SI_UNIT ( $, .RADIAN. ) );",
+        "SI_UNIT ( $, .STERADIAN. ) SOLID_ANGLE_UNIT ( ) );",
+        "SI_UNIT ( .MILLI., .METRE. ) );",
+        "SI_UNIT ( .MILLI., .METRE. ) );"
+      ],
+      "product_declarations": [
+        "PRODUCT ( 'a1-\\X2\\5e955ea7\\X0\\b', 'a1-\\X2\\5e955ea7\\X0\\b', '', ( #1941 ) ) ;"
+      ],
+      "cartesian_point_entities": 336,
+      "interpretation": "Neutral-file structure inspected; not a solid-model survey or measured antenna phase center."
+    },
+    {
+      "source_label": "print/b3-亚克力板.STL",
+      "bytes": 98084,
+      "sha256": "88c5eae78d3774003fc8431333aabee866225535b7f7a58483cba7d1bfa3b2fc"
+    },
+    {
+      "source_label": "z1-总装.SLDASM",
+      "bytes": 218547,
+      "sha256": "5180013c6246c607ceadb4f77cb72c2e5fb3b3c7a488d156b0261269c6f9f1e3"
+    },
+    {
+      "source_label": "z1-总装.STEP",
+      "bytes": 662588,
+      "sha256": "1c1795cc5326710fa95f77209325e1e3e3837b04c05f2af4b736586bfe192a17",
+      "si_unit_declarations": [
+        "SI_UNIT ( $, .RADIAN. ) );",
+        "SI_UNIT ( $, .STERADIAN. ) SOLID_ANGLE_UNIT ( ) );",
+        "SI_UNIT ( $, .RADIAN. ) );",
+        "SI_UNIT ( .MILLI., .METRE. ) );",
+        "SI_UNIT ( .MILLI., .METRE. ) );",
+        "SI_UNIT ( .MILLI., .METRE. ) );",
+        "SI_UNIT ( $, .RADIAN. ) );",
+        "SI_UNIT ( $, .STERADIAN. ) SOLID_ANGLE_UNIT ( ) );",
+        "SI_UNIT ( .MILLI., .METRE. ) );",
+        "SI_UNIT ( .MILLI., .METRE. ) );",
+        "SI_UNIT ( $, .RADIAN. ) );",
+        "SI_UNIT ( $, .RADIAN. ) );",
+        "SI_UNIT ( $, .STERADIAN. ) SOLID_ANGLE_UNIT ( ) );",
+        "SI_UNIT ( $, .STERADIAN. ) SOLID_ANGLE_UNIT ( ) );",
+        "SI_UNIT ( $, .RADIAN. ) );",
+        "SI_UNIT ( $, .STERADIAN. ) SOLID_ANGLE_UNIT ( ) );",
+        "SI_UNIT ( $, .STERADIAN. ) SOLID_ANGLE_UNIT ( ) );",
+        "SI_UNIT ( .MILLI., .METRE. ) );",
+        "SI_UNIT ( $, .STERADIAN. ) SOLID_ANGLE_UNIT ( ) );",
+        "SI_UNIT ( .MILLI., .METRE. ) );",
+        "SI_UNIT ( $, .RADIAN. ) );"
+      ],
+      "product_declarations": [
+        "PRODUCT ( 'b1-\\X2\\4e9a514b529b677f\\X0\\', 'b1-\\X2\\4e9a514b529b677f\\X0\\', '', ( #4102 ) ) ;",
+        "PRODUCT ( 'z1-\\X2\\603b88c5\\X0\\', 'z1-\\X2\\603b88c5\\X0\\', '', ( #7614 ) ) ;",
+        "PRODUCT ( 'a1-\\X2\\5e955ea7\\X0\\b', 'a1-\\X2\\5e955ea7\\X0\\b', '', ( #3079 ) ) ;",
+        "PRODUCT ( 'a2-\\X2\\59297ebf652f67b6\\X0\\a', 'a2-\\X2\\59297ebf652f67b6\\X0\\a', '', ( #6661 ) ) ;",
+        "PRODUCT ( 'a2-\\X2\\59297ebf652f67b6\\X0\\b', 'a2-\\X2\\59297ebf652f67b6\\X0\\b', '', ( #6524 ) ) ;",
+        "PRODUCT ( 'b2-\\X2\\592759297ebf\\X0\\', 'b2-\\X2\\592759297ebf\\X0\\', '', ( #8307 ) ) ;",
+        "PRODUCT ( 'a1-\\X2\\5e955ea7\\X0\\a', 'a1-\\X2\\5e955ea7\\X0\\a', '', ( #4230 ) ) ;"
+      ],
+      "cartesian_point_entities": 1443,
+      "interpretation": "Neutral-file structure inspected; not a solid-model survey or measured antenna phase center."
+    },
+    {
+      "source_label": "Go2_URDF.zip",
+      "bytes": 14126795,
+      "sha256": "690d6863813cd2854c90e0afef3cc8102e3613c91e8f53e4850b85be916852c5"
+    },
+    {
+      "source_label": "快速开启保姆级教程.pdf",
+      "bytes": 12172232,
+      "sha256": "8b337d994a6523c6258727f08755a12e9b1db1b3054575d537afdeec74fba415"
+    }
+  ],
+  "urdf": {
+    "member": "GO2_URDF/urdf/go2_description.urdf",
+    "sha256": "333c3331ef76793134aeb3e928fdc9213fc879a274dc6e02ba5ac4f6950143df",
+    "link_count": 29,
+    "joints": [
+      {
+        "name": "Head_upper_joint",
+        "type": "fixed",
+        "parent": "base",
+        "child": "Head_upper",
+        "xyz": "0.285 0 0.01",
+        "rpy": "0 0 0"
+      },
+      {
+        "name": "Head_lower_joint",
+        "type": "fixed",
+        "parent": "Head_upper",
+        "child": "Head_lower",
+        "xyz": "0.008 0 -0.07",
+        "rpy": "0 0 0"
+      },
+      {
+        "name": "FL_hip_joint",
+        "type": "revolute",
+        "parent": "base",
+        "child": "FL_hip",
+        "xyz": "0.1934 0.0465 0",
+        "rpy": "0 0 0"
+      },
+      {
+        "name": "FL_thigh_joint",
+        "type": "revolute",
+        "parent": "FL_hip",
+        "child": "FL_thigh",
+        "xyz": "0 0.0955 0",
+        "rpy": "0 0 0"
+      },
+      {
+        "name": "FL_calf_joint",
+        "type": "revolute",
+        "parent": "FL_thigh",
+        "child": "FL_calf",
+        "xyz": "0 0 -0.213",
+        "rpy": "0 0 0"
+      },
+      {
+        "name": "FL_calflower_joint",
+        "type": "fixed",
+        "parent": "FL_calf",
+        "child": "FL_calflower",
+        "xyz": "0.020 0 -0.148",
+        "rpy": "0 0.05 0"
+      },
+      {
+        "name": "FL_calflower1_joint",
+        "type": "fixed",
+        "parent": "FL_calflower",
+        "child": "FL_calflower1",
+        "xyz": "-0.01 0 -0.04",
+        "rpy": "0 0.48 0"
+      },
+      {
+        "name": "FL_foot_joint",
+        "type": "fixed",
+        "parent": "FL_calf",
+        "child": "FL_foot",
+        "xyz": "0 0 -0.213",
+        "rpy": "0 0 0"
+      },
+      {
+        "name": "FR_hip_joint",
+        "type": "revolute",
+        "parent": "base",
+        "child": "FR_hip",
+        "xyz": "0.1934 -0.0465 0",
+        "rpy": "0 0 0"
+      },
+      {
+        "name": "FR_thigh_joint",
+        "type": "revolute",
+        "parent": "FR_hip",
+        "child": "FR_thigh",
+        "xyz": "0 -0.0955 0",
+        "rpy": "0 0 0"
+      },
+      {
+        "name": "FR_calf_joint",
+        "type": "revolute",
+        "parent": "FR_thigh",
+        "child": "FR_calf",
+        "xyz": "0 0 -0.213",
+        "rpy": "0 0 0"
+      },
+      {
+        "name": "FR_calflower_joint",
+        "type": "fixed",
+        "parent": "FR_calf",
+        "child": "FR_calflower",
+        "xyz": "0.020 0 -0.148",
+        "rpy": "0 0.05 0"
+      },
+      {
+        "name": "FR_calflower1_joint",
+        "type": "fixed",
+        "parent": "FR_calflower",
+        "child": "FR_calflower1",
+        "xyz": "-0.01 0 -0.04",
+        "rpy": "0 0.48 0"
+      },
+      {
+        "name": "FR_foot_joint",
+        "type": "fixed",
+        "parent": "FR_calf",
+        "child": "FR_foot",
+        "xyz": "0 0 -0.213",
+        "rpy": "0 0 0"
+      },
+      {
+        "name": "RL_hip_joint",
+        "type": "revolute",
+        "parent": "base",
+        "child": "RL_hip",
+        "xyz": "-0.1934 0.0465 0",
+        "rpy": "0 0 0"
+      },
+      {
+        "name": "RL_thigh_joint",
+        "type": "revolute",
+        "parent": "RL_hip",
+        "child": "RL_thigh",
+        "xyz": "0 0.0955 0",
+        "rpy": "0 0 0"
+      },
+      {
+        "name": "RL_calf_joint",
+        "type": "revolute",
+        "parent": "RL_thigh",
+        "child": "RL_calf",
+        "xyz": "0 0 -0.213",
+        "rpy": "0 0 0"
+      },
+      {
+        "name": "RL_calflower_joint",
+        "type": "fixed",
+        "parent": "RL_calf",
+        "child": "RL_calflower",
+        "xyz": "0.020 0 -0.148",
+        "rpy": "0 0.05 0"
+      },
+      {
+        "name": "RL_calflower1_joint",
+        "type": "fixed",
+        "parent": "RL_calflower",
+        "child": "RL_calflower1",
+        "xyz": "-0.01 0 -0.04",
+        "rpy": "0 0.48 0"
+      },
+      {
+        "name": "RL_foot_joint",
+        "type": "fixed",
+        "parent": "RL_calf",
+        "child": "RL_foot",
+        "xyz": "0 0 -0.213",
+        "rpy": "0 0 0"
+      },
+      {
+        "name": "RR_hip_joint",
+        "type": "revolute",
+        "parent": "base",
+        "child": "RR_hip",
+        "xyz": "-0.1934 -0.0465 0",
+        "rpy": "0 0 0"
+      },
+      {
+        "name": "RR_thigh_joint",
+        "type": "revolute",
+        "parent": "RR_hip",
+        "child": "RR_thigh",
+        "xyz": "0 -0.0955 0",
+        "rpy": "0 0 0"
+      },
+      {
+        "name": "RR_calf_joint",
+        "type": "revolute",
+        "parent": "RR_thigh",
+        "child": "RR_calf",
+        "xyz": "0 0 -0.213",
+        "rpy": "0 0 0"
+      },
+      {
+        "name": "RR_calflower_joint",
+        "type": "fixed",
+        "parent": "RR_calf",
+        "child": "RR_calflower",
+        "xyz": "0.020 0 -0.148",
+        "rpy": "0 0.05 0"
+      },
+      {
+        "name": "RR_calflower1_joint",
+        "type": "fixed",
+        "parent": "RR_calflower",
+        "child": "RR_calflower1",
+        "xyz": "-0.01 0 -0.04",
+        "rpy": "0 0.48 0"
+      },
+      {
+        "name": "RR_foot_joint",
+        "type": "fixed",
+        "parent": "RR_calf",
+        "child": "RR_foot",
+        "xyz": "0 0 -0.213",
+        "rpy": "0 0 0"
+      },
+      {
+        "name": "imu_joint",
+        "type": "fixed",
+        "parent": "base",
+        "child": "imu",
+        "xyz": "-0.02557 0 0.04232",
+        "rpy": "0 0 0"
+      },
+      {
+        "name": "radar_joint",
+        "type": "fixed",
+        "parent": "base",
+        "child": "radar",
+        "xyz": "0.28945 0 -0.046825",
+        "rpy": "0 2.8782 0"
+      }
+    ],
+    "zip_members": 362,
+    "history_members": 325,
+    "xacro": {
+      "member": "GO2_URDF/xacro/robot.xacro",
+      "sha256": "efb9b8a49ce1eae49828170b4912d1d2fcc07d67435f62b24c4bd5e2a144c429",
+      "imu_joint_declarations": [
+        "<joint name=\"imu_joint\" type=\"fixed\">\n        <parent link=\"trunk\" />\n        <child link=\"imu_link\" />\n        <origin rpy=\"0 0 0\" xyz=\"0 0 0\" />\n    </joint>\n\n    "
+      ]
+    }
+  },
+  "manual": {
+    "pages": 16,
+    "page_topics": [
+      {
+        "page_1based": 1,
+        "text_chars": 346,
+        "topic_snippets": []
+      },
+      {
+        "page_1based": 2,
+        "text_chars": 250,
+        "topic_snippets": [
+          "Step 6: 输出配置",
+          "Step 8: 检查相机视图"
+        ]
+      },
+      {
+        "page_1based": 3,
+        "text_chars": 709,
+        "topic_snippets": [
+          "最高输出更新率",
+          "定位精度 (在RTK Fix状态下)",
+          "航向精度",
+          "速度精度",
+          "数据接口 (输入/输出)",
+          "有线输入/输出",
+          "114 × 129 × 30 mm"
+        ]
+      },
+      {
+        "page_1based": 4,
+        "text_chars": 535,
+        "topic_snippets": []
+      },
+      {
+        "page_1based": 5,
+        "text_chars": 175,
+        "topic_snippets": []
+      },
+      {
+        "page_1based": 6,
+        "text_chars": 495,
+        "topic_snippets": []
+      },
+      {
+        "page_1based": 7,
+        "text_chars": 834,
+        "topic_snippets": []
+      },
+      {
+        "page_1based": 8,
+        "text_chars": 255,
+        "topic_snippets": [
+          "大地坐标系需选用WGS 84"
+        ]
+      },
+      {
+        "page_1based": 9,
+        "text_chars": 799,
+        "topic_snippets": [
+          "GNSS外部参数是以传感器表面 ‘X’ 图形中心点为坐标原点并按照右手定则设置；外部参数精",
+          "度不超过3 cm，XYZ坐标单位为m",
+          "0.0200",
+          "-0.1750",
+          "-0.0200",
+          "0.0200",
+          "0.1750",
+          "-0.0200"
+        ]
+      },
+      {
+        "page_1based": 10,
+        "text_chars": 1167,
+        "topic_snippets": [
+          "Step 6: 输出配置",
+          "消息和输出渠道",
+          "输出平移是相对于传感器上 'X' 图形中心点进行设置",
+          "高精度 NMEA 格式包含非正式字段，可通过这些字段获取更高精度的时间、位置与航向值",
+          "较高的输出频率需要较大的 I/O 带宽。IMU 消息需要较大带宽，因此需谨慎启用",
+          "对 LLH 输出，传感器假定改正数据采用 WGS84 大地基准"
+        ]
+      },
+      {
+        "page_1based": 11,
+        "text_chars": 1007,
+        "topic_snippets": []
+      },
+      {
+        "page_1based": 12,
+        "text_chars": 327,
+        "topic_snippets": [
+          "Step 8: 检查相机视图"
+        ]
+      },
+      {
+        "page_1based": 13,
+        "text_chars": 829,
+        "topic_snippets": [
+          "3. 确保已激活status页面中的所有消息输出，且地图中的红色箭头指向与传感器航向一致"
+        ]
+      },
+      {
+        "page_1based": 14,
+        "text_chars": 770,
+        "topic_snippets": []
+      },
+      {
+        "page_1based": 15,
+        "text_chars": 665,
+        "topic_snippets": []
+      },
+      {
+        "page_1based": 16,
+        "text_chars": 333,
+        "topic_snippets": []
+      }
+    ]
+  },
+  "limits": [
+    "CAD files represent the installation according to the author; numeric base-to-sensor calibration is not thereby established.",
+    "URDF transforms are nominal model declarations; SDK state frame and actual sensitive-center equivalence require independent evidence.",
+    "No scientific configuration or original source file was edited."
+  ]
+}

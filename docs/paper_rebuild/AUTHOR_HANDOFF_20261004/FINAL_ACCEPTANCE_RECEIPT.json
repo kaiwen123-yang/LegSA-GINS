@@ -1,0 +1,54 @@
+{
+  "schema": "legsa.four-workstreams.root-handoff.v1",
+  "created_utc": "2026-10-04T11:17:03.850956+00:00",
+  "accepted_before_handoff_commit": "05f971df6aa5a06edcd32a585a6320dc8f219925",
+  "new_commits_before_handoff": 18,
+  "commit_index_excludes_this_own_handoff": true,
+  "root_final_fgo_git_objects_byte_exact": 49,
+  "source_methods_name": "LegSA-GINS",
+  "original_V3_is_primary": true,
+  "original_full_matrix_rerun_this_story_work": false,
+  "new_fgo_native": 3,
+  "reused_fgo_native": 6,
+  "new_fgo_offline": 3,
+  "fgo_blocks_attempted": 11,
+  "fgo_author_full_program_and_all_original_experiments_reproduced": false,
+  "ext_nominal_rows": 7689,
+  "ext_original_9_metrics_changed": false,
+  "paper_numeric_PASS": 219,
+  "paper_numeric_FAIL": 0,
+  "submission_ready": false,
+  "scope": "Complete current four-workstream delivery; machine census and semantic-reading coverage distinguished; author materials/calibration and formal submission work explicitly pending",
+  "root_review_scripts_scope": "Byte-archived actual local review scripts, use fixed machine paths and only saved data. These are not author-solver portable implementations or new native/evaluator runs.",
+  "review_archive": [
+    {
+      "path": "FGO_SEGMENTED_FINAL_PACKAGING_ROOT_REVIEW.json",
+      "sha256": "b68f4067be4a4d91ff0d5ad81e40b99821516248921d992ee23ff3a6c06827d7"
+    },
+    {
+      "path": "V3_COMPARISON_STORY_ROOT_REVIEW.json",
+      "sha256": "5322044d6d279267713cc513e2e84f04c636b7518d878b9a57e91f578c91897b"
+    },
+    {
+      "path": "PAPER_EXTERNAL_ADDENDUM_ROOT_REVIEW.json",
+      "sha256": "ad6855a5ef66e252bd8567aaca2a6caedf16f56b1b1f96330a72c2bb3f843dcb"
+    },
+    {
+      "path": "FINAL_SPACE_STATUS.json",
+      "sha256": "ffc2f52bb6bae9631c7c559bd98e2e41c79004ca0748856bf816070131d7dba0"
+    }
+  ],
+  "reader_handoff_peer_review": {
+    "reviewer": "/root/venue_readiness_audit",
+    "full_repository_and_G_entries_read": true,
+    "blocking_errors": 0,
+    "SDK_RP_wording_clarified": true,
+    "no_scientific_calls": true
+  },
+  "archived_builder_Git_byte_preservation": {
+    "path": "docs/paper_rebuild/V3_STORY_20261004/build_fourth_story_block.py",
+    "working_source_original_sha256": "72b5ebe09f96f995da7d80253a9bb1d8cfc5f39a6b42d7cac87c2e6723e4c7d2",
+    "old_Git_normalization_only_no_code_difference": true,
+    "new_scoped_attribute_preserves_frozen_receipt_hash": true
+  }
+}

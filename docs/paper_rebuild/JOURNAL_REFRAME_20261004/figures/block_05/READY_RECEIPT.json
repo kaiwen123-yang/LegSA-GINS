@@ -1,0 +1,137 @@
+{
+  "status": "READY",
+  "time_utc": "2026-10-04T14:31:49.397020+00:00",
+  "revision": "RV_CONFOUNDING_EDITORIAL_CORRECTION",
+  "superseded_ready_sha256": "bdc8fb3f6ef7085839988c71e1b7afa69c7d0492c00eeca61b292671f3f14ee2",
+  "actual_visual_review": "4 corrected final PNGs individually opened; PDF/SVG not separately rendered",
+  "build_receipt_sha256": "ec3de040f9b66c690c3fe103810fa3b3474570f46037472458e5bf3a82ba1daa",
+  "no_solver_or_evaluator": true,
+  "files": [
+    {
+      "path": "BUILD_RECEIPT.json",
+      "sha256": "ec3de040f9b66c690c3fe103810fa3b3474570f46037472458e5bf3a82ba1daa",
+      "bytes": 17184
+    },
+    {
+      "path": "CONFIG_DIFF_EVIDENCE.json",
+      "sha256": "2a9e74fd33ac6c57abc76fb30095b634702eef44305852254b53b682c7833626",
+      "bytes": 7699
+    },
+    {
+      "path": "R11_BY2H_receiver_velocity_toggle.pdf",
+      "sha256": "b3bdba9910a5507406cdae7b1ff83c00dfabbc740d910b8570a1f52f5558e8bc",
+      "bytes": 2208970
+    },
+    {
+      "path": "R11_BY2H_receiver_velocity_toggle.png",
+      "sha256": "a46245cda809d195cd5dd1d18883a3be9dfaef65e2a30b1a5a950c428abb0f12",
+      "bytes": 1076778
+    },
+    {
+      "path": "R11_BY2H_receiver_velocity_toggle.svg",
+      "sha256": "28d67baa904160991c06f895b204b8bda06a862e4365d1a349c5db92db39e033",
+      "bytes": 5577592
+    },
+    {
+      "path": "R11_BY2O_receiver_velocity_toggle.pdf",
+      "sha256": "07a3ce11c2d5d98d110e13f027af4d2b7eeccbc1a37ed6c39dbac13e25a93330",
+      "bytes": 2776177
+    },
+    {
+      "path": "R11_BY2O_receiver_velocity_toggle.png",
+      "sha256": "0753f9a66cead6e910b170ddb6ea141e495aea26c97502edf0f80201e4ae6567",
+      "bytes": 755575
+    },
+    {
+      "path": "R11_BY2O_receiver_velocity_toggle.svg",
+      "sha256": "55df5c7a4ad3b8784971279736aa3845c80f25b6dab2ccf8aea0bd204a91f4ba",
+      "bytes": 7291797
+    },
+    {
+      "path": "R11_BY2_receiver_velocity_toggle.pdf",
+      "sha256": "8602202f63a8bded05fe31f49bc4f2d77ddd4dc2903686d44ea6f473740d5100",
+      "bytes": 2126214
+    },
+    {
+      "path": "R11_BY2_receiver_velocity_toggle.png",
+      "sha256": "55ca44fa2a9bbbace620b0b71883eaab837760331beba8b09fed793aaea83f64",
+      "bytes": 990621
+    },
+    {
+      "path": "R11_BY2_receiver_velocity_toggle.svg",
+      "sha256": "5d0e3a9e6d8513e9bee4570d577ba3dda337e95afc17467f6b857bf2557b357d",
+      "bytes": 5395123
+    },
+    {
+      "path": "R12_BY2_native_heading_decisions.pdf",
+      "sha256": "41f90a8f94faed02d257add09a08e131551b57769dd08c56bb30987001488443",
+      "bytes": 565750
+    },
+    {
+      "path": "R12_BY2_native_heading_decisions.png",
+      "sha256": "40969f30b9d8e23870d7fe8a71878d26f6f4ea7f46b9e34f1b603321c9d394ae",
+      "bytes": 669569
+    },
+    {
+      "path": "R12_BY2_native_heading_decisions.svg",
+      "sha256": "2af91dc85d27eb469e6e077968563258e22ce751ffb0a7b582258b5fd99cb2ef",
+      "bytes": 1534134
+    },
+    {
+      "path": "README.md",
+      "sha256": "af67d17a2887e6fd0fc404f587eff03e45de1420bb72fe8d1d21ab086368f94d",
+      "bytes": 1619
+    },
+    {
+      "path": "build_velocity_heading_figures.py",
+      "sha256": "cbfa62e34ed1ff677d8d5445ef92037adcf896f0216a933f2d3f0d5723b75461",
+      "bytes": 8222
+    },
+    {
+      "path": "data/BY2H_F02_full_saved_errors.csv.gz",
+      "sha256": "93406e8e934f0d9e56e9b4e9e681d6e25a81092176cafea4ef3957b4eb27241d",
+      "bytes": 1296283
+    },
+    {
+      "path": "data/BY2H_F03_full_saved_errors.csv.gz",
+      "sha256": "34299976c0def6997722c6911cd5d45f3ea323ef44d77216ce7f5b11c31274fc",
+      "bytes": 1299905
+    },
+    {
+      "path": "data/BY2O_F02_full_saved_errors.csv.gz",
+      "sha256": "b9b149a511a77cb59c70d25ccc385544f763e7a24195a2933ef9885024536fde",
+      "bytes": 1686848
+    },
+    {
+      "path": "data/BY2O_F03_full_saved_errors.csv.gz",
+      "sha256": "cc4e3bce9708fff43da24ad7fe8ce05055dc5a34a4cd1d802bb8d07ce7a8497e",
+      "bytes": 1686533
+    },
+    {
+      "path": "data/BY2_F02_full_saved_errors.csv.gz",
+      "sha256": "0baf0831ed80488f48289a3a898f74dc3385aeed062fdc8e83f07e5cce605200",
+      "bytes": 1254534
+    },
+    {
+      "path": "data/BY2_F03_full_saved_errors.csv.gz",
+      "sha256": "dd2572cb9bb3b6e98b8376a3b4ab4fec44ef24da9ae5af52e97fe0401f33405d",
+      "bytes": 1256914
+    },
+    {
+      "path": "data/BY2_Proposed_yaw_errors.csv.gz",
+      "sha256": "160a351c09d5f59344afeb234de23a24cc9d59dc19934d24c1c472f9350314b5",
+      "bytes": 736397
+    },
+    {
+      "path": "data/BY2_all_1369_native_heading_update_modes.csv.gz",
+      "sha256": "634880982079d82ab56ebc70c9b388dd842b89949e9a081100cdcda0af658a94",
+      "bytes": 19637
+    },
+    {
+      "path": "data/original_natural_velocity_pair_metrics.csv.gz",
+      "sha256": "aca163ae23ccee46840c945df29c2de0486d507bbde9648388b70699f4d3a9fc",
+      "bytes": 323
+    }
+  ],
+  "all_9_data_copies_byte_identical": true
+}

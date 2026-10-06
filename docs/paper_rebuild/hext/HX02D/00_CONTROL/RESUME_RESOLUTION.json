@@ -1,0 +1,11 @@
+{
+  "historical_record_sha256": "5567b3532ecb038462377793056ebbdc7ef17eea95b84b9c00be5175140046e3",
+  "result": "无需补提交",
+  "authorized_start": "e612eeb0ad37bf150a4076eb636424fe85f1d222",
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src OPENBLAS_NUM_THREADS=1 python3 -m pytest -q -p no:cacheprovider tests/paper_rebuild/test_hx02d_diagnostic.py",
+    "result": "6 passed in 0.23s",
+    "native_solver_calls": 0,
+    "reference_opens": 0
+  }
+}

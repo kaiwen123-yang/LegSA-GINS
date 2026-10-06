@@ -1,0 +1,278 @@
+claim_id,table,selector,column,expected,tolerance,used_in,actual,status
+yaw_BY2_F04_rmse,yawdec,sequence=BY2;method=F04,rmse_deg,1.886,0.0006,"UNC01 §2,D1",1.8862718548526467,PASS
+yaw_BY2_F04_bias,yawdec,sequence=BY2;method=F04,bias_deg,-1.086,0.0006,UNC01 §2,-1.0864579081639958,PASS
+yaw_BY2_F04_slow,yawdec,sequence=BY2;method=F04,std_slow_deg,0.816,0.0006,UNC01 §2,0.8161456214644863,PASS
+yaw_BY2_F04_fast,yawdec,sequence=BY2;method=F04,std_fast_deg,1.305,0.0006,UNC01 §2,1.3054882273955206,PASS
+yaw_BY2_F04_share_bias,yawdec,sequence=BY2;method=F04,share_bias,0.33,0.006,UNC01 §2,0.3317548201321348,PASS
+yaw_BY2_F04_share_slow,yawdec,sequence=BY2;method=F04,share_slow,0.19,0.006,UNC01 §2,0.1872090074461181,PASS
+yaw_BY2_F04_share_fast,yawdec,sequence=BY2;method=F04,share_fast,0.48,0.006,UNC01 §2,0.4790020259524147,PASS
+yaw_BY2_F04_own,yawdec,sequence=BY2;method=F04,estimator_specific_deg,1.36,0.006,UNC01 §2,1.3588540987345692,PASS
+yaw_BY2_F02_rmse,yawdec,sequence=BY2;method=F02,rmse_deg,2.232,0.0006,"UNC01 §2,D1",2.2319522558080127,PASS
+yaw_BY2_F02_bias,yawdec,sequence=BY2;method=F02,bias_deg,-1.39,0.0006,UNC01 §2,-1.3897634137763333,PASS
+yaw_BY2_F02_slow,yawdec,sequence=BY2;method=F02,std_slow_deg,1.153,0.0006,UNC01 §2,1.1532342575915997,PASS
+yaw_BY2_F02_fast,yawdec,sequence=BY2;method=F02,std_fast_deg,1.307,0.0006,UNC01 §2,1.3073893217288506,PASS
+yaw_BY2_LC01_rmse,yawdec,sequence=BY2;method=LC01,rmse_deg,2.995,0.0006,"UNC01 §2,D1",2.994827460059108,PASS
+yaw_BY2_LC01_bias,yawdec,sequence=BY2;method=LC01,bias_deg,-1.353,0.0006,UNC01 §2,-1.3530511190504768,PASS
+yaw_BY2_LC01_slow,yawdec,sequence=BY2;method=LC01,std_slow_deg,2.216,0.0006,UNC01 §2,2.215810323328854,PASS
+yaw_BY2_LC01_fast,yawdec,sequence=BY2;method=LC01,std_fast_deg,1.272,0.0006,UNC01 §2,1.2715696590816747,PASS
+yaw_BY2_LC01_share_slow,yawdec,sequence=BY2;method=LC01,share_slow,0.55,0.006,UNC01 §2,0.5474211209222919,PASS
+yaw_BY2_LC01-S_rmse,yawdec,sequence=BY2;method=LC01-S,rmse_deg,1.539,0.0006,"UNC01 §2,D1",1.5392385536245534,PASS
+yaw_BY2_LC01-S_bias,yawdec,sequence=BY2;method=LC01-S,bias_deg,-0.357,0.0006,UNC01 §2,-0.3565871902295715,PASS
+yaw_BY2_LC01-S_slow,yawdec,sequence=BY2;method=LC01-S,std_slow_deg,0.844,0.0006,UNC01 §2,0.8444917961909428,PASS
+yaw_BY2_LC01-S_fast,yawdec,sequence=BY2;method=LC01-S,std_fast_deg,1.229,0.0006,UNC01 §2,1.2285876737227843,PASS
+yaw_BY2H_F04_rmse,yawdec,sequence=BY2H;method=F04,rmse_deg,1.934,0.0006,"UNC01 §2,D1",1.93377013508875,PASS
+yaw_BY2H_F04_bias,yawdec,sequence=BY2H;method=F04,bias_deg,-0.538,0.0006,UNC01 §2,-0.5382968649940884,PASS
+yaw_BY2H_F04_slow,yawdec,sequence=BY2H;method=F04,std_slow_deg,1.222,0.0006,UNC01 §2,1.2217061257788229,PASS
+yaw_BY2H_F04_fast,yawdec,sequence=BY2H;method=F04,std_fast_deg,1.405,0.0006,UNC01 §2,1.4048586949505133,PASS
+yaw_BY2H_F04_share_bias,yawdec,sequence=BY2H;method=F04,share_bias,0.08,0.006,UNC01 §2,0.077487920035447,PASS
+yaw_BY2H_F04_share_slow,yawdec,sequence=BY2H;method=F04,share_slow,0.4,0.006,UNC01 §2,0.39913866964606476,PASS
+yaw_BY2H_F04_share_fast,yawdec,sequence=BY2H;method=F04,share_fast,0.53,0.006,UNC01 §2,0.5277832340527017,PASS
+yaw_BY2H_F04_own,yawdec,sequence=BY2H;method=F04,estimator_specific_deg,1.34,0.006,UNC01 §2,1.335039090299593,PASS
+yaw_BY2H_LC01_rmse,yawdec,sequence=BY2H;method=LC01,rmse_deg,2.209,0.0006,"UNC01 §2,D1",2.208612313835051,PASS
+yaw_BY2H_LC01_bias,yawdec,sequence=BY2H;method=LC01,bias_deg,-0.805,0.0006,UNC01 §2,-0.8052060506311665,PASS
+yaw_BY2H_LC01_slow,yawdec,sequence=BY2H;method=LC01,std_slow_deg,1.445,0.0006,UNC01 §2,1.444751629494186,PASS
+yaw_BY2H_LC01_fast,yawdec,sequence=BY2H;method=LC01,std_fast_deg,1.391,0.0006,UNC01 §2,1.39070061808866,PASS
+yaw_BY2O_F04_rmse,yawdec,sequence=BY2O;method=F04,rmse_deg,2.434,0.0006,"UNC01 §2,D1",2.433814932823714,PASS
+yaw_BY2O_F04_bias,yawdec,sequence=BY2O;method=F04,bias_deg,0.339,0.0006,UNC01 §2,0.3386035666761478,PASS
+yaw_BY2O_F04_slow,yawdec,sequence=BY2O;method=F04,std_slow_deg,2.076,0.0006,UNC01 §2,2.0763309351547106,PASS
+yaw_BY2O_F04_fast,yawdec,sequence=BY2O;method=F04,std_fast_deg,1.078,0.0006,UNC01 §2,1.0780528836388263,PASS
+yaw_BY2O_F04_share_bias,yawdec,sequence=BY2O;method=F04,share_bias,0.02,0.006,UNC01 §2,0.019355658632179647,PASS
+yaw_BY2O_F04_share_slow,yawdec,sequence=BY2O;method=F04,share_slow,0.73,0.006,UNC01 §2,0.7278100466158709,PASS
+yaw_BY2O_F04_share_fast,yawdec,sequence=BY2O;method=F04,share_fast,0.2,0.006,UNC01 §2,0.19620272205292316,PASS
+yaw_BY2O_F04_own,yawdec,sequence=BY2O;method=F04,estimator_specific_deg,2.1,0.006,UNC01 §2,2.1037591420232125,PASS
+yaw_BY2O_LC01_rmse,yawdec,sequence=BY2O;method=LC01,rmse_deg,2.454,0.0006,"UNC01 §2,D1",2.4536970334279924,PASS
+yaw_BY2O_LC01_bias,yawdec,sequence=BY2O;method=LC01,bias_deg,0.3,0.0006,UNC01 §2,0.3003443465354922,PASS
+yaw_BY2O_LC01_slow,yawdec,sequence=BY2O;method=LC01,std_slow_deg,2.075,0.0006,UNC01 §2,2.074912710891528,PASS
+yaw_BY2O_LC01_fast,yawdec,sequence=BY2O;method=LC01,std_fast_deg,1.065,0.0006,UNC01 §2,1.0646824826469616,PASS
+yaw_BY2_F04_own_spec,yawdec,sequence=BY2;method=F04,estimator_specific_minus_ref_spec_deg,0.73,0.006,UNC01 §2,0.7350931999876927,PASS
+yaw_BY2_F04_own_fused,yawdec,sequence=BY2;method=F04,estimator_specific_minus_ref_fused_deg,1.03,0.006,UNC01 §2,1.03028562139231,PASS
+yaw_BY2H_F04_own_spec,yawdec,sequence=BY2H;method=F04,estimator_specific_minus_ref_spec_deg,0.69,0.006,UNC01 §2,0.6900774765548957,PASS
+yaw_BY2H_F04_own_fused,yawdec,sequence=BY2H;method=F04,estimator_specific_minus_ref_fused_deg,0.98,0.006,UNC01 §2,0.9768466474467549,PASS
+fast_BY2_min,fast,sequence=BY2,fast_min,1.229,0.0006,UNC01 §2; paragraphs,1.2285876737227843,PASS
+fast_BY2_max,fast,sequence=BY2,fast_max,1.311,0.0006,UNC01 §2; paragraphs,1.3106866300547064,PASS
+fast_BY2_n,fast,sequence=BY2,n_estimators,13.0,0.0,UNC01 §2,13.0,PASS
+fast_BY2H_min,fast,sequence=BY2H,fast_min,1.391,0.0006,UNC01 §2; paragraphs,1.39070061808866,PASS
+fast_BY2H_max,fast,sequence=BY2H,fast_max,1.415,0.0006,UNC01 §2; paragraphs,1.4151634553301873,PASS
+fast_BY2H_n,fast,sequence=BY2H,n_estimators,12.0,0.0,UNC01 §2,12.0,PASS
+fast_BY2O_min,fast,sequence=BY2O,fast_min,1.053,0.0006,UNC01 §2; paragraphs,1.0531180735462389,PASS
+fast_BY2O_max,fast,sequence=BY2O,fast_max,1.079,0.0006,UNC01 §2; paragraphs,1.0786035904015538,PASS
+fast_BY2O_n,fast,sequence=BY2O,n_estimators,12.0,0.0,UNC01 §2,12.0,PASS
+seg_F04_primary_yaw,bands,method=F04;segment=primary,rmse_yaw,0.2325,0.0006,UNC01 §2,0.2325140820805299,PASS
+seg_F04_primary_fast,bands,method=F04;segment=primary,std_fast,0.059,0.0006,UNC01 §2; paragraphs,0.0586834397126148,PASS
+seg_F04_primary_slow,bands,method=F04;segment=primary,std_slow,0.182,0.0006,UNC01 §2,0.1823773949941773,PASS
+seg_F04_primary_mean,bands,method=F04;segment=primary,mean_yaw,-0.124,0.0006,UNC01 §2,-0.1243015820995684,PASS
+seg_F04_primary_n,bands,method=F04;segment=primary,n,7612.0,0.0,UNC01 §2,7612.0,PASS
+seg_F04_primary_h,bands,method=F04;segment=primary,rmse_h,0.0242,6e-05,UNC01 §2,0.0242039712178186,PASS
+seg_F04_primary_up,bands,method=F04;segment=primary,rmse_up,0.0158,6e-05,UNC01 §2,0.0158452010686834,PASS
+seg_F01_primary_fast,bands,method=F01;segment=primary,std_fast,0.058,0.0006,UNC01 §2,0.0583298715661526,PASS
+seg_F04_outside_yaw,bands,method=F04;segment=outside,rmse_yaw,2.589,0.0006,UNC02 §3,2.5885939307825425,PASS
+seg_LC01_primary_yaw,bands,method=LC01;segment=primary,rmse_yaw,4.008,0.0006,UNC02 §3,4.008201405335621,PASS
+seg_LC01_outside_yaw,bands,method=LC01;segment=outside,rmse_yaw,1.878,0.0006,UNC02 §3,1.8780275781753493,PASS
+seg_LC01_primary_fast,bands,method=LC01;segment=primary,std_fast,0.271,0.0006,UNC01 §2,0.2709837527346881,PASS
+real_BY2_F04_yaw_err_deg_b20,real,sequence=BY2;method=F04;series=yaw_err_deg,se_rmse_batch_20s,0.153,0.0006,UNC01 §4,0.1528179043289198,PASS
+real_BY2_F04_yaw_err_deg_b40,real,sequence=BY2;method=F04;series=yaw_err_deg,se_rmse_batch_40s,0.206,0.0006,UNC01 §4,0.2059203394890583,PASS
+real_BY2_F04_yaw_err_deg_lo,real,sequence=BY2;method=F04;series=yaw_err_deg,rmse_mbb_low,1.604,0.0006,UNC01 §4; paragraphs,1.6041045440663786,PASS
+real_BY2_F04_yaw_err_deg_hi,real,sequence=BY2;method=F04;series=yaw_err_deg,rmse_mbb_high,2.158,0.0006,UNC01 §4; paragraphs,2.1577873461151,PASS
+real_BY2H_F04_yaw_err_deg_b20,real,sequence=BY2H;method=F04;series=yaw_err_deg,se_rmse_batch_20s,0.164,0.0006,UNC01 §4,0.1635296875495151,PASS
+real_BY2H_F04_yaw_err_deg_b40,real,sequence=BY2H;method=F04;series=yaw_err_deg,se_rmse_batch_40s,0.141,0.0006,UNC01 §4,0.1412745061343906,PASS
+real_BY2H_F04_yaw_err_deg_lo,real,sequence=BY2H;method=F04;series=yaw_err_deg,rmse_mbb_low,1.602,0.0006,UNC01 §4; paragraphs,1.6015213544951996,PASS
+real_BY2H_F04_yaw_err_deg_hi,real,sequence=BY2H;method=F04;series=yaw_err_deg,rmse_mbb_high,2.037,0.0006,UNC01 §4; paragraphs,2.0371482003650665,PASS
+real_BY2O_F04_yaw_err_deg_b20,real,sequence=BY2O;method=F04;series=yaw_err_deg,se_rmse_batch_20s,0.661,0.0006,UNC01 §4,0.6606551191483796,PASS
+real_BY2O_F04_yaw_err_deg_b40,real,sequence=BY2O;method=F04;series=yaw_err_deg,se_rmse_batch_40s,0.717,0.0006,UNC01 §4,0.7167670500761741,PASS
+real_BY2O_F04_yaw_err_deg_lo,real,sequence=BY2O;method=F04;series=yaw_err_deg,rmse_mbb_low,1.364,0.0006,UNC01 §4; paragraphs,1.3636626474919804,PASS
+real_BY2O_F04_yaw_err_deg_hi,real,sequence=BY2O;method=F04;series=yaw_err_deg,rmse_mbb_high,3.613,0.0006,UNC01 §4; paragraphs,3.6124999365744177,PASS
+real_BY2_LC01_yaw_err_deg_b20,real,sequence=BY2;method=LC01;series=yaw_err_deg,se_rmse_batch_20s,0.863,0.0006,UNC01 §4,0.8630287269069296,PASS
+real_BY2_LC01_yaw_err_deg_b40,real,sequence=BY2;method=LC01;series=yaw_err_deg,se_rmse_batch_40s,1.094,0.0006,UNC01 §4,1.0937171711762064,PASS
+real_BY2_LC01_yaw_err_deg_lo,real,sequence=BY2;method=LC01;series=yaw_err_deg,rmse_mbb_low,1.618,0.0006,UNC01 §4; paragraphs,1.617630273772789,PASS
+real_BY2_LC01_yaw_err_deg_hi,real,sequence=BY2;method=LC01;series=yaw_err_deg,rmse_mbb_high,4.554,0.0006,UNC01 §4; paragraphs,4.5534708287314976,PASS
+real_BY2H_LC01_yaw_err_deg_b20,real,sequence=BY2H;method=LC01;series=yaw_err_deg,se_rmse_batch_20s,0.162,0.0006,UNC01 §4,0.1621562688927273,PASS
+real_BY2H_LC01_yaw_err_deg_b40,real,sequence=BY2H;method=LC01;series=yaw_err_deg,se_rmse_batch_40s,0.18,0.0006,UNC01 §4,0.1797553808533448,PASS
+real_BY2H_LC01_yaw_err_deg_lo,real,sequence=BY2H;method=LC01;series=yaw_err_deg,rmse_mbb_low,1.744,0.0006,UNC01 §4; paragraphs,1.7440811098372433,PASS
+real_BY2H_LC01_yaw_err_deg_hi,real,sequence=BY2H;method=LC01;series=yaw_err_deg,rmse_mbb_high,2.421,0.0006,UNC01 §4; paragraphs,2.4211934906592054,PASS
+real_BY2O_LC01_yaw_err_deg_b20,real,sequence=BY2O;method=LC01;series=yaw_err_deg,se_rmse_batch_20s,0.329,0.0006,UNC01 §4,0.3292558376310953,PASS
+real_BY2O_LC01_yaw_err_deg_b40,real,sequence=BY2O;method=LC01;series=yaw_err_deg,se_rmse_batch_40s,0.439,0.0006,UNC01 §4,0.4390631845167507,PASS
+real_BY2O_LC01_yaw_err_deg_lo,real,sequence=BY2O;method=LC01;series=yaw_err_deg,rmse_mbb_low,1.707,0.0006,UNC01 §4; paragraphs,1.7072280240347126,PASS
+real_BY2O_LC01_yaw_err_deg_hi,real,sequence=BY2O;method=LC01;series=yaw_err_deg,rmse_mbb_high,3.139,0.0006,UNC01 §4; paragraphs,3.1388711226470742,PASS
+real_BY2_F04_horizontal_err_m_b20,real,sequence=BY2;method=F04;series=horizontal_err_m,se_rmse_batch_20s,0.0246,6e-05,UNC01 §4,0.0246298185267755,PASS
+real_BY2_F04_horizontal_err_m_b40,real,sequence=BY2;method=F04;series=horizontal_err_m,se_rmse_batch_40s,0.0404,6e-05,UNC01 §4,0.040443807448107,PASS
+real_BY2_F04_horizontal_err_m_lo,real,sequence=BY2;method=F04;series=horizontal_err_m,rmse_mbb_low,0.0452,6e-05,UNC01 §4; paragraphs,0.0451932153538284,PASS
+real_BY2_F04_horizontal_err_m_hi,real,sequence=BY2;method=F04;series=horizontal_err_m,rmse_mbb_high,0.152,6e-05,UNC01 §4; paragraphs,0.1520228272249416,PASS
+real_BY2H_F04_horizontal_err_m_b20,real,sequence=BY2H;method=F04;series=horizontal_err_m,se_rmse_batch_20s,0.0068,6e-05,UNC01 §4,0.0067734802987368,PASS
+real_BY2H_F04_horizontal_err_m_b40,real,sequence=BY2H;method=F04;series=horizontal_err_m,se_rmse_batch_40s,0.0106,6e-05,UNC01 §4,0.0106053873064031,PASS
+real_BY2H_F04_horizontal_err_m_lo,real,sequence=BY2H;method=F04;series=horizontal_err_m,rmse_mbb_low,0.0452,6e-05,UNC01 §4; paragraphs,0.0451694461623399,PASS
+real_BY2H_F04_horizontal_err_m_hi,real,sequence=BY2H;method=F04;series=horizontal_err_m,rmse_mbb_high,0.0853,6e-05,UNC01 §4; paragraphs,0.0853396034947835,PASS
+real_BY2O_F04_horizontal_err_m_b20,real,sequence=BY2O;method=F04;series=horizontal_err_m,se_rmse_batch_20s,0.0115,6e-05,UNC01 §4,0.0114821550850778,PASS
+real_BY2O_F04_horizontal_err_m_b40,real,sequence=BY2O;method=F04;series=horizontal_err_m,se_rmse_batch_40s,0.0028,6e-05,UNC01 §4,0.0028180816453967,PASS
+real_BY2O_F04_horizontal_err_m_lo,real,sequence=BY2O;method=F04;series=horizontal_err_m,rmse_mbb_low,0.0376,6e-05,UNC01 §4; paragraphs,0.0375518175262786,PASS
+real_BY2O_F04_horizontal_err_m_hi,real,sequence=BY2O;method=F04;series=horizontal_err_m,rmse_mbb_high,0.073,6e-05,UNC01 §4; paragraphs,0.0729816831102467,PASS
+real_BY2_F04_err_u_m_b20,real,sequence=BY2;method=F04;series=err_u_m,se_rmse_batch_20s,0.0036,6e-05,UNC01 §4,0.0036486465101101,PASS
+real_BY2_F04_err_u_m_b40,real,sequence=BY2;method=F04;series=err_u_m,se_rmse_batch_40s,0.0058,6e-05,UNC01 §4,0.0057933696247102,PASS
+real_BY2_F04_err_u_m_lo,real,sequence=BY2;method=F04;series=err_u_m,rmse_mbb_low,0.0407,6e-05,UNC01 §4; paragraphs,0.040709380447989,PASS
+real_BY2_F04_err_u_m_hi,real,sequence=BY2;method=F04;series=err_u_m,rmse_mbb_high,0.057,6e-05,UNC01 §4; paragraphs,0.0569901095371519,PASS
+real_BY2_F04_yaw_tau,real,sequence=BY2;method=F04;series=yaw_err_deg,tau_int_s,0.64,0.006,UNC01 §4,0.6435356879612202,PASS
+real_BY2O_F04_yaw_tau,real,sequence=BY2O;method=F04;series=yaw_err_deg,tau_int_s,7.98,0.006,UNC01 §4,7.980266456517845,PASS
+real_BY2O_F04_yaw_neff,real,sequence=BY2O;method=F04;series=yaw_err_deg,n_eff,38.5,0.06,UNC01 §4,38.53171039977466,PASS
+real_BY2_F04_h_tau,real,sequence=BY2;method=F04;series=horizontal_err_m,tau_int_s,12.2,0.06,UNC01 §4,12.242712138136769,PASS
+real_BY2_F04_h_neff,real,sequence=BY2;method=F04;series=horizontal_err_m,n_eff,18.6,0.06,UNC01 §4,18.56650253925037,PASS
+dist_BY2_full_LC01-F04_yaw_delta,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,delta_rmse,1.11,0.0006,UNC02 table,1.1103372814582677,PASS
+dist_BY2_full_LC01-F04_yaw_lo,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,mbb95_low,-0.215,0.0006,UNC02 table,-0.2151695911095197,PASS
+dist_BY2_full_LC01-F04_yaw_hi,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,mbb95_high,2.574,0.0006,UNC02 table,2.5738499973094195,PASS
+dist_BY2H_full_LC01-F04_yaw_delta,dist,sequence=BY2H;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,delta_rmse,0.274,0.0006,UNC02 table,0.2741892278945445,PASS
+dist_BY2H_full_LC01-F04_yaw_lo,dist,sequence=BY2H;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,mbb95_low,-0.052,0.0006,UNC02 table,-0.0520599344381443,PASS
+dist_BY2H_full_LC01-F04_yaw_hi,dist,sequence=BY2H;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,mbb95_high,0.514,0.0006,UNC02 table,0.5142639522923124,PASS
+dist_BY2O_full_LC01-F04_yaw_delta,dist,sequence=BY2O;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,delta_rmse,0.018,0.0006,UNC02 table,0.0174754860961838,PASS
+dist_BY2O_full_LC01-F04_yaw_lo,dist,sequence=BY2O;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,mbb95_low,-1.344,0.0006,UNC02 table,-1.3442060289453843,PASS
+dist_BY2O_full_LC01-F04_yaw_hi,dist,sequence=BY2O;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,mbb95_high,1.401,0.0006,UNC02 table,1.4010706010080711,PASS
+dist_BY2O_primary_LC01-F04_yaw_delta,dist,sequence=BY2O;segment=primary;pair_A_minus_B=LC01-F04;metric=yaw,delta_rmse,3.776,0.0006,UNC02 table,3.776270532494427,PASS
+dist_BY2O_primary_LC01-F04_yaw_lo,dist,sequence=BY2O;segment=primary;pair_A_minus_B=LC01-F04;metric=yaw,mbb95_low,2.197,0.0006,UNC02 table,2.19681378848168,PASS
+dist_BY2O_primary_LC01-F04_yaw_hi,dist,sequence=BY2O;segment=primary;pair_A_minus_B=LC01-F04;metric=yaw,mbb95_high,4.438,0.0006,UNC02 table,4.438214277767938,PASS
+dist_BY2_full_LC01-S-F04_yaw_delta,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-S-F04;metric=yaw,delta_rmse,-0.348,0.0006,UNC02 table,-0.3480479153220283,PASS
+dist_BY2_full_LC01-S-F04_yaw_lo,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-S-F04;metric=yaw,mbb95_low,-0.59,0.0006,UNC02 table,-0.5903600995106961,PASS
+dist_BY2_full_LC01-S-F04_yaw_hi,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-S-F04;metric=yaw,mbb95_high,-0.152,0.0006,UNC02 table,-0.1521347696766734,PASS
+dist_BY2_full_F04-F02_yaw_delta,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-F02;metric=yaw,delta_rmse,-0.346,0.0006,UNC02 table,-0.3456804009553664,PASS
+dist_BY2_full_F04-F02_yaw_lo,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-F02;metric=yaw,mbb95_low,-0.692,0.0006,UNC02 table,-0.6920855863166964,PASS
+dist_BY2_full_F04-F02_yaw_hi,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-F02;metric=yaw,mbb95_high,-0.055,0.0006,UNC02 table,-0.0550375671996121,PASS
+dist_BY2H_full_F04-F02_yaw_delta,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-F02;metric=yaw,delta_rmse,-0.35,0.0006,UNC02 table,-0.3494712525778034,PASS
+dist_BY2H_full_F04-F02_yaw_lo,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-F02;metric=yaw,mbb95_low,-0.827,0.0006,UNC02 table,-0.8267181447807768,PASS
+dist_BY2H_full_F04-F02_yaw_hi,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-F02;metric=yaw,mbb95_high,-0.02,0.0006,UNC02 table,-0.0198906170933416,PASS
+dist_BY2O_full_F04-F02_yaw_delta,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-F02;metric=yaw,delta_rmse,0.124,0.0006,UNC02 table,0.1243239461011613,PASS
+dist_BY2O_full_F04-F02_yaw_lo,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-F02;metric=yaw,mbb95_low,-0.034,0.0006,UNC02 table,-0.0336709672210277,PASS
+dist_BY2O_full_F04-F02_yaw_hi,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-F02;metric=yaw,mbb95_high,0.219,0.0006,UNC02 table,0.2192205046241588,PASS
+dist_BY2_full_F04-F03_yaw_delta,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-F03;metric=yaw,delta_rmse,-0.029,0.0006,UNC02 table,-0.0293191950214297,PASS
+dist_BY2_full_F04-F03_yaw_lo,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-F03;metric=yaw,mbb95_low,-0.066,0.0006,UNC02 table,-0.0657310119763651,PASS
+dist_BY2_full_F04-F03_yaw_hi,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-F03;metric=yaw,mbb95_high,0.001,0.0006,UNC02 table,0.0009271473347726,PASS
+dist_BY2H_full_F04-F03_yaw_delta,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-F03;metric=yaw,delta_rmse,-0.007,0.0006,UNC02 table,-0.0070304508114646,PASS
+dist_BY2H_full_F04-F03_yaw_lo,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-F03;metric=yaw,mbb95_low,-0.021,0.0006,UNC02 table,-0.0214429046434409,PASS
+dist_BY2H_full_F04-F03_yaw_hi,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-F03;metric=yaw,mbb95_high,0.002,0.0006,UNC02 table,0.0016939625572446,PASS
+dist_BY2O_full_F04-F03_yaw_delta,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-F03;metric=yaw,delta_rmse,0.002,0.0006,UNC02 table,0.0016307835069979,PASS
+dist_BY2O_full_F04-F03_yaw_lo,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-F03;metric=yaw,mbb95_low,-0.003,0.0006,UNC02 table,-0.0026646326921809,PASS
+dist_BY2O_full_F04-F03_yaw_hi,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-F03;metric=yaw,mbb95_high,0.005,0.0006,UNC02 table,0.0053259068279028,PASS
+dist_BY2_full_F04-A04_yaw_delta,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-A04;metric=yaw,delta_rmse,0.0003,0.0006,UNC02 table,0.0002710217014096,PASS
+dist_BY2_full_F04-A04_yaw_lo,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-A04;metric=yaw,mbb95_low,-0.004,0.0006,UNC02 table,-0.0039283094789591,PASS
+dist_BY2_full_F04-A04_yaw_hi,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-A04;metric=yaw,mbb95_high,0.005,0.0006,UNC02 table,0.004869940518951,PASS
+dist_BY2H_full_F04-A04_yaw_delta,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-A04;metric=yaw,delta_rmse,-0.0001,0.0006,UNC02 table,-0.0001364906374614,PASS
+dist_BY2H_full_F04-A04_yaw_lo,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-A04;metric=yaw,mbb95_low,-0.001,0.0006,UNC02 table,-0.0010578881149788,PASS
+dist_BY2H_full_F04-A04_yaw_hi,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-A04;metric=yaw,mbb95_high,0.001,0.0006,UNC02 table,0.0011298496748862,PASS
+dist_BY2O_full_F04-A04_yaw_delta,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-A04;metric=yaw,delta_rmse,0.005,0.0006,UNC02 table,0.0046423987699997,PASS
+dist_BY2O_full_F04-A04_yaw_lo,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-A04;metric=yaw,mbb95_low,-0.0002,0.0006,UNC02 table,-0.0002098132321407,PASS
+dist_BY2O_full_F04-A04_yaw_hi,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-A04;metric=yaw,mbb95_high,0.009,0.0006,UNC02 table,0.008571730998556,PASS
+dist_BY2_full_F03-F02_yaw_delta,dist,sequence=BY2;segment=full;pair_A_minus_B=F03-F02;metric=yaw,delta_rmse,-0.316,0.0006,UNC02 table,-0.3163612059339366,PASS
+dist_BY2_full_F03-F02_yaw_lo,dist,sequence=BY2;segment=full;pair_A_minus_B=F03-F02;metric=yaw,mbb95_low,-0.639,0.0006,UNC02 table,-0.6385843461387779,PASS
+dist_BY2_full_F03-F02_yaw_hi,dist,sequence=BY2;segment=full;pair_A_minus_B=F03-F02;metric=yaw,mbb95_high,-0.014,0.0006,UNC02 table,-0.0140485089609116,PASS
+dist_BY2H_full_F03-F02_yaw_delta,dist,sequence=BY2H;segment=full;pair_A_minus_B=F03-F02;metric=yaw,delta_rmse,-0.342,0.0006,UNC02 table,-0.3424408017663387,PASS
+dist_BY2H_full_F03-F02_yaw_lo,dist,sequence=BY2H;segment=full;pair_A_minus_B=F03-F02;metric=yaw,mbb95_low,-0.817,0.0006,UNC02 table,-0.8174006878608853,PASS
+dist_BY2H_full_F03-F02_yaw_hi,dist,sequence=BY2H;segment=full;pair_A_minus_B=F03-F02;metric=yaw,mbb95_high,-0.013,0.0006,UNC02 table,-0.0125432894447936,PASS
+dist_BY2O_primary_F04-F02_yaw_delta,dist,sequence=BY2O;segment=primary;pair_A_minus_B=F04-F02;metric=yaw,delta_rmse,-0.631,0.0006,UNC02 table,-0.6305228844894119,PASS
+dist_BY2O_primary_F04-F02_yaw_lo,dist,sequence=BY2O;segment=primary;pair_A_minus_B=F04-F02;metric=yaw,mbb95_low,-0.713,0.0006,UNC02 table,-0.7127685842317752,PASS
+dist_BY2O_primary_F04-F02_yaw_hi,dist,sequence=BY2O;segment=primary;pair_A_minus_B=F04-F02;metric=yaw,mbb95_high,-0.579,0.0006,UNC02 table,-0.5791110139771921,PASS
+dist_BY2_full_F04-F02_horizontal_delta,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-F02;metric=horizontal,delta_rmse,-0.004,6e-05,UNC02 table,-0.0040157955998262,PASS
+dist_BY2_full_F04-F02_horizontal_lo,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-F02;metric=horizontal,mbb95_low,-0.008,6e-05,UNC02 table,-0.0080201870127562,PASS
+dist_BY2_full_F04-F02_horizontal_hi,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-F02;metric=horizontal,mbb95_high,-0.0013,6e-05,UNC02 table,-0.0012947464629125,PASS
+dist_BY2H_full_F04-F02_horizontal_delta,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-F02;metric=horizontal,delta_rmse,-0.0031,6e-05,UNC02 table,-0.0031380822832408,PASS
+dist_BY2H_full_F04-F02_horizontal_lo,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-F02;metric=horizontal,mbb95_low,-0.0061,6e-05,UNC02 table,-0.0060738332904947,PASS
+dist_BY2H_full_F04-F02_horizontal_hi,dist,sequence=BY2H;segment=full;pair_A_minus_B=F04-F02;metric=horizontal,mbb95_high,-0.0014,6e-05,UNC02 table,-0.0013562405056865,PASS
+dist_BY2_full_F04-A04_horizontal_delta,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-A04;metric=horizontal,delta_rmse,0.001,6e-05,UNC02 table,0.0009861761800585,PASS
+dist_BY2_full_F04-A04_horizontal_lo,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-A04;metric=horizontal,mbb95_low,0.0002,6e-05,UNC02 table,0.0002048211166692,PASS
+dist_BY2_full_F04-A04_horizontal_hi,dist,sequence=BY2;segment=full;pair_A_minus_B=F04-A04;metric=horizontal,mbb95_high,0.0023,6e-05,UNC02 table,0.0023145404228738,PASS
+dist_BY2_full_LC01-F04_horizontal_delta,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-F04;metric=horizontal,delta_rmse,-0.0003,6e-05,UNC02 table,-0.0003381467668376,PASS
+dist_BY2_full_LC01-F04_horizontal_lo,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-F04;metric=horizontal,mbb95_low,-0.0039,6e-05,UNC02 table,-0.0038548414048737,PASS
+dist_BY2_full_LC01-F04_horizontal_hi,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-F04;metric=horizontal,mbb95_high,0.0026,6e-05,UNC02 table,0.0025891817269295,PASS
+dist_BY2H_full_LC01-F04_horizontal_delta,dist,sequence=BY2H;segment=full;pair_A_minus_B=LC01-F04;metric=horizontal,delta_rmse,0.0064,6e-05,UNC02 table,0.0063539637898245,PASS
+dist_BY2H_full_LC01-F04_horizontal_lo,dist,sequence=BY2H;segment=full;pair_A_minus_B=LC01-F04;metric=horizontal,mbb95_low,-0.0015,6e-05,UNC02 table,-0.0014825143854087,PASS
+dist_BY2H_full_LC01-F04_horizontal_hi,dist,sequence=BY2H;segment=full;pair_A_minus_B=LC01-F04;metric=horizontal,mbb95_high,0.0107,6e-05,UNC02 table,0.0107249546954025,PASS
+dist_BY2O_full_LC01-F04_horizontal_delta,dist,sequence=BY2O;segment=full;pair_A_minus_B=LC01-F04;metric=horizontal,delta_rmse,-0.0002,6e-05,UNC02 table,-0.0001612787726445,PASS
+dist_BY2O_full_LC01-F04_horizontal_lo,dist,sequence=BY2O;segment=full;pair_A_minus_B=LC01-F04;metric=horizontal,mbb95_low,-0.0028,6e-05,UNC02 table,-0.0028483560769228,PASS
+dist_BY2O_full_LC01-F04_horizontal_hi,dist,sequence=BY2O;segment=full;pair_A_minus_B=LC01-F04;metric=horizontal,mbb95_high,0.0037,6e-05,UNC02 table,0.0037362413697491,PASS
+dist_BY2O_primary_LC01-F04_horizontal_delta,dist,sequence=BY2O;segment=primary;pair_A_minus_B=LC01-F04;metric=horizontal,delta_rmse,0.0154,6e-05,UNC02 table,0.0154111403407533,PASS
+dist_BY2O_primary_LC01-F04_horizontal_lo,dist,sequence=BY2O;segment=primary;pair_A_minus_B=LC01-F04;metric=horizontal,mbb95_low,0.0132,6e-05,UNC02 table,0.013170651284443,PASS
+dist_BY2O_primary_LC01-F04_horizontal_hi,dist,sequence=BY2O;segment=primary;pair_A_minus_B=LC01-F04;metric=horizontal,mbb95_high,0.0176,6e-05,UNC02 table,0.0176455376177081,PASS
+dist_BY2_LC01F04_corr,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,corr_squared_errors,0.185,0.0006,UNC02 table,0.1848110590630375,PASS
+dist_BY2O_LC01F04_corr,dist,sequence=BY2O;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,corr_squared_errors,0.005,0.0006,UNC02 table,0.0044775059529635,PASS
+dist_BY2_LC01F04_ncommon,dist,sequence=BY2;segment=full;pair_A_minus_B=LC01-F04;metric=yaw,n_common,56628.0,0.0,UNC02 table,56628.0,PASS
+dist_BY2O_F04F02_ncommon,dist,sequence=BY2O;segment=full;pair_A_minus_B=F04-F02;metric=yaw,n_common,76548.0,0.0,UNC02 table,76548.0,PASS
+seed_F04_yaw_median,seeds,method=F04;metric=yaw_rmse_deg,median_sd,0.0023,6e-05,UNC01 §5,0.00230332210563135,PASS
+seed_F04_yaw_p90,seeds,method=F04;metric=yaw_rmse_deg,p90_sd,0.268,0.0006,UNC01 §5,0.2684414023574657,PASS
+seed_F04_yaw_lt01,seeds,method=F04;metric=yaw_rmse_deg,n_sd_lt_0.1,50.0,0.0,UNC01 §5; paragraphs,50.0,PASS
+seed_F04_yaw_lt001,seeds,method=F04;metric=yaw_rmse_deg,n_sd_lt_0.01,33.0,0.0,UNC01 §5,33.0,PASS
+seed_F04_h_median,seeds,method=F04;metric=horizontal_rmse_m,median_sd,0.00045,6e-06,UNC01 §5,0.0004498406472235,PASS
+seed_F04_h_p90,seeds,method=F04;metric=horizontal_rmse_m,p90_sd,0.0204,6e-05,UNC01 §5,0.02037254616456925,PASS
+seed_F04_h_lt01,seeds,method=F04;metric=horizontal_rmse_m,n_sd_lt_0.1,55.0,0.0,UNC01 §5,55.0,PASS
+tsd_F04_D32_yaw_med,tsd,method=F04;metric=yaw_rmse_deg;type=D32,median,1.913,0.0006,UNC01 §5,1.9127208742485744,PASS
+tsd_F04_D32_yaw_sd,tsd,method=F04;metric=yaw_rmse_deg;type=D32,sd,0.052,0.0006,UNC01 §5,0.0514698588042016,PASS
+tsd_F04_D33_yaw_med,tsd,method=F04;metric=yaw_rmse_deg;type=D33,median,2.215,0.0006,UNC01 §5,2.21457465861512,PASS
+tsd_F04_D33_yaw_sd,tsd,method=F04;metric=yaw_rmse_deg;type=D33,sd,0.23,0.0006,UNC01 §5,0.2304299919452502,PASS
+tsd_F04_D35_yaw_med,tsd,method=F04;metric=yaw_rmse_deg;type=D35,median,1.903,0.0006,UNC01 §5,1.903282422810439,PASS
+tsd_F04_D35_yaw_sd,tsd,method=F04;metric=yaw_rmse_deg;type=D35,sd,0.069,0.0006,UNC01 §5,0.0689468162057298,PASS
+tsd_F04_D03_h_med,tsd,method=F04;metric=horizontal_rmse_m;type=D03,median,0.1003,6e-05,UNC01 §5,0.1002734995306791,PASS
+tsd_F04_D03_h_sd,tsd,method=F04;metric=horizontal_rmse_m;type=D03,sd,0.0025,6e-05,UNC01 §5,0.0024948492217628,PASS
+tsd_F04_D04_h_med,tsd,method=F04;metric=horizontal_rmse_m;type=D04,median,0.1142,6e-05,UNC01 §5,0.1141752860795654,PASS
+tsd_F04_D04_h_sd,tsd,method=F04;metric=horizontal_rmse_m;type=D04,sd,0.0079,6e-05,UNC01 §5,0.0078761300922737,PASS
+tsd_F04_D05_h_med,tsd,method=F04;metric=horizontal_rmse_m;type=D05,median,0.1198,6e-05,UNC01 §5,0.1197900518631117,PASS
+tsd_F04_D05_h_sd,tsd,method=F04;metric=horizontal_rmse_m;type=D05,sd,0.0148,6e-05,UNC01 §5,0.0147662062674917,PASS
+tsd_F04_D06_h_med,tsd,method=F04;metric=horizontal_rmse_m;type=D06,median,10.29,0.006,UNC01 §5,10.292008352167633,PASS
+tsd_F04_D06_h_sd,tsd,method=F04;metric=horizontal_rmse_m;type=D06,sd,3.98,0.006,UNC01 §5,3.9790013055610154,PASS
+ext_LC01F04_D32_mean,ext,pair=LC01-F04;metric=yaw_rmse_deg;type=D32,mean,1.142,0.0006,UNC01 §5; UNC02,1.1424684282214237,PASS
+ext_LC01F04_D32_sd,ext,pair=LC01-F04;metric=yaw_rmse_deg;type=D32,sd,0.062,0.0006,UNC01 §5; UNC02,0.0616050952311661,PASS
+ext_LC01F04_D33_mean,ext,pair=LC01-F04;metric=yaw_rmse_deg;type=D33,mean,1.657,0.0006,UNC01 §5; UNC02,1.6574525006944256,PASS
+ext_LC01F04_D33_sd,ext,pair=LC01-F04;metric=yaw_rmse_deg;type=D33,sd,0.273,0.0006,UNC01 §5; UNC02,0.2728827452102587,PASS
+ext_LC01F04_D35_mean,ext,pair=LC01-F04;metric=yaw_rmse_deg;type=D35,mean,1.348,0.0006,UNC01 §5; UNC02,1.3477335512010609,PASS
+ext_LC01F04_D35_sd,ext,pair=LC01-F04;metric=yaw_rmse_deg;type=D35,sd,0.101,0.0006,UNC01 §5; UNC02,0.1013913151441746,PASS
+ext_LC01F04_D31_min,ext,pair=LC01-F04;metric=yaw_rmse_deg;type=D31,min,0.923,0.0006,UNC02,0.9232090198277402,PASS
+povr_F04F02_yaw_med,povr,pair=F04-F02;metric=yaw_rmse_deg,median,-0.346,0.0006,UNC01 §5,-0.3457735032007704,PASS
+povr_F04F02_yaw_frac,povr,pair=F04-F02;metric=yaw_rmse_deg,frac_negative,0.988,0.0006,UNC01 §5,0.987927565392354,PASS
+povr_F04F02_yaw_n,povr,pair=F04-F02;metric=yaw_rmse_deg,n_pairs,497.0,0.0,UNC01 §5,497.0,PASS
+povr_F04F03_yaw_med,povr,pair=F04-F03;metric=yaw_rmse_deg,median,-0.029,0.0006,UNC01 §5,-0.0293547205232904,PASS
+povr_F04F03_yaw_frac,povr,pair=F04-F03;metric=yaw_rmse_deg,frac_negative,0.988,0.0006,UNC01 §5,0.9882583170254404,PASS
+povr_F04A04_yaw_frac,povr,pair=F04-A04;metric=yaw_rmse_deg,frac_negative,0.371,0.0006,UNC01 §5,0.37109375,PASS
+povr_F04F02_h_med,povr,pair=F04-F02;metric=horizontal_rmse_m,median,-0.004,6e-05,UNC01 §5,-0.0040268735282527,PASS
+povr_F04F02_h_frac,povr,pair=F04-F02;metric=horizontal_rmse_m,frac_negative,0.893,0.0006,UNC01 §5,0.8933601609657947,PASS
+povr_F04A04_h_frac,povr,pair=F04-A04;metric=horizontal_rmse_m,frac_negative,0.225,0.0006,UNC01 §5,0.224609375,PASS
+quant_F04_yaw_p95,quant,method=F04;metric=yaw_rmse_deg,p95,2.447,0.0006,UNC01 §5,2.4465376134717114,PASS
+quant_F04_yaw_p95_clo,quant,method=F04;metric=yaw_rmse_deg,cluster_q95_low,2.0,0.006,UNC01 §5,2.0011628967739465,PASS
+quant_F04_yaw_p95_chi,quant,method=F04;metric=yaw_rmse_deg,cluster_q95_high,4.18,0.006,UNC01 §5,4.175717582219556,PASS
+quant_F04_yaw_p95_nlo,quant,method=F04;metric=yaw_rmse_deg,naive_q95_low,2.11,0.006,UNC01 §5,2.107618351375004,PASS
+quant_F04_yaw_p95_nhi,quant,method=F04;metric=yaw_rmse_deg,naive_q95_high,2.7,0.006,UNC01 §5,2.7034286882599177,PASS
+quant_F04_yaw_nfin,quant,method=F04;metric=yaw_rmse_deg,n_finite,519.0,0.0,UNC01 §5,519.0,PASS
+quant_F04_yaw_nfail,quant,method=F04;metric=yaw_rmse_deg,n_failure,22.0,0.0,UNC01 §5,22.0,PASS
+quant_F04_h_p95,quant,method=F04;metric=horizontal_rmse_m,p95,3.551,0.0006,UNC01 §5,3.5510500790754915,PASS
+quant_F04_h_p95_clo,quant,method=F04;metric=horizontal_rmse_m,cluster_q95_low,1.52,0.006,UNC01 §5,1.51720372778863,PASS
+quant_F04_h_p95_chi,quant,method=F04;metric=horizontal_rmse_m,cluster_q95_high,4.92,0.006,UNC01 §5,4.915296682671065,PASS
+addp_D62_10_F04F03_h_mean,addp,type=D62;duration_s=10;pair=F04-F03;metric=horizontal_rmse_m,mean,-1.61,0.006,UNC01 §6,-1.609440190835162,PASS
+addp_D62_10_F04F03_h_sd,addp,type=D62;duration_s=10;pair=F04-F03;metric=horizontal_rmse_m,sd,0.87,0.006,UNC01 §6,0.8727723585344432,PASS
+addp_D62_10_F04F03_h_p95,addp,type=D62;duration_s=10;pair=F04-F03;metric=horizontal_rmse_m,p95,-0.33,0.006,UNC01 §6,-0.3301656401520029,PASS
+addp_D62_20_F04F03_h_mean,addp,type=D62;duration_s=20;pair=F04-F03;metric=horizontal_rmse_m,mean,-10.5,0.06,UNC01 §6,-10.510165904595016,PASS
+addp_D62_20_F04F03_h_sd,addp,type=D62;duration_s=20;pair=F04-F03;metric=horizontal_rmse_m,sd,5.7,0.06,UNC01 §6,5.692337264607777,PASS
+addp_D62_20_F04F03_h_p95,addp,type=D62;duration_s=20;pair=F04-F03;metric=horizontal_rmse_m,p95,-2.6,0.06,UNC01 §6,-2.616458720553715,PASS
+adds_D62_10_F04_h_median,adds,type=D62;duration_s=10;method=F04;metric=horizontal_rmse_m,median,0.126,0.0006,UNC01 §6,0.1258372295353398,PASS
+adds_D62_10_F04_h_sd,adds,type=D62;duration_s=10;method=F04;metric=horizontal_rmse_m,sd,0.015,0.0006,UNC01 §6,0.0152922781055545,PASS
+adds_D62_20_F04_h_median,adds,type=D62;duration_s=20;method=F04;metric=horizontal_rmse_m,median,0.241,0.0006,UNC01 §6,0.2407591338855341,PASS
+adds_D62_20_F04_h_sd,adds,type=D62;duration_s=20;method=F04;metric=horizontal_rmse_m,sd,0.043,0.0006,UNC01 §6,0.0431448614302099,PASS
+adds_D62_10_F03_h_mean,adds,type=D62;duration_s=10;method=F03;metric=horizontal_rmse_m,mean,1.74,0.006,UNC01 §6,1.738485179468768,PASS
+adds_D62_20_F03_h_mean,adds,type=D62;duration_s=20;method=F03;metric=horizontal_rmse_m,mean,10.8,0.06,UNC01 §6,10.7603420996436,PASS
+adds_D62_10_F04_up_mean,adds,type=D62;duration_s=10;method=F04;metric=up_rmse_m,mean,0.328,0.0006,UNC01 §6,0.3282865011125574,PASS
+adds_D62_20_F04_up_mean,adds,type=D62;duration_s=20;method=F04;metric=up_rmse_m,mean,1.025,0.0006,UNC01 §6,1.0249543549402742,PASS
+adds_D61_30_F04_h_mean,adds,type=D61;duration_s=30;method=F04;metric=horizontal_rmse_m,mean,30.8,0.06,UNC01 §6,30.80599245730669,PASS
+motion_BY2_yawrate_rms,motion,sequence=BY2;kind=yaw_rate,rms,18.0,0.06,UNC01 §3,18.00275370883964,PASS
+motion_BY2_yawrate_frac10,motion,sequence=BY2;kind=yaw_rate,time_fraction_abs_gt_10_deg_s,0.618,0.0006,UNC01 §3,0.6179419599387539,PASS
+motion_BY2_speed_mean,motion,sequence=BY2;kind=horizontal_speed,mean,1.187,0.0006,UNC01 §3,1.1868668175960333,PASS
+motion_BY2H_yawrate_rms,motion,sequence=BY2H;kind=yaw_rate,rms,17.5,0.06,UNC01 §3,17.537316980990543,PASS
+motion_BY2H_yawrate_frac10,motion,sequence=BY2H;kind=yaw_rate,time_fraction_abs_gt_10_deg_s,0.62,0.0006,UNC01 §3,0.6195219410225448,PASS
+motion_BY2H_speed_mean,motion,sequence=BY2H;kind=horizontal_speed,mean,1.196,0.0006,UNC01 §3,1.1964579674979718,PASS
+motion_BY2O_yawrate_rms,motion,sequence=BY2O;kind=yaw_rate,rms,15.4,0.06,UNC01 §3,15.371176894239213,PASS
+motion_BY2O_yawrate_frac10,motion,sequence=BY2O;kind=yaw_rate,time_fraction_abs_gt_10_deg_s,0.463,0.0006,UNC01 §3,0.463237873832987,PASS
+motion_BY2O_speed_mean,motion,sequence=BY2O;kind=horizontal_speed,mean,0.892,0.0006,UNC01 §3,0.8921611475740188,PASS
+motion_BY2O_static_frac,motion,sequence=BY2O;kind=horizontal_speed,fraction_speed_lt_0p2_m_s,0.243,0.0006,UNC01 §3,0.24284199363732767,PASS
+body_BY2_F04_fwd,body,sequence=BY2;method=F04,forward_mean_m,0.0444,6e-05,UNC01 §3,0.044413574529713805,PASS
+body_BY2_F04_fwdshare,body,sequence=BY2;method=F04,share_forward_bias,0.204,0.0006,UNC01 §3,0.20399090025103178,PASS
+body_BY2_F04_up,body,sequence=BY2;method=F04,up_mean_m,-0.017,6e-05,UNC01 §3,-0.01700154339547581,PASS
+body_BY2_F04_upshare,body,sequence=BY2;method=F04,share_up_bias,0.12,0.0006,UNC01 §3,0.12007456837942833,PASS
+body_BY2H_F04_fwd,body,sequence=BY2H;method=F04,forward_mean_m,0.0303,6e-05,UNC01 §3,0.030318289670228437,PASS
+body_BY2H_F04_fwdshare,body,sequence=BY2H;method=F04,share_forward_bias,0.193,0.0006,UNC01 §3,0.19271454779406694,PASS
+body_BY2H_F04_up,body,sequence=BY2H;method=F04,up_mean_m,-0.0072,6e-05,UNC01 §3,-0.0071568727976222485,PASS
+body_BY2H_F04_upshare,body,sequence=BY2H;method=F04,share_up_bias,0.025,0.0006,UNC01 §3,0.02492545106877428,PASS
+body_BY2O_F04_fwd,body,sequence=BY2O;method=F04,forward_mean_m,0.0282,6e-05,UNC01 §3,0.02822499641585092,PASS
+body_BY2O_F04_fwdshare,body,sequence=BY2O;method=F04,share_forward_bias,0.25,0.0006,UNC01 §3,0.24988286221183872,PASS
+body_BY2O_F04_up,body,sequence=BY2O;method=F04,up_mean_m,-0.0188,6e-05,UNC01 §3,-0.018822351448629298,PASS
+body_BY2O_F04_upshare,body,sequence=BY2O;method=F04,share_up_bias,0.168,0.0006,UNC01 §3,0.16770802306387056,PASS
+body_BY2_F04_fwdrand,body,sequence=BY2;method=F04,share_forward_random,0.624,0.0006,UNC01 §3,0.6239798563728557,PASS
+body_BY2_F04_rightrand,body,sequence=BY2;method=F04,share_right_random,0.172,0.0006,UNC01 §3,0.17202182854234874,PASS

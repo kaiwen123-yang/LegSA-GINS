@@ -1,0 +1,53 @@
+{
+  "stage": "E02_D39_SEED00_SUPPLEMENTAL_WINDOWS",
+  "status": "COMPLETE",
+  "started_at_utc": "2026-10-02T04:36:55.665499+00:00",
+  "completed_at_utc": "2026-10-02T04:37:08.631187+00:00",
+  "selected_files": 22,
+  "supplemental_read": "true",
+  "supplemental_payload_open_attempts": 22,
+  "completed_files": 22,
+  "unavailable_files": 0,
+  "rows_read": 1246124,
+  "window_rows": 66,
+  "available_window_rows": 44,
+  "empty_intersection_rows": 22,
+  "full_source_hashes_recomputed": 0,
+  "old_main_scan_receipt_unchanged": true,
+  "old_file_checks_unchanged": true,
+  "original_main_scan_count_unchanged": 1,
+  "new_read_kind": "supplemental, one attempt per selected file; not another corpus scan",
+  "fixed_windows": [
+    [
+      "82.204517",
+      "84.204517"
+    ],
+    [
+      "182.204872",
+      "184.204872"
+    ],
+    [
+      "349.204539",
+      "352.204539"
+    ]
+  ],
+  "full_support": [
+    66,
+    340
+  ],
+  "data_mode": "validation_of_existing_semisynthetic_results",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "semisynthetic_data_generated": false,
+  "validation_calculation": true,
+  "solver_calls": 0,
+  "provider_generator_calls": 0,
+  "original_evaluator_calls": 0,
+  "controller_calls": 0,
+  "bootstrap_calls": 0,
+  "raw_reference_payload_opens": 0,
+  "nav_std_payload_opens": 0,
+  "d22_payload_opens": 0,
+  "other_error_series_payload_opens": 0,
+  "source_writes": 0
+}

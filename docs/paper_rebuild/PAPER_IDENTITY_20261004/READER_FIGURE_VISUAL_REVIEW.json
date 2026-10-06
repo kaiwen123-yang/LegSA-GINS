@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "review_scope": "Nine modified publication PNGs, scaled preview inspection; not pixel-semantic review of every scientific source or calibration validation",
+  "figures": [
+    {
+      "figure": "Fig01",
+      "png_sha256": "fbb36e528e3883b1ff2b7a98fd410798d26155927d0990065089e2c490f37758",
+      "actual_pixels_viewed": true,
+      "review": "Reader labels legible; no legend overlap or clipped labels in final preview; failure/support annotations retained; Fig01 original photo is identified separately from declared geometry schematic"
+    },
+    {
+      "figure": "Fig03",
+      "png_sha256": "72712b1c93d4dedde1d8f93fcf06294abd1ec29d9b59de035f830af0eafb1944",
+      "actual_pixels_viewed": true,
+      "review": "Reader labels legible; no legend overlap or clipped labels in final preview; failure/support annotations retained; Fig01 original photo is identified separately from declared geometry schematic"
+    },
+    {
+      "figure": "Fig04",
+      "png_sha256": "413b67ce09dea7211cdab14c15be74af7e4633ffb6654c0744287bdf951aa3e1",
+      "actual_pixels_viewed": true,
+      "review": "Reader labels legible; no legend overlap or clipped labels in final preview; failure/support annotations retained; Fig01 original photo is identified separately from declared geometry schematic"
+    },
+    {
+      "figure": "Fig05",
+      "png_sha256": "ac118a76c456e17eb2ec7495304cc56290cc447a228338453f15b81947ad7453",
+      "actual_pixels_viewed": true,
+      "review": "Reader labels legible; no legend overlap or clipped labels in final preview; failure/support annotations retained; Fig01 original photo is identified separately from declared geometry schematic"
+    },
+    {
+      "figure": "Fig06",
+      "png_sha256": "f3a4ffe71dd120f691939b4185e7e22cac14728cb4c95eb6c9f91826aed2befb",
+      "actual_pixels_viewed": true,
+      "review": "Reader labels legible; no legend overlap or clipped labels in final preview; failure/support annotations retained; Fig01 original photo is identified separately from declared geometry schematic"
+    },
+    {
+      "figure": "Fig07",
+      "png_sha256": "929ca006c68492ec4dbeab03a2456dda13fe7e66329fa0e0e42a3de58a4f7c9c",
+      "actual_pixels_viewed": true,
+      "review": "Reader labels legible; no legend overlap or clipped labels in final preview; failure/support annotations retained; Fig01 original photo is identified separately from declared geometry schematic"
+    },
+    {
+      "figure": "Fig08",
+      "png_sha256": "9817ba0814464b96a3ac3b6dc05f71538fcceba10b12c4ad9df2a96c96a85328",
+      "actual_pixels_viewed": true,
+      "review": "Reader labels legible; no legend overlap or clipped labels in final preview; failure/support annotations retained; Fig01 original photo is identified separately from declared geometry schematic"
+    },
+    {
+      "figure": "SFig01",
+      "png_sha256": "60d33668748ed53d047ed4db75d2d269397a1e66421481b34ea684846e623200",
+      "actual_pixels_viewed": true,
+      "review": "Reader labels legible; no legend overlap or clipped labels in final preview; failure/support annotations retained; Fig01 original photo is identified separately from declared geometry schematic"
+    },
+    {
+      "figure": "SFig02",
+      "png_sha256": "64e9730f4739ad3d87a29020bada3b5f6c0690cd18d4ac5f8b0ec94f1d1baa79",
+      "actual_pixels_viewed": true,
+      "review": "Reader labels legible; no legend overlap or clipped labels in final preview; failure/support annotations retained; Fig01 original photo is identified separately from declared geometry schematic"
+    }
+  ]
+}

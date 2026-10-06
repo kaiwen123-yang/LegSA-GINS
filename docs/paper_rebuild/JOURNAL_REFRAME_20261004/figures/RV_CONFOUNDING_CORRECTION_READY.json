@@ -1,0 +1,262 @@
+{
+  "status": "READY",
+  "time_utc": "2026-10-04T14:32:32.931480+00:00",
+  "scope": "EDITORIAL_RV_CONFOUNDING_CORRECTION_NO_SCIENCE_CHANGE",
+  "all_checks_passed": true,
+  "corrected_interpretation": "F02 to F03 changes both RV and yaw handling; no isolated RV causal attribution",
+  "actual_F02_yaw_fixed_std_deg": 2.933193,
+  "all_9_data_copies_byte_identical": true,
+  "all_16_original_build_inputs_hash_unchanged": true,
+  "original_build_inputs_after_check": [
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/uncertainty/UA01_INPUT_SHA256.json",
+      "sha256": "46c0deeffe0779ad2b63430aff5512f3096c93006b9382e443879999d1015a2c",
+      "unchanged": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv",
+      "sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+      "unchanged": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00002/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "77549e7b3d05d29d6101ea866bec0dcd3900d0a6b94adebc12a575857371812f",
+      "unchanged": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00002/V3_RUNTIME_CONFIG.yaml",
+      "sha256": "3e5c21e94cea327b9c4aa2f7c095f5f7eb9662cafc66a3759d6d4f3d084f8e79",
+      "unchanged": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00003/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "6aa5848dac4666630bc899c3b37627f50348d21cba17106bbd1d4bd1996cda57",
+      "unchanged": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00003/V3_RUNTIME_CONFIG.yaml",
+      "sha256": "ecbd659c0d57665c2cff897e71cbbdbbb7d89f19662d748541adf7d6f62c1a4d",
+      "unchanged": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F02/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "13b20be5f3145e5b041701f0cfcf993928143d361e112baada69abaef83002f9",
+      "unchanged": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F02/V3_RUNTIME_CONFIG.yaml",
+      "sha256": "a5131fb4d6f9e5c8cb9fcbcfe71feb840bdca056f3e304308e51b2e5d94e2575",
+      "unchanged": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F03/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "4a9ded9aa8d2c3523c271aff8c9d8eb59961549a95e9dd2098518455ad1ee922",
+      "unchanged": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F03/V3_RUNTIME_CONFIG.yaml",
+      "sha256": "b58766c5b4200a6a16d50c9f4b49379a5c9ae8e33e86484a16f382f5aee6aed9",
+      "unchanged": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F02/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "f9ea3df87aff0aff26876bc6f3933ad48e269383f5c0ebaaaea570f235998c45",
+      "unchanged": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F02/V3_RUNTIME_CONFIG.yaml",
+      "sha256": "b2e56de0da9a03a19e1a5976d0b7785839fa9b44bdd75a3662b0fbd8e44cf09d",
+      "unchanged": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F03/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "1e551aa58a8465a6b2c3f29bc43cb44848d75cf9b958481f8c52a5fa33840426",
+      "unchanged": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F03/V3_RUNTIME_CONFIG.yaml",
+      "sha256": "6efc5ebcd925083add3d7fba3a0628fbb8ea5e4fd6fbbe183a208f9f6576d96d",
+      "unchanged": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00004/PORT_GNSS_UPDATE_TRACE.csv.gz",
+      "sha256": "316ccf3d2bb9cd327ebe6917a0d1147bba339b5edf48cb929e43a02ec9679fd7",
+      "unchanged": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00004/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "a98f1a5f7591c2365b0fd73b6a1146e0d6df3de2a06414fd067fc9b66b928548",
+      "unchanged": true
+    }
+  ],
+  "corrected_PNGs_actually_opened": 4,
+  "PDF_separate_rendering": false,
+  "no_solver_calls": true,
+  "no_evaluator_calls": true,
+  "raw_reference_payload_opens": 0,
+  "changed_files": [
+    {
+      "path": "CATALOG_READY_RECEIPT.json",
+      "before_sha256": "e2412262b9257eab499f61f90b23cc335c569af309924b410dee1bcdb17074ba",
+      "after_sha256": "430fe5455ac8a86a714ade01e8f4503f8b0eaf56fedc6fb197f3aecd671d6daf",
+      "before_bytes": 1024,
+      "after_bytes": 1120
+    },
+    {
+      "path": "CATALOG_RECEIPT.json",
+      "before_sha256": "a222ed7ca18075e5f9e5effec51b1a15d76607cbf0e7ec78e89a3786b3615043",
+      "after_sha256": "88021efc9deec4fee840ecf1cc89f0edc4c29d3aeaade4558619d5db9988b0ac",
+      "before_bytes": 4143,
+      "after_bytes": 4143
+    },
+    {
+      "path": "FIGURE_CATALOG.csv",
+      "before_sha256": "9325717ece74634124f405aa0ad854cfea71140df7bf1cade54d03e3f8ceccfc",
+      "after_sha256": "a5bed6bec51dd508252d9535e33bbfa513926ff1ab381325a5637c50496f5f95",
+      "before_bytes": 34172,
+      "after_bytes": 34661
+    },
+    {
+      "path": "README.md",
+      "before_sha256": "6143d9cfcfc365541104cae6645faa5bbbf329f11ec6bcf8a940f331f4dee787",
+      "after_sha256": "6249bedf72086cdc77beaee8904fd0707eeafc421f20784a62cba22fd22ca39e",
+      "before_bytes": 3419,
+      "after_bytes": 3477
+    },
+    {
+      "path": "block_05/BUILD_RECEIPT.json",
+      "before_sha256": "980c3a87c2fcd1c2419184724255ac332dd3bc9df6f0a8b0de1d7f2e3479c750",
+      "after_sha256": "ec3de040f9b66c690c3fe103810fa3b3474570f46037472458e5bf3a82ba1daa",
+      "before_bytes": 14310,
+      "after_bytes": 17184
+    },
+    {
+      "path": "block_05/CONFIG_DIFF_EVIDENCE.json",
+      "before_sha256": "936acc2c196087c6503921dda3b291842caeed6ebe04bcfc436d9629b968444f",
+      "after_sha256": "2a9e74fd33ac6c57abc76fb30095b634702eef44305852254b53b682c7833626",
+      "before_bytes": 3042,
+      "after_bytes": 7699
+    },
+    {
+      "path": "block_05/R11_BY2H_receiver_velocity_toggle.pdf",
+      "before_sha256": "6ef58b09e9e49b83b4a4f536e7288e187dcda7fb354eefd55de936f04683048e",
+      "after_sha256": "b3bdba9910a5507406cdae7b1ff83c00dfabbc740d910b8570a1f52f5558e8bc",
+      "before_bytes": 2208786,
+      "after_bytes": 2208970
+    },
+    {
+      "path": "block_05/R11_BY2H_receiver_velocity_toggle.png",
+      "before_sha256": "0212ab3936a653e90e6334e4af79e853e61ff9cbb743367850834e22b6e581ef",
+      "after_sha256": "a46245cda809d195cd5dd1d18883a3be9dfaef65e2a30b1a5a950c428abb0f12",
+      "before_bytes": 1065675,
+      "after_bytes": 1076778
+    },
+    {
+      "path": "block_05/R11_BY2H_receiver_velocity_toggle.svg",
+      "before_sha256": "64dd9c7c76adbd18ee1b9e5065ff98820327e2aad755e17d9ae64838dd79628f",
+      "after_sha256": "28d67baa904160991c06f895b204b8bda06a862e4365d1a349c5db92db39e033",
+      "before_bytes": 5811973,
+      "after_bytes": 5577592
+    },
+    {
+      "path": "block_05/R11_BY2O_receiver_velocity_toggle.pdf",
+      "before_sha256": "6c45e29b5b28a2476c6ab3eb63d644068385eaac6423f14a7796d57463204e20",
+      "after_sha256": "07a3ce11c2d5d98d110e13f027af4d2b7eeccbc1a37ed6c39dbac13e25a93330",
+      "before_bytes": 2776009,
+      "after_bytes": 2776177
+    },
+    {
+      "path": "block_05/R11_BY2O_receiver_velocity_toggle.png",
+      "before_sha256": "7e5cbaf64d5c35be3cfcaa8186117ea6b264b6d89424f6baf8a78a3a40e8fe3e",
+      "after_sha256": "0753f9a66cead6e910b170ddb6ea141e495aea26c97502edf0f80201e4ae6567",
+      "before_bytes": 746327,
+      "after_bytes": 755575
+    },
+    {
+      "path": "block_05/R11_BY2O_receiver_velocity_toggle.svg",
+      "before_sha256": "b3511e2d801653219cf5718d7be99cf13f05850493030525819f97c7262230f7",
+      "after_sha256": "55df5c7a4ad3b8784971279736aa3845c80f25b6dab2ccf8aea0bd204a91f4ba",
+      "before_bytes": 7598058,
+      "after_bytes": 7291797
+    },
+    {
+      "path": "block_05/R11_BY2_receiver_velocity_toggle.pdf",
+      "before_sha256": "6d341b183966591a4701df72a515cc17e2f68576190f13d34b6791b5f63ac495",
+      "after_sha256": "8602202f63a8bded05fe31f49bc4f2d77ddd4dc2903686d44ea6f473740d5100",
+      "before_bytes": 2126044,
+      "after_bytes": 2126214
+    },
+    {
+      "path": "block_05/R11_BY2_receiver_velocity_toggle.png",
+      "before_sha256": "04a7a484446ba58ee278f0138083d5579e915e0925250fec51cb717a14318d00",
+      "after_sha256": "55ca44fa2a9bbbace620b0b71883eaab837760331beba8b09fed793aaea83f64",
+      "before_bytes": 980216,
+      "after_bytes": 990621
+    },
+    {
+      "path": "block_05/R11_BY2_receiver_velocity_toggle.svg",
+      "before_sha256": "9a76dad5a916a92ae7a785e9a8f7ecda9baf0e9048814b321c700ee65aff61ec",
+      "after_sha256": "5d0e3a9e6d8513e9bee4570d577ba3dda337e95afc17467f6b857bf2557b357d",
+      "before_bytes": 5621752,
+      "after_bytes": 5395123
+    },
+    {
+      "path": "block_05/R12_BY2_native_heading_decisions.svg",
+      "before_sha256": "925a4d69f021aa52e960e91f14c725163886379cdcfecb493293886ba6c3b80f",
+      "after_sha256": "2af91dc85d27eb469e6e077968563258e22ce751ffb0a7b582258b5fd99cb2ef",
+      "before_bytes": 1590840,
+      "after_bytes": 1534134
+    },
+    {
+      "path": "block_05/README.md",
+      "before_sha256": "da024aedadf6e5c990fcf507650196d3121dd813c8374a277eaf48bbfc4e0548",
+      "after_sha256": "af67d17a2887e6fd0fc404f587eff03e45de1420bb72fe8d1d21ab086368f94d",
+      "before_bytes": 1403,
+      "after_bytes": 1619
+    },
+    {
+      "path": "block_05/READY_RECEIPT.json",
+      "before_sha256": "bdc8fb3f6ef7085839988c71e1b7afa69c7d0492c00eeca61b292671f3f14ee2",
+      "after_sha256": "4d1f20facc6bc670c4cc7a263d6c217e73d50b90307e6694d55f9f0902b63693",
+      "before_bytes": 4628,
+      "after_bytes": 4832
+    },
+    {
+      "path": "block_05/build_velocity_heading_figures.py",
+      "before_sha256": "5e5f1609371713849a2fee89855eab0ae69a1e34fde3264d9b5a7137de2534bc",
+      "after_sha256": "cbfa62e34ed1ff677d8d5445ef92037adcf896f0216a933f2d3f0d5723b75461",
+      "before_bytes": 6504,
+      "after_bytes": 8222
+    },
+    {
+      "path": "build_figure_catalog.py",
+      "before_sha256": "c1c9b5e7e616a65b6e4b9b8bee453ea2447ddd0c7e84f26370dd5087a20640eb",
+      "after_sha256": "de2777dc5500c0a34e8a1527a497b5eb4297226391626f532b97683ae0017b6c",
+      "before_bytes": 5762,
+      "after_bytes": 5777
+    }
+  ],
+  "new_files": [
+    {
+      "path": "REVIEW_RV_CONFOUNDING_CORRECTION.md",
+      "sha256": "9fc2dc466ff084d948baa9f0b0f7af7641fdc401143fc91db1ef4ccf71575b03",
+      "bytes": 4806
+    },
+    {
+      "path": "RV_CONFOUNDING_EVIDENCE.json",
+      "sha256": "d75a812bf57af89b58122b5078ca476adc6a23117a1ad2691ebbd668dc760b26",
+      "bytes": 10690
+    },
+    {
+      "path": "RV_CONFOUNDING_CORRECTION_BEFORE.json",
+      "sha256": "56f1e56b39eb9891751d3a217b2635c9980e92f7528892b5299a7735023a410c",
+      "bytes": 31004
+    }
+  ],
+  "block05_ready_sha256": "4d1f20facc6bc670c4cc7a263d6c217e73d50b90307e6694d55f9f0902b63693",
+  "catalog_ready_sha256": "430fe5455ac8a86a714ade01e8f4503f8b0eaf56fedc6fb197f3aecd671d6daf",
+  "catalog_sha256": "a5bed6bec51dd508252d9535e33bbfa513926ff1ab381325a5637c50496f5f95",
+  "unmodified_7_other_blocks": true,
+  "git_diff_check_passed": true,
+  "SVG_whitespace_normalization_only": true
+}

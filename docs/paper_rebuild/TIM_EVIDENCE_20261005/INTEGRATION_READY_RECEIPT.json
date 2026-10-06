@@ -1,0 +1,48 @@
+{
+  "status": "EVIDENCE_AND_DRAFT_HANDOFF_COMPLETE_NOT_SUBMISSION_READY",
+  "files": [
+    {
+      "path": "docs/paper_rebuild/NEXT_ACTIONS.md",
+      "sha256": "e20a05a083bca5f56e39b3eee9b1d01e18b5130030b0f503f303f41567078e0d"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/README.md",
+      "sha256": "8907a2b0db13bef70d73a24c73d6ffe98e32453461402f92bc4450fe8cc69105"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/DRAWING_HANDOFF.md",
+      "sha256": "f73e8fb1056ebca090c14f0b0c5f5399d1aac12e66e65eb202a4c53862bb32f9"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/AUTHOR_CLARIFICATIONS_AND_SCOPE.md",
+      "sha256": "a4d3bf8734aabc2086e662d41ecbcac1421bbb491ead983e32a2ee9cb99c3e5e"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/sdk_and_metrology/README.md",
+      "sha256": "fc2a77ea643e18aba8e09ed89c326917ce16fad2033c061a79c2e13b41f46ff0"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/manuscript/MANUSCRIPTS_READY_RECEIPT.json",
+      "sha256": "ef0ad22f120a065ed2b8492ca107f9c97d424eace1d93eb260ca0ac0fac55c9e"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/manuscript/R3_CLAIM_EVIDENCE_MAP.csv",
+      "sha256": "3354fc1c174b0313058f681426242eeead65dcd4c60e25c5bbb7b11ebb802372"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/manuscript/R3_REVERSE_OUTLINE.csv",
+      "sha256": "8ea798bd3a2c7a6a8324c20d1a8f3368f76fd9327011e0bc901ba6ad59f24566"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/manuscript/WORD_R3_PAGE_VISUAL_REVIEW.csv",
+      "sha256": "861ea15a58a4d2d02d5fbc1a862a16c8fc77d5e28d908defe590da46c1c474b3"
+    }
+  ],
+  "new_scientific_solver_calls": 0,
+  "new_formal_evaluator_calls": 0,
+  "original_v3_results_changed": false,
+  "new_figures": 0,
+  "word_visual_review_pages": 34,
+  "handoff_local_links_checked": 26,
+  "unknown_physical_uncertainty_imputed": false
+}

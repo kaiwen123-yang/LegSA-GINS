@@ -1,0 +1,82 @@
+# Recommendations only; NOT executed. No numerical tuning.
+# Explicit equivalent SNR switches and hold default; enable residual log for a future separately authorized run.
+# Keep baseline length/sigma, AR ratio, constellations and dynamics unchanged.
+# Baseline constraint is configured; execution frequency cannot be recovered without diagnostics.
+--- BY2/recorded.conf
++++ BY2/SUGGESTED_NOT_EXECUTED.conf
+@@ -2,7 +2,8 @@
+ pos1-frequency     =l1+l2
+ pos1-soltype       =forward
+ pos1-elmask        =15
+-pos1-snrmask       =0
++pos1-snrmask_r    =off
++pos1-snrmask_b    =off
+ pos1-dynamics      =off
+ pos1-tidecorr      =off
+ pos1-ionoopt       =off
+@@ -33,7 +34,7 @@
+ out-timendec       =3
+ out-fieldsep       =,
+ out-solstatic      =all
+-out-outstat        =off
++out-outstat        =residual
+ stats-eratio1      =100
+ stats-eratio2      =100
+ stats-errphase     =0.003
+@@ -52,3 +53,4 @@
+ stats-clkstab      =5e-12
+ ant1-postype       =single
+ ant2-postype       =single
++pos2-elmaskhold    =0
+--- BY2H/recorded.conf
++++ BY2H/SUGGESTED_NOT_EXECUTED.conf
+@@ -2,7 +2,8 @@
+ pos1-frequency     =l1+l2
+ pos1-soltype       =forward
+ pos1-elmask        =15
+-pos1-snrmask       =0
++pos1-snrmask_r    =off
++pos1-snrmask_b    =off
+ pos1-dynamics      =off
+ pos1-tidecorr      =off
+ pos1-ionoopt       =off
+@@ -33,7 +34,7 @@
+ out-timendec       =3
+ out-fieldsep       =,
+ out-solstatic      =all
+-out-outstat        =off
++out-outstat        =residual
+ stats-eratio1      =100
+ stats-eratio2      =100
+ stats-errphase     =0.003
+@@ -52,3 +53,4 @@
+ stats-clkstab      =5e-12
+ ant1-postype       =single
+ ant2-postype       =single
++pos2-elmaskhold    =0
+--- BY2O/recorded.conf
++++ BY2O/SUGGESTED_NOT_EXECUTED.conf
+@@ -2,7 +2,8 @@
+ pos1-frequency     =l1+l2
+ pos1-soltype       =forward
+ pos1-elmask        =15
+-pos1-snrmask       =0
++pos1-snrmask_r    =off
++pos1-snrmask_b    =off
+ pos1-dynamics      =off
+ pos1-tidecorr      =off
+ pos1-ionoopt       =off
+@@ -33,7 +34,7 @@
+ out-timendec       =3
+ out-fieldsep       =,
+ out-solstatic      =all
+-out-outstat        =off
++out-outstat        =residual
+ stats-eratio1      =100
+ stats-eratio2      =100
+ stats-errphase     =0.003
+@@ -52,3 +53,4 @@
+ stats-clkstab      =5e-12
+ ant1-postype       =single
+ ant2-postype       =single
++pos2-elmaskhold    =0

@@ -1,0 +1,8 @@
+{
+  "legsa_native": 0,
+  "legsa_evaluation": 0,
+  "external_native": 0,
+  "leg_dr_integrations": 3,
+  "relative_pose_evaluation": 3,
+  "reference_opens": 3
+}

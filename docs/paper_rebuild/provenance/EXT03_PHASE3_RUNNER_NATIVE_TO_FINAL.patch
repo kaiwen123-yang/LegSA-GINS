@@ -1,0 +1,317 @@
+--- a/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_runner.py
++++ b/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_runner.py
+@@ -1015,0 +1016,40 @@
++def _strict_csv_bool(value: Any, *, field: str) -> bool:
++    if value is True or value == "true": return True
++    if value is False or value == "false": return False
++    raise Phase3RunnerError(f"invalid canonical CSV boolean for {field}: {value!r}")
++
++
++def _optional_finite_csv_float(value: Any, *, field: str) -> float | None:
++    if value in (None,""): return None
++    try: result=float(value)
++    except (TypeError,ValueError) as exc: raise Phase3RunnerError(f"invalid CSV numeric for {field}: {value!r}") from exc
++    if not math.isfinite(result): raise Phase3RunnerError(f"non-finite CSV numeric for {field}: {value!r}")
++    return result
++
++
++def _build_trace_summary_rows(trace_rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
++    def error_stats(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
++        values=[_optional_finite_csv_float(row.get("native_minus_trace_wrapsafe_deg"),field="native_minus_trace_wrapsafe_deg") for row in rows]
++        array = np.asarray([value for value in values if value is not None],dtype=float)
++        if not array.size: return {"count":0}
++        absolute=np.abs(array)
++        return {"count":int(array.size),"bias":float(np.mean(array)),"rmse":float(np.sqrt(np.mean(array**2))),"mae":float(np.mean(absolute)),"median_absolute":float(np.median(absolute)),"p90_absolute":float(np.percentile(absolute,90)),"p95_absolute":float(np.percentile(absolute,95)),"p99_absolute":float(np.percentile(absolute,99)),"max_absolute":float(np.max(absolute))}
++    output: list[dict[str, Any]]=[]
++    state_keys=sorted({(row["system_mode"],row["constraint_mode"],row.get("baseline_sigma_m"),row["solution_state"]) for row in trace_rows})
++    for key in state_keys:
++        subset=[row for row in trace_rows if (row["system_mode"],row["constraint_mode"],row.get("baseline_sigma_m"),row["solution_state"])==key]
++        matched=[row for row in subset if _strict_csv_bool(row.get("fixed_window_matched"),field="fixed_window_matched")]
++        tows=sorted(float(row["gps_tow_seconds"]) for row in matched)
++        output.append({"method_id":METHOD_ID,"case_id":CASE_ID,"system_mode":key[0],"constraint_mode":key[1],"baseline_sigma_m":key[2],"solution_state":key[3],"paper_ratio_fixed":key[3]=="paper_ratio_fixed","ambiguity_correctness_known":False,"row_count":len(subset),"matched_count":len(matched),"coverage":None if key[3]=="invalid" else (len(matched)/len(subset) if subset else None),"window_timestamp_fraction":len(matched)/len(subset) if subset else None,**error_stats(matched),"continuity_count":len(tows),"maximum_gap_seconds":max((b-a for a,b in zip(tows,tows[1:])),default=None)})
++    variant_keys=sorted({(row["system_mode"],row["constraint_mode"],row.get("baseline_sigma_m")) for row in trace_rows})
++    for key in variant_keys:
++        variant=[row for row in trace_rows if (row["system_mode"],row["constraint_mode"],row.get("baseline_sigma_m"))==key]
++        window=[row for row in variant if _strict_csv_bool(row.get("fixed_window_matched"),field="fixed_window_matched")]
++        valid=[row for row in variant if row.get("solution_state")!="invalid"]
++        valid_matched=[row for row in valid if _strict_csv_bool(row.get("fixed_window_matched"),field="fixed_window_matched") and _optional_finite_csv_float(row.get("native_minus_trace_wrapsafe_deg"),field="native_minus_trace_wrapsafe_deg") is not None]
++        fixed=[row for row in valid_matched if _strict_csv_bool(row.get("paper_ratio_fixed"),field="paper_ratio_fixed")]
++        tows=sorted(float(row["gps_tow_seconds"]) for row in valid_matched)
++        output.append({"method_id":METHOD_ID,"case_id":CASE_ID,"system_mode":key[0],"constraint_mode":key[1],"baseline_sigma_m":key[2],"solution_state":"ALL_VALID","paper_ratio_fixed":False,"ambiguity_correctness_known":False,"row_count":len(variant),"valid_count":len(valid),"fixed_window_input_count":len(window),"window_timestamp_fraction":len(window)/len(variant) if variant else None,"valid_matched_count":len(valid_matched),"valid_coverage":len(valid_matched)/len(window) if window else None,"paper_ratio_fixed_matched_count":len(fixed),"paper_ratio_fixed_rate_of_window":len(fixed)/len(window) if window else None,"paper_ratio_fixed_rate_of_valid_matched":len(fixed)/len(valid_matched) if valid_matched else None,**error_stats(valid_matched),"valid_continuity_count":len(tows),"valid_maximum_gap_seconds":max((b-a for a,b in zip(tows,tows[1:])),default=None)})
++    return output
++
++
+@@ -1025,0 +1066,21 @@
++
++
++def _primary_post_recovery_inventory(preflight: PreflightResult, *, expected_file_count: int | None = None) -> dict[str, Any]:
++    root = preflight.paths.native_root / "POST_NATIVE"
++    _validate_post_native_freeze(root)
++    files = sorted(path for path in root.iterdir() if path.is_file())
++    if expected_file_count is not None and len(files) != expected_file_count:
++        raise Phase3RunnerError(f"primary POST_NATIVE file count changed: {len(files)} != {expected_file_count}")
++    report_status = (preflight.paths.final_report, preflight.paths.final_status)
++    if any(not path.is_file() for path in report_status):
++        raise Phase3RunnerError("primary Phase3 report/status missing before recovery")
++    file_inventory = {path.name:{"sha256":_sha256(path),"size_bytes":path.stat().st_size} for path in files}
++    report_inventory = {path.name:{"sha256":_sha256(path),"size_bytes":path.stat().st_size} for path in report_status}
++    return {
++        "primary_post_file_count":len(files),
++        "primary_post_total_bytes":sum(item["size_bytes"] for item in file_inventory.values()),
++        "primary_post_files":file_inventory,
++        "primary_post_aggregate_sha256":hashlib.sha256(_canonical(file_inventory).encode()).hexdigest(),
++        "primary_report_status":report_inventory,
++        "primary_report_status_aggregate_sha256":hashlib.sha256(_canonical(report_inventory).encode()).hexdigest(),
++    }
+@@ -1069,8 +1130,2 @@
+-    """Exact week/TOW diagnostic comparison; never feeds production state."""
+-    stock_by_time = {(int(row["gps_week"]), float(row["gps_tow_seconds"])): row for row in parsed}
+-    native_by_time = {
+-        (int(row["gps_week"]), float(row["gps_tow_seconds"])): row for row in native_rows
+-    }
+-    if len(stock_by_time) != len(parsed) or len(native_by_time) != len(native_rows):
+-        raise Phase3RunnerError("duplicate week/TOW in RTKLIB/native diagnostic comparison")
+-    common = sorted(set(stock_by_time) & set(native_by_time))
++    """Value-blind unique-nearest time association, then diagnostic comparison."""
++    associations = _associate_rtklib_native_times(parsed, native_rows)
+@@ -1082,2 +1137,4 @@
+-    for key in common:
+-        stock, native = stock_by_time[key], native_by_time[key]
++    matched_associations = [row for row in associations if row["association_status"] == "ASSOCIATED_UNIQUE_NEAREST_SAME_WEEK"]
++    for association in matched_associations:
++        stock = parsed[int(association["stock_index"])]
++        native = native_rows[int(association["native_index"])]
+@@ -1098 +1155 @@
+-        matched_ratios.append({"gps_week": key[0], "gps_tow_seconds": key[1], "rtklib_ratio": stock["ratio"], "native_ratio": None if native.get("ratio") in (None, "") else float(native["ratio"])})
++        matched_ratios.append({"gps_week": association["gps_week"], "stock_gps_tow_seconds": association["stock_gps_tow_seconds"], "native_rawx_gps_tow_seconds": association["native_rawx_gps_tow_seconds"], "stock_minus_rawx_seconds": association["stock_minus_rawx_seconds"], "rtklib_ratio": stock["ratio"], "native_ratio": None if native.get("ratio") in (None, "") else float(native["ratio"])})
+@@ -1102 +1159,3 @@
+-        "exact_week_tow_matched_count": len(common),
++        "time_association_policy": "SAME_WEEK_UNIQUE_NEAREST_STRICT_MONOTONIC_ONE_TO_ONE_REJECT_TIE_OR_DISTANCE_GE_HALF_LOCAL_NATIVE_CADENCE_VALUE_BLIND",
++        "time_associated_count": len(matched_associations),
++        "time_associations": associations,
+@@ -1108,3 +1167,3 @@
+-        "rtklib_only_week_tow": [list(key) for key in sorted(set(stock_by_time)-set(native_by_time))],
+-        "native_only_week_tow": [list(key) for key in sorted(set(native_by_time)-set(stock_by_time))],
+-        "ratio_by_exact_week_tow": matched_ratios,
++        "rtklib_unassociated_week_tow": [[row["gps_week"], row["stock_gps_tow_seconds"], row["association_status"]] for row in associations if row["association_status"] != "ASSOCIATED_UNIQUE_NEAREST_SAME_WEEK"],
++        "native_unassociated_week_tow": [[int(row["gps_week"]), float(row["gps_tow_seconds"])] for index,row in enumerate(native_rows) if index not in {int(item["native_index"]) for item in matched_associations}],
++        "ratio_by_time_association": matched_ratios,
+@@ -1114,0 +1174,166 @@
++def _associate_rtklib_native_times(
++    parsed: Sequence[Mapping[str, Any]], native_rows: Sequence[Mapping[str, str]]
++) -> list[dict[str, Any]]:
++    """Associate timestamps without consulting solution values or accuracy."""
++    native_by_week: dict[int, list[tuple[float, int]]] = {}
++    for index, row in enumerate(native_rows):
++        week, tow = int(row["gps_week"]), float(row["gps_tow_seconds"])
++        native_by_week.setdefault(week, []).append((tow,index))
++    for week, values in native_by_week.items():
++        values.sort()
++        if len({tow for tow,_index in values}) != len(values):
++            raise Phase3RunnerError(f"duplicate native RAWX TOW in GPS week {week}")
++    used: set[int] = set()
++    last_native_index_by_week: dict[int,int] = {}
++    output: list[dict[str, Any]] = []
++    previous_stock: tuple[int,float] | None = None
++    for stock_index, stock in enumerate(parsed):
++        week, stock_tow = int(stock["gps_week"]), float(stock["gps_tow_seconds"])
++        if previous_stock is not None and (week,stock_tow) <= previous_stock:
++            raise Phase3RunnerError("RTKLIB stock rows are not strict chronological week/TOW")
++        previous_stock = (week,stock_tow)
++        candidates = native_by_week.get(week, [])
++        base = {"stock_index":stock_index, "gps_week":week, "stock_gps_tow_seconds":stock_tow, "association_policy":"SAME_WEEK_UNIQUE_NEAREST_STRICT_MONOTONIC_ONE_TO_ONE_REJECT_TIE_OR_DISTANCE_GE_HALF_LOCAL_NATIVE_CADENCE_VALUE_BLIND"}
++        if not candidates:
++            output.append({**base,"association_status":"REJECTED_NO_NATIVE_IN_SAME_WEEK","native_index":None,"native_rawx_gps_tow_seconds":None,"stock_minus_rawx_seconds":None,"local_native_cadence_seconds":None})
++            continue
++        distances = [abs(stock_tow-tow) for tow,_index in candidates]
++        minimum = min(distances)
++        nearest_positions = [position for position,value in enumerate(distances) if math.isclose(value,minimum,rel_tol=0.0,abs_tol=1e-12)]
++        if len(nearest_positions) != 1:
++            output.append({**base,"association_status":"REJECTED_MIDPOINT_TIE","native_index":None,"native_rawx_gps_tow_seconds":None,"stock_minus_rawx_seconds":None,"local_native_cadence_seconds":None})
++            continue
++        position = nearest_positions[0]; native_tow,native_index = candidates[position]
++        neighbor_cadences = []
++        if position > 0: neighbor_cadences.append(native_tow-candidates[position-1][0])
++        if position+1 < len(candidates): neighbor_cadences.append(candidates[position+1][0]-native_tow)
++        local_cadence = min(neighbor_cadences) if neighbor_cadences else math.nan
++        if not neighbor_cadences or not math.isfinite(local_cadence) or local_cadence <= 0 or minimum >= 0.5*local_cadence-1e-12:
++            output.append({**base,"association_status":"REJECTED_DISTANCE_GE_HALF_LOCAL_CADENCE","native_index":None,"native_rawx_gps_tow_seconds":native_tow,"stock_minus_rawx_seconds":stock_tow-native_tow,"local_native_cadence_seconds":None if not math.isfinite(local_cadence) else local_cadence})
++            continue
++        if native_index in used:
++            status = "REJECTED_NATIVE_REUSE"
++        elif native_index <= last_native_index_by_week.get(week,-1):
++            status = "REJECTED_NON_MONOTONIC_NATIVE_ASSOCIATION"
++        else:
++            status = "ASSOCIATED_UNIQUE_NEAREST_SAME_WEEK"
++            used.add(native_index); last_native_index_by_week[week]=native_index
++        output.append({**base,"association_status":status,"native_index":native_index if status.startswith("ASSOCIATED") else None,"native_rawx_gps_tow_seconds":native_tow,"stock_minus_rawx_seconds":stock_tow-native_tow,"local_native_cadence_seconds":local_cadence})
++    return output
++
++
++def _post_native_rtklib_time_recovery(
++    preflight: PreflightResult,
++    freeze: Mapping[str, Any],
++    prior_inventory: Mapping[str, Any],
++    final: Path,
++    attempt: Path,
++    report_path: Path,
++    status_path: Path,
++) -> dict[str, Any]:
++    """Narrow recovery using only frozen native and primary-post artifacts."""
++    primary = preflight.paths.native_root/"POST_NATIVE"
++    position_path = primary/"RTKLIB_UNMODIFIED_MOVING_BASE.pos"
++    diagnostic_path = primary/"EXT03_C00_RTKLIB_DIAGNOSTIC.json"
++    if not position_path.is_file() or not diagnostic_path.is_file():
++        raise Phase3RunnerError("primary POST_NATIVE lacks frozen RTKLIB diagnostic inputs")
++    diagnostic = json.loads(diagnostic_path.read_text(encoding="utf-8"))
++    mode = diagnostic.get("system_mode")
++    headings = _read_csv(preflight.paths.native_files["heading_results"])
++    native_primary = [row for row in headings if row["system_mode"]==mode and row["constraint_mode"]=="CONSTRAINED" and row.get("baseline_sigma_m") in {"0.01","0.010"}]
++    parsed = _parse_rtklib_enu_pos(position_path.read_text(encoding="utf-8",errors="strict"))
++    comparison = _rtklib_native_comparison(parsed,native_primary)
++    associated = [row for row in comparison["time_associations"] if row["association_status"]=="ASSOCIATED_UNIQUE_NEAREST_SAME_WEEK"]
++    offsets = [float(row["stock_minus_rawx_seconds"]) for row in associated]
++    associated_invalid = sum(not native_primary[int(row["native_index"])].get("baseline_ned_m") for row in associated)
++    comparison["fixed_float_overlap_key_orientation"]="RTKLIB_STOCK_STATE__NATIVE_EXT03_STATE"
++    comparison["associated_native_invalid_count"]=associated_invalid
++    expected_overlap={"FLOAT_FLOAT":344,"FIXED_FLOAT":159,"FLOAT_FIXED":89,"FIXED_FIXED":16}
++    if len(parsed)!=660 or len(associated)!=660 or comparison["matched_finite_baseline_count"]!=608 or associated_invalid!=52:
++        raise Phase3RunnerError("RTKLIB time recovery BY2 row-count invariant failed")
++    if not offsets or any(not math.isclose(value,0.002,rel_tol=0.0,abs_tol=1e-9) for value in offsets):
++        raise Phase3RunnerError("RTKLIB time recovery did not confirm deterministic +0.002 s offset")
++    if comparison["fixed_float_overlap"]!=expected_overlap:
++        raise Phase3RunnerError("RTKLIB/native fixed-float overlap invariant failed")
++    frozen_trace_path=primary/"EXT03_C00_TRACE_DIAGNOSTICS.csv"
++    frozen_proxy_path=primary/"EXT03_C00_PROXY_DIAGNOSTICS.csv"
++    frozen_mode_path=preflight.paths.native_files["mode_summary"]
++    if not frozen_trace_path.is_file() or not frozen_proxy_path.is_file() or not frozen_mode_path.is_file():
++        raise Phase3RunnerError("frozen mode/proxy/trace applicability evidence is incomplete")
++    trace_summary_rows=_build_trace_summary_rows(_read_csv(frozen_trace_path))
++    primary_key=(mode,"CONSTRAINED","0.01")
++    def primary_row(row: Mapping[str,Any]) -> bool:
++        return (row.get("system_mode"),row.get("constraint_mode"),row.get("baseline_sigma_m"))==primary_key
++    all_valid=next((row for row in trace_summary_rows if primary_row(row) and row.get("solution_state")=="ALL_VALID"),None)
++    fixed_trace=next((row for row in trace_summary_rows if primary_row(row) and row.get("solution_state")=="paper_ratio_fixed"),None)
++    if all_valid is None or fixed_trace is None:
++        raise Phase3RunnerError("recovery trace summary lacks primary ALL_VALID/fixed rows")
++    native_valid=sum(row.get("solution_state")!="invalid" for row in native_primary)
++    native_fixed=sum(_strict_csv_bool(row.get("paper_ratio_fixed"),field="paper_ratio_fixed") for row in native_primary)
++    native_invalid=sum(row.get("solution_state")=="invalid" for row in native_primary)
++    proxy_primary=[row for row in _read_csv(frozen_proxy_path) if primary_row(row)]
++    proxy_fixed=[row for row in proxy_primary if _strict_csv_bool(row.get("paper_ratio_fixed"),field="paper_ratio_fixed")]
++    proxy_inconsistent=sum(_strict_csv_bool(row.get("proxy_inconsistent_ratio_fixed"),field="proxy_inconsistent_ratio_fixed") for row in proxy_fixed)
++    def close(actual: Any, expected: float, tolerance: float) -> bool:
++        return actual is not None and math.isclose(float(actual),expected,rel_tol=0.0,abs_tol=tolerance)
++    gates={
++        "native_row_count":len(native_primary)==1509,"native_valid_count":native_valid==609,"native_fixed_count":native_fixed==105,"native_invalid_count":native_invalid==900,
++        "proxy_fixed_count":len(proxy_fixed)==105,"proxy_inconsistent_fixed_count":proxy_inconsistent==101,
++        "fixed_window_input_count":all_valid.get("fixed_window_input_count")==1370,"valid_matched_count":all_valid.get("valid_matched_count")==541,
++        "valid_coverage":close(all_valid.get("valid_coverage"),0.3948905109,5e-11),"fixed_matched_count":all_valid.get("paper_ratio_fixed_matched_count")==105,
++        "fixed_rate_of_window":close(all_valid.get("paper_ratio_fixed_rate_of_window"),0.0766423358,5e-11),"valid_rmse_deg":close(all_valid.get("rmse"),84.3438,5e-4),"valid_max_gap_seconds":close(all_valid.get("valid_maximum_gap_seconds"),38.4,1e-9),
++        "fixed_trace_count":fixed_trace.get("count")==105,"fixed_trace_rmse_deg":close(fixed_trace.get("rmse"),40.6308,5e-4),"fixed_trace_max_abs_deg":close(fixed_trace.get("max_absolute"),158.788,5e-4),"fixed_trace_max_gap_seconds":close(fixed_trace.get("maximum_gap_seconds"),129.8,1e-9),
++    }
++    if not all(gates.values()):
++        raise Phase3RunnerError(f"frozen PASS_POOR applicability evidence gate failed: {[key for key,value in gates.items() if not value]}")
++    poor_evidence={"terminal_status":PASS_POOR,"decision_rule":"FROZEN_PROXY_INCONSISTENCY_AT_PREREGISTERED_30_DEG_AND_FROZEN_TRACE_ERROR_ESTABLISH_POOR_APPLICABILITY_NO_NATIVE_SELECTION","gates":gates,"native":{"row_count":len(native_primary),"valid_count":native_valid,"paper_ratio_fixed_count":native_fixed,"invalid_count":native_invalid},"proxy":{"paper_ratio_fixed_count":len(proxy_fixed),"proxy_inconsistent_ratio_fixed_count":proxy_inconsistent},"trace":{"ALL_VALID":all_valid,"PAPER_RATIO_FIXED":fixed_trace}}
++    attempt.mkdir()
++    source_links={
++        "native_freeze_sha256":_sha256(preflight.paths.native_files["native_freeze"]),
++        "primary_post_freeze_sha256":_sha256(primary/"EXT03_C00_POST_NATIVE_FREEZE.json"),
++        "primary_rtklib_position_sha256":_sha256(position_path),
++        "primary_rtklib_diagnostic_sha256":_sha256(diagnostic_path),
++        "native_heading_sha256":_sha256(preflight.paths.native_files["heading_results"]),
++        "native_mode_summary_sha256":_sha256(frozen_mode_path),
++        "primary_proxy_diagnostics_sha256":_sha256(frozen_proxy_path),
++        "primary_trace_diagnostics_sha256":_sha256(frozen_trace_path),
++    }
++    payload={"schema_version":"horizontal_literature.phase3.rtklib_time_association_recovery.v1","terminal_status":PASS_POOR,"supersedes_for_rtklib_time_association_only":True,"association_uses_solution_values_or_accuracy":False,"source_links":source_links,"prior_primary_post_and_report_status_inventory":prior_inventory,"comparison":comparison,"frozen_poor_applicability_evidence":poor_evidence}
++    phase2._atomic_write_json(attempt/"EXT03_C00_RTKLIB_TIME_ASSOCIATION_R1.json",payload)
++    _write_csv(attempt/"EXT03_C00_TRACE_SUMMARY_R1.csv",trace_summary_rows)
++    summary={"schema_version":"horizontal_literature.phase3.post_native.v1","terminal_status":PASS_POOR,"scientific_terminal_basis":"FROZEN_NATIVE_AND_PRIMARY_POST_APPLICABILITY_EVIDENCE_NO_NATIVE_SELECTION","supersedes_for_rtklib_time_association_only":True,"native_files_mutated":False,"primary_post_files_mutated":False,"source_links":source_links,"prior_primary_post_and_report_status_inventory":prior_inventory,"RTKLIB_time_association":comparison,"frozen_poor_applicability_evidence":poor_evidence,"recovery_trace_summary":"EXT03_C00_TRACE_SUMMARY_R1.csv"}
++    phase2._atomic_write_json(attempt/"EXT03_C00_POST_NATIVE_SUMMARY.json",summary)
++    inventory={path.name:_sha256(path) for path in attempt.iterdir() if path.is_file()}
++    phase2._atomic_write_json(attempt/"EXT03_C00_POST_NATIVE_FREEZE.json",{"schema_version":"horizontal_literature.phase3.post_native_freeze.v1","files":inventory,"native_freeze_sha256":source_links["native_freeze_sha256"],"supersedes_for_rtklib_time_association_only":True,"prior_primary_post_and_report_status_inventory":prior_inventory})
++    _validate_post_native_freeze(attempt)
++    phase2._atomic_install_noreplace(attempt,final,label="Phase-3 RTKLIB time-association recovery",kind="directory")
++    _validate_post_native_freeze(final)
++    report_text=f"""# Phase 3 EXT03 C00 RTKLIB time-association recovery R1
++
++Terminal status: `{PASS_POOR}`
++
++This recovery supersedes the frozen primary post-native output only for the
++RTKLIB-to-native timestamp association. It used the frozen RTKLIB `.pos` and
++native heading table, selected no native mode or row by solution value, and
++left native plus primary `POST_NATIVE` evidence byte-identical.
++
++Associated RTKLIB rows: `{len(associated)}`; finite native comparisons: `{comparison['matched_finite_baseline_count']}`;
++associated native-invalid rows: `{associated_invalid}`. Overlap keys are
++`RTKLIB_STOCK_STATE__NATIVE_EXT03_STATE`.
++
++The frozen primary mode has `609/1509` valid rows, `105` ratio-fixed rows,
++and `900` invalid rows. The frozen proxy marks `101/105` ratio-fixed rows
++inconsistent at the preregistered 30-degree threshold. Frozen trace ALL_VALID
++coverage is `541/1370`; its RMSE is `84.3438 deg`. The ratio-fixed trace RMSE
++is `40.6308 deg`. These hash-linked facts establish `{PASS_POOR}` without
++changing or selecting any native output.
++"""
++    phase2._atomic_write_bytes(report_path,report_text.encode())
++    phase2._atomic_write_json(status_path,{"schema_version":"horizontal_literature.phase3.status.v1","terminal_status":PASS_POOR,"method_id":METHOD_ID,"case_id":CASE_ID,"native_freeze_sha256":source_links["native_freeze_sha256"],"post_native_root":str(final),"independent_review":"PENDING","git_commit_created":False,"supersedes_for_rtklib_time_association_only":True,"prior_primary_post_and_report_status_inventory":prior_inventory})
++    after=_primary_post_recovery_inventory(preflight,expected_file_count=12)
++    if after!=prior_inventory:
++        raise Phase3RunnerError("primary POST_NATIVE or Phase3 report/status changed during recovery")
++    validate_native_freeze(preflight.paths.native_root)
++    return {"terminal_status":PASS_POOR,"post_native_root":str(final),"post_native_summary":summary}
++
++
+@@ -1116,0 +1342,5 @@
++    recovery_prior_inventory: dict[str, Any] | None = None
++    if recovery_id is not None:
++        if recovery_id != "RTKLIB_TIME_ASSOCIATION_R1":
++            raise Phase3RunnerError("unsupported post-native recovery identity")
++        recovery_prior_inventory = _primary_post_recovery_inventory(preflight, expected_file_count=12)
+@@ -1120,0 +1351,4 @@
++    report_path = preflight.paths.final_report if recovery_id is None else preflight.paths.report_root / f"PHASE3_EXT03_C00_REPORT_{recovery_id}.md"
++    status_path = preflight.paths.final_status if recovery_id is None else preflight.paths.report_root / f"PHASE3_STATUS_{recovery_id}.json"
++    if recovery_id is not None and (report_path.exists() or status_path.exists()):
++        raise Phase3RunnerError("post-native recovery report/status collision")
+@@ -1125,0 +1360,3 @@
++    if recovery_id == "RTKLIB_TIME_ASSOCIATION_R1":
++        assert recovery_prior_inventory is not None
++        return _post_native_rtklib_time_recovery(preflight,freeze,recovery_prior_inventory,final,attempt,report_path,status_path)
+@@ -1160 +1397,4 @@
+-    native_attempt = preflight.paths.native_root.parent / f".attempt_EXT03_{preflight.source_fingerprint[:12]}"
++    frozen_source_fingerprint = str(freeze.get("source_fingerprint", ""))
++    if len(frozen_source_fingerprint) < 12:
++        raise Phase3RunnerError("native freeze lacks source fingerprint for post-native cache recovery")
++    native_attempt = preflight.paths.native_root.parent / f".attempt_EXT03_{frozen_source_fingerprint[:12]}"
+@@ -1188,5 +1428 @@
+-    for key in group_keys:
+-        subset = [row for row in trace_rows if (row["system_mode"], row["constraint_mode"], row.get("baseline_sigma_m"), row["solution_state"]) == key]
+-        matched = [row for row in subset if row.get("fixed_window_matched")]
+-        tows = sorted(float(row["gps_tow_seconds"]) for row in matched)
+-        trace_summary_rows.append({"method_id": METHOD_ID, "case_id": CASE_ID, "system_mode": key[0], "constraint_mode": key[1], "baseline_sigma_m": key[2], "solution_state": key[3], "paper_ratio_fixed": key[3] == "paper_ratio_fixed", "ambiguity_correctness_known": False, "row_count": len(subset), "matched_count": len(matched), "coverage": len(matched)/len(subset) if subset else None, **stats(row.get("native_minus_trace_wrapsafe_deg") for row in matched), "continuity_count": len(tows), "maximum_gap_seconds": max((b-a for a,b in zip(tows,tows[1:])), default=None)})
++    trace_summary_rows = _build_trace_summary_rows(trace_rows)
+@@ -1306 +1542 @@
+-        rtklib_diag = {"role": "POST_NATIVE_DIAGNOSTIC_ONLY", "output_solver_input": False, "system_mode": diagnostic_mode, "status": "COMPLETE" if completed.returncode == 0 and output_path.is_file() else "FAILED", "returncode": completed.returncode, "command": command, "rnx2rtkp_sha256_verified": expected_rnx2rtkp_hash, "config_sha256": _sha256(config_path), "output_sha256": _sha256(output_path) if output_path.is_file() else None, "stderr_tail": completed.stderr[-2000:], "parsed_solution_count": len(parsed), "fixed_quality_count": sum(value == 1 for value in qualities), "float_quality_count": sum(value == 2 for value in qualities), "baseline_norm_mean_m": float(np.mean([np.linalg.norm(value) for value in baselines])) if baselines else None, "native_primary_row_count": len(native_primary), "native_primary_ratio_fixed_count": sum(row.get("paper_ratio_fixed") == "true" for row in native_primary), "availability_count_difference_rtklib_minus_native_valid": len(parsed)-sum(row.get("solution_state") != "invalid" for row in native_primary), "exact_week_tow_comparison": exact_comparison, "failure_period_comparison": {"rtklib_only": exact_comparison["rtklib_only_week_tow"], "native_only": exact_comparison["native_only_week_tow"]}}
++        rtklib_diag = {"role": "POST_NATIVE_DIAGNOSTIC_ONLY", "output_solver_input": False, "system_mode": diagnostic_mode, "status": "COMPLETE" if completed.returncode == 0 and output_path.is_file() else "FAILED", "returncode": completed.returncode, "command": command, "rnx2rtkp_sha256_verified": expected_rnx2rtkp_hash, "config_sha256": _sha256(config_path), "output_sha256": _sha256(output_path) if output_path.is_file() else None, "stderr_tail": completed.stderr[-2000:], "parsed_solution_count": len(parsed), "fixed_quality_count": sum(value == 1 for value in qualities), "float_quality_count": sum(value == 2 for value in qualities), "baseline_norm_mean_m": float(np.mean([np.linalg.norm(value) for value in baselines])) if baselines else None, "native_primary_row_count": len(native_primary), "native_primary_ratio_fixed_count": sum(row.get("paper_ratio_fixed") == "true" for row in native_primary), "availability_count_difference_rtklib_minus_native_valid": len(parsed)-sum(row.get("solution_state") != "invalid" for row in native_primary), "time_associated_comparison": exact_comparison, "failure_period_comparison": {"rtklib_unassociated": exact_comparison["rtklib_unassociated_week_tow"], "native_unassociated": exact_comparison["native_unassociated_week_tow"]}}
+@@ -1318 +1554,6 @@
+-    summary = {"schema_version": "horizontal_literature.phase3.post_native.v1", "terminal_status": terminal_status, "native_freeze_sha256": _sha256(preflight.paths.native_files["native_freeze"]), "native_hashes_revalidated": True, "trace_sha256": trace_hash, "trace_open_count": 1, "trace_leap_second_evidence": leap_evidence, "HPPOSECEF_receiver_stream_decode_count": 2, "proxy_association": "AUDITED_UNIQUE_NEAREST_COMMON_GRID_CONFIRMED_PLUS_2MS", "proxy_inconsistent_threshold_deg": 30.0, "proxy_inconsistent_ratio_fixed_count": sum(bool(row.get("proxy_inconsistent_ratio_fixed")) for row in proxy_rows), "primary_mode": primary_mode, "primary_ratio_fixed_count": len(primary_fixed), "primary_proxy_inconsistent_ratio_fixed_count": primary_inconsistent, "native_files_mutated": False, "RTKLIB_diagnostic": rtklib_diag, "RTKLIB_diagnostic_output_solver_input": False, "phase_bias_calibration": False}
++    if recovery_id == "RTKLIB_TIME_ASSOCIATION_R1":
++        # This recovery repairs only a deterministic diagnostic timestamp
++        # association.  The scientific applicability verdict remains the
++        # evidence-backed poor result; no native row or mode is reselected.
++        terminal_status = PASS_POOR
++    summary = {"schema_version": "horizontal_literature.phase3.post_native.v1", "terminal_status": terminal_status, "scientific_terminal_basis": "FROZEN_NATIVE_AND_PRIMARY_POST_APPLICABILITY_EVIDENCE_NO_NATIVE_SELECTION" if recovery_id else "CURRENT_POST_NATIVE_EVIDENCE", "native_freeze_sha256": _sha256(preflight.paths.native_files["native_freeze"]), "native_hashes_revalidated": True, "trace_sha256": trace_hash, "trace_open_count": 1, "trace_leap_second_evidence": leap_evidence, "HPPOSECEF_receiver_stream_decode_count": 2, "proxy_association": "AUDITED_UNIQUE_NEAREST_COMMON_GRID_CONFIRMED_PLUS_2MS", "proxy_inconsistent_threshold_deg": 30.0, "proxy_inconsistent_ratio_fixed_count": sum(bool(row.get("proxy_inconsistent_ratio_fixed")) for row in proxy_rows), "primary_mode": primary_mode, "primary_ratio_fixed_count": len(primary_fixed), "primary_proxy_inconsistent_ratio_fixed_count": primary_inconsistent, "native_files_mutated": False, "RTKLIB_diagnostic": rtklib_diag, "RTKLIB_diagnostic_output_solver_input": False, "phase_bias_calibration": False, "supersedes_for_rtklib_time_association_only": recovery_id == "RTKLIB_TIME_ASSOCIATION_R1", "prior_primary_post_and_report_status_inventory": recovery_prior_inventory}
+@@ -1321 +1562 @@
+-    phase2._atomic_write_json(attempt / "EXT03_C00_POST_NATIVE_FREEZE.json", {"schema_version": "horizontal_literature.phase3.post_native_freeze.v1", "files": inventory, "native_freeze_sha256": summary["native_freeze_sha256"]})
++    phase2._atomic_write_json(attempt / "EXT03_C00_POST_NATIVE_FREEZE.json", {"schema_version": "horizontal_literature.phase3.post_native_freeze.v1", "files": inventory, "native_freeze_sha256": summary["native_freeze_sha256"], "supersedes_for_rtklib_time_association_only": recovery_id == "RTKLIB_TIME_ASSOCIATION_R1", "prior_primary_post_and_report_status_inventory": recovery_prior_inventory})
+@@ -1378,2 +1618,0 @@
+-    report_path = preflight.paths.final_report if recovery_id is None else preflight.paths.report_root / f"PHASE3_EXT03_C00_REPORT_{recovery_id}.md"
+-    status_path = preflight.paths.final_status if recovery_id is None else preflight.paths.report_root / f"PHASE3_STATUS_{recovery_id}.json"
+@@ -1381 +1620,5 @@
+-    phase2._atomic_write_json(status_path, {"schema_version": "horizontal_literature.phase3.status.v1", "terminal_status": terminal_status, "method_id": METHOD_ID, "case_id": CASE_ID, "native_freeze_sha256": summary["native_freeze_sha256"], "post_native_root": str(final), "independent_review": "PENDING", "git_commit_created": False})
++    phase2._atomic_write_json(status_path, {"schema_version": "horizontal_literature.phase3.status.v1", "terminal_status": terminal_status, "method_id": METHOD_ID, "case_id": CASE_ID, "native_freeze_sha256": summary["native_freeze_sha256"], "post_native_root": str(final), "independent_review": "PENDING", "git_commit_created": False, "supersedes_for_rtklib_time_association_only": recovery_id == "RTKLIB_TIME_ASSOCIATION_R1", "prior_primary_post_and_report_status_inventory": recovery_prior_inventory})
++    if recovery_prior_inventory is not None:
++        recovery_after = _primary_post_recovery_inventory(preflight, expected_file_count=12)
++        if recovery_after != recovery_prior_inventory:
++            raise Phase3RunnerError("primary POST_NATIVE or Phase3 report/status changed during recovery")

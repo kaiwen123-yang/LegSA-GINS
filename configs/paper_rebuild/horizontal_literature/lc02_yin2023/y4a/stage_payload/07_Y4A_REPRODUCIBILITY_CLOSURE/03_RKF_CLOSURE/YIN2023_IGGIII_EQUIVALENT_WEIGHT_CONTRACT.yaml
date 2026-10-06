@@ -1,0 +1,92 @@
+schema_version: lc02.y4a.iggiii.v2
+branch_id: YIN2023_RKF
+thresholds:
+  k0: 1.15
+  k1: 4.45
+scalar_weight:
+  paper_component_symbol: "ω (U+03C9 GREEK SMALL LETTER OMEGA)"
+  ascii_alias: omega_i
+  explicitly_distinct_from_equation_11_latin_w: true
+  explicitly_distinct_from_fusion_varpi_U_03D6: true
+  paper_printed_low: "1 for |tilde_V_i|<=k0"
+  paper_printed_middle: "(k0/|tilde_V_i|)*((k1-|tilde_V_i|)/(k1-k0))^3 for k0<|tilde_V_i|<=k1"
+  paper_printed_high: "0 for |tilde_V_i|>k1"
+  dimensionless: true
+  lower_boundary_continuous: true
+  upper_boundary_zero: true
+  effective_zero_domain: "|tilde_V_i|>=k1"
+  effective_zero_domain_provenance: PAPER_DERIVED_FROM_PRINTED_MIDDLE_BOUNDARY
+equation_11_paper_direct:
+  overloaded_symbol: "bar_A(tilde_V_i)"
+  lhs_and_low_middle_rhs_use_same_symbol: true
+  low_branch: "bar_A(tilde_V_i) = bar_A(tilde_V_i)"
+  middle_multiplier_symbol: "w(tilde_V_i) (LATIN SMALL LETTER W)"
+  middle_branch: "bar_A(tilde_V_i) = bar_A(tilde_V_i) * w(tilde_V_i)"
+  distinct_from_equation_10_omega_glyph: true
+  high_branch: "bar_A(tilde_V_i) = 0"
+  prose_identity: "bar_A(tilde_V_i) = R_i^-1"
+  self_referential: true
+  unique_base_equivalent_split: false
+conventional_base_equivalent_split_candidate:
+  equivalent_information: "bar_A_equivalent_i = A_base_i * w(tilde_V_i)"
+  weighting_value_relation: "author response says Eq.10 weighting function enters Eq.11; Eq.10 omega and Eq.11 Latin w remain distinct glyphs"
+  base_information: "A_base_i = R_i^-1"
+  units: INVERSE_MEASUREMENT_VARIANCE
+  provenance: PAPER_DERIVED_POLICY_BASELINE
+  selected: false
+author_response:
+  source: OFFICIAL_PEER_REVIEW_AUTHOR_RESPONSE_JINA_TRANSPORT_CAPTURE
+  transport_sha256: 46c6bd33f49aab98ea0b9333f1ddce3298991ae55422ed440806a7d2dca313ce
+  A_of_tilde_V_i_called_equivalent_weight_function: true
+  equation_10_weight_enters_equation_11: true
+  glyphs_equated_by_source: false
+  semantic_relation: "Eq.10 weighting function enters Eq.11 Latin w multiplier; the source does not collapse the distinct printed glyphs"
+  inverse_equivalent_weight_called_observation_covariance: true
+  distinct_base_and_equivalent_symbols_supplied: false
+  general_matrix_assembly_supplied: false
+  zero_weight_operation_supplied: false
+general_matrix_semantics:
+  measurement_dimension: 3
+  R_may_be_correlated: true
+  matrix_assembly_printed: false
+  off_diagonal_weighting_printed: false
+  symmetry_guarantee_printed: false
+  PSD_guarantee_printed: false
+  component_frame_or_order_printed: false
+  zero_weight_inverse_defined: false
+  scalar_equivalent_information_mapping_unique: false
+unselected_completions:
+  diagonal_only:
+    expression: "Abar=diag(w(tilde_V_i)/R_ii)"
+    provenance: PAPER_DERIVED_POLICY_BASELINE
+    limitation: "Discards correlations"
+  left_precision:
+    expression: "Abar=W R^-1"
+    provenance: PAPER_DERIVED_POLICY_BASELINE
+    limitation: "Generally nonsymmetric for correlated R"
+  symmetric_precision_sandwich:
+    expression: "Abar=W^(1/2) R^-1 W^(1/2)"
+    provenance: PAPER_DERIVED_POLICY_BASELINE
+    limitation: "Symmetric PSD for positive weights but not printed by Yin"
+  niu_covariance_inflation:
+    expression: "Rbar_ij=sqrt(eta_ii eta_jj) R_ij"
+    provenance: CITED_SOURCE_CANDIDATE
+    limitation: "Niu uses exponent-two inflation and is not uniquely adopted by Yin"
+  yang_song_xu_2002_correlated_bifactor:
+    expression: SOURCE_SPECIFIC_CORRELATED_EQUIVALENT_WEIGHT_CHAIN
+    provenance: CITED_SOURCE_CANDIDATE
+    limitation: "Foundational correlated-observation construction but no explicit Yin adoption"
+  yang_cheng_shum_tapley_1999:
+    expression: "v_i/sigma_i with MAD robust scale and exponent-two middle factor"
+    provenance: CITED_SOURCE_CANDIDATE
+    limitation: "Direct Knight IGGIII source differs from Yin's exponent-three function and supplies no unique Yin Kalman zero operation"
+  yang_he_xu_2001:
+    expression: "V_i/r_i with dependent max-based mapping"
+    provenance: CITED_SOURCE_CANDIDATE
+    limitation: "Distinct adaptive-robust construction not explicitly selected by Yin"
+closure:
+  scalar_IGGIII_unique: true
+  equation_11_scalar_equivalent_information_mapping_unique: false
+  IGGIII_matrix_construction_unique: false
+  decision: CURRENTLY_UNKNOWN
+  faithful_algorithm_use_authorized: false

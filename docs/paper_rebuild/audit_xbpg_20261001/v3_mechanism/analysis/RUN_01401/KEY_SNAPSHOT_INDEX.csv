@@ -1,0 +1,17 @@
+source_path,source_line_1based,source_byte_offset,source_line_bytes,run_id,event_seq,source,n12_classification,n16_classification
+<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl,270,410352,8699,RUN_01401,270,receiver_position,NO_MATERIAL_NIS_OR_R_CHANGE,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl,277,445632,9805,RUN_01401,277,dual_antenna_yaw,NIS_CHANGED_NO_FINAL_R_CHANGE,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl,284,482754,10132,RUN_01401,284,receiver_velocity,NIS_CHANGED_NO_FINAL_R_CHANGE,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl,292,522899,10262,RUN_01401,292,raw_doppler_velocity,SHADOW_FINAL_R_CHANGED,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl,299,560907,10183,RUN_01401,299,go2_horizontal_velocity,OIM_CHANGE_MASKED_BY_LSIM,SHADOW_FINAL_R_CHANGED
+<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl,306,598072,10126,RUN_01401,306,go2_attitude_roll_pitch,NIS_CHANGED_NO_FINAL_R_CHANGE,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl,580,1110517,10371,RUN_01401,580,receiver_velocity,SHADOW_FINAL_R_CHANGED,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl,595,1189535,10252,RUN_01401,595,go2_horizontal_velocity,SHADOW_FINAL_R_CHANGED,SHADOW_FINAL_R_CHANGED
+<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl,602,1227081,10259,RUN_01401,602,go2_attitude_roll_pitch,OIM_CHANGE_MASKED_BY_LSIM,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl,892,1767184,10392,RUN_01401,892,receiver_velocity,RAW_OIM_CHANGE_MASKED_BY_CAP,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl,900,1807994,10518,RUN_01401,900,raw_doppler_velocity,RAW_OIM_CHANGE_MASKED_BY_CAP,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl,907,1846536,10356,RUN_01401,907,go2_horizontal_velocity,RAW_OIM_CHANGE_MASKED_BY_CAP,LSIM_CHANGE_MASKED_BY_OIM_OR_CAP
+<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl,1478,3090859,10207,RUN_01401,1478,go2_attitude_roll_pitch,SHADOW_FINAL_R_CHANGED,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl,2679,5522981,9902,RUN_01401,2679,dual_antenna_yaw,SHADOW_FINAL_R_CHANGED,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl,2701,5639606,10293,RUN_01401,2701,go2_horizontal_velocity,SHADOW_FINAL_R_CHANGED,LSIM_CHANGE_MASKED_BY_OIM_OR_CAP
+<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl,270906,576032210,10432,RUN_01401,270906,raw_doppler_velocity,OIM_CHANGE_MASKED_BY_LSIM,NOT_ELIGIBLE

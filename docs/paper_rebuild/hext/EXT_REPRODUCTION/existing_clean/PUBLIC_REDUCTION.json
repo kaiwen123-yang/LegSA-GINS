@@ -1,0 +1,18 @@
+{
+  "public_index_records": 1151,
+  "public_source_copies": 101,
+  "local_full_work_index": "<EXT_REPRO_ROOT>/collection_detail/existing_clean/CLEAN4_CLEAN7_INDEX.csv",
+  "local_full_copies": "<EXT_REPRO_ROOT>/collection_detail/existing_clean/horizontal_sources",
+  "original_sources_unchanged": true,
+  "reason": "retain complete run/evaluation/source entries without repeated per-cell control manifests or large duplicate epoch tables",
+  "full_work_index_records": 4443,
+  "copy_normalization": "public derived source copies use LF line endings; Markdown trailing spaces removed; original and local pre-normalization bytes retained",
+  "normalized_copies": [
+    "docs/paper_rebuild/hext/EXT_REPRODUCTION/existing_clean/archive_sources/c541_v21_handoff__sequence_error_series_subset__SUBSET_MANIFEST.csv",
+    "docs/paper_rebuild/hext/EXT_REPRODUCTION/existing_clean/archive_sources/hext_three_sequences_handoff__STAGE__99_HARD_STOP__EVALUATION_LEDGER.csv",
+    "docs/paper_rebuild/hext/EXT_REPRODUCTION/existing_clean/archive_sources/hext_three_sequences_handoff_v2__STAGE__08_AGGREGATE__HORIZONTAL_TABLE_V2_THREE_SEQUENCES.csv",
+    "docs/paper_rebuild/hext/EXT_REPRODUCTION/existing_clean/archive_sources/hext_three_sequences_handoff_v2__STAGE__08_AGGREGATE__HORIZONTAL_TABLE_V3_THREE_SEQUENCES.csv",
+    "docs/paper_rebuild/hext/EXT_REPRODUCTION/existing_clean/archive_sources/hext_three_sequences_handoff_v2__STAGE__99_HARD_STOP__EVALUATION_LEDGER.csv",
+    "docs/paper_rebuild/hext/EXT_REPRODUCTION/existing_clean/horizontal_sources/C4_PLOT_ARCHIVE_CATALOG.csv"
+  ]
+}

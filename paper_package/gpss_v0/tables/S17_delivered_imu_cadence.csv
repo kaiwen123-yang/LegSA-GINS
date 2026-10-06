@@ -1,0 +1,4 @@
+Sequence,Formal output records,Median output interval,Mean records per second,Intervals over 0.1 s
+BY2,56643,0.004013 s,206.726,0
+BY2H,58581,0.004006 s,217.000,1
+BY2O,76549,0.004017 s,203.047,6

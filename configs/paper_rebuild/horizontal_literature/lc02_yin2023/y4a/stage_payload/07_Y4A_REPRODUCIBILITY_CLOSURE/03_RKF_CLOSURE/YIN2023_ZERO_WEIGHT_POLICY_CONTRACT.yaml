@@ -1,0 +1,62 @@
+schema_version: lc02.y4a.zero_weight.v2
+branch_id: YIN2023_RKF
+paper_path:
+  printed_middle_condition: "1.15<|tilde_V_i|<=4.45"
+  printed_high_condition: "|tilde_V_i|>4.45"
+  middle_value_at_absolute_tilde_V_i_equal_4_45: 0.0
+  effective_zero_condition: "|tilde_V_i|>=4.45"
+  effective_zero_condition_provenance: PAPER_DERIVED_FROM_PRINTED_MIDDLE_BOUNDARY
+  paper_component_weight_symbol: "ω (U+03C9 omega)"
+  scalar_weight: 0.0
+  equation_11_middle_multiplier_symbol: "w(tilde_V_i) (LATIN SMALL LETTER W)"
+  equation_10_to_equation_11_semantic_relation: AUTHOR_RESPONSE_BACKED_GLYPHS_DISTINCT
+  equation_11_high_branch: "bar_A(tilde_V_i)=0"
+  equation_11_low_middle_self_reference: true
+  next_operation: "bar_A_k^-1 inside RKF gain"
+  directly_executable: false
+  reason: ZERO_INFORMATION_IS_SINGULAR_BEFORE_REQUIRED_INVERSE
+equation_11_mapping_boundary:
+  conventional_base_equivalent_split: "bar_A_equivalent_i=A_base_i*w(tilde_V_i); A_base_i=R_i^-1"
+  provenance: PAPER_DERIVED_POLICY_BASELINE
+  selected: false
+  scalar_mapping_unique: false
+author_response:
+  equation_10_weighting_function_enters_equation_11_latin_w: true
+  glyphs_equated: false
+  inverse_equivalent_weight_called_observation_covariance: true
+  explicit_zero_operation_supplied: false
+required_but_missing_operations:
+  rejected_component_removal: null
+  full_R_row_column_removal: null
+  innovation_and_H_row_removal: null
+  all_components_rejected_behavior: null
+  dimension_update: null
+  covariance_update_after_rejection: null
+  near_zero_threshold_or_floor: null
+cited_candidate_niu_tcrtkins:
+  operation: "Delete rejected innovation/H rows and matching R rows/columns"
+  all_relevant_structures_reduced_together: true
+  source_role: OFFICIAL_CODE_FOR_CITED_REF39_NOT_YIN
+  uniquely_closes_yin: false
+cited_candidate_yang_1999:
+  operation: "Zero static robust weight for the observation in its robust-estimation setting"
+  source_role: DIRECT_KNIGHT_IGGIII_SOURCE_NOT_YIN_KALMAN_POLICY
+  uniquely_closes_yin: false
+cited_candidate_yang_song_xu_2002:
+  operation: "Zero bifactor eliminates the static observation in its correlated robust-estimation construction"
+  source_role: EXECUTABLE_CITED_CANDIDATE_NOT_EXPLICITLY_ADOPTED_BY_YIN
+  uniquely_closes_yin: false
+limit_results:
+  scalar_diagonal_positive_limit_equals_omission: true
+  multidimensional_diagonal_positive_limit_equals_row_omission: true
+  correlated_case_path_independent: false
+  direct_zero_inverse_valid: false
+permitted_nonfaithful_policy:
+  name: EXPLICIT_ROW_OMISSION
+  provenance: PAPER_DERIVED_POLICY_BASELINE_WITH_CITED_CANDIDATE_SUPPORT
+  faithful_algorithm_claim_allowed: false
+closure:
+  equation_11_scalar_mapping_unique: false
+  zero_weight_policy_unique: false
+  decision: CURRENTLY_UNKNOWN
+  implementation_authorized: false

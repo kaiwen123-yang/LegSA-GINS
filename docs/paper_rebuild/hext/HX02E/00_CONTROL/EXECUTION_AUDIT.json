@@ -1,0 +1,633 @@
+{
+  "status": "PASS",
+  "controllers": [
+    {
+      "path": "00_CONTROL/BOOTSTRAP_ATTEMPT_1/CONTROLLER_OPENAT.strace",
+      "passed": true,
+      "reference_opens": 0,
+      "raw_go2_opens": 0,
+      "write_scope": {
+        "pass": true,
+        "write_open_count": 0,
+        "write_outside_run_count": 0,
+        "outside_run_write_open_count": 0,
+        "outside_run_write_open_records": [],
+        "write_open_records": [],
+        "allowed_device_write_count": 0,
+        "allowed_device_write_records": [],
+        "allowed_anonymous_pipe_write_count": 0,
+        "allowed_anonymous_pipe_write_records": [],
+        "raw_write_open_count": 0,
+        "clean_root_outside_run_write_count": 0,
+        "write_scope_exceptions": [
+          "/dev/null",
+          "/dev/pts/*",
+          "kernel-identified anonymous pipe"
+        ]
+      },
+      "strace_sha256": "80f66c789ed3c42563045e29b96b8fed19172c4fdc70e2d019e622416167c72a"
+    },
+    {
+      "path": "00_CONTROL/CONTROLLER_OPENAT.strace",
+      "passed": true,
+      "reference_opens": 0,
+      "raw_go2_opens": 3,
+      "write_scope": {
+        "pass": true,
+        "write_open_count": 74,
+        "write_outside_run_count": 0,
+        "outside_run_write_open_count": 0,
+        "outside_run_write_open_records": [],
+        "write_open_records": [
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/native_stdout.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/native_stdout.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/native_stderr.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/native_stderr.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/NATIVE_AUDIT.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/NATIVE_AUDIT.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/SPEC.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/SPEC.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/evaluator_stdout.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/evaluator_stdout.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/evaluator_stderr.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/evaluator_stderr.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/EVALUATOR_STRACE_AUDIT.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/EVALUATOR_STRACE_AUDIT.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/RESULT.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/RESULT.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/native_stdout.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/native_stdout.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/native_stderr.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/native_stderr.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/NATIVE_AUDIT.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/NATIVE_AUDIT.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/SPEC.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/SPEC.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/evaluator_stdout.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/evaluator_stdout.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/evaluator_stderr.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/evaluator_stderr.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/EVALUATOR_STRACE_AUDIT.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/EVALUATOR_STRACE_AUDIT.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/RESULT.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/RESULT.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/native_stdout.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/native_stdout.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/native_stderr.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/native_stderr.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/NATIVE_AUDIT.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/NATIVE_AUDIT.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/SPEC.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/SPEC.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/evaluator_stdout.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/evaluator_stdout.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/evaluator_stderr.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/evaluator_stderr.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/EVALUATOR_STRACE_AUDIT.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/EVALUATOR_STRACE_AUDIT.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/RESULT.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/RESULT.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/native_stdout.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/native_stdout.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/native_stderr.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/native_stderr.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/NATIVE_AUDIT.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/NATIVE_AUDIT.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/SPEC.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/SPEC.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/evaluator_stdout.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/evaluator_stdout.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/evaluator_stderr.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/evaluator_stderr.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/EVALUATOR_STRACE_AUDIT.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/EVALUATOR_STRACE_AUDIT.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/RESULT.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/RESULT.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/native_stdout.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/native_stdout.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/native_stderr.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/native_stderr.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/NATIVE_AUDIT.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/NATIVE_AUDIT.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/SPEC.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/SPEC.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/evaluator_stdout.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/evaluator_stdout.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/evaluator_stderr.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/evaluator_stderr.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/EVALUATOR_STRACE_AUDIT.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/EVALUATOR_STRACE_AUDIT.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/RESULT.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/RESULT.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/native_stdout.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/native_stdout.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/native_stderr.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/native_stderr.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/NATIVE_AUDIT.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/NATIVE_AUDIT.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/SPEC.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/SPEC.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/evaluator_stdout.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/evaluator_stdout.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/evaluator_stderr.log",
+            "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/evaluator_stderr.log",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/EVALUATOR_STRACE_AUDIT.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/EVALUATOR_STRACE_AUDIT.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/REAL_CALLS.jsonl",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/RESULT.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/RESULT.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/EXECUTION_COUNTS.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/EXECUTION_COUNTS.json",
+            "anonymous_pipe": false
+          },
+          {
+            "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/RESULTS.json",
+            "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+            "return_code": 3,
+            "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/RESULTS.json",
+            "anonymous_pipe": false
+          }
+        ],
+        "allowed_device_write_count": 0,
+        "allowed_device_write_records": [],
+        "allowed_anonymous_pipe_write_count": 0,
+        "allowed_anonymous_pipe_write_records": [],
+        "raw_write_open_count": 0,
+        "clean_root_outside_run_write_count": 0,
+        "write_scope_exceptions": [
+          "/dev/null",
+          "/dev/pts/*",
+          "kernel-identified anonymous pipe"
+        ]
+      },
+      "strace_sha256": "ab9dc6a4c79f531a063ff2596b115f423edbab0f75704961c4f8cfc82475053a"
+    }
+  ],
+  "runs": [
+    {
+      "run": "BY2__HARTLEY_OFFICIAL__OFF-LIT__C00",
+      "native_pass": true,
+      "reference_pass": true,
+      "trace_open_count": 1,
+      "trace_sha256_observed": "ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c"
+    },
+    {
+      "run": "BY2__HARTLEY_OFFICIAL__OFF-DEF__C00",
+      "native_pass": true,
+      "reference_pass": true,
+      "trace_open_count": 1,
+      "trace_sha256_observed": "ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c"
+    },
+    {
+      "run": "BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START",
+      "native_pass": true,
+      "reference_pass": true,
+      "trace_open_count": 1,
+      "trace_sha256_observed": "8d11fe360753bfcdbc54f7bf793fcb25850c0997b7aaad4ec1c9f10859c0f84f"
+    },
+    {
+      "run": "BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START",
+      "native_pass": true,
+      "reference_pass": true,
+      "trace_open_count": 1,
+      "trace_sha256_observed": "8d11fe360753bfcdbc54f7bf793fcb25850c0997b7aaad4ec1c9f10859c0f84f"
+    },
+    {
+      "run": "BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START",
+      "native_pass": true,
+      "reference_pass": true,
+      "trace_open_count": 1,
+      "trace_sha256_observed": "4f7b3007c6a0b43ce1b0fb4908f23c042891154b4adbc7af4c3d8a47ca363cd9"
+    },
+    {
+      "run": "BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START",
+      "native_pass": true,
+      "reference_pass": true,
+      "trace_open_count": 1,
+      "trace_sha256_observed": "4f7b3007c6a0b43ce1b0fb4908f23c042891154b4adbc7af4c3d8a47ca363cd9"
+    }
+  ],
+  "counts": {
+    "legsa_native": 0,
+    "legsa_evaluation": 0,
+    "official_real_native": 6,
+    "relative_pose_evaluation": 6,
+    "reference_opens": 6
+  },
+  "official_examples": 2,
+  "driver_gate_calls": 4,
+  "native_retries": 0,
+  "evaluator_retries": 0,
+  "controller_launch_attempts": 2,
+  "first_attempt_before_script_open": true
+}

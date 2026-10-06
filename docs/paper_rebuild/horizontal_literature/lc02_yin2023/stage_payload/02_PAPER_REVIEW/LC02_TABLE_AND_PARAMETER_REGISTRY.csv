@@ -1,0 +1,31 @@
+table,page,subject,parameter_or_row,value,units,provenance_class
+1,6,measurement factor,Q1 Fixed integer 3D accuracy,0.00-0.15,m,PAPER_DIRECT
+1,6,measurement factor,Q2 Converged float or noise Fixed integer,0.05-0.40,m,PAPER_DIRECT
+1,6,measurement factor,Q3 Converging float,0.2-1.0,m,PAPER_DIRECT
+1,6,measurement factor,Q4 Converging float,0.5-2.00,m,PAPER_DIRECT
+1,6,measurement factor,Q5 DGPS,1.00-5.00,m,PAPER_DIRECT
+1,6,measurement factor,Q6 DGPS,2.00-10.00,m,PAPER_DIRECT
+2,8,sensor parameters,gyro bias,0.25,deg_per_hour,PAPER_DIRECT
+2,8,sensor parameters,accelerometer bias,0.025,deg_per_hour_as_printed,PAPER_DIRECT
+2,8,sensor parameters,gyro random noise,0.04,deg_per_sqrt_hour,PAPER_DIRECT
+2,8,sensor parameters,accelerometer random noise,0.03,m_per_s_per_sqrt_hour,PAPER_DIRECT
+3,9,R candidates,method 1,r^2,formula,PAPER_DIRECT
+3,9,R candidates,method 2,PDOP*Q*r^2,formula,PAPER_DIRECT
+3,9,R candidates,method 3,PDOP*r^2,formula,PAPER_DIRECT
+3,9,R candidates,method 4,PDOP^2*Q*r^2,formula,PAPER_DIRECT
+3,9,R candidates,method 5,PDOP^3*Q*r^2,formula,PAPER_DIRECT
+3,9,R candidates,method 6,PDOP^2*Q^2*r^2,formula,PAPER_DIRECT
+3,9,R candidates,method 7,PDOP^2*Q^3*r^2,formula,PAPER_DIRECT
+4,10,R experiment,RMS matrix for EKF and modes 1-7,"fully reviewed; not active BY2 evidence",paper_table,PAPER_DIRECT
+5,12-13,vehicle experiment 1,EKF/AKF/RKF/RAKF RMS,"fully reviewed; not imported",paper_table,PAPER_DIRECT
+6,14-15,satellite systems,single GPS versus three-system position RMS,"fully reviewed; not imported",paper_table,PAPER_DIRECT
+7,17,vehicle experiment 2,EKF/AKF/RKF/RAKF RMS,"fully reviewed; not imported",paper_table,PAPER_DIRECT
+8,17,disturbance injection,durations and magnitudes,"1 s and 5 s GNSS elevation perturbations",paper_table,PAPER_DIRECT
+9,19,one-second injection,EKF/AKF/RKF/RAKF RMS,"fully reviewed; not imported",paper_table,PAPER_DIRECT
+10,21,five-second injection,EKF/AKF/RKF/RAKF RMS,"published v2 contains this additional table; fully reviewed",paper_table,PAPER_DIRECT
+PARAM,6-7,branch thresholds,adaptive k,1,dimensionless,PAPER_DIRECT
+PARAM,7,branch thresholds,IGGIII k0,1.15,dimensionless,PAPER_DIRECT
+PARAM,7,branch thresholds,IGGIII k1,4.45,dimensionless,PAPER_DIRECT
+PARAM,7,fusion threshold,c,1,dimensionless,PAPER_DIRECT
+PARAM,7,fusion weight,omega inside threshold,0.85,dimensionless,PAPER_DIRECT
+PARAM,7,fusion weight,omega outside threshold,0.15,dimensionless,PAPER_DIRECT
