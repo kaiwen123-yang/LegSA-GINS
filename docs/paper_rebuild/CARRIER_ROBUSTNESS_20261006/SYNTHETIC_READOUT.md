@@ -91,6 +91,8 @@
 
 m=3/4 使用 GPS L1，m=9 使用 GPS L1/L2 与 Galileo E1 各 3 个 DD；多频波长不同。原始 SD 到 DD 的共享参考星协方差被完整保留，GPS 两频 raw-SD 相关系数固定 0.35。相位 σ 为单接收机 0.004 m 工程设定，不是 RAWX 0.004 cycles。fault-free 条件由同一完整 Q 生成和估计；时间相关条件仅从未来段起引入 ρ=0.8，且仍故意使用独立历元工作 Q。
 
+后续源码复核补充：原 TEMPORAL_RHO08 的第一个 future 噪声由最后一个 selection 噪声递推而来，因此还存在选择与验证之间的相关性。只换 future 的边际 Q 不能恢复给定所选候选后的条件模型。原判定保留；新 joint 接口对这 72 例明确返回 UNRESOLVED_SELECTION_DEPENDENCE，另行注册独立起始的 future 噪声做配对机制验证，见 COVARIANCE_FOLLOWUP_READOUT.md。该后续试验不重新称作独立 heldout AR 验证。
+
 原 sealed SUMMARY 的 mean_baseline_angle_rmse_deg 包括所有可评分的主候选（含未接纳、错误整数），仅是候选诊断。新公开摘要增加 shadow_accepted_angle_subsets，不能将前者当正确固定精度。mean_observation_model_exact 是对逐历元真整数的条件均值口径；漏检周跳还须同时检查 model_truth_representable=False。
 
 Holm 只控制指定正确 N、已知 Gaussian Q 等条件下共同无故障零假设的名义族错误；异常存在时多个相关模板可以共同显著，不能声称定位误报率受控，亦不能仅凭两机 SD 定位到 RX2。
