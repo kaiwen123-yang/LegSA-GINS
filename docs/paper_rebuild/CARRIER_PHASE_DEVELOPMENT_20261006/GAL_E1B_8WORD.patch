@@ -1,0 +1,11 @@
+--- original/src/rcv/ublox.c
++++ overlay/ublox_e1b_8word.c
+@@ -793,7 +793,7 @@
+         trace(2,"ubx rxmsfrbx enav length error: sat=%d len=%d\n",sat,raw->len);
+         return -1;
+     }
+-    if (raw->len<44+off) return 0; /* E5b I/NAV */
++    /* 8-word E1B format: retain bounds and CRC checks above/below. */
+     
+     for (i=0;i<8;i++,p+=4) {
+         setbitu(buff,32*i,32,U4(p));

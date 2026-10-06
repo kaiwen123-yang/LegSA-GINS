@@ -1,0 +1,639 @@
+{
+  "schema": "legsa-carrier-navigation-repair-receipt-v1",
+  "status": "QUALIFIED_FOR_CAUSAL_V2_INPUT_NOT_INTEGER_ACCEPTANCE",
+  "stage_alias": "<SCRATCH_ROOT>/CARRIER_PHASE_DEVELOPMENT_20261006/GAL_NAV_QUALIFICATION_V2",
+  "path_aliases": {
+    "<REPOSITORY>": "current source checkout",
+    "<SCRATCH_ROOT>": "external computation and artifact root",
+    "<RTKLIB_ROOT>": "pinned RTKLIB source checkout",
+    "<CLEAN_ROOT>": "existing clean-rebuild data root"
+  },
+  "source_rtklib_revision": "180043ee24b6d2b168f98b64be15f69d50046b1a",
+  "input_pins": {
+    "original_plan": "<SCRATCH_ROOT>/CARRIER_PHASE_DEVELOPMENT_20261006/REAL_80_82_V1/PLAN.json",
+    "original_plan_sha256": "e8c62ad623dc6e9bdb04eaa2a82f98b9c9c0919d94cf08f28bc308a3e4a1f88f",
+    "registry": "<CLEAN_ROOT>/stages/EXT_REPRODUCTION_20261002T124139Z/inputs/BY2/INPUT.json",
+    "registry_sha256": "8d016923133d6c2971a2d3bee286696a43c055a241a61e76a04a1b50c0e21501",
+    "ubx": {
+      "1": {
+        "path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss1.ubx",
+        "sha256": "24177f2d6f25c0b614f769e66c4e4147eea727f3a7f55e22d5e04419eaa10f8b"
+      },
+      "2": {
+        "path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss2.ubx",
+        "sha256": "0876d7e67441ddfce66b4ce8e39838b4245bddab3d6d3cce60d5eb9bad42c2c2"
+      }
+    },
+    "script_sha256": "30514b184eac41743f024d184b228ab462717bec040c65f0e2defc9cf3287d94"
+  },
+  "navigation_manifest_sha256": "0986c9fbc6af8bfd61eb44369203c0413372537645cb3cbfe07bb6b7cab3f9e5",
+  "navigation_manifest": {
+    "navigation": [
+      {
+        "path": "<SCRATCH_ROOT>/CARRIER_PHASE_DEVELOPMENT_20261006/GAL_NAV_QUALIFICATION_V2/broadcast_prefix_rx1.nav",
+        "sha256": "69fa3e41b16e0de6a1bec26d185e406d6600ca6b646617bc63fccb7c06790420",
+        "receiver": 1,
+        "role": "NEW_ALL_GNSS_CAUSAL_PREFIX_GAL_E1B_ONLY",
+        "records": {
+          "G19": 1,
+          "G17": 1,
+          "G06": 1,
+          "G11": 1,
+          "J07": 1,
+          "J02": 1,
+          "J03": 1,
+          "R20": 1,
+          "R11": 1,
+          "R21": 1,
+          "R04": 1,
+          "R05": 1,
+          "E11": 1,
+          "E10": 1,
+          "E02": 1,
+          "E36": 1,
+          "C28": 1,
+          "C27": 1,
+          "C14": 1,
+          "C43": 1,
+          "C42": 1,
+          "C56": 1,
+          "C07": 1,
+          "C10": 1,
+          "C40": 1,
+          "C38": 1,
+          "R19": 1
+        }
+      },
+      {
+        "path": "<SCRATCH_ROOT>/CARRIER_PHASE_DEVELOPMENT_20261006/GAL_NAV_QUALIFICATION_V2/broadcast_prefix_rx2.nav",
+        "sha256": "da8c583e684a74f2901d534706ac896aaa1108de66a3c7e6e72a83f112bf50e9",
+        "receiver": 2,
+        "role": "NEW_ALL_GNSS_CAUSAL_PREFIX_GAL_E1B_ONLY",
+        "records": {
+          "G19": 1,
+          "G17": 1,
+          "G06": 1,
+          "G11": 1,
+          "J02": 1,
+          "J03": 1,
+          "R20": 1,
+          "R11": 1,
+          "R21": 1,
+          "R05": 1,
+          "R04": 1,
+          "R19": 1,
+          "E02": 1,
+          "E36": 1,
+          "E10": 1,
+          "E11": 1,
+          "C28": 1,
+          "C27": 1,
+          "C14": 1,
+          "C43": 1,
+          "C42": 1,
+          "C07": 1,
+          "C40": 1,
+          "C10": 1,
+          "C38": 1,
+          "R10": 1
+        }
+      }
+    ],
+    "converter": {
+      "original_ublox_sha256": "d08da0090cb0a93d3d78c77bc29b658f9f8371485d8855b08b442c6da29dccb7",
+      "overlay_sha256": "7aac6c8d9f132eda64bed729374f93972547c5ed2f28b529003db58c442f5765",
+      "patch": {
+        "path": "<SCRATCH_ROOT>/CARRIER_PHASE_DEVELOPMENT_20261006/GAL_NAV_QUALIFICATION_V2/GAL_E1B_8WORD.patch",
+        "sha256": "cc3c30ed342a2933c4f468268a4e6879bd27a8b3f0fa1264370dde289e196b0a"
+      },
+      "executable_sha256": "dd9e6d3bf3b68047f53f1efb5c8504ae4849b920b3ab8bf41f2a2a6619396f3c",
+      "sources": {
+        "<RTKLIB_ROOT>/src/rcv/ublox.c": "d08da0090cb0a93d3d78c77bc29b658f9f8371485d8855b08b442c6da29dccb7",
+        "<RTKLIB_ROOT>/src/rtklib.h": "c00abb9eee5b89de376ab3a971555459b4efbf92410b8efb0141d168ae94160d",
+        "<RTKLIB_ROOT>/app/consapp/convbin/convbin.c": "1557fa3892f7181248622aa8aae6dd6e7251708a5b675a179633ade57c60b956",
+        "<RTKLIB_ROOT>/src/rtkcmn.c": "3f57e10a71e72bc44dc7453ed1b7a6706dd42d1ab8f2103686f1672c1a19195a",
+        "<RTKLIB_ROOT>/src/rinex.c": "de6c39dc2ad64d0e9bee4859e8ff91504a36c14f650185e50bc2e30d60c33871",
+        "<RTKLIB_ROOT>/src/sbas.c": "d8ea458b66913720c01694b90fd714edd3fdeb3b9026bff8385f96355d6c586a",
+        "<RTKLIB_ROOT>/src/preceph.c": "034e9d0127d7e06de599186b27163686dd10ead3e5853419feed3ea2da1114f7",
+        "<RTKLIB_ROOT>/src/rcvraw.c": "b17fd4943d9834598b3bcf805fab3443c1b1cd2e9a0779e127733a60d95e3db3",
+        "<RTKLIB_ROOT>/src/convrnx.c": "d10e77a66636fc1ff939d587a70f57dd719984784a879748863d32b810b7dc96",
+        "<RTKLIB_ROOT>/src/rtcm.c": "56182b4bb191bb82e64eea156e625c864007cb8753dfe14a7a5ef36192d85e80",
+        "<RTKLIB_ROOT>/src/rtcm2.c": "aee7f13891ffcbe336e786d61fa04a122f69f9e88328689492413e0306903a5b",
+        "<RTKLIB_ROOT>/src/rtcm3.c": "44d1f8020b13d804a0e4fba30204bd987564c78df9d8417533f99ccff96a63e7",
+        "<RTKLIB_ROOT>/src/rtcm3e.c": "196364243b58439b0035067a254cf71125b898ea4243ac4ed7bb4f45fe3ff715",
+        "<RTKLIB_ROOT>/src/pntpos.c": "4ba8fe46e8738f93ed435e3e5b7d5459884bc5da22c0dca10d008428b08d9be9",
+        "<RTKLIB_ROOT>/src/ephemeris.c": "d1f50cfa0a7935844726d389c33b9c6a9270904cfaa5a7967a73e1d628eefa59",
+        "<RTKLIB_ROOT>/src/ionex.c": "bf6f6a3cbb3ff546c4e590cc6650b424a5236cd5cbdbcacb6e0ae5f7a4b89fa5",
+        "<RTKLIB_ROOT>/src/rcv/novatel.c": "a0afd07e8bada12dc146464b2a7c3b5123e8432b3507718f1954208a65240cf7",
+        "<RTKLIB_ROOT>/src/rcv/ss2.c": "f381b57b96b7e6a80b1942d7c5cdbd1111e4a859b63955cea1cedbe34313fc66",
+        "<SCRATCH_ROOT>/CARRIER_PHASE_DEVELOPMENT_20261006/GAL_NAV_QUALIFICATION_V2/ublox_e1b_8word.c": "7aac6c8d9f132eda64bed729374f93972547c5ed2f28b529003db58c442f5765",
+        "<RTKLIB_ROOT>/src/rcv/crescent.c": "c2b30599856326ad5129fa7593db00ab7884eaaa7be8e8eef6c72a298775fb6b",
+        "<RTKLIB_ROOT>/src/rcv/skytraq.c": "2297ae497b7d99516dfb28728885f4ad161875fb97db752102619c176e7ec2e6",
+        "<RTKLIB_ROOT>/src/rcv/javad.c": "82fb62149a7cb9d69ae5707b44f0484f6b89cd22a5807e566bb01fb7eb411961",
+        "<RTKLIB_ROOT>/src/rcv/nvs.c": "eafeef3e61a74048698023ebbbbe240f3de15a7920da31c546a06fa3e368a368",
+        "<RTKLIB_ROOT>/src/rcv/binex.c": "773546e2f436f0c6855ffa44b0401738ccefaba56f4b70934fc0490aa098dbde",
+        "<RTKLIB_ROOT>/src/rcv/rt17.c": "0e186e205271f838afdf593fce192ac2f4a17e6b4204628d2c7a6dfd3a80f881",
+        "<RTKLIB_ROOT>/src/rcv/septentrio.c": "7f4eb4407bd6749368568735c78abcd313f0ce7ef00a59b677fbd9b598fd9aef"
+      },
+      "patch_scope": "REMOVE_OBSOLETE_NINE_WORD_GALILEO_GUARD_ONLY",
+      "CRC_IOD_SV_HEALTH_DECODERS_UNCHANGED": true
+    },
+    "commands": [
+      {
+        "argv": [
+          "<SCRATCH_ROOT>/CARRIER_PHASE_DEVELOPMENT_20261006/GAL_NAV_QUALIFICATION_V2/convbin_e1b_8word",
+          "-r",
+          "ubx",
+          "-v",
+          "3.04",
+          "-o",
+          "<SCRATCH_ROOT>/CARRIER_PHASE_DEVELOPMENT_20261006/GAL_NAV_QUALIFICATION_V2/unused_prefix_rx1.obs",
+          "-n",
+          "<SCRATCH_ROOT>/CARRIER_PHASE_DEVELOPMENT_20261006/GAL_NAV_QUALIFICATION_V2/broadcast_prefix_rx1.nav",
+          "-trace",
+          "3",
+          "<SCRATCH_ROOT>/CARRIER_PHASE_DEVELOPMENT_20261006/GAL_NAV_QUALIFICATION_V2/gnss1_rawx_e1b.ubx"
+        ],
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "<SCRATCH_ROOT>/CARRIER_PHASE_DEVELOPMENT_20261006/GAL_NAV_QUALIFICATION_V2/convbin_e1b_8word",
+          "-r",
+          "ubx",
+          "-v",
+          "3.04",
+          "-o",
+          "<SCRATCH_ROOT>/CARRIER_PHASE_DEVELOPMENT_20261006/GAL_NAV_QUALIFICATION_V2/unused_prefix_rx2.obs",
+          "-n",
+          "<SCRATCH_ROOT>/CARRIER_PHASE_DEVELOPMENT_20261006/GAL_NAV_QUALIFICATION_V2/broadcast_prefix_rx2.nav",
+          "-trace",
+          "3",
+          "<SCRATCH_ROOT>/CARRIER_PHASE_DEVELOPMENT_20261006/GAL_NAV_QUALIFICATION_V2/gnss2_rawx_e1b.ubx"
+        ],
+        "returncode": 0
+      }
+    ],
+    "source": "SAME_DATASET_PINNED_UBX_ALL_GNSS_PREFIX_GAL_E1B_ONLY",
+    "cutoff_relative_s": 100.0,
+    "causal_cutoff_relative_s": 100.0,
+    "old_full_history_navigation_loaded": false,
+    "causal_availability": "PAGE_QUALIFICATION.json bounds using surrounding original RAWX",
+    "old_nav_modified": false,
+    "reference_reads": 0,
+    "downloaded_ephemeris": false,
+    "script_sha256": "30514b184eac41743f024d184b228ab462717bec040c65f0e2defc9cf3287d94"
+  },
+  "artifact_sha256": {
+    "PAGE_QUALIFICATION.json": "cc149437addf714a01e96d974f92531cad8d4a4b4fe571b44c9e2df5904a98a6",
+    "BROADCAST_QUALIFICATION.json": "b3e59959d16a1b09c70092e74bed02bb123a56b239cea247d22d7a57c5635e3d",
+    "INPUT_PINS.json": "bcc75d218c2f06aea3e6f4180ad61ad0a0870e6cdc804d64457623308dc93ff9",
+    "BUILD_COMMAND.json": "47090a67771390ae749bdd0477682b6d4bd4504986a7118f2f5302fac5982f66",
+    "PREPARE_NAVIGATION_AT_EXECUTION.py": "30514b184eac41743f024d184b228ab462717bec040c65f0e2defc9cf3287d94",
+    "qualify_broadcast.py": "39902901d42c6a87f456a958028b1aca6dfe7c26308a38d279bf5366b807c749"
+  },
+  "audit_summary": {
+    "causal_cutoff_relative_s": 100.0,
+    "last_kept_rawx_relative_s": {
+      "1": 99.99799990653992,
+      "2": 99.99799990653992
+    },
+    "first_qualified_galileo_page_chains": {
+      "1": {
+        "E11": {
+          "iode": 0,
+          "health": 0,
+          "toe_tow_seconds": 457200,
+          "gps_week": 2408,
+          "preceding_rawx_relative_s": 98.99799990653992,
+          "available_by_rawx_relative_s": 99.19799995422363
+        },
+        "E10": {
+          "iode": 5,
+          "health": 0,
+          "toe_tow_seconds": 460200,
+          "gps_week": 2408,
+          "preceding_rawx_relative_s": 98.99799990653992,
+          "available_by_rawx_relative_s": 99.19799995422363
+        },
+        "E02": {
+          "iode": 5,
+          "health": 0,
+          "toe_tow_seconds": 460200,
+          "gps_week": 2408,
+          "preceding_rawx_relative_s": 98.99799990653992,
+          "available_by_rawx_relative_s": 99.19799995422363
+        },
+        "E36": {
+          "iode": 3,
+          "health": 0,
+          "toe_tow_seconds": 459000,
+          "gps_week": 2408,
+          "preceding_rawx_relative_s": 99.19799995422363,
+          "available_by_rawx_relative_s": 99.39800000190735
+        }
+      },
+      "2": {
+        "E02": {
+          "iode": 5,
+          "health": 0,
+          "toe_tow_seconds": 460200,
+          "gps_week": 2408,
+          "preceding_rawx_relative_s": 98.99799990653992,
+          "available_by_rawx_relative_s": 99.19799995422363
+        },
+        "E36": {
+          "iode": 3,
+          "health": 0,
+          "toe_tow_seconds": 459000,
+          "gps_week": 2408,
+          "preceding_rawx_relative_s": 98.99799990653992,
+          "available_by_rawx_relative_s": 99.19799995422363
+        },
+        "E10": {
+          "iode": 5,
+          "health": 0,
+          "toe_tow_seconds": 460200,
+          "gps_week": 2408,
+          "preceding_rawx_relative_s": 98.99799990653992,
+          "available_by_rawx_relative_s": 99.19799995422363
+        },
+        "E11": {
+          "iode": 0,
+          "health": 0,
+          "toe_tow_seconds": 457200,
+          "gps_week": 2408,
+          "preceding_rawx_relative_s": 98.99799990653992,
+          "available_by_rawx_relative_s": 99.19799995422363
+        }
+      }
+    },
+    "native_decoded_nav_page_matches": 8,
+    "native_provider_qualified_signal_states": 16,
+    "native_qualification_signals": [
+      "Galileo E1C RAWX (2,0,0)",
+      "Galileo E5bQ RAWX (2,6,0)"
+    ],
+    "navigation_message_signal": "Galileo E1B SFRBX only",
+    "independent_python_negative_controls": [
+      {
+        "receiver": 1,
+        "one_bit_corruption_rejected": true,
+        "truncation_rejected": true
+      },
+      {
+        "receiver": 2,
+        "one_bit_corruption_rejected": true,
+        "truncation_rejected": true
+      }
+    ],
+    "native_corrupted_stream_execution_performed": false,
+    "native_unhealthy_ephemeris_execution_performed": false,
+    "negative_control_scope": "Python page-audit CRC covered-bit flip and seven-word truncation, one original frame per receiver; native negative executions were not added.",
+    "raw_or_navigation_changed_in_place": false,
+    "old_full_history_navigation_loaded": false,
+    "downloaded_ephemeris": false,
+    "reference_reads": 0,
+    "CILS_calls": 0
+  },
+  "qualification": {
+    "nav_page_checks": [
+      {
+        "receiver": 1,
+        "satellite": "E11",
+        "iode": 0,
+        "health": 0,
+        "toe_tow_seconds": 457200.0,
+        "gps_week": 2408,
+        "page_chain_match": true
+      },
+      {
+        "receiver": 1,
+        "satellite": "E10",
+        "iode": 5,
+        "health": 0,
+        "toe_tow_seconds": 460200.0,
+        "gps_week": 2408,
+        "page_chain_match": true
+      },
+      {
+        "receiver": 1,
+        "satellite": "E02",
+        "iode": 5,
+        "health": 0,
+        "toe_tow_seconds": 460200.0,
+        "gps_week": 2408,
+        "page_chain_match": true
+      },
+      {
+        "receiver": 1,
+        "satellite": "E36",
+        "iode": 3,
+        "health": 0,
+        "toe_tow_seconds": 459000.0,
+        "gps_week": 2408,
+        "page_chain_match": true
+      },
+      {
+        "receiver": 2,
+        "satellite": "E02",
+        "iode": 5,
+        "health": 0,
+        "toe_tow_seconds": 460200.0,
+        "gps_week": 2408,
+        "page_chain_match": true
+      },
+      {
+        "receiver": 2,
+        "satellite": "E36",
+        "iode": 3,
+        "health": 0,
+        "toe_tow_seconds": 459000.0,
+        "gps_week": 2408,
+        "page_chain_match": true
+      },
+      {
+        "receiver": 2,
+        "satellite": "E10",
+        "iode": 5,
+        "health": 0,
+        "toe_tow_seconds": 460200.0,
+        "gps_week": 2408,
+        "page_chain_match": true
+      },
+      {
+        "receiver": 2,
+        "satellite": "E11",
+        "iode": 0,
+        "health": 0,
+        "toe_tow_seconds": 457200.0,
+        "gps_week": 2408,
+        "page_chain_match": true
+      }
+    ],
+    "signal_states": [
+      {
+        "receiver": 1,
+        "signal": "2:36:0:0",
+        "status": "QUALIFIED",
+        "orbit_radius_m": 29594220.96009818,
+        "rinex_signal": "1C",
+        "frequency_hz": 1575420000.0,
+        "age_seconds": 1918.198000000033,
+        "toe_gps_week": 2408,
+        "toe_tow_seconds": 459000.0,
+        "health": 0,
+        "iode": 3,
+        "variance_m2": 8.7616
+      },
+      {
+        "receiver": 1,
+        "signal": "2:11:0:0",
+        "status": "QUALIFIED",
+        "orbit_radius_m": 29592096.008475404,
+        "rinex_signal": "1C",
+        "frequency_hz": 1575420000.0,
+        "age_seconds": 3718.198000000033,
+        "toe_gps_week": 2408,
+        "toe_tow_seconds": 457200.0,
+        "health": 0,
+        "iode": 0,
+        "variance_m2": 8.7616
+      },
+      {
+        "receiver": 1,
+        "signal": "2:10:0:0",
+        "status": "QUALIFIED",
+        "orbit_radius_m": 29599701.92922136,
+        "rinex_signal": "1C",
+        "frequency_hz": 1575420000.0,
+        "age_seconds": 718.1980000000331,
+        "toe_gps_week": 2408,
+        "toe_tow_seconds": 460200.0,
+        "health": 0,
+        "iode": 5,
+        "variance_m2": 8.7616
+      },
+      {
+        "receiver": 1,
+        "signal": "2:2:0:0",
+        "status": "QUALIFIED",
+        "orbit_radius_m": 29595029.63250266,
+        "rinex_signal": "1C",
+        "frequency_hz": 1575420000.0,
+        "age_seconds": 718.1980000000331,
+        "toe_gps_week": 2408,
+        "toe_tow_seconds": 460200.0,
+        "health": 0,
+        "iode": 5,
+        "variance_m2": 8.7616
+      },
+      {
+        "receiver": 1,
+        "signal": "2:10:6:0",
+        "status": "QUALIFIED",
+        "orbit_radius_m": 29599701.929221347,
+        "rinex_signal": "7Q",
+        "frequency_hz": 1207140000.0,
+        "age_seconds": 718.1980000000331,
+        "toe_gps_week": 2408,
+        "toe_tow_seconds": 460200.0,
+        "health": 0,
+        "iode": 5,
+        "variance_m2": 8.7616
+      },
+      {
+        "receiver": 1,
+        "signal": "2:11:6:0",
+        "status": "QUALIFIED",
+        "orbit_radius_m": 29592096.008475415,
+        "rinex_signal": "7Q",
+        "frequency_hz": 1207140000.0,
+        "age_seconds": 3718.198000000033,
+        "toe_gps_week": 2408,
+        "toe_tow_seconds": 457200.0,
+        "health": 0,
+        "iode": 0,
+        "variance_m2": 8.7616
+      },
+      {
+        "receiver": 1,
+        "signal": "2:2:6:0",
+        "status": "QUALIFIED",
+        "orbit_radius_m": 29595029.63250266,
+        "rinex_signal": "7Q",
+        "frequency_hz": 1207140000.0,
+        "age_seconds": 718.1980000000331,
+        "toe_gps_week": 2408,
+        "toe_tow_seconds": 460200.0,
+        "health": 0,
+        "iode": 5,
+        "variance_m2": 8.7616
+      },
+      {
+        "receiver": 1,
+        "signal": "2:36:6:0",
+        "status": "QUALIFIED",
+        "orbit_radius_m": 29594220.960098173,
+        "rinex_signal": "7Q",
+        "frequency_hz": 1207140000.0,
+        "age_seconds": 1918.198000000033,
+        "toe_gps_week": 2408,
+        "toe_tow_seconds": 459000.0,
+        "health": 0,
+        "iode": 3,
+        "variance_m2": 8.7616
+      },
+      {
+        "receiver": 2,
+        "signal": "2:2:0:0",
+        "status": "QUALIFIED",
+        "orbit_radius_m": 29595029.63324596,
+        "rinex_signal": "1C",
+        "frequency_hz": 1575420000.0,
+        "age_seconds": 718.1980000000331,
+        "toe_gps_week": 2408,
+        "toe_tow_seconds": 460200.0,
+        "health": 0,
+        "iode": 5,
+        "variance_m2": 8.7616
+      },
+      {
+        "receiver": 2,
+        "signal": "2:36:0:0",
+        "status": "QUALIFIED",
+        "orbit_radius_m": 29594220.96062422,
+        "rinex_signal": "1C",
+        "frequency_hz": 1575420000.0,
+        "age_seconds": 1918.198000000033,
+        "toe_gps_week": 2408,
+        "toe_tow_seconds": 459000.0,
+        "health": 0,
+        "iode": 3,
+        "variance_m2": 8.7616
+      },
+      {
+        "receiver": 2,
+        "signal": "2:10:0:0",
+        "status": "QUALIFIED",
+        "orbit_radius_m": 29599701.929422684,
+        "rinex_signal": "1C",
+        "frequency_hz": 1575420000.0,
+        "age_seconds": 718.1980000000331,
+        "toe_gps_week": 2408,
+        "toe_tow_seconds": 460200.0,
+        "health": 0,
+        "iode": 5,
+        "variance_m2": 8.7616
+      },
+      {
+        "receiver": 2,
+        "signal": "2:11:0:0",
+        "status": "QUALIFIED",
+        "orbit_radius_m": 29592096.009114914,
+        "rinex_signal": "1C",
+        "frequency_hz": 1575420000.0,
+        "age_seconds": 3718.198000000033,
+        "toe_gps_week": 2408,
+        "toe_tow_seconds": 457200.0,
+        "health": 0,
+        "iode": 0,
+        "variance_m2": 8.7616
+      },
+      {
+        "receiver": 2,
+        "signal": "2:36:6:0",
+        "status": "QUALIFIED",
+        "orbit_radius_m": 29594220.960624207,
+        "rinex_signal": "7Q",
+        "frequency_hz": 1207140000.0,
+        "age_seconds": 1918.198000000033,
+        "toe_gps_week": 2408,
+        "toe_tow_seconds": 459000.0,
+        "health": 0,
+        "iode": 3,
+        "variance_m2": 8.7616
+      },
+      {
+        "receiver": 2,
+        "signal": "2:10:6:0",
+        "status": "QUALIFIED",
+        "orbit_radius_m": 29599701.929422688,
+        "rinex_signal": "7Q",
+        "frequency_hz": 1207140000.0,
+        "age_seconds": 718.1980000000331,
+        "toe_gps_week": 2408,
+        "toe_tow_seconds": 460200.0,
+        "health": 0,
+        "iode": 5,
+        "variance_m2": 8.7616
+      },
+      {
+        "receiver": 2,
+        "signal": "2:2:6:0",
+        "status": "QUALIFIED",
+        "orbit_radius_m": 29595029.63324594,
+        "rinex_signal": "7Q",
+        "frequency_hz": 1207140000.0,
+        "age_seconds": 718.1980000000331,
+        "toe_gps_week": 2408,
+        "toe_tow_seconds": 460200.0,
+        "health": 0,
+        "iode": 5,
+        "variance_m2": 8.7616
+      },
+      {
+        "receiver": 2,
+        "signal": "2:11:6:0",
+        "status": "QUALIFIED",
+        "orbit_radius_m": 29592096.00911493,
+        "rinex_signal": "7Q",
+        "frequency_hz": 1207140000.0,
+        "age_seconds": 3718.198000000033,
+        "toe_gps_week": 2408,
+        "toe_tow_seconds": 457200.0,
+        "health": 0,
+        "iode": 0,
+        "variance_m2": 8.7616
+      }
+    ],
+    "negative_crc_checks": [
+      {
+        "receiver": 1,
+        "one_bit_corruption_rejected": true,
+        "truncation_rejected": true
+      },
+      {
+        "receiver": 2,
+        "one_bit_corruption_rejected": true,
+        "truncation_rejected": true
+      }
+    ],
+    "epoch_keys": [
+      [
+        1,
+        2408,
+        460918.19800000003,
+        100.19799995422363
+      ],
+      [
+        2,
+        2408,
+        460918.19800000003,
+        100.19799995422363
+      ]
+    ],
+    "navigation_manifest_sha256": "0986c9fbc6af8bfd61eb44369203c0413372537645cb3cbfe07bb6b7cab3f9e5",
+    "reference_reads": 0,
+    "solver_calls": 0,
+    "note": "State qualification uses new causal-prefix navigation; not integer acceptance."
+  },
+  "limits": [
+    "Native health zero and matching IOD/toe/week qualify orbit inputs, not carrier integer correctness.",
+    "Copied RTKLIB CRC/IOD/SV/health decoding is unchanged; no claim of native corrupted-stream negative testing.",
+    "100-102 s was selected after input availability audit and is a development window, not held out.",
+    "GLONASS and QZSS messages may remain in the navigation files; the integer builder does not thereby gain support for these systems.",
+    "Generated RINEX OBS files are not solver inputs; original RAWX phase observations remain the input.",
+    "Local manifest paths are usable by the runner; this Git receipt uses aliases and is not a directly executable manifest."
+  ]
+}
