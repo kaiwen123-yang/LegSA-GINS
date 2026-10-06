@@ -15,7 +15,7 @@
   "rows": [
     {
       "sequence": "BY2",
-      "source_alias": "<RAW_ROOT>/by2_go2_body",
+      "source_config_key": "by2_go2_body",
       "window_start_unix": 1772784066.0,
       "window_end_unix": 1772784340.0,
       "message_blocks_total": 63278,
@@ -34,7 +34,7 @@
     },
     {
       "sequence": "BY2H",
-      "source_alias": "<RAW_ROOT>/by2h_go2_body",
+      "source_config_key": "by2h_go2_body",
       "window_start_unix": 1772784413.0,
       "window_end_unix": 1772784683.0,
       "message_blocks_total": 63222,
@@ -53,7 +53,7 @@
     },
     {
       "sequence": "BY2O",
-      "source_alias": "<RAW_ROOT>/by2o_go2_body",
+      "source_config_key": "by2o_go2_body",
       "window_start_unix": 1772783586.0,
       "window_end_unix": 1772783963.0,
       "message_blocks_total": 95860,

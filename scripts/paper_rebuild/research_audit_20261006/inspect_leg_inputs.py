@@ -1,6 +1,6 @@
 """Raw-only feasibility check; neither truth validation nor a solver provider.
 
-Sample first complete message per 0.2 s, choose two highest force feet, compare
+Sample first timestamped message per 0.2 s, choose two highest force feet, compare
 no-slip kinematic proxy to two explicit SDK velocity frame hypotheses.
 No GNSS/trace, frame tuning, contact threshold fitting, or estimator output.
 """
@@ -52,7 +52,7 @@ def run(paths, out):
             R=np.array([[cy*cp,cy*sp*sr-sy*cr,cy*sp*cr+sy*sr],[sy*cp,sy*sp*sr+cy*cr,sy*sp*cr-cy*sr],[-sp,cp*sr,cp*cr]])
             records.append([t,np.linalg.norm(vp[:2]-v[:2]),np.linalg.norm(vp[:2]-(R.T@v)[:2]),np.linalg.norm(proxy[ids[0],:2]-proxy[ids[1],:2]),np.linalg.norm(v[:2]),np.all(force[ids]>0),np.count_nonzero(fd),np.count_nonzero(feet)])
         a=np.array(records)
-        q={'sequence':seq,'source_alias':f'<RAW_ROOT>/{key}','window_start_unix':start,'window_end_unix':end,'message_blocks_total':all_blocks,'selected_5hz_records':sampled,'finite_all_required_fields':complete,'sample_period_min_s':float(np.diff(a[:,0]).min()),'sample_max_gap_s':float(np.diff(a[:,0]).max()),'sdk_speed_horizontal_p50_mps':float(np.median(a[:,4])),'body_hypothesis_proxy_difference_median_mps':float(np.median(a[:,1])),'odom_hypothesis_proxy_difference_median_mps':float(np.median(a[:,2])),'two_feet_disagreement_median_mps':float(np.median(a[:,3])),'two_feet_disagreement_p95_mps':float(np.quantile(a[:,3],.95)),'both_selected_forces_positive_fraction':float(a[:,5].mean()),'nonzero_foot_speed_fraction':float((a[:,6]>0).mean()),'nonzero_foot_position_fraction':float((a[:,7]>0).mean())}
+        q={'sequence':seq,'source_config_key':key,'window_start_unix':start,'window_end_unix':end,'message_blocks_total':all_blocks,'selected_5hz_records':sampled,'finite_all_required_fields':complete,'sample_period_min_s':float(np.diff(a[:,0]).min()),'sample_max_gap_s':float(np.diff(a[:,0]).max()),'sdk_speed_horizontal_p50_mps':float(np.median(a[:,4])),'body_hypothesis_proxy_difference_median_mps':float(np.median(a[:,1])),'odom_hypothesis_proxy_difference_median_mps':float(np.median(a[:,2])),'two_feet_disagreement_median_mps':float(np.median(a[:,3])),'two_feet_disagreement_p95_mps':float(np.quantile(a[:,3],.95)),'both_selected_forces_positive_fraction':float(a[:,5].mean()),'nonzero_foot_speed_fraction':float((a[:,6]>0).mean()),'nonzero_foot_position_fraction':float((a[:,7]>0).mean())}
         results.append(q);print(json.dumps(q),flush=True)
     out.mkdir(parents=True,exist_ok=True)
     with (out/'LEG_INPUT_FEASIBILITY.csv').open('w',newline='') as f:
