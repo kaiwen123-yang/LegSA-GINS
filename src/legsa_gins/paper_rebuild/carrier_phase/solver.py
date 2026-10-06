@@ -9,6 +9,7 @@ from pathlib import Path
 import heapq,math,time
 import numpy as np
 from ..horizontal_literature.ext01_clambda import RTKLIBLambdaBridge,constrained_baseline,BaselineSphereMetric,LambdaBridgeError
+from .native_sphere import NativeSphereBackend
 from .temporal import TemporalProblem,TemporalFloat,TemporalModelError,joint_float,conditional_baselines,has_cross_epoch_covariance,positive_definite
 
 @dataclass(frozen=True)
@@ -50,6 +51,10 @@ class TemporalCertificate:
     bound_sphere_evaluations: int=0
     candidate_sphere_evaluations: int=0
     sphere_metric_factorizations: int=0
+    sphere_backend: str="python"
+    sphere_library_sha256: str|None=None
+    sphere_kernel_version: str|None=None
+    sphere_abi_version: int|None=None
 
 @dataclass(frozen=True)
 class TemporalResult:
@@ -93,10 +98,11 @@ def checked_integer_vector(value, *, name="integer vector"):
 
 class _IntegerEvaluator:
     """Per-solve leaf factors; each candidate retains the full residual check."""
-    def __init__(self, problem, floating):
+    def __init__(self, problem, floating, *, sphere_backend=None):
         _require_separable(problem,floating)
         self.problem,self.floating=problem,floating
-        self.metrics=tuple(BaselineSphereMetric.from_covariance(
+        factory=BaselineSphereMetric.from_covariance if sphere_backend is None else sphere_backend.from_covariance
+        self.metrics=tuple(factory(
             floating.conditional_covariance_b[bb,bb]) for bb in problem.baseline_slices)
         self.sphere_evaluations=0
 
@@ -148,8 +154,9 @@ class _BaselineBoundCache:
     The lower bound remains max(single-epoch marginal sphere bounds), never
     their sum. Relaxed cross-epoch correlation is not discarded.
     """
-    def __init__(self, problem, floating, reduced):
+    def __init__(self, problem, floating, reduced, *, sphere_backend=None):
         self.problem, self.floating, self.reduced = problem, floating, reduced
+        self._prepare_metric=BaselineSphereMetric.from_covariance if sphere_backend is None else sphere_backend.from_covariance
         self.m = problem.ambiguity_count
         self.qbb = floating.covariance[self.m:, self.m:]
         self.qbz = floating.covariance_ba @ reduced.transformation
@@ -196,7 +203,7 @@ class _BaselineBoundCache:
         ss = self.problem.baseline_slices[k]
         key = (len(suffix), k)
         if key not in self.sphere_metrics:
-            self.sphere_metrics[key] = BaselineSphereMetric.from_covariance(cov[ss,ss])
+            self.sphere_metrics[key] = self._prepare_metric(cov[ss,ss])
         exact = self.sphere_metrics[key].solve(center[ss], float(self.problem.lengths[k])).objective
         self.sphere_evaluations += 1
         return float(ambiguity_bound+max(maximum_cheap, exact))
@@ -204,12 +211,15 @@ class _BaselineBoundCache:
 
 def solve_temporal(problem:TemporalProblem,lambda_library:str|Path,*,initial_candidates:int=8,
                    node_limit:int=100000,timeout_s:float=60.,
-                   distinct_ambiguity_labels:tuple[str,...]|None=None)->TemporalResult:
+                   distinct_ambiguity_labels:tuple[str,...]|None=None,
+                   sphere_library:str|Path|None=None)->TemporalResult:
     """Find two best integer classes, retaining all historical nuisance integers.
 
     With selected labels, vectors with equal selected coordinates form one class;
     its score is the minimum FULL objective over all historical integer values.
-    The complete original-dimensional search remains in place.
+    The complete original-dimensional search remains in place. An explicit
+    sphere_library selects the ABI-checked scalar kernel; None retains Python.
+    Backend load/hash and all factor setup are included in elapsed_s.
     """
     if initial_candidates<2 or node_limit<1 or not math.isfinite(timeout_s) or timeout_s<=0:
         raise TemporalModelError("invalid search budget")
@@ -221,7 +231,8 @@ def solve_temporal(problem:TemporalProblem,lambda_library:str|Path,*,initial_can
     evaluated={};nodes=leaves=returned=0;frontier_bound=None
     conditional_calls=conditional_evaluated=conditional_failures=0
     bound_cache=None
-    integer_evaluator=_IntegerEvaluator(problem,floating)
+    sphere_backend=None if sphere_library is None else NativeSphereBackend(sphere_library)
+    integer_evaluator=_IntegerEvaluator(problem,floating,sphere_backend=sphere_backend)
     def ordered_classes():
         classes={}
         for candidate in evaluated.values():
@@ -246,7 +257,11 @@ def solve_temporal(problem:TemporalProblem,lambda_library:str|Path,*,initial_can
             bound_sphere_evaluations=0 if bound_cache is None else bound_cache.sphere_evaluations,
             candidate_sphere_evaluations=integer_evaluator.sphere_evaluations,
             sphere_metric_factorizations=len(integer_evaluator.metrics)+(
-                0 if bound_cache is None else len(bound_cache.sphere_metrics)))
+                0 if bound_cache is None else len(bound_cache.sphere_metrics)),
+            sphere_backend="python" if sphere_backend is None else "native_scalar",
+            sphere_library_sha256=None if sphere_backend is None else sphere_backend.library_sha256,
+            sphere_kernel_version=None if sphere_backend is None else sphere_backend.kernel_version,
+            sphere_abi_version=None if sphere_backend is None else sphere_backend.abi_version)
         return TemporalResult(best,second,certificate,floating)
     bridge=RTKLIBLambdaBridge(lambda_library)
     seeds=bridge.candidates(floating.ambiguity,floating.covariance_aa,initial_candidates);returned=len(seeds)
@@ -306,7 +321,7 @@ def solve_temporal(problem:TemporalProblem,lambda_library:str|Path,*,initial_can
     if len(ordered_classes())<2:return finish("INSUFFICIENT_DISTINCT_CLASSES",False)
     incumbent=ordered_classes()[1].reduced_cost
     m=problem.ambiguity_count
-    bound_cache=_BaselineBoundCache(problem,floating,reduced)
+    bound_cache=_BaselineBoundCache(problem,floating,reduced,sphere_backend=sphere_backend)
     node_bound=bound_cache
 
     weight=np.linalg.solve(reduced.covariance,np.eye(m));weight=(weight+weight.T)*.5

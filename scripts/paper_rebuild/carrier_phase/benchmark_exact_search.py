@@ -14,7 +14,7 @@ import os
 import time
 import numpy as np
 from shadow_replay import load_model
-from legsa_gins.paper_rebuild.carrier_phase import solver, partial
+from legsa_gins.paper_rebuild.carrier_phase import solver, partial, native_sphere
 from legsa_gins.paper_rebuild.horizontal_literature import ext01_clambda
 
 
@@ -41,6 +41,7 @@ def main():
     parser.add_argument("--variant", required=True)
     parser.add_argument("--timeout", type=float, default=30.)
     parser.add_argument("--nodes", type=int, default=100000)
+    parser.add_argument("--sphere-library", type=Path)
     args = parser.parse_args()
     if os.uname().sysname != "Linux":
         raise RuntimeError("run algorithm benchmarks in Ubuntu WSL")
@@ -64,11 +65,12 @@ def main():
     if not search.selection.ready:
         raise ValueError(search.selection.status)
     before = time.perf_counter()
+    options = {} if args.sphere_library is None else {"sphere_library": args.sphere_library}
     result = partial.solve_partial(
-        search, plan["lambda_library"], node_limit=args.nodes, timeout_s=args.timeout)
+        search, plan["lambda_library"], node_limit=args.nodes, timeout_s=args.timeout, **options)
     elapsed_s = time.perf_counter() - before
     source = {}
-    for module in (solver, partial, ext01_clambda):
+    for module in (solver, partial, ext01_clambda, native_sphere):
         path = Path(module.__file__)
         source[module.__name__] = {
             "path": str(path), "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
@@ -76,7 +78,8 @@ def main():
         "variant": args.variant, "window_start_s": args.start, "cap": args.cap,
         "limits": {"nodes": args.nodes, "timeout_s": args.timeout},
         "model_plan_sha256": hashlib.sha256(plan_path.read_bytes()).hexdigest(),
-        "source": source, "selection": serial(search.selection),
+        "source": source, "sphere_library": str(args.sphere_library) if args.sphere_library else None,
+        "selection": serial(search.selection),
         "all_labels": search.problem.ambiguity_labels,
         "certificate": serial(result.certificate),
         "best": serial(result.best), "second": serial(result.second),

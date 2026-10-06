@@ -244,13 +244,15 @@ def prepare_partial_search(models: Sequence[MultiGnssEpoch], *, length_m: float,
 
 
 def solve_partial(plan: PartialSearchPlan, lambda_library, *, initial_candidates: int = 8,
-                  node_limit: int = 100000, timeout_s: float = 60.) -> TemporalResult:
+                  node_limit: int = 100000, timeout_s: float = 60.,
+                  sphere_library=None) -> TemporalResult:
     """Profile unselected INTEGER coordinates via full original-dimensional search."""
     if not plan.selection.ready:
         raise TemporalModelError(f"partial subset unavailable: {plan.selection.status}")
     return solve_temporal(plan.problem, lambda_library, initial_candidates=initial_candidates,
                           node_limit=node_limit, timeout_s=timeout_s,
-                          distinct_ambiguity_labels=plan.selection.selected_labels)
+                          distinct_ambiguity_labels=plan.selection.selected_labels,
+                          sphere_library=sphere_library)
 
 
 def freeze_partial_candidates(plan: PartialSearchPlan, result: TemporalResult, *,
