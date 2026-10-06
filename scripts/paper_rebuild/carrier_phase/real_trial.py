@@ -37,8 +37,16 @@ def log(path,value):
  print(text,flush=True)
 def localtime(e,base):return 315964800.+e.gps_week*604800.+e.gps_tow_seconds-e.leap_seconds-base
 def revision(code): return subprocess.check_output(["git","rev-parse","HEAD"],cwd=code,text=True).strip()
+def source_snapshot(code):
+ paths=list((code/"src/legsa_gins/paper_rebuild/carrier_phase").glob("*.py"))
+ paths += [code/"src/legsa_gins/paper_rebuild/horizontal_literature"/name for name in
+   ("shared_raw_backend.py","reproduction_backend.py","ext01_clambda.py")]
+ paths.append(Path(__file__))
+ return {str(p.relative_to(code)):digest(p) for p in paths}
+
 def prepare(a):
  out=a.output;out.mkdir(parents=True,exist_ok=False)
+ execution=revision(a.code);source_pins=source_snapshot(a.code)
  roots=aliases(a.roots);ip=Path(roots["<EXT_REPRO_ROOT>"])/"inputs"/a.sequence/"INPUT.json"
  info=json.loads(ip.read_text());base=info["base_time"];libroot=Path(roots["<EXT_REPRO_BUILD>"])/"lib"
  nav=[expand(x,roots) for x in info["navigation"]]
@@ -52,6 +60,15 @@ def prepare(a):
   inputs["raw_sources"][str(rx)]={"source":source["source"],"sha256":source["sha256"],"full_epochs":len(values),"window_epochs":len(epochs[rx])}
  for rx,p in enumerate(nav,1):
   if digest(p)!=info["source_files"][f"gnss{rx}.nav"]["sha256"]:raise ValueError("navigation source changed")
+ if a.navigation_manifest:
+  manifest=json.loads(a.navigation_manifest.read_text())
+  nav=[]
+  for row in manifest["navigation"]:
+   path=Path(row["path"])
+   if digest(path)!=row["sha256"]:raise ValueError("explicit navigation identity changed")
+   nav.append(path)
+  inputs["navigation_override"]={"manifest":str(a.navigation_manifest),"sha256":digest(a.navigation_manifest),"navigation":manifest["navigation"]}
+
  # Each receiver is processed independently; exact pairing happens afterwards.
  grouped={};events={};all_events=[];adapter_rejections=[]
  for rx in (1,2):
@@ -107,7 +124,7 @@ def prepare(a):
    records.append(rec)
    log(ledger,{"time_s":t,"families":{k:{"status":v["status"],"rows":v.get("rows"),"ambiguities":v.get("ambiguities"),"reason":v.get("reason")} for k,v in rec["families"].items()}})
  emit(out/"EPHEMERIS_QUALIFICATION.json",provider.last_qualification)
- plan={"source_commit":revision(a.code),"sequence":a.sequence,"window_s":[a.start,a.stop],
+ plan={"source_commit":execution,"source_sha256":source_pins,"sequence":a.sequence,"window_s":[a.start,a.stop],
    "base_time":base,"inputs":inputs,"pairing":pairing,"records":records,"lambda_library":str(libroot/"librtklib_legsa.so"),
    "baseline_length_m":a.length,"max_gap_s":a.max_gap,"tdcp_limit_cycles":a.tdcp_limit,
    "prefixes":[1,5,10],"families":FAMILIES,"cross_epoch_covariance":"assumed independent",
@@ -117,10 +134,11 @@ def prepare(a):
  emit(out/"PLAN.json",plan)
  print("PREPARE_COMPLETE",json.dumps(pairing),flush=True)
 def solve(a):
- plan=json.loads((a.output/"PLAN.json").read_text());dest=a.output/"SOLVE";dest.mkdir(exist_ok=False)
+ plan=json.loads((a.output/"PLAN.json").read_text());dest=a.output/("SOLVE_ACTIVE" if a.active_classes else "SOLVE");dest.mkdir(exist_ok=False)
+ execution=revision(a.code);source_pins=source_snapshot(a.code)
  results=[];ledger=dest/"LEDGER.jsonl"
- for family in plan["families"]:
-  for count in plan["prefixes"]:
+ for family in (a.families or plan["families"]):
+  for count in (a.prefixes or plan["prefixes"]):
    rec={"family":family,"prefix_epochs":count,"endpoint_time_s":None,"status":"UNAVAILABLE"}
    rows=plan["records"][:count]
    try:
@@ -135,7 +153,8 @@ def solve(a):
     rec.update(ambiguities=problem.ambiguity_count,observations=len(problem.y),baseline_epochs=problem.epoch_count,
        requested_groups=plan["families"][family],actual_group_keys_by_epoch=[[g["key"] for g in row["families"][family]["groups"]] for row in rows])
     log(ledger,{**rec,"event":"SOLVE_START"})
-    result=solve_temporal(problem,plan["lambda_library"],node_limit=a.nodes,timeout_s=a.timeout)
+    kwargs={"distinct_ambiguity_labels":blocks[-1].ambiguity_labels} if a.active_classes else {}
+    result=solve_temporal(problem,plan["lambda_library"],node_limit=a.nodes,timeout_s=a.timeout,**kwargs)
     rec.update(status="CERTIFIED_CANDIDATE" if result.global_optimum_certified else "UNCERTIFIED",
         certificate=result.certificate,best=result.best,second=result.second,
         float_residual_cost=result.float_solution.residual_objective,
@@ -145,13 +164,15 @@ def solve(a):
    emit(dest/f"{family}_{count:02d}.json",rec);results.append(rec)
    log(ledger,{"event":"SOLVE_END","family":family,"prefix_epochs":count,"status":rec["status"],"failure":rec.get("failure"),
       "certificate":rec.get("certificate")})
- emit(dest/"RESULTS.json",{"execution_commit":revision(a.code),"node_limit":a.nodes,"timeout_s":a.timeout,"records":results,"reference_reads":0,"real_integer_truth_available":False})
+ emit(dest/"RESULTS.json",{"execution_commit":execution,"source_sha256":source_pins,"active_classes":a.active_classes,"node_limit":a.nodes,"timeout_s":a.timeout,"records":results,"reference_reads":0,"real_integer_truth_available":False})
 def main():
  p=argparse.ArgumentParser();p.add_argument("mode",choices=["prepare","solve"])
  p.add_argument("--code",type=Path,default=Path(__file__).resolve().parents[3]);p.add_argument("--roots",type=Path)
  p.add_argument("--output",type=Path,required=True);p.add_argument("--sequence",default="BY2")
  p.add_argument("--start",type=float,default=80.);p.add_argument("--stop",type=float,default=82.)
  p.add_argument("--length",type=float,default=.350);p.add_argument("--max-gap",type=float,default=.21)
+ p.add_argument("--navigation-manifest",type=Path);p.add_argument("--active-classes",action="store_true")
+ p.add_argument("--prefixes",nargs="+",type=int);p.add_argument("--families",nargs="+",choices=list(FAMILIES))
  p.add_argument("--tdcp-limit",type=float,default=.5);p.add_argument("--nodes",type=int,default=100000);p.add_argument("--timeout",type=float,default=60.)
  a=p.parse_args()
  if os.uname().sysname!="Linux":raise RuntimeError("algorithm trial must run in Ubuntu WSL")

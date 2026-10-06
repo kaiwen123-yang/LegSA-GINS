@@ -129,3 +129,40 @@ def test_expired_budget_never_certifies(library):
     assert not answer.candidate_available
     assert not answer.certificate.global_optimum_certified
     assert "TIMEOUT" in answer.certificate.termination_reason
+
+@pytest.mark.parametrize("value",[2**63,-2**63,2**53,2**53+1,10**400,float("inf"),1.5])
+def test_large_or_nonintegral_candidate_is_explicitly_rejected(value):
+    blocks,_,_=fixture_problem(count=1)
+    p=assemble_epochs(blocks);f=joint_float(p)
+    with pytest.raises(TemporalModelError):
+        evaluate_integer(p,f,[value,0,0,0])
+
+def test_selected_integer_classes_keep_historical_nuisance_and_match_enumeration(library):
+    blocks,truth,n=fixture_problem(count=2,m=3,noise=.3,seed=951)
+    b0,b1=blocks
+    blocks=[b0,EpochBlock(b1.time_s,b1.y,b1.A,b1.B,b1.Q,("new_arc",)+b1.ambiguity_labels[1:])]
+    p=assemble_epochs(blocks);f=joint_float(p)
+    active=blocks[-1].ambiguity_labels
+    result=solve_temporal(p,library,distinct_ambiguity_labels=active,timeout_s=15)
+    assert result.candidate_available
+    indices=[p.ambiguity_labels.index(x) for x in active]
+    expected=np.r_[n,n[0]]
+    classes={}
+    for offset in itertools.product(range(-2,3),repeat=4):
+        candidate=evaluate_integer(p,f,expected+np.array(offset))
+        key=tuple(candidate.ambiguity[indices])
+        if key not in classes or candidate.full_residual_cost<classes[key].full_residual_cost:classes[key]=candidate
+    brute=sorted(classes.values(),key=lambda x:x.full_residual_cost)
+    assert tuple(result.best.ambiguity[indices])!=tuple(result.second.ambiguity[indices])
+    assert np.array_equal(result.best.ambiguity,brute[0].ambiguity)
+    assert np.array_equal(result.second.ambiguity,brute[1].ambiguity)
+    assert abs(result.second.full_residual_cost-brute[1].full_residual_cost)<1e-7
+    assert result.best.ambiguity.shape==(4,)
+    assert result.certificate.distinct_ambiguity_labels==active
+    assert result.certificate.certificate_scope=="two_best_selected_integer_classes"
+
+@pytest.mark.parametrize("labels",[(),("absent",),("G:L1:s0:pivot0:arc0",)*2])
+def test_invalid_selected_integer_classes_rejected(library,labels):
+    blocks,_,_=fixture_problem(count=1)
+    with pytest.raises(TemporalModelError,match="distinct ambiguity labels"):
+        solve_temporal(assemble_epochs(blocks),library,distinct_ambiguity_labels=labels)

@@ -38,6 +38,9 @@ class TemporalCertificate:
     elapsed_s: float
     candidate_cap_applied: bool
     integer_acceptance_test_defined: bool=False
+    distinct_ambiguity_labels: tuple[str,...]=()
+    distinct_ambiguity_classes: int=0
+    certificate_scope: str="two_best_full_integer_vectors"
 
 @dataclass(frozen=True)
 class TemporalResult:
@@ -62,12 +65,29 @@ def _require_separable(problem,floating):
             if np.max(np.abs(cb[a,b]))>1e-8*scale+1e-14:
                 raise TemporalModelError("conditional baseline covariance is not epoch-separable")
 
+MAX_EXACT_INTEGER=2**53-1
+
+def checked_integer_vector(value, *, name="integer vector"):
+    """Reject values outside the exactly represented binary64 integer domain.
+
+    This solver uses floating LAMBDA transforms; int64 storage is not a claim
+    of exact arithmetic over the whole int64 domain.
+    """
+    try:
+        n=np.asarray(value,float)
+    except (TypeError,ValueError,OverflowError) as exc:
+        raise TemporalModelError(f"{name}: unsupported integer representation") from exc
+    if (not np.isfinite(n).all() or np.any(np.abs(n)>MAX_EXACT_INTEGER)
+            or not np.array_equal(n,np.rint(n))):
+        raise TemporalModelError(f"{name}: requires exact integers with absolute value <= 2**53-1")
+    return n.astype(np.int64)
+
 def evaluate_integer(problem:TemporalProblem,floating:TemporalFloat,integer)->TemporalCandidate:
     _require_separable(problem,floating)
-    n=np.asarray(integer,float)
-    if n.shape!=floating.ambiguity.shape or not np.isfinite(n).all() or not np.array_equal(n,np.rint(n)):
-        raise TemporalModelError("candidate must be a finite integer vector")
-    n=np.rint(n).astype(np.int64);delta=n-floating.ambiguity
+    n=checked_integer_vector(integer,name="candidate")
+    if n.shape!=floating.ambiguity.shape:
+        raise TemporalModelError("candidate must have the registered integer vector shape")
+    delta=n-floating.ambiguity
     ambiguity_cost=float(delta@np.linalg.solve(floating.covariance_aa,delta))
     centers=conditional_baselines(floating,n)
     baselines=[];sphere_cost=0.;length_error=0.
@@ -85,27 +105,62 @@ def evaluate_integer(problem:TemporalProblem,floating:TemporalFloat,integer)->Te
     return TemporalCandidate(n,baselines,reduced,ambiguity_cost,sphere_cost,full,floating.residual_objective,error,length_error)
 
 def solve_temporal(problem:TemporalProblem,lambda_library:str|Path,*,initial_candidates:int=8,
-                   node_limit:int=100000,timeout_s:float=60.)->TemporalResult:
+                   node_limit:int=100000,timeout_s:float=60.,
+                   distinct_ambiguity_labels:tuple[str,...]|None=None)->TemporalResult:
+    """Find two best integer classes, retaining all historical nuisance integers.
+
+    With selected labels, vectors with equal selected coordinates form one class;
+    its score is the minimum FULL objective over all historical integer values.
+    The complete original-dimensional search remains in place.
+    """
     if initial_candidates<2 or node_limit<1 or not math.isfinite(timeout_s) or timeout_s<=0:
         raise TemporalModelError("invalid search budget")
     started=time.monotonic();floating=joint_float(problem);_require_separable(problem,floating)
+    labels=tuple(problem.ambiguity_labels if distinct_ambiguity_labels is None else distinct_ambiguity_labels)
+    if not labels or len(set(labels))!=len(labels) or any(x not in problem.ambiguity_labels for x in labels):
+        raise TemporalModelError("distinct ambiguity labels must be nonempty, unique, and present in the problem")
+    distinct_indices=tuple(problem.ambiguity_labels.index(x) for x in labels)
     evaluated={};nodes=leaves=returned=0;frontier_bound=None
+    def ordered_classes():
+        classes={}
+        for candidate in evaluated.values():
+            key=tuple(int(candidate.ambiguity[i]) for i in distinct_indices)
+            previous=classes.get(key)
+            if previous is None or (candidate.reduced_cost,tuple(candidate.ambiguity)) < (previous.reduced_cost,tuple(previous.ambiguity)):
+                classes[key]=candidate
+        return sorted(classes.values(),key=lambda x:(x.reduced_cost,tuple(x.ambiguity)))
     def finish(reason,certified):
-        ordered=sorted(evaluated.values(),key=lambda x:(x.reduced_cost,tuple(x.ambiguity)))
+        ordered=ordered_classes()
         best=ordered[0] if ordered else None;second=ordered[1] if len(ordered)>1 else None
         certificate=TemporalCertificate(certified,reason,initial_candidates,returned,nodes,leaves,len(evaluated),
             frontier_bound,None if best is None else best.reduced_cost,None if second is None else second.reduced_cost,
-            time.monotonic()-started,False)
+            time.monotonic()-started,False,False,labels,len(ordered),
+            "two_best_full_integer_vectors" if distinct_ambiguity_labels is None else "two_best_selected_integer_classes")
         return TemporalResult(best,second,certificate,floating)
     bridge=RTKLIBLambdaBridge(lambda_library)
     seeds=bridge.candidates(floating.ambiguity,floating.covariance_aa,initial_candidates);returned=len(seeds)
     reduced=bridge.decorrelate(floating.ambiguity,floating.covariance_aa)
+    checked_integer_vector(reduced.transformation,name="LAMBDA transformation")
     for seed in seeds:
-        key=tuple(int(x) for x in seed.ambiguity)
-        evaluated[key]=evaluate_integer(problem,floating,seed.ambiguity)
+        seed_integer=checked_integer_vector(seed.ambiguity,name="LAMBDA seed")
+        key=tuple(int(x) for x in seed_integer)
+        evaluated[key]=evaluate_integer(problem,floating,seed_integer)
         if time.monotonic()-started>=timeout_s:return finish("TIMEOUT_DURING_SEED_EVALUATION",False)
-    if len(evaluated)<2:return finish("INSUFFICIENT_SEEDS",False)
-    incumbent=sorted(x.reduced_cost for x in evaluated.values())[1]
+    if len(ordered_classes())<2:
+        # A finite upper bound needs two DISTINCT classes. Perturb an active
+        # original integer coordinate, never restrict the search to these seeds.
+        base=min(evaluated.values(),key=lambda x:x.reduced_cost).ambiguity.copy()
+        for sign in (-1,1):
+            extra=base.copy()
+            value=int(extra[distinct_indices[0]])+sign
+            if abs(value)>MAX_EXACT_INTEGER:continue
+            extra[distinct_indices[0]]=value
+            key=tuple(int(x) for x in extra)
+            if key not in evaluated:evaluated[key]=evaluate_integer(problem,floating,extra)
+            if time.monotonic()-started>=timeout_s:return finish("TIMEOUT_DURING_CLASS_SEED_EVALUATION",False)
+            if len(ordered_classes())>=2:break
+    if len(ordered_classes())<2:return finish("INSUFFICIENT_DISTINCT_CLASSES",False)
+    incumbent=ordered_classes()[1].reduced_cost
     m=problem.ambiguity_count
     qbb=floating.covariance[m:,m:];qbz=floating.covariance_ba@reduced.transformation
 
@@ -150,19 +205,22 @@ def solve_temporal(problem:TemporalProblem,lambda_library:str|Path,*,initial_can
             original=np.linalg.solve(reduced.transformation.T.astype(float),np.asarray(suffix,float))
             rounded=np.rint(original)
             if not np.allclose(original,rounded,rtol=0.,atol=1e-7):raise TemporalModelError("unimodular integer transform failed")
+            rounded=checked_integer_vector(rounded,name="LAMBDA back-transformed candidate")
             key=tuple(int(v) for v in rounded)
             if key not in evaluated:
                 candidate=evaluate_integer(problem,floating,rounded)
                 if not math.isclose(candidate.ambiguity_cost,ambiguity_bound,rel_tol=2e-7,abs_tol=2e-7):
                     raise TemporalModelError("tree integer metric mismatch")
                 evaluated[key]=candidate
-                incumbent=sorted(x.reduced_cost for x in evaluated.values())[1]
+                incumbent=ordered_classes()[1].reduced_cost
             continue
         assigned=np.asarray(suffix,float)
         cross=float(upper[index,index+1:]@(reduced.float_ambiguity[index+1:]-assigned)) if len(assigned) else 0.
         diagonal=float(upper[index,index]);center=float(reduced.float_ambiguity[index]+cross/diagonal)
         radius=math.sqrt(max(0.,incumbent-ambiguity_bound+tolerance))/abs(diagonal)
         low=math.ceil(center-radius);high=math.floor(center+radius)
+        if low < -MAX_EXACT_INTEGER or high > MAX_EXACT_INTEGER:
+            return finish("INTEGER_REPRESENTATION_DOMAIN_EXCEEDED",False)
         # Lazy Schnorr-Euchner traversal; do not materialize an unbounded range.
         left=math.floor(center);right=left+1
         while left>=low or right<=high:
