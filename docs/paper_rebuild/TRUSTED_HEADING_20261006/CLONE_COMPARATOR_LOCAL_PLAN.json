@@ -1,0 +1,28 @@
+{
+  "schema": "trusted_heading.clone_comparator.local_plan.v1",
+  "authorization": "root: one pure synthetic three-arm attribution/all-SKIP scenario",
+  "unique_pytest_cases": 1,
+  "max_pytest_invocations_initial": 1,
+  "real_comparisons": 0,
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "reference_reads": 0,
+  "case": "constant original/old fallback yaw10, NULL9, PAIR9 -> original A may pass but foot recommendation false; PAIR8 -> positive attributable effect; missing exact-key and empty-error diagnostics",
+  "parameters": "uses original metric/tolerance/event helpers unchanged; strict zero-delta report distinct from V3 engineering tolerance",
+  "output_schema": "trusted_heading.clone_navigation_comparison.v1",
+  "command": [
+    "python3",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/paper_rebuild/test_compare_clone_window_navigation.py"
+  ],
+  "source_pins": {
+    "scripts/paper_rebuild/carrier_phase/compare_clone_window_navigation.py": "911e3d37e4af37100a5c99ed56e67424a08c365a14c4d55d45f386154c10aaad",
+    "scripts/paper_rebuild/carrier_phase/compare_full_window_navigation.py": "194532eb7c77ecc4758663a3ea25227ab3020de3c9a228a9eebe09f48f1fda30",
+    "tests/paper_rebuild/test_compare_clone_window_navigation.py": "87e02ae3639ce80344d30a6b1b2b295a67451a39907dd5131c2c1b2ef0ad077c"
+  },
+  "log_alias": "<SCRATCH_ROOT>/TRUSTED_HEADING_20261006/CLONE_COMPARATOR_LOCAL_ATTEMPT01"
+}
