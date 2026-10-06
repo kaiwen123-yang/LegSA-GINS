@@ -1,0 +1,22 @@
+{
+  "scope": "read-only sealed BY2O matched-control error series and fallback events",
+  "new_native": 0,
+  "new_evaluator": 0,
+  "reference_reads": 0,
+  "carrier_attempts": 12,
+  "carrier_accepted": 8,
+  "first_attempt_s": 3495.3980000019073,
+  "last_attempt_s": 3507.3980000019073,
+  "control_absolute_yaw_p99_deg": 12.497939940606056,
+  "samples_at_or_above_p99": 766,
+  "first_tail_s": 3322.153428,
+  "last_tail_s": 3327.411051,
+  "tail_samples_after_first_carrier_attempt": 0,
+  "source_paths": [
+    "<NAV_STAGE>/NATIVE/BY2O__CARRIER_FALLBACK/HEADING_SOURCE_EVENTS.csv",
+    "<NAV_STAGE>/EVALUATION/BY2O__PVT_CONTROL/FROZEN_EVALUATOR/error_series.csv"
+  ],
+  "identities": "original ALL_NATIVE_SEALED.json and EVALUATION_COMPLETE.json files maps; no modified outputs",
+  "parsing": "first diagnostic CSV read lacked utf-8-sig and failed on BOM time header; corrected read succeeded, no scientific algorithm rerun",
+  "use_for_tuning": false
+}
