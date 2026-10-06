@@ -1,0 +1,160 @@
+{
+  "schema": "trusted_heading.rawx_fault.readout_receipt.v1",
+  "registered_input_commit": "8f4bc5d716b46b019757e369966d0b4cdb74a6cd",
+  "scratch_alias": "<TRUSTED_HEADING_SCRATCH>/RAWX_FAULT_READOUT_ATTEMPT01",
+  "source_alias": "<TRUSTED_HEADING_SCRATCH>/RAWX_FAULT_ATTEMPT01",
+  "raw_reference_algorithm_calls_during_readout": 0,
+  "files": {
+    "RAWX_FAULT_ATTEMPT01/PREPARED/COMPLETE.json": "6ddce0411e1fd182cac983d6d9fea0db21ca6dc1278e49cdcb914fb85f8cbcf0",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/COMPLETE.json": "b6ad72593658e2f22bfc9853178aab5647b5f1f8acf948c2bc8e0bcc4e1b7992",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/SUMMARY.json": "84f81aafcecd0f7f1729bf16c53ed317b024ed97b01b4ec0da70146596e92ec2",
+    "RAWX_FAULT_ATTEMPT01/PREPARED/SUMMARY.json": "cf9012cc5fdf603068c2febe800197c4d1d24451b40994ecfd7bf8f03674b3e5",
+    "RAWX_FAULT_DRIVER_ATTEMPT01/PREPARE_RESULT.json": "dcc7fa07b229a9d7f79b3b4682f31d7363ff2ce9cc295f8381d729daff9d990c",
+    "RAWX_FAULT_DRIVER_ATTEMPT01/FRONTEND_RESULT.json": "fc5c6fde6ea0a082f49fa60fe7bf9f3e71ec5b9c77173144bb3d2ca758349b49",
+    "RAWX_FAULT_ATTEMPT01/PREPARED/BY2/MODEL_OUTPUT_SEAL.json": "40f109ba78f7ea4b1de343b4ab6f337d52ab871fcfe5ab49dbb31b24089f04f2",
+    "RAWX_FAULT_ATTEMPT01/PREPARED/BY2/MODELS/PLAN.json": "768ad37181acdaab7407a2e25e58eebb081460132b0083d793d3c0db97c4a623",
+    "RAWX_FAULT_ATTEMPT01/PREPARED/BY2/MODELS/RAWX_OBSERVATION_OVERLAY.json": "034b5279b4046ddb438c251f8510884dda238573ca950fdea53f7f4b936eec8f",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2/OUTPUT_SEAL.json": "1132b1667977c4c7ae78c9311f5376284e46ba51af2743e0ba74e1b67944eabb",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2/EPOCHS.csv": "a8317b0086999947e9edf37d9af5ba4518b4812384bb6ab9969979cc5b098da8",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2/CARRIER.csv": "4b5e85c40cba71a4bc77102e0c7227de8631a99edfb8e3707a751e9b0d1d5fbe",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2/ACQUISITIONS.csv": "f98b2907b3af45e708beaa62fed1014d3348e201f1c9c4164c0c9d0df91c1a86",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2/SUMMARY.json": "7d65a26fdced95e5d146ff1ea83c530a88ff2ba0634219a6a543a35ebb8576f7",
+    "RAWX_FAULT_ATTEMPT01/PREPARED/BY2/MODELS/ARC_EVENTS.json": "19862038825a0b37681f0554e4878972d1c85c9992dab9bec85aec170c8b3a8b",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2/SOURCE_DETAILS.jsonl.gz": "e34ad4d91d421e4ee5d941d3c5fa3a9063a576303a087924fa797b6fdd3889d5",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2/SLOT_DETAILS.jsonl.gz": "74c8fe4d90d50238d4d0a7323049d0ca6a41909a23365e75cde4134e97274f7d",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2/OUTPUT_SEAL.json": "4546567c49e8b2fa75d1028549c677156bfaa73ca0fd3eac04af73785eb291c5",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2/EPOCHS.csv": "19a9743b5ace5f54cfe447f49a5d1424e45b62aafd40965c5eeedb40d9d879cf",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2/CARRIER.csv": "0856069e1068643bb2c89b9bce2a6a2d7c21f0cba7872354c5739f2541dd132a",
+    "RAWX_FAULT_ATTEMPT01/PREPARED/BY2H/MODEL_OUTPUT_SEAL.json": "02b91be89bbe86d5d4a7196998b5129a76d8f3945003bfd5b4f6877d777aa832",
+    "RAWX_FAULT_ATTEMPT01/PREPARED/BY2H/MODELS/PLAN.json": "2e1a549ccf3d0650754bc74e5eb7ff620e78487e1d966698b4b44080ecd60da6",
+    "RAWX_FAULT_ATTEMPT01/PREPARED/BY2H/MODELS/RAWX_OBSERVATION_OVERLAY.json": "8e2723eb760afb34c3c60dac7c29e02595f6ff6642d442dcb0b129cd1081af88",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2H/OUTPUT_SEAL.json": "dac7875285cdc1f098d845983ffb545f5c292a075fe8bff59112b600685891e3",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2H/EPOCHS.csv": "2384397f36cd39bbd6b2ff9df2bfc48b53d2b76555d366da7c5bbf7dbee4c664",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2H/CARRIER.csv": "68c0747df4f190793c7ba3971c006d311f805c29a4d878ac299095e80869679b",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2H/ACQUISITIONS.csv": "c879f5f62838521064e3d7c49adad272ea358e2abe9c3df6c3002ce2b6fb42ca",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2H/SUMMARY.json": "753e1a7219ac160636d0aefa516f84c9f32963a23a01fefdc88d77cc3fbfc9f7",
+    "RAWX_FAULT_ATTEMPT01/PREPARED/BY2H/MODELS/ARC_EVENTS.json": "eae20e81142302074f4eb487f2842fd8f35cf3b5bf66cae9b8951197365aa307",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2H/SOURCE_DETAILS.jsonl.gz": "81b82f64e5e8dd6766679d11ab1b0842a50d4c399f348e8d542f4ddb6b35ed0c",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2H/SLOT_DETAILS.jsonl.gz": "4937a1a306b768354fabed24f9fc13e8d247f8ed9620db2ebfb46f044b43f7ea",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2H/OUTPUT_SEAL.json": "7b1be4aadece94fbec649666083f2598b47237e5b0275bb30a63565460b581a4",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2H/EPOCHS.csv": "93b8c250f7928a6b5847f491ee9da42862b26fb3e91e43af83a93b686365a0ad",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2H/CARRIER.csv": "2e4b938cf805f3e3390d41d96905b28700d94f1e5d48ed54725a6df537e51a95",
+    "RAWX_FAULT_ATTEMPT01/PREPARED/BY2O/MODEL_OUTPUT_SEAL.json": "d37a867d2b07bdc91b87cb7842b9319507f28d401c85dc401fc923f1513e803f",
+    "RAWX_FAULT_ATTEMPT01/PREPARED/BY2O/MODELS/PLAN.json": "67be4c0ec9355062ac389b1651c12912e4a9d39d559247e2ccab9816959da0d4",
+    "RAWX_FAULT_ATTEMPT01/PREPARED/BY2O/MODELS/RAWX_OBSERVATION_OVERLAY.json": "72019925908d77717b07b1a3b3be938c20c2aabdf5427bce608d9d90b1e5e2b6",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2O/OUTPUT_SEAL.json": "82a6eb2189c3823e413a577a595558695e0ff8457ede37ed1f54aed288ddfdff",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2O/EPOCHS.csv": "6a87b53d6a15266802ebea8fbd3325ac259c23a6b8237d5cae0193d0a836d8c7",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2O/CARRIER.csv": "73a5e5d492537fe58d639e8935af2744aff62e8f441fde40f5781f6a26b5066e",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2O/ACQUISITIONS.csv": "5cd240b87611e8d63122af4d34669c49b4a293274916b4f891592512aaf112ef",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2O/SUMMARY.json": "6da508b632ad47dbf00d307361a8a287408384fcbca1aee587d117e548661eaa",
+    "RAWX_FAULT_ATTEMPT01/PREPARED/BY2O/MODELS/ARC_EVENTS.json": "bd6d5630206ff9beeb2fb03913ccfb34f522eecd66eb51d8a0e84173ed5f26e5",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2O/SOURCE_DETAILS.jsonl.gz": "1650bda62c727f8ec31f496f1a769e449988a442595d00f1f79b3b054ddf028c",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2O/SLOT_DETAILS.jsonl.gz": "764f9c5dce504da59dc8e9c5bb9777c1b4a6944f08a281d40d553182d1623e99",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2O/OUTPUT_SEAL.json": "02f9e0f268b52bd4d77cd81aeda8791b30c910edc0c6b65e9350717de56bc1a4",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2O/EPOCHS.csv": "0be709c565f5c783a9bb15d0abe5ca8dc9bed5aa0318daca9ec64bf93ce5e394",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2O/CARRIER.csv": "3237d1783dca269ab43a7a50b65e0a7ebdd64456b56fb3d9e679167ca2426094",
+    "RAWX_FAULT_ATTEMPT01/PREPARE_COMPLETE.json": "389b5201e128bb10464a9e642c952efbbcb3923af82eff9c47fa2634d3f4f9f5",
+    "RAWX_FAULT_ATTEMPT01/FRONTEND_COMPLETE.json": "59abb397f0e82ae93ac7284f40ffc3627d4f9521c628999686aff36ca00da873"
+  },
+  "stream_receipts": {
+    "RAWX_FAULT_ATTEMPT01/PREPARED/BY2/MODELS/ARC_EVENTS.json": {
+      "sha256": "19862038825a0b37681f0554e4878972d1c85c9992dab9bec85aec170c8b3a8b",
+      "bytes": 87316693,
+      "records": 200630,
+      "full_payload_passes": 1,
+      "prior_header_peek_bytes": 2200
+    },
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2/SOURCE_DETAILS.jsonl.gz": {
+      "sha256": "e34ad4d91d421e4ee5d941d3c5fa3a9063a576303a087924fa797b6fdd3889d5",
+      "compressed_bytes": 2935723,
+      "records": 134,
+      "full_payload_passes": 1
+    },
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2/SLOT_DETAILS.jsonl.gz": {
+      "sha256": "74c8fe4d90d50238d4d0a7323049d0ca6a41909a23365e75cde4134e97274f7d",
+      "compressed_bytes": 5009528,
+      "records": 1370,
+      "full_payload_passes": 1
+    },
+    "RAWX_FAULT_ATTEMPT01/PREPARED/BY2H/MODELS/ARC_EVENTS.json": {
+      "sha256": "eae20e81142302074f4eb487f2842fd8f35cf3b5bf66cae9b8951197365aa307",
+      "bytes": 88186626,
+      "records": 203601,
+      "full_payload_passes": 1,
+      "prior_header_peek_bytes": 2200
+    },
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2H/SOURCE_DETAILS.jsonl.gz": {
+      "sha256": "81b82f64e5e8dd6766679d11ab1b0842a50d4c399f348e8d542f4ddb6b35ed0c",
+      "compressed_bytes": 3097556,
+      "records": 121,
+      "full_payload_passes": 1
+    },
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2H/SLOT_DETAILS.jsonl.gz": {
+      "sha256": "4937a1a306b768354fabed24f9fc13e8d247f8ed9620db2ebfb46f044b43f7ea",
+      "compressed_bytes": 5174853,
+      "records": 1350,
+      "full_payload_passes": 1
+    },
+    "RAWX_FAULT_ATTEMPT01/PREPARED/BY2O/MODELS/ARC_EVENTS.json": {
+      "sha256": "bd6d5630206ff9beeb2fb03913ccfb34f522eecd66eb51d8a0e84173ed5f26e5",
+      "bytes": 128541393,
+      "records": 305331,
+      "full_payload_passes": 1,
+      "prior_header_peek_bytes": 2200
+    },
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2O/SOURCE_DETAILS.jsonl.gz": {
+      "sha256": "1650bda62c727f8ec31f496f1a769e449988a442595d00f1f79b3b054ddf028c",
+      "compressed_bytes": 3398347,
+      "records": 202,
+      "full_payload_passes": 1
+    },
+    "RAWX_FAULT_ATTEMPT01/FRONTEND/BY2O/SLOT_DETAILS.jsonl.gz": {
+      "sha256": "764f9c5dce504da59dc8e9c5bb9777c1b4a6944f08a281d40d553182d1623e99",
+      "compressed_bytes": 5550936,
+      "records": 1885,
+      "full_payload_passes": 1
+    }
+  },
+  "violations": [],
+  "scripts": {
+    "extract.py": "9f8635e4453238bdecaab2cad4aa48a70aab09d281c89d3822ffdfdfc51a5bdf",
+    "summarize.py": "42bf7c7cdbd06f4ca7c9ffa84a69566d0dc255c55f02bdfd0d8618b354e25fa1"
+  },
+  "cached_derived": {
+    "EXTRACTED.json": {
+      "sha256": "528fc2b052503bcf0fa0d24fea0e2af680f1b829af8a11c0ef4164f92c777e8d",
+      "bytes": 76717588
+    }
+  },
+  "stream_scope": "Each new SOURCE_DETAILS and SLOT_DETAILS gzip was decoded/hash-checked in one full streaming pass; ARC_EVENTS likewise one full pass after a prior 2200-byte header peek. Later readout uses local derived cache only.",
+  "clean_scope": "Only existing clean EPOCHS/CARRIER CSV and their existing seals reused; no rerun, no reference.",
+  "validation": "All exported and internal valid provider receipts checked for source identity, five consecutive slots, source availability, exact common origins, live physical arc labels, original raw-cost threshold and non-truth flags. No numerical estimator was re-executed.",
+  "time_semantics": "Offline observation event replay; virtual worker does not count final serialization and disk I/O; recorded service availability is not validated end-to-end realtime.",
+  "readout_only_correction": "Optional parent seal check first used prepare_complete_sha256; actual key prepared_complete_sha256 corrected, zero algorithm/data-model execution; initial tool error remains in transcript.",
+  "outputs": {
+    "COUNTS.csv": {
+      "sha256": "98674bb47b915ced6222368c13ba3b137e60025e7bcf8026bc2d15b7f805a8a1",
+      "bytes": 655
+    },
+    "EVENTS.csv": {
+      "sha256": "4403b695c736914dbf3dce77baf6b585c5ff42b1fc130cd0bed12fa9c4780f79",
+      "bytes": 1576
+    },
+    "PHYSICAL_PROVENANCE.csv": {
+      "sha256": "2161c66b29907a4dd63be2c357a6a2da625ffbd36d46512f26ee2d4c384091c7",
+      "bytes": 1632
+    },
+    "RECOVERY.csv": {
+      "sha256": "3f4fecd6634de4c58dc7816bd064553f35ec909607c14f428e8da5f337171bf2",
+      "bytes": 2667
+    },
+    "RESULTS.md": {
+      "sha256": "dc08756a6cab5d5189f8bf80c1e7119cf2988db9d3a44ec0aab8ee3429f94a2a",
+      "bytes": 7729
+    },
+    "SUMMARY.json": {
+      "sha256": "41d15579710eb9aaf03b1fee782d643de25ae2a9b4ba51ac1b50ebd81cff307c",
+      "bytes": 48345
+    }
+  }
+}

@@ -1,0 +1,4 @@
+sequence,rows,clean_points_reused,fault_points,point_count_delta,coverage,sources_attempted,complete_enumerations,incomplete,activation_overcap,raw_candidates,length_necessary_candidates,longest_unavailable_slots_s,receipts_checked,receipt_violations,prefirst_rows,prefirst_semantic_mismatches,prefirst_numeric_difference,max_slot_wall_s
+BY2,1370,168,206,38,0.15036496350364964,134,99,0,0,8156,102,68.60000000000001,261,0,342,0,0.0,0.40283540999996603
+BY2H,1350,319,310,-9,0.22962962962962963,121,93,0,0,8632,88,46.6,394,0,337,0,0.0,0.17883364900001197
+BY2O,1885,166,169,3,0.0896551724137931,202,197,0,0,9348,117,104.0,201,0,471,0,0.0,0.19180400600009762

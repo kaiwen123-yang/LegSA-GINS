@@ -1,0 +1,10 @@
+sequence,event,pre_eligible_rx2_signals,post_eligible_rx2_signals,matched_pre_post_signals,same_rx2_arc_token_count,new_rx2_arc_token_count,during_rx2_eligible,during_rx2_record_count,source_physical_end_events,old_pre_event_source_exports_after_start,old_source_export_semantics,first_post_point_source_index,first_post_point_new_source,first_post_point_selection_all_after_end
+BY2,F1,1,1,1,0,1,0,5,0,4,F3 continuation allowed if physical arcs continuous; F1 can use unaffected source; F2 must be zero,334,False,False
+BY2,F2,41,44,40,0,40,0,370,0,0,F3 continuation allowed if physical arcs continuous; F1 can use unaffected source; F2 must be zero,694,True,True
+BY2,F3,1,1,1,0,1,4,5,0,0,F3 continuation allowed if physical arcs continuous; F1 can use unaffected source; F2 must be zero,1084,True,True
+BY2H,F1,1,1,1,0,1,0,5,0,0,F3 continuation allowed if physical arcs continuous; F1 can use unaffected source; F2 must be zero,349,True,True
+BY2H,F2,45,49,45,0,45,0,390,2,0,F3 continuation allowed if physical arcs continuous; F1 can use unaffected source; F2 must be zero,684,True,True
+BY2H,F3,1,1,1,1,0,5,5,0,23,F3 continuation allowed if physical arcs continuous; F1 can use unaffected source; F2 must be zero,984,False,False
+BY2O,F1,1,1,1,0,1,0,5,0,0,F3 continuation allowed if physical arcs continuous; F1 can use unaffected source; F2 must be zero,,,
+BY2O,F2,21,21,21,0,21,0,410,0,0,F3 continuation allowed if physical arcs continuous; F1 can use unaffected source; F2 must be zero,,,
+BY2O,F3,1,1,1,1,0,5,5,0,7,F3 continuation allowed if physical arcs continuous; F1 can use unaffected source; F2 must be zero,1384,False,False
