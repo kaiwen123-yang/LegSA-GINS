@@ -1,5 +1,8 @@
 # AR 对照文献资格与两历元最小研究边界
 
+
+出版信息更正（2026-10-06）：正式出版记录为 **ION ITM 2023，pp.591–596，DOI [10.33012/2023.18673](https://doi.org/10.33012/2023.18673)**，以[官方 ION 元数据](https://www.ion.org/publications/abstract.cfm?articleID=18673)为准。作者机构 PDF 文件名 `ArvizuMedinaVila_ITM_2022.pdf` 原样保留，只作为所读版本的来源标识，不再据文件名认定发表年；既有阅读范围、历史执行身份、日期和结果不变。
+
 日期：2026-10-06。状态：**文献局部核查与算法设计；新对照尚未完成实现资格**。
 
 ## 1. 本次范围与决策
@@ -80,7 +83,7 @@
 
 ### 3.1 PD-PAR：方向精度适配，资格尚未闭合
 
-补充来源：J. Manuel Castro-Arvizu、Daniel Medina、Jordi Vilà-Valls，**Precision-Aided Partial Ambiguity Resolution Scheme for GNSS Attitude Determination**, ION ITM 2022。[作者机构 6 页全文](https://elib.dlr.de/193961/1/ArvizuMedinaVila_ITM_2022.pdf)。核查 p1–4 的模型/方法和 p6 参考；p3 式(17) 未选整数为实值，式(19)–(22) 用条件姿态协方差选集，p4 Algorithm 1 按子集精度和 FF-RT 迭代。未重新验证作者全部仿真。它有明确新对照价值，但不是本项目创新来源的空白区。
+补充来源：J. Manuel Castro-Arvizu、Daniel Medina、Jordi Vilà-Valls，**Precision-Aided Partial Ambiguity Resolution Scheme for GNSS Attitude Determination**, ION ITM 2023。[作者机构 6 页全文](https://elib.dlr.de/193961/1/ArvizuMedinaVila_ITM_2022.pdf)。核查 p1–4 的模型/方法和 p6 参考；p3 式(17) 未选整数为实值，式(19)–(22) 用条件姿态协方差选集，p4 Algorithm 1 按子集精度和 FF-RT 迭代。未重新验证作者全部仿真。它有明确新对照价值，但不是本项目创新来源的空白区。
 
 **单基线适配问题（以下是本项目数学分析，不是原文已有结论）：** 一条已知机体系基线 `r` 的方向观测 `b=Rr` 不识别绕 `r` 的旋转。不能直接以完整四元数协方差的 `trace(Pq)` 作为双天线质量指标，也不能把奇异信息矩阵伪逆中不可观方向的零特征值解释成零不确定度。四元数还须区分四分量协方差与三维局部扰动协方差。
 

@@ -1,0 +1,138 @@
+{
+  "schema": "arc_support_saved_output_aggregation.v1",
+  "source": "ARC_SUPPORT_AUDIT_RESULTS.csv + <TRUSTED_HEADING>/ARC_SUPPORT_AUDIT_ATTEMPT01/WINDOW_DETAILS.jsonl.gz",
+  "source_csv_sha256": "83e5dd6533c66a1a285ae858860f4e7e2b3bda85d15c14aefcad3412314aaa7e",
+  "not_a_new_input_audit": true,
+  "first_failure_reason_basis_windows": {
+    "tdcp_only": 153,
+    "metadata_only": 371,
+    "mixed": 11
+  },
+  "reason_definition": "Union of receiver-prefixed first physical-loss reasons; strip receiver prefix, exclude LINK_NOT_QUALIFIED/ARC_TOKEN_CHANGED/INELIGIBLE derived flags; TDCP-prefixed vs remaining metadata codes. Window-level, overlapping and not distinct fault events.",
+  "covariance_ratio_definition": "Each window statistic is maximum over its five original future slots relative to same-slot all-current-N-known free-baseline GLS covariance. Percentiles use numpy linear interpolation.",
+  "groups": {
+    "selected_groups": {
+      "0:0:0": 1689,
+      "0:3:0": 220,
+      "2:0:0": 1470,
+      "2:6:0": 443,
+      "3:0:0": 3138,
+      "3:2:0": 186
+    },
+    "final_conditional_phase_groups": {
+      "0:0:0": 1527,
+      "0:3:0": 170,
+      "2:0:0": 1353,
+      "2:6:0": 396,
+      "3:0:0": 2873,
+      "3:2:0": 152
+    }
+  },
+  "subsets": {
+    "all_windows": {
+      "windows": 1191,
+      "minimum_phase_rows": {
+        "2": 2,
+        "3": 17,
+        "4": 100,
+        "5": 416,
+        "6": 656
+      },
+      "minimum_phase_rank": {
+        "2": 2,
+        "3": 1189
+      },
+      "max_trace_loss_vs_all_current_N_known": {
+        "count": 1191,
+        "min": 1.3706517273893841,
+        "median": 2.3991749654540646,
+        "p95_linear": 9.4226531281012,
+        "max": 5839.655506340076
+      },
+      "max_lambda_loss_vs_all_current_N_known": {
+        "count": 1191,
+        "min": 1.258557448636497,
+        "median": 2.3882345431475884,
+        "p95_linear": 10.853650473441778,
+        "max": 10542.71223969933
+      }
+    },
+    "original_label_failure": {
+      "windows": 535,
+      "minimum_phase_rows": {
+        "2": 2,
+        "3": 17,
+        "4": 100,
+        "5": 416
+      },
+      "minimum_phase_rank": {
+        "2": 2,
+        "3": 533
+      },
+      "max_trace_loss_vs_all_current_N_known": {
+        "count": 535,
+        "min": 1.4265610821490216,
+        "median": 2.943241804457543,
+        "p95_linear": 15.65139542973897,
+        "max": 5839.655506340076
+      },
+      "max_lambda_loss_vs_all_current_N_known": {
+        "count": 535,
+        "min": 1.2813991623663359,
+        "median": 3.0563153181287404,
+        "p95_linear": 20.51049202054931,
+        "max": 10542.71223969933
+      }
+    },
+    "conditional_support_upper_bound": {
+      "windows": 516,
+      "minimum_phase_rows": {
+        "4": 100,
+        "5": 416
+      },
+      "minimum_phase_rank": {
+        "3": 516
+      },
+      "max_trace_loss_vs_all_current_N_known": {
+        "count": 516,
+        "min": 1.4265610821490216,
+        "median": 2.87564190557845,
+        "p95_linear": 12.209249399264507,
+        "max": 91.42472887626451
+      },
+      "max_lambda_loss_vs_all_current_N_known": {
+        "count": 516,
+        "min": 1.2813991623663359,
+        "median": 2.979151058991298,
+        "p95_linear": 14.416856196828082,
+        "max": 119.20015057878322
+      }
+    },
+    "failed_support_insufficient": {
+      "windows": 19,
+      "minimum_phase_rows": {
+        "2": 2,
+        "3": 17
+      },
+      "minimum_phase_rank": {
+        "2": 2,
+        "3": 17
+      },
+      "max_trace_loss_vs_all_current_N_known": {
+        "count": 19,
+        "min": 4.272904930551215,
+        "median": 19.97036317001735,
+        "p95_linear": 5839.176002278645,
+        "max": 5839.655506340076
+      },
+      "max_lambda_loss_vs_all_current_N_known": {
+        "count": 19,
+        "min": 5.2032220428380285,
+        "median": 24.70261260029833,
+        "p95_linear": 10542.49887471414,
+        "max": 10542.71223969933
+      }
+    }
+  },
+  "solver_admission_glrt_evaluator_calls": 0
+}

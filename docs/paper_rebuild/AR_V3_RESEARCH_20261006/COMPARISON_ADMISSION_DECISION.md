@@ -1,5 +1,8 @@
 # R5：新增 AR 对照的纳入决策
 
+
+出版信息更正（2026-10-06）：正式出版记录为 **ION ITM 2023，pp.591–596，DOI [10.33012/2023.18673](https://doi.org/10.33012/2023.18673)**，以[官方 ION 元数据](https://www.ion.org/publications/abstract.cfm?articleID=18673)为准。作者机构 PDF 文件名 `ArvizuMedinaVila_ITM_2022.pdf` 原样保留，只作为所读版本的来源标识，不再据文件名认定发表年；既有阅读范围、历史执行身份、日期和结果不变。
+
 日期：2026-10-06。范围：最多两项额外对照的原文资格及实施边界；不新增第三方法，不运行算法，不评价 R6 尚未封存的结果。本文是研究决策记录，不是论文正文。
 
 **当前决策：只保留 PD-PAR 与 2013 rate-gyro-integral 两项有条件候选；两者的本项目新实现、数值运行、正式实测纳入数均为 0。** 文献资格不等于实现资格，未实现不计失败或零固定率。若 R6 的登记机制证据不足，结束本轮两历元运动支线及为该支线配套的新增实现扩张，保存未决与反例；不为凑齐两行比较而另造算法。此条件式决策不预判 R6，也不否定两个文献方法。
@@ -9,7 +12,7 @@
 - [已有文献资格](LITERATURE_QUALIFICATION.md)：附件八篇的实际读取范围、既有 C-LAMBDA/C-WLS/RTKLIB 覆盖以及仅保留两项新增候选的依据。其 §3–5 是本决策的直接前序。
 - [目标合同](GOAL_CONTRACT.md)：R5 的最多两项限制、R6→R7 条件与原 V3 实测范围。
 - [R6 预注册](MOTION_PAIR_PREREGISTRATION.md)和[数学边界](MOTION_BOUND_DESIGN.md)：当前两历元无向夹角内核的限定问题；不能作为以下作者方法已经实现的证据。
-- Castro-Arvizu、Medina、Vilà-Valls，Precision-Aided Partial Ambiguity Resolution Scheme for GNSS Attitude Determination，ION ITM 2022：[作者机构全文](https://elib.dlr.de/193961/1/ArvizuMedinaVila_ITM_2022.pdf)。本次在 WSL 从内存读取 PDF 第 2–4 页，复核式(8)–(22)、Algorithm 1 及仿真设置；未重新验证作者仿真，也未检索作者代码。
+- Castro-Arvizu、Medina、Vilà-Valls，Precision-Aided Partial Ambiguity Resolution Scheme for GNSS Attitude Determination，ION ITM 2023：[作者机构全文](https://elib.dlr.de/193961/1/ArvizuMedinaVila_ITM_2022.pdf)。本次在 WSL 从内存读取 PDF 第 2–4 页，复核式(8)–(22)、Algorithm 1 及仿真设置；未重新验证作者仿真，也未检索作者代码。
 - Zhu、Li、Wang、Hu、Wu，Rate-Gyro-Integral Constraint for Ambiguity Resolution in GNSS Attitude Determination Applications，Sensors 13(6):7979–7999，2013，DOI 10.3390/s130607979：[出版方](https://www.mdpi.com/1424-8220/13/6/7979)、[同篇开放全文存档](https://pmc.ncbi.nlm.nih.gov/articles/PMC3720121/)。出版方本次直接请求返回 403，改在 WSL 读取该篇 Europe PMC 原文 XML；复核 §2–4、§5–6 相关定义及 Appendix，未保存 PDF/XML 或批量提取附件。通过 DOI 查找该篇存档，不增加新方法候选。
 
 下文“原文确认”指上述文章的明确模型或实施内容；“本项目分析”指针对双天线和当前研究内核的推导或实施判断。原文实验中的成功定义不能自动移植到 V3。
