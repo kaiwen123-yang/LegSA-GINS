@@ -45,7 +45,7 @@ def source_snapshot(code):
  paths.append(Path(__file__))
  return {str(p.relative_to(code)):digest(p) for p in paths}
 
-def checked_navigation_manifest(path,roots,*,start_s,first_epoch_s=None,expected_cutoff=None,expected_lineage=None):
+def checked_navigation_manifest(path,roots,*,start_s,first_epoch_s=None,expected_cutoff=None,expected_lineage=None,allow_empty_navigation=False):
  """Admit an explicitly bounded broadcast prefix, never an inherited full NAV.
 
  The cutoff describes the latest source-message availability admitted by the
@@ -70,7 +70,26 @@ def checked_navigation_manifest(path,roots,*,start_s,first_epoch_s=None,expected
   if not np.isfinite(first_epoch_s):raise ValueError("FINITE_FIRST_EPOCH_REQUIRED")
   if cutoff>first_epoch_s:raise ValueError("NAVIGATION_PREFIX_AFTER_FIRST_EPOCH")
  entries=manifest.get("navigation")
- if not isinstance(entries,list) or not entries:raise ValueError("NAVIGATION_PREFIX_EMPTY")
+ if not isinstance(entries,list):raise ValueError("INVALID_NAVIGATION_PREFIX_LIST")
+ availability=manifest.get("navigation_availability","AVAILABLE")
+ outcomes=manifest.get("conversion_outcomes")
+ if outcomes is not None:
+  if not isinstance(outcomes,list) or len(outcomes)!=2 or not all(isinstance(x,dict) for x in outcomes):
+   raise ValueError("INVALID_PREFIX_CONVERSION_OUTCOMES")
+  if {x.get("receiver") for x in outcomes if isinstance(x,dict)}!={1,2}:
+   raise ValueError("PREFIX_CONVERSION_RECEIVERS_REQUIRED")
+  if any(type(x.get("returncode")) is not int or x["returncode"]!=0
+         or type(x.get("navigation_output_present")) is not bool for x in outcomes):
+   raise ValueError("PREFIX_CONVERSION_NOT_SUCCESSFUL")
+  if {x["receiver"] for x in outcomes if x["navigation_output_present"]} != {
+      x.get("receiver") for x in entries if isinstance(x,dict)}:
+   raise ValueError("PREFIX_CONVERSION_NAVIGATION_MISMATCH")
+ if not entries:
+  if not allow_empty_navigation:raise ValueError("NAVIGATION_PREFIX_EMPTY")
+  if availability!="NO_NAV_OUTPUT_AT_PREFIX" or outcomes is None:
+   raise ValueError("EMPTY_NAVIGATION_EXPLICIT_QUALIFICATION_REQUIRED")
+ elif availability!="AVAILABLE":
+  raise ValueError("NONEMPTY_NAVIGATION_AVAILABILITY_MISMATCH")
  nav=[]
  for row in entries:
   if not isinstance(row,dict) or not isinstance(row.get("path"),str) or not isinstance(row.get("sha256"),str):
@@ -83,7 +102,19 @@ def checked_navigation_manifest(path,roots,*,start_s,first_epoch_s=None,expected
   "causal_cutoff_relative_s":float(cutoff),"requested_start_s":float(start_s),
   "first_processed_rawx_s":None if first_epoch_s is None else float(first_epoch_s),
   "causality_guard":"PREFIX_AVAILABILITY_AT_OR_BEFORE_REQUESTED_AND_ACTUAL_START",
-  "inherited_full_history_navigation_opened":False}
+  "inherited_full_history_navigation_opened":False,
+  "navigation_availability":availability,"conversion_outcomes":outcomes}
+
+
+class UnavailableBroadcastProvider:
+ """Explicit empty causal snapshot; never fabricates a satellite state."""
+ status="NO_NAV_OUTPUT_AT_PREFIX"
+ def __init__(self):self.last_qualification={}
+ def __enter__(self):return self
+ def __exit__(self,*args):return False
+ def state(self,identity,*args,**kwargs):
+  self.last_qualification[raw.identity_text(identity)]={"status":self.status}
+  raise raw.RawBackendError(self.status)
 
 
 class NavigationReplay:
@@ -93,16 +124,17 @@ class NavigationReplay:
  at or before the current receiver epoch may open its manifest/NAV payload.
  Every epoch uses one provider snapshot throughout SPP and all DD families.
  """
- def __init__(self,roots,library,*,start_s,manifest=None,schedule=None):
+ def __init__(self,roots,library,*,start_s,manifest=None,schedule=None,allow_empty_navigation=False):
   if (manifest is None)==(schedule is None):
    raise ValueError("EXACTLY_ONE_NAVIGATION_MANIFEST_OR_SCHEDULE_REQUIRED")
   if not np.isfinite(start_s):raise ValueError("FINITE_START_REQUIRED")
   self.roots=roots;self.library=library;self.start_s=float(start_s)
+  self.allow_empty_navigation=bool(allow_empty_navigation)
   self.provider=None;self.index=None;self.last_time=None;self.current_audit=None
   self.switches=[];self.qualification={};self.initial_paths=None;self.expected_lineage=None
   self.schedule_registry_sha256=None
   if schedule is None:
-   self.initial_paths,audit=checked_navigation_manifest(manifest,roots,start_s=start_s)
+   self.initial_paths,audit=checked_navigation_manifest(manifest,roots,start_s=start_s,allow_empty_navigation=self.allow_empty_navigation)
    self.entries=[{"cutoff_relative_s":audit["causal_cutoff_relative_s"],"manifest":str(manifest),"manifest_sha256":audit["sha256"]}]
    self.input_audit=audit
   else:
@@ -156,10 +188,11 @@ class NavigationReplay:
    if digest(path)!=row["manifest_sha256"]:raise ValueError("NAVIGATION_SCHEDULE_MANIFEST_IDENTITY_CHANGED")
    paths,audit=checked_navigation_manifest(path,self.roots,start_s=time_s,first_epoch_s=time_s,
        expected_cutoff=row["cutoff_relative_s"],expected_lineage=(None
-        if index==0 and row.get("reuse_initial_prefix") is True else self.expected_lineage))
+        if index==0 and row.get("reuse_initial_prefix") is True else self.expected_lineage),
+       allow_empty_navigation=self.allow_empty_navigation)
    # Open the new admitted prefix before retiring the old handle. On error the
    # run stops: no silent stale/full-history fallback or future retry occurs.
-   replacement=CheckedRtklibProvider(self.library,paths)
+   replacement=CheckedRtklibProvider(self.library,paths) if paths else UnavailableBroadcastProvider()
    replacement.__enter__()
    if self.provider is not None:
     self._remember_qualification();self.provider.__exit__(None,None,None)
@@ -168,7 +201,8 @@ class NavigationReplay:
    if "schedule" not in self.input_audit:self.input_audit["first_processed_rawx_s"]=float(time_s)
   self.last_time=float(time_s)
   return self.provider, {"schedule_index":index,"causal_cutoff_relative_s":float(self.entries[index]["cutoff_relative_s"]),
-      "manifest":self.current_audit["manifest"],"manifest_sha256":self.current_audit["sha256"]}
+      "manifest":self.current_audit["manifest"],"manifest_sha256":self.current_audit["sha256"],
+      "navigation_availability":self.current_audit["navigation_availability"]}
 
 
 def build_with_pivot_policy(e1,e2,provider,anchor,*,groups,pivots,arc_ids,policy="fixed"):
@@ -210,7 +244,8 @@ def prepare(a):
  # fallback for an integration run.
  roots=aliases(a.roots)
  replay=NavigationReplay(roots,Path(roots["<EXT_REPRO_BUILD>"])/"lib/liblegsa_rtklib_bridge.so",
-   start_s=a.start,manifest=getattr(a,"navigation_manifest",None),schedule=getattr(a,"navigation_schedule",None))
+   start_s=a.start,manifest=getattr(a,"navigation_manifest",None),schedule=getattr(a,"navigation_schedule",None),
+   allow_empty_navigation=getattr(a,"allow_empty_navigation",False))
  anchor_policy=AnchorPolicy(max_hold_age_s=getattr(a,"max_anchor_hold_s",0.))
  anchor_state=CausalRawCodeAnchor(anchor_policy)
  pivot_policy=getattr(a,"pivot_policy","fixed")
@@ -308,6 +343,7 @@ def prepare(a):
    "base_time":base,"inputs":inputs,"pairing":pairing,"records":records,"lambda_library":str(libroot/"librtklib_legsa.so"),
    "baseline_length_m":a.length,"max_gap_s":a.max_gap,"tdcp_limit_cycles":a.tdcp_limit,
    "pivot_policy":pivot_policy,"anchor_policy":asdict(anchor_policy),
+   "allow_empty_navigation":getattr(a,"allow_empty_navigation",False),
    "prefixes":[1,5,10],"families":FAMILIES,"cross_epoch_covariance":"assumed independent",
    "cross_signal_SD_covariance":"RAWX independent SD default; shared pivot DD propagated exactly",
    "real_integer_truth_available":False,"reference_reads":0,"scope":"development; inspection history is declared by the calling trial contract",
@@ -354,6 +390,7 @@ def main():
  p.add_argument("--length",type=float,default=.350);p.add_argument("--max-gap",type=float,default=.21)
  nav=p.add_mutually_exclusive_group()
  nav.add_argument("--navigation-manifest",type=Path);nav.add_argument("--navigation-schedule",type=Path)
+ p.add_argument("--allow-empty-navigation",action="store_true")
  p.add_argument("--pivot-policy",choices=["fixed","reselect_when_missing"],default="fixed")
  p.add_argument("--max-anchor-hold-s",type=float,default=0.)
  p.add_argument("--active-classes",action="store_true")

@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "src"))
 from prepare_navigation import scan, nav_records
 
-PLAN_REL = "docs/paper_rebuild/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_PLAN.json"
+PLAN_REL = "docs/paper_rebuild/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_R2_PLAN.json"
 SCRIPT_REL = "scripts/paper_rebuild/carrier_phase/full_window_prepare.py"
 
 
@@ -133,7 +133,7 @@ def main(args):
     state = dict(status="PREFLIGHT", converter_calls=0, prepare_calls=0,
                  integer_search_calls=0, navigation_solver_calls=0, evaluator_calls=0,
                  reference_reads=0, old_full_history_NAV_reads=0, converter_build_calls=0,
-                 prefixes_created=0, prefixes_reused=0, sequences_completed=[])
+                 prefixes_created=0, prefixes_reused=0, converter_outcomes_reused=0, sequences_completed=[])
     started = time.monotonic()
     emit(out / "STATE.json", state)
     try:
@@ -141,7 +141,8 @@ def main(args):
         registration(args.registration_commit, plan)
         emit(out / "REGISTERED_PLAN.json", plan)
         roots = read(args.roots)["aliases"]
-        roots = {**roots, "<OLD_CARRIER_ROOT>": str(args.carrier_root.resolve())}
+        roots = {**roots, "<OLD_CARRIER_ROOT>": str(args.carrier_root.resolve()),
+                 "<PRIOR_ATTEMPT>": str(args.prior_attempt.resolve())}
         # The child real_trial script resolves package imports without changing
         # its source; it must use this checked-out source, not another install.
         os.environ["PYTHONPATH"] = str(ROOT / "src")
@@ -181,6 +182,21 @@ def main(args):
         require(initial["converter"]["executable_sha256"] == plan["converter_sha256"],
                 "converter metadata differs")
         check_pin(converter, plan["converter_sha256"])
+        prior = plan["reuse_conversion_outcome"]
+        for row in prior["artifacts"]:
+            path = expand(row["path"], roots)
+            require(path.stat().st_size == row["bytes"], "prior attempt artifact size differs")
+            check_pin(path, row["sha256"])
+        old_conversion = read(expand(prior["invocation"], roots))
+        require(old_conversion["status"] == "COMPLETED" and old_conversion["returncode"] == 0,
+                "prior converter was not successful")
+        require(old_conversion["argv"][0] == str(converter), "prior converter identity differs")
+        old_nav = Path(old_conversion["argv"][old_conversion["argv"].index("-n")+1])
+        require(old_nav.resolve().is_relative_to(args.prior_attempt.resolve())
+                and not old_nav.exists(), "prior NO_NAV outcome changed")
+        old_page = read(expand(prior["page_qualification"], roots))["1"]
+        require(old_page["cutoff_relative_s"] == 66. and old_page["last_kept_rawx_relative_s"] <= 66.,
+                "prior prefix cutoff differs")
         inputs = {}
         for spec in plan["sequences"]:
             name = spec["sequence"]
@@ -250,25 +266,46 @@ def main(args):
                         "wrapper_script_sha256": sha(ROOT / SCRIPT_REL)}
                     state["prefixes_reused"] += 1
                 else:
-                    navigation, commands, audits = [], [], {}
+                    navigation, commands, audits, outcomes = [], [], {}, []
                     for rx in (1, 2):
-                        payload, audit = scan(sources[rx], info["base_time"], cutoff)
-                        derived = prefix / f"gnss{rx}_rawx_e1b.ubx"
-                        derived.write_bytes(payload)
-                        audit["derived_stream_sha256"] = sha(derived)
+                        nav = prefix / f"broadcast_prefix_rx{rx}.nav"
+                        if name == "BY2" and cutoff == 66. and rx == 1:
+                            # Reuse the exact successful conversion with no NAV;
+                            # do not invoke or modify any file in ATTEMPT01.
+                            audit = old_page
+                            receipt = {**old_conversion, "reused": True,
+                                "original_invocation": prior["invocation"],
+                                "original_attempt_registration": prior["registration_commit"]}
+                            state["converter_outcomes_reused"] += 1
+                            emit(prefix / "REUSED_RX1_CONVERSION.json", receipt)
+                        else:
+                            payload, audit = scan(sources[rx], info["base_time"], cutoff)
+                            derived = prefix / f"gnss{rx}_rawx_e1b.ubx"
+                            derived.write_bytes(payload)
+                            audit["derived_stream_sha256"] = sha(derived)
+                            logdir = prefix / f"CONVERT_RX{rx}"
+                            logdir.mkdir()
+                            argv = [converter, "-r", "ubx", "-v", "3.04", "-o", prefix / f"unused_rx{rx}.obs",
+                                    "-n", nav, "-trace", "0", derived]
+                            receipt = invoke(argv, logdir, "converter", state, plan["budgets"])
+                        commands.append(receipt)
                         audits[str(rx)] = audit
                         emit(prefix / "PAGE_QUALIFICATION.json", audits)
-                        nav = prefix / f"broadcast_prefix_rx{rx}.nav"
-                        logdir = prefix / f"CONVERT_RX{rx}"
-                        logdir.mkdir()
-                        argv = [converter, "-r", "ubx", "-v", "3.04", "-o", prefix / f"unused_rx{rx}.obs",
-                                "-n", nav, "-trace", "0", derived]
-                        commands.append(invoke(argv, logdir, "converter", state, plan["budgets"]))
-                        require(nav.is_file(), "converter produced no NAV")
-                        navigation.append(dict(path=str(nav), sha256=sha(nav), receiver=rx,
-                            role="NEW_ALL_GNSS_CAUSAL_PREFIX_GAL_E1B_ONLY", records=dict(nav_records(nav))))
+                        present = nav.is_file()
+                        require(present or not nav.exists(), "NAV output exists but is not a regular file")
+                        outcome = dict(receiver=rx, returncode=0, navigation_output_present=present,
+                            status="AVAILABLE" if present else "NO_NAV_OUTPUT_AT_PREFIX",
+                            reused=bool(receipt.get("reused", False)))
+                        outcomes.append(outcome)
+                        if present:
+                            counts = dict(nav_records(nav))
+                            require(sum(counts.values()) > 0, "existing NAV file has no records; not a qualified absent output")
+                            navigation.append(dict(path=str(nav), sha256=sha(nav), receiver=rx,
+                                role="NEW_ALL_GNSS_CAUSAL_PREFIX_GAL_E1B_ONLY", records=counts))
                         emit(out / "STATE.json", state)
                     manifest = dict(navigation=navigation, converter=initial["converter"], commands=commands,
+                        navigation_availability="AVAILABLE" if navigation else "NO_NAV_OUTPUT_AT_PREFIX",
+                        conversion_outcomes=outcomes,
                         source="SAME_DATASET_PINNED_UBX_ALL_GNSS_PREFIX_GAL_E1B_ONLY",
                         cutoff_relative_s=cutoff, causal_cutoff_relative_s=cutoff,
                         old_full_history_navigation_loaded=False, old_nav_modified=False,
@@ -297,7 +334,7 @@ def main(args):
                     "--sequence", name, "--start", spec["window_s"][0], "--stop", spec["window_s"][1],
                     "--length", .35, "--max-gap", .21, "--tdcp-limit", .5,
                     "--max-anchor-hold-s", 20., "--pivot-policy", "reselect_when_missing",
-                    "--navigation-schedule", schedule]
+                    "--navigation-schedule", schedule, "--allow-empty-navigation"]
             invoke(argv, logdir, "prepare", state, plan["budgets"])
             seal_path = seqout / "MODEL_OUTPUT_SEAL.json"
             output_seal_sha = seal_models(models, seal_path, dict(
@@ -334,7 +371,7 @@ def main(args):
         registration(args.registration_commit, plan)
         for item in plan["native_dependencies"]:
             check_pin(expand(item["path"], roots), item["sha256"])
-        require(state["converter_calls"] == 74 and state["prepare_calls"] == 3
+        require(state["converter_calls"] == 73 and state["converter_outcomes_reused"] == 1 and state["prepare_calls"] == 3
                 and state["prefixes_created"] == 37 and state["prefixes_reused"] == 12,
                 "registered terminal invocation/prefix counts differ")
         state.update(status="COMPLETE", total_wall_s=time.monotonic()-started)
@@ -342,7 +379,7 @@ def main(args):
             caveat="input models only; no integer selection, FIX, navigation or independent truth qualification"))
         emit(out / "STATE.json", state)
         emit(out / "COMPLETE.json", dict(status="COMPLETE", registration_commit=args.registration_commit,
-            summary_sha256=sha(out / "SUMMARY.json"), converter_calls=74, prepare_calls=3))
+            summary_sha256=sha(out / "SUMMARY.json"), converter_calls=73, converter_outcomes_reused=1, prepare_calls=3))
     except BaseException as exc:
         state.update(status="FAILED_NO_RETRY", error=repr(exc), total_wall_s=time.monotonic()-started,
                      failure_scope="INPUT_MODEL_PREPARATION_NOT_NAVIGATION_ACCURACY")
@@ -360,7 +397,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    for key in ("roots", "carrier-root", "output"):
+    for key in ("roots", "carrier-root", "prior-attempt", "output"):
         parser.add_argument("--" + key, type=Path, required=True)
     parser.add_argument("--registration-commit", required=True)
     main(parser.parse_args())
