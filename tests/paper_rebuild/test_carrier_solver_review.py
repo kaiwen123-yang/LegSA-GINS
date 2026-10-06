@@ -198,6 +198,10 @@ def test_active_class_certificate_profiles_all_historical_integer_values(monkeyp
     class Bridge:
         def __init__(self, _): pass
         def candidates(self, mean, covariance, count):
+            if len(mean) != 3:
+                # This oracle deliberately tests poor full-dimensional seeds;
+                # its fixed mock does not supply the optional conditional seeds.
+                raise solver.LambdaBridgeError("conditional seeds unavailable in fixed mock")
             # Both seeds belong to the same active NEW/SHARED class.
             return [SimpleNamespace(ambiguity=np.array([1,-1,3])),
                     SimpleNamespace(ambiguity=np.array([3,-1,3]))]

@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from pathlib import Path
 import heapq,math,time
 import numpy as np
-from ..horizontal_literature.ext01_clambda import RTKLIBLambdaBridge,constrained_baseline
+from ..horizontal_literature.ext01_clambda import RTKLIBLambdaBridge,constrained_baseline,LambdaBridgeError
 from .temporal import TemporalProblem,TemporalFloat,TemporalModelError,joint_float,conditional_baselines,has_cross_epoch_covariance,positive_definite
 
 @dataclass(frozen=True)
@@ -41,6 +41,10 @@ class TemporalCertificate:
     distinct_ambiguity_labels: tuple[str,...]=()
     distinct_ambiguity_classes: int=0
     certificate_scope: str="two_best_full_integer_vectors"
+    conditional_seed_ils_calls: int=0
+    conditional_seed_candidates_evaluated: int=0
+    conditional_seed_failures: int=0
+    bound_cache_depths: int=0
 
 @dataclass(frozen=True)
 class TemporalResult:
@@ -104,6 +108,66 @@ def evaluate_integer(problem:TemporalProblem,floating:TemporalFloat,integer)->Te
     if length_error>1e-8:raise TemporalModelError("sphere subproblem violated baseline length")
     return TemporalCandidate(n,baselines,reduced,ambiguity_cost,sphere_cost,full,floating.residual_objective,error,length_error)
 
+def _condition_integer_coordinate(floating, index, value):
+    """Gaussian conditioning for FEASIBLE seed generation, never a certificate.
+
+    All other coordinates, including unselected/historical N, remain free here.
+    Their conditional integer seeds are lifted back to the original dimension
+    and scored by evaluate_integer with the exact registered sphere objective.
+    """
+    mean, q = floating.ambiguity, floating.covariance_aa
+    free = np.array([j for j in range(len(mean)) if j != index], dtype=int)
+    cross = q[free, index]
+    conditioned_mean = mean[free] + cross / q[index, index] * (value-mean[index])
+    conditioned_q = q[np.ix_(free, free)] - np.outer(cross, cross)/q[index, index]
+    return free, conditioned_mean, positive_definite(conditioned_q, "conditional seed Q")
+
+
+class _BaselineBoundCache:
+    """Cache depth-only Gaussian factors; each node still uses its own center.
+
+    The lower bound remains max(single-epoch marginal sphere bounds), never
+    their sum. Relaxed cross-epoch correlation is not discarded.
+    """
+    def __init__(self, problem, floating, reduced):
+        self.problem, self.floating, self.reduced = problem, floating, reduced
+        self.m = problem.ambiguity_count
+        self.qbb = floating.covariance[self.m:, self.m:]
+        self.qbz = floating.covariance_ba @ reduced.transformation
+        self.depths = {}
+
+    def parameters(self, depth):
+        if depth not in self.depths:
+            indices = np.arange(self.m-depth, self.m)
+            if depth:
+                qss = self.reduced.covariance[np.ix_(indices, indices)]
+                qbs = self.qbz[:, indices]
+                solved = np.linalg.solve(qss, qbs.T)
+                gain = solved.T
+                cov = self.qbb - qbs @ solved
+            else:
+                gain = np.zeros((len(self.floating.baseline), 0))
+                cov = self.qbb
+            cov = (cov+cov.T)*.5
+            maximum_eigenvalues = []
+            for ss in self.problem.baseline_slices:
+                q = positive_definite(cov[ss, ss], "relaxed baseline marginal")
+                maximum_eigenvalues.append(float(np.linalg.eigvalsh(q)[-1]))
+            self.depths[depth] = (indices, gain, cov, np.asarray(maximum_eigenvalues))
+        return self.depths[depth]
+
+    def __call__(self, suffix, ambiguity_bound):
+        indices, gain, cov, maximum_eigenvalues = self.parameters(len(suffix))
+        delta = np.asarray(suffix, float)-self.reduced.float_ambiguity[indices]
+        center = self.floating.baseline + gain @ delta
+        cheap = np.asarray([(float(np.linalg.norm(center[ss]))-self.problem.lengths[k])**2
+                            for k,ss in enumerate(self.problem.baseline_slices)]) / maximum_eigenvalues
+        k = int(np.argmax(cheap))
+        ss = self.problem.baseline_slices[k]
+        exact = constrained_baseline(center[ss], cov[ss,ss], float(self.problem.lengths[k])).objective
+        return float(ambiguity_bound+max(float(np.max(cheap)), exact))
+
+
 def solve_temporal(problem:TemporalProblem,lambda_library:str|Path,*,initial_candidates:int=8,
                    node_limit:int=100000,timeout_s:float=60.,
                    distinct_ambiguity_labels:tuple[str,...]|None=None)->TemporalResult:
@@ -121,6 +185,8 @@ def solve_temporal(problem:TemporalProblem,lambda_library:str|Path,*,initial_can
         raise TemporalModelError("distinct ambiguity labels must be nonempty, unique, and present in the problem")
     distinct_indices=tuple(problem.ambiguity_labels.index(x) for x in labels)
     evaluated={};nodes=leaves=returned=0;frontier_bound=None
+    conditional_calls=conditional_evaluated=conditional_failures=0
+    bound_cache=None
     def ordered_classes():
         classes={}
         for candidate in evaluated.values():
@@ -135,7 +201,11 @@ def solve_temporal(problem:TemporalProblem,lambda_library:str|Path,*,initial_can
         certificate=TemporalCertificate(certified,reason,initial_candidates,returned,nodes,leaves,len(evaluated),
             frontier_bound,None if best is None else best.reduced_cost,None if second is None else second.reduced_cost,
             time.monotonic()-started,False,False,labels,len(ordered),
-            "two_best_full_integer_vectors" if distinct_ambiguity_labels is None else "two_best_selected_integer_classes")
+            "two_best_full_integer_vectors" if distinct_ambiguity_labels is None else "two_best_selected_integer_classes",
+            conditional_seed_ils_calls=conditional_calls,
+            conditional_seed_candidates_evaluated=conditional_evaluated,
+            conditional_seed_failures=conditional_failures,
+            bound_cache_depths=0 if bound_cache is None else len(bound_cache.depths))
         return TemporalResult(best,second,certificate,floating)
     bridge=RTKLIBLambdaBridge(lambda_library)
     seeds=bridge.candidates(floating.ambiguity,floating.covariance_aa,initial_candidates);returned=len(seeds)
@@ -146,6 +216,39 @@ def solve_temporal(problem:TemporalProblem,lambda_library:str|Path,*,initial_can
         key=tuple(int(x) for x in seed_integer)
         evaluated[key]=evaluate_integer(problem,floating,seed_integer)
         if time.monotonic()-started>=timeout_s:return finish("TIMEOUT_DURING_SEED_EVALUATION",False)
+    if len(distinct_indices) < problem.ambiguity_count:
+        # Coarse classes can make the first LAMBDA seeds all equivalent. A
+        # one-coordinate change with every other integer held unchanged is a
+        # poor upper bound under strong ambiguity correlation. Instead condition
+        # on each selected coordinate's base +/- 1 and generate two integer
+        # candidates over ALL remaining coordinates. Only feasibility is used.
+        base=min(evaluated.values(),key=lambda x:x.reduced_cost).ambiguity.copy()
+        for index in distinct_indices:
+            for sign in (-1,1):
+                if time.monotonic()-started>=timeout_s:
+                    return finish("TIMEOUT_DURING_CONDITIONAL_SEED_EVALUATION",False)
+                value=int(base[index])+sign
+                if abs(value)>MAX_EXACT_INTEGER:continue
+                try:
+                    free,mean,covariance=_condition_integer_coordinate(floating,index,value)
+                    conditional_calls+=1
+                    seeds=bridge.candidates(mean,covariance,2)
+                except (LambdaBridgeError,np.linalg.LinAlgError,TemporalModelError):
+                    # An optional conditioning/ILS seed failure does not narrow
+                    # the exact search or manufacture a successful certificate.
+                    conditional_failures+=1
+                    continue
+                for seed in seeds:
+                    integer=checked_integer_vector(seed.ambiguity,name="conditional LAMBDA seed")
+                    if integer.shape!=(len(free),):
+                        raise TemporalModelError("conditional seed dimension mismatch")
+                    extra=base.copy();extra[index]=value;extra[free]=integer
+                    key=tuple(int(x) for x in extra)
+                    if key not in evaluated:
+                        evaluated[key]=evaluate_integer(problem,floating,extra)
+                        conditional_evaluated+=1
+                    if time.monotonic()-started>=timeout_s:
+                        return finish("TIMEOUT_DURING_CONDITIONAL_SEED_EVALUATION",False)
     if len(ordered_classes())<2:
         # A finite upper bound needs two DISTINCT classes. Perturb an active
         # original integer coordinate, never restrict the search to these seeds.
@@ -162,30 +265,8 @@ def solve_temporal(problem:TemporalProblem,lambda_library:str|Path,*,initial_can
     if len(ordered_classes())<2:return finish("INSUFFICIENT_DISTINCT_CLASSES",False)
     incumbent=ordered_classes()[1].reduced_cost
     m=problem.ambiguity_count
-    qbb=floating.covariance[m:,m:];qbz=floating.covariance_ba@reduced.transformation
-
-    def node_bound(suffix,ambiguity_bound):
-        # Relax all unassigned integers to real values. Conditioning on the
-        # assigned suffix gives a JOINT baseline Gaussian with cross-epoch
-        # covariance. A single-epoch marginal sphere is a valid lower bound
-        # on all-epoch constraints; SUMMING these marginal costs would be wrong.
-        if not suffix:
-            center=floating.baseline;cov=qbb
-        else:
-            indices=np.arange(m-len(suffix),m);qss=reduced.covariance[np.ix_(indices,indices)]
-            qbs=qbz[:,indices];delta=np.asarray(suffix,float)-reduced.float_ambiguity[indices]
-            center=floating.baseline+qbs@np.linalg.solve(qss,delta)
-            cov=qbb-qbs@np.linalg.solve(qss,qbs.T)
-        cov=(cov+cov.T)*.5
-        cheap=[]
-        for k,ss in enumerate(problem.baseline_slices):
-            q=positive_definite(cov[ss,ss],"relaxed baseline marginal")
-            cheap.append((float(np.linalg.norm(center[ss]))-problem.lengths[k])**2/float(np.linalg.eigvalsh(q)[-1]))
-        k=int(np.argmax(cheap));ss=problem.baseline_slices[k]
-        # One exact marginal bound, and all cheap marginal bounds. Their MAX,
-        # never their sum, remains a valid descendant bound.
-        exact=constrained_baseline(center[ss],cov[ss,ss],float(problem.lengths[k])).objective
-        return float(ambiguity_bound+max(max(cheap),exact))
+    bound_cache=_BaselineBoundCache(problem,floating,reduced)
+    node_bound=bound_cache
 
     weight=np.linalg.solve(reduced.covariance,np.eye(m));weight=(weight+weight.T)*.5
     upper=np.linalg.cholesky(weight).T

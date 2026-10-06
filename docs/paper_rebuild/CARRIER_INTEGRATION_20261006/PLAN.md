@@ -27,3 +27,27 @@ All carrier statistics initially use the declared RAWX working covariance. Actua
 Run four native replays/evaluations, once the full 100..340 carrier frontend is ready: C0 scalar dual-PVT yaw, C1 dual-PVT baseline vector, C2 full-current-integer-class carrier vector, C3 preselected-partial-integer-class carrier vector. All four use the same explicit research runtime contract, AB1110 (RD/SA/RP enabled, HV disabled), exact-time chronological event handling and past-only non-repeated RP/RD source observations. They share normal provider inputs and the existing non-AR-cold-start initialization. Their navigation output times remain the original IMU times.
 
 This is a controlled intermediate integration test, not a reproduction of the archived all-module V3 numbers and not completion of the entire author goal. Prior provider inspection found that old NED HV interpolates commercial GNSS yaw and may access the next sample; the HV-off comparison avoids that hidden yaw dependency while the carrier path is verified. The later complete algorithm must explicitly resolve or replace that dependency when restoring the full leg-aiding path, rather than silently narrowing the final method to HV-off. C1 uses its source-backed current raw provider covariance and k_b=1; both carrier arms use the same registered measurement qualification and covariance floor.
+
+## Search optimization and full-span execution update
+
+The 20-call 180–200 s integration pilot is preserved with zero qualified observations.
+The conditional-integer feasible seed generator and depth-only bound cache change
+search efficiency, not the objective, covariance, gates, or certificate. Small
+exhaustive tests and three separately stored real-window performance checks pass.
+
+Run the same registered 100,102,...,338 s full domain under this improved solver
+in separate FULL_SPAN_FULL and FULL_SPAN_PARTIAL outputs. Each mode has 120
+attempts; the original pilot is retained as the earlier implementation result.
+The 10 overlapping pilot windows are explicit repeat performance/completeness
+checks under changed search code, not additional independent evidence.
+Two independent processes use one BLAS thread each. No measured-navigation
+reference is opened for candidate search or measurement selection.
+
+In addition to the registered HV-off comparison, evaluate a second, common
+body-HV group (AB1111) after the native body observation interface is complete.
+Use raw recording body-FLU support from the prior internal position/rpy/velocity
+audit; no GNSS yaw rotation. All four arms share scale 1, engineering std 0.20 m/s,
+xy-only observation, .20 s update schedule, past-only source selection, and the
+same shared initialization. This is not a calibrated body-velocity covariance or
+an independent holdout of the prior coordinate audit. No parameter is selected
+from new navigation errors. Default V3 remains unchanged.
