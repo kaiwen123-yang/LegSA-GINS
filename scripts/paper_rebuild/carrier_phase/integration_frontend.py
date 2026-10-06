@@ -16,6 +16,13 @@ from legsa_gins.paper_rebuild.carrier_phase.partial import PartialPolicy,prepare
 from legsa_gins.paper_rebuild.carrier_phase.admission import AdmissionConfig,CausalAdmissionSession
 from legsa_gins.paper_rebuild.carrier_phase.measurement import CSV_FIELDS,unavailable_measurement,diagnose_validated_window,qualify_current_baseline
 
+def timed_search_call(record, solve, *args, **kwargs):
+    began = time.monotonic()
+    try:
+        return solve(*args, **kwargs)
+    finally:
+        record["search_attempt_elapsed_s"] = time.monotonic() - began
+
 def verify_solver_backend(result, backend):
     certificate = result.certificate
     expected = "python" if backend["kind"] == "python_sphere" else "native_scalar"
@@ -32,6 +39,9 @@ def run(a):
     plan=json.loads((a.trial/"PLAN.json").read_text())
     a.output.mkdir(parents=True,exist_ok=True);cases_dir=a.output/"cases";cases_dir.mkdir(exist_ok=True)
     policy=PartialPolicy(max_ambiguities=a.partial_max_ambiguities)
+    formatted_starts = [f"{start:07.2f}" for start in a.starts]
+    if len(set(formatted_starts)) != len(formatted_starts):
+        raise ValueError("formatted acquisition case identities collide")
     if a.likelihood == "selected-support" and a.modes != ["partial"]:
         raise ValueError("selected-support likelihood requires partial mode alone")
     if a.likelihood == "selected-support":
@@ -67,7 +77,8 @@ def run(a):
             event_time=float(rows[-1]["time_s"]) if rows else float(start+2.)
             record={"case_id":case,"mode":mode,"window_start_s":start,
               "input_contract":identity["model_plan_sha256"],"execution_commit":revision(a.code),
-              "status":"UNAVAILABLE","integer_truth_available":False,"search_called":False}
+              "status":"UNAVAILABLE","integer_truth_available":False,"search_called":False,
+              "presearch_unavailable":False}
             measurement=unavailable_measurement(event_time,"UNAVAILABLE_INPUT")
             try:
                 if len(rows)!=10:raise ValueError("fixed window requires exactly ten real epochs")
@@ -89,11 +100,11 @@ def run(a):
                                       "nuisance_and_selected_integers":problem.ambiguity_count,
                                       "selected":len(search.selection.selected_labels)}),flush=True)
                     if a.likelihood == "selected-support":
-                        selected_result=solve_selected_likelihood(search,plan["lambda_library"],
+                        selected_result=timed_search_call(record,solve_selected_likelihood,search,plan["lambda_library"],
                             node_limit=a.nodes,timeout_s=a.timeout,**solver_options)
                         result=selected_result.result
                     else:
-                        result=solve_partial(search,plan["lambda_library"],node_limit=a.nodes,
+                        result=timed_search_call(record,solve_partial,search,plan["lambda_library"],node_limit=a.nodes,
                             timeout_s=a.timeout,**solver_options)
                     verify_solver_backend(result,backend)
                     record["search"]={"certificate":serial(result.certificate),"best":serial(result.best),
@@ -108,7 +119,7 @@ def run(a):
                     print(json.dumps({"event":"SEARCH_START","case":case,"call":calls,
                                       "nuisance_and_selected_integers":problem.ambiguity_count,
                                       "selected":len(active)}),flush=True)
-                    result=solve_temporal(problem,plan["lambda_library"],distinct_ambiguity_labels=active,
+                    result=timed_search_call(record,solve_temporal,problem,plan["lambda_library"],distinct_ambiguity_labels=active,
                                           node_limit=a.nodes,timeout_s=a.timeout,**solver_options)
                     verify_solver_backend(result,backend)
                     source={"certificate":serial(result.certificate),"best":serial(result.best),
@@ -131,6 +142,8 @@ def run(a):
                 record["status"]=measurement.status
             except (ValueError,np.linalg.LinAlgError) as ex:
                 record["failure"]=type(ex).__name__+":"+str(ex)
+                if not record["search_called"]:
+                    record["presearch_unavailable"]=True
                 measurement=unavailable_measurement(event_time,"UNAVAILABLE:"+str(ex))
                 record["status"]=measurement.status
             record["measurement"]=serial(measurement);record["csv_row"]=measurement.csv_row()

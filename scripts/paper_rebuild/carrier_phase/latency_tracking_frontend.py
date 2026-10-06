@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Idealized single-worker replay using saved whole CILS certificate durations.
+"""Idealized single-worker replay using explicitly sourced saved search durations.
 
 No search is rerun. Preparation, IO, validation, catch-up and tracking take zero
 simulated time. This is NOT a wall-clock real-time implementation or benchmark.
@@ -11,7 +11,71 @@ import hashlib
 import json
 import math
 import os
+from statistics import median
 from pathlib import Path
+
+
+CERTIFICATE_COST = "CERTIFICATE_ELAPSED"
+FAILED_ATTEMPT_COST = "FAILED_SEARCH_ATTEMPT_TIMER"
+NO_SEARCH_COST = "NO_CILS_PRESELECTION_UNAVAILABLE"
+
+
+def recorded_service_cost(record):
+    """Classify saved service evidence; never synthesize a missing search duration.
+
+    A presearch failure is explicit zero CILS work, not a zero-duration attempt.
+    Preparation remains an explicitly unmodelled cost. Failed attempted searches
+    need their positive whole-call timer when no normal certificate was returned.
+    """
+    called = record.get("search_called")
+    presearch = record.get("presearch_unavailable", False)
+    measurement = record.get("measurement", {})
+    if not isinstance(measurement, dict):
+        raise ValueError("invalid recorded measurement schema")
+    valid = measurement.get("valid")
+    search = record.get("search", {})
+    if (not isinstance(called, bool) or not isinstance(presearch, bool)
+            or not isinstance(valid, bool) or not isinstance(search, dict)):
+        raise ValueError("invalid recorded search/measurement schema")
+    certificate = search.get("certificate")
+    if valid and (not called or not isinstance(certificate, dict)
+                  or certificate.get("global_optimum_certified") is not True):
+        raise ValueError("valid measurement requires its global search certificate")
+    if not called:
+        if not presearch or valid or certificate is not None:
+            raise ValueError("no-search record needs explicit invalid presearch-unavailable evidence")
+        if record.get("search_attempt_elapsed_s") not in (None, 0):
+            raise ValueError("presearch-unavailable record cannot contain attempted-search time")
+        return 0., NO_SEARCH_COST
+    if presearch:
+        raise ValueError("attempted search conflicts with presearch-unavailable flag")
+    if certificate is not None:
+        if not isinstance(certificate, dict):
+            raise ValueError("malformed search certificate")
+        value, source, positive = certificate.get("elapsed_s"), CERTIFICATE_COST, False
+    else:
+        value, source, positive = record.get("search_attempt_elapsed_s"), FAILED_ATTEMPT_COST, True
+    if (isinstance(value, bool) or not isinstance(value, (int, float))
+            or not math.isfinite(value) or value < 0 or (positive and value <= 0)):
+        raise ValueError("missing or invalid recorded search duration: " + source)
+    return float(value), source
+
+
+def opportunity_cadence(jobs):
+    """Describe offered selection-ready times; rounding here never schedules jobs."""
+    times = sorted(float(job.selected_at) for job in jobs)
+    if not times or not all(math.isfinite(t) for t in times) or len(set(times)) != len(times):
+        raise ValueError("cadence requires unique finite selection-ready times")
+    differences = [b-a for a,b in zip(times,times[1:])]
+    nominal = round(median(differences), 6) if differences else None
+    return dict(opportunities=len(times), first_selected_at_s=times[0], last_selected_at_s=times[-1],
+        spacing_min_s=min(differences) if differences else None,
+        spacing_median_s=median(differences) if differences else None,
+        spacing_max_s=max(differences) if differences else None,
+        nominal_spacing_s=nominal,
+        cadence_tolerance_s=1e-5,
+        uniform_within_tolerance=all(abs(x-nominal)<=1e-5 for x in differences) if differences else None,
+        scheduling_uses_original_unrounded_times=True)
 
 
 @dataclass(frozen=True)
@@ -20,14 +84,18 @@ class RecordedJob:
     selected_at: float
     validation_times: tuple
     elapsed_s: float
+    cost_source: str = CERTIFICATE_COST
 
     def __post_init__(self):
         values = (self.selected_at, self.elapsed_s, *self.validation_times)
         if (len(self.validation_times) != 5 or not all(math.isfinite(x) for x in values)
                 or self.elapsed_s < 0 or self.validation_times[0] <= self.selected_at
                 or any(b <= a for a, b in zip(self.validation_times, self.validation_times[1:]))
-                or not math.isfinite(self.completion)):
-            raise ValueError("invalid original times or recorded certificate elapsed")
+                or not math.isfinite(self.completion)
+                or self.cost_source not in (CERTIFICATE_COST, FAILED_ATTEMPT_COST, NO_SEARCH_COST)
+                or (self.cost_source == NO_SEARCH_COST and self.elapsed_s != 0)
+                or (self.cost_source == FAILED_ATTEMPT_COST and self.elapsed_s <= 0)):
+            raise ValueError("invalid original times or recorded service elapsed")
 
     @property
     def completion(self):
@@ -56,13 +124,19 @@ class SerialService:
         self.offered.add(job.case_id)
         self.last_ready = time_s
         event = dict(case_id=job.case_id, selection_ready_s=time_s,
-            recorded_cils_elapsed_s=job.elapsed_s, worker_busy_until_before_s=self.busy_until
+            recorded_cils_elapsed_s=job.elapsed_s, cost_source=job.cost_source,
+            recorded_case_had_cils_attempt=job.cost_source != NO_SEARCH_COST,
+            simulated_cils_attempt_started=False, worker_busy_until_before_s=self.busy_until
             if math.isfinite(self.busy_until) else None)
         if time_s < self.busy_until:
             return {**event, "action":"BUSY_DROP_NO_QUEUE"}
         self.busy_until = job.completion
+        if job.cost_source == NO_SEARCH_COST:
+            return {**event, "action":"PRESEARCH_UNAVAILABLE_NO_CILS",
+                    "service_completion_s":job.completion}
         self.pending.append(job)
-        return {**event, "action":"SEARCH_LAUNCHED", "service_completion_s":job.completion,
+        return {**event, "action":"SEARCH_LAUNCHED", "simulated_cils_attempt_started":True,
+                "service_completion_s":job.completion,
                 "original_validation_end_s":job.validation_end,
                 "publication_not_before_s":job.available_after}
 
@@ -204,9 +278,11 @@ def run(args):
         integer_truth_available=False, lifetime_false_fix_probability=None,
         replay_kind="IDEALIZED_RECORDED_CILS_SERVICE_COST",
         real_time_implementation=False, wall_clock_realtime_validated=False,
-        cost_field="search.certificate.elapsed_s", worker_count_per_mode=1,
+        cost_field="search.certificate.elapsed_s normally; search_attempt_elapsed_s only for failed no-certificate attempts; explicit no-CILS presearch failures have zero CILS work",
+        worker_count_per_mode=1,
         multi_mode_disclosure="Each mode is a separate one-worker methodological replay, not concurrent deployment on a shared CPU; resource contention is unmodelled.",
-        selection_opportunity="ORIGINAL_FIFTH_SELECTION_EPOCH_EVERY_TWO_SECONDS",
+        selection_opportunity="ORIGINAL_FIFTH_SELECTION_EPOCH_PER_REGISTERED_WINDOW",
+        opportunity_cadence_by_mode={}, registered_cost_sources_by_mode={},
         worker_policy="BUSY_DROP_NO_QUEUE_FINISH_RELEASES_WORKER_IMMEDIATELY",
         owner_policy="INCUMBENT_AT_ENTRY_OWNS_FAILURE_EPOCH_NO_QUEUE_NO_RESURRECTION",
         publication_policy="FIRST_RAW_SLOT_GE_MAX_COMPLETION_ORIGINAL_VALIDATION_END_CURRENT_ONLY",
@@ -216,7 +292,7 @@ def run(args):
         metadata_disclosure="Original saved case JSON is read as recorded-cost simulation input. Outcome/status never chooses launch or drop.",
         time_domain_s=[plan["records"][0]["time_s"],plan["records"][-1]["time_s"]], modes={})
     args.output.mkdir(parents=True, exist_ok=False)
-    emit(args.output/"PLAN.json", manifest)
+    registered = {}
     for mode in args.modes:
         # Only timestamps define opportunities; neither status nor residuals enter scheduling.
         original_schedule = acquisition_schedule(summary, plan, mode)
@@ -231,19 +307,23 @@ def run(args):
             rec = json.loads(data)
             if rec["case_id"] != cid or rec["mode"] != mode or rec["input_contract"] != contract["model_plan_sha256"]:
                 raise ValueError("original acquisition case identity mismatch")
-            # Missing/rejected/uncertified results do NOT get a free or zero-cost task.
-            if not rec["search_called"]:
-                raise ValueError("every registered opportunity requires recorded search service time")
-            elapsed = rec["search"]["certificate"]["elapsed_s"]
+            elapsed, cost_source = recorded_service_cost(rec)
             future = tuple(float(r["time_s"]) for r in plan["records"] if selected_at < r["time_s"] <= end)
-            job = RecordedJob(cid,float(selected_at),future,float(elapsed))
+            job = RecordedJob(cid,float(selected_at),future,float(elapsed),cost_source)
             if selected_at in jobs:
                 raise ValueError("duplicate selection-ready time")
             jobs[selected_at], records[cid], pins[cid] = job, rec, sha
+        registered[mode] = jobs, records, pins
+        manifest["opportunity_cadence_by_mode"][mode] = opportunity_cadence(jobs.values())
+        manifest["registered_cost_sources_by_mode"][mode] = dict(Counter(j.cost_source for j in jobs.values()))
+    emit(args.output/"PLAN.json", manifest)
+    for mode in args.modes:
+        jobs, records, pins = registered[mode]
         service = SerialService()
         owner = AvailabilityOwner(unavailable_measurement)
         history, valid_times, started_origins = [], [], []
         counts, service_counts, release_counts, arrival_counts = Counter(), Counter(), Counter(), Counter()
+        serviced_cost_sources = Counter()
         csv_path = args.output/("CARRIER_LATENCY_TRACKED_"+mode.upper()+".csv")
         with csv_path.open("x",newline="") as csv_file, (args.output/(mode.upper()+"_EVENTS.jsonl")).open("x") as events, (args.output/(mode.upper()+"_SCHEDULE.jsonl")).open("x") as schedule_file:
             writer = csv.DictWriter(csv_file,fieldnames=CSV_FIELDS,lineterminator="\n")
@@ -253,12 +333,15 @@ def run(args):
                 if now in jobs:
                     action = service.offer(jobs[now], now)
                     service_counts[action["action"]] += 1
+                    if action["action"] != "BUSY_DROP_NO_QUEUE":
+                        serviced_cost_sources[action["cost_source"]] += 1
                     schedule_file.write(json.dumps(action,allow_nan=False)+"\n")
                 arrivals = service.arrivals(now)
                 for job in arrivals:
                     schedule_file.write(json.dumps(dict(action="RESULT_ARRIVAL",case_id=job.case_id,
                         service_completion_s=job.completion,original_validation_end_s=job.validation_end,
-                        publication_not_before_s=job.available_after,arrival_raw_slot_s=now),allow_nan=False)+"\n")
+                        publication_not_before_s=job.available_after,arrival_raw_slot_s=now,
+                        cost_source=job.cost_source),allow_nan=False)+"\n")
                 reason = None
                 try:
                     model = load_model(args.trial,row,contract["family"])
@@ -299,6 +382,9 @@ def run(args):
                     release_counts[measurement.status] += 1
         manifest["modes"][mode] = dict(epochs=len(plan["records"]),valid_experimental_measurements=len(valid_times),
             valid_times_s=valid_times,events=dict(counts),service_actions=dict(service_counts),
+            serviced_cost_sources=dict(serviced_cost_sources),
+            simulated_cils_attempts_started=sum(serviced_cost_sources[k] for k in (CERTIFICATE_COST,FAILED_ATTEMPT_COST)),
+            presearch_unavailable_no_cils=serviced_cost_sources[NO_SEARCH_COST],
             arrival_actions=dict(arrival_counts),release_statuses=dict(release_counts),origins=started_origins,
             original_case_pins=pins,active_owner_at_end=owner.track is not None,worker_busy_until_s=service.busy_until,
             pending_at_end=[dict(case_id=j.case_id,completion_s=j.completion,publication_not_before_s=j.available_after)

@@ -135,6 +135,32 @@ These are recorded-service-time results with zero other processing costs.
 Primary selected integers agree in 111/120 windows between the likelihoods;
 competitors agree in only 9/120. Physical integer truth is still unavailable.
 
+## Acquisition cadence and failure timing
+
+The registered final dense trial uses the selected-support likelihood and native
+sphere kernel together. All 1191 consecutive ten-epoch windows are offered at
+the fifth selection epoch, with 0.2-second spacing. Window width remains two
+seconds; each candidate still needs five later validation epochs. Cadence is
+derived from registered selection times rather than assumed by the controller.
+
+A saved certificate provides its own elapsed time. If an entered search fails
+before producing a certificate, its positive whole-call timer is required.
+An explicit preselection failure performs no CILS and is counted separately.
+Missing attempted-search timing is an error. These cases still obey the same
+busy-drop policy; no failed search becomes a free retry. Preparation and all
+other processing costs remain idealized as zero in this replay.
+
+The preceding nine-version comparison completes 36 native/evaluation chains
+with the same 56,642 time keys and byte-identical C0/C1/C2 controls. Native
+full-likelihood serial tracking accepts 25 measurements and yields yaw RMSE
+2.282673 degrees. Selected-likelihood ordinary and serial tracking both accept
+60 and have byte-identical navigation: yaw RMSE 2.036194 degrees, horizontal
+RMSE 0.100087 m and vertical RMSE 0.048783 m. This improves the earlier
+2.403444-degree serial arm, but remains worse than the PVT-vector control's
+1.620834 degrees and 0.098646 m horizontal RMSE. See
+NATIVE_SELECTED_NAVIGATION_READOUT.md. The dense trial remains pending until
+its own frontend and complete navigation results are recorded.
+
 ## Measured status and remaining limits
 
 The first frontend produced one full-class and seven partial-class measurements

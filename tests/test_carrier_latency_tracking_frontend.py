@@ -209,3 +209,96 @@ def test_owner_rejects_backdated_final_export():
         return mod.CatchupResult(FakeTrack("old"),measurement(1.),"AVAILABLE_CURRENT_CANDIDATE",[])
     with pytest.raises(ValueError,match="historical"):
         owner.advance(1.2,None,[job()],bad)
+
+
+
+def saved_cost_record(*,called=True,valid=False,certificate=None,attempt=None,presearch=False):
+    record={"search_called":called,"measurement":{"valid":valid},
+            "presearch_unavailable":presearch}
+    if certificate is not None: record["search"]={"certificate":certificate}
+    if attempt is not None: record["search_attempt_elapsed_s"]=attempt
+    return record
+
+
+def test_explicit_presearch_failure_is_zero_cils_not_an_attempt_or_pending_result():
+    value,source=mod.recorded_service_cost(saved_cost_record(called=False,presearch=True))
+    assert value==0 and source==mod.NO_SEARCH_COST
+    no_search=mod.RecordedJob("not-ready",0.,job().validation_times,value,source)
+    worker=mod.SerialService()
+    action=worker.offer(no_search,0.)
+    assert action["action"]=="PRESEARCH_UNAVAILABLE_NO_CILS"
+    assert not action["simulated_cils_attempt_started"]
+    assert not action["recorded_case_had_cils_attempt"]
+    assert worker.busy_until==0 and worker.pending==[] and worker.arrivals(100)==[]
+    assert worker.offer(job("real",.2,.1),.2)["action"]=="SEARCH_LAUNCHED"
+
+
+def test_presearch_failure_still_obeys_busy_drop_without_queue():
+    worker=mod.SerialService()
+    worker.offer(job("busy",0,3),0)
+    no_search=mod.RecordedJob("not-ready",2.,job(selected=2.).validation_times,0.,mod.NO_SEARCH_COST)
+    action=worker.offer(no_search,2.)
+    assert action["action"]=="BUSY_DROP_NO_QUEUE"
+    assert not action["simulated_cils_attempt_started"] and worker.busy_until==3
+    assert [j.case_id for j in worker.arrivals(100)]==["busy"]
+
+
+def test_failed_no_certificate_attempt_charges_positive_recorded_whole_call():
+    value,source=mod.recorded_service_cost(saved_cost_record(attempt=3.2))
+    assert value==3.2 and source==mod.FAILED_ATTEMPT_COST
+    worker=mod.SerialService()
+    action=worker.offer(mod.RecordedJob("failed",0.,job().validation_times,value,source),0.)
+    assert action["action"]=="SEARCH_LAUNCHED" and action["simulated_cils_attempt_started"]
+    assert action["cost_source"]==mod.FAILED_ATTEMPT_COST
+    dropped=worker.offer(job("next",2.,.1),2.)
+    assert dropped["action"]=="BUSY_DROP_NO_QUEUE"
+    assert dropped["recorded_case_had_cils_attempt"] and not dropped["simulated_cils_attempt_started"]
+    assert worker.arrivals(3.)==[] and worker.arrivals(3.2)[0].case_id=="failed"
+
+
+def test_certificate_timer_has_priority_over_successful_whole_call_timer():
+    cert={"global_optimum_certified":True,"elapsed_s":.2}
+    assert mod.recorded_service_cost(saved_cost_record(valid=True,certificate=cert,attempt=7.))==(.2,mod.CERTIFICATE_COST)
+
+
+@pytest.mark.parametrize("attempt",[None,0.,-.1,float("nan"),float("inf"),True,"1.0"])
+def test_no_certificate_attempt_missing_or_invalid_timing_rejected(attempt):
+    with pytest.raises(ValueError,match="duration"):
+        mod.recorded_service_cost(saved_cost_record(attempt=attempt))
+
+
+@pytest.mark.parametrize("elapsed",[None,-.1,float("nan"),float("inf"),True,"1.0"])
+def test_bad_certificate_timer_may_not_fallback_to_valid_attempt_timer(elapsed):
+    with pytest.raises(ValueError,match="duration"):
+        mod.recorded_service_cost(saved_cost_record(certificate={"elapsed_s":elapsed},attempt=1.))
+
+
+@pytest.mark.parametrize("record",[
+    saved_cost_record(valid=True,attempt=1.),
+    saved_cost_record(called=False,valid=True,presearch=True),
+    saved_cost_record(valid=True,certificate={"global_optimum_certified":False,"elapsed_s":1.}),
+    saved_cost_record(called=False),
+    saved_cost_record(called=False,presearch=True,certificate={"elapsed_s":1.}),
+    saved_cost_record(called=False,presearch=True,attempt=1.),
+    saved_cost_record(presearch=True,attempt=1.),
+])
+def test_invalid_validity_or_presearch_contract_is_rejected(record):
+    with pytest.raises(ValueError):
+        mod.recorded_service_cost(record)
+
+
+def test_cadence_metadata_derives_point2_and_preserves_old_two_seconds_without_rounding_jobs():
+    old=[job(str(i),selected=10.+2*i) for i in range(4)]
+    dense=[job(str(i),selected=10.+.2*i+1e-7*(i%2)) for i in range(6)]
+    original=[j.selected_at for j in dense]
+    old_meta=mod.opportunity_cadence(old)
+    dense_meta=mod.opportunity_cadence(dense)
+    assert old_meta["nominal_spacing_s"]==2.
+    assert dense_meta["nominal_spacing_s"]==.2
+    assert old_meta["uniform_within_tolerance"] and dense_meta["uniform_within_tolerance"]
+    assert dense_meta["opportunities"]==6
+    assert dense_meta["spacing_min_s"]<.2<dense_meta["spacing_max_s"]
+    assert [j.selected_at for j in dense]==original
+    assert dense_meta["scheduling_uses_original_unrounded_times"]
+    with pytest.raises(ValueError,match="unique"):
+        mod.opportunity_cadence([dense[0],dense[0]])
