@@ -1,0 +1,423 @@
+{
+  "schema": "trusted_heading.heading_counter_correction.v1",
+  "scope": "METADATA_ONLY_DERIVATION_FROM_SIX_SEALED_NATIVE_EVENT_TABLES",
+  "stage_alias": "<NAV_STAGE> = <SCRATCH_ROOT>/TRUSTED_HEADING_20261006/FULL_WINDOW_NAVIGATION_ATTEMPT01",
+  "native_seal": {
+    "path": "<NAV_STAGE>/ALL_NATIVE_SEALED.json",
+    "sha256": "1d85386e07593a10d20a57f5c6421430e084a27357cd7f8fc2a9d0f7910b8d17",
+    "size_bytes": 64891
+  },
+  "native_registration_plan": {
+    "path": "<NAV_STAGE>/PLAN.json",
+    "sha256": "8e2d476d08e3caf9cdeca78edf75d8024dc4accea2430c26a7aa263d7d6210dc",
+    "size_bytes": 82246
+  },
+  "cause": {
+    "file": "<CODE_ROOT>/cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp",
+    "successful_finalization_before_fix_lines": "1600-1624",
+    "failure_helper_copy_line": 178,
+    "finding": "Successful finalization copied legacy yaw and baseline3d counters but omitted heading_source_counts. The final manifest was written, with default-zero new counters. Failure-only helper already copied them.",
+    "event_counter_code": "<CODE_ROOT>/cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp:617-676",
+    "event_writer": "<CODE_ROOT>/cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp:1331-1346",
+    "manifest_writer": "<CODE_ROOT>/cpp/legsa_v23_port_core/src/fileio/file_saver.cpp:787-792"
+  },
+  "records": [
+    {
+      "run_id": "BY2__PVT_CONTROL",
+      "sequence_id": "BY2",
+      "arm": "PVT_CONTROL",
+      "event_rows": 2738,
+      "counts_authority": "SEALED_HEADING_SOURCE_EVENTS_DERIVED",
+      "counts": {
+        "heading_pvt_attempt_count": 1369,
+        "heading_pvt_accept_count": 1348,
+        "heading_pvt_suppressed_count": 0,
+        "heading_carrier_attempt_count": 0,
+        "heading_carrier_accept_count": 0,
+        "heading_carrier_bypass_count": 1369
+      },
+      "pvt_rejected_count": 21,
+      "carrier_rejected_count": 0,
+      "original_manifest_heading_counts": {
+        "heading_pvt_attempt_count": 0,
+        "heading_pvt_accept_count": 0,
+        "heading_pvt_suppressed_count": 0,
+        "heading_carrier_attempt_count": 0,
+        "heading_carrier_accept_count": 0,
+        "heading_carrier_bypass_count": 0
+      },
+      "original_manifest_heading_counts_reliable": false,
+      "sources": {
+        "heading_events": {
+          "path": "<NAV_STAGE>/NATIVE/BY2__PVT_CONTROL/HEADING_SOURCE_EVENTS.csv",
+          "sha256": "cc1e992a1061f56e11744aafee0a30f5c3531c47003318611392b31416992a7e",
+          "size_bytes": 243149
+        },
+        "baseline3d_diagnostics": {
+          "path": "<NAV_STAGE>/NATIVE/BY2__PVT_CONTROL/BASELINE3D_DIAGNOSTICS.csv",
+          "sha256": "6988c1df6bb9e94da4821880cd75989dcca56a9ea141954a0e93750a4a9182cf",
+          "size_bytes": 384
+        },
+        "original_manifest": {
+          "path": "<NAV_STAGE>/NATIVE/BY2__PVT_CONTROL/RUN_MANIFEST.json",
+          "sha256": "e049ff593511869fa39228b22766921db3311adc4e45808ba8bc74bbe12495e6",
+          "size_bytes": 24094
+        }
+      },
+      "cross_checks": {
+        "exclusive_pvt_carrier_attempts": true,
+        "accepted_implies_attempt": true,
+        "baseline3d_attempt_count": 0,
+        "baseline3d_accept_count": 0,
+        "baseline3d_counts_equal_event_carrier_counts": true,
+        "manifest_yaw_update_count": 1369,
+        "manifest_dual_yaw_update_count": 1348,
+        "manifest_total_yaw_attempts_equal_event_attempt_sum": true,
+        "manifest_total_yaw_accepts_equal_event_accept_sum": true
+      },
+      "carrier_reasons": {
+        "CONTROL_CARRIER_BYPASS": 1369
+      },
+      "pvt_reasons": {
+        "PVT_PRIORITY": 1369
+      }
+    },
+    {
+      "run_id": "BY2__CARRIER_FALLBACK",
+      "sequence_id": "BY2",
+      "arm": "CARRIER_FALLBACK",
+      "event_rows": 2738,
+      "counts_authority": "SEALED_HEADING_SOURCE_EVENTS_DERIVED",
+      "counts": {
+        "heading_pvt_attempt_count": 1369,
+        "heading_pvt_accept_count": 1348,
+        "heading_pvt_suppressed_count": 0,
+        "heading_carrier_attempt_count": 0,
+        "heading_carrier_accept_count": 0,
+        "heading_carrier_bypass_count": 1369
+      },
+      "pvt_rejected_count": 21,
+      "carrier_rejected_count": 0,
+      "original_manifest_heading_counts": {
+        "heading_pvt_attempt_count": 0,
+        "heading_pvt_accept_count": 0,
+        "heading_pvt_suppressed_count": 0,
+        "heading_carrier_attempt_count": 0,
+        "heading_carrier_accept_count": 0,
+        "heading_carrier_bypass_count": 0
+      },
+      "original_manifest_heading_counts_reliable": false,
+      "sources": {
+        "heading_events": {
+          "path": "<NAV_STAGE>/NATIVE/BY2__CARRIER_FALLBACK/HEADING_SOURCE_EVENTS.csv",
+          "sha256": "5215751448efb6ec5dd803d2dea0e361eb030eb39be041481a968c5bc416a09f",
+          "size_bytes": 242141
+        },
+        "baseline3d_diagnostics": {
+          "path": "<NAV_STAGE>/NATIVE/BY2__CARRIER_FALLBACK/BASELINE3D_DIAGNOSTICS.csv",
+          "sha256": "6988c1df6bb9e94da4821880cd75989dcca56a9ea141954a0e93750a4a9182cf",
+          "size_bytes": 384
+        },
+        "original_manifest": {
+          "path": "<NAV_STAGE>/NATIVE/BY2__CARRIER_FALLBACK/RUN_MANIFEST.json",
+          "sha256": "f06db5071fa4e1cb4cc0ed8e7290daa1abcc0cb591cf328cd0a76c5f49241861",
+          "size_bytes": 24123
+        }
+      },
+      "cross_checks": {
+        "exclusive_pvt_carrier_attempts": true,
+        "accepted_implies_attempt": true,
+        "baseline3d_attempt_count": 0,
+        "baseline3d_accept_count": 0,
+        "baseline3d_counts_equal_event_carrier_counts": true,
+        "manifest_yaw_update_count": 1369,
+        "manifest_dual_yaw_update_count": 1348,
+        "manifest_total_yaw_attempts_equal_event_attempt_sum": true,
+        "manifest_total_yaw_accepts_equal_event_accept_sum": true
+      },
+      "carrier_reasons": {
+        "CARRIER_SOURCE_INVALID": 1201,
+        "PVT_SOURCE_VALID": 168
+      },
+      "pvt_reasons": {
+        "PVT_PRIORITY": 1369
+      }
+    },
+    {
+      "run_id": "BY2H__PVT_CONTROL",
+      "sequence_id": "BY2H",
+      "arm": "PVT_CONTROL",
+      "event_rows": 2698,
+      "counts_authority": "SEALED_HEADING_SOURCE_EVENTS_DERIVED",
+      "counts": {
+        "heading_pvt_attempt_count": 1349,
+        "heading_pvt_accept_count": 1334,
+        "heading_pvt_suppressed_count": 0,
+        "heading_carrier_attempt_count": 0,
+        "heading_carrier_accept_count": 0,
+        "heading_carrier_bypass_count": 1349
+      },
+      "pvt_rejected_count": 15,
+      "carrier_rejected_count": 0,
+      "original_manifest_heading_counts": {
+        "heading_pvt_attempt_count": 0,
+        "heading_pvt_accept_count": 0,
+        "heading_pvt_suppressed_count": 0,
+        "heading_carrier_attempt_count": 0,
+        "heading_carrier_accept_count": 0,
+        "heading_carrier_bypass_count": 0
+      },
+      "original_manifest_heading_counts_reliable": false,
+      "sources": {
+        "heading_events": {
+          "path": "<NAV_STAGE>/NATIVE/BY2H__PVT_CONTROL/HEADING_SOURCE_EVENTS.csv",
+          "sha256": "bf22d65bd86c6743d4cb3aba4e6b62e4cc53023baa21921714e4325f99536123",
+          "size_bytes": 238664
+        },
+        "baseline3d_diagnostics": {
+          "path": "<NAV_STAGE>/NATIVE/BY2H__PVT_CONTROL/BASELINE3D_DIAGNOSTICS.csv",
+          "sha256": "6988c1df6bb9e94da4821880cd75989dcca56a9ea141954a0e93750a4a9182cf",
+          "size_bytes": 384
+        },
+        "original_manifest": {
+          "path": "<NAV_STAGE>/NATIVE/BY2H__PVT_CONTROL/RUN_MANIFEST.json",
+          "sha256": "6e2ef439584f3e99600a8ec3d2c4cbf84476d846348d8229936e6a9a6a2309eb",
+          "size_bytes": 24112
+        }
+      },
+      "cross_checks": {
+        "exclusive_pvt_carrier_attempts": true,
+        "accepted_implies_attempt": true,
+        "baseline3d_attempt_count": 0,
+        "baseline3d_accept_count": 0,
+        "baseline3d_counts_equal_event_carrier_counts": true,
+        "manifest_yaw_update_count": 1349,
+        "manifest_dual_yaw_update_count": 1334,
+        "manifest_total_yaw_attempts_equal_event_attempt_sum": true,
+        "manifest_total_yaw_accepts_equal_event_accept_sum": true
+      },
+      "carrier_reasons": {
+        "CONTROL_CARRIER_BYPASS": 1349
+      },
+      "pvt_reasons": {
+        "PVT_PRIORITY": 1349
+      }
+    },
+    {
+      "run_id": "BY2H__CARRIER_FALLBACK",
+      "sequence_id": "BY2H",
+      "arm": "CARRIER_FALLBACK",
+      "event_rows": 2698,
+      "counts_authority": "SEALED_HEADING_SOURCE_EVENTS_DERIVED",
+      "counts": {
+        "heading_pvt_attempt_count": 1349,
+        "heading_pvt_accept_count": 1334,
+        "heading_pvt_suppressed_count": 0,
+        "heading_carrier_attempt_count": 0,
+        "heading_carrier_accept_count": 0,
+        "heading_carrier_bypass_count": 1349
+      },
+      "pvt_rejected_count": 15,
+      "carrier_rejected_count": 0,
+      "original_manifest_heading_counts": {
+        "heading_pvt_attempt_count": 0,
+        "heading_pvt_accept_count": 0,
+        "heading_pvt_suppressed_count": 0,
+        "heading_carrier_attempt_count": 0,
+        "heading_carrier_accept_count": 0,
+        "heading_carrier_bypass_count": 0
+      },
+      "original_manifest_heading_counts_reliable": false,
+      "sources": {
+        "heading_events": {
+          "path": "<NAV_STAGE>/NATIVE/BY2H__CARRIER_FALLBACK/HEADING_SOURCE_EVENTS.csv",
+          "sha256": "76908a9f190fb1bb7481241267543b7d9bb4486e3fa1b76f1b25dcec087a5c6f",
+          "size_bytes": 236750
+        },
+        "baseline3d_diagnostics": {
+          "path": "<NAV_STAGE>/NATIVE/BY2H__CARRIER_FALLBACK/BASELINE3D_DIAGNOSTICS.csv",
+          "sha256": "6988c1df6bb9e94da4821880cd75989dcca56a9ea141954a0e93750a4a9182cf",
+          "size_bytes": 384
+        },
+        "original_manifest": {
+          "path": "<NAV_STAGE>/NATIVE/BY2H__CARRIER_FALLBACK/RUN_MANIFEST.json",
+          "sha256": "f77e29498bbe1271c70abde948ceace0887234e1dd0909461755a7c5a4411510",
+          "size_bytes": 24141
+        }
+      },
+      "cross_checks": {
+        "exclusive_pvt_carrier_attempts": true,
+        "accepted_implies_attempt": true,
+        "baseline3d_attempt_count": 0,
+        "baseline3d_accept_count": 0,
+        "baseline3d_counts_equal_event_carrier_counts": true,
+        "manifest_yaw_update_count": 1349,
+        "manifest_dual_yaw_update_count": 1334,
+        "manifest_total_yaw_attempts_equal_event_attempt_sum": true,
+        "manifest_total_yaw_accepts_equal_event_accept_sum": true
+      },
+      "carrier_reasons": {
+        "CARRIER_SOURCE_INVALID": 1030,
+        "PVT_SOURCE_VALID": 319
+      },
+      "pvt_reasons": {
+        "PVT_PRIORITY": 1349
+      }
+    },
+    {
+      "run_id": "BY2O__PVT_CONTROL",
+      "sequence_id": "BY2O",
+      "arm": "PVT_CONTROL",
+      "event_rows": 3768,
+      "counts_authority": "SEALED_HEADING_SOURCE_EVENTS_DERIVED",
+      "counts": {
+        "heading_pvt_attempt_count": 1593,
+        "heading_pvt_accept_count": 1588,
+        "heading_pvt_suppressed_count": 0,
+        "heading_carrier_attempt_count": 0,
+        "heading_carrier_accept_count": 0,
+        "heading_carrier_bypass_count": 1884
+      },
+      "pvt_rejected_count": 5,
+      "carrier_rejected_count": 0,
+      "original_manifest_heading_counts": {
+        "heading_pvt_attempt_count": 0,
+        "heading_pvt_accept_count": 0,
+        "heading_pvt_suppressed_count": 0,
+        "heading_carrier_attempt_count": 0,
+        "heading_carrier_accept_count": 0,
+        "heading_carrier_bypass_count": 0
+      },
+      "original_manifest_heading_counts_reliable": false,
+      "sources": {
+        "heading_events": {
+          "path": "<NAV_STAGE>/NATIVE/BY2O__PVT_CONTROL/HEADING_SOURCE_EVENTS.csv",
+          "sha256": "516be148fbc9359e55be594a61b7d7ce4ffc923954689b83b3436c7059912c2a",
+          "size_bytes": 338764
+        },
+        "baseline3d_diagnostics": {
+          "path": "<NAV_STAGE>/NATIVE/BY2O__PVT_CONTROL/BASELINE3D_DIAGNOSTICS.csv",
+          "sha256": "6988c1df6bb9e94da4821880cd75989dcca56a9ea141954a0e93750a4a9182cf",
+          "size_bytes": 384
+        },
+        "original_manifest": {
+          "path": "<NAV_STAGE>/NATIVE/BY2O__PVT_CONTROL/RUN_MANIFEST.json",
+          "sha256": "e90cd0e4565e0295c1b551b836a93c536df123ab74e5a2aaaa10e2703c4ed566",
+          "size_bytes": 24093
+        }
+      },
+      "cross_checks": {
+        "exclusive_pvt_carrier_attempts": true,
+        "accepted_implies_attempt": true,
+        "baseline3d_attempt_count": 0,
+        "baseline3d_accept_count": 0,
+        "baseline3d_counts_equal_event_carrier_counts": true,
+        "manifest_yaw_update_count": 1593,
+        "manifest_dual_yaw_update_count": 1588,
+        "manifest_total_yaw_attempts_equal_event_attempt_sum": true,
+        "manifest_total_yaw_accepts_equal_event_accept_sum": true
+      },
+      "carrier_reasons": {
+        "CONTROL_CARRIER_BYPASS": 1884
+      },
+      "pvt_reasons": {
+        "PVT_PRIORITY": 1593,
+        "PVT_SOURCE_INVALID": 291
+      }
+    },
+    {
+      "run_id": "BY2O__CARRIER_FALLBACK",
+      "sequence_id": "BY2O",
+      "arm": "CARRIER_FALLBACK",
+      "event_rows": 3768,
+      "counts_authority": "SEALED_HEADING_SOURCE_EVENTS_DERIVED",
+      "counts": {
+        "heading_pvt_attempt_count": 1593,
+        "heading_pvt_accept_count": 1588,
+        "heading_pvt_suppressed_count": 0,
+        "heading_carrier_attempt_count": 12,
+        "heading_carrier_accept_count": 8,
+        "heading_carrier_bypass_count": 1872
+      },
+      "pvt_rejected_count": 5,
+      "carrier_rejected_count": 4,
+      "original_manifest_heading_counts": {
+        "heading_pvt_attempt_count": 0,
+        "heading_pvt_accept_count": 0,
+        "heading_pvt_suppressed_count": 0,
+        "heading_carrier_attempt_count": 0,
+        "heading_carrier_accept_count": 0,
+        "heading_carrier_bypass_count": 0
+      },
+      "original_manifest_heading_counts_reliable": false,
+      "sources": {
+        "heading_events": {
+          "path": "<NAV_STAGE>/NATIVE/BY2O__CARRIER_FALLBACK/HEADING_SOURCE_EVENTS.csv",
+          "sha256": "01e590e10f8da4b04def9c8688891b89c827e6f7f5d95c2052b3bb1781a6bb8b",
+          "size_bytes": 337924
+        },
+        "baseline3d_diagnostics": {
+          "path": "<NAV_STAGE>/NATIVE/BY2O__CARRIER_FALLBACK/BASELINE3D_DIAGNOSTICS.csv",
+          "sha256": "7fb08007b02bc38546a0ee57803e8153eea0a0577e2087b06e0c006cc1917230",
+          "size_bytes": 8522
+        },
+        "original_manifest": {
+          "path": "<NAV_STAGE>/NATIVE/BY2O__CARRIER_FALLBACK/RUN_MANIFEST.json",
+          "sha256": "c4f02a1549344b361f4c0f22101717b23f1df7bdf8151f614b1a3c5cbc4512a8",
+          "size_bytes": 24123
+        }
+      },
+      "cross_checks": {
+        "exclusive_pvt_carrier_attempts": true,
+        "accepted_implies_attempt": true,
+        "baseline3d_attempt_count": 12,
+        "baseline3d_accept_count": 8,
+        "baseline3d_counts_equal_event_carrier_counts": true,
+        "manifest_yaw_update_count": 1605,
+        "manifest_dual_yaw_update_count": 1596,
+        "manifest_total_yaw_attempts_equal_event_attempt_sum": true,
+        "manifest_total_yaw_accepts_equal_event_accept_sum": true
+      },
+      "carrier_reasons": {
+        "CARRIER_SOURCE_INVALID": 1718,
+        "PVT_SOURCE_VALID": 154,
+        "FRESH_PVT_GAP_CARRIER_ATTEMPT": 12
+      },
+      "pvt_reasons": {
+        "PVT_PRIORITY": 1593,
+        "PVT_SOURCE_INVALID": 291
+      }
+    }
+  ],
+  "event_rows_total": 18408,
+  "control_zero_carrier_attempts_independently_rechecked": true,
+  "sealed_outputs_modified": false,
+  "original_zero_metadata_preserved_not_rewritten": true,
+  "controller_original_control_zero_assertion_was_non_informative": true,
+  "future_source_fix": {
+    "path": "<CODE_ROOT>/cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp",
+    "line": 1608,
+    "statement": "options.heading_source_counts = engine.headingSourceCounts();",
+    "old_sha256": "d80cf80e76740cd90fc832f288ff31fc3e97e93d11d8edba2ff304e2bd854c37",
+    "new_sha256": "f7741fd5ece7875b67cad2b2960524b49619426c62a93c94d5cae6bd553c2874",
+    "rebuilt": false,
+    "retested": false,
+    "current_result_binary_unchanged": true,
+    "current_registered_plan_pins_not_rewritten": true,
+    "completed_attempt_cannot_reenter_with_changed_source": "EXPECTED_SOURCE_PIN_MISMATCH_DO_NOT_RERUN"
+  },
+  "calls": {
+    "new_native": 0,
+    "new_evaluator": 0,
+    "new_search": 0,
+    "new_tests": 0,
+    "build": 0,
+    "reference_reads": 0,
+    "raw_reads": 0
+  },
+  "limits": [
+    "Accepted means actual normal/downweighted EKF heading update, not known-correct integer or heading truth.",
+    "Only source event tables, baseline3d diagnostics, original manifests, native seal/PLAN metadata and code were read for this derivation.",
+    "No NAV, reference, evaluator error series, source-aware trace, or raw input was used."
+  ]
+}

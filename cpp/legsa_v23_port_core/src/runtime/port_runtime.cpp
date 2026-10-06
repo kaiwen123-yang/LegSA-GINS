@@ -1605,6 +1605,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   options.yaw_normal_count = engine.yawNormalCount();
   options.yaw_downweight_count = engine.yawDownweightCount();
   options.yaw_reject_count = engine.yawRejectCount();
+  options.heading_source_counts = engine.headingSourceCounts();
   if (options.dual_antenna_measurement_model == "baseline3d") {
     options.baseline3d_counts = engine.baseline3dCounts();
   }

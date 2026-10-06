@@ -1,0 +1,790 @@
+{
+  "schema": "trusted_heading.navigation_readout.v1",
+  "registration_commit": "3c81e5b8e4df4bece69c5f4635f0a60bd12c4369",
+  "data_mode": "original real V3 windows; offline event replay",
+  "counts": {
+    "config_checker_compile": 1,
+    "config_checker": 6,
+    "native": 6,
+    "evaluator": 6,
+    "comparison": 1,
+    "retries": 0
+  },
+  "readout_calls": {
+    "native": 0,
+    "evaluator": 0,
+    "reference": 0
+  },
+  "gate": {
+    "all_sequence_nondegradation": true,
+    "A": false,
+    "A_sequences_at_least_5_percent_yaw_rmse_reduction": 0,
+    "B": null,
+    "B_reason": "NO_REGISTERED_RAW_CARRIER_FAULT_RECOVERY_CASES",
+    "recommend_for_human_review_under_this_contract": false,
+    "failure_or_missing_is_not_a_zero_metric": true,
+    "reference_is_independent_truth": false,
+    "integer_correctness": null,
+    "false_fix_probability": null,
+    "velocity_truth_metrics": null,
+    "main_replacement_authorized": false
+  },
+  "paired_support": {
+    "BY2": {
+      "same_time_keys": true,
+      "nav_byte_equal": true,
+      "std_byte_equal": true
+    },
+    "BY2H": {
+      "same_time_keys": true,
+      "nav_byte_equal": true,
+      "std_byte_equal": true
+    },
+    "BY2O": {
+      "same_time_keys": true,
+      "nav_byte_equal": false,
+      "std_byte_equal": false
+    }
+  },
+  "source_metadata": {
+    "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/PLAN.json": "8e2d476d08e3caf9cdeca78edf75d8024dc4accea2430c26a7aa263d7d6210dc",
+    "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/ALL_NATIVE_SEALED.json": "1d85386e07593a10d20a57f5c6421430e084a27357cd7f8fc2a9d0f7910b8d17",
+    "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/EVALUATION_COMPLETE.json": "39ee82e8c2d6b1f5820717590190a8e6aa45d1c9619902ad73a6b8116aa787c5",
+    "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_COMPARISON_ATTEMPT01/COMPARISON.json": "ea4f88dc06e71b7be45a23788a85356bdad06571d2c62660d960c9159c9c63ed"
+  },
+  "native_results": [
+    {
+      "run_id": "BY2__PVT_CONTROL",
+      "sequence_id": "BY2",
+      "arm": "PVT_CONTROL",
+      "status": "COMPLETED",
+      "nav": {
+        "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/KF_GINS_Navresult.nav",
+        "sha256": "d740232040e541cb2f41fb3ba0e46fa9e37a1ddc8159a9d94bc9baa139991982",
+        "size_bytes": 10025634
+      },
+      "std": {
+        "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/KF_GINS_STD.txt",
+        "sha256": "705e43738e613ccb66a1f5ec1d9f944249c2fbf03c85b837af56471c46519899",
+        "size_bytes": 19994626
+      },
+      "output_rows": 56642,
+      "first_time": 66.005054,
+      "last_time": 339.997056,
+      "time_keys_sha256": "b822e5136f043eaf6a97b78d01d3e62b67440c3147f84fc5cb72a0c0478639b5",
+      "access_audit": {
+        "passed": true,
+        "raw_open_records": [],
+        "online_reference_opens": 0,
+        "unexpected_protected_opens": [],
+        "missing_inputs": [],
+        "write_scope": {
+          "pass": true,
+          "write_open_count": 10,
+          "write_outside_run_count": 0,
+          "outside_run_write_open_count": 0,
+          "outside_run_write_open_records": [],
+          "write_open_records": [
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/LegSA_PORT_NAV.nav",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/LegSA_PORT_NAV.nav",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/LegSA_PORT_STD.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/LegSA_PORT_STD.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/EVAL_NAV.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/EVAL_NAV.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/KF_GINS_Navresult.nav",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/KF_GINS_Navresult.nav",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/KF_GINS_STD.txt",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 4,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/KF_GINS_STD.txt",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/KF_GINS_IMU_ERR.txt",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 5,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/KF_GINS_IMU_ERR.txt",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/RUN_MANIFEST.json",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/RUN_MANIFEST.json",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/SOURCE_AWARE_WEIGHT_TRACE.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/SOURCE_AWARE_WEIGHT_TRACE.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/BASELINE3D_DIAGNOSTICS.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/BASELINE3D_DIAGNOSTICS.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/HEADING_SOURCE_EVENTS.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__PVT_CONTROL/HEADING_SOURCE_EVENTS.csv",
+              "anonymous_pipe": false
+            }
+          ],
+          "allowed_device_write_count": 0,
+          "allowed_device_write_records": [],
+          "allowed_anonymous_pipe_write_count": 0,
+          "allowed_anonymous_pipe_write_records": [],
+          "raw_write_open_count": 0,
+          "clean_root_outside_run_write_count": 0,
+          "write_scope_exceptions": [
+            "/dev/null",
+            "/dev/pts/*",
+            "kernel-identified anonymous pipe"
+          ]
+        },
+        "native_exec_count": 1,
+        "strace_sha256": "ea261fd25ea7b6f3b39e68dec53303bd5780371e1c207010e9687c5e61a62526"
+      }
+    },
+    {
+      "run_id": "BY2__CARRIER_FALLBACK",
+      "sequence_id": "BY2",
+      "arm": "CARRIER_FALLBACK",
+      "status": "COMPLETED",
+      "nav": {
+        "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/KF_GINS_Navresult.nav",
+        "sha256": "d740232040e541cb2f41fb3ba0e46fa9e37a1ddc8159a9d94bc9baa139991982",
+        "size_bytes": 10025634
+      },
+      "std": {
+        "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/KF_GINS_STD.txt",
+        "sha256": "705e43738e613ccb66a1f5ec1d9f944249c2fbf03c85b837af56471c46519899",
+        "size_bytes": 19994626
+      },
+      "output_rows": 56642,
+      "first_time": 66.005054,
+      "last_time": 339.997056,
+      "time_keys_sha256": "b822e5136f043eaf6a97b78d01d3e62b67440c3147f84fc5cb72a0c0478639b5",
+      "access_audit": {
+        "passed": true,
+        "raw_open_records": [],
+        "online_reference_opens": 0,
+        "unexpected_protected_opens": [],
+        "missing_inputs": [],
+        "write_scope": {
+          "pass": true,
+          "write_open_count": 10,
+          "write_outside_run_count": 0,
+          "outside_run_write_open_count": 0,
+          "outside_run_write_open_records": [],
+          "write_open_records": [
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/LegSA_PORT_NAV.nav",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/LegSA_PORT_NAV.nav",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/LegSA_PORT_STD.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/LegSA_PORT_STD.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/EVAL_NAV.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/EVAL_NAV.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/KF_GINS_Navresult.nav",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/KF_GINS_Navresult.nav",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/KF_GINS_STD.txt",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 4,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/KF_GINS_STD.txt",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/KF_GINS_IMU_ERR.txt",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 5,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/KF_GINS_IMU_ERR.txt",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/RUN_MANIFEST.json",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/RUN_MANIFEST.json",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/SOURCE_AWARE_WEIGHT_TRACE.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/SOURCE_AWARE_WEIGHT_TRACE.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/BASELINE3D_DIAGNOSTICS.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/BASELINE3D_DIAGNOSTICS.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/HEADING_SOURCE_EVENTS.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2__CARRIER_FALLBACK/HEADING_SOURCE_EVENTS.csv",
+              "anonymous_pipe": false
+            }
+          ],
+          "allowed_device_write_count": 0,
+          "allowed_device_write_records": [],
+          "allowed_anonymous_pipe_write_count": 0,
+          "allowed_anonymous_pipe_write_records": [],
+          "raw_write_open_count": 0,
+          "clean_root_outside_run_write_count": 0,
+          "write_scope_exceptions": [
+            "/dev/null",
+            "/dev/pts/*",
+            "kernel-identified anonymous pipe"
+          ]
+        },
+        "native_exec_count": 1,
+        "strace_sha256": "fd5a84be33ae55ea9bfbaf6e25fac3bc6ae87287a0fc817d093aaf3c487420d8"
+      }
+    },
+    {
+      "run_id": "BY2H__PVT_CONTROL",
+      "sequence_id": "BY2H",
+      "arm": "PVT_CONTROL",
+      "status": "COMPLETED",
+      "nav": {
+        "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/KF_GINS_Navresult.nav",
+        "sha256": "46960a3370c5237dc26cf4cb72191ca060cafe551bace8f62a7fa72dc8599812",
+        "size_bytes": 10368660
+      },
+      "std": {
+        "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/KF_GINS_STD.txt",
+        "sha256": "ebbff5d89e7c65ac2b332594192d526a67bfed02ada29b47bd097b3112e4384a",
+        "size_bytes": 20678740
+      },
+      "output_rows": 58580,
+      "first_time": 413.047045,
+      "last_time": 682.99505,
+      "time_keys_sha256": "c338c7bcd53aa966119a06eda47fb3e4cbb40209cdcb9cdc1ec67648d708c694",
+      "access_audit": {
+        "passed": true,
+        "raw_open_records": [],
+        "online_reference_opens": 0,
+        "unexpected_protected_opens": [],
+        "missing_inputs": [],
+        "write_scope": {
+          "pass": true,
+          "write_open_count": 10,
+          "write_outside_run_count": 0,
+          "outside_run_write_open_count": 0,
+          "outside_run_write_open_records": [],
+          "write_open_records": [
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/LegSA_PORT_NAV.nav",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/LegSA_PORT_NAV.nav",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/LegSA_PORT_STD.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/LegSA_PORT_STD.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/EVAL_NAV.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/EVAL_NAV.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/KF_GINS_Navresult.nav",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/KF_GINS_Navresult.nav",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/KF_GINS_STD.txt",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 4,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/KF_GINS_STD.txt",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/KF_GINS_IMU_ERR.txt",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 5,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/KF_GINS_IMU_ERR.txt",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/RUN_MANIFEST.json",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/RUN_MANIFEST.json",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/SOURCE_AWARE_WEIGHT_TRACE.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/SOURCE_AWARE_WEIGHT_TRACE.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/BASELINE3D_DIAGNOSTICS.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/BASELINE3D_DIAGNOSTICS.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/HEADING_SOURCE_EVENTS.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__PVT_CONTROL/HEADING_SOURCE_EVENTS.csv",
+              "anonymous_pipe": false
+            }
+          ],
+          "allowed_device_write_count": 0,
+          "allowed_device_write_records": [],
+          "allowed_anonymous_pipe_write_count": 0,
+          "allowed_anonymous_pipe_write_records": [],
+          "raw_write_open_count": 0,
+          "clean_root_outside_run_write_count": 0,
+          "write_scope_exceptions": [
+            "/dev/null",
+            "/dev/pts/*",
+            "kernel-identified anonymous pipe"
+          ]
+        },
+        "native_exec_count": 1,
+        "strace_sha256": "89175ce5666964105e5505b34c2bc974dcfb72e6dc1ade242cc6425ae9122b2f"
+      }
+    },
+    {
+      "run_id": "BY2H__CARRIER_FALLBACK",
+      "sequence_id": "BY2H",
+      "arm": "CARRIER_FALLBACK",
+      "status": "COMPLETED",
+      "nav": {
+        "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/KF_GINS_Navresult.nav",
+        "sha256": "46960a3370c5237dc26cf4cb72191ca060cafe551bace8f62a7fa72dc8599812",
+        "size_bytes": 10368660
+      },
+      "std": {
+        "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/KF_GINS_STD.txt",
+        "sha256": "ebbff5d89e7c65ac2b332594192d526a67bfed02ada29b47bd097b3112e4384a",
+        "size_bytes": 20678740
+      },
+      "output_rows": 58580,
+      "first_time": 413.047045,
+      "last_time": 682.99505,
+      "time_keys_sha256": "c338c7bcd53aa966119a06eda47fb3e4cbb40209cdcb9cdc1ec67648d708c694",
+      "access_audit": {
+        "passed": true,
+        "raw_open_records": [],
+        "online_reference_opens": 0,
+        "unexpected_protected_opens": [],
+        "missing_inputs": [],
+        "write_scope": {
+          "pass": true,
+          "write_open_count": 10,
+          "write_outside_run_count": 0,
+          "outside_run_write_open_count": 0,
+          "outside_run_write_open_records": [],
+          "write_open_records": [
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/LegSA_PORT_NAV.nav",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/LegSA_PORT_NAV.nav",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/LegSA_PORT_STD.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/LegSA_PORT_STD.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/EVAL_NAV.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/EVAL_NAV.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/KF_GINS_Navresult.nav",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/KF_GINS_Navresult.nav",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/KF_GINS_STD.txt",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 4,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/KF_GINS_STD.txt",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/KF_GINS_IMU_ERR.txt",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 5,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/KF_GINS_IMU_ERR.txt",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/RUN_MANIFEST.json",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/RUN_MANIFEST.json",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/SOURCE_AWARE_WEIGHT_TRACE.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/SOURCE_AWARE_WEIGHT_TRACE.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/BASELINE3D_DIAGNOSTICS.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/BASELINE3D_DIAGNOSTICS.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/HEADING_SOURCE_EVENTS.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2H__CARRIER_FALLBACK/HEADING_SOURCE_EVENTS.csv",
+              "anonymous_pipe": false
+            }
+          ],
+          "allowed_device_write_count": 0,
+          "allowed_device_write_records": [],
+          "allowed_anonymous_pipe_write_count": 0,
+          "allowed_anonymous_pipe_write_records": [],
+          "raw_write_open_count": 0,
+          "clean_root_outside_run_write_count": 0,
+          "write_scope_exceptions": [
+            "/dev/null",
+            "/dev/pts/*",
+            "kernel-identified anonymous pipe"
+          ]
+        },
+        "native_exec_count": 1,
+        "strace_sha256": "7286487a7420f054c1cd7623d9af22e2d0da612b38325a318681cd456c9f81e3"
+      }
+    },
+    {
+      "run_id": "BY2O__PVT_CONTROL",
+      "sequence_id": "BY2O",
+      "arm": "PVT_CONTROL",
+      "status": "COMPLETED",
+      "nav": {
+        "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/KF_GINS_Navresult.nav",
+        "sha256": "8a3e50884ea99b41babb9f355bdcdf3d92fbef74185b6c83713e872c8a8e9431",
+        "size_bytes": 13548996
+      },
+      "std": {
+        "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/KF_GINS_STD.txt",
+        "sha256": "6f582a3744eedd328bb995f2519ee6ec6a7b469dd1859bc0f6e2414f4db58105",
+        "size_bytes": 27021444
+      },
+      "output_rows": 76548,
+      "first_time": 3186.005234,
+      "last_time": 3562.997055,
+      "time_keys_sha256": "f5f8442de5367b1f328c139cba4bb3d4c1f13fce627ce5c9d8fb138dec8f5eb1",
+      "access_audit": {
+        "passed": true,
+        "raw_open_records": [],
+        "online_reference_opens": 0,
+        "unexpected_protected_opens": [],
+        "missing_inputs": [],
+        "write_scope": {
+          "pass": true,
+          "write_open_count": 10,
+          "write_outside_run_count": 0,
+          "outside_run_write_open_count": 0,
+          "outside_run_write_open_records": [],
+          "write_open_records": [
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/LegSA_PORT_NAV.nav",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/LegSA_PORT_NAV.nav",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/LegSA_PORT_STD.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/LegSA_PORT_STD.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/EVAL_NAV.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/EVAL_NAV.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/KF_GINS_Navresult.nav",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/KF_GINS_Navresult.nav",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/KF_GINS_STD.txt",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 4,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/KF_GINS_STD.txt",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/KF_GINS_IMU_ERR.txt",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 5,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/KF_GINS_IMU_ERR.txt",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/RUN_MANIFEST.json",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/RUN_MANIFEST.json",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/SOURCE_AWARE_WEIGHT_TRACE.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/SOURCE_AWARE_WEIGHT_TRACE.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/BASELINE3D_DIAGNOSTICS.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/BASELINE3D_DIAGNOSTICS.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/HEADING_SOURCE_EVENTS.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__PVT_CONTROL/HEADING_SOURCE_EVENTS.csv",
+              "anonymous_pipe": false
+            }
+          ],
+          "allowed_device_write_count": 0,
+          "allowed_device_write_records": [],
+          "allowed_anonymous_pipe_write_count": 0,
+          "allowed_anonymous_pipe_write_records": [],
+          "raw_write_open_count": 0,
+          "clean_root_outside_run_write_count": 0,
+          "write_scope_exceptions": [
+            "/dev/null",
+            "/dev/pts/*",
+            "kernel-identified anonymous pipe"
+          ]
+        },
+        "native_exec_count": 1,
+        "strace_sha256": "554da6a49e7724c8309d19aa6521758fae5dd7e7912f08ba5039fc461e38e799"
+      }
+    },
+    {
+      "run_id": "BY2O__CARRIER_FALLBACK",
+      "sequence_id": "BY2O",
+      "arm": "CARRIER_FALLBACK",
+      "status": "COMPLETED",
+      "nav": {
+        "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/KF_GINS_Navresult.nav",
+        "sha256": "e623381bd154e507f03831b075d2942c68e0c8412d3493470742bbcf5614626f",
+        "size_bytes": 13548996
+      },
+      "std": {
+        "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/KF_GINS_STD.txt",
+        "sha256": "489e7451c71b93121847b84746821b69f93d0550bef9b236e86ae2dcfc896d7f",
+        "size_bytes": 27021444
+      },
+      "output_rows": 76548,
+      "first_time": 3186.005234,
+      "last_time": 3562.997055,
+      "time_keys_sha256": "f5f8442de5367b1f328c139cba4bb3d4c1f13fce627ce5c9d8fb138dec8f5eb1",
+      "access_audit": {
+        "passed": true,
+        "raw_open_records": [],
+        "online_reference_opens": 0,
+        "unexpected_protected_opens": [],
+        "missing_inputs": [],
+        "write_scope": {
+          "pass": true,
+          "write_open_count": 10,
+          "write_outside_run_count": 0,
+          "outside_run_write_open_count": 0,
+          "outside_run_write_open_records": [],
+          "write_open_records": [
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/LegSA_PORT_NAV.nav",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/LegSA_PORT_NAV.nav",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/LegSA_PORT_STD.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/LegSA_PORT_STD.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/EVAL_NAV.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/EVAL_NAV.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/KF_GINS_Navresult.nav",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/KF_GINS_Navresult.nav",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/KF_GINS_STD.txt",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 4,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/KF_GINS_STD.txt",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/KF_GINS_IMU_ERR.txt",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 5,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/KF_GINS_IMU_ERR.txt",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/RUN_MANIFEST.json",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/RUN_MANIFEST.json",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/SOURCE_AWARE_WEIGHT_TRACE.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/SOURCE_AWARE_WEIGHT_TRACE.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/BASELINE3D_DIAGNOSTICS.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/BASELINE3D_DIAGNOSTICS.csv",
+              "anonymous_pipe": false
+            },
+            {
+              "path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/HEADING_SOURCE_EVENTS.csv",
+              "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+              "return_code": 3,
+              "lexical_path": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_NAVIGATION_ATTEMPT01/NATIVE/BY2O__CARRIER_FALLBACK/HEADING_SOURCE_EVENTS.csv",
+              "anonymous_pipe": false
+            }
+          ],
+          "allowed_device_write_count": 0,
+          "allowed_device_write_records": [],
+          "allowed_anonymous_pipe_write_count": 0,
+          "allowed_anonymous_pipe_write_records": [],
+          "raw_write_open_count": 0,
+          "clean_root_outside_run_write_count": 0,
+          "write_scope_exceptions": [
+            "/dev/null",
+            "/dev/pts/*",
+            "kernel-identified anonymous pipe"
+          ]
+        },
+        "native_exec_count": 1,
+        "strace_sha256": "bda01fee0ad96c54dd34496cf0ac1a4a93a9ca4499d6f217870d67e09b49a7dd"
+      }
+    }
+  ],
+  "timings": {
+    "PREPARE": {
+      "returncode": 0,
+      "wall_s": 2.19721251
+    },
+    "NATIVE": {
+      "returncode": 0,
+      "wall_s": 59.711191271000004
+    },
+    "EVALUATE": {
+      "returncode": 0,
+      "wall_s": 35.188175497
+    },
+    "COMPARISON": {
+      "returncode": 0,
+      "wall_s": 3.6064023399999883
+    }
+  },
+  "manifest_heading_counts": "incorrect zero defaults; see separate sealed-event correction; originals unchanged"
+}
