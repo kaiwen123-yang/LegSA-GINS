@@ -16,6 +16,7 @@
 #include "legsa_v23_port_core/types.hpp"
 #include "legsa_v23_port_core/baseline3d.hpp"
 #include "legsa_v23_port_core/heading_source_policy.hpp"
+#include "legsa_v23_port_core/factors/foot_pair_events.hpp"
 
 #include <string>
 
@@ -50,6 +51,8 @@ struct PortOptions {
   // Default preserves scalar / replacement contracts; opt-in mixes exclusively.
   std::string heading_source_policy = "configured";
   HeadingSourceCounts heading_source_counts;
+  AttitudeCloneConfig attitude_clone_config;
+  AttitudeCloneCounts attitude_clone_counts;
   std::string external_carrier_baseline_path;
   Vec3 baseline3d_body_vector_m = makeVec3(0.0, 0.0, 0.0);
   double baseline3d_length_m = 0.0;

@@ -126,6 +126,12 @@ GIEngine::GIEngine(PortOptions options)
         !options_.enable_dual_yaw_update || !options_.yaw_scheme_C_enabled)
       throw std::runtime_error("PVT_PRIORITY_INVALID_ENGINE_CONTRACT");
   }
+  validateAttitudeCloneConfig(options_.attitude_clone_config, options_.runtime_contract);
+  if (options_.attitude_clone_config.mode != "off" &&
+      (options_.qa_fallback_config.enable_qa_fallback || options_.qa_fallback_config.qa_active_mode ||
+       options_.algorithm_id == quality_aware::kLegsaQaFallbackEkf ||
+       options_.quality_state_manager_config.enable_multi_state_qm))
+    throw std::runtime_error("ATTITUDE_CLONE_REQUIRES_FULL_UNCLIPPED_FEEDBACK_QA_QM_OFF");
   const auto& body_cfg = options_.go2_velocity_prior_diagnostic_config;
   if (body_cfg.enable_go2_horizontal_velocity_prior && body_cfg.go2_horizontal_velocity_frame == "body_frd") {
     if (options_.runtime_contract != "research_experiment" ||
@@ -157,6 +163,17 @@ void GIEngine::initialize(const NavState& initial_state) {
   heading_source_policy_ = HeadingSourcePolicy{};
   heading_source_counts_ = HeadingSourceCounts{};
   heading_source_events_.clear();
+  attitude_clone_active_=false;
+  attitude_clone_cross_=Matrix(RANK,3,0.0);
+  attitude_clone_cov_=Matrix(3,3,0.0);
+  attitude_clone_error_={0.0,0.0,0.0};
+  attitude_clone_used_ids_.clear();foot_used_endpoint_ids_.clear();
+  next_foot_event_=0;foot_stream_started_=false;foot_event_diagnostics_.clear();
+  attitude_clone_counts_=AttitudeCloneCounts{};
+  attitude_clone_counts_.source_rows=foot_events_.size();
+  if (options_.attitude_clone_config.mode!="off")
+    attitude_clone_weights_=attitude_clone::fixedCurrentWeights(Cov_);
+
   zeroVector(dx_);
   initialized_ = true;
 }
@@ -497,12 +514,22 @@ void GIEngine::EKFPredict() {
 void GIEngine::EKFPredict(const Matrix& Phi, const Matrix& Qd) {
   Cov_ = add(multiply(multiply(Phi, Cov_), transpose(Phi)), Qd);
   dx_ = multiply(Phi, dx_);
+  if (attitude_clone_active_) attitude_clone_cross_=multiply(Phi,attitude_clone_cross_);
+  if (options_.attitude_clone_config.mode!="off") requireFrozenCloneBlocks();
 }
 
 // 中文说明：EKFUpdate 使用 dx += K(dz-Hdx) 和 Joseph covariance form。
 void GIEngine::EKFUpdate(const std::vector<double>& dz, const Matrix& H, const Matrix& R) {
   if (H.cols != RANK || dz.size() != H.rows || R.rows != H.rows || R.cols != H.rows) {
     throw std::runtime_error("EKFUpdate dimension mismatch");
+  }
+  if (attitude_clone_active_) {
+    Matrix full_h(H.rows,attitude_clone::kJoint,0.0);
+    for(std::size_t i=0;i<H.rows;++i) for(std::size_t j=0;j<RANK;++j) full_h(i,j)=H(i,j);
+    setAttitudeJointState(attitude_clone::ordinaryUpdate(attitudeJointState(),dz,full_h,R));
+    ++attitude_clone_counts_.ordinary_joint_updates;
+    requireFrozenCloneBlocks();
+    return;
   }
   const Matrix Ht = transpose(H);
   const Matrix S = add(multiply(multiply(H, Cov_), Ht), R);
@@ -535,7 +562,20 @@ void GIEngine::stateFeedback() {
       yaw_correction_clipped = true;
     }
   }
-  pvacur_.pos_blh_rad_m = subtract(pvacur_.pos_blh_rad_m, multiply(Earth::DRi(pvacur_.pos_blh_rad_m), dx_pos));
+  const Vec3 old_blh = pvacur_.pos_blh_rad_m;
+  const Vec3 new_blh = subtract(old_blh, multiply(Earth::DRi(old_blh), dx_pos));
+  attitude_clone::Gaussian reset_state;
+  Matrix3 reset_clone=attitude_clone_cbe_;
+  if(options_.attitude_clone_config.mode!="off") {
+    if(yaw_correction_clipped) throw std::runtime_error("ATTITUDE_CLONE_PARTIAL_FEEDBACK_FORBIDDEN");
+    reset_state=attitude_clone::reset(attitudeJointState(),multiply(Earth::DR(new_blh),Earth::DRi(old_blh)));
+    if(attitude_clone_active_) {
+      reset_clone=multiply(Rotation::quaternion2matrix(Rotation::rotvec2quaternion(attitude_clone_error_)),
+                           attitude_clone_cbe_);
+      attitude_clone::requireRotation(reset_clone,"FEEDBACK_CLONE_CBE");
+    }
+  }
+  pvacur_.pos_blh_rad_m = new_blh;
   pvacur_.vel_ned_mps = subtract(pvacur_.vel_ned_mps, dx_vel);
   const Quaternion qpn = Rotation::rotvec2quaternion(dx_phi);
   pvacur_.qbn = Rotation::multiply(qpn, pvacur_.qbn);
@@ -550,6 +590,12 @@ void GIEngine::stateFeedback() {
                                                          -dx_phi[2] * R2D,
                                                          yaw_correction_clipped);
   zeroVector(dx_);
+  if(options_.attitude_clone_config.mode!="off") {
+    setAttitudeJointState(reset_state);
+    if(attitude_clone_active_) attitude_clone_cbe_=reset_clone;
+    ++attitude_clone_counts_.full_resets;
+    requireFrozenCloneBlocks();
+  }
 }
 
 // 中文说明：newImuProcess 完整处理 res=0/1/2/3，R2 只做 synthetic smoke，不声明 real clean parity。
@@ -589,7 +635,7 @@ void GIEngine::newImuProcess() {
   imupre_ = imucur_;
 }
 
-void GIEngine::newImuProcessWithEvents(const std::vector<GnssData>& events) {
+void GIEngine::processExactJointEvents(const std::vector<JointTimedEvent>& events) {
   if (options_.baseline3d_source != "external_carrier" && options_.runtime_contract != "research_experiment")
     throw std::runtime_error("EXACT_EVENT_LOOP_REQUIRES_OPT_IN");
   if (!initialized_) return;
@@ -608,10 +654,11 @@ void GIEngine::newImuProcessWithEvents(const std::vector<GnssData>& events) {
   ImuData previous = imupre_;
   ImuData remaining = imucur_;
   for (const auto& input_event : events) {
-    GnssData event = input_event;
+    GnssData event = input_event.gnss;
+    bool execute_gnss = input_event.has_gnss;
     const bool priority = options_.heading_source_policy != "configured";
     HeadingSourceDecision decision;
-    if (priority) {
+    if (priority && execute_gnss) {
       if (event.auxiliary_updates_allowed != event.pvt_heading_source_present || !event.validity_explicit)
         throw std::runtime_error("PVT_PRIORITY_EVENT_SOURCE_IDENTITY_REQUIRED");
       decision = heading_source_policy_.arrive(event.time, event.pvt_heading_source_present,
@@ -623,7 +670,7 @@ void GIEngine::newImuProcessWithEvents(const std::vector<GnssData>& events) {
       // A coincident carrier cannot activate aids on an otherwise wholly invalid
       // PVT row. Suppressed *valid* PVT retains its original auxiliary schedule.
       event.auxiliary_updates_allowed = event.auxiliary_updates_allowed &&
-          (input_event.has_position || input_event.has_velocity || input_event.has_yaw);
+          (input_event.gnss.has_position || input_event.gnss.has_velocity || input_event.gnss.has_yaw);
       if (decision.pvt_present && decision.pvt_source_valid && !decision.use_pvt)
         ++heading_source_counts_.pvt_suppressed;
       if (decision.carrier_present && !decision.use_carrier)
@@ -631,20 +678,22 @@ void GIEngine::newImuProcessWithEvents(const std::vector<GnssData>& events) {
       if (!event.pvt_heading_source_present && !decision.use_carrier) {
         // Even valid but suppressed carrier events are diagnostics only.
         heading_source_events_.push_back(decision);
-        continue;
+        execute_gnss=false;
       }
     }
-    if (!priority && !event.auxiliary_updates_allowed && !event.baseline3d.valid) {
+    if (execute_gnss && !priority && !event.auxiliary_updates_allowed && !event.baseline3d.valid) {
       // Invalid carrier availability is a diagnostic, not a propagation boundary.
       // This must be numerically identical to an absent observation.
       applyBaseline3dUpdate(event, options_.enable_basic_dual_yaw_baseline, "INACTIVE", 1.0);
-      continue;
+      execute_gnss=false;
     }
-    if (event.time > previous.time) {
+    if(!execute_gnss && input_event.feet.empty()) continue;
+    const double event_time=input_event.time;
+    if (event_time > previous.time) {
       ImuData segment = remaining;
-      if (event.time != end) {
-        const double fraction = (event.time - previous.time) / (end - previous.time);
-        segment.time = event.time;
+      if (event_time != end) {
+        const double fraction = (event_time - previous.time) / (end - previous.time);
+        segment.time = event_time;
         segment.dtheta = scale(remaining.dtheta, fraction);
         segment.dvel = scale(remaining.dvel, fraction);
         // Split measured dt, not rounded timestamp elapsed; conserve all three increments.
@@ -660,7 +709,8 @@ void GIEngine::newImuProcessWithEvents(const std::vector<GnssData>& events) {
       pvapre_ = pvacur_;
     }
     // No TIME_ALIGN_ERR snapping: no event can be used before its availability.
-    timestamp_ = event.time;
+    timestamp_ = event_time;
+    if(execute_gnss) {
     addGnssData(event);
     const auto heading_accepted_before = yaw_normal_count_ + yaw_downweight_count_;
     gnssUpdate();
@@ -677,6 +727,9 @@ void GIEngine::newImuProcessWithEvents(const std::vector<GnssData>& events) {
     }
     stateFeedback();
     pvapre_ = pvacur_;
+    }
+    for(const auto& foot : input_event.feet) processFootPairEvent(foot);
+    pvapre_=pvacur_;
   }
   if (previous.time < end) {
     insPropagation(previous, remaining);
@@ -703,6 +756,11 @@ void GIEngine::newImuProcessWithEvents(const std::vector<GnssData>& events) {
 }
 
 bool GIEngine::checkCov() const {
+  if(attitude_clone_active_) {
+    for(double v:attitude_clone_cross_.data) if(!std::isfinite(v)) return false;
+    for(double v:attitude_clone_cov_.data) if(!std::isfinite(v)) return false;
+    for(std::size_t i=0;i<3;++i) if(attitude_clone_cov_(i,i)<0.0) return false;
+  }
   for (std::size_t i = 0; i < RANK; ++i) {
     if (!std::isfinite(Cov_(i, i)) || Cov_(i, i) < 0.0) {
       return false;
@@ -2005,6 +2063,8 @@ Matrix GIEngine::covarianceMatrix() const {
 }
 
 void GIEngine::setCovarianceMatrix(const Matrix& matrix) {
+  if(options_.attitude_clone_config.mode!="off")
+    throw std::runtime_error("ATTITUDE_CLONE_CURRENT_ONLY_COV_REPLACEMENT_FORBIDDEN");
   Cov_ = matrix;
 }
 

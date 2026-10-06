@@ -1,0 +1,158 @@
+{
+  "status": "PASS_LOCAL_SYNTHETIC_16_NO_REAL_DATA_QUALIFICATION",
+  "stage": "<TRUSTED_HEADING_SCRATCH>/NATIVE_ATTITUDE_CLONE_LOCAL_ATTEMPT01",
+  "build_calls": {
+    "configure": 1,
+    "core_demo": 1,
+    "harness_compile": 1,
+    "technical_rebuilds": 0
+  },
+  "test_unique_cases": 16,
+  "test_instances": 16,
+  "pytest_calls": 1,
+  "passed": 16,
+  "production_algorithm_repairs": 0,
+  "test_fixture_repairs": 0,
+  "harness_process_calls": 28,
+  "harness_expected_domain_rejections": 6,
+  "forbidden_real_calls": {
+    "raw_reads": 0,
+    "real_foot_provider_reads": 0,
+    "navigation": 0,
+    "evaluator": 0,
+    "integer_search": 0,
+    "reference_reads": 0
+  },
+  "binary": {
+    "path": "<TRUSTED_HEADING_SCRATCH>/NATIVE_ATTITUDE_CLONE_LOCAL_ATTEMPT01/BUILD/legsa_v23_port_core_demo",
+    "sha256": "f29010e5ba2d000276b6ac0b2be0dd33b4c3a0f2fa4d8884c25b6ca110bd24aa"
+  },
+  "static_library_sha256": "d0b5008e5b69d1fcaa4ea45e0215dc4298a420d6119c837673dab0268aa78b50",
+  "harness": {
+    "path": "<TRUSTED_HEADING_SCRATCH>/NATIVE_ATTITUDE_CLONE_LOCAL_ATTEMPT01/native_attitude_clone_harness",
+    "sha256": "5a291e41120a44e98de8a921219e563c8408c084e20f8851beea833679c0b6d5",
+    "future_loader_only_command": [
+      "<harness>",
+      "config",
+      "<config>"
+    ]
+  },
+  "cases": [
+    {
+      "name": "test_01_deterministic_clone_latent",
+      "status": "PASS",
+      "elapsed_s": 0.024
+    },
+    {
+      "name": "test_02_native_current_only_prediction",
+      "status": "PASS",
+      "elapsed_s": 0.003
+    },
+    {
+      "name": "test_03_ordinary_full_gain_latent_QR",
+      "status": "PASS",
+      "elapsed_s": 0.007
+    },
+    {
+      "name": "test_04_complete_reset_retraction_FD",
+      "status": "PASS",
+      "elapsed_s": 0.005
+    },
+    {
+      "name": "test_05_retire_marginal_not_conditioning",
+      "status": "PASS",
+      "elapsed_s": 0.003
+    },
+    {
+      "name": "test_06_pair_nonzero_gauge_and_feedback_FD",
+      "status": "PASS",
+      "elapsed_s": 0.002
+    },
+    {
+      "name": "test_07_NED_connection_augmentation_FD",
+      "status": "PASS",
+      "elapsed_s": 0.002
+    },
+    {
+      "name": "test_08_full_endpoint_covariance_frame_domains",
+      "status": "PASS",
+      "elapsed_s": 0.004
+    },
+    {
+      "name": "test_09_Young_bound_actual_nonzero_cross",
+      "status": "PASS",
+      "elapsed_s": 0.004
+    },
+    {
+      "name": "test_10_fixed_weights_SKIP_not_inflation",
+      "status": "PASS",
+      "elapsed_s": 0.009
+    },
+    {
+      "name": "test_11_native_frozen_scale",
+      "status": "PASS",
+      "elapsed_s": 0.003
+    },
+    {
+      "name": "test_12_large_innovation_failclosed",
+      "status": "PASS",
+      "elapsed_s": 0.007
+    },
+    {
+      "name": "test_13_exact_time_GNSS_before_clone_and_identity",
+      "status": "PASS",
+      "elapsed_s": 0.004
+    },
+    {
+      "name": "test_14_invalid_END_RETIRE_no_aux",
+      "status": "PASS",
+      "elapsed_s": 0.004
+    },
+    {
+      "name": "test_15_support_boundaries_blank_timer_source",
+      "status": "PASS",
+      "elapsed_s": 0.005
+    },
+    {
+      "name": "test_16_default_off_and_malformed_contracts",
+      "status": "PASS",
+      "elapsed_s": 0.01
+    }
+  ],
+  "source_sha256": {
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/attitude_clone.hpp": "de9e238d2c3a10f2939bea9ea988d5a84992b89bd907436895a7de15a9792fa8",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/foot_pair_events.hpp": "347166fcbb49377facb405abfaaebd9699d95e91bd3fe583ef7403482185978e",
+    "cpp/legsa_v23_port_core/src/factors/attitude_clone.cpp": "51124cc5ed99b77e59182f1adea342f398cb451c8457aabc6f53a66a46cbe02e",
+    "cpp/legsa_v23_port_core/src/factors/foot_pair_events.cpp": "4ba6634d0ff7c14f7f5a85041b57aa6412645e73dd2f6ddda7b532414d014edd",
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine_attitude_clone.cpp": "30d340b262fe8d3e7c9f62d11dcbeb01c0bb1dc2f05cdd41d017a8818ed85bf4",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/gi_engine.hpp": "68142268015287fde0503c2d1af36d329cb449d891117f6dc71ff398aa7349b5",
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp": "0e351c06f0d34acd38d67d37028992ef1f850ac54a7e5aa647c94d5a6d63a793",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/options.hpp": "f4dda0dc2942032faa6e9cfdc35701fb030703839c005922ff81a44e70e71d4c",
+    "cpp/legsa_v23_port_core/src/config/port_config_loader.cpp": "fab0d6fbdfa022162384ee3170aba0698e32b4fa06193bbeb52cdd18698d7539",
+    "cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp": "74e3e3047f75650590fc384c4596fc6827acbc88e353cf705f1753e0305a70a1",
+    "cpp/legsa_v23_port_core/src/fileio/file_saver.cpp": "c6a77cd49c7df1452d3df68528f298ff028ac67890bc7f1719d7c76c89001e9f",
+    "docs/paper_rebuild/TRUSTED_HEADING_20261006/NATIVE_ATTITUDE_CLONE_DESIGN.md": "8767c33ebaeefbfa813cdb7becf8bb63de648d179ae851a4c46f7e00ade6fced",
+    "tests/paper_rebuild/native_attitude_clone_harness.cpp": "d1aaec7cca3bef5212e1879677d7f4d52051b965df4e45b169bea103ee64c157",
+    "tests/paper_rebuild/test_native_attitude_clone.py": "78b764e373ea09bc47f1778e689ed5dbbb7a8fdd842f40f6db30a9363e67d01a"
+  },
+  "artifacts_sha256": {
+    "INITIAL_TEST_SOURCE_PINS.json": "2f5f5a4105d21bbcfd19e74133a6d51aca301dbced1eb95dc37882d5312e56a9",
+    "02_BUILD.json": "c7aeebf2750b08b7942221562ace42055da5194adb5843e7aa3dfbbb05cc0a0c",
+    "01_CONFIGURE.json": "0431eb2032589d3a3e14b54535be31c13cd60cf99dc6a27595ca1801ddb57135",
+    "LOCAL_PLAN.json": "82a0fb83071bd5d9777aa03e1f7a4300c76b149d44a3c0d796a3b420ba47bdd2",
+    "04_TESTS.json": "105f7f1e70ee34c37338eb6923c8f88c7680e8dbc3f7dbe41ddbd61b384c2a81",
+    "03_HARNESS_COMPILE.json": "8b2b091a1d3bb0999f7e4c3da8e6396eb1c635e25c250db0d89454ba97e279c5",
+    "02_BUILD.log": "3866e5ea5d02757c73ff3e9b83bb0b50ea7217834b93aa4a21962506c29ce326",
+    "03_HARNESS_COMPILE.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "04_TESTS.log": "2af9fab565d3dd91c9995ce4ab2e8541053a88526ba2cd867a272c859913a8b4",
+    "01_CONFIGURE.log": "c6ca77603e0b6fe4ca8178fb1a56fc0ee13d1a93bd99d00819a8850d699c7c0c",
+    "04_TESTS.xml": "b2f905773bc7c498dd314ba20a5b4c1d5dad7e32ea6cb26c86294c907f685432",
+    "HARNESS_INVOCATIONS.jsonl": "164fc7e38b6efb664e7ac9d701b357869a73585d0491531a0d98e75fb4b87523"
+  },
+  "boundaries": [
+    "Fixed working linearization and supplied covariance bounds; no physical SDK calibration or independence claim.",
+    "Test16 establishes default-off flag, input isolation, current21 shape, malformed-input rejection and deterministic same-path outputs. It is not old-binary byte-parity evidence.",
+    "Native full-joint Gaussian update retains inherited original measurement/process working independence assumptions; only foot Young term allows arbitrary unknown cross under given marginals.",
+    "No real loader or navigation entry has been invoked. Original sealed binary/results remain unchanged."
+  ]
+}

@@ -546,6 +546,29 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       options.dual_antenna_measurement_model != "baseline3d") {
     throw std::runtime_error("BASELINE3D_UNKNOWN_MEASUREMENT_MODEL");
   }
+  auto& clone_config = options.attitude_clone_config;
+  clone_config.mode = stringOrDefault(kv, "attitude_clone_mode", "off");
+  clone_config.events_path = stringOrDefault(kv, "foot_pair_events_path", "");
+  clone_config.position_source_id = stringOrDefault(kv, "foot_pair_position_source_id", "");
+  clone_config.position_gnss_input_status = stringOrDefault(kv, "foot_pair_position_gnss_input_status", "");
+  clone_config.covariance_source_id = stringOrDefault(kv, "foot_pair_covariance_source_id", "");
+  clone_config.covariance_assumption = stringOrDefault(kv, "foot_pair_covariance_assumption", "");
+  clone_config.frame_source_id = stringOrDefault(kv, "foot_pair_frame_source_id", "");
+  clone_config.availability_policy = stringOrDefault(kv, "foot_pair_availability_policy", "");
+  if (clone_config.mode != "off") {
+    const auto frame = kv.find("foot_pair_body_frd_to_engine_body");
+    if (frame == kv.end()) throw std::runtime_error("FOOT_PAIR_EXPLICIT_FRAME_REQUIRED");
+    std::istringstream frame_stream(normalizeLine(frame->second));
+    for (std::size_t i=0;i<9;++i) {
+      double value=0.0;
+      if (!(frame_stream>>value) || !std::isfinite(value))
+        throw std::runtime_error("FOOT_PAIR_FRAME_REQUIRES_NINE_FINITE_VALUES");
+      clone_config.foot_frd_to_engine_body[i/3][i%3]=value;
+    }
+    std::string trailing_frame;
+    if (frame_stream>>trailing_frame) throw std::runtime_error("FOOT_PAIR_FRAME_TRAILING_VALUE");
+  }
+  validateAttitudeCloneConfig(clone_config, options.runtime_contract);
   options.heading_source_policy = stringOrDefault(kv, "heading_source_policy", "configured");
   if (options.heading_source_policy != "configured" &&
       options.heading_source_policy != "pvt_priority_control" &&
@@ -1339,6 +1362,11 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   if (options.clean1_formal_mode || options.runtime_contract == "research_experiment") {
     validateFormalMethodContract(kv, options);
   }
+  if (options.attitude_clone_config.mode != "off" &&
+      (options.qa_fallback_config.enable_qa_fallback || options.qa_fallback_config.qa_active_mode ||
+       options.algorithm_id == quality_aware::kLegsaQaFallbackEkf ||
+       options.quality_state_manager_config.enable_multi_state_qm))
+    throw std::runtime_error("ATTITUDE_CLONE_REQUIRES_FULL_UNCLIPPED_FEEDBACK_QA_QM_OFF");
   if (options.heading_source_policy != "configured" &&
       (options.enable_basic_dual_yaw_baseline || !options.enable_dual_yaw_update || !options.yaw_scheme_C_enabled))
     throw std::runtime_error("PVT_PRIORITY_REQUIRES_SCHEME_C_NONBASIC");

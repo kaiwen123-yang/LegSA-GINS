@@ -6,6 +6,7 @@
 // 中文说明：该文件为受控移植的组合导航骨架代码，后续创新因子将在该骨架通过 parity 后再接入。
 
 #include "legsa_v23_port_core/fileio/file_saver.hpp"
+#include "legsa_v23_port_core/factors/attitude_clone.hpp"
 
 #include "legsa_v23_port_core/common/earth.hpp"
 #include "legsa_v23_port_core/source_aware/source_aware_policy.hpp"
@@ -163,6 +164,9 @@ void writeActualSolverInputPaths(std::ostream& out, const PortOptions& options) 
   };
   add("propagation_imu", options.imu_path);
   add("gnss_position_receiver_velocity_dual_yaw", options.gnss_path);
+  if (options.attitude_clone_config.mode != "off") {
+    add("sdk_foot_pair_direction_events", options.attitude_clone_config.events_path);
+  }
   if (options.dual_antenna_measurement_model == "baseline3d") {
     add("dual_antenna_baseline3d", options.baseline3d_source == "external_carrier" ? options.external_carrier_baseline_path : options.baseline3d_path);
   }
@@ -210,6 +214,9 @@ void writeActualSolverInputRoles(std::ostream& out, const PortOptions& options) 
   }
   if (options.fgo_feedback_config.enable_fgo_feedback) {
     out << ", \"selected_fgo_feedback\": \"out_of_scope_for_clean1\"";
+  }
+  if (options.attitude_clone_config.mode != "off") {
+    out << ", \"sdk_foot_pair_direction_events\": \"conditional_relative_rotation_working_bound_not_contact_truth\"";
   }
   out << "}";
 }
@@ -813,6 +820,54 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
         << "  \"body_velocity_native_uses_GNSS_heading_to_construct_measurement\": false,\n"
         << "  \"body_velocity_update_period_s\": " << options.go2_velocity_prior_diagnostic_config.go2_body_velocity_update_period_s << ",\n"
         << "  \"body_velocity_time_policy\": \"independent_IMU_boundary_timer_past_latest_unique_attempt_no_interpolation\",\n";
+  }
+  if (options.attitude_clone_config.mode != "off") {
+    const auto& ac = options.attitude_clone_config;
+    const auto& counts = options.attitude_clone_counts;
+    out << "  \"attitude_clone_mode\": \"" << escapeJson(ac.mode) << "\",\n"
+        << "  \"attitude_clone_max_joint_dimension\": 24,\n"
+        << "  \"attitude_clone_output_current_dimension\": 21,\n"
+        << "  \"foot_pair_position_source_id\": \"" << escapeJson(ac.position_source_id) << "\",\n"
+        << "  \"foot_pair_position_gnss_input_status\": \"" << escapeJson(ac.position_gnss_input_status) << "\",\n"
+        << "  \"foot_pair_covariance_source_id\": \"" << escapeJson(ac.covariance_source_id) << "\",\n"
+        << "  \"foot_pair_covariance_assumption\": \"" << escapeJson(ac.covariance_assumption) << "\",\n"
+        << "  \"foot_pair_frame_source_id\": \"" << escapeJson(ac.frame_source_id) << "\",\n"
+        << "  \"foot_pair_availability_policy\": \"" << escapeJson(ac.availability_policy) << "\",\n"
+        << "  \"foot_pair_body_frd_to_engine_body\": [";
+    for (std::size_t i = 0; i < 9; ++i) {
+      if (i) out << ',';
+      out << ac.foot_frd_to_engine_body[i / 3][i % 3];
+    }
+    out << "],\n"
+        << "  \"foot_pair_physical_frame_independently_calibrated\": false,\n"
+        << "  \"foot_pair_IMU_statistical_independence_proven\": false,\n"
+        << "  \"foot_pair_absolute_heading_or_instant_velocity\": false,\n"
+        << "  \"foot_pair_true_slip_or_integrity_claim\": false,\n"
+        << "  \"attitude_clone_reset\": \"full_joint_G_P_Gt_positive_left_both_research_modes\",\n"
+        << "  \"attitude_clone_retirement\": \"current_marginal_not_Schur_conditioning\",\n"
+        << "  \"attitude_clone_original_measurement_cross_model\": \"inherited_working_model_zero_clone_H_full_joint_gain\",\n"
+        << "  \"attitude_clone_process_noise_cross_model\": \"inherited_current_process_working_model\",\n"
+        << "  \"foot_pair_Young_epsilon_candidates\": [0.015625,0.0625,0.25,1,4],\n"
+        << "  \"foot_pair_Young_selection\": \"fixed_initial_current21_weighted_trace_with_exact_SKIP\",\n"
+        << "  \"foot_pair_Young_bound_scope\": \"local_given_working_marginal_second_moment_bounds_arbitrary_state_measurement_cross\",\n"
+        << "  \"foot_pair_safe_innovation_covariance\": \"2*(H_P_Ht+R)\",\n"
+        << "  \"foot_pair_safe_innovation_threshold\": " << attitude_clone::kSafeInnovationThreshold << ",\n"
+        << "  \"foot_pair_safe_innovation_scope\": \"working_Gaussian_diagnostic_not_physical_slip_truth\",\n"
+        << "  \"attitude_clone_source_rows\": " << counts.source_rows << ",\n"
+        << "  \"attitude_clone_consumed_event_rows\": " << counts.event_rows << ",\n"
+        << "  \"attitude_clone_starts\": " << counts.starts << ",\n"
+        << "  \"attitude_clone_ends\": " << counts.ends << ",\n"
+        << "  \"attitude_clone_retires\": " << counts.retires << ",\n"
+        << "  \"attitude_clone_pair_updates\": " << counts.pair_updates << ",\n"
+        << "  \"attitude_clone_pair_skips\": " << counts.pair_skips << ",\n"
+        << "  \"attitude_clone_null_ends\": " << counts.null_ends << ",\n"
+        << "  \"attitude_clone_innovation_rejects\": " << counts.innovation_rejects << ",\n"
+        << "  \"attitude_clone_rejected_events\": " << counts.rejected_events << ",\n"
+        << "  \"attitude_clone_ordinary_joint_updates\": " << counts.ordinary_joint_updates << ",\n"
+        << "  \"attitude_clone_full_resets\": " << counts.full_resets << ",\n"
+        << "  \"attitude_clone_late_initial_events\": " << counts.late_initial_events << ",\n"
+        << "  \"attitude_clone_unconsumed_terminal\": " << counts.unconsumed_terminal << ",\n"
+        << "  \"attitude_clone_unconsumed_outside_imu\": " << counts.unconsumed_outside_imu << ",\n";
   }
   out << "  \"actual_solver_input_paths\": ";
   writeActualSolverInputPaths(out, options);

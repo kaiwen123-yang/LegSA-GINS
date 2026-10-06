@@ -1,0 +1,27 @@
+{
+  "status": "IMPLEMENTATION_ONLY_NOT_BUILT_OR_TESTED",
+  "source_files": {
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/attitude_clone.hpp": "de9e238d2c3a10f2939bea9ea988d5a84992b89bd907436895a7de15a9792fa8",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/foot_pair_events.hpp": "347166fcbb49377facb405abfaaebd9699d95e91bd3fe583ef7403482185978e",
+    "cpp/legsa_v23_port_core/src/factors/attitude_clone.cpp": "51124cc5ed99b77e59182f1adea342f398cb451c8457aabc6f53a66a46cbe02e",
+    "cpp/legsa_v23_port_core/src/factors/foot_pair_events.cpp": "4ba6634d0ff7c14f7f5a85041b57aa6412645e73dd2f6ddda7b532414d014edd",
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine_attitude_clone.cpp": "30d340b262fe8d3e7c9f62d11dcbeb01c0bb1dc2f05cdd41d017a8818ed85bf4",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/gi_engine.hpp": "68142268015287fde0503c2d1af36d329cb449d891117f6dc71ff398aa7349b5",
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp": "0e351c06f0d34acd38d67d37028992ef1f850ac54a7e5aa647c94d5a6d63a793",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/options.hpp": "f4dda0dc2942032faa6e9cfdc35701fb030703839c005922ff81a44e70e71d4c",
+    "cpp/legsa_v23_port_core/src/config/port_config_loader.cpp": "fab0d6fbdfa022162384ee3170aba0698e32b4fa06193bbeb52cdd18698d7539",
+    "cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp": "74e3e3047f75650590fc384c4596fc6827acbc88e353cf705f1753e0305a70a1",
+    "cpp/legsa_v23_port_core/src/fileio/file_saver.cpp": "c6a77cd49c7df1452d3df68528f298ff028ac67890bc7f1719d7c76c89001e9f",
+    "docs/paper_rebuild/TRUSTED_HEADING_20261006/NATIVE_ATTITUDE_CLONE_DESIGN.md": "8767c33ebaeefbfa813cdb7becf8bb63de648d179ae851a4c46f7e00ade6fced"
+  },
+  "new_compile_calls": 0,
+  "new_local_test_calls": 0,
+  "new_real_loader_calls": 0,
+  "new_raw_or_reference_reads": 0,
+  "new_native_navigation_calls": 0,
+  "new_evaluator_calls": 0,
+  "new_integer_search_calls": 0,
+  "future_local_cases_proposed_maximum": 16,
+  "original_source_and_sealed_binary_are_distinct": true,
+  "note": "Static source implementation and review only. Source hashes are not execution qualification."
+}

@@ -19,6 +19,8 @@
 #include "legsa_v23_port_core/source_aware/quality_state_trace.hpp"
 #include "legsa_v23_port_core/source_aware/source_aware_trace.hpp"
 
+#include "legsa_v23_port_core/factors/attitude_clone.hpp"
+#include <set>
 #include <cstddef>
 #include <string>
 #include <vector>
@@ -106,8 +108,31 @@ class GIEngine {
   const HeadingSourceCounts& headingSourceCounts() const { return heading_source_counts_; }
   const std::vector<HeadingSourceDecision>& headingSourceEvents() const { return heading_source_events_; }
   void writeHeadingSourceDiagnostics(const std::string& output_dir) const;
+  void setFootPairEvents(const std::vector<FootPairEvent>& events);
+  void finalizeFootPairStream();
+  void writeAttitudeCloneDiagnostics(const std::string& output_dir) const;
+  const AttitudeCloneCounts& attitudeCloneCounts() const { return attitude_clone_counts_; }
+  Matrix jointAttitudeCovariance() const;
+  bool attitudeCloneActive() const { return attitude_clone_active_; }
+
 
  private:
+  struct JointTimedEvent {
+    double time=0.0;
+    bool has_gnss=false;
+    GnssData gnss;
+    std::vector<FootPairEvent> feet;
+  };
+  void processExactJointEvents(const std::vector<JointTimedEvent>& events);
+  attitude_clone::Gaussian attitudeJointState() const;
+  void setAttitudeJointState(const attitude_clone::Gaussian& state);
+  void processFootPairEvent(const FootPairEvent& event);
+  void retireAttitudeClone();
+  void requireFrozenCloneBlocks() const;
+  void recordFootEvent(const FootPairEvent& event, const std::string& action,
+                       bool applied=false, double epsilon=0.0,
+                       double prior_score=0.0, double bound_score=0.0,
+                       double safe_innovation=-1.0);
   void initializeCovariance();
   void initializeQc();
   void buildErrorStateMatrices(const ImuData& imu, Matrix& F, Matrix& G, Matrix& Phi, Matrix& Qd) const;
@@ -143,6 +168,26 @@ class GIEngine {
   void setCovarianceMatrix(const Matrix& matrix);
 
   PortOptions options_;
+  bool attitude_clone_active_=false;
+  Matrix attitude_clone_cross_{RANK,3,0.0};
+  Matrix attitude_clone_cov_{3,3,0.0};
+  Vec3 attitude_clone_error_{};
+  Matrix3 attitude_clone_cbe_{};
+  FootPairEvent attitude_clone_start_;
+  std::set<std::string> attitude_clone_used_ids_, foot_used_endpoint_ids_;
+  std::vector<double> attitude_clone_weights_;
+  std::vector<FootPairEvent> foot_events_;
+  std::size_t next_foot_event_=0;
+  bool foot_stream_started_=false;
+  AttitudeCloneCounts attitude_clone_counts_;
+  struct FootEventDiagnostic {
+    double event_time=0, state_time=0, source_time=0;
+    std::string type, clone_id, endpoint_id, action;
+    bool applied=false;
+    double epsilon=0, prior_score=0, bound_score=0, safe_innovation=-1;
+  };
+  std::vector<FootEventDiagnostic> foot_event_diagnostics_;
+
   HeadingSourcePolicy heading_source_policy_;
   HeadingSourceCounts heading_source_counts_;
   std::vector<HeadingSourceDecision> heading_source_events_;

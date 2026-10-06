@@ -176,6 +176,7 @@ void copyRuntimeStatusForCovFailure(const GIEngine& engine, PortOptions& options
   options.yaw_downweight_count = engine.yawDownweightCount();
   options.yaw_reject_count = engine.yawRejectCount();
   options.heading_source_counts = engine.headingSourceCounts();
+  options.attitude_clone_counts = engine.attitudeCloneCounts();
   copyCovHealthStatus(engine, options);
   copyRawDopplerStatus(engine, options);
   copySourceAwareStatus(engine, options);
@@ -1439,6 +1440,9 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   }
 
   GIEngine engine(options);
+  if (options.attitude_clone_config.mode != "off") {
+    engine.setFootPairEvents(readFootPairEvents(options.attitude_clone_config));
+  }
   if (options.raw_doppler_config.enable_raw_doppler) {
     engine.setRawDopplerVelocityMeasurements(raw_doppler_load.measurements, raw_doppler_load.status);
   }
@@ -1597,6 +1601,8 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     ++loop_index;
   }
 
+  // Future terminal cleanup does not propagate, append output, or condition the clone.
+  engine.finalizeFootPairStream();
   options.propagation_count = engine.propagationCount();
   options.measurement_update_count = engine.updateCount();
   options.position_update_count = engine.positionUpdateCount();
@@ -1606,6 +1612,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   options.yaw_downweight_count = engine.yawDownweightCount();
   options.yaw_reject_count = engine.yawRejectCount();
   options.heading_source_counts = engine.headingSourceCounts();
+  options.attitude_clone_counts = engine.attitudeCloneCounts();
   if (options.dual_antenna_measurement_model == "baseline3d") {
     options.baseline3d_counts = engine.baseline3dCounts();
   }
@@ -1654,6 +1661,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   engine.writeBaseline3dDiagnostics(output_dir);
   engine.writeHeadingSourceDiagnostics(output_dir);
   engine.writeBodyVelocityDiagnostics(output_dir);
+  engine.writeAttitudeCloneDiagnostics(output_dir);
 }
 
 }  // namespace legsa_v23_port_core
