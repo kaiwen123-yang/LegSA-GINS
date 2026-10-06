@@ -1,0 +1,21 @@
+{
+  "status": "NO_BLOCKING_ISSUE_WITHIN_REGISTERED_IDEALIZED_SCOPE",
+  "script_sha256": "1a0a48a0839a632cf139a2b08a07191b6b985426bcab6816ac25d54691053929",
+  "review_tests_sha256": "9b21a2413bb445008167aad6a937ff379e4a998388f4fedaf007c4192292e38f",
+  "implementation_tests_sha256": "f05e47a4d9515347e194bc3f9639d198c4bb75b616bf1c9306d197c8e91a78d6",
+  "independent_tests_passed": 11,
+  "independent_random_scenarios": 200,
+  "jobs_per_random_scenario": 25,
+  "implementation_tests_reported_passed": 16,
+  "independent_test_command": "PYTHONPATH=src python3 -m pytest -q tests/test_carrier_latency_review.py",
+  "seed": 884216,
+  "runtime_cost_source": "original PARTIAL6 saved search.certificate.elapsed_s; execution commits c25a48e to dbf under the same scientific freeze (documentation-only progression)",
+  "new_cache_benchmark_cost_substitution_allowed": false,
+  "real_model_replays": 0,
+  "CILS_calls": 0,
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "reference_payload_reads": 0,
+  "review_sha256": "c8b2f45693aee05f8172c28e89688fb89e2c333654e76b6f67334c50eba88e2c",
+  "unix": 1791276099.8237054
+}
