@@ -1,4 +1,9 @@
-# 固定EKF核心的研究范围与贡献组织
+# 固定EKF核心的研究范围与贡献组织（历史约束）
+
+> 已被同日用户后续决定取代：允许有界、问题驱动的EKF改动。当前执行边界见
+> [BOUNDED_EKF_SCOPE.md](BOUNDED_EKF_SCOPE.md)，研究架构见
+> [THREE_CONTRIBUTION_ARCHITECTURE.md](THREE_CONTRIBUTION_ARCHITECTURE.md)。
+> 下文保留当时决策，不再作为绝对冻结的依据。
 
 2026-10-06，依据用户最新约束收紧 ab08c52 提案。本文件优先于旧提案的
 联合信息更新、共享状态扩维或惯导后验回灌设想。设计阶段，无新增数值执行。
