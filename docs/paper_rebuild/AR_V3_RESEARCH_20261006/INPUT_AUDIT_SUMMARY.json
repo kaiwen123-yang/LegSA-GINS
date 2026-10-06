@@ -1,0 +1,2083 @@
+{
+  "schema": "ar_v3.input_audit.result.v1",
+  "status": "COMPLETE",
+  "plan_sha256": "82dc22bc9117286f9ec24ddba4ab69dbc778b4c9e28f02e1fd2a526b4bed351d",
+  "script_sha256": "b68b790f44b547a3be5991862011b6dfeaa11aebe166ec04e3e38014af412917",
+  "code_commit": "29435b451bf10ee0051aa10527c1f9bad2bc8963",
+  "data_mode": "recorded_raw_gnss_diagnostic",
+  "reference_opens": 0,
+  "navigation_calls": 0,
+  "integer_search_calls": 0,
+  "convbin_calls": 6,
+  "retries": 0,
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "receivers": [
+    {
+      "sequence": "BY2",
+      "receiver": 1,
+      "source": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv",
+      "source_sha256": "5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027",
+      "status": "COMPARED",
+      "malformed_prefixed_cell_count": 2,
+      "malformed_prefixed_cells": [
+        {
+          "csv_line": 24848,
+          "time": "1772784305.5471563",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 6242341,
+          "stream_end": 6242405,
+          "cell_sha256": "fc372b1296181c60fb50c78bcf5477383b4dc769b2c952771993078794552817",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 28473,
+          "time": "1772784342.5491133",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 7162589,
+          "stream_end": 7162653,
+          "cell_sha256": "9c287a231e7ac0151c749341d5600125a7647425499344db7470fd10a9f12ed7",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        }
+      ],
+      "scanner_discarded_bytes": 47343,
+      "scanner_checksum_failures": 2,
+      "scanner_accepted_frames": 29432,
+      "excluded_cell_count": 606,
+      "excluded_cells_receipt": "<AR_V3_SCRATCH>/input_history_attempt02/BY2_R1/FULL_STREAM_EXCLUDED_CELLS.json",
+      "full_ubx_byte_identical": true,
+      "clipped_ubx_byte_identical": true,
+      "input_prefixed_cell_name_counts": {
+        "UBX-NAV-PVT": 1510,
+        "UBX-NAV-HPPOSECEF": 1510,
+        "UBX-NAV-VELECEF": 1510,
+        "UBX-NAV-SAT": 1510,
+        "UBX-NAV-SIG": 1510,
+        "UBX-NAV-STATUS": 1510,
+        "UBX-NAV-DOP": 1510,
+        "UBX-NAV-TIMEGPS": 1510,
+        "UBX-NAV-CLOCK": 1510,
+        "UBX-NAV-COV": 1510,
+        "UBX-NAV-RELPOSNED": 1510,
+        "UBX-NAV-EOE": 1510,
+        "UBX-RXM-RAWX": 1509,
+        "UBX-RXM-SFRBX": 5216,
+        "UBX-TIM-TP": 302,
+        "UBX-RXM-RTCM": 1870,
+        "UBX-MON-HW": 302,
+        "UBX-MON-HW2": 302,
+        "UBX-MON-TEMP": 302,
+        "UBX-MON-MSGPP": 300,
+        "UBX-MON-COMMS": 302,
+        "UBX-MON-HW3": 302,
+        "UBX-MON-RF": 302,
+        "UBX-MON-SPAN": 302,
+        "UBX-INF-DEBUG": 1,
+        "OTHER": 2
+      },
+      "full_ubx_sha256": "24177f2d6f25c0b614f769e66c4e4147eea727f3a7f55e22d5e04419eaa10f8b",
+      "clipped_ubx_sha256": "8a67b183b430907b1c9a50a9f6c77dffd072831d955b98e9cf536bbbcbde5dd0",
+      "old_full_obs": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss1.obs",
+      "old_full_obs_sha256": "f3bb057c79aeb967a82123e9840b5173a97d80842f336c30f17853b0bd10be5b",
+      "old_full_ubx_sha256": "24177f2d6f25c0b614f769e66c4e4147eea727f3a7f55e22d5e04419eaa10f8b",
+      "old_clipped_ubx_sha256": "8a67b183b430907b1c9a50a9f6c77dffd072831d955b98e9cf536bbbcbde5dd0",
+      "command": [
+        "<RTKLIB_ROOT>/app/consapp/convbin/gcc/convbin",
+        "-r",
+        "ubx",
+        "-o",
+        "<AR_V3_SCRATCH>/input_history_attempt02/BY2_R1/BY2_R1.obs",
+        "-n",
+        "<AR_V3_SCRATCH>/input_history_attempt02/BY2_R1/BY2_R1.nav",
+        "<AR_V3_SCRATCH>/input_history_attempt02/BY2_R1/BY2_R1.ubx"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.11388416899990261,
+      "old_epochs": 1509,
+      "new_epochs": 1509,
+      "epochs_equal": true,
+      "science_records_byte_identical": true,
+      "old_header_semantics": {
+        "observation_types": {
+          "G": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "R": [
+            "C1C",
+            "L1C",
+            "C2C",
+            "L2C"
+          ],
+          "E": [
+            "C1C",
+            "L1C",
+            "C7Q",
+            "L7Q"
+          ],
+          "J": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L"
+          ],
+          "S": [
+            "C1C",
+            "L1C"
+          ],
+          "C": [
+            "C2I",
+            "L2I",
+            "C7I",
+            "L7I"
+          ]
+        },
+        "time_system": "GPS",
+        "time_system_declarations": {
+          "TIME OF FIRST OBS": "GPS",
+          "TIME OF LAST OBS": "GPS"
+        },
+        "interpretation_records": {
+          "RINEX VERSION / TYPE": [
+            "     3.04           OBSERVATION DATA    M: Mixed"
+          ],
+          "SYS / PHASE SHIFT": [
+            "G L1C",
+            "G L2L  0.00000",
+            "R L1C",
+            "R L2C",
+            "E L1C  0.00000",
+            "E L7Q  0.00000",
+            "J L1C",
+            "J L2L  0.00000",
+            "S L1C",
+            "C L2I",
+            "C L7I"
+          ],
+          "GLONASS SLOT / FRQ #": [
+            "  9 R04  6 R05  1 R06 -4 R09 -2 R10 -7 R11  0 R19  3 R20  2",
+            "    R21  4"
+          ],
+          "GLONASS COD/PHS/BIS": [
+            " C1C    0.000 C1P    0.000 C2C    0.000 C2P    0.000"
+          ]
+        }
+      },
+      "new_header_semantics": {
+        "observation_types": {
+          "G": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "R": [
+            "C1C",
+            "L1C",
+            "C2C",
+            "L2C"
+          ],
+          "E": [
+            "C1C",
+            "L1C",
+            "C7Q",
+            "L7Q"
+          ],
+          "J": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L"
+          ],
+          "S": [
+            "C1C",
+            "L1C"
+          ],
+          "C": [
+            "C2I",
+            "L2I",
+            "C7I",
+            "L7I"
+          ]
+        },
+        "time_system": "GPS",
+        "time_system_declarations": {
+          "TIME OF FIRST OBS": "GPS",
+          "TIME OF LAST OBS": "GPS"
+        },
+        "interpretation_records": {
+          "RINEX VERSION / TYPE": [
+            "     3.04           OBSERVATION DATA    M: Mixed"
+          ],
+          "SYS / PHASE SHIFT": [
+            "G L1C",
+            "G L2L  0.00000",
+            "R L1C",
+            "R L2C",
+            "E L1C  0.00000",
+            "E L7Q  0.00000",
+            "J L1C",
+            "J L2L  0.00000",
+            "S L1C",
+            "C L2I",
+            "C L7I"
+          ],
+          "GLONASS SLOT / FRQ #": [
+            "  9 R04  6 R05  1 R06 -4 R09 -2 R10 -7 R11  0 R19  3 R20  2",
+            "    R21  4"
+          ],
+          "GLONASS COD/PHS/BIS": [
+            " C1C    0.000 C1P    0.000 C2C    0.000 C2P    0.000"
+          ]
+        }
+      },
+      "header_semantics_equal": true,
+      "science_equal": true,
+      "observable_fields": {
+        "C_common": 94118,
+        "L_common": 42471,
+        "LLI_common": 42471,
+        "SSI_common": 42471
+      },
+      "different_fields": 0,
+      "new_obs_sha256": "b552c921c335f334145a679625336133eeee8193acfad69d95dfb3d9f0e72017"
+    },
+    {
+      "sequence": "BY2",
+      "receiver": 2,
+      "source": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss2-raw.csv",
+      "source_sha256": "39249696329530452a1049b5b39e2c1d8f7e89ae2190d2c95bce70f5b4f44583",
+      "status": "COMPARED",
+      "malformed_prefixed_cell_count": 1,
+      "malformed_prefixed_cells": [
+        {
+          "csv_line": 521,
+          "time": "1772784060.5583591",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 114337,
+          "stream_end": 114401,
+          "cell_sha256": "4ca011e9777dd85193dd002655e136e7940144ac092ed4311422222e5e81a25b",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        }
+      ],
+      "scanner_discarded_bytes": 47242,
+      "scanner_checksum_failures": 1,
+      "scanner_accepted_frames": 29303,
+      "excluded_cell_count": 605,
+      "excluded_cells_receipt": "<AR_V3_SCRATCH>/input_history_attempt02/BY2_R2/FULL_STREAM_EXCLUDED_CELLS.json",
+      "full_ubx_byte_identical": true,
+      "clipped_ubx_byte_identical": true,
+      "input_prefixed_cell_name_counts": {
+        "UBX-NAV-PVT": 1510,
+        "UBX-NAV-HPPOSECEF": 1510,
+        "UBX-NAV-VELECEF": 1510,
+        "UBX-NAV-SAT": 1510,
+        "UBX-NAV-SIG": 1510,
+        "UBX-NAV-STATUS": 1510,
+        "UBX-NAV-DOP": 1510,
+        "UBX-NAV-TIMEGPS": 1510,
+        "UBX-NAV-CLOCK": 1510,
+        "UBX-NAV-COV": 1510,
+        "UBX-NAV-RELPOSNED": 1510,
+        "UBX-NAV-EOE": 1510,
+        "UBX-RXM-RAWX": 1509,
+        "UBX-RXM-SFRBX": 5086,
+        "UBX-TIM-TP": 302,
+        "UBX-RXM-RTCM": 1870,
+        "UBX-MON-HW": 302,
+        "UBX-MON-HW2": 302,
+        "UBX-MON-TEMP": 302,
+        "UBX-MON-MSGPP": 301,
+        "UBX-MON-COMMS": 302,
+        "UBX-MON-HW3": 302,
+        "UBX-MON-RF": 302,
+        "UBX-MON-SPAN": 302,
+        "OTHER": 1,
+        "UBX-INF-DEBUG": 1
+      },
+      "full_ubx_sha256": "0876d7e67441ddfce66b4ce8e39838b4245bddab3d6d3cce60d5eb9bad42c2c2",
+      "clipped_ubx_sha256": "e750bb8c17fd1242221e7d3e6717a6f1579c06ce182fadeb59824ad10d50bc07",
+      "old_full_obs": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss2.obs",
+      "old_full_obs_sha256": "11a77bb45cbf7461f02bfec3d48cdace38525f54cfd4b2af1306903c2b8dab2e",
+      "old_full_ubx_sha256": "0876d7e67441ddfce66b4ce8e39838b4245bddab3d6d3cce60d5eb9bad42c2c2",
+      "old_clipped_ubx_sha256": "e750bb8c17fd1242221e7d3e6717a6f1579c06ce182fadeb59824ad10d50bc07",
+      "command": [
+        "<RTKLIB_ROOT>/app/consapp/convbin/gcc/convbin",
+        "-r",
+        "ubx",
+        "-o",
+        "<AR_V3_SCRATCH>/input_history_attempt02/BY2_R2/BY2_R2.obs",
+        "-n",
+        "<AR_V3_SCRATCH>/input_history_attempt02/BY2_R2/BY2_R2.nav",
+        "<AR_V3_SCRATCH>/input_history_attempt02/BY2_R2/BY2_R2.ubx"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.11383705200000804,
+      "old_epochs": 1509,
+      "new_epochs": 1509,
+      "epochs_equal": true,
+      "science_records_byte_identical": true,
+      "old_header_semantics": {
+        "observation_types": {
+          "G": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L"
+          ],
+          "R": [
+            "C1C",
+            "L1C",
+            "C2C",
+            "L2C"
+          ],
+          "E": [
+            "C1C",
+            "L1C",
+            "C7Q",
+            "L7Q"
+          ],
+          "J": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "S": [
+            "C1C",
+            "L1C"
+          ],
+          "C": [
+            "C2I",
+            "L2I",
+            "C7I",
+            "L7I"
+          ]
+        },
+        "time_system": "GPS",
+        "time_system_declarations": {
+          "TIME OF FIRST OBS": "GPS",
+          "TIME OF LAST OBS": "GPS"
+        },
+        "interpretation_records": {
+          "RINEX VERSION / TYPE": [
+            "     3.04           OBSERVATION DATA    M: Mixed"
+          ],
+          "SYS / PHASE SHIFT": [
+            "G L1C",
+            "G L2L  0.00000",
+            "R L1C",
+            "R L2C",
+            "E L1C  0.00000",
+            "E L7Q  0.00000",
+            "J L1C",
+            "J L2L  0.00000",
+            "S L1C",
+            "C L2I",
+            "C L7I"
+          ],
+          "GLONASS SLOT / FRQ #": [
+            "  8 R04  6 R05  1 R09 -2 R10 -7 R11  0 R19  3 R20  2 R21  4"
+          ],
+          "GLONASS COD/PHS/BIS": [
+            " C1C    0.000 C1P    0.000 C2C    0.000 C2P    0.000"
+          ]
+        }
+      },
+      "new_header_semantics": {
+        "observation_types": {
+          "G": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L"
+          ],
+          "R": [
+            "C1C",
+            "L1C",
+            "C2C",
+            "L2C"
+          ],
+          "E": [
+            "C1C",
+            "L1C",
+            "C7Q",
+            "L7Q"
+          ],
+          "J": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "S": [
+            "C1C",
+            "L1C"
+          ],
+          "C": [
+            "C2I",
+            "L2I",
+            "C7I",
+            "L7I"
+          ]
+        },
+        "time_system": "GPS",
+        "time_system_declarations": {
+          "TIME OF FIRST OBS": "GPS",
+          "TIME OF LAST OBS": "GPS"
+        },
+        "interpretation_records": {
+          "RINEX VERSION / TYPE": [
+            "     3.04           OBSERVATION DATA    M: Mixed"
+          ],
+          "SYS / PHASE SHIFT": [
+            "G L1C",
+            "G L2L  0.00000",
+            "R L1C",
+            "R L2C",
+            "E L1C  0.00000",
+            "E L7Q  0.00000",
+            "J L1C",
+            "J L2L  0.00000",
+            "S L1C",
+            "C L2I",
+            "C L7I"
+          ],
+          "GLONASS SLOT / FRQ #": [
+            "  8 R04  6 R05  1 R09 -2 R10 -7 R11  0 R19  3 R20  2 R21  4"
+          ],
+          "GLONASS COD/PHS/BIS": [
+            " C1C    0.000 C1P    0.000 C2C    0.000 C2P    0.000"
+          ]
+        }
+      },
+      "header_semantics_equal": true,
+      "science_equal": true,
+      "observable_fields": {
+        "C_common": 88957,
+        "L_common": 39135,
+        "LLI_common": 39135,
+        "SSI_common": 39135
+      },
+      "different_fields": 0,
+      "new_obs_sha256": "687392a770753320462ae9fa75575807473e4df0cb5ef6ff54b97e32031c4a11"
+    },
+    {
+      "sequence": "BY2H",
+      "receiver": 1,
+      "source": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss1-raw.csv",
+      "source_sha256": "b6e0e3108b0902350eb7655fe1a2db23a8f320136ddc6c54bcd7e5dbe2d17508",
+      "status": "COMPARED",
+      "malformed_prefixed_cell_count": 0,
+      "malformed_prefixed_cells": [],
+      "scanner_discarded_bytes": 46446,
+      "scanner_checksum_failures": 0,
+      "scanner_accepted_frames": 28912,
+      "excluded_cell_count": 594,
+      "excluded_cells_receipt": "<AR_V3_SCRATCH>/input_history_attempt02/BY2H_R1/FULL_STREAM_EXCLUDED_CELLS.json",
+      "full_ubx_byte_identical": true,
+      "clipped_ubx_byte_identical": true,
+      "input_prefixed_cell_name_counts": {
+        "UBX-RXM-RAWX": 1483,
+        "UBX-RXM-RTCM": 1838,
+        "UBX-NAV-PVT": 1483,
+        "UBX-NAV-HPPOSECEF": 1483,
+        "UBX-NAV-VELECEF": 1483,
+        "UBX-NAV-SAT": 1483,
+        "UBX-NAV-SIG": 1483,
+        "UBX-NAV-STATUS": 1483,
+        "UBX-NAV-DOP": 1483,
+        "UBX-NAV-TIMEGPS": 1483,
+        "UBX-NAV-CLOCK": 1483,
+        "UBX-NAV-COV": 1483,
+        "UBX-NAV-RELPOSNED": 1483,
+        "UBX-NAV-EOE": 1483,
+        "UBX-RXM-SFRBX": 5123,
+        "UBX-MON-HW": 297,
+        "UBX-MON-HW2": 297,
+        "UBX-MON-TEMP": 297,
+        "UBX-MON-MSGPP": 297,
+        "UBX-MON-COMMS": 297,
+        "UBX-MON-HW3": 297,
+        "UBX-MON-RF": 297,
+        "UBX-MON-SPAN": 297,
+        "UBX-TIM-TP": 296
+      },
+      "full_ubx_sha256": "7287a2745d893c0c3a05981aefc65973b0080a7dd81ae0c3f0b1e90a9aaa7b99",
+      "clipped_ubx_sha256": "1a19354c63ab4f1ce7ecbac7642d2125fa3c2c1b288edead076f15a6ad492442",
+      "old_full_obs": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/SOURCE_BACKEND/gnss1.obs",
+      "old_full_obs_sha256": "8ac02d4d59a6ad205b2c34e301e34c717a901132b73c82978ef24e4e742867a3",
+      "old_full_ubx_sha256": "7287a2745d893c0c3a05981aefc65973b0080a7dd81ae0c3f0b1e90a9aaa7b99",
+      "old_clipped_ubx_sha256": "1a19354c63ab4f1ce7ecbac7642d2125fa3c2c1b288edead076f15a6ad492442",
+      "command": [
+        "<RTKLIB_ROOT>/app/consapp/convbin/gcc/convbin",
+        "-r",
+        "ubx",
+        "-o",
+        "<AR_V3_SCRATCH>/input_history_attempt02/BY2H_R1/BY2H_R1.obs",
+        "-n",
+        "<AR_V3_SCRATCH>/input_history_attempt02/BY2H_R1/BY2H_R1.nav",
+        "<AR_V3_SCRATCH>/input_history_attempt02/BY2H_R1/BY2H_R1.ubx"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.11410170900012417,
+      "old_epochs": 1483,
+      "new_epochs": 1483,
+      "epochs_equal": true,
+      "science_records_byte_identical": true,
+      "old_header_semantics": {
+        "observation_types": {
+          "G": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "R": [
+            "C1C",
+            "L1C",
+            "C2C",
+            "L2C"
+          ],
+          "E": [
+            "C1C",
+            "L1C",
+            "C7Q",
+            "L7Q"
+          ],
+          "J": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L"
+          ],
+          "S": [
+            "C1C",
+            "L1C"
+          ],
+          "C": [
+            "C2I",
+            "L2I",
+            "C7I",
+            "L7I"
+          ]
+        },
+        "time_system": "GPS",
+        "time_system_declarations": {
+          "TIME OF FIRST OBS": "GPS",
+          "TIME OF LAST OBS": "GPS"
+        },
+        "interpretation_records": {
+          "RINEX VERSION / TYPE": [
+            "     3.04           OBSERVATION DATA    M: Mixed"
+          ],
+          "SYS / PHASE SHIFT": [
+            "G L1C",
+            "G L2L  0.00000",
+            "R L1C",
+            "R L2C",
+            "E L1C  0.00000",
+            "E L7Q  0.00000",
+            "J L1C",
+            "J L2L  0.00000",
+            "S L1C",
+            "C L2I",
+            "C L7I"
+          ],
+          "GLONASS SLOT / FRQ #": [
+            "  9 R04  6 R05  1 R06 -4 R09 -2 R10 -7 R11  0 R19  3 R20  2",
+            "    R21  4"
+          ],
+          "GLONASS COD/PHS/BIS": [
+            " C1C    0.000 C1P    0.000 C2C    0.000 C2P    0.000"
+          ]
+        }
+      },
+      "new_header_semantics": {
+        "observation_types": {
+          "G": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "R": [
+            "C1C",
+            "L1C",
+            "C2C",
+            "L2C"
+          ],
+          "E": [
+            "C1C",
+            "L1C",
+            "C7Q",
+            "L7Q"
+          ],
+          "J": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L"
+          ],
+          "S": [
+            "C1C",
+            "L1C"
+          ],
+          "C": [
+            "C2I",
+            "L2I",
+            "C7I",
+            "L7I"
+          ]
+        },
+        "time_system": "GPS",
+        "time_system_declarations": {
+          "TIME OF FIRST OBS": "GPS",
+          "TIME OF LAST OBS": "GPS"
+        },
+        "interpretation_records": {
+          "RINEX VERSION / TYPE": [
+            "     3.04           OBSERVATION DATA    M: Mixed"
+          ],
+          "SYS / PHASE SHIFT": [
+            "G L1C",
+            "G L2L  0.00000",
+            "R L1C",
+            "R L2C",
+            "E L1C  0.00000",
+            "E L7Q  0.00000",
+            "J L1C",
+            "J L2L  0.00000",
+            "S L1C",
+            "C L2I",
+            "C L7I"
+          ],
+          "GLONASS SLOT / FRQ #": [
+            "  9 R04  6 R05  1 R06 -4 R09 -2 R10 -7 R11  0 R19  3 R20  2",
+            "    R21  4"
+          ],
+          "GLONASS COD/PHS/BIS": [
+            " C1C    0.000 C1P    0.000 C2C    0.000 C2P    0.000"
+          ]
+        }
+      },
+      "header_semantics_equal": true,
+      "science_equal": true,
+      "observable_fields": {
+        "C_common": 92307,
+        "L_common": 41717,
+        "LLI_common": 41717,
+        "SSI_common": 41717
+      },
+      "different_fields": 0,
+      "new_obs_sha256": "f81dd26217ccd6fed7b2528f07bb51c2a14f1c6d4a19577d386218582c842be6"
+    },
+    {
+      "sequence": "BY2H",
+      "receiver": 2,
+      "source": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss2-raw.csv",
+      "source_sha256": "87e4056c85b58595792578a62aeceb1b594475d654e4e49eb7fccaf5bfff56aa",
+      "status": "COMPARED",
+      "malformed_prefixed_cell_count": 2,
+      "malformed_prefixed_cells": [
+        {
+          "csv_line": 23374,
+          "time": "1772784635.547668",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 5748536,
+          "stream_end": 5748600,
+          "cell_sha256": "c30c661180cf6640f6e973419755dd7b84bb31099f45a67f867864b1022d38b1",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 29080,
+          "time": "1772784693.5504293",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 7164031,
+          "stream_end": 7164095,
+          "cell_sha256": "b09ab8dfd06aaf414cca677403aa3030ef351701ba53e2406c1f9360e85ef7e8",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        }
+      ],
+      "scanner_discarded_bytes": 46565,
+      "scanner_checksum_failures": 2,
+      "scanner_accepted_frames": 28909,
+      "excluded_cell_count": 596,
+      "excluded_cells_receipt": "<AR_V3_SCRATCH>/input_history_attempt02/BY2H_R2/FULL_STREAM_EXCLUDED_CELLS.json",
+      "full_ubx_byte_identical": true,
+      "clipped_ubx_byte_identical": true,
+      "input_prefixed_cell_name_counts": {
+        "UBX-RXM-RAWX": 1483,
+        "UBX-RXM-RTCM": 1838,
+        "UBX-NAV-PVT": 1483,
+        "UBX-NAV-HPPOSECEF": 1483,
+        "UBX-NAV-VELECEF": 1483,
+        "UBX-NAV-SAT": 1483,
+        "UBX-NAV-SIG": 1483,
+        "UBX-NAV-STATUS": 1483,
+        "UBX-NAV-DOP": 1483,
+        "UBX-NAV-TIMEGPS": 1483,
+        "UBX-NAV-CLOCK": 1483,
+        "UBX-NAV-COV": 1483,
+        "UBX-NAV-RELPOSNED": 1483,
+        "UBX-NAV-EOE": 1483,
+        "UBX-RXM-SFRBX": 5122,
+        "UBX-MON-HW": 297,
+        "UBX-MON-HW2": 297,
+        "UBX-MON-TEMP": 297,
+        "UBX-MON-MSGPP": 295,
+        "UBX-MON-COMMS": 297,
+        "UBX-MON-HW3": 297,
+        "UBX-MON-RF": 297,
+        "UBX-MON-SPAN": 297,
+        "UBX-TIM-TP": 296,
+        "OTHER": 2
+      },
+      "full_ubx_sha256": "62a615500cede304abf9eb9146432ea860bd6d56e94b20e40d22cefce17987fd",
+      "clipped_ubx_sha256": "023d3dba102a7e439695458a42be1d3a495a4efec8db5b3d0d4c0d718d57084c",
+      "old_full_obs": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/SOURCE_BACKEND/gnss2.obs",
+      "old_full_obs_sha256": "e283c27456ca7faa7f9efca863ffd5fd131567b60a25278e93d7348c248534da",
+      "old_full_ubx_sha256": "62a615500cede304abf9eb9146432ea860bd6d56e94b20e40d22cefce17987fd",
+      "old_clipped_ubx_sha256": "023d3dba102a7e439695458a42be1d3a495a4efec8db5b3d0d4c0d718d57084c",
+      "command": [
+        "<RTKLIB_ROOT>/app/consapp/convbin/gcc/convbin",
+        "-r",
+        "ubx",
+        "-o",
+        "<AR_V3_SCRATCH>/input_history_attempt02/BY2H_R2/BY2H_R2.obs",
+        "-n",
+        "<AR_V3_SCRATCH>/input_history_attempt02/BY2H_R2/BY2H_R2.nav",
+        "<AR_V3_SCRATCH>/input_history_attempt02/BY2H_R2/BY2H_R2.ubx"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.11409937700000228,
+      "old_epochs": 1483,
+      "new_epochs": 1483,
+      "epochs_equal": true,
+      "science_records_byte_identical": true,
+      "old_header_semantics": {
+        "observation_types": {
+          "G": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "R": [
+            "C1C",
+            "L1C",
+            "C2C",
+            "L2C"
+          ],
+          "E": [
+            "C1C",
+            "L1C",
+            "C7Q",
+            "L7Q"
+          ],
+          "J": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "S": [
+            "C1C",
+            "L1C"
+          ],
+          "C": [
+            "C2I",
+            "L2I",
+            "C7I",
+            "L7I"
+          ]
+        },
+        "time_system": "GPS",
+        "time_system_declarations": {
+          "TIME OF FIRST OBS": "GPS",
+          "TIME OF LAST OBS": "GPS"
+        },
+        "interpretation_records": {
+          "RINEX VERSION / TYPE": [
+            "     3.04           OBSERVATION DATA    M: Mixed"
+          ],
+          "SYS / PHASE SHIFT": [
+            "G L1C",
+            "G L2L  0.00000",
+            "R L1C",
+            "R L2C",
+            "E L1C  0.00000",
+            "E L7Q  0.00000",
+            "J L1C",
+            "J L2L  0.00000",
+            "S L1C",
+            "C L2I",
+            "C L7I"
+          ],
+          "GLONASS SLOT / FRQ #": [
+            "  9 R04  6 R05  1 R06 -4 R09 -2 R10 -7 R11  0 R19  3 R20  2",
+            "    R21  4"
+          ],
+          "GLONASS COD/PHS/BIS": [
+            " C1C    0.000 C1P    0.000 C2C    0.000 C2P    0.000"
+          ]
+        }
+      },
+      "new_header_semantics": {
+        "observation_types": {
+          "G": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "R": [
+            "C1C",
+            "L1C",
+            "C2C",
+            "L2C"
+          ],
+          "E": [
+            "C1C",
+            "L1C",
+            "C7Q",
+            "L7Q"
+          ],
+          "J": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "S": [
+            "C1C",
+            "L1C"
+          ],
+          "C": [
+            "C2I",
+            "L2I",
+            "C7I",
+            "L7I"
+          ]
+        },
+        "time_system": "GPS",
+        "time_system_declarations": {
+          "TIME OF FIRST OBS": "GPS",
+          "TIME OF LAST OBS": "GPS"
+        },
+        "interpretation_records": {
+          "RINEX VERSION / TYPE": [
+            "     3.04           OBSERVATION DATA    M: Mixed"
+          ],
+          "SYS / PHASE SHIFT": [
+            "G L1C",
+            "G L2L  0.00000",
+            "R L1C",
+            "R L2C",
+            "E L1C  0.00000",
+            "E L7Q  0.00000",
+            "J L1C",
+            "J L2L  0.00000",
+            "S L1C",
+            "C L2I",
+            "C L7I"
+          ],
+          "GLONASS SLOT / FRQ #": [
+            "  9 R04  6 R05  1 R06 -4 R09 -2 R10 -7 R11  0 R19  3 R20  2",
+            "    R21  4"
+          ],
+          "GLONASS COD/PHS/BIS": [
+            " C1C    0.000 C1P    0.000 C2C    0.000 C2P    0.000"
+          ]
+        }
+      },
+      "header_semantics_equal": true,
+      "science_equal": true,
+      "observable_fields": {
+        "C_common": 89831,
+        "L_common": 40103,
+        "LLI_common": 40103,
+        "SSI_common": 40103
+      },
+      "different_fields": 0,
+      "new_obs_sha256": "1dbb190be8f7e8044d9603ef540fe063314b2c8f14ad4294e89e64c0300375b7"
+    },
+    {
+      "sequence": "BY2O",
+      "receiver": 1,
+      "source": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss1-raw.csv",
+      "source_sha256": "6035d50419eaa0ff29d9a4b053dbed5d715fd2bec38f44ad4b4be02ca54a4ba9",
+      "status": "COMPARED",
+      "malformed_prefixed_cell_count": 22,
+      "malformed_prefixed_cells": [
+        {
+          "csv_line": 9642,
+          "time": "1772783635.533212",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 2328720,
+          "stream_end": 2328784,
+          "cell_sha256": "9bbbea64790ce077488524cb91dfb9904d14a2f6529f3ccbbcdf27dba221ddd6",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 9775,
+          "time": "1772783636.5406377",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 2353933,
+          "stream_end": 2353997,
+          "cell_sha256": "8a027f5b925dc59da0bcd03d14c138833b075325b53bc5e76b988d78275bc850",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 11276,
+          "time": "1772783651.5416756",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 2716232,
+          "stream_end": 2716296,
+          "cell_sha256": "70ab3dee413bbeb090ac9f989038b6033283bca4042fa19219b12a645fa2f33a",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 19865,
+          "time": "1772783733.5592556",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 4863471,
+          "stream_end": 4863535,
+          "cell_sha256": "c1442c8e9a430918116a4b92fb55d1c450d409e23900376c5b706540598db477",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 39581,
+          "time": "1772783928.5503974",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 9571472,
+          "stream_end": 9571536,
+          "cell_sha256": "d25ca20609798b27df62000091c1af259da53882291722c54fa9701cb47380bf",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 39676,
+          "time": "1772783929.542718",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 9594651,
+          "stream_end": 9594715,
+          "cell_sha256": "82e5dec67b4b20c1842b0b4ac94ce87fe223a17d56a891c902adf9f5969cbe6d",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 39789,
+          "time": "1772783930.538161",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 9618982,
+          "stream_end": 9619046,
+          "cell_sha256": "b756744b17219306b7feb8e091a61e9e657ab136f36f06ab204d7e784cab8eb7",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 39968,
+          "time": "1772783932.5356216",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 9665420,
+          "stream_end": 9665484,
+          "cell_sha256": "a495b549a1a945d01a0c4d70f1195934bf090a6ef08cd37c729d95ab95e9a3b3",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 40061,
+          "time": "1772783933.5371273",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 9688415,
+          "stream_end": 9688479,
+          "cell_sha256": "02e0b7e292b68e13f9833a00a09bed181164950e0d946d2c7f82d6af8735083c",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 40167,
+          "time": "1772783934.548571",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 9711956,
+          "stream_end": 9712020,
+          "cell_sha256": "e29f85ff98fbeacf9300026c23b3a8b9595fc60e4937823d700706e8ef921fa3",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 40247,
+          "time": "1772783935.5438304",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 9734599,
+          "stream_end": 9734663,
+          "cell_sha256": "e29f85ff98fbeacf9300026c23b3a8b9595fc60e4937823d700706e8ef921fa3",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 40374,
+          "time": "1772783936.544754",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 9758610,
+          "stream_end": 9758674,
+          "cell_sha256": "04fe9f66f45e9ef36e754ca6a54713105ade6b3450920fac0c08af0473bae09e",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 40455,
+          "time": "1772783937.5464716",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 9781093,
+          "stream_end": 9781157,
+          "cell_sha256": "04fe9f66f45e9ef36e754ca6a54713105ade6b3450920fac0c08af0473bae09e",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 40557,
+          "time": "1772783938.554254",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 9804330,
+          "stream_end": 9804394,
+          "cell_sha256": "f672c60f1e8c7943f3fd0b74c5f9a73c20e4d23582fae831149b247fd5d892df",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 40745,
+          "time": "1772783940.5401156",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 9850988,
+          "stream_end": 9851052,
+          "cell_sha256": "4b238afd5cb142f14e1d04d75f55c12f268717e6a8ced9d393f016cd7de71061",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 40831,
+          "time": "1772783941.5449493",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 9874191,
+          "stream_end": 9874255,
+          "cell_sha256": "5c0ebdd6a8aae567dac3acd171aa431940185ebe4d1e00445675e0459dc378bb",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 40932,
+          "time": "1772783942.5419292",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 9897916,
+          "stream_end": 9897980,
+          "cell_sha256": "f8f8c25af9891756cc542536089d93bb8cea60aefba8a1a231f55d81a1835086",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 41112,
+          "time": "1772783944.5369527",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 9944550,
+          "stream_end": 9944614,
+          "cell_sha256": "40dbb495890a45ca96bbf93a8292c65e5411f4867dfdc93d181ec418bbe39747",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 41301,
+          "time": "1772783946.5438106",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 9991880,
+          "stream_end": 9991944,
+          "cell_sha256": "74eb7f800baa022bc123135290f9ba2deaff076488d298f70bd4918fa9130bfd",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 41499,
+          "time": "1772783948.552534",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 10039432,
+          "stream_end": 10039496,
+          "cell_sha256": "994a58ff49940f08c9222e8bbd4c29e3857368ade7b980892be6e00600085cbe",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 42082,
+          "time": "1772783954.5405526",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 10185314,
+          "stream_end": 10185378,
+          "cell_sha256": "5fd155e1b95f44e9f2121951c9581602b7227e5fd2e4e6b7c09e90c7e180b5e5",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        },
+        {
+          "csv_line": 42182,
+          "time": "1772783955.5490124",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 10209603,
+          "stream_end": 10209667,
+          "cell_sha256": "89e1dc6386ad7f05d01b9ac2a3edc145ce75085c91e352cf7780211d42b0420c",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        }
+      ],
+      "scanner_discarded_bytes": 70462,
+      "scanner_checksum_failures": 23,
+      "scanner_accepted_frames": 44828,
+      "excluded_cell_count": 915,
+      "excluded_cells_receipt": "<AR_V3_SCRATCH>/input_history_attempt02/BY2O_R1/FULL_STREAM_EXCLUDED_CELLS.json",
+      "full_ubx_byte_identical": true,
+      "clipped_ubx_byte_identical": true,
+      "input_prefixed_cell_name_counts": {
+        "UBX-RXM-RAWX": 2231,
+        "UBX-MON-HW": 447,
+        "UBX-MON-HW2": 447,
+        "UBX-MON-TEMP": 447,
+        "UBX-NAV-PVT": 2231,
+        "UBX-NAV-HPPOSECEF": 2231,
+        "UBX-NAV-VELECEF": 2231,
+        "UBX-NAV-SAT": 2231,
+        "UBX-NAV-SIG": 2231,
+        "UBX-NAV-STATUS": 2231,
+        "UBX-NAV-DOP": 2231,
+        "UBX-NAV-TIMEGPS": 2231,
+        "UBX-NAV-CLOCK": 2231,
+        "UBX-NAV-COV": 2231,
+        "UBX-NAV-RELPOSNED": 2231,
+        "UBX-NAV-EOE": 2231,
+        "UBX-MON-MSGPP": 424,
+        "UBX-MON-COMMS": 447,
+        "UBX-MON-HW3": 447,
+        "UBX-MON-RF": 447,
+        "UBX-MON-SPAN": 447,
+        "UBX-RXM-RTCM": 2764,
+        "UBX-RXM-SFRBX": 9061,
+        "UBX-TIM-TP": 446,
+        "UBX-INF-DEBUG": 1,
+        "OTHER": 22
+      },
+      "full_ubx_sha256": "649d47b553c2d3b5b7cec627b2aeb5ee179346dbb40364f50d5003d02507ac30",
+      "clipped_ubx_sha256": "b64d76693d8fe097b898ed7c2add0f16e8abf8fa740296939034df5f93d40fd4",
+      "old_full_obs": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/SOURCE_BACKEND/gnss1.obs",
+      "old_full_obs_sha256": "bb0c81ab5727e44c21739c875f7a99b3d2c16a201c4629ba7814dc230afa7b01",
+      "old_full_ubx_sha256": "649d47b553c2d3b5b7cec627b2aeb5ee179346dbb40364f50d5003d02507ac30",
+      "old_clipped_ubx_sha256": "b64d76693d8fe097b898ed7c2add0f16e8abf8fa740296939034df5f93d40fd4",
+      "command": [
+        "<RTKLIB_ROOT>/app/consapp/convbin/gcc/convbin",
+        "-r",
+        "ubx",
+        "-o",
+        "<AR_V3_SCRATCH>/input_history_attempt02/BY2O_R1/BY2O_R1.obs",
+        "-n",
+        "<AR_V3_SCRATCH>/input_history_attempt02/BY2O_R1/BY2O_R1.nav",
+        "<AR_V3_SCRATCH>/input_history_attempt02/BY2O_R1/BY2O_R1.ubx"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.16390604699995492,
+      "old_epochs": 2231,
+      "new_epochs": 2231,
+      "epochs_equal": true,
+      "science_records_byte_identical": true,
+      "old_header_semantics": {
+        "observation_types": {
+          "G": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "R": [
+            "C1C",
+            "L1C",
+            "C2C",
+            "L2C"
+          ],
+          "E": [
+            "C1C",
+            "L1C",
+            "C7Q",
+            "L7Q"
+          ],
+          "J": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L"
+          ],
+          "S": [
+            "C1C",
+            "L1C"
+          ],
+          "C": [
+            "C2I",
+            "L2I",
+            "C7I",
+            "L7I"
+          ]
+        },
+        "time_system": "GPS",
+        "time_system_declarations": {
+          "TIME OF FIRST OBS": "GPS",
+          "TIME OF LAST OBS": "GPS"
+        },
+        "interpretation_records": {
+          "RINEX VERSION / TYPE": [
+            "     3.04           OBSERVATION DATA    M: Mixed"
+          ],
+          "SYS / PHASE SHIFT": [
+            "G L1C",
+            "G L2L  0.00000",
+            "R L1C",
+            "R L2C",
+            "E L1C  0.00000",
+            "E L7Q  0.00000",
+            "J L1C",
+            "J L2L  0.00000",
+            "S L1C",
+            "C L2I",
+            "C L7I"
+          ],
+          "GLONASS SLOT / FRQ #": [
+            "  9 R03  5 R04  6 R05  1 R09 -2 R10 -7 R11  0 R19  3 R20  2",
+            "    R21  4"
+          ],
+          "GLONASS COD/PHS/BIS": [
+            " C1C    0.000 C1P    0.000 C2C    0.000 C2P    0.000"
+          ]
+        }
+      },
+      "new_header_semantics": {
+        "observation_types": {
+          "G": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "R": [
+            "C1C",
+            "L1C",
+            "C2C",
+            "L2C"
+          ],
+          "E": [
+            "C1C",
+            "L1C",
+            "C7Q",
+            "L7Q"
+          ],
+          "J": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L"
+          ],
+          "S": [
+            "C1C",
+            "L1C"
+          ],
+          "C": [
+            "C2I",
+            "L2I",
+            "C7I",
+            "L7I"
+          ]
+        },
+        "time_system": "GPS",
+        "time_system_declarations": {
+          "TIME OF FIRST OBS": "GPS",
+          "TIME OF LAST OBS": "GPS"
+        },
+        "interpretation_records": {
+          "RINEX VERSION / TYPE": [
+            "     3.04           OBSERVATION DATA    M: Mixed"
+          ],
+          "SYS / PHASE SHIFT": [
+            "G L1C",
+            "G L2L  0.00000",
+            "R L1C",
+            "R L2C",
+            "E L1C  0.00000",
+            "E L7Q  0.00000",
+            "J L1C",
+            "J L2L  0.00000",
+            "S L1C",
+            "C L2I",
+            "C L7I"
+          ],
+          "GLONASS SLOT / FRQ #": [
+            "  9 R03  5 R04  6 R05  1 R09 -2 R10 -7 R11  0 R19  3 R20  2",
+            "    R21  4"
+          ],
+          "GLONASS COD/PHS/BIS": [
+            " C1C    0.000 C1P    0.000 C2C    0.000 C2P    0.000"
+          ]
+        }
+      },
+      "header_semantics_equal": true,
+      "science_equal": true,
+      "observable_fields": {
+        "C_common": 138621,
+        "L_common": 76327,
+        "LLI_common": 76327,
+        "SSI_common": 76327
+      },
+      "different_fields": 0,
+      "new_obs_sha256": "54e10bbb63eba0191e87d06888e31b970e7d2c41fce0cf3cbe8e47b2bfb2688f"
+    },
+    {
+      "sequence": "BY2O",
+      "receiver": 2,
+      "source": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss2-raw.csv",
+      "source_sha256": "4f18ec7d618c675238d5c40a868ba01802a9d2da9325877d715f75f2f939119f",
+      "status": "COMPARED",
+      "malformed_prefixed_cell_count": 1,
+      "malformed_prefixed_cells": [
+        {
+          "csv_line": 12993,
+          "time": "1772783672.543229",
+          "name": "OTHER",
+          "protocol": "9",
+          "stream_start": 3057585,
+          "stream_end": 3057649,
+          "cell_sha256": "73d90b8d099671ec9c52371136cb3fd97a4883f23b2d68d0f026537a4eaf6c4b",
+          "actual_bytes": 64,
+          "declared_payload_bytes": 120,
+          "length_ok": false,
+          "checksum_over_available_bytes_ok": true,
+          "filter_rule": "HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION",
+          "discarded_bytes": 64,
+          "filter_reasons": [
+            "DECLARED_FRAME_CHECKSUM_MISMATCH",
+            "NON_UBX_BYTES"
+          ]
+        }
+      ],
+      "scanner_discarded_bytes": 69211,
+      "scanner_checksum_failures": 1,
+      "scanner_accepted_frames": 43403,
+      "excluded_cell_count": 895,
+      "excluded_cells_receipt": "<AR_V3_SCRATCH>/input_history_attempt02/BY2O_R2/FULL_STREAM_EXCLUDED_CELLS.json",
+      "full_ubx_byte_identical": true,
+      "clipped_ubx_byte_identical": true,
+      "input_prefixed_cell_name_counts": {
+        "UBX-RXM-RAWX": 2231,
+        "UBX-MON-HW": 447,
+        "UBX-MON-HW2": 447,
+        "UBX-MON-TEMP": 447,
+        "UBX-NAV-PVT": 2231,
+        "UBX-NAV-HPPOSECEF": 2231,
+        "UBX-NAV-VELECEF": 2231,
+        "UBX-NAV-SAT": 2231,
+        "UBX-NAV-SIG": 2231,
+        "UBX-NAV-STATUS": 2231,
+        "UBX-NAV-DOP": 2231,
+        "UBX-NAV-TIMEGPS": 2231,
+        "UBX-NAV-CLOCK": 2231,
+        "UBX-NAV-COV": 2231,
+        "UBX-NAV-RELPOSNED": 2231,
+        "UBX-NAV-EOE": 2231,
+        "UBX-MON-MSGPP": 446,
+        "UBX-MON-COMMS": 447,
+        "UBX-MON-HW3": 447,
+        "UBX-MON-RF": 447,
+        "UBX-MON-SPAN": 447,
+        "UBX-RXM-RTCM": 2764,
+        "UBX-RXM-SFRBX": 7613,
+        "UBX-TIM-TP": 446,
+        "UBX-INF-DEBUG": 2,
+        "OTHER": 1
+      },
+      "full_ubx_sha256": "d24ea622e999ab782d8ee17cc84faa21919f4e3a24f3563a98cad828a9f44c66",
+      "clipped_ubx_sha256": "6a0690243d9459fa547529766a5239a9a3bab663aa97364874bd5cc53b946af0",
+      "old_full_obs": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/SOURCE_BACKEND/gnss2.obs",
+      "old_full_obs_sha256": "7d07520747e48913a0f6baf1a80c98f8848fa01717a345a9794f9d10ccd9949e",
+      "old_full_ubx_sha256": "d24ea622e999ab782d8ee17cc84faa21919f4e3a24f3563a98cad828a9f44c66",
+      "old_clipped_ubx_sha256": "6a0690243d9459fa547529766a5239a9a3bab663aa97364874bd5cc53b946af0",
+      "command": [
+        "<RTKLIB_ROOT>/app/consapp/convbin/gcc/convbin",
+        "-r",
+        "ubx",
+        "-o",
+        "<AR_V3_SCRATCH>/input_history_attempt02/BY2O_R2/BY2O_R2.obs",
+        "-n",
+        "<AR_V3_SCRATCH>/input_history_attempt02/BY2O_R2/BY2O_R2.nav",
+        "<AR_V3_SCRATCH>/input_history_attempt02/BY2O_R2/BY2O_R2.ubx"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.16404409900019346,
+      "old_epochs": 2231,
+      "new_epochs": 2231,
+      "epochs_equal": true,
+      "science_records_byte_identical": true,
+      "old_header_semantics": {
+        "observation_types": {
+          "G": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "R": [
+            "C1C",
+            "L1C",
+            "C2C",
+            "L2C"
+          ],
+          "E": [
+            "C1C",
+            "L1C",
+            "C7Q",
+            "L7Q"
+          ],
+          "J": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "S": [
+            "C1C",
+            "L1C"
+          ],
+          "C": [
+            "C2I",
+            "L2I",
+            "C7I",
+            "L7I"
+          ]
+        },
+        "time_system": "GPS",
+        "time_system_declarations": {
+          "TIME OF FIRST OBS": "GPS",
+          "TIME OF LAST OBS": "GPS"
+        },
+        "interpretation_records": {
+          "RINEX VERSION / TYPE": [
+            "     3.04           OBSERVATION DATA    M: Mixed"
+          ],
+          "SYS / PHASE SHIFT": [
+            "G L1C",
+            "G L2L  0.00000",
+            "R L1C",
+            "R L2C",
+            "E L1C  0.00000",
+            "E L7Q  0.00000",
+            "J L1C",
+            "J L2L  0.00000",
+            "S L1C",
+            "C L2I",
+            "C L7I"
+          ],
+          "GLONASS SLOT / FRQ #": [
+            "  9 R03  5 R04  6 R05  1 R09 -2 R10 -7 R11  0 R19  3 R20  2",
+            "    R21  4"
+          ],
+          "GLONASS COD/PHS/BIS": [
+            " C1C    0.000 C1P    0.000 C2C    0.000 C2P    0.000"
+          ]
+        }
+      },
+      "new_header_semantics": {
+        "observation_types": {
+          "G": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "R": [
+            "C1C",
+            "L1C",
+            "C2C",
+            "L2C"
+          ],
+          "E": [
+            "C1C",
+            "L1C",
+            "C7Q",
+            "L7Q"
+          ],
+          "J": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "S": [
+            "C1C",
+            "L1C"
+          ],
+          "C": [
+            "C2I",
+            "L2I",
+            "C7I",
+            "L7I"
+          ]
+        },
+        "time_system": "GPS",
+        "time_system_declarations": {
+          "TIME OF FIRST OBS": "GPS",
+          "TIME OF LAST OBS": "GPS"
+        },
+        "interpretation_records": {
+          "RINEX VERSION / TYPE": [
+            "     3.04           OBSERVATION DATA    M: Mixed"
+          ],
+          "SYS / PHASE SHIFT": [
+            "G L1C",
+            "G L2L  0.00000",
+            "R L1C",
+            "R L2C",
+            "E L1C  0.00000",
+            "E L7Q  0.00000",
+            "J L1C",
+            "J L2L  0.00000",
+            "S L1C",
+            "C L2I",
+            "C L7I"
+          ],
+          "GLONASS SLOT / FRQ #": [
+            "  9 R03  5 R04  6 R05  1 R09 -2 R10 -7 R11  0 R19  3 R20  2",
+            "    R21  4"
+          ],
+          "GLONASS COD/PHS/BIS": [
+            " C1C    0.000 C1P    0.000 C2C    0.000 C2P    0.000"
+          ]
+        }
+      },
+      "header_semantics_equal": true,
+      "science_equal": true,
+      "observable_fields": {
+        "C_common": 127899,
+        "L_common": 59763,
+        "LLI_common": 59763,
+        "SSI_common": 59763
+      },
+      "different_fields": 0,
+      "new_obs_sha256": "d13e7fb460772e7251cba631f04167ce6faa03306e8fb35c8e3b80e1f58f9b5d"
+    }
+  ],
+  "input_identity": [
+    {
+      "role": "convbin",
+      "path": "<RTKLIB_ROOT>/app/consapp/convbin/gcc/convbin",
+      "sequence": null,
+      "receiver": null,
+      "expected_sha256": "85b6b981374c7df957492d9423a3c650a35cb5e7253598651070adf4d9f1df2a",
+      "actual_sha256": "85b6b981374c7df957492d9423a3c650a35cb5e7253598651070adf4d9f1df2a",
+      "identity_equal": true
+    },
+    {
+      "role": "old_lli_table",
+      "path": "<CODE_ROOT>/docs/paper_rebuild/hext/DG01R/DG01R_LLI_DIFFERENCES.csv",
+      "sequence": null,
+      "receiver": null,
+      "expected_sha256": "3efef3c8a05b656d4ff6b5662f3d4d36780b305c861df6428e97c24e0b8f0b56",
+      "actual_sha256": "3efef3c8a05b656d4ff6b5662f3d4d36780b305c861df6428e97c24e0b8f0b56",
+      "identity_equal": true
+    },
+    {
+      "role": "source",
+      "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv",
+      "sequence": "BY2",
+      "receiver": 1,
+      "expected_sha256": "5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027",
+      "actual_sha256": "5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027",
+      "identity_equal": true
+    },
+    {
+      "role": "old_full_obs",
+      "path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss1.obs",
+      "sequence": "BY2",
+      "receiver": 1,
+      "expected_sha256": "f3bb057c79aeb967a82123e9840b5173a97d80842f336c30f17853b0bd10be5b",
+      "actual_sha256": "f3bb057c79aeb967a82123e9840b5173a97d80842f336c30f17853b0bd10be5b",
+      "identity_equal": true
+    },
+    {
+      "role": "old_full_ubx",
+      "path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss1.ubx",
+      "sequence": "BY2",
+      "receiver": 1,
+      "expected_sha256": "24177f2d6f25c0b614f769e66c4e4147eea727f3a7f55e22d5e04419eaa10f8b",
+      "actual_sha256": "24177f2d6f25c0b614f769e66c4e4147eea727f3a7f55e22d5e04419eaa10f8b",
+      "identity_equal": true
+    },
+    {
+      "role": "old_clipped_ubx",
+      "path": "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/UBX/BY2_R1.ubx",
+      "sequence": "BY2",
+      "receiver": 1,
+      "expected_sha256": "8a67b183b430907b1c9a50a9f6c77dffd072831d955b98e9cf536bbbcbde5dd0",
+      "actual_sha256": "8a67b183b430907b1c9a50a9f6c77dffd072831d955b98e9cf536bbbcbde5dd0",
+      "identity_equal": true
+    },
+    {
+      "role": "source",
+      "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss2-raw.csv",
+      "sequence": "BY2",
+      "receiver": 2,
+      "expected_sha256": "39249696329530452a1049b5b39e2c1d8f7e89ae2190d2c95bce70f5b4f44583",
+      "actual_sha256": "39249696329530452a1049b5b39e2c1d8f7e89ae2190d2c95bce70f5b4f44583",
+      "identity_equal": true
+    },
+    {
+      "role": "old_full_obs",
+      "path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss2.obs",
+      "sequence": "BY2",
+      "receiver": 2,
+      "expected_sha256": "11a77bb45cbf7461f02bfec3d48cdace38525f54cfd4b2af1306903c2b8dab2e",
+      "actual_sha256": "11a77bb45cbf7461f02bfec3d48cdace38525f54cfd4b2af1306903c2b8dab2e",
+      "identity_equal": true
+    },
+    {
+      "role": "old_full_ubx",
+      "path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss2.ubx",
+      "sequence": "BY2",
+      "receiver": 2,
+      "expected_sha256": "0876d7e67441ddfce66b4ce8e39838b4245bddab3d6d3cce60d5eb9bad42c2c2",
+      "actual_sha256": "0876d7e67441ddfce66b4ce8e39838b4245bddab3d6d3cce60d5eb9bad42c2c2",
+      "identity_equal": true
+    },
+    {
+      "role": "old_clipped_ubx",
+      "path": "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/UBX/BY2_R2.ubx",
+      "sequence": "BY2",
+      "receiver": 2,
+      "expected_sha256": "e750bb8c17fd1242221e7d3e6717a6f1579c06ce182fadeb59824ad10d50bc07",
+      "actual_sha256": "e750bb8c17fd1242221e7d3e6717a6f1579c06ce182fadeb59824ad10d50bc07",
+      "identity_equal": true
+    },
+    {
+      "role": "source",
+      "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss1-raw.csv",
+      "sequence": "BY2H",
+      "receiver": 1,
+      "expected_sha256": "b6e0e3108b0902350eb7655fe1a2db23a8f320136ddc6c54bcd7e5dbe2d17508",
+      "actual_sha256": "b6e0e3108b0902350eb7655fe1a2db23a8f320136ddc6c54bcd7e5dbe2d17508",
+      "identity_equal": true
+    },
+    {
+      "role": "old_full_obs",
+      "path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/SOURCE_BACKEND/gnss1.obs",
+      "sequence": "BY2H",
+      "receiver": 1,
+      "expected_sha256": "8ac02d4d59a6ad205b2c34e301e34c717a901132b73c82978ef24e4e742867a3",
+      "actual_sha256": "8ac02d4d59a6ad205b2c34e301e34c717a901132b73c82978ef24e4e742867a3",
+      "identity_equal": true
+    },
+    {
+      "role": "old_full_ubx",
+      "path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/SOURCE_BACKEND/gnss1.ubx",
+      "sequence": "BY2H",
+      "receiver": 1,
+      "expected_sha256": "7287a2745d893c0c3a05981aefc65973b0080a7dd81ae0c3f0b1e90a9aaa7b99",
+      "actual_sha256": "7287a2745d893c0c3a05981aefc65973b0080a7dd81ae0c3f0b1e90a9aaa7b99",
+      "identity_equal": true
+    },
+    {
+      "role": "old_clipped_ubx",
+      "path": "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/UBX/BY2H_R1.ubx",
+      "sequence": "BY2H",
+      "receiver": 1,
+      "expected_sha256": "1a19354c63ab4f1ce7ecbac7642d2125fa3c2c1b288edead076f15a6ad492442",
+      "actual_sha256": "1a19354c63ab4f1ce7ecbac7642d2125fa3c2c1b288edead076f15a6ad492442",
+      "identity_equal": true
+    },
+    {
+      "role": "source",
+      "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss2-raw.csv",
+      "sequence": "BY2H",
+      "receiver": 2,
+      "expected_sha256": "87e4056c85b58595792578a62aeceb1b594475d654e4e49eb7fccaf5bfff56aa",
+      "actual_sha256": "87e4056c85b58595792578a62aeceb1b594475d654e4e49eb7fccaf5bfff56aa",
+      "identity_equal": true
+    },
+    {
+      "role": "old_full_obs",
+      "path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/SOURCE_BACKEND/gnss2.obs",
+      "sequence": "BY2H",
+      "receiver": 2,
+      "expected_sha256": "e283c27456ca7faa7f9efca863ffd5fd131567b60a25278e93d7348c248534da",
+      "actual_sha256": "e283c27456ca7faa7f9efca863ffd5fd131567b60a25278e93d7348c248534da",
+      "identity_equal": true
+    },
+    {
+      "role": "old_full_ubx",
+      "path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/SOURCE_BACKEND/gnss2.ubx",
+      "sequence": "BY2H",
+      "receiver": 2,
+      "expected_sha256": "62a615500cede304abf9eb9146432ea860bd6d56e94b20e40d22cefce17987fd",
+      "actual_sha256": "62a615500cede304abf9eb9146432ea860bd6d56e94b20e40d22cefce17987fd",
+      "identity_equal": true
+    },
+    {
+      "role": "old_clipped_ubx",
+      "path": "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/UBX/BY2H_R2.ubx",
+      "sequence": "BY2H",
+      "receiver": 2,
+      "expected_sha256": "023d3dba102a7e439695458a42be1d3a495a4efec8db5b3d0d4c0d718d57084c",
+      "actual_sha256": "023d3dba102a7e439695458a42be1d3a495a4efec8db5b3d0d4c0d718d57084c",
+      "identity_equal": true
+    },
+    {
+      "role": "source",
+      "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss1-raw.csv",
+      "sequence": "BY2O",
+      "receiver": 1,
+      "expected_sha256": "6035d50419eaa0ff29d9a4b053dbed5d715fd2bec38f44ad4b4be02ca54a4ba9",
+      "actual_sha256": "6035d50419eaa0ff29d9a4b053dbed5d715fd2bec38f44ad4b4be02ca54a4ba9",
+      "identity_equal": true
+    },
+    {
+      "role": "old_full_obs",
+      "path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/SOURCE_BACKEND/gnss1.obs",
+      "sequence": "BY2O",
+      "receiver": 1,
+      "expected_sha256": "bb0c81ab5727e44c21739c875f7a99b3d2c16a201c4629ba7814dc230afa7b01",
+      "actual_sha256": "bb0c81ab5727e44c21739c875f7a99b3d2c16a201c4629ba7814dc230afa7b01",
+      "identity_equal": true
+    },
+    {
+      "role": "old_full_ubx",
+      "path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/SOURCE_BACKEND/gnss1.ubx",
+      "sequence": "BY2O",
+      "receiver": 1,
+      "expected_sha256": "649d47b553c2d3b5b7cec627b2aeb5ee179346dbb40364f50d5003d02507ac30",
+      "actual_sha256": "649d47b553c2d3b5b7cec627b2aeb5ee179346dbb40364f50d5003d02507ac30",
+      "identity_equal": true
+    },
+    {
+      "role": "old_clipped_ubx",
+      "path": "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/UBX/BY2O_R1.ubx",
+      "sequence": "BY2O",
+      "receiver": 1,
+      "expected_sha256": "b64d76693d8fe097b898ed7c2add0f16e8abf8fa740296939034df5f93d40fd4",
+      "actual_sha256": "b64d76693d8fe097b898ed7c2add0f16e8abf8fa740296939034df5f93d40fd4",
+      "identity_equal": true
+    },
+    {
+      "role": "source",
+      "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss2-raw.csv",
+      "sequence": "BY2O",
+      "receiver": 2,
+      "expected_sha256": "4f18ec7d618c675238d5c40a868ba01802a9d2da9325877d715f75f2f939119f",
+      "actual_sha256": "4f18ec7d618c675238d5c40a868ba01802a9d2da9325877d715f75f2f939119f",
+      "identity_equal": true
+    },
+    {
+      "role": "old_full_obs",
+      "path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/SOURCE_BACKEND/gnss2.obs",
+      "sequence": "BY2O",
+      "receiver": 2,
+      "expected_sha256": "7d07520747e48913a0f6baf1a80c98f8848fa01717a345a9794f9d10ccd9949e",
+      "actual_sha256": "7d07520747e48913a0f6baf1a80c98f8848fa01717a345a9794f9d10ccd9949e",
+      "identity_equal": true
+    },
+    {
+      "role": "old_full_ubx",
+      "path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/SOURCE_BACKEND/gnss2.ubx",
+      "sequence": "BY2O",
+      "receiver": 2,
+      "expected_sha256": "d24ea622e999ab782d8ee17cc84faa21919f4e3a24f3563a98cad828a9f44c66",
+      "actual_sha256": "d24ea622e999ab782d8ee17cc84faa21919f4e3a24f3563a98cad828a9f44c66",
+      "identity_equal": true
+    },
+    {
+      "role": "old_clipped_ubx",
+      "path": "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/UBX/BY2O_R2.ubx",
+      "sequence": "BY2O",
+      "receiver": 2,
+      "expected_sha256": "6a0690243d9459fa547529766a5239a9a3bab663aa97364874bd5cc53b946af0",
+      "actual_sha256": "6a0690243d9459fa547529766a5239a9a3bab663aa97364874bd5cc53b946af0",
+      "identity_equal": true
+    }
+  ],
+  "execution_complete": true,
+  "status_semantics": "COMPLETE denotes execution completion, not scientific equality",
+  "all_science_records_equal": true,
+  "all_old_lli_table_consistent": true,
+  "old_lli_events": 15,
+  "all_old_lli_full_history_equal": true,
+  "total_different_fields": 0,
+  "all_science_body_records_byte_identical": true,
+  "all_header_semantics_equal": true,
+  "all_epochs_equal": true
+}
