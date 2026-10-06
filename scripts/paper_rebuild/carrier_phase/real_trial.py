@@ -44,12 +44,52 @@ def source_snapshot(code):
  paths.append(Path(__file__))
  return {str(p.relative_to(code)):digest(p) for p in paths}
 
+def checked_navigation_manifest(path,roots,*,start_s,first_epoch_s=None):
+ """Admit an explicitly bounded broadcast prefix, never an inherited full NAV.
+
+ The cutoff describes the latest source-message availability admitted by the
+ prefix producer, not an ephemeris TOE/age check. Availability must precede
+ both the requested start and every receiver's actual first processed epoch.
+ """
+ if path is None:raise ValueError("CAUSAL_NAVIGATION_MANIFEST_REQUIRED")
+ if not np.isfinite(start_s):raise ValueError("FINITE_START_REQUIRED")
+ path=Path(path);manifest=json.loads(path.read_text())
+ cutoff=manifest.get("causal_cutoff_relative_s")
+ if isinstance(cutoff,bool) or not isinstance(cutoff,(int,float)) or not np.isfinite(cutoff):
+  raise ValueError("FINITE_CAUSAL_NAVIGATION_CUTOFF_REQUIRED")
+ if manifest.get("old_full_history_navigation_loaded") is not False:
+  raise ValueError("FULL_HISTORY_NAVIGATION_NOT_ALLOWED")
+ if cutoff>start_s:raise ValueError("NAVIGATION_PREFIX_AFTER_REQUESTED_START")
+ if first_epoch_s is not None:
+  if not np.isfinite(first_epoch_s):raise ValueError("FINITE_FIRST_EPOCH_REQUIRED")
+  if cutoff>first_epoch_s:raise ValueError("NAVIGATION_PREFIX_AFTER_FIRST_EPOCH")
+ entries=manifest.get("navigation")
+ if not isinstance(entries,list) or not entries:raise ValueError("NAVIGATION_PREFIX_EMPTY")
+ nav=[]
+ for row in entries:
+  if not isinstance(row,dict) or not isinstance(row.get("path"),str) or not isinstance(row.get("sha256"),str):
+   raise ValueError("INVALID_NAVIGATION_PREFIX_ENTRY")
+  item=Path(row["path"]) if Path(row["path"]).is_absolute() else expand(row["path"],roots)
+  if item in nav:raise ValueError("DUPLICATE_NAVIGATION_PREFIX_PATH")
+  if digest(item)!=row["sha256"]:raise ValueError("explicit navigation identity changed")
+  nav.append(item)
+ return nav,{"manifest":str(path),"sha256":digest(path),"navigation":entries,
+  "causal_cutoff_relative_s":float(cutoff),"requested_start_s":float(start_s),
+  "first_processed_rawx_s":None if first_epoch_s is None else float(first_epoch_s),
+  "causality_guard":"PREFIX_AVAILABILITY_AT_OR_BEFORE_REQUESTED_AND_ACTUAL_START",
+  "inherited_full_history_navigation_opened":False}
+
 def prepare(a):
+ # New preparations require an explicit causal prefix. Historical saved plans
+ # remain unchanged and readable; there is deliberately no implicit full-NAV
+ # fallback for an integration run.
+ roots=aliases(a.roots)
+ nav,nav_audit=checked_navigation_manifest(a.navigation_manifest,roots,start_s=a.start)
+ if not np.isfinite(a.stop) or a.stop<a.start:raise ValueError("INVALID_WINDOW")
  out=a.output;out.mkdir(parents=True,exist_ok=False)
  execution=revision(a.code);source_pins=source_snapshot(a.code)
- roots=aliases(a.roots);ip=Path(roots["<EXT_REPRO_ROOT>"])/"inputs"/a.sequence/"INPUT.json"
+ ip=Path(roots["<EXT_REPRO_ROOT>"])/"inputs"/a.sequence/"INPUT.json"
  info=json.loads(ip.read_text());base=info["base_time"];libroot=Path(roots["<EXT_REPRO_BUILD>"])/"lib"
- nav=[expand(x,roots) for x in info["navigation"]]
  epochs={};inputs={"registry":str(ip),"registry_sha256":digest(ip),"raw_sources":{}}
  for rx in (1,2):
   source=info["source_files"][f"gnss{rx}.ubx"];p=expand(source["source"],roots)
@@ -58,16 +98,14 @@ def prepare(a):
   values=[raw.decode_rawx(body) for cls,ident,body in raw.iter_ubx_frames(payload) if (cls,ident)==(2,0x15)]
   epochs[rx]=[e for e in values if a.start<=localtime(e,base)<=a.stop]
   inputs["raw_sources"][str(rx)]={"source":source["source"],"sha256":source["sha256"],"full_epochs":len(values),"window_epochs":len(epochs[rx])}
- for rx,p in enumerate(nav,1):
-  if digest(p)!=info["source_files"][f"gnss{rx}.nav"]["sha256"]:raise ValueError("navigation source changed")
- if a.navigation_manifest:
-  manifest=json.loads(a.navigation_manifest.read_text())
-  nav=[]
-  for row in manifest["navigation"]:
-   path=Path(row["path"])
-   if digest(path)!=row["sha256"]:raise ValueError("explicit navigation identity changed")
-   nav.append(path)
-  inputs["navigation_override"]={"manifest":str(a.navigation_manifest),"sha256":digest(a.navigation_manifest),"navigation":manifest["navigation"]}
+ if not epochs[1] or not epochs[2]:raise ValueError("RAWX_WINDOW_MISSING_RECEIVER")
+ first_epoch=min(localtime(e,base) for rx in (1,2) for e in epochs[rx])
+ # No additional file I/O is needed for the actual-epoch check: the explicit
+ # prefix was pinned above, before either RAWX source was opened.
+ if nav_audit["causal_cutoff_relative_s"]>first_epoch:
+  raise ValueError("NAVIGATION_PREFIX_AFTER_FIRST_EPOCH")
+ nav_audit["first_processed_rawx_s"]=float(first_epoch)
+ inputs["navigation_override"]=nav_audit
 
  # Each receiver is processed independently; exact pairing happens afterwards.
  grouped={};events={};all_events=[];adapter_rejections=[]
