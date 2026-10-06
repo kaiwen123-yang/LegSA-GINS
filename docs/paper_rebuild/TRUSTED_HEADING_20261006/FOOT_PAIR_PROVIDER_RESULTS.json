@@ -1,0 +1,134 @@
+{
+  "status": "COMPLETE",
+  "sequences": [
+    {
+      "sequence_id": "BY2",
+      "full_window_s": [
+        66.0,
+        340.0
+      ],
+      "source": {
+        "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by2.txt",
+        "registered_sha256": "95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278",
+        "current_size_bytes": 92352512,
+        "checked_this_lock": "EXISTS_AND_SIZE_ONLY_NO_RAW_BYTES_READ",
+        "hash_authority": "original registration raw_source_hashes; not rehashed in this task"
+      },
+      "counts": {
+        "messages_framed": 61180,
+        "source_prefix": 4536,
+        "source_window": 56643,
+        "following_timestamp_only": 1
+      },
+      "events": {
+        "START": 1279,
+        "END": 688,
+        "RETIRE": 591
+      },
+      "opportunities": {
+        "START": 1279,
+        "INSUFFICIENT_SUPPORT": 91
+      },
+      "source_first_s": 44.887078145000004,
+      "source_last_s": 339.997055685,
+      "all_opportunities_retained": true,
+      "reference_reads": 0,
+      "navigation_reads": 0,
+      "position_role": "SDK_FOOT_BODY_PROXY_NOT_ENCODER_FK",
+      "source_time_replay_assumption": true,
+      "working_point_sigma_m": 0.01,
+      "point_covariance_is_calibrated": false,
+      "imu_independence_proven": false
+    },
+    {
+      "sequence_id": "BY2H",
+      "full_window_s": [
+        413.0,
+        683.0
+      ],
+      "source": {
+        "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by3.txt",
+        "registered_sha256": "b2e80763c613a5a0d6739aea90ea3ed4f8c9170cf5f2f6b73e5a000a666f0c49",
+        "current_size_bytes": 92274688,
+        "checked_this_lock": "EXISTS_AND_SIZE_ONLY_NO_RAW_BYTES_READ",
+        "hash_authority": "original registration raw_source_hashes; not rehashed in this task"
+      },
+      "counts": {
+        "messages_framed": 61264,
+        "source_prefix": 2680,
+        "source_window": 58583,
+        "following_timestamp_only": 1
+      },
+      "events": {
+        "START": 1251,
+        "END": 666,
+        "RETIRE": 585
+      },
+      "opportunities": {
+        "INSUFFICIENT_SUPPORT": 98,
+        "START": 1251,
+        "FIRST_SOURCE_TOO_LATE": 1
+      },
+      "source_first_s": 394.943073919,
+      "source_last_s": 682.995050403,
+      "all_opportunities_retained": true,
+      "reference_reads": 0,
+      "navigation_reads": 0,
+      "position_role": "SDK_FOOT_BODY_PROXY_NOT_ENCODER_FK",
+      "source_time_replay_assumption": true,
+      "working_point_sigma_m": 0.01,
+      "point_covariance_is_calibrated": false,
+      "imu_independence_proven": false
+    },
+    {
+      "sequence_id": "BY2O",
+      "full_window_s": [
+        3186.0,
+        3563.0
+      ],
+      "source": {
+        "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by1.txt",
+        "registered_sha256": "0e5c62e0a5af0b6c32c51b535cc90701677276fc73c5623b72abda66cc148f2e",
+        "current_size_bytes": 140873728,
+        "checked_this_lock": "EXISTS_AND_SIZE_ONLY_NO_RAW_BYTES_READ",
+        "hash_authority": "original registration raw_source_hashes; not rehashed in this task"
+      },
+      "counts": {
+        "messages_framed": 93700,
+        "source_prefix": 17144,
+        "source_window": 76555,
+        "following_timestamp_only": 1
+      },
+      "events": {
+        "START": 1779,
+        "END": 1158,
+        "RETIRE": 621
+      },
+      "opportunities": {
+        "START": 1779,
+        "INSUFFICIENT_SUPPORT": 103,
+        "FIRST_SOURCE_TOO_LATE": 3
+      },
+      "source_first_s": 3101.5570684570002,
+      "source_last_s": 3562.9970547310004,
+      "all_opportunities_retained": true,
+      "reference_reads": 0,
+      "navigation_reads": 0,
+      "position_role": "SDK_FOOT_BODY_PROXY_NOT_ENCODER_FK",
+      "source_time_replay_assumption": true,
+      "working_point_sigma_m": 0.01,
+      "point_covariance_is_calibrated": false,
+      "imu_independence_proven": false
+    }
+  ],
+  "native_calls": 0,
+  "reference_reads": 0,
+  "integer_search": 0,
+  "registration_commit": "fc59f8252ecd8c40a0eed17c8ae5325f303aacad",
+  "driver": {
+    "returncode": 0,
+    "timed_out": false,
+    "wall_s": 18.24955146100001
+  },
+  "complete_manifest_sha256": "469183001fb2105fe98958ed4b8802558bfce43baa3700b2aef36dabc56a7c9c"
+}
