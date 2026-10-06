@@ -183,19 +183,7 @@ class CausalAdmissionSession:
     def expected_future_times(self):return self._times
 
     def _fit(self,block,integer_mapping,rows):
-        # Import locally so this state API can be inspected without the optional
-        # fault-diagnostic implementation importing the entire pipeline.
-        from .faults import fixed_integer_gls
-        fit=fixed_integer_gls(block,integer_mapping,rows=rows)
-        if fit.baseline_rank!=3 or fit.residual_df!=len(fit.rows_retained)-3:
-            raise TemporalModelError("future free-baseline rank must be exactly three")
-        if fit.residual_df<=0:raise TemporalModelError("no positive future residual dimension")
-        center=np.asarray(fit.nuisance_estimate,float);cov=np.asarray(fit.nuisance_covariance,float)
-        sphere=constrained_baseline(center,cov,self._config.length_m)
-        return CandidateEpochFit(float(fit.residual_cost),int(fit.residual_df),float(sphere.objective),
-            float(fit.residual_cost+sphere.objective),tuple(map(float,center)),
-            tuple(tuple(map(float,row)) for row in cov),float(np.linalg.norm(center)),
-            tuple(map(int,fit.rows_retained)),int(fit.baseline_rank))
+        return fit_candidate_epoch(block,integer_mapping,rows,length_m=self._config.length_m)
 
     def observe(self,block:EpochBlock)->AdmissionEpoch:
         if self._closed:raise TemporalModelError("admission session already finalized")
@@ -207,45 +195,13 @@ class CausalAdmissionSession:
             raise TemporalModelError("observation is outside the registered future validation slots")
         if nearest in self._records:raise TemporalModelError("duplicate validation slot")
         self._last_time=t
-        labels=tuple(block.ambiguity_labels);A=np.asarray(block.A,float);y=np.asarray(block.y,float)
-        if (y.ndim!=1 or A.shape!=(len(y),len(labels)) or not np.isfinite(A).all()
-                or len(set(labels))!=len(labels)):
-            raise TemporalModelError("invalid future ambiguity design")
-        p=self._primary.integers;c=self._competitor.integers
-        common_known=np.array([label in p and label in c for label in labels],dtype=bool)
-        withheld=np.any(A[:,~common_known]!=0,axis=1)
-        rows=tuple(map(int,np.flatnonzero(~withheld)))
-        phase_count=int(np.sum(np.any(A[list(rows)]!=0,axis=1)))
-        observed_labels={labels[i] for i in range(len(labels)) if np.any(A[list(rows),i]!=0)}
-        validated=tuple(label for label in self._primary.active_labels if label in observed_labels)
-        unknown=tuple(label for label,known in zip(labels,common_known) if not known)
-        reason=None;pf=cf=None
-        if len(validated)!=len(self._primary.active_labels):
-            reason="UNRESOLVED_ACTIVE_ARC_CHANGED"
-        if phase_count<self._config.minimum_phase_rows:
-            reason=reason or "UNRESOLVED_INSUFFICIENT_PHASE_SUPPORT"
-        if phase_count>=self._config.minimum_phase_rows:
-            try:
-                pf=self._fit(block,p,rows);cf=self._fit(block,c,rows)
-                if pf.rows_retained!=cf.rows_retained or pf.rows_retained!=rows:
-                    pf=cf=None;reason="UNRESOLVED_UNMATCHED_SUPPORT"
-            except (TemporalModelError,np.linalg.LinAlgError,ValueError) as exc:
-                reason=reason or "UNRESOLVED_GEOMETRY_OR_MODEL: "+str(exc)
-                pf=cf=None
-        record=AdmissionEpoch(t,nearest,rows,tuple(map(int,np.flatnonzero(withheld))),validated,unknown,pf,cf,reason,
-                              model_fingerprint(block))
+        record=score_frozen_epoch(block,self._primary,self._competitor,slot_index=nearest,
+                                  minimum_phase_rows=self._config.minimum_phase_rows,length_m=self._config.length_m)
         self._records[nearest]=record
         return record
 
     def _gate(self,candidate,records,attribute):
-        fits=[getattr(record,attribute) for record in records]
-        if not fits or any(fit is None for fit in fits):return None
-        residual=sum(f.residual_cost for f in fits);df=sum(f.residual_df for f in fits)
-        length=sum(f.length_penalty for f in fits);length_df=3*len(fits);alpha=self._config.alpha_total/2
-        return CandidateGate(candidate.candidate_id,residual,df,float(chi2.isf(alpha,df)),
-            float(chi2.sf(residual,df)),bool(residual<=chi2.isf(alpha,df)),
-            length,length_df,float(chi2.isf(alpha,length_df)),float(chi2.sf(length,length_df)),
-            bool(length<=chi2.isf(alpha,length_df)),sum(f.sphere_full_cost for f in fits))
+        return gate_candidate_records(candidate.candidate_id,records,attribute,alpha_total=self._config.alpha_total)
 
     def finalize(self)->AdmissionDecision:
         if self._closed:raise TemporalModelError("admission session already finalized")
@@ -290,3 +246,61 @@ class CausalAdmissionSession:
              "geometry and fixed length are correct","the registered fixed future horizon is used once",
              "only the registered competitor is tested; no full integer posterior mass"),
             None,False,False,registered_length_m=float(self._config.length_m))
+
+
+def fit_candidate_epoch(block,integer_mapping,rows,*,length_m):
+    # Import locally so this state API can be inspected without the optional
+    # fault-diagnostic implementation importing the entire pipeline.
+    from .faults import fixed_integer_gls
+    fit=fixed_integer_gls(block,integer_mapping,rows=rows)
+    if fit.baseline_rank!=3 or fit.residual_df!=len(fit.rows_retained)-3:
+        raise TemporalModelError("future free-baseline rank must be exactly three")
+    if fit.residual_df<=0:raise TemporalModelError("no positive future residual dimension")
+    center=np.asarray(fit.nuisance_estimate,float);cov=np.asarray(fit.nuisance_covariance,float)
+    sphere=constrained_baseline(center,cov,length_m)
+    return CandidateEpochFit(float(fit.residual_cost),int(fit.residual_df),float(sphere.objective),
+        float(fit.residual_cost+sphere.objective),tuple(map(float,center)),
+        tuple(tuple(map(float,row)) for row in cov),float(np.linalg.norm(center)),
+        tuple(map(int,fit.rows_retained)),int(fit.baseline_rank))
+
+
+def gate_candidate_records(candidate_id,records,attribute,*,alpha_total):
+    fits=[getattr(record,attribute) for record in records]
+    if not fits or any(fit is None for fit in fits):return None
+    residual=sum(f.residual_cost for f in fits);df=sum(f.residual_df for f in fits)
+    length=sum(f.length_penalty for f in fits);length_df=3*len(fits);alpha=alpha_total/2
+    return CandidateGate(candidate_id,residual,df,float(chi2.isf(alpha,df)),
+        float(chi2.sf(residual,df)),bool(residual<=chi2.isf(alpha,df)),
+        length,length_df,float(chi2.isf(alpha,length_df)),float(chi2.sf(length,length_df)),
+        bool(length<=chi2.isf(alpha,length_df)),sum(f.sphere_full_cost for f in fits))
+
+
+def score_frozen_epoch(block,primary,competitor,*,slot_index,minimum_phase_rows,length_m):
+    labels=tuple(block.ambiguity_labels);A=np.asarray(block.A,float);y=np.asarray(block.y,float)
+    if (y.ndim!=1 or A.shape!=(len(y),len(labels)) or not np.isfinite(A).all()
+            or len(set(labels))!=len(labels)):
+        raise TemporalModelError("invalid future ambiguity design")
+    p=primary.integers;c=competitor.integers
+    common_known=np.array([label in p and label in c for label in labels],dtype=bool)
+    withheld=np.any(A[:,~common_known]!=0,axis=1)
+    rows=tuple(map(int,np.flatnonzero(~withheld)))
+    phase_count=int(np.sum(np.any(A[list(rows)]!=0,axis=1)))
+    observed_labels={labels[i] for i in range(len(labels)) if np.any(A[list(rows),i]!=0)}
+    validated=tuple(label for label in primary.active_labels if label in observed_labels)
+    unknown=tuple(label for label,known in zip(labels,common_known) if not known)
+    reason=None;pf=cf=None
+    if len(validated)!=len(primary.active_labels):
+        reason="UNRESOLVED_ACTIVE_ARC_CHANGED"
+    if phase_count<minimum_phase_rows:
+        reason=reason or "UNRESOLVED_INSUFFICIENT_PHASE_SUPPORT"
+    if phase_count>=minimum_phase_rows:
+        try:
+            pf=fit_candidate_epoch(block,p,rows,length_m=length_m);cf=fit_candidate_epoch(block,c,rows,length_m=length_m)
+            if pf.rows_retained!=cf.rows_retained or pf.rows_retained!=rows:
+                pf=cf=None;reason="UNRESOLVED_UNMATCHED_SUPPORT"
+        except (TemporalModelError,np.linalg.LinAlgError,ValueError) as exc:
+            reason=reason or "UNRESOLVED_GEOMETRY_OR_MODEL: "+str(exc)
+            pf=cf=None
+    record=AdmissionEpoch(float(block.time_s),slot_index,rows,tuple(map(int,np.flatnonzero(withheld))),validated,unknown,pf,cf,reason,
+                          model_fingerprint(block))
+    return record

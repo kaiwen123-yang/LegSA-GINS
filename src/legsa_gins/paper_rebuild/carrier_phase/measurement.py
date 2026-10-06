@@ -149,7 +149,16 @@ def qualify_current_baseline(model:EpochBlock, candidate:FrozenCandidate,
         return unavailable_measurement(t,"UNRESOLVED_NO_TESTABLE_PHASE_FAULT_HYPOTHESES")
     if any(score.nominal_reject_null for score in result.scores):
         return unavailable_measurement(t,"REJECTED_PHASE_FAULT_DIAGNOSTIC")
-    fit=fixed_integer_gls(model,candidate.integers,rows=admission.epochs[-1].rows_retained)
+    return _baseline_from_fixed_rows(model,candidate,admission.epochs[-1].rows_retained,
+        length_m=length_m,angular_floor_rad=angular_floor_rad,status="EXPERIMENTAL_FIXED_CANDIDATE")
+
+
+def _baseline_from_fixed_rows(model,candidate,retained_rows,*,length_m,angular_floor_rad,status):
+    """Shared current-epoch calculation; callers must first bind/gate the window."""
+    t=float(model.time_s)
+    fit=fixed_integer_gls(model,candidate.integers,rows=retained_rows)
+    if tuple(fit.rows_retained)!=tuple(retained_rows):
+        raise TemporalModelError("measurement support differs from the validated fixed-N support")
     rows=np.asarray(fit.rows_retained,dtype=int)
     phase_rows=rows[np.any(np.asarray(model.A)[rows]!=0,axis=1)]
     if len(phase_rows)<4 or np.linalg.matrix_rank(np.asarray(model.B)[phase_rows])!=3:
@@ -160,6 +169,25 @@ def qualify_current_baseline(model:EpochBlock, candidate:FrozenCandidate,
     covariance=positive_definite(fit.Cb+np.eye(3)*(length_m*angular_floor_rad)**2,"carrier covariance")
     if not np.isfinite(sphere.baseline).all():
         return unavailable_measurement(t,"UNRESOLVED_NONFINITE_BASELINE")
-    return CarrierBaselineMeasurement(t,t,True,"EXPERIMENTAL_FIXED_CANDIDATE",
+    return CarrierBaselineMeasurement(t,t,True,status,
         tuple(map(float,sphere.baseline)),tuple(tuple(map(float,row)) for row in covariance),
         tuple(map(int,fit.rows_retained)),candidate.active_labels,float(angular_floor_rad))
+
+
+def qualify_tracking_baseline(model,candidate,receipt,*,binding,availability_time_s):
+    """Export a separately bound rolling receipt; never relabel a first admission.
+
+    Receipt hashes detect mixed inputs, not malicious reconstruction of every
+    public Python object. The caller remains responsible for trusted raw lineage
+    and for selecting at most one active owner per raw epoch.
+    """
+    from .tracking import TrackingWindowReceipt,validate_tracking_receipt
+    if not isinstance(receipt,TrackingWindowReceipt):
+        raise TemporalModelError("a distinct tracking-window receipt is required")
+    validate_tracking_receipt(model,candidate,receipt,binding=binding,availability_time_s=availability_time_s)
+    if not receipt.experimental_passed:
+        return unavailable_measurement(float(model.time_s),receipt.status)
+    return _baseline_from_fixed_rows(model,candidate,receipt.epochs[-1].rows_retained,
+        length_m=receipt.admission_config.length_m,
+        angular_floor_rad=receipt.tracking_config.angular_floor_rad,
+        status="EXPERIMENTAL_FIXED_CANDIDATE_TRACKING")

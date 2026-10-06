@@ -44,6 +44,8 @@ decision under the working noise model, not known physical FIX truth.
 - carrier_phase/real_trial.py prepare: raw observation models and lineage.
 - carrier_phase/integration_frontend.py: full/partial integer selection,
   chronological future validation, failure records, 15-column ECEF output.
+- carrier_phase/tracking_frontend.py: causal fixed-N tracking of saved qualified
+  acquisitions; explicit release, immutable selection identity and one owner.
 - carrier_phase/body_velocity_provider.py: dataset-qualified raw FLU velocity
   to body-FRD xy, no GNSS/attitude interpolation.
 - carrier_phase/navigation_trial.py prepare/native/evaluate: four common-input
@@ -68,16 +70,51 @@ axes, with .08-second maximum source age. Native NED-HV defaults remain unchange
 The raw-body frame assumption is specific to these audited recordings; it is not
 a universal vendor API assumption. Shared initialization is not an AR cold start.
 
-## Current limitations requiring further development
+## Continuous fixed-candidate tracking
 
-The first frontend produces one full-class and seven partial-class measurements
-in 120 registered windows. GPS-only SPP failures suppress 57 complete window
-models; the first preparation also holds broadcast ephemeris at the available
-100-second prefix. Causal anchor maintenance and advancing ephemeris reception
-are the next input-availability improvements.
+The optional tracker separates integer discovery from current-epoch measurement
+generation. A track starts only from a qualified acquisition whose original
+five-model admission, phase diagnosis and measurement reproduce under the same
+policies. The original primary/competitor integers, selected_at, active labels
+and source fingerprints remain fixed throughout that track.
 
-This initial implementation re-acquires per non-overlapping two-second window;
-it does not yet hold admitted ambiguities as a continuous tracking state.
-Persistent fault identification is diagnostic, not unique satellite attribution.
-RAWX working covariance is not a field-calibrated temporal error model. The
-receiver-derived evaluation reference is not independent ground truth.
+Each new 0.2-second slot shifts a five-epoch validation window. The fixed-N GLS
+still fits a separate moving baseline at every epoch; tracking does not freeze
+the baseline direction. The original residual/length/competition gates and
+persistent phase diagnostic are recomputed. A distinct tracking receipt binds
+the original acquisition, explicit window times, numerical models and physical
+SD fault maps. The last model alone generates the current baseline and covariance.
+
+The first timing gap, selected arc break, deficient geometry, failed gate or
+fault diagnostic ends the track permanently. The controller uses one incumbent
+per raw epoch, including its failure epoch; overlapping new acquisitions are
+logged as suppressed and never queued. Initial measurement is emitted once.
+No integer search occurs during tracking, and no old candidate is resurrected.
+
+Twenty-five tracking-library tests and ten controller tests cover dynamic
+baselines with known integers, full covariance, independent synthetic SD
+geometry, wrong-integer aliases, policy/model mutation, time gaps, terminal
+release and owner conflicts. The combined affected-library test set contains
+121 passing tests. In the alias counterexample both the wrong and true
+competitor fit, so the method returns unresolved competition. Consistency
+under an assumed model does not establish integer truth.
+
+## Measured status and remaining limits
+
+The first frontend produced one full-class and seven partial-class measurements
+in 120 windows. Its fixed broadcast prefix and GPS-SPP gaps were preserved as
+V1. V2 advances broadcast availability causally and handles unavailable pivots
+explicitly: all 1200 raw epochs now build models, but full-class acquisition
+admits zero windows and partial acquisition admits six of 120. Its body-HV
+partial navigation yaw RMSE is 2.557707 degrees versus 1.620834 degrees for the
+dual-PVT vector control; input completeness has not produced navigation gain.
+The separate tracking trial and its full-span navigation results must be judged
+on their own evidence, not on support lifetime alone.
+
+Rolling windows overlap and surviving tracks are selected by earlier tests.
+There is no lifetime false-fix or false-alarm guarantee. Persistent phase
+identification is diagnostic, not unique satellite attribution. The working
+measurement covariance omits discrete integer error and gate conditioning;
+RAWX noise is not a field-calibrated temporal model. The receiver-derived
+reference is not independent ground truth. Data-time causal replay does not
+charge the CILS wall-clock latency to navigation timestamps.
