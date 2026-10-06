@@ -1,0 +1,157 @@
+{
+  "execution_commit": "529487e10eac459e950c084945d7562239de7cef",
+  "payload_stage": "<AR_SCRATCH>/PREP04",
+  "plan_sha256": "18906fccddc3d419ea40df0cd31f55c32db446de774384becbfacdd59a67e9a4",
+  "phase": "COMPLETED_BOUNDED_QUALIFICATION_NOT_ACCEPTED_INTEGER_FIX",
+  "counts": {
+    "scheduled_epochs": 12,
+    "cold_code_spp_calls": 12,
+    "cils_calls": 18,
+    "A_candidates": 9,
+    "B_candidates": 9,
+    "C_retained": 5,
+    "model_failure_epochs": 3,
+    "real_retry": 0,
+    "offline_reference_read_opens": 1,
+    "online_reference_read_opens": 0
+  },
+  "summary": {
+    "A": {
+      "scheduled": 12,
+      "native_candidate_count": 9,
+      "own_support": {
+        "count": 9,
+        "rmse_deg": 60.18183964367512,
+        "mae_deg": 32.26560022654088,
+        "max_absolute_deg": 140.21134394077342
+      },
+      "common_AB_support": {
+        "count": 9,
+        "rmse_deg": 60.18183964367512,
+        "mae_deg": 32.26560022654088,
+        "max_absolute_deg": 140.21134394077342
+      }
+    },
+    "B": {
+      "scheduled": 12,
+      "native_candidate_count": 9,
+      "own_support": {
+        "count": 9,
+        "rmse_deg": 2.443953148465886,
+        "mae_deg": 1.8914822473997472,
+        "max_absolute_deg": 4.981738598432685
+      },
+      "common_AB_support": {
+        "count": 9,
+        "rmse_deg": 2.443953148465886,
+        "mae_deg": 1.8914822473997472,
+        "max_absolute_deg": 4.981738598432685
+      }
+    },
+    "C": {
+      "scheduled": 12,
+      "native_candidate_count": 5,
+      "own_support": {
+        "count": 5,
+        "rmse_deg": 2.840567238302987,
+        "mae_deg": 2.4277997905652113,
+        "max_absolute_deg": 4.981738598432685
+      },
+      "common_AB_support": {
+        "count": 5,
+        "rmse_deg": 2.840567238302987,
+        "mae_deg": 2.4277997905652113,
+        "max_absolute_deg": 4.981738598432685
+      }
+    }
+  },
+  "C_retained_same_five_support": {
+    "A": {
+      "count": 5,
+      "rmse_deg": 2.8430310881225482,
+      "mae_deg": 2.4355731088947437,
+      "max_absolute_deg": 4.956587150853295
+    },
+    "B": {
+      "count": 5,
+      "rmse_deg": 2.840567238302987,
+      "mae_deg": 2.4277997905652113,
+      "max_absolute_deg": 4.981738598432685
+    },
+    "C": {
+      "count": 5,
+      "rmse_deg": 2.840567238302987,
+      "mae_deg": 2.4277997905652113,
+      "max_absolute_deg": 4.981738598432685
+    }
+  },
+  "C_rejected_changed_same_four_support": {
+    "A": {
+      "count": 4,
+      "rmse_deg": 90.2167809739866,
+      "mae_deg": 69.55313412359854,
+      "max_absolute_deg": 140.21134394077342
+    },
+    "B": {
+      "count": 4,
+      "rmse_deg": 1.831123408625532,
+      "mae_deg": 1.221085318442917,
+      "max_absolute_deg": 3.5766025677571633
+    }
+  },
+  "C_retained_indices": [
+    121,
+    321,
+    421,
+    521,
+    621
+  ],
+  "C_rejected_changed_indices": [
+    221,
+    721,
+    921,
+    1221
+  ],
+  "io": {
+    "REAL": {
+      "passed": true,
+      "phase": "real",
+      "exit_code": 0,
+      "elapsed_s": 23.821838533999994,
+      "reference_successful_read_opens": 0,
+      "expected_reference_opens": 0,
+      "unexpected_raw_open_paths": [],
+      "all_raw_inputs_readonly": true,
+      "strace_sha256": "d6df006b531bc592314256e67ac55092b07531fc301c07db384576a8d7e0c525"
+    },
+    "EVALUATE": {
+      "passed": true,
+      "phase": "evaluate",
+      "exit_code": 0,
+      "elapsed_s": 0.7179304389999288,
+      "reference_successful_read_opens": 1,
+      "expected_reference_opens": 1,
+      "unexpected_raw_open_paths": [],
+      "all_raw_inputs_readonly": true,
+      "strace_sha256": "a4ebc2d785c99adc072cbdf80c610a7c57ed80a45713834899077e98f1b60fc3"
+    }
+  },
+  "all_method_scheduled_timekeys_exact_equal": true,
+  "real_integer_correctness": "NA",
+  "body_yaw_field_semantics": "lateral projected heading; compared approximately with commercial Euler yaw",
+  "source_receipts": {
+    "PLAN.json": "18906fccddc3d419ea40df0cd31f55c32db446de774384becbfacdd59a67e9a4",
+    "REAL_SEAL.json": "ccfeae1370beb0415c99082ec56304f019c39afdd403811f29014c90f46f0b8b",
+    "REAL_IO_AUDIT.json": "47e0550bf5bcb61fa3dac4db8e472da186d80e09b41a23e63e585c80af2092fd",
+    "REAL_EVALUATION.csv": "71eed56f8e33cab4fba2cbcdf7e724c4ef63ad30e378137cac0aa461e0315fb6",
+    "EVALUATION_SEAL.json": "6baab528cf2688e1293555c0823ecbbca8d411a6b80e31430f69962cf7219e12",
+    "EVALUATE_IO_AUDIT.json": "096315628c6bb05fa315c68cf4bb9611ff1e4b274919dc4b40acf29230b104ad",
+    "CALL_LEDGER.jsonl": "8be0a5b069a9168c35edfd31b8fc749806cca902f93b93ab819b9c4bd5a8d264"
+  },
+  "summary_script_sha256": "84e1f869abda54ad05f1ea487db8cb2f4d7dbad7b9f247f3df09c353292c6714",
+  "environment": {
+    "python": "3.10.12",
+    "numpy": "1.26.4",
+    "system": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35"
+  }
+}
