@@ -77,3 +77,20 @@ def score_future_epoch(block: EpochBlock, integers: Mapping[str,int], *,
         tuple(label for label,k in zip(labels,known) if not k),
         sphere.baseline,float(residual@residual),residual,
         abs(float(np.linalg.norm(sphere.baseline))-length_m),rank,len(retained)-2)
+
+def compare_future_scores(first, second):
+    """Compare only identical scored epochs/rows; unavailable is never zero cost."""
+    left={x.time_s:x for x in first};right={x.time_s:x for x in second}
+    if len(left)!=len(first) or len(right)!=len(second):
+        raise TemporalModelError("duplicate future scoring epoch")
+    common=[t for t in sorted(set(left)&set(right))
+            if left[t].rows_retained==right[t].rows_retained]
+    if not common:
+        return {"status":"NO_COMMON_SCORED_SUPPORT","common_times":[],
+                "first_cost":None,"second_cost":None,"second_minus_first":None,
+                "complete_matching_support":False}
+    a=sum(left[t].residual_cost for t in common)
+    b=sum(right[t].residual_cost for t in common)
+    return {"status":"COMMON_SUPPORT_SCORED","common_times":common,
+            "first_cost":a,"second_cost":b,"second_minus_first":b-a,
+            "complete_matching_support":len(common)==len(first)==len(second)}

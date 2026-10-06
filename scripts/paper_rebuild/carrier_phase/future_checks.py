@@ -4,7 +4,7 @@ from pathlib import Path
 import argparse,json,os,subprocess
 import numpy as np
 from legsa_gins.paper_rebuild.carrier_phase.temporal import EpochBlock,TemporalModelError
-from legsa_gins.paper_rebuild.carrier_phase.validation import score_future_epoch
+from legsa_gins.paper_rebuild.carrier_phase.validation import score_future_epoch, compare_future_scores
 from real_trial import emit,revision
 
 def run(a):
@@ -19,7 +19,7 @@ def run(a):
       "future_epoch_count":len(plan["records"])-prefix,"candidate_results":{}}
    for name in ("best","second"):
     if source.get(name) is None:continue
-    integers=dict(zip(source["ambiguity_labels"],map(int,source[name]["ambiguity"])))
+    integers=dict(zip(source["ambiguity_labels"],source[name]["ambiguity"]))
     scores=[]
     for row in plan["records"][prefix:]:
      entry=row["families"].get(family,{})
@@ -38,15 +38,21 @@ def run(a):
       "scores":scores}
    both=record["candidate_results"]
    if len(both)==2:
-    future_labels={label for row in plan["records"][prefix:] for label in row["families"].get(family,{}).get("ambiguity_labels",[])}
+    comparison=compare_future_scores(
+       [s["score"] for s in both["best"]["scores"] if s["status"]=="SCORED"],
+       [s["score"] for s in both["second"]["scores"] if s["status"]=="SCORED"])
+    record["common_support_comparison"]=comparison
+    future_labels={label for row in plan["records"][prefix:] if row["time_s"] in comparison["common_times"]
+                   for label in row["families"].get(family,{}).get("ambiguity_labels",[])}
     differing=[label for label,one,two in zip(source["ambiguity_labels"],source["best"]["ambiguity"],source["second"]["ambiguity"]) if one!=two]
     active_differences=[label for label in differing if label in future_labels]
-    delta=both["second"]["residual_cost_sum"]-both["best"]["residual_cost_sum"]
+    delta=comparison["second_minus_first"]
     record["differing_labels_visible_in_future"]=active_differences
-    record["comparison_status"]=("HISTORICAL_ONLY_DIFFERENCE" if not active_differences else
-        ("FUTURE_SUPPORTS_ORIGINAL_BEST" if delta>1e-8 else "FUTURE_SUPPORTS_SECOND" if delta < -1e-8 else "TIED"))
-    record["original_best_has_lower_future_cost"]=delta>1e-8
-    record["future_cost_gap_second_minus_best"]=both["second"]["residual_cost_sum"]-both["best"]["residual_cost_sum"]
+    record["comparison_status"]=("UNAVAILABLE_NO_COMMON_SUPPORT" if delta is None else
+        "HISTORICAL_ONLY_DIFFERENCE" if not active_differences else
+        "FUTURE_SUPPORTS_ORIGINAL_BEST" if delta>1e-8 else "FUTURE_SUPPORTS_SECOND" if delta < -1e-8 else "TIED")
+    record["original_best_has_lower_future_cost"]=None if delta is None else delta>1e-8
+    record["future_cost_gap_second_minus_best"]=delta
    records.append(record)
    print(json.dumps({k:v for k,v in record.items() if k!="candidate_results"}),flush=True)
  emit(a.output/"FUTURE_RESULTS.json",{"execution_commit":revision(a.code),"raw_payload_reads":0,"reference_reads":0,

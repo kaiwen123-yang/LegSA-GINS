@@ -46,3 +46,16 @@ def test_noninteger_candidate_rejected():
     block,n,_=model();candidate=dict(zip(block.ambiguity_labels,map(int,n)));candidate["a"]=2.5
     with pytest.raises(TemporalModelError,match="exactly represented integers"):
         score_future_epoch(block,candidate,decision_time_s=1.,length_m=.35)
+
+def test_empty_or_different_future_support_never_becomes_zero_cost_success():
+    from legsa_gins.paper_rebuild.carrier_phase.validation import compare_future_scores
+    from dataclasses import replace
+    block,n,_=model()
+    score=score_future_epoch(block,dict(zip(block.ambiguity_labels,map(int,n))),decision_time_s=1.,length_m=.35)
+    assert compare_future_scores([],[])["second_minus_first"] is None
+    assert compare_future_scores([score],[])["second_minus_first"] is None
+    changed=replace(score,rows_retained=score.rows_retained[:-1])
+    assert compare_future_scores([score],[changed])["status"]=="NO_COMMON_SCORED_SUPPORT"
+    partial=compare_future_scores([score,replace(score,time_s=3.)],[score])
+    assert partial["second_minus_first"]==0
+    assert not partial["complete_matching_support"]
