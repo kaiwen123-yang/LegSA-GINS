@@ -1,0 +1,10 @@
+role,path_alias,bytes,sha256,same_20261005,same_R5_path,same_R5_hash
+BODY,<JAN5_RAW>/高层数据/nmb1.txt,136663040,01d20699dff81fa0f8f13ee8b5d8956d30e1cd64ed59176a4bb65bfc768ec157,True,True,True
+BODY,<JAN5_RAW>/高层数据/nmb2.txt,119517184,9f3a0a2102000acac8cf0a02cb60d609095b0bc69d41c23bfb1ddda008e8f0fa,True,True,True
+BODY,<JAN5_RAW>/高层数据/nmb3.txt,119693312,56daf49c6cea2d9484d3a5d4a34329f71ec4bd8609530d40ce7e4cf6cd4ee636,True,True,True
+BODY,<JAN5_RAW>/高层数据/nmb4.txt,114655232,e4bf521973f91bbca2c17119e2710dfd9aa1e9ee3f845776e6da75e33899ecad,True,True,True
+BODY,<JAN5_RAW>/高层数据/xb1.txt,134111232,486ee147977177f58e1f5cc337d2aa833ad99d3254d8c7059d0741ace549e5cb,True,True,True
+BODY,<JAN5_RAW>/高层数据/xb2.txt,123183104,7fba7f5072552f0367fe7bcfecd8fecf09bca2f7b6b845ea2a46ea6d897fc9ca,True,True,True
+BODY,<JAN5_RAW>/高层数据/xb3.txt,117280768,ae3c9348cb65d16066e6b110a3f01f4d5dab38642e228c7e8ebeaa03541c0a0f,True,True,True
+BODY,<JAN5_RAW>/高层数据/xb4.txt,116461568,ae70e45ab78902d6993e0024bd297c47a0da6d30478eaee1830a2bfd974b7843,True,True,True
+ZIP,<JAN5_RAW>/fixpositon数据/vrtk2_a87c6e_2026-01-05-11-16-59_minimal.zip,198406698,a12c5f05e1c89739f3c5cf3ab89e07a0b1d0a17858f1b119862d314ea46e3e39,True,True,via member pins

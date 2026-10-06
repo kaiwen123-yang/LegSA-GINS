@@ -4,13 +4,14 @@ LegSA-GINS studies short lateral dual-GNSS heading and robot-aided, source-aware
 
 ## Current reading order
 
-1. [Research audit and bounded upgrade study (2026-10-06)](docs/paper_rebuild/RESEARCH_AUDIT_20261006/README.md).
-2. [Latest completed manuscript and eight-record transfer results (R5)](docs/paper_rebuild/EXISTING_DATA_R5_20261005/README.md).
-3. [Original V3 method, evidence and provenance](docs/paper_rebuild/V3_STORY_20261004/CURRENT_STORY_INDEX.md).
-4. [Comparison acceptance and implementation scope](docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/COMPARISON_ACCEPTANCE_REPORT.md).
-5. [Current author directions](docs/paper_rebuild/NEXT_ACTIONS.md) and [agent rules](AGENTS.md).
+1. [Heading, FIX and research-direction reassessment (2026-10-06)](docs/paper_rebuild/HEADING_REASSESSMENT_20261006/README.md).
+2. [Research audit and bounded upgrade study (2026-10-06)](docs/paper_rebuild/RESEARCH_AUDIT_20261006/README.md).
+3. [Latest completed manuscript and eight-record transfer results (R5)](docs/paper_rebuild/EXISTING_DATA_R5_20261005/README.md).
+4. [Original V3 method, evidence and provenance](docs/paper_rebuild/V3_STORY_20261004/CURRENT_STORY_INDEX.md).
+5. [Comparison acceptance and implementation scope](docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/COMPARISON_ACCEPTANCE_REPORT.md).
+6. [Current author directions](docs/paper_rebuild/NEXT_ACTIONS.md) and [agent rules](AGENTS.md).
 
-The current maintained branch is `fix/fgo-v3-reproduction-20261004`. The `main` branch and `docs/paper_rebuild/ACTIVE_CONTEXT.md` describe earlier stages. Original V3 remains the selected paper identity; later corrected diagnostic cohorts, FGO variants and transfer runs retain separate identities. The October 6 exploratory pilot does not replace the original matrix.
+The maintained research baseline was merged into `main` through PR #63. The completed heading/FIX reassessment is recorded in `research/heading-reassessment-20261006` and its linked evidence. `docs/paper_rebuild/ACTIVE_CONTEXT.md` remains historical. Original V3 remains the selected paper identity; later corrected diagnostic cohorts, FGO variants and transfer runs retain separate identities. The October 6 exploratory pilot does not replace the original matrix.
 
 ## Implementation and data
 

@@ -1,0 +1,18 @@
+{
+  "docs/paper_rebuild/HEADING_REASSESSMENT_20261006/raw_audit/AUDIT_SCOPE.json": "59b3c9ec73710cefd9dc100a9e75e6d7c8e4a302eaf5b59bd591562442398946",
+  "docs/paper_rebuild/HEADING_REASSESSMENT_20261006/raw_audit/BODY_AND_SESSION.csv": "a8f313cabe2fefc518dae446cdf93d31eed5f729bd67982a3804b47b1b98548b",
+  "docs/paper_rebuild/HEADING_REASSESSMENT_20261006/raw_audit/DATE_SESSION_GROUPS.csv": "cacddcfa7b932c27d5912d8a18ebc35c6e9fe3fc5eeca6c136dc7ca33d40a6b3",
+  "docs/paper_rebuild/HEADING_REASSESSMENT_20261006/raw_audit/DECODE_DETAILS.json": "24cf0a144b038eeb950113cb0c4deee873b3b668654bc165532766cdb2d41b1a",
+  "docs/paper_rebuild/HEADING_REASSESSMENT_20261006/raw_audit/FILE_IDENTITY.csv": "48f3c7d07b6059c1986208186c4466c2c06dc829d28bd20465b30aabde757429",
+  "docs/paper_rebuild/HEADING_REASSESSMENT_20261006/raw_audit/GNSS_PAIR_STATES.csv": "0fca1b591f94daa2bcf78b6d46ecfe46c6b3a9e6c1d6cc5b827288f428a6b2da",
+  "docs/paper_rebuild/HEADING_REASSESSMENT_20261006/raw_audit/GNSS_RECEIVER_STATES.csv": "41c3587d7886097205f17571c0d45a06c43a55d1ae018046a456e984b2521d8a",
+  "docs/paper_rebuild/HEADING_REASSESSMENT_20261006/raw_audit/HEADING_SUPPORT.csv": "77609648adee79caeaa0b1376969786a9cc6b511b3a5b4a2fe149cc9a08be29c",
+  "docs/paper_rebuild/HEADING_REASSESSMENT_20261006/raw_audit/RAWX_PAIR_OPPORTUNITIES.csv": "95ec61654694f7ce631d117dc69dc03534a890bdef3d4843b4ec3355d065a1ac",
+  "docs/paper_rebuild/HEADING_REASSESSMENT_20261006/raw_audit/RAW_MEMBER_IDENTITIES.json": "2d7aa74ebe458af48f8cecb27acc825244ce040b198444ad8a454cacb3fa5b56",
+  "docs/paper_rebuild/HEADING_REASSESSMENT_20261006/raw_audit/RECEIVER_ACCURACY_BY_STATE.csv": "a18de23c8e9f41e50f2eb82294cba354cae979995299f69163f2dd1881f14feb",
+  "docs/paper_rebuild/HEADING_REASSESSMENT_20261006/raw_audit/RELPOSNED_SUPPORT.csv": "4609891c4db6b20819a91779c6ce49c61b5cd3fd53aa6ddf238eb4aca1d9f57e",
+  "scripts/paper_rebuild/heading_reassessment_20261006/audit_raw_inputs.py": "e5ccfd40c4021b49582029f1f4e44a751f1e524400ac574dee15ae398f1aaa52",
+  "scripts/paper_rebuild/heading_reassessment_20261006/group_dates.py": "00e9cfa367dc43e3450a31889ed59ec656402edc59a9ffbd6542ec0a59e66ce5",
+  "docs/paper_rebuild/RESEARCH_AUDIT_20261006/LEG_INPUT_FEASIBILITY.json": "6633569390648e23405d75689b02c9ae0425be3ccd3af0aefdbb2efc5c9f3b51",
+  "docs/paper_rebuild/TIM_EVIDENCE_20261005/data_and_selection/BODY_FIELD_STATS.csv": "a4c47d2e807a26c095928d31249a9ace17f5284b24245bf07d1119c4c4dae3ab"
+}
