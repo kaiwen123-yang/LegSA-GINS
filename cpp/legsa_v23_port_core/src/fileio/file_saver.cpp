@@ -174,7 +174,9 @@ void writeActualSolverInputPaths(std::ostream& out, const PortOptions& options) 
   }
   if (options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior) {
     add("go2_horizontal_velocity_weak_prior",
-        options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_diagnostic_path);
+        options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame == "body_frd"
+            ? options.go2_velocity_prior_diagnostic_config.go2_body_velocity_prior_path
+            : options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_diagnostic_path);
   }
   if (options.go2_readiness_lsim_metadata_config.enable_go2_readiness_lsim_metadata) {
     add("go2_source_quality_metadata",
@@ -199,7 +201,9 @@ void writeActualSolverInputRoles(std::ostream& out, const PortOptions& options) 
     out << ", \"go2_roll_pitch_weak_prior\": \"weak_prior_not_truth\"";
   }
   if (options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior) {
-    out << ", \"go2_horizontal_velocity_weak_prior\": \"horizontal_weak_prior_not_truth\"";
+    out << ", \"go2_horizontal_velocity_weak_prior\": \""
+        << (options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame == "body_frd"
+            ? "body_forward_right_velocity_at_imu_point_not_truth" : "horizontal_weak_prior_not_truth") << "\"";
   }
   if (options.go2_readiness_lsim_metadata_config.enable_go2_readiness_lsim_metadata) {
     out << ", \"go2_source_quality_metadata\": \"solver_visible_quality_metadata_not_truth\"";
@@ -781,6 +785,18 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
         << "  \"external_carrier_valid_is_trusted_FIX\": false,\n"
         << "  \"external_carrier_pacc_used\": false,\n"
         << "  \"external_carrier_k_b_used\": false,\n";
+  }
+  if (options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior &&
+      options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame == "body_frd") {
+    out << "  \"go2_horizontal_velocity_frame\": \"body_frd\",\n"
+        << "  \"body_velocity_measurement_axes\": \"forward_right\",\n"
+        << "  \"body_velocity_z_observed\": false,\n"
+        << "  \"body_velocity_nav_down_state_frozen\": false,\n"
+        << "  \"body_velocity_reference_point_assumption\": \"navigation_IMU_point_no_lever_arm_applied\",\n"
+        << "  \"body_velocity_input_frame_verified_by_native\": false,\n"
+        << "  \"body_velocity_native_uses_GNSS_heading_to_construct_measurement\": false,\n"
+        << "  \"body_velocity_update_period_s\": " << options.go2_velocity_prior_diagnostic_config.go2_body_velocity_update_period_s << ",\n"
+        << "  \"body_velocity_time_policy\": \"independent_IMU_boundary_timer_past_latest_unique_attempt_no_interpolation\",\n";
   }
   out << "  \"actual_solver_input_paths\": ";
   writeActualSolverInputPaths(out, options);

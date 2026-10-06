@@ -102,6 +102,7 @@ class GIEngine {
   const Baseline3dCounts& baseline3dCounts() const { return baseline3d_counts_; }
   const std::vector<Baseline3dDiagnostics>& baseline3dDiagnostics() const { return baseline3d_diagnostics_; }
   void writeBaseline3dDiagnostics(const std::string& output_dir) const;
+  void writeBodyVelocityDiagnostics(const std::string& output_dir) const;
 
  private:
   void initializeCovariance();
@@ -123,6 +124,7 @@ class GIEngine {
   void applyRawDopplerUpdateForTime(double update_time);
   void applyGo2AttitudeWeakPriorForTime(double update_time);
   void applyGo2VelocityDiagnosticPriorForTime(double update_time);
+  void applyBodyVelocityPriorForTime(double update_time);
   void applyFgoFeedbackForTime(double update_time);
   quality_aware::QAObservation buildQAObservation(const GnssData& gnss) const;
   void enrichGo2ReadinessMetadata(source_aware::SourceMetadata& metadata, double update_time);
@@ -182,6 +184,14 @@ class GIEngine {
   double last_fgo_feedback_time_ = -1.0e100;
   double research_last_rp_attempt_time_ = -1.0e100;
   double research_last_rd_attempt_time_ = -1.0e100;
+  double research_last_body_hv_attempt_time_ = -1.0e100;
+  double research_next_body_hv_tick_ = 0.0;
+  struct BodyVelocityEvent {
+    double time=0.0, source_time=0.0;
+    bool source_present=false, valid=false, accepted=false;
+    std::string reason;
+  };
+  std::vector<BodyVelocityEvent> body_velocity_events_;
   quality_aware::QAFallbackSupervisor qa_fallback_supervisor_;
   source_aware::SourceAwarePolicy source_aware_policy_;
   source_aware::QualityStateManager quality_state_manager_;

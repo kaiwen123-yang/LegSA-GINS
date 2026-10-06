@@ -1,0 +1,55 @@
+{
+  "scope": "BY2 real100..340, 120 registered 2s windows per mode; no reference online",
+  "modes": {
+    "full": {
+      "cases": 120,
+      "valid_experimental_measurements": 1,
+      "search_calls": 69,
+      "statuses": {
+        "UNRESOLVED_ACTIVE_ARC_CHANGED": 47,
+        "REJECTED_RESIDUAL": 8,
+        "REJECTED_RESIDUAL_AND_LENGTH": 2,
+        "REJECTED_PHASE_FAULT_DIAGNOSTIC": 4,
+        "UNAVAILABLE:MODEL_UNAVAILABLE:None": 57,
+        "REJECTED_LENGTH": 1,
+        "EXPERIMENTAL_FIXED_CANDIDATE": 1
+      },
+      "csv": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CARRIER_INTEGRATION_20261006/FULL_SPAN_FULL/CARRIER_FULL_0001.csv",
+      "decision_times_s": [
+        301.9979999065399
+      ],
+      "execution_commits": [
+        "87b1f1179d6a813bac704bb804187389589de3d3"
+      ]
+    },
+    "partial": {
+      "cases": 120,
+      "valid_experimental_measurements": 7,
+      "search_calls": 69,
+      "statuses": {
+        "UNRESOLVED_ACTIVE_ARC_CHANGED": 23,
+        "REJECTED_PHASE_FAULT_DIAGNOSTIC": 16,
+        "REJECTED_RESIDUAL": 11,
+        "EXPERIMENTAL_FIXED_CANDIDATE": 7,
+        "REJECTED_LENGTH": 5,
+        "UNAVAILABLE:partial freeze requires the exact certified selected-class search": 1,
+        "UNAVAILABLE:MODEL_UNAVAILABLE:None": 57
+      },
+      "csv": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CARRIER_INTEGRATION_20261006/FULL_SPAN_PARTIAL/CARRIER_PARTIAL_0001.csv",
+      "decision_times_s": [
+        135.99799990653992,
+        141.99799990653992,
+        155.99799990653992,
+        169.99799990653992,
+        171.99799990653992,
+        295.9979999065399,
+        301.9979999065399
+      ],
+      "execution_commits": [
+        "87b1f1179d6a813bac704bb804187389589de3d3",
+        "d9bb06a418102280b9e86d0e271fd1d5df9d1f8b"
+      ]
+    }
+  },
+  "interpretation": "valid is engineering-qualified candidate for experimental fusion, not known correct N or validated FIX"
+}

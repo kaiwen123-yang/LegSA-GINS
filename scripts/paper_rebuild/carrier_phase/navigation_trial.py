@@ -83,19 +83,28 @@ def clone_config(payload, fields):
     return result, changes
 
 
-def common_contract(configs):
+def common_contract(configs, hv_mode="off"):
+    if hv_mode not in ("off", "body"):
+        raise ValueError("UNKNOWN_HV_MODE")
     if len(configs) != len(CASES):
         raise ValueError("FOUR_CASES_REQUIRED")
     normalized = [{k: v for k, v in c.items() if k not in VARIANT_KEYS} for c in configs]
     if any(v != normalized[0] for v in normalized[1:]):
         raise ValueError("NONHEADING_CONFIG_DIFFERENCE")
     c = normalized[0]
-    if (c["algorithm_id"] != "AB1110" or c["ablation_variant"] != "AB1110"
-            or c["enable_go2_horizontal_velocity_prior"] is not False
+    algorithm = "AB1111" if hv_mode == "body" else "AB1110"
+    if (c["algorithm_id"] != algorithm or c["ablation_variant"] != algorithm
+            or c["enable_go2_horizontal_velocity_prior"] is not (hv_mode == "body")
             or c["enable_go2_velocity_prior_diagnostic"] is not False
             or c["runtime_contract"] != "research_experiment"
             or c["dual_yaw_prediction_model"] != "lateral_projection"):
         raise ValueError("COMMON_RESEARCH_CONTRACT")
+    if hv_mode == "body" and (c.get("go2_horizontal_velocity_frame") != "body_frd"
+            or not c.get("go2_body_velocity_prior_path")
+            or c.get("go2_body_velocity_update_period_s") != .2
+            or c.get("go2_velocity_prior_std_scale") != 1.
+            or c.get("go2_horizontal_velocity_prior_std_scale") != 1.):
+        raise ValueError("COMMON_BODY_VELOCITY_CONTRACT")
     for key in ("enable_receiver_velocity", "enable_raw_doppler", "enable_source_aware",
                 "enable_go2_roll_pitch_prior"):
         if c[key] is not True:
@@ -111,8 +120,9 @@ def common_contract(configs):
     if configs[2]["external_carrier_baseline_path"] == configs[3]["external_carrier_baseline_path"]:
         raise ValueError("FULL_PARTIAL_MUST_HAVE_SEPARATE_SOURCE_FILES")
     return {"identical_outside_heading_and_output_identity": True,
-            "HV_disabled_in_all_four": True, "algorithm_id": "AB1110",
-            "shared_input_roles": list(INPUT_KEYS),
+            "HV_disabled_in_all_four": hv_mode == "off", "hv_mode": hv_mode,
+            "body_velocity_shared_in_all_four": hv_mode == "body", "algorithm_id": algorithm,
+            "shared_input_roles": list(INPUT_KEYS) + (["go2_body_velocity_prior_path"] if hv_mode == "body" else []),
             "same_shared_initialization_not_AR_cold_start": True}
 
 
@@ -144,6 +154,73 @@ def carrier_audit(path):
     return {"rows": len(rows), "valid_rows": valid, "invalid_rows": len(rows)-valid,
             "first_s": times[0] if times else None, "last_s": times[-1] if times else None,
             "reference_used": False, "decision_equals_measurement_time": True}
+
+
+
+BODY_COLUMNS = ["time", "v_forward_mps", "v_right_mps", "std_forward_mps",
+                "std_right_mps", "valid", "source_status"]
+
+
+def body_velocity_audit(path):
+    """Check frozen 2-D engineering input; do not infer its physical frame."""
+    with Path(path).open(newline="") as f:
+        reader = csv.DictReader(f)
+        if reader.fieldnames != BODY_COLUMNS:
+            raise ValueError("BODY_VELOCITY_COLUMN_CONTRACT")
+        rows = list(reader)
+    times = []; valid = 0
+    for row in rows:
+        t = float(row["time"])
+        if not np.isfinite(t) or not 66. <= t <= 340.:
+            raise ValueError("BODY_VELOCITY_TIME")
+        times.append(t)
+        if row["valid"] not in ("0", "1"):
+            raise ValueError("BODY_VELOCITY_VALIDITY")
+        if row["valid"] == "1":
+            values = np.array([float(row[k]) for k in BODY_COLUMNS[1:5]])
+            if (not np.isfinite(values).all() or not np.array_equal(values[2:], [.2, .2])
+                    or row["source_status"] != "active"):
+                raise ValueError("BODY_VELOCITY_FIXED_NOISE_OR_VALID_SOURCE")
+            valid += 1
+    if not times or not np.all(np.diff(times) > 0):
+        raise ValueError("BODY_VELOCITY_ORDER_OR_EMPTY")
+    return {"rows": len(rows), "valid_rows": valid, "invalid_rows": len(rows)-valid,
+            "first_s": times[0], "last_s": times[-1], "std_xy_mps": .2,
+            "scale": 1., "physical_frame_verified_by_this_check": False}
+
+
+def body_event_audit(path, expected_updates, max_age_s):
+    with Path(path).open(newline="") as f:
+        rows = list(csv.DictReader(f))
+    state_times = []; source_times = []; accepted = 0
+    for row in rows:
+        state = float(row["state_time"])
+        if not np.isfinite(state):
+            raise ValueError("BODY_EVENT_NONFINITE_TIME")
+        state_times.append(state)
+        if row["frame"] != "body_frd" or row["observed_axes"] != "forward_right":
+            raise ValueError("BODY_EVENT_FRAME_AXES")
+        if any(row[k] not in ("0", "1") for k in ("source_present", "valid", "accepted")):
+            raise ValueError("BODY_EVENT_FLAGS")
+        if row["accepted"] == "1" and (row["valid"] != "1" or row["source_present"] != "1"):
+            raise ValueError("BODY_EVENT_ACCEPTED_INVALID")
+        if row["source_present"] == "1":
+            source, age = float(row["source_time"]), float(row["age_s"])
+            if (not np.isfinite([source, age]).all() or source > state
+                    or age < 0 or age > max_age_s+1e-12
+                    or abs(age-(state-source)) > 1e-10):
+                raise ValueError("BODY_EVENT_CAUSAL_AGE")
+            source_times.append(source)
+        elif row["source_time"] or row["age_s"]:
+            raise ValueError("BODY_EVENT_ABSENT_SOURCE_HAS_TIMESTAMP")
+        accepted += row["accepted"] == "1"
+    if not rows or not np.all(np.diff(state_times) > 0) or not np.all(np.diff(source_times) > 0):
+        raise ValueError("BODY_EVENT_ORDER_OR_REUSED_SOURCE")
+    if accepted != expected_updates:
+        raise ValueError("BODY_EVENT_MANIFEST_COUNT")
+    return {"events": len(rows), "source_attempts": len(source_times),
+            "accepted": accepted, "causal_and_unique_source_timestamps": True,
+            "observed_body_z": False, "navigation_down_state_frozen": False}
 
 
 def reuse_dual_pvt(root, gnss_path, dest):
@@ -191,6 +268,11 @@ def source_pins(code):
 
 
 def prepare(a):
+    hv_mode = a.hv_mode
+    if hv_mode == "body" and a.body_velocity is None:
+        raise ValueError("BODY_MODE_REQUIRES_BODY_VELOCITY_CSV")
+    if hv_mode == "off" and a.body_velocity is not None:
+        raise ValueError("HV_OFF_MUST_NOT_CONSUME_BODY_VELOCITY")
     stage = a.stage; stage.mkdir(parents=True, exist_ok=False)
     prior = read(a.prior_prereg)
     seq = prior["sequences"]["BY2"]
@@ -199,10 +281,31 @@ def prepare(a):
         raise ValueError("BY2_SINGLE_CONTIGUOUS_COMMON_WINDOW_REQUIRED")
     original = check_pin(run["children"][0]["config"])
     original_bytes = original.read_bytes(); base = yaml.safe_load(original_bytes)
+    if hv_mode == "body" and (not isinstance(base.get("go2_velocity_prior_time_tolerance_sec"), (int, float))
+            or not np.isfinite(base["go2_velocity_prior_time_tolerance_sec"])
+            or base["go2_velocity_prior_time_tolerance_sec"] <= 0):
+        raise ValueError("BODY_EXPLICIT_POSITIVE_SOURCE_MAX_AGE_REQUIRED")
     # Pin the active shared providers and binary, without opening the reference.
     inputs = {k: pin(base[k]) for k in INPUT_KEYS}
     binary = pin(a.binary); checker = pin(a.config_check)
     inp = stage/"INPUTS"; inp.mkdir()
+    body_info = None
+    if hv_mode == "body":
+        source_body = pin(a.body_velocity)
+        source_manifest = pin(a.body_velocity.parent/"MANIFEST.json")
+        provenance = read(check_pin(source_manifest))
+        if (provenance["provider_sha256"] != source_body["sha256"]
+                or provenance["output_frame"] != "body_frd"
+                or provenance["GNSS_read_count"] != 0 or provenance["reference_read_count"] != 0
+                or provenance["attitude_rotation_used"] or provenance["interpolation_used"]
+                or provenance["std_xy_mps"] != .2 or provenance["scale"] != 1.):
+            raise ValueError("BODY_VELOCITY_SOURCE_PROVENANCE")
+        body_path = inp/"BODY_VELOCITY.csv"
+        body_path.write_bytes(Path(a.body_velocity).read_bytes())
+        inputs["go2_body_velocity_prior_path"] = pin(body_path)
+        body_info = {"source": source_body, "source_manifest": source_manifest,
+                     "provider": pin(body_path), "gate": body_velocity_audit(body_path),
+                     "source_point_assumption": provenance["source_point_to_IMU_lever_arm"]}
     pvt = inp/"DUAL_PVT_BASELINE3D.csv"
     pvt_lineage = reuse_dual_pvt(a.dual_pvt_root, base["gnsspath"], pvt)
     carriers = {}; carrier_gates = {}; carrier_sources = {}
@@ -218,8 +321,9 @@ def prepare(a):
             "stage_id": STAGE_ID, "protocol_id": "EXPERIMENTAL_CARRIER_VS_POSITION_HEADING",
             "case_id": case, "run_id": case, "run_label": case,
             "runtime_contract": "research_experiment", "runtime_role": "experimental_navigation_solver",
-            "algorithm_id": "AB1110", "ablation_variant": "AB1110",
-            "enable_go2_horizontal_velocity_prior": False,
+            "algorithm_id": "AB1111" if hv_mode == "body" else "AB1110",
+            "ablation_variant": "AB1111" if hv_mode == "body" else "AB1110",
+            "enable_go2_horizontal_velocity_prior": hv_mode == "body",
             "enable_go2_velocity_prior_diagnostic": False,
             "outputpath": str(stage/"NATIVE"/case),
             "dual_yaw_prediction_model": "lateral_projection",
@@ -227,6 +331,11 @@ def prepare(a):
             "baseline3d_body_vector_m": [0., -.35, 0.],
             "dual_antenna_measurement_model": "scalar" if case == CASES[0] else "baseline3d",
         }
+        if hv_mode == "body":
+            fields.update(go2_horizontal_velocity_frame="body_frd",
+                go2_body_velocity_prior_path=str(body_path),
+                go2_body_velocity_update_period_s=.2,
+                go2_velocity_prior_std_scale=1., go2_horizontal_velocity_prior_std_scale=1.)
         if case == CASES[1]:
             fields.update(baseline3d_source="dual_pvt", baseline3d_path=str(pvt))
         if case in carriers:
@@ -235,7 +344,7 @@ def prepare(a):
         config = configdir/(case+".yaml"); config.write_bytes(payload)
         configs.append(yaml.safe_load(payload))
         runs.append({"case": case, "config": pin(config), "changes": changes})
-    gate = common_contract(configs)
+    gate = common_contract(configs, hv_mode)
     completed = subprocess.run([str(a.config_check), *[r["config"]["path"] for r in runs]],
                                capture_output=True, text=True)
     emit(stage/"CONFIG_LOADER_CHECK.json", {"returncode": completed.returncode,
@@ -247,6 +356,11 @@ def prepare(a):
         "source_prior_prereg": pin(a.prior_prereg), "source_config": pin(original),
         "source_sha256": source_pins(a.code), "binary": binary, "checker": checker,
         "sequence": seq, "runs": runs, "active_shared_inputs": inputs,
+        "hv_mode": hv_mode, "body_velocity_input": body_info,
+        "forbidden_legacy_velocity_paths": sorted({base[k] for k in
+            ("go2_horizontal_velocity_prior_path", "go2_velocity_prior_diagnostic_path")
+            if isinstance(base.get(k), str) and base[k]}),
+        "body_velocity_max_age_s": base.get("go2_velocity_prior_time_tolerance_sec") if hv_mode == "body" else None,
         "common_contract": gate, "dual_pvt_input": pin(pvt), "dual_pvt_lineage": pvt_lineage,
         "external_carrier_inputs": {k: pin(v) for k, v in carriers.items()},
         "external_carrier_sources": carrier_sources,
@@ -256,7 +370,8 @@ def prepare(a):
         "initialization": {"source": base["common_initialization_source"],
             "dual_yaw_used": base["common_initialization_dual_yaw_used"],
             "unchanged_across_cases": True, "AR_cold_start": False},
-        "comparison_scope": "common AB1110 (HV off), not complete unchanged V3 F04",
+        "comparison_scope": ("common AB1111 with causal raw body forward/right velocity"
+            if hv_mode == "body" else "common AB1110 (HV off), not complete unchanged V3 F04"),
         "evaluation_frame": "frozen v3 antenna-midpoint transform; all non-LLH tokens unchanged",
         "real_integer_truth_available": False}
     emit(stage/"PLAN.json", plan)
@@ -272,17 +387,31 @@ def checked_plan(a):
                  *plan["active_shared_inputs"].values(), plan["dual_pvt_input"],
                  *plan["external_carrier_inputs"].values(), *[r["config"] for r in plan["runs"]]]:
         check_pin(item)
+    if plan.get("body_velocity_input"):
+        check_pin(plan["body_velocity_input"]["source_manifest"])
     return plan
 
 
 
-def manifest_checks(manifest, case):
+def manifest_checks(manifest, case, hv_mode="off"):
+    algorithm = "AB1111" if hv_mode == "body" else "AB1110"
+    if hv_mode not in ("off", "body"):
+        raise ValueError("UNKNOWN_HV_MODE")
     if (manifest.get("runtime_contract") != "research_experiment"
-            or manifest.get("algorithm_id") != "AB1110"
+            or manifest.get("algorithm_id") != algorithm
             or manifest.get("run_id") != case
             or manifest.get("dual_yaw_prediction_model") != "lateral_projection"
-            or manifest.get("go2_horizontal_velocity_update_count") != 0):
+            or (hv_mode == "off" and manifest.get("go2_horizontal_velocity_update_count") != 0)):
         raise ValueError("NATIVE_EFFECTIVE_RESEARCH_CONTRACT")
+    if hv_mode == "body" and (manifest.get("go2_horizontal_velocity_frame") != "body_frd"
+            or manifest.get("body_velocity_measurement_axes") != "forward_right"
+            or manifest.get("body_velocity_z_observed") is not False
+            or manifest.get("body_velocity_nav_down_state_frozen") is not False
+            or manifest.get("body_velocity_native_uses_GNSS_heading_to_construct_measurement") is not False
+            or manifest.get("body_velocity_update_period_s") != .2
+            or manifest.get("go2_velocity_prior_std_scale") != 1.
+            or manifest.get("body_velocity_time_policy") != "independent_IMU_boundary_timer_past_latest_unique_attempt_no_interpolation"):
+        raise ValueError("NATIVE_BODY_VELOCITY_CONTRACT")
     if manifest.get("research_RD_RP_policy") != "past_only_each_source_timestamp_attempted_at_most_once":
         raise ValueError("NATIVE_RD_RP_CAUSAL_CONTRACT")
     if case != CASES[0] and (manifest.get("dual_antenna_measurement_model") != "baseline3d"
@@ -294,7 +423,9 @@ def manifest_checks(manifest, case):
         raise ValueError("NATIVE_CARRIER_IDENTITY")
     return {k: v for k, v in manifest.items() if k.endswith("_count")
             or k in ("cov_health_status", "runtime_contract", "research_RD_RP_policy",
-                     "research_event_schedule", "baseline3d_frame_contract")}
+                     "research_event_schedule", "baseline3d_frame_contract",
+                     "body_velocity_time_policy", "go2_horizontal_velocity_frame",
+                     "body_velocity_z_observed", "body_velocity_nav_down_state_frozen")}
 
 
 def launch(argv, cwd, output, timeout=1200):
@@ -321,12 +452,20 @@ def native(a):
         started=time.monotonic(); code,timed_out=launch(argv,a.code,out)
         opens=audited_open_records(out/"OPENAT.strace",a.code)
         tr=sum(x["path"]==plan["sequence"]["trace_path"] for x in opens)
+        legacy_opens=sum(x["path"] in plan.get("forbidden_legacy_velocity_paths",[]) for x in opens)
+        body_opens=(sum(x["path"]==plan["body_velocity_input"]["provider"]["path"] for x in opens)
+                    if plan.get("hv_mode") == "body" else None)
         rec={"case":r["case"],"returncode":code,"timed_out":timed_out,
              "runtime_seconds":time.monotonic()-started,"online_reference_opens":tr,
-             "status":"COMPLETED" if code==0 and not timed_out and tr==0 else "FAILED"}
+             "forbidden_legacy_velocity_opens":legacy_opens,"body_velocity_provider_opens":body_opens,
+             "status":"COMPLETED" if code==0 and not timed_out and tr==0 and legacy_opens==0
+                 and (body_opens is None or body_opens>0) else "FAILED"}
         if rec["status"]=="COMPLETED":
             manifest=read(out/"RUN_MANIFEST.json")
-            rec["runtime_checks"]=manifest_checks(manifest,r["case"])
+            rec["runtime_checks"]=manifest_checks(manifest,r["case"],plan.get("hv_mode","off"))
+            if plan.get("hv_mode") == "body":
+                rec["body_velocity_events"]=body_event_audit(out/"BODY_VELOCITY_EVENTS.csv",
+                    manifest["go2_horizontal_velocity_update_count"],plan["body_velocity_max_age_s"])
             rec["runtime_manifest"]=pin(out/"RUN_MANIFEST.json")
             nav=np.loadtxt(out/"KF_GINS_Navresult.nav",ndmin=2,comments="%")
             std=np.loadtxt(out/"KF_GINS_STD.txt",ndmin=2,comments="%")
@@ -402,6 +541,8 @@ def main():
     for key in ("stage","code","prior-prereg","binary","config-check","dual-pvt-root",
                 "carrier-full","carrier-partial","evaluator","clean-root"):
         parser.add_argument("--"+key,type=Path,required=key in ("stage","code"))
+    parser.add_argument("--hv-mode", choices=["off", "body"], default="off")
+    parser.add_argument("--body-velocity", type=Path)
     a=parser.parse_args()
     if os.uname().sysname!="Linux":raise RuntimeError("Ubuntu WSL required")
     globals()[a.phase](a)

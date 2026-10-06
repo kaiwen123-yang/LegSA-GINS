@@ -1333,9 +1333,12 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   }
   Go2VelocityDiagnosticPriorLoadResult go2_velocity_prior_load;
   if (options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic) {
-    go2_velocity_prior_load = Go2WeakPriorLoader::loadVelocityDiagnosticCsv(
-        options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_diagnostic_path,
-        options.go2_velocity_prior_diagnostic_config);
+    go2_velocity_prior_load = options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame == "body_frd"
+        ? Go2WeakPriorLoader::loadBodyVelocityCsv(options.go2_velocity_prior_diagnostic_config.go2_body_velocity_prior_path,
+                                               options.go2_velocity_prior_diagnostic_config)
+        : Go2WeakPriorLoader::loadVelocityDiagnosticCsv(
+            options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_diagnostic_path,
+            options.go2_velocity_prior_diagnostic_config);
     options.go2_velocity_prior_diagnostic_status = go2_velocity_prior_load.status;
     if (!(options.clean1_formal_mode || options.runtime_contract == "research_experiment") && go2_velocity_prior_load.status.horizontal_only &&
         !options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior) {
@@ -1646,6 +1649,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   engine.writeFgoFeedbackTrace(output_dir);
   engine.writeQAFallbackTrace(output_dir);
   engine.writeBaseline3dDiagnostics(output_dir);
+  engine.writeBodyVelocityDiagnostics(output_dir);
 }
 
 }  // namespace legsa_v23_port_core

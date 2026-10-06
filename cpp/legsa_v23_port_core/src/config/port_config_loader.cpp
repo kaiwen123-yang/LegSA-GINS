@@ -443,6 +443,9 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
   if (expected_source_aware && options.source_aware_policy_config.source_aware_mode == "off") {
     formalContractFailure("source-aware feature is enabled but policy mode is off");
   }
+  if (go2_horizontal && options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame == "body_frd" &&
+      options.go2_velocity_prior_diagnostic_config.go2_body_velocity_prior_path.empty())
+    formalContractFailure("body_frd velocity requires its explicit body provider path");
   if (go2_horizontal &&
       (!options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_vertical_disabled ||
        options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_mode != "horizontal_2d")) {
@@ -954,6 +957,20 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       stringOrDefault(kv,
                       "go2_velocity_prior_diagnostic_path",
                       options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_diagnostic_path);
+  options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame =
+      stringOrDefault(kv,"go2_horizontal_velocity_frame","ned");
+  options.go2_velocity_prior_diagnostic_config.go2_body_velocity_prior_path =
+      stringOrDefault(kv,"go2_body_velocity_prior_path","");
+  options.go2_velocity_prior_diagnostic_config.go2_body_velocity_update_period_s =
+      scalarOrDefault(kv,"go2_body_velocity_update_period_s",0.2);
+  if (options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame != "ned" &&
+      options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame != "body_frd")
+    throw std::runtime_error("BODY_HV_UNKNOWN_FRAME");
+  if (options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame == "body_frd") {
+    if(options.runtime_contract != "research_experiment") throw std::runtime_error("BODY_HV_REQUIRES_RESEARCH_CONTRACT");
+    const double period=options.go2_velocity_prior_diagnostic_config.go2_body_velocity_update_period_s;
+    if(!std::isfinite(period)||!(period>0.0)) throw std::runtime_error("BODY_HV_INVALID_PERIOD");
+  }
   options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_path =
       stringOrDefault(kv,
                       "go2_horizontal_velocity_prior_path",

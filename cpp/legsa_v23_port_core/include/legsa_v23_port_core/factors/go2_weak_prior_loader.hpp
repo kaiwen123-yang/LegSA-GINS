@@ -37,6 +37,8 @@ class Go2WeakPriorLoader {
   static Go2VelocityDiagnosticPriorLoadResult loadVelocityDiagnosticCsv(
       const std::string& path,
       const Go2VelocityDiagnosticPriorConfig& config);
+  static Go2VelocityDiagnosticPriorLoadResult loadBodyVelocityCsv(
+      const std::string& path, const Go2VelocityDiagnosticPriorConfig& config);
   static Go2ReadinessLsimMetadataLoadResult loadReadinessLsimMetadataCsv(
       const std::string& path,
       const Go2ReadinessLsimMetadataConfig& config);

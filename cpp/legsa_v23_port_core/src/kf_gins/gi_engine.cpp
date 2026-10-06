@@ -13,6 +13,7 @@
 #include "legsa_v23_port_core/factors/raw_doppler_factor.hpp"
 #include "legsa_v23_port_core/kf_gins/insmech.hpp"
 
+#include "legsa_v23_port_core/factors/body_velocity_model.hpp"
 #include <algorithm>
 #include <cmath>
 #include <filesystem>
@@ -114,6 +115,16 @@ GIEngine::GIEngine(PortOptions options)
       throw std::runtime_error("BASELINE3D_SCOPE_REQUIRES_QA_QM_OFF");
     }
   }
+  const auto& body_cfg = options_.go2_velocity_prior_diagnostic_config;
+  if (body_cfg.enable_go2_horizontal_velocity_prior && body_cfg.go2_horizontal_velocity_frame == "body_frd") {
+    if (options_.runtime_contract != "research_experiment" ||
+        body_cfg.go2_horizontal_velocity_prior_mode != "horizontal_2d" ||
+        !body_cfg.go2_horizontal_velocity_prior_vertical_disabled ||
+        !std::isfinite(body_cfg.go2_body_velocity_update_period_s) || !(body_cfg.go2_body_velocity_update_period_s > 0.0) ||
+        !std::isfinite(body_cfg.go2_velocity_prior_time_tolerance_sec) || body_cfg.go2_velocity_prior_time_tolerance_sec < 0.0 ||
+        !std::isfinite(body_cfg.go2_velocity_prior_std_scale) || !(body_cfg.go2_velocity_prior_std_scale > 0.0))
+      throw std::runtime_error("BODY_HV_INVALID_ENGINE_CONTRACT");
+  }
   initializeQc();
 }
 
@@ -128,6 +139,10 @@ void GIEngine::initialize(const NavState& initial_state) {
   pvapre_ = pvacur_;
   timestamp_ = pvacur_.time;
   initializeCovariance();
+  research_next_body_hv_tick_ = options_.starttime +
+      options_.go2_velocity_prior_diagnostic_config.go2_body_velocity_update_period_s;
+  research_last_body_hv_attempt_time_ = -1.0e100;
+  body_velocity_events_.clear();
   zeroVector(dx_);
   initialized_ = true;
 }
@@ -197,6 +212,7 @@ void GIEngine::setGo2VelocityDiagnosticPriors(
       (options_.go2_velocity_prior_diagnostic_config.go2_diagnostic_prior_only ||
        options_.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior);
   go2_velocity_diagnostic_prior_status_.horizontal_only =
+      options_.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame == "body_frd" ||
       std::any_of(measurements.begin(), measurements.end(), [](const Go2VelocityDiagnosticPriorMeasurement& measurement) {
         return measurement.std_ned_mps[2] >= 999.0 ||
                measurement.prior_policy.find("horizontal") != std::string::npos;
@@ -432,7 +448,8 @@ void GIEngine::gnssUpdate(GnssData& gnss) {
   }
   // 中文说明：N7B3 Go2 velocity diagnostic prior 默认关闭；开启时仍为 diagnostic-only，不构成正式 prior。
   if (!qa_active || qa_decision.go2_aux_action == "ACCEPT") {
-    applyGo2VelocityDiagnosticPriorForTime(policy_gnss.time);
+    if (options_.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame != "body_frd")
+      applyGo2VelocityDiagnosticPriorForTime(policy_gnss.time);
   }
   // 中文说明：Go2 roll/pitch weak prior 与 GNSS epoch 对齐进入 EKF；不启用 Go2 position/velocity/yaw prior。
   if (!qa_active || qa_decision.go2_aux_action == "ACCEPT") {
@@ -609,6 +626,16 @@ void GIEngine::newImuProcessWithEvents(const std::vector<GnssData>& events) {
   imucur_ = previous;
   imupre_ = imucur_;
   timestamp_ = end;
+  const auto& body_cfg = options_.go2_velocity_prior_diagnostic_config;
+  if (body_cfg.enable_go2_horizontal_velocity_prior && body_cfg.go2_horizontal_velocity_frame == "body_frd" &&
+      end >= research_next_body_hv_tick_) {
+    // At most one fresh update after a gap; never replay missed timer ticks or stale source rows.
+    do { research_next_body_hv_tick_ += body_cfg.go2_body_velocity_update_period_s; }
+    while (research_next_body_hv_tick_ <= end);
+    const auto before = go2_velocity_diagnostic_prior_status_.update_count;
+    applyBodyVelocityPriorForTime(end);
+    if (go2_velocity_diagnostic_prior_status_.update_count > before) stateFeedback();
+  }
   pvapre_ = pvacur_;
   if (!checkCov()) {
     ++cov_health_fail_count_;
@@ -1428,6 +1455,65 @@ void GIEngine::applyGo2AttitudeWeakPriorForTime(double update_time) {
   };
   go2_attitude_prior_status_.residual_roll_p95_rad = p95(go2_roll_residuals_);
   go2_attitude_prior_status_.residual_pitch_p95_rad = p95(go2_pitch_residuals_);
+}
+
+void GIEngine::applyBodyVelocityPriorForTime(double update_time) {
+  const auto& config = options_.go2_velocity_prior_diagnostic_config;
+  if (!config.enable_go2_horizontal_velocity_prior || config.go2_horizontal_velocity_frame != "body_frd") return;
+  BodyVelocityEvent event;
+  event.time=update_time;
+  auto finish = [&](const std::string& reason) { event.reason=reason; body_velocity_events_.push_back(event); };
+  if (!go2_velocity_diagnostic_prior_status_.solver_enabled) { finish("provider_unavailable"); return; }
+  const Go2VelocityDiagnosticPriorMeasurement* best=nullptr;
+  for (const auto& row : go2_velocity_diagnostic_priors_) {
+    if (row.time<=update_time && row.time>research_last_body_hv_attempt_time_ &&
+        update_time-row.time<=config.go2_velocity_prior_time_tolerance_sec &&
+        (!best || row.time>best->time)) best=&row;
+  }
+  if (!best) { finish("no_new_past_sample_within_age"); return; }
+  event.source_present=true;event.source_time=best->time;
+  research_last_body_hv_attempt_time_=best->time; // Invalid/rejected samples also consumed once.
+  event.valid=best->update_flag && best->source_status=="active" && !best->go2_velocity_truth_claim;
+  if (best->observation_frame!="body_frd") throw std::runtime_error("BODY_HV_MEASUREMENT_FRAME_MISMATCH");
+  if (!event.valid) { ++go2_velocity_diagnostic_prior_status_.reject_count; finish("provider_invalid"); return; }
+  const Vec3 stddev=scale(best->std_body_frd_mps,config.go2_velocity_prior_std_scale);
+  const auto model=buildBodyVelocity2dModel(pvacur_,best->velocity_body_frd_mps,stddev);
+  Matrix scaled_R=model.R;
+  if (config.go2_horizontal_velocity_prior_source_aware_enabled) {
+    source_aware::SourceMetadata metadata;
+    metadata.source=source_aware::MeasurementSource::kGo2HorizontalVelocity;
+    metadata.time=best->time;metadata.valid=true;
+    metadata.std_xyz=makeVec3(stddev[0],stddev[1],999.0);
+    metadata.active_dimensions=2;
+    metadata.residual_norm=std::sqrt(model.residual[0]*model.residual[0]+model.residual[1]*model.residual[1]);
+    metadata.time_diff_sec=best->time-update_time;
+    metadata.provider_status="available";
+    metadata.quality_flag=best->quality_flag;
+    metadata.covariance_available=true;
+    const auto weight=applySourceAwareWeighting(metadata.source,metadata,model.residual,model.H,model.R,scaled_R);
+    if(weight.rejected) { ++go2_velocity_diagnostic_prior_status_.reject_count; finish("source_aware_reject"); return; }
+  }
+  EKFUpdate(model.residual,model.H,scaled_R);
+  ++go2_velocity_diagnostic_prior_status_.update_count;
+  ++go2_velocity_diagnostic_prior_status_.horizontal_update_count;
+  go2_velocity_diagnostic_prior_status_.horizontal_only=true;
+  go2_velocity_diagnostic_prior_status_.vertical_disabled=true;
+  event.accepted=true;finish("accept_body_forward_right_2d");
+}
+
+void GIEngine::writeBodyVelocityDiagnostics(const std::string& output_dir) const {
+  const auto& config=options_.go2_velocity_prior_diagnostic_config;
+  if(!config.enable_go2_horizontal_velocity_prior || config.go2_horizontal_velocity_frame!="body_frd") return;
+  std::filesystem::create_directories(output_dir);
+  std::ofstream out(std::filesystem::path(output_dir)/"BODY_VELOCITY_EVENTS.csv");
+  if(!out)throw std::runtime_error("BODY_HV_DIAGNOSTICS_OPEN_FAILED");
+  out<<std::setprecision(17)<<"state_time,source_time,age_s,source_present,valid,accepted,reason,frame,observed_axes\n";
+  for(const auto& row:body_velocity_events_) {
+    out<<row.time<<',';if(row.source_present)out<<row.source_time;
+    out<<',';if(row.source_present)out<<row.time-row.source_time;
+    out<<','<<row.source_present<<','<<row.valid<<','<<row.accepted<<','<<row.reason<<",body_frd,forward_right\n";
+  }
+  if(!out)throw std::runtime_error("BODY_HV_DIAGNOSTICS_WRITE_FAILED");
 }
 
 void GIEngine::applyGo2VelocityDiagnosticPriorForTime(double update_time) {
