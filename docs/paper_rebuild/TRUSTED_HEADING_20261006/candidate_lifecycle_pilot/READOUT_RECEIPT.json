@@ -1,0 +1,38 @@
+{
+  "registration_commit": "1b9fe64fd940f0f9b03ad53b0fef677d5e7a7d7c",
+  "source_alias": "<TRUSTED_HEADING>/CANDIDATE_LIFECYCLE_PILOT_ATTEMPT01",
+  "driver_alias": "<TRUSTED_HEADING>/CANDIDATE_LIFECYCLE_PILOT_DRIVER_ATTEMPT01",
+  "runner_pid": 637,
+  "supervisor_pid": 550,
+  "exec_chunk": "54b741",
+  "persistent_exec_session": null,
+  "session_reason": "finished before initial tool return",
+  "all_six_source_seal_entries_verified": true,
+  "sealed_source_files": {
+    "DETAILS.jsonl.gz": "61c633b6d113be727569ca19d025ac61c2b8c6baeadff80ef73c85bd3aed6dad",
+    "EXECUTION_PLAN.json": "e8ad5da7bed9de81cff8aa3a7cff4fe83ee72fae115b1ee54ded97299d903842",
+    "INPUT_IDENTITY.json": "a075b6e1bee956901c1b8c83be3d5aaa86db50193969c36c7884fe6e6d9c3237",
+    "PROGRESS.json": "70ef9854976eb92ba73d20387621367b8957a4b730daae5c0068fd6e954a4377",
+    "RESULTS.csv": "2d0d9f375c30ed046c66036e38cede1783c819df6305e2b14ae4c8dc48610cc4",
+    "SUMMARY.json": "d13105ff6a3793ce4fe244440ee2e0359d9ffe466b9b0ebcbc87212cbe525284"
+  },
+  "copied_files": {
+    "RESULTS.csv": "2d0d9f375c30ed046c66036e38cede1783c819df6305e2b14ae4c8dc48610cc4",
+    "SUMMARY.json": "d13105ff6a3793ce4fe244440ee2e0359d9ffe466b9b0ebcbc87212cbe525284",
+    "COMPLETE.json": "48a4f3dfbf28a61797dc0901329567f37e0d8138d84b5fedfa04194fd4fefb85",
+    "OUTPUT_SEAL.json": "cf4b279bc415834daee9f71fa0a0549db66be095adc10688db77066a5c16d35d"
+  },
+  "full_details_local_only": {
+    "alias": "<TRUSTED_HEADING>/CANDIDATE_LIFECYCLE_PILOT_ATTEMPT01/DETAILS.jsonl.gz",
+    "sha256": "61c633b6d113be727569ca19d025ac61c2b8c6baeadff80ef73c85bd3aed6dad",
+    "bytes": 198868,
+    "force_added_to_git": false
+  },
+  "driver_files": {
+    "HANDLE.json": "1e5eb04c39b516ec99033f3326c1a5d7d31eed5beb24ed140e9dfc1adab56f0f",
+    "stdout.txt": "25bc23651f8df8e2fe3a125679ccb7356e42bdfb625800ddf1bb147416065e24",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "DRIVER_COMPLETE.json": "a7fe636a90d33d30da9a0b2799971fbb0f5e9a314abf0115adae33f91c384a12"
+  },
+  "scope_note": "docs contains small tables and receipts; input identity, execution plan, progress and gzip details remain sealed at scratch aliases; original seal not altered"
+}

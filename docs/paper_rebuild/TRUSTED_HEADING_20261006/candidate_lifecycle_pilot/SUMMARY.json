@@ -1,0 +1,44 @@
+{
+  "status": "COMPLETE_FIXED12_FIVE_SLOT_DIAGNOSTIC",
+  "registration_commit": "1b9fe64fd940f0f9b03ad53b0fef677d5e7a7d7c",
+  "expected_slots": 60,
+  "terminal_rows": 60,
+  "processed_slots": 60,
+  "source_windows": 12,
+  "nonempty_source_windows": 9,
+  "empty_source_windows": 3,
+  "source_candidates": 23,
+  "status_counts": {
+    "CURRENT_SET_MULTI": 22,
+    "CURRENT_SET_EMPTY": 3,
+    "CURRENT_SET_SINGLE": 20,
+    "EMPTY_SOURCE": 15
+  },
+  "quality_counts": {
+    "NUMERICAL_DIRECTION_DOMAIN_READY": 27,
+    "UNQUALIFIED_CURRENT_QUALITY": 15,
+    "NO_CURRENT_DIRECTION_DOMAIN": 18
+  },
+  "direction_domain_qualified_slots": 27,
+  "calls": {
+    "gls_limit": 115,
+    "glrt_limit": 115,
+    "fixed_integer_gls_calls": 115,
+    "single_fault_glrt_calls": 115,
+    "deadline_monotonic": 621.123473514
+  },
+  "integer_enumeration_calls": 0,
+  "LAMBDA_calls": 0,
+  "CILS_calls": 0,
+  "sphere_optimization_calls": 0,
+  "raw_UBX_reads": 0,
+  "reference_reads": 0,
+  "navigation_calls": 0,
+  "evaluator_calls": 0,
+  "retries": 0,
+  "total_processing_wall_s": 1.299972658999991,
+  "accepted_integer_measurement": false,
+  "all_global_current_alternatives_covered": false,
+  "false_fix_probability": null,
+  "scope": "conditional complete-source set; current raw domains and per-class diagnostic only; no cumulative statistical pruning"
+}
