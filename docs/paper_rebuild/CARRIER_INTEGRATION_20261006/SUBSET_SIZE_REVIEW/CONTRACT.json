@@ -1,0 +1,36 @@
+{
+  "execution_commit": "361620c5d1f220e8b595453cc3c4f66e2b99909e",
+  "trial": "<CARRIER_SCRATCH>/REAL_100_340_V2",
+  "plan_sha256": "4eeb5f4536d0ac20e1ed68247d123ef5798980b0bfc6bed723fc09b54563c82e",
+  "summary": "<CARRIER_SCRATCH>/FRONTEND_V2_PILOT/SUMMARY_0002.json",
+  "partial_source_sha256": "ef793762ec5964b187b9de49662b9646d8103f1f6224e1ea092af81a74465db0",
+  "script_sha256": "54ff7379cb3d9973cc34593b28efe0547a8968291b203801a490116388328cb0",
+  "sizes": [
+    4,
+    6,
+    8
+  ],
+  "base_policy": {
+    "selection_epochs": 5,
+    "min_ambiguities": 4,
+    "max_ambiguities": 8,
+    "epoch_interval_s": 0.2,
+    "time_tolerance_s": 0.01
+  },
+  "family": "GPS_GAL_BDS_DUAL",
+  "windows": 120,
+  "arrays_read": [
+    "A",
+    "B",
+    "Q"
+  ],
+  "y_accessed": false,
+  "synthetic_y_placeholder": true,
+  "source_reference_reads": 0,
+  "new_CILS_calls": 0,
+  "admission_calls": 0,
+  "navigation_calls": 0,
+  "conditional_covariance": "free baseline given hypothetical correct selected N; all code + covered phase rows; principal Q",
+  "future_support_is_integer_success": false,
+  "selection_uses_future": false
+}

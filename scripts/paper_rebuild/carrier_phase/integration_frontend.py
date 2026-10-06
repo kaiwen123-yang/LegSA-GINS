@@ -24,9 +24,10 @@ def selected_windows(plan,starts):
 def run(a):
     plan=json.loads((a.trial/"PLAN.json").read_text())
     a.output.mkdir(parents=True,exist_ok=True);cases_dir=a.output/"cases";cases_dir.mkdir(exist_ok=True)
+    policy=PartialPolicy(max_ambiguities=a.partial_max_ambiguities)
     sources=source_snapshot(a.code);sources[str(Path(__file__).relative_to(a.code))]=digest(__file__)
     identity={"model_plan_sha256":digest(a.trial/"PLAN.json"),"family":a.family,
-      "length_m":plan["baseline_length_m"],"partial_policy":serial(PartialPolicy()),
+      "length_m":plan["baseline_length_m"],"partial_policy":serial(policy),
       "nodes":a.nodes,"timeout_s":a.timeout,"alpha":.01,"angular_floor_deg":1.5,
       "source_files":sources,"data_mode":"real_by2_raw","trace_used_online":False}
     contract=a.output/"INPUT_CONTRACT.json"
@@ -53,7 +54,7 @@ def run(a):
                 if len(rows)!=10:raise ValueError("fixed window requires exactly ten real epochs")
                 selection=[load_model(a.trial,row,a.family) for row in rows[:5]]
                 if mode=="partial":
-                    search=prepare_partial_search(selection,length_m=plan["baseline_length_m"])
+                    search=prepare_partial_search(selection,length_m=plan["baseline_length_m"],policy=policy)
                     record["subset_selection"]=serial(search.selection)
                     if not search.selection.ready:
                         raise ValueError(search.selection.status)
@@ -129,6 +130,7 @@ def main():
     p.add_argument("--starts",type=float,nargs="+",required=True)
     p.add_argument("--modes",choices=("full","partial"),nargs="+",default=["full","partial"])
     p.add_argument("--family",default="GPS_GAL_BDS_DUAL")
+    p.add_argument("--partial-max-ambiguities",type=int,default=8)
     p.add_argument("--nodes",type=int,default=100000);p.add_argument("--timeout",type=float,default=30.)
     p.add_argument("--code",type=Path,default=Path(__file__).resolve().parents[3])
     a=p.parse_args()

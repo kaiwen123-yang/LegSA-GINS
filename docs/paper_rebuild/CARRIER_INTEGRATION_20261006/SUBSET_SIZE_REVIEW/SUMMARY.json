@@ -1,0 +1,176 @@
+{
+  "execution_commit": "361620c5d1f220e8b595453cc3c4f66e2b99909e",
+  "trial": "<CARRIER_SCRATCH>/REAL_100_340_V2",
+  "plan_sha256": "4eeb5f4536d0ac20e1ed68247d123ef5798980b0bfc6bed723fc09b54563c82e",
+  "summary": "<CARRIER_SCRATCH>/FRONTEND_V2_PILOT/SUMMARY_0002.json",
+  "partial_source_sha256": "ef793762ec5964b187b9de49662b9646d8103f1f6224e1ea092af81a74465db0",
+  "script_sha256": "54ff7379cb3d9973cc34593b28efe0547a8968291b203801a490116388328cb0",
+  "sizes": [
+    4,
+    6,
+    8
+  ],
+  "base_policy": {
+    "selection_epochs": 5,
+    "min_ambiguities": 4,
+    "max_ambiguities": 8,
+    "epoch_interval_s": 0.2,
+    "time_tolerance_s": 0.01
+  },
+  "family": "GPS_GAL_BDS_DUAL",
+  "windows": 120,
+  "arrays_read": [
+    "A",
+    "B",
+    "Q"
+  ],
+  "y_accessed": false,
+  "synthetic_y_placeholder": true,
+  "source_reference_reads": 0,
+  "new_CILS_calls": 0,
+  "admission_calls": 0,
+  "navigation_calls": 0,
+  "conditional_covariance": "free baseline given hypothetical correct selected N; all code + covered phase rows; principal Q",
+  "future_support_is_integer_success": false,
+  "selection_uses_future": false,
+  "max8_original_label_parity": 120,
+  "nested_subset_windows": 120,
+  "nested_conditional_covariance_order_checks": 1992,
+  "results": {
+    "4": {
+      "windows": 120,
+      "ready": 120,
+      "future_all_selected_labels": 79,
+      "future_all_phase_rank": 79,
+      "future_all_supported": 79,
+      "future_supported_slots": 475,
+      "selection_worst_sigma3d_m": {
+        "n": 120,
+        "median": 0.01715896519743735,
+        "p95": 0.030131769042715327,
+        "min": 0.012112983283746223,
+        "max": 0.034754291957736584
+      },
+      "selection_worst_sigma_max_axis_m": {
+        "n": 120,
+        "median": 0.014821889807299907,
+        "p95": 0.02619817155366252,
+        "min": 0.009660186657866872,
+        "max": 0.03354269410329431
+      },
+      "selection_matched_sigma3d_ratio_to8": {
+        "n": 600,
+        "median": 1.2589792407306901,
+        "p95": 1.4626779616242815,
+        "min": 1.0831469138247387,
+        "max": 1.7795326464603942
+      },
+      "selection_matched_max_axis_ratio_to8": {
+        "n": 600,
+        "median": 1.2455297979955877,
+        "p95": 1.534810550814835,
+        "min": 1.0336155142895995,
+        "max": 1.9392025219586604
+      },
+      "future_matched_sigma3d_ratio_to8": {
+        "n": 396,
+        "median": 1.2631285157692294,
+        "p95": 1.5039619419409724,
+        "min": 1.0966559991836995,
+        "max": 2.0129426730441202
+      },
+      "future_matched_max_axis_ratio_to8": {
+        "n": 396,
+        "median": 1.2390648757711196,
+        "p95": 1.549031938724558,
+        "min": 1.058758595530868,
+        "max": 2.2152821539584706
+      }
+    },
+    "6": {
+      "windows": 120,
+      "ready": 120,
+      "future_all_selected_labels": 67,
+      "future_all_phase_rank": 116,
+      "future_all_supported": 67,
+      "future_supported_slots": 431,
+      "selection_worst_sigma3d_m": {
+        "n": 120,
+        "median": 0.01467699153184994,
+        "p95": 0.025650156789711488,
+        "min": 0.010321712431662623,
+        "max": 0.030396633415252377
+      },
+      "selection_worst_sigma_max_axis_m": {
+        "n": 120,
+        "median": 0.012795226465120671,
+        "p95": 0.024143429584562493,
+        "min": 0.008661797365009771,
+        "max": 0.02947894501714813
+      },
+      "selection_matched_sigma3d_ratio_to8": {
+        "n": 600,
+        "median": 1.0877114357966646,
+        "p95": 1.161550855084126,
+        "min": 1.014775128980416,
+        "max": 1.2287569912233016
+      },
+      "selection_matched_max_axis_ratio_to8": {
+        "n": 600,
+        "median": 1.082037030626894,
+        "p95": 1.1877516677939193,
+        "min": 1.0002810026229032,
+        "max": 1.279972213976023
+      },
+      "future_matched_sigma3d_ratio_to8": {
+        "n": 396,
+        "median": 1.091327015208421,
+        "p95": 1.1865524962252847,
+        "min": 1.0217553928508873,
+        "max": 1.2400155832927375
+      },
+      "future_matched_max_axis_ratio_to8": {
+        "n": 396,
+        "median": 1.0864926536678086,
+        "p95": 1.2222680990156427,
+        "min": 1.0000575070068467,
+        "max": 1.2889908180892566
+      }
+    },
+    "8": {
+      "windows": 120,
+      "ready": 120,
+      "future_all_selected_labels": 57,
+      "future_all_phase_rank": 120,
+      "future_all_supported": 57,
+      "future_supported_slots": 396,
+      "selection_worst_sigma3d_m": {
+        "n": 120,
+        "median": 0.013599276408142045,
+        "p95": 0.023519840451922208,
+        "min": 0.009431048078223507,
+        "max": 0.027280192573558733
+      },
+      "selection_worst_sigma_max_axis_m": {
+        "n": 120,
+        "median": 0.011829656158903332,
+        "p95": 0.021683583559944025,
+        "min": 0.007838490991796714,
+        "max": 0.025394286924055792
+      }
+    }
+  },
+  "paired_window_support": {
+    "4_gain_over8": 22,
+    "4_loss_vs8": 0,
+    "6_gain_over8": 10,
+    "6_loss_vs8": 0,
+    "all_three_supported_windows": 57
+  },
+  "warnings": [
+    "future support is not integer correctness or admission success",
+    "geometry covariance is conditional on hypothetical true N and working Q; no integer/anchor/phase fault error budget",
+    "same recorded windows and nested subsets are paired; this is not independent statistical replication",
+    "all diagnostics retained; no new candidate search or best-output selection performed"
+  ]
+}

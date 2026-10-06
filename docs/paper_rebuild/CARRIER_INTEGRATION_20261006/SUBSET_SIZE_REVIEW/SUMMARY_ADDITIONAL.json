@@ -1,0 +1,53 @@
+{
+  "whole_window_common_support_windows": 57,
+  "whole_window_common_support_epochs": 285,
+  "whole_window_matched_geometry": {
+    "4": {
+      "epochs": 285,
+      "sigma3d_ratio_to8": {
+        "median": 1.2640262586887396,
+        "p95": 1.6017658454717267,
+        "min": 1.0966559991836995,
+        "max": 2.0129426730441202
+      },
+      "sigma_max_axis_ratio_to8": {
+        "median": 1.2419505400365616,
+        "p95": 1.7079280646164114,
+        "min": 1.058758595530868,
+        "max": 2.2152821539584706
+      }
+    },
+    "6": {
+      "epochs": 285,
+      "sigma3d_ratio_to8": {
+        "median": 1.0920002584039399,
+        "p95": 1.2015378179399379,
+        "min": 1.0217553928508873,
+        "max": 1.2400155832927375
+      },
+      "sigma_max_axis_ratio_to8": {
+        "median": 1.0906400654607695,
+        "p95": 1.235556753202622,
+        "min": 1.0000575070068467,
+        "max": 1.2889908180892566
+      }
+    }
+  },
+  "max8_support_failure_count": 63,
+  "max8_original_arc_status_count": 60,
+  "max8_fail_before_admission": [
+    {
+      "case": "partial_0318.00",
+      "original_status": "UNAVAILABLE:partial freeze requires the exact certified selected-class search"
+    },
+    {
+      "case": "partial_0330.00",
+      "original_status": "UNAVAILABLE:partial freeze requires the exact certified selected-class search"
+    },
+    {
+      "case": "partial_0336.00",
+      "original_status": "UNAVAILABLE:partial freeze requires the exact certified selected-class search"
+    }
+  ],
+  "new_algorithm_calls": 0
+}
