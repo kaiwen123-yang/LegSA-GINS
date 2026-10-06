@@ -1,0 +1,516 @@
+{
+  "status": "COMPLETE_READ_ONLY_PROVIDER_JOIN",
+  "script_sha256": "cede2eefcf9bb3a31a1beba1c3e2f3ecc40d769a492fa65e5c4dd7112cbfa0ce",
+  "decoder_script_sha256": "e5ccfd40c4021b49582029f1f4e44a751f1e524400ac574dee15ae398f1aaa52",
+  "R5_plan_sha256": "05c2c842ec84d27384c36230e85e6cfedb8b473d0da268aac1942de901a64fc7",
+  "ZIP_sha256": "a12c5f05e1c89739f3c5cf3ab89e07a0b1d0a17858f1b119862d314ea46e3e39",
+  "selected_members": 4,
+  "reference_reads": 0,
+  "native_navigation_calls": 0,
+  "evaluator_calls": 0,
+  "meaning": "Counts are existing GNSS18 provider admission flags inside recorded native start/end, not independently counted final EKF updates or accuracy evidence.",
+  "pins": [
+    {
+      "sequence": "NMB1",
+      "member": "vrtk2_a87c6e_2026-01-05-11-16-59_minimal/gnss1-raw.csv",
+      "member_sha256": "6a06882679158cd2d8e6f7fe8dca513676826409580ea41ad4981445d868cea2",
+      "GNSS18_path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB1/GNSS18.gnss",
+      "GNSS18_sha256": "769689878e3c6238f7e8da23aa6b0803a5393c72b43f0075e7accd6d3c247f78",
+      "native_window": [
+        40621.403808498384,
+        40972.56780471802
+      ],
+      "provider_rows": 1830,
+      "PVT_rows": 1830,
+      "missing_join": 0,
+      "join_time_tolerance_s": 0
+    },
+    {
+      "sequence": "NMB2",
+      "member": "vrtk2_a87c6e_2026-01-05-11-25-11_minimal/gnss1-raw.csv",
+      "member_sha256": "fcc9914a4b6aee924a8fd48fe6dfd511746fabbe00c86fc3559bfa6414eb8ebd",
+      "GNSS18_path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB2/GNSS18.gnss",
+      "GNSS18_sha256": "c3815ffd52682d57cc38772d507155b08c67073c7d8ddf409043d10fff3c6dc0",
+      "native_window": [
+        41112.80181040764,
+        41467.61380090714
+      ],
+      "provider_rows": 1806,
+      "PVT_rows": 1806,
+      "missing_join": 0,
+      "join_time_tolerance_s": 0
+    },
+    {
+      "sequence": "NMB3",
+      "member": "vrtk2_a87c6e_2026-01-05-11-32-27_minimal/gnss1-raw.csv",
+      "member_sha256": "ef92c0d0e32df282e5f0d457f545d42ef9fdf781379266908fa4da182c39f0c5",
+      "GNSS18_path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB3/GNSS18.gnss",
+      "GNSS18_sha256": "70844ca9a61b6d5b678200320039bc9d4e9dececaeb8502ec90846f21f62765d",
+      "native_window": [
+        41569.003810548784,
+        41929.74181237221
+      ],
+      "provider_rows": 1916,
+      "PVT_rows": 1916,
+      "missing_join": 0,
+      "join_time_tolerance_s": 0
+    },
+    {
+      "sequence": "NMB4",
+      "member": "vrtk2_a87c6e_2026-01-05-11-39-50_minimal/gnss1-raw.csv",
+      "member_sha256": "a2ee231afcd6ed8f23c3e4efdc129d0267a2b31dfabde195c75537c3a39f1c5e",
+      "GNSS18_path": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03/INPUTS/NMB4/GNSS18.gnss",
+      "GNSS18_sha256": "87612eda444c59f6aba03da59a619423991b3bb4a6ac7047292cfb94005d8a5f",
+      "native_window": [
+        41996.00179710388,
+        42338.60179510117
+      ],
+      "provider_rows": 1780,
+      "PVT_rows": 1780,
+      "missing_join": 0,
+      "join_time_tolerance_s": 0
+    }
+  ],
+  "rows": [
+    {
+      "sequence": "NMB1",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "FIX",
+      "epochs": 803,
+      "position_valid": 803,
+      "receiver_velocity_valid": 803,
+      "yaw_valid": 771,
+      "first_time_utc_day_s": 40621.40018296242,
+      "last_time_utc_day_s": 40987.200197935104
+    },
+    {
+      "sequence": "NMB1",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "FLOAT",
+      "epochs": 171,
+      "position_valid": 171,
+      "receiver_velocity_valid": 171,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 40722.80018758774,
+      "last_time_utc_day_s": 40928.00019645691
+    },
+    {
+      "sequence": "NMB1",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "OTHER_VALID",
+      "epochs": 42,
+      "position_valid": 42,
+      "receiver_velocity_valid": 42,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 40730.60018801689,
+      "last_time_utc_day_s": 40917.00019621849
+    },
+    {
+      "sequence": "NMB1",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "INVALID",
+      "epochs": 814,
+      "position_valid": 0,
+      "receiver_velocity_valid": 0,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 40749.80018877983,
+      "last_time_utc_day_s": 40912.40019631386
+    },
+    {
+      "sequence": "NMB1",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "RESERVED",
+      "epochs": 0,
+      "position_valid": 0,
+      "receiver_velocity_valid": 0,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": null,
+      "last_time_utc_day_s": null
+    },
+    {
+      "sequence": "NMB1",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "FIX",
+      "epochs": 728,
+      "position_valid": 728,
+      "receiver_velocity_valid": 728,
+      "yaw_valid": 696,
+      "first_time_utc_day_s": 40621.6001830101,
+      "last_time_utc_day_s": 40972.40019750595
+    },
+    {
+      "sequence": "NMB1",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "FLOAT",
+      "epochs": 171,
+      "position_valid": 171,
+      "receiver_velocity_valid": 171,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 40722.80018758774,
+      "last_time_utc_day_s": 40928.00019645691
+    },
+    {
+      "sequence": "NMB1",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "OTHER_VALID",
+      "epochs": 42,
+      "position_valid": 42,
+      "receiver_velocity_valid": 42,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 40730.60018801689,
+      "last_time_utc_day_s": 40917.00019621849
+    },
+    {
+      "sequence": "NMB1",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "INVALID",
+      "epochs": 814,
+      "position_valid": 0,
+      "receiver_velocity_valid": 0,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 40749.80018877983,
+      "last_time_utc_day_s": 40912.40019631386
+    },
+    {
+      "sequence": "NMB1",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "RESERVED",
+      "epochs": 0,
+      "position_valid": 0,
+      "receiver_velocity_valid": 0,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": null,
+      "last_time_utc_day_s": null
+    },
+    {
+      "sequence": "NMB2",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "FIX",
+      "epochs": 760,
+      "position_valid": 760,
+      "receiver_velocity_valid": 760,
+      "yaw_valid": 750,
+      "first_time_utc_day_s": 41112.800201654434,
+      "last_time_utc_day_s": 41473.800213098526
+    },
+    {
+      "sequence": "NMB2",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "FLOAT",
+      "epochs": 182,
+      "position_valid": 182,
+      "receiver_velocity_valid": 182,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 41208.800204992294,
+      "last_time_utc_day_s": 41420.4002122879
+    },
+    {
+      "sequence": "NMB2",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "OTHER_VALID",
+      "epochs": 39,
+      "position_valid": 39,
+      "receiver_velocity_valid": 39,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 41222.80020546913,
+      "last_time_utc_day_s": 41409.400211811066
+    },
+    {
+      "sequence": "NMB2",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "INVALID",
+      "epochs": 825,
+      "position_valid": 0,
+      "receiver_velocity_valid": 0,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 41242.200206041336,
+      "last_time_utc_day_s": 41407.00021100044
+    },
+    {
+      "sequence": "NMB2",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "RESERVED",
+      "epochs": 0,
+      "position_valid": 0,
+      "receiver_velocity_valid": 0,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": null,
+      "last_time_utc_day_s": null
+    },
+    {
+      "sequence": "NMB2",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "FIX",
+      "epochs": 728,
+      "position_valid": 728,
+      "receiver_velocity_valid": 728,
+      "yaw_valid": 718,
+      "first_time_utc_day_s": 41113.00020170212,
+      "last_time_utc_day_s": 41467.60021305084
+    },
+    {
+      "sequence": "NMB2",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "FLOAT",
+      "epochs": 182,
+      "position_valid": 182,
+      "receiver_velocity_valid": 182,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 41208.800204992294,
+      "last_time_utc_day_s": 41420.4002122879
+    },
+    {
+      "sequence": "NMB2",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "OTHER_VALID",
+      "epochs": 39,
+      "position_valid": 39,
+      "receiver_velocity_valid": 39,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 41222.80020546913,
+      "last_time_utc_day_s": 41409.400211811066
+    },
+    {
+      "sequence": "NMB2",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "INVALID",
+      "epochs": 825,
+      "position_valid": 0,
+      "receiver_velocity_valid": 0,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 41242.200206041336,
+      "last_time_utc_day_s": 41407.00021100044
+    },
+    {
+      "sequence": "NMB2",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "RESERVED",
+      "epochs": 0,
+      "position_valid": 0,
+      "receiver_velocity_valid": 0,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": null,
+      "last_time_utc_day_s": null
+    },
+    {
+      "sequence": "NMB3",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "FIX",
+      "epochs": 915,
+      "position_valid": 915,
+      "receiver_velocity_valid": 915,
+      "yaw_valid": 904,
+      "first_time_utc_day_s": 41548.80021452904,
+      "last_time_utc_day_s": 41931.800221443176
+    },
+    {
+      "sequence": "NMB3",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "FLOAT",
+      "epochs": 130,
+      "position_valid": 130,
+      "receiver_velocity_valid": 130,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 41676.60021734238,
+      "last_time_utc_day_s": 41877.00022125244
+    },
+    {
+      "sequence": "NMB3",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "OTHER_VALID",
+      "epochs": 45,
+      "position_valid": 45,
+      "receiver_velocity_valid": 45,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 41683.40021729469,
+      "last_time_utc_day_s": 41872.00022101402
+    },
+    {
+      "sequence": "NMB3",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "INVALID",
+      "epochs": 826,
+      "position_valid": 0,
+      "receiver_velocity_valid": 0,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 41700.20021772385,
+      "last_time_utc_day_s": 41865.20022082329
+    },
+    {
+      "sequence": "NMB3",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "RESERVED",
+      "epochs": 0,
+      "position_valid": 0,
+      "receiver_velocity_valid": 0,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": null,
+      "last_time_utc_day_s": null
+    },
+    {
+      "sequence": "NMB3",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "FIX",
+      "epochs": 802,
+      "position_valid": 802,
+      "receiver_velocity_valid": 802,
+      "yaw_valid": 791,
+      "first_time_utc_day_s": 41569.20021486282,
+      "last_time_utc_day_s": 41929.60022139549
+    },
+    {
+      "sequence": "NMB3",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "FLOAT",
+      "epochs": 130,
+      "position_valid": 130,
+      "receiver_velocity_valid": 130,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 41676.60021734238,
+      "last_time_utc_day_s": 41877.00022125244
+    },
+    {
+      "sequence": "NMB3",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "OTHER_VALID",
+      "epochs": 45,
+      "position_valid": 45,
+      "receiver_velocity_valid": 45,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 41683.40021729469,
+      "last_time_utc_day_s": 41872.00022101402
+    },
+    {
+      "sequence": "NMB3",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "INVALID",
+      "epochs": 826,
+      "position_valid": 0,
+      "receiver_velocity_valid": 0,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 41700.20021772385,
+      "last_time_utc_day_s": 41865.20022082329
+    },
+    {
+      "sequence": "NMB3",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "RESERVED",
+      "epochs": 0,
+      "position_valid": 0,
+      "receiver_velocity_valid": 0,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": null,
+      "last_time_utc_day_s": null
+    },
+    {
+      "sequence": "NMB4",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "FIX",
+      "epochs": 724,
+      "position_valid": 724,
+      "receiver_velocity_valid": 724,
+      "yaw_valid": 697,
+      "first_time_utc_day_s": 41991.20022177696,
+      "last_time_utc_day_s": 42347.00022649765
+    },
+    {
+      "sequence": "NMB4",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "FLOAT",
+      "epochs": 153,
+      "position_valid": 153,
+      "receiver_velocity_valid": 153,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 42080.80022263527,
+      "last_time_utc_day_s": 42291.80022644997
+    },
+    {
+      "sequence": "NMB4",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "OTHER_VALID",
+      "epochs": 41,
+      "position_valid": 41,
+      "receiver_velocity_valid": 41,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 42093.600222826004,
+      "last_time_utc_day_s": 42282.80022621155
+    },
+    {
+      "sequence": "NMB4",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "INVALID",
+      "epochs": 862,
+      "position_valid": 0,
+      "receiver_velocity_valid": 0,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 42109.200223207474,
+      "last_time_utc_day_s": 42281.400226831436
+    },
+    {
+      "sequence": "NMB4",
+      "domain": "FULL_GNSS18",
+      "gnss1_state": "RESERVED",
+      "epochs": 0,
+      "position_valid": 0,
+      "receiver_velocity_valid": 0,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": null,
+      "last_time_utc_day_s": null
+    },
+    {
+      "sequence": "NMB4",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "FIX",
+      "epochs": 657,
+      "position_valid": 657,
+      "receiver_velocity_valid": 657,
+      "yaw_valid": 630,
+      "first_time_utc_day_s": 41996.20022177696,
+      "last_time_utc_day_s": 42338.6002266407
+    },
+    {
+      "sequence": "NMB4",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "FLOAT",
+      "epochs": 153,
+      "position_valid": 153,
+      "receiver_velocity_valid": 153,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 42080.80022263527,
+      "last_time_utc_day_s": 42291.80022644997
+    },
+    {
+      "sequence": "NMB4",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "OTHER_VALID",
+      "epochs": 41,
+      "position_valid": 41,
+      "receiver_velocity_valid": 41,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 42093.600222826004,
+      "last_time_utc_day_s": 42282.80022621155
+    },
+    {
+      "sequence": "NMB4",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "INVALID",
+      "epochs": 862,
+      "position_valid": 0,
+      "receiver_velocity_valid": 0,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": 42109.200223207474,
+      "last_time_utc_day_s": 42281.400226831436
+    },
+    {
+      "sequence": "NMB4",
+      "domain": "NATIVE_WINDOW",
+      "gnss1_state": "RESERVED",
+      "epochs": 0,
+      "position_valid": 0,
+      "receiver_velocity_valid": 0,
+      "yaw_valid": 0,
+      "first_time_utc_day_s": null,
+      "last_time_utc_day_s": null
+    }
+  ]
+}
