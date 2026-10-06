@@ -24,7 +24,7 @@
     {
       "sequence": "BY2",
       "receiver": 1,
-      "source": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv",
+      "source": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv",
       "source_sha256": "5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027",
       "old_full_ubx": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss1.ubx",
       "old_full_obs": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss1.obs",
@@ -34,12 +34,26 @@
       "window": [
         66,
         340
-      ]
+      ],
+      "old_full_ubx_sha256": "24177f2d6f25c0b614f769e66c4e4147eea727f3a7f55e22d5e04419eaa10f8b",
+      "old_full_ubx_sha256_provenance": {
+        "kind": "historical_seal_reuse",
+        "seal": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/OUTPUT_HASHES.json",
+        "seal_sha256": "5424858a7db98a87d16676d044e6b0a91308b06f1693b1847c4bf364a9eaf215",
+        "entry": "files/native/SOURCE_BACKEND/gnss1.ubx"
+      },
+      "old_clipped_ubx_sha256": "8a67b183b430907b1c9a50a9f6c77dffd072831d955b98e9cf536bbbcbde5dd0",
+      "old_clipped_ubx_sha256_provenance": {
+        "kind": "historical_seal_reuse",
+        "seal": "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/OUTPUT_SHA256.json",
+        "seal_sha256": "f12911e1d3fcfce9256b755e45b3b8cc0e2acc103aadc9921395021512963f6b",
+        "entry": "UBX/BY2_R1.ubx"
+      }
     },
     {
       "sequence": "BY2",
       "receiver": 2,
-      "source": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss2-raw.csv",
+      "source": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss2-raw.csv",
       "source_sha256": "39249696329530452a1049b5b39e2c1d8f7e89ae2190d2c95bce70f5b4f44583",
       "old_full_ubx": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss2.ubx",
       "old_full_obs": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss2.obs",
@@ -49,12 +63,26 @@
       "window": [
         66,
         340
-      ]
+      ],
+      "old_full_ubx_sha256": "0876d7e67441ddfce66b4ce8e39838b4245bddab3d6d3cce60d5eb9bad42c2c2",
+      "old_full_ubx_sha256_provenance": {
+        "kind": "historical_seal_reuse",
+        "seal": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/OUTPUT_HASHES.json",
+        "seal_sha256": "5424858a7db98a87d16676d044e6b0a91308b06f1693b1847c4bf364a9eaf215",
+        "entry": "files/native/SOURCE_BACKEND/gnss2.ubx"
+      },
+      "old_clipped_ubx_sha256": "e750bb8c17fd1242221e7d3e6717a6f1579c06ce182fadeb59824ad10d50bc07",
+      "old_clipped_ubx_sha256_provenance": {
+        "kind": "historical_seal_reuse",
+        "seal": "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/OUTPUT_SHA256.json",
+        "seal_sha256": "f12911e1d3fcfce9256b755e45b3b8cc0e2acc103aadc9921395021512963f6b",
+        "entry": "UBX/BY2_R2.ubx"
+      }
     },
     {
       "sequence": "BY2H",
       "receiver": 1,
-      "source": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss1-raw.csv",
+      "source": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss1-raw.csv",
       "source_sha256": "b6e0e3108b0902350eb7655fe1a2db23a8f320136ddc6c54bcd7e5dbe2d17508",
       "old_full_ubx": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/SOURCE_BACKEND/gnss1.ubx",
       "old_full_obs": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/SOURCE_BACKEND/gnss1.obs",
@@ -64,12 +92,26 @@
       "window": [
         413,
         683
-      ]
+      ],
+      "old_full_ubx_sha256": "7287a2745d893c0c3a05981aefc65973b0080a7dd81ae0c3f0b1e90a9aaa7b99",
+      "old_full_ubx_sha256_provenance": {
+        "kind": "historical_seal_reuse",
+        "seal": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/OUTPUT_HASHES.json",
+        "seal_sha256": "3c192e8519d68ce94d9ccbc0c4eac4d1e6b350d208f9ee9ea159df10c4c3dd8e",
+        "entry": "files/native/SOURCE_BACKEND/gnss1.ubx"
+      },
+      "old_clipped_ubx_sha256": "1a19354c63ab4f1ce7ecbac7642d2125fa3c2c1b288edead076f15a6ad492442",
+      "old_clipped_ubx_sha256_provenance": {
+        "kind": "historical_seal_reuse",
+        "seal": "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/OUTPUT_SHA256.json",
+        "seal_sha256": "f12911e1d3fcfce9256b755e45b3b8cc0e2acc103aadc9921395021512963f6b",
+        "entry": "UBX/BY2H_R1.ubx"
+      }
     },
     {
       "sequence": "BY2H",
       "receiver": 2,
-      "source": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss2-raw.csv",
+      "source": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss2-raw.csv",
       "source_sha256": "87e4056c85b58595792578a62aeceb1b594475d654e4e49eb7fccaf5bfff56aa",
       "old_full_ubx": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/SOURCE_BACKEND/gnss2.ubx",
       "old_full_obs": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/SOURCE_BACKEND/gnss2.obs",
@@ -79,12 +121,26 @@
       "window": [
         413,
         683
-      ]
+      ],
+      "old_full_ubx_sha256": "62a615500cede304abf9eb9146432ea860bd6d56e94b20e40d22cefce17987fd",
+      "old_full_ubx_sha256_provenance": {
+        "kind": "historical_seal_reuse",
+        "seal": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/OUTPUT_HASHES.json",
+        "seal_sha256": "3c192e8519d68ce94d9ccbc0c4eac4d1e6b350d208f9ee9ea159df10c4c3dd8e",
+        "entry": "files/native/SOURCE_BACKEND/gnss2.ubx"
+      },
+      "old_clipped_ubx_sha256": "023d3dba102a7e439695458a42be1d3a495a4efec8db5b3d0d4c0d718d57084c",
+      "old_clipped_ubx_sha256_provenance": {
+        "kind": "historical_seal_reuse",
+        "seal": "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/OUTPUT_SHA256.json",
+        "seal_sha256": "f12911e1d3fcfce9256b755e45b3b8cc0e2acc103aadc9921395021512963f6b",
+        "entry": "UBX/BY2H_R2.ubx"
+      }
     },
     {
       "sequence": "BY2O",
       "receiver": 1,
-      "source": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss1-raw.csv",
+      "source": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss1-raw.csv",
       "source_sha256": "6035d50419eaa0ff29d9a4b053dbed5d715fd2bec38f44ad4b4be02ca54a4ba9",
       "old_full_ubx": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/SOURCE_BACKEND/gnss1.ubx",
       "old_full_obs": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/SOURCE_BACKEND/gnss1.obs",
@@ -94,12 +150,26 @@
       "window": [
         3186,
         3563
-      ]
+      ],
+      "old_full_ubx_sha256": "649d47b553c2d3b5b7cec627b2aeb5ee179346dbb40364f50d5003d02507ac30",
+      "old_full_ubx_sha256_provenance": {
+        "kind": "historical_seal_reuse",
+        "seal": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/OUTPUT_HASHES.json",
+        "seal_sha256": "5400abbc40ca00e47c65eef49b60dcbcd31b292f9fc8a70c174c39d1648442d5",
+        "entry": "files/native/SOURCE_BACKEND/gnss1.ubx"
+      },
+      "old_clipped_ubx_sha256": "b64d76693d8fe097b898ed7c2add0f16e8abf8fa740296939034df5f93d40fd4",
+      "old_clipped_ubx_sha256_provenance": {
+        "kind": "historical_seal_reuse",
+        "seal": "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/OUTPUT_SHA256.json",
+        "seal_sha256": "f12911e1d3fcfce9256b755e45b3b8cc0e2acc103aadc9921395021512963f6b",
+        "entry": "UBX/BY2O_R1.ubx"
+      }
     },
     {
       "sequence": "BY2O",
       "receiver": 2,
-      "source": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss2-raw.csv",
+      "source": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss2-raw.csv",
       "source_sha256": "4f18ec7d618c675238d5c40a868ba01802a9d2da9325877d715f75f2f939119f",
       "old_full_ubx": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/SOURCE_BACKEND/gnss2.ubx",
       "old_full_obs": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/SOURCE_BACKEND/gnss2.obs",
@@ -109,7 +179,48 @@
       "window": [
         3186,
         3563
-      ]
+      ],
+      "old_full_ubx_sha256": "d24ea622e999ab782d8ee17cc84faa21919f4e3a24f3563a98cad828a9f44c66",
+      "old_full_ubx_sha256_provenance": {
+        "kind": "historical_seal_reuse",
+        "seal": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/OUTPUT_HASHES.json",
+        "seal_sha256": "5400abbc40ca00e47c65eef49b60dcbcd31b292f9fc8a70c174c39d1648442d5",
+        "entry": "files/native/SOURCE_BACKEND/gnss2.ubx"
+      },
+      "old_clipped_ubx_sha256": "6a0690243d9459fa547529766a5239a9a3bab663aa97364874bd5cc53b946af0",
+      "old_clipped_ubx_sha256_provenance": {
+        "kind": "historical_seal_reuse",
+        "seal": "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/OUTPUT_SHA256.json",
+        "seal_sha256": "f12911e1d3fcfce9256b755e45b3b8cc0e2acc103aadc9921395021512963f6b",
+        "entry": "UBX/BY2O_R2.ubx"
+      }
     }
-  ]
+  ],
+  "old_lli_table_sha256": "3efef3c8a05b656d4ff6b5662f3d4d36780b305c861df6428e97c24e0b8f0b56",
+  "old_lli_table_sha256_provenance": {
+    "kind": "historical_seal_reuse",
+    "seal": "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/OUTPUT_SHA256.json",
+    "seal_sha256": "f12911e1d3fcfce9256b755e45b3b8cc0e2acc103aadc9921395021512963f6b",
+    "entry": "DG01R_LLI_DIFFERENCES.csv"
+  },
+  "old_input_pin_policy": {
+    "newly_bound_inputs": 13,
+    "historical_seal_reused": 13,
+    "current_targeted_hash_fallback": 0,
+    "runtime": "Record actual SHA256, expected SHA256 and identity_equal before asserting each input; preserve failures.",
+    "seal_provenance": "Pins copied from the named historical manifests; source manifests are provenance, not additional scientific inputs.",
+    "lli_table_copy": "Tracked LLI table SHA matched historical DG01R output seal during preparation."
+  },
+  "comparison_contract": {
+    "observables": "Union of all parsed observation fields, including C/L/D/S and carrier LLI/SSI; missing fields count as differences.",
+    "science_equal": "epochs_equal AND zero observable differences AND header_semantics_equal AND science_records_byte_identical",
+    "header_semantics": [
+      "per-system ordered SYS / # / OBS TYPES",
+      "declared TIME OF FIRST/LAST OBS time system; missing remains null",
+      "RINEX version/type and observation interpretation records"
+    ],
+    "old_15_events": "Report both full-history equality and old_full_table_consistent; GPS declaration required for the registered +18 s inverse mapping.",
+    "completion": "COMPLETE means all six comparisons executed; execution_complete is not a scientific PASS.",
+    "failed_execution": "A pin mismatch or execution failure leaves status FAILED, actual input identity and completed results in STATE; no retry."
+  }
 }
