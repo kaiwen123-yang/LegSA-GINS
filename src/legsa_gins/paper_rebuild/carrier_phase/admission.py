@@ -20,7 +20,7 @@ from typing import Mapping
 import numpy as np
 from scipy.stats import chi2
 from ..horizontal_literature.ext01_clambda import constrained_baseline
-from .temporal import EpochBlock,TemporalModelError
+from .temporal import EpochBlock,TemporalModelError,model_fingerprint
 
 @dataclass(frozen=True)
 class FrozenCandidate:
@@ -110,6 +110,7 @@ class AdmissionEpoch:
     primary: CandidateEpochFit|None
     competitor: CandidateEpochFit|None
     reason: str|None
+    model_fingerprint: str=""
 
 @dataclass(frozen=True)
 class CandidateGate:
@@ -152,6 +153,7 @@ class AdmissionDecision:
     false_fix_probability: None=None
     accepted_integer_measurement: bool=False
     all_integer_alternatives_tested: bool=False
+    registered_length_m: float|None=None
 
 class CausalAdmissionSession:
     """Freeze two candidates and consume a fixed future horizon exactly once.
@@ -230,7 +232,8 @@ class CausalAdmissionSession:
             except (TemporalModelError,np.linalg.LinAlgError,ValueError) as exc:
                 reason=reason or "UNRESOLVED_GEOMETRY_OR_MODEL: "+str(exc)
                 pf=cf=None
-        record=AdmissionEpoch(t,nearest,rows,tuple(map(int,np.flatnonzero(withheld))),validated,unknown,pf,cf,reason)
+        record=AdmissionEpoch(t,nearest,rows,tuple(map(int,np.flatnonzero(withheld))),validated,unknown,pf,cf,reason,
+                              model_fingerprint(block))
         self._records[nearest]=record
         return record
 
@@ -286,4 +289,4 @@ class CausalAdmissionSession:
              "epochs and validation versus selection noise are independent",
              "geometry and fixed length are correct","the registered fixed future horizon is used once",
              "only the registered competitor is tested; no full integer posterior mass"),
-            None,False,False)
+            None,False,False,registered_length_m=float(self._config.length_m))

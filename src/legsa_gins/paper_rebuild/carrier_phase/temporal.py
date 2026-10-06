@@ -2,6 +2,8 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Sequence
+import hashlib
+import json
 import numpy as np
 
 class TemporalModelError(ValueError):
@@ -18,6 +20,35 @@ def positive_definite(value, name):
     try:np.linalg.cholesky(q)
     except np.linalg.LinAlgError as ex:raise TemporalModelError(f"{name}: covariance is not positive definite") from ex
     return q
+
+def model_fingerprint(model) -> str:
+    """Canonical identity of the numeric epoch used by an admission decision.
+
+    Float64 little-endian C-order bytes bind time, y, A, B, Q and ordered labels.
+    Only baseline_frame is included from metadata: comments and report paths
+    are not part of the scientific input. This binds an actual computed gate to
+    its measurement input; it does not prove raw lineage or physical validity.
+    """
+    labels = tuple(model.ambiguity_labels)
+    frame = model.metadata.get("baseline_frame")
+    t = float(model.time_s)
+    if (not np.isfinite(t) or len(set(labels)) != len(labels)
+            or any(not isinstance(s, str) or not s for s in labels)
+            or (frame is not None and not isinstance(frame, str))):
+        raise TemporalModelError("invalid canonical model identity")
+    digest = hashlib.sha256()
+    header = {"schema": "carrier_epoch_numeric_v1", "time_s": t.hex(),
+              "ambiguity_labels": labels, "baseline_frame": frame}
+    digest.update(json.dumps(header, sort_keys=True, ensure_ascii=True,
+                             separators=(",", ":")).encode("ascii"))
+    for name in ("y", "A", "B", "Q"):
+        value = np.asarray(getattr(model, name), dtype="<f8", order="C")
+        if not np.isfinite(value).all():
+            raise TemporalModelError("nonfinite canonical model array: "+name)
+        digest.update(json.dumps((name, value.shape), separators=(",", ":")).encode("ascii"))
+        digest.update(value.tobytes(order="C"))
+    return digest.hexdigest()
+
 
 @dataclass(frozen=True)
 class EpochBlock:
