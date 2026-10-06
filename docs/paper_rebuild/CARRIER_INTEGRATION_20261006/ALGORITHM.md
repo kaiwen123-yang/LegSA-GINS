@@ -14,7 +14,8 @@ decision under the working noise model, not known physical FIX truth.
    constellation/frequency groups. Propagate the shared-pivot covariance and
    retain arc identities. Build geometry at the current raw-code anchor.
 3. At five selection epochs, choose either every current integer or a stable
-   subset with phase rank three, at least four ambiguities and at most eight.
+   subset with phase rank three, at least four ambiguities and a registered upper cap (default eight; the
+   six-cap development trial changes only this limit).
    The partial rule sees geometry/covariance/selection arc continuity only.
 4. Solve the original full-dimensional integer problem with a fixed-length
    baseline at every selection epoch. Unselected and historical integers remain
@@ -117,6 +118,26 @@ horizontal position. The control arms and all-invalid full-carrier arm have
 byte-identical NAV/STD to V2; only the partial tracking stream changes.
 Six tracks end at four phase-diagnostic failures and two arc changes. These are
 six acquisition sources, not 24 independent correct integer fixes.
+
+The preregistered six-cap trial performs 120 new searches with unchanged
+acceptance thresholds. It admits 16 initial candidates; 15 start tracks and one
+is suppressed by the incumbent. Tracking exports 70 measurements and native
+navigation accepts 68. Full-span yaw RMSE is 1.994934 degrees, H 0.099993 m and
+V 0.048782 m. Compared with eight-cap tracking this improves the RMSE point
+estimates, but maximum absolute yaw error rises from 6.520854 to 7.258837
+degrees. The longest interval without an accepted carrier update remains
+45.998 seconds. This remains worse than the PVT-vector control in yaw and H.
+All three controls are NAV/STD byte-identical, and all 16 version/arm outputs
+share 56,642 evaluation time keys. See PARTIAL6_NAVIGATION_READOUT.md and the
+record of the controller-only nominal-end/last-IMU-time correction.
+
+Recorded search latency is a material unresolved limitation. On eight-cap
+tracking only 7/24 exported measurements satisfy even the necessary condition
+measurement_time >= selected_at + recorded CILS elapsed time. For six-cap
+tracking it is 14/70. These counts assume immediate starts and zero queue or
+other processing costs; they do not establish that these outputs are actually
+schedulable. Earlier navigation RMSEs remain explicitly data-time offline
+results, not latency-corrected real-time results.
 
 Rolling windows overlap and surviving tracks are selected by earlier tests.
 There is no lifetime false-fix or false-alarm guarantee. Persistent phase
