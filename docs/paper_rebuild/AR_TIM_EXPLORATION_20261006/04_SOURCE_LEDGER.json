@@ -1,0 +1,36 @@
+{
+  "schema": "measurement_source_ledger.v1",
+  "review_scope": "Source provenance plus independent synthetic formula checks, no real raw/reference/native/evaluator execution",
+  "source_pins": {
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp": "e7f13769d1475b434d6550fe9b6fb42b00adab857c4f03207479be558bc6daef",
+    "cpp/legsa_v23_port_core/src/fileio/gnss_file_loader.cpp": "6132f390d2a9fd1a298bc6b3c7a1a3080fdbbe2a2cb1f5a0313fef0d0e6e5726",
+    "src/legsa_gins/paper_rebuild/final_v23_clean_input.py": "e1b67d4e72a4c2bf12de3d309c310e8e37a25058bead6581c5094152f493e2ef",
+    "src/legsa_gins/paper_rebuild/providers.py": "8a6852f84f3fc0fe6a22c44e57b05828f3ff191eb8f9dabf8055a77e239dfcd1",
+    "src/legsa_gins/paper_rebuild/clean5_parity/providers.py": "9d8959617c76ac94ed329c88a76477fd58645f48028c51c2505018f72b7567fd",
+    "src/legsa_gins/paper_rebuild/clean6_sensor_v21/providers.py": "86002aba39c524887264d7b65a707bc1824dc5c0d266ead3cfd45acb25c87a4d",
+    "docs/paper_rebuild/TIM_EVIDENCE_20261005/sdk_and_metrology/INPUT_UNCERTAINTY_BUDGET.csv": "edbe5e3aa6db536ef5651721b5e6ee8dd62c8605ae8bcad41be8e08585e1d0bc",
+    "docs/paper_rebuild/TIM_EVIDENCE_20261005/sdk_and_metrology/MINIMAL_VALIDATION_PROTOCOL.md": "9d46d6a38024544f2dd4c6fdc41f3bcace9dd4a99f776e29a251012f13474958",
+    "src/legsa_gins/paper_rebuild/protocol_v3/providers.py": "e352c6106a4623d39615c71d669d94b9593efe26609dea7822b641986dd77df4",
+    "src/legsa_gins/paper_rebuild/hext/t5a_provider.py": "386c20d8f9f89488aa59d01e945128a1227b3e2adf7c5b0ccbff10a80a20b025",
+    "src/legsa_gins/input_generation/status_yaw_builder.py": "4435dd71593b1447152986ab91e2fe0394177470791a4c09815a851b75504193",
+    "src/legsa_gins/paper_rebuild/clean5_sequence/provider_chain.py": "9bc3af9c427963517252216208cfa15d12a217e2bae92ab97b509dc80637f1dc",
+    "docs/paper_rebuild/EXISTING_DATA_R5_20261005/new_data/run_new_sequences.py": "cda70fec6c3829f7e3daca7cbfabbc7f4fb57c3b3c236da698b0de10495e287f"
+  },
+  "deliverables": {
+    "docs/paper_rebuild/AR_TIM_EXPLORATION_20261006/04_MEASUREMENT_AND_VALIDATION.md": "e59138e5efa9ca739836a9e47894c0f08aaf799a9c6e87ea30fe9ab69056ff8a",
+    "scripts/paper_rebuild/ar_tim_exploration_20261006/measurement_validation.py": "2084e5f1110ac90e1df93395be0abbc6972b4d1702698c3af158d52447b56b3c",
+    "docs/paper_rebuild/AR_TIM_EXPLORATION_20261006/measurement_validation/ANGLE_TARGET_BUDGET.csv": "b612962c917df910ecf119b68a7cdc7a13b2250e6be25feea415dc09903ce059",
+    "docs/paper_rebuild/AR_TIM_EXPLORATION_20261006/measurement_validation/GAUSSIAN_PROPAGATION.csv": "81555ab394f3739ac83fac0cb1ee9c4e77f264fc21b17dc96d21f32bd9fbe48e",
+    "docs/paper_rebuild/AR_TIM_EXPLORATION_20261006/measurement_validation/JACOBIAN_CHECKS.csv": "12422fe3451980e7a331394f283c2ffd851c0714fa6027ec354b82f6cfc36d2d",
+    "docs/paper_rebuild/AR_TIM_EXPLORATION_20261006/measurement_validation/PARAMETERS.json": "16006c2f1a63147181ab35cdf086de064fddcc8af935b2934a7124187ed5bd1a",
+    "docs/paper_rebuild/AR_TIM_EXPLORATION_20261006/measurement_validation/TILT_MODEL.csv": "43b5c32d7884181e2bc512e418a4b9888095b374b8b612cfbfe52ae34c0f2021",
+    "docs/paper_rebuild/AR_TIM_EXPLORATION_20261006/measurement_validation/TIMING_SENSITIVITY.csv": "f15f9ffc74a88409d8864da3b83303f1cd296fc3fe466e20aa252af94132a6c8",
+    "docs/paper_rebuild/AR_TIM_EXPLORATION_20261006/measurement_validation/VALIDATION_MANIFEST.json": "9ae920aeeafb8478e4781563ecaaa82e655fdf7a034bbc4b77b3d3e90d5f41ec",
+    "docs/paper_rebuild/AR_TIM_EXPLORATION_20261006/measurement_validation/WRONG_FIX_MIXTURE.json": "b047ba3c38c48a3bf06dc9561ff258dda4d4e150981e8c77a0a7228bdb260dfa"
+  },
+  "web_sources": [
+    "https://www.iso.org/sites/JCGM/GUM/JCGM100/C045315e-html/C045315e_FILES/MAIN_C045315e/05_e.html",
+    "https://www.bipm.org/en/doi/10.59161/jcgm101-2008",
+    "https://content.u-blox.com/sites/default/files/ZED-F9P_IntegrationManual_UBX-18010802.pdf"
+  ]
+}

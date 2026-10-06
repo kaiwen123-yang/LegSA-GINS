@@ -1,0 +1,16 @@
+{
+  "data_mode": "synthetic",
+  "N": 200000,
+  "wrong_probability_assumed": 0.01,
+  "wrong_count": 1976,
+  "wrong_bias_assumed_deg": 20.0,
+  "conditional_std_assumed_deg": 1.0,
+  "MC_RMS_deg": 2.2233303050377047,
+  "mixture_RMS_formula_deg": 2.23606797749979,
+  "MC_abs_error_gt_10deg_fraction": 0.00988,
+  "MC_within_1p96deg_fraction": 0.9409,
+  "length_min_m": 0.3499999999999999,
+  "length_max_m": 0.35000000000000003,
+  "length_gate_pass_fraction": 1.0,
+  "is_real_AR_wrong_fix_estimate": false
+}
