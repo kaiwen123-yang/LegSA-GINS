@@ -1,0 +1,138 @@
+{
+  "execution_commit": "14fec6b0c4fcb2a7bdb98370c2d5c8713462d62d",
+  "data_mode": "real_by2_raw",
+  "prepared_plan_sha256": "4eeb5f4536d0ac20e1ed68247d123ef5798980b0bfc6bed723fc09b54563c82e",
+  "acquisition_summary_sha256": "1b087d46fea6db00ebff899cf1914ffbb553082d88d155da6981bab0bb937201",
+  "original_tracking_summary_sha256": "e4a4b239a64ad19315c7e1024249190c86b52a0f91f9aed0af93a371457aa53b",
+  "solver_calls": 0,
+  "reference_reads": 0,
+  "trace_used_online": false,
+  "production_validated": false,
+  "integer_truth_available": false,
+  "lifetime_false_fix_probability": null,
+  "replay_kind": "IDEALIZED_RECORDED_CILS_SERVICE_COST",
+  "real_time_implementation": false,
+  "wall_clock_realtime_validated": false,
+  "cost_field": "search.certificate.elapsed_s",
+  "worker_count_per_mode": 1,
+  "multi_mode_disclosure": "Each mode is a separate one-worker methodological replay, not concurrent deployment on a shared CPU; resource contention is unmodelled.",
+  "selection_opportunity": "ORIGINAL_FIFTH_SELECTION_EPOCH_EVERY_TWO_SECONDS",
+  "worker_policy": "BUSY_DROP_NO_QUEUE_FINISH_RELEASES_WORKER_IMMEDIATELY",
+  "owner_policy": "INCUMBENT_AT_ENTRY_OWNS_FAILURE_EPOCH_NO_QUEUE_NO_RESURRECTION",
+  "publication_policy": "FIRST_RAW_SLOT_GE_MAX_COMPLETION_ORIGINAL_VALIDATION_END_CURRENT_ONLY",
+  "internal_catchup_policy": "LOGICAL_DATA_TIME_REPLAY_NOT_HISTORICAL_PUBLICATION",
+  "zero_cost_components": [
+    "preparation",
+    "model_loading",
+    "IO",
+    "validation",
+    "fault_diagnostics",
+    "catchup",
+    "tracking",
+    "export",
+    "navigation",
+    "worker_launch"
+  ],
+  "metadata_disclosure": "Original saved case JSON is read as recorded-cost simulation input. Outcome/status never chooses launch or drop.",
+  "time_domain_s": [
+    100.19799995422363,
+    339.9979999065399
+  ],
+  "modes": {
+    "partial": {
+      "epochs": 1200,
+      "valid_experimental_measurements": 11,
+      "valid_times_s": [
+        129.99799990653992,
+        130.19799995422363,
+        201.99799990653992,
+        202.19799995422363,
+        202.39800000190735,
+        202.59800004959106,
+        202.79800009727478,
+        218.19799995422363,
+        218.39800000190735,
+        218.59800004959106,
+        218.79800009727478
+      ],
+      "events": {
+        "INACTIVE": 1186,
+        "TRACK_STARTED": 3,
+        "TRACK_UPDATED": 8,
+        "TRACK_RELEASED": 3
+      },
+      "service_actions": {
+        "SEARCH_LAUNCHED": 37,
+        "BUSY_DROP_NO_QUEUE": 83
+      },
+      "arrival_actions": {
+        "ORIGINAL_RESULT_UNAVAILABLE": 31,
+        "CATCHUP_DEAD": 2,
+        "AVAILABLE_CURRENT_CANDIDATE": 3
+      },
+      "release_statuses": {
+        "RELEASED_REJECTED_PHASE_FAULT_DIAGNOSTIC": 2,
+        "RELEASED_UNRESOLVED_ACTIVE_ARC_CHANGED": 1
+      },
+      "origins": [
+        {
+          "case_id": "partial_0128.00",
+          "origin_id": "776f87a276507098e3dc407736e4b32e1f46986b8097650e28e5612780b37653",
+          "original_selected_at_s": 128.99799990653992,
+          "original_validation_end_s": 129.99799990653992,
+          "service_completion_s": 129.44456238353993,
+          "scheduler_acquired_at_s": 129.99799990653992
+        },
+        {
+          "case_id": "partial_0200.00",
+          "origin_id": "9e555c0ff9c971d650021500e6e46c1fd455f6ab68cba88d6ed87e63bd98447b",
+          "original_selected_at_s": 200.99799990653992,
+          "original_validation_end_s": 201.99799990653992,
+          "service_completion_s": 201.12962220553993,
+          "scheduler_acquired_at_s": 201.99799990653992
+        },
+        {
+          "case_id": "partial_0216.00",
+          "origin_id": "284a94b6fd929179863877d20e60a28732df195231a6dc12e93d0ecf0eb04d71",
+          "original_selected_at_s": 216.99799990653992,
+          "original_validation_end_s": 217.99799990653992,
+          "service_completion_s": 218.0916236055399,
+          "scheduler_acquired_at_s": 218.19799995422363
+        }
+      ],
+      "active_owner_at_end": false,
+      "worker_busy_until_s": 364.99870870153995,
+      "pending_at_end": [
+        {
+          "case_id": "partial_0334.00",
+          "completion_s": 364.99870870153995,
+          "publication_not_before_s": 364.99870870153995
+        }
+      ]
+    }
+  },
+  "source_files": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/admission.py": "6a84ca69fa3d815967f147677dd75f0f22da1c0acb344b40eeca9eb3e4e532c2",
+    "src/legsa_gins/paper_rebuild/carrier_phase/partial.py": "ef793762ec5964b187b9de49662b9646d8103f1f6224e1ea092af81a74465db0",
+    "src/legsa_gins/paper_rebuild/carrier_phase/ephemeris.py": "0e095ab821618553f47e699f009a8d5622d6c66b9109a96143cfb79810803d8d",
+    "src/legsa_gins/paper_rebuild/carrier_phase/joint_admission.py": "2cb821ecfde825879723de71debd8c2dfe1bbbddc8bc8fe33b032cd4adb8f72a",
+    "src/legsa_gins/paper_rebuild/carrier_phase/multignss.py": "20704c075335edc7fa0e10092ca4efbd2e7a8c28a43497d514e88d31e6842555",
+    "src/legsa_gins/paper_rebuild/carrier_phase/tracking.py": "a83f2eca16d4f104e2296848354131ad86465e6b4665a5693908a32989b6d62a",
+    "src/legsa_gins/paper_rebuild/carrier_phase/temporal.py": "1c48b863e7e132b0cfa281ca0f7bb45e1dd9b7c443906d775c4e25b3226a7177",
+    "src/legsa_gins/paper_rebuild/carrier_phase/solver.py": "116a9ef9be3a42a8d120eb9c4fe7b613de97da078c0c76b550628eed4f21c074",
+    "src/legsa_gins/paper_rebuild/carrier_phase/arcs.py": "5f4b030fcc55ffa5fa1bd4bb41e06641281b17248e34f32d877f8ebac7526953",
+    "src/legsa_gins/paper_rebuild/carrier_phase/observations.py": "637ada354ec2132c6d4aeb7f615d2e7eb1ef7f1c5ebcf7f688e2847b798ca44c",
+    "src/legsa_gins/paper_rebuild/carrier_phase/causal_anchor.py": "36ac7303efd2106c0904483dc11f1a5d7d678286827938c8a4c66bb3278ab940",
+    "src/legsa_gins/paper_rebuild/carrier_phase/measurement.py": "c90b64e6a924ebbaf69d447813708ba84d3da22c43f04be05d1a07f3175f7a88",
+    "src/legsa_gins/paper_rebuild/carrier_phase/validation.py": "6a5fc4c899efae7a4415d2b47a6bf28c8f13e10654fcf4634cb88885842871dd",
+    "src/legsa_gins/paper_rebuild/carrier_phase/faults.py": "66ea331d87e3eacc8816ee199156fd0105accca9220bf65023b62aacd5031b96",
+    "src/legsa_gins/paper_rebuild/carrier_phase/sensitivity.py": "7e159c3ed766037b0ae2f523454c90dd5359f3bad5a9085e4f8aeb7d76ac69c1",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "7a6dd13f40235f1edcb6b3e9f27768e53f0c244f5d9bb0d39268333150f859d6",
+    "scripts/paper_rebuild/carrier_phase/real_trial.py": "bec8b96832d599120348579140070a6b1dda0004c7e22fc14acc18b8c941f8c1",
+    "scripts/paper_rebuild/carrier_phase/latency_tracking_frontend.py": "1a0a48a0839a632cf139a2b08a07191b6b985426bcab6816ac25d54691053929",
+    "scripts/paper_rebuild/carrier_phase/tracking_frontend.py": "65cd4e7adc27748069c4360149a1dea80e899441ad032ed0aee5f0a11a561259",
+    "scripts/paper_rebuild/carrier_phase/shadow_replay.py": "e00254d5f38a292690d3e392c09fc5dcfdadc67e67d545a4568ae92bcda34e81"
+  }
+}
