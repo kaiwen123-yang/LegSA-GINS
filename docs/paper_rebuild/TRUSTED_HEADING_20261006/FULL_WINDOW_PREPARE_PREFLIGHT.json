@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "check": "Python py_compile only; no import or algorithm execution",
+  "utc": "2026-10-06T15:36:27.618383+00:00",
+  "source": "scripts/paper_rebuild/carrier_phase/full_window_prepare.py",
+  "source_sha256": "506b1ed586400adcb8db393ecd89971f119e86a9d1b15515ea3a989e78861b90",
+  "plan_sha256": "266ae7307eff13b49fd357340e1df50964d3b77f2fdc7d888fd8d374571d3f89",
+  "command": "python3: py_compile.compile(source, cfile=<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_PREPARE_PREFLIGHT/full_window_prepare.pyc, doraise=True)",
+  "unique_files_compiled": 1,
+  "compile_invocations": 1,
+  "converter_calls": 0,
+  "spp_calls": 0,
+  "model_prepare_calls": 0,
+  "integer_search_calls": 0,
+  "navigation_solver_calls": 0,
+  "evaluator_calls": 0,
+  "reference_reads": 0,
+  "raw_UBX_payload_reads": 0,
+  "note": "Only existing metadata/source/native bridge hash read while preparing registration; raw metadata hash_status copied from old registry is not newly measured here."
+}
