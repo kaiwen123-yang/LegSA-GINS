@@ -1,0 +1,102 @@
+{
+  "planned": 48,
+  "solver_calls": 48,
+  "execution_commit": "a7dc538fbd83ae9c44a9a8b5e53714811cc2ebd4",
+  "elapsed_s": 42.884370890000014,
+  "source_pins": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/temporal.py": "3b9706b5cc82cc1e6f1ba3858433993fdb06baad73f8eb49cadd927b93c75286",
+    "src/legsa_gins/paper_rebuild/carrier_phase/solver.py": "a7a220a543724911353386f263779bd31cc7d9edb108cc35dc5f1349656592c4",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "d28604a587655623537bdf9125afc24a929388b218696829fe42c9ffd2192ede",
+    "scripts/paper_rebuild/carrier_phase/synthetic_trial.py": "de97524c246522984c579cfdc5066e2217118bdcdb2a3cd9eeff0db59a39ec6f"
+  },
+  "counts": {
+    "CORRECT": 39,
+    "WRONG": 9
+  },
+  "groups": {
+    "NOMINAL_K1": {
+      "support": 10,
+      "counts": {
+        "CORRECT": 6,
+        "WRONG": 4
+      },
+      "certified": 10,
+      "certified_angle_rmse_mean_deg": 33.685898819124716,
+      "certified_angle_rmse_max_deg": 153.76008766504683
+    },
+    "NOMINAL_K5": {
+      "support": 10,
+      "counts": {
+        "CORRECT": 9,
+        "WRONG": 1
+      },
+      "certified": 10,
+      "certified_angle_rmse_mean_deg": 12.046716881351292,
+      "certified_angle_rmse_max_deg": 100.33502259160015
+    },
+    "NOMINAL_K10": {
+      "support": 10,
+      "counts": {
+        "CORRECT": 10
+      },
+      "certified": 10,
+      "certified_angle_rmse_mean_deg": 2.2498166372652633,
+      "certified_angle_rmse_max_deg": 2.9763054890138867
+    },
+    "SLIP_NEW_ARC_K10": {
+      "support": 3,
+      "counts": {
+        "CORRECT": 3
+      },
+      "certified": 3,
+      "certified_angle_rmse_mean_deg": 1.930494777558815,
+      "certified_angle_rmse_max_deg": 2.252794432280104
+    },
+    "SLIP_UNMODELED_K10": {
+      "support": 3,
+      "counts": {
+        "WRONG": 3
+      },
+      "certified": 3,
+      "certified_angle_rmse_mean_deg": 104.0929964883977,
+      "certified_angle_rmse_max_deg": 131.44345483620606
+    },
+    "QUARTER_CYCLE_K10": {
+      "support": 3,
+      "counts": {
+        "WRONG": 1,
+        "CORRECT": 2
+      },
+      "certified": 3,
+      "certified_angle_rmse_mean_deg": 30.9727918030504,
+      "certified_angle_rmse_max_deg": 82.56636359611765
+    },
+    "CORRELATED_RHO08_K10": {
+      "support": 3,
+      "counts": {
+        "CORRECT": 3
+      },
+      "certified": 3,
+      "certified_angle_rmse_mean_deg": 1.9494610648356032,
+      "certified_angle_rmse_max_deg": 2.7049156287343163
+    },
+    "RP_NOMINAL_K10": {
+      "support": 3,
+      "counts": {
+        "CORRECT": 3
+      },
+      "certified": 3,
+      "certified_angle_rmse_mean_deg": 1.9360832247069801,
+      "certified_angle_rmse_max_deg": 2.3432350023997355
+    },
+    "RP_BIAS_K10": {
+      "support": 3,
+      "counts": {
+        "CORRECT": 3
+      },
+      "certified": 3,
+      "certified_angle_rmse_mean_deg": 3.8562295072089245,
+      "certified_angle_rmse_max_deg": 4.012741535959783
+    }
+  }
+}

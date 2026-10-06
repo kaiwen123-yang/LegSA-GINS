@@ -1,0 +1,248 @@
+{
+  "status": "PASS_REVIEWED_SCOPE",
+  "review_environment": "Ubuntu-22.04 WSL",
+  "module_tests": {
+    "observations_arcs": {
+      "passed": 38,
+      "last_elapsed_s": 0.18
+    },
+    "independent_solver_oracles": {
+      "passed": 10,
+      "last_elapsed_s": 0.2,
+      "native_library_calls": 0
+    }
+  },
+  "found_and_resolved": [
+    "integer int64 wrapping before exact-domain check",
+    "future own-support sum ranking and empty-support zero",
+    "saved integer map(int) truncation"
+  ],
+  "solver_scope": [
+    "moving baseline per epoch, shared integers only",
+    "full conditional-baseline cost separates only under epoch-independent observation Q",
+    "partial-assignment relaxed sphere lower bounds use MAX not SUM",
+    "active class ranking minimizes full objective over all historical nuisance integers",
+    "independent full-coverage integer boxes confirm best/second for full vectors and selected active classes",
+    "cross-epoch Q supports float only and rejects separable constrained global certificate"
+  ],
+  "future_score_review": [
+    "causal decision time required",
+    "future N is fixed with no new integer search",
+    "unknown arc-dependent rows withheld using covariance principal submatrix",
+    "sphere baseline profiled per future epoch",
+    "common-score comparison uses same time and retained-row support",
+    "n-2 dimension is nominal, not a calibrated chi-square law"
+  ],
+  "actual_saved_support_checks": [
+    {
+      "result_directory": "FUTURE_CHECK",
+      "family": "GPS_L1",
+      "decision_prefix": 1,
+      "decision_time_s": 80.19799995422363,
+      "scored_epochs_per_candidate": 9,
+      "same_epoch_and_retained_rows": true,
+      "future_cost_gap_second_minus_best": 102.3490160093867,
+      "comparison_status": "INITIAL_NUMERIC_ONLY",
+      "strictly_future": true,
+      "real_integer_truth_available": false
+    },
+    {
+      "result_directory": "FUTURE_CHECK",
+      "family": "GPS_L1",
+      "decision_prefix": 5,
+      "decision_time_s": 80.99799990653992,
+      "scored_epochs_per_candidate": 5,
+      "same_epoch_and_retained_rows": true,
+      "future_cost_gap_second_minus_best": 0.0,
+      "comparison_status": "INITIAL_NUMERIC_ONLY",
+      "strictly_future": true,
+      "real_integer_truth_available": false
+    },
+    {
+      "result_directory": "FUTURE_CHECK",
+      "family": "GPS_L1_L2",
+      "decision_prefix": 1,
+      "decision_time_s": 80.19799995422363,
+      "scored_epochs_per_candidate": 9,
+      "same_epoch_and_retained_rows": true,
+      "future_cost_gap_second_minus_best": 308.6894619360253,
+      "comparison_status": "INITIAL_NUMERIC_ONLY",
+      "strictly_future": true,
+      "real_integer_truth_available": false
+    },
+    {
+      "result_directory": "FUTURE_CHECK",
+      "family": "GPS_L1_L2",
+      "decision_prefix": 5,
+      "decision_time_s": 80.99799990653992,
+      "scored_epochs_per_candidate": 5,
+      "same_epoch_and_retained_rows": true,
+      "future_cost_gap_second_minus_best": 0.0,
+      "comparison_status": "INITIAL_NUMERIC_ONLY",
+      "strictly_future": true,
+      "real_integer_truth_available": false
+    },
+    {
+      "result_directory": "FUTURE_CHECK",
+      "family": "GPS_GAL_BDS_DUAL",
+      "decision_prefix": 1,
+      "decision_time_s": 80.19799995422363,
+      "scored_epochs_per_candidate": 9,
+      "same_epoch_and_retained_rows": true,
+      "future_cost_gap_second_minus_best": 273.47981211953334,
+      "comparison_status": "INITIAL_NUMERIC_ONLY",
+      "strictly_future": true,
+      "real_integer_truth_available": false
+    },
+    {
+      "result_directory": "FUTURE_CHECK",
+      "family": "GPS_GAL_BDS_DUAL",
+      "decision_prefix": 5,
+      "decision_time_s": 80.99799990653992,
+      "scored_epochs_per_candidate": 5,
+      "same_epoch_and_retained_rows": true,
+      "future_cost_gap_second_minus_best": 0.0,
+      "comparison_status": "INITIAL_NUMERIC_ONLY",
+      "strictly_future": true,
+      "real_integer_truth_available": false
+    },
+    {
+      "result_directory": "FUTURE_CHECK_CATEGORIZED",
+      "family": "GPS_L1",
+      "decision_prefix": 1,
+      "decision_time_s": 80.19799995422363,
+      "scored_epochs_per_candidate": 9,
+      "same_epoch_and_retained_rows": true,
+      "future_cost_gap_second_minus_best": 102.3490160093867,
+      "comparison_status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "strictly_future": true,
+      "real_integer_truth_available": false
+    },
+    {
+      "result_directory": "FUTURE_CHECK_CATEGORIZED",
+      "family": "GPS_L1",
+      "decision_prefix": 5,
+      "decision_time_s": 80.99799990653992,
+      "scored_epochs_per_candidate": 5,
+      "same_epoch_and_retained_rows": true,
+      "future_cost_gap_second_minus_best": 0.0,
+      "comparison_status": "HISTORICAL_ONLY_DIFFERENCE",
+      "strictly_future": true,
+      "real_integer_truth_available": false
+    },
+    {
+      "result_directory": "FUTURE_CHECK_CATEGORIZED",
+      "family": "GPS_L1_L2",
+      "decision_prefix": 1,
+      "decision_time_s": 80.19799995422363,
+      "scored_epochs_per_candidate": 9,
+      "same_epoch_and_retained_rows": true,
+      "future_cost_gap_second_minus_best": 308.6894619360253,
+      "comparison_status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "strictly_future": true,
+      "real_integer_truth_available": false
+    },
+    {
+      "result_directory": "FUTURE_CHECK_CATEGORIZED",
+      "family": "GPS_L1_L2",
+      "decision_prefix": 5,
+      "decision_time_s": 80.99799990653992,
+      "scored_epochs_per_candidate": 5,
+      "same_epoch_and_retained_rows": true,
+      "future_cost_gap_second_minus_best": 0.0,
+      "comparison_status": "HISTORICAL_ONLY_DIFFERENCE",
+      "strictly_future": true,
+      "real_integer_truth_available": false
+    },
+    {
+      "result_directory": "FUTURE_CHECK_CATEGORIZED",
+      "family": "GPS_GAL_BDS_DUAL",
+      "decision_prefix": 1,
+      "decision_time_s": 80.19799995422363,
+      "scored_epochs_per_candidate": 9,
+      "same_epoch_and_retained_rows": true,
+      "future_cost_gap_second_minus_best": 273.47981211953334,
+      "comparison_status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "strictly_future": true,
+      "real_integer_truth_available": false
+    },
+    {
+      "result_directory": "FUTURE_CHECK_CATEGORIZED",
+      "family": "GPS_GAL_BDS_DUAL",
+      "decision_prefix": 5,
+      "decision_time_s": 80.99799990653992,
+      "scored_epochs_per_candidate": 5,
+      "same_epoch_and_retained_rows": true,
+      "future_cost_gap_second_minus_best": 0.0,
+      "comparison_status": "HISTORICAL_ONLY_DIFFERENCE",
+      "strictly_future": true,
+      "real_integer_truth_available": false
+    },
+    {
+      "result_directory": "FUTURE_ACTIVE",
+      "family": "GPS_L1",
+      "decision_prefix": 5,
+      "decision_time_s": 80.99799990653992,
+      "scored_epochs_per_candidate": 5,
+      "same_epoch_and_retained_rows": true,
+      "future_cost_gap_second_minus_best": 6.64088960457145,
+      "comparison_status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "strictly_future": true,
+      "real_integer_truth_available": false
+    },
+    {
+      "result_directory": "FUTURE_ACTIVE",
+      "family": "GPS_L1_L2",
+      "decision_prefix": 5,
+      "decision_time_s": 80.99799990653992,
+      "scored_epochs_per_candidate": 5,
+      "same_epoch_and_retained_rows": true,
+      "future_cost_gap_second_minus_best": 195.19347612460027,
+      "comparison_status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "strictly_future": true,
+      "real_integer_truth_available": false
+    },
+    {
+      "result_directory": "FUTURE_ACTIVE",
+      "family": "GPS_GAL_BDS_DUAL",
+      "decision_prefix": 5,
+      "decision_time_s": 80.99799990653992,
+      "scored_epochs_per_candidate": 5,
+      "same_epoch_and_retained_rows": true,
+      "future_cost_gap_second_minus_best": 1400.9032104000828,
+      "comparison_status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "strictly_future": true,
+      "real_integer_truth_available": false
+    }
+  ],
+  "old_categorized_scores_exact_equal": true,
+  "maximum_independent_sum_gap_difference": 5.684341886080802e-14,
+  "input_result_hashes": {
+    "PLAN.json": "e8c62ad623dc6e9bdb04eaa2a82f98b9c9c0919d94cf08f28bc308a3e4a1f88f",
+    "FUTURE_CHECK/FUTURE_RESULTS.json": "80d9e6ea114bd49f42c0c0e6056758e7f2fd0cbe03cd1d78146b3e03d36b020d",
+    "FUTURE_CHECK_CATEGORIZED/FUTURE_RESULTS.json": "c2e31c89044eb51eaa417d776749fd43df7b049455961d420c285a2abd6c0f07",
+    "FUTURE_ACTIVE/FUTURE_RESULTS.json": "2cd77934649f4ea62ef5e43fb9d5a57a21d68e90f86cc7e5976c7fd235495d35"
+  },
+  "reviewed_source_hashes": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/observations.py": "637ada354ec2132c6d4aeb7f615d2e7eb1ef7f1c5ebcf7f688e2847b798ca44c",
+    "src/legsa_gins/paper_rebuild/carrier_phase/arcs.py": "5f4b030fcc55ffa5fa1bd4bb41e06641281b17248e34f32d877f8ebac7526953",
+    "src/legsa_gins/paper_rebuild/carrier_phase/temporal.py": "3b9706b5cc82cc1e6f1ba3858433993fdb06baad73f8eb49cadd927b93c75286",
+    "src/legsa_gins/paper_rebuild/carrier_phase/solver.py": "a7a220a543724911353386f263779bd31cc7d9edb108cc35dc5f1349656592c4",
+    "src/legsa_gins/paper_rebuild/carrier_phase/validation.py": "6a5fc4c899efae7a4415d2b47a6bf28c8f13e10654fcf4634cb88885842871dd",
+    "scripts/paper_rebuild/carrier_phase/real_trial.py": "d2f81ff32cabf6e1af5c76629df565b2600d9f06aad564fa91262d148ecf052e",
+    "scripts/paper_rebuild/carrier_phase/future_checks.py": "f16c4fc44c5c6c41bf85b8555245104962dc46cba30490815d3aa1029f2841fd",
+    "tests/paper_rebuild/test_carrier_observations.py": "f1f4b6056949b16eb2fbadda145affc7397877a215a115e4272d428e0f90f1cb",
+    "tests/paper_rebuild/test_carrier_solver_review.py": "10067f4f546764c8a04d0364171104b625c35e685371220c98f597feb284ba48"
+  },
+  "raw_reads_by_review": 0,
+  "reference_reads_by_review": 0,
+  "new_scientific_CILS_calls_by_review": 0,
+  "new_future_scores_by_review": 0,
+  "limitations": [
+    "Model objective optimality does not establish true integers or accepted heading.",
+    "The previously inspected real window is development data.",
+    "This review does not independently prove each sphere floating-point global certificate beyond the stated synthetic oracles.",
+    "No independence/calibration of RAWX covariance or TDCP threshold was established.",
+    "If the native seed provider returns zero candidates, its empty-class fallback currently fails explicitly via ValueError; no false certification occurs."
+  ]
+}

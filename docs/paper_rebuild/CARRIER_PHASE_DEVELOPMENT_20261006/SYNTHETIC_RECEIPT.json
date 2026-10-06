@@ -1,0 +1,28 @@
+{
+  "sealed_root_alias": "<CARRIER_SYNTHETIC>",
+  "seal_sha256": "e786398621bef0b95dec664dec1f18fa579e2c88788261a70061980ee59550b4",
+  "copied_payloads": {
+    "SYNTHETIC_PLAN.json": {
+      "source": "PLAN.json",
+      "sha256": "bc93b9b61bc1062bf1b9ab4f81f9bcb37113f408bb15f994766f135c5b6768a3"
+    },
+    "SYNTHETIC_METRICS.csv": {
+      "source": "RESULTS.csv",
+      "sha256": "07f4edf537dff574fc336408c53204abe3ae9d9ebfb61c24046d6555b8a025bd"
+    },
+    "SYNTHETIC_SUMMARY.json": {
+      "source": "SUMMARY.json",
+      "sha256": "f84932c6e732bad5c7cd72851f041b8c8f97079dd88d7d77478f452ff3cd8792"
+    }
+  },
+  "checked_sealed_files": 196,
+  "solver_calls": 48,
+  "representation": "Tables only; full synthetic models and candidates remain in sealed WSL scratch.",
+  "summary_script_sha256": "df0ba46f19f27e41ee7db2c1830af224f2b192cba2901017f81aab1da5afcedb",
+  "interpretation_counts": {
+    "compatible_model_correct": 39,
+    "compatible_model_wrong": 6,
+    "model_truth_unrepresentable": 3,
+    "unresolved": 0
+  }
+}
