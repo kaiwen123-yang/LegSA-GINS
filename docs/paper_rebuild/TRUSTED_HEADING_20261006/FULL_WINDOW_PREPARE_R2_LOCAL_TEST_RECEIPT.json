@@ -26,5 +26,11 @@
   "real_trial_final_sha256": "a5d53ad4bc412a322237f45227631d9c29070736032a92aebbbd432d46862de9",
   "test_log_alias": "<TRUSTED_HEADING_SCRATCH>/EMPTY_NAVIGATION_LOCAL_TESTS_ATTEMPT01/pytest.log",
   "test_log_sha256": "90938eb99f6e9883d2cea26507b9cf7d10939651a834da1233047d54adfdb5a4",
-  "r2_plan_sha256": "2a20169eb0ed6633288457d9cfc77b1289ca4ee527a74671dca27323bc38913c"
+  "r2_plan_sha256": "ac6cefc036b21caa5ed7cae382f6b2493e30557af6246f19b25801d5b2040b92",
+  "registration_newline_normalization": {
+    "file": "tests/paper_rebuild/test_empty_navigation_prefix.py",
+    "executed_sha256": "7b58e062244b8a4ed6bb2d62c38c33d8b4128c13a93eca54ee675eaf39efc26f",
+    "registered_lf_sha256": "45b9c254cbda96f25b61a64543a4418fe24259d55322f940f00359e8190419d8",
+    "scope": "CRLF to LF only to match Git committed bytes; no semantic edits, no test rerun, no real execution"
+  }
 }
