@@ -85,3 +85,43 @@ Any finite exhaustive oracle must state its domain and bound excluded integers.
 The mechanism could improve integer discrimination but cannot repair invalid
 carrier observations. A shared gyro later creates dependence with the EKF;
 a successful kernel test does not resolve that fusion covariance question.
+
+## Identifiability limitation found before the first prototype run
+
+With unchanged full-column-rank satellite geometry H and shared integers,
+
+    phase_k = Lambda N + H b_k,
+    phase_2-phase_1 = H(b_2-b_1).
+
+Exact phase time differences determine Delta b independently of N. Equal known
+lengths then give b1^T b2 = L^2-||Delta b||^2/2. An angle-only prior therefore
+either permits all exact-phase/length solutions or excludes all of them; it
+does not distinguish their integers.
+
+More explicitly, an integer alias d with H v=Lambda d yields
+N'=N+d, b_i'=b_i-v. If both original and shifted baselines have length L, then
+b_i^T v=||v||^2/2 and b_1'^T b_2'=b_1^T b_2. A nonzero exact integer alias is
+not guaranteed to exist for general overdetermined H. Also, noise-free full-rank
+code observations already determine b, so this is NOT a claim of unavoidable
+ambiguity in the complete noiseless code+phase model.
+
+For two vectors, equal Gram matrices admit a proper rotation between the two
+pairs; unknown R0 and nonplanar body motion do not alone break this ambiguity.
+For K vectors the same translation alias preserves all pairwise Gram terms.
+When three baselines span R^3, the alias reflection has det=-1 and a common
+SO(3) constraint can distinguish chirality; pairwise Gram tests still cannot.
+That larger problem is not silently substituted for this two-epoch experiment.
+
+With finite measurement noise or different H1/H2 the motion constraint can
+change continuous profile costs and possibly integer ordering. This remains
+a possible regularization benefit, not proof of added exact-phase integer
+identifiability. Midpoint code observations can give equal cost at two specified
+alias points, without forcing their finite-weight profiled minima to be equal.
+The registered prototype must preserve this distinction and the wrong-prior
+counterexample before deciding whether a navigation matrix is justified.
+
+Implementation review adjustment: the first motion search uses only the Gaussian
+integer quadratic metric at internal tree nodes. It does not reuse a numerical
+sphere optimizer value as a certified lower bound. Full-N motion intervals include
+stationarity/spectral/completion margins; all ordering is numerical/model-conditional,
+not an interval-arithmetic proof or calibrated integer acceptance.

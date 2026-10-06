@@ -1,0 +1,34 @@
+{
+  "schema": "ar_v3_classic_qualification.copy_receipt.v1",
+  "registration_commit": "4895332a831bfdd706d5ec58094e12672397af89",
+  "source_alias": "<AR_V3_SCRATCH>/CLASSIC_QUALIFICATION",
+  "calls": 12,
+  "ledger_begin": 12,
+  "ledger_end": 12,
+  "additional_solver_calls_for_readout": 0,
+  "files": {
+    "RESULTS.csv": {
+      "sha256": "208b33b13960f51148f6370aa6c1e9f2c24df9345810665f40b2be1ca8fa4232",
+      "bytes": 3880,
+      "copied_byte_identically": true
+    },
+    "COMPLETE.json": {
+      "sha256": "64483057e20d0bcda328b08fb90974647cdbd2c1d06c2989167869a095e0d07d",
+      "bytes": 548,
+      "copied_byte_identically": true
+    },
+    "CALLS.jsonl": {
+      "sha256": "94fb206fbfe814ee2231f85cbb3e7e8b1ce4b10030ebd1226201a5c3deb25a00",
+      "bytes": 10786,
+      "copied_byte_identically": true
+    },
+    "DETAILS.json.gz": {
+      "sha256": "29c412e7c190f4afe8948b6c523f25ed2dc893fbdddc802dc0a119090b66e55e",
+      "bytes": 241978,
+      "decompressed_name": "DETAILS.json",
+      "decompressed_sha256": "18112f0750e68b377a95d318bca0898ea22328d94ab9a88fc50769962492acec",
+      "decompressed_bytes": 4302188,
+      "lossless_roundtrip_verified": true
+    }
+  }
+}
