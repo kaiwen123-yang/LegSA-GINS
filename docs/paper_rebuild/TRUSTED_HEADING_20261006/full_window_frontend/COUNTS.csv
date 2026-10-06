@@ -1,0 +1,4 @@
+sequence,epochs,research_points,coverage,acquisition_opportunities,actual_acquisition_attempts,enumerations,complete_enumerations,incomplete_enumerations,overcap_sources,nodes,leaves,raw_candidates,length_necessary_candidates,promotions,constructed_pending_sources,distinct_owners,source_change_rows,longest_unavailable_epochs,longest_unavailable_nominal_s
+BY2,1370,168,0.12262773722627737,274,132,98,98,0,0,13781,7372,7372,100,15,64,15,29,343,68.60000000000001
+BY2H,1350,319,0.2362962962962963,270,120,93,93,0,0,15714,8204,8204,86,21,67,21,40,233,46.6
+BY2O,1885,166,0.08806366047745358,377,199,196,196,0,0,17850,9406,9406,116,18,76,18,36,520,104.0

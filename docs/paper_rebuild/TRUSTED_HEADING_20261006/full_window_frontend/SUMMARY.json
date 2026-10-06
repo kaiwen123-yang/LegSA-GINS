@@ -1,0 +1,737 @@
+{
+  "registration_commit": "eaa39dc36197842fbe17f034af23ec85ec4f3c06",
+  "status": "SEALED_FRONTEND_READOUT_COMPLETE",
+  "epochs": 4605,
+  "research_points": 653,
+  "coverage": 0.14180238870792616,
+  "frontend_status": "COMPLETE",
+  "pipeline_counts": {
+    "enumeration_calls": 387,
+    "enumeration_nodes": 47345,
+    "enumeration_leaves": 24982,
+    "length_filter_calls": 387,
+    "acquisition_opportunities": 921,
+    "acquisition_skipped_pending": 470,
+    "acquisition_skipped_busy": 0,
+    "actual_model_npz_reads": 4300,
+    "pending_providers_constructed": 207,
+    "source_promotions": 54,
+    "source_exception_count": 0,
+    "slot_exception_count": 0
+  },
+  "scientific_calls": {
+    "lifecycle": {
+      "gls_limit": 400000,
+      "glrt_limit": 400000,
+      "fixed_integer_gls_calls": 5631,
+      "single_fault_glrt_calls": 5631,
+      "deadline_monotonic": 1613.836756083
+    },
+    "geometry_limit": 400000,
+    "sphere_limit": 9210,
+    "geometry_calls": 5631,
+    "python_sphere_calls": 2408
+  },
+  "sequences": {
+    "BY2": {
+      "sequence": "BY2",
+      "window_s": [
+        66.0,
+        340.0
+      ],
+      "epochs": 1370,
+      "research_points": 168,
+      "coverage": 0.12262773722627737,
+      "longest_unavailable": {
+        "epochs": 343,
+        "duration_nominal_s": 68.60000000000001,
+        "first_time_s": 66.19799995422363,
+        "last_time_s": 134.59800004959106,
+        "observed_span_s": 68.40000009536743
+      },
+      "longest_available": {
+        "epochs": 41,
+        "duration_nominal_s": 8.200000000000001,
+        "first_time_s": 183.99799990653992,
+        "last_time_s": 191.99799990653992,
+        "observed_span_s": 8.0
+      },
+      "acquisition_opportunities": 274,
+      "actual_acquisition_attempts": 132,
+      "enumerations": 98,
+      "complete_enumerations": 98,
+      "incomplete_enumerations": 0,
+      "overcap_sources": 0,
+      "nodes": 13781,
+      "leaves": 7372,
+      "raw_candidates": 7372,
+      "length_necessary_candidates": 100,
+      "source_dimension_counts": {
+        "6": 98
+      },
+      "raw_candidate_count_statistics": {
+        "n": 98,
+        "min": 0,
+        "median": 59.0,
+        "p95": 223.45,
+        "max": 480,
+        "sum": 7372
+      },
+      "length_candidate_count_statistics": {
+        "n": 98,
+        "min": 0,
+        "median": 1.0,
+        "p95": 3.0,
+        "max": 6,
+        "sum": 100
+      },
+      "raw_envelope_status_counts": {
+        "COMPLETE_RELAXED_SUPPORT": 77,
+        "EMPTY_RELAXED_SUPPORT": 21
+      },
+      "acquisition_attempt_status_counts": {
+        "SELECTION_INPUT_UNAVAILABLE": 34,
+        "COMPLETE_SOURCE_PENDING": 64,
+        "COMPLETE_EMPTY_SOURCE": 34
+      },
+      "acquisition_grid_status_counts": {
+        "SELECTION_INPUT_UNAVAILABLE": 34,
+        "COMPLETE_SOURCE_PENDING": 64,
+        "SKIPPED_PENDING_OCCUPIED": 142,
+        "COMPLETE_EMPTY_SOURCE": 34
+      },
+      "raw_enumeration_seconds": {
+        "n": 98,
+        "min": 0.00035428600000386723,
+        "median": 0.00486828449999166,
+        "p95": 0.015160496150008383,
+        "max": 0.029556576999993922,
+        "sum": 0.5723555950004311
+      },
+      "whole_acquisition_seconds": {
+        "n": 132,
+        "min": 1.5339999777097546e-06,
+        "median": 0.02788926400000946,
+        "p95": 0.06579579415001716,
+        "max": 0.09899159499997268,
+        "sum": 3.728158385999677
+      },
+      "recorded_source_latency_seconds": {
+        "n": 64,
+        "min": 0.017870776000052047,
+        "median": 0.04652058050004371,
+        "p95": 0.07353886460000751,
+        "max": 0.09957715599995254,
+        "sum": 3.117166943999905
+      },
+      "slot_processing_seconds": {
+        "n": 1370,
+        "min": 2.269999981763249e-06,
+        "median": 0.005232842499992785,
+        "p95": 0.03174942384999611,
+        "max": 0.16384025700000393,
+        "sum": 11.481677396999316
+      },
+      "current_point_service_seconds": {
+        "n": 168,
+        "min": 0.0035885280000229614,
+        "median": 0.010005126000010023,
+        "p95": 0.01259331580000662,
+        "max": 0.014155230000028496,
+        "sum": 1.5518009539992477
+      },
+      "original_record_status_counts": {
+        "NO_ACTIVE_SOURCE": 951,
+        "PROMOTED_OWNER_NEXT_SLOT_ONLY": 15,
+        "VALIDATING_CONDITIONAL_SOURCE_SET": 136,
+        "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY": 93,
+        "RESEARCH_CONDITIONAL_SOURCE_SET_POINT": 168,
+        "CURRENT_SPHERE_POINT_OUTSIDE_ORIGINAL_COST_DOMAIN": 7
+      },
+      "promotions": 15,
+      "constructed_pending_sources": 64,
+      "distinct_owners": 15,
+      "source_change_rows": 29,
+      "retirement_events": {
+        "pending:TTL_OR_PHYSICAL_TERMINAL": 40,
+        "owner:PHYSICAL_SUPPORT_INSUFFICIENT": 7,
+        "pending:PHYSICAL_SUPPORT_INSUFFICIENT": 8,
+        "owner:TTL_OR_PHYSICAL_TERMINAL": 7
+      },
+      "time_breaks": 0,
+      "role_diagnostics": {
+        "owner": {
+          "status": {
+            "VALIDATING_CONDITIONAL_SOURCE_SET": 136,
+            "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY": 100,
+            "RESEARCH_CONDITIONAL_SOURCE_SET_POINT": 168,
+            "CURRENT_SPHERE_POINT_OUTSIDE_ORIGINAL_COST_DOMAIN": 7
+          },
+          "domain_status": {
+            "CURRENT_SET_SINGLE": 372,
+            "CURRENT_SET_EMPTY": 27,
+            "CURRENT_SET_MULTI": 12
+          },
+          "quality": {
+            "NUMERICAL_DIRECTION_DOMAIN_READY": 321,
+            "NO_CURRENT_DIRECTION_DOMAIN": 27,
+            "UNQUALIFIED_CURRENT_QUALITY": 63
+          },
+          "class_reasons": {
+            "INSUFFICIENT_CURRENT_PHASE_GEOMETRY": 7,
+            "PHASE_GLRT_SIGNIFICANT": 82
+          },
+          "compatible_class_reasons": {
+            "INSUFFICIENT_CURRENT_PHASE_GEOMETRY": 6,
+            "PHASE_GLRT_SIGNIFICANT": 57
+          },
+          "class_count": {
+            "1": 372,
+            "0": 27,
+            "2": 12
+          },
+          "geometry_widths": {
+            "n": 396,
+            "min": 0.31120745636567476,
+            "median": 9.691314293145886,
+            "p95": 59.44946616950241,
+            "max": 126.67649119928797,
+            "sum": 7010.37155625928
+          },
+          "retired": {},
+          "calls": 411,
+          "class_evaluations": 448,
+          "provider_valid": 168,
+          "receipt_checked": 168,
+          "significant_phase_classes": 57,
+          "numerical_single_ready": 311,
+          "numerical_multi_ready": 10
+        },
+        "pending": {
+          "status": {
+            "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY": 447,
+            "VALIDATING_CONDITIONAL_SOURCE_SET": 287,
+            "RESEARCH_CONDITIONAL_SOURCE_SET_POINT": 53,
+            "CURRENT_SPHERE_POINT_OUTSIDE_ORIGINAL_COST_DOMAIN": 8
+          },
+          "domain_status": {
+            "CURRENT_SET_MULTI": 264,
+            "CURRENT_SET_SINGLE": 472,
+            "CURRENT_SET_EMPTY": 59
+          },
+          "quality": {
+            "NUMERICAL_DIRECTION_DOMAIN_READY": 487,
+            "UNQUALIFIED_CURRENT_QUALITY": 249,
+            "NO_CURRENT_DIRECTION_DOMAIN": 59
+          },
+          "class_reasons": {
+            "PHASE_GLRT_SIGNIFICANT": 446,
+            "INSUFFICIENT_CURRENT_PHASE_GEOMETRY": 10
+          },
+          "compatible_class_reasons": {
+            "PHASE_GLRT_SIGNIFICANT": 271,
+            "INSUFFICIENT_CURRENT_PHASE_GEOMETRY": 10
+          },
+          "class_count": {
+            "4": 6,
+            "6": 8,
+            "1": 472,
+            "5": 3,
+            "0": 59,
+            "2": 209,
+            "3": 38
+          },
+          "geometry_widths": {
+            "n": 1091,
+            "min": 0.31120745636567476,
+            "median": 9.136930971662014,
+            "p95": 24.244639902182772,
+            "max": 156.41076618277052,
+            "sum": 12213.118962107372
+          },
+          "retired": {},
+          "calls": 795,
+          "class_evaluations": 1327,
+          "provider_valid": 53,
+          "receipt_checked": 53,
+          "significant_phase_classes": 271,
+          "numerical_single_ready": 348,
+          "numerical_multi_ready": 139
+        }
+      },
+      "valid_point_receipts_checked": 168,
+      "unique_csv_epoch_rows": true
+    },
+    "BY2H": {
+      "sequence": "BY2H",
+      "window_s": [
+        413.0,
+        683.0
+      ],
+      "epochs": 1350,
+      "research_points": 319,
+      "coverage": 0.2362962962962963,
+      "longest_unavailable": {
+        "epochs": 233,
+        "duration_nominal_s": 46.6,
+        "first_time_s": 413.19799995422363,
+        "last_time_s": 459.59800004959106,
+        "observed_span_s": 46.40000009536743
+      },
+      "longest_available": {
+        "epochs": 39,
+        "duration_nominal_s": 7.800000000000001,
+        "first_time_s": 581.3980000019073,
+        "last_time_s": 588.9979999065399,
+        "observed_span_s": 7.599999904632568
+      },
+      "acquisition_opportunities": 270,
+      "actual_acquisition_attempts": 120,
+      "enumerations": 93,
+      "complete_enumerations": 93,
+      "incomplete_enumerations": 0,
+      "overcap_sources": 0,
+      "nodes": 15714,
+      "leaves": 8204,
+      "raw_candidates": 8204,
+      "length_necessary_candidates": 86,
+      "source_dimension_counts": {
+        "6": 93
+      },
+      "raw_candidate_count_statistics": {
+        "n": 93,
+        "min": 0,
+        "median": 47,
+        "p95": 255.19999999999985,
+        "max": 539,
+        "sum": 8204
+      },
+      "length_candidate_count_statistics": {
+        "n": 93,
+        "min": 0,
+        "median": 1,
+        "p95": 2.0,
+        "max": 4,
+        "sum": 86
+      },
+      "raw_envelope_status_counts": {
+        "COMPLETE_RELAXED_SUPPORT": 84,
+        "EMPTY_RELAXED_SUPPORT": 9
+      },
+      "acquisition_attempt_status_counts": {
+        "SELECTION_INPUT_UNAVAILABLE": 27,
+        "COMPLETE_SOURCE_PENDING": 67,
+        "COMPLETE_EMPTY_SOURCE": 26
+      },
+      "acquisition_grid_status_counts": {
+        "SELECTION_INPUT_UNAVAILABLE": 27,
+        "COMPLETE_SOURCE_PENDING": 67,
+        "SKIPPED_PENDING_OCCUPIED": 150,
+        "COMPLETE_EMPTY_SOURCE": 26
+      },
+      "raw_enumeration_seconds": {
+        "n": 93,
+        "min": 0.0003468509999606795,
+        "median": 0.004628826000043773,
+        "p95": 0.016993779599988556,
+        "max": 0.032865485999991506,
+        "sum": 0.6216987640001435
+      },
+      "whole_acquisition_seconds": {
+        "n": 120,
+        "min": 1.66499995657432e-06,
+        "median": 0.025699876000032873,
+        "p95": 0.07049184844996431,
+        "max": 0.10326033500001586,
+        "sum": 3.64617679800034
+      },
+      "recorded_source_latency_seconds": {
+        "n": 67,
+        "min": 0.014438371999972333,
+        "median": 0.044385591999969165,
+        "p95": 0.08890912590002241,
+        "max": 0.10691646000009314,
+        "sum": 3.2051938749999067
+      },
+      "slot_processing_seconds": {
+        "n": 1350,
+        "min": 2.391000009538402e-06,
+        "median": 0.005699668499971722,
+        "p95": 0.02855464055000709,
+        "max": 0.24996663500002114,
+        "sum": 12.327860319000195
+      },
+      "current_point_service_seconds": {
+        "n": 319,
+        "min": 0.00387571500004924,
+        "median": 0.008546857000055752,
+        "p95": 0.012825832999931208,
+        "max": 0.018222567999998773,
+        "sum": 2.635023861999912
+      },
+      "original_record_status_counts": {
+        "NO_ACTIVE_SOURCE": 704,
+        "PROMOTED_OWNER_NEXT_SLOT_ONLY": 21,
+        "RESEARCH_CONDITIONAL_SOURCE_SET_POINT": 319,
+        "CURRENT_SPHERE_POINT_OUTSIDE_ORIGINAL_COST_DOMAIN": 5,
+        "VALIDATING_CONDITIONAL_SOURCE_SET": 187,
+        "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY": 114
+      },
+      "promotions": 21,
+      "constructed_pending_sources": 67,
+      "distinct_owners": 21,
+      "source_change_rows": 40,
+      "retirement_events": {
+        "pending:TTL_OR_PHYSICAL_TERMINAL": 41,
+        "pending:PHYSICAL_SUPPORT_INSUFFICIENT": 4,
+        "owner:PHYSICAL_SUPPORT_INSUFFICIENT": 11,
+        "owner:TTL_OR_PHYSICAL_TERMINAL": 10
+      },
+      "time_breaks": 0,
+      "role_diagnostics": {
+        "owner": {
+          "status": {
+            "RESEARCH_CONDITIONAL_SOURCE_SET_POINT": 319,
+            "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY": 125,
+            "CURRENT_SPHERE_POINT_OUTSIDE_ORIGINAL_COST_DOMAIN": 5,
+            "VALIDATING_CONDITIONAL_SOURCE_SET": 187
+          },
+          "domain_status": {
+            "CURRENT_SET_SINGLE": 592,
+            "CURRENT_SET_EMPTY": 8,
+            "CURRENT_SET_MULTI": 36
+          },
+          "quality": {
+            "NUMERICAL_DIRECTION_DOMAIN_READY": 522,
+            "UNQUALIFIED_CURRENT_QUALITY": 106,
+            "NO_CURRENT_DIRECTION_DOMAIN": 8
+          },
+          "class_reasons": {
+            "INSUFFICIENT_CURRENT_PHASE_GEOMETRY": 13,
+            "PHASE_GLRT_SIGNIFICANT": 141
+          },
+          "compatible_class_reasons": {
+            "INSUFFICIENT_CURRENT_PHASE_GEOMETRY": 12,
+            "PHASE_GLRT_SIGNIFICANT": 96
+          },
+          "class_count": {
+            "1": 592,
+            "0": 8,
+            "2": 36
+          },
+          "geometry_widths": {
+            "n": 664,
+            "min": 3.3792717462735813,
+            "median": 11.414669270823637,
+            "p95": 55.698685230897226,
+            "max": 168.36980978041956,
+            "sum": 11723.598122483561
+          },
+          "retired": {},
+          "calls": 636,
+          "class_evaluations": 743,
+          "provider_valid": 319,
+          "receipt_checked": 319,
+          "significant_phase_classes": 96,
+          "numerical_single_ready": 511,
+          "numerical_multi_ready": 11
+        },
+        "pending": {
+          "status": {
+            "VALIDATING_CONDITIONAL_SOURCE_SET": 368,
+            "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY": 356,
+            "RESEARCH_CONDITIONAL_SOURCE_SET_POINT": 92,
+            "CURRENT_SPHERE_POINT_OUTSIDE_ORIGINAL_COST_DOMAIN": 12,
+            "VALIDATION_ORIGIN_CHANGED": 1
+          },
+          "domain_status": {
+            "CURRENT_SET_SINGLE": 595,
+            "CURRENT_SET_EMPTY": 92,
+            "CURRENT_SET_MULTI": 142
+          },
+          "quality": {
+            "NUMERICAL_DIRECTION_DOMAIN_READY": 538,
+            "UNQUALIFIED_CURRENT_QUALITY": 199,
+            "NO_CURRENT_DIRECTION_DOMAIN": 92
+          },
+          "class_reasons": {
+            "PHASE_GLRT_SIGNIFICANT": 337,
+            "INSUFFICIENT_CURRENT_PHASE_GEOMETRY": 5
+          },
+          "compatible_class_reasons": {
+            "PHASE_GLRT_SIGNIFICANT": 203,
+            "INSUFFICIENT_CURRENT_PHASE_GEOMETRY": 5
+          },
+          "class_count": {
+            "1": 595,
+            "0": 92,
+            "2": 132,
+            "4": 4,
+            "3": 6
+          },
+          "geometry_widths": {
+            "n": 893,
+            "min": 0.7899044244460184,
+            "median": 9.373272842901711,
+            "p95": 31.154537415731777,
+            "max": 118.07364573985637,
+            "sum": 11260.444333491901
+          },
+          "retired": {},
+          "calls": 829,
+          "class_evaluations": 1087,
+          "provider_valid": 92,
+          "receipt_checked": 92,
+          "significant_phase_classes": 203,
+          "numerical_single_ready": 473,
+          "numerical_multi_ready": 65
+        }
+      },
+      "valid_point_receipts_checked": 319,
+      "unique_csv_epoch_rows": true
+    },
+    "BY2O": {
+      "sequence": "BY2O",
+      "window_s": [
+        3186.0,
+        3563.0
+      ],
+      "epochs": 1885,
+      "research_points": 166,
+      "coverage": 0.08806366047745358,
+      "longest_unavailable": {
+        "epochs": 520,
+        "duration_nominal_s": 104.0,
+        "first_time_s": 3323.1979999542236,
+        "last_time_s": 3426.99799990654,
+        "observed_span_s": 103.79999995231628
+      },
+      "longest_available": {
+        "epochs": 30,
+        "duration_nominal_s": 6.0,
+        "first_time_s": 3464.99799990654,
+        "last_time_s": 3470.798000097275,
+        "observed_span_s": 5.800000190734863
+      },
+      "acquisition_opportunities": 377,
+      "actual_acquisition_attempts": 199,
+      "enumerations": 196,
+      "complete_enumerations": 196,
+      "incomplete_enumerations": 0,
+      "overcap_sources": 0,
+      "nodes": 17850,
+      "leaves": 9406,
+      "raw_candidates": 9406,
+      "length_necessary_candidates": 116,
+      "source_dimension_counts": {
+        "6": 186,
+        "4": 3,
+        "5": 7
+      },
+      "raw_candidate_count_statistics": {
+        "n": 196,
+        "min": 0,
+        "median": 0.0,
+        "p95": 222.0,
+        "max": 399,
+        "sum": 9406
+      },
+      "length_candidate_count_statistics": {
+        "n": 196,
+        "min": 0,
+        "median": 0.0,
+        "p95": 2.0,
+        "max": 5,
+        "sum": 116
+      },
+      "raw_envelope_status_counts": {
+        "EMPTY_RELAXED_SUPPORT": 106,
+        "COMPLETE_RELAXED_SUPPORT": 90
+      },
+      "acquisition_attempt_status_counts": {
+        "COMPLETE_EMPTY_SOURCE": 120,
+        "COMPLETE_SOURCE_PENDING": 76,
+        "UNAVAILABLE_INSUFFICIENT_CONTINUOUS_ARCS": 3
+      },
+      "acquisition_grid_status_counts": {
+        "COMPLETE_EMPTY_SOURCE": 120,
+        "COMPLETE_SOURCE_PENDING": 76,
+        "SKIPPED_PENDING_OCCUPIED": 178,
+        "UNAVAILABLE_INSUFFICIENT_CONTINUOUS_ARCS": 3
+      },
+      "raw_enumeration_seconds": {
+        "n": 196,
+        "min": 0.0002996259999576978,
+        "median": 0.0008790320000287011,
+        "p95": 0.01564281474996676,
+        "max": 0.02685480500002768,
+        "sum": 0.7764134900000386
+      },
+      "whole_acquisition_seconds": {
+        "n": 199,
+        "min": 0.0004627049999612609,
+        "median": 0.03054431900000054,
+        "p95": 0.07221455379997223,
+        "max": 0.10224233999997523,
+        "sum": 6.465831160000107
+      },
+      "recorded_source_latency_seconds": {
+        "n": 76,
+        "min": 0.020592124999893713,
+        "median": 0.04699503949996142,
+        "p95": 0.08381190800002969,
+        "max": 0.10315870700014784,
+        "sum": 3.9672909269997945
+      },
+      "slot_processing_seconds": {
+        "n": 1885,
+        "min": 0.0004572209999764709,
+        "median": 0.005110554999987471,
+        "p95": 0.035903451399997253,
+        "max": 0.5219632370000227,
+        "sum": 16.323894875999656
+      },
+      "current_point_service_seconds": {
+        "n": 166,
+        "min": 0.004050280999763345,
+        "median": 0.008888311999953658,
+        "p95": 0.015778164750031465,
+        "max": 0.0203874009998799,
+        "sum": 1.516037516000324
+      },
+      "original_record_status_counts": {
+        "NO_ACTIVE_SOURCE": 1440,
+        "PROMOTED_OWNER_NEXT_SLOT_ONLY": 18,
+        "RESEARCH_CONDITIONAL_SOURCE_SET_POINT": 166,
+        "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY": 90,
+        "VALIDATING_CONDITIONAL_SOURCE_SET": 159,
+        "CURRENT_SPHERE_POINT_OUTSIDE_ORIGINAL_COST_DOMAIN": 12
+      },
+      "promotions": 18,
+      "constructed_pending_sources": 76,
+      "distinct_owners": 18,
+      "source_change_rows": 36,
+      "retirement_events": {
+        "pending:TTL_OR_PHYSICAL_TERMINAL": 50,
+        "owner:PHYSICAL_SUPPORT_INSUFFICIENT": 13,
+        "pending:PHYSICAL_SUPPORT_INSUFFICIENT": 7,
+        "owner:TTL_OR_PHYSICAL_TERMINAL": 5
+      },
+      "time_breaks": 0,
+      "role_diagnostics": {
+        "owner": {
+          "status": {
+            "RESEARCH_CONDITIONAL_SOURCE_SET_POINT": 166,
+            "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY": 103,
+            "VALIDATING_CONDITIONAL_SOURCE_SET": 159,
+            "CURRENT_SPHERE_POINT_OUTSIDE_ORIGINAL_COST_DOMAIN": 12
+          },
+          "domain_status": {
+            "CURRENT_SET_SINGLE": 398,
+            "CURRENT_SET_EMPTY": 24,
+            "CURRENT_SET_MULTI": 18
+          },
+          "quality": {
+            "NUMERICAL_DIRECTION_DOMAIN_READY": 338,
+            "UNQUALIFIED_CURRENT_QUALITY": 78,
+            "NO_CURRENT_DIRECTION_DOMAIN": 24
+          },
+          "class_reasons": {
+            "PHASE_GLRT_SIGNIFICANT": 93,
+            "INSUFFICIENT_CURRENT_PHASE_GEOMETRY": 13
+          },
+          "compatible_class_reasons": {
+            "PHASE_GLRT_SIGNIFICANT": 68,
+            "INSUFFICIENT_CURRENT_PHASE_GEOMETRY": 13
+          },
+          "class_count": {
+            "1": 398,
+            "0": 24,
+            "2": 18
+          },
+          "geometry_widths": {
+            "n": 434,
+            "min": 0.9949641585483348,
+            "median": 9.462444983963016,
+            "p95": 30.35071411850449,
+            "max": 360.0,
+            "sum": 5950.736634277091
+          },
+          "retired": {},
+          "calls": 440,
+          "class_evaluations": 479,
+          "provider_valid": 166,
+          "receipt_checked": 166,
+          "significant_phase_classes": 68,
+          "numerical_single_ready": 337,
+          "numerical_multi_ready": 1
+        },
+        "pending": {
+          "status": {
+            "VALIDATING_CONDITIONAL_SOURCE_SET": 368,
+            "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY": 541,
+            "RESEARCH_CONDITIONAL_SOURCE_SET_POINT": 33,
+            "VALIDATION_ORIGIN_CHANGED": 1,
+            "CURRENT_SPHERE_POINT_OUTSIDE_ORIGINAL_COST_DOMAIN": 26
+          },
+          "domain_status": {
+            "CURRENT_SET_SINGLE": 596,
+            "CURRENT_SET_EMPTY": 99,
+            "CURRENT_SET_MULTI": 274
+          },
+          "quality": {
+            "NUMERICAL_DIRECTION_DOMAIN_READY": 541,
+            "UNQUALIFIED_CURRENT_QUALITY": 329,
+            "NO_CURRENT_DIRECTION_DOMAIN": 99
+          },
+          "class_reasons": {
+            "PHASE_GLRT_SIGNIFICANT": 576,
+            "INSUFFICIENT_CURRENT_PHASE_GEOMETRY": 11
+          },
+          "compatible_class_reasons": {
+            "PHASE_GLRT_SIGNIFICANT": 362,
+            "INSUFFICIENT_CURRENT_PHASE_GEOMETRY": 9
+          },
+          "class_count": {
+            "1": 596,
+            "0": 99,
+            "2": 206,
+            "3": 47,
+            "4": 20,
+            "5": 1
+          },
+          "geometry_widths": {
+            "n": 1234,
+            "min": 0.26066631673390595,
+            "median": 9.699682975841194,
+            "p95": 28.10200058082436,
+            "max": 164.46136573220494,
+            "sum": 16679.286597949118
+          },
+          "retired": {},
+          "calls": 969,
+          "class_evaluations": 1547,
+          "provider_valid": 33,
+          "receipt_checked": 33,
+          "significant_phase_classes": 362,
+          "numerical_single_ready": 428,
+          "numerical_multi_ready": 113
+        }
+      },
+      "valid_point_receipts_checked": 166,
+      "unique_csv_epoch_rows": true
+    }
+  },
+  "driver_wall_s": 56.66493315600002,
+  "frontend_wall_s": 55.94016619199999,
+  "integer_truth_available": false,
+  "correct_fix_rate": null,
+  "heading_accuracy": null,
+  "navigation_accuracy": null,
+  "full_cpp_navigation_calls": 0,
+  "reference_reads": 0,
+  "new_readout_algorithm_calls": 0,
+  "geometry_width_scope": "Ranges in role_diagnostics.geometry_widths are conditional compatible-class slot domain widths, including unexported/rejected classes; they are not errors, RMSE, standard deviations or truth-calibrated confidence intervals.",
+  "time_scope": "CSV decision timestamps are logical offline observation events. Recorded worker service excludes final diagnostic gzip serialization/write; zero busy rows does not prove real-time5Hz. Total outer wall includes output overhead. Source and current service figures are not hardware end-to-end latency.",
+  "estimator_scope": "Point is conditional on original complete selected-observation source, surviving physical arcs and uncalibrated working Q; not global current integer completeness or correct physical FIX."
+}
