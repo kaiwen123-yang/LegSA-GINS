@@ -108,8 +108,15 @@ explicitly: all 1200 raw epochs now build models, but full-class acquisition
 admits zero windows and partial acquisition admits six of 120. Its body-HV
 partial navigation yaw RMSE is 2.557707 degrees versus 1.620834 degrees for the
 dual-PVT vector control; input completeness has not produced navigation gain.
-The separate tracking trial and its full-span navigation results must be judged
-on their own evidence, not on support lifetime alone.
+The tracking trial reuses those six acquisitions and exports 24 current
+measurements, of which the native filter accepts 20. Full-span yaw RMSE becomes
+2.249469 degrees, horizontal RMSE 0.101068 m and vertical RMSE 0.048785 m.
+This improves the sparse V2 carrier arm (2.557707 degrees, 0.102334 m,
+0.048792 m), while remaining worse than the dual-PVT control in heading and
+horizontal position. The control arms and all-invalid full-carrier arm have
+byte-identical NAV/STD to V2; only the partial tracking stream changes.
+Six tracks end at four phase-diagnostic failures and two arc changes. These are
+six acquisition sources, not 24 independent correct integer fixes.
 
 Rolling windows overlap and surviving tracks are selected by earlier tests.
 There is no lifetime false-fix or false-alarm guarantee. Persistent phase
