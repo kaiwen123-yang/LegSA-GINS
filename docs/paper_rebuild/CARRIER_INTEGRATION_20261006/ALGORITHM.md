@@ -100,6 +100,41 @@ release and owner conflicts. The combined affected-library test set contains
 competitor fit, so the method returns unresolved competition. Consistency
 under an assumed model does not establish integer truth.
 
+## Optional preselected-observation likelihood
+
+The selected-support mode chooses the same labels S using the original
+selection-window geometry, covariance and arc identities, before evaluating
+integer residuals. It retains R: all code rows plus phase rows with exactly zero
+coefficients on every unselected integer. The new problem uses y[R], A[R,S],
+B[R] and Q[R,R]. Shared-pivot correlations remain; Q is a marginal principal
+submatrix, never a Schur conditional covariance. This is a different
+observation likelihood, not an equivalent profile of the original full problem.
+
+The actual reduced problem, source-row identities and selected labels are
+fingerprinted. The top two globally certified classes are frozen with the
+SELECTED_OBSERVATION_MARGINAL_Q_V1 source prefix. Validation and tracking still
+consume the original current models, retain only the fixed support, and use
+unchanged residual/length/competition/phase gates. Losing a selected arc still
+releases the track. The full-nuisance mode remains available for comparison.
+
+integration_frontend.py accepts --likelihood original (default) or
+--likelihood selected-support with partial mode. --sphere-library is an
+independent opt-in numerical backend; its ABI/kernel/library SHA enters the
+certificate and input contract. Omitting it keeps Python. The selected-support
+trial deliberately uses Python, while NATIVE_FULL6 keeps the original
+likelihood and changes only equivalent numerical implementation.
+
+The complete 120-window native full-likelihood trial certifies all 120 and
+matches the original 112 certified candidate pairs, admissions and measurements
+within floating-point tolerance. It produces 71 uncharged and 26 serial
+measurements. The separate selected-support trial also certifies all 120,
+uses exactly six integers, and produces 62 measurements in either replay;
+its two 1200-row streams are byte-identical. It launches all 120 scheduled
+opportunities without busy drops. Search median/P95 are 0.135904/0.498868 s.
+These are recorded-service-time results with zero other processing costs.
+Primary selected integers agree in 111/120 windows between the likelihoods;
+competitors agree in only 9/120. Physical integer truth is still unavailable.
+
 ## Measured status and remaining limits
 
 The first frontend produced one full-class and seven partial-class measurements

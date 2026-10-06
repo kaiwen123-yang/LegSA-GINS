@@ -1,0 +1,4 @@
+variant,certified,windows,integer_dimensions_min,integer_dimensions_max,acquisitions,ordinary_valid,serial_valid,serial_search_launched,serial_busy_drops,solve_median_s,solve_p95_s,solve_max_s,solve_gt_1s,same_ordinary_serial_csv_bytes
+PARTIAL6,112,120,12,30,16,70,11,37,83,3.1205529450000427,30.00022988995001,30.00161398199998,82,False
+NATIVE_FULL6,120,120,12,30,17,71,26,94,26,0.4628932440000142,5.240184028450017,17.336169659000007,34,False
+SELECTED_LIKELIHOOD,120,120,6,6,15,62,62,120,0,0.1359035699999822,0.49886841470001564,1.87063195799999,1,True

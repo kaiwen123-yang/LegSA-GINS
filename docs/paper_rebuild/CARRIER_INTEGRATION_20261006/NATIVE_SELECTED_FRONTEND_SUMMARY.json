@@ -1,0 +1,69 @@
+{
+  "code_freeze": "fc125a9",
+  "new_searches": 240,
+  "trial_order": [
+    "NATIVE_FULL6",
+    "SELECTED_LIKELIHOOD"
+  ],
+  "new_tracking_runs": 4,
+  "reference_reads": 0,
+  "physical_integer_truth_available": false,
+  "real_time_qualified": false,
+  "results": [
+    {
+      "variant": "PARTIAL6",
+      "certified": 112,
+      "windows": 120,
+      "integer_dimensions_min": 12,
+      "integer_dimensions_max": 30,
+      "acquisitions": 16,
+      "ordinary_valid": 70,
+      "serial_valid": 11,
+      "serial_search_launched": 37,
+      "serial_busy_drops": 83,
+      "solve_median_s": 3.1205529450000427,
+      "solve_p95_s": 30.00022988995001,
+      "solve_max_s": 30.00161398199998,
+      "solve_gt_1s": 82,
+      "same_ordinary_serial_csv_bytes": false
+    },
+    {
+      "variant": "NATIVE_FULL6",
+      "certified": 120,
+      "windows": 120,
+      "integer_dimensions_min": 12,
+      "integer_dimensions_max": 30,
+      "acquisitions": 17,
+      "ordinary_valid": 71,
+      "serial_valid": 26,
+      "serial_search_launched": 94,
+      "serial_busy_drops": 26,
+      "solve_median_s": 0.4628932440000142,
+      "solve_p95_s": 5.240184028450017,
+      "solve_max_s": 17.336169659000007,
+      "solve_gt_1s": 34,
+      "same_ordinary_serial_csv_bytes": false
+    },
+    {
+      "variant": "SELECTED_LIKELIHOOD",
+      "certified": 120,
+      "windows": 120,
+      "integer_dimensions_min": 6,
+      "integer_dimensions_max": 6,
+      "acquisitions": 15,
+      "ordinary_valid": 62,
+      "serial_valid": 62,
+      "serial_search_launched": 120,
+      "serial_busy_drops": 0,
+      "solve_median_s": 0.1359035699999822,
+      "solve_p95_s": 0.49886841470001564,
+      "solve_max_s": 1.87063195799999,
+      "solve_gt_1s": 1,
+      "same_ordinary_serial_csv_bytes": true
+    }
+  ],
+  "primary_selected_integer_agreement_between_new_likelihoods": 111,
+  "second_selected_integer_agreement": 9,
+  "agreement_denominator": 120,
+  "likelihood_selection_labels_agree": 120
+}
