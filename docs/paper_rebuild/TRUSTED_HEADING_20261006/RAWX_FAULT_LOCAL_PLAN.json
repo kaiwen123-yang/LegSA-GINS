@@ -1,0 +1,23 @@
+{
+  "status": "LOCAL_SYNTHETIC_CHECKS_PREREGISTERED",
+  "authorization": "root message: at most eight pure synthetic/mock checks once; necessary repair retained",
+  "test_cases": 8,
+  "scope": "overlay fields/arc tokens, bound cached anchor identity, default-off prepare hooks, supplied frontend registration callback",
+  "real_raw_reads": 0,
+  "real_prepares": 0,
+  "real_frontends": 0,
+  "AR_search": 0,
+  "GLS": 0,
+  "GLRT": 0,
+  "native_navigation": 0,
+  "evaluator": 0,
+  "reference_reads": 0,
+  "synthetic_time_window_s": [
+    0,
+    100
+  ],
+  "synthetic_interval_s": 0.2,
+  "synthetic_phase_rate_cycles_s": 2.0,
+  "synthetic_Doppler_Hz": -2.0,
+  "failure_policy": "preserve first log; no expansion or real execution; targeted fixture/source repairs separately disclosed"
+}

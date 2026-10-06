@@ -238,11 +238,15 @@ def build_with_pivot_policy(e1,e2,provider,anchor,*,groups,pivots,arc_ids,policy
   pivots[group.key]=group.pivot
  return model,changes
 
-def prepare(a):
+def prepare(a, *, epoch_overlay=None, anchor_reuse=None, prepare_families=None):
  # New preparations require an explicit causal prefix. Historical saved plans
  # remain unchanged and readable; there is deliberately no implicit full-NAV
  # fallback for an integration run.
  roots=aliases(a.roots)
+ families=FAMILIES if prepare_families is None else {name:FAMILIES[name] for name in prepare_families}
+ if not families:raise ValueError("EMPTY_PREPARE_FAMILY_SELECTION")
+ if (epoch_overlay is None)!=(anchor_reuse is None):
+  raise ValueError("OVERLAY_AND_BOUND_UNCHANGED_CODE_ANCHOR_REUSE_REQUIRED_TOGETHER")
  replay=NavigationReplay(roots,Path(roots["<EXT_REPRO_BUILD>"])/"lib/liblegsa_rtklib_bridge.so",
    start_s=a.start,manifest=getattr(a,"navigation_manifest",None),schedule=getattr(a,"navigation_schedule",None),
    allow_empty_navigation=getattr(a,"allow_empty_navigation",False))
@@ -269,6 +273,17 @@ def prepare(a):
  if replay.entries[0]["cutoff_relative_s"]>first_epoch:
   raise ValueError("NAVIGATION_PREFIX_AFTER_FIRST_EPOCH")
  inputs["navigation_override"]=replay.input_audit
+ if anchor_reuse is not None:
+  # Only a registered caller may supply this sealed, code-identical snapshot.
+  anchor_reuse.bind(sequence=a.sequence,window_s=[a.start,a.stop],base_time=base,
+    inputs=inputs,epochs=epochs,navigation_audit=replay.input_audit)
+  overlay_result=epoch_overlay(epochs,base)
+  anchor_reuse.verify_overlay(epochs,overlay_result.epochs)
+  epochs=overlay_result.epochs
+  emit(out/"RAWX_OBSERVATION_OVERLAY.json",overlay_result.audit)
+  inputs["anchor_reuse"]=anchor_reuse.identity
+  inputs["rawx_overlay"]={"file":"RAWX_OBSERVATION_OVERLAY.json",
+    "sha256":digest(out/"RAWX_OBSERVATION_OVERLAY.json"),"data_mode":overlay_result.audit["data_mode"]}
 
  # Each receiver is processed independently; exact pairing happens afterwards.
  grouped={};events={};all_events=[];adapter_rejections=[]
@@ -294,33 +309,37 @@ def prepare(a):
     "duplicate_rx1":sum(len(v)>1 for v in grouped[1].values()),"duplicate_rx2":sum(len(v)>1 for v in grouped[2].values())}
  emit(out/"ARC_EVENTS.json",all_events)
  emit(out/"ADAPTER_REJECTIONS.json",adapter_rejections)
- records=[];pivots={family:{} for family in FAMILIES};pivot_events=[];ledger=out/"PREPARE_LEDGER.jsonl"
+ records=[];pivots={family:{} for family in families};pivot_events=[];ledger=out/"PREPARE_LEDGER.jsonl"
  with replay:
   for key in keys:
    if len(grouped[1][key])!=1 or len(grouped[2][key])!=1:continue
    e1,e2=grouped[1][key][0],grouped[2][key][0];t=localtime(e1,base)
    provider,epoch_navigation=replay.advance(t)
    rec={"time_s":t,"key":key,"families":{},"navigation":epoch_navigation}
-   try:
-    spp=raw.gps_l1_code_spp(e1,provider,None,earth_rotation_delay="iterated_geometric")
-   except (ValueError,raw.RawBackendError,np.linalg.LinAlgError) as exc:
-    rec["spp_failure"]=str(exc)
-    decision=anchor_state.resolve(t,failure=str(exc))
+   if anchor_reuse is None:
+    try:
+     spp=raw.gps_l1_code_spp(e1,provider,None,earth_rotation_delay="iterated_geometric")
+    except (ValueError,raw.RawBackendError,np.linalg.LinAlgError) as exc:
+     rec["spp_failure"]=str(exc)
+     decision=anchor_state.resolve(t,failure=str(exc))
+    else:
+     rec["spp"]=spp
+     decision=anchor_state.resolve(t,position_ecef_m=spp.position_ecef_m)
+    rec["anchor_decision"]={**asdict(decision),"available":decision.available,"held":decision.held}
    else:
-    rec["spp"]=spp
-    decision=anchor_state.resolve(t,position_ecef_m=spp.position_ecef_m)
-   rec["anchor_decision"]={**asdict(decision),"available":decision.available,"held":decision.held}
-   if not decision.available:
+    rec.update(anchor_reuse.for_epoch(key,t,epoch_navigation))
+   anchor_info=rec["anchor_decision"]
+   if not anchor_info["available"]:
     records.append(rec);log(ledger,{"time_s":t,"navigation":epoch_navigation,
-       "SPP_FAILURE":rec.get("spp_failure"),"anchor_status":decision.status});continue
-   anchor=np.asarray(decision.position_ecef_m);rec["anchor_ecef_m"]=anchor
+       "SPP_FAILURE":rec.get("spp_failure"),"anchor_status":anchor_info["status"]});continue
+   anchor=np.asarray(anchor_info["position_ecef_m"]);rec["anchor_ecef_m"]=anchor
    common=set(events[(1,key)])&set(events[(2,key)])
    arcs={}
    for identity in common:
     one,two=events[(1,key)][identity],events[(2,key)][identity]
     if one.eligible and two.eligible:
      arcs[identity]=json.dumps([one.arc_token,two.arc_token],separators=(",",":"))
-   for family,spec in FAMILIES.items():
+   for family,spec in families.items():
     try:
      model,changes=build_with_pivot_policy(e1,e2,provider,anchor,groups=spec,
          pivots=pivots[family],arc_ids=arcs,policy=pivot_policy)
@@ -334,7 +353,7 @@ def prepare(a):
      rec["families"][family]={"status":"UNAVAILABLE","reason":str(exc),"qualification":getattr(exc,"qualification",None)}
      pivot_events.extend({"time_s":t,"family":family,**change} for change in getattr(exc,"pivot_events",[]))
    records.append(rec)
-   log(ledger,{"time_s":t,"navigation":epoch_navigation,"anchor_status":decision.status,"families":{k:{"status":v["status"],"rows":v.get("rows"),"ambiguities":v.get("ambiguities"),"reason":v.get("reason")} for k,v in rec["families"].items()}})
+   log(ledger,{"time_s":t,"navigation":epoch_navigation,"anchor_status":anchor_info["status"],"families":{k:{"status":v["status"],"rows":v.get("rows"),"ambiguities":v.get("ambiguities"),"reason":v.get("reason")} for k,v in rec["families"].items()}})
  emit(out/"EPHEMERIS_QUALIFICATION.json",replay.qualification if "schedule" in replay.input_audit
       else replay.qualification.get("0",{}).get("last_signal_queries_in_snapshot",{}))
  emit(out/"NAVIGATION_SWITCHES.json",replay.switches)
@@ -344,10 +363,14 @@ def prepare(a):
    "baseline_length_m":a.length,"max_gap_s":a.max_gap,"tdcp_limit_cycles":a.tdcp_limit,
    "pivot_policy":pivot_policy,"anchor_policy":asdict(anchor_policy),
    "allow_empty_navigation":getattr(a,"allow_empty_navigation",False),
-   "prefixes":[1,5,10],"families":FAMILIES,"cross_epoch_covariance":"assumed independent",
+   "prefixes":[1,5,10],"families":families,"cross_epoch_covariance":"assumed independent",
    "cross_signal_SD_covariance":"RAWX independent SD default; shared pivot DD propagated exactly",
    "real_integer_truth_available":False,"reference_reads":0,"scope":"development; inspection history is declared by the calling trial contract",
    "arc_left_censored":True,"accepted_integer_measurement":False}
+ if anchor_reuse is not None:
+  plan.update(data_mode="RAWX_OBSERVATION_LEVEL_SEMISYNTHETIC",spp_calls=0,
+    reused_anchor_slots=len(records),rawx_overlay_file="RAWX_OBSERVATION_OVERLAY.json",
+    scope="fixed observation-layer faults; not natural faults or true-integer evidence")
  emit(out/"PLAN.json",plan)
  print("PREPARE_COMPLETE",json.dumps(pairing),flush=True)
 def solve(a):

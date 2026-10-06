@@ -89,8 +89,14 @@ def source_acquire(block,library,source_id,counts,limits):
  if not (result.numerical_support_complete and length.necessary_support_complete):return None,detail
  origin=CompleteSourceSet.from_saved_record(clean(detail),source_id=source_id,registered_length_m=.35)
  return origin,detail
-def run(a):
- plan=read(ROOT/PLAN_REL);registered(a.registration_commit,plan)
+def run(a, *, supplied_plan=None, registration_check=None):
+ # A separately registered input-only experiment may reuse this exact algorithm.
+ # The caller binds any derived input seals to its own fixed registration.
+ plan=read(ROOT/PLAN_REL) if supplied_plan is None else supplied_plan
+ validate=registered if registration_check is None else registration_check
+ if supplied_plan is not None and registration_check is None:
+  raise ValueError("SUPPLIED_PLAN_REQUIRES_EXPLICIT_REGISTRATION_CHECK")
+ validate(a.registration_commit,plan)
  out=Path(a.output).resolve();out.mkdir(parents=True,exist_ok=False)
  prepared=Path(a.prepared).resolve()
  checked(prepared/'COMPLETE.json',plan['prepared_complete_sha256'])
@@ -240,7 +246,7 @@ def run(a):
    emit(seqout/'SUMMARY.json',summary)
    emit(seqout/'OUTPUT_SEAL.json',{p.name:sha(p) for p in sorted(seqout.iterdir()) if p.is_file()})
    summaries.append(summary)
-  registered(a.registration_commit,plan)
+  validate(a.registration_commit,plan)
   emit(out/'SUMMARY.json',dict(status='PARTIAL_PROCESSING_LIMIT' if limited else 'COMPLETE',
    registration_commit=a.registration_commit,counts=counts,calls=calls,sequences=summaries,
    wall_s=time.monotonic()-begin,integer_truth_available=False,reference_reads=0,navigation_calls=0,

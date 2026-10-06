@@ -1,0 +1,127 @@
+{
+  "schema": "trusted_heading.rawx_fault.local_test_receipt.v1",
+  "scope": "Ubuntu-22.04 WSL pure synthetic and mocked integration only",
+  "authorization": "Parent authorized a prewritten local plan and at most eight distinct pure synthetic/mock checks; targeted repair of failed fixtures allowed. Real three-window prepare/frontend not executed.",
+  "local_plan": {
+    "path": "docs/paper_rebuild/TRUSTED_HEADING_20261006/RAWX_FAULT_LOCAL_PLAN.json",
+    "sha256": "b8530ebef2325b6d4e30818f1196b3cf48839081c97632e78a9503605be2f59c",
+    "timing": "written before first local test execution; snapshot retained with attempt"
+  },
+  "attempts": [
+    {
+      "scratch_alias": "<TRUSTED_HEADING_SCRATCH>/RAWX_FAULT_LOCAL_UNITS_ATTEMPT01",
+      "result": "FAILED_FIXTURES",
+      "passed": 4,
+      "failed": 4,
+      "deselected": 0,
+      "terminal": {
+        "returncode": 1,
+        "wall_s": 0.7978828259999773
+      },
+      "files": {
+        "INVOCATION.json": {
+          "sha256": "80c6224dcb1e639c4bf24f31832b664569c89133a953baf073fca7db08b32f3f",
+          "bytes": 229
+        },
+        "PLAN.json": {
+          "sha256": "b8530ebef2325b6d4e30818f1196b3cf48839081c97632e78a9503605be2f59c",
+          "bytes": 782
+        },
+        "SOURCE_PINS.json": {
+          "sha256": "03a3753e919355fdbf9753e9f29ee6dee38ea0427d029d4c5f5c0faef6e38f19",
+          "bytes": 646
+        },
+        "TERMINAL.json": {
+          "sha256": "b9c0176ec5912ea534b1a8af0278a67ef6908a5e2309c66e9e0ff525c43200a2",
+          "bytes": 54
+        },
+        "pytest.log": {
+          "sha256": "67d29ec803f952bbdf3adea3f2aa7cf64f4d6e7a12135cdc9e1e70b6b5039e5b",
+          "bytes": 4967
+        }
+      }
+    },
+    {
+      "scratch_alias": "<TRUSTED_HEADING_SCRATCH>/RAWX_FAULT_LOCAL_FIXTURE_REPAIR",
+      "result": "PASS_TARGETED_REPAIR",
+      "passed": 4,
+      "failed": 0,
+      "deselected": 4,
+      "terminal": {
+        "returncode": 0,
+        "wall_s": 0.35532224500002485,
+        "argv": [
+          "python3",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/paper_rebuild/test_rawx_fault_overlay.py",
+          "-k",
+          "test_01 or test_03 or test_05 or test_06"
+        ]
+      },
+      "files": {
+        "REPAIR.json": {
+          "sha256": "2aa1eb9ce8409592daecee533bee62572f2df21de135c65c137eb23d6c5af1e6",
+          "bytes": 520
+        },
+        "TERMINAL.json": {
+          "sha256": "4d481b0b5ba40832cf142069be62fbaada787dc488713f013d44a7065b8b88b4",
+          "bytes": 232
+        },
+        "pytest.log": {
+          "sha256": "ffda409585f92859607f9fc5f2e183f945af0a50e80c66dbb8a6a316d0f511c0",
+          "bytes": 112
+        }
+      }
+    }
+  ],
+  "distinct_scenarios": 8,
+  "pytest_instances_executed": 12,
+  "combined_result": "All eight distinct scenarios passed across the original and targeted fixture-repair invocations; not a fresh final eight-test rerun.",
+  "first_failure_root_cause": "Synthetic fixtures used raw TOW float as local time instead of the exact local_time expression; pivot history also omitted other group pivots. Exact identity guards correctly rejected the inconsistent synthetic cached anchor.",
+  "repair_scope": "Only synthetic test fixtures changed: canonical local_time keys/record time and all group pivots. No production algorithm changed to repair these failures.",
+  "production_source_after_tests": "Trial wrapper subsequently added existing satellite-bridge SHA validation and PID/PPID/argv/start-time receipt fields. Cached-anchor/scientific logic unchanged. These final wrapper changes were source-reviewed and AST-parsed, not exercised by a new test run.",
+  "final_source_sha256": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/rawx_fault_overlay.py": "75eab0d088e7e523ed15295fc37587c7d83a02964afa9f932de848a2e871dbad",
+    "scripts/paper_rebuild/carrier_phase/rawx_fault_trial.py": "491343311f31bfb5d13bdb6997fc2c3e1a934dfddc7d3a283cf865556e75b3a3",
+    "scripts/paper_rebuild/carrier_phase/real_trial.py": "6655bed85a62b718d873eda220719cc467c6ca0e4b2ebd31ac7dde2cd088a343",
+    "scripts/paper_rebuild/carrier_phase/full_window_frontend.py": "79309c3b1b06d3e3cbb4e295ebe4864842f738a69527bd550a691e587b4e841a",
+    "tests/paper_rebuild/test_rawx_fault_overlay.py": "a5cfd137661abe81e7d83107f4c2e55cdfb0dc815019e003ab37e85940a2d89e"
+  },
+  "static_final_checks": {
+    "AST_parse_files": 5,
+    "registered_source_pins_checked": 46,
+    "pin_mismatches": []
+  },
+  "anchor_navigation_identity_review": {
+    "file": "scripts/paper_rebuild/carrier_phase/real_trial.py",
+    "method": "NavigationReplay.advance",
+    "fields": [
+      "schedule_index",
+      "causal_cutoff_relative_s",
+      "manifest",
+      "manifest_sha256",
+      "navigation_availability"
+    ],
+    "finding": "Stable causal snapshot identity only. SPP/signal query qualification counters are recorded separately, so skipping SPP does not change this dictionary. Exact equality remains intentional."
+  },
+  "execution_counts": {
+    "real_RAWX_prepare": 0,
+    "real_frontend": 0,
+    "CILS": 0,
+    "GLS": 0,
+    "GLRT": 0,
+    "native_navigation": 0,
+    "convrnx": 0,
+    "reference_reads": 0,
+    "mocked_prepare_dispatches": 2,
+    "mocked_frontend_dispatches": 2
+  },
+  "limits": [
+    "No three-window semi-synthetic prepare/search run yet.",
+    "Synthetic tests establish engineering isolation and arc/provenance behavior, not natural-fault realism or integer correctness.",
+    "Existing satellite-state native bridge will be used during later model preparation; zero navigation calls does not mean zero native satellite-state computation.",
+    "First failed logs are preserved; no old scientific results or old frozen plans modified."
+  ]
+}
