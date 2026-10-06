@@ -29,7 +29,7 @@ import full_window_navigation as legacy
 require,sha,read,emit,pin,check,clone,launch,seal_files = (
     legacy.require,legacy.sha,legacy.read,legacy.emit,legacy.pin,legacy.check,
     legacy.clone,legacy.launch,legacy.seal_files)
-PLAN_REL="docs/paper_rebuild/TRUSTED_HEADING_20261006/CLONE_WINDOW_NAVIGATION_PLAN.json"
+PLAN_REL="docs/paper_rebuild/TRUSTED_HEADING_20261006/CLONE_WINDOW_NAVIGATION_R2_PLAN.json"
 SOURCE_REL="scripts/paper_rebuild/carrier_phase/clone_window_navigation.py"
 SEQUENCES=("BY2","BY2H","BY2O")
 ARMS=("NULL_CLONE","PAIR_YOUNG")
@@ -187,7 +187,7 @@ def prepare(a):
                 "foot_pair_position_source_id":"SDK_FOOT_BODY_PROXY_NOT_ENCODER_FK:"+sid,
                 "foot_pair_position_gnss_input_status":"unknown",
                 "foot_pair_covariance_source_id":"ENGINEERING_POINT_SIGMA_0_01M_ARBITRARY_FOUR_POINT_CROSS_BOUND",
-                "foot_pair_covariance_assumption":"Sigma6_upper_bound=8*sigma^2*I6; sigma=.01m; uncalibrated_zero_mean_working_model",
+                "foot_pair_covariance_assumption":"Sigma6 upper bound 8 sigma squared I6; sigma 0.01m; uncalibrated zero mean working model",
                 "foot_pair_frame_source_id":"SDK_FLU_TO_FRD_THEN_ENGINE_BODY_IDENTITY_UNCALIBRATED",
                 "foot_pair_body_frd_to_engine_body":[1,0,0,0,1,0,0,0,1],
                 "foot_pair_availability_policy":"source_time_replay_assumption"}
