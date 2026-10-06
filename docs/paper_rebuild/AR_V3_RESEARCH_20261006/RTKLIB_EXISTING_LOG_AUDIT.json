@@ -1,0 +1,26 @@
+{
+  "scope": "existing solution/stat/stderr only; no reference/error_series",
+  "scientific_output_rows": 660,
+  "q_counts": {
+    "1": 177,
+    "2": 483
+  },
+  "stat_record_counts": {
+    "$POS": 660,
+    "$VELACC": 660,
+    "$CLK": 660,
+    "$SAT": 25738
+  },
+  "existing_trace_files": [],
+  "stderr_has_constbl_or_AR_trace": false,
+  "evidence_gap": "status records do not record constbl invocation/application/skips or AR branch reason",
+  "q1_max_absolute_length_residual_m": 0.357747956549505,
+  "source_static_facts": [
+    "rtkpos.c constbl skips when mean position variance > (0.1*current length)^2",
+    "fixed postfit ddres passes P=NULL: constbl var=0; that call adds a residual but no filter update",
+    "valpos initializes stat=1 and only logs large residuals, never sets stat=0",
+    "resamb_LAMBDA ratio gate is distinct from valpos; Q1 is not independently true integers",
+    "satposs already uses receiver observation time minus own P/c minus satellite clock",
+    "generic subHalfCyc cannot justify adding 0.5 cycle to cpMes"
+  ]
+}

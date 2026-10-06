@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "id": "AR_V3_RESEARCH_20261006_RTKLIB_BY2_V0_TRACE4_ATTEMPT01",
+  "purpose": "Causal execution-path diagnosis; not a performance repair or new AR comparison",
+  "sequence": "BY2",
+  "variant": "HX07R_V0_UNCHANGED_SCIENCE",
+  "external_commit": "180043ee24b6d2b168f98b64be15f69d50046b1a",
+  "source_copy_or_patch": false,
+  "build_calls": 0,
+  "native_budget": 1,
+  "retry_budget": 0,
+  "evaluator_budget": 0,
+  "reference_read_budget": 0,
+  "raw_decode_budget": 0,
+  "original_run": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0",
+  "original_argv": [
+    "<RTKLIB>/app/consapp/rnx2rtkp/gcc/rnx2rtkp",
+    "-k",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07/CONFIGS/V0.conf",
+    "-o",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0/solution.pos",
+    "-y",
+    "2",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss2.obs",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss1.obs",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss1.nav",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss2.nav"
+  ],
+  "argv": [
+    "<RTKLIB>/app/consapp/rnx2rtkp/gcc/rnx2rtkp",
+    "-k",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07/CONFIGS/V0.conf",
+    "-o",
+    "<RTKLIB_DIAGNOSTIC_STAGE>/RUN/solution.pos",
+    "-y",
+    "2",
+    "-x",
+    "4",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss2.obs",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss1.obs",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss1.nav",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss2.nav"
+  ],
+  "diagnostic_only_cli_addition": [
+    "-x",
+    "4"
+  ],
+  "unchanged_cli": "-y 2 and complete original observation/history, navigation, and config",
+  "scientific_equality_gate": "all bytes of solution.pos and solution.pos.stat equal archived HX07R BY2 V0",
+  "nominal_original_run_elapsed_s": 4.380123,
+  "estimated_cost": "original 4.38s; trace/strace expected seconds to tens of seconds; not runtime benchmark",
+  "wall_timeout_s": 240,
+  "trace_disk_cap_bytes": 1000000000,
+  "protected_inputs_sha256": {
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss1.nav": "107409d66734988652ba4a38ea7b8bf31094ee2746232c1885fbaa1eec136205",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss1.obs": "f3bb057c79aeb967a82123e9840b5173a97d80842f336c30f17853b0bd10be5b",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss2.nav": "299d5e881d480e388194e981e402785b3b494d002838b435df5404345ad54974",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss2.obs": "11a77bb45cbf7461f02bfec3d48cdace38525f54cfd4b2af1306903c2b8dab2e",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07/CONFIGS/V0.conf": "97f0fe4157ce31909538e696184a7faadad059c3099ab912cbe2e97b0fc9e14f",
+    "<RTKLIB>/app/consapp/rnx2rtkp/gcc/rnx2rtkp": "3a0ad1c55435b45e1f83b2e713a0b0fb837a5f0a118d76ead3df1f9e3e531eda",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0/COMMAND.json": "8b4c39a3c1cf01ced206767744f9b53acced41df209009af61404c0d45d260d7",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0/solution.pos": "ecea49618f532fbf5a0cfb61c47377c1647bfc986297cdaec6cff24d96563199",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0/solution.pos.stat": "cf40c88259f979b21f1a2f3f93076f39d5d12489ef70e07866a94e715765d9e0",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0/stderr.log": "1fd3c6e8bf5870832a86847746cc8cda758239a22d14c753e16bc38730b96205",
+    "<RTKLIB>/src/rtkpos.c": "6b4ec66a1f7368e1e1e641c75d65727349e92379b681c449d7fec92dac538559",
+    "<RTKLIB>/src/ephemeris.c": "d1f50cfa0a7935844726d389c33b9c6a9270904cfaa5a7967a73e1d628eefa59",
+    "<RTKLIB>/src/rcv/ublox.c": "d08da0090cb0a93d3d78c77bc29b658f9f8371485d8855b08b442c6da29dccb7",
+    "<RTKLIB>/src/postpos.c": "bc3e49d569712978b6aa1c11158753c8a01a771fdb9b5638aad8d30841c22653",
+    "<RTKLIB>/app/consapp/rnx2rtkp/rnx2rtkp.c": "a85d2591c35dc0c129061a11a504386c925eadf46809d848d318a070eae8b634",
+    "<CODE_ROOT>/scripts/paper_rebuild/carrier_phase/ar_v3_rtklib_diagnostic.py": "045ef075c57b0c418ebfd1908c633903d3d41b0e624f918dc4a546881a1ef918"
+  },
+  "aliases": {
+    "<CODE_ROOT>": "<CODE_ROOT>",
+    "<CLEAN_ROOT>": "<CLEAN_ROOT>",
+    "<RTKLIB>": "<RTKLIB>",
+    "<RTKLIB_DIAGNOSTIC_STAGE>": "<RTKLIB_DIAGNOSTIC_STAGE>"
+  },
+  "thread_environment": {
+    "BLIS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1"
+  },
+  "context_only_window_relative_s": [
+    66.0,
+    340.0
+  ],
+  "native_replay_scope": "complete original files; no -ts/-te truncation",
+  "pos_time_base_tow_s": 460818.0,
+  "planned_diagnostics": [
+    "per epoch pre-AR DD constbl added/skipped counts with original trace quantization",
+    "LAMBDA branch: attempted/no DD/numerical failure/ratio failed/ratio passed",
+    "float and fixed postfit large residual logs, baseline residual separated",
+    "join all output Q states and length, without reference or selection by error"
+  ],
+  "boundaries": [
+    "trace is RTKLIB diagnostic output, never commercial reference",
+    "do not infer physical integer truth, unique multipath cause, or false-fix probability",
+    "do not apply an extra receiver clock correction or generic half-cycle adjustment",
+    "a mismatch preserves failed attempt; no automatic rerun and no replacement of old results"
+  ],
+  "local_plan_sha256": "b58e709bab44bf930a8e7d00ee53efd3bd9086fcb3e2c09993a148f130064644",
+  "status_at_registration": "PREPARED_NATIVE_ZERO"
+}
