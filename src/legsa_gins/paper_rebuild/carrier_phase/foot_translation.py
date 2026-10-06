@@ -1,4 +1,6 @@
-"""GNSS-free-declared conditional foot-interval displacement, not a velocity.
+"""Conditional foot-interval displacement, not a velocity.
+
+Only rotation provenance is declared GNSS-free; foot-position provenance is unknown.
 
 p0 = R p1 + t_body, where R maps body1 FRD into body0 FRD.
 R must be supplied in full; a rank-deficient contact-rotation representative is
@@ -117,7 +119,10 @@ class FootIntervalTranslation:
     source_role: str = "SDK_FOOT_POSITION_CONDITIONAL_INTERVAL_DISPLACEMENT"
     output_measurand: str = "FINITE_INTERVAL_DISPLACEMENT_NOT_CURRENT_VELOCITY"
     uncertainty_status: str = "CALLER_SIGMA_FIRST_ORDER_FIXED_WORKING_LINEARIZATION_NOT_CALIBRATED"
-    gnss_free_provenance_declared: bool = True
+    # Only the rotation input carries a GNSS-free declaration; position does not.
+    gnss_free_rotation_provenance_declared: bool = True
+    gnss_free_position_provenance_declared: bool | None = None
+    gnss_free_provenance_declared: bool | None = None
     imu_statistical_independence_proven: bool = False
     no_slip_proven: bool = False
     common_slip_observable: bool = False

@@ -1,4 +1,4 @@
-"""24 local synthetic/domain tests, no real data or navigation backend."""
+"""25 local synthetic/domain tests, no real data or navigation backend."""
 from dataclasses import replace
 import inspect
 import numpy as np
@@ -330,3 +330,13 @@ def test_rotation_snapshot_copies_input_and_reports_no_imu_independence():
     np.testing.assert_array_equal(recorded.matrix_body1_to_body0_frd,expected)
     assert not recorded.matrix_body1_to_body0_frd.flags.writeable
     assert not recorded.imu_statistical_independence_proven
+
+
+def test_rotation_source_declaration_does_not_certify_position_or_combined_source():
+    a,b,r,t=setup()
+    out=estimate(a,b,r)
+    assert out.gnss_free_rotation_provenance_declared is True
+    assert out.gnss_free_position_provenance_declared is None
+    assert out.gnss_free_provenance_declared is None
+    assert out.imu_statistical_independence_proven is False
+    np.testing.assert_allclose(out.body_origin_displacement_body0_frd_m,t,atol=1e-14)

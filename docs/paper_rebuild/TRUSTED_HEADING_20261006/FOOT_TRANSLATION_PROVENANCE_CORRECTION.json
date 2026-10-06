@@ -1,0 +1,26 @@
+{
+  "reason": "Correct overbroad metadata: only R declared GNSS-free; position provenance remains unknown. Numerical estimator unchanged.",
+  "command": [
+    "python3",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/paper_rebuild/test_foot_translation.py",
+    "-k",
+    "test_rotation_source_declaration_does_not_certify_position_or_combined_source"
+  ],
+  "returncode": 0,
+  "source_identity": {
+    "source_sha256": "de10aeed5ad150dd0ce02cad6e68bcee275e9d7067ecbd591443b584701d81b6",
+    "tests_sha256": "6ed7739be3c600bed8067f76f900549bae02ff18ba65667f84caaf1e01372c1b"
+  },
+  "source_identity_unchanged": true,
+  "scope": "One new metadata regression only; prior 24 tests deselected, not rerun.",
+  "stdout": ".                                                                        [100%]\n1 passed, 24 deselected in 0.11s\n",
+  "stderr": "",
+  "new_raw_reads": 0,
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "final_source_sha256": "ae3473d22ba9c5ff513926b401619cd9f0cfd9e1f9d1dafeffbc4679fb09994b",
+  "post_test_change": "Module docstring only; non-docstring AST identical; no rerun."
+}

@@ -32,3 +32,7 @@ Sigma 与全部交叉项来自调用者，使用 first-order fixed working linea
 - src/legsa_gins/paper_rebuild/carrier_phase/foot_translation.py 与 tests/paper_rebuild/test_foot_translation.py：完整可执行实现和测试。
 
 parent 与 planner 已完成只读符号、完整 Sigma 及测试覆盖审查，未发现阻断问题；未为审查追加数值运行。
+
+## 来源标记的后续修正
+
+只读检查发现原输出将旋转输入的 GNSS-free 声明泛化成整个足端组合观测。已修正：仅旋转声明为 true，足端位置与组合来源均为未知（None），IMU 统计独立仍为 false；位移计算未变。增加1项针对性元数据回归通过，原24项未重跑，总独立测试数25。修正执行源码和最后仅文档字符串修订的SHA、持久日志见 FOOT_TRANSLATION_PROVENANCE_CORRECTION.json；原24项回执保留原执行身份。
