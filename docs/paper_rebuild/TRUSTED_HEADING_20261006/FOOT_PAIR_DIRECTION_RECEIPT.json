@@ -1,0 +1,80 @@
+{
+  "scope": "LOCAL_SYNTHETIC_KERNEL_ONLY",
+  "unique_tests": 16,
+  "test_executions": 17,
+  "invocations": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "pytest",
+        "tests/paper_rebuild/test_foot_pair_direction.py",
+        "-q"
+      ],
+      "code_root": "<CODE_ROOT>",
+      "source_sha256": {
+        "src/legsa_gins/paper_rebuild/carrier_phase/foot_pair_direction.py": "2d6f764408cf0335e295d964b6c2e2eddae305029ae7beb3dc97779b96c7307c",
+        "src/legsa_gins/paper_rebuild/carrier_phase/contact_rotation.py": "6dc63f134e37a1f55e67aec3976a2a507e39bba92ef8985bfdca0f8bd738971d",
+        "tests/paper_rebuild/test_foot_pair_direction.py": "f7bb431ee32093cdc97c4e486810886a5bbee6372ec18519bf69884a0c25b9fd",
+        "docs/paper_rebuild/TRUSTED_HEADING_20261006/FOOT_PAIR_DIRECTION_PLAN.md": "61f9af63d70760ad0115c1ce78436ef94cdc9b153e5dbcebaf6458aca4a99511"
+      },
+      "returncode": 1,
+      "wall_s": 0.5203534669999996,
+      "real_data_reads": 0,
+      "native_calls": 0,
+      "solver_calls": 0,
+      "evaluator_calls": 0,
+      "reference_reads": 0,
+      "observed_passed": 15,
+      "observed_failed": 1,
+      "pytest_reported_elapsed_valid": false
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "pytest",
+        "tests/paper_rebuild/test_foot_pair_direction.py::test_clone_ecef_augmentation_matches_independent_rotation_log_fd",
+        "-q"
+      ],
+      "source_sha256": {
+        "src/legsa_gins/paper_rebuild/carrier_phase/foot_pair_direction.py": "2d6f764408cf0335e295d964b6c2e2eddae305029ae7beb3dc97779b96c7307c",
+        "src/legsa_gins/paper_rebuild/carrier_phase/contact_rotation.py": "6dc63f134e37a1f55e67aec3976a2a507e39bba92ef8985bfdca0f8bd738971d",
+        "tests/paper_rebuild/test_foot_pair_direction.py": "40c384bf35c9876cf464457cf44fbce15473283b445d06fd51c64109693fa062"
+      },
+      "returncode": 0,
+      "wall_s": 0.42373730500000306,
+      "reason": "Only failed FD zero-element tolerance test; 8.3267e-17 roundoff exceeded 8e-17; now 8 machine eps. No production math change.",
+      "real_data_reads": 0,
+      "native_calls": 0,
+      "solver_calls": 0,
+      "evaluator_calls": 0,
+      "reference_reads": 0,
+      "observed_passed": 1,
+      "observed_failed": 0
+    }
+  ],
+  "final_unique_passed": 16,
+  "final_unique_failed": 0,
+  "preparation_revision": "Before first execution: world vector residual replaced by body0 relative residual to retain common-rotation gauge away from zero residual. Old preparation retained; not executed.",
+  "runtime_correction": "Production math unchanged after first run. FD zero-element absolute tolerance 8e-17 replaced by 8*machine_epsilon; only failed test rerun.",
+  "scientific_source_unchanged_across_test_runs": true,
+  "final_source_sha256": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/foot_pair_direction.py": "2d6f764408cf0335e295d964b6c2e2eddae305029ae7beb3dc97779b96c7307c",
+    "src/legsa_gins/paper_rebuild/carrier_phase/contact_rotation.py": "6dc63f134e37a1f55e67aec3976a2a507e39bba92ef8985bfdca0f8bd738971d",
+    "tests/paper_rebuild/test_foot_pair_direction.py": "40c384bf35c9876cf464457cf44fbce15473283b445d06fd51c64109693fa062",
+    "docs/paper_rebuild/TRUSTED_HEADING_20261006/FOOT_PAIR_DIRECTION_PLAN.md": "61f9af63d70760ad0115c1ce78436ef94cdc9b153e5dbcebaf6458aca4a99511"
+  },
+  "logs": {
+    "FOOT_PAIR_DIRECTION_TEST_01.log": "5609c8ddcc2aeaff3098ee0b6a89edba98fb32d79d7509514dac991514eb9eb5",
+    "FOOT_PAIR_DIRECTION_TEST_02.log": "016a4093788648644b08006f7d1d171ca7639313677f5aa929f004d4a3e52465"
+  },
+  "raw_reads": 0,
+  "reference_reads": 0,
+  "native_calls": 0,
+  "CILS_calls": 0,
+  "navigation_runs": 0,
+  "evaluator_calls": 0,
+  "scratch_alias": "<SCRATCH>/TRUSTED_HEADING_20261006/FOOT_PAIR_DIRECTION",
+  "repository_head_observed_at_reporting": "39b2b2223c23a9af40cdbef2eb509e2f1c010673"
+}

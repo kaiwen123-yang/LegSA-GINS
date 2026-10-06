@@ -1,0 +1,46 @@
+....F...........                                                         [100%]
+=================================== FAILURES ===================================
+_______ test_clone_ecef_augmentation_matches_independent_rotation_log_fd _______
+
+    def test_clone_ecef_augmentation_matches_independent_rotation_log_fd():
+        blh = np.array([.8, -.3, 125.])
+        e,k,dri = earth(blh)
+        cbn = exp([.4,-.2,.3])
+        old = e@cbn
+        j = clone_attitude_augmentation_jacobian(ecef_from_ned=e, ned_frame_connection_per_m=k)
+        def pos(delta):
+            updated = earth(blh-dri@delta)[0]@cbn
+            return Rotation.from_matrix(updated@old.T).as_rotvec()
+        def phi(delta):
+            updated = e@exp(delta)@cbn
+            return Rotation.from_matrix(updated@old.T).as_rotvec()
+>       np.testing.assert_allclose(j[:,:3], fd(pos,3,eps=1.), atol=8e-17)
+
+tests/paper_rebuild/test_foot_pair_direction.py:158: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = (<function assert_allclose.<locals>.compare at 0x743fb04a29e0>, array([[ 4.64038354e-08, -0.00000000e+00, -0.00000000e...     [ 1.50010985e-07,  8.32667268e-17,  0.00000000e+00],
+       [-6.93889390e-18, -2.24645808e-07,  0.00000000e+00]]))
+kwds = {'equal_nan': True, 'err_msg': '', 'header': 'Not equal to tolerance rtol=1e-07, atol=8e-17', 'verbose': True}
+
+    @wraps(func)
+    def inner(*args, **kwds):
+        with self._recreate_cm():
+>           return func(*args, **kwds)
+E           AssertionError: 
+E           Not equal to tolerance rtol=1e-07, atol=8e-17
+E           
+E           Mismatched elements: 1 / 9 (11.1%)
+E           Max absolute difference: 8.32667268e-17
+E           Max relative difference: 1.
+E            x: array([[ 4.640384e-08, -0.000000e+00, -0.000000e+00],
+E                  [ 1.500110e-07, -0.000000e+00, -0.000000e+00],
+E                  [ 0.000000e+00, -2.246458e-07, -0.000000e+00]])
+E            y: array([[ 4.640384e-08,  1.387779e-17,  0.000000e+00],
+E                  [ 1.500110e-07,  8.326673e-17,  0.000000e+00],
+E                  [-6.938894e-18, -2.246458e-07,  0.000000e+00]])
+
+/usr/lib/python3.10/contextlib.py:79: AssertionError
+=========================== short test summary info ============================
+FAILED tests/paper_rebuild/test_foot_pair_direction.py::test_clone_ecef_augmentation_matches_independent_rotation_log_fd
+1 failed, 15 passed in -4.56s
