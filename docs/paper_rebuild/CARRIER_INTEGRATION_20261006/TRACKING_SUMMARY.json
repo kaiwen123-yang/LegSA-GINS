@@ -1,0 +1,144 @@
+{
+  "execution_commit": "e6adb92748101d3bca6b7c4dc93b59815eda8051",
+  "data_mode": "real_by2_raw",
+  "prepared_plan_sha256": "4eeb5f4536d0ac20e1ed68247d123ef5798980b0bfc6bed723fc09b54563c82e",
+  "acquisition_summary_sha256": "2017326b297c19fc2589fa735bd02a61fb71c0d15c611d15c7535922922d9fe2",
+  "solver_calls": 0,
+  "reference_reads": 0,
+  "trace_used_online": false,
+  "time_domain_s": [
+    100.19799995422363,
+    339.9979999065399
+  ],
+  "ownership": "INCUMBENT_AT_ENTRY_EXCLUSIVE_NO_QUEUE_NO_RESURRECTION",
+  "wall_clock_acquisition_latency_charged": false,
+  "integer_truth_available": false,
+  "production_validated": false,
+  "lifetime_false_fix_probability": null,
+  "source_summary_sha256": "33dc1757867c1189165fbb479e7844ef998a62ba17b0ad1e7911c42cbe9e2268",
+  "modes": {
+    "full": {
+      "epochs": 1200,
+      "valid_experimental_measurements": 0,
+      "valid_times_s": [],
+      "events": {
+        "INACTIVE": 1200,
+        "suppressed_valid_origins": 0
+      },
+      "release_statuses": {},
+      "reused_integer_searches_started": 0,
+      "active_at_end": false
+    },
+    "partial": {
+      "epochs": 1200,
+      "valid_experimental_measurements": 24,
+      "valid_times_s": [
+        149.99799990653992,
+        155.99799990653992,
+        156.19799995422363,
+        156.39800000190735,
+        157.99799990653992,
+        169.99799990653992,
+        170.19799995422363,
+        170.39800000190735,
+        170.59800004959106,
+        170.79800009727478,
+        170.99799990653992,
+        171.19799995422363,
+        171.39800000190735,
+        171.59800004959106,
+        171.79800009727478,
+        171.99799990653992,
+        172.19799995422363,
+        172.39800000190735,
+        172.59800004959106,
+        172.79800009727478,
+        172.99799990653992,
+        173.19799995422363,
+        333.9979999065399,
+        335.9979999065399
+      ],
+      "events": {
+        "INACTIVE": 1170,
+        "suppressed_valid_origins": 0,
+        "TRACK_STARTED": 6,
+        "TRACK_RELEASED": 6,
+        "TRACK_UPDATED": 18
+      },
+      "release_statuses": {
+        "RELEASED_REJECTED_PHASE_FAULT_DIAGNOSTIC": 4,
+        "RELEASED_UNRESOLVED_ACTIVE_ARC_CHANGED": 2
+      },
+      "reused_integer_searches_started": 6,
+      "active_at_end": false
+    }
+  },
+  "partial_tracks": [
+    {
+      "case_id": "partial_0148.00",
+      "selected_at_s": 148.99799990653992,
+      "started_at_s": 149.99799990653992,
+      "last_valid_at_s": 149.99799990653992,
+      "valid_current_measurements": 1,
+      "new_tracking_measurements": 0,
+      "accepted_extension_s": 0.0,
+      "released_at_s": 150.19799995422363,
+      "release_status": "RELEASED_REJECTED_PHASE_FAULT_DIAGNOSTIC"
+    },
+    {
+      "case_id": "partial_0154.00",
+      "selected_at_s": 154.99799990653992,
+      "started_at_s": 155.99799990653992,
+      "last_valid_at_s": 156.39800000190735,
+      "valid_current_measurements": 3,
+      "new_tracking_measurements": 2,
+      "accepted_extension_s": 0.40000009536743164,
+      "released_at_s": 156.59800004959106,
+      "release_status": "RELEASED_REJECTED_PHASE_FAULT_DIAGNOSTIC"
+    },
+    {
+      "case_id": "partial_0156.00",
+      "selected_at_s": 156.99799990653992,
+      "started_at_s": 157.99799990653992,
+      "last_valid_at_s": 157.99799990653992,
+      "valid_current_measurements": 1,
+      "new_tracking_measurements": 0,
+      "accepted_extension_s": 0.0,
+      "released_at_s": 158.19799995422363,
+      "release_status": "RELEASED_UNRESOLVED_ACTIVE_ARC_CHANGED"
+    },
+    {
+      "case_id": "partial_0168.00",
+      "selected_at_s": 168.99799990653992,
+      "started_at_s": 169.99799990653992,
+      "last_valid_at_s": 173.19799995422363,
+      "valid_current_measurements": 17,
+      "new_tracking_measurements": 16,
+      "accepted_extension_s": 3.200000047683716,
+      "released_at_s": 173.39800000190735,
+      "release_status": "RELEASED_REJECTED_PHASE_FAULT_DIAGNOSTIC"
+    },
+    {
+      "case_id": "partial_0332.00",
+      "selected_at_s": 332.9979999065399,
+      "started_at_s": 333.9979999065399,
+      "last_valid_at_s": 333.9979999065399,
+      "valid_current_measurements": 1,
+      "new_tracking_measurements": 0,
+      "accepted_extension_s": 0.0,
+      "released_at_s": 334.19799995422363,
+      "release_status": "RELEASED_UNRESOLVED_ACTIVE_ARC_CHANGED"
+    },
+    {
+      "case_id": "partial_0334.00",
+      "selected_at_s": 334.9979999065399,
+      "started_at_s": 335.9979999065399,
+      "last_valid_at_s": 335.9979999065399,
+      "valid_current_measurements": 1,
+      "new_tracking_measurements": 0,
+      "accepted_extension_s": 0.0,
+      "released_at_s": 336.19799995422363,
+      "release_status": "RELEASED_REJECTED_PHASE_FAULT_DIAGNOSTIC"
+    }
+  ]
+}
