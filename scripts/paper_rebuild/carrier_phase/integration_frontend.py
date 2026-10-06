@@ -16,6 +16,13 @@ from legsa_gins.paper_rebuild.carrier_phase.partial import PartialPolicy,prepare
 from legsa_gins.paper_rebuild.carrier_phase.admission import AdmissionConfig,CausalAdmissionSession
 from legsa_gins.paper_rebuild.carrier_phase.measurement import CSV_FIELDS,unavailable_measurement,diagnose_validated_window,qualify_current_baseline
 
+def verify_solver_backend(result, backend):
+    certificate = result.certificate
+    expected = "python" if backend["kind"] == "python_sphere" else "native_scalar"
+    if (certificate.sphere_backend != expected
+            or certificate.sphere_library_sha256 != backend.get("library_sha256")):
+        raise RuntimeError("requested sphere backend identity changed during frontend execution")
+
 def selected_windows(plan,starts):
     for start in starts:
         rows=[row for row in plan["records"] if start<=row["time_s"]<start+2.]
@@ -25,10 +32,22 @@ def run(a):
     plan=json.loads((a.trial/"PLAN.json").read_text())
     a.output.mkdir(parents=True,exist_ok=True);cases_dir=a.output/"cases";cases_dir.mkdir(exist_ok=True)
     policy=PartialPolicy(max_ambiguities=a.partial_max_ambiguities)
+    if a.likelihood == "selected-support" and a.modes != ["partial"]:
+        raise ValueError("selected-support likelihood requires partial mode alone")
+    if a.likelihood == "selected-support":
+        from legsa_gins.paper_rebuild.carrier_phase.selected_likelihood import (
+            prepare_selected_likelihood, solve_selected_likelihood,
+            freeze_selected_likelihood_candidates)
+    backend = {"kind": "python_sphere"}
+    solver_options = {}
+    if a.sphere_library is not None:
+        backend = {"kind": "native_sphere", "library_sha256": digest(a.sphere_library)}
+        solver_options["sphere_library"] = a.sphere_library
     sources=source_snapshot(a.code);sources[str(Path(__file__).relative_to(a.code))]=digest(__file__)
     identity={"model_plan_sha256":digest(a.trial/"PLAN.json"),"family":a.family,
       "length_m":plan["baseline_length_m"],"partial_policy":serial(policy),
       "nodes":a.nodes,"timeout_s":a.timeout,"alpha":.01,"angular_floor_deg":1.5,
+      "likelihood":a.likelihood,"sphere_backend":backend,
       "source_files":sources,"data_mode":"real_by2_raw","trace_used_online":False}
     contract=a.output/"INPUT_CONTRACT.json"
     if contract.exists():
@@ -54,8 +73,14 @@ def run(a):
                 if len(rows)!=10:raise ValueError("fixed window requires exactly ten real epochs")
                 selection=[load_model(a.trial,row,a.family) for row in rows[:5]]
                 if mode=="partial":
-                    search=prepare_partial_search(selection,length_m=plan["baseline_length_m"],policy=policy)
+                    prepare = (prepare_selected_likelihood if a.likelihood == "selected-support"
+                               else prepare_partial_search)
+                    search=prepare(selection,length_m=plan["baseline_length_m"],policy=policy)
                     record["subset_selection"]=serial(search.selection)
+                    record["likelihood"]=a.likelihood
+                    if a.likelihood == "selected-support":
+                        record["selection_support"]=serial(search.supports)
+                        record["selected_likelihood_plan_fingerprint"]=search.fingerprint if search.ready else None
                     if not search.selection.ready:
                         raise ValueError(search.selection.status)
                     problem=search.problem
@@ -63,10 +88,19 @@ def run(a):
                     print(json.dumps({"event":"SEARCH_START","case":case,"call":calls,
                                       "nuisance_and_selected_integers":problem.ambiguity_count,
                                       "selected":len(search.selection.selected_labels)}),flush=True)
-                    result=solve_partial(search,plan["lambda_library"],node_limit=a.nodes,timeout_s=a.timeout)
+                    if a.likelihood == "selected-support":
+                        selected_result=solve_selected_likelihood(search,plan["lambda_library"],
+                            node_limit=a.nodes,timeout_s=a.timeout,**solver_options)
+                        result=selected_result.result
+                    else:
+                        result=solve_partial(search,plan["lambda_library"],node_limit=a.nodes,
+                            timeout_s=a.timeout,**solver_options)
+                    verify_solver_backend(result,backend)
                     record["search"]={"certificate":serial(result.certificate),"best":serial(result.best),
                                       "second":serial(result.second),"all_labels":problem.ambiguity_labels}
-                    pair=freeze_partial_candidates(search,result,source_id=case)
+                    pair=(freeze_selected_likelihood_candidates(search,selected_result,source_id=case)
+                          if a.likelihood == "selected-support"
+                          else freeze_partial_candidates(search,result,source_id=case))
                 else:
                     problem=assemble_epochs(selection,length_m=plan["baseline_length_m"])
                     active=selection[-1].ambiguity_labels
@@ -75,7 +109,8 @@ def run(a):
                                       "nuisance_and_selected_integers":problem.ambiguity_count,
                                       "selected":len(active)}),flush=True)
                     result=solve_temporal(problem,plan["lambda_library"],distinct_ambiguity_labels=active,
-                                          node_limit=a.nodes,timeout_s=a.timeout)
+                                          node_limit=a.nodes,timeout_s=a.timeout,**solver_options)
+                    verify_solver_backend(result,backend)
                     source={"certificate":serial(result.certificate),"best":serial(result.best),
                             "second":serial(result.second),"ambiguity_labels":problem.ambiguity_labels}
                     record["search"]=source
@@ -131,6 +166,9 @@ def main():
     p.add_argument("--modes",choices=("full","partial"),nargs="+",default=["full","partial"])
     p.add_argument("--family",default="GPS_GAL_BDS_DUAL")
     p.add_argument("--partial-max-ambiguities",type=int,default=8)
+    p.add_argument("--likelihood",choices=("original","selected-support"),default="original")
+    p.add_argument("--sphere-library",type=Path,
+                   help="opt-in native sphere kernel; omitted uses the original Python backend")
     p.add_argument("--nodes",type=int,default=100000);p.add_argument("--timeout",type=float,default=30.)
     p.add_argument("--code",type=Path,default=Path(__file__).resolve().parents[3])
     a=p.parse_args()

@@ -139,10 +139,28 @@ other processing costs; they do not establish that these outputs are actually
 schedulable. Earlier navigation RMSEs remain explicitly data-time offline
 results, not latency-corrected real-time results.
 
+The single-worker replay now charges those original recorded CILS service times.
+Of 120 opportunities, it starts 37 and drops 83 while busy. Three surviving
+origins emit 11 current measurements, 10 accepted by the native EKF; all delayed
+origins are checked through intervening epochs before any current export.
+Full-span yaw RMSE is 2.403444 degrees, H 0.101844 m and V 0.048793 m, with a
+121.202-second longest interval without accepted carrier updates. This is worse
+than the uncharged six-cap replay and the PVT control. All three controls remain
+byte-identical. Preparation, IO, validation, catch-up and scheduling overhead
+remain idealized as zero; this is not a hardware real-time result.
+
+Caching sphere factors and pruning with an already-present cheap lower bound
+preserves the original objective. A registered 9-problem/18-call paired benchmark
+certifies 6 problems in both versions with the same two full integer vectors,
+baselines and objective; median speedup on that selected six-pair sample is
+1.248. One old timeout becomes certified; two remain timed out. These speed
+measurements were not substituted into the original serial replay.
+
 Rolling windows overlap and surviving tracks are selected by earlier tests.
 There is no lifetime false-fix or false-alarm guarantee. Persistent phase
 identification is diagnostic, not unique satellite attribution. The working
 measurement covariance omits discrete integer error and gate conditioning;
 RAWX noise is not a field-calibrated temporal model. The receiver-derived
-reference is not independent ground truth. Data-time causal replay does not
-charge the CILS wall-clock latency to navigation timestamps.
+reference is not independent ground truth. The early data-time
+replays do not charge search latency. The separately labeled serial replay
+charges recorded search service time only, with other costs still idealized.
