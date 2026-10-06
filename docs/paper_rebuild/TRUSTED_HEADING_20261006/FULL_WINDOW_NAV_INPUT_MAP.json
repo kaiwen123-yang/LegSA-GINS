@@ -1,0 +1,950 @@
+{
+  "schema": "trusted_heading.full_window_nav_input_map.v1",
+  "created_utc": "2026-10-06T16:03:13.154325+00:00",
+  "scope": "Engineering metadata and targeted small-file identity inventory only; no rebuild, solver, evaluator, reference or numerical-data analysis.",
+  "inspection_commit": "595dca896f920ef9bd3a7340c446303ca06e3aad",
+  "authority": {
+    "v3_lock": {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/AR_V3_RESEARCH_20261006/V3_BASELINE_LOCK.json",
+      "sha256": "d961acfd483c420e24e5b48f0b313cbac5932ef7a036a21ffe5a00dd742a09ff"
+    },
+    "original_scientific_freeze": "7d43b9af26120ed5dde21f53e515386361072ba6",
+    "main_identity_at_original_lock": "077fb725612730d743ff1dd3ba698c43499b4fcb",
+    "main_or_remote_rechecked_this_map": false,
+    "evaluation_contract": "<CODE_ROOT>/docs/paper_rebuild/TRUSTED_HEADING_20261006/NAVIGATION_EVALUATION_CONTRACT.md"
+  },
+  "correction_to_starting_assumption": "V3_SCRATCH is not wholly released: all three original locked GNSS providers and registry exist. Only the checked original NAV/STD payloads are absent.",
+  "aliases": {
+    "<CODE_ROOT>": "Resolved in ignored scratch <NAV_INPUT_MAP_LOCAL>/LOCAL_PATHS.json only.",
+    "<V3_ROOT>": "Resolved in ignored scratch <NAV_INPUT_MAP_LOCAL>/LOCAL_PATHS.json only.",
+    "<V3_SCRATCH>": "Resolved in ignored scratch <NAV_INPUT_MAP_LOCAL>/LOCAL_PATHS.json only.",
+    "<RAW_ROOT>": "Resolved in ignored scratch <NAV_INPUT_MAP_LOCAL>/LOCAL_PATHS.json only.",
+    "<CLEAN_ROOT>": "Resolved in ignored scratch <NAV_INPUT_MAP_LOCAL>/LOCAL_PATHS.json only.",
+    "<FROZEN_CODE_ROOT>": "Resolved in ignored scratch <NAV_INPUT_MAP_LOCAL>/LOCAL_PATHS.json only.",
+    "<SCRATCH_ROOT>": "Resolved in ignored scratch <NAV_INPUT_MAP_LOCAL>/LOCAL_PATHS.json only.",
+    "<CARRIER_SCRATCH>": "Resolved in ignored scratch <NAV_INPUT_MAP_LOCAL>/LOCAL_PATHS.json only.",
+    "<CARRIER_NAV_SCRATCH>": "Resolved in ignored scratch <NAV_INPUT_MAP_LOCAL>/LOCAL_PATHS.json only.",
+    "<NAV_INPUT_MAP_LOCAL>": "Resolved in ignored scratch <NAV_INPUT_MAP_LOCAL>/LOCAL_PATHS.json only."
+  },
+  "sequences": [
+    {
+      "sequence_id": "BY2",
+      "original_run_id": "RUN_00004",
+      "original_case_id": "C00_clean_normal",
+      "full_window_s": [
+        66.0,
+        340.0
+      ],
+      "base_time_unix_s": 1772784000.0,
+      "configuration": {
+        "path": "<V3_ROOT>/03_NATIVE/RUN_00004/V3_RUNTIME_CONFIG.yaml",
+        "sha256": "3ac059cbaf5cacbf68929ca6027074629ab4efc969b4e8a5ddbb2ca300f4c542",
+        "size_bytes": 7846,
+        "role": "BY2:runtime_config",
+        "expected_hash_authority": "main task ledger",
+        "exists_now": true,
+        "size_matches_lock": true,
+        "current_sha256_verified_this_review": true,
+        "verification_level": "CURRENT_SHA256_MATCH"
+      },
+      "initialization": {
+        "initpos": [
+          39.98482973,
+          116.34312609,
+          41.80208107
+        ],
+        "initvel": [
+          0,
+          0,
+          0
+        ],
+        "initatt": [
+          0,
+          0,
+          0.688505
+        ],
+        "initgyrbias": [
+          0,
+          0,
+          0
+        ],
+        "initaccbias": [
+          0,
+          0,
+          0
+        ],
+        "initgyrscale": [
+          0,
+          0,
+          0
+        ],
+        "initaccscale": [
+          0,
+          0,
+          0
+        ],
+        "initposstd": [
+          10,
+          10,
+          10
+        ],
+        "initvelstd": [
+          1,
+          1,
+          1
+        ],
+        "initattstd": [
+          2,
+          2,
+          2
+        ],
+        "initbgstd": [
+          9.38,
+          9.38,
+          9.38
+        ],
+        "initbastd": [
+          77.8,
+          77.8,
+          77.8
+        ],
+        "initsgstd": [
+          0,
+          0,
+          0
+        ],
+        "initsastd": [
+          0,
+          0,
+          0
+        ]
+      },
+      "runtime_antenna_lever_frd_m": [
+        0.03,
+        0.03,
+        -0.3
+      ],
+      "runtime_provider_pins": {
+        "gnsspath": {
+          "path": "<V3_SCRATCH>/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+          "sha256": "fc6dd49c0a35c41208fc7d94da1c78ad63fe6938bd8f599021750c3bf5e20760",
+          "size_bytes": 253682,
+          "role": "BY2:provider:gnsspath",
+          "expected_hash_authority": "main task ledger provider_hashes_json",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": true,
+          "verification_level": "CURRENT_SHA256_MATCH"
+        },
+        "go2_attitude_prior_path": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv",
+          "sha256": "e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e",
+          "size_bytes": 9320956,
+          "role": "BY2:provider:go2_attitude_prior_path",
+          "expected_hash_authority": "main task ledger provider_hashes_json",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        },
+        "go2_horizontal_velocity_prior_path": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+          "sha256": "3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e",
+          "size_bytes": 18814268,
+          "role": "BY2:provider:go2_horizontal_velocity_prior_path",
+          "expected_hash_authority": "main task ledger provider_hashes_json",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        },
+        "imupath": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu",
+          "sha256": "74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647",
+          "size_bytes": 5091513,
+          "role": "BY2:provider:imupath",
+          "expected_hash_authority": "main task ledger provider_hashes_json",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        },
+        "raw_doppler_factor_path": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv",
+          "sha256": "847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4",
+          "size_bytes": 530592,
+          "role": "BY2:provider:raw_doppler_factor_path",
+          "expected_hash_authority": "main task ledger provider_hashes_json",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        }
+      },
+      "imu_input_contract": {
+        "imudatalen": 7,
+        "imudatarate_hz": 500,
+        "propagation_source": "hash_locked_go2_body",
+        "research_IMU8_replacement_authorized_by_this_map": false
+      },
+      "original_heading_contract": {
+        "source": "exact-epoch paired receiver HPPOSECEF positions, GNSS2 minus GNSS1; not raw carrier integer AR",
+        "nominal_input_hz": 5,
+        "required_receiver_carrier_status": "BOTH_FIXED",
+        "fixed_std_marker_deg": 2.933193,
+        "original_hv": "Frozen old status-A1 heading rotated provider; not the new causal body-HV provider"
+      },
+      "evaluation": {
+        "contract": "evaluator_contract_v3",
+        "baseline_median_m": 0.356191491865984,
+        "position_lever_frd_m": [
+          0.03,
+          -0.148095745932992,
+          -0.3
+        ],
+        "historical_transformed_nav_sha256": "375663491799b93d5c69251f7cad0edc21bc8ac8732a59600fede2a67b0fb8db",
+        "matched_time_start_s": 66.005054,
+        "matched_time_end_s": 339.997056,
+        "capture": {
+          "path": "<V3_ROOT>/04_EVALUATION/RUN_00004/v3/FROZEN_EVALUATOR/CAPTURE_CONFIG.json",
+          "sha256": "36f7bb7c7ef3131519e105653a731c56d92a46bf6bfdbdcb0da92dc2d53f4e02",
+          "size_bytes": 793,
+          "role": "BY2:evaluation_capture",
+          "expected_hash_authority": "evaluation ARCHIVE_RECEIPT",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        },
+        "result": {
+          "path": "<V3_ROOT>/04_EVALUATION/RUN_00004/v3/EVALUATION_RESULT.json",
+          "sha256": "d00efef45c3f210425c0aa26dc8bdbaf8757e9fe16904120e2f9fbf3ed9fc8e1",
+          "size_bytes": 20150,
+          "role": "BY2:evaluation_result",
+          "expected_hash_authority": "evaluation ARCHIVE_RECEIPT",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        },
+        "retained_error_series": {
+          "path": "<V3_ROOT>/04_EVALUATION/RUN_00004/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+          "sha256": "a98f1a5f7591c2365b0fd73b6a1146e0d6df3de2a06414fd067fc9b66b928548",
+          "size_bytes": 5786321,
+          "role": "BY2:retained_error_series_compressed",
+          "expected_hash_authority": "evaluation ARCHIVE_RECEIPT",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        },
+        "reference_identity_from_lock_only": {
+          "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv",
+          "sha256": "ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c",
+          "role": "EVALUATOR_CHILD_ONLY",
+          "parent_may_hash": false
+        },
+        "reference_payload_opened_or_hashed": false,
+        "std_transformed": false,
+        "uncertainty_status": "UNTRANSPORTED_STD_DIAGNOSTIC_ONLY"
+      },
+      "native_output": {
+        "archive_root": "<V3_ROOT>/03_NATIVE/RUN_00004",
+        "nav_sha256_from_ledger": "2fda678fbc9d760e7bd4b93b6e7f99861b41ea91aef86252566ea059abbeb0f4",
+        "std_sha256_from_ledger": "06fb77697eb2a2b5b53a9fb5702560907920f389de08fd45af2d6d9cb7fa1da9",
+        "full_nav_payload_retained": false,
+        "full_std_payload_retained": false,
+        "hashes_are_historical_receipts_not_current_payload_validation": true,
+        "original_scratch_nav_path": "<V3_SCRATCH>/03_NATIVE/RUN_00004/KF_GINS_Navresult.nav",
+        "original_scratch_std_path": "<V3_SCRATCH>/03_NATIVE/RUN_00004/KF_GINS_STD.txt",
+        "scratch_nav_exists_now": false,
+        "scratch_std_exists_now": false,
+        "archive_nav_exists_now": false,
+        "archive_std_exists_now": false
+      },
+      "missing_required_provider_roles": [],
+      "alternate_same_sha_copy_search_needed": false
+    },
+    {
+      "sequence_id": "BY2H",
+      "original_run_id": "SEQUENCE_BY2H_F04",
+      "original_case_id": "CLEAN5_BY2H_NATURAL",
+      "full_window_s": [
+        413.0,
+        683.0
+      ],
+      "base_time_unix_s": 1772784000.0,
+      "configuration": {
+        "path": "<V3_ROOT>/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F04/V3_RUNTIME_CONFIG.yaml",
+        "sha256": "47b91241f40453d4de1b3e6cafa7913f2892589e77178e9af3edb6209ee1b0c0",
+        "size_bytes": 7937,
+        "role": "BY2H:runtime_config",
+        "expected_hash_authority": "main task ledger",
+        "exists_now": true,
+        "size_matches_lock": true,
+        "current_sha256_verified_this_review": true,
+        "verification_level": "CURRENT_SHA256_MATCH"
+      },
+      "initialization": {
+        "initpos": [
+          39.9848666,
+          116.3431276,
+          41.691001892089844
+        ],
+        "initvel": [
+          0,
+          0,
+          0
+        ],
+        "initatt": [
+          0,
+          0,
+          353.25599329459806
+        ],
+        "initgyrbias": [
+          0,
+          0,
+          0
+        ],
+        "initaccbias": [
+          0,
+          0,
+          0
+        ],
+        "initgyrscale": [
+          0,
+          0,
+          0
+        ],
+        "initaccscale": [
+          0,
+          0,
+          0
+        ],
+        "initposstd": [
+          10,
+          10,
+          10
+        ],
+        "initvelstd": [
+          1,
+          1,
+          1
+        ],
+        "initattstd": [
+          2,
+          2,
+          2
+        ],
+        "initbgstd": [
+          9.38,
+          9.38,
+          9.38
+        ],
+        "initbastd": [
+          77.8,
+          77.8,
+          77.8
+        ],
+        "initsgstd": [
+          0,
+          0,
+          0
+        ],
+        "initsastd": [
+          0,
+          0,
+          0
+        ]
+      },
+      "runtime_antenna_lever_frd_m": [
+        0.03,
+        0.03,
+        -0.3
+      ],
+      "runtime_provider_pins": {
+        "gnsspath": {
+          "path": "<V3_SCRATCH>/02_PROVIDERS/CASES/BY2H__C00_clean_normal__4cd2369e62e4fba4f0b84b00a75c312c53a8e7eac606802837cbc88892278ff5/GNSS18.gnss",
+          "sha256": "4ff6ed07f1d189ab19934bc67c350e9f48f79527170c6fcafc85eba7cf1155bd",
+          "size_bytes": 249472,
+          "role": "BY2H:provider:gnsspath",
+          "expected_hash_authority": "main task ledger provider_hashes_json",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": true,
+          "verification_level": "CURRENT_SHA256_MATCH"
+        },
+        "go2_attitude_prior_path": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GO2_ATTITUDE_PRIOR.csv",
+          "sha256": "7366cdb1c24fd647b65328fd2d3938331f288903677b0006a291ae646adbfd55",
+          "size_bytes": 9323295,
+          "role": "BY2H:provider:go2_attitude_prior_path",
+          "expected_hash_authority": "main task ledger provider_hashes_json",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        },
+        "go2_horizontal_velocity_prior_path": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+          "sha256": "379d0676cbea5fda88437b6dc0508fcfe3d37b2fc6d5ccb40f39e732a6be54bf",
+          "size_bytes": 18811477,
+          "role": "BY2H:provider:go2_horizontal_velocity_prior_path",
+          "expected_hash_authority": "main task ledger provider_hashes_json",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        },
+        "imupath": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/CALIBRATED_IMU.imu",
+          "sha256": "d32e4891080e300e6edde4526146636f15ec54df945a0470c57fbbdc3aa5115c",
+          "size_bytes": 5098435,
+          "role": "BY2H:provider:imupath",
+          "expected_hash_authority": "main task ledger provider_hashes_json",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        },
+        "raw_doppler_factor_path": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/RAW_DOPPLER.csv",
+          "sha256": "d5c4a42790f2034423d1a3e060d37488ba01341b423933074c11471fcdbac21c",
+          "size_bytes": 405344,
+          "role": "BY2H:provider:raw_doppler_factor_path",
+          "expected_hash_authority": "main task ledger provider_hashes_json",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        }
+      },
+      "imu_input_contract": {
+        "imudatalen": 7,
+        "imudatarate_hz": 500,
+        "propagation_source": "hash_locked_go2_body",
+        "research_IMU8_replacement_authorized_by_this_map": false
+      },
+      "original_heading_contract": {
+        "source": "exact-epoch paired receiver HPPOSECEF positions, GNSS2 minus GNSS1; not raw carrier integer AR",
+        "nominal_input_hz": 5,
+        "required_receiver_carrier_status": "BOTH_FIXED",
+        "fixed_std_marker_deg": 2.933193,
+        "original_hv": "Frozen old status-A1 heading rotated provider; not the new causal body-HV provider"
+      },
+      "evaluation": {
+        "contract": "evaluator_contract_v3",
+        "baseline_median_m": 0.35418777593777223,
+        "position_lever_frd_m": [
+          0.03,
+          -0.14709388796888612,
+          -0.3
+        ],
+        "historical_transformed_nav_sha256": "1195defe0320d7037fba7a06feb086681aac1ed2b91dbbe9b059e1b069cde01c",
+        "matched_time_start_s": 413.047045,
+        "matched_time_end_s": 682.99505,
+        "capture": {
+          "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F04/v3/FROZEN_EVALUATOR/CAPTURE_CONFIG.json",
+          "sha256": "55c427356f0ce00cb470e7e1b354dfdd9b5bf482965946794b5676e6219e2ac5",
+          "size_bytes": 820,
+          "role": "BY2H:evaluation_capture",
+          "expected_hash_authority": "evaluation ARCHIVE_RECEIPT",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        },
+        "result": {
+          "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F04/v3/EVALUATION_RESULT.json",
+          "sha256": "4597ab15b20e0b21ed60c525238625459455be09dee3870eeb75bf119d54c6ba",
+          "size_bytes": 19756,
+          "role": "BY2H:evaluation_result",
+          "expected_hash_authority": "evaluation ARCHIVE_RECEIPT",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        },
+        "retained_error_series": {
+          "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F04/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+          "sha256": "eef9485bb7420ba23a32bfe6a4eb9d2882f31001892c0435297a44b9b8b67dfb",
+          "size_bytes": 5985885,
+          "role": "BY2H:retained_error_series_compressed",
+          "expected_hash_authority": "evaluation ARCHIVE_RECEIPT",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        },
+        "reference_identity_from_lock_only": {
+          "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/trace_vrtk2_a87c6e_2026-03-06-08-06-39_minimal.csv",
+          "sha256": "8d11fe360753bfcdbc54f7bf793fcb25850c0997b7aaad4ec1c9f10859c0f84f",
+          "role": "EVALUATOR_CHILD_ONLY",
+          "parent_may_hash": false
+        },
+        "reference_payload_opened_or_hashed": false,
+        "std_transformed": false,
+        "uncertainty_status": "UNTRANSPORTED_STD_DIAGNOSTIC_ONLY"
+      },
+      "native_output": {
+        "archive_root": "<V3_ROOT>/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F04",
+        "nav_sha256_from_ledger": "7f1cc3dd5276940575e1d8b5d92393921c03f8de6f8f25a6611afb0800e3edab",
+        "std_sha256_from_ledger": "8ebb16646d1a55a95896cf4fb0a6b97c6612186ad477d4e59dd00913b192dc83",
+        "full_nav_payload_retained": false,
+        "full_std_payload_retained": false,
+        "hashes_are_historical_receipts_not_current_payload_validation": true,
+        "original_scratch_nav_path": "<V3_SCRATCH>/V3R_CONTINUATION/03_NATIVE/SEQUENCE_BY2H_F04/KF_GINS_Navresult.nav",
+        "original_scratch_std_path": "<V3_SCRATCH>/V3R_CONTINUATION/03_NATIVE/SEQUENCE_BY2H_F04/KF_GINS_STD.txt",
+        "scratch_nav_exists_now": false,
+        "scratch_std_exists_now": false,
+        "archive_nav_exists_now": false,
+        "archive_std_exists_now": false
+      },
+      "missing_required_provider_roles": [],
+      "alternate_same_sha_copy_search_needed": false
+    },
+    {
+      "sequence_id": "BY2O",
+      "original_run_id": "SEQUENCE_BY2O_F04",
+      "original_case_id": "CLEAN5_BY2O_NATURAL",
+      "full_window_s": [
+        3186.0,
+        3563.0
+      ],
+      "base_time_unix_s": 1772780400.0,
+      "configuration": {
+        "path": "<V3_ROOT>/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F04/V3_RUNTIME_CONFIG.yaml",
+        "sha256": "15ac163dc99443955cd939047806b2fd74fb5ee421acad8f49403124a1138bcb",
+        "size_bytes": 7944,
+        "role": "BY2O:runtime_config",
+        "expected_hash_authority": "main task ledger",
+        "exists_now": true,
+        "size_matches_lock": true,
+        "current_sha256_verified_this_review": true,
+        "verification_level": "CURRENT_SHA256_MATCH"
+      },
+      "initialization": {
+        "initpos": [
+          39.984822099999995,
+          116.343128,
+          41.74599838256836
+        ],
+        "initvel": [
+          0,
+          0,
+          0
+        ],
+        "initatt": [
+          0,
+          0,
+          8.145278694592946
+        ],
+        "initgyrbias": [
+          0,
+          0,
+          0
+        ],
+        "initaccbias": [
+          0,
+          0,
+          0
+        ],
+        "initgyrscale": [
+          0,
+          0,
+          0
+        ],
+        "initaccscale": [
+          0,
+          0,
+          0
+        ],
+        "initposstd": [
+          10,
+          10,
+          10
+        ],
+        "initvelstd": [
+          1,
+          1,
+          1
+        ],
+        "initattstd": [
+          2,
+          2,
+          2
+        ],
+        "initbgstd": [
+          9.38,
+          9.38,
+          9.38
+        ],
+        "initbastd": [
+          77.8,
+          77.8,
+          77.8
+        ],
+        "initsgstd": [
+          0,
+          0,
+          0
+        ],
+        "initsastd": [
+          0,
+          0,
+          0
+        ]
+      },
+      "runtime_antenna_lever_frd_m": [
+        0.03,
+        0.03,
+        -0.3
+      ],
+      "runtime_provider_pins": {
+        "gnsspath": {
+          "path": "<V3_SCRATCH>/02_PROVIDERS/CASES/BY2O__C00_clean_normal__c5212cf72d07afd6d3ae0407fee87f841f2e0d909dfb8c1416bd7f38b0248bb4/GNSS18.gnss",
+          "sha256": "2a0b0ebbcd66b59dd153b84b132c638e9ea31021653e58e3ac125ed21304fa13",
+          "size_bytes": 376806,
+          "role": "BY2O:provider:gnsspath",
+          "expected_hash_authority": "main task ledger provider_hashes_json",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": true,
+          "verification_level": "CURRENT_SHA256_MATCH"
+        },
+        "go2_attitude_prior_path": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_ATTITUDE_PRIOR.csv",
+          "sha256": "60d0ea7aeb84ea5df757f8b34fc04d1e1e39b78925c592118094b690b8424537",
+          "size_bytes": 14205133,
+          "role": "BY2O:provider:go2_attitude_prior_path",
+          "expected_hash_authority": "main task ledger provider_hashes_json",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        },
+        "go2_horizontal_velocity_prior_path": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+          "sha256": "92bbe9165ed4ad6aa3f92c478f4a195ffccc7ec7b652506ba73533bd4190cdd2",
+          "size_bytes": 28692252,
+          "role": "BY2O:provider:go2_horizontal_velocity_prior_path",
+          "expected_hash_authority": "main task ledger provider_hashes_json",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        },
+        "imupath": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/CALIBRATED_IMU.imu",
+          "sha256": "48943f3e704ceebbf517bfb073856c1c215b5216e3a5d8b6cd91e7ea7586e49b",
+          "size_bytes": 7820907,
+          "role": "BY2O:provider:imupath",
+          "expected_hash_authority": "main task ledger provider_hashes_json",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        },
+        "raw_doppler_factor_path": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/RAW_DOPPLER.csv",
+          "sha256": "dd9b178b37149eb3d97bd586bf078b1e11cf5e43f8771cbc38c9c21bcd6101f5",
+          "size_bytes": 807097,
+          "role": "BY2O:provider:raw_doppler_factor_path",
+          "expected_hash_authority": "main task ledger provider_hashes_json",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        }
+      },
+      "imu_input_contract": {
+        "imudatalen": 7,
+        "imudatarate_hz": 500,
+        "propagation_source": "hash_locked_go2_body",
+        "research_IMU8_replacement_authorized_by_this_map": false
+      },
+      "original_heading_contract": {
+        "source": "exact-epoch paired receiver HPPOSECEF positions, GNSS2 minus GNSS1; not raw carrier integer AR",
+        "nominal_input_hz": 5,
+        "required_receiver_carrier_status": "BOTH_FIXED",
+        "fixed_std_marker_deg": 2.933193,
+        "original_hv": "Frozen old status-A1 heading rotated provider; not the new causal body-HV provider"
+      },
+      "evaluation": {
+        "contract": "evaluator_contract_v3",
+        "baseline_median_m": 0.35013463864843675,
+        "position_lever_frd_m": [
+          0.03,
+          -0.14506731932421837,
+          -0.3
+        ],
+        "historical_transformed_nav_sha256": "549db2477e9d87c5c138c410823fb1a1e1bbcb4de3bf6355de532ab397f2ef59",
+        "matched_time_start_s": 3186.005234,
+        "matched_time_end_s": 3562.997055,
+        "capture": {
+          "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F04/v3/FROZEN_EVALUATOR/CAPTURE_CONFIG.json",
+          "sha256": "3325eb7f325766a57996a815da9bffd7b3dc2928d53707f6214fe37743f4b6dd",
+          "size_bytes": 822,
+          "role": "BY2O:evaluation_capture",
+          "expected_hash_authority": "evaluation ARCHIVE_RECEIPT",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        },
+        "result": {
+          "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F04/v3/EVALUATION_RESULT.json",
+          "sha256": "d6dcd2785426fe59698557105efa69eff3bcf24ccd3b7331cf2a07a7e59a72b3",
+          "size_bytes": 19787,
+          "role": "BY2O:evaluation_result",
+          "expected_hash_authority": "evaluation ARCHIVE_RECEIPT",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        },
+        "retained_error_series": {
+          "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F04/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+          "sha256": "7c89c024b6088b3d2ba7f1b647a5b742e18e411695f4c39bd821e0eb1cc8a67b",
+          "size_bytes": 7788877,
+          "role": "BY2O:retained_error_series_compressed",
+          "expected_hash_authority": "evaluation ARCHIVE_RECEIPT",
+          "exists_now": true,
+          "size_matches_lock": true,
+          "current_sha256_verified_this_review": false,
+          "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED"
+        },
+        "reference_identity_from_lock_only": {
+          "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/trace_vrtk2_a87c6e_2026-03-06-07-52-22_minimal.csv",
+          "sha256": "4f7b3007c6a0b43ce1b0fb4908f23c042891154b4adbc7af4c3d8a47ca363cd9",
+          "role": "EVALUATOR_CHILD_ONLY",
+          "parent_may_hash": false
+        },
+        "reference_payload_opened_or_hashed": false,
+        "std_transformed": false,
+        "uncertainty_status": "UNTRANSPORTED_STD_DIAGNOSTIC_ONLY"
+      },
+      "native_output": {
+        "archive_root": "<V3_ROOT>/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F04",
+        "nav_sha256_from_ledger": "04cab3cbd1b86514cb442fe23e53c80705c919aaa2273e2ce07ddb0f42eb3842",
+        "std_sha256_from_ledger": "d29d72b1c453dd30aa8563aa61470ff81851339c831c8920969162510e605982",
+        "full_nav_payload_retained": false,
+        "full_std_payload_retained": false,
+        "hashes_are_historical_receipts_not_current_payload_validation": true,
+        "original_scratch_nav_path": "<V3_SCRATCH>/V3R_CONTINUATION/03_NATIVE/SEQUENCE_BY2O_F04/KF_GINS_Navresult.nav",
+        "original_scratch_std_path": "<V3_SCRATCH>/V3R_CONTINUATION/03_NATIVE/SEQUENCE_BY2O_F04/KF_GINS_STD.txt",
+        "scratch_nav_exists_now": false,
+        "scratch_std_exists_now": false,
+        "archive_nav_exists_now": false,
+        "archive_std_exists_now": false
+      },
+      "missing_required_provider_roles": [],
+      "alternate_same_sha_copy_search_needed": false
+    }
+  ],
+  "original_binary": {
+    "path": "<FROZEN_CODE_ROOT>/build/p13_v21_cpp/legsa_v23_port_core_demo",
+    "sha256": "96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c",
+    "size_bytes": 759456,
+    "role": "original_v3_binary",
+    "expected_hash_authority": "PROTOCOL_V3_CONTRACT.yaml",
+    "exists_now": true,
+    "size_matches_lock": true,
+    "current_sha256_verified_this_review": true,
+    "verification_level": "CURRENT_SHA256_MATCH"
+  },
+  "frozen_evaluator": {
+    "path": "<CLEAN_ROOT>/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py",
+    "sha256": "aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da",
+    "size_bytes": 18195,
+    "role": "original_frozen_evaluator",
+    "expected_hash_authority": "PROTOCOL_V3_CONTRACT.yaml",
+    "exists_now": true,
+    "size_matches_lock": true,
+    "current_sha256_verified_this_review": true,
+    "verification_level": "CURRENT_SHA256_MATCH",
+    "transport_entry": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/protocol_v3/evaluation_process.py::evaluate",
+    "transport_signature": "evaluate(evaluator, trace, nav, std, outdir, base_time, window, trace_sha256, code_root, raw_root, clean_root, instrument=True, consistency_policy=canonical_v2_wgs84_full_support)",
+    "frozen_argv": [
+      "python3",
+      "<FROZEN_EVALUATOR>",
+      "--trace",
+      "<SEQUENCE_TRACE_EVALUATOR_ONLY>",
+      "--nav",
+      "<SEALED_TRANSFORMED_NAV>",
+      "--std",
+      "<SAME_RUN_UNMODIFIED_STD>",
+      "--outdir",
+      "<NEW_EVALUATION_OUTPUT>",
+      "--base_time",
+      "<SEQUENCE_BASE_TIME>",
+      "--yaw_truth_mode",
+      "enu"
+    ],
+    "observer": "<CODE_ROOT>/scripts/paper_rebuild/v3_evaluator_observer",
+    "position_transform_entry": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/clean5_parity/evaluation.py::transform_nav + write_transformed_nav",
+    "physical_transform": "IMU position -> antenna midpoint using each original baseline median and body FRD lever [0.03, 0.03 - median/2, -0.30]; rotate by NAV Rz(yaw)Ry(pitch)Rx(roll), NED->ECEF, then WGS84 LLH.",
+    "changed_nav_columns_zero_based": [
+      2,
+      3,
+      4
+    ],
+    "non_position_tokens_unchanged": true,
+    "fit_or_reference_alignment_allowed": false,
+    "covariance_point_transport_performed": false,
+    "do_not_use_for_three_sequence_metrics": "clean5_parity.evaluation._metrics has fixed BY2 [66,340] count; use registered protocol_v3 sequence-aware metric path.",
+    "offline_access": "Only after all new outputs are sealed; reference opens/hashes in evaluator child, never provider/native/controller for tuning."
+  },
+  "registry": {
+    "path": "<V3_SCRATCH>/00_PREREGISTRATION/REGISTRY.json",
+    "sha256": "c89813daff415f6afbc723e954555bd8256b9d7f5221e49d56a02948552c1222",
+    "size_bytes": 55327878,
+    "role": "original_registration",
+    "expected_hash_authority": "REGISTRY_FILE_SEAL.json",
+    "exists_now": true,
+    "size_matches_lock": true,
+    "current_sha256_verified_this_review": false,
+    "verification_level": "EXISTS_AND_SIZE_MATCH_ONLY_HISTORICAL_SHA_NOT_REHASHED",
+    "payload_read_this_review": false
+  },
+  "source_index": {
+    "path": "<CODE_ROOT>/configs/paper_rebuild/v3/V3_PROVIDER_SOURCE_INDEX.json",
+    "role": "Historical source lineage; its base_gnss entries are pre-V3 lift inputs, NOT the locked GNSS18 runtime bytes.",
+    "use_locked_runtime_gnss_instead": true
+  },
+  "available_research_build": {
+    "recorded_plan": "<CARRIER_SCRATCH>/NAVIGATION_BODY_HV_01/PLAN.json",
+    "binary": {
+      "path": "<CARRIER_NAV_SCRATCH>/BUILD_BODY_HV/legsa_v23_port_core_demo",
+      "sha256": "e715d7405fbeff4e9e2b86aa3797b4ae8ea076b6fc4e34d7f88fc48e3b7a9462",
+      "exists_now": true,
+      "size_bytes": 881992,
+      "current_sha256_verified_this_review": true
+    },
+    "config_checker": {
+      "path": "<CARRIER_NAV_SCRATCH>/BUILD_BODY_HV/config_check",
+      "sha256": "f5b2e4cbd2c1af51742e4050c82857bf1e31ef02b7d0ee209629eeb3b2511a97",
+      "exists_now": true,
+      "size_bytes": 230344,
+      "current_sha256_verified_this_review": true
+    },
+    "registered_cpp_source_files": 58,
+    "current_cpp_source_hash_matches": 58,
+    "current_cpp_source_hash_mismatches": [],
+    "cpp_sources_actual": {
+      "cpp/legsa_v23_port_core/src/baseline3d.cpp": "3d88423e6a8d9d41c498f2f618fac70ac629481983d675c91026acdfbba058c2",
+      "cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp": "38149394f2396702b68463a89bc46f93030df97e4fb46b14462fe8b87fe5bd49",
+      "cpp/legsa_v23_port_core/src/common/rotation.cpp": "7dd006b9612a13ee5173b5faa51a0f9bb9d8ccdfcea9c8f1a599269371a01331",
+      "cpp/legsa_v23_port_core/src/common/earth.cpp": "8e9e6f52dc48ce42992f2e43ffa034cb5cc408f7901bb836542f1e0ed4683f82",
+      "cpp/legsa_v23_port_core/src/common/types.cpp": "5a4de8e7d89f38e597587349df5c627a465248e86c67287e738c849ee781081d",
+      "cpp/legsa_v23_port_core/src/fileio/file_saver.cpp": "02db31f1c123286566a8cf00dd1fd470dc49713dbaa30308246dd36fde7e6d39",
+      "cpp/legsa_v23_port_core/src/fileio/imu_file_loader.cpp": "ed064dfb7f50d5fede6cb0865870b42c86f254e4b68389e32e1fa18cfc9e1119",
+      "cpp/legsa_v23_port_core/src/fileio/gnss_file_loader.cpp": "b437bb7cba67cafbdfb0708e6f1bc0e3ccbf5719ef45e979eef07e8699a886e8",
+      "cpp/legsa_v23_port_core/src/factors/raw_doppler_factor_loader.cpp": "6634a30568ac943a778c17c3faef133c820a6f93a246d6ed9a9f5b251cec6249",
+      "cpp/legsa_v23_port_core/src/factors/satellite_state_provider.cpp": "78984fe28dbe53aec6a6a7b9c850fc29d38d9a01cb58427585d61a3591eabe10",
+      "cpp/legsa_v23_port_core/src/factors/raw_doppler_factor.cpp": "46786a1a0e4e31db2aba87023d754a5bd2e6480cd57be1eeec4f41f6dcc2946f",
+      "cpp/legsa_v23_port_core/src/factors/body_velocity_model.cpp": "6301565e4a1ab2bf6b7a3daa68447699707a4d1779eee04783b80fbbd39ec23b",
+      "cpp/legsa_v23_port_core/src/factors/go2_weak_prior_loader.cpp": "38e792a9d7512916b01e5dbfba001d05c69a567270d45492b4e5025b97ddb647",
+      "cpp/legsa_v23_port_core/src/factors/go2_weak_prior_factor.cpp": "d40bfc1b7cfd8d54fb30b167ad8f922ce56c98ecb2097171133cedb4832231d4",
+      "cpp/legsa_v23_port_core/src/quality_aware/qa_fallback.cpp": "76dc1658bcaeb06607c87861011ed9ba3a10e9b33144148e790134a70d09b707",
+      "cpp/legsa_v23_port_core/src/config/port_config_loader.cpp": "f6bbc15b78c59959459523a04bfc8407c6909af37c0fd5f77bed6fa2cf9294dd",
+      "cpp/legsa_v23_port_core/src/demo/legsa_v23_port_core_demo.cpp": "0e2bdf1ba03555f47f6af2b98ca5da86c54322651f60f5352e2ea095c9b07a40",
+      "cpp/legsa_v23_port_core/src/demo/port_demo.cpp": "274bd62f9dbd18b10c1764a02f98ab4452d0e445115f04bd30630f68018be891",
+      "cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp": "844e29ee4c799fe382d6f0e0724ec486054e7f089356edcb063e2d2711492fbf",
+      "cpp/legsa_v23_port_core/src/kf_gins/insmech.cpp": "eec54b43325af4101722d0b0eb76a712ec75a867f55950087a913642976f231c",
+      "cpp/legsa_v23_port_core/src/source_aware/source_aware_trace.cpp": "16305993507e641ff07c19952a0acb0263daf83ca91de0901df9aa5e529b2144",
+      "cpp/legsa_v23_port_core/src/source_aware/quality_state_trace.cpp": "00af7e8ccb982ed733fe55739555c1f03f9c02e8534c6291724f9348da0bdcde",
+      "cpp/legsa_v23_port_core/src/source_aware/source_aware_policy.cpp": "3efce02c49adc184dc9aa76b9a1fdd1b6eeb1307ad45edeb9ebfb5eea360cb91",
+      "cpp/legsa_v23_port_core/src/source_aware/quality_state_manager.cpp": "ba8511f51e35cfee41a313c114817c1adbe6b2e118a9632a88a24c06ebc8e192",
+      "cpp/legsa_v23_port_core/src/writers/port_writers.cpp": "b8947e623fc8c2c78cd4bbd721328b41559652e9bd17dc0e378e0417ba06af31",
+      "cpp/legsa_v23_port_core/src/fgo_feedback/fgo_feedback.cpp": "6a5742a17c615edef630728a460c2bbf5374b06d03dd8faf790684804591317b",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/nav_state.hpp": "804067e48398d6a495d4549f69fdb66f9c83f2831ac0a5d04cf1c37baa278093",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/imu.hpp": "7c79c573cd8aae9745ebe9a227a2c681d26c4e846cfb1583b1e4a516f668d728",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/baseline3d.hpp": "cee2acf52d96b83ac559dffb0c2324e56aa5a6c7a724f136df2e86efa0652286",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/gnss.hpp": "8000928d98bb7311fc28feef1d0d43cee3fde5396fb4d1463b3a4950eee14e8b",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/options.hpp": "a56f80a0ca9d29145297038a96643bb41d1685755b518fb79540493c323cec5a",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/types.hpp": "ff32237a291905bf9afe68721e687a4391c5a155d80cbaa626d8db3b2d75b9ef",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/runtime/port_runtime.hpp": "eb6523a5a121a90cebee732b2df5ad4e06e6407e3bb631024655234c086bb7f5",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/common/rotation.hpp": "6968d788b9765736fda9470c41243c5d2a01bf4fdb492e05b714b6d6b1892dca",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/common/earth.hpp": "aee6183b334e8c33c9dc4ca08396c8a0f61211444ba1d69d230148445c4dede3",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/fileio/imu_file_loader.hpp": "013a6b0e84914cc4260aad13148a12905f3ae33ff5aa51e339f31c9ded31be25",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/fileio/file_saver.hpp": "c854a616ac5d858890262b5c4801670a553bb629aaecbaeb98c60ced9a97839e",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/fileio/gnss_file_loader.hpp": "2c90de9ead14fdd285b358b37b50ca1622a94810f615e789a0e8149977ea2f1b",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/go2_weak_prior_types.hpp": "a0b781a519a1bd3b1a1e2340b3369fbb49f27074a8c9aeb1ca6adf161da5a60f",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/raw_doppler_types.hpp": "c59c1ab797128ca0ab73f9496c1fe12599d8a886f98d16a3e7a0b7ac4e8d56fc",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/body_velocity_model.hpp": "25c855998bcbbbc6bcc84f08a72a9c5c76f044bee9d8321de4cea894d4fec6e0",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/raw_doppler_factor.hpp": "ce2e00fdf4697ba6322fe0b3e22c719e86f11b4fcb26001ff67e04db933baea8",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/satellite_state_provider.hpp": "ee899b3c17fd036a7a1cf3841fd15bffa94a3e6adfbe066c6501b31e4845d1f8",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/go2_weak_prior_factor.hpp": "7fe76fc1bf98dd59729194d7eac9a36054e51a9d93c75974c467202475092261",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/raw_doppler_factor_loader.hpp": "1ecb890eac97824e263d75296022d1aafc486b04d5a18917c5474a868dc55d00",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/go2_weak_prior_loader.hpp": "3a5b7875ca85724683f596731e72cc13d1105a4b24cde1cdb94e8268fbf5b956",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/quality_aware/qa_fallback.hpp": "169866841e615dcc936b3ef0b0b4d481b1e121513f5d1ae615c32e0c8ace5ea8",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/config/port_config_loader.hpp": "cd3210d6412ff1c426e9792c2284c6554c1625e19e29e3da6919fb95e6bc2ce9",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/insmech.hpp": "500c44107b8cfa4997e7104783b72ee53a050550c79dedc8c90741b002c4ae6a",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/gi_engine.hpp": "c540f2e73179f46e7e1b05047eff1c8ebe6cb6bcf417aca34d957d71418e8f1b",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/options.hpp": "774b04a17d972af4a57a9ac2c29d1067005b49586dc7950c03b1cf98b34c49fb",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/quality_state_manager.hpp": "1f1636baa20c701f972a8895d9e74fd6aa6b59f03243ff9a6fce751b6e0d3cf9",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/measurement_source.hpp": "218da13d3f9b3f846182098880f96bd589cfa51db1d9a65efab3b0f0fd623da7",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/source_aware_policy.hpp": "e5c0d58d629194f1f1a0ddb35eeb8cb9335dd84f3544acbbe68cde07eb590e49",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/source_aware_trace.hpp": "cd2ad52aa811f12ebcad8397634e444c0a426956d36f9327b56646beac9c4811",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/quality_state_trace.hpp": "a25e0b963e3b55ff01f824b5e85689cbf5ab48210f359f8011258d72573c2b1f",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/writers/port_writers.hpp": "35fad671a84912ace9636ae98ee3bdeba90ff345828944fba6d57835e30f308c",
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/fgo_feedback/fgo_feedback.hpp": "97bc3f0b41ce53d0c5b28b29dd2e9865b16d7d62bc915d619224786b242891e7"
+    },
+    "cmake_source": "<CODE_ROOT>/cpp",
+    "target": "legsa_v23_port_core_demo",
+    "build_type": "Release",
+    "cxx_standard": 17,
+    "compiler": "c++",
+    "generator": "Unix Makefiles",
+    "release_flags": "-O3 -DNDEBUG",
+    "new_build_if_needed_commands": [
+      "cmake -S <CODE_ROOT>/cpp -B <NEW_BUILD_ROOT> -DCMAKE_BUILD_TYPE=Release",
+      "cmake --build <NEW_BUILD_ROOT> --target legsa_v23_port_core_demo -j2"
+    ],
+    "build_executed_this_review": false,
+    "original_v3_binary_equivalent": false,
+    "capabilities": "Opt-in external carrier ECEF baseline/full covariance, exact event scheduling, body-FRD HV research interface; legacy defaults remain a separate compatibility claim.",
+    "new_three_sequence_configuration_qualified": false,
+    "existing_navigation_trial_direct_reuse_allowed": false,
+    "existing_navigation_trial_boundary": "Existing script uses stage_07 BY2 IMU8 and BY2-only initialization/provider identity. Reuse orchestration/evaluation transport only after new full-window sequence configs are derived from the locked original configs, explicit changes registered and loader checked; do not copy old research config as V3."
+  },
+  "reuse_and_compatibility": {
+    "default_baseline_policy": "Reuse original V3 saved metrics/results and matched error series identities; do not rerun original V3 to obtain an improved baseline.",
+    "new_method_policy": "Run only new registered methods on all three full windows; retain initialization, physical point, timebase and unmodified providers unless the exact intended observation change is explicitly registered.",
+    "compatibility_original_nav_hashes_usable": true,
+    "compatibility_rule": "An optional new-binary/new-features-disabled compatibility run can compare its complete native NAV/STD SHA against historical locked SHA without old payload. Match is byte identity evidence for those outputs; mismatch is NOT equivalent and requires separate new-run identity/evaluation. Never relabel research C0 as original V3.",
+    "common_support": "Historical error_series.csv.gz exist. Derive common actual time keys only after new output seal; do not infer them from summary counts/endpoints and do not reconstruct old NAV.",
+    "missing_payload_metrics": "Any metric requiring unavailable original NAV/full covariance not recoverable from retained artifacts remains NA.",
+    "old_hv_dependency": "Frozen HV is A1/GNSS-heading-rotated. Keeping it is valid as unchanged original V3 input, but is not an independent velocity innovation or complete removal of commercial yaw.",
+    "observations_not_independent_by_default": "Do not count PVT yaw and same raw-carrier output as independent repeated heading information. Provider/arm definitions must disclose what is removed or retained.",
+    "degradation_layer": "Original V3 D61/D62 and scalar angular faults act on PVT/provider fields; not raw phase/slip/erasure faults. No degraded case reconstructed or reused as raw fault in this inventory.",
+    "initialization": "Reuse locked dual-yaw initialization values; this does not demonstrate autonomous raw-AR cold start.",
+    "merge_main_modified": false
+  },
+  "verification": {
+    "current_sha_verified_small_runtime_objects": 10,
+    "current_sha_verified_roles": [
+      "3 V3 config files",
+      "3 locked GNSS18 files",
+      "original V3 binary",
+      "frozen evaluator",
+      "research binary",
+      "research config checker"
+    ],
+    "large_providers_exists_and_size_only": 12,
+    "research_cpp_identity_comparisons": 58,
+    "original_registry_exists_and_size_only": 1,
+    "original_native_payloads_checked_missing": 6,
+    "reference_payload_reads": 0,
+    "raw_message_payload_reads": 0,
+    "provider_numeric_rows_parsed": 0,
+    "solver_calls": 0,
+    "evaluator_calls": 0,
+    "build_calls": 0,
+    "tests_run": 0,
+    "broad_file_hash_search": false,
+    "provider_rebuilt": false,
+    "source_lookup_correction": "A read of cpp/legsa_v23_port_core/CMakeLists.txt found no file; actual existing CMake entry is cpp/CMakeLists.txt. No executable was started."
+  }
+}

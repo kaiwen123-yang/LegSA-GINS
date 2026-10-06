@@ -1,0 +1,45 @@
+{
+  "status": "LOCAL_SYNTHETIC_KERNEL_CHECKS_PASS",
+  "authorization": "Parent chat approved dedicated source-set provider and <=8 local synthetic tests; no real frontend run authorized.",
+  "plan_relative": "docs/paper_rebuild/TRUSTED_HEADING_20261006/SET_PROVIDER_LOCAL_PLAN.json",
+  "plan_sha256": "291e35df908e75ad6de230caa5a70536f94066dfdccfc9ccb5b1ca4bb61dd179",
+  "execution_alias": "<TRUSTED_HEADING>/SET_PROVIDER_LOCAL_UNITS_ATTEMPT01",
+  "pytest_pass": 8,
+  "pytest_fail": 0,
+  "pytest_seconds": 0.54,
+  "wall_s": 0.7418515040000102,
+  "actual_calls": {
+    "fixed_integer_GLS": 62,
+    "GLRT": 62,
+    "geometry": 61,
+    "integer_enumeration": 0,
+    "CILS": 0,
+    "LAMBDA": 0,
+    "native_navigation": 0,
+    "real_model_reads": 0,
+    "reference_reads": 0,
+    "sphere_interface_dispatches": 44,
+    "actual_python_sphere_kernel_invocations": 43,
+    "mocked_sphere_return_invocations": 1
+  },
+  "files": {
+    "PLAN.json": "2eaae92aa0257929e832affe5557c153e3792f84fc9c30f5380ba7776a4e3c28",
+    "pytest.log": "e06fe8da6194d1f7074b49ef17b792481ff747e4cde99899448354abc9997142",
+    "RECEIPT.json": "5a3aed0fca203d06d0989584822c96dfaa26d27b97308d035eb2b1229e2a341a"
+  },
+  "source_pins": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/set_provider.py": "c4994347b6c3dd379b45ce370ec0c83ebb256031ad1d0d6b8582947068de3091",
+    "tests/paper_rebuild/test_carrier_set_provider.py": "91407d1ae8fb4bd43db7267d7c05d67cc3b8e91fc0aa7caa3e394d4a464a7a24",
+    "tests/paper_rebuild/test_carrier_candidate_lifecycle.py": "d2d927a12e5bf114c7fb70a19fb5224a4e8946faea4b10c4d61df98399c7f32f",
+    "docs/paper_rebuild/TRUSTED_HEADING_20261006/SET_PROVIDER_LOCAL_PLAN.json": "291e35df908e75ad6de230caa5a70536f94066dfdccfc9ccb5b1ca4bb61dd179"
+  },
+  "reused_generator": "Existing independent physical SD generator imported from test_carrier_candidate_lifecycle.py; its old tests were not re-run.",
+  "test_truth_scope": "Synthetic source support supplied explicitly; these tests validate provider semantics, not correctness/completeness of new integer enumeration.",
+  "timing_scope": "Source availability is supplied recorded acquisition completion; processing_wall_s is separately recorded, no hardware realtime claim.",
+  "limitations": [
+    "Current point covariance omits discrete integer risk, gate-selection conditioning and unmodeled correlations.",
+    "Conditional source uniqueness is not global current integer uniqueness or physical correct FIX.",
+    "Full-window scheduler and actual whole-acquisition runtime binding remain runner responsibilities."
+  ],
+  "sphere_count_disclosure": "Original pytest ledger labels all 44 dispatches python_sphere_ML; test_07 deliberately replaces one return to test the independent actual-raw-cost guard, so only 43 execute the real Python sphere kernel. Original log is retained unchanged."
+}

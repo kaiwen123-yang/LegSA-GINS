@@ -1,0 +1,34 @@
+{
+  "stage": "FULL_WINDOW_FRONTEND_SCHEDULER_LOCAL",
+  "status": "BEFORE_TEST_EXECUTION",
+  "tests": 6,
+  "scope": "Run orchestration against synthetic metadata and mocked acquisition/provider/model interfaces; never invoke scientific estimators.",
+  "budgets": {
+    "scheduler_runs": 6,
+    "integer_search": 0,
+    "GLS": 0,
+    "GLRT": 0,
+    "sphere": 0,
+    "real_models": 0,
+    "native_navigation": 0,
+    "reference": 0
+  },
+  "cases": [
+    "Healthy owner remains despite later qualified pending; at most one point per epoch; promotion epoch invalid",
+    "0.65 s acquisition blocks current exports; skipped slots are replayed as model=None and cannot accumulate validation",
+    "Missing current model stays invalid and resets synthetic validator streak",
+    "Complete source of 65 candidates is preserved and never truncated/activated at64",
+    "Global processing deadline keeps all remaining rows and acquisition opportunities across sequences",
+    "True input time gap clears owner/pending; old objects never reappear"
+  ],
+  "clock": "Only replace full_window_frontend.time with deterministic clock object. Do not monkeypatch global time module.",
+  "mocked": [
+    "registration/hash inputs",
+    "load_inputs/load_model",
+    "source_acquire",
+    "CompleteSetPointProvider",
+    "current_nodes/axes"
+  ],
+  "failure": "Record first result unchanged; report actual runner issue to owner; do not edit runner or rerun existing provider units.",
+  "log": "<TRUSTED_HEADING>/FULL_WINDOW_FRONTEND_SCHEDULER_UNITS_ATTEMPT01"
+}

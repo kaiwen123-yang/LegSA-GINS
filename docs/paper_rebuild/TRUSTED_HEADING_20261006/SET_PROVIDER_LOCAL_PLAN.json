@@ -1,0 +1,37 @@
+{
+  "stage": "COMPLETE_SET_PROVIDER_LOCAL_UNITS",
+  "status": "BEFORE_IMPLEMENTATION_AND_TEST_EXECUTION",
+  "authorization": "parent explicitly authorized dedicated provider kernel and at most 8 local synthetic checks after engineering design",
+  "scope": "new set_provider.py and new tests only; no real MODELS, raw, reference, integer search or native build",
+  "tests": 8,
+  "budgets": {
+    "GLS_calls": 180,
+    "GLRT_calls": 180,
+    "geometry_calls": 180,
+    "python_sphere_ML_calls": 64,
+    "integer_search_calls": 0,
+    "LAMBDA_calls": 0,
+    "native_navigation_calls": 0,
+    "real_model_reads": 0,
+    "reference_reads": 0
+  },
+  "cases": [
+    "known integer physical moving baseline: first 4 withheld, fifth current conditional estimate and full cost identity",
+    "recorded source availability delay: historical catchup never exports and selected_at unchanged",
+    "temporary bad measurement resets streak without deleting source N",
+    "multiple compatible classes retained with no mean or sphere call",
+    "same-origin requirement: alternating sole compatible source hypotheses cannot accumulate validation",
+    "physical token retirement resets validation, new token cannot inherit and full loss is permanent",
+    "sphere point outside original tau and malformed/early/TTL chronology fail closed",
+    "empty/incomplete source, call budget and receipt binding safety"
+  ],
+  "policy": {
+    "validation_epochs": 5,
+    "length_m": 0.35,
+    "angular_floor_deg": 1.5,
+    "max_source_age_s": 10,
+    "covariance": "fixed-N GLS Cb plus existing engineering isotropic floor; no discrete risk claim"
+  },
+  "logs": "<TRUSTED_HEADING>/SET_PROVIDER_LOCAL_UNITS_ATTEMPT01",
+  "failure": "Retain first failure log, fix actual implementation/test defect only, then execute only affected tests with separate receipt. No data or threshold changes."
+}
