@@ -223,3 +223,70 @@ def test_unimodular_decorrelation_path_with_nontrivial_mock_transform(monkeypatc
 def test_invalid_threshold_is_rejected_before_search():
     with pytest.raises(TemporalModelError):
         run(analytic_problem([0.],[.35,0.,0.],np.eye(4)),-1.)
+
+
+# Stage-B optional whole-domain length filter: targeted tests only.
+def test_length_filter_overlap_does_not_test_only_conditional_center():
+    from legsa_gins.paper_rebuild.carrier_phase.candidate_envelope import filter_length_necessary_support
+    p=analytic_problem([0.],[.41,0.,0.],np.diag([1e-4,.01,.01,.01]))
+    envelope=run(p,1.)
+    view=filter_length_necessary_support(p,envelope)
+    assert view.necessary_support_complete and len(view.retained_candidates)==1
+    assert view.items[0].checks[0].center_norm_m != pytest.approx(.35)
+    assert view.items[0].checks[0].necessary_condition_passed
+    assert len(envelope.candidates)==1  # raw result not mutated
+
+
+def test_length_filter_uses_every_epoch_not_only_target_center():
+    from legsa_gins.paper_rebuild.carrier_phase.candidate_envelope import filter_length_necessary_support
+    a=np.array([[1.],[0.],[0.],[0.]])
+    B=np.vstack([np.zeros((1,3)),np.eye(3)])
+    q=np.diag([1e-4,1e-4,1e-4,1e-4])
+    blocks=[EpochBlock(float(i),np.r_[0.,b],a,B,q,('n',),{'baseline_frame':'ECEF'})
+            for i,b in enumerate([[.8,0.,0.],[.35,0.,0.]])]
+    p=assemble_epochs(blocks)
+    envelope=run(p,1.)
+    view=filter_length_necessary_support(p,envelope)
+    assert view.status=='EMPTY_NECESSARY_SUPPORT' and view.necessary_support_complete
+    assert not view.items[0].checks[0].necessary_condition_passed
+    assert view.items[0].checks[1].necessary_condition_passed
+    assert view.azimuth_outer_arc is None
+
+
+def test_length_filter_tangent_boundary_is_retained():
+    from legsa_gins.paper_rebuild.carrier_phase.candidate_envelope import filter_length_necessary_support
+    p=analytic_problem([0.],[.45,0.,0.],np.diag([1e-4,.01,.01,.01]))
+    view=filter_length_necessary_support(p,run(p,1.))
+    assert len(view.retained_candidates)==1
+
+
+def test_length_filter_incomplete_domain_never_becomes_complete_empty():
+    from legsa_gins.paper_rebuild.carrier_phase.candidate_envelope import filter_length_necessary_support
+    p=analytic_problem([0.],[.8,0.,0.],np.diag([1.,1e-4,1e-4,1e-4]))
+    view=filter_length_necessary_support(p,run(p,4.,candidate_limit=1))
+    assert view.status=='INCOMPLETE_NECESSARY_SUPPORT'
+    assert not view.raw_support_complete and not view.necessary_support_complete
+    assert len(view.retained_candidates)==0 and view.azimuth_outer_arc is None
+
+
+def test_length_filter_requires_same_numerical_problem():
+    from legsa_gins.paper_rebuild.carrier_phase.candidate_envelope import filter_length_necessary_support
+    p=analytic_problem([0.],[.35,0.,0.],np.diag([1e-4,.01,.01,.01]))
+    envelope=run(p,1.)
+    other=replace(p,y=p.y+np.array([0.,.01,0.,0.]))
+    with pytest.raises(TemporalModelError,match='original bound envelope'):
+        filter_length_necessary_support(other,envelope)
+
+
+def test_length_filter_preserves_five_known_feasible_sphere_points():
+    from legsa_gins.paper_rebuild.carrier_phase.candidate_envelope import filter_length_necessary_support
+    truth=np.array([.21,.28,0.])
+    assert np.linalg.norm(truth)==pytest.approx(.35)
+    for displacement in ([.02,0.,0.],[-.04,.02,0.],[0.,0.,.1],[.1,-.03,.04],[-.01,-.01,-.01]):
+        v=np.asarray(displacement)
+        variance=2*float(v@v)
+        p=analytic_problem([0.],truth-v,np.diag([1e-4,variance,variance,variance]))
+        # Independent raw cost of the known length truth equals one half.
+        assert (truth-(truth-v))@(truth-(truth-v))/variance==pytest.approx(.5)
+        view=filter_length_necessary_support(p,run(p,1.))
+        assert view.necessary_support_complete and len(view.retained_candidates)==1

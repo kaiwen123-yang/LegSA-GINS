@@ -16,6 +16,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import math
+import hashlib
+import json
 from pathlib import Path
 import time
 import numpy as np
@@ -113,6 +115,8 @@ class CandidateEnvelopeResult:
     condition_number: float | None
     maximum_objective_identity_error: float
     decorrelation_used: bool
+    problem_fingerprint: str = ""
+    relative_numerical_guard: float = 1e-10
     coverage_scope: str = 'NUMERICAL_OUTER_COVER_OF_FULL_GAUSSIAN_RELAXED_INTEGER_SUPPORT'
     rigorous_interval_certificate: bool = False
     integer_acceptance_defined: bool = False
@@ -155,6 +159,21 @@ def _nearest_integers(center, low, high):
         else:
             yield right
             right += 1
+
+
+
+def envelope_problem_fingerprint(problem: TemporalProblem) -> str:
+    """Bind every numerical input; does not certify raw lineage or physical Q."""
+    header = dict(labels=tuple(problem.ambiguity_labels),
+        row_slices=[(s.start,s.stop,s.step) for s in problem.row_slices],
+        baseline_slices=[(s.start,s.stop,s.step) for s in problem.baseline_slices],
+        frames=[m.get('baseline_frame') for m in problem.metadata])
+    digest = hashlib.sha256(json.dumps(header,sort_keys=True,separators=(',',':')).encode())
+    for name in ('y','A','B','Q','times','lengths'):
+        value = np.asarray(getattr(problem,name),dtype='<f8',order='C')
+        digest.update(json.dumps((name,value.shape),separators=(',',':')).encode())
+        digest.update(value.tobytes(order='C'))
+    return digest.hexdigest()
 
 
 def enumerate_candidate_envelope(problem: TemporalProblem, raw_cost_threshold: float, *,
@@ -210,7 +229,9 @@ def enumerate_candidate_envelope(problem: TemporalProblem, raw_cost_threshold: f
             None if floating is None else float(floating.residual_objective), target_epoch,
             float(problem.times[target_epoch]), tuple(problem.ambiguity_labels), nodes, leaves,
             time.monotonic()-started, None if floating is None else float(floating.condition_number),
-            identity_error, used_decorrelation)
+            identity_error, used_decorrelation,
+            problem_fingerprint=envelope_problem_fingerprint(problem),
+            relative_numerical_guard=relative_numerical_guard)
 
     try:
         floating = joint_float(problem)
@@ -327,3 +348,95 @@ def enumerate_candidate_envelope(problem: TemporalProblem, raw_cost_threshold: f
         return finish('GAUSSIAN_RELAXED_DOMAIN_EXHAUSTED',complete=True)
     except (TemporalModelError, np.linalg.LinAlgError, FloatingPointError, OverflowError) as exc:
         return finish(type(exc).__name__+': '+str(exc),numerical=True)
+
+
+@dataclass(frozen=True)
+class RadialLengthCheck:
+    epoch: int
+    center_norm_m: float
+    exact_model_length_m: float
+    continuous_outer_radius_m: float
+    radial_separation_m: float
+    comparison_guard_m: float
+    necessary_condition_passed: bool
+
+
+@dataclass(frozen=True)
+class LengthSupportItem:
+    integer: tuple[int,...]
+    retained: bool
+    checks: tuple[RadialLengthCheck,...]
+
+
+@dataclass(frozen=True)
+class LengthNecessarySupport:
+    status: str
+    raw_support_complete: bool
+    necessary_support_complete: bool
+    raw_observed_candidates: int
+    retained_candidates: tuple[IntegerDirectionEnvelope,...]
+    items: tuple[LengthSupportItem,...]
+    azimuth_outer_arc: CircularArc | None
+    problem_fingerprint: str
+    scope: str = 'NECESSARY_RADIAL_OUTER_DOMAIN_FILTER_NOT_EXACT_SPHERE_FEASIBILITY'
+    rigorous_interval_certificate: bool = False
+    integer_acceptance_defined: bool = False
+    false_fix_probability: None = None
+
+
+def filter_length_necessary_support(problem: TemporalProblem,
+                                    envelope: CandidateEnvelopeResult) -> LengthNecessarySupport:
+    """Optional whole-domain necessary condition; never replaces the raw support.
+
+    For every candidate and epoch, the conditional ellipsoid lies in the ball
+    ||b-c|| <= sqrt(rho*lambda_max(Cb_kk)). If abs(||c||-L) exceeds that radius
+    with the declared arithmetic guard, the entire ellipsoid misses the sphere.
+    Surviving this test does NOT prove intersection with the ellipsoid/sphere or
+    any directed-motion constraint. Epoch correlations need not be discarded:
+    Cb_kk is the marginal block of the FULL conditional covariance.
+
+    Incomplete input stays incomplete, even if all seen candidates are removed.
+    Original enumeration output and default behavior are unchanged. No searches,
+    sphere optimization, thresholds fitted from observations or reference reads.
+    """
+    fingerprint = envelope_problem_fingerprint(problem)
+    if (not isinstance(envelope,CandidateEnvelopeResult)
+            or not envelope.problem_fingerprint
+            or fingerprint != envelope.problem_fingerprint):
+        raise TemporalModelError('length filter requires the original bound envelope problem')
+    if not math.isfinite(envelope.relative_numerical_guard) or envelope.relative_numerical_guard <= 0:
+        raise TemporalModelError('invalid recorded arithmetic guard')
+    retained, items = [], []
+    if envelope.status == 'UNQUALIFIED_NUMERICS':
+        return LengthNecessarySupport('UNQUALIFIED_NUMERICS',False,False,len(envelope.candidates),
+            (),(),None,fingerprint)
+    floating = joint_float(problem)
+    rel = envelope.relative_numerical_guard
+    for candidate in envelope.candidates:
+        centers = conditional_baselines(floating,candidate.integer)
+        checks = []
+        rho = candidate.remaining_raw_budget
+        if not math.isfinite(rho) or rho < 0:
+            raise TemporalModelError('invalid recorded continuous cost budget')
+        for k,ss in enumerate(problem.baseline_slices):
+            center = centers[k]
+            norm = float(np.linalg.norm(center))
+            length = float(problem.lengths[k])
+            eigen = float(np.linalg.eigvalsh(floating.conditional_covariance_b[ss,ss])[-1])
+            if not math.isfinite(norm+length+eigen) or length <= 0 or eigen <= 0:
+                raise TemporalModelError('invalid radial necessary-condition geometry')
+            radius = math.sqrt(rho*eigen*(1+rel))
+            scale = max(norm,length,radius,np.finfo(float).tiny)
+            radius += rel*scale
+            comparison_guard = max(256*np.finfo(float).eps,rel)*max(norm,length,radius)
+            separation = abs(norm-length)-radius
+            passed = separation <= comparison_guard
+            checks.append(RadialLengthCheck(k,norm,length,radius,separation,comparison_guard,passed))
+        keep = all(check.necessary_condition_passed for check in checks)
+        items.append(LengthSupportItem(candidate.integer,keep,tuple(checks)))
+        if keep:
+            retained.append(candidate)
+    complete = envelope.numerical_support_complete
+    status = ('COMPLETE_NECESSARY_SUPPORT' if retained else 'EMPTY_NECESSARY_SUPPORT') if complete else 'INCOMPLETE_NECESSARY_SUPPORT'
+    return LengthNecessarySupport(status,complete,complete,len(envelope.candidates),tuple(retained),
+        tuple(items),enclosing_arc(c.azimuth_outer_arc for c in retained) if complete else None,fingerprint)
