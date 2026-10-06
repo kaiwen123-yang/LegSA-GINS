@@ -11,6 +11,7 @@ from legsa_gins.paper_rebuild.carrier_phase.observations import from_rawx, Epoch
 from legsa_gins.paper_rebuild.carrier_phase.arcs import ArcConfig, ArcTracker
 from legsa_gins.paper_rebuild.carrier_phase.multignss import build_multignss_epoch
 from legsa_gins.paper_rebuild.carrier_phase.ephemeris import CheckedRtklibProvider
+from legsa_gins.paper_rebuild.carrier_phase.causal_anchor import AnchorPolicy, CausalRawCodeAnchor
 from legsa_gins.paper_rebuild.carrier_phase.temporal import EpochBlock, assemble_epochs
 from legsa_gins.paper_rebuild.carrier_phase.solver import solve_temporal
 
@@ -44,7 +45,7 @@ def source_snapshot(code):
  paths.append(Path(__file__))
  return {str(p.relative_to(code)):digest(p) for p in paths}
 
-def checked_navigation_manifest(path,roots,*,start_s,first_epoch_s=None):
+def checked_navigation_manifest(path,roots,*,start_s,first_epoch_s=None,expected_cutoff=None,expected_lineage=None):
  """Admit an explicitly bounded broadcast prefix, never an inherited full NAV.
 
  The cutoff describes the latest source-message availability admitted by the
@@ -57,6 +58,11 @@ def checked_navigation_manifest(path,roots,*,start_s,first_epoch_s=None):
  cutoff=manifest.get("causal_cutoff_relative_s")
  if isinstance(cutoff,bool) or not isinstance(cutoff,(int,float)) or not np.isfinite(cutoff):
   raise ValueError("FINITE_CAUSAL_NAVIGATION_CUTOFF_REQUIRED")
+ if expected_cutoff is not None and cutoff!=expected_cutoff:
+  raise ValueError("NAVIGATION_SCHEDULE_MANIFEST_CUTOFF_MISMATCH")
+ if expected_lineage is not None:
+  for key,value in expected_lineage.items():
+   if manifest.get(key)!=value:raise ValueError("NAVIGATION_PREFIX_LINEAGE_MISMATCH:"+key)
  if manifest.get("old_full_history_navigation_loaded") is not False:
   raise ValueError("FULL_HISTORY_NAVIGATION_NOT_ALLOWED")
  if cutoff>start_s:raise ValueError("NAVIGATION_PREFIX_AFTER_REQUESTED_START")
@@ -79,17 +85,142 @@ def checked_navigation_manifest(path,roots,*,start_s,first_epoch_s=None):
   "causality_guard":"PREFIX_AVAILABILITY_AT_OR_BEFORE_REQUESTED_AND_ACTUAL_START",
   "inherited_full_history_navigation_opened":False}
 
+
+class NavigationReplay:
+ """Lazy causal NAV snapshots. Future manifests and NAV bytes stay unopened.
+
+ Schedule metadata may be inspected at construction, but only a selected entry
+ at or before the current receiver epoch may open its manifest/NAV payload.
+ Every epoch uses one provider snapshot throughout SPP and all DD families.
+ """
+ def __init__(self,roots,library,*,start_s,manifest=None,schedule=None):
+  if (manifest is None)==(schedule is None):
+   raise ValueError("EXACTLY_ONE_NAVIGATION_MANIFEST_OR_SCHEDULE_REQUIRED")
+  if not np.isfinite(start_s):raise ValueError("FINITE_START_REQUIRED")
+  self.roots=roots;self.library=library;self.start_s=float(start_s)
+  self.provider=None;self.index=None;self.last_time=None;self.current_audit=None
+  self.switches=[];self.qualification={};self.initial_paths=None;self.expected_lineage=None
+  self.schedule_registry_sha256=None
+  if schedule is None:
+   self.initial_paths,audit=checked_navigation_manifest(manifest,roots,start_s=start_s)
+   self.entries=[{"cutoff_relative_s":audit["causal_cutoff_relative_s"],"manifest":str(manifest),"manifest_sha256":audit["sha256"]}]
+   self.input_audit=audit
+  else:
+   schedule=Path(schedule);data=json.loads(schedule.read_text())
+   if data.get("schema")!="causal_navigation_schedule.v1":raise ValueError("NAVIGATION_SCHEDULE_SCHEMA")
+   if data.get("old_full_history_navigation_loaded") is not False:raise ValueError("FULL_HISTORY_NAVIGATION_NOT_ALLOWED")
+   self.schedule_registry_sha256=data.get("registry_sha256")
+   entries=data.get("entries")
+   if not isinstance(entries,list) or not entries:raise ValueError("EMPTY_NAVIGATION_SCHEDULE")
+   self.entries=[]
+   for row in entries:
+    if not isinstance(row,dict):raise ValueError("INVALID_NAVIGATION_SCHEDULE_ENTRY")
+    cutoff=row.get("cutoff_relative_s")
+    if isinstance(cutoff,bool) or not isinstance(cutoff,(int,float)) or not np.isfinite(cutoff):
+     raise ValueError("FINITE_CAUSAL_NAVIGATION_CUTOFF_REQUIRED")
+    if self.entries and cutoff<=self.entries[-1]["cutoff_relative_s"]:raise ValueError("NAVIGATION_SCHEDULE_NOT_STRICTLY_ORDERED")
+    if not isinstance(row.get("manifest"),str) or not row["manifest"] or not isinstance(row.get("manifest_sha256"),str):
+     raise ValueError("INVALID_NAVIGATION_SCHEDULE_ENTRY")
+    item=Path(row["manifest"])
+    if not item.is_absolute():
+     item=expand(row["manifest"],roots) if row["manifest"].startswith("<") else schedule.parent/item
+    self.entries.append({**row,"manifest":str(item)})
+   if self.entries[0]["cutoff_relative_s"]>start_s:raise ValueError("NAVIGATION_PREFIX_AFTER_REQUESTED_START")
+   self.input_audit={"schedule":str(schedule),"sha256":digest(schedule),"entries":self.entries,
+     "requested_start_s":self.start_s,"causality_guard":"LAZY_LATEST_PREFIX_AT_OR_BEFORE_CURRENT_EPOCH",
+     "inherited_full_history_navigation_opened":False}
+
+ def __enter__(self):return self
+ def __exit__(self,*args):
+  if self.provider is not None:
+   self._remember_qualification()
+   self.provider.__exit__(*args);self.provider=None
+  return False
+ def bind_inputs(self,registry_sha256,base_time,source_ubx_sha256):
+  if "schedule" in self.input_audit:
+   if self.schedule_registry_sha256!=registry_sha256:raise ValueError("NAVIGATION_SCHEDULE_REGISTRY_MISMATCH")
+   self.expected_lineage={"registry_sha256":registry_sha256,"base_time":base_time,
+                          "source_ubx_sha256":source_ubx_sha256}
+   self.input_audit["registry_sha256"]=registry_sha256
+ def _remember_qualification(self):
+  self.qualification[str(self.index)]={"navigation":self.current_audit,
+      "last_signal_queries_in_snapshot":dict(self.provider.last_qualification)}
+ def advance(self,time_s):
+  if not np.isfinite(time_s) or (self.last_time is not None and time_s<=self.last_time):
+   raise ValueError("NAVIGATION_EPOCHS_MUST_BE_FINITE_STRICTLY_INCREASING")
+  eligible=[i for i,row in enumerate(self.entries) if row["cutoff_relative_s"]<=time_s]
+  if not eligible:raise ValueError("NAVIGATION_PREFIX_AFTER_FIRST_EPOCH")
+  index=eligible[-1]
+  if index!=self.index:
+   row=self.entries[index];path=Path(row["manifest"])
+   if digest(path)!=row["manifest_sha256"]:raise ValueError("NAVIGATION_SCHEDULE_MANIFEST_IDENTITY_CHANGED")
+   paths,audit=checked_navigation_manifest(path,self.roots,start_s=time_s,first_epoch_s=time_s,
+       expected_cutoff=row["cutoff_relative_s"],expected_lineage=(None
+        if index==0 and row.get("reuse_initial_prefix") is True else self.expected_lineage))
+   # Open the new admitted prefix before retiring the old handle. On error the
+   # run stops: no silent stale/full-history fallback or future retry occurs.
+   replacement=CheckedRtklibProvider(self.library,paths)
+   replacement.__enter__()
+   if self.provider is not None:
+    self._remember_qualification();self.provider.__exit__(None,None,None)
+   self.provider=replacement;self.index=index;self.current_audit=audit
+   self.switches.append({"epoch_time_s":float(time_s),"schedule_index":index,**audit})
+   if "schedule" not in self.input_audit:self.input_audit["first_processed_rawx_s"]=float(time_s)
+  self.last_time=float(time_s)
+  return self.provider, {"schedule_index":index,"causal_cutoff_relative_s":float(self.entries[index]["cutoff_relative_s"]),
+      "manifest":self.current_audit["manifest"],"manifest_sha256":self.current_audit["sha256"]}
+
+
+def build_with_pivot_policy(e1,e2,provider,anchor,*,groups,pivots,arc_ids,policy="fixed"):
+ """Retain a qualified pivot; reselect only explicit current-pivot failure.
+
+ Rebuilding uses the unchanged group's current qualification/elevation/lock
+ policy. No previous integers are transformed or copied to new DD labels.
+ """
+ if policy not in ("fixed","reselect_when_missing"):raise ValueError("INVALID_PIVOT_POLICY")
+ trial_pivots=dict(pivots);initial_error=None
+ try:
+  model=build_multignss_epoch(e1,e2,provider,anchor,groups=groups,pivots=trial_pivots,arc_ids=arc_ids)
+  qualification=model.metadata
+ except raw.RawBackendError as exc:
+  initial_error=exc;qualification=getattr(exc,"qualification",{})
+ missing={tuple(row["group"]) for row in qualification.get("groups",[])
+          if row.get("status")=="REQUESTED_PIVOT_UNAVAILABLE"}
+ changes=[]
+ if policy=="reselect_when_missing" and missing:
+  for key in sorted(missing):
+   previous=trial_pivots.pop(key)
+   changes.append({"group":key,"previous_pivot":raw.identity_text(previous),
+      "new_pivot":None,"reason":"PREVIOUS_PIVOT_NOT_CURRENTLY_QUALIFIED",
+      "integer_transfer":False})
+  try:
+   model=build_multignss_epoch(e1,e2,provider,anchor,groups=groups,pivots=trial_pivots,arc_ids=arc_ids)
+  except raw.RawBackendError as exc:
+   exc.pivot_events=changes;raise
+ elif initial_error is not None:raise initial_error
+ for group in model.groups:
+  for change in changes:
+   if tuple(change["group"])==group.key:change["new_pivot"]=raw.identity_text(group.pivot)
+  pivots[group.key]=group.pivot
+ return model,changes
+
 def prepare(a):
  # New preparations require an explicit causal prefix. Historical saved plans
  # remain unchanged and readable; there is deliberately no implicit full-NAV
  # fallback for an integration run.
  roots=aliases(a.roots)
- nav,nav_audit=checked_navigation_manifest(a.navigation_manifest,roots,start_s=a.start)
+ replay=NavigationReplay(roots,Path(roots["<EXT_REPRO_BUILD>"])/"lib/liblegsa_rtklib_bridge.so",
+   start_s=a.start,manifest=getattr(a,"navigation_manifest",None),schedule=getattr(a,"navigation_schedule",None))
+ anchor_policy=AnchorPolicy(max_hold_age_s=getattr(a,"max_anchor_hold_s",0.))
+ anchor_state=CausalRawCodeAnchor(anchor_policy)
+ pivot_policy=getattr(a,"pivot_policy","fixed")
+ if pivot_policy not in ("fixed","reselect_when_missing"):raise ValueError("INVALID_PIVOT_POLICY")
  if not np.isfinite(a.stop) or a.stop<a.start:raise ValueError("INVALID_WINDOW")
  out=a.output;out.mkdir(parents=True,exist_ok=False)
  execution=revision(a.code);source_pins=source_snapshot(a.code)
  ip=Path(roots["<EXT_REPRO_ROOT>"])/"inputs"/a.sequence/"INPUT.json"
  info=json.loads(ip.read_text());base=info["base_time"];libroot=Path(roots["<EXT_REPRO_BUILD>"])/"lib"
+ replay.bind_inputs(digest(ip),base,{str(rx):info["source_files"][f"gnss{rx}.ubx"]["sha256"] for rx in (1,2)})
  epochs={};inputs={"registry":str(ip),"registry_sha256":digest(ip),"raw_sources":{}}
  for rx in (1,2):
   source=info["source_files"][f"gnss{rx}.ubx"];p=expand(source["source"],roots)
@@ -100,12 +231,9 @@ def prepare(a):
   inputs["raw_sources"][str(rx)]={"source":source["source"],"sha256":source["sha256"],"full_epochs":len(values),"window_epochs":len(epochs[rx])}
  if not epochs[1] or not epochs[2]:raise ValueError("RAWX_WINDOW_MISSING_RECEIVER")
  first_epoch=min(localtime(e,base) for rx in (1,2) for e in epochs[rx])
- # No additional file I/O is needed for the actual-epoch check: the explicit
- # prefix was pinned above, before either RAWX source was opened.
- if nav_audit["causal_cutoff_relative_s"]>first_epoch:
+ if replay.entries[0]["cutoff_relative_s"]>first_epoch:
   raise ValueError("NAVIGATION_PREFIX_AFTER_FIRST_EPOCH")
- nav_audit["first_processed_rawx_s"]=float(first_epoch)
- inputs["navigation_override"]=nav_audit
+ inputs["navigation_override"]=replay.input_audit
 
  # Each receiver is processed independently; exact pairing happens afterwards.
  grouped={};events={};all_events=[];adapter_rejections=[]
@@ -131,17 +259,26 @@ def prepare(a):
     "duplicate_rx1":sum(len(v)>1 for v in grouped[1].values()),"duplicate_rx2":sum(len(v)>1 for v in grouped[2].values())}
  emit(out/"ARC_EVENTS.json",all_events)
  emit(out/"ADAPTER_REJECTIONS.json",adapter_rejections)
- records=[];pivots={family:{} for family in FAMILIES};ledger=out/"PREPARE_LEDGER.jsonl"
- with CheckedRtklibProvider(libroot/"liblegsa_rtklib_bridge.so",nav) as provider:
+ records=[];pivots={family:{} for family in FAMILIES};pivot_events=[];ledger=out/"PREPARE_LEDGER.jsonl"
+ with replay:
   for key in keys:
    if len(grouped[1][key])!=1 or len(grouped[2][key])!=1:continue
    e1,e2=grouped[1][key][0],grouped[2][key][0];t=localtime(e1,base)
-   rec={"time_s":t,"key":key,"families":{}}
+   provider,epoch_navigation=replay.advance(t)
+   rec={"time_s":t,"key":key,"families":{},"navigation":epoch_navigation}
    try:
     spp=raw.gps_l1_code_spp(e1,provider,None,earth_rotation_delay="iterated_geometric")
-    anchor=np.asarray(spp.position_ecef_m);rec["anchor_ecef_m"]=anchor;rec["spp"]=spp
    except (ValueError,raw.RawBackendError,np.linalg.LinAlgError) as exc:
-    rec["spp_failure"]=str(exc);records.append(rec);log(ledger,{"time_s":t,"SPP_FAILURE":str(exc)});continue
+    rec["spp_failure"]=str(exc)
+    decision=anchor_state.resolve(t,failure=str(exc))
+   else:
+    rec["spp"]=spp
+    decision=anchor_state.resolve(t,position_ecef_m=spp.position_ecef_m)
+   rec["anchor_decision"]={**asdict(decision),"available":decision.available,"held":decision.held}
+   if not decision.available:
+    records.append(rec);log(ledger,{"time_s":t,"navigation":epoch_navigation,
+       "SPP_FAILURE":rec.get("spp_failure"),"anchor_status":decision.status});continue
+   anchor=np.asarray(decision.position_ecef_m);rec["anchor_ecef_m"]=anchor
    common=set(events[(1,key)])&set(events[(2,key)])
    arcs={}
    for identity in common:
@@ -150,8 +287,9 @@ def prepare(a):
      arcs[identity]=json.dumps([one.arc_token,two.arc_token],separators=(",",":"))
    for family,spec in FAMILIES.items():
     try:
-     model=build_multignss_epoch(e1,e2,provider,anchor,groups=spec,pivots=pivots[family],arc_ids=arcs)
-     for group in model.groups:pivots[family].setdefault(group.key,group.pivot)
+     model,changes=build_with_pivot_policy(e1,e2,provider,anchor,groups=spec,
+         pivots=pivots[family],arc_ids=arcs,policy=pivot_policy)
+     pivot_events.extend({"time_s":t,"family":family,**change} for change in changes)
      filename=f"{family}_{len(records):03d}.npz"
      np.savez_compressed(out/filename,y=model.y,A=model.A,B=model.B,Q=model.Q)
      rec["families"][family]={"status":"BUILT","file":filename,"ambiguity_labels":model.ambiguity_labels,
@@ -159,12 +297,17 @@ def prepare(a):
         "rows":len(model.y),"ambiguities":len(model.ambiguity_labels)}
     except (ValueError,raw.RawBackendError,np.linalg.LinAlgError) as exc:
      rec["families"][family]={"status":"UNAVAILABLE","reason":str(exc),"qualification":getattr(exc,"qualification",None)}
+     pivot_events.extend({"time_s":t,"family":family,**change} for change in getattr(exc,"pivot_events",[]))
    records.append(rec)
-   log(ledger,{"time_s":t,"families":{k:{"status":v["status"],"rows":v.get("rows"),"ambiguities":v.get("ambiguities"),"reason":v.get("reason")} for k,v in rec["families"].items()}})
- emit(out/"EPHEMERIS_QUALIFICATION.json",provider.last_qualification)
+   log(ledger,{"time_s":t,"navigation":epoch_navigation,"anchor_status":decision.status,"families":{k:{"status":v["status"],"rows":v.get("rows"),"ambiguities":v.get("ambiguities"),"reason":v.get("reason")} for k,v in rec["families"].items()}})
+ emit(out/"EPHEMERIS_QUALIFICATION.json",replay.qualification if "schedule" in replay.input_audit
+      else replay.qualification.get("0",{}).get("last_signal_queries_in_snapshot",{}))
+ emit(out/"NAVIGATION_SWITCHES.json",replay.switches)
+ emit(out/"PIVOT_EVENTS.json",pivot_events)
  plan={"source_commit":execution,"source_sha256":source_pins,"sequence":a.sequence,"window_s":[a.start,a.stop],
    "base_time":base,"inputs":inputs,"pairing":pairing,"records":records,"lambda_library":str(libroot/"librtklib_legsa.so"),
    "baseline_length_m":a.length,"max_gap_s":a.max_gap,"tdcp_limit_cycles":a.tdcp_limit,
+   "pivot_policy":pivot_policy,"anchor_policy":asdict(anchor_policy),
    "prefixes":[1,5,10],"families":FAMILIES,"cross_epoch_covariance":"assumed independent",
    "cross_signal_SD_covariance":"RAWX independent SD default; shared pivot DD propagated exactly",
    "real_integer_truth_available":False,"reference_reads":0,"scope":"development; inspection history is declared by the calling trial contract",
@@ -209,7 +352,11 @@ def main():
  p.add_argument("--output",type=Path,required=True);p.add_argument("--sequence",default="BY2")
  p.add_argument("--start",type=float,default=80.);p.add_argument("--stop",type=float,default=82.)
  p.add_argument("--length",type=float,default=.350);p.add_argument("--max-gap",type=float,default=.21)
- p.add_argument("--navigation-manifest",type=Path);p.add_argument("--active-classes",action="store_true")
+ nav=p.add_mutually_exclusive_group()
+ nav.add_argument("--navigation-manifest",type=Path);nav.add_argument("--navigation-schedule",type=Path)
+ p.add_argument("--pivot-policy",choices=["fixed","reselect_when_missing"],default="fixed")
+ p.add_argument("--max-anchor-hold-s",type=float,default=0.)
+ p.add_argument("--active-classes",action="store_true")
  p.add_argument("--prefixes",nargs="+",type=int);p.add_argument("--families",nargs="+",choices=list(FAMILIES))
  p.add_argument("--tdcp-limit",type=float,default=.5);p.add_argument("--nodes",type=int,default=100000);p.add_argument("--timeout",type=float,default=60.)
  a=p.parse_args()

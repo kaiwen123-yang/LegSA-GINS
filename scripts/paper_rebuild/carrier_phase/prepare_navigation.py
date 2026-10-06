@@ -78,12 +78,20 @@ def inav_word(words):
 
 
 def scan(source, base_time, cutoff):
+    if not math.isfinite(base_time) or (cutoff is not None and not math.isfinite(cutoff)):
+        raise ValueError("FINITE_PREFIX_TIME_DOMAIN_REQUIRED")
     frames=list(raw.iter_ubx_frames(source.read_bytes()))
     raw_times={}
     for k,(cls,ident,payload) in enumerate(frames):
         if (cls,ident)==(2,0x15):
             e=raw.decode_rawx(payload)
+            if e.gps_week<0 or not math.isfinite(e.gps_tow_seconds) or not 0<=e.gps_tow_seconds<604800:
+                raise ValueError("VALID_RAWX_GPS_TIME_REQUIRED")
             raw_times[k]=315964800.+e.gps_week*604800.+e.gps_tow_seconds-e.leap_seconds-base_time
+    ordered_times=list(raw_times.values())
+    if (any(not math.isfinite(t) for t in ordered_times)
+            or any(right<=left for left,right in zip(ordered_times,ordered_times[1:]))):
+        raise ValueError("RAWX_TIME_ORDER_REQUIRED_FOR_CAUSAL_PREFIX")
     following={}; next_time=None
     for k in range(len(frames)-1,-1,-1):
         if k in raw_times: next_time=raw_times[k]
