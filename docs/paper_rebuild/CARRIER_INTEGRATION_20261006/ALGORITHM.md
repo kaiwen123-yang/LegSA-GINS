@@ -161,8 +161,31 @@ full-likelihood serial tracking accepts 25 measurements and yields yaw RMSE
 RMSE 0.100087 m and vertical RMSE 0.048783 m. This improves the earlier
 2.403444-degree serial arm, but remains worse than the PVT-vector control's
 1.620834 degrees and 0.098646 m horizontal RMSE. See
-NATIVE_SELECTED_NAVIGATION_READOUT.md. The dense trial remains pending until
-its own frontend and complete navigation results are recorded.
+NATIVE_SELECTED_NAVIGATION_READOUT.md. The final dense trial is now complete:
+1191 actual searches, all globally certified under the selected likelihood,
+116 admitted acquisitions, and 157 tracked measurements from 55 origins.
+Serial replay launches 1172 opportunities and drops 19 while busy, with no
+pending result at the end. Its 157-measurement stream is equivalent to the
+ordinary stream in the completed navigation comparison; both yield 145 native
+accepts. Search median/P95 are 0.034646/0.154479 s. These timing figures still
+exclude all non-CILS processing.
+
+Dense serial navigation yields yaw RMSE 1.937270 degrees, horizontal RMSE
+0.098965 m and vertical RMSE 0.048794 m. Against the preceding selected-support
+serial arm, yaw RMSE improves by 0.098924 degrees but maximum absolute yaw
+worsens from 7.205476 to 7.993303 degrees. Against the PVT-vector control, yaw
+RMSE remains 0.316437 degrees worse and horizontal RMSE 0.000319 m worse.
+The 0.000029 m vertical reduction is not evidence of a meaningful vertical gain.
+The eleven-version comparison has 44 complete native/evaluation chains with
+the same 56,642 time keys and unchanged controls. See DENSE_NAVIGATION_READOUT.md
+and DENSE_SELECTED_EQUIVALENCE/SUMMARY.md. Native acceleration plus denser
+opportunities are a combined change; their serial improvement is not an
+isolated cadence effect.
+
+This completes the bounded implementation/development comparison. The carrier
+path remains an opt-in research algorithm; the available evidence does not
+justify promoting it over default V3 or claiming calibrated integer reliability.
+No further cap, acceptance-threshold or noise sweep is part of this experiment.
 
 ## Measured status and remaining limits
 
