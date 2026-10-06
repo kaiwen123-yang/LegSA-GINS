@@ -39,6 +39,25 @@ def build(a):
  s=s.replace('pilot_mode_==2','pilot_mode_>=2').replace('pilot_mode_!=2','pilot_mode_<2')
  s=rep(s,'    setBlockIdentity(H, 0, V_ID);\n    R = diagonalMatrix(cwiseProduct(stdv, stdv));','    setBlockIdentity(H, 0, V_ID);\n    if(pilot_mode_==3)H=pilotBodyH(pvacur_,3);\n    R = diagonalMatrix(cwiseProduct(stdv, stdv));')
  p.write_text(s)
+ runtime=dest/"core/src/runtime/port_runtime.cpp";rs=runtime.read_text()
+ rs=rep(rs,"#include <algorithm>","#include <algorithm>\n#include <cstdlib>")
+ rs=rep(rs,"  const bool go2_horizontal_active = options.go2_horizontal_velocity_update_count > 0;",r"""
+  const char* research_mode=std::getenv("LEGSA_PILOT_AID_MODE");
+  const bool research_body3d=research_mode && std::string(research_mode)=="3";
+  if(research_body3d && (options.algorithm_id!="LegSA_Paper_V1" ||
+      (options.run_id.rfind("IMUFIX_HEADING_",0)!=0 && options.run_id.rfind("IMUFIX_CLAIM_HEADING_",0)!=0)))
+    throw std::runtime_error("RESEARCH_BODY3D_IDENTITY_MISMATCH");
+  // Diagnostic model identity only: keep true 3D and horizontal counters distinct.
+  const auto& velocity_status=options.go2_velocity_prior_diagnostic_status;
+  const bool go2_horizontal_active = research_body3d
+      ? (options.algorithm_id=="LegSA_Paper_V1" &&
+         (options.run_id.rfind("IMUFIX_HEADING_",0)==0 || options.run_id.rfind("IMUFIX_CLAIM_HEADING_",0)==0) &&
+         velocity_status.solver_enabled && velocity_status.update_count>0 &&
+         options.go2_horizontal_velocity_update_count==0 &&
+         velocity_status.horizontal_update_count==0 &&
+         !velocity_status.horizontal_only && !velocity_status.vertical_disabled)
+      : options.go2_horizontal_velocity_update_count>0;""")
+ runtime.write_text(rs)
  p=dest/"core/include/legsa_v23_port_core/pilot_aiding.hpp";s=p.read_text()
  s=rep(s,'pilotBodyH(const NavState& s)','pilotBodyH(const NavState& s,int dim=2)')
  s=rep(s,'Matrix H(2,RANK,0.0)','Matrix H(dim,RANK,0.0)')
@@ -112,7 +131,7 @@ def prepare(a):
    reused.append({"case":case,"mode":mode,"run_id":r["run_id"],"native_dir":str(d),"error_path":str(err),"error_sha256":sha(err),"nav_sha256":saved["nav_sha256"],"std_sha256":saved["std_sha256"],"execution_commit":saved["execution_commit"],"binary_sha256":OLD_BINARY})
  def add(case,mode):
   source=chosen[(case,2)] if case!="H20" else chosen[("D61_20s_seed_00",mode if mode in(0,2) else 2)]
-  rid=("IMUFIX_HEADING_" if case=="C00" else "IMUFIX_CLAIM_HEADING_")+case+"_M"+str(mode)
+  rid=("IMUFIX_HEADING_" if case=="C00" else "IMUFIX_CLAIM_HEADING_")+case+"_M"+str(mode)+"_T02"
   fields={"run_id":rid,"run_label":rid,"outputpath":str(a.stage/"NATIVE"/rid)}
   if case=="H20":
    fields.update({k:clean[k] for k in ROLES});fields["gnsspath"]=str(h20);fields["go2_horizontal_velocity_prior_path"]=str(hvpath if mode==0 else body)
@@ -130,7 +149,7 @@ def prepare(a):
  check=subprocess.run([str(a.stage/"BUILD/config_check")]+[r["config"] for r in runs],capture_output=True,text=True)
  emit(a.stage/"CONFIG_LOADER_ADMISSION.json",{"returncode":check.returncode,"configs":len(runs),"native_solver_calls":0,"stdout":check.stdout,"stderr":check.stderr,"checker_sha256":sha(a.stage/"BUILD/config_check")})
  assert check.returncode==0 and len(check.stdout.splitlines())==6
- emit(a.stage/"PLAN.json",{"schema":"heading_reassessment.v1","sequence":old["sequence"],"runs":runs,"reused":reused,"inputs":pins,"native_budget":6,"parent_plan_sha256":sha(a.prior/"PLAN.json"),"parent_seal_sha256":sha(a.prior/"ALL_NATIVE_SEALED.json"),"build_identity_sha256":sha(a.stage/"BUILD_IDENTITY.json"),"body_std_xyz_mps":[.132838]*3,"new_z_calibrated":False,"body_point_offset_assumption_m":[0,0,0],"H20":{"semantics":"A1 source loss; all non-yaw GNSS18 bytes retained; legacy HV support re-gated, no interpolation through removed A1 epochs","masked_gnss_rows":changed,"legacy_a1_source":str(base),"legacy_a1_source_sha256":sha(base),"removed_a1_rows":int(len(a1)-len(kept)),"hv_disabled_rows":int(np.sum(original&~support)),"maximum_interpolation_gap_s":1.2,"fault_HV_tolerance_guard_passed":True}})
+ emit(a.stage/"PLAN.json",{"schema":"heading_reassessment.v1","sequence":old["sequence"],"runs":runs,"reused":reused,"inputs":pins,"native_budget":6,"prior_post_runtime_rejected_solver_calls":1,"total_solver_call_target":7,"prior_failed_invocation_sha256":sha(a.stage.parent/"NATIVE/IMUFIX_HEADING_C00_M3/INVOCATION.json"),"parent_plan_sha256":sha(a.prior/"PLAN.json"),"parent_seal_sha256":sha(a.prior/"ALL_NATIVE_SEALED.json"),"build_identity_sha256":sha(a.stage/"BUILD_IDENTITY.json"),"body_std_xyz_mps":[.132838]*3,"new_z_calibrated":False,"body_point_offset_assumption_m":[0,0,0],"H20":{"semantics":"A1 source loss; all non-yaw GNSS18 bytes retained; legacy HV support re-gated, no interpolation through removed A1 epochs","masked_gnss_rows":changed,"legacy_a1_source":str(base),"legacy_a1_source_sha256":sha(base),"removed_a1_rows":int(len(a1)-len(kept)),"hv_disabled_rows":int(np.sum(original&~support)),"maximum_interpolation_gap_s":1.2,"fault_HV_tolerance_guard_passed":True}})
  print("PREPARED_6_NEW_6_REUSED_NO_REFERENCE",flush=True)
 def native(a):
  from legsa_gins.paper_rebuild.clean5_sequence.io_audit import audited_open_records

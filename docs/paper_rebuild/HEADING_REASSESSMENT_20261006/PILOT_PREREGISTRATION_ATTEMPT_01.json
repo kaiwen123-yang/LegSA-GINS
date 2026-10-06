@@ -1,5 +1,5 @@
 {
-  "plan_sha256": "9d712bdd126c8d51f749ee69023700f34c6821d876fe5db7e59e8073d7f2bf36",
+  "plan_sha256": "e3efe7cdfa757aba4b38e39903b5821fd1d062f3e7eb2cc0629426e99e8ac128",
   "plan": {
     "schema": "heading_reassessment.v1",
     "sequence": {
@@ -58,38 +58,38 @@
     },
     "runs": [
       {
-        "run_id": "IMUFIX_HEADING_C00_M3_T02",
+        "run_id": "IMUFIX_HEADING_C00_M3",
         "case": "C00",
         "mode": 3,
-        "config": "<NEW_STAGE_T02>/CONFIGS/IMUFIX_HEADING_C00_M3_T02.yaml",
-        "config_sha256": "8dd854513f2fea2c0959058452624ce07f317bdd63dc0257e66656a7684c5d1d",
-        "binary": "<NEW_STAGE_T02>/BUILD/SOLVER",
-        "binary_sha256": "1bf81d76f74f10511ca0f49988a800e2593cbdced791fd48bbc63e5ec8463509",
+        "config": "<NEW_STAGE>/CONFIGS/IMUFIX_HEADING_C00_M3.yaml",
+        "config_sha256": "e6296c3c09d999ab8e495a5310da6b62a9ecfcdc1ed96414f32975288f3d22c5",
+        "binary": "<NEW_STAGE>/BUILD/SOLVER",
+        "binary_sha256": "20eb97b47707ad01c9a935fbf4301f21e93018dda04ba909810d33938c48e72e",
         "outage": null,
         "changes": [
           {
             "field": "run_id",
             "line": 7,
             "before": "run_id: \"IMUFIX_RESEARCH_AUDIT_C00_M2\"",
-            "after": "run_id: \"IMUFIX_HEADING_C00_M3_T02\""
+            "after": "run_id: \"IMUFIX_HEADING_C00_M3\""
           },
           {
             "field": "run_label",
             "line": 8,
             "before": "run_label: \"IMUFIX_RESEARCH_AUDIT_C00_M2\"",
-            "after": "run_label: \"IMUFIX_HEADING_C00_M3_T02\""
+            "after": "run_label: \"IMUFIX_HEADING_C00_M3\""
           },
           {
             "field": "outputpath",
             "line": 12,
             "before": "outputpath: \"<PRIOR_PILOT>/NATIVE/IMUFIX_RESEARCH_AUDIT_C00_M2\"",
-            "after": "outputpath: \"<NEW_STAGE_T02>/NATIVE/IMUFIX_HEADING_C00_M3_T02\""
+            "after": "outputpath: \"<NEW_STAGE>/NATIVE/IMUFIX_HEADING_C00_M3\""
           },
           {
             "field": "go2_horizontal_velocity_prior_path",
             "line": 58,
             "before": "go2_horizontal_velocity_prior_path: \"<PRIOR_PILOT>/INPUTS/ROBOT_REPORTED_BODY_HYPOTHESIS.csv\"",
-            "after": "go2_horizontal_velocity_prior_path: \"<NEW_STAGE_T02>/INPUTS/SDK_BODY_3D.csv\""
+            "after": "go2_horizontal_velocity_prior_path: \"<NEW_STAGE>/INPUTS/SDK_BODY_3D.csv\""
           }
         ],
         "source_config_sha256": "4181312ce613ccc9daf514b32b6e2569d06eea9a59c8ee50f5a090f2c140e190",
@@ -98,13 +98,13 @@
         "effective_vertical_disabled": false
       },
       {
-        "run_id": "IMUFIX_CLAIM_HEADING_D61_20s_seed_00_M3_T02",
+        "run_id": "IMUFIX_CLAIM_HEADING_D61_20s_seed_00_M3",
         "case": "D61_20s_seed_00",
         "mode": 3,
-        "config": "<NEW_STAGE_T02>/CONFIGS/IMUFIX_CLAIM_HEADING_D61_20s_seed_00_M3_T02.yaml",
-        "config_sha256": "5ac1c5843afefb789130962310b38fe5a886e8d72facaa974be76224a1d55f65",
-        "binary": "<NEW_STAGE_T02>/BUILD/SOLVER",
-        "binary_sha256": "1bf81d76f74f10511ca0f49988a800e2593cbdced791fd48bbc63e5ec8463509",
+        "config": "<NEW_STAGE>/CONFIGS/IMUFIX_CLAIM_HEADING_D61_20s_seed_00_M3.yaml",
+        "config_sha256": "92c0f774bc70d639ae4066ee1756406a447dafdfb66daae1a1cae6e159dca8dc",
+        "binary": "<NEW_STAGE>/BUILD/SOLVER",
+        "binary_sha256": "20eb97b47707ad01c9a935fbf4301f21e93018dda04ba909810d33938c48e72e",
         "outage": [
           196.2,
           216.2
@@ -114,25 +114,25 @@
             "field": "run_id",
             "line": 7,
             "before": "run_id: \"IMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M2\"",
-            "after": "run_id: \"IMUFIX_CLAIM_HEADING_D61_20s_seed_00_M3_T02\""
+            "after": "run_id: \"IMUFIX_CLAIM_HEADING_D61_20s_seed_00_M3\""
           },
           {
             "field": "run_label",
             "line": 8,
             "before": "run_label: \"IMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M2\"",
-            "after": "run_label: \"IMUFIX_CLAIM_HEADING_D61_20s_seed_00_M3_T02\""
+            "after": "run_label: \"IMUFIX_CLAIM_HEADING_D61_20s_seed_00_M3\""
           },
           {
             "field": "outputpath",
             "line": 12,
             "before": "outputpath: \"<PRIOR_PILOT>/NATIVE/IMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M2\"",
-            "after": "outputpath: \"<NEW_STAGE_T02>/NATIVE/IMUFIX_CLAIM_HEADING_D61_20s_seed_00_M3_T02\""
+            "after": "outputpath: \"<NEW_STAGE>/NATIVE/IMUFIX_CLAIM_HEADING_D61_20s_seed_00_M3\""
           },
           {
             "field": "go2_horizontal_velocity_prior_path",
             "line": 58,
             "before": "go2_horizontal_velocity_prior_path: \"<PRIOR_PILOT>/INPUTS/ROBOT_REPORTED_BODY_HYPOTHESIS.csv\"",
-            "after": "go2_horizontal_velocity_prior_path: \"<NEW_STAGE_T02>/INPUTS/SDK_BODY_3D.csv\""
+            "after": "go2_horizontal_velocity_prior_path: \"<NEW_STAGE>/INPUTS/SDK_BODY_3D.csv\""
           }
         ],
         "source_config_sha256": "b46c0ccb1caa9b62fda3a7a073058c1ba493e30b49bbf6f909f6e28126f49b10",
@@ -141,13 +141,13 @@
         "effective_vertical_disabled": false
       },
       {
-        "run_id": "IMUFIX_CLAIM_HEADING_D62_20s_seed_00_M3_T02",
+        "run_id": "IMUFIX_CLAIM_HEADING_D62_20s_seed_00_M3",
         "case": "D62_20s_seed_00",
         "mode": 3,
-        "config": "<NEW_STAGE_T02>/CONFIGS/IMUFIX_CLAIM_HEADING_D62_20s_seed_00_M3_T02.yaml",
-        "config_sha256": "9fdcf209004ce14127a8724ca43fc9c9c85bd526b21ecff66f86cbb8c6186bb2",
-        "binary": "<NEW_STAGE_T02>/BUILD/SOLVER",
-        "binary_sha256": "1bf81d76f74f10511ca0f49988a800e2593cbdced791fd48bbc63e5ec8463509",
+        "config": "<NEW_STAGE>/CONFIGS/IMUFIX_CLAIM_HEADING_D62_20s_seed_00_M3.yaml",
+        "config_sha256": "9a9de86e3fdb5d3c097041232a0ca33e27957ca4cddaba108c42ea33046c8659",
+        "binary": "<NEW_STAGE>/BUILD/SOLVER",
+        "binary_sha256": "20eb97b47707ad01c9a935fbf4301f21e93018dda04ba909810d33938c48e72e",
         "outage": [
           196.2,
           216.2
@@ -157,25 +157,25 @@
             "field": "run_id",
             "line": 7,
             "before": "run_id: \"IMUFIX_CLAIM_RESEARCH_AUDIT_D62_20s_seed_00_M2\"",
-            "after": "run_id: \"IMUFIX_CLAIM_HEADING_D62_20s_seed_00_M3_T02\""
+            "after": "run_id: \"IMUFIX_CLAIM_HEADING_D62_20s_seed_00_M3\""
           },
           {
             "field": "run_label",
             "line": 8,
             "before": "run_label: \"IMUFIX_CLAIM_RESEARCH_AUDIT_D62_20s_seed_00_M2\"",
-            "after": "run_label: \"IMUFIX_CLAIM_HEADING_D62_20s_seed_00_M3_T02\""
+            "after": "run_label: \"IMUFIX_CLAIM_HEADING_D62_20s_seed_00_M3\""
           },
           {
             "field": "outputpath",
             "line": 12,
             "before": "outputpath: \"<PRIOR_PILOT>/NATIVE/IMUFIX_CLAIM_RESEARCH_AUDIT_D62_20s_seed_00_M2\"",
-            "after": "outputpath: \"<NEW_STAGE_T02>/NATIVE/IMUFIX_CLAIM_HEADING_D62_20s_seed_00_M3_T02\""
+            "after": "outputpath: \"<NEW_STAGE>/NATIVE/IMUFIX_CLAIM_HEADING_D62_20s_seed_00_M3\""
           },
           {
             "field": "go2_horizontal_velocity_prior_path",
             "line": 58,
             "before": "go2_horizontal_velocity_prior_path: \"<PRIOR_PILOT>/INPUTS/ROBOT_REPORTED_BODY_HYPOTHESIS.csv\"",
-            "after": "go2_horizontal_velocity_prior_path: \"<NEW_STAGE_T02>/INPUTS/SDK_BODY_3D.csv\""
+            "after": "go2_horizontal_velocity_prior_path: \"<NEW_STAGE>/INPUTS/SDK_BODY_3D.csv\""
           }
         ],
         "source_config_sha256": "8deec4b4736c11e36bd299938ffa4e28f8b5634614b2835a44fe81c7e66f52b3",
@@ -184,11 +184,11 @@
         "effective_vertical_disabled": false
       },
       {
-        "run_id": "IMUFIX_CLAIM_HEADING_H20_M0_T02",
+        "run_id": "IMUFIX_CLAIM_HEADING_H20_M0",
         "case": "H20",
         "mode": 0,
-        "config": "<NEW_STAGE_T02>/CONFIGS/IMUFIX_CLAIM_HEADING_H20_M0_T02.yaml",
-        "config_sha256": "7236e9cdc2b4f78d08c116a121791793f60b77bd2e4299a98749a87d0dae24ca",
+        "config": "<NEW_STAGE>/CONFIGS/IMUFIX_CLAIM_HEADING_H20_M0.yaml",
+        "config_sha256": "ee1e57b836e61fd7b9ad5fa83b33024e0da7eafc134b87d45e5f4b5451158881",
         "binary": "<PRIOR_PILOT>/BUILD/SOLVER",
         "binary_sha256": "3805d2d2b0f52063da48d52b23fca2f88c4b5f9ef19adc9bfd48f5fe920701e7",
         "outage": [
@@ -200,19 +200,19 @@
             "field": "run_id",
             "line": 7,
             "before": "run_id: \"IMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M0\"",
-            "after": "run_id: \"IMUFIX_CLAIM_HEADING_H20_M0_T02\""
+            "after": "run_id: \"IMUFIX_CLAIM_HEADING_H20_M0\""
           },
           {
             "field": "run_label",
             "line": 8,
             "before": "run_label: \"IMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M0\"",
-            "after": "run_label: \"IMUFIX_CLAIM_HEADING_H20_M0_T02\""
+            "after": "run_label: \"IMUFIX_CLAIM_HEADING_H20_M0\""
           },
           {
             "field": "outputpath",
             "line": 12,
             "before": "outputpath: \"<PRIOR_PILOT>/NATIVE/IMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M0\"",
-            "after": "outputpath: \"<NEW_STAGE_T02>/NATIVE/IMUFIX_CLAIM_HEADING_H20_M0_T02\""
+            "after": "outputpath: \"<NEW_STAGE>/NATIVE/IMUFIX_CLAIM_HEADING_H20_M0\""
           },
           {
             "field": "imupath",
@@ -224,7 +224,7 @@
             "field": "gnsspath",
             "line": 11,
             "before": "gnsspath: \"<SCRATCH_ROOT>/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__D61_20s_seed_00__3e9eee10e392fb43808d437fe62665ecd61e3e07ab2f24c91ae00f98fd1220ab/GNSS18.gnss\"",
-            "after": "gnsspath: \"<NEW_STAGE_T02>/INPUTS/H20_SOURCE_LOSS.gnss\""
+            "after": "gnsspath: \"<NEW_STAGE>/INPUTS/H20_SOURCE_LOSS.gnss\""
           },
           {
             "field": "raw_doppler_factor_path",
@@ -242,7 +242,7 @@
             "field": "go2_horizontal_velocity_prior_path",
             "line": 58,
             "before": "go2_horizontal_velocity_prior_path: \"<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D61_20s_seed_00/GO2_HORIZONTAL_VELOCITY_PRIOR.csv\"",
-            "after": "go2_horizontal_velocity_prior_path: \"<NEW_STAGE_T02>/INPUTS/H20_LEGACY_HV_SOURCE_MASK.csv\""
+            "after": "go2_horizontal_velocity_prior_path: \"<NEW_STAGE>/INPUTS/H20_LEGACY_HV_SOURCE_MASK.csv\""
           }
         ],
         "source_config_sha256": "f174d33ce2226d44fa606dbc3f663297a008ad567449eb3e0540f053550bbbfc",
@@ -251,11 +251,11 @@
         "effective_vertical_disabled": true
       },
       {
-        "run_id": "IMUFIX_CLAIM_HEADING_H20_M2_T02",
+        "run_id": "IMUFIX_CLAIM_HEADING_H20_M2",
         "case": "H20",
         "mode": 2,
-        "config": "<NEW_STAGE_T02>/CONFIGS/IMUFIX_CLAIM_HEADING_H20_M2_T02.yaml",
-        "config_sha256": "f04c0d6d78a19a67b6f11c7942a32605f8258c21d540624b0c53ddee952c215a",
+        "config": "<NEW_STAGE>/CONFIGS/IMUFIX_CLAIM_HEADING_H20_M2.yaml",
+        "config_sha256": "1018f8077dd1825d7da05188ab1ce1d32a25d7894bd09fa5597241111166f146",
         "binary": "<PRIOR_PILOT>/BUILD/SOLVER",
         "binary_sha256": "3805d2d2b0f52063da48d52b23fca2f88c4b5f9ef19adc9bfd48f5fe920701e7",
         "outage": [
@@ -267,19 +267,19 @@
             "field": "run_id",
             "line": 7,
             "before": "run_id: \"IMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M2\"",
-            "after": "run_id: \"IMUFIX_CLAIM_HEADING_H20_M2_T02\""
+            "after": "run_id: \"IMUFIX_CLAIM_HEADING_H20_M2\""
           },
           {
             "field": "run_label",
             "line": 8,
             "before": "run_label: \"IMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M2\"",
-            "after": "run_label: \"IMUFIX_CLAIM_HEADING_H20_M2_T02\""
+            "after": "run_label: \"IMUFIX_CLAIM_HEADING_H20_M2\""
           },
           {
             "field": "outputpath",
             "line": 12,
             "before": "outputpath: \"<PRIOR_PILOT>/NATIVE/IMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M2\"",
-            "after": "outputpath: \"<NEW_STAGE_T02>/NATIVE/IMUFIX_CLAIM_HEADING_H20_M2_T02\""
+            "after": "outputpath: \"<NEW_STAGE>/NATIVE/IMUFIX_CLAIM_HEADING_H20_M2\""
           },
           {
             "field": "imupath",
@@ -291,7 +291,7 @@
             "field": "gnsspath",
             "line": 11,
             "before": "gnsspath: \"<SCRATCH_ROOT>/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__D61_20s_seed_00__3e9eee10e392fb43808d437fe62665ecd61e3e07ab2f24c91ae00f98fd1220ab/GNSS18.gnss\"",
-            "after": "gnsspath: \"<NEW_STAGE_T02>/INPUTS/H20_SOURCE_LOSS.gnss\""
+            "after": "gnsspath: \"<NEW_STAGE>/INPUTS/H20_SOURCE_LOSS.gnss\""
           },
           {
             "field": "raw_doppler_factor_path",
@@ -318,13 +318,13 @@
         "effective_vertical_disabled": true
       },
       {
-        "run_id": "IMUFIX_CLAIM_HEADING_H20_M3_T02",
+        "run_id": "IMUFIX_CLAIM_HEADING_H20_M3",
         "case": "H20",
         "mode": 3,
-        "config": "<NEW_STAGE_T02>/CONFIGS/IMUFIX_CLAIM_HEADING_H20_M3_T02.yaml",
-        "config_sha256": "9863c29512d711ee465a6a94a9e90112cc2f70ea2337262e5f9dea75ec52999d",
-        "binary": "<NEW_STAGE_T02>/BUILD/SOLVER",
-        "binary_sha256": "1bf81d76f74f10511ca0f49988a800e2593cbdced791fd48bbc63e5ec8463509",
+        "config": "<NEW_STAGE>/CONFIGS/IMUFIX_CLAIM_HEADING_H20_M3.yaml",
+        "config_sha256": "878d9b7f1266201d54129673f212b576876d9304050c60a6b31e88cee2eb1d72",
+        "binary": "<NEW_STAGE>/BUILD/SOLVER",
+        "binary_sha256": "20eb97b47707ad01c9a935fbf4301f21e93018dda04ba909810d33938c48e72e",
         "outage": [
           196.2,
           216.2
@@ -334,19 +334,19 @@
             "field": "run_id",
             "line": 7,
             "before": "run_id: \"IMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M2\"",
-            "after": "run_id: \"IMUFIX_CLAIM_HEADING_H20_M3_T02\""
+            "after": "run_id: \"IMUFIX_CLAIM_HEADING_H20_M3\""
           },
           {
             "field": "run_label",
             "line": 8,
             "before": "run_label: \"IMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M2\"",
-            "after": "run_label: \"IMUFIX_CLAIM_HEADING_H20_M3_T02\""
+            "after": "run_label: \"IMUFIX_CLAIM_HEADING_H20_M3\""
           },
           {
             "field": "outputpath",
             "line": 12,
             "before": "outputpath: \"<PRIOR_PILOT>/NATIVE/IMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M2\"",
-            "after": "outputpath: \"<NEW_STAGE_T02>/NATIVE/IMUFIX_CLAIM_HEADING_H20_M3_T02\""
+            "after": "outputpath: \"<NEW_STAGE>/NATIVE/IMUFIX_CLAIM_HEADING_H20_M3\""
           },
           {
             "field": "imupath",
@@ -358,7 +358,7 @@
             "field": "gnsspath",
             "line": 11,
             "before": "gnsspath: \"<SCRATCH_ROOT>/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__D61_20s_seed_00__3e9eee10e392fb43808d437fe62665ecd61e3e07ab2f24c91ae00f98fd1220ab/GNSS18.gnss\"",
-            "after": "gnsspath: \"<NEW_STAGE_T02>/INPUTS/H20_SOURCE_LOSS.gnss\""
+            "after": "gnsspath: \"<NEW_STAGE>/INPUTS/H20_SOURCE_LOSS.gnss\""
           },
           {
             "field": "raw_doppler_factor_path",
@@ -376,7 +376,7 @@
             "field": "go2_horizontal_velocity_prior_path",
             "line": 58,
             "before": "go2_horizontal_velocity_prior_path: \"<PRIOR_PILOT>/INPUTS/ROBOT_REPORTED_BODY_HYPOTHESIS.csv\"",
-            "after": "go2_horizontal_velocity_prior_path: \"<NEW_STAGE_T02>/INPUTS/SDK_BODY_3D.csv\""
+            "after": "go2_horizontal_velocity_prior_path: \"<NEW_STAGE>/INPUTS/SDK_BODY_3D.csv\""
           }
         ],
         "source_config_sha256": "b46c0ccb1caa9b62fda3a7a073058c1ba493e30b49bbf6f909f6e28126f49b10",
@@ -464,23 +464,20 @@
       "<SCRATCH_ROOT>/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss": "fc6dd49c0a35c41208fc7d94da1c78ad63fe6938bd8f599021750c3bf5e20760",
       "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv": "847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4",
       "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv": "e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e",
-      "<NEW_STAGE_T02>/INPUTS/SDK_BODY_3D.csv": "298a5376568c616ae9c0c49debabb3763b3a1af022e3302a14330a9f89eb30aa",
+      "<NEW_STAGE>/INPUTS/SDK_BODY_3D.csv": "298a5376568c616ae9c0c49debabb3763b3a1af022e3302a14330a9f89eb30aa",
       "<CLEAN_ROOT>/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/INPUTS/BY2/IMU8_SEGMENT_00.imu": "0078814bb29b3c42cea74dda2e92b0372d5eade5105ac7b0643b7c359cad4f46",
       "<SCRATCH_ROOT>/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__D61_20s_seed_00__3e9eee10e392fb43808d437fe62665ecd61e3e07ab2f24c91ae00f98fd1220ab/GNSS18.gnss": "e0296dc1b604a548ed73263b825c2c0535b054a08466ab758ded5446c498f142",
       "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D61_20s_seed_00/RAW_DOPPLER.csv": "3193ccb0233437d3539bbd6021cdad235a91b3c0bca2b7368e50f5814f3ca382",
       "<SCRATCH_ROOT>/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__D62_20s_seed_00__49656fbb3f44c9337bcd77c796dcbef82fbc3576c1061ad7e3214985454f45cf/GNSS18.gnss": "81417d507f8f28d055a861c29fe5ce053e8cfb540696f2c7712178dde2ed656e",
       "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D62_20s_seed_00/RAW_DOPPLER.csv": "3193ccb0233437d3539bbd6021cdad235a91b3c0bca2b7368e50f5814f3ca382",
-      "<NEW_STAGE_T02>/INPUTS/H20_SOURCE_LOSS.gnss": "1f8f7e0fa5850d0f0c572f85ddaff6a6cb568a64f029a850403c8894b1627bae",
-      "<NEW_STAGE_T02>/INPUTS/H20_LEGACY_HV_SOURCE_MASK.csv": "67674bd90c82fff56c6113be7904fa644b2e11fff59f120ed8144fb40007e87a",
+      "<NEW_STAGE>/INPUTS/H20_SOURCE_LOSS.gnss": "1f8f7e0fa5850d0f0c572f85ddaff6a6cb568a64f029a850403c8894b1627bae",
+      "<NEW_STAGE>/INPUTS/H20_LEGACY_HV_SOURCE_MASK.csv": "67674bd90c82fff56c6113be7904fa644b2e11fff59f120ed8144fb40007e87a",
       "<PRIOR_PILOT>/INPUTS/ROBOT_REPORTED_BODY_HYPOTHESIS.csv": "eceffe24080bb61c4a97293fc057209aac2e02d3d57e4e0a84735c50fafad7ce"
     },
     "native_budget": 6,
-    "prior_post_runtime_rejected_solver_calls": 1,
-    "total_solver_call_target": 7,
-    "prior_failed_invocation_sha256": "caf3ab944fa11ac855660fd0d831a7d4937a1f259fd3c4a6bc9a61093174a45c",
     "parent_plan_sha256": "f96251d9d53e6c0323f3f931a56432cef5686ef702a562cf61f74ea80495d3f8",
     "parent_seal_sha256": "ef75b9afa3630123f71ff48bcd1a36bc3a41287288ce411afd131bad8172de58",
-    "build_identity_sha256": "df93702cb996badaf98103912b387523109b1c208233a8def99878c8b52e1caa",
+    "build_identity_sha256": "b432830bc157a493a85433619bdb3b8661bed856d79e44152caf70fa2d95b49f",
     "body_std_xyz_mps": [
       0.132838,
       0.132838,
@@ -501,12 +498,14 @@
       "hv_disabled_rows": 3843,
       "maximum_interpolation_gap_s": 1.2,
       "fault_HV_tolerance_guard_passed": true
-    }
+    },
+    "provider_numeric_token_preservation": "all inherited numeric velocity and xy std tokens retained verbatim; only M3 std_vd/policy and H20 validity/support/reason fields changed",
+    "preparation_note": "Before any solver: pandas CSV roundtrip preparation preserved in PREPARATION_00_CSV_ROUNDTRIP and replaced by exact numeric-token construction; no scientific code/binary/parameter change"
   },
   "build_identity": {
     "parent_build_identity_sha256": "3695d3a26ee7d2b7e807b04f5c754e3c6126d5b105059e7c7397c83cf906eb96",
     "parent_binary_sha256": "3805d2d2b0f52063da48d52b23fca2f88c4b5f9ef19adc9bfd48f5fe920701e7",
-    "base_commit": "59a8734b7699778e5596536f88580932ac8c780b",
+    "base_commit": "c9c494001d02e7862b180b87ce1b9fb83b2c1c3b",
     "sandbox_source_sha256": {
       "pilot_test.cpp": "e69c44024434998a2a2bb7f927efbb1588d9e6b6beab2b2c35f9f754f282d3b1",
       "CMakeLists.txt": "09d220840c0998a4fe84ec9d616a907338b551d58b40564ec15f386cb6c583de",
@@ -546,7 +545,7 @@
       "core/include/legsa_v23_port_core/writers/port_writers.hpp": "35fad671a84912ace9636ae98ee3bdeba90ff345828944fba6d57835e30f308c",
       "core/include/legsa_v23_port_core/fgo_feedback/fgo_feedback.hpp": "97bc3f0b41ce53d0c5b28b29dd2e9865b16d7d62bc915d619224786b242891e7",
       "core/src/baseline3d.cpp": "34e46aba357fb9de5c955f92c1f41eb81a31baf27e5761dec1783e36d3da6fcf",
-      "core/src/runtime/port_runtime.cpp": "a308c85c35fdb73a13c97c0e2e4aeac2dbd8cbef28dc28980aee401c21c41f70",
+      "core/src/runtime/port_runtime.cpp": "266c5cd5fdab2a7a3ef9fefee36c01e736e43bf8f44308abb49951237bebd9c3",
       "core/src/common/rotation.cpp": "7dd006b9612a13ee5173b5faa51a0f9bb9d8ccdfcea9c8f1a599269371a01331",
       "core/src/common/earth.cpp": "8e9e6f52dc48ce42992f2e43ffa034cb5cc408f7901bb836542f1e0ed4683f82",
       "core/src/common/types.cpp": "5a4de8e7d89f38e597587349df5c627a465248e86c67287e738c849ee781081d",
@@ -571,76 +570,28 @@
       "core/src/writers/port_writers.cpp": "b8947e623fc8c2c78cd4bbd721328b41559652e9bd17dc0e378e0417ba06af31",
       "core/src/fgo_feedback/fgo_feedback.cpp": "6a5742a17c615edef630728a460c2bbf5374b06d03dd8faf790684804591317b"
     },
-    "binary_sha256": "1bf81d76f74f10511ca0f49988a800e2593cbdced791fd48bbc63e5ec8463509",
+    "binary_sha256": "20eb97b47707ad01c9a935fbf4301f21e93018dda04ba909810d33938c48e72e",
     "unit_tests": {
       "status": "PASS",
       "max_body_jacobian_error": 2.97396e-10,
       "schedule_guards": 5
     },
-    "effective_M3_model": "3D body velocity; std_z=.132838; inherited parser transport horizontal_2d overridden only inside isolated GIEngine constructor",
-    "postgate_identity_repair": "mode3 + dedicated IMUFIX_HEADING/IMUFIX_CLAIM_HEADING run identity uses genuine enabled 3D velocity status; preserves zero horizontal count, all other formal gates"
+    "effective_M3_model": "3D body velocity; std_z=.132838; inherited parser transport horizontal_2d overridden only inside isolated GIEngine constructor"
   },
   "loader_admission": {
     "returncode": 0,
     "configs": 6,
     "native_solver_calls": 0,
-    "stdout": "IMUFIX_HEADING_C00_M3_T02 V3_NATURAL_SEQUENCE_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_HEADING_D61_20s_seed_00_M3_T02 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_HEADING_D62_20s_seed_00_M3_T02 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_HEADING_H20_M0_T02 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_HEADING_H20_M2_T02 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_HEADING_H20_M3_T02 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\n",
+    "stdout": "IMUFIX_HEADING_C00_M3 V3_NATURAL_SEQUENCE_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_HEADING_D61_20s_seed_00_M3 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_HEADING_D62_20s_seed_00_M3 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_HEADING_H20_M0 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_HEADING_H20_M2 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_HEADING_H20_M3 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\n",
     "stderr": "",
-    "checker_sha256": "a791d6601d2f41f460399d7e2acbd3f9b363024bc7e52754aa24fcdacbe690b1",
-    "checker_invocations_this_stage_total": 2
+    "checker_sha256": "a791d6601d2f41f460399d7e2acbd3f9b363024bc7e52754aa24fcdacbe690b1"
   },
-  "solver_calls_before_refreeze": 1,
-  "prior_failure": {
-    "run_id": "IMUFIX_HEADING_C00_M3",
-    "case": "C00",
-    "mode": 3,
-    "config": "<NEW_STAGE_T01>/CONFIGS/IMUFIX_HEADING_C00_M3.yaml",
-    "config_sha256": "e6296c3c09d999ab8e495a5310da6b62a9ecfcdc1ed96414f32975288f3d22c5",
-    "binary": "<NEW_STAGE_T01>/BUILD/SOLVER",
-    "binary_sha256": "20eb97b47707ad01c9a935fbf4301f21e93018dda04ba909810d33938c48e72e",
-    "outage": null,
-    "changes": [
-      {
-        "field": "run_id",
-        "line": 7,
-        "before": "run_id: \"IMUFIX_RESEARCH_AUDIT_C00_M2\"",
-        "after": "run_id: \"IMUFIX_HEADING_C00_M3\""
-      },
-      {
-        "field": "run_label",
-        "line": 8,
-        "before": "run_label: \"IMUFIX_RESEARCH_AUDIT_C00_M2\"",
-        "after": "run_label: \"IMUFIX_HEADING_C00_M3\""
-      },
-      {
-        "field": "outputpath",
-        "line": 12,
-        "before": "outputpath: \"<PRIOR_PILOT>/NATIVE/IMUFIX_RESEARCH_AUDIT_C00_M2\"",
-        "after": "outputpath: \"<NEW_STAGE_T01>/NATIVE/IMUFIX_HEADING_C00_M3\""
-      },
-      {
-        "field": "go2_horizontal_velocity_prior_path",
-        "line": 58,
-        "before": "go2_horizontal_velocity_prior_path: \"<PRIOR_PILOT>/INPUTS/ROBOT_REPORTED_BODY_HYPOTHESIS.csv\"",
-        "after": "go2_horizontal_velocity_prior_path: \"<NEW_STAGE_T01>/INPUTS/SDK_BODY_3D.csv\""
-      }
-    ],
-    "source_config_sha256": "4181312ce613ccc9daf514b32b6e2569d06eea9a59c8ee50f5a090f2c140e190",
-    "effective_velocity_dimension": 3,
-    "effective_velocity_frame": "conditional_body_FRD",
-    "effective_vertical_disabled": false,
-    "returncode": 1,
-    "runtime_seconds": 7.103748583999959,
-    "online_trace_reads": 0,
-    "execution_commit": "05ee1ae09309b81012adca546e071c54f3ba71a7"
-  },
-  "prior_failure_phase": "after full propagation; runtime counter identity check; before NAV/STD writing; not pre-input",
+  "new_native_solver_calls_before_freeze": 0,
   "new_evaluator_calls_before_freeze": 0,
   "tracked_script_sha256": {
-    "scripts/paper_rebuild/heading_reassessment_20261006/pilot.py": "b740f80482d0861a07834f8c5b4a39791e181eb2788b9a4c187a680abd6de529",
-    "scripts/paper_rebuild/heading_reassessment_20261006/count_r5_float_admission.py": "cede2eefcf9bb3a31a1beba1c3e2f3ecc40d769a492fa65e5c4dd7112cbfa0ce",
-    "scripts/paper_rebuild/heading_reassessment_20261006/audit_raw_inputs.py": "e5ccfd40c4021b49582029f1f4e44a751f1e524400ac574dee15ae398f1aaa52",
-    "scripts/paper_rebuild/heading_reassessment_20261006/group_dates.py": "00e9cfa367dc43e3450a31889ed59ec656402edc59a9ffbd6542ec0a59e66ce5",
+    "scripts/paper_rebuild/heading_reassessment_20261006/pilot.py": "003191c614362f79e9285e919fb5287c98a430398ea65dae8dbe17a98b6fb196",
+    "scripts/paper_rebuild/heading_reassessment_20261006/audit_raw_inputs.py": "5194c0ae1a1695266c283647233f3e930a4ad1866f1ad5635e9b988687d83be2",
+    "scripts/paper_rebuild/heading_reassessment_20261006/group_dates.py": "654a87f5bf47bae91b74f0d02b5ed0aedf5452dea83755134528f0e416b3f3ae",
     "scripts/paper_rebuild/heading_reassessment_20261006/inspect_vertical_input.py": "f83ff2f4bfb717da38b158573f341622018e01c99fbac2f8c004ee0b3bd72e20",
     "scripts/paper_rebuild/heading_reassessment_20261006/count_provider_fix.py": "8e046f36c91dc8023e2f875bdb80b6787b2b77ae79d64808c6ea08eb43629217"
   }

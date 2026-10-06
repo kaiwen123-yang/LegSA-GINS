@@ -1,6 +1,6 @@
 # Heading-source loss and conditional vertical-velocity pilot
 
-Status before scientific execution: build, raw-input diagnostics, 3D Jacobian and six native-loader admissions PASS; zero new navigation or evaluator runs. Execution requires parent commit/push freeze. This is an exploratory extension of the October 6 diagnostic pilot, not original V3 or a production repair.
+Historical status before first scientific execution: build, raw-input diagnostics, 3D Jacobian and six native-loader admissions PASS; zero new navigation or evaluator runs. Execution requires parent commit/push freeze. This is an exploratory extension of the October 6 diagnostic pilot, not original V3 or a production repair.
 
 ## Fixed design and budget
 
@@ -41,3 +41,12 @@ Seal all six native outputs before any of the six new offline evaluations. Reuse
 The primary new heading question is the H20 M2-versus-M0 yaw trajectory/error and recovery, interpreted together with position/velocity support and actual heading/HV availability. C00 assesses collateral changes; D61/D62 assess the conditional third-dimensional constraint, including adverse H/yaw changes. There is no prespecified claim that D62 must improve. A favorable H result alone cannot establish the paper's heading innovation or a new absolute-heading observation. Shared dual-yaw initialization remains; this does not resolve no-initial-heading cases or global yaw gauge freedom.
 
 The limit remains six new scientific native calls and six evaluations. No candidate replaces V3 or is approved for deployment from this single-sequence, single-event test.
+
+
+## 运行后身份检查事故与 T02 技术修复（结果评估前登记）
+
+第一次 M3 C00 在冻结提交 05ee1ae09309b81012adca546e071c54f3ba71a7 下调用 solver，实际完成整窗传播；约 7.10 s 后旧运行检查要求 horizontal_update_count>0，而真正三维更新的该计数为 0，因此在写 NAV/STD 前拒绝。记录、stderr、strace 与 AID_EVENTS 全部保留。它是一次已执行算法的运行后合同失败，不能记成 pre-input 失败；在线 reference 读取为 0，未进行评估。
+
+用户本轮范围内由 root 授权一个技术修复：新 ATTEMPT_02 仅修改隔离副本 port_runtime.cpp 的 M3 身份检查。M3 必须为专用 IMUFIX_HEADING_/IMUFIX_CLAIM_HEADING_ 身份及 LegSA_Paper_V1 transport，否则明确拒绝；模块活动采用真实 solver_enabled、velocity update_count>0、horizontal_update_count==0、horizontal_only=false、vertical_disabled=false。其余 position/RV/yaw/RD/SA/RP 和禁用模块检查、全部旧模式检查保留。没有伪造横向计数，也未改变导航计算、观测、阈值或参数。两版 SOURCE 的唯一差异为 runtime 检查文件，gi_engine 与全部数学源码哈希相同。
+
+新六配置具有 T02 run-id 后缀和独立输出路径，实际 loader 再次全部通过。三维 Jacobian 检查仍通过。第一次冻结预注册保留为 PILOT_PREREGISTRATION_ATTEMPT_01.json，当前 PILOT_PREREGISTRATION.json 描述 T02。最终目标调用账本为 7 次 solver：1 次完整传播后被身份检查拒绝，加 6 次可评估试验；只有后六次全部封存后才执行 6 次 evaluator。已有六组成对结果仍仅复用，不重跑。
