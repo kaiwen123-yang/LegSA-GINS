@@ -1,0 +1,145 @@
+{
+  "status": "PASS_LOCAL_AND_FULL_DEPENDENCY_METADATA_PREPARATION",
+  "registration_commit": "07637339a3cc531d042397c4ff154c4eeca53d30",
+  "python_cases": 8,
+  "native_cases": 8,
+  "binary": {
+    "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_QUALIFICATION_ATTEMPT01/BUILD/legsa_v23_port_core_demo",
+    "sha256": "9bde21f71a7035341a7830586e4ff80ed9cc80a8f92c427e1f11b1a03b659d2d",
+    "size_bytes": 1266440
+  },
+  "harness_sha256": "c319177d841f9db8e3b99afd597b2e6757e9787732eb7bdfe758f0ad788f0401",
+  "native_real_calls": 0,
+  "evaluator_calls": 0,
+  "actual_arrival_qualified": false,
+  "velocity_recomputed": false,
+  "automatic_retries": 0,
+  "source_result": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_QUALIFICATION_ATTEMPT01/COMPLETE.json",
+  "source_result_sha256": "bd8acd24de3de5a7268c7cc247d74f776cd9895f7e14d68fe81e59753c4a7523",
+  "input_files": 6,
+  "scientific_bytes": 67191365,
+  "providers": [
+    {
+      "sequence_id": "BY2",
+      "dependency_scope": "CALIBRATED_GNSS18_INTERPOLATION_ENDPOINTS_ONLY",
+      "input_pins": {
+        "hv": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+          "sha256": "3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e",
+          "size_bytes": 18814268,
+          "hash_passes": 1
+        },
+        "historical_gnss": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_GNSS.gnss",
+          "sha256": "68ed8de7f91b267072bab09e968a9cab4b5220bc5eb116140adacdfde0382e7a",
+          "size_bytes": 251694,
+          "hash_passes": 1
+        }
+      },
+      "derived_csv": {
+        "sha256": "07cb8846f3b548f0074524cc6c371acb8239078e50b9fb5eea25491da9b7f3cb",
+        "size_bytes": 22578367
+      },
+      "provider_rows": 63278,
+      "supported_rows": 60867,
+      "unsupported_rows": 2411,
+      "ready_empty_rows": 2411,
+      "original_valid_rows": 60867,
+      "original_flags_consistency_checked_rows": 63278,
+      "prefix_preserved_rows": 63278,
+      "original_field_bytes_preserved": true,
+      "original_order_and_line_endings_preserved": true,
+      "helper_calls": 8,
+      "dependency_kinds": {
+        "OUTSIDE_LEFT": 2411,
+        "INTERIOR": 60867
+      },
+      "valid_a1_endpoints": 301
+    },
+    {
+      "sequence_id": "BY2H",
+      "dependency_scope": "CALIBRATED_GNSS18_INTERPOLATION_ENDPOINTS_ONLY",
+      "input_pins": {
+        "hv": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+          "sha256": "379d0676cbea5fda88437b6dc0508fcfe3d37b2fc6d5ccb40f39e732a6be54bf",
+          "size_bytes": 18811477,
+          "hash_passes": 1
+        },
+        "historical_gnss": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/CALIBRATED_GNSS.gnss",
+          "sha256": "88d18be4ec1b4efe4d74f8fc59683d7209fc803f52c60268a763ce457fa55f00",
+          "size_bytes": 247428,
+          "hash_passes": 1
+        }
+      },
+      "derived_csv": {
+        "sha256": "9ddc777c9c31b1949ce5a81e703d5bdcc5f429fc4b272ae19a6526f2aad501b3",
+        "size_bytes": 22585997
+      },
+      "provider_rows": 63221,
+      "supported_rows": 61669,
+      "unsupported_rows": 1552,
+      "ready_empty_rows": 1552,
+      "original_valid_rows": 61669,
+      "original_flags_consistency_checked_rows": 63221,
+      "prefix_preserved_rows": 63221,
+      "original_field_bytes_preserved": true,
+      "original_order_and_line_endings_preserved": true,
+      "helper_calls": 8,
+      "dependency_kinds": {
+        "OUTSIDE_LEFT": 1552,
+        "INTERIOR": 61669
+      },
+      "valid_a1_endpoints": 295
+    },
+    {
+      "sequence_id": "BY2O",
+      "dependency_scope": "CALIBRATED_GNSS18_INTERPOLATION_ENDPOINTS_ONLY",
+      "input_pins": {
+        "hv": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+          "sha256": "92bbe9165ed4ad6aa3f92c478f4a195ffccc7ec7b652506ba73533bd4190cdd2",
+          "size_bytes": 28692252,
+          "hash_passes": 1
+        },
+        "historical_gnss": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/CALIBRATED_GNSS.gnss",
+          "sha256": "96ffaa3a88f97d2519381baf20c1e139269665281ff0de2f56fb55f0b2446394",
+          "size_bytes": 374246,
+          "hash_passes": 1
+        }
+      },
+      "derived_csv": {
+        "sha256": "00c00caa7c8eabebeff17c290799eb095f06dbac1d988fa100c4ed9da01399e0",
+        "size_bytes": 34476118
+      },
+      "provider_rows": 95860,
+      "supported_rows": 87091,
+      "unsupported_rows": 8769,
+      "ready_empty_rows": 8769,
+      "original_valid_rows": 87091,
+      "original_flags_consistency_checked_rows": 95860,
+      "prefix_preserved_rows": 95860,
+      "original_field_bytes_preserved": true,
+      "original_order_and_line_endings_preserved": true,
+      "helper_calls": 12,
+      "dependency_kinds": {
+        "OUTSIDE_LEFT": 8769,
+        "INTERIOR": 87091
+      },
+      "valid_a1_endpoints": 445
+    }
+  ],
+  "full_hv_rows": 222359,
+  "real_helper_calls": 28,
+  "supported_rows": 209627,
+  "derived_bytes": 79640482,
+  "first_pass": true,
+  "scope": "Declared metadata identity/readiness software qualification and full source-preserving CSV preparation only. No real native replay, physical arrival, cross, or navigation gain.",
+  "independent_review": {
+    "reviewer": "heading_evidence",
+    "status": "PASS",
+    "scope": "Read COMPLETE/PYTEST and per-case process logs plus selected synthetic event/manifest outputs, and runner/source static review. No original scientific or full augmented CSV rereads."
+  }
+}

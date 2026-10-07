@@ -1,0 +1,389 @@
+{
+  "schema": "hv_dependency_policy.real/v1",
+  "status": "REGISTERED_READY_SINGLE_EXECUTION",
+  "stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_POLICY_REAL_ATTEMPT01",
+  "aliases": {
+    "<CODE_ROOT>": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001",
+    "<V3_ROOT>": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3",
+    "<V3_SCRATCH>": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3",
+    "<RAW_ROOT>": "/mnt/g/LegSA-GINS-project/data/raw",
+    "<CLEAN_ROOT>": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607",
+    "<FROZEN_CODE_ROOT>": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair",
+    "<SCRATCH_ROOT>": "/home/kaiwen/research/LegSA-GINS-SCRATCH",
+    "<CARRIER_SCRATCH>": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CARRIER_INTEGRATION_20261006",
+    "<CARRIER_NAV_SCRATCH>": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CARRIER_NAV_INTEGRATION_20261006",
+    "<NAV_INPUT_MAP_LOCAL>": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_NAV_INPUT_MAP"
+  },
+  "source_pins": {
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/baseline3d.hpp": "cee2acf52d96b83ac559dffb0c2324e56aa5a6c7a724f136df2e86efa0652286",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/common/earth.hpp": "aee6183b334e8c33c9dc4ca08396c8a0f61211444ba1d69d230148445c4dede3",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/common/rotation.hpp": "6968d788b9765736fda9470c41243c5d2a01bf4fdb492e05b714b6d6b1892dca",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/config/port_config_loader.hpp": "cd3210d6412ff1c426e9792c2284c6554c1625e19e29e3da6919fb95e6bc2ce9",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/arc_source_events.hpp": "d2f9bb36dae96ae7b629046e5b505d9c0954d5916e1c208b88436f30b3e9a99d",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/attitude_clone.hpp": "889cf7cc47219d3c37d7f4ff2e98303641700754301a204089cdb13d68e09254",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/body_velocity_model.hpp": "25c855998bcbbbc6bcc84f08a72a9c5c76f044bee9d8321de4cea894d4fec6e0",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/foot_pair_events.hpp": "347166fcbb49377facb405abfaaebd9699d95e91bd3fe583ef7403482185978e",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/go2_weak_prior_factor.hpp": "7fe76fc1bf98dd59729194d7eac9a36054e51a9d93c75974c467202475092261",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/go2_weak_prior_loader.hpp": "3a5b7875ca85724683f596731e72cc13d1105a4b24cde1cdb94e8268fbf5b956",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/go2_weak_prior_types.hpp": "77bf218843bf56a8abbc0f68086b7a6ff5699d720ca48015c7a6b1330647bb5d",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/raw_doppler_factor.hpp": "ce2e00fdf4697ba6322fe0b3e22c719e86f11b4fcb26001ff67e04db933baea8",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/raw_doppler_factor_loader.hpp": "1ecb890eac97824e263d75296022d1aafc486b04d5a18917c5474a868dc55d00",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/raw_doppler_types.hpp": "c59c1ab797128ca0ab73f9496c1fe12599d8a886f98d16a3e7a0b7ac4e8d56fc",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/satellite_state_provider.hpp": "ee899b3c17fd036a7a1cf3841fd15bffa94a3e6adfbe066c6501b31e4845d1f8",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/fgo_feedback/fgo_feedback.hpp": "97bc3f0b41ce53d0c5b28b29dd2e9865b16d7d62bc915d619224786b242891e7",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/fileio/file_saver.hpp": "c854a616ac5d858890262b5c4801670a553bb629aaecbaeb98c60ced9a97839e",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/fileio/gnss_file_loader.hpp": "965c1953420437a539e8367d4ce9604ff496e8d83135385deb76078df8b658cd",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/fileio/imu_file_loader.hpp": "013a6b0e84914cc4260aad13148a12905f3ae33ff5aa51e339f31c9ded31be25",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/gnss.hpp": "96784c0e2af49ce9bad3878e0b8c438cb99daf38d9c886f2c5894b5376fb6cf2",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/heading_source_policy.hpp": "78f1aa46f269c9ff7085217a662a81ab05291a2884fbb474b03e21973025784d",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/imu.hpp": "7c79c573cd8aae9745ebe9a227a2c681d26c4e846cfb1583b1e4a516f668d728",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/gi_engine.hpp": "b4deb99d33cb23cf6563f03e7deb3c335e0a13afdc485ec881636e0d418a000a",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/insmech.hpp": "500c44107b8cfa4997e7104783b72ee53a050550c79dedc8c90741b002c4ae6a",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/options.hpp": "774b04a17d972af4a57a9ac2c29d1067005b49586dc7950c03b1cf98b34c49fb",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/nav_state.hpp": "804067e48398d6a495d4549f69fdb66f9c83f2831ac0a5d04cf1c37baa278093",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/options.hpp": "3cf54031c2c4cdeba664a8c0839935b64e653eb5e258745e1ff43f35219ccd20",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/quality_aware/qa_fallback.hpp": "169866841e615dcc936b3ef0b0b4d481b1e121513f5d1ae615c32e0c8ace5ea8",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/runtime/port_runtime.hpp": "eb6523a5a121a90cebee732b2df5ad4e06e6407e3bb631024655234c086bb7f5",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/measurement_source.hpp": "218da13d3f9b3f846182098880f96bd589cfa51db1d9a65efab3b0f0fd623da7",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/quality_state_manager.hpp": "1f1636baa20c701f972a8895d9e74fd6aa6b59f03243ff9a6fce751b6e0d3cf9",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/quality_state_trace.hpp": "a25e0b963e3b55ff01f824b5e85689cbf5ab48210f359f8011258d72573c2b1f",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/source_aware_policy.hpp": "e5c0d58d629194f1f1a0ddb35eeb8cb9335dd84f3544acbbe68cde07eb590e49",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/source_aware_trace.hpp": "cd2ad52aa811f12ebcad8397634e444c0a426956d36f9327b56646beac9c4811",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/types.hpp": "ff32237a291905bf9afe68721e687a4391c5a155d80cbaa626d8db3b2d75b9ef",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/writers/port_writers.hpp": "35fad671a84912ace9636ae98ee3bdeba90ff345828944fba6d57835e30f308c",
+    "cpp/legsa_v23_port_core/src/baseline3d.cpp": "3d88423e6a8d9d41c498f2f618fac70ac629481983d675c91026acdfbba058c2",
+    "cpp/legsa_v23_port_core/src/common/earth.cpp": "8e9e6f52dc48ce42992f2e43ffa034cb5cc408f7901bb836542f1e0ed4683f82",
+    "cpp/legsa_v23_port_core/src/common/rotation.cpp": "7dd006b9612a13ee5173b5faa51a0f9bb9d8ccdfcea9c8f1a599269371a01331",
+    "cpp/legsa_v23_port_core/src/common/types.cpp": "5a4de8e7d89f38e597587349df5c627a465248e86c67287e738c849ee781081d",
+    "cpp/legsa_v23_port_core/src/config/port_config_loader.cpp": "24d275aa03a3074d81c3b0e5996be70ed7de65e3d4bdd236eef0876755249d50",
+    "cpp/legsa_v23_port_core/src/demo/legsa_v23_port_core_demo.cpp": "0e2bdf1ba03555f47f6af2b98ca5da86c54322651f60f5352e2ea095c9b07a40",
+    "cpp/legsa_v23_port_core/src/demo/port_demo.cpp": "274bd62f9dbd18b10c1764a02f98ab4452d0e445115f04bd30630f68018be891",
+    "cpp/legsa_v23_port_core/src/factors/arc_source_events.cpp": "848d9d1ca6fa37142e8cf0520d6d22a08298efe3fab99efacc831725595d03da",
+    "cpp/legsa_v23_port_core/src/factors/attitude_clone.cpp": "11568fb2d4bb69198c8aed15bd8a095f0bbe48fd4b5969eba2f95eb7bb1db47b",
+    "cpp/legsa_v23_port_core/src/factors/body_velocity_model.cpp": "6301565e4a1ab2bf6b7a3daa68447699707a4d1779eee04783b80fbbd39ec23b",
+    "cpp/legsa_v23_port_core/src/factors/foot_pair_events.cpp": "4ba6634d0ff7c14f7f5a85041b57aa6412645e73dd2f6ddda7b532414d014edd",
+    "cpp/legsa_v23_port_core/src/factors/go2_weak_prior_factor.cpp": "d40bfc1b7cfd8d54fb30b167ad8f922ce56c98ecb2097171133cedb4832231d4",
+    "cpp/legsa_v23_port_core/src/factors/go2_weak_prior_loader.cpp": "c80bdd88d45f361ebd37b07a779ce8ca452866ef84d706ff6a39fa79f39f1004",
+    "cpp/legsa_v23_port_core/src/factors/raw_doppler_factor.cpp": "46786a1a0e4e31db2aba87023d754a5bd2e6480cd57be1eeec4f41f6dcc2946f",
+    "cpp/legsa_v23_port_core/src/factors/raw_doppler_factor_loader.cpp": "6634a30568ac943a778c17c3faef133c820a6f93a246d6ed9a9f5b251cec6249",
+    "cpp/legsa_v23_port_core/src/factors/satellite_state_provider.cpp": "78984fe28dbe53aec6a6a7b9c850fc29d38d9a01cb58427585d61a3591eabe10",
+    "cpp/legsa_v23_port_core/src/fgo_feedback/fgo_feedback.cpp": "6a5742a17c615edef630728a460c2bbf5374b06d03dd8faf790684804591317b",
+    "cpp/legsa_v23_port_core/src/fileio/file_saver.cpp": "19dea24817e1c34fa691a0ee096f17740e6920324010712d2296a3e7f55ae75f",
+    "cpp/legsa_v23_port_core/src/fileio/gnss_file_loader.cpp": "b2ba9d908600ebd72a1671ea90d7bfb15f0c696bf4116e0d7d8d1c6bdbf31b3d",
+    "cpp/legsa_v23_port_core/src/fileio/imu_file_loader.cpp": "ed064dfb7f50d5fede6cb0865870b42c86f254e4b68389e32e1fa18cfc9e1119",
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp": "9bab421b31fe3a0ef4caf069fa4f5a24062966361dbb3f4afb9b73b0b499807f",
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine_arc_clone.cpp": "a5a11e9d2e64fbf91eee2a6dd088a6eec4451fd2fd9690edc13c024751b3f768",
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine_attitude_clone.cpp": "143b2e08ae4701449a7536b468d45c410dc52922d5d7ec544f3a0cce27a8abb1",
+    "cpp/legsa_v23_port_core/src/kf_gins/insmech.cpp": "eec54b43325af4101722d0b0eb76a712ec75a867f55950087a913642976f231c",
+    "cpp/legsa_v23_port_core/src/quality_aware/qa_fallback.cpp": "76dc1658bcaeb06607c87861011ed9ba3a10e9b33144148e790134a70d09b707",
+    "cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp": "8bec85789b9463cdb593336b9d9c890d7d436612323087883fe6b02e8ec90a89",
+    "cpp/legsa_v23_port_core/src/source_aware/quality_state_manager.cpp": "ba8511f51e35cfee41a313c114817c1adbe6b2e118a9632a88a24c06ebc8e192",
+    "cpp/legsa_v23_port_core/src/source_aware/quality_state_trace.cpp": "00af7e8ccb982ed733fe55739555c1f03f9c02e8534c6291724f9348da0bdcde",
+    "cpp/legsa_v23_port_core/src/source_aware/source_aware_policy.cpp": "3efce02c49adc184dc9aa76b9a1fdd1b6eeb1307ad45edeb9ebfb5eea360cb91",
+    "cpp/legsa_v23_port_core/src/source_aware/source_aware_trace.cpp": "16305993507e641ff07c19952a0acb0263daf83ca91de0901df9aa5e529b2144",
+    "cpp/legsa_v23_port_core/src/writers/port_writers.cpp": "b8947e623fc8c2c78cd4bbd721328b41559652e9bd17dc0e378e0417ba06af31",
+    "cpp/CMakeLists.txt": "e3d34e2c5ca0af380865ff55fdbb4b48ee142c4b5b099f7723263d22cbd3f181",
+    "scripts/paper_rebuild/carrier_phase/hv_dependency_prepare.py": "aae84d5803e1b675a1622c626f38fc982cee990aff97da79b3c411548df3a8a6",
+    "src/legsa_gins/paper_rebuild/carrier_phase/hv_a1_dependencies.py": "ec48f77c5666d5c252ec2b55040a575c4b01e6da65cc08ad947f310a9b3559a0",
+    "scripts/paper_rebuild/carrier_phase/hv_dependency_qualification.py": "ac97d3650f62aaafaccbef69c0f9ea0f234cdee376a8c03326e582c43d698373",
+    "tests/paper_rebuild/native_hv_dependency_policy_harness.cpp": "e2161330a7431b36c911d7ff45a4e86036066cb955104e4883218c4edd23f64e",
+    "tests/paper_rebuild/test_hv_dependency_prepare.py": "b5ff29a8e647f00b2b816dee0a78f88ac2d74b7b7f0b6981c394d4faa328f39e",
+    "tests/conftest.py": "02a67b2b103d8304fd46d3799cd854f2c982142071e39ebcff1a707e4d91a3eb",
+    "pyproject.toml": "957989804d98fa6bd830ece3420ef1dc9a0509fef0ddc7c1dde402be28d131fd",
+    "scripts/paper_rebuild/carrier_phase/hv_causal_policy_replay.py": "1651d583e928ee682feecadf45096b89e89b57169624ab747ff56dd8dc9fbf07",
+    "scripts/paper_rebuild/carrier_phase/arc_native_replay.py": "cc58f97cacc950ef8fae9f7eaf6d78aea7c0ff4759f16712c24a3fe04da5d472",
+    "scripts/paper_rebuild/carrier_phase/arc_native_real.py": "74b9b69962caaa4fba2c37265b6d9a10662517a8efce677ba0747e8b7a277ad7",
+    "scripts/paper_rebuild/carrier_phase/hv_dependency_replay.py": "ba7efcc985341909d9e8bf6fa40d4edb807af707d4406d38dfd2f7219651796d"
+  },
+  "metadata_pins": {
+    "prepared_plan": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/PLAN.json",
+      "sha256": "71c002fffc6dd2cf63ba567faf2c34100ce591a6bb2079a046cac79d71bc3f75",
+      "size_bytes": 47006
+    },
+    "loader_complete": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_COMPLETION01/COMPLETE.json",
+      "sha256": "6711f939b9f388839c3d82a2a6361182d431a04aa971fb09910bf71069138a08",
+      "size_bytes": 45195
+    },
+    "old_seal": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_CAUSAL_POLICY_REAL_ATTEMPT01/ALL_NATIVE_SEALED.json",
+      "sha256": "eec6608b1924a75b8f0e8e20295ef1e04e878e6abe5327108173c4bb9567f1f1",
+      "size_bytes": 30304
+    },
+    "qualification_complete": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_QUALIFICATION_ATTEMPT01/COMPLETE.json",
+      "sha256": "bd8acd24de3de5a7268c7cc247d74f776cd9895f7e14d68fe81e59753c4a7523",
+      "size_bytes": 44846
+    }
+  },
+  "binary": {
+    "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_QUALIFICATION_ATTEMPT01/BUILD/legsa_v23_port_core_demo",
+    "sha256": "9bde21f71a7035341a7830586e4ff80ed9cc80a8f92c427e1f11b1a03b659d2d",
+    "size_bytes": 1266440
+  },
+  "provider_inputs": [
+    {
+      "path": "<V3_SCRATCH>/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+      "sha256": "fc6dd49c0a35c41208fc7d94da1c78ad63fe6938bd8f599021750c3bf5e20760",
+      "size_bytes": 253682
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv",
+      "sha256": "e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e",
+      "size_bytes": 9320956
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+      "sha256": "3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e",
+      "size_bytes": 18814268
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu",
+      "sha256": "74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647",
+      "size_bytes": 5091513
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv",
+      "sha256": "847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4",
+      "size_bytes": 530592
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_20261006/FULL_WINDOW_FRONTEND_ATTEMPT01/BY2/CARRIER.csv",
+      "sha256": "0856069e1068643bb2c89b9bce2a6a2d7c21f0cba7872354c5739f2541dd132a",
+      "size_bytes": 113295
+    },
+    {
+      "path": "<V3_SCRATCH>/02_PROVIDERS/CASES/BY2H__C00_clean_normal__4cd2369e62e4fba4f0b84b00a75c312c53a8e7eac606802837cbc88892278ff5/GNSS18.gnss",
+      "sha256": "4ff6ed07f1d189ab19934bc67c350e9f48f79527170c6fcafc85eba7cf1155bd",
+      "size_bytes": 249472
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GO2_ATTITUDE_PRIOR.csv",
+      "sha256": "7366cdb1c24fd647b65328fd2d3938331f288903677b0006a291ae646adbfd55",
+      "size_bytes": 9323295
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+      "sha256": "379d0676cbea5fda88437b6dc0508fcfe3d37b2fc6d5ccb40f39e732a6be54bf",
+      "size_bytes": 18811477
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/CALIBRATED_IMU.imu",
+      "sha256": "d32e4891080e300e6edde4526146636f15ec54df945a0470c57fbbdc3aa5115c",
+      "size_bytes": 5098435
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/RAW_DOPPLER.csv",
+      "sha256": "d5c4a42790f2034423d1a3e060d37488ba01341b423933074c11471fcdbac21c",
+      "size_bytes": 405344
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_20261006/FULL_WINDOW_FRONTEND_ATTEMPT01/BY2H/CARRIER.csv",
+      "sha256": "2e4b938cf805f3e3390d41d96905b28700d94f1e5d48ed54725a6df537e51a95",
+      "size_bytes": 148835
+    },
+    {
+      "path": "<V3_SCRATCH>/02_PROVIDERS/CASES/BY2O__C00_clean_normal__c5212cf72d07afd6d3ae0407fee87f841f2e0d909dfb8c1416bd7f38b0248bb4/GNSS18.gnss",
+      "sha256": "2a0b0ebbcd66b59dd153b84b132c638e9ea31021653e58e3ac125ed21304fa13",
+      "size_bytes": 376806
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_ATTITUDE_PRIOR.csv",
+      "sha256": "60d0ea7aeb84ea5df757f8b34fc04d1e1e39b78925c592118094b690b8424537",
+      "size_bytes": 14205133
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+      "sha256": "92bbe9165ed4ad6aa3f92c478f4a195ffccc7ec7b652506ba73533bd4190cdd2",
+      "size_bytes": 28692252
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/CALIBRATED_IMU.imu",
+      "sha256": "48943f3e704ceebbf517bfb073856c1c215b5216e3a5d8b6cd91e7ea7586e49b",
+      "size_bytes": 7820907
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/RAW_DOPPLER.csv",
+      "sha256": "dd9b178b37149eb3d97bd586bf078b1e11cf5e43f8771cbc38c9c21bcd6101f5",
+      "size_bytes": 807097
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_20261006/FULL_WINDOW_FRONTEND_ATTEMPT01/BY2O/CARRIER.csv",
+      "sha256": "3237d1783dca269ab43a7a50b65e0a7ebdd64456b56fb3d9e679167ca2426094",
+      "size_bytes": 137255
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_QUALIFICATION_ATTEMPT01/PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+      "sha256": "07cb8846f3b548f0074524cc6c371acb8239078e50b9fb5eea25491da9b7f3cb",
+      "size_bytes": 22578367
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_QUALIFICATION_ATTEMPT01/PROVIDERS/BY2H/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+      "sha256": "9ddc777c9c31b1949ce5a81e703d5bdcc5f429fc4b272ae19a6526f2aad501b3",
+      "size_bytes": 22585997
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_QUALIFICATION_ATTEMPT01/PROVIDERS/BY2O/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+      "sha256": "00c00caa7c8eabebeff17c290799eb095f06dbac1d988fa100c4ed9da01399e0",
+      "size_bytes": 34476118
+    }
+  ],
+  "control_configs": [
+    {
+      "sequence_id": "BY2",
+      "config": {
+        "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_CAUSAL_POLICY_REAL_ATTEMPT01/CONFIGS/BY2_causal.yaml",
+        "sha256": "8fcb5e16c67fd78eca6c93c8a5ec9b2347b29371e77901a6ca843fe69d05ead6",
+        "size_bytes": 8965
+      }
+    },
+    {
+      "sequence_id": "BY2H",
+      "config": {
+        "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_CAUSAL_POLICY_REAL_ATTEMPT01/CONFIGS/BY2H_causal.yaml",
+        "sha256": "66279f373429c60bdedd810aa8a33da7183a2eebf9a981921da475c8c924d4d7",
+        "size_bytes": 9025
+      }
+    },
+    {
+      "sequence_id": "BY2O",
+      "config": {
+        "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_CAUSAL_POLICY_REAL_ATTEMPT01/CONFIGS/BY2O_causal.yaml",
+        "sha256": "8053812fa0a5534813cf53bc392e4cca4d36212eb4f352fbda1b5e42ce39e969",
+        "size_bytes": 9032
+      }
+    }
+  ],
+  "dependency_configs": [
+    {
+      "sequence_id": "BY2",
+      "sha256": "93d8a4b1e7fd322e5138e314a1d8cd415a81c73941bc4dbb0a73e53c6e2970a8",
+      "size_bytes": 9016
+    },
+    {
+      "sequence_id": "BY2H",
+      "sha256": "d9f595738a79aece953878f188b044f187c4bcfdac861b9b0a34bfcd2ebd8702",
+      "size_bytes": 9076
+    },
+    {
+      "sequence_id": "BY2O",
+      "sha256": "ac289dbc7beb184552f6a7ce10c8c037620cea3a84ea1f28a167cb0e928c62d5",
+      "size_bytes": 9083
+    }
+  ],
+  "augmented_providers": [
+    {
+      "sequence_id": "BY2",
+      "provider": {
+        "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_QUALIFICATION_ATTEMPT01/PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+        "sha256": "07cb8846f3b548f0074524cc6c371acb8239078e50b9fb5eea25491da9b7f3cb",
+        "size_bytes": 22578367
+      },
+      "manifest": {
+        "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_QUALIFICATION_ATTEMPT01/PROVIDERS/BY2/MANIFEST.json",
+        "sha256": "b3e60ddfe04ffd0ffc58ed0e2b8befb5fc57b3dde85be50cf973029ab95504b0",
+        "size_bytes": 5881
+      }
+    },
+    {
+      "sequence_id": "BY2H",
+      "provider": {
+        "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_QUALIFICATION_ATTEMPT01/PROVIDERS/BY2H/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+        "sha256": "9ddc777c9c31b1949ce5a81e703d5bdcc5f429fc4b272ae19a6526f2aad501b3",
+        "size_bytes": 22585997
+      },
+      "manifest": {
+        "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_QUALIFICATION_ATTEMPT01/PROVIDERS/BY2H/MANIFEST.json",
+        "sha256": "eabdfa653fb00fd95c6a75757696d44fc8afa480bfef877ea6df9ac89b76cf70",
+        "size_bytes": 5824
+      }
+    },
+    {
+      "sequence_id": "BY2O",
+      "provider": {
+        "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_QUALIFICATION_ATTEMPT01/PROVIDERS/BY2O/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+        "sha256": "00c00caa7c8eabebeff17c290799eb095f06dbac1d988fa100c4ed9da01399e0",
+        "size_bytes": 34476118
+      },
+      "manifest": {
+        "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_QUALIFICATION_ATTEMPT01/PROVIDERS/BY2O/MANIFEST.json",
+        "sha256": "4c00372434f9bed1abffc9245aae0d31781ee0a1dd7b78e78e72686ee4d17208",
+        "size_bytes": 7325
+      }
+    }
+  ],
+  "ordered_calls": [
+    {
+      "arm": "CAUSAL",
+      "sequence_id": "BY2"
+    },
+    {
+      "arm": "CAUSAL",
+      "sequence_id": "BY2H"
+    },
+    {
+      "arm": "CAUSAL",
+      "sequence_id": "BY2O"
+    },
+    {
+      "arm": "DEPENDENCY",
+      "sequence_id": "BY2"
+    },
+    {
+      "arm": "DEPENDENCY",
+      "sequence_id": "BY2H"
+    },
+    {
+      "arm": "DEPENDENCY",
+      "sequence_id": "BY2O"
+    }
+  ],
+  "environment_common": {
+    "PATH": "/usr/bin:/bin",
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1"
+  },
+  "telemetry_flag": "1",
+  "budgets": {
+    "native_calls": 6,
+    "evaluator_calls": 0,
+    "compile_calls": 0,
+    "loader_only_calls": 0,
+    "prepare_calls": 0,
+    "phase_math_calls": 0,
+    "information_readout_calls": 0,
+    "raw_reads": 0,
+    "reference_reads": 0,
+    "provider_hash_passes": 1,
+    "provider_unique_files": 21,
+    "original_provider_unique_files": 18,
+    "original_provider_bytes": 120200614,
+    "config_text_clones": 3,
+    "control_byte_identity_files": 45,
+    "native_timeout_s": 1200,
+    "dependency_structural_summaries": 3,
+    "causal_event_summaries": 3,
+    "dependency_event_summaries": 3,
+    "automatic_retries": 0,
+    "provider_bytes_per_hash_pass": 199841096,
+    "provider_hash_bytes_max": 199841096
+  },
+  "policy_contract": "Filter declared dependency readiness before latest timestamp and last eligible vector-index tie. Unready rows not consumed; selected rows consume timestamp before quality rejection. Existing source age, double clock, generation and schedule unchanged.",
+  "comparison": "Candidate binary original causal 3 must match old sealed 15 files each exactly before new policy 3. New config only changes one HV path line plus one time-policy value line.",
+  "input_scope": "Original 18 providers plus 3 source-preserving augmented HV CSVs: 21 unique files, one PRE identity hash pass199841096B, 36 native provider file opens across 6 calls. Native access traces enforce input allowlist and no provider writes; no duplicate POST full hash.",
+  "readout_scope": "3 dependency-arm structural summaries and source decisions with actual accepted ledger join. No evaluator/reference reads, no phase information/matrix algebra or phase updates.",
+  "failure_policy": "Retain first failure and stop; no automatic retry, no parameter scan. Record unavailable opportunities, do not presume acceptance count.",
+  "claim_boundary": "Software readiness for recorded historical GNSS18 interpolation dependencies only; not actual arrival, raw sensor clocks, total errors/cross, independent yaw truth or navigation gain.",
+  "qualification_registration_commit": "07637339a3cc531d042397c4ff154c4eeca53d30",
+  "review_decision": "Qualification8Python/8native first-pass with independent limited-output review. Root read entire new runner, checked fixed six-call order, two-line config mutation, original53fields, 21-input closure, control-first45file gate, new dependency counter/clock checks and failure retention. Author final static interface review PASS; no execution. Extra independent plan review is read-only and is not a new execution prerequisite.",
+  "strace": {
+    "path": "/usr/bin/strace",
+    "sha256": "38a5c75cb29dd85ddd7780d54f5bf595554d7a1b5c42524b23065f5dc4c4b01d",
+    "size_bytes": 1972848
+  }
+}
