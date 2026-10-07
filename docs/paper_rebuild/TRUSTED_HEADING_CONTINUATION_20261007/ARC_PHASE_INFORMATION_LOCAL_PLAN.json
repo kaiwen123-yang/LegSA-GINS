@@ -1,0 +1,84 @@
+{
+  "schema": "trusted_heading.arc_phase_information.local_plan.v1",
+  "status": "SOURCE_READY_NOT_EXECUTED",
+  "scope": "synthetic two-pose information qualification only; no native or real saved-model information readout",
+  "source_files": [
+    "src/legsa_gins/paper_rebuild/carrier_phase/arc_phase_information.py",
+    "tests/paper_rebuild/test_arc_phase_information.py"
+  ],
+  "fixed_read_only_source_pins": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/arc_phase_difference.py": "3898eb95f2621f483c80ecd0d67b9fd6dcf27135673a755b11f8650a7d66ef12",
+    "src/legsa_gins/paper_rebuild/carrier_phase/attitude_clone.py": "20835772ca369ea635c1a05260eea628cd3023c800fe90cf8b6b4e8ee604c691",
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp": "0e351c06f0d34acd38d67d37028992ef1f850ac54a7e5aa647c94d5a6d63a793",
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine_attitude_clone.cpp": "3e52eab9cf1f68b40013e82aa92c684e4ecf2479d033abf798ad4dccbe52261e",
+    "cpp/legsa_v23_port_core/src/factors/attitude_clone.cpp": "11568fb2d4bb69198c8aed15bd8a095f0bbe48fd4b5969eba2f95eb7bb1db47b",
+    "cpp/legsa_v23_port_core/src/fileio/gnss_file_loader.cpp": "b2ba9d908600ebd72a1671ea90d7bfb15f0c696bf4116e0d7d8d1c6bdbf31b3d",
+    "cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp": "74e3e3047f75650590fc384c4596fc6827acbc88e353cf705f1753e0305a70a1"
+  },
+  "plan_document_sha256": "f2422dae4a8dfc5840c9f89613e37d9365450797e7aef0bc89d028763c602269",
+  "budget": {
+    "pytest_processes": 1,
+    "pytest_items": 12,
+    "timeout_s": 60,
+    "numeric_threads": 1,
+    "native_calls": 0,
+    "evaluator_calls": 0,
+    "CILS_calls": 0,
+    "raw_reads": 0,
+    "reference_reads": 0,
+    "real_information_readout_calls": 0,
+    "automatic_retries": 0
+  },
+  "fixed_parameters": {
+    "epsilon_grid": [
+      0.015625,
+      0.0625,
+      0.25,
+      1,
+      4
+    ],
+    "unknown_cross_latent_seed": 20261007,
+    "unknown_cross_latent_cases": 16,
+    "continuous_optimizer": false,
+    "jitter": 0,
+    "positive_eigenmode_truncation": false,
+    "synthetic_dense_seed": 731,
+    "posterior_formula_error_tolerance_in_prior_scales": 2e-10,
+    "psd_normalized_tolerance": "128*machine_epsilon*dimension*max(1,norm(normalized,2))",
+    "continuous_boundary_margin": "512*machine_epsilon*6*max(abs(T),abs(J),tiny)",
+    "selection_tie": "64*machine_epsilon*max(1,abs(score),abs(best))"
+  },
+  "first_failure_policy": "preserve all first outputs; root must separately register affected-item repair execution",
+  "output_stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_INFORMATION_LOCAL_ATTEMPT01",
+  "real_native_proposal_only": {
+    "registered": false,
+    "max_native_calls": 6,
+    "evaluator_calls": 0,
+    "arms": [
+      "ARC_NULL",
+      "ARC_TELEMETRY"
+    ],
+    "identity_gate": "same exact ARC timeline/clone arithmetic, NAV+STD+old state event bytes equal per sequence; old PVT_CONTROL is separate identity"
+  },
+  "interpretation": "working conditional information and gauge/source boundaries, not trusted direction or navigation gain",
+  "source_pins": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/arc_phase_information.py": "6f14db775227afddd05b75b47c8cd98d5743dd1dd10466d322987012765e1c3a",
+    "tests/paper_rebuild/test_arc_phase_information.py": "3c014f1e90e1e5d178cd0ad2d7faf83dead5146adf0e60aec5ed042aad953e26"
+  },
+  "static_test_function_inventory": [
+    "test_01_so3_jacobian_and_baseline_spin_gauge",
+    "test_02_static_common_rotation_gauge_is_preserved",
+    "test_03_numerical_rank_does_not_establish_information_size",
+    "test_04_complete_temporal_cross_changes_increment",
+    "test_05_zero_cross_scalar_formula_and_existing_oracle",
+    "test_06_supplied_dense_cross_full_conditional_and_joseph_oracle",
+    "test_07_cancellation_cross_has_no_new_information",
+    "test_08_unknown_cross_full_bound_and_continuous_existence",
+    "test_09_singular_joint_prior_and_singular_innovation_no_loading",
+    "test_10_tiny_positive_variance_weight_mass_is_not_discarded",
+    "test_11_rotated_and_rescaled_coordinates_preserve_full_objective",
+    "test_12_source_domain_and_unknown_availability_contracts"
+  ],
+  "pytest_collection_executed": false,
+  "independent_review_before_execution": "Math/source review: no formula blocker; finite-input overflow gates added to source and item12 without new pytest items; no test executed"
+}
