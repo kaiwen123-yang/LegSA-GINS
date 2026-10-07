@@ -1,0 +1,175 @@
+{
+  "status": "PASS_ACCESS_AND_FINITE_BUDGET_WITH_NUMERICAL_REPRODUCTION_EXCLUDED",
+  "registration_commit": "e80e9d9e00196b58e3e7d69d3a5697acbdc017c2",
+  "stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_REAL_INFORMATION_ATTEMPT01",
+  "execution": {
+    "returncode": 0,
+    "elapsed_s": 6.125699806,
+    "timeout": false,
+    "automatic_retries": 0,
+    "scientific_processes": 1
+  },
+  "trace_audit": {
+    "trace_lines": 5136,
+    "trace_sha256": "d706f266a1bf980cf9546475b4de2233ea113b49d0af5cf359aa12b34d603170",
+    "counts": {
+      "execve": 317,
+      "openat": 4660,
+      "open_success": 3615,
+      "open_failed": 1045,
+      "exit": 80,
+      "signal": 79
+    },
+    "classes": {
+      "SYSTEM_RUNTIME": 1205,
+      "WORKSPACE_SOURCE_CONFIG_DIRECTORY": 174,
+      "OTHER": 0,
+      "GIT_METADATA": 1961,
+      "NEW_OUTPUT_STAGE": 16,
+      "REGISTERED_METADATA": 7,
+      "REGISTERED_SCIENTIFIC_INPUT": 15,
+      "GIT_CONFIG": 237
+    },
+    "unparsed_count": 0,
+    "unparsed_examples": [],
+    "unknown_paths": {},
+    "exec_success": {
+      "/usr/bin/python3": 1,
+      "/usr/bin/git": 79
+    },
+    "exec_fail": {
+      "/usr/local/sbin/git": 79,
+      "/usr/local/bin/git": 79,
+      "/usr/sbin/git": 79
+    },
+    "input_opens": {
+      "BY2_priors": 1,
+      "BY2_lifecycle": 1,
+      "BY2_ledger": 1,
+      "BY2_details": 1,
+      "BY2_events": 1,
+      "BY2H_priors": 1,
+      "BY2H_lifecycle": 1,
+      "BY2H_ledger": 1,
+      "BY2H_details": 1,
+      "BY2H_events": 1,
+      "BY2O_priors": 1,
+      "BY2O_lifecycle": 1,
+      "BY2O_ledger": 1,
+      "BY2O_details": 1,
+      "BY2O_events": 1
+    },
+    "metadata_opens": {
+      "native_complete": 1,
+      "native_seal": 1,
+      "native_audit": 1,
+      "prepared_plan": 1,
+      "phase_summary": 1,
+      "phase_complete": 1,
+      "local_adapter_result": 1
+    },
+    "writes": {
+      "/dev/null": 79,
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_REAL_INFORMATION_ATTEMPT01/RESERVATION.json": 1,
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_REAL_INFORMATION_ATTEMPT01/REGISTERED_PLAN.json": 1,
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_REAL_INFORMATION_ATTEMPT01/BLOCKS.csv": 1,
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_REAL_INFORMATION_ATTEMPT01/OBJECTIVES.csv": 1,
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_REAL_INFORMATION_ATTEMPT01/NUMERICAL_DETAILS.json": 1,
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_REAL_INFORMATION_ATTEMPT01/INPUT_READ_RECEIPT.json": 1,
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_REAL_INFORMATION_ATTEMPT01/SUMMARY.json": 1,
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_REAL_INFORMATION_ATTEMPT01/COMPLETE.json": 1
+    },
+    "input_declared_bytes": 32210421,
+    "metadata_bytes": 150871
+  },
+  "pin_audit": {
+    "source_count": 78,
+    "source_current_mismatches": [],
+    "metadata_current_mismatches": [],
+    "plan_sha256": "86bd6a5c54a638f910f7e1f94dbb2db11b6589bc02c13c4132b236e278e8c4fb",
+    "plan_matches_registration_git": true,
+    "stage_file_sizes": {
+      "INPUT_READ_RECEIPT.json": 7953,
+      "COMPLETE.json": 2656,
+      "SUMMARY.json": 3160,
+      "NUMERICAL_DETAILS.json": 35614348,
+      "OBJECTIVES.csv": 1165831,
+      "REGISTERED_PLAN.json": 24789,
+      "BLOCKS.csv": 465954,
+      "RESERVATION.json": 887
+    },
+    "failed_marker_exists": false
+  },
+  "input_receipt_review": {
+    "declared_files": 22,
+    "scientific_files": 15,
+    "metadata_files": 7,
+    "scientific_bytes": 32210421,
+    "metadata_bytes": 150871,
+    "each_content_passes": 1,
+    "each_verified_before_decode": true,
+    "post_stat_identity": true,
+    "post_hash_pass": false,
+    "receipt_pin_fields_match_registered_closure": true,
+    "independent_scientific_input_rehash": false
+  },
+  "call_budget": {
+    "prior_qualification_calls": 918,
+    "geometry_calls": 857,
+    "diagnose_calls": 1714,
+    "source_event_rows": 1842,
+    "lifecycle_rows": 921,
+    "prior_rows": 918,
+    "phase_detail_rows": 921,
+    "conditioning_ledger_declared_rows": 31230,
+    "native_calls": 0,
+    "evaluator_calls": 0,
+    "residual_calls": 0,
+    "provider_payload_reads": 0,
+    "raw_reads": 0,
+    "reference_reads": 0,
+    "npz_reads": 0,
+    "integer_search_calls": 0
+  },
+  "sealed_summary_review": {
+    "total_blocks": 921,
+    "prior_qualification_pass": 918,
+    "model_unavailable": 61,
+    "uncovered_no_prior": 3,
+    "qualified_working_diagnostic": 857,
+    "objectives": [
+      {
+        "target": "joint",
+        "rows": 857,
+        "CONTINUOUS_NO_IMPROVEMENT": 857,
+        "nonzero_grid_selections": 0
+      },
+      {
+        "target": "current",
+        "rows": 857,
+        "CONTINUOUS_NO_IMPROVEMENT": 857,
+        "nonzero_grid_selections": 0
+      },
+      {
+        "target": "relative_ecef",
+        "rows": 857,
+        "CONTINUOUS_NO_IMPROVEMENT": 857,
+        "nonzero_grid_selections": 0
+      },
+      {
+        "target": "common_ecef",
+        "rows": 857,
+        "CONTINUOUS_NO_IMPROVEMENT": 857,
+        "nonzero_grid_selections": 0
+      }
+    ],
+    "interpretation": "Four fixed targets within the declared Young family and uncalibrated linearized working model; not all-method impossibility, physical bounds, trustworthy heading or navigation benefit."
+  },
+  "evidence_limits": [
+    "No re-read of the 15 scientific inputs or 35,614,348-byte NUMERICAL_DETAILS.json; their scientific contents were not independently recomputed.",
+    "The registered adapter authenticates each cached byte snapshot before decoding. Final stat is not a second content authentication.",
+    "The openat/execve trace confirms file/process closure, not Python-level numerical correctness or exact read syscall byte counts. Call totals combine frozen-source review and completed receipts.",
+    "Successful Git processes are registration checks, not scientific solver invocations. /home/kaiwen/.gitconfig reads are Git configuration access.",
+    "Output inventory and sizes agree with the COMPLETE declarations; this audit does not claim a new complete output-payload rehash. Small outputs were read for evidence and result scope; no mathematical kernel was rerun."
+  ]
+}

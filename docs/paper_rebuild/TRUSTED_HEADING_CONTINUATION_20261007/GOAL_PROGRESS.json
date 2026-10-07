@@ -17,7 +17,7 @@
     {
       "id": "R2",
       "requirement": "Unfixed same-physical-arc temporal phase contrast: ambiguity elimination, timing, geometry, breaks, covariance, shared endpoints; qualify before navigation",
-      "status": "SAVED_MODEL_GEOMETRY_QUALIFIED_NOT_ADMITTED",
+      "status": "REAL_WORKING_INFORMATION_DIAGNOSIS_COMPLETE_NO_GAIN_IN_FIXED_YOUNG_FAMILY",
       "registration_commit": "4754bb184cd712290fb37cad4728c6097eccdbf2",
       "fixed_blocks": 921,
       "legal_contrast_blocks": 860,
@@ -25,10 +25,9 @@
       "missing_endpoint_blocks": 61,
       "stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_SAVED_MODEL_ATTEMPT01",
       "remaining": [
-        "phase-fault admission/revocation",
-        "source-backed error bounds and cross structure",
-        "availability and physical timing qualification",
-        "explainable state information increment before navigation"
+        "Source-supported phase endpoint and state-phase correlation model with total effective error qualification",
+        "Separate causal-source policy qualification",
+        "Only after explained admissible information gain: matched-backend fusion and recovery validation"
       ],
       "local_qualification": {
         "information": {
@@ -101,6 +100,22 @@
           "all_source_online_causality_qualified": false,
           "prior_scope": "OFFLINE_EXECUTED_PREFIX_WORKING_PRIOR"
         }
+      },
+      "real_information_readout": {
+        "registration_commit": "e80e9d9e00196b58e3e7d69d3a5697acbdc017c2",
+        "blocks": 921,
+        "qualified": 857,
+        "missing_model": 61,
+        "uncovered": 3,
+        "unresolved": 0,
+        "four_objectives_no_improvement_each": 857,
+        "native_calls": 0,
+        "evaluator_calls": 0,
+        "geometry_calls": 857,
+        "diagnose_calls": 1714,
+        "physical_bounds_qualified": false,
+        "navigation_admitted": false,
+        "evidence": "ARC_PHASE_REAL_INFORMATION_RESULTS.md"
       }
     },
     {
@@ -144,5 +159,5 @@
   "main_merge_authorized": false,
   "completion_proven": false,
   "latest_decision": "CONTINUATION_DECISION.md",
-  "latest_checkpoint": "Six matched ARC passive replays pass byte identity; 918 joint working priors, 857 with legal saved phase model; 1880 of 4600 NED-HV updates use later reported source timestamps. No phase information or navigation gain qualification; next conditional readout and separate causal-source gate."
+  "latest_checkpoint": "One real information readout completed: 857 blocks, all four fixed UNKNOWN-cross Young objectives have no improvement; 61 missing-model and 3 terminal-uncovered blocks retained. No phase fusion. Next source/correlation qualification, causal use policy and independently referenced acquisition."
 }

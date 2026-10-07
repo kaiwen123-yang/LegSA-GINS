@@ -1,0 +1,171 @@
+{
+  "status": "COMPLETE_LINEARIZED_WORKING_INFORMATION_READOUT_NOT_PHYSICAL_OR_NAVIGATION_GAIN",
+  "registration_commit": "e80e9d9e00196b58e3e7d69d3a5697acbdc017c2",
+  "summary": {
+    "status": "COMPLETE_LINEARIZED_WORKING_INFORMATION_READOUT_NOT_PHYSICAL_OR_NAVIGATION_GAIN",
+    "registration_commit": "e80e9d9e00196b58e3e7d69d3a5697acbdc017c2",
+    "total_blocks": 921,
+    "covered_priors": 918,
+    "legal_models": 860,
+    "legal_intersection": 857,
+    "block_statuses": {
+      "MODEL_UNAVAILABLE": 61,
+      "QUALIFIED_LINEARIZED_WORKING_DIAGNOSTIC": 857,
+      "UNCOVERED_NO_PRIOR": 3
+    },
+    "prior_qualification_statuses": {
+      "PASS_NUMERICAL_FULL_P24_AND_P6_MAPPING": 918,
+      "NOT_AVAILABLE": 3
+    },
+    "per_sequence": [
+      {
+        "sequence_id": "BY2",
+        "blocks": 274,
+        "statuses": {
+          "MODEL_UNAVAILABLE": 34,
+          "QUALIFIED_LINEARIZED_WORKING_DIAGNOSTIC": 239,
+          "UNCOVERED_NO_PRIOR": 1
+        }
+      },
+      {
+        "sequence_id": "BY2H",
+        "blocks": 270,
+        "statuses": {
+          "MODEL_UNAVAILABLE": 27,
+          "QUALIFIED_LINEARIZED_WORKING_DIAGNOSTIC": 242,
+          "UNCOVERED_NO_PRIOR": 1
+        }
+      },
+      {
+        "sequence_id": "BY2O",
+        "blocks": 377,
+        "statuses": {
+          "QUALIFIED_LINEARIZED_WORKING_DIAGNOSTIC": 376,
+          "UNCOVERED_NO_PRIOR": 1
+        }
+      }
+    ],
+    "objectives": {
+      "joint": {
+        "rows": 857,
+        "conditions": {
+          "CONTINUOUS_NO_IMPROVEMENT": 857
+        },
+        "grid_selected_count": 0
+      },
+      "current": {
+        "rows": 857,
+        "conditions": {
+          "CONTINUOUS_NO_IMPROVEMENT": 857
+        },
+        "grid_selected_count": 0
+      },
+      "relative_ecef": {
+        "rows": 857,
+        "conditions": {
+          "CONTINUOUS_NO_IMPROVEMENT": 857
+        },
+        "grid_selected_count": 0
+      },
+      "common_ecef": {
+        "rows": 857,
+        "conditions": {
+          "CONTINUOUS_NO_IMPROVEMENT": 857
+        },
+        "grid_selected_count": 0
+      }
+    },
+    "calls": {
+      "source_csv_reads": 3,
+      "source_event_rows": 1842,
+      "lifecycle_file_reads": 3,
+      "lifecycle_rows": 921,
+      "prior_file_reads": 3,
+      "prior_rows": 918,
+      "phase_detail_file_reads": 3,
+      "phase_detail_rows": 921,
+      "conditioning_ledger_reads": 3,
+      "prior_qualification_calls": 918,
+      "geometry_calls": 857,
+      "diagnose_calls": 1714
+    },
+    "fixed_zero_calls": {
+      "native_calls": 0,
+      "evaluator_calls": 0,
+      "residual_calls": 0,
+      "provider_payload_reads": 0,
+      "raw_reads": 0,
+      "reference_reads": 0,
+      "npz_reads": 0,
+      "integer_search_calls": 0
+    },
+    "qualification_note": "LINEARIZED_WORKING_SURROGATE_ONLY. P and mapped endpoint Q are uncalibrated working arrays at the same declared END information set. Rbar=2(Q0+Q1) is a hypothetical second-moment bound only. A physical bound would require bounds for total effective error including phase noise, bias, installation, timing and nonlinear remainder at I_END. Those qualifications are absent. C_en and actual arrival remain UNKNOWN; no residual is used.",
+    "scope": "LINEARIZED_WORKING_SURROGATE_ONLY",
+    "nonlinear_remainder_qualified": false,
+    "actual_available_time_s": null,
+    "phase_state_cross": "UNKNOWN",
+    "navigation_admitted": false,
+    "physical_covariance_bound_qualified": false,
+    "source_time_flags_are_report_only": true,
+    "all_source_online_causality_qualified": false
+  },
+  "objective_ranges": {
+    "joint": {
+      "rows": 857,
+      "J_over_T_min": 2.3851219228712696e-07,
+      "J_over_T_max": 0.02068745897789187,
+      "nonzero_grid_selections": 0
+    },
+    "current": {
+      "rows": 857,
+      "J_over_T_min": 4.0175512573253465e-07,
+      "J_over_T_max": 0.020688179525000457,
+      "nonzero_grid_selections": 0
+    },
+    "relative_ecef": {
+      "rows": 857,
+      "J_over_T_min": 1.5859381594075774e-05,
+      "J_over_T_max": 0.00033688180120251815,
+      "nonzero_grid_selections": 0
+    },
+    "common_ecef": {
+      "rows": 857,
+      "J_over_T_min": 2.0234368729812757e-07,
+      "J_over_T_max": 0.020698041858209507,
+      "nonzero_grid_selections": 0
+    }
+  },
+  "working_information_eigenvalue_max": 0.03274515714116526,
+  "source_time_flags": {
+    "prefix_contains_reported_source_after_its_update": 918,
+    "within_clone_interval_contains_reported_source_after_its_update": 811,
+    "prefix_contains_reported_source_after_prior_END": 0
+  },
+  "source_time_flag_denominator": 918,
+  "post_readout_operations": "Tabulation of declared outputs only; no additional prior/model read, matrix solve, parameter change, fusion or evaluator.",
+  "stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_REAL_INFORMATION_ATTEMPT01",
+  "source_outputs": {
+    "SUMMARY.json": {
+      "sha256": "702ce288d7f8ac3122af200f29f4732f37e53cc63b16212d6e5b67bbcf4b9f53",
+      "size_bytes": 3160
+    },
+    "OBJECTIVES.csv": {
+      "sha256": "0bbf5a9b6cee1fbfb5ccf46f3f61a5801ab86ec2249a2be267f4d367f9fe60d3",
+      "size_bytes": 1165831
+    },
+    "BLOCKS.csv": {
+      "sha256": "0b3ebbcb53a954189040e3954c5c505b4996c5bfb8f152c42d9d50ed6c70e98e",
+      "size_bytes": 465954
+    },
+    "INPUT_READ_RECEIPT.json": {
+      "sha256": "9379677038c643d539472f3a659129833cf60fffa953fd4a3bd2c90d26d75149",
+      "size_bytes": 7953
+    },
+    "COMPLETE.json": {
+      "sha256": "54dbde518d33df57c5c1fb8a51cdaf2b1ce2870578677169f1ed6e8bebe642fb",
+      "size_bytes": 2656
+    }
+  },
+  "adoption": false,
+  "goal_complete": false
+}
