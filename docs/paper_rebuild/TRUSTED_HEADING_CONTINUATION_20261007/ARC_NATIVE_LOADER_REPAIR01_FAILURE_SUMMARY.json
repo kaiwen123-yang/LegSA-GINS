@@ -1,0 +1,73 @@
+{
+  "status": "COMPILE_AND_BY2_PROCESS_PASSED_POSTPROCESS_VALIDATION_FAILED",
+  "registration_plan_identity": "commit containing this exact plan",
+  "counts": {
+    "checker_wrapper_attempts": 1,
+    "actual_checker_compile": 1,
+    "actual_loader_calls": 1,
+    "actual_arc_csv_parses": 1,
+    "BY2_rows": 548,
+    "BY2_blocks": 274,
+    "BY2H_calls": 0,
+    "BY2O_calls": 0,
+    "prepare_calls": 0,
+    "native_calls": 0,
+    "evaluator_calls": 0
+  },
+  "trace_execs": {
+    "COMPILE": {
+      "trace_lines": 1264,
+      "execve_records": 8,
+      "successful_execs": [
+        "/usr/bin/x86_64-linux-gnu-g++-11",
+        "/usr/lib/gcc/x86_64-linux-gnu/11/cc1plus",
+        "/usr/bin/as",
+        "/usr/lib/gcc/x86_64-linux-gnu/11/collect2",
+        "/usr/bin/ld"
+      ]
+    },
+    "BY2": {
+      "trace_lines": 10,
+      "execve_records": 1,
+      "successful_execs": [
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK_REPAIR01/config_check"
+      ]
+    }
+  },
+  "science_echo_field_count": 54,
+  "science_echo_differences": {
+    "phase": {
+      "old": "TRUSTED_HEADING_FULL_WINDOW_NAVIGATION_20261006",
+      "new": "TRUSTED_HEADING_ARC_NATIVE_TELEMETRY_20261007"
+    }
+  },
+  "both_phase_equal_stage_id": true,
+  "loader_source_relation": "port_config_loader.cpp:462 options.phase = options.stage_id",
+  "failure": {
+    "error": "ValueError('original scientific config changed in loader echo: phase')",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/scripts/paper_rebuild/carrier_phase/arc_native_real.py\", line 337, in main\n    loader(args)\n  File \"/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/scripts/paper_rebuild/carrier_phase/arc_native_real.py\", line 299, in loader\n    require(key in original and key in echo and original[key] == echo[key],\n  File \"/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/scripts/paper_rebuild/carrier_phase/arc_native_real.py\", line 70, in require\n    raise ValueError(message)\nValueError: original scientific config changed in loader echo: phase\n",
+    "first_failure_preserved": true,
+    "retry_allowed": false,
+    "native_calls": 0
+  },
+  "compile_result": {
+    "returncode": 0,
+    "timed_out": false,
+    "elapsed_s": 1.121326346999922,
+    "audit_passed": true,
+    "retry": 0
+  },
+  "BY2_result": {
+    "returncode": 0,
+    "timed_out": false,
+    "elapsed_s": 0.0293851359999735,
+    "audit_passed": true,
+    "retry": 0
+  },
+  "BY2_stdout": {
+    "source_rows": 548,
+    "source_blocks": 274
+  },
+  "limits": "Focused actual-process/count/metadata-difference review; not a new complete access trace audit or qualification of remaining two sequences.",
+  "registration_commit": "c74a52c8ee7a1603590285e27b79b5c263feaa09"
+}

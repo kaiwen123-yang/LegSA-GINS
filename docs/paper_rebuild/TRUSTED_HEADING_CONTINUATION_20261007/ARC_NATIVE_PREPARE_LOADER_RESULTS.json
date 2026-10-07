@@ -1,0 +1,379 @@
+{
+  "schema": "trusted_heading.arc_native.prepare_loader_results.v1",
+  "status": "COMPLETE_METADATA_PREPARATION_AND_THREE_PRODUCTION_LOADER_PARSER_QUALIFICATIONS",
+  "report_scope": "Only ARC metadata preparation and config/event parsing; not prior telemetry, phase fusion, navigation, or information analysis",
+  "registrations": {
+    "prepare_first": "dda5d4013cb508281287c893f248ecbfa07f126f",
+    "prepare_repair": "82e56f07dfc3358e437450014ca0849ce08ec195",
+    "instrumentation_repair": "c74a52c8ee7a1603590285e27b79b5c263feaa09",
+    "loader_finish": "b13e2e7615488f68ab6234fc7fb3491c939c12de"
+  },
+  "stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01",
+  "timeline": [
+    {
+      "step": 1,
+      "registration": "dda5d4013cb508281287c893f248ecbfa07f126f",
+      "operation": "prepare",
+      "result": "TECHNICAL_VALIDATOR_FAILURE",
+      "reason": "PhaseEpoch 64-hex content fingerprint was incorrectly parsed as source_id composite text",
+      "prepare_attempts": 1,
+      "detail_rows_decoded": 35,
+      "actual_checker_compiles": 0,
+      "actual_loaders": 0,
+      "actual_csv_parsers": 0,
+      "failure_preserved": true
+    },
+    {
+      "step": 2,
+      "registration": "82e56f07dfc3358e437450014ca0849ce08ec195",
+      "operation": "registered_prepare_repair",
+      "result": "PASS_ALL_921_BLOCKS_1842_ENDPOINTS",
+      "prepare_attempts": 1,
+      "detail_rows_decoded": 921,
+      "actual_checker_compiles": 0,
+      "actual_loaders": 0,
+      "actual_csv_parsers": 0
+    },
+    {
+      "step": 3,
+      "registration": "82e56f07dfc3358e437450014ca0849ce08ec195",
+      "operation": "loader_compile_wrapper",
+      "result": "TECHNICAL_INSTRUMENTATION_FAILURE_BEFORE_COMPILER",
+      "reason": "Outer strace -f and inner strace -f conflict: PTRACE_TRACEME Operation not permitted",
+      "compile_wrapper_attempts": 1,
+      "actual_checker_compiles": 0,
+      "actual_loaders": 0,
+      "actual_csv_parsers": 0,
+      "failure_preserved": true
+    },
+    {
+      "step": 4,
+      "registration": "c74a52c8ee7a1603590285e27b79b5c263feaa09",
+      "operation": "compile_and_BY2_loader",
+      "result": "COMPILE_AND_BY2_PARSE_PASS_POSTVALIDATION_FAILURE",
+      "reason": "phase derives from stage_id; metadata change was incorrectly treated as scientific-field drift",
+      "compile_wrapper_attempts": 1,
+      "actual_checker_compiles": 1,
+      "actual_loaders": 1,
+      "actual_csv_parsers": 1,
+      "BY2_rows": 548,
+      "BY2_blocks": 274,
+      "failure_preserved": true
+    },
+    {
+      "step": 5,
+      "registration": "b13e2e7615488f68ab6234fc7fb3491c939c12de",
+      "operation": "stored_BY2_validation_and_remaining_two_loaders",
+      "result": "PASS_COMPLETE_ALL_THREE_CONFIG_AND_EVENT_PARSERS",
+      "reused_BY2_validations": 1,
+      "actual_checker_compiles": 0,
+      "actual_loaders": 2,
+      "actual_csv_parsers": 2,
+      "rerun_BY2": 0
+    }
+  ],
+  "totals": {
+    "prepare_attempts": 2,
+    "successful_preparations": 1,
+    "compile_wrapper_attempts": 2,
+    "actual_checker_compiles": 1,
+    "actual_loader_processes": 3,
+    "actual_event_csv_parsers": 3,
+    "reused_BY2_validations": 1,
+    "BY2_process_reruns": 0,
+    "final_blocks": 921,
+    "final_endpoints": 1842,
+    "legal_saved_model_blocks": 860,
+    "recorded_phase_epoch_fingerprints": 1720,
+    "missing_pair_blocks": 61,
+    "blank_endpoint_fingerprint_fields": 122,
+    "selected_scientific_fields_preserved_per_sequence": 53,
+    "total_scientific_echo_field_comparisons": 159,
+    "native_calls": 0,
+    "evaluator_calls": 0,
+    "phase_math_calls": 0,
+    "provider_payload_reads": 0,
+    "npz_reads": 0,
+    "raw_reads": 0,
+    "reference_reads": 0
+  },
+  "detailed_result_read_accounting": {
+    "opportunity_decodes": 2,
+    "detail_stream_decode_attempts": 4,
+    "decoded_rows_including_failed_attempt": 956,
+    "decoded_bytes_including_failed_attempt": 15830246,
+    "files_contain_phase_arrays": true,
+    "phase_values_decoded_by_json": true,
+    "only_identity_fields_used": true,
+    "phase_math_calls": 0,
+    "note": "Files were opened/hash-checked as bounded saved results; this was not an identity-only physical file read."
+  },
+  "sequence_results": [
+    {
+      "sequence_id": "BY2",
+      "blocks": 274,
+      "endpoints": 548,
+      "legal_saved_model_blocks": 240,
+      "recorded_phase_epoch_fingerprints": 480,
+      "missing_pair_blocks": 34,
+      "blank_endpoint_fingerprint_fields": 68,
+      "science_fields_preserved": 53,
+      "loader_result_source": "REUSED_SUCCESSFUL_BY2_PROCESS_NO_RERUN",
+      "production_parse_counts": {
+        "source_rows": 548,
+        "source_blocks": 274
+      },
+      "config": {
+        "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/CONFIGS/BY2__ARC_EMPTY_MODEL.yaml",
+        "sha256": "3f6b935e5366cde502024bb3e74a2143ef37c7e167d9d940902b02ed18eb7b56",
+        "size_bytes": 8912
+      },
+      "echo": {
+        "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK_REPAIR01/BY2/ECHO/RUN_MANIFEST.json",
+        "sha256": "69fa8d90164ea487c8d27bd7fa659d399a1f7852d4bc7cdadfa22db85bf27632",
+        "size_bytes": 25206
+      },
+      "derived_phase_check": {
+        "original_stage": "TRUSTED_HEADING_FULL_WINDOW_NAVIGATION_20261006",
+        "original_phase": "TRUSTED_HEADING_FULL_WINDOW_NAVIGATION_20261006",
+        "new_stage": "TRUSTED_HEADING_ARC_NATIVE_TELEMETRY_20261007",
+        "new_phase": "TRUSTED_HEADING_ARC_NATIVE_TELEMETRY_20261007"
+      }
+    },
+    {
+      "sequence_id": "BY2H",
+      "blocks": 270,
+      "endpoints": 540,
+      "legal_saved_model_blocks": 243,
+      "recorded_phase_epoch_fingerprints": 486,
+      "missing_pair_blocks": 27,
+      "blank_endpoint_fingerprint_fields": 54,
+      "science_fields_preserved": 53,
+      "loader_result_source": "NEW_REMAINING_LOADER_PROCESS",
+      "production_parse_counts": {
+        "source_rows": 540,
+        "source_blocks": 270
+      },
+      "config": {
+        "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/CONFIGS/BY2H__ARC_EMPTY_MODEL.yaml",
+        "sha256": "0f201e8148e14b79cc40723d84bd01d642a5b755b2c5b5ddd06999b462df4fab",
+        "size_bytes": 8972
+      },
+      "echo": {
+        "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_COMPLETION01/BY2H/ECHO/RUN_MANIFEST.json",
+        "sha256": "691caa7a385a08eaa7bcb50517abd901fb8b06c97306a9ddbec62fcb81f3f8e6",
+        "size_bytes": 25164
+      },
+      "derived_phase_check": {
+        "original_stage": "TRUSTED_HEADING_FULL_WINDOW_NAVIGATION_20261006",
+        "original_phase": "TRUSTED_HEADING_FULL_WINDOW_NAVIGATION_20261006",
+        "new_stage": "TRUSTED_HEADING_ARC_NATIVE_TELEMETRY_20261007",
+        "new_phase": "TRUSTED_HEADING_ARC_NATIVE_TELEMETRY_20261007"
+      }
+    },
+    {
+      "sequence_id": "BY2O",
+      "blocks": 377,
+      "endpoints": 754,
+      "legal_saved_model_blocks": 377,
+      "recorded_phase_epoch_fingerprints": 754,
+      "missing_pair_blocks": 0,
+      "blank_endpoint_fingerprint_fields": 0,
+      "science_fields_preserved": 53,
+      "loader_result_source": "NEW_REMAINING_LOADER_PROCESS",
+      "production_parse_counts": {
+        "source_rows": 754,
+        "source_blocks": 377
+      },
+      "config": {
+        "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/CONFIGS/BY2O__ARC_EMPTY_MODEL.yaml",
+        "sha256": "7de417977bb9b946ba7d7ea179c359e9f9024a7407881f65fa8463f5534850fb",
+        "size_bytes": 8979
+      },
+      "echo": {
+        "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_COMPLETION01/BY2O/ECHO/RUN_MANIFEST.json",
+        "sha256": "fa259523de0bb4a8d2b7327cfc8b135a01ddb25ed81718f683847dee9f8cc30b",
+        "size_bytes": 25173
+      },
+      "derived_phase_check": {
+        "original_stage": "TRUSTED_HEADING_FULL_WINDOW_NAVIGATION_20261006",
+        "original_phase": "TRUSTED_HEADING_FULL_WINDOW_NAVIGATION_20261006",
+        "new_stage": "TRUSTED_HEADING_ARC_NATIVE_TELEMETRY_20261007",
+        "new_phase": "TRUSTED_HEADING_ARC_NATIVE_TELEMETRY_20261007"
+      }
+    }
+  ],
+  "fingerprint_semantics": {
+    "type": "PhaseEpoch header plus phase/geometry/covariance array SHA256",
+    "format": "lowercase_64_hex",
+    "original_saved_fingerprint_preserved": true,
+    "npz_file_hash_derived": false,
+    "missing_fields_not_fabricated": true
+  },
+  "phase_metadata": {
+    "source": "cpp/legsa_v23_port_core/src/config/port_config_loader.cpp:462",
+    "rule": "options.phase = options.stage_id",
+    "original_and_new_each_match_own_stage": true,
+    "phase_removed_only_from_cross_stage_science_equality": true
+  },
+  "evidence_pins": [
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01/PREPARE_FAILED.json",
+      "sha256": "bad845dba71a4d4110a1c78a14d327cd5d1f72e7465dfe8b117c2f8709d58e18",
+      "size_bytes": 1032
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01/PREPARE_RESERVATION.json",
+      "sha256": "92ca00ff9cb6a2b4a2e8ad924611fab913dfea35cd2d1343c86b171d2631c100",
+      "size_bytes": 669
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/PREPARED.json",
+      "sha256": "57a1dff15a429bd169e859002cb4e492b495b064bb253cb0cb2cf6b67bac10da",
+      "size_bytes": 712
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/PLAN.json",
+      "sha256": "71c002fffc6dd2cf63ba567faf2c34100ce591a6bb2079a046cac79d71bc3f75",
+      "size_bytes": 47006
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/ARC_SOURCE_EVENTS_MANIFEST.json",
+      "sha256": "4e1a34724605e8c3dc2aed50018bbd6dfb0228e7d7d586461b48cc8760679374",
+      "size_bytes": 1517
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/FAILED.json",
+      "sha256": "fb9045d3150ff1f09526e74035a9b16288838ddc8f5bb7900fa0e1be6a13412a",
+      "size_bytes": 1204
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/COMPILE/RESULT.json",
+      "sha256": "615c2800c8c71e2a2fe848bada75cabbc8e62a97ed11f30ca339b728f1eb4a24",
+      "size_bytes": 118
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/COMPILE/stderr.log",
+      "sha256": "112363166df69a6eb7fa4cae1bfb13ef9bace5aa358b8b4ccfd63951fad1aa09",
+      "size_bytes": 157
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK_REPAIR01/FAILED.json",
+      "sha256": "e249af3d8cecc3155756c8617e7e9adfb04a730ff432307d27f4fac7c04c763d",
+      "size_bytes": 887
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK_REPAIR01/COMPILE/RESULT.json",
+      "sha256": "ea4686dc173ef04c9d573ff7a96a8e762fe1c7074dd2b5e9db990cddb1689780",
+      "size_bytes": 116
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK_REPAIR01/BY2/RESULT.json",
+      "sha256": "e05df4e2788c1f720792a3f682ab4cffc8bbef53e94454a43460462d40d9b486",
+      "size_bytes": 117
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK_REPAIR01/BY2/stdout.log",
+      "sha256": "9d03143f555f17acdecfd1aecfc45c74f89b4991bf5bff7bc33af17189dcaf32",
+      "size_bytes": 40
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_COMPLETION01/COMPLETE.json",
+      "sha256": "6711f939b9f388839c3d82a2a6361182d431a04aa971fb09910bf71069138a08",
+      "size_bytes": 45195
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_COMPLETION01/BY2_STORED_VALIDATION.json",
+      "sha256": "28997389731304efc9b3d7b74eab526b72a535fc1d0671be43e804b175f84762",
+      "size_bytes": 6283
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_COMPLETION01/BY2H/RESULT.json",
+      "sha256": "52ad0f07f38f4039fcdf748c7c128e922f4c41b2797f7b504c81905e1cd3dd42",
+      "size_bytes": 119
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_COMPLETION01/BY2O/RESULT.json",
+      "sha256": "9f4360044a542a48d01bf26fbd9d41d367fe69d5af86f894489c58344e1010df",
+      "size_bytes": 119
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01_PREPARE_EXIT.json",
+      "sha256": "8e7aa6c0a300e96f68d6db932feb14556d54dc47b1b36b70292fc1cf1d188120",
+      "size_bytes": 125
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01_PREPARE_EXIT.json",
+      "sha256": "b4a64787e3008503bc9a24787db1808fff23d03c7ad84420fcc36c91836e8d4e",
+      "size_bytes": 126
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01_LOADER_EXIT.json",
+      "sha256": "0188f4f1e6e73e1f1ec65dbf0269e4101eb74dad7d68ce6d860e9f04d798e0c8",
+      "size_bytes": 125
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01_LOADER_INSTRUMENTATION_REPAIR_EXIT.json",
+      "sha256": "7c9c54ca59bea53fa364804d6cdfe4cf9541b5adc42a34528480a0eddf1e37e0",
+      "size_bytes": 126
+    },
+    {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01_LOADER_FINISH_EXIT.json",
+      "sha256": "b532d9b6bcfe10fa2a56d596d3a3ac82f673b2f76b58e2b90fb3d22561179d85",
+      "size_bytes": 148
+    }
+  ],
+  "independent_finish_audit": {
+    "status": "PASS_WITH_STATED_TRACE_SCOPE",
+    "registration_commit": "b13e2e7615488f68ab6234fc7fb3491c939c12de",
+    "source_pins": 70,
+    "preserved_artifact_pins": 40,
+    "current_metadata_pins": 55,
+    "all_pins_match": true,
+    "combined_trace_lines": 621,
+    "unparsed_lines": 0,
+    "unclassified_successful_opens": 0,
+    "scope": "Outer parent-only trace excludes Git/tracer child internals; inner traces cover both actual remaining checker processes; bounded openat/execve audit, not all-process/all-syscall proof",
+    "artifacts": [
+      {
+        "path": "<CODE_ROOT>/docs/paper_rebuild/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_LOADER_FINISH_AUDIT.md",
+        "sha256": "0247b76370ea55c5d51d3a37f52bedd638ad5a421add3b36117db727110dd204",
+        "size_bytes": 4100
+      },
+      {
+        "path": "<CODE_ROOT>/docs/paper_rebuild/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_LOADER_FINISH_AUDIT.json",
+        "sha256": "9384a2d7d3f501b71151585d74f49ac501e117297d8060227d25fad3d1076e64",
+        "size_bytes": 34655
+      }
+    ]
+  },
+  "limits": {
+    "actual_available_time_s": null,
+    "actual_latency_s": null,
+    "phase_state_cross": "UNKNOWN",
+    "time_scale_id": "UTC_UNIX_MINUS_REGISTERED_BASE_SECONDS",
+    "mapping_definition_verified": true,
+    "physical_clock_synchronization_qualified": false,
+    "noise_or_input_physics_qualified": false,
+    "provider_payload_hash_status": "INHERITED_FROM_OLD_SEAL_NOT_REHASHED_THIS_STAGE",
+    "event_execution_qualified": false,
+    "all_860_blocks_have_prior_established": false,
+    "joint_covariance_calibrated": false,
+    "heading_information_gain_established": false,
+    "navigation_gain_established": false,
+    "real_hv_inputs": "UNCHANGED_STATUS_A1_ROTATED_NED_PROVIDER_NOT_SYNTHETIC_BODY_HV"
+  },
+  "next_gate": {
+    "status": "REQUIRES_SEPARATE_REGISTRATION",
+    "maximum_native_calls": 6,
+    "evaluator_calls": 0,
+    "design": "Three same-timeline ARC_NULL versus ARC_TELEMETRY pairs; unchanged config/input/binary, only serialization env flag and output directory differ",
+    "required_first_checks": [
+      "Explicit current provider before/after hash/read budget",
+      "Matched NAV/STD/IMUERR/heading/body/ARC_COMMON byte identity",
+      "Preserve all 921 lifecycle records including uncovered endpoints"
+    ],
+    "phase_likelihood_entering_native": false,
+    "information_readout_requires_further_sealed_gate": true
+  }
+}

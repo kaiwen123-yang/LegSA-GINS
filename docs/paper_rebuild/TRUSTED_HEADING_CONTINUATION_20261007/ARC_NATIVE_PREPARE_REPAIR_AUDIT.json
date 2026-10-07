@@ -1,0 +1,309 @@
+{
+  "schema": "independent.arc_native_prepare_repair.audit/v1",
+  "registration_commit": "82e56f07dfc3358e437450014ca0849ce08ec195",
+  "status": "PREPARE_PASS_LOADER_INSTRUMENTATION_FAILED_PRESERVED",
+  "prepare_counts": {
+    "opportunity_decodes": 1,
+    "detailed_result_decodes": 3,
+    "detailed_result_rows": 921,
+    "fixed_blocks": 921,
+    "endpoint_rows": 1842,
+    "native_calls": 0,
+    "evaluator_calls": 0,
+    "phase_math_calls": 0,
+    "npz_reads": 0,
+    "provider_payload_reads": 0,
+    "reference_reads": 0,
+    "raw_reads": 0,
+    "detailed_result_decoded_bytes": 15775643
+  },
+  "plan_seal_matches": true,
+  "schedule_summary": [
+    {
+      "sequence_id": "BY2",
+      "block_count": 274,
+      "endpoint_count": 548,
+      "status_counts": {
+        "ENDPOINT_MODEL_UNAVAILABLE": 34,
+        "LEGAL_SAME_ARC_CONTRAST": 240
+      },
+      "phase_math_calls": 0,
+      "actual_available_time_s": null
+    },
+    {
+      "sequence_id": "BY2H",
+      "block_count": 270,
+      "endpoint_count": 540,
+      "status_counts": {
+        "ENDPOINT_MODEL_UNAVAILABLE": 27,
+        "LEGAL_SAME_ARC_CONTRAST": 243
+      },
+      "phase_math_calls": 0,
+      "actual_available_time_s": null
+    },
+    {
+      "sequence_id": "BY2O",
+      "block_count": 377,
+      "endpoint_count": 754,
+      "status_counts": {
+        "LEGAL_SAME_ARC_CONTRAST": 377
+      },
+      "phase_math_calls": 0,
+      "actual_available_time_s": null
+    }
+  ],
+  "generated_metadata_audit": {
+    "output_pins_9_pass": true,
+    "scientific_config_line_bytes_unchanged": [
+      "BY2",
+      "BY2H",
+      "BY2O"
+    ],
+    "known_unique_64hex_fingerprints": 1720,
+    "missing_fingerprints": 122,
+    "all_actual_availability_blank": true,
+    "note": "Generated metadata CSV/config/manifests checked in this independent audit; original OPP/gzip not reopened."
+  },
+  "original_failure_8_pins_pass": {
+    "prior_attempt_evidence_0": true,
+    "prior_attempt_evidence_1": true,
+    "prior_attempt_evidence_2": true,
+    "prior_attempt_evidence_3": true,
+    "prior_attempt_evidence_4": true,
+    "prior_attempt_evidence_5": true,
+    "prior_attempt_evidence_6": true,
+    "prior_attempt_evidence_7": true
+  },
+  "source_pins": {
+    "PREPARE": {
+      "registered_source_count": 74,
+      "frozen_git_mismatches": []
+    },
+    "LOADER": {
+      "registered_source_count": 69,
+      "frozen_git_mismatches": []
+    }
+  },
+  "traces": {
+    "PREPARE": {
+      "counts": {
+        "lines": 4827,
+        "execve": 301,
+        "execve_successful": 76,
+        "openat": 4375,
+        "openat_successful": 3395,
+        "openat_failed": 980,
+        "execve_failed": 225,
+        "process_records": 151
+      },
+      "successful_openat_classes": {
+        "system_or_python_runtime": 1004,
+        "registered_input_or_source_or_frozen_build": 200,
+        "source_directory": 1,
+        "registration_plan": 1,
+        "git_metadata": 2165,
+        "prepared_or_attempt_output": 24
+      },
+      "successful_execs": {
+        "/usr/bin/python3": 1,
+        "/usr/bin/git": 75
+      },
+      "unparsed": [],
+      "unclassified": [],
+      "scientific_write_paths": [
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/REGISTERED_PLAN.json",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/PREPARE_RESERVATION.json",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/SCHEDULES/BY2/ARC_SOURCE_EVENTS.csv",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/SCHEDULES/BY2/ARC_SOURCE_EVENTS_MANIFEST.json",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/CONFIGS/BY2__ARC_EMPTY_MODEL.yaml",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/SCHEDULES/BY2H/ARC_SOURCE_EVENTS.csv",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/SCHEDULES/BY2H/ARC_SOURCE_EVENTS_MANIFEST.json",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/CONFIGS/BY2H__ARC_EMPTY_MODEL.yaml",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/SCHEDULES/BY2O/ARC_SOURCE_EVENTS.csv",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/SCHEDULES/BY2O/ARC_SOURCE_EVENTS_MANIFEST.json",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/CONFIGS/BY2O__ARC_EMPTY_MODEL.yaml",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/ARC_SOURCE_EVENTS_MANIFEST.json",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/PLAN.json",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/PREPARED.json"
+      ],
+      "sha256": "cf192c55565df57c5dc179d969f9d1a626a502f3d6aa919e74fab54cc7971fa8"
+    },
+    "LOADER": {
+      "counts": {
+        "lines": 4592,
+        "execve": 282,
+        "execve_successful": 72,
+        "openat": 4161,
+        "openat_successful": 3221,
+        "openat_failed": 940,
+        "execve_failed": 210,
+        "process_records": 149
+      },
+      "successful_openat_classes": {
+        "system_or_python_runtime": 1077,
+        "registered_input_or_source_or_frozen_build": 85,
+        "source_directory": 1,
+        "registration_plan": 2,
+        "git_metadata": 2022,
+        "prepared_or_attempt_output": 34
+      },
+      "successful_execs": {
+        "/usr/bin/python3": 1,
+        "/usr/bin/git": 70,
+        "/usr/bin/strace": 1
+      },
+      "unparsed": [],
+      "unclassified": [],
+      "scientific_write_paths": [
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/REGISTERED_PLAN.json",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/INPUT_METADATA_PINS.json",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/config_check.cpp",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/COMPILE/INVOCATION.json",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/COMPILE/stdout.log",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/COMPILE/stderr.log",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/COMPILE/OPENAT.strace",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/COMPILE/ACCESS_AUDIT.json",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/COMPILE/RESULT.json",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/FAILED.json"
+      ],
+      "sha256": "d29fd2193571fb8822bc362f26834f6797857e68cd27e3876a60bfdbeedaf021"
+    }
+  },
+  "prepare_exit": {
+    "returncode": 0,
+    "elapsed_s": 2.6181733349999377,
+    "registration_commit": "82e56f07dfc3358e437450014ca0849ce08ec195"
+  },
+  "loader_failure": {
+    "wrapper_compile_attempts": 1,
+    "actual_compiler_execs": 0,
+    "actual_loader_parser_execs": 0,
+    "native_execs": 0,
+    "evaluator_execs": 0,
+    "phase_math": 0,
+    "outer_exit": {
+      "returncode": 1,
+      "elapsed_s": 4.028243182999859,
+      "registration_commit": "82e56f07dfc3358e437450014ca0849ce08ec195"
+    },
+    "inner_result": {
+      "returncode": 1,
+      "timed_out": false,
+      "elapsed_s": 0.10229861899983916,
+      "audit_passed": true,
+      "retry": 0
+    },
+    "inner_trace_bytes": 28,
+    "stderr": "/usr/bin/strace: test_ptrace_get_syscall_info: PTRACE_TRACEME: Operation not permitted\n/usr/bin/strace: ptrace(PTRACE_TRACEME, ...): Operation not permitted\n",
+    "empty_inner_access_audit_is_not_compile_qualification": true
+  },
+  "artifact_pins": {
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/REGISTERED_PLAN.json": {
+      "sha256": "14e35763b8d4123fd28c3ba389cbb4bce4914b55b9ef169fc8d8e614323a3fb3",
+      "size_bytes": 34164
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/PREPARE_RESERVATION.json": {
+      "sha256": "49a3faff89f6673427d1f6c972332c6cc9f575ddecf1765704dcd6b401da5861",
+      "size_bytes": 669
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/PLAN.json": {
+      "sha256": "71c002fffc6dd2cf63ba567faf2c34100ce591a6bb2079a046cac79d71bc3f75",
+      "size_bytes": 47006
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/PREPARED.json": {
+      "sha256": "57a1dff15a429bd169e859002cb4e492b495b064bb253cb0cb2cf6b67bac10da",
+      "size_bytes": 712
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/ARC_SOURCE_EVENTS_MANIFEST.json": {
+      "sha256": "4e1a34724605e8c3dc2aed50018bbd6dfb0228e7d7d586461b48cc8760679374",
+      "size_bytes": 1517
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/FAILED.json": {
+      "sha256": "fb9045d3150ff1f09526e74035a9b16288838ddc8f5bb7900fa0e1be6a13412a",
+      "size_bytes": 1204
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/REGISTERED_PLAN.json": {
+      "sha256": "71df2a4504faaa082c40a9608c78e7aed73ed59990a19417d5620f9cfea6b9a0",
+      "size_bytes": 13801
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/INPUT_METADATA_PINS.json": {
+      "sha256": "e6f53db81acfbacc06c5ca344324977db088c57c89ad965cde146223d47cdbb4",
+      "size_bytes": 3265
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/config_check.cpp": {
+      "sha256": "9e360fded18e854d90f35a06f93f830ca49cbf87f83ef81f7f2e734730d613bc",
+      "size_bytes": 811
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/COMPILE/ACCESS_AUDIT.json": {
+      "sha256": "c483979b46103a7efd51d7aea9e816066d0d54dbbbeb6cc1ee6fbc709d93fa74",
+      "size_bytes": 127
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/COMPILE/OPENAT.strace": {
+      "sha256": "31d6d6f8d1549467595bf706e0acc1e6fafc39f5e15726ffaef83cbd91e91187",
+      "size_bytes": 28
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/COMPILE/RESULT.json": {
+      "sha256": "615c2800c8c71e2a2fe848bada75cabbc8e62a97ed11f30ca339b728f1eb4a24",
+      "size_bytes": 118
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/COMPILE/INVOCATION.json": {
+      "sha256": "25b443538cb8e1728a76cba6a0e8ea33c393975db2d365a202c561a2ff3fec4c",
+      "size_bytes": 1010
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/COMPILE/stderr.log": {
+      "sha256": "112363166df69a6eb7fa4cae1bfb13ef9bace5aa358b8b4ccfd63951fad1aa09",
+      "size_bytes": 157
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/LOADER_CHECK/COMPILE/stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01_PREPARE_EXIT.json": {
+      "sha256": "b4a64787e3008503bc9a24787db1808fff23d03c7ad84420fcc36c91836e8d4e",
+      "size_bytes": 126
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01_PREPARE_INVOCATION.json": {
+      "sha256": "bc8db19804bea04250b085862b9120ba10eb5b5bf7ef016724b7ea3e5755e11a",
+      "size_bytes": 612
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01_PREPARE_OPENAT.strace": {
+      "sha256": "cf192c55565df57c5dc179d969f9d1a626a502f3d6aa919e74fab54cc7971fa8",
+      "size_bytes": 1115019
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01_PREPARE_stdout.log": {
+      "sha256": "3780b7735adf559694159e56b2184ecefb5a097e54a1bf87b0b969f75335dd9e",
+      "size_bytes": 378
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01_PREPARE_stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01_LOADER_EXIT.json": {
+      "sha256": "0188f4f1e6e73e1f1ec65dbf0269e4101eb74dad7d68ce6d860e9f04d798e0c8",
+      "size_bytes": 125
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01_LOADER_INVOCATION.json": {
+      "sha256": "3f6bccaa0f165eb94dd5b9c7fb09a8a151b606bed44845aa21d34e724a1b6dc7",
+      "size_bytes": 622
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01_LOADER_OPENAT.strace": {
+      "sha256": "d29fd2193571fb8822bc362f26834f6797857e68cd27e3876a60bfdbeedaf021",
+      "size_bytes": 1044783
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01_LOADER_stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01_LOADER_stderr.log": {
+      "sha256": "0ad31581568f86bc3f576c11cc3a4cfa85b0b8a496be8e27d2b5fc2d82debd6d",
+      "size_bytes": 1162
+    }
+  },
+  "reviewer_scope": "Only stdlib metadata/source/log audit; no OPP/gzip re-decoding, scientific import, native, test or checker call.",
+  "audit_parser_note": "During construction, audit-only assumptions for availability token case and loader repair registration filename were corrected from observed metadata/trace; no trial artifacts changed.",
+  "limits": [
+    "openat/execve trace scope only",
+    "prepare success does not qualify production parser or navigation",
+    "actual arrival unknown; source-time replay assumption retained"
+  ]
+}

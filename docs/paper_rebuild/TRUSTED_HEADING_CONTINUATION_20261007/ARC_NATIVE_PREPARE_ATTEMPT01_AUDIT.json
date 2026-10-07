@@ -1,0 +1,154 @@
+{
+  "schema": "independent.arc_native_prepare_attempt01.audit/v1",
+  "status": "FAILED_PREPARE_RETAINED_ACCESS_BOUNDARY_PASS",
+  "registration_commit": "dda5d4013cb508281287c893f248ecbfa07f126f",
+  "stage": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01",
+  "trial_exit": {
+    "returncode": 1,
+    "elapsed_s": 2.718379930000083,
+    "registration_commit": "dda5d4013cb508281287c893f248ecbfa07f126f"
+  },
+  "failure": {
+    "status": "FAILED_NO_AUTOMATIC_RETRY",
+    "error": "RuntimeError('missing/unsafe endpoint model fingerprint')",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/scripts/paper_rebuild/carrier_phase/arc_native_prepare.py\", line 309, in main\n    require(all(m and m[1] == sid for m in matches) and fps[0] != fps[1],\n  File \"/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/scripts/paper_rebuild/carrier_phase/arc_native_prepare.py\", line 58, in require\n    raise RuntimeError(message)\nRuntimeError: missing/unsafe endpoint model fingerprint\n",
+    "counts": {
+      "opportunity_decodes": 1,
+      "detailed_result_decodes": 1,
+      "detailed_result_rows": 35,
+      "fixed_blocks": 0,
+      "endpoint_rows": 0,
+      "native_calls": 0,
+      "evaluator_calls": 0,
+      "phase_math_calls": 0,
+      "npz_reads": 0,
+      "provider_payload_reads": 0,
+      "reference_reads": 0,
+      "raw_reads": 0,
+      "detailed_result_decoded_bytes": 54603
+    }
+  },
+  "trace_counts": {
+    "trace_lines": 4749,
+    "execve": 297,
+    "execve_successful": 75,
+    "openat": 4303,
+    "openat_successful": 3336,
+    "openat_failed": 967,
+    "execve_failed": 222,
+    "process_records": 149
+  },
+  "successful_openat_classes": {
+    "system_or_python_runtime": 1101,
+    "registered_source": 79,
+    "source_directory_listing": 1,
+    "registration_plan": 1,
+    "git_metadata": 2134,
+    "attempt_output": 3,
+    "registered_input": 17
+  },
+  "successful_executable_counts": {
+    "/usr/bin/python3": 1,
+    "/usr/bin/git": 74
+  },
+  "git_show_registered_targets_exact": true,
+  "unparsed_lines": [],
+  "unclassified_successful_opens": [],
+  "registered_input_open_counts": {
+    "old_plan": 1,
+    "old_prepared": 1,
+    "old_native_seal": 1,
+    "arc_complete": 1,
+    "arc_summary": 1,
+    "rawx_registration": 1,
+    "v3_lock": 1,
+    "arc_opportunities": 1,
+    "BY2_config": 1,
+    "BY2_details": 1,
+    "BY2_provider_manifest": 1,
+    "BY2H_config": 1,
+    "BY2H_details": 1,
+    "BY2H_provider_manifest": 1,
+    "BY2O_config": 1,
+    "BY2O_details": 1,
+    "BY2O_provider_manifest": 1
+  },
+  "scientific_writes": [
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01/REGISTERED_PLAN.json",
+      "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC, 0666",
+      "class": "attempt_output"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01/PREPARE_RESERVATION.json",
+      "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC, 0666",
+      "class": "attempt_output"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01/PREPARE_FAILED.json",
+      "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC, 0666",
+      "class": "attempt_output"
+    }
+  ],
+  "source_validation": {
+    "frozen_source_count": 73,
+    "registration_hash_mismatches": [],
+    "registered_plan_bytes_match_git": true,
+    "current_source_changes_at_audit": [
+      "scripts/paper_rebuild/carrier_phase/arc_native_prepare.py"
+    ],
+    "current_change_scope": "authorized repair underway; original frozen git version preserved"
+  },
+  "execution_counts": {
+    "prepare": 1,
+    "checker_compile": 0,
+    "loader": 0,
+    "native": 0,
+    "evaluator": 0,
+    "phase_math": 0,
+    "automatic_retries": 0
+  },
+  "observed_unregistered_scientific_reads": 0,
+  "observed_raw_reference_npz_or_provider_payload_reads": 0,
+  "artifact_pins": {
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01/PREPARE_FAILED.json": {
+      "sha256": "bad845dba71a4d4110a1c78a14d327cd5d1f72e7465dfe8b117c2f8709d58e18",
+      "size_bytes": 1032
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01/PREPARE_RESERVATION.json": {
+      "sha256": "92ca00ff9cb6a2b4a2e8ad924611fab913dfea35cd2d1343c86b171d2631c100",
+      "size_bytes": 669
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01/REGISTERED_PLAN.json": {
+      "sha256": "a990c37de3cc9062ffd1e90ad058a13b8209e6da9de514e4ef6dd6ddd953a4fb",
+      "size_bytes": 29854
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01_PREPARE_EXIT.json": {
+      "sha256": "8e7aa6c0a300e96f68d6db932feb14556d54dc47b1b36b70292fc1cf1d188120",
+      "size_bytes": 125
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01_PREPARE_INVOCATION.json": {
+      "sha256": "9da50a15fdce2fa5810a26b41b527207168e4d1cde80cbc5938a8291e3df23b3",
+      "size_bytes": 613
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01_PREPARE_OPENAT.strace": {
+      "sha256": "9eaadee50e7d3720928f124860ee8f8b64ef1950e7bd75c276f719d3d42f147f",
+      "size_bytes": 1077147
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01_PREPARE_stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01_PREPARE_stderr.log": {
+      "sha256": "551851329c0c8f78c4e1fa803cf96307b1695538fc4c7f2cdce629ed178b3c7a",
+      "size_bytes": 676
+    }
+  },
+  "reviewer_reads": "Source, registration, failure, invocation/exit and trace only; no OPP/gzip reopening or decode. Hashes of original science inputs were not recomputed.",
+  "limits": [
+    "openat/execve trace scope, not an all-syscall proof",
+    "All three compressed reports were read during initial hash buffering; only BY2 35 rows were decoded before failure.",
+    "Root cause is a source_id versus fingerprint semantic mismatch missed in initial static review.",
+    "This audit qualifies containment, not preparation success or native qualification."
+  ]
+}

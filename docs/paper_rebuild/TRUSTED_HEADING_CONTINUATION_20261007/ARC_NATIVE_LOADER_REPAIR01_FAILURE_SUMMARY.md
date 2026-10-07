@@ -1,0 +1,7 @@
+# Independent loader instrumentation repair outcome
+
+The c74a52c instrumentation repair genuinely compiled the checker once and ran BY2 loader/parser once. COMPILE rc0 (1.121326347s), BY2 rc0 (0.029385136s), stdout548 source rows/274 blocks. Inner exec traces show the compiler and its toolchain, then one config_check execution. No BY2H or BY2O attempt occurred; no prepare, native or evaluator ran in this stage.
+
+The runner then FAILED in echo postprocessing at phase. Independently comparing all54 combined fixed science and original init_* fields finds phase as the only difference. In both old and new echoes phase equals stage_id. The production loader explicitly assigns options.phase = options.stage_id at port_config_loader.cpp:462, while stage_id is an originally allowed metadata edit. This is a validator classification error, not evidence of a changed navigation model. Do not replace the failed receipt or call the three-sequence loader gate complete.
+
+A separately registered finish may preserve this checker and successful BY2 output, validate phase == stage_id as a metadata relation and keep all remaining scientific equality gates. It should consume only the two remaining BY2H/BY2O calls, with compile0/prepare0/native0; exact artifact pins and no rerun/retry are required. This note verifies process counts and the identified metadata mismatch, not a full independent audit of every c74 access. It does not authorize execution.
