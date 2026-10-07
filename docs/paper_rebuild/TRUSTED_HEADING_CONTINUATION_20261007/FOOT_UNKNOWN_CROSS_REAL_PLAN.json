@@ -1,0 +1,56 @@
+{
+  "schema": "foot_unknown_cross_certificate.real_plan.v1",
+  "status": "FROZEN_READY_FOR_SINGLE_EXECUTION",
+  "events": 2510,
+  "offline_processes": 1,
+  "wall_seconds": 60,
+  "new_native_calls": 0,
+  "new_evaluator_calls": 0,
+  "raw_reads": 0,
+  "reference_reads": 0,
+  "retries": 0,
+  "source_pins": {
+    "scripts/paper_rebuild/carrier_phase/foot_unknown_cross_certificate.py": "0a5acd445edb917a370feceacef68b3cd42428d68e9896d2c9f1345f3880ff35",
+    "tests/paper_rebuild/test_foot_unknown_cross_certificate.py": "812fdf0e3f0da7d2f56393c5f158ebbf039f66cbcdfed78010489d9fdd333d30"
+  },
+  "native_seal_sha256": "9e061caab68272f61a9f5246480db3b62b0bc408c47b5bb66f70cb0679d65d7f",
+  "readout_complete_sha256": "e3328bfd01c13ef5d9fff418f39ee43fbb23f211f6b339afc4572c1a78ea85a3",
+  "sequences": [
+    {
+      "id": "BY2",
+      "events": 687,
+      "dump_sha256": "9ba31a58a44c8986ca479d8e1abe4a8b5b40938dae1658668b34abdadc38cd2a",
+      "qualification_sha256": "c9becd7cc52897ed59c41bcf729d6644eaaa5b58f4fc15ce70200cfda6c331ef"
+    },
+    {
+      "id": "BY2H",
+      "events": 666,
+      "dump_sha256": "75d0bb9ea8f11016c00d157c7d7f12d5e6f25cad74578ec0f65e261bee584492",
+      "qualification_sha256": "3f5802a41ca48e0f947ca07a769c311deaec16c4c218bb7ba70b23317521d86d"
+    },
+    {
+      "id": "BY2O",
+      "events": 1157,
+      "dump_sha256": "c110dd7448d06963da9a8274c28ba29ad3096bdf29eacc2b2692818cccc1080c",
+      "qualification_sha256": "05bdd777cde4a23f7fd0ea8d5871942a7f43bf1f02650e5560d1148fe6fbb8b7"
+    }
+  ],
+  "original_stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/FOOT_INFORMATION_TRIAL_ATTEMPT01",
+  "new_stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/FOOT_UNKNOWN_CROSS_ATTEMPT01",
+  "source_identity_basis": "committed foot_information/READOUT_RECEIPT.json at cd81069; each dump must match original native seal.files",
+  "input_counts": {
+    "frozen_dumps": 3,
+    "existing_qualification_tables": 3,
+    "native_seal": 1,
+    "readout_seal_hash_only": 1
+  },
+  "local_qualification": "FOOT_UNKNOWN_CROSS_LOCAL_RESULTS.json: 10 passed first run",
+  "policy": "All original eligible events; no condition-based deletion, no covariance change or phase/foot/nav update. Bounds apply only to centered conditional working moments and fixed linear K with unrestricted joint-PSD cross uncertainty. P roundoff qualification is not a physical or interval-arithmetic certificate.",
+  "decision_states": [
+    "WITNESS_STRICT_WORKING_MARGIN",
+    "WITNESS_EXACT_ZERO_REMAINDER",
+    "CONDITION_NOT_SATISFIED",
+    "UNRESOLVED_PSD_BOUNDARY",
+    "UNRESOLVED_NUMERICAL_SYMMETRY"
+  ]
+}

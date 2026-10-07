@@ -1,0 +1,24 @@
+{
+  "registration_commit": "a45d01807a90b2be92adc6f1a652774505c2fb7b",
+  "returncode": 0,
+  "elapsed_s": 0.38009176900004604,
+  "command": [
+    "python3",
+    "-m",
+    "pytest",
+    "tests/paper_rebuild/test_foot_unknown_cross_certificate.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--junitxml=<STAGE>/results.xml"
+  ],
+  "source_pins": {
+    "scripts/paper_rebuild/carrier_phase/foot_unknown_cross_certificate.py": "0a5acd445edb917a370feceacef68b3cd42428d68e9896d2c9f1345f3880ff35",
+    "tests/paper_rebuild/test_foot_unknown_cross_certificate.py": "812fdf0e3f0da7d2f56393c5f158ebbf039f66cbcdfed78010489d9fdd333d30"
+  },
+  "scope": "synthetic only; 0 native/evaluator/raw/reference/real saved dump reads",
+  "stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/FOOT_UNKNOWN_CROSS_LOCAL_ATTEMPT01",
+  "stdout_sha256": "dc1c7c6ae5675589d56331f73e369f94b58e0f19a0b6c58d3125af016c9d068b",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "junit_sha256": "b8e3fdd4188c7c059c5abb5c8195bfa0c403b159a7533a7a11a6361cefb7d756"
+}
