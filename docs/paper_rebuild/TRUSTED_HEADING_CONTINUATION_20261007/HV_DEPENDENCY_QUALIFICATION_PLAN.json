@@ -104,8 +104,8 @@
       "config_loader_calls": 2,
       "provider_loader_calls": 15,
       "initialize_calls": 1,
-      "setter_calls": 7,
-      "direct_ned_calls": 1,
+      "setter_calls": 8,
+      "direct_ned_calls": 2,
       "exact_steps": 0,
       "legacy_steps": 0,
       "manual_feedback_calls": 0
@@ -294,5 +294,6 @@
     "Native new policy validates declared schema/index/time-bits/ready; external preparation lineage is needed to authenticate those declarations.",
     "Original two policies ignore appended metadata; same-binary synthetic equality precedes later three-window historical byte control."
   ],
-  "review": "Root reviewed full production diff, 310-line native harness, pure preparation and eight synthetic tests. fusion_evidence independently reviewed runner order, finite reads and failure behavior. Root statically counted all fixed native calls including intentional loader/setter failures."
+  "review": "Root reviewed full production diff, 310-line native harness, pure preparation and eight synthetic tests. fusion_evidence independently reviewed runner order, finite reads and failure behavior. Root statically counted all fixed native calls including intentional loader/setter failures.",
+  "pre_execution_budget_note": "After initial registration fa7ccec, author final static tally arrived: registered 312-line harness already contains two added missing-only probes; corrected identity setter/direct counters 7/1 -> 8/2 before any execution. No source change or attempted tests."
 }
