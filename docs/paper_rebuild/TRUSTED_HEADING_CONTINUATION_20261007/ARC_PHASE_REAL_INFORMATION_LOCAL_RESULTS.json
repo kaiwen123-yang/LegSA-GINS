@@ -1,0 +1,53 @@
+{
+  "status": "PASS_THREE_SYNTHETIC_ADAPTER_TESTS",
+  "registration_commit": "a33851c48eecba9c46e1f3ab5d71b9d04651c2aa",
+  "passed": 3,
+  "failed": 0,
+  "pytest_processes": 1,
+  "automatic_retries": 0,
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "real_input_reads": 0,
+  "diagnose_calls": 0,
+  "geometry_calls": 0,
+  "elapsed_s": 0.8151779449999879,
+  "scope": "Synthetic adapter qualification only; no physical, real phase information, or navigation gain claim.",
+  "tests": [
+    "test_01_equator_full_cross_prior_uses_end_frame",
+    "test_02_bad_mapping_or_indefinite_prior_is_unresolved_without_repair",
+    "test_03_exact_join_schema_and_hash_refuse_corruption"
+  ],
+  "source_pins": {
+    "scripts/paper_rebuild/carrier_phase/arc_phase_real_information.py": "55822aae95d650bdccfb169bd703f065f100b0384c05d22122ca081c2d3c227e",
+    "scripts/paper_rebuild/carrier_phase/arc_native_real.py": "74b9b69962caaa4fba2c37265b6d9a10662517a8efce677ba0747e8b7a277ad7",
+    "src/legsa_gins/paper_rebuild/carrier_phase/arc_phase_information.py": "6f14db775227afddd05b75b47c8cd98d5743dd1dd10466d322987012765e1c3a",
+    "src/legsa_gins/__init__.py": "996a06df703fd19f79cb4b8bee3ba2cbf917e35d9f25d06c21a29c7a0831715a",
+    "src/legsa_gins/paper_rebuild/__init__.py": "268d06de2fa275e95ea3319111f359187f492c66e812b1be1ccd07812f6014e9",
+    "src/legsa_gins/paper_rebuild/manifest.py": "05f29a41984518bea5f86b80e2a221dcbde978f9b9616ea61ad21cdad632bc91",
+    "src/legsa_gins/paper_rebuild/paths.py": "8535cca9952f8c7d55c4cf9689031ab287cc79d0d9f0cf9207997e111db4ac0b",
+    "tests/paper_rebuild/test_arc_phase_real_information_adapter.py": "36eabb44dbcaa83bcf9688abc4e61ec1e71149bd9da23368e0b7449a40fe7778"
+  },
+  "stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_REAL_INFORMATION_LOCAL_ATTEMPT01",
+  "outputs": {
+    "OPENAT.strace": {
+      "sha256": "48a4edd80b191ab9a8afbbbe1b528b783370ab922f7b8d6accd525c7dc67a6b4",
+      "size_bytes": 162459
+    },
+    "INVOCATION.json": {
+      "sha256": "0a03d02a4e8d929e7163d752bc950ae43ce1eff775e905ad6e04c60357e0ae79",
+      "size_bytes": 2227
+    },
+    "stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "EXIT.json": {
+      "sha256": "e378538064ffbcabce04d3b6c63e76c6f7ae7908d2c292a8bde7feda14661edf",
+      "size_bytes": 83
+    },
+    "stdout.log": {
+      "sha256": "4a6e9c36d8f59b5f37fea72c93e4df9fc194a7d55658ccade2f5975a987ec522",
+      "size_bytes": 98
+    }
+  }
+}
