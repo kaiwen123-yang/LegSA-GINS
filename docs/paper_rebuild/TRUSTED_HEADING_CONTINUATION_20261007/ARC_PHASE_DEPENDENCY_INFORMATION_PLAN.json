@@ -1,0 +1,329 @@
+{
+  "aliases": {
+    "<CODE_ROOT>": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001",
+    "<V3_ROOT>": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3",
+    "<V3_SCRATCH>": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3",
+    "<RAW_ROOT>": "/mnt/g/LegSA-GINS-project/data/raw",
+    "<CLEAN_ROOT>": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607",
+    "<FROZEN_CODE_ROOT>": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair",
+    "<SCRATCH_ROOT>": "/home/kaiwen/research/LegSA-GINS-SCRATCH",
+    "<CARRIER_SCRATCH>": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CARRIER_INTEGRATION_20261006",
+    "<CARRIER_NAV_SCRATCH>": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CARRIER_NAV_INTEGRATION_20261006",
+    "<NAV_INPUT_MAP_LOCAL>": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_NAV_INPUT_MAP"
+  },
+  "budgets": {
+    "native_calls": 0,
+    "evaluator_calls": 0,
+    "provider_payload_reads": 0,
+    "raw_reads": 0,
+    "reference_reads": 0,
+    "npz_reads": 0,
+    "residual_calls": 0,
+    "integer_search_calls": 0,
+    "phase_detail_file_reads": 3,
+    "phase_detail_rows": 921,
+    "prior_file_reads": 3,
+    "prior_rows": 918,
+    "lifecycle_file_reads": 3,
+    "lifecycle_rows": 921,
+    "source_csv_reads": 3,
+    "source_event_rows": 1842,
+    "conditioning_ledger_reads": 3,
+    "prior_qualification_calls_max": 918,
+    "geometry_calls_max": 857,
+    "diagnose_calls_max": 1714,
+    "output_block_rows": 921,
+    "objective_rows_max": 3428,
+    "numerical_threads": 1,
+    "wall_s": 600,
+    "automatic_retries": 0
+  },
+  "baseline_body_m": [
+    0.0,
+    -0.35,
+    0.0
+  ],
+  "baseline_frame_claim": "INHERITED_ENGINE_FRAME_WORKING_ASSUMPTION_NOT_PHYSICAL_EXTRINSIC_PROOF",
+  "epsilon_grid": [
+    0.015625,
+    0.0625,
+    0.25,
+    1.0,
+    4.0
+  ],
+  "objectives": [
+    "joint",
+    "current",
+    "relative_ecef",
+    "common_ecef"
+  ],
+  "covariance_kind": "SECOND_MOMENT_UPPER_BOUND",
+  "error_model": "SECOND_MOMENT_ABOUT_NOMINAL",
+  "cross_mode": "UNKNOWN_CROSS_BOUND",
+  "phase_state_cross": "UNKNOWN",
+  "scope": "LINEARIZED_WORKING_SURROGATE_ONLY",
+  "nonlinear_remainder_qualified": false,
+  "physical_bound_conditions": "Both P and Rbar must bound total effective second moments at the same I_END, including bias, installation, timing and linearization remainder; absent in these working arrays.",
+  "numerical_qualification": {
+    "full_P24": "Diagonal-normalized numerical PSD on full 24 matrix; all positive scales retained; exact zero rows enforced; no eigenvalue repair",
+    "P6_mapping_tolerance_in_prior_scales": 2e-10,
+    "J1_B6_relative_nonzero_tolerance": 2e-10,
+    "J1_B6_exact_structural_zeros": true,
+    "C1_mapping_and_SO3_absolute_tolerance": 1e-10,
+    "original_raw_arrays_preserved": true,
+    "Rbar_formula_tolerance_in_saved_scales": 2e-10
+  },
+  "flags": {
+    "report_only": true,
+    "prefix": "All executed source-tagged ordinary updates before END snapshot",
+    "within_clone_interval": "Events after actual ARC_START ledger ordinal through END snapshot; ordinary updates at START before clone creation excluded",
+    "source_after_its_update": "Recorded source timestamp greater than the state time of that particular update",
+    "source_after_prior_END": "Maximum recorded prefix source time greater than prior END time; separate from source-after-update",
+    "actual_available_time_s": null,
+    "online_causality_qualified": false
+  },
+  "no_admission": {
+    "phase_residual_access": false,
+    "z_m_decoded_in_input_json_but_not_used": true,
+    "zero_residual_fabricated": false,
+    "provider_reference_nav_reads": false,
+    "navigation_updated": false,
+    "metrics_used_to_filter": false,
+    "PSD_repair": false
+  },
+  "failure_policy": "First identity/hash/schema/IO failure aborts and records FAILED; no retries or alternate stage. Numeric PSD/mapping/SPD/domain failures retain that block as UNRESOLVED, never tune noise, remove rows or admit a factor.",
+  "execution_envelope": "One root-owned subprocess group, outer strace -f allowed because adapter launches no tracer; timeout at 600 s plus bounded wrapper margin. No native/eval/compile/pytest inside this real readout.",
+  "output_scope": "All artifacts on new ext4 stage; compact reporting later must preserve all denominators and conditional labels; no derived information means proven physical information or navigation gain.",
+  "local_test_registration_commit": "a33851c48eecba9c46e1f3ab5d71b9d04651c2aa",
+  "schema": "arc_phase_dependency_information.registration/v1",
+  "status": "REGISTERED_READY_SINGLE_EXECUTION",
+  "stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_DEPENDENCY_INFORMATION_ATTEMPT01",
+  "source_pins": {
+    "scripts/paper_rebuild/carrier_phase/arc_phase_real_information.py": "55822aae95d650bdccfb169bd703f065f100b0384c05d22122ca081c2d3c227e",
+    "scripts/paper_rebuild/carrier_phase/arc_native_real.py": "74b9b69962caaa4fba2c37265b6d9a10662517a8efce677ba0747e8b7a277ad7",
+    "src/legsa_gins/paper_rebuild/carrier_phase/arc_phase_information.py": "6f14db775227afddd05b75b47c8cd98d5743dd1dd10466d322987012765e1c3a",
+    "src/legsa_gins/__init__.py": "996a06df703fd19f79cb4b8bee3ba2cbf917e35d9f25d06c21a29c7a0831715a",
+    "src/legsa_gins/paper_rebuild/__init__.py": "268d06de2fa275e95ea3319111f359187f492c66e812b1be1ccd07812f6014e9",
+    "src/legsa_gins/paper_rebuild/manifest.py": "05f29a41984518bea5f86b80e2a221dcbde978f9b9616ea61ad21cdad632bc91",
+    "src/legsa_gins/paper_rebuild/paths.py": "8535cca9952f8c7d55c4cf9689031ab287cc79d0d9f0cf9207997e111db4ac0b",
+    "tests/paper_rebuild/test_arc_phase_real_information_adapter.py": "36eabb44dbcaa83bcf9688abc4e61ec1e71149bd9da23368e0b7449a40fe7778",
+    "scripts/paper_rebuild/carrier_phase/arc_phase_dependency_information.py": "a2fe22dd81f76a7376b8e1a93ad700a5adb99fcb0f1aa718f5b9ba09d65918a9"
+  },
+  "metadata_pins": {
+    "prepared_plan": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/PLAN.json",
+      "sha256": "71c002fffc6dd2cf63ba567faf2c34100ce591a6bb2079a046cac79d71bc3f75",
+      "size_bytes": 47006
+    },
+    "phase_summary": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_SAVED_MODEL_ATTEMPT01/SUMMARY.json",
+      "sha256": "c431e00ddb34ac4f62015a07a199161f07b5c8e51e03af217544c8d2d907fb54",
+      "size_bytes": 3709
+    },
+    "phase_complete": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_SAVED_MODEL_ATTEMPT01/COMPLETE.json",
+      "sha256": "1b5d255e167b383562f68035c62a5d0d78e59ecf305f6464ce53b27834efca08",
+      "size_bytes": 192
+    },
+    "local_adapter_result": {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_REAL_INFORMATION_LOCAL_RESULTS.json",
+      "sha256": "e84ace412ac3c4a3f4612b17262e2058645bb580f880f78f59d4668a5b17c34e",
+      "size_bytes": 2510
+    },
+    "native_complete": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_POLICY_REAL_ATTEMPT01/REPAIR01/COMPLETE.json",
+      "sha256": "49fce3ce2838dc14ff42500c61b4d984d306386e7bc55df8f2debd6041ab847b",
+      "size_bytes": 11100
+    },
+    "native_seal": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_POLICY_REAL_ATTEMPT01/REPAIR01/ALL_NATIVE_SEALED.json",
+      "sha256": "43f399c15dba7f5674feb6e4637841b31bf1535db2c3ccd46791d01916497396",
+      "size_bytes": 24019
+    },
+    "native_results": {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_POLICY_RESULTS.json",
+      "sha256": "a48994f7af16c7b8794e5b9fabed1862cf45de61228f46ab3a70b1f357818d47",
+      "size_bytes": 3521
+    },
+    "BY2_native_manifest": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_POLICY_REAL_ATTEMPT01/REPAIR01/BY2__DEPENDENCY/OUT/RUN_MANIFEST.json",
+      "sha256": "657ca670252aebdca5fba4705fc4c55c6e167aa0177a1ada2af7e59647f356ed",
+      "size_bytes": 27605
+    },
+    "BY2H_native_manifest": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_POLICY_REAL_ATTEMPT01/REPAIR01/BY2H__DEPENDENCY/OUT/RUN_MANIFEST.json",
+      "sha256": "d33f2d8198b1dfe2db27417c668d3fff00b2ff9f71c7ba4f8bca7c416b0c68ef",
+      "size_bytes": 27624
+    },
+    "BY2O_native_manifest": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_POLICY_REAL_ATTEMPT01/REPAIR01/BY2O__DEPENDENCY/OUT/RUN_MANIFEST.json",
+      "sha256": "6e9f909f81eabd2fd63177490a3bc3fec9be47d3357718406006ed21d7056d65",
+      "size_bytes": 27604
+    }
+  },
+  "input_pins": {
+    "BY2_priors": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_POLICY_REAL_ATTEMPT01/REPAIR01/BY2__DEPENDENCY/OUT/ARC_JOINT_PRIORS.jsonl",
+      "sha256": "dbcb00f91413182749db66721c3b889f2ecf9cfbd9e7e0df7942d25df1142465",
+      "size_bytes": 5255311
+    },
+    "BY2_lifecycle": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_POLICY_REAL_ATTEMPT01/REPAIR01/BY2__DEPENDENCY/OUT/ARC_LIFECYCLE.csv",
+      "sha256": "7d7964691e4d14294553e5d60e93211369d7ec5db71713b68a0f6e79a0285d45",
+      "size_bytes": 145740
+    },
+    "BY2_ledger": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_POLICY_REAL_ATTEMPT01/REPAIR01/BY2__DEPENDENCY/OUT/ARC_CONDITIONING_EVENTS.jsonl",
+      "sha256": "0d2e0d23d15b98678b2dee34b5c186c79a91ddbb158d7a35a82301ab55afb59a",
+      "size_bytes": 3102271
+    },
+    "BY2_details": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_SAVED_MODEL_ATTEMPT01/BY2_DETAILS.jsonl.gz",
+      "sha256": "76211cca065d3b84fa9cb963037b0105355479649811786aedc41d42d1736fa7",
+      "size_bytes": 548587
+    },
+    "BY2_events": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/SCHEDULES/BY2/ARC_SOURCE_EVENTS.csv",
+      "sha256": "941f91119281f4660f28b3a18a44b4e1e03d07a6572d5613cb74dc42e62f0e9c",
+      "size_bytes": 102141
+    },
+    "BY2H_priors": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_POLICY_REAL_ATTEMPT01/REPAIR01/BY2H__DEPENDENCY/OUT/ARC_JOINT_PRIORS.jsonl",
+      "sha256": "242ccba9d65146d61f5215e99b03e958c42c48d91bfbd674549ce49ca326cb6e",
+      "size_bytes": 5182167
+    },
+    "BY2H_lifecycle": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_POLICY_REAL_ATTEMPT01/REPAIR01/BY2H__DEPENDENCY/OUT/ARC_LIFECYCLE.csv",
+      "sha256": "344e35d5a4a10b7443b979e48021cc21fc1fcb7d9eda481c4576bde513b025ac",
+      "size_bytes": 145506
+    },
+    "BY2H_ledger": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_POLICY_REAL_ATTEMPT01/REPAIR01/BY2H__DEPENDENCY/OUT/ARC_CONDITIONING_EVENTS.jsonl",
+      "sha256": "5176c891ef3637aa547b3a5a750553c8bba36d518717b394f1a660bdb0b8ba88",
+      "size_bytes": 3014402
+    },
+    "BY2H_details": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_SAVED_MODEL_ATTEMPT01/BY2H_DETAILS.jsonl.gz",
+      "sha256": "eb2ae07364c7f0a2c825620e58c6cd030e9d36e9f254453a48fbfcfeb0f16921",
+      "size_bytes": 535088
+    },
+    "BY2H_events": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/SCHEDULES/BY2H/ARC_SOURCE_EVENTS.csv",
+      "sha256": "ec05c103485f6f9a172c032e7a9af23055db2bccf59d87a932e0d1cbb517efc3",
+      "size_bytes": 103089
+    },
+    "BY2O_priors": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_POLICY_REAL_ATTEMPT01/REPAIR01/BY2O__DEPENDENCY/OUT/ARC_JOINT_PRIORS.jsonl",
+      "sha256": "5186017e1668eb11281cc205c0a568fb7294da57a81eba8cf258cd92ca09b7e9",
+      "size_bytes": 7251507
+    },
+    "BY2O_lifecycle": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_POLICY_REAL_ATTEMPT01/REPAIR01/BY2O__DEPENDENCY/OUT/ARC_LIFECYCLE.csv",
+      "sha256": "814c5bfbf1aaf2b2901f6ff8090a768bebd7731387285013f6094c5d6d5bbbca",
+      "size_bytes": 208454
+    },
+    "BY2O_ledger": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_DEPENDENCY_POLICY_REAL_ATTEMPT01/REPAIR01/BY2O__DEPENDENCY/OUT/ARC_CONDITIONING_EVENTS.jsonl",
+      "sha256": "956807955e56b32b8fb2da2b0ac2e9c0684cccad43760676b3a2bda7bbbb5d67",
+      "size_bytes": 4185201
+    },
+    "BY2O_details": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_SAVED_MODEL_ATTEMPT01/BY2O_DETAILS.jsonl.gz",
+      "sha256": "d40416fe547616b2a040f4875c04b2c12cb671b0f031925bc5882269f1dc65fb",
+      "size_bytes": 837901
+    },
+    "BY2O_events": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01/SCHEDULES/BY2O/ARC_SOURCE_EVENTS.csv",
+      "sha256": "202f902e21d0d9e1a5119e4e3de810bb989b8770fd0aa584a6c6f9804d89b51e",
+      "size_bytes": 149131
+    }
+  },
+  "sequences": [
+    {
+      "sequence_id": "BY2",
+      "run_id": "BY2__ARC_EMPTY_MODEL",
+      "blocks": 274,
+      "priors": 273,
+      "legal_models": 240,
+      "legal_intersection": 239,
+      "ledger_rows": 8311,
+      "event_sha256": "941f91119281f4660f28b3a18a44b4e1e03d07a6572d5613cb74dc42e62f0e9c",
+      "manifest_sha256": "711ed11bf91f4c8091541e4a7982afbe443b761302cb7f317f54ed2f90151060",
+      "priors_sha256": "dbcb00f91413182749db66721c3b889f2ecf9cfbd9e7e0df7942d25df1142465",
+      "details_sha256": "76211cca065d3b84fa9cb963037b0105355479649811786aedc41d42d1736fa7",
+      "policy": "causal_recorded_dependencies_unique_latest",
+      "source_hv_accepted": 273
+    },
+    {
+      "sequence_id": "BY2H",
+      "run_id": "BY2H__ARC_EMPTY_MODEL",
+      "blocks": 270,
+      "priors": 269,
+      "legal_models": 243,
+      "legal_intersection": 242,
+      "ledger_rows": 8062,
+      "event_sha256": "ec05c103485f6f9a172c032e7a9af23055db2bccf59d87a932e0d1cbb517efc3",
+      "manifest_sha256": "aaa26fdb39c74f683e65ef18d448799e5fcfd88bd0dd48e1ce3f08352204bc69",
+      "priors_sha256": "242ccba9d65146d61f5215e99b03e958c42c48d91bfbd674549ce49ca326cb6e",
+      "details_sha256": "eb2ae07364c7f0a2c825620e58c6cd030e9d36e9f254453a48fbfcfeb0f16921",
+      "policy": "causal_recorded_dependencies_unique_latest",
+      "source_hv_accepted": 268
+    },
+    {
+      "sequence_id": "BY2O",
+      "run_id": "BY2O__ARC_EMPTY_MODEL",
+      "blocks": 377,
+      "priors": 376,
+      "legal_models": 377,
+      "legal_intersection": 376,
+      "ledger_rows": 11172,
+      "event_sha256": "202f902e21d0d9e1a5119e4e3de810bb989b8770fd0aa584a6c6f9804d89b51e",
+      "manifest_sha256": "1b63cb6a6c6be903024a6ce089c2b71d166f1da7341fa60792efea1d0d044532",
+      "priors_sha256": "5186017e1668eb11281cc205c0a568fb7294da57a81eba8cf258cd92ca09b7e9",
+      "details_sha256": "d40416fe547616b2a040f4875c04b2c12cb671b0f031925bc5882269f1dc65fb",
+      "policy": "causal_recorded_dependencies_unique_latest",
+      "source_hv_accepted": 374
+    }
+  ],
+  "source_byte_reads": {
+    "input_files": 15,
+    "input_bytes": 30766496,
+    "metadata_files": 10,
+    "metadata_bytes": 174890,
+    "content_passes_per_file": 1,
+    "size_change_probe_extra_bytes_max": 25,
+    "phase_compressed_decode_passes": 3,
+    "max_decompressed_bytes_per_phase_file": 67108864,
+    "post_check": "stat identity only; no second payload hash"
+  },
+  "qualification_gate": "Reuse exact source-identical three adapter tests and12 core tests; mathematics and join functions unchanged. New orchestration receives static interface review before registration. No new native/eval/pytest.",
+  "registration_decision": "Root and delegated static metadata/interface review complete; unchanged eight-source adapter qualification is enforced. One new-prior readout; preserve all failure and no-admission boundaries.",
+  "scientific_question": "Does the new dependency-ready executed prefix permit an explained conditional information increment in the same previously fixed UNKNOWN-cross phase family? Changes to the prior and END nominal require new geometry; old857 numbers do not answer this.",
+  "comparison_contract": "Keep originalG0/G1/Q0/Q1,full921blocks,original4targets/epsilon/Rbar/UNKNOWNcross/numericaltolerances. Requalify new fullP24/P6 and recompute H from current and END-corrected clone attitudes; never reuse oldH.",
+  "metadata_note": "native_results independent_review is a limited output/decision-CSV review, not the older full access audit. Current native_complete/seal retain checker failure and1reused+5new actualcalls6,zero repeated.",
+  "readiness_scope": "Inherit already sealed915 accepted source/dependency-clock checks; this15-file information readout has no readyCSV and does not revalidate actual readiness/arrival.",
+  "cancellation_sufficient_condition": {
+    "from_existing_output_scalar": true,
+    "criterion": "1 - 2*rho > 128*machine_epsilon*max(1,abs(2*rho))",
+    "rho": "largest eigenvalue of Rbar-whitened HPHt for this new block",
+    "meaning": "Numerical working support for A<=S in the conditional unconstrained-second-moment counterexample; not interval-certified PSD or physical impossibility.",
+    "near_boundary": "Do not infer counterexample eligibility; no change to core objective decision."
+  },
+  "decision_rules": [
+    "All numerical qualification failures remain explicit UNRESOLVED and retain full denominator.",
+    "No continuous or fixed-grid improvement means retainSKIP; do not changeR,noise,cross,objectives,epsilon orwindow to force acceptance.",
+    "PositiveJ>T is only a working-family signal; physical total-error,arrival,nonlinear and fault gates remain prerequisites to anyphase admission.",
+    "No actual residual ortrace use; decoded phase z in sealed JSON is not accessed for computation."
+  ],
+  "outputs": [
+    "RESERVATION.json",
+    "REGISTERED_PLAN.json",
+    "BLOCKS.csv",
+    "OBJECTIVES.csv",
+    "NUMERICAL_DETAILS.json",
+    "INPUT_READ_RECEIPT.json",
+    "SUMMARY.json",
+    "COMPLETE.json"
+  ],
+  "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 python3 scripts/paper_rebuild/carrier_phase/arc_phase_dependency_information.py --registration-commit <REGISTERED_COMMIT>"
+}
