@@ -1,0 +1,528 @@
+{
+  "schema": "trusted_heading.arc_native.prepare.v1",
+  "status": "REGISTERED_READY",
+  "registration_identity": "exact committed plan/source bytes; root changes status to REGISTERED_READY before registration",
+  "stage": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01",
+  "stage_id": "TRUSTED_HEADING_ARC_NATIVE_TELEMETRY_20261007",
+  "old_native_registration_commit": "3c81e5b8e4df4bece69c5f4635f0a60bd12c4369",
+  "source_time_scale_id": "UTC_UNIX_MINUS_REGISTERED_BASE_SECONDS",
+  "allowed_config_edit_keys": [
+    "stage_id",
+    "protocol_id",
+    "case_id",
+    "run_id",
+    "run_label",
+    "outputpath",
+    "arc_clone_mode",
+    "arc_source_events_path",
+    "arc_source_events_sha256",
+    "arc_schedule_manifest_sha256",
+    "arc_source_time_scale_id",
+    "arc_source_time_mapping_id",
+    "arc_availability_policy"
+  ],
+  "source_pins": {
+    "cpp/CMakeLists.txt": "e3d34e2c5ca0af380865ff55fdbb4b48ee142c4b5b099f7723263d22cbd3f181",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/baseline3d.hpp": "cee2acf52d96b83ac559dffb0c2324e56aa5a6c7a724f136df2e86efa0652286",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/common/earth.hpp": "aee6183b334e8c33c9dc4ca08396c8a0f61211444ba1d69d230148445c4dede3",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/common/rotation.hpp": "6968d788b9765736fda9470c41243c5d2a01bf4fdb492e05b714b6d6b1892dca",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/config/port_config_loader.hpp": "cd3210d6412ff1c426e9792c2284c6554c1625e19e29e3da6919fb95e6bc2ce9",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/arc_source_events.hpp": "d2f9bb36dae96ae7b629046e5b505d9c0954d5916e1c208b88436f30b3e9a99d",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/attitude_clone.hpp": "889cf7cc47219d3c37d7f4ff2e98303641700754301a204089cdb13d68e09254",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/body_velocity_model.hpp": "25c855998bcbbbc6bcc84f08a72a9c5c76f044bee9d8321de4cea894d4fec6e0",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/foot_pair_events.hpp": "347166fcbb49377facb405abfaaebd9699d95e91bd3fe583ef7403482185978e",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/go2_weak_prior_factor.hpp": "7fe76fc1bf98dd59729194d7eac9a36054e51a9d93c75974c467202475092261",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/go2_weak_prior_loader.hpp": "3a5b7875ca85724683f596731e72cc13d1105a4b24cde1cdb94e8268fbf5b956",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/go2_weak_prior_types.hpp": "a0b781a519a1bd3b1a1e2340b3369fbb49f27074a8c9aeb1ca6adf161da5a60f",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/raw_doppler_factor.hpp": "ce2e00fdf4697ba6322fe0b3e22c719e86f11b4fcb26001ff67e04db933baea8",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/raw_doppler_factor_loader.hpp": "1ecb890eac97824e263d75296022d1aafc486b04d5a18917c5474a868dc55d00",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/raw_doppler_types.hpp": "c59c1ab797128ca0ab73f9496c1fe12599d8a886f98d16a3e7a0b7ac4e8d56fc",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/satellite_state_provider.hpp": "ee899b3c17fd036a7a1cf3841fd15bffa94a3e6adfbe066c6501b31e4845d1f8",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/fgo_feedback/fgo_feedback.hpp": "97bc3f0b41ce53d0c5b28b29dd2e9865b16d7d62bc915d619224786b242891e7",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/fileio/file_saver.hpp": "c854a616ac5d858890262b5c4801670a553bb629aaecbaeb98c60ced9a97839e",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/fileio/gnss_file_loader.hpp": "965c1953420437a539e8367d4ce9604ff496e8d83135385deb76078df8b658cd",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/fileio/imu_file_loader.hpp": "013a6b0e84914cc4260aad13148a12905f3ae33ff5aa51e339f31c9ded31be25",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/gnss.hpp": "96784c0e2af49ce9bad3878e0b8c438cb99daf38d9c886f2c5894b5376fb6cf2",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/heading_source_policy.hpp": "78f1aa46f269c9ff7085217a662a81ab05291a2884fbb474b03e21973025784d",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/imu.hpp": "7c79c573cd8aae9745ebe9a227a2c681d26c4e846cfb1583b1e4a516f668d728",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/gi_engine.hpp": "1eb3284aeb701dea43731b9c3f0375ffd2dbfabf998f11d7a49bb079267f904f",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/insmech.hpp": "500c44107b8cfa4997e7104783b72ee53a050550c79dedc8c90741b002c4ae6a",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/options.hpp": "774b04a17d972af4a57a9ac2c29d1067005b49586dc7950c03b1cf98b34c49fb",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/nav_state.hpp": "804067e48398d6a495d4549f69fdb66f9c83f2831ac0a5d04cf1c37baa278093",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/options.hpp": "3cf54031c2c4cdeba664a8c0839935b64e653eb5e258745e1ff43f35219ccd20",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/quality_aware/qa_fallback.hpp": "169866841e615dcc936b3ef0b0b4d481b1e121513f5d1ae615c32e0c8ace5ea8",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/runtime/port_runtime.hpp": "eb6523a5a121a90cebee732b2df5ad4e06e6407e3bb631024655234c086bb7f5",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/measurement_source.hpp": "218da13d3f9b3f846182098880f96bd589cfa51db1d9a65efab3b0f0fd623da7",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/quality_state_manager.hpp": "1f1636baa20c701f972a8895d9e74fd6aa6b59f03243ff9a6fce751b6e0d3cf9",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/quality_state_trace.hpp": "a25e0b963e3b55ff01f824b5e85689cbf5ab48210f359f8011258d72573c2b1f",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/source_aware_policy.hpp": "e5c0d58d629194f1f1a0ddb35eeb8cb9335dd84f3544acbbe68cde07eb590e49",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/source_aware_trace.hpp": "cd2ad52aa811f12ebcad8397634e444c0a426956d36f9327b56646beac9c4811",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/types.hpp": "ff32237a291905bf9afe68721e687a4391c5a155d80cbaa626d8db3b2d75b9ef",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/writers/port_writers.hpp": "35fad671a84912ace9636ae98ee3bdeba90ff345828944fba6d57835e30f308c",
+    "cpp/legsa_v23_port_core/src/baseline3d.cpp": "3d88423e6a8d9d41c498f2f618fac70ac629481983d675c91026acdfbba058c2",
+    "cpp/legsa_v23_port_core/src/common/earth.cpp": "8e9e6f52dc48ce42992f2e43ffa034cb5cc408f7901bb836542f1e0ed4683f82",
+    "cpp/legsa_v23_port_core/src/common/rotation.cpp": "7dd006b9612a13ee5173b5faa51a0f9bb9d8ccdfcea9c8f1a599269371a01331",
+    "cpp/legsa_v23_port_core/src/common/types.cpp": "5a4de8e7d89f38e597587349df5c627a465248e86c67287e738c849ee781081d",
+    "cpp/legsa_v23_port_core/src/config/port_config_loader.cpp": "1938b73db0caf8a3d18f5133348e77a3112ac8dc686ee61cf2e4f23ce2f4540a",
+    "cpp/legsa_v23_port_core/src/demo/legsa_v23_port_core_demo.cpp": "0e2bdf1ba03555f47f6af2b98ca5da86c54322651f60f5352e2ea095c9b07a40",
+    "cpp/legsa_v23_port_core/src/demo/port_demo.cpp": "274bd62f9dbd18b10c1764a02f98ab4452d0e445115f04bd30630f68018be891",
+    "cpp/legsa_v23_port_core/src/factors/arc_source_events.cpp": "848d9d1ca6fa37142e8cf0520d6d22a08298efe3fab99efacc831725595d03da",
+    "cpp/legsa_v23_port_core/src/factors/attitude_clone.cpp": "11568fb2d4bb69198c8aed15bd8a095f0bbe48fd4b5969eba2f95eb7bb1db47b",
+    "cpp/legsa_v23_port_core/src/factors/body_velocity_model.cpp": "6301565e4a1ab2bf6b7a3daa68447699707a4d1779eee04783b80fbbd39ec23b",
+    "cpp/legsa_v23_port_core/src/factors/foot_pair_events.cpp": "4ba6634d0ff7c14f7f5a85041b57aa6412645e73dd2f6ddda7b532414d014edd",
+    "cpp/legsa_v23_port_core/src/factors/go2_weak_prior_factor.cpp": "d40bfc1b7cfd8d54fb30b167ad8f922ce56c98ecb2097171133cedb4832231d4",
+    "cpp/legsa_v23_port_core/src/factors/go2_weak_prior_loader.cpp": "38e792a9d7512916b01e5dbfba001d05c69a567270d45492b4e5025b97ddb647",
+    "cpp/legsa_v23_port_core/src/factors/raw_doppler_factor.cpp": "46786a1a0e4e31db2aba87023d754a5bd2e6480cd57be1eeec4f41f6dcc2946f",
+    "cpp/legsa_v23_port_core/src/factors/raw_doppler_factor_loader.cpp": "6634a30568ac943a778c17c3faef133c820a6f93a246d6ed9a9f5b251cec6249",
+    "cpp/legsa_v23_port_core/src/factors/satellite_state_provider.cpp": "78984fe28dbe53aec6a6a7b9c850fc29d38d9a01cb58427585d61a3591eabe10",
+    "cpp/legsa_v23_port_core/src/fgo_feedback/fgo_feedback.cpp": "6a5742a17c615edef630728a460c2bbf5374b06d03dd8faf790684804591317b",
+    "cpp/legsa_v23_port_core/src/fileio/file_saver.cpp": "10f011454d5d354596da18432a317f25642c34e5699f52c92c2e9abb5ee7dea8",
+    "cpp/legsa_v23_port_core/src/fileio/gnss_file_loader.cpp": "b2ba9d908600ebd72a1671ea90d7bfb15f0c696bf4116e0d7d8d1c6bdbf31b3d",
+    "cpp/legsa_v23_port_core/src/fileio/imu_file_loader.cpp": "ed064dfb7f50d5fede6cb0865870b42c86f254e4b68389e32e1fa18cfc9e1119",
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp": "654024e4085373d78606de8af9ce571c311aed5d8415062221fa9552609b922f",
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine_arc_clone.cpp": "a5a11e9d2e64fbf91eee2a6dd088a6eec4451fd2fd9690edc13c024751b3f768",
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine_attitude_clone.cpp": "143b2e08ae4701449a7536b468d45c410dc52922d5d7ec544f3a0cce27a8abb1",
+    "cpp/legsa_v23_port_core/src/kf_gins/insmech.cpp": "eec54b43325af4101722d0b0eb76a712ec75a867f55950087a913642976f231c",
+    "cpp/legsa_v23_port_core/src/quality_aware/qa_fallback.cpp": "76dc1658bcaeb06607c87861011ed9ba3a10e9b33144148e790134a70d09b707",
+    "cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp": "474b1c7bb222d94de9d35a886f1ea20b1c687cef37d2587441dda0e177643a91",
+    "cpp/legsa_v23_port_core/src/source_aware/quality_state_manager.cpp": "ba8511f51e35cfee41a313c114817c1adbe6b2e118a9632a88a24c06ebc8e192",
+    "cpp/legsa_v23_port_core/src/source_aware/quality_state_trace.cpp": "00af7e8ccb982ed733fe55739555c1f03f9c02e8534c6291724f9348da0bdcde",
+    "cpp/legsa_v23_port_core/src/source_aware/source_aware_policy.cpp": "3efce02c49adc184dc9aa76b9a1fdd1b6eeb1307ad45edeb9ebfb5eea360cb91",
+    "cpp/legsa_v23_port_core/src/source_aware/source_aware_trace.cpp": "16305993507e641ff07c19952a0acb0263daf83ca91de0901df9aa5e529b2144",
+    "cpp/legsa_v23_port_core/src/writers/port_writers.cpp": "b8947e623fc8c2c78cd4bbd721328b41559652e9bd17dc0e378e0417ba06af31",
+    "scripts/paper_rebuild/carrier_phase/arc_native_prepare.py": "eab327b9a3453d8f7897b6ab498b314a2b631fc18d42f9a76edc48974066a183",
+    "scripts/paper_rebuild/carrier_phase/arc_phase_saved_model_qualification.py": "6974da4b477e8e340278fae3d71512547307e995b59269b5594681037341fb9e",
+    "scripts/paper_rebuild/carrier_phase/real_trial.py": "6655bed85a62b718d873eda220719cc467c6ca0e4b2ebd31ac7dde2cd088a343",
+    "src/legsa_gins/input_generation/imu_txt_builder.py": "dcc20ae00cb23d2c4685578e5104cf373204413d90ce26c36a15135ad42522ce",
+    "src/legsa_gins/paper_rebuild/clean5_calibrated/providers.py": "6cda62efc66c6298416a7b65cc25767fb6b3697e2a67b0d49a3a0b03ca472abd",
+    "src/legsa_gins/paper_rebuild/carrier_phase/arc_phase_difference.py": "3898eb95f2621f483c80ecd0d67b9fd6dcf27135673a755b11f8650a7d66ef12"
+  },
+  "time_definition_source_pins": {
+    "scripts/paper_rebuild/carrier_phase/real_trial.py": "6655bed85a62b718d873eda220719cc467c6ca0e4b2ebd31ac7dde2cd088a343",
+    "src/legsa_gins/paper_rebuild/clean5_calibrated/providers.py": "6cda62efc66c6298416a7b65cc25767fb6b3697e2a67b0d49a3a0b03ca472abd",
+    "src/legsa_gins/input_generation/imu_txt_builder.py": "dcc20ae00cb23d2c4685578e5104cf373204413d90ce26c36a15135ad42522ce",
+    "cpp/legsa_v23_port_core/src/fileio/imu_file_loader.cpp": "ed064dfb7f50d5fede6cb0865870b42c86f254e4b68389e32e1fa18cfc9e1119"
+  },
+  "metadata_inputs": {
+    "old_plan": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_NAVIGATION_ATTEMPT01/PLAN.json",
+      "sha256": "8e2d476d08e3caf9cdeca78edf75d8024dc4accea2430c26a7aa263d7d6210dc",
+      "size_bytes": 82246,
+      "kind": "sealed_metadata"
+    },
+    "old_prepared": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_NAVIGATION_ATTEMPT01/PREPARED.json",
+      "sha256": "d6204a35435fc5e210a76e0b25e9d3282f57adaaf59f0bba9641bd198be615d7",
+      "size_bytes": 112,
+      "kind": "sealed_metadata"
+    },
+    "old_native_seal": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_NAVIGATION_ATTEMPT01/ALL_NATIVE_SEALED.json",
+      "sha256": "1d85386e07593a10d20a57f5c6421430e084a27357cd7f8fc2a9d0f7910b8d17",
+      "size_bytes": 64891,
+      "kind": "sealed_metadata"
+    },
+    "arc_complete": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_SAVED_MODEL_ATTEMPT01/COMPLETE.json",
+      "sha256": "1b5d255e167b383562f68035c62a5d0d78e59ecf305f6464ce53b27834efca08",
+      "size_bytes": 192,
+      "kind": "sealed_metadata"
+    },
+    "arc_summary": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_SAVED_MODEL_ATTEMPT01/SUMMARY.json",
+      "sha256": "c431e00ddb34ac4f62015a07a199161f07b5c8e51e03af217544c8d2d907fb54",
+      "size_bytes": 3709,
+      "kind": "sealed_metadata"
+    },
+    "rawx_registration": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_ATTEMPT02/REGISTERED_PLAN.json",
+      "sha256": "ac6cefc036b21caa5ed7cae382f6b2493e30557af6246f19b25801d5b2040b92",
+      "size_bytes": 16667,
+      "kind": "sealed_metadata"
+    },
+    "v3_lock": {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/AR_V3_RESEARCH_20261006/V3_BASELINE_LOCK.json",
+      "sha256": "d961acfd483c420e24e5b48f0b313cbac5932ef7a036a21ffe5a00dd742a09ff",
+      "size_bytes": 70366,
+      "kind": "sealed_metadata"
+    },
+    "arc_opportunities": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_SAVED_MODEL_ATTEMPT01/OPPORTUNITIES.csv",
+      "sha256": "96fe22f93b89e5ec2eb8ebaeacd17e04790c50ca7c395c92e0bc1e75835ab6a4",
+      "size_bytes": 243447,
+      "kind": "sealed_metadata"
+    },
+    "BY2_config": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_NAVIGATION_ATTEMPT01/CONFIGS/BY2__PVT_CONTROL.yaml",
+      "sha256": "f7d70b96dc15770824dfe9507960b658ba68b9f8e6931c7730f20cf41a81e6b2",
+      "size_bytes": 8296,
+      "kind": "original_config"
+    },
+    "BY2_details": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_SAVED_MODEL_ATTEMPT01/BY2_DETAILS.jsonl.gz",
+      "sha256": "76211cca065d3b84fa9cb963037b0105355479649811786aedc41d42d1736fa7",
+      "size_bytes": 548587,
+      "kind": "sealed_detailed_result"
+    },
+    "BY2_provider_manifest": {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/PROVIDER_MANIFEST.json",
+      "sha256": "cd29237a621ae7a8d4ef6fcaf44c113ca8b41a221bff9849c4e99740cc568b79",
+      "size_bytes": 8072,
+      "kind": "sealed_metadata"
+    },
+    "BY2H_config": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_NAVIGATION_ATTEMPT01/CONFIGS/BY2H__PVT_CONTROL.yaml",
+      "sha256": "df7079b666bf6c3918848491209183d01c9b8419e0d08baf530e9f37679d1fd7",
+      "size_bytes": 8354,
+      "kind": "original_config"
+    },
+    "BY2H_details": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_SAVED_MODEL_ATTEMPT01/BY2H_DETAILS.jsonl.gz",
+      "sha256": "eb2ae07364c7f0a2c825620e58c6cd030e9d36e9f254453a48fbfcfeb0f16921",
+      "size_bytes": 535088,
+      "kind": "sealed_detailed_result"
+    },
+    "BY2H_provider_manifest": {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/PROVIDER_MANIFEST.json",
+      "sha256": "522e2cba60c1341cefea80d5c0576dbffe6eff67fffae52cd23924124b5ab7e3",
+      "size_bytes": 8090,
+      "kind": "sealed_metadata"
+    },
+    "BY2O_config": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_NAVIGATION_ATTEMPT01/CONFIGS/BY2O__PVT_CONTROL.yaml",
+      "sha256": "e43ed53dc6e0e55e3ae442bb081401ef4492a364df65a2c4a47fdb582a3f49d4",
+      "size_bytes": 8361,
+      "kind": "original_config"
+    },
+    "BY2O_details": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_SAVED_MODEL_ATTEMPT01/BY2O_DETAILS.jsonl.gz",
+      "sha256": "d40416fe547616b2a040f4875c04b2c12cb671b0f031925bc5882269f1dc65fb",
+      "size_bytes": 837901,
+      "kind": "sealed_detailed_result"
+    },
+    "BY2O_provider_manifest": {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/PROVIDER_MANIFEST.json",
+      "sha256": "a1c608720fc4ae2ea9b3f8c3813896f1ed137c706f65c36ddf4a10351274ede3",
+      "size_bytes": 8140,
+      "kind": "sealed_metadata"
+    },
+    "prior_attempt_evidence_0": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01/REGISTERED_PLAN.json",
+      "sha256": "a990c37de3cc9062ffd1e90ad058a13b8209e6da9de514e4ef6dd6ddd953a4fb",
+      "size_bytes": 29854,
+      "kind": "sealed_metadata"
+    },
+    "prior_attempt_evidence_1": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01/PREPARE_RESERVATION.json",
+      "sha256": "92ca00ff9cb6a2b4a2e8ad924611fab913dfea35cd2d1343c86b171d2631c100",
+      "size_bytes": 669,
+      "kind": "sealed_metadata"
+    },
+    "prior_attempt_evidence_2": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01/PREPARE_FAILED.json",
+      "sha256": "bad845dba71a4d4110a1c78a14d327cd5d1f72e7465dfe8b117c2f8709d58e18",
+      "size_bytes": 1032,
+      "kind": "sealed_metadata"
+    },
+    "prior_attempt_evidence_3": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01_PREPARE_INVOCATION.json",
+      "sha256": "9da50a15fdce2fa5810a26b41b527207168e4d1cde80cbc5938a8291e3df23b3",
+      "size_bytes": 613,
+      "kind": "sealed_metadata"
+    },
+    "prior_attempt_evidence_4": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01_PREPARE_EXIT.json",
+      "sha256": "8e7aa6c0a300e96f68d6db932feb14556d54dc47b1b36b70292fc1cf1d188120",
+      "size_bytes": 125,
+      "kind": "sealed_metadata"
+    },
+    "prior_attempt_evidence_5": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01_PREPARE_stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "kind": "sealed_metadata"
+    },
+    "prior_attempt_evidence_6": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01_PREPARE_stderr.log",
+      "sha256": "551851329c0c8f78c4e1fa803cf96307b1695538fc4c7f2cdce629ed178b3c7a",
+      "size_bytes": 676,
+      "kind": "sealed_metadata"
+    },
+    "prior_attempt_evidence_7": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01_PREPARE_OPENAT.strace",
+      "sha256": "9eaadee50e7d3720928f124860ee8f8b64ef1950e7bd75c276f719d3d42f147f",
+      "size_bytes": 1077147,
+      "kind": "sealed_metadata"
+    }
+  },
+  "loader_only_metadata_pins": {
+    "BY2_old_checker_echo": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_NAVIGATION_ATTEMPT01/CHECKS/BY2__PVT_CONTROL/ECHO/RUN_MANIFEST.json",
+      "sha256": "feae8665a13f623d10ba01e66f8ad52b553485c77397f380f3b02a7711c112d0",
+      "size_bytes": 23190
+    },
+    "BY2H_old_checker_echo": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_NAVIGATION_ATTEMPT01/CHECKS/BY2H__PVT_CONTROL/ECHO/RUN_MANIFEST.json",
+      "sha256": "a8fa7fc0b9dd6053b32e7c3fd10dd0acf5f20649916893c3416d6dda6fdf4311",
+      "size_bytes": 23145
+    },
+    "BY2O_old_checker_echo": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_NAVIGATION_ATTEMPT01/CHECKS/BY2O__PVT_CONTROL/ECHO/RUN_MANIFEST.json",
+      "sha256": "62f66de7867c9e193ee9d0b7967c973ef152b76ec4ea6628c2df2738887ed2d7",
+      "size_bytes": 23154
+    }
+  },
+  "opportunity_columns": [
+    "sequence",
+    "block_index",
+    "first_epoch_index",
+    "last_epoch_index",
+    "start_s",
+    "end_s",
+    "interval_s",
+    "status",
+    "endpoint_models_available",
+    "common_endpoint_nodes",
+    "interval_continuous_nodes",
+    "contrast_relations",
+    "geometry_rank0",
+    "geometry_rank1",
+    "free_two_baseline_rank",
+    "attitude_rank",
+    "singleton_valid_at_block_end",
+    "singleton_valid_slots_in_block",
+    "legal_contrast_without_singleton_at_end",
+    "all_five_model_slots_built",
+    "actual_available_time_s",
+    "actual_latency_s",
+    "joint_covariance_m2",
+    "direction_point_ecef",
+    "cross_time_covariance_known",
+    "between_block_independence_known",
+    "covariance_calibrated",
+    "navigation_admitted",
+    "endpoint0_Q_trace_m2",
+    "endpoint1_Q_trace_m2",
+    "conditional_unknown_cross_bound_trace_m2",
+    "norm_z_m",
+    "norm_geometry_change",
+    "lost_node_reasons"
+  ],
+  "sequences": [
+    {
+      "sequence_id": "BY2",
+      "blocks": 274,
+      "legal_model_blocks": 240,
+      "window_s": [
+        66.0,
+        340.0
+      ],
+      "base_time_unix_s": 1772784000.0,
+      "time_mapping_source_id": "BY2:SEALED_RAWX_UTC_AND_CALIBRATED_IMU_BASE_V1",
+      "providers_declared_pins": {
+        "gnsspath": {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+          "sha256": "fc6dd49c0a35c41208fc7d94da1c78ad63fe6938bd8f599021750c3bf5e20760",
+          "size_bytes": 253682
+        },
+        "go2_attitude_prior_path": {
+          "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv",
+          "sha256": "e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e",
+          "size_bytes": 9320956
+        },
+        "go2_horizontal_velocity_prior_path": {
+          "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+          "sha256": "3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e",
+          "size_bytes": 18814268
+        },
+        "imupath": {
+          "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu",
+          "sha256": "74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647",
+          "size_bytes": 5091513
+        },
+        "raw_doppler_factor_path": {
+          "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv",
+          "sha256": "847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4",
+          "size_bytes": 530592
+        }
+      },
+      "carrier_declared_pin": {
+        "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_FRONTEND_ATTEMPT01/BY2/CARRIER.csv",
+        "sha256": "0856069e1068643bb2c89b9bce2a6a2d7c21f0cba7872354c5739f2541dd132a",
+        "size_bytes": 113295
+      }
+    },
+    {
+      "sequence_id": "BY2H",
+      "blocks": 270,
+      "legal_model_blocks": 243,
+      "window_s": [
+        413.0,
+        683.0
+      ],
+      "base_time_unix_s": 1772784000.0,
+      "time_mapping_source_id": "BY2H:SEALED_RAWX_UTC_AND_CALIBRATED_IMU_BASE_V1",
+      "providers_declared_pins": {
+        "gnsspath": {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2H__C00_clean_normal__4cd2369e62e4fba4f0b84b00a75c312c53a8e7eac606802837cbc88892278ff5/GNSS18.gnss",
+          "sha256": "4ff6ed07f1d189ab19934bc67c350e9f48f79527170c6fcafc85eba7cf1155bd",
+          "size_bytes": 249472
+        },
+        "go2_attitude_prior_path": {
+          "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GO2_ATTITUDE_PRIOR.csv",
+          "sha256": "7366cdb1c24fd647b65328fd2d3938331f288903677b0006a291ae646adbfd55",
+          "size_bytes": 9323295
+        },
+        "go2_horizontal_velocity_prior_path": {
+          "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+          "sha256": "379d0676cbea5fda88437b6dc0508fcfe3d37b2fc6d5ccb40f39e732a6be54bf",
+          "size_bytes": 18811477
+        },
+        "imupath": {
+          "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/CALIBRATED_IMU.imu",
+          "sha256": "d32e4891080e300e6edde4526146636f15ec54df945a0470c57fbbdc3aa5115c",
+          "size_bytes": 5098435
+        },
+        "raw_doppler_factor_path": {
+          "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/RAW_DOPPLER.csv",
+          "sha256": "d5c4a42790f2034423d1a3e060d37488ba01341b423933074c11471fcdbac21c",
+          "size_bytes": 405344
+        }
+      },
+      "carrier_declared_pin": {
+        "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_FRONTEND_ATTEMPT01/BY2H/CARRIER.csv",
+        "sha256": "2e4b938cf805f3e3390d41d96905b28700d94f1e5d48ed54725a6df537e51a95",
+        "size_bytes": 148835
+      }
+    },
+    {
+      "sequence_id": "BY2O",
+      "blocks": 377,
+      "legal_model_blocks": 377,
+      "window_s": [
+        3186.0,
+        3563.0
+      ],
+      "base_time_unix_s": 1772780400.0,
+      "time_mapping_source_id": "BY2O:SEALED_RAWX_UTC_AND_CALIBRATED_IMU_BASE_V1",
+      "providers_declared_pins": {
+        "gnsspath": {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2O__C00_clean_normal__c5212cf72d07afd6d3ae0407fee87f841f2e0d909dfb8c1416bd7f38b0248bb4/GNSS18.gnss",
+          "sha256": "2a0b0ebbcd66b59dd153b84b132c638e9ea31021653e58e3ac125ed21304fa13",
+          "size_bytes": 376806
+        },
+        "go2_attitude_prior_path": {
+          "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_ATTITUDE_PRIOR.csv",
+          "sha256": "60d0ea7aeb84ea5df757f8b34fc04d1e1e39b78925c592118094b690b8424537",
+          "size_bytes": 14205133
+        },
+        "go2_horizontal_velocity_prior_path": {
+          "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+          "sha256": "92bbe9165ed4ad6aa3f92c478f4a195ffccc7ec7b652506ba73533bd4190cdd2",
+          "size_bytes": 28692252
+        },
+        "imupath": {
+          "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/CALIBRATED_IMU.imu",
+          "sha256": "48943f3e704ceebbf517bfb073856c1c215b5216e3a5d8b6cd91e7ea7586e49b",
+          "size_bytes": 7820907
+        },
+        "raw_doppler_factor_path": {
+          "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/RAW_DOPPLER.csv",
+          "sha256": "dd9b178b37149eb3d97bd586bf078b1e11cf5e43f8771cbc38c9c21bcd6101f5",
+          "size_bytes": 807097
+        }
+      },
+      "carrier_declared_pin": {
+        "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_FRONTEND_ATTEMPT01/BY2O/CARRIER.csv",
+        "sha256": "3237d1783dca269ab43a7a50b65e0a7ebdd64456b56fb3d9e679167ca2426094",
+        "size_bytes": 137255
+      }
+    }
+  ],
+  "binary": {
+    "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_LOCAL_ATTEMPT01/BUILD/legsa_v23_port_core_demo",
+    "sha256": "3010a85d27d0571f27640f68814b522c7094e32455c9cc7b8bdf43d11331013e",
+    "size_bytes": 1227000
+  },
+  "library": {
+    "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_LOCAL_ATTEMPT01/BUILD/liblegsa_v23_port_core.a",
+    "sha256": "1637f34f986086847c275849f646cf1ae25fe59aca7beacc9610cd526d3bb2c8",
+    "size_bytes": 2379562
+  },
+  "budget": {
+    "prepare_invocations": 1,
+    "opportunity_decodes": 1,
+    "detailed_result_decodes": 3,
+    "detailed_result_rows": 921,
+    "fixed_blocks": 921,
+    "endpoint_rows": 1842,
+    "config_outputs": 3,
+    "event_csv_outputs": 3,
+    "loader_calls_in_prepare": 0,
+    "native_calls": 0,
+    "evaluator_calls": 0,
+    "phase_math_calls": 0,
+    "npz_reads": 0,
+    "provider_payload_reads": 0,
+    "reference_reads": 0,
+    "raw_reads": 0,
+    "source_and_metadata_hash_passes": 2,
+    "automatic_retries": 0
+  },
+  "limits": {
+    "max_input_bytes": 67108864,
+    "total_input_bytes": 3562635,
+    "max_detail_line_bytes": 4194304,
+    "max_total_detail_decoded_bytes": 134217728,
+    "wall_s": 120
+  },
+  "followup_loader_budget": {
+    "checker_compiles": 1,
+    "config_loader_calls": 3,
+    "native_calls": 0,
+    "evaluator_calls": 0,
+    "provider_payload_reads": 0,
+    "requires_separate_registered_runner": true,
+    "arc_csv_metadata_parser_calls": 3,
+    "arc_csv_metadata_rows": 1842,
+    "arc_csv_metadata_blocks": 921
+  },
+  "detailed_result_read_scope": "Boundedly read and decode 3 sealed detailed results containing phase z/G/Q matrices; extract identity/time/fingerprint/status only; no phase computation or use of matrix values.",
+  "known_fingerprint_scope": "860 legal blocks preserve their two original 64-lowercase-hex PhaseEpoch fingerprints unchanged; these hash semantic header plus arrays, not NPZ file bytes. Global 1720 uniqueness retained. NPZ content SHA remains unknown and is not read or reconstructed.",
+  "missing_fingerprint_scope": "61 ENDPOINT_MODEL_UNAVAILABLE blocks retain every schedule endpoint; both CSV fingerprints blank, per-end source model status preserved and NOT_SERIALIZED_FOR_ENDPOINT_UNAVAILABLE_BLOCK. A BUILT status in those blocks does not imply a known fingerprint.",
+  "endpoint_id_scope": "Derived sequence plus original epoch index, not original RAWX receiver-message identity.",
+  "provider_hash_scope": "Original provider/carrier pins inherited from sealed old PLAN. Their payloads are neither opened nor hashed in prepare or config-only loader. Later native authorization must separately rehash before and after execution.",
+  "real_hv_scope": "Keep original status-A1 rotated NED provider and original config bytes; local synthetic body-HV test is not a statement about real input frame.",
+  "time_scope": "Common UTC Unix minus registered base definition; preserve saved RAWX double times and pre-existing IMU 6-decimal tokens; no snapping, resampling, physical synchronization calibration, or actual arrival assertion.",
+  "stop_conditions": [
+    "Any seal/hash/schema/denominator/index/time mismatch",
+    "Any required identity field missing except explicitly registered unavailable-block fingerprint NA",
+    "Any overlapping/reused endpoint or original scientific config byte change",
+    "Any existing output stage; no retry or alternate output stage",
+    "Any read outside registered metadata/source files; no scientific payload reads"
+  ],
+  "limits_of_claim": "Schedule/config preparation and separately registered config-loader qualification only; 0 real native, 0 new joint priors, 0 calibrated phase bounds, 0 heading/navigation gains.",
+  "root_review": "Root and fusion independently read actual fingerprint producer/property; first incorrect source_id/fingerprint assumption and failed static review retained. Minimal semantic repair only, no changed times, phase values, model status, window, ordinary inputs, source noise or scheduling.",
+  "repair_of_registration": "dda5d4013cb508281287c893f248ecbfa07f126f",
+  "repair_reason": "Strict metadata schema used source_id composite format for PhaseEpoch.fingerprint. Core property returns SHA256(header plus working phase/geometry/covariance arrays). First attempt stopped at detail row35; no generated schedule, compile, loader, or native.",
+  "fingerprint_definition_source_pins": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/arc_phase_difference.py": "3898eb95f2621f483c80ecd0d67b9fd6dcf27135673a755b11f8650a7d66ef12",
+    "scripts/paper_rebuild/carrier_phase/arc_phase_saved_model_qualification.py": "6974da4b477e8e340278fae3d71512547307e995b59269b5594681037341fb9e"
+  },
+  "first_attempt_budget_consumed": {
+    "opportunity_decodes": 1,
+    "detailed_result_decodes": 1,
+    "detailed_result_rows": 35,
+    "fixed_blocks": 0,
+    "endpoint_rows": 0,
+    "native_calls": 0,
+    "evaluator_calls": 0,
+    "phase_math_calls": 0,
+    "npz_reads": 0,
+    "provider_payload_reads": 0,
+    "reference_reads": 0,
+    "raw_reads": 0,
+    "detailed_result_decoded_bytes": 54603
+  },
+  "preserved_attempt_policy": "New stage explicitly authorized only by this separate repair registration. Prior failed stage and 8 evidence files remain unchanged and join pre/post hash whitelist. This is a finite repair, not silent retry."
+}

@@ -22,8 +22,8 @@ import traceback
 
 ROOT = Path(__file__).resolve().parents[3]
 SCRATCH = Path("/home/kaiwen/research/LegSA-GINS-SCRATCH")
-STAGE = SCRATCH / "TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_ATTEMPT01"
-PLAN_REL = "docs/paper_rebuild/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_PREPARE_PLAN.json"
+STAGE = SCRATCH / "TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01"
+PLAN_REL = "docs/paper_rebuild/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_PREPARE_REPAIR_PLAN.json"
 SOURCE_REL = "scripts/paper_rebuild/carrier_phase/arc_native_prepare.py"
 SIDS = ("BY2", "BY2H", "BY2O")
 BLOCKS = (274, 270, 377)
@@ -43,7 +43,7 @@ ROW_ID = ("sequence", "block_index", "first_epoch_index", "last_epoch_index",
 NA_FIELDS = ("actual_available_time_s", "actual_latency_s", "joint_covariance_m2",
              "direction_point_ecef", "attitude_rank")
 SAFE = re.compile(r"^[A-Za-z0-9_.:+-]+$")
-FINGERPRINT = re.compile(r"^([A-Za-z0-9_.+-]+):([A-Za-z0-9_.+-]+\.npz):([0-9a-f]{64})$")
+FINGERPRINT = re.compile(r"^[0-9a-f]{64}$")
 KEY_LINE = re.compile(rb"^([A-Za-z0-9_]+)[ \t]*:[ \t]*(.*?)(?:\r?\n)?$")
 BUDGET = dict(prepare_invocations=1, opportunity_decodes=1, detailed_result_decodes=3,
               detailed_result_rows=921, fixed_blocks=921, endpoint_rows=1842,
@@ -306,13 +306,15 @@ def main():
                     if available:
                         fps = [detail["epoch0_fingerprint"],detail["epoch1_fingerprint"]]
                         matches = [FINGERPRINT.fullmatch(fp) for fp in fps]
-                        require(all(m and m[1] == sid for m in matches) and fps[0] != fps[1],
+                        require(all(matches) and fps[0] != fps[1],
                                 "missing/unsafe endpoint model fingerprint")
                         require(not any(fp in known_fingerprints for fp in fps), "reused endpoint model fingerprint")
                         known_fingerprints.update(fps)
                         model_status = [{"status":"BUILT"},{"status":"BUILT"}]
-                        fp_status = "PRESERVED_SEALED_ENDPOINT_FINGERPRINT"
-                        model_hashes = [m[3] for m in matches]
+                        fp_status = "PRESERVED_SEALED_PHASE_EPOCH_FINGERPRINT_SHA256"
+                        # PhaseEpoch.fingerprint hashes its header plus working
+                        # phase/geometry/covariance arrays, not an NPZ file.
+                        phase_epoch_hashes = list(fps)
                     else:
                         require("epoch0_fingerprint" not in detail and "epoch1_fingerprint" not in detail,
                                 "unexpected unavailable-block fingerprint schema")
@@ -320,12 +322,12 @@ def main():
                         require(isinstance(model_status,list) and len(model_status)==2 and
                                 all(isinstance(s,dict) and isinstance(s.get("status"),str) for s in model_status) and
                                 any(s["status"] != "BUILT" for s in model_status), "missing endpoint status identity")
-                        fps, model_hashes = ["",""], [None,None]
+                        fps, phase_epoch_hashes = ["",""], [None,None]
                         fp_status = "NOT_SERIALIZED_FOR_ENDPOINT_UNAVAILABLE_BLOCK"
                     block_id = sid+":BLOCK:"+str(block_index)
                     endpoints = []
                     for role, t, epoch, fp, ms, mh in zip(
-                            ("START","END"),(start,end),(5*block_index,5*block_index+4),fps,model_status,model_hashes):
+                            ("START","END"),(start,end),(5*block_index,5*block_index+4),fps,model_status,phase_epoch_hashes):
                         eid = sid+":EPOCH:"+str(epoch)
                         require(SAFE.fullmatch(eid) and SAFE.fullmatch(block_id), "unsafe derived ID")
                         token = format(t,".17g")
@@ -334,7 +336,9 @@ def main():
                                      "SOURCE_TIME_REPLAY_ASSUMPTION",str(epoch),fp)))
                         endpoint_rows.append(event)
                         endpoints.append(dict(event=event,model_status=ms,fingerprint_status=fp_status,
-                             model_content_sha256=mh,actual_available_time_s=None,
+                             phase_epoch_fingerprint_sha256=mh,model_content_sha256=None,
+                             model_content_sha256_status="UNKNOWN_NOT_READ_OR_RECONSTRUCTED",
+                             actual_available_time_s=None,
                              endpoint_id_provenance="DERIVED_SEQUENCE_AND_ORIGINAL_EPOCH_INDEX_NOT_RAWX_KEY"))
                     blocks.append(dict(sequence_id=sid,block_index=block_index,status=status,
                                        first_epoch_index=5*block_index,last_epoch_index=5*block_index+4,
@@ -410,7 +414,7 @@ def main():
              unrecorded_fingerprint_blocks=61,schedules=global_manifests,
              counts=dict(counts),actual_available_time_s=None))
         prepared = dict(schema="arc_native_telemetry.prepared/v1",stage=str(STAGE),
-             stage_alias="ARC_NATIVE_TELEMETRY_ATTEMPT01",registration_commit=args.registration_commit,
+             stage_alias="ARC_NATIVE_TELEMETRY_REPAIR01",registration_commit=args.registration_commit,
              registered_plan_sha256=sha(registered_bytes),source_pins=plan["source_pins"],
              metadata_inputs=plan["metadata_inputs"],aliases=old["aliases"],
              old_plan=plan["metadata_inputs"]["old_plan"],old_native_seal=plan["metadata_inputs"]["old_native_seal"],

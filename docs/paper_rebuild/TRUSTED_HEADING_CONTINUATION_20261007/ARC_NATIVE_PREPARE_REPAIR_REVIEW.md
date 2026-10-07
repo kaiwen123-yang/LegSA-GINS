@@ -1,0 +1,11 @@
+# 时间表准备首次失败与字段语义修复
+
+原登记dda5d40首次prepare退出1，2.71838s。17项输入各读取一次做hash，OPP一次解码；BY2详细结果解码35行，到首个模型合法块时严格格式检查失败。没有生成CSV/config/PREPARED，没有编译或loader/native/evaluator。原stage的REGISTERED_PLAN、RESERVATION、FAILED以及外层调用/退出/stdout/stderr/访问日志全部保留。
+
+根因是把source_id的“序列:NPZ名:文件sha”文本格式误当成PhaseEpoch.fingerprint。arc_phase_difference.py155–165实际返回64hex的SHA256，对含source_id等的header及phase/geometry/Q工作数组摘要；qualification385存的就是这个属性。此前root和独立静态审查都漏掉了这个语义匹配，不能将它描述为输入损坏或生产算法失败。
+
+最小修复保留原64hex字符串，删除从hash拆序列的错误断言；序列/块/epoch/精确时刻仍由已有字段严格绑定。另将NPZ文件hash留为未知，PhaseEpoch fingerprint单列。1720个已知fingerprint全局唯一、61块缺失NA、921块1842端点及全部窗口/时刻/科学配置不变，不重算指纹、不打开NPZ。
+
+fusion独立亲读fingerprint属性及保存器，确认此修复正确；loader源仅更改固定新stage和修复计划路径。新stage明确为ARC_NATIVE_TELEMETRY_REPAIR01，由本次单独登记的一次repair授权，不能复用覆盖旧失败现场。prepare再次固定1次OPP+3详细报告/921行身份抽取；前后hash白名单加入8份首次失败证据。旧详细文件含相位数组字节，读取范围如实保留，phase数学调用仍0。
+
+仅prepare成功才使用原未消耗的一次新checker编译+三个loader/生产CSVparser；导航/评价仍0。本次不是未登记自动重试。新库和所有生产源码不变，未改噪声、模型值或选择规则。

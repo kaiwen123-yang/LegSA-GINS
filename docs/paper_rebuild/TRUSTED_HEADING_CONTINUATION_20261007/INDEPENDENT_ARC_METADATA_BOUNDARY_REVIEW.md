@@ -1,6 +1,6 @@
 # Independent ARC metadata/loader boundary review
 
-Status: REVIEW_CHECKLIST_ONLY_WAITING_FOR_DRAFTS. This note records the independent review gates; it does not register or authorize metadata traversal, checker compilation, loader execution or six native calls. The reviewer has not opened the real OPPORTUNITIES/gz payloads for this preparation task, run numerical code or changed production code.
+Current status: STATIC_REVIEW_READY_FOR_BOUNDED_PREPARE_AND_LOADER_REGISTRATION. The final review below supersedes the earlier waiting/config-only scope. This note does not itself register or authorize execution, and does not authorize six native calls. The reviewer has not opened the real OPPORTUNITIES/gz payloads for this preparation task, run numerical code or changed production code.
 
 ## Necessary gates
 
@@ -23,3 +23,25 @@ The root clarified that the registered preparation may boundedly decode all3 old
 Initial arc_native_real.py review covered all294 lines without import or execution. Its CLI supports loader only, with fixed compile1/loader3/native0 budget and an exclusive LOADER_CHECK substage, pinned headers/library and successful protected-tree openat auditing using -yy resolved fd paths. The author confirmed the checker intentionally performs loadYamlLike plus manifest serialization only. It does not readArcSourceEvents; therefore this is config-loader qualification, and cannot certify the real event CSV with the production parser. The checklist's item6 must be read with this narrower deliberate scope. Actual CSV production parsing remains behind the separately registered native/metadata-parser stage. Compiler pinning uses the resolved canonical compiler executable, since unresolved symlink paths are rejected.
 
 Preparation and DRAFT registration files were not yet ready at this initial code review. Cross-file schema, source-time mapping evidence, original metadata echo bindings and scientific-line preservation remain to be checked before a final conclusion.
+
+
+## Final static review of the registered-ready sources
+
+Conclusion: no remaining blocking finding in the reviewed prepare/loader scope. The parent may register prepare1, checker compile1 and three loader processes, each including the production ARC metadata CSV parser. This is a static implementation review, not evidence that these commands have already passed. The reviewer did not import either script, execute a checker or numerical module, or open/traverse the real OPPORTUNITIES.csv and detail gzip payloads.
+
+Reviewed final identities:
+
+- arc_native_prepare.py: 28c1b3beb14b6396996327363b97af601a3bb66e9765774aac773f0d09be5623.
+- arc_native_real.py: 8f1d8c2642c4566bb67f06918064405461318e02051244ba4fdaa339a0c4da1c.
+- ARC_NATIVE_PREPARE_PLAN.json: a990c37de3cc9062ffd1e90ad058a13b8209e6da9de514e4ef6dd6ddd953a4fb; REGISTERED_READY.
+- ARC_NATIVE_LOADER_PLAN.json: a8a199b9e90e7291efb7892ae47b4c4988447ca6425f2d44b279f69c523d57dc; REGISTERED_READY_SINGLE_EXECUTION.
+
+The final prepare delta from the reviewed draft only finalizes PLAN_REL/file naming and status/source pin registration. The loader library/binary identity comparison now expands both absolute and alias paths and compares SHA256, comparing size only when both declarations contain it. This fixes the deterministic mismatch between the two scripts' equivalent pin dictionaries. Metadata overrides now cover exactly six metadata keys; they cannot overwrite the seven separately checked ARC fields. The canonical compiler pin resolves to the g++ executable rather than an unaccepted symlink spelling.
+
+The earlier config-only paragraph is historical and is superseded: the fixed checker now executes loadYamlLike followed by readArcSourceEvents, then writes a static manifest. It must return source_rows/source_blocks of 548/274, 540/270 and 754/377. Its registered three metadata CSV parses occur inside the same three loader processes, without GIEngine construction, propagation, scientific provider consumption or event dispatch. Echo execution counts therefore remain zero; parsing does not qualify native execution or state conditioning.
+
+Preparation stat/hash bounds apply before both metadata hash passes, with a final total-wall check. One CSV traversal and three bounded gzip/JSON decodes preserve all921 blocks/1842 endpoints. The decode reads existing phase z/G/Q bytes as already disclosed, but uses only identity/time/fingerprint/status and performs zero phase math. The1720 known composite fingerprints must be globally unique. The61 unavailable blocks retain missing serialized fingerprints as NA, including endpoints whose other status may be BUILT; no invented fingerprint or payload lookup is allowed. Singleton flags and rank/residual metrics do not select rows.
+
+The source-time mapping is backed by the saved source formulas: RAWX local time uses GPS week/TOW minus leap seconds and the registered base, while the calibrated IMU path uses its source timestamp minus the same base. Both source and replay event fields preserve binary64 values through round-trip decimal/hex checks. This establishes a registered source-time replay convention, not physical clock synchronization, packet arrival, latency or trusted availability. New schedule manifests state that distinction. Original scientific config lines are retained byte-for-byte except the finite metadata/ARC whitelist; inherited provider paths remain declarations and are not opened in preparation or loader. Three small original checker echoes were read during static review solely to confirm that all requested scientific echo fields exist.
+
+Fresh fixed stages, registration/source pins, original seal links, no automatic retry, failure preservation, loader process-group timeout and protected-path openat checks implement the stated execution boundary. The parent still needs an external trace/receipt audit for preparation and loader outcomes; static allowlists are not a claim about actual future accesses. Loader completion must precede separate registration of native6/eval0/information-readout0. No trusted heading coverage, navigation benefit, real physical carrier outage, calibrated covariance or available state/source cross is established by this gate.
