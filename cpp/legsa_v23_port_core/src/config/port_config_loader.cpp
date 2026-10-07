@@ -549,6 +549,7 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   auto& support_config=options.support_pose_config;
   support_config.mode=stringOrDefault(kv,"support_pose_mode","off");
   support_config.events_path=stringOrDefault(kv,"support_pose_events_path","");
+  support_config.observed_axes=stringOrDefault(kv,"support_pose_observed_axes","body0_xy");
   support_config.point_sigma_m=scalarOrDefault(kv,"support_pose_point_sigma_m",.01);
   if(support_config.mode!="off") {
     auto frame=kv.find("support_pose_body_frd_to_engine_body");

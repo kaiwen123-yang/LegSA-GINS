@@ -5,9 +5,13 @@
 namespace legsa_v23_port_core {
 struct SupportPoseConfig {
   std::string mode="off", events_path;
+  std::string observed_axes="body0_xy";
   double point_sigma_m=.01;
   Matrix3 foot_frd_to_engine_body{};
   Vec3 imu_lever_body_frd{};
+  bool horizontalOnly() const {return observed_axes=="body0_xy";}
+  std::size_t measurementDimension() const {return horizontalOnly()?4:6;}
+  double nisThreshold() const {return horizontalOnly()?18.4668269529:22.457744484825323;}
 };
 struct SupportPoseEvent {
   double time=0, available_time=0, source_time=0, point_sigma_m=.01;

@@ -121,19 +121,19 @@ void GIEngine::processSupportPoseEvent(const SupportPoseEvent& e) {
   }
   Matrix sigma(12,12);for(int i=0;i<12;++i) sigma(i,i)=c.point_sigma_m*c.point_sigma_m;
   const auto model=pose_clone::footModel(first.positions_body_frd,current,support_pose_position_ecef_,
-      support_pose_cbe_,pvacur_.cbn,pvacur_.pos_blh_rad_m,sigma,c.imu_lever_body_frd,true);
+      support_pose_cbe_,pvacur_.cbn,pvacur_.pos_blh_rad_m,sigma,c.imu_lever_body_frd,c.horizontalOnly());
   const auto prior=supportPoseJointState();
   const auto S=add(multiply(multiply(model.H,prior.covariance),transpose(model.H)),model.R);
   const auto whitened=multiply(inverse(S),model.residual);
   double statistic=0;for(std::size_t i=0;i<whitened.size();++i) statistic+=model.residual[i]*whitened[i];
   if(c.mode!="REPLACE_SUPPORT") {
     ++support_pose_counts_.null_ends;recordSupportPose(e,"NULL_POSE_NO_FOOT_UPDATE",false,false,statistic);
-  } else if(!std::isfinite(statistic) || statistic>18.4668269529) {
-    ++support_pose_counts_.rejected;recordSupportPose(e,"WORKING_FOOT_XY_INNOVATION_REJECT",true,false,statistic);
+  } else if(!std::isfinite(statistic) || statistic>c.nisThreshold()) {
+    ++support_pose_counts_.rejected;recordSupportPose(e,c.horizontalOnly()?"WORKING_FOOT_XY_INNOVATION_REJECT":"WORKING_FOOT_XYZ_INNOVATION_REJECT",true,false,statistic);
   } else {
     setSupportPoseJointState(pose_clone::footUpdate(prior,model));stateFeedback();
     ++support_pose_counts_.accepted;support_pose_applied_ids_.insert(e.clone_id);
-    recordSupportPose(e,"SUPPORT_XY_JOINT_UPDATE",true,true,statistic);
+    recordSupportPose(e,c.horizontalOnly()?"SUPPORT_XY_JOINT_UPDATE":"SUPPORT_XYZ_JOINT_UPDATE",true,true,statistic);
   }
   retireSupportPose();
 }
@@ -147,8 +147,10 @@ void GIEngine::finalizeSupportPoseStream() {
 void GIEngine::writeSupportPoseDiagnostics(const std::string& output) const {
   if(!supportPoseEnabled()) return;
   std::ofstream out(std::filesystem::path(output)/"SUPPORT_POSE_EVENTS.csv");
-  out<<"event_time_s,state_time_s,event_type,clone_id,attempted,accepted,reason,statistic\n"<<std::setprecision(17);
+  const auto& c=options_.support_pose_config;
+  out<<"event_time_s,state_time_s,event_type,clone_id,attempted,accepted,reason,statistic,observed_axes,measurement_dimension,nis_threshold\n"<<std::setprecision(17);
   for(const auto& e:support_pose_diagnostics_)
-    out<<e.time<<','<<e.state_time<<','<<e.type<<','<<e.clone_id<<','<<e.attempted<<','<<e.accepted<<','<<e.reason<<','<<e.statistic<<'\n';
+    out<<e.time<<','<<e.state_time<<','<<e.type<<','<<e.clone_id<<','<<e.attempted<<','<<e.accepted<<','<<e.reason<<','<<e.statistic
+       <<','<<c.observed_axes<<','<<c.measurementDimension()<<','<<c.nisThreshold()<<'\n';
 }
 }

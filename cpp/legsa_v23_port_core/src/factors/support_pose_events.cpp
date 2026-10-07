@@ -19,6 +19,7 @@ void validateSupportPoseConfig(const SupportPoseConfig& c,const std::string& run
   if(c.mode=="off") return;
   if(runtime!="research_experiment" || c.events_path.empty() ||
     (c.mode!="SDK_NULL" && c.mode!="REPLACE_NULL" && c.mode!="REPLACE_SUPPORT") ||
+    (c.observed_axes!="body0_xy" && c.observed_axes!="body0_xyz") ||
     !(c.point_sigma_m>0) || !std::isfinite(c.point_sigma_m))
     throw std::runtime_error("SUPPORT_POSE_RESEARCH_CONFIG");
   attitude_clone::requireRotation(c.foot_frd_to_engine_body,"SUPPORT_POSE_FRAME");
