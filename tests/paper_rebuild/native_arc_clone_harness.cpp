@@ -110,6 +110,7 @@ PortOptions options(bool enabled=true,bool aids=false){
   a.source_time_scale_id="GPS_WEEK_TOW__SAVED_LOCAL_BASE";a.time_mapping_source_id="SYNTHETIC_EXACT_LOCAL_MAPPING";
   a.availability_policy="source_time_replay_assumption";}
  if(aids){auto& v=o.go2_velocity_prior_diagnostic_config;
+  v.enable_go2_velocity_prior_diagnostic=true;
   v.enable_go2_horizontal_velocity_prior=true;v.go2_horizontal_velocity_frame="body_frd";
   v.go2_body_velocity_update_period_s=.2;v.go2_horizontal_velocity_prior_source_aware_enabled=false;
   o.go2_attitude_prior_config.enable_go2_attitude_weak_prior=true;

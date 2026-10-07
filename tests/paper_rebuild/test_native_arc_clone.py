@@ -277,6 +277,10 @@ def test_06_null_and_telemetry_scientific_outputs_byte_identical(tmp_path):
     paths = [tmp_path / "NULL", tmp_path / "TELEMETRY"]
     outputs = [call("identity", path=p, telemetry=k) for k, p in enumerate(paths)]
     assert outputs[0] == outputs[1]
+    for output, path in zip(outputs, paths):
+        assert output["GNSS"] == output["RP"] == output["HV"] == 3
+        body_rows = list(csv.DictReader((path / "BODY_VELOCITY_EVENTS.csv").open()))
+        assert len(body_rows) == 3 and all(row["accepted"] == "1" for row in body_rows)
     # A dedicated production PVT-priority fixture emits genuine heading rows;
     # configured-policy mode would create no heading event file.
     heading_rows = list(csv.DictReader((paths[0] / "HEADING_SOURCE_EVENTS.csv").open()))
