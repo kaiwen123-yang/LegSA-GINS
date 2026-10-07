@@ -40,6 +40,18 @@ Baseline3dModel buildExternalCarrierBaseline3dModel(
     const Baseline3dMeasurement& observation, const Vec3& body_vector_m);
 
 struct Baseline3dDiagnostics {
+  // Diagnostic snapshot only: current conditional error chart before this carrier.
+  std::size_t event_sequence = 0;
+  bool prior_available = false;
+  double prior_state_time = 0.0;
+  Matrix3 prior_nominal_cbn{};
+  Vec3 prior_nominal_blh_rad_m{};
+  Vec3 prior_body_baseline_m{};
+  Vec3 prior_dx_phi_rad{};
+  Matrix3 prior_P_phi_phi_rad2{};
+  Vec3 prior_dx_p_m{};
+  Matrix3 prior_P_p_p_m2{};
+  Matrix3 prior_P_p_phi_m_rad{};
   double time = 0.0;
   std::string source = "dual_pvt";
   double measurement_time = 0.0;

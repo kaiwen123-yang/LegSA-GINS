@@ -1409,6 +1409,7 @@ void GIEngine::applyBasicDualYawUpdate(GnssData& gnss) {
 void GIEngine::applyBaseline3dUpdate(const GnssData& gnss, bool basic,
                                     const std::string& qa_action, double qa_R_scale) {
   Baseline3dDiagnostics row;
+  row.event_sequence = baseline3d_diagnostics_.size() + 1;
   row.time = gnss.time;
   row.source = options_.baseline3d_source;
   row.measurement_time = gnss.baseline3d.measurement_time;
@@ -1448,6 +1449,25 @@ void GIEngine::applyBaseline3dUpdate(const GnssData& gnss, bool basic,
       : buildBaseline3dModel(pvacur_.cbn, gnss.baseline3d,
                             options_.baseline3d_length_m, options_.baseline3d_k_b);
   row.model_available = true;
+  if (external) {
+    // PRE_CURRENT_CARRIER_UPDATE: no feedback/reset or extra conditioning here.
+    // C_true = Exp(phi) C_nom; p_true ~= p_nom - DRi(p_nom) dp, dp in NED metres.
+    // dx/Cov are the conditional mean/covariance in this existing error chart.
+    row.prior_available = true;
+    row.prior_state_time = timestamp_;
+    row.prior_nominal_cbn = pvacur_.cbn;
+    row.prior_nominal_blh_rad_m = pvacur_.pos_blh_rad_m;
+    row.prior_body_baseline_m = options_.baseline3d_body_vector_m;
+    for (std::size_t i = 0; i < 3; ++i) {
+      row.prior_dx_phi_rad[i] = dx_[PHI_ID + i];
+      row.prior_dx_p_m[i] = dx_[P_ID + i];
+      for (std::size_t j = 0; j < 3; ++j) {
+        row.prior_P_phi_phi_rad2[i][j] = Cov_(PHI_ID + i, PHI_ID + j);
+        row.prior_P_p_p_m2[i][j] = Cov_(P_ID + i, P_ID + j);
+        row.prior_P_p_phi_m_rad[i][j] = Cov_(P_ID + i, PHI_ID + j);
+      }
+    }
+  }
   row.observed_m = external ? subtract(model.predicted_m, model.residual_m) : gnss.baseline3d.ned_m;
   for (std::size_t i = 0; i < 3; ++i) for (std::size_t j = 0; j < 3; ++j)
     row.covariance_ned_m2[i][j] = model.R(i, j);
@@ -1549,7 +1569,23 @@ void GIEngine::writeBaseline3dDiagnostics(const std::string& output_dir) const {
          "innovation_n_m,innovation_e_m,innovation_d_m,pAcc1_m,pAcc2_m,base_variance_m2,"
          "along_axis_residual_m,length_mismatch_m,nis_actual_innovation,dof,qa_action,qa_R_scale,sa_R_scale";
   const bool external = options_.baseline3d_source == "external_carrier";
-  if (external) out << ",source,measurement_time,decision_available_time,R_nn,R_ne,R_nd,R_en,R_ee,R_ed,R_dn,R_de,R_dd";
+  if (external) {
+    out << ",source,measurement_time,decision_available_time,R_nn,R_ne,R_nd,R_en,R_ee,R_ed,R_dn,R_de,R_dd";
+    out << ",prior_available,prior_phase,baseline_event_sequence,prior_event_identity,event_time_bits_hex,"
+           "prior_state_time,prior_state_time_bits_hex,prior_error_chart";
+    for (std::size_t i = 0; i < 3; ++i)
+      for (std::size_t j = 0; j < 3; ++j) out << ",prior_nominal_cbn_" << i << j;
+    out << ",prior_nominal_lat_rad,prior_nominal_lon_rad,prior_nominal_height_m,"
+           "prior_body_baseline_x_m,prior_body_baseline_y_m,prior_body_baseline_z_m,"
+           "prior_dx_phi_n_rad,prior_dx_phi_e_rad,prior_dx_phi_d_rad";
+    for (const char* axes : {"nn", "ne", "nd", "en", "ee", "ed", "dn", "de", "dd"})
+      out << ",prior_P_phi_phi_" << axes << "_rad2";
+    out << ",prior_dx_p_n_m,prior_dx_p_e_m,prior_dx_p_d_m";
+    for (const char* axes : {"nn", "ne", "nd", "en", "ee", "ed", "dn", "de", "dd"})
+      out << ",prior_P_p_p_" << axes << "_m2";
+    for (const char* axes : {"nn", "ne", "nd", "en", "ee", "ed", "dn", "de", "dd"})
+      out << ",prior_P_p_phi_" << axes << "_m_rad";
+  }
   out << '\n';
   for (const auto& row : baseline3d_diagnostics_) {
     out << row.time << ",baseline3d," << row.present << ',' << row.valid << ','
@@ -1576,6 +1612,26 @@ void GIEngine::writeBaseline3dDiagnostics(const std::string& output_dir) const {
       cell(row.decision_available_time, row.present);
       for (const auto& values : row.covariance_ned_m2)
         for (double value : values) cell(value, row.model_available);
+      const std::string event_bits = arcSourceTimeBits(row.time);
+      out << ',' << row.prior_available << ',';
+      if (row.prior_available) out << "PRE_CURRENT_CARRIER_UPDATE";
+      out << ',' << row.event_sequence << ',' << row.source << ":EVENT_TIME_BITS:" << event_bits
+          << ',' << event_bits;
+      cell(row.prior_state_time, row.prior_available);
+      out << ',';
+      if (row.prior_available) out << arcSourceTimeBits(row.prior_state_time);
+      out << ',';
+      if (row.prior_available) out << "GI_LEFT_NED_PHI_POSITION_MINUS";
+      for (const auto& values : row.prior_nominal_cbn)
+        for (double value : values) cell(value, row.prior_available);
+      for (const auto& vector : {row.prior_nominal_blh_rad_m, row.prior_body_baseline_m, row.prior_dx_phi_rad})
+        for (double value : vector) cell(value, row.prior_available);
+      for (const auto& values : row.prior_P_phi_phi_rad2)
+        for (double value : values) cell(value, row.prior_available);
+      for (double value : row.prior_dx_p_m) cell(value, row.prior_available);
+      for (const auto& matrix : {row.prior_P_p_p_m2, row.prior_P_p_phi_m_rad})
+        for (const auto& values : matrix)
+          for (double value : values) cell(value, row.prior_available);
     }
     out << '\n';
   }
