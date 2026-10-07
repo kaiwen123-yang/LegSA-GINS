@@ -1,0 +1,39 @@
+{
+  "data_mode": "synthetic_only",
+  "head": "a40c59153a9e6e1cfd897f0782a94fa53cd14471",
+  "command": [
+    "python3",
+    "-m",
+    "pytest",
+    "tests/paper_rebuild/test_arc_phase_difference.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--junitxml=<CONTINUATION>/ARC_PHASE_LOCAL_ATTEMPT_01.xml",
+    "-o",
+    "junit_family=legacy"
+  ],
+  "exit_code": 0,
+  "elapsed_s": 0.5371785350000096,
+  "source_test_sha256_before": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/arc_phase_difference.py": "e3f14d2922a3ed720dbbc5ad68b79a749359bd30d98d05356915d05f2a6cf3c8",
+    "tests/paper_rebuild/test_arc_phase_difference.py": "ed10e5623274934cd24c6112641851d74efd236e903057a37868c00718e92169"
+  },
+  "source_test_sha256_after": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/arc_phase_difference.py": "e3f14d2922a3ed720dbbc5ad68b79a749359bd30d98d05356915d05f2a6cf3c8",
+    "tests/paper_rebuild/test_arc_phase_difference.py": "ed10e5623274934cd24c6112641851d74efd236e903057a37868c00718e92169"
+  },
+  "runtime": "Python 3.10.12",
+  "declared_calls": {
+    "pytest_process": 1,
+    "raw_UBX": 0,
+    "reference": 0,
+    "saved_real_model": 0,
+    "native": 0,
+    "evaluator": 0,
+    "CILS": 0
+  },
+  "io_scope": "synthetic test code and imports only; no separate syscall audit",
+  "wall_finished_utc": "2026-10-07T01:50:19.983330+00:00",
+  "metadata_note": "Timestamp label corrected from wall_started_utc: it was sampled after execution. No rerun; original log/XML unchanged."
+}

@@ -1,0 +1,39 @@
+{
+  "data_mode": "synthetic_only",
+  "reason": "authorized geometry-only extension; original26 regression plus new5",
+  "head": "2492567229a0f80390f4ca09c26fc843bf084854",
+  "command": [
+    "python3",
+    "-m",
+    "pytest",
+    "tests/paper_rebuild/test_arc_phase_difference.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--junitxml=<CONTINUATION>/ARC_PHASE_LOCAL_ATTEMPT_02.xml",
+    "-o",
+    "junit_family=legacy"
+  ],
+  "exit_code": 0,
+  "elapsed_s": 0.712542290999977,
+  "source_test_sha256_before": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/arc_phase_difference.py": "3898eb95f2621f483c80ecd0d67b9fd6dcf27135673a755b11f8650a7d66ef12",
+    "tests/paper_rebuild/test_arc_phase_difference.py": "6e0b4ff44c1aa53caa252494248d08dad7e03470314c94e1acaba3e6c819d30c"
+  },
+  "source_test_sha256_after": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/arc_phase_difference.py": "3898eb95f2621f483c80ecd0d67b9fd6dcf27135673a755b11f8650a7d66ef12",
+    "tests/paper_rebuild/test_arc_phase_difference.py": "6e0b4ff44c1aa53caa252494248d08dad7e03470314c94e1acaba3e6c819d30c"
+  },
+  "wall_started_utc": "2026-10-07T01:57:32.875810+00:00",
+  "wall_finished_utc": "2026-10-07T01:57:33.594835+00:00",
+  "declared_calls": {
+    "pytest_process": 1,
+    "raw_UBX": 0,
+    "reference": 0,
+    "saved_real_model_arrays": 0,
+    "native": 0,
+    "evaluator": 0,
+    "CILS": 0
+  },
+  "io_scope": "synthetic test code/imports only; no separate syscall audit"
+}

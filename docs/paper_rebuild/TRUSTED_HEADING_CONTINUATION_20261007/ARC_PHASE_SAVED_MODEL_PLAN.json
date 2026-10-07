@@ -1,0 +1,121 @@
+{
+  "schema": "arc_phase_saved_model_qualification/v1",
+  "status": "FROZEN_AWAITING_REGISTERED_SINGLE_EXECUTION",
+  "created_utc": "2026-10-07T02:06:38.378424+00:00",
+  "pre_registration_head": "714934f557607f79588c4e2dfd0b32db4ba373e2",
+  "family": "GPS_GAL_BDS_DUAL",
+  "block_length": 5,
+  "endpoint_indices_in_block": [
+    0,
+    4
+  ],
+  "stage_aliases": {
+    "prepared": "FULL_WINDOW_PREPARE_ATTEMPT02",
+    "singleton": "FULL_WINDOW_FRONTEND_ATTEMPT01",
+    "out": "ARC_PHASE_SAVED_MODEL_ATTEMPT01"
+  },
+  "scratch_layout": "checkout parent parent / LegSA-GINS-SCRATCH / (out: TRUSTED_HEADING_CONTINUATION_20261007; inputs: TRUSTED_HEADING_20261006) / stage_alias",
+  "budgets": {
+    "fixed_blocks": 921,
+    "block_length": 5,
+    "endpoint_npz_reads": 1842,
+    "saved_plan_reads": 3,
+    "saved_seal_reads": 3,
+    "saved_arc_metadata_reads": 3,
+    "singleton_valid_table_reads": 3,
+    "geometry_contrast_calls": 921,
+    "conditional_bound_calls": 921,
+    "saved_metadata_bytes": 500000000,
+    "endpoint_npz_bytes": 100000000,
+    "wall_s": 600
+  },
+  "source_pins": {
+    "scripts/paper_rebuild/carrier_phase/arc_phase_saved_model_qualification.py": "6974da4b477e8e340278fae3d71512547307e995b59269b5594681037341fb9e",
+    "src/legsa_gins/__init__.py": "996a06df703fd19f79cb4b8bee3ba2cbf917e35d9f25d06c21a29c7a0831715a",
+    "src/legsa_gins/paper_rebuild/__init__.py": "268d06de2fa275e95ea3319111f359187f492c66e812b1be1ccd07812f6014e9",
+    "src/legsa_gins/paper_rebuild/carrier_phase/admission.py": "6a84ca69fa3d815967f147677dd75f0f22da1c0acb344b40eeca9eb3e4e532c2",
+    "src/legsa_gins/paper_rebuild/carrier_phase/arc_phase_difference.py": "3898eb95f2621f483c80ecd0d67b9fd6dcf27135673a755b11f8650a7d66ef12",
+    "src/legsa_gins/paper_rebuild/carrier_phase/arc_relations.py": "3d1a433f012b6def3798b6945ade03713890508d0f32ace77629c74281eaff4b",
+    "src/legsa_gins/paper_rebuild/carrier_phase/multignss.py": "20704c075335edc7fa0e10092ca4efbd2e7a8c28a43497d514e88d31e6842555",
+    "src/legsa_gins/paper_rebuild/carrier_phase/temporal.py": "1c48b863e7e132b0cfa281ca0f7bb45e1dd9b7c443906d775c4e25b3226a7177",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/__init__.py": "aedeaca104c42b628527de21ac068da2e4311fecb42c9ab4907c6552357373fa",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "7a6dd13f40235f1edcb6b3e9f27768e53f0c244f5d9bb0d39268333150f859d6",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "4d4ef06794fe9d0f51417de2162b21bead31f171908619ae0cb8acbeb465d3a4",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+    "src/legsa_gins/paper_rebuild/manifest.py": "05f29a41984518bea5f86b80e2a221dcbde978f9b9616ea61ad21cdad632bc91",
+    "src/legsa_gins/paper_rebuild/paths.py": "8535cca9952f8c7d55c4cf9689031ab287cc79d0d9f0cf9207997e111db4ac0b"
+  },
+  "local_test_identity": {
+    "original_26": "ARC_PHASE_LOCAL_ATTEMPT_01.json",
+    "original26_regression_plus_new5": "ARC_PHASE_LOCAL_ATTEMPT_02.json",
+    "adapter_three_cases": "ARC_PHASE_SAVED_MODEL_LOCAL_CHECK.json",
+    "test_sha256": "6e0b4ff44c1aa53caa252494248d08dad7e03470314c94e1acaba3e6c819d30c",
+    "adapter_final_source_receipt": "ARC_PHASE_SAVED_MODEL_LOCAL_CHECK_02.json"
+  },
+  "sequences": [
+    {
+      "sequence": "BY2",
+      "window_s": [
+        66,
+        340
+      ],
+      "epochs": 1370,
+      "blocks": 274,
+      "plan_sha256": "16580a87ee787d4890edd22a8fc8bfb9b0771242e427201a952f323f233879ea",
+      "seal_sha256": "c79910edc923b82d5b3d73e2c8355c988b2d3692515a67ff1678b35fc3b50db5",
+      "singleton_csv_sha256": "0856069e1068643bb2c89b9bce2a6a2d7c21f0cba7872354c5739f2541dd132a"
+    },
+    {
+      "sequence": "BY2H",
+      "window_s": [
+        413,
+        683
+      ],
+      "epochs": 1350,
+      "blocks": 270,
+      "plan_sha256": "6712ccd1723917379a94acad639b297779073b9b207015d06f898f8010cfc943",
+      "seal_sha256": "b700a5287f3d6d465f8e53a66277850524996d863af7a854f0de54f14f813dbe",
+      "singleton_csv_sha256": "2e4b938cf805f3e3390d41d96905b28700d94f1e5d48ed54725a6df537e51a95"
+    },
+    {
+      "sequence": "BY2O",
+      "window_s": [
+        3186,
+        3563
+      ],
+      "epochs": 1885,
+      "blocks": 377,
+      "plan_sha256": "fb592b5f86669cbe4e02c15e1a900776571bc51424bf5f04f56fb3e5d9da482a",
+      "seal_sha256": "62154c1f25e42f2f31b88ffb63fb4d0e089fdd2b28a8520ba2d1bd18e939e42c",
+      "singleton_csv_sha256": "3237d1783dca269ab43a7a50b65e0a7ebdd64456b56fb3d9e679167ca2426094"
+    }
+  ],
+  "protocol": {
+    "block_selection": "All original consecutive records, non-overlapping five-epoch blocks; first/last only; no shifting or alternate family",
+    "whole_interval_continuity": "Every saved physical receiver event in [first,last], including unpaired intermediate events; no endpoint-token shortcut",
+    "singleton_comparison": "old valid flag at exact block end and any of the five original epochs; no saved baseline/error use",
+    "source_Q": "Retain each mapped endpoint working Q separately. No Q01 source exists. Original assumed-independent declaration is not promoted to truth.",
+    "conditional_bound": "2*(F0 Q0 F0^T+F1 Q1 F1^T), valid only if endpoint matrices upper-bound actual error second moments; premise not established for RAWX working Q.",
+    "unavailable_fields": [
+      "actual_available_time_s",
+      "actual_latency_s",
+      "joint_covariance_m2",
+      "direction_point_ecef",
+      "attitude_rank"
+    ],
+    "rank_scope": "Algebraic ranks and all singular values of G0, G1, [-G0,G1], not attitude observability or absolute yaw",
+    "forbidden": [
+      "raw UBX or decoded raw observations",
+      "reference",
+      "N search or CILS",
+      "native navigation",
+      "old navigation attitude linearization",
+      "noise fitting",
+      "window/family/endpoint changes",
+      "retry or alternate output stage"
+    ],
+    "failure": "Preserve FAILED.json and completed-block partial records. No silent rerun; report cause before a separately registered change.",
+    "next_gate": "Independently justified phase-fault admission/revocation and source-backed error bound; no automatic navigation integration"
+  }
+}

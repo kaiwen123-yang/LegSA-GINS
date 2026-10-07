@@ -1,0 +1,16 @@
+{
+  "status": "PASS_LOCAL_ADAPTER_CHECK",
+  "command": [
+    "python3",
+    "scripts/paper_rebuild/carrier_phase/arc_phase_saved_model_qualification.py",
+    "--self-check"
+  ],
+  "exit_code": 0,
+  "started_utc": "2026-10-07T02:04:08.557044+00:00",
+  "elapsed_s": 0.5378511339999932,
+  "source_sha256": "8eb23c992ba37861adf5f662417c17690a3955d8fd61675f37905a760a351e73",
+  "data_mode": "synthetic_only",
+  "saved_model_reads": 0,
+  "raw_reference_native_calls": 0,
+  "retries": 0
+}

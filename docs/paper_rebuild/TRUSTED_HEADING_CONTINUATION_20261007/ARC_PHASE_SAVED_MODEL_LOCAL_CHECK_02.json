@@ -1,0 +1,16 @@
+{
+  "status": "PASS_FINAL_LOCAL_ADAPTER_AND_PLAN_PREFLIGHT",
+  "source_sha256": "6974da4b477e8e340278fae3d71512547307e995b59269b5594681037341fb9e",
+  "plan_sha256": "d2daed4c4283f316eba3bf8dcddf4b271f34a862468f7a1368bc1c8e82b04c01",
+  "wall_finished_utc": "2026-10-07T02:07:39.664974+00:00",
+  "checks": [
+    "3 original synthetic arc continuity adapter cases",
+    "plan schema/full denominator/limits/final stages",
+    "all 15 actual local imported source identities",
+    "output absent",
+    "old-round output rejected"
+  ],
+  "saved_data_reads": 0,
+  "raw_reference_native_calls": 0,
+  "reason": "parent review corrected new output round; original LOCAL_CHECK preserved"
+}

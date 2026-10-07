@@ -1,0 +1,205 @@
+{
+  "status": "PASS_LOCAL_SYNTHETIC_QUALIFICATION_NOT_NAVIGATION",
+  "data_mode": "synthetic_only",
+  "pytest_processes": 1,
+  "tests_passed": 26,
+  "tests_failed": 0,
+  "retries": 0,
+  "existing_412_line_source_modified_this_step": false,
+  "source_sha256": "e3f14d2922a3ed720dbbc5ad68b79a749359bd30d98d05356915d05f2a6cf3c8",
+  "test_sha256": "ed10e5623274934cd24c6112641851d74efd236e903057a37868c00718e92169",
+  "raw_reference_saved_real_models_native_CILS_calls": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "test_cases": [
+    {
+      "test": "test_constant_arbitrary_integers_cancel_with_moving_geometry",
+      "status": "PASS",
+      "time_s": 0.005,
+      "properties": {
+        "max_exact_model_residual_m": "1.9984014443252818e-15",
+        "incorrect_frozen_geometry_error_norm_m": "0.0228414355456359"
+      }
+    },
+    {
+      "test": "test_left_ecef_jacobian_finite_difference_and_baseline_gauges",
+      "status": "PASS",
+      "time_s": 0.003,
+      "properties": {
+        "left_jacobian_max_abs_error": "3.896931943803139e-10",
+        "moving_two_pose_rank": "4"
+      }
+    },
+    {
+      "test": "test_static_same_geometry_has_common_rotation_gauge",
+      "status": "PASS",
+      "time_s": 0.001,
+      "properties": {}
+    },
+    {
+      "test": "test_changed_geometry_is_not_falsely_given_common_rotation_gauge",
+      "status": "PASS",
+      "time_s": 0.001,
+      "properties": {}
+    },
+    {
+      "test": "test_pivot_reparameterization_preserves_observation_and_full_covariance",
+      "status": "PASS",
+      "time_s": 0.001,
+      "properties": {}
+    },
+    {
+      "test": "test_epoch_only_pivots_cancel_without_inheriting_their_integers",
+      "status": "PASS",
+      "time_s": 0.001,
+      "properties": {}
+    },
+    {
+      "test": "test_partial_interval_break_is_removed_even_if_endpoint_tokens_match",
+      "status": "PASS",
+      "time_s": 0.001,
+      "properties": {}
+    },
+    {
+      "test": "test_full_break_new_tokens_and_empty_support_do_not_reuse_old_phase",
+      "status": "PASS",
+      "time_s": 0.001,
+      "properties": {}
+    },
+    {
+      "test": "test_disconnected_graphs_keep_only_common_connected_relations",
+      "status": "PASS",
+      "time_s": 0.001,
+      "properties": {}
+    },
+    {
+      "test": "test_signal_groups_wavelengths_are_separate_and_cross_group_dd_is_rejected",
+      "status": "PASS",
+      "time_s": 0.001,
+      "properties": {}
+    },
+    {
+      "test": "test_full_cross_time_covariance_matches_independent_sd_latent_oracle",
+      "status": "PASS",
+      "time_s": 0.001,
+      "properties": {
+        "covariance_max_abs_error_m2": "5.421010862427522e-20",
+        "wrong_zero_cross_covariance_error_norm_m2": "0.00023820602767018212"
+      }
+    },
+    {
+      "test": "test_shared_endpoint_negative_cross_covariance_is_explicit",
+      "status": "PASS",
+      "time_s": 0.001,
+      "properties": {}
+    },
+    {
+      "test": "test_erased_shared_endpoint_or_conflicting_payload_is_rejected",
+      "status": "PASS",
+      "time_s": 0.001,
+      "properties": {}
+    },
+    {
+      "test": "test_hidden_target_or_pivot_step_has_template_but_is_not_detected[0-1.0]",
+      "status": "PASS",
+      "time_s": 0.001,
+      "properties": {}
+    },
+    {
+      "test": "test_hidden_target_or_pivot_step_has_template_but_is_not_detected[2--0.25]",
+      "status": "PASS",
+      "time_s": 0.001,
+      "properties": {}
+    },
+    {
+      "test": "test_psd_singular_noise_is_preserved_without_floor_or_inversion",
+      "status": "PASS",
+      "time_s": 0.001,
+      "properties": {}
+    },
+    {
+      "test": "test_timing_identity_and_availability_fail_closed[time_scale]",
+      "status": "PASS",
+      "time_s": 0.0,
+      "properties": {}
+    },
+    {
+      "test": "test_timing_identity_and_availability_fail_closed[receiver_pair]",
+      "status": "PASS",
+      "time_s": 0.0,
+      "properties": {}
+    },
+    {
+      "test": "test_timing_identity_and_availability_fail_closed[phase_convention]",
+      "status": "PASS",
+      "time_s": 0.0,
+      "properties": {}
+    },
+    {
+      "test": "test_timing_identity_and_availability_fail_closed[same_epoch_id]",
+      "status": "PASS",
+      "time_s": 0.0,
+      "properties": {}
+    },
+    {
+      "test": "test_timing_identity_and_availability_fail_closed[reverse_time]",
+      "status": "PASS",
+      "time_s": 0.0,
+      "properties": {}
+    },
+    {
+      "test": "test_timing_identity_and_availability_fail_closed[early_decision]",
+      "status": "PASS",
+      "time_s": 0.0,
+      "properties": {}
+    },
+    {
+      "test": "test_timing_identity_and_availability_fail_closed[wrong_interval]",
+      "status": "PASS",
+      "time_s": 0.0,
+      "properties": {}
+    },
+    {
+      "test": "test_timing_identity_and_availability_fail_closed[future_continuity]",
+      "status": "PASS",
+      "time_s": 0.0,
+      "properties": {}
+    },
+    {
+      "test": "test_covariance_contract_rejects_missing_indefinite_or_changed_marginals",
+      "status": "PASS",
+      "time_s": 0.001,
+      "properties": {}
+    },
+    {
+      "test": "test_attitude_frame_and_actual_availability_are_checked",
+      "status": "PASS",
+      "time_s": 0.001,
+      "properties": {}
+    }
+  ],
+  "limits": [
+    "supplied whole-interval continuity is not a physical no-slip proof",
+    "no endpoint-consumption ledger or measurement acceptance",
+    "hidden slip templates are not a detector",
+    "known full source Q or explicit working assumption is required",
+    "no calibrated state-measurement independence or real covariance",
+    "no absolute heading, integer correctness, real risk or navigation claim"
+  ],
+  "followup_geometry_only_extension": {
+    "status": "PASS_SYNTHETIC_EXTENSION_NOT_NAVIGATION",
+    "original_regression_cases": 26,
+    "new_cases": 5,
+    "total_passed": 31,
+    "total_failed": 0,
+    "retries": 0,
+    "receipt": "ARC_PHASE_LOCAL_ATTEMPT_02.json",
+    "source_sha256": "3898eb95f2621f483c80ecd0d67b9fd6dcf27135673a755b11f8650a7d66ef12",
+    "test_sha256": "6e0b4ff44c1aa53caa252494248d08dad7e03470314c94e1acaba3e6c819d30c",
+    "scope": "explicit unknown availability geometry only; old factor rejects None; conditional second-moment upper bound with positive/negative/generic PSD cross tests"
+  }
+}
