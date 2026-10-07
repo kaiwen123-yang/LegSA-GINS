@@ -159,7 +159,7 @@
   "main_merge_authorized": false,
   "completion_proven": false,
   "latest_decision": "CONTINUATION_DECISION.md",
-  "latest_checkpoint": "Conditional phase counterexample strengthens the old Young-family diagnosis; source tracing identifies upstream A1 interpolation as an unresolved causal dependency despite passing provider-row time policy. Next: bounded passive upstream dependency audit; physical error/cross/reference remain unqualified.",
+  "latest_checkpoint": "Passive generator audit first-pass:6 synthetic cases;4602 opportunities/4598 selected;3683 selected depend on later historical GNSS heading endpoints by about0.2-0.8s. Native row-causal policy remains valid only at row layer. Next qualify generation-dependency eligibility; full trusted heading/nav gain remains incomplete.",
   "causal_ned_hv_policy": {
     "status": "REAL_SOURCE_TIME_POLICY_QUALIFIED_NOT_PHYSICAL_ARRIVAL_OR_NAV_GAIN",
     "registration_commit": "531b30860b7c1389e22255ccd1339cb246983049",
@@ -173,7 +173,8 @@
     "covered_priors": 918,
     "source_blocks": 921,
     "actual_arrival_qualified": false,
-    "evidence": "HV_CAUSAL_POLICY_RESULTS.md"
+    "evidence": "HV_CAUSAL_POLICY_RESULTS.md",
+    "upstream_generator_dependencies_qualified": false
   },
   "phase_source_model_review": {
     "status": "ANALYTICAL_IMPLICATION_AND_STATIC_SOURCE_TRACE_COMPLETE",
@@ -183,7 +184,28 @@
     "new_native_calls": 0,
     "new_evaluator_calls": 0,
     "scope": "Conditional marginal-moment linear surrogate; independent Gaussian counterexample also preserves endpoint marginals with Q01=0. Physical sources and new causal priors not qualified.",
-    "upstream_a1_interpolation": "LATER_BRACKET_DEPENDENCY_EXISTS_IN_CODE_REAL_ACCEPTED_COUNT_NOT_YET_READ",
-    "next_executable_action": "Register one bounded passive HV/A1 dependency-time join without changing provider values or navigation."
+    "upstream_a1_interpolation": "CONFIRMED_ON_SELECTED_GENERATOR_INPUTS:3683/4598_ENDPOINT_AFTER_STATE",
+    "next_executable_action": "Dependency audit completed; qualify dependency-aware eligibility before any further joint phase information claim."
+  },
+  "hv_a1_dependency_audit": {
+    "status": "COMPLETE_REPORTED_GENERATOR_ENDPOINT_FUTURE_DEPENDENCIES_CONFIRMED",
+    "registration_commit": "3a963d2e31c23bf5cccbbf4d6b249100f20ee783",
+    "evidence": "HV_A1_DEPENDENCY_RESULTS.md",
+    "opportunities": 4602,
+    "selected": 4598,
+    "no_selected": 4,
+    "dependency_after_hv_query": 4598,
+    "dependency_after_state": 3683,
+    "dependency_not_after_state": 915,
+    "positive_state_lead_range_approx_s": [
+      0.2,
+      0.8
+    ],
+    "native_calls": 0,
+    "evaluator_calls": 0,
+    "velocity_recomputed": false,
+    "raw_receiver_time_qualified": false,
+    "actual_arrival_qualified": false,
+    "next_action": "Define and qualify a reported-dependency-time admission policy with preserved velocity values; do not infer its update counts by deleting current rows."
   }
 }

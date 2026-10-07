@@ -1,0 +1,107 @@
+{
+  "status": "COMPLETE_PASSIVE_HV_GENERATOR_ENDPOINT_TIME_AUDIT",
+  "registration_commit": "3a963d2e31c23bf5cccbbf4d6b249100f20ee783",
+  "scope": "CALIBRATED_GNSS18_INTERPOLATION_ENDPOINTS_ONLY",
+  "sequences": [
+    {
+      "sequence_id": "BY2",
+      "opportunities": 1369,
+      "selected": 1369,
+      "no_selected": 0,
+      "provider_rows": 63278,
+      "gnss_rows": 1510,
+      "valid_a1_endpoints": 301,
+      "dependency_after_hv_query": 1369,
+      "dependency_after_state": 1096,
+      "rounded_coordinate_after_state": 1096,
+      "positive_lead_bins_s": {
+        "(0,1e-6]": 0,
+        "(1e-6,1e-3]": 0,
+        "(1e-3,1e-2]": 0,
+        "(1e-2,inf)": 1096
+      },
+      "max_dependency_minus_state_s": 0.7999999520000074,
+      "min_positive_dependency_minus_state_s": 0.2000000479999926,
+      "kinds": {
+        "INTERIOR": 1369
+      }
+    },
+    {
+      "sequence_id": "BY2H",
+      "opportunities": 1349,
+      "selected": 1348,
+      "no_selected": 1,
+      "provider_rows": 63221,
+      "gnss_rows": 1483,
+      "valid_a1_endpoints": 295,
+      "dependency_after_hv_query": 1348,
+      "dependency_after_state": 1080,
+      "rounded_coordinate_after_state": 1080,
+      "positive_lead_bins_s": {
+        "(0,1e-6]": 0,
+        "(1e-6,1e-3]": 0,
+        "(1e-3,1e-2]": 0,
+        "(1e-2,inf)": 1080
+      },
+      "max_dependency_minus_state_s": 0.7999999520000074,
+      "min_positive_dependency_minus_state_s": 0.2000000479999926,
+      "kinds": {
+        "INTERIOR": 1348,
+        "NO_SELECTED_HV_SOURCE": 1
+      }
+    },
+    {
+      "sequence_id": "BY2O",
+      "opportunities": 1884,
+      "selected": 1881,
+      "no_selected": 3,
+      "provider_rows": 95860,
+      "gnss_rows": 2231,
+      "valid_a1_endpoints": 445,
+      "dependency_after_hv_query": 1881,
+      "dependency_after_state": 1507,
+      "rounded_coordinate_after_state": 1507,
+      "positive_lead_bins_s": {
+        "(0,1e-6]": 0,
+        "(1e-6,1e-3]": 0,
+        "(1e-3,1e-2]": 0,
+        "(1e-2,inf)": 1507
+      },
+      "max_dependency_minus_state_s": 0.79999995199978,
+      "min_positive_dependency_minus_state_s": 0.20000004800021998,
+      "kinds": {
+        "INTERIOR": 1881,
+        "NO_SELECTED_HV_SOURCE": 3
+      }
+    }
+  ],
+  "opportunities": 4602,
+  "selected": 4598,
+  "no_selected": 4,
+  "python_version": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+  "numpy_version": "1.26.4",
+  "dependency_after_hv_query": 4598,
+  "dependency_after_state": 3683,
+  "actual_arrival_qualified": false,
+  "raw_receiver_time_qualified": false,
+  "velocity_recomputed": false,
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "local_synthetic_cases": 6,
+  "local_first_pass": true,
+  "not_a_navigation_accuracy_result": true,
+  "stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_A1_DEPENDENCY_ATTEMPT01",
+  "read_scope": {
+    "science_files": 9,
+    "science_bytes": 68005260,
+    "science_read_passes": 1,
+    "metadata_files": 8,
+    "metadata_bytes": 321870,
+    "system_trace_used": false
+  },
+  "independent_review": {
+    "result_rows": "heading_evidence: all4602 rows checked against summary and output pins; no old payload or helper execution",
+    "execution_receipts": "research_map: registration, process, JUnit and17 input receipts checked; not a system-wide access audit"
+  },
+  "goal_complete": false
+}
