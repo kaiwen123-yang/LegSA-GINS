@@ -1,0 +1,46 @@
+{
+  "schema": "foot_unknown_cross_certificate.local_plan.v1",
+  "status": "REGISTERED_BEFORE_LOCAL_NUMERICAL_EXECUTION",
+  "purpose": "Check adversarial decorrelation witness for unrestricted state-noise cross uncertainty; no actual physical-correlation claim",
+  "head_before": "cd81069c68bfd4da4327eac358735fdb53089c56",
+  "statement": "If P,R are valid marginal moments and V=R-H P H^T is PSD, choose C=-P H^T and n=-H e+v with v uncorrelated with e and moment V. Innovation r=v gives posterior moment P+K V K^T for every linear correction K; no PSD-weighted trace improvement can be guaranteed over this uncertainty class.",
+  "new_files": [
+    "scripts/paper_rebuild/carrier_phase/foot_unknown_cross_certificate.py",
+    "tests/paper_rebuild/test_foot_unknown_cross_certificate.py"
+  ],
+  "local_tests": {
+    "max_unique_cases": 10,
+    "pytest_processes_initial": 1,
+    "cases": [
+      "scalar R greater P admits witness",
+      "matrix nontrivial offdiagonal P/R and independent latent construction",
+      "rank-deficient P or zero V retains valid witness",
+      "stronger measurement V indefinite does not claim certificate",
+      "unit-change covariance congruence invariance",
+      "nonfinite/nonsymmetric input rejected",
+      "unknown/invalid P not silently certified",
+      "arbitrary fixed K cannot lower weighted trace",
+      "zero measurement H certificate",
+      "empty or negative weights rejected"
+    ],
+    "budget_unit": "10 pytest functions; validation guards may contain multiple invalid-input assertions",
+    "initial_timeout_s": 60
+  },
+  "real_data": {
+    "status": "NOT_YET_REGISTERED_FOR_EXECUTION",
+    "planned_read_scope": "Only all 2510 frozen FOOT_INFORMATION_INPUTS plus existing diagnostic qualification fields; three new summaries no native/eval/raw/reference",
+    "later_registration_required": true
+  },
+  "limits": [
+    "floating-point working-matrix qualification, not interval arithmetic proof",
+    "P and R do not certify physical second-moment bounds",
+    "does not assert actual SDK negative cross covariance",
+    "does not exclude tighter justified correlation models",
+    "does not change P/H/R/W or epsilon"
+  ],
+  "source_pins": {
+    "scripts/paper_rebuild/carrier_phase/foot_unknown_cross_certificate.py": "0a5acd445edb917a370feceacef68b3cd42428d68e9896d2c9f1345f3880ff35",
+    "tests/paper_rebuild/test_foot_unknown_cross_certificate.py": "812fdf0e3f0da7d2f56393c5f158ebbf039f66cbcdfed78010489d9fdd333d30"
+  },
+  "mean_and_risk_scope": "Centered conditional errors at a fixed information set; fixed linear K only. Skip need not be unique. Known mean residuals must be subtracted. No claim about residual-selected nonlinear gains or actual SDK cross."
+}
