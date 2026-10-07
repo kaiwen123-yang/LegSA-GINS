@@ -1,0 +1,25 @@
+{
+  "schema": "trusted_heading.direction_model_readout.v1",
+  "registration_commit": "a40c59153a9e6e1cfd897f0782a94fa53cd14471",
+  "stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/DIRECTION_MODEL_ATTEMPT01",
+  "files": {
+    "V3_COMPARISONS.csv": "a374c6228e0c2b779abd59740f0afb75d6bd197901d757823943bc1436d63848",
+    "MODEL_DIFFERENCES.csv": "3f54c14690f9841f3812caf48e26b7c0a4b352410d24af076803c933d96755c9",
+    "COVERAGE.csv": "a8ef411c727a744db3214f11ffc91fc2457fb937cdb75403c3052190233199d4",
+    "COMPARISON.json": "02f2c3e18fecf048510ebef3b6c47863581682f026d55bef1b7913ae93a8979b",
+    "runtime/PLAN.json": "67334d2ac5e2c607f103735e4c06d71976c8f567f95d732465bbd4a4be3360a0",
+    "runtime/PREPARED.json": "747b950cb27d2a3102f14177e1824a2919364a4f2b1253625443547b747b9733",
+    "runtime/ALL_NATIVE_SEALED.json": "555049fa55ce50e0f64a7084dfdb6868e5057598a5c13dde31150eaf4d904c96",
+    "runtime/EVALUATION_COMPLETE.json": "6ae1acf01546840375c6e48daefc6a5b1467e4a9c38daca3bf969e3d367db94f",
+    "runtime/LOADER_LEDGER.jsonl": "7f9f0cf1cdf6dd7f2215cf43a91b5120b2a0f76bafb2e523341bb15cf94dbb09",
+    "runtime/NATIVE_LEDGER.jsonl": "bf5c9f6bac44092a18802f7a0731b390cc321a227560a9ed0c563218d8a169e5",
+    "runtime/EVALUATOR_LEDGER.jsonl": "d9bc90162f13adf2b9dbf598cf4d166a09a6681b2c2623d7ff552c8126297747"
+  },
+  "new_native": 3,
+  "new_evaluator": 3,
+  "loader": 3,
+  "scientific_retries": 0,
+  "raw_or_reference_parent_reads": 0,
+  "original_Euler_and_V3": "reused",
+  "reference_is_independent_truth": false
+}

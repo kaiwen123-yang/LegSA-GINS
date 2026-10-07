@@ -1,0 +1,42 @@
+{
+  "schema": "trusted_heading.continuation_goal_progress.v1",
+  "goal_status": "ACTIVE",
+  "formal_version": "V3/main@077fb725612730d743ff1dd3ba698c43499b4fcb",
+  "requirements": [
+    {
+      "id": "R1",
+      "requirement": "Three original full windows, physical lateral projection only; 3 new native and at most 3 frozen evaluations; old Euler/V3 reused",
+      "status": "COMPLETED_NEGATIVE_ADOPTION_GATE",
+      "registration_commit": "a40c59153a9e6e1cfd897f0782a94fa53cd14471",
+      "stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/DIRECTION_MODEL_ATTEMPT01",
+      "evidence": "direction_model_trial/RESULTS.md",
+      "native_calls": 3,
+      "evaluator_calls": 3,
+      "adoption_A": false
+    },
+    {
+      "id": "R2",
+      "requirement": "Unfixed same-physical-arc temporal phase contrast: ambiguity elimination, timing, geometry, breaks, covariance, shared endpoints; qualify before navigation",
+      "status": "LOCAL_IMPLEMENTATION_AND_TESTS_IN_PROGRESS"
+    },
+    {
+      "id": "R3",
+      "requirement": "Capture actual foot P/H/R, weights and candidate scores without changing selection; diagnose zero updates; audit SDK provenance",
+      "status": "DIAGNOSTIC_IMPLEMENTATION_IN_PROGRESS"
+    },
+    {
+      "id": "R4",
+      "requirement": "Only after explainable information gain, matched-backend joint and same-fault/same-admission recovery validation",
+      "status": "CONDITIONAL_PENDING_R1_R2_R3"
+    },
+    {
+      "id": "R5",
+      "requirement": "Prepare independently referenced rotation/support-change/occlusion acquisition and metrics; January data not unseen holdout",
+      "status": "PLAN_IN_PROGRESS_EQUIPMENT_QUESTION_PENDING"
+    }
+  ],
+  "reference_boundary": "shared commercial GNSS reference; independent truth/real integer correctness/risk calibration not established",
+  "local_registration_only": true,
+  "main_merge_authorized": false,
+  "completion_proven": false
+}
