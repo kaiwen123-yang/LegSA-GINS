@@ -1,0 +1,230 @@
+{
+  "schema": "trusted_heading.foot_information.compact_report.v1",
+  "status": "COMPLETE_DIAGNOSTIC_ONLY",
+  "created_utc": "2026-10-07T02:09:59.345413+00:00",
+  "registration_commit": "714934f557607f79588c4e2dfd0b32db4ba373e2",
+  "registered_plan_sha256": "412ffe58acb980697823e0942f3ef4afe5ea5c1ca714101656cf9900ad5c4160",
+  "expanded_plan_sha256": "bf8fb3d45698c8678f34d15d497748e742d8f8b6a3dc9d8d40c6a63550db9a03",
+  "native_seal_sha256": "9e061caab68272f61a9f5246480db3b62b0bc408c47b5bb66f70cb0679d65d7f",
+  "readout_complete_sha256": "e3328bfd01c13ef5d9fff418f39ee43fbb23f211f6b339afc4572c1a78ea85a3",
+  "stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/FOOT_INFORMATION_TRIAL_ATTEMPT01",
+  "alias_resolution": "Use local PLAN.json aliases; machine-local absolute roots are not redistributed.",
+  "binary_sha256": "1ee2c222c857edb9eff66ccc205352e21810b392efd609f8eddca978113dc2a6",
+  "old_native_seal_sha256": "50f53f871627704c1ceae76d8597e484419a12a6052e21614ea58336f8693397",
+  "source_pins": {
+    "cpp/legsa_v23_port_core/src/factors/attitude_clone.cpp": "11568fb2d4bb69198c8aed15bd8a095f0bbe48fd4b5969eba2f95eb7bb1db47b",
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine_attitude_clone.cpp": "3e52eab9cf1f68b40013e82aa92c684e4ecf2479d033abf798ad4dccbe52261e",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/attitude_clone.hpp": "889cf7cc47219d3c37d7f4ff2e98303641700754301a204089cdb13d68e09254",
+    "tests/paper_rebuild/native_attitude_clone_harness.cpp": "f93d82c19e2a9009f1286b7005e88444aecd083704d8d99bfaaf61247ae08836",
+    "tests/paper_rebuild/test_foot_information_diagnostic.py": "6c9b2a46ec9164919913aa9fcd738ca2b2be73115bf5bc8fb9364d382a848086",
+    "scripts/paper_rebuild/carrier_phase/foot_information_diagnostic.py": "c04e7c90ab47468d64b4b25b8c185371c2ad89c349aab596cc485d97524940c1",
+    "scripts/paper_rebuild/carrier_phase/foot_information_trial.py": "6b2382bf2927506fed53aca503af7fdd6f8d0384b67e0218d890d81c90a43d73"
+  },
+  "execution_counts": {
+    "loader_only": 3,
+    "native": 3,
+    "offline_diagnostic_readout": 3,
+    "evaluator": 0,
+    "raw_reads": 0,
+    "reference_reads": 0,
+    "retries": 0
+  },
+  "report_aggregation": {
+    "operation": "stdlib JSON/CSV aggregation of saved diagnostics only; no scientific function imported or invoked",
+    "native_calls": 0,
+    "diagnostic_readout_calls": 0,
+    "evaluator_calls": 0,
+    "raw_reads": 0,
+    "reference_reads": 0,
+    "aggregation_rule": "all saved rows, no filtering; ordinary sample median, extrema, boolean counts, absolute errors; relative_cost=(candidate_score-T)/T",
+    "input_hashes_relative_to_stage": {
+      "PLAN.json": {
+        "sha256": "bf8fb3d45698c8678f34d15d497748e742d8f8b6a3dc9d8d40c6a63550db9a03",
+        "size_bytes": 56281
+      },
+      "REGISTERED_PLAN.json": {
+        "sha256": "ef07a5300ecac97fbccc4c3a02db9017f237a9b6745f257e11cc2f1e9e89f352",
+        "size_bytes": 13060
+      },
+      "PREPARED.json": {
+        "sha256": "44798a2269ba1ef36569e3ddb477d0ba492bd35c737b2a5e24d0cc86d33acef2",
+        "size_bytes": 112
+      },
+      "ALL_NATIVE_SEALED.json": {
+        "sha256": "9e061caab68272f61a9f5246480db3b62b0bc408c47b5bb66f70cb0679d65d7f",
+        "size_bytes": 33002
+      },
+      "READOUT_COMPLETE.json": {
+        "sha256": "e3328bfd01c13ef5d9fff418f39ee43fbb23f211f6b339afc4572c1a78ea85a3",
+        "size_bytes": 2047
+      },
+      "NATIVE_LEDGER.jsonl": {
+        "sha256": "e0d759b10df179259f4c28498ec471cbd452b7afefadb1960c92472cd03a736b",
+        "size_bytes": 206
+      },
+      "CHECKS/BY2/RESULT.json": {
+        "sha256": "a09ad50af7751353977c3abe3ea943c4eb7b3dbacb5e778dcabf41b4ca49287c",
+        "size_bytes": 81
+      },
+      "READOUT/BY2/SUMMARY.json": {
+        "sha256": "bf658aa96dde5c443a8e7feadc63764dd9fcfea365642d41e6a67f2a0232c1ce",
+        "size_bytes": 525
+      },
+      "READOUT/BY2/EVENT_DIAGNOSTICS.jsonl": {
+        "sha256": "c9becd7cc52897ed59c41bcf729d6644eaaa5b58f4fc15ce70200cfda6c331ef",
+        "size_bytes": 3350970
+      },
+      "CHECKS/BY2H/RESULT.json": {
+        "sha256": "9396d7c957272a1ed201df926ef9f15fcd1a46f5d7124399ca75be7667ea8c49",
+        "size_bytes": 82
+      },
+      "READOUT/BY2H/SUMMARY.json": {
+        "sha256": "16ee72a227955a67c7d5f59bf9ffc0447bc6c500518a66094daad59e80fe6fd5",
+        "size_bytes": 526
+      },
+      "READOUT/BY2H/EVENT_DIAGNOSTICS.jsonl": {
+        "sha256": "3f5802a41ca48e0f947ca07a769c311deaec16c4c218bb7ba70b23317521d86d",
+        "size_bytes": 3249277
+      },
+      "CHECKS/BY2O/RESULT.json": {
+        "sha256": "7997f99270e4999532fa90a46fee414773ab200d7446d6c73dc60c236f7ca173",
+        "size_bytes": 82
+      },
+      "READOUT/BY2O/SUMMARY.json": {
+        "sha256": "5366848d812c98f7800dcb97af0550411d65ff5c5e49160d59736ee8bcd49884",
+        "size_bytes": 528
+      },
+      "READOUT/BY2O/EVENT_DIAGNOSTICS.jsonl": {
+        "sha256": "05bdd777cde4a23f7fd0ea8d5871942a7f43bf1f02650e5560d1148fe6fbb8b7",
+        "size_bytes": 5647747
+      }
+    },
+    "output_pins_excluding_this_receipt": {
+      "RESULTS.md": {
+        "sha256": "102cd1fbabdf5e65ac28c3c480ab4c594c01178854b14223722b2830f9ac3580",
+        "size_bytes": 5678
+      },
+      "GRID_SUMMARY.csv": {
+        "sha256": "58519507f5a9e4f4d87c5d693f8e7b2fe13528fd778e020919d981d1248e42cf",
+        "size_bytes": 2118
+      },
+      "SEQUENCE_SUMMARY.csv": {
+        "sha256": "9e4de118f52d8b91f8955b8889a069a6f387ab4f7761ff8e58e87cf7f30033e5",
+        "size_bytes": 3021
+      }
+    }
+  },
+  "sequence_identity": [
+    {
+      "sequence_id": "BY2",
+      "run_id": "BY2__PAIR_YOUNG",
+      "diagnostic_id": "FOOT_INFORMATION_BY2",
+      "window_s": [
+        66.0,
+        340.0
+      ],
+      "events": 687,
+      "state_bytes_equal": true,
+      "nav_sha256": "135799430f3c2fdcbccfa6f27711fb9e5e36c5fd3040b6286baf92708f7b11e4",
+      "std_sha256": "ede2ad406c49edb313e33a4f71ecabe38b5cf67095af7556e9e35d91435c2c2e",
+      "original_event_sha256": "6de5e92e61c145eb6fd2543c609080ee93a198f1c88c6a795e9dabcbd77e88ac",
+      "passive_dump_sha256": "9ba31a58a44c8986ca479d8e1abe4a8b5b40938dae1658668b34abdadc38cd2a",
+      "native_access_audit_passed": true,
+      "native_raw_open_count": 0,
+      "native_reference_open_count": 0
+    },
+    {
+      "sequence_id": "BY2H",
+      "run_id": "BY2H__PAIR_YOUNG",
+      "diagnostic_id": "FOOT_INFORMATION_BY2H",
+      "window_s": [
+        413.0,
+        683.0
+      ],
+      "events": 666,
+      "state_bytes_equal": true,
+      "nav_sha256": "358db661eab73274a451115589ac746d29210160cce2da2546b15de6207fcff6",
+      "std_sha256": "23934fc584ea6a42bf0a3ee8123ac30096efb75cc8718cb2ded8a8e55debc20e",
+      "original_event_sha256": "0259ba179036c9d4656a1d4f8a4763eda883f5f4ad1effc066e7f4fe78f4718a",
+      "passive_dump_sha256": "75d0bb9ea8f11016c00d157c7d7f12d5e6f25cad74578ec0f65e261bee584492",
+      "native_access_audit_passed": true,
+      "native_raw_open_count": 0,
+      "native_reference_open_count": 0
+    },
+    {
+      "sequence_id": "BY2O",
+      "run_id": "BY2O__PAIR_YOUNG",
+      "diagnostic_id": "FOOT_INFORMATION_BY2O",
+      "window_s": [
+        3186.0,
+        3563.0
+      ],
+      "events": 1157,
+      "state_bytes_equal": true,
+      "nav_sha256": "102b72661b28f68b8c6dbbc217427dcbaa31bd3bf1d27e16f80319a3bc2c2cf7",
+      "std_sha256": "b133d5e62188bd3a09fae6f5e17c32cb63a6b607c1f2dedf3fbe178247761fa6",
+      "original_event_sha256": "6a140c350a057b70d09746a3e1501549cbb73755354e201bd8dc03f3f57127ac",
+      "passive_dump_sha256": "c110dd7448d06963da9a8274c28ba29ad3096bdf29eacc2b2692818cccc1080c",
+      "native_access_audit_passed": true,
+      "native_raw_open_count": 0,
+      "native_reference_open_count": 0
+    }
+  ],
+  "aggregate": {
+    "sequence_id": "ALL",
+    "eligible_end_count": 2510,
+    "continuous_no_improvement_count": 2510,
+    "continuous_improvement_count": 0,
+    "other_condition_count": 0,
+    "native_applied_count": 0,
+    "continuous_beats_original_skip_tie_count": 0,
+    "spectral_full_model_qualified_count": 2510,
+    "native_order_and_action_verified_count": 2510,
+    "full_P_grid_action_verified_count": 2510,
+    "continuous_score_exact_T_count": 2510,
+    "continuous_zero_reduction_count": 2510,
+    "continuous_zero_omega_count": 2510,
+    "Gmax_certification_NA_count": 2510,
+    "J_over_T_min": 1.824396594983521e-10,
+    "J_over_T_median": 7.074724500424039e-10,
+    "J_over_T_max": 1.6908464091980409e-09,
+    "T_min": 1.008047280001807,
+    "T_median": 1.839891276340067,
+    "T_max": 7.6906111741669445,
+    "J_min": 2.7722950977274347e-10,
+    "J_median": 1.2139370556734498e-09,
+    "J_max": 7.999767657612778e-09,
+    "information_lambda_max_min": 3.1216437264554455e-07,
+    "information_lambda_max_median": 1.0817770067529168e-06,
+    "information_lambda_max_max": 1.3240458565245985e-06,
+    "best_grid_relative_cost_min": 0.015624999973167878,
+    "best_grid_relative_cost_median": 0.015624999988773015,
+    "best_grid_relative_cost_max": 0.01562499999710509,
+    "rank_H_min": 2,
+    "rank_H_max": 2,
+    "rank_P_support_min": 18,
+    "rank_P_support_max": 18,
+    "information_rank_min": 2,
+    "information_rank_max": 2,
+    "T_spectral_error_max_abs": 8.881784197001252e-15,
+    "J_spectral_error_max_abs": 1.4404523186998424e-20,
+    "native_T_error_max_abs": 1.7763568394002505e-15,
+    "native_J_error_max_abs": 2.3065931381041177e-21,
+    "native_candidate_score_error_max_abs": 7.105427357601002e-15,
+    "spectral_objective_error_max_abs": 8.881784197001252e-15
+  },
+  "decision": "CONTINUOUS_EPSILON_DOES_NOT_RECOVER_UPDATES_FOR_FIXED_WORKING_INPUTS",
+  "interpretation_limits": [
+    "fixed working P/H/R/W Young trace family only",
+    "not a yaw or navigation benefit guarantee",
+    "numerical ranks and spectra do not certify physical observability or exact zero-noise cap",
+    "SDK foot positions not verified as independent encoder FK",
+    "original sigma/R/interval/grid unchanged; no scan performed",
+    "no additional state update applied"
+  ],
+  "local_qualification": {
+    "path": "../FOOT_INFORMATION_LOCAL_RESULTS.json",
+    "sha256": "a5e40c8abb0af125bdd542ad8980cba28c9da46798bd314be9e6c21b5f5e5baa",
+    "first_failures_preserved": true
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "status": "PASS_LOCAL_SYNTHETIC_EXTENSION_NOT_NAVIGATION",
+  "data_mode": "synthetic_only",
+  "original_26_first_receipt": "ARC_PHASE_LOCAL_ATTEMPT_01.json",
+  "extension_receipt": "ARC_PHASE_LOCAL_ATTEMPT_02.json",
+  "original_26_regression_passed": 26,
+  "new_cases_passed": 5,
+  "total_passed": 31,
+  "total_failed": 0,
+  "retries": 0,
+  "source_sha256": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/arc_phase_difference.py": "3898eb95f2621f483c80ecd0d67b9fd6dcf27135673a755b11f8650a7d66ef12",
+    "tests/paper_rebuild/test_arc_phase_difference.py": "6e0b4ff44c1aa53caa252494248d08dad7e03470314c94e1acaba3e6c819d30c"
+  },
+  "elapsed_process_s": 0.712542290999977,
+  "pytest_processes_this_extension": 1,
+  "raw_reference_saved_model_native_CILS_calls": 0,
+  "new_cases": [
+    {
+      "name": "test_geometry_only_preserves_missing_availability_and_does_not_admit",
+      "time_s": 0.001,
+      "properties": {}
+    },
+    {
+      "name": "test_unknown_cross_bound_with_actual_joint_psd_and_extremes[positive]",
+      "time_s": 0.001,
+      "properties": {}
+    },
+    {
+      "name": "test_unknown_cross_bound_with_actual_joint_psd_and_extremes[negative]",
+      "time_s": 0.001,
+      "properties": {}
+    },
+    {
+      "name": "test_unknown_cross_bound_with_actual_joint_psd_and_extremes[generic]",
+      "time_s": 0.001,
+      "properties": {}
+    },
+    {
+      "name": "test_geometry_only_empty_relations_does_not_invent_noise_or_delay",
+      "time_s": 0.001,
+      "properties": {}
+    }
+  ],
+  "limits": [
+    "unknown actual availability supported only by geometry-only API",
+    "original full factor rejects missing availability",
+    "conditional second-moment bound is not calibrated covariance",
+    "no between-factor independence established",
+    "no direction/heading/navigation benefit evidence"
+  ]
+}

@@ -50,3 +50,5 @@ foot_information_trial.py固定三个旧PAIR_YOUNG身份，0 evaluator。新stag
 - 真正更紧融合仍需可证明的来源结构或合格独立成分；不可因全SKIP缩小R、删除被动cross、假定SDK与IMU独立。下一采集优先补原始关节/FK、时序、body到IMU外参和接触/滑移证据。
 
 本审查没有计算2510个真实事件的J/T或根因比例；所有实测结论等待已登记回放回执。原V3、原Young状态算法及历史无收益结论保持。
+
+最终计划复核：FOOT_INFORMATION_TRIAL_PLAN.json SHA256为412ffe58acb980697823e0942f3ef4afe5ea5c1ca714101656cf9900ad5c4160；局部资格FOOT_INFORMATION_LOCAL_RESULTS.json为a5e40c8abb0af125bdd542ad8980cba28c9da46798bd314be9e6c21b5f5e5baa。二者已独立读小文件并核hash。最终计划明确3 loader、3 PAIR native、0 evaluator、3 offline readout、0 retry；本审查未发现新的执行前阻断。此声明不代替真实三窗回放的输出身份与访问审计门。

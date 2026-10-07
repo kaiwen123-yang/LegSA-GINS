@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "trace_sha256": "882df20022f8366409ebd5ef4f1f8145bdc2792be0c44dd145ecc60851a95f2d",
+  "parsed_openat_records": 4646,
+  "unparsed_openat_records": 0,
+  "successful_exec_programs": {
+    "/usr/bin/python3": 1,
+    "/usr/bin/lscpu": 1,
+    "/usr/bin/git": 17
+  },
+  "successful_scientific_npz_opens": 1720,
+  "unique_scientific_npz_paths": 1720,
+  "unexpected_scientific_opens": [],
+  "scientific_writes_outside_new_stage": [],
+  "raw_obs_nav_file_opens": [],
+  "reference_file_opens": 0,
+  "scope": "openat/execve audit; all scientific file opens confined to pinned prepared models, old singleton flags and new result stage; model/arc metadata are decoded saved derivatives, no raw UBX or evaluator reference; not a proof about untraced syscall kinds",
+  "stage_aliases": [
+    "<SCRATCH_ROOT>/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_ATTEMPT02",
+    "<SCRATCH_ROOT>/TRUSTED_HEADING_20261006/FULL_WINDOW_FRONTEND_ATTEMPT01",
+    "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_SAVED_MODEL_ATTEMPT01"
+  ]
+}

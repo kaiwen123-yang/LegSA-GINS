@@ -1,0 +1,70 @@
+{
+  "status": "SEALED_RUN_AND_COMPACT_IDENTITY_VERIFIED",
+  "verified_utc": "2026-10-07T02:12:07.484500+00:00",
+  "registration_commit": "4754bb184cd712290fb37cad4728c6097eccdbf2",
+  "execution_head": "4754bb184cd712290fb37cad4728c6097eccdbf2",
+  "original_stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_SAVED_MODEL_ATTEMPT01",
+  "original_output_sha256": {
+    "COMPLETE.json": "1b5d255e167b383562f68035c62a5d0d78e59ecf305f6464ce53b27834efca08",
+    "SUMMARY.json": "c431e00ddb34ac4f62015a07a199161f07b5c8e51e03af217544c8d2d907fb54",
+    "BY2_DETAILS.jsonl.gz": "76211cca065d3b84fa9cb963037b0105355479649811786aedc41d42d1736fa7",
+    "BY2H_DETAILS.jsonl.gz": "eb2ae07364c7f0a2c825620e58c6cd030e9d36e9f254453a48fbfcfeb0f16921",
+    "BY2O_DETAILS.jsonl.gz": "d40416fe547616b2a040f4875c04b2c12cb671b0f031925bc5882269f1dc65fb",
+    "OPPORTUNITIES.csv": "96fe22f93b89e5ec2eb8ebaeacd17e04790c50ca7c395c92e0bc1e75835ab6a4"
+  },
+  "instrumentation_sha256": {
+    "ARC_PHASE_SAVED_MODEL_ATTEMPT01_EXIT.json": "b9d476b14621e78ff3b08e4fc4566a8deba2cbdb3cafd70a4c52d69632b6aef6",
+    "ARC_PHASE_SAVED_MODEL_ATTEMPT01_INVOCATION.json": "93519add4dbe160c1d991889f4d097678912d18eba1b34050700c529cc75231c",
+    "ARC_PHASE_SAVED_MODEL_ATTEMPT01_RESOURCES.txt": "4f5a4ceaa5b4a32da512b12f3ea85d982db260ef8acdd944ce33d8ade98dac7b",
+    "ARC_PHASE_SAVED_MODEL_ATTEMPT01_OPENAT.strace": "882df20022f8366409ebd5ef4f1f8145bdc2792be0c44dd145ecc60851a95f2d",
+    "ARC_PHASE_SAVED_MODEL_ATTEMPT01_ACCESS_AUDIT.json": "0350ee2f2b7dad816f65a97c54976c14909922c70e55ca004c3c12339460ed44",
+    "ARC_PHASE_SAVED_MODEL_ATTEMPT01_stdout.log": "839a581c5399db9d836f44692dc3162ab8636319c555ca03d2e94ec1bedb471e",
+    "ARC_PHASE_SAVED_MODEL_ATTEMPT01_stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "output_summary_counts": {
+    "pytest_processes": 0,
+    "raw_UBX_reads": 0,
+    "reference_reads": 0,
+    "native_calls": 0,
+    "evaluator_calls": 0,
+    "integer_search_calls": 0,
+    "saved_seal_reads": 3,
+    "saved_plan_reads": 3,
+    "saved_metadata_bytes": 431704107,
+    "saved_arc_metadata_reads": 3,
+    "arc_event_records": 709562,
+    "singleton_valid_table_reads": 3,
+    "endpoint_npz_reads": 1720,
+    "endpoint_npz_bytes": 3278368,
+    "geometry_contrast_calls": 860,
+    "conditional_bound_calls": 860
+  },
+  "returncode": 0,
+  "resource_measurements": {
+    "runner_elapsed_s": 8.54484970600015,
+    "time_v_wall_s": 12.78,
+    "time_v_user_s": 7.2,
+    "time_v_system_s": 1.95,
+    "time_v_maximum_RSS_KiB": 744656,
+    "outer_wrapper_elapsed_s": 10.323480029999928,
+    "note": "Different timing instruments/scopes retained separately; none is actual sensor availability or latency. Single offline execution is not a hard-real-time guarantee."
+  },
+  "compact_validation": {
+    "summary_and_all_four_payload_hashes_match": true,
+    "opportunities_rows": 921,
+    "details_rows": 921,
+    "details_status_and_indices_match_csv": true,
+    "five_unavailable_fields_all_null_or_blank": true,
+    "no_legal_endpoint_fingerprint_reuse": true,
+    "passive_openat_trace_hash_matches_audit": true
+  },
+  "scientific_reruns": 0,
+  "analysis_mode": "read-only aggregation of original output CSV/details; no core rerun, input-model revisit, raw/reference or external accuracy evaluation",
+  "compact_artifact_sha256": {
+    "ARC_PHASE_SAVED_MODEL_RESULTS.json": "4b7f0bf183a0b5bf626488d3c7eea70e22fc897d36907b9487238523d8486949",
+    "ARC_PHASE_SAVED_MODEL_DIAGNOSTICS.json": "e682247dcef29285a000d913db0ce98cafe9dc747dc6e147deac2aa0934d2795",
+    "ARC_PHASE_SAVED_MODEL_OPPORTUNITIES.csv": "96fe22f93b89e5ec2eb8ebaeacd17e04790c50ca7c395c92e0bc1e75835ab6a4",
+    "ARC_PHASE_SAVED_MODEL_ACCESS_AUDIT.json": "0350ee2f2b7dad816f65a97c54976c14909922c70e55ca004c3c12339460ed44",
+    "ARC_PHASE_SAVED_MODEL_RESULTS.md": "4c653f8626acfdada5a5b3c7c11f2886bf5f61053031db42af14b00107be1466"
+  }
+}

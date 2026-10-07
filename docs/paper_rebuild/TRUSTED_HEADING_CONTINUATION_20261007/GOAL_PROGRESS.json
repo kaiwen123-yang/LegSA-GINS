@@ -17,26 +17,50 @@
     {
       "id": "R2",
       "requirement": "Unfixed same-physical-arc temporal phase contrast: ambiguity elimination, timing, geometry, breaks, covariance, shared endpoints; qualify before navigation",
-      "status": "LOCAL_IMPLEMENTATION_AND_TESTS_IN_PROGRESS"
+      "status": "SAVED_MODEL_GEOMETRY_QUALIFIED_NOT_ADMITTED",
+      "registration_commit": "4754bb184cd712290fb37cad4728c6097eccdbf2",
+      "fixed_blocks": 921,
+      "legal_contrast_blocks": 860,
+      "all_block_old_singleton_absent": 659,
+      "missing_endpoint_blocks": 61,
+      "stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_SAVED_MODEL_ATTEMPT01",
+      "remaining": [
+        "phase-fault admission/revocation",
+        "source-backed error bounds and cross structure",
+        "availability and physical timing qualification",
+        "explainable state information increment before navigation"
+      ]
     },
     {
       "id": "R3",
       "requirement": "Capture actual foot P/H/R, weights and candidate scores without changing selection; diagnose zero updates; audit SDK provenance",
-      "status": "DIAGNOSTIC_IMPLEMENTATION_IN_PROGRESS"
+      "status": "DIAGNOSIS_COMPLETE_CURRENT_FAMILY_NO_GAIN",
+      "registration_commit": "714934f557607f79588c4e2dfd0b32db4ba373e2",
+      "native_calls": 3,
+      "evaluator_calls": 0,
+      "eligible_ends": 2510,
+      "continuous_improvement": 0,
+      "unresolved": 0,
+      "exact_old_output_identity": true,
+      "evidence": "foot_information/RESULTS.md",
+      "physical_input_qualification": "PENDING_RAW_JOINT_TIME_INSTALLATION_AND_ERROR_PROVENANCE"
     },
     {
       "id": "R4",
       "requirement": "Only after explainable information gain, matched-backend joint and same-fault/same-admission recovery validation",
-      "status": "CONDITIONAL_PENDING_R1_R2_R3"
+      "status": "NOT_TRIGGERED_NO_ADMISSIBLE_EXPLAINED_NAV_INFORMATION_GAIN"
     },
     {
       "id": "R5",
       "requirement": "Prepare independently referenced rotation/support-change/occlusion acquisition and metrics; January data not unseen holdout",
-      "status": "PLAN_IN_PROGRESS_EQUIPMENT_QUESTION_PENDING"
+      "status": "ACQUISITION_PLAN_PREPARED_EQUIPMENT_INFORMATION_PENDING",
+      "evidence": "ACQUISITION_PLAN.md",
+      "field_execution": false
     }
   ],
   "reference_boundary": "shared commercial GNSS reference; independent truth/real integer correctness/risk calibration not established",
   "local_registration_only": true,
   "main_merge_authorized": false,
-  "completion_proven": false
+  "completion_proven": false,
+  "latest_decision": "CONTINUATION_DECISION.md"
 }

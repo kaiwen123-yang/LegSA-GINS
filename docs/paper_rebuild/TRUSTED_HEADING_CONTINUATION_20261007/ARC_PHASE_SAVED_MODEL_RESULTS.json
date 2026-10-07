@@ -1,0 +1,129 @@
+{
+  "status": "COMPLETE_REAL_SAVED_MODEL_OBSERVATION_QUALIFICATION_NOT_TRUSTED_HEADING",
+  "registration_commit": "4754bb184cd712290fb37cad4728c6097eccdbf2",
+  "execution_head": "4754bb184cd712290fb37cad4728c6097eccdbf2",
+  "executions": 1,
+  "plan": "ARC_PHASE_SAVED_MODEL_PLAN.json",
+  "plan_sha256": "d2daed4c4283f316eba3bf8dcddf4b271f34a862468f7a1368bc1c8e82b04c01",
+  "data_mode": "real_saved_models_structural_diagnostic",
+  "total": {
+    "original_epochs": 4605,
+    "fixed_blocks": 921,
+    "legal_contrast_blocks": 860,
+    "endpoint_model_unavailable_blocks": 61,
+    "legal_fraction_of_all_blocks": 0.9337676438653637,
+    "legal_without_singleton_at_block_end": 731,
+    "legal_without_any_singleton_in_block": 659,
+    "contrast_relation_rows": 13555,
+    "endpoint_reuse_count": 0,
+    "free_two_baseline_rank6_blocks": 849,
+    "free_two_baseline_rank3_to_5_blocks": 11
+  },
+  "sequences": [
+    {
+      "sequence": "BY2",
+      "original_epochs": 1370,
+      "fixed_blocks": 274,
+      "statuses": {
+        "ENDPOINT_MODEL_UNAVAILABLE": 34,
+        "LEGAL_SAME_ARC_CONTRAST": 240
+      },
+      "endpoint_models_available": 240,
+      "legal_contrasts": 240,
+      "legal_without_singleton_at_block_end": 209,
+      "legal_without_any_singleton_in_block": 185,
+      "endpoint_reuse_count": 0,
+      "relation_count_range": [
+        8,
+        25
+      ],
+      "current_geometry_rank_counts": {
+        "3": 240
+      },
+      "actual_availability_known": false,
+      "cross_time_covariance_known": false,
+      "between_block_independence_known": false,
+      "covariance_calibrated": false
+    },
+    {
+      "sequence": "BY2H",
+      "original_epochs": 1350,
+      "fixed_blocks": 270,
+      "statuses": {
+        "ENDPOINT_MODEL_UNAVAILABLE": 27,
+        "LEGAL_SAME_ARC_CONTRAST": 243
+      },
+      "endpoint_models_available": 243,
+      "legal_contrasts": 243,
+      "legal_without_singleton_at_block_end": 176,
+      "legal_without_any_singleton_in_block": 150,
+      "endpoint_reuse_count": 0,
+      "relation_count_range": [
+        7,
+        25
+      ],
+      "current_geometry_rank_counts": {
+        "3": 243
+      },
+      "actual_availability_known": false,
+      "cross_time_covariance_known": false,
+      "between_block_independence_known": false,
+      "covariance_calibrated": false
+    },
+    {
+      "sequence": "BY2O",
+      "original_epochs": 1885,
+      "fixed_blocks": 377,
+      "statuses": {
+        "LEGAL_SAME_ARC_CONTRAST": 377
+      },
+      "endpoint_models_available": 377,
+      "legal_contrasts": 377,
+      "legal_without_singleton_at_block_end": 346,
+      "legal_without_any_singleton_in_block": 324,
+      "endpoint_reuse_count": 0,
+      "relation_count_range": [
+        3,
+        25
+      ],
+      "current_geometry_rank_counts": {
+        "3": 377
+      },
+      "actual_availability_known": false,
+      "cross_time_covariance_known": false,
+      "between_block_independence_known": false,
+      "covariance_calibrated": false
+    }
+  ],
+  "null_fields": [
+    "actual_available_time_s",
+    "actual_latency_s",
+    "joint_covariance_m2",
+    "direction_point_ecef",
+    "attitude_rank"
+  ],
+  "covariance_boundary": {
+    "endpoint_Q": "uncalibrated INDEPENDENT_RAW_SD_WORKING_MODEL",
+    "cross_time_covariance_known": false,
+    "between_block_independence_known": false,
+    "conditional_bound": "2*(mapped endpoint Q0 + mapped endpoint Q1); valid only if these matrices upper-bound actual endpoint error second moments; premise not established",
+    "joint_covariance_m2": null
+  },
+  "geometry_boundary": "Algebraic rank is not attitude observability. In 849 rank-six blocks, free two-baseline condition numbers have per-sequence medians 86211.7102, 95020.3484, 81093.0456; no attitude linearization or baseline solution was formed.",
+  "scope": {
+    "no_reference": true,
+    "no_raw_observation_reads": true,
+    "no_integer_search": true,
+    "no_native_navigation": true,
+    "no_trusted_heading_claim": true,
+    "no_navigation_benefit_evaluation": true,
+    "scope_verified": "registered kernel/adapter source, run outputs and root openat/execve audit; not every syscall kind"
+  },
+  "next_gate": "Independent phase-fault admission/revocation and source-backed error second-moment bound; only then assess relative-pose incremental information and controlled navigation integration.",
+  "artifacts": {
+    "opportunities": "ARC_PHASE_SAVED_MODEL_OPPORTUNITIES.csv",
+    "conditioning_diagnostics": "ARC_PHASE_SAVED_MODEL_DIAGNOSTICS.json",
+    "access_audit": "ARC_PHASE_SAVED_MODEL_ACCESS_AUDIT.json",
+    "receipt": "ARC_PHASE_SAVED_MODEL_RECEIPT.json"
+  }
+}

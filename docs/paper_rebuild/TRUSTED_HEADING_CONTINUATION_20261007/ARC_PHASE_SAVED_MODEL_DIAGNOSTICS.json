@@ -1,0 +1,397 @@
+{
+  "status": "READ_ONLY_OUTPUT_CHECK_COMPLETE",
+  "full_denominator": 921,
+  "all_output_hashes_verified": true,
+  "summary_sha256": "c431e00ddb34ac4f62015a07a199161f07b5c8e51e03af217544c8d2d907fb54",
+  "all_five_unavailable_fields_NA": true,
+  "no_legal_endpoint_fingerprint_reuse": true,
+  "sequences": [
+    {
+      "sequence": "BY2",
+      "counts": {
+        "statuses": {
+          "ENDPOINT_MODEL_UNAVAILABLE": 34,
+          "LEGAL_SAME_ARC_CONTRAST": 240
+        },
+        "legal": 240,
+        "contrast_rows": 3850,
+        "blocks_with_rejected_common_nodes": 0,
+        "rejected_node_reason_counts": {}
+      },
+      "relations": {
+        "count": 240,
+        "min": 8.0,
+        "p25": 14.0,
+        "median": 16.0,
+        "p75": 18.0,
+        "max": 25.0
+      },
+      "free_two_baseline_rank_counts": {
+        "6": 240
+      },
+      "singular_value_diagnostics": {
+        "G0_condition": {
+          "count": 240,
+          "min": 2.20464274941488,
+          "p25": 3.1837061795628316,
+          "median": 3.693828827250514,
+          "p75": 4.780522672790191,
+          "max": 8.276322652663973
+        },
+        "G1_condition": {
+          "count": 240,
+          "min": 2.2048676492421104,
+          "p25": 3.183611331296741,
+          "median": 3.694110536135836,
+          "p75": 4.780405460138612,
+          "max": 8.277181861466795
+        },
+        "free_fullrank_condition": {
+          "count": 240,
+          "min": 54452.79035061939,
+          "p25": 73471.65138782593,
+          "median": 86211.71017584438,
+          "p75": 101787.18409199076,
+          "max": 327228.5963938745
+        },
+        "free_singular4_to_1": {
+          "count": 240,
+          "min": 2.5616442928145435e-05,
+          "p25": 4.117471659174048e-05,
+          "median": 4.5091735714873645e-05,
+          "p75": 4.982361861185692e-05,
+          "max": 7.826914971399598e-05
+        },
+        "free_smallest_to_1": {
+          "count": 240,
+          "min": 3.055967635531255e-06,
+          "p25": 9.824440902554124e-06,
+          "median": 1.1599413172167956e-05,
+          "p75": 1.361069243761427e-05,
+          "max": 1.8364531800134374e-05
+        }
+      },
+      "scalar_diagnostics": {
+        "common_endpoint_nodes": {
+          "count": 240,
+          "min": 12.0,
+          "p25": 20.0,
+          "median": 22.0,
+          "p75": 24.0,
+          "max": 31.0
+        },
+        "interval_continuous_nodes": {
+          "count": 240,
+          "min": 12.0,
+          "p25": 20.0,
+          "median": 22.0,
+          "p75": 24.0,
+          "max": 31.0
+        },
+        "norm_z_m": {
+          "count": 240,
+          "min": 0.03947972052884141,
+          "p25": 0.07625530200253433,
+          "median": 0.09863627575308062,
+          "p75": 0.12655325262562353,
+          "max": 1.236304883125108
+        },
+        "norm_geometry_change": {
+          "count": 240,
+          "min": 0.00028363513189699774,
+          "p25": 0.0004163158609471281,
+          "median": 0.00045553408161725555,
+          "p75": 0.0004944076146479778,
+          "max": 0.00061781203802069
+        },
+        "endpoint0_Q_trace_m2": {
+          "count": 240,
+          "min": 0.0003734086913611902,
+          "p25": 0.0010706257347852743,
+          "median": 0.0013719022482635238,
+          "p75": 0.001586082735271977,
+          "max": 0.0025093366524891127
+        },
+        "endpoint1_Q_trace_m2": {
+          "count": 240,
+          "min": 0.0003676809547690969,
+          "p25": 0.001035415045332793,
+          "median": 0.0013989934170014757,
+          "p75": 0.0016195174018499396,
+          "max": 0.0024300265144112506
+        },
+        "conditional_unknown_cross_bound_trace_m2": {
+          "count": 240,
+          "min": 0.001486655921661199,
+          "p25": 0.004159220023811186,
+          "median": 0.00550053187903206,
+          "p75": 0.006449529427718294,
+          "max": 0.009491615241675085
+        }
+      },
+      "unavailable_endpoint_statuses": {
+        "{\"status\": \"NO_ANCHOR_MODEL\"}": 68
+      }
+    },
+    {
+      "sequence": "BY2H",
+      "counts": {
+        "statuses": {
+          "ENDPOINT_MODEL_UNAVAILABLE": 27,
+          "LEGAL_SAME_ARC_CONTRAST": 243
+        },
+        "legal": 243,
+        "contrast_rows": 3783,
+        "blocks_with_rejected_common_nodes": 0,
+        "rejected_node_reason_counts": {}
+      },
+      "relations": {
+        "count": 243,
+        "min": 7.0,
+        "p25": 13.0,
+        "median": 15.0,
+        "p75": 18.0,
+        "max": 25.0
+      },
+      "free_two_baseline_rank_counts": {
+        "6": 243
+      },
+      "singular_value_diagnostics": {
+        "G0_condition": {
+          "count": 243,
+          "min": 2.537860000423068,
+          "p25": 3.4182345313153846,
+          "median": 4.161118559066325,
+          "p75": 5.039340601818587,
+          "max": 11.143703561923441
+        },
+        "G1_condition": {
+          "count": 243,
+          "min": 2.538043270842539,
+          "p25": 3.41843524034162,
+          "median": 4.161333279973448,
+          "p75": 5.039871530044062,
+          "max": 11.146394701960151
+        },
+        "free_fullrank_condition": {
+          "count": 243,
+          "min": 52522.65571081985,
+          "p25": 73932.10417798105,
+          "median": 95020.34835735394,
+          "p75": 115928.00644820486,
+          "max": 401734.63406088937
+        },
+        "free_singular4_to_1": {
+          "count": 243,
+          "min": 2.6462412516881773e-05,
+          "p25": 3.975308993845019e-05,
+          "median": 4.4385067709383994e-05,
+          "p75": 5.05433666925772e-05,
+          "max": 6.746817801316561e-05
+        },
+        "free_smallest_to_1": {
+          "count": 243,
+          "min": 2.489205349042507e-06,
+          "p25": 8.626066254073257e-06,
+          "median": 1.0524061606669606e-05,
+          "p75": 1.3525923775734284e-05,
+          "max": 1.90394028341944e-05
+        }
+      },
+      "scalar_diagnostics": {
+        "common_endpoint_nodes": {
+          "count": 243,
+          "min": 11.0,
+          "p25": 19.0,
+          "median": 21.0,
+          "p75": 24.0,
+          "max": 31.0
+        },
+        "interval_continuous_nodes": {
+          "count": 243,
+          "min": 11.0,
+          "p25": 19.0,
+          "median": 21.0,
+          "p75": 24.0,
+          "max": 31.0
+        },
+        "norm_z_m": {
+          "count": 243,
+          "min": 0.0368477222496181,
+          "p25": 0.07636492640174977,
+          "median": 0.09972198358036664,
+          "p75": 0.1283455966999637,
+          "max": 0.34876064119592626
+        },
+        "norm_geometry_change": {
+          "count": 243,
+          "min": 0.00027165888017876763,
+          "p25": 0.0004099287364889769,
+          "median": 0.000452990567119754,
+          "p75": 0.0004903258938674306,
+          "max": 0.0006035578586532784
+        },
+        "endpoint0_Q_trace_m2": {
+          "count": 243,
+          "min": 0.0003207097145453675,
+          "p25": 0.000987881600699759,
+          "median": 0.0013492634135036444,
+          "p75": 0.0016124693928869422,
+          "max": 0.0024585999681463857
+        },
+        "endpoint1_Q_trace_m2": {
+          "count": 243,
+          "min": 0.00032756262881302557,
+          "p25": 0.0009985251882783344,
+          "median": 0.0013766511194458911,
+          "p75": 0.001657618714845058,
+          "max": 0.0027968711633685286
+        },
+        "conditional_unknown_cross_bound_trace_m2": {
+          "count": 243,
+          "min": 0.0012998988181112856,
+          "p25": 0.003971599815717309,
+          "median": 0.005368774790784818,
+          "p75": 0.0064324537473676256,
+          "max": 0.010510942263029828
+        }
+      },
+      "unavailable_endpoint_statuses": {
+        "{\"status\": \"NO_ANCHOR_MODEL\"}": 54
+      }
+    },
+    {
+      "sequence": "BY2O",
+      "counts": {
+        "statuses": {
+          "LEGAL_SAME_ARC_CONTRAST": 377
+        },
+        "legal": 377,
+        "contrast_rows": 5922,
+        "blocks_with_rejected_common_nodes": 0,
+        "rejected_node_reason_counts": {}
+      },
+      "relations": {
+        "count": 377,
+        "min": 3.0,
+        "p25": 12.0,
+        "median": 16.0,
+        "p75": 20.0,
+        "max": 25.0
+      },
+      "free_two_baseline_rank_counts": {
+        "6": 366,
+        "5": 8,
+        "4": 2,
+        "3": 1
+      },
+      "singular_value_diagnostics": {
+        "G0_condition": {
+          "count": 377,
+          "min": 2.1956174123581387,
+          "p25": 3.171272584825287,
+          "median": 3.8769764523872463,
+          "p75": 4.783387587083999,
+          "max": 52.09517695545824
+        },
+        "G1_condition": {
+          "count": 377,
+          "min": 2.19587553858041,
+          "p25": 3.1713085155892173,
+          "median": 3.877503397361243,
+          "p75": 4.78358638818412,
+          "max": 52.08931179311629
+        },
+        "free_fullrank_condition": {
+          "count": 366,
+          "min": 48788.073081882045,
+          "p25": 68516.69473178395,
+          "median": 81093.04560976445,
+          "p75": 100104.10797742044,
+          "max": 795080.3575498923
+        },
+        "free_singular4_to_1": {
+          "count": 376,
+          "min": 1.8245490676859413e-05,
+          "p25": 3.434722536724581e-05,
+          "median": 4.064930576798033e-05,
+          "p75": 4.5741617702779885e-05,
+          "max": 7.239621221029734e-05
+        },
+        "free_smallest_to_1": {
+          "count": 377,
+          "min": 1.2577345050776818e-06,
+          "p25": 1.0015859858817662e-05,
+          "median": 1.2341876112880981e-05,
+          "p75": 1.4691840271730802e-05,
+          "max": 0.019196724396470754
+        }
+      },
+      "scalar_diagnostics": {
+        "common_endpoint_nodes": {
+          "count": 377,
+          "min": 5.0,
+          "p25": 17.0,
+          "median": 22.0,
+          "p75": 26.0,
+          "max": 31.0
+        },
+        "interval_continuous_nodes": {
+          "count": 377,
+          "min": 5.0,
+          "p25": 17.0,
+          "median": 22.0,
+          "p75": 26.0,
+          "max": 31.0
+        },
+        "norm_z_m": {
+          "count": 377,
+          "min": 0.013342308361817117,
+          "p25": 0.07016942685089382,
+          "median": 0.09385535919585253,
+          "p75": 0.1263237497581409,
+          "max": 0.5789092331522738
+        },
+        "norm_geometry_change": {
+          "count": 377,
+          "min": 0.00018916734992549989,
+          "p25": 0.00040538447836537884,
+          "median": 0.0004624995411171283,
+          "p75": 0.0005084927700999246,
+          "max": 0.0006672088180784278
+        },
+        "endpoint0_Q_trace_m2": {
+          "count": 377,
+          "min": 0.00011448896995478925,
+          "p25": 0.0008673951275711908,
+          "median": 0.0013521259984809366,
+          "p75": 0.0016957770614783908,
+          "max": 0.0027971558491389306
+        },
+        "endpoint1_Q_trace_m2": {
+          "count": 377,
+          "min": 0.00011902794777398473,
+          "p25": 0.0008758676797290295,
+          "median": 0.0013597945559437883,
+          "p75": 0.0017079878187372353,
+          "max": 0.0027059716189539508
+        },
+        "conditional_unknown_cross_bound_trace_m2": {
+          "count": 377,
+          "min": 0.00046703383545754803,
+          "p25": 0.003513811543734491,
+          "median": 0.005414942263027094,
+          "p75": 0.006810485395398716,
+          "max": 0.010812472689857269
+        }
+      },
+      "unavailable_endpoint_statuses": {}
+    }
+  ],
+  "conditioning_notes": [
+    "SVDs are unweighted geometric matrices, not information matrices whitened with calibrated joint Q.",
+    "free_fullrank_condition includes rank-six blocks only.",
+    "free_smallest_to_1 uses the smallest returned singular value among min(number of relations,6); underdetermined blocks still have implicit null directions, so this ratio is not a full-column condition number.",
+    "No conditioning threshold was used to select or exclude any block."
+  ]
+}
