@@ -17,6 +17,7 @@
 #include "legsa_v23_port_core/baseline3d.hpp"
 #include "legsa_v23_port_core/heading_source_policy.hpp"
 #include "legsa_v23_port_core/factors/foot_pair_events.hpp"
+#include "legsa_v23_port_core/factors/arc_source_events.hpp"
 
 #include <string>
 
@@ -53,6 +54,9 @@ struct PortOptions {
   HeadingSourceCounts heading_source_counts;
   AttitudeCloneConfig attitude_clone_config;
   AttitudeCloneCounts attitude_clone_counts;
+  ArcCloneConfig arc_clone_config;
+  ArcCloneCounts arc_clone_counts;
+  bool arc_native_telemetry_enabled=false;
   std::string external_carrier_baseline_path;
   Vec3 baseline3d_body_vector_m = makeVec3(0.0, 0.0, 0.0);
   double baseline3d_length_m = 0.0;

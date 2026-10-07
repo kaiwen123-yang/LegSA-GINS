@@ -56,7 +56,9 @@ class GIEngine {
   void gnssUpdate(GnssData& gnss);
   void EKFPredict();
   void EKFPredict(const Matrix& Phi, const Matrix& Qd);
-  void EKFUpdate(const std::vector<double>& dz, const Matrix& H, const Matrix& R);
+  void EKFUpdate(const std::vector<double>& dz, const Matrix& H, const Matrix& R,
+                 const std::string& source_tag="UNSPECIFIED_INTERNAL_SOURCE",
+                 const std::string& provider_measurement_identity="UNKNOWN");
   void stateFeedback();
   void newImuProcess();
   // Exact-time event queue for the opt-in carrier source; consumes every event once.
@@ -114,16 +116,35 @@ class GIEngine {
   const AttitudeCloneCounts& attitudeCloneCounts() const { return attitude_clone_counts_; }
   Matrix jointAttitudeCovariance() const;
   bool attitudeCloneActive() const { return attitude_clone_active_; }
+  void setArcSourceEvents(const std::vector<ArcSourceEvent>& events);
+  void finalizeArcSourceStream();
+  void writeArcCloneDiagnostics(const std::string& output_dir) const;
+  const ArcCloneCounts& arcCloneCounts() const { return arc_clone_counts_; }
+  const std::vector<ArcJointPrior>& arcJointPriors() const { return arc_joint_priors_; }
+  const std::vector<ArcLifecycleEvent>& arcLifecycleEvents() const { return arc_lifecycle_events_; }
+  const std::vector<ArcConditioningEvent>& arcConditioningEvents() const { return arc_conditioning_events_; }
+  const std::vector<ArcImuSegment>& arcImuSegments() const { return arc_imu_segments_; }
+  bool arcNativeTelemetryEnabled() const { return arc_native_telemetry_enabled_; }
 
 
  private:
+  friend struct ArcNativeTestAccess;  // Synthetic harness: no production setter is exposed.
   struct JointTimedEvent {
     double time=0.0;
     bool has_gnss=false;
     GnssData gnss;
     std::vector<FootPairEvent> feet;
+    std::vector<ArcSourceEvent> arcs;
   };
   void processExactJointEvents(const std::vector<JointTimedEvent>& events);
+  bool jointCloneEnabled() const;
+  void initializeArcDiagnostics();
+  void appendArcTimedEvents(std::vector<JointTimedEvent>& events);
+  void processArcSourceEvent(const ArcSourceEvent& event);
+  void recordArcConditioning(const std::string& kind, const std::string& source_tag,
+                             const std::string& provider_measurement_identity="UNKNOWN");
+  void recordArcImuSegment(const ImuData& previous, const ImuData& segment);
+  std::string arcConditioningInformationId() const;
   attitude_clone::Gaussian attitudeJointState() const;
   void setAttitudeJointState(const attitude_clone::Gaussian& state);
   void processFootPairEvent(const FootPairEvent& event);
@@ -169,6 +190,17 @@ class GIEngine {
 
   PortOptions options_;
   bool attitude_clone_active_=false;
+  std::string attitude_clone_owner_="NONE";
+  std::vector<ArcSourceEvent> arc_events_;
+  std::size_t next_arc_event_=0, arc_dispatch_ordinal_=0, arc_state_sample_count_=0;
+  bool arc_stream_started_=false, arc_stream_finalized_=false, arc_native_telemetry_enabled_=false;
+  ArcCloneCounts arc_clone_counts_;
+  std::vector<ArcLifecycleEvent> arc_lifecycle_events_;
+  std::vector<ArcConditioningEvent> arc_conditioning_events_;
+  std::vector<ArcImuSegment> arc_imu_segments_;
+  std::vector<ArcJointPrior> arc_joint_priors_;
+  ArcJointPrior arc_active_prior_;
+  std::size_t arc_active_lifecycle_=0;
   Matrix attitude_clone_cross_{RANK,3,0.0};
   Matrix attitude_clone_cov_{3,3,0.0};
   Vec3 attitude_clone_error_{};

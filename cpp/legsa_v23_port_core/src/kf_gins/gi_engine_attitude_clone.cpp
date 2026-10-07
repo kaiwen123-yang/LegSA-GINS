@@ -48,7 +48,7 @@ void GIEngine::setAttitudeJointState(const attitude_clone::Gaussian& state) {
   }
 }
 void GIEngine::requireFrozenCloneBlocks() const {
-  if(options_.attitude_clone_config.mode=="off") return;
+  if(!jointCloneEnabled()) return;
   require(attitude_clone_weights_.size()==21,"ATTITUDE_CLONE_WEIGHTS_NOT_INITIALIZED");
   for(std::size_t i=0;i<21;++i) if(attitude_clone_weights_[i]==0.0) {
     require(dx_[i]==0.0,"ATTITUDE_CLONE_FROZEN_MEAN_ACTIVATED");
@@ -84,6 +84,7 @@ void GIEngine::recordFootEvent(const FootPairEvent& e,const std::string& action,
 void GIEngine::retireAttitudeClone() {
   // Cov_ and dx_ already ARE the current marginal. No Schur complement.
   attitude_clone_active_=false;
+  attitude_clone_owner_="NONE";
   attitude_clone_cross_=Matrix(21,3);attitude_clone_cov_=Matrix(3,3);
   attitude_clone_error_={0.0,0.0,0.0};
 }
@@ -119,7 +120,7 @@ void GIEngine::processFootPairEvent(const FootPairEvent& e) {
     attitude_clone_start_.direction_body_frd=multiply(config.foot_frd_to_engine_body,e.direction_body_frd);
     attitude_clone_cbe_=multiply(Earth::cne(pvacur_.pos_blh_rad_m),pvacur_.cbn);
     attitude_clone::requireRotation(attitude_clone_cbe_,"START_CBE");
-    attitude_clone_active_=true;setAttitudeJointState(augmented);
+    attitude_clone_active_=true;attitude_clone_owner_="FOOT";setAttitudeJointState(augmented);
     recordFootEvent(e,"CLONE_CREATED_DETERMINISTIC");return;
   }
   require(e.type=="END","FOOT_PAIR_UNKNOWN_ACTION");
@@ -191,6 +192,7 @@ void GIEngine::newImuProcessWithEvents(const std::vector<GnssData>& events) {
     }
     std::stable_sort(combined.begin(),combined.end(),[](const JointTimedEvent& a,const JointTimedEvent& b){return a.time<b.time;});
   }
+  appendArcTimedEvents(combined);
   processExactJointEvents(combined);
 }
 void GIEngine::finalizeFootPairStream() {

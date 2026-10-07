@@ -569,6 +569,17 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
     if (frame_stream>>trailing_frame) throw std::runtime_error("FOOT_PAIR_FRAME_TRAILING_VALUE");
   }
   validateAttitudeCloneConfig(clone_config, options.runtime_contract);
+  auto& arc_config=options.arc_clone_config;
+  arc_config.mode=stringOrDefault(kv,"arc_clone_mode","off");
+  arc_config.events_path=stringOrDefault(kv,"arc_source_events_path","");
+  arc_config.events_sha256=stringOrDefault(kv,"arc_source_events_sha256","");
+  arc_config.manifest_sha256=stringOrDefault(kv,"arc_schedule_manifest_sha256","");
+  arc_config.source_time_scale_id=stringOrDefault(kv,"arc_source_time_scale_id","");
+  arc_config.time_mapping_source_id=stringOrDefault(kv,"arc_source_time_mapping_id","");
+  arc_config.availability_policy=stringOrDefault(kv,"arc_availability_policy","");
+  validateArcCloneConfig(arc_config,options.runtime_contract);
+  if(arc_config.mode!="off" && clone_config.mode!="off")
+    throw std::runtime_error("ARC_AND_FOOT_CLONE_MODES_ARE_EXCLUSIVE");
   options.heading_source_policy = stringOrDefault(kv, "heading_source_policy", "configured");
   if (options.heading_source_policy != "configured" &&
       options.heading_source_policy != "pvt_priority_control" &&
@@ -1362,7 +1373,7 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   if (options.clean1_formal_mode || options.runtime_contract == "research_experiment") {
     validateFormalMethodContract(kv, options);
   }
-  if (options.attitude_clone_config.mode != "off" &&
+  if ((options.attitude_clone_config.mode != "off" || options.arc_clone_config.mode != "off") &&
       (options.qa_fallback_config.enable_qa_fallback || options.qa_fallback_config.qa_active_mode ||
        options.algorithm_id == quality_aware::kLegsaQaFallbackEkf ||
        options.quality_state_manager_config.enable_multi_state_qm))

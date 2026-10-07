@@ -127,7 +127,10 @@ GIEngine::GIEngine(PortOptions options)
       throw std::runtime_error("PVT_PRIORITY_INVALID_ENGINE_CONTRACT");
   }
   validateAttitudeCloneConfig(options_.attitude_clone_config, options_.runtime_contract);
-  if (options_.attitude_clone_config.mode != "off" &&
+  validateArcCloneConfig(options_.arc_clone_config, options_.runtime_contract);
+  if (options_.arc_clone_config.mode!="off" && options_.attitude_clone_config.mode!="off")
+    throw std::runtime_error("ARC_AND_FOOT_CLONE_MODES_ARE_EXCLUSIVE");
+  if (jointCloneEnabled() &&
       (options_.qa_fallback_config.enable_qa_fallback || options_.qa_fallback_config.qa_active_mode ||
        options_.algorithm_id == quality_aware::kLegsaQaFallbackEkf ||
        options_.quality_state_manager_config.enable_multi_state_qm))
@@ -164,6 +167,8 @@ void GIEngine::initialize(const NavState& initial_state) {
   heading_source_counts_ = HeadingSourceCounts{};
   heading_source_events_.clear();
   attitude_clone_active_=false;
+  attitude_clone_owner_="NONE";
+  initializeArcDiagnostics();
   attitude_clone_cross_=Matrix(RANK,3,0.0);
   attitude_clone_cov_=Matrix(3,3,0.0);
   attitude_clone_error_={0.0,0.0,0.0};
@@ -171,7 +176,7 @@ void GIEngine::initialize(const NavState& initial_state) {
   next_foot_event_=0;foot_stream_started_=false;foot_event_diagnostics_.clear();
   attitude_clone_counts_=AttitudeCloneCounts{};
   attitude_clone_counts_.source_rows=foot_events_.size();
-  if (options_.attitude_clone_config.mode!="off")
+  if (jointCloneEnabled())
     attitude_clone_weights_=attitude_clone::fixedCurrentWeights(Cov_);
 
   zeroVector(dx_);
@@ -515,11 +520,12 @@ void GIEngine::EKFPredict(const Matrix& Phi, const Matrix& Qd) {
   Cov_ = add(multiply(multiply(Phi, Cov_), transpose(Phi)), Qd);
   dx_ = multiply(Phi, dx_);
   if (attitude_clone_active_) attitude_clone_cross_=multiply(Phi,attitude_clone_cross_);
-  if (options_.attitude_clone_config.mode!="off") requireFrozenCloneBlocks();
+  if (jointCloneEnabled()) requireFrozenCloneBlocks();
 }
 
 // 中文说明：EKFUpdate 使用 dx += K(dz-Hdx) 和 Joseph covariance form。
-void GIEngine::EKFUpdate(const std::vector<double>& dz, const Matrix& H, const Matrix& R) {
+void GIEngine::EKFUpdate(const std::vector<double>& dz, const Matrix& H, const Matrix& R,
+                         const std::string& source_tag, const std::string& provider_measurement_identity) {
   if (H.cols != RANK || dz.size() != H.rows || R.rows != H.rows || R.cols != H.rows) {
     throw std::runtime_error("EKFUpdate dimension mismatch");
   }
@@ -527,7 +533,10 @@ void GIEngine::EKFUpdate(const std::vector<double>& dz, const Matrix& H, const M
     Matrix full_h(H.rows,attitude_clone::kJoint,0.0);
     for(std::size_t i=0;i<H.rows;++i) for(std::size_t j=0;j<RANK;++j) full_h(i,j)=H(i,j);
     setAttitudeJointState(attitude_clone::ordinaryUpdate(attitudeJointState(),dz,full_h,R));
-    ++attitude_clone_counts_.ordinary_joint_updates;
+    if(attitude_clone_owner_=="ARC") ++arc_clone_counts_.ordinary_joint_updates;
+    else ++attitude_clone_counts_.ordinary_joint_updates;
+    if(options_.arc_clone_config.mode!="off") ++arc_clone_counts_.ordinary_updates;
+    recordArcConditioning("ORDINARY_UPDATE",source_tag,provider_measurement_identity);
     requireFrozenCloneBlocks();
     return;
   }
@@ -546,6 +555,8 @@ void GIEngine::EKFUpdate(const std::vector<double>& dz, const Matrix& H, const M
   const Matrix I = identityMatrix(RANK);
   const Matrix IKH = subtract(I, multiply(K, H));
   Cov_ = add(multiply(multiply(IKH, Cov_), transpose(IKH)), multiply(multiply(K, R), transpose(K)));
+  if(options_.arc_clone_config.mode!="off") ++arc_clone_counts_.ordinary_updates;
+  recordArcConditioning("ORDINARY_UPDATE",source_tag,provider_measurement_identity);
 }
 
 // 中文说明：stateFeedback 将误差状态反馈到导航状态；位置/速度减，姿态 qpn 左乘，bias/scale 加。
@@ -566,7 +577,7 @@ void GIEngine::stateFeedback() {
   const Vec3 new_blh = subtract(old_blh, multiply(Earth::DRi(old_blh), dx_pos));
   attitude_clone::Gaussian reset_state;
   Matrix3 reset_clone=attitude_clone_cbe_;
-  if(options_.attitude_clone_config.mode!="off") {
+  if(jointCloneEnabled()) {
     if(yaw_correction_clipped) throw std::runtime_error("ATTITUDE_CLONE_PARTIAL_FEEDBACK_FORBIDDEN");
     reset_state=attitude_clone::reset(attitudeJointState(),multiply(Earth::DR(new_blh),Earth::DRi(old_blh)));
     if(attitude_clone_active_) {
@@ -590,10 +601,12 @@ void GIEngine::stateFeedback() {
                                                          -dx_phi[2] * R2D,
                                                          yaw_correction_clipped);
   zeroVector(dx_);
-  if(options_.attitude_clone_config.mode!="off") {
+  if(jointCloneEnabled()) {
     setAttitudeJointState(reset_state);
     if(attitude_clone_active_) attitude_clone_cbe_=reset_clone;
-    ++attitude_clone_counts_.full_resets;
+    if(options_.arc_clone_config.mode!="off") ++arc_clone_counts_.full_resets;
+    else ++attitude_clone_counts_.full_resets;
+    recordArcConditioning("FULL_RESET","FULL_FEEDBACK_JOINT_G_P_Gt");
     requireFrozenCloneBlocks();
   }
 }
@@ -653,6 +666,7 @@ void GIEngine::processExactJointEvents(const std::vector<JointTimedEvent>& event
   }
   ImuData previous = imupre_;
   ImuData remaining = imucur_;
+  std::vector<ArcSourceEvent> end_arcs;
   for (const auto& input_event : events) {
     GnssData event = input_event.gnss;
     bool execute_gnss = input_event.has_gnss;
@@ -687,7 +701,7 @@ void GIEngine::processExactJointEvents(const std::vector<JointTimedEvent>& event
       applyBaseline3dUpdate(event, options_.enable_basic_dual_yaw_baseline, "INACTIVE", 1.0);
       execute_gnss=false;
     }
-    if(!execute_gnss && input_event.feet.empty()) continue;
+    if(!execute_gnss && input_event.feet.empty() && input_event.arcs.empty()) continue;
     const double event_time=input_event.time;
     if (event_time > previous.time) {
       ImuData segment = remaining;
@@ -704,11 +718,13 @@ void GIEngine::processExactJointEvents(const std::vector<JointTimedEvent>& event
         remaining.dt -= segment.dt;
         remaining.compensated = false;
       }
+      recordArcImuSegment(previous,segment);
       insPropagation(previous, segment);
       previous = segment;
       pvapre_ = pvacur_;
     }
-    // No TIME_ALIGN_ERR snapping: no event can be used before its availability.
+    // No TIME_ALIGN_ERR snapping: dispatch at the registered event timestamp.
+    // ARC is source-time replay only; actual sensor/model availability remains unknown.
     timestamp_ = event_time;
     if(execute_gnss) {
     addGnssData(event);
@@ -729,9 +745,14 @@ void GIEngine::processExactJointEvents(const std::vector<JointTimedEvent>& event
     pvapre_ = pvacur_;
     }
     for(const auto& foot : input_event.feet) processFootPairEvent(foot);
+    for(const auto& arc:input_event.arcs) {
+      if(event_time==end) end_arcs.push_back(arc);
+      else processArcSourceEvent(arc);
+    }
     pvapre_=pvacur_;
   }
   if (previous.time < end) {
+    recordArcImuSegment(previous,remaining);
     insPropagation(previous, remaining);
     previous = remaining;
   }
@@ -748,6 +769,8 @@ void GIEngine::processExactJointEvents(const std::vector<JointTimedEvent>& event
     applyBodyVelocityPriorForTime(end);
     if (go2_velocity_diagnostic_prior_status_.update_count > before) stateFeedback();
   }
+  if(options_.arc_clone_config.mode!="off") ++arc_state_sample_count_;
+  for(const auto& arc:end_arcs) processArcSourceEvent(arc);
   pvapre_ = pvacur_;
   if (!checkCov()) {
     ++cov_health_fail_count_;
@@ -1081,7 +1104,8 @@ void GIEngine::applyPositionUpdate(GnssData& gnss) {
   if (options_.enable_basic_dual_yaw_baseline) {
     // 中文说明：PAPER10E0 Basic 基线保持 KF-GINS 原始 GNSS 位置 3D 更新，
     // 不经过 source-aware/QM R scaling，避免把 LegSA-GINS-Full 模块混入基础对比。
-    EKFUpdate(dz, H, R);
+    EKFUpdate(dz, H, R, "GNSS_POSITION_BASIC",
+      options_.arc_clone_config.mode!="off" ? "GNSS_EVENT_TIME_BITS:"+arcSourceTimeBits(gnss.time) + ":RAW_ROW_ID_UNKNOWN" : "UNKNOWN");
     ++position_update_count_;
     return;
   }
@@ -1096,7 +1120,8 @@ void GIEngine::applyPositionUpdate(GnssData& gnss) {
   if (weight.rejected) {
     return;
   }
-  EKFUpdate(dz, H, scaled_R);
+  EKFUpdate(dz, H, scaled_R, "GNSS_POSITION_SOURCE_AWARE",
+      options_.arc_clone_config.mode!="off" ? "GNSS_EVENT_TIME_BITS:"+arcSourceTimeBits(gnss.time) + ":RAW_ROW_ID_UNKNOWN" : "UNKNOWN");
   ++position_update_count_;
 }
 
@@ -1180,7 +1205,8 @@ void GIEngine::applyVelocityUpdate(GnssData& gnss) {
   if (weight.rejected) {
     return;
   }
-  EKFUpdate(dz, H, scaled_R);
+  EKFUpdate(dz, H, scaled_R, "RECEIVER_VELOCITY",
+      options_.arc_clone_config.mode!="off" ? "GNSS_EVENT_TIME_BITS:"+arcSourceTimeBits(gnss.time) + ":RAW_ROW_ID_UNKNOWN" : "UNKNOWN");
   ++velocity_update_count_;
 }
 
@@ -1252,7 +1278,8 @@ void GIEngine::applyYawUpdate(GnssData& gnss) {
   } else {
     ++yaw_normal_count_;
   }
-  EKFUpdate(dz, H, scaled_R);
+  EKFUpdate(dz, H, scaled_R, "DUAL_YAW_SOURCE_AWARE",
+      options_.arc_clone_config.mode!="off" ? "GNSS_EVENT_TIME_BITS:"+arcSourceTimeBits(gnss.time) + ":RAW_ROW_ID_UNKNOWN" : "UNKNOWN");
 }
 
 // 中文说明：PAPER10E0 Basic Dual-Yaw EKF 的唯一新增观测。
@@ -1272,7 +1299,8 @@ void GIEngine::applyBasicDualYawUpdate(GnssData& gnss) {
   // 中文说明：R_yaw 使用固定角度标准差，内部单位为 rad^2；不使用 dynamic yaw_std 或 source-aware 放大。
   Matrix R(1, 1, yaw_std * yaw_std);
   const std::vector<double> dz{residual};
-  EKFUpdate(dz, H, R);
+  EKFUpdate(dz, H, R, "DUAL_YAW_BASIC",
+      options_.arc_clone_config.mode!="off" ? "GNSS_EVENT_TIME_BITS:"+arcSourceTimeBits(gnss.time) + ":RAW_ROW_ID_UNKNOWN" : "UNKNOWN");
   ++yaw_normal_count_;
 }
 
@@ -1373,7 +1401,8 @@ void GIEngine::applyBaseline3dUpdate(const GnssData& gnss, bool basic,
     row.sa_R_scale = weight.combined_R_scale;
     if (weight.rejected) { reject("SOURCE_AWARE_REJECT"); return; }
   }
-  EKFUpdate(dz, model.H, scaled_R);
+  EKFUpdate(dz, model.H, scaled_R, "BASELINE3D",
+      options_.arc_clone_config.mode!="off" ? "GNSS_EVENT_TIME_BITS:"+arcSourceTimeBits(gnss.time) + ":RAW_ROW_ID_UNKNOWN" : "UNKNOWN");
   row.accepted = true;
   row.reason = basic ? "BASIC_ACCEPT" : "ACCEPT";
   ++baseline3d_counts_.accepted;
@@ -1507,7 +1536,8 @@ void GIEngine::applyRawDopplerUpdateForTime(double update_time) {
     raw_doppler_residual_norms_.push_back(residual);
     return;
   }
-  EKFUpdate(dz, H, scaled_R);
+  EKFUpdate(dz, H, scaled_R, "RAW_DOPPLER",
+      options_.arc_clone_config.mode!="off" ? "SOURCE_TIME_BITS:"+arcSourceTimeBits(best->time) + ":VECTOR_INDEX:" + std::to_string(static_cast<std::size_t>(best-raw_doppler_measurements_.data())) : "UNKNOWN");
   raw_doppler_residual_norms_.push_back(residual);
   ++raw_doppler_status_.update_count;
   if (raw_doppler_status_.sat_count_min == 0 || best->sat_count < raw_doppler_status_.sat_count_min) {
@@ -1577,7 +1607,8 @@ void GIEngine::applyGo2AttitudeWeakPriorForTime(double update_time) {
       return;
     }
   }
-  EKFUpdate(dz, H, scaled_R);
+  EKFUpdate(dz, H, scaled_R, "GO2_ATTITUDE_RP",
+      options_.arc_clone_config.mode!="off" ? "SOURCE_TIME_BITS:"+arcSourceTimeBits(best->time) + ":VECTOR_INDEX:" + std::to_string(static_cast<std::size_t>(best-go2_attitude_priors_.data())) : "UNKNOWN");
   go2_roll_residuals_.push_back(std::fabs(dz[0]));
   go2_pitch_residuals_.push_back(std::fabs(dz[1]));
   ++go2_attitude_prior_status_.update_count;
@@ -1628,7 +1659,8 @@ void GIEngine::applyBodyVelocityPriorForTime(double update_time) {
     const auto weight=applySourceAwareWeighting(metadata.source,metadata,model.residual,model.H,model.R,scaled_R);
     if(weight.rejected) { ++go2_velocity_diagnostic_prior_status_.reject_count; finish("source_aware_reject"); return; }
   }
-  EKFUpdate(model.residual,model.H,scaled_R);
+  EKFUpdate(model.residual,model.H,scaled_R, "BODY_HORIZONTAL_VELOCITY",
+      options_.arc_clone_config.mode!="off" ? "SOURCE_TIME_BITS:"+arcSourceTimeBits(best->time) + ":VECTOR_INDEX:" + std::to_string(static_cast<std::size_t>(best-go2_velocity_diagnostic_priors_.data())) : "UNKNOWN");
   ++go2_velocity_diagnostic_prior_status_.update_count;
   ++go2_velocity_diagnostic_prior_status_.horizontal_update_count;
   go2_velocity_diagnostic_prior_status_.horizontal_only=true;
@@ -1722,7 +1754,8 @@ void GIEngine::applyGo2VelocityDiagnosticPriorForTime(double update_time) {
       return;
     }
   }
-  EKFUpdate(dz, H, scaled_R);
+  EKFUpdate(dz, H, scaled_R, "GO2_VELOCITY_DIAGNOSTIC",
+      options_.arc_clone_config.mode!="off" ? "SOURCE_TIME_BITS:"+arcSourceTimeBits(best->time) + ":VECTOR_INDEX:" + std::to_string(static_cast<std::size_t>(best-go2_velocity_diagnostic_priors_.data())) : "UNKNOWN");
   ++go2_velocity_diagnostic_prior_status_.update_count;
   if (horizontal_2d || best->std_ned_mps[2] >= 999.0 ||
       best->prior_policy.find("horizontal") != std::string::npos) {
@@ -1852,7 +1885,8 @@ void GIEngine::applyFgoFeedbackForTime(double update_time) {
     }
   }
   // 中文说明：N8G 通过 EKFUpdate 累积误差状态，随后由统一 stateFeedback 生效；这里不直接改 pvacur_。
-  EKFUpdate(dz, H, R);
+  EKFUpdate(dz, H, R, "FGO_FEEDBACK",
+      options_.arc_clone_config.mode!="off" ? "SOURCE_TIME_BITS:"+arcSourceTimeBits(best->time) + ":VECTOR_INDEX:" + std::to_string(static_cast<std::size_t>(best-fgo_feedback_observations_.data())) : "UNKNOWN");
   trace.accepted = 1;
   trace.reject_reason = "";
   fgo_feedback_trace_.push_back(trace);
@@ -2063,7 +2097,7 @@ Matrix GIEngine::covarianceMatrix() const {
 }
 
 void GIEngine::setCovarianceMatrix(const Matrix& matrix) {
-  if(options_.attitude_clone_config.mode!="off")
+  if(jointCloneEnabled())
     throw std::runtime_error("ATTITUDE_CLONE_CURRENT_ONLY_COV_REPLACEMENT_FORBIDDEN");
   Cov_ = matrix;
 }

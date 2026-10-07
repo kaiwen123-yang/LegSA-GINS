@@ -167,6 +167,7 @@ void writeActualSolverInputPaths(std::ostream& out, const PortOptions& options) 
   if (options.attitude_clone_config.mode != "off") {
     add("sdk_foot_pair_direction_events", options.attitude_clone_config.events_path);
   }
+  if(options.arc_clone_config.mode!="off") add("arc_source_time_metadata_only",options.arc_clone_config.events_path);
   if (options.dual_antenna_measurement_model == "baseline3d") {
     add("dual_antenna_baseline3d", options.baseline3d_source == "external_carrier" ? options.external_carrier_baseline_path : options.baseline3d_path);
   }
@@ -195,6 +196,8 @@ void writeActualSolverInputPaths(std::ostream& out, const PortOptions& options) 
 void writeActualSolverInputRoles(std::ostream& out, const PortOptions& options) {
   out << "{\"propagation_imu\": \"source_backed_propagation\", "
       << "\"gnss_position_receiver_velocity_dual_yaw\": \"validity_gated_measurements\"";
+  if(options.arc_clone_config.mode!="off")
+    out<<", \"arc_source_time_metadata_only\": \"source_time_replay_assumption_no_phase_values_or_availability_claim\"";
   if (options.dual_antenna_measurement_model == "baseline3d") {
     out << ", \"dual_antenna_baseline3d\": \"" << (options.heading_source_policy == "pvt_priority_control" ? "diagnostic_only_carrier_no_heading_update" : options.baseline3d_source == "external_carrier" ? "experimental_external_carrier_baseline_full_covariance" : "three_dimensional_gnss_baseline_measurement") << "\"";
   }
@@ -868,6 +871,43 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
         << "  \"attitude_clone_late_initial_events\": " << counts.late_initial_events << ",\n"
         << "  \"attitude_clone_unconsumed_terminal\": " << counts.unconsumed_terminal << ",\n"
         << "  \"attitude_clone_unconsumed_outside_imu\": " << counts.unconsumed_outside_imu << ",\n";
+  }
+  if(options.arc_clone_config.mode!="off") {
+    const auto& ac=options.arc_clone_config;const auto& counts=options.arc_clone_counts;
+    out<<"  \"arc_clone_mode\": \""<<escapeJson(ac.mode)<<"\",\n"
+       <<"  \"arc_source_events_path\": \""<<escapeJson(ac.events_path)<<"\",\n"
+       <<"  \"arc_source_events_sha256\": \""<<escapeJson(ac.events_sha256)<<"\",\n"
+       <<"  \"arc_schedule_manifest_sha256\": \""<<escapeJson(ac.manifest_sha256)<<"\",\n"
+       <<"  \"arc_pin_validation\": \"declared_pins_require_external_runner_pre_and_post_verification\",\n"
+       <<"  \"arc_source_time_scale_id\": \""<<escapeJson(ac.source_time_scale_id)<<"\",\n"
+       <<"  \"arc_source_time_mapping_id\": \""<<escapeJson(ac.time_mapping_source_id)<<"\",\n"
+       <<"  \"arc_availability_policy\": \""<<escapeJson(ac.availability_policy)<<"\",\n"
+       <<"  \"arc_actual_available_time\": null,\n"
+       <<"  \"arc_phase_state_cross\": \"UNKNOWN\",\n"
+       <<"  \"arc_native_telemetry_enabled\": "<<(options.arc_native_telemetry_enabled?"true":"false")<<",\n"
+       <<"  \"arc_arithmetic_mode\": \"identical_empty_phase_model_all_arms\",\n"
+       <<"  \"arc_max_joint_dimension\": 24,\n"
+       <<"  \"arc_output_current_dimension\": 21,\n"
+       <<"  \"arc_reset\": \"full_joint_G_P_Gt_including_interblock_gaps\",\n"
+       <<"  \"arc_retirement\": \"current_marginal_not_Schur_conditioning\",\n"
+       <<"  \"arc_ordinary_cross_model\": \"inherited_working_model_zero_clone_H_full_joint_gain\",\n"
+       <<"  \"arc_process_cross_model\": \"inherited_current_process_working_model\",\n"
+       <<"  \"arc_dispatch_phase\": \"POST_ALL_EXISTING_UPDATES_AT_TIMESTAMP\",\n"
+       <<"  \"arc_source_rows\": "<<counts.source_rows<<",\n"
+       <<"  \"arc_source_blocks\": "<<counts.source_blocks<<",\n"
+       <<"  \"arc_consumed_event_rows\": "<<counts.event_rows<<",\n"
+       <<"  \"arc_starts\": "<<counts.starts<<",\n"
+       <<"  \"arc_ends\": "<<counts.ends<<",\n"
+       <<"  \"arc_retires\": "<<counts.retires<<",\n"
+       <<"  \"arc_covered_blocks\": "<<counts.covered_blocks<<",\n"
+       <<"  \"arc_uncovered_initial\": "<<counts.uncovered_initial<<",\n"
+       <<"  \"arc_uncovered_terminal\": "<<counts.uncovered_terminal<<",\n"
+       <<"  \"arc_ordinary_updates\": "<<counts.ordinary_updates<<",\n"
+       <<"  \"arc_ordinary_joint_updates\": "<<counts.ordinary_joint_updates<<",\n"
+       <<"  \"arc_full_resets\": "<<counts.full_resets<<",\n"
+       <<"  \"arc_imu_segments\": "<<counts.imu_segments<<",\n"
+       <<"  \"arc_phase_updates\": "<<counts.phase_updates<<",\n"
+       <<"  \"arc_foot_pair_updates\": "<<options.attitude_clone_counts.pair_updates<<",\n";
   }
   out << "  \"actual_solver_input_paths\": ";
   writeActualSolverInputPaths(out, options);
