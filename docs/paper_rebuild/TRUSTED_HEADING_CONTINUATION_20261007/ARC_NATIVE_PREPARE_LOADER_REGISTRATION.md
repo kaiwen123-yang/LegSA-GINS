@@ -1,0 +1,17 @@
+# 原生ARC时间表与loader：执行前登记
+
+在原生局部资格完成后，独立登记两个顺序执行的有界阶段：prepare一次；成功后新checker编译一次、三个config loader及同进程三个ARC CSV生产parser。完整导航、相位数学/故障读出、评价均为0。六次真实空相位回放须另行登记。
+
+prepare固定读取17项共2,452,519字节原配置/封存记录，包括一次OPPORTUNITIES解析与三份共921行详细结果解码。详细结果实际含z/G/Q旧数值，程序只提取身份、时刻、fingerprint与缺失状态；不声称未读这些字节。前后各做一次身份哈希核查，源码及所有输入事前固定。
+
+全921块保留，生成1842个精确START/END，860块1720个已知composite模型指纹唯一；61块两端fp未被旧文件序列化则留空，并保留各端状态，不补造。endpoint ID由序列与原epoch index派生，不冒充原接收机消息ID。原窗口、端点和顺序固定，不用旧singleton、残差或几何rank选块。
+
+源时标明确为UTC Unix减登记base；保存原RAWX双精度端点和IMU既有6位时间tokens。登记base及代码/manifest来源只支持共同时间定义，物理同步、实际到达仍未知。旧三窗HV是status-A1旋转NED provider，保持原配置；合成body-HV资格不提供实测独立腿测速。
+
+原3PVT_CONTROL科学配置全部原字节保留，只可改6个身份/输出元数据键并追加7个ARC键。每序列两臂共用同一配置，默认输出路径也改为新stage的UNUSED_DEFAULT，旧输出不作默认写入目标。旧provider载荷本阶段不打开或再hash；只继承其封存声明，真实回放前后需要另登记重核。
+
+新checker链接已完成局部资格的同一库，实际调用loadYamlLike与readArcSourceEvents，核3序列548/540/754行及274/270/377块、ARC配置回显、原科学字段与输入路径。没有GIEngine构造或事件执行，运行计数仍0。外部runner核生成配置/CSV/manifest/库与原checker回显的身份，并审计子进程openat。
+
+root逐行审阅prepare/loader源码及增量；独立审查见INDEPENDENT_ARC_METADATA_BOUNDARY_REVIEW.md。登记前修复绝对路径带size与alias路径不带size的pin对象等式问题，改为展开path/hash比较；未消耗执行预算。原生生产源码和新库均未变。
+
+新唯一scratch stage为ARC_NATIVE_TELEMETRY_ATTEMPT01。prepare阶段存在即拒绝，loader子目录存在即拒绝，任何首次失败保留，不自动重跑。文件名从草案改为最终PLAN，状态与自身源码哈希在提交前一并冻结。

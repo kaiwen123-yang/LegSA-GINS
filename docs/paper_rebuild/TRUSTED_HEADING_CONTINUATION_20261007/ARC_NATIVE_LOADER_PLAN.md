@@ -1,0 +1,15 @@
+# ARC metadata and loader gate (registered before execution)
+
+The separate `ARC_NATIVE_PREPARE_PLAN.json` fixes one metadata preparation. This plan fixes one new config-checker compilation and three checker processes in BY2, BY2H, BY2O order. Each checker runs the production `loadYamlLike` and `readArcSourceEvents`, then writes a manifest and parsed source-row/block counts. It never constructs GIEngine or invokes the navigation demo. Native and evaluator budgets are zero.
+
+Expected generated source counts are BY2 548 rows / 274 blocks, BY2H 540 / 270, BY2O 754 / 377, totaling all 1,842 endpoints / 921 blocks. The 61 blocks without two saved endpoint models remain scheduled. Parser counts describe source metadata, not executed events, covered priors, or information. Runtime manifest counters stay zero.
+
+Preparation preserves original PVT_CONTROL scientific config lines, changing only six registered run/output metadata keys and seven ARC keys. Loader verification explicitly checks those identities, ARC mode, event/manifest hash declarations, exact source-time mapping IDs, original scientific manifest fields, and original provider paths. Binary/library identity compares resolved paths plus SHA-256; their optional size fields do not change identity. The checker links the newly qualified local ARC static library rather than the historical checker library.
+
+The source time is UTC Unix seconds minus each registered base. Existing sealed RAWX conversion and calibrated IMU provider manifests establish that convention; they do not establish physical clock synchronization or measured arrival. `actual_available_time` remains null, phase-state cross remains UNKNOWN, and source-time replay is an explicit assumption. No nearby IMU/NAV timestamp supplies or replaces an endpoint.
+
+Scientific provider payload pins are inherited from the old sealed run and are **not rehashed or opened in this gate**. Allowed research-tree payload reads in checker subprocesses are only the new config and generated event CSV, with metadata/binary/source hash checks performed by the runner. The old three checker manifests are metadata read for original scientific-field comparison. Compilation uses the frozen source headers and new static library. The instrumentation records successful `openat` and `execve`; it is not a system-wide sandbox or a proof about untraced syscalls.
+
+`LOADER_CHECK` is an exclusive directory under the single fixed `ARC_NATIVE_TELEMETRY_ATTEMPT01` stage. One compile has a 60-second timeout; each loader has 60 seconds. First failure ends the gate and leaves logs and partial artifacts. There is no retry, alternate stage, configure/build of production, native command, or evaluator command in this runner.
+
+Only root may change the JSON status from DRAFT to registered after review and commit the exact sources and plan. The command is recorded in JSON. Any later six-call matched NULL/TELEMETRY replay requires its own registered provider hash/read budget and execution receipt. This gate alone establishes no trajectory identity, conditioned covariance qualification, navigation benefit, or trusted heading.
