@@ -1,0 +1,185 @@
+{
+  "schema": "hv_a1_endpoint_dependency.audit/v1",
+  "status": "REGISTERED_READY_SINGLE_EXECUTION",
+  "stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_A1_DEPENDENCY_ATTEMPT01",
+  "aliases": {
+    "<CODE_ROOT>": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001",
+    "<SCRATCH_ROOT>": "/home/kaiwen/research/LegSA-GINS-SCRATCH",
+    "<CLEAN_ROOT>": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607"
+  },
+  "budgets": {
+    "pytest_processes": 1,
+    "synthetic_cases": 6,
+    "synthetic_helper_calls": 16,
+    "scientific_files": 9,
+    "scientific_file_read_passes": 1,
+    "real_helper_calls": 3,
+    "source_decisions": 4602,
+    "selected": 4598,
+    "native_calls": 0,
+    "evaluator_calls": 0,
+    "raw_reads": 0,
+    "body_npz_reads": 0,
+    "velocity_recomputations": 0,
+    "automatic_retries": 0
+  },
+  "scientific_bytes": 68005260,
+  "generation_commit": "d01f2be8fb0ef1633d4871ec57b0e6d4e9de44a7",
+  "generator_source_paths": [
+    "src/legsa_gins/paper_rebuild/clean6_sensor_v21/providers.py",
+    "scripts/paper_rebuild/clean6_hv_a1_yaw_diagnostic.py"
+  ],
+  "source_pins": {
+    "scripts/paper_rebuild/carrier_phase/hv_a1_dependency_audit.py": "938230a115e21be3bfb5beb8b140d589d99f1ecbbf6c92ce91c2e0618d96baca",
+    "src/legsa_gins/paper_rebuild/carrier_phase/hv_a1_dependencies.py": "ec48f77c5666d5c252ec2b55040a575c4b01e6da65cc08ad947f310a9b3559a0",
+    "tests/paper_rebuild/test_hv_a1_dependencies.py": "e62eb96c84c466e345b6ff2f42ca0c69ac13ac17ade070153447201f6840dc0c",
+    "src/legsa_gins/paper_rebuild/clean6_sensor_v21/providers.py": "86002aba39c524887264d7b65a707bc1824dc5c0d266ead3cfd45acb25c87a4d",
+    "scripts/paper_rebuild/clean6_hv_a1_yaw_diagnostic.py": "8d11f99682f788ef55a71274824509e1cb7ffb94c92d656a54887687de575757",
+    "cpp/legsa_v23_port_core/src/factors/go2_weak_prior_loader.cpp": "38e792a9d7512916b01e5dbfba001d05c69a567270d45492b4e5025b97ddb647",
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp": "143980ec8afadab3e0c6bb48187264343f5e1919e8114e8c9c3c62f4bb42edd2"
+  },
+  "metadata_pins": {
+    "native_seal": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_CAUSAL_POLICY_REAL_ATTEMPT01/ALL_NATIVE_SEALED.json",
+      "sha256": "eec6608b1924a75b8f0e8e20295ef1e04e878e6abe5327108173c4bb9567f1f1",
+      "size_bytes": 30304
+    },
+    "native_plan": {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/TRUSTED_HEADING_CONTINUATION_20261007/HV_CAUSAL_POLICY_REAL_PLAN.json",
+      "sha256": "00665e8f97eaa0958e46388ae3771e47b9b5f1fdd7cd3a8724e9cc205cd6ce05",
+      "size_bytes": 11079
+    },
+    "BY2_bundle": {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/PROVIDER_BUNDLE.json",
+      "sha256": "89796f43088b2e704cc00969e5d6877f5e69bbc7b23b94b9db6a44daa2cdddb3",
+      "size_bytes": 61837
+    },
+    "BY2_manifest": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_CAUSAL_POLICY_REAL_ATTEMPT01/BY2__CAUSAL/OUT/RUN_MANIFEST.json",
+      "sha256": "97417c6e4fa6881c4458c59953669e259a949a9a325cd884cd21814317f374e5",
+      "size_bytes": 26739
+    },
+    "BY2H_bundle": {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/PROVIDER_BUNDLE.json",
+      "sha256": "7c6f03e641c02466e7d5851eb66fe8086c16ee5e4ced43d446029f3da4d66bcf",
+      "size_bytes": 61967
+    },
+    "BY2H_manifest": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_CAUSAL_POLICY_REAL_ATTEMPT01/BY2H__CAUSAL/OUT/RUN_MANIFEST.json",
+      "sha256": "1a041b5643b1a2c763d37f9806110606aefd42bb01d9084705a56756f44373e8",
+      "size_bytes": 26764
+    },
+    "BY2O_bundle": {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/PROVIDER_BUNDLE.json",
+      "sha256": "e0e7c61ddfc54b10f49a178e77be42ff4833ba7320ad0ce9f18b83076856274e",
+      "size_bytes": 76432
+    },
+    "BY2O_manifest": {
+      "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_CAUSAL_POLICY_REAL_ATTEMPT01/BY2O__CAUSAL/OUT/RUN_MANIFEST.json",
+      "sha256": "d1d7a6b839d943072274b2906e520063e3bd3cf1f56928a8d72049bbe9fd00d6",
+      "size_bytes": 26748
+    }
+  },
+  "sequences": [
+    {
+      "sequence_id": "BY2",
+      "opportunities": 1369,
+      "accepted": 1369,
+      "provider_rows": 63278,
+      "decisions": {
+        "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_CAUSAL_POLICY_REAL_ATTEMPT01/BY2__CAUSAL/OUT/NED_VELOCITY_SOURCE_EVENTS.csv",
+        "sha256": "d879d63cd632cf910191950f2597ef15ba70e1d0668bde1d731252560341bdfd",
+        "size_bytes": 241645
+      },
+      "hv": {
+        "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+        "sha256": "3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e",
+        "size_bytes": 18814268
+      },
+      "gnss": {
+        "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_GNSS.gnss",
+        "sha256": "68ed8de7f91b267072bab09e968a9cab4b5220bc5eb116140adacdfde0382e7a",
+        "size_bytes": 251694
+      }
+    },
+    {
+      "sequence_id": "BY2H",
+      "opportunities": 1349,
+      "accepted": 1348,
+      "provider_rows": 63221,
+      "decisions": {
+        "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_CAUSAL_POLICY_REAL_ATTEMPT01/BY2H__CAUSAL/OUT/NED_VELOCITY_SOURCE_EVENTS.csv",
+        "sha256": "02d4474b6849915319fad62d9c00326309edafe12fb5d15e9cf1c03b9bb34114",
+        "size_bytes": 237990
+      },
+      "hv": {
+        "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+        "sha256": "379d0676cbea5fda88437b6dc0508fcfe3d37b2fc6d5ccb40f39e732a6be54bf",
+        "size_bytes": 18811477
+      },
+      "gnss": {
+        "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/CALIBRATED_GNSS.gnss",
+        "sha256": "88d18be4ec1b4efe4d74f8fc59683d7209fc803f52c60268a763ce457fa55f00",
+        "size_bytes": 247428
+      }
+    },
+    {
+      "sequence_id": "BY2O",
+      "opportunities": 1884,
+      "accepted": 1881,
+      "provider_rows": 95860,
+      "decisions": {
+        "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_CAUSAL_POLICY_REAL_ATTEMPT01/BY2O__CAUSAL/OUT/NED_VELOCITY_SOURCE_EVENTS.csv",
+        "sha256": "ed6977744fc84e9cfd94a52285dba35658a36da04a16ffdba3ff92e883bca2c1",
+        "size_bytes": 334260
+      },
+      "hv": {
+        "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+        "sha256": "92bbe9165ed4ad6aa3f92c478f4a195ffccc7ec7b652506ba73533bd4190cdd2",
+        "size_bytes": 28692252
+      },
+      "gnss": {
+        "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/CALIBRATED_GNSS.gnss",
+        "sha256": "96ffaa3a88f97d2519381baf20c1e139269665281ff0de2f56fb55f0b2446394",
+        "size_bytes": 374246
+      }
+    }
+  ],
+  "purpose": "Passive audit of CALIBRATED_GNSS18 nonzero interpolation endpoint reported times used to construct accepted NED-HV rows; no velocity regeneration.",
+  "scope": "Full4602 opportunity denominator;4598 selected source joins;4 no-source NA. Only actual historical generator input layer, not raw receiver/arrival or SDK/body origin qualification.",
+  "local_test_command": [
+    "python3",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/paper_rebuild/test_hv_a1_dependencies.py"
+  ],
+  "rules": [
+    "First six synthetic tests pass before any of nine scientific payload reads.",
+    "Once per input: read bytes, verify existing SHA/size, parse same memory. Metadata/source reads separate.",
+    "Native nonempty physical CSV order preserved including invalid HV rows; exact selected source-time bits bind vector index.",
+    "Use historical CALIBRATED_GNSS col17==1; preserve full GNSS row index, unrounded row time and np.rint millisecond coordinate.",
+    "Closed exact knots have one nonzero dependency; strict interiors two; gap>1.2s disables only open interior.",
+    "Endpoint-after-state counted separately from endpoint-after-HV-query. No positive/zero-future result is presumed.",
+    "All opportunity rows retained; unavailable source has NA dependency fields; no physical latency or navigation impact claim.",
+    "A1 unwrap prefix is bounded by latest endpoint under strictly increasing times; not a bitwise velocity reproduction.",
+    "Stat size checked before one bounded file read (registered size+1 maximum); record failed read attempts.",
+    "PYTEST_ADDOPTS/PYTEST_PLUGINS removed; external pytest plugin autoload disabled.",
+    "Keep strict >0 classifications; predefined positive state-lead bins (0,1e-6],(1e-6,1e-3],(1e-3,1e-2],(1e-2,infinity) diagnose magnitude without changing classification. Report rounded-coordinate-after-state separately; neither represents physical clock error."
+  ],
+  "failure_policy": "Record first failure and stop; no automatic retry or expanded source reads. Bounded technical repair requires explicit updated registration and retains failure.",
+  "source_discovery_boundary": "Static code plus V21/native metadata; prior discovery also opened two H/O parity bundles containing embedded audit rows (4.13/6.21 MB), not reused in execution. No provider/raw payload opened during discovery.",
+  "invocation": [
+    "python3",
+    "scripts/paper_rebuild/carrier_phase/hv_a1_dependency_audit.py",
+    "--registration-commit",
+    "<REGISTRATION_COMMIT>"
+  ],
+  "static_review": {
+    "identity": "research_map: PASS precise historical generation/native bindings and nine-file denominator",
+    "timing_and_runner": "heading_evidence: PASS after bounded-read and pytest-environment fixes; no scientific execution",
+    "root": "native CSV loader comparison and test conftest/pyproject inspected; no raw input behavior"
+  }
+}
