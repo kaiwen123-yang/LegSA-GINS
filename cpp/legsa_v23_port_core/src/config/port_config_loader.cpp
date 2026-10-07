@@ -1064,6 +1064,21 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       stringOrDefault(kv,
                       "go2_horizontal_velocity_strength_policy",
                       options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_strength_policy);
+  auto& ned_time = options.go2_velocity_prior_diagnostic_config;
+  ned_time.go2_velocity_prior_time_policy = stringOrDefault(
+      kv,"go2_velocity_prior_time_policy","legacy_absolute_nearest");
+  if (ned_time.go2_velocity_prior_time_policy != "legacy_absolute_nearest" &&
+      ned_time.go2_velocity_prior_time_policy != "causal_unique_latest")
+    throw std::runtime_error("NED_HV_UNKNOWN_TIME_POLICY");
+  if (ned_time.go2_velocity_prior_time_policy == "causal_unique_latest" &&
+      (options.runtime_contract != "research_experiment" ||
+       !ned_time.enable_go2_horizontal_velocity_prior ||
+       ned_time.go2_horizontal_velocity_frame != "ned" ||
+       ned_time.go2_horizontal_velocity_prior_mode != "horizontal_2d" ||
+       !ned_time.go2_horizontal_velocity_prior_vertical_disabled ||
+       !std::isfinite(ned_time.go2_velocity_prior_time_tolerance_sec) ||
+       ned_time.go2_velocity_prior_time_tolerance_sec < 0.0))
+    throw std::runtime_error("NED_HV_CAUSAL_POLICY_REQUIRES_RESEARCH_HORIZONTAL_NED");
   options.go2_readiness_lsim_metadata_config.enable_go2_readiness_lsim_metadata =
       boolOrDefault(kv,
                     "enable_go2_readiness_lsim_metadata",

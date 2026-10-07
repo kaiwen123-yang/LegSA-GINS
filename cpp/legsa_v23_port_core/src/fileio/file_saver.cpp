@@ -812,6 +812,18 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
         << "  \"external_carrier_pacc_used\": false,\n"
         << "  \"external_carrier_k_b_used\": false,\n";
   }
+  if (options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_policy == "causal_unique_latest") {
+    const auto& c=options.go2_velocity_prior_diagnostic_status.ned_time_policy_counts;
+    out << "  \"go2_velocity_prior_time_policy\": \"causal_unique_latest\",\n"
+        << "  \"go2_ned_source_policy_scope\": \"reported_source_time_only_actual_arrival_unknown\",\n"
+        << "  \"go2_ned_source_consumption\": \"timestamp_once_attempt_before_provider_and_weight_gates_per_generation_no_older_backfill\",\n"
+        << "  \"go2_ned_source_generation_reset\": \"initialize_or_explicit_source_vector_replacement_not_EKF_feedback\",\n"
+        << "  \"go2_ned_source_generations\": " << c.generations << ",\n"
+        << "  \"go2_ned_source_selected_attempts\": " << c.selected_attempts << ",\n"
+        << "  \"go2_ned_source_future_candidate_skips\": " << c.future_candidate_skips << ",\n"
+        << "  \"go2_ned_source_used_or_older_candidate_skips\": " << c.used_or_older_candidate_skips << ",\n"
+        << "  \"go2_ned_source_no_eligible_calls\": " << c.no_eligible_calls << ",\n";
+  }
   if (options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior &&
       options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame == "body_frd") {
     out << "  \"go2_horizontal_velocity_frame\": \"body_frd\",\n"

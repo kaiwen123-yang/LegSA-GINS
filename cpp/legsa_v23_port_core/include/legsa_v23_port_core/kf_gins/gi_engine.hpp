@@ -107,6 +107,8 @@ class GIEngine {
   const std::vector<Baseline3dDiagnostics>& baseline3dDiagnostics() const { return baseline3d_diagnostics_; }
   void writeBaseline3dDiagnostics(const std::string& output_dir) const;
   void writeBodyVelocityDiagnostics(const std::string& output_dir) const;
+  void writeNedVelocitySourceDiagnostics(const std::string& output_dir) const;
+  const std::vector<NedVelocitySourceEvent>& nedVelocitySourceEvents() const { return ned_velocity_source_events_; }
   const HeadingSourceCounts& headingSourceCounts() const { return heading_source_counts_; }
   const std::vector<HeadingSourceDecision>& headingSourceEvents() const { return heading_source_events_; }
   void writeHeadingSourceDiagnostics(const std::string& output_dir) const;
@@ -129,6 +131,7 @@ class GIEngine {
 
  private:
   friend struct ArcNativeTestAccess;  // Synthetic harness: no production setter is exposed.
+  friend struct NedHvSourceTestAccess;  // Isolate synthetic selection/gating probes only.
   struct JointTimedEvent {
     double time=0.0;
     bool has_gnss=false;
@@ -173,6 +176,7 @@ class GIEngine {
   void applyRawDopplerUpdateForTime(double update_time);
   void applyGo2AttitudeWeakPriorForTime(double update_time);
   void applyGo2VelocityDiagnosticPriorForTime(double update_time);
+  void resetNedVelocitySourceGeneration(const std::string& reason);
   void applyBodyVelocityPriorForTime(double update_time);
   void applyFgoFeedbackForTime(double update_time);
   quality_aware::QAObservation buildQAObservation(const GnssData& gnss) const;
@@ -266,6 +270,11 @@ class GIEngine {
   std::vector<double> go2_pitch_residuals_;
   std::vector<Go2VelocityDiagnosticPriorMeasurement> go2_velocity_diagnostic_priors_;
   Go2VelocityDiagnosticPriorStatus go2_velocity_diagnostic_prior_status_;
+  bool ned_velocity_source_has_attempt_ = false;
+  double ned_velocity_source_last_attempt_time_ = 0.0;
+  std::string ned_velocity_generation_reset_reason_;
+  NedVelocitySourceCounts ned_velocity_source_counts_;
+  std::vector<NedVelocitySourceEvent> ned_velocity_source_events_;
   std::vector<Go2ReadinessLsimMetadataMeasurement> go2_readiness_lsim_metadata_;
   Go2ReadinessLsimMetadataStatus go2_readiness_lsim_metadata_status_;
   std::vector<fgo_feedback::FgoFeedbackObservation> fgo_feedback_observations_;

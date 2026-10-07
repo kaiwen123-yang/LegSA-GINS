@@ -85,6 +85,8 @@ struct Go2VelocityDiagnosticPriorConfig {
   std::string go2_velocity_prior_diagnostic_path;
   std::string go2_horizontal_velocity_prior_path;
   std::string go2_horizontal_velocity_frame = "ned";
+  // Opt-in source-time policy; actual arrival and physical frame lineage remain unknown.
+  std::string go2_velocity_prior_time_policy = "legacy_absolute_nearest";
   std::string go2_body_velocity_prior_path;
   double go2_body_velocity_update_period_s = 0.2;
   double go2_velocity_prior_time_tolerance_sec = 0.08;
@@ -98,7 +100,26 @@ struct Go2VelocityDiagnosticPriorConfig {
   std::string go2_horizontal_velocity_strength_policy;
 };
 
+struct NedVelocitySourceCounts {
+  std::size_t generations = 0;
+  std::size_t selected_attempts = 0;
+  std::size_t future_candidate_skips = 0;
+  std::size_t used_or_older_candidate_skips = 0;
+  std::size_t no_eligible_calls = 0;
+};
+
+struct NedVelocitySourceEvent {
+  double trigger_time = 0.0, state_time = 0.0, source_time = 0.0;
+  std::size_t generation = 0, vector_index = 0;
+  std::size_t future_candidate_skips = 0, used_or_older_candidate_skips = 0;
+  std::size_t future_trigger_candidate_skips = 0, future_state_candidate_skips = 0;
+  std::size_t nonfinite_time_skips = 0;
+  bool source_present = false, consumed = false, accepted = false;
+  std::string reason, generation_reset_reason;
+};
+
 struct Go2VelocityDiagnosticPriorStatus {
+  NedVelocitySourceCounts ned_time_policy_counts;
   bool code_present = true;
   bool solver_enabled = false;
   std::size_t prior_count = 0;

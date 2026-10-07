@@ -136,6 +136,19 @@ GIEngine::GIEngine(PortOptions options)
        options_.quality_state_manager_config.enable_multi_state_qm))
     throw std::runtime_error("ATTITUDE_CLONE_REQUIRES_FULL_UNCLIPPED_FEEDBACK_QA_QM_OFF");
   const auto& body_cfg = options_.go2_velocity_prior_diagnostic_config;
+  if (body_cfg.go2_velocity_prior_time_policy != "legacy_absolute_nearest" &&
+      body_cfg.go2_velocity_prior_time_policy != "causal_unique_latest")
+    throw std::runtime_error("NED_HV_UNKNOWN_TIME_POLICY");
+  if (body_cfg.go2_velocity_prior_time_policy == "causal_unique_latest" &&
+      (options_.runtime_contract != "research_experiment" ||
+       !body_cfg.enable_go2_horizontal_velocity_prior ||
+       !body_cfg.enable_go2_velocity_prior_diagnostic ||
+       body_cfg.go2_horizontal_velocity_frame != "ned" ||
+       body_cfg.go2_horizontal_velocity_prior_mode != "horizontal_2d" ||
+       !body_cfg.go2_horizontal_velocity_prior_vertical_disabled ||
+       !std::isfinite(body_cfg.go2_velocity_prior_time_tolerance_sec) ||
+       body_cfg.go2_velocity_prior_time_tolerance_sec < 0.0))
+    throw std::runtime_error("NED_HV_CAUSAL_POLICY_REQUIRES_RESEARCH_HORIZONTAL_NED");
   if (body_cfg.enable_go2_horizontal_velocity_prior && body_cfg.go2_horizontal_velocity_frame == "body_frd") {
     if (options_.runtime_contract != "research_experiment" ||
         body_cfg.go2_horizontal_velocity_prior_mode != "horizontal_2d" ||
@@ -163,6 +176,7 @@ void GIEngine::initialize(const NavState& initial_state) {
       options_.go2_velocity_prior_diagnostic_config.go2_body_velocity_update_period_s;
   research_last_body_hv_attempt_time_ = -1.0e100;
   body_velocity_events_.clear();
+  resetNedVelocitySourceGeneration("initialize");
   heading_source_policy_ = HeadingSourcePolicy{};
   heading_source_counts_ = HeadingSourceCounts{};
   heading_source_events_.clear();
@@ -229,7 +243,12 @@ void GIEngine::setGo2AttitudeWeakPriors(const std::vector<Go2AttitudeWeakPriorMe
 void GIEngine::setGo2VelocityDiagnosticPriors(
     const std::vector<Go2VelocityDiagnosticPriorMeasurement>& measurements,
     const Go2VelocityDiagnosticPriorStatus& status) {
+  if (options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_policy == "causal_unique_latest") {
+    for (const auto& row : measurements)
+      if (row.observation_frame != "ned") throw std::runtime_error("NED_HV_SOURCE_FRAME_MISMATCH");
+  }
   go2_velocity_diagnostic_priors_ = measurements;
+  resetNedVelocitySourceGeneration("source_vector_replacement");
   go2_velocity_diagnostic_prior_status_ = status;
   go2_velocity_diagnostic_prior_status_.code_present = true;
   go2_velocity_diagnostic_prior_status_.prior_count = measurements.size();
@@ -909,7 +928,9 @@ std::size_t GIEngine::go2VelocityDiagnosticPriorRejectCount() const {
 }
 
 Go2VelocityDiagnosticPriorStatus GIEngine::go2VelocityDiagnosticPriorStatus() const {
-  return go2_velocity_diagnostic_prior_status_;
+  auto status = go2_velocity_diagnostic_prior_status_;
+  status.ned_time_policy_counts = ned_velocity_source_counts_;
+  return status;
 }
 
 Go2ReadinessLsimMetadataStatus GIEngine::go2ReadinessLsimMetadataStatus() const {
@@ -1683,33 +1704,108 @@ void GIEngine::writeBodyVelocityDiagnostics(const std::string& output_dir) const
   if(!out)throw std::runtime_error("BODY_HV_DIAGNOSTICS_WRITE_FAILED");
 }
 
+void GIEngine::resetNedVelocitySourceGeneration(const std::string& reason) {
+  if (options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_policy != "causal_unique_latest") return;
+  ned_velocity_source_has_attempt_=false;
+  ned_velocity_source_last_attempt_time_=0.0;
+  ned_velocity_generation_reset_reason_=reason;
+  ++ned_velocity_source_counts_.generations;
+}
+
+void GIEngine::writeNedVelocitySourceDiagnostics(const std::string& output_dir) const {
+  if (options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_policy != "causal_unique_latest") return;
+  std::filesystem::create_directories(output_dir);
+  std::ofstream out(std::filesystem::path(output_dir)/"NED_VELOCITY_SOURCE_EVENTS.csv");
+  if(!out) throw std::runtime_error("NED_HV_SOURCE_DIAGNOSTICS_OPEN_FAILED");
+  out<<std::setprecision(17)
+     <<"trigger_time,state_time,source_time,trigger_age_s,state_age_s,source_time_bits_hex,vector_index,generation,generation_reset_reason,source_present,consumed,accepted,reason,future_candidate_skips,future_trigger_candidate_skips,future_state_candidate_skips,used_or_older_candidate_skips,nonfinite_time_skips,actual_available_time_s,frame\n";
+  for(const auto& e:ned_velocity_source_events_) {
+    out<<e.trigger_time<<','<<e.state_time<<',';if(e.source_present)out<<e.source_time;
+    out<<',';if(e.source_present)out<<e.trigger_time-e.source_time;
+    out<<',';if(e.source_present)out<<e.state_time-e.source_time;
+    out<<',';if(e.source_present)out<<arcSourceTimeBits(e.source_time);
+    out<<',';if(e.source_present)out<<e.vector_index;
+    out<<','<<e.generation<<','<<e.generation_reset_reason<<','<<e.source_present<<','<<e.consumed
+       <<','<<e.accepted<<','<<e.reason<<','<<e.future_candidate_skips
+       <<','<<e.future_trigger_candidate_skips<<','<<e.future_state_candidate_skips<<','<<e.used_or_older_candidate_skips
+       <<','<<e.nonfinite_time_skips<<",,ned\n";
+  }
+  if(!out) throw std::runtime_error("NED_HV_SOURCE_DIAGNOSTICS_WRITE_FAILED");
+}
+
 void GIEngine::applyGo2VelocityDiagnosticPriorForTime(double update_time) {
   const bool controlled_horizontal =
       options_.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior;
+  const bool causal = options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_policy == "causal_unique_latest";
+  NedVelocitySourceEvent event;
+  if (causal) {
+    if(!std::isfinite(update_time) || !std::isfinite(pvacur_.time)) throw std::runtime_error("NED_HV_NONFINITE_UPDATE_TIME");
+    event.trigger_time=update_time;event.state_time=pvacur_.time;
+    event.generation=ned_velocity_source_counts_.generations;
+    event.generation_reset_reason=ned_velocity_generation_reset_reason_;
+  }
+  auto finish=[&](const std::string& reason) {
+    if(causal) {event.reason=reason;ned_velocity_source_events_.push_back(event);}
+  };
   if (!options_.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic ||
       !go2_velocity_diagnostic_prior_status_.solver_enabled ||
       (!options_.go2_velocity_prior_diagnostic_config.go2_diagnostic_prior_only && !controlled_horizontal)) {
+    finish("provider_unavailable");
     return;
   }
   const Go2VelocityDiagnosticPriorMeasurement* best = nullptr;
-  double best_dt = options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_tolerance_sec;
-  for (const auto& measurement : go2_velocity_diagnostic_priors_) {
-    if (!measurement.update_flag) {
-      continue;
+  if (causal) {
+    const double tolerance=options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_tolerance_sec;
+    for (const auto& measurement : go2_velocity_diagnostic_priors_) {
+      if(!measurement.update_flag) continue;
+      if(!std::isfinite(measurement.time)) {++event.nonfinite_time_skips;continue;}
+      // Count competing rows only inside the unchanged absolute tolerance.
+      if(std::fabs(measurement.time-update_time)>tolerance) continue;
+      const bool future_trigger=measurement.time>update_time;
+      const bool future_state=measurement.time>pvacur_.time;
+      if(future_trigger || future_state) {
+        ++event.future_candidate_skips;
+        event.future_trigger_candidate_skips+=static_cast<std::size_t>(future_trigger);
+        event.future_state_candidate_skips+=static_cast<std::size_t>(future_state);
+        continue;
+      }
+      if(ned_velocity_source_has_attempt_ && measurement.time<=ned_velocity_source_last_attempt_time_) {
+        ++event.used_or_older_candidate_skips;continue;
+      }
+      // Iteration order makes an exact-time tie choose the last vector index.
+      if(!best || measurement.time>=best->time) best=&measurement;
     }
-    const double dt = std::fabs(measurement.time - update_time);
-    if (dt <= best_dt) {
-      best = &measurement;
-      best_dt = dt;
+    ned_velocity_source_counts_.future_candidate_skips+=event.future_candidate_skips;
+    ned_velocity_source_counts_.used_or_older_candidate_skips+=event.used_or_older_candidate_skips;
+    if(!best) {++ned_velocity_source_counts_.no_eligible_calls;finish("no_eligible_source");return;}
+    event.source_present=true;event.source_time=best->time;
+    event.vector_index=static_cast<std::size_t>(best-go2_velocity_diagnostic_priors_.data());
+    // Consume the entire source timestamp BEFORE provider/weight gates. No refund,
+    // retry of duplicates, or older backfill; guarantee is per explicit generation.
+    ned_velocity_source_last_attempt_time_=best->time;ned_velocity_source_has_attempt_=true;
+    ++ned_velocity_source_counts_.selected_attempts;event.consumed=true;
+  } else {
+    // Legacy branch retains its exact selection loop and floating-point order.
+    double best_dt = options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_tolerance_sec;
+    for (const auto& measurement : go2_velocity_diagnostic_priors_) {
+      if (!measurement.update_flag) {
+        continue;
+      }
+      const double dt = std::fabs(measurement.time - update_time);
+      if (dt <= best_dt) {
+        best = &measurement;
+        best_dt = dt;
+      }
     }
-  }
-  if (!best) {
-    return;
+    if (!best) {
+      return;
+    }
   }
   if (best->source_status != "active" ||
       (!best->diagnostic_only && !controlled_horizontal) ||
       best->go2_velocity_truth_claim) {
     ++go2_velocity_diagnostic_prior_status_.reject_count;
+    finish("provider_invalid");
     return;
   }
   const Vec3 stdv = positiveStd(
@@ -1751,6 +1847,7 @@ void GIEngine::applyGo2VelocityDiagnosticPriorForTime(double update_time) {
     const auto weight = applySourceAwareWeighting(metadata.source, metadata, dz, H, R, scaled_R);
     if (weight.rejected) {
       ++go2_velocity_diagnostic_prior_status_.reject_count;
+      finish("source_aware_reject");
       return;
     }
   }
@@ -1763,6 +1860,8 @@ void GIEngine::applyGo2VelocityDiagnosticPriorForTime(double update_time) {
     go2_velocity_diagnostic_prior_status_.vertical_disabled = true;
     ++go2_velocity_diagnostic_prior_status_.horizontal_update_count;
   }
+  if(causal) event.accepted=true;
+  finish("accept_ned_horizontal_2d");
 }
 
 void GIEngine::applyFgoFeedbackForTime(double update_time) {
