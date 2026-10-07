@@ -1,0 +1,21 @@
+{
+  "status": "REGISTERED_BEFORE_REPAIR_TESTS",
+  "timestamp_utc": "2026-10-07T01:57:50.499268+00:00",
+  "previous": "FOOT_INFORMATION_LOCAL_ATTEMPT01: 24/24 preserved",
+  "trigger": "independent static review found mixed-unit positive-spectrum truncation counterexample; prior tests did not cover it",
+  "new_boundary_cases": 2,
+  "affected_prior_cases_rerun": 8,
+  "untouched_original_native_regression_not_rerun": 16,
+  "builds": {
+    "configure": 1,
+    "core_demo": 1,
+    "harness": 1
+  },
+  "repair_stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/FOOT_INFORMATION_LOCAL_ATTEMPT02",
+  "numerical_state_update_change": false,
+  "new_native": 0,
+  "new_evaluator": 0,
+  "raw_reference_reads": 0,
+  "expected_fix": "no positive P spectrum discarded; full-P score including exact omega0; unresolved spectral consistency => NA; native grid action verified; no zero-noise rank theorem from numerical rank",
+  "failure_policy": "preserve first failure; only affected technical repair reruns"
+}

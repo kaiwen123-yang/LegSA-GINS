@@ -1,0 +1,63 @@
+{
+  "status": "REGISTERED_BEFORE_IMPLEMENTATION_AND_TESTS",
+  "timestamp_utc": "2026-10-07T01:47:11.934984+00:00",
+  "anchor": "8cd93b2",
+  "scope": "passive diagnostic only; original P/H/R/W/epsilon/selection/update unchanged",
+  "new_case_limit": 8,
+  "new_cases": [
+    "rank2 passive cost and exact old grid/J agreement",
+    "J<T J=T J>T continuous criterion and zero-score case",
+    "analytic grid-miss continuous minimum",
+    "singular deterministic clone dense cross and support CI equivalence",
+    "unknown-correlation cancellation counterexample and PSD upper bound under full reset",
+    "native diagnostic on/off byte-identical output and stored inputs",
+    "diagnostic dump roundtrip offline CLI and fail-closed domains",
+    "sealed old harness vs new local engine cases exact outputs"
+  ],
+  "existing_regression_cases": 16,
+  "seed": 61060724,
+  "dimensions_max": 24,
+  "epsilon": [
+    0.015625,
+    0.0625,
+    0.25,
+    1,
+    4
+  ],
+  "rank_tolerance": "64*machine epsilon*dimension*max(abs eigenvalue); negative beyond tolerance fails, numerical support truncation diagnostic only",
+  "continuous_solver": "analytic derivative on PSD support spectrum; J/T reported with roundoff margin; derivative bisection at most 80 steps, bracket width <= 2e-14; no application to state",
+  "tolerances": {
+    "matrix_oracle_rtol": 2e-11,
+    "matrix_oracle_atol": 2e-12,
+    "byte_identity": "exact",
+    "analytic_weight_atol": 2e-12
+  },
+  "build_budget": {
+    "configure": 1,
+    "core_demo_build": 1,
+    "harness_compile": 1
+  },
+  "test_budget": {
+    "pytest_initial": 1,
+    "unique_cases_max": 24,
+    "repair": "retain first failure; rerun only affected cases after justified technical repair"
+  },
+  "inputs": "synthetic only, sealed old synthetic harness binary for identity",
+  "forbidden_calls": {
+    "raw": 0,
+    "reference": 0,
+    "real_provider": 0,
+    "navigation": 0,
+    "evaluator": 0,
+    "integer_solver": 0
+  },
+  "source_before": {
+    "cpp/legsa_v23_port_core/src/factors/attitude_clone.cpp": "51124cc5ed99b77e59182f1adea342f398cb451c8457aabc6f53a66a46cbe02e",
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine_attitude_clone.cpp": "30d340b262fe8d3e7c9f62d11dcbeb01c0bb1dc2f05cdd41d017a8818ed85bf4",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/attitude_clone.hpp": "de9e238d2c3a10f2939bea9ea988d5a84992b89bd907436895a7de15a9792fa8",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/gi_engine.hpp": "68142268015287fde0503c2d1af36d329cb449d891117f6dc71ff398aa7349b5",
+    "tests/paper_rebuild/native_attitude_clone_harness.cpp": "d1aaec7cca3bef5212e1879677d7f4d52051b965df4e45b169bea103ee64c157",
+    "tests/paper_rebuild/test_native_attitude_clone.py": "78b764e373ea09bc47f1778e689ed5dbbb7a8fdd842f40f6db30a9363e67d01a"
+  },
+  "future_real_budget_proposal": "3 PAIR-only native, zero evaluator; compare prior sealed NAV/STD byte-for-byte; requires root preregistration"
+}

@@ -23,6 +23,16 @@ struct PairModel {
 struct SafeInnovation { double statistic=0.0; bool passed=false; };
 constexpr double kSafeInnovationThreshold = 16.26623619623813;
 
+// Passive telemetry. It never selects or applies a different covariance update.
+struct YoungCandidateDiagnostic {
+  double epsilon=0.0, score=0.0, comparison_score=0.0, tie=0.0;
+  bool selected_at_step=false;
+};
+struct YoungDiagnostics {
+  double T=0.0, J=0.0;
+  bool J_available=false;  // Singular R may be legal for the old grid; no diagnostic jitter.
+  std::vector<YoungCandidateDiagnostic> candidates;
+};
 struct YoungResult {
   Gaussian state;
   bool applied = false;
@@ -46,7 +56,7 @@ SafeInnovation safeInnovation(const Gaussian& state, const std::vector<double>& 
                               const Matrix& H, const Matrix& R);
 YoungResult youngUpdate(const Gaussian& state, const std::vector<double>& dz,
                         const Matrix& H, const Matrix& R,
-                        const std::vector<double>& fixed_current_weights);
+                        const std::vector<double>& fixed_current_weights, YoungDiagnostics* diagnostics=nullptr);
 PairModel pairModel(const Vec3& d0, const Vec3& d1, const Matrix3& clone_body_to_ecef,
                     const Matrix3& current_body_to_ned, const Vec3& current_blh,
                     const Matrix& complete_difference_covariance);

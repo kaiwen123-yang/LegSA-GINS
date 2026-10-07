@@ -227,8 +227,9 @@ SafeInnovation safeInnovation(const Gaussian& s,const std::vector<double>& z,con
 }
 
 YoungResult youngUpdate(const Gaussian& s,const std::vector<double>& z,const Matrix& h,const Matrix& input_r,
-                        const std::vector<double>& weights) {
+                        const std::vector<double>& weights, YoungDiagnostics* diagnostics) {
   validateMeasurement(s,z,h,input_r);
+  if(diagnostics) *diagnostics=YoungDiagnostics{};
   require(s.mean.size()==kJoint,"PAIR_REQUIRES_ACTIVE_CLONE");
   const Matrix r=symmetricPsd(input_r,input_r.rows,"PAIR_R");
   const double prior=score(s.covariance,weights);
@@ -246,12 +247,29 @@ YoungResult youngUpdate(const Gaussian& s,const std::vector<double>& z,const Mat
     const double value=score(bound,weights);
     const double tie=64.0*std::numeric_limits<double>::epsilon()*
         std::max({1.0,std::fabs(value),std::fabs(best.bound_score)});
+    if(diagnostics) diagnostics->candidates.push_back({epsilon,value,best.bound_score,tie,
+                                                       value < best.bound_score-tie});
     if(value < best.bound_score-tie) {
       best.state.covariance=bound;
       best.applied=true;best.epsilon=epsilon;best.bound_score=value;selected_gain=gain;
     }
   }
   if(best.applied) best.state.mean=corrected(s,z,h,selected_gain);
+  if(diagnostics) {
+    // J = tr(R^-1 H P W P H^T); current21 weights are the original fixed weights.
+    Matrix d(h.rows,h.rows);
+    for(std::size_t i=0;i<kCurrent;++i) for(std::size_t a=0;a<h.rows;++a)
+      for(std::size_t b=0;b<h.rows;++b) d(a,b)+=weights[i]*pht(i,a)*pht(i,b);
+    diagnostics->T=prior;
+    try {
+      const auto rd=solveSpd(r,d);
+      for(std::size_t a=0;a<h.rows;++a) diagnostics->J+=rd(a,a);
+      diagnostics->J_available=std::isfinite(diagnostics->J);
+    } catch(const std::runtime_error&) {
+      // An unavailable J diagnostic must not turn a previously legal update into a failure.
+      diagnostics->J_available=false;
+    }
+  }
   return best;
 }
 

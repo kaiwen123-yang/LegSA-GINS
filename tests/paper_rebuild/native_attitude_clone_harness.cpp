@@ -141,12 +141,19 @@ int main(int argc,char**argv){
  try{
   need(argc>=2,"operation");std::cout<<std::setprecision(17)<<'{';std::string op=argv[1];
   if(op=="augment"){auto p=mat(21,21);auto m=vec(21);auto j=mat(3,21);gaussian(ac::augment(p,m,j));}
-  else if(op=="ordinary"||op=="young"||op=="safe"){
+  else if(op=="ordinary"||op=="young"||op=="young_diag"||op=="safe"){
    int n,k;std::cin>>n>>k;auto p=mat(n,n);auto m=vec(n);auto h=mat(k,n);auto r=mat(k,k);auto z=vec(k);
    ac::Gaussian s{p,m};
    if(op=="ordinary")gaussian(ac::ordinaryUpdate(s,z,h,r));
    if(op=="young"){auto w=vec(21);auto a=ac::youngUpdate(s,z,h,r,w);gaussian(a.state);num("applied",a.applied);num("epsilon",a.epsilon);num("prior",a.prior_score);num("score",a.bound_score);}
-   if(op=="safe"){auto a=ac::safeInnovation(s,z,h,r);num("statistic",a.statistic);num("passed",a.passed);}
+   if(op=="young_diag"){
+     auto w=vec(21);ac::YoungDiagnostics d;auto a=ac::youngUpdate(s,z,h,r,w,&d);
+     gaussian(a.state);num("applied",a.applied);num("epsilon",a.epsilon);num("prior",a.prior_score);num("score",a.bound_score);
+     num("T",d.T);num("J",d.J);Matrix candidates(d.candidates.size(),5);
+     for(std::size_t i=0;i<d.candidates.size();++i){const auto& c=d.candidates[i];candidates(i,0)=c.epsilon;candidates(i,1)=c.score;candidates(i,2)=c.comparison_score;candidates(i,3)=c.tie;candidates(i,4)=c.selected_at_step;}
+     out("candidates",candidates);
+    }
+    if(op=="safe"){auto a=ac::safeInnovation(s,z,h,r);num("statistic",a.statistic);num("passed",a.passed);}
   }else if(op=="reset"){int n;std::cin>>n;auto p=mat(n,n);auto m=vec(n);auto gp=m3();gaussian(ac::reset({p,m},gp));}
   else if(op=="model"){auto d0=v3(),d1=v3();auto c0=m3(),cbn=m3();auto blh=v3();auto s=mat(6,6);
    auto a=ac::pairModel(d0,d1,c0,cbn,blh,s);out("H",a.H);out("R",a.R);out("z",a.residual);out("J",ac::augmentationJacobian(blh));out("K",ac::nedFrameConnection(blh));}

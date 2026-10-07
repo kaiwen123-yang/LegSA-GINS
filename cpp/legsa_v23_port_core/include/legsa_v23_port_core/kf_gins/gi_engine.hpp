@@ -187,6 +187,16 @@ class GIEngine {
     double epsilon=0, prior_score=0, bound_score=0, safe_innovation=-1;
   };
   std::vector<FootEventDiagnostic> foot_event_diagnostics_;
+  bool foot_information_diagnostics_enabled_=false;
+  struct FootInformationDiagnostic {
+    double event_time=0.0;
+    attitude_clone::Gaussian prior;
+    attitude_clone::PairModel model;
+    attitude_clone::YoungDiagnostics young;
+    bool applied=false;
+    double selected_epsilon=0.0;
+  };
+  std::vector<FootInformationDiagnostic> foot_information_diagnostics_;
 
   HeadingSourcePolicy heading_source_policy_;
   HeadingSourceCounts heading_source_counts_;

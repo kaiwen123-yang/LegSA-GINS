@@ -3,6 +3,7 @@
 #include "legsa_v23_port_core/common/rotation.hpp"
 #include <algorithm>
 #include <cmath>
+#include <cstdlib>
 #include <filesystem>
 #include <fstream>
 #include <iomanip>
@@ -69,6 +70,10 @@ void GIEngine::setFootPairEvents(const std::vector<FootPairEvent>& events) {
     require(e.type=="START" || e.type=="END" || e.type=="RETIRE","FOOT_PAIR_STREAM_ACTION");
     last=e.time;
   }
+  const char* passive=std::getenv("LEGSA_FOOT_INFORMATION_DIAGNOSTICS");
+  require(!passive || std::string(passive)=="0" || std::string(passive)=="1",
+          "FOOT_INFORMATION_DIAGNOSTIC_FLAG_MUST_BE_0_OR_1");
+  foot_information_diagnostics_enabled_=passive && std::string(passive)=="1";
   foot_events_=events;
 }
 void GIEngine::recordFootEvent(const FootPairEvent& e,const std::string& action,bool applied,double epsilon,
@@ -145,8 +150,13 @@ void GIEngine::processFootPairEvent(const FootPairEvent& e) {
     recordFootEvent(e,"NULL_CLONE_NO_PAIR_UPDATE",false,0,0,0,safe.statistic);
     retireAttitudeClone();return;
   }
-  const auto result=attitude_clone::youngUpdate(attitudeJointState(),model.residual,model.H,model.R,
-                                               attitude_clone_weights_);
+  const auto prior=attitudeJointState();
+  attitude_clone::YoungDiagnostics passive;
+  const auto result=attitude_clone::youngUpdate(prior,model.residual,model.H,model.R,
+                                               attitude_clone_weights_,
+                                               foot_information_diagnostics_enabled_?&passive:nullptr);
+  if(foot_information_diagnostics_enabled_)
+    foot_information_diagnostics_.push_back({e.time,prior,model,passive,result.applied,result.epsilon});
   if(result.applied) {
     setAttitudeJointState(result.state);
     stateFeedback();  // Same full feedback/reset implementation as every original observation.
@@ -209,6 +219,34 @@ void GIEngine::writeAttitudeCloneDiagnostics(const std::string& output_dir) cons
        <<e.action<<','<<e.applied<<','<<e.epsilon<<','<<e.prior_score<<','<<e.bound_score<<',';
     if(e.safe_innovation>=0.0) out<<e.safe_innovation;
     out<<','<<attitude_clone::kSafeInnovationThreshold<<'\n';
+  }
+  if(foot_information_diagnostics_enabled_) {
+    std::ofstream inputs(std::filesystem::path(output_dir)/"FOOT_INFORMATION_INPUTS.jsonl");
+    require(inputs.good(),"FOOT_INFORMATION_DIAGNOSTIC_OPEN");
+    inputs<<std::setprecision(17);
+    auto vector=[&](const std::vector<double>& values) {
+      inputs<<'[';
+      for(std::size_t i=0;i<values.size();++i) {if(i) inputs<<',';inputs<<values[i];}
+      inputs<<']';
+    };
+    for(const auto& d:foot_information_diagnostics_) {
+      inputs<<"{\"schema\":1,\"event_time_s\":"<<d.event_time<<",\"P\":";
+      vector(d.prior.covariance.data);inputs<<",\"mean\":";vector(d.prior.mean);
+      inputs<<",\"H\":";vector(d.model.H.data);inputs<<",\"R\":";vector(d.model.R.data);
+      inputs<<",\"dz\":";vector(d.model.residual);inputs<<",\"weights\":";vector(attitude_clone_weights_);
+      inputs<<",\"T\":"<<d.young.T<<",\"J\":";
+      if(d.young.J_available) inputs<<d.young.J;else inputs<<"null";
+      inputs<<",\"applied\":"<<(d.applied?"true":"false")
+            <<",\"selected_epsilon\":"<<d.selected_epsilon<<",\"candidates\":[";
+      for(std::size_t i=0;i<d.young.candidates.size();++i) {
+        const auto& c=d.young.candidates[i];if(i) inputs<<',';
+        inputs<<"{\"epsilon\":"<<c.epsilon<<",\"score\":"<<c.score
+              <<",\"comparison_score\":"<<c.comparison_score<<",\"tie\":"<<c.tie
+              <<",\"selected_at_step\":"<<(c.selected_at_step?"true":"false")<<'}';
+      }
+      inputs<<"]}\n";
+    }
+    require(inputs.good(),"FOOT_INFORMATION_DIAGNOSTIC_WRITE");
   }
   std::ofstream weights(std::filesystem::path(output_dir)/"ATTITUDE_CLONE_FIXED_WEIGHTS.csv");
   require(weights.good(),"ATTITUDE_CLONE_WEIGHTS_OPEN");
