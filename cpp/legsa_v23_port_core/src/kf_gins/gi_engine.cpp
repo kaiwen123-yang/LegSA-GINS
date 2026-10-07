@@ -126,6 +126,8 @@ GIEngine::GIEngine(PortOptions options)
         !options_.enable_dual_yaw_update || !options_.yaw_scheme_C_enabled)
       throw std::runtime_error("PVT_PRIORITY_INVALID_ENGINE_CONTRACT");
   }
+  validateSupportPoseConfig(options_.support_pose_config, options_.runtime_contract);
+  if(supportPoseEnabled() && jointCloneEnabled()) throw std::runtime_error("SUPPORT_POSE_SEPARATE_JOINT_STATE");
   validateAttitudeCloneConfig(options_.attitude_clone_config, options_.runtime_contract);
   validateArcCloneConfig(options_.arc_clone_config, options_.runtime_contract);
   if (options_.arc_clone_config.mode!="off" && options_.attitude_clone_config.mode!="off")
@@ -182,6 +184,10 @@ void GIEngine::initialize(const NavState& initial_state) {
   heading_source_policy_ = HeadingSourcePolicy{};
   heading_source_counts_ = HeadingSourceCounts{};
   heading_source_events_.clear();
+  support_pose_active_=false;support_pose_stream_started_=false;next_support_pose_event_=0;
+  support_pose_counts_=SupportPoseCounts{};support_pose_counts_.source_rows=support_pose_events_.size();
+  support_pose_diagnostics_.clear();support_pose_applied_ids_.clear();support_pose_revocations_.clear();
+  support_pose_revoked_.clear();
   attitude_clone_active_=false;
   attitude_clone_owner_="NONE";
   initializeArcDiagnostics();
@@ -558,6 +564,7 @@ void GIEngine::EKFPredict(const Matrix& Phi, const Matrix& Qd) {
   Cov_ = add(multiply(multiply(Phi, Cov_), transpose(Phi)), Qd);
   dx_ = multiply(Phi, dx_);
   if (attitude_clone_active_) attitude_clone_cross_=multiply(Phi,attitude_clone_cross_);
+  if (support_pose_active_) support_pose_cross_=multiply(Phi,support_pose_cross_);
   if (jointCloneEnabled()) requireFrozenCloneBlocks();
 }
 
@@ -566,6 +573,12 @@ void GIEngine::EKFUpdate(const std::vector<double>& dz, const Matrix& H, const M
                          const std::string& source_tag, const std::string& provider_measurement_identity) {
   if (H.cols != RANK || dz.size() != H.rows || R.rows != H.rows || R.cols != H.rows) {
     throw std::runtime_error("EKFUpdate dimension mismatch");
+  }
+  if(support_pose_active_) {
+    Matrix full_h(H.rows,pose_clone::kJoint,0.0);
+    for(std::size_t i=0;i<H.rows;++i) for(std::size_t j=0;j<RANK;++j) full_h(i,j)=H(i,j);
+    setSupportPoseJointState(pose_clone::ordinaryUpdate(supportPoseJointState(),dz,full_h,R));
+    ++support_pose_counts_.ordinary_joint_updates;return;
   }
   if (attitude_clone_active_) {
     Matrix full_h(H.rows,attitude_clone::kJoint,0.0);
@@ -613,6 +626,18 @@ void GIEngine::stateFeedback() {
   }
   const Vec3 old_blh = pvacur_.pos_blh_rad_m;
   const Vec3 new_blh = subtract(old_blh, multiply(Earth::DRi(old_blh), dx_pos));
+  pose_clone::Gaussian support_reset;
+  Matrix3 support_reset_rotation=support_pose_cbe_;
+  Vec3 support_reset_position=support_pose_position_ecef_;
+  if(supportPoseEnabled()) {
+    if(yaw_correction_clipped) throw std::runtime_error("SUPPORT_POSE_FULL_FEEDBACK_REQUIRED");
+    support_reset=pose_clone::reset(supportPoseJointState(),multiply(Earth::DR(new_blh),Earth::DRi(old_blh)));
+    if(support_pose_active_) {
+      support_reset_position=subtract(support_pose_position_ecef_,Vec3{support_pose_error_[0],support_pose_error_[1],support_pose_error_[2]});
+      support_reset_rotation=multiply(Rotation::quaternion2matrix(Rotation::rotvec2quaternion(
+        {support_pose_error_[3],support_pose_error_[4],support_pose_error_[5]})),support_pose_cbe_);
+    }
+  }
   attitude_clone::Gaussian reset_state;
   Matrix3 reset_clone=attitude_clone_cbe_;
   if(jointCloneEnabled()) {
@@ -639,6 +664,11 @@ void GIEngine::stateFeedback() {
                                                          -dx_phi[2] * R2D,
                                                          yaw_correction_clipped);
   zeroVector(dx_);
+  if(supportPoseEnabled()) {
+    setSupportPoseJointState(support_reset);
+    if(support_pose_active_) {support_pose_position_ecef_=support_reset_position;support_pose_cbe_=support_reset_rotation;}
+    ++support_pose_counts_.full_resets;
+  }
   if(jointCloneEnabled()) {
     setAttitudeJointState(reset_state);
     if(attitude_clone_active_) attitude_clone_cbe_=reset_clone;
@@ -739,7 +769,7 @@ void GIEngine::processExactJointEvents(const std::vector<JointTimedEvent>& event
       applyBaseline3dUpdate(event, options_.enable_basic_dual_yaw_baseline, "INACTIVE", 1.0);
       execute_gnss=false;
     }
-    if(!execute_gnss && input_event.feet.empty() && input_event.arcs.empty()) continue;
+    if(!execute_gnss && input_event.feet.empty() && input_event.arcs.empty() && input_event.support.empty()) continue;
     const double event_time=input_event.time;
     if (event_time > previous.time) {
       ImuData segment = remaining;
@@ -782,6 +812,7 @@ void GIEngine::processExactJointEvents(const std::vector<JointTimedEvent>& event
     stateFeedback();
     pvapre_ = pvacur_;
     }
+    for(const auto& support : input_event.support) processSupportPoseEvent(support);
     for(const auto& foot : input_event.feet) processFootPairEvent(foot);
     for(const auto& arc:input_event.arcs) {
       if(event_time==end) end_arcs.push_back(arc);
@@ -804,7 +835,10 @@ void GIEngine::processExactJointEvents(const std::vector<JointTimedEvent>& event
     do { research_next_body_hv_tick_ += body_cfg.go2_body_velocity_update_period_s; }
     while (research_next_body_hv_tick_ <= end);
     const auto before = go2_velocity_diagnostic_prior_status_.update_count;
-    applyBodyVelocityPriorForTime(end);
+    if(support_pose_active_ && options_.support_pose_config.mode!="SDK_NULL") {
+      ++support_pose_counts_.sdk_ticks_suppressed;
+      body_velocity_events_.push_back({end,0,false,false,false,"SUPPORT_INTERVAL_SDK_REPLACED"});
+    } else applyBodyVelocityPriorForTime(end);
     if (go2_velocity_diagnostic_prior_status_.update_count > before) stateFeedback();
   }
   if(options_.arc_clone_config.mode!="off") ++arc_state_sample_count_;
@@ -817,6 +851,11 @@ void GIEngine::processExactJointEvents(const std::vector<JointTimedEvent>& event
 }
 
 bool GIEngine::checkCov() const {
+  if(support_pose_active_) {
+    for(double v:support_pose_cross_.data) if(!std::isfinite(v)) return false;
+    for(double v:support_pose_cov_.data) if(!std::isfinite(v)) return false;
+    for(std::size_t i=0;i<6;++i) if(support_pose_cov_(i,i)<0.0) return false;
+  }
   if(attitude_clone_active_) {
     for(double v:attitude_clone_cross_.data) if(!std::isfinite(v)) return false;
     for(double v:attitude_clone_cov_.data) if(!std::isfinite(v)) return false;

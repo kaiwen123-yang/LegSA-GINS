@@ -6,6 +6,7 @@
 // 中文说明：该文件为受控移植的组合导航骨架代码，后续创新因子将在该骨架通过 parity 后再接入。
 
 #include "legsa_v23_port_core/runtime/port_runtime.hpp"
+#include "legsa_v23_port_core/runtime/support_pose_replay.hpp"
 
 #include "legsa_v23_port_core/common/earth.hpp"
 #include "legsa_v23_port_core/common/rotation.hpp"
@@ -1442,6 +1443,11 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   }
 
   GIEngine engine(options);
+  const bool support_pose_enabled=options.support_pose_config.mode!="off";
+  const auto support_pose_events=support_pose_enabled
+      ? readSupportPoseEvents(options.support_pose_config) : std::vector<SupportPoseEvent>{};
+  if(support_pose_enabled) engine.setSupportPoseEvents(support_pose_events);
+  SupportPoseReplay support_replay(support_pose_enabled,support_pose_events);
   if (options.attitude_clone_config.mode != "off") {
     engine.setFootPairEvents(readFootPairEvents(options.attitude_clone_config));
   }
@@ -1548,6 +1554,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
         skipped_trace << stale_time << ",stale," << current_imu_time << "," << imu.time << "\n";
       }
     }
+    support_replay.beforeInterval(engine,current_imu_time,imu);
     engine.addImuData(imu);
     const int res = engine.isToUpdate();
     const std::size_t updates_before = engine.updateCount();
@@ -1576,6 +1583,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
             << engine.positionUpdateCount()-pos_before << ',' << engine.velocityUpdateCount()-vel_before << ','
             << engine.yawUpdateCount()-yaw_before << '\n';
       }
+      support_replay.afterInterval(engine,current_imu_time,imu,events);
     } else engine.newImuProcess();
     failClosedOnCovHealth(engine, options, output_dir, "configured run covariance check failed");
     appendState(engine, states, covariances);
@@ -1609,6 +1617,8 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   // Future terminal cleanup does not propagate, append output, or condition the clone.
   engine.finalizeFootPairStream();
   engine.finalizeArcSourceStream();
+  engine.finalizeSupportPoseStream();
+  options.support_pose_counts=engine.supportPoseCounts();
   options.propagation_count = engine.propagationCount();
   options.measurement_update_count = engine.updateCount();
   options.position_update_count = engine.positionUpdateCount();
@@ -1672,6 +1682,8 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   engine.writeNedVelocitySourceDiagnostics(output_dir);
   engine.writeAttitudeCloneDiagnostics(output_dir);
   engine.writeArcCloneDiagnostics(output_dir);
+  engine.writeSupportPoseDiagnostics(output_dir);
+  support_replay.writeDiagnostics(output_dir);
 }
 
 }  // namespace legsa_v23_port_core

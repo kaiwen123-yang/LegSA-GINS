@@ -192,6 +192,7 @@ void GIEngine::newImuProcessWithEvents(const std::vector<GnssData>& events) {
     }
     std::stable_sort(combined.begin(),combined.end(),[](const JointTimedEvent& a,const JointTimedEvent& b){return a.time<b.time;});
   }
+  appendSupportPoseEvents(combined);
   appendArcTimedEvents(combined);
   processExactJointEvents(combined);
 }

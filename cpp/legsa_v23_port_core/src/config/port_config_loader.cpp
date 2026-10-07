@@ -546,6 +546,21 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       options.dual_antenna_measurement_model != "baseline3d") {
     throw std::runtime_error("BASELINE3D_UNKNOWN_MEASUREMENT_MODEL");
   }
+  auto& support_config=options.support_pose_config;
+  support_config.mode=stringOrDefault(kv,"support_pose_mode","off");
+  support_config.events_path=stringOrDefault(kv,"support_pose_events_path","");
+  support_config.point_sigma_m=scalarOrDefault(kv,"support_pose_point_sigma_m",.01);
+  if(support_config.mode!="off") {
+    auto frame=kv.find("support_pose_body_frd_to_engine_body");
+    auto lever=kv.find("support_pose_imu_lever_body_frd_m");
+    if(frame==kv.end() || lever==kv.end()) throw std::runtime_error("SUPPORT_POSE_EXPLICIT_FRAME_AND_LEVER");
+    std::istringstream fs(normalizeLine(frame->second)),ls(normalizeLine(lever->second));
+    for(int i=0;i<9;++i) if(!(fs>>support_config.foot_frd_to_engine_body[i/3][i%3]))
+      throw std::runtime_error("SUPPORT_POSE_FRAME_VALUES");
+    for(int i=0;i<3;++i) if(!(ls>>support_config.imu_lever_body_frd[i]))
+      throw std::runtime_error("SUPPORT_POSE_LEVER_VALUES");
+  }
+  validateSupportPoseConfig(support_config,options.runtime_contract);
   auto& clone_config = options.attitude_clone_config;
   clone_config.mode = stringOrDefault(kv, "attitude_clone_mode", "off");
   clone_config.events_path = stringOrDefault(kv, "foot_pair_events_path", "");
@@ -580,6 +595,8 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   validateArcCloneConfig(arc_config,options.runtime_contract);
   if(arc_config.mode!="off" && clone_config.mode!="off")
     throw std::runtime_error("ARC_AND_FOOT_CLONE_MODES_ARE_EXCLUSIVE");
+  if(support_config.mode!="off" && (arc_config.mode!="off" || clone_config.mode!="off"))
+    throw std::runtime_error("SUPPORT_POSE_USES_ITS_OWN_JOINT_STATE");
   options.heading_source_policy = stringOrDefault(kv, "heading_source_policy", "configured");
   if (options.heading_source_policy != "configured" &&
       options.heading_source_policy != "pvt_priority_control" &&

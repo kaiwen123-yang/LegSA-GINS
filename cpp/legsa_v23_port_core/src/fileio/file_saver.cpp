@@ -162,6 +162,8 @@ void writeActualSolverInputPaths(std::ostream& out, const PortOptions& options) 
     first = false;
     out << "\"" << role << "\": \"" << escapeJson(path) << "\"";
   };
+  if(options.support_pose_config.mode!="off")
+    add("sdk_two_time_support_pose_events",options.support_pose_config.events_path);
   add("propagation_imu", options.imu_path);
   add("gnss_position_receiver_velocity_dual_yaw", options.gnss_path);
   if (options.attitude_clone_config.mode != "off") {
@@ -196,6 +198,8 @@ void writeActualSolverInputPaths(std::ostream& out, const PortOptions& options) 
 void writeActualSolverInputRoles(std::ostream& out, const PortOptions& options) {
   out << "{\"propagation_imu\": \"source_backed_propagation\", "
       << "\"gnss_position_receiver_velocity_dual_yaw\": \"validity_gated_measurements\"";
+  if(options.support_pose_config.mode!="off")
+    out<<", \"sdk_two_time_support_pose_events\": \"conditional_same_state_body0_xy_support_displacement_SDK_interval_replacement\"";
   if(options.arc_clone_config.mode!="off")
     out<<", \"arc_source_time_metadata_only\": \"source_time_replay_assumption_no_phase_values_or_availability_claim\"";
   if (options.dual_antenna_measurement_model == "baseline3d") {
@@ -856,6 +860,44 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
         << "  \"body_velocity_native_uses_GNSS_heading_to_construct_measurement\": false,\n"
         << "  \"body_velocity_update_period_s\": " << options.go2_velocity_prior_diagnostic_config.go2_body_velocity_update_period_s << ",\n"
         << "  \"body_velocity_time_policy\": \"independent_IMU_boundary_timer_past_latest_unique_attempt_no_interpolation\",\n";
+  }
+  if(options.support_pose_config.mode!="off") {
+    const auto& config=options.support_pose_config;
+    const auto& counts=options.support_pose_counts;
+    out << "  \"support_pose_mode\": \"" << escapeJson(config.mode) << "\",\n"
+        << "  \"support_pose_point_sigma_m\": " << config.point_sigma_m << ",\n"
+        << "  \"support_pose_max_joint_dimension\": 27,\n"
+        << "  \"support_pose_output_current_dimension\": 21,\n"
+        << "  \"support_pose_measurement_axes\": \"START_body_forward_right\",\n"
+        << "  \"support_pose_body_z_observed\": false,\n"
+        << "  \"support_pose_uses_same_state_rotations\": true,\n"
+        << "  \"support_pose_SDK_cross_independence_claim\": false,\n"
+        << "  \"support_pose_replacement_policy\": \"same_source_interval_no_independent_SDK_stacking_no_addback_on_revocation\",\n"
+        << "  \"support_pose_retirement_policy\": \"end_future_constraint_preserve_valid_past_marginal\",\n"
+        << "  \"support_pose_revocation_policy\": \"geometric_dependency_notice_bounded_raw_event_replay_current_state\",\n"
+        << "  \"support_pose_replay_history_s\": 0.5,\n"
+        << "  \"support_pose_replay_summary\": \"SUPPORT_POSE_REPLAY_SUMMARY.json\",\n"
+        << "  \"support_pose_replay_journal\": \"SUPPORT_POSE_REPLAY_EVENTS.csv\",\n"
+        << "  \"support_pose_engine_diagnostics_semantics\": \"corrected_trajectory_after_replay_original_acceptance_retained_in_replay_journal\",\n"
+        << "  \"support_pose_past_NAV_rewritten\": false,\n"
+        << "  \"support_pose_imu_lever_body_frd_m\": [" << config.imu_lever_body_frd[0] << "," << config.imu_lever_body_frd[1] << "," << config.imu_lever_body_frd[2] << "],\n"
+        << "  \"support_pose_reference_point_assumption\": \"configured_body_origin_to_IMU_lever_zero_is_inherited_working_assumption_not_calibration\",\n"
+        << "  \"support_pose_foot_frd_to_engine_body\": [";
+    for(std::size_t i=0;i<9;++i) {if(i) out<<",";out<<config.foot_frd_to_engine_body[i/3][i%3];}
+    out << "],\n"
+        << "  \"support_pose_source_rows\": " << counts.source_rows << ",\n"
+        << "  \"support_pose_event_rows\": " << counts.event_rows << ",\n"
+        << "  \"support_pose_starts\": " << counts.starts << ",\n"
+        << "  \"support_pose_ends\": " << counts.ends << ",\n"
+        << "  \"support_pose_retires\": " << counts.retires << ",\n"
+        << "  \"support_pose_revocations\": " << counts.revocations << ",\n"
+        << "  \"support_pose_accepted\": " << counts.accepted << ",\n"
+        << "  \"support_pose_rejected\": " << counts.rejected << ",\n"
+        << "  \"support_pose_null_ends\": " << counts.null_ends << ",\n"
+        << "  \"support_pose_sdk_ticks_suppressed\": " << counts.sdk_ticks_suppressed << ",\n"
+        << "  \"support_pose_ordinary_joint_updates\": " << counts.ordinary_joint_updates << ",\n"
+        << "  \"support_pose_full_resets\": " << counts.full_resets << ",\n"
+        << "  \"support_pose_unconsumed\": " << counts.unconsumed << ",\n";
   }
   if (options.attitude_clone_config.mode != "off") {
     const auto& ac = options.attitude_clone_config;

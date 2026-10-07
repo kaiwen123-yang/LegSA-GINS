@@ -20,6 +20,7 @@
 #include "legsa_v23_port_core/source_aware/source_aware_trace.hpp"
 
 #include "legsa_v23_port_core/factors/attitude_clone.hpp"
+#include "legsa_v23_port_core/factors/pose_clone.hpp"
 #include <set>
 #include <cstddef>
 #include <string>
@@ -112,6 +113,14 @@ class GIEngine {
   const HeadingSourceCounts& headingSourceCounts() const { return heading_source_counts_; }
   const std::vector<HeadingSourceDecision>& headingSourceEvents() const { return heading_source_events_; }
   void writeHeadingSourceDiagnostics(const std::string& output_dir) const;
+  void setSupportPoseEvents(const std::vector<SupportPoseEvent>& events);
+  void finalizeSupportPoseStream();
+  void writeSupportPoseDiagnostics(const std::string& output_dir) const;
+  const SupportPoseCounts& supportPoseCounts() const {return support_pose_counts_;}
+  bool hasSupportPoseStartBetween(double after_time,double through_time) const;
+  double supportPoseFactorStartTime(const std::string& clone_id) const;
+  const std::vector<SupportPoseRevocation>& pendingSupportRevocations() const {return support_pose_revocations_;}
+  void setRevokedSupportFactorIds(const std::set<std::string>& ids) {support_pose_revoked_=ids;}
   void setFootPairEvents(const std::vector<FootPairEvent>& events);
   void finalizeFootPairStream();
   void writeAttitudeCloneDiagnostics(const std::string& output_dir) const;
@@ -138,6 +147,7 @@ class GIEngine {
     GnssData gnss;
     std::vector<FootPairEvent> feet;
     std::vector<ArcSourceEvent> arcs;
+    std::vector<SupportPoseEvent> support;
   };
   void processExactJointEvents(const std::vector<JointTimedEvent>& events);
   bool jointCloneEnabled() const;
@@ -157,6 +167,13 @@ class GIEngine {
                        bool applied=false, double epsilon=0.0,
                        double prior_score=0.0, double bound_score=0.0,
                        double safe_innovation=-1.0);
+  bool supportPoseEnabled() const {return options_.support_pose_config.mode!="off";}
+  pose_clone::Gaussian supportPoseJointState() const;
+  void setSupportPoseJointState(const pose_clone::Gaussian& state);
+  void appendSupportPoseEvents(std::vector<JointTimedEvent>& events);
+  void processSupportPoseEvent(const SupportPoseEvent& event);
+  void retireSupportPose();
+  void recordSupportPose(const SupportPoseEvent&,const std::string&,bool attempted=false,bool accepted=false,double statistic=0.0);
   void initializeCovariance();
   void initializeQc();
   void buildErrorStateMatrices(const ImuData& imu, Matrix& F, Matrix& G, Matrix& Phi, Matrix& Qd) const;
@@ -193,6 +210,23 @@ class GIEngine {
   void setCovarianceMatrix(const Matrix& matrix);
 
   PortOptions options_;
+  bool support_pose_active_=false,support_pose_stream_started_=false;
+  Matrix support_pose_cross_{21,6,0.0},support_pose_cov_{6,6,0.0};
+  std::vector<double> support_pose_error_=std::vector<double>(6,0.0);
+  Vec3 support_pose_position_ecef_{};
+  Matrix3 support_pose_cbe_{};
+  SupportPoseEvent support_pose_start_;
+  std::vector<SupportPoseEvent> support_pose_events_;
+  std::size_t next_support_pose_event_=0;
+  SupportPoseCounts support_pose_counts_;
+  std::set<std::string> support_pose_revoked_,support_pose_applied_ids_;
+  std::vector<SupportPoseRevocation> support_pose_revocations_;
+  struct SupportPoseDiagnostic {
+    double time=0,state_time=0,statistic=0;
+    std::string type,clone_id,reason;
+    bool attempted=false,accepted=false;
+  };
+  std::vector<SupportPoseDiagnostic> support_pose_diagnostics_;
   bool attitude_clone_active_=false;
   std::string attitude_clone_owner_="NONE";
   std::vector<ArcSourceEvent> arc_events_;

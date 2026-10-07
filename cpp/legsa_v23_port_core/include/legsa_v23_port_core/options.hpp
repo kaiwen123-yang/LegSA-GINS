@@ -17,6 +17,7 @@
 #include "legsa_v23_port_core/baseline3d.hpp"
 #include "legsa_v23_port_core/heading_source_policy.hpp"
 #include "legsa_v23_port_core/factors/foot_pair_events.hpp"
+#include "legsa_v23_port_core/factors/support_pose_events.hpp"
 #include "legsa_v23_port_core/factors/arc_source_events.hpp"
 
 #include <string>
@@ -53,6 +54,8 @@ struct PortOptions {
   std::string heading_source_policy = "configured";
   HeadingSourceCounts heading_source_counts;
   AttitudeCloneConfig attitude_clone_config;
+  SupportPoseConfig support_pose_config;
+  SupportPoseCounts support_pose_counts;
   AttitudeCloneCounts attitude_clone_counts;
   ArcCloneConfig arc_clone_config;
   ArcCloneCounts arc_clone_counts;
