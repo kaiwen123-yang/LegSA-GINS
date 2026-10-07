@@ -1,0 +1,33 @@
+{
+  "rpy_deg": [
+    13.0,
+    -17.0,
+    47.0
+  ],
+  "eps_rad": 1e-06,
+  "J_heading_left_ECEF": [
+    0.21653244167840718,
+    -0.9087167647463978,
+    -0.46991360137242666
+  ],
+  "J_heading_right_POI": [
+    0.0,
+    -0.2352294631404721,
+    -1.018890744513769
+  ],
+  "finite_difference_left": [
+    0.2165324417546799,
+    -0.9087167647248151,
+    -0.46991360136416915
+  ],
+  "finite_difference_right": [
+    0.0,
+    -0.23522946301923753,
+    -1.018890744441947
+  ],
+  "left_max_abs_error": 7.627271036980687e-11,
+  "right_max_abs_error": 1.212345779322277e-10,
+  "same_physical_covariance_variance_difference": 1.6263032587282567e-19,
+  "same_covariance_note": "Cb=R^T Ce R must give identical heading variance; alternative B later deliberately reinterprets serialized entries as local, not this equivalent change of basis",
+  "status": "PASS"
+}
