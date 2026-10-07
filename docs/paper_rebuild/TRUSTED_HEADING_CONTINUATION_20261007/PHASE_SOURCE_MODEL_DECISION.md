@@ -1,5 +1,7 @@
 # 相位无增益：相关性反例与来源模型决策
 
+**当前接续状态（后续证据）：** 本文第6–7节的HV依赖核对已完成，生成依赖准入及其新先验相位诊断也已完成；见[新先验结果](ARC_PHASE_DEPENDENCY_INFORMATION_RESULTS.md)。其857块仍支持本文条件反例的数值前提。下一步来源/相关性分界见[新来源合同](PHASE_CORRELATION_SOURCE_CONTRACT.md)，下文保留原阶段论证与历史措辞。
+
 日期：2026-10-07。状态：ANALYTICAL_IMPLICATION_OF_EXISTING_WORKING_DIAGNOSTICS。本轮读取当前源码与既有小结果报告，复核代数；没有重新读取原始/provider/联合先验/相位模型大型输出，没有新增矩阵诊断、测试、导航或评价。既有全部结果和 V3 保留。
 
 ## 1. 新结论及其证据范围

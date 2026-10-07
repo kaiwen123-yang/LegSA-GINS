@@ -77,3 +77,20 @@
 ## 8. 2026-10-07 用户接口资料补充
 
 见 [GO2_INTERFACE_SEMANTICS_UPDATE.md](GO2_INTERFACE_SEMANTICS_UPDATE.md)。按该文档，状态消息 error_code 是运动模式，控制API返回码另列；新采集须保存明确schema与两类码，不能非零即源故障。Move的机体系速度是命令语义，反馈velocity坐标仍待确认。Euler/BalanceStand可作为候选激励接口，命令与实际反馈/独立参考分别记录。此补充没有填补原始关节、足端生成链、安装或同步资格，也没有执行机器人动作。
+
+## 9. 设备无关的最小记录与检查合同
+
+以下是采集设计要求，不是已经运行的collector或物理资格。现有代码有局部source/availability/退役合同，但本次定向检索未发现覆盖全部clock域、派生依赖和航向三态的统一采集检查器；实际适配应绑定设备及消息版本，不先制造默认值。
+
+1. **身份与原始值。** 每条记录保存record_id、stream_id、source_sequence、capture_sequence、generation，以及schema、collector/固件/IDL版本和原始载荷位置。未知身份显式UNKNOWN；原始与派生值分开。
+2. **时间语义。** 设备stamp、SDK发布、host_receive分别保存；每个时刻附clock_id、clock_epoch、unit、stamp_semantics。不能确认stamp语义时标未知，不能用到达时刻代替采样时刻。主机到达使用有epoch身份的单调时钟。
+3. **跨时钟映射。** 不同clock/epoch的数字不能直接比较。映射记录map_id、有效区间、标定来源和误差界。缺映射为UNVERIFIABLE；映射后时间区间重叠也不能按中心值宣称先后已确定。
+4. **顺序与重启。** 保存源乱序、重复、缺包、忙丢弃及队列丢弃。reset、回拨或计数重置显式开启新generation；旧token/缓存/一次消费身份不能无声明跨代复活。不静默排序、补点或删除失败。
+5. **派生依赖与ready。** 每个派生测量保存算法/标定版本、精确依赖record_id、dependency_list_complete、compute_complete和实际ready。依赖缺失/循环显式报告。可比较时ready不得早于任何依赖实际可用及自身计算完成；max(source stamp)不能代替实际ready。
+6. **消费与发布。** 保存consume、publish、revoke、reacquire时刻和原因，并关联generation。可比较时consume不得早于ready；未知arrival或时钟映射不能被记录为在线资格通过。所有机会及未发布进入分母。
+7. **命令/模式/测量分域。** command参数、send/return、API返回码、state模式码与实际反馈独立记录。按明确schema解释模式；未知版本不默认健康或故障。命令、API成功和高层步态不能替代姿态、速度、每足接触或无滑移测量。
+8. **航向三态与参考独立。** 输出CURRENT_ABSOLUTE_AVAILABLE、RELATIVE_PROPAGATION、UNAVAILABLE之一，附参考系、源/资格引用及退出原因。相对传播注明起点/锚与适用合同，不计作当前绝对测量。不可用可留诊断数值但不能标usable。独立参考另列质量/可用性/同步；参考缺失不能填零误差或直接计算法失败。
+
+日志合同检查应区分CONTRADICTION、UNVERIFIABLE、CONSISTENT_DECLARATIONS，最后一项只表示已声明数据自洽，不表示物理可信。时延、同步误差、最大age/hold、漂移界、接触/滑移阈值、外参误差、noise/cross和风险概率不预填数值。既有1秒确认/20秒观察属于原评价合同，不自动成为物理可靠性参数。
+
+相关性证据需要同时覆盖每观测共享输入、初始化和共享标定参数，见[来源相关性合同](PHASE_CORRELATION_SOURCE_CONTRACT.md)。这份新增合同没有创建采集器、控制机器人或填补缺失的真实arrival记录。

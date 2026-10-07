@@ -176,7 +176,7 @@
   "main_merge_authorized": false,
   "completion_proven": false,
   "latest_decision": "CONTINUATION_DECISION.md",
-  "latest_checkpoint": "New dependency-policy priors requalified:918 complete P24/P6;857 new H blocks,all4 targets continuous-no-improvement and gridSKIP;61 missing,3uncovered,0unresolved. All857 satisfy registered numerical2rho<1 margin,conditional working counterexample only.0native/eval. Proceed source-supported error/cross model and acquisition qualification; goal remains incomplete.",
+  "latest_checkpoint": "Source trace separates direct V3 R5 heading, legacy A1 inside HV, and BY2 GNSS/SDK-derived calibration parameters. Moving END phase before GNSS does not remove historical/source dependence. Derived sharp fixed-scalar conditional cross-norm frontier; no physical gamma/moments supplied, no numeric scans or fusion. Added clock/arrival/dependency/three-state acquisition contract; concrete collector/source/reference information remains required.",
   "causal_ned_hv_policy": {
     "status": "REAL_SOURCE_TIME_POLICY_QUALIFIED_NOT_PHYSICAL_ARRIVAL_OR_NAV_GAIN",
     "registration_commit": "531b30860b7c1389e22255ccd1339cb246983049",
@@ -202,7 +202,7 @@
     "new_evaluator_calls": 0,
     "scope": "Conditional marginal-moment linear surrogate; independent Gaussian counterexample also preserves endpoint marginals with Q01=0. Physical sources and new causal priors not qualified.",
     "upstream_a1_interpolation": "CONFIRMED_ON_SELECTED_GENERATOR_INPUTS:3683/4598_ENDPOINT_AFTER_STATE",
-    "next_executable_action": "New dependency-prior readout complete; fixed family remains SKIP. Use known generating-source dependencies to specify shared nuisance/error and source-supported cross restrictions; physical acquisition/arrival/reference information remains pending."
+    "next_executable_action": "Conditional cross frontier and static source trace now written. Bind real collector/source records before choosing independent-source or raw-joint model; black-box PVT/STD cannot supply missing cross. No further fixed-family tuning or navigation admission."
   },
   "hv_a1_dependency_audit": {
     "status": "COMPLETE_REPORTED_GENERATOR_ENDPOINT_FUTURE_DEPENDENCIES_CONFIRMED",
@@ -244,5 +244,22 @@
     "physical_cross_qualified": false,
     "new_prior_phase_information_evaluated": true,
     "new_prior_phase_information_evidence": "ARC_PHASE_DEPENDENCY_INFORMATION_RESULTS.md"
+  },
+  "phase_correlation_source_contract": {
+    "status": "STATIC_SOURCE_TRACE_AND_CONDITIONAL_DERIVATION_COMPLETE_NOT_PHYSICAL_QUALIFICATION",
+    "evidence": "PHASE_CORRELATION_SOURCE_CONTRACT.md",
+    "source_code_base_commit": "31c786b8ea518c7d3469a5d86f90680e4ec4eac6",
+    "new_native_calls": 0,
+    "new_evaluator_calls": 0,
+    "new_matrix_diagnostics": 0,
+    "real_payload_reads": 0,
+    "physical_gamma_supplied": false,
+    "positive_guarantee_model": "Centered exact marginal moments at fixed information set, bounded whitened C; fixed scalar only",
+    "live_collector_implemented": false,
+    "next_required_evidence": [
+      "Versioned collector and receiver/SDK generating-source identities",
+      "Source-supported effective-error and cross model including shared calibration, bias, timing and installation",
+      "Independent direction reference and measured sample/arrival clock mapping"
+    ]
   }
 }
