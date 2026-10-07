@@ -1,0 +1,75 @@
+{
+  "status": "REVIEWED_CONDITIONAL_WORKING_CLASS_DIAGNOSIS",
+  "registration_commit": "f9ec34d75401a05f5466fdd4a8b92377f5fd770e",
+  "stage": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/FOOT_UNKNOWN_CROSS_ATTEMPT01",
+  "summary": {
+    "status": "COMPLETE_CONDITIONAL_WORKING_CLASS_DIAGNOSIS",
+    "registration_commit": "f9ec34d75401a05f5466fdd4a8b92377f5fd770e",
+    "events": 2510,
+    "sequences": [
+      {
+        "sequence": "BY2",
+        "events": 687,
+        "statuses": {
+          "WITNESS_STRICT_WORKING_MARGIN": 687
+        },
+        "min_direct_V_eigenvalue": 0.0015999980949976383,
+        "min_normalized_V_eigenvalue": 0.9999988093735239,
+        "min_roundoff_margin_multiple": 11728110065795.68
+      },
+      {
+        "sequence": "BY2H",
+        "events": 666,
+        "statuses": {
+          "WITNESS_STRICT_WORKING_MARGIN": 666
+        },
+        "min_direct_V_eigenvalue": 0.001599997881526631,
+        "min_normalized_V_eigenvalue": 0.9999986759541432,
+        "min_roundoff_margin_multiple": 11728108501036.633
+      },
+      {
+        "sequence": "BY2O",
+        "events": 1157,
+        "statuses": {
+          "WITNESS_STRICT_WORKING_MARGIN": 1157
+        },
+        "min_direct_V_eigenvalue": 0.0015999980096772053,
+        "min_normalized_V_eigenvalue": 0.9999987560482534,
+        "min_roundoff_margin_multiple": 11728109440390.295
+      }
+    ],
+    "elapsed_s": 0.7507497240000021,
+    "new_native_calls": 0,
+    "new_evaluator_calls": 0,
+    "raw_reads": 0,
+    "reference_reads": 0,
+    "source_dumps": 3,
+    "old_qualification_tables": 3,
+    "actual_C_identified": false,
+    "physical_error_bound_established": false,
+    "output_sha256": {
+      "EVENT_WITNESSES.jsonl": "a068c61371dafa798ef18c7f0e5ccd33ca1aabdb3933a2ff42b847322d1c59d9"
+    }
+  },
+  "source_execution_count": 1,
+  "independent_reviewer": "INDEPENDENT_FOOT_UNKNOWN_CROSS_RESULTS_REVIEW.md",
+  "file_sha256": {
+    "FOOT_UNKNOWN_CROSS_ATTEMPT01_EXIT.json": "30c21a65968bf9b6bce08f385f30039c053de677007257caf7d8982019fb7201",
+    "FOOT_UNKNOWN_CROSS_ATTEMPT01_INVOCATION.json": "c29d2267e1dba033b9e166f463bcc6ac7ae9cda91def597d4f0148b3e9e974ad",
+    "FOOT_UNKNOWN_CROSS_ATTEMPT01_OPENAT.strace": "6e879c922a1d37ef700a9ffc20bb1e20d106acc29da82201b4d834794f0d72fb",
+    "FOOT_UNKNOWN_CROSS_ATTEMPT01_stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "FOOT_UNKNOWN_CROSS_ATTEMPT01_stdout.log": "e530ba79ade8ccde1b62539073628e11e07dfca0fd9e98f2409a21ba13f56f04"
+  },
+  "stage_file_sha256": {
+    "COMPLETE.json": "f30debd755c1fe54e5ff183256b0b32785675d7b438da355e74dd5f944c3a485",
+    "EVENT_WITNESSES.jsonl": "a068c61371dafa798ef18c7f0e5ccd33ca1aabdb3933a2ff42b847322d1c59d9",
+    "SUMMARY.json": "4c1553b6e6703c0716fb552431c236d488d302f2f6edbcfa658c3b269fef6650"
+  },
+  "interpretation_limits": [
+    "PSD qualification is roundoff-tolerant numerical working evidence, not exact interval certification",
+    "P and R are not physically certified marginal error moments",
+    "Actual C has not been identified",
+    "Minimax result is for fixed linear correction chosen before the tested residual, not every nonlinear/adaptive estimator",
+    "No navigation gain, raw read, native run or evaluation was added"
+  ]
+}

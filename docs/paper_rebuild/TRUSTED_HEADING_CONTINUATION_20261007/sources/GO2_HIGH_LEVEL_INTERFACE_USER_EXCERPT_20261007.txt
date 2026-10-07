@@ -1,0 +1,401 @@
+高层运动控制接口介绍
+高层控制接口可以实现  Go2  的姿态、速度、空翻、跳跃、倒立等控制。下面列出运动控制接口的相关函数。
+
+函数名	Damp
+函数原型	int32_t Damp()
+功能概述	进入阻尼状态。
+参数	无
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	所有电机关节停止运动并进入阻尼状态。该模式具有最高的优先级，用于突发情况下的急停。
+函数名	BalanceStand
+函数原型	int32_t BalanceStand()
+功能概述	解除锁定。
+参数	无
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	解除关节电机锁定，从正常站立模式切换到平衡站立模式。这一模式下机身姿态和高度会始终保持平衡，不受地形的影响。可以通过调用 Euler()接口实现机身的姿态控制(详见表格的对应部分)。
+函数名	StopMove
+函数原型	int32_t StopMove()
+功能概述	停下当前动作，将绝大多数指令恢复成默认值。
+参数	无
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	停下当前的运动，并将 Go2 内部的运动参数恢复到默认值。
+函数名	StandUp
+函数原型	int32_t StandUp()
+功能概述	关节锁定，站高。
+参数	无
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	机器狗正常站高，电机关节保持锁定。相比于平衡站立模式，该模式下机器狗的姿态不会始终保持平衡。默认的站立高度为 0.33m 。锁定姿态容易导致机器狗电机过热，请注意及时解锁。
+函数名	StandDown
+函数原型	int32_t StandDown()
+功能概述	关节锁定，站低。
+参数	无
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	机器狗趴下，电机关节保持锁定。
+函数名	RecoveryStand
+函数原型	int32_t RecoveryStand()
+功能概述	恢复站立。
+参数	无
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	从翻倒或趴下状态恢复至平衡站立状态。不论是否翻倒，都会恢复至站立。
+函数名	Euler
+函数原型	int32_t Euler(float roll, float pitch, float yaw)
+功能概述	站立和行走时的姿态。
+参数	roll:  取值范围  [-0.75~0.75] (rad)； pitch:  取值范围  [-0.75~0.75] (rad)； yaw:  取值范围  [-0.6~0.6] (rad)。
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	设置 Go2 平衡站立或移动时的机体姿态角。欧拉角采用绕机体相对轴和 z-y-x 旋转顺序的表示方式。
+函数名	Move
+函数原型	int32_t Move(float vx, float vy, float vyaw)
+功能概述	移动。
+参数	vx:  取值范围[-2.5~3.8] (m/s)； vy:  取值范围[-1.0~1.0] (m/s)； vyaw:  取值范围[-4~4] (rad/s)。
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	控制移动速度。设定的速度为机体坐标系表示下的速度。Move接口有两个特点：（1）运控部分不会对Move指令进行滤波；（2）最新的Move指令会维持1s。建议：使用该接口时，自行加滤波然后发送；在不使用Move时，发送Move(0,0,0)或者StopMove()。
+函数名	Sit
+函数原型	int32_t Sit();
+功能概述	坐下。
+参数	无
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	特殊动作，机器狗坐下。需要注意特殊动作需要在上一个动作执行完毕后再执行，否则会导致动作异常。
+函数名	RiseSit
+函数原型	int32_t RiseSit()
+功能概述	站起（相对于坐下）。
+参数	无
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	从坐下状态恢复到平衡站立
+函数名	SpeedLevel
+函数原型	int32_t SpeedLevel(int level)
+功能概述	设置速度档位。
+参数	level：速度档位枚举值，取值  -1  为慢速，0  为正常，1  为快速。
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	
+函数名	Hello
+函数原型	int32_t Hello()
+功能概述	打招呼。
+参数	无
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	
+函数名	Stretch
+函数原型	int32_t Stretch()
+功能概述	伸懒腰。
+参数	无
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	
+函数名	SwitchJoystick
+函数原型	int32_t SwitchJoystick(bool flag)
+功能概述	原生遥控器响应开关。
+参数	flag：设置 true  为响应原生遥控器，false  为不响应遥控器。
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	关闭遥控器响应后，推动遥控器摇杆不会干涉当前程序的运行
+函数名	Content
+函数原型	int32_t Content()
+功能概述	开心。
+参数	无
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	
+函数名	Heart
+函数原型	int32_t Heart()
+功能概述	比心。
+参数	无
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	
+函数名	Pose
+函数原型	int32_t Pose(bool flag)
+功能概述	摆姿势。
+参数	flag：设置 true  为摆姿式，false  为恢复。
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	
+函数名	Scrape
+函数原型	int32_t Scrape()
+功能概述	拜年作揖。
+参数	无
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	
+函数名	FrontFlip
+函数原型	int32_t FrontFlip()
+功能概述	前空翻。
+参数	无
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	该动作存在一定危险性，执行前请您注意与他人保持适当的安全距离，以确保人员安全。需要提醒您的是，若因操作不当导致人员事故，宇树科技将不承担责任。同时，该动作可能会加速硬件损伤，减少硬件使用寿命，建议您谨慎使用。
+函数名	FrontJump
+函数原型	int32_t FrontJump()
+功能概述	前跳。
+参数	无
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	
+函数名	FrontPounce
+函数原型	int32_t FrontPounce()
+功能概述	向前扑人。
+参数	无
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	
+函数名	Dance1
+函数原型	int32_t Dance1()
+功能概述	舞蹈段落  1。
+参数	无
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	
+函数名	Dance2
+函数原型	int32_t Dance2()
+功能概述	舞蹈段落  2。
+参数	无
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	
+函数名	HandStand
+函数原型	int32_t HandStand(bool flag)
+功能概述	倒立行走。
+参数	flag：设置 true  为开启，false  为关闭。
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	进入倒立模式。该模式需要在可移动状态下，才能进入。发送StandOut前，可先发送BalanceStand()，确保可切入倒立模式。
+该步态电机容易过热， 请自行把控业务逻辑，避免因电机过热导致机身摔倒。
+函数名	LeftFlip
+函数原型	int32_t LeftFlip()
+功能概述	左空翻。
+参数	无。
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	进行单次左空翻，空翻结束后会自动进入灵动模式。该模式需要在非运动状态下才能进入。
+该动作存在一定危险性，执行前请您注意与他人保持适当的安全距离，以确保人员安全。需要提醒您的是，若因操作不当导致人员事故，宇树科技将不承担责任。同时，该动作可能会加速硬件损伤，减少硬件使用寿命，建议您谨慎使用。
+函数名	BackFlip
+函数原型	int32_t BackFlip()
+功能概述	后空翻。
+参数	无。
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	进行单次后空翻，空翻结束后会自动进入灵动模式。该模式需要在非运动状态下才能进入。
+该动作存在一定危险性，执行前请您注意与他人保持适当的安全距离，以确保人员安全。需要提醒您的是，若因操作不当导致人员事故，宇树科技将不承担责任。同时，该动作可能会加速硬件损伤，减少硬件使用寿命，建议您谨慎使用。
+函数名	FreeWalk
+函数原型	int32_t FreeWalk()
+功能概述	灵动模式（默认步态）。
+参数	无。
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	进入Ai-灵动模式, 拥有较强的复杂地形适应能力，支持爬楼梯、碎石、草甸、湿滑地面。
+函数名	FreeBound
+函数原型	int32_t FreeBound(bool flag)
+功能概述	并腿跑模式。
+参数	flag：设置true，进入并腿跑；设置false，退出并腿跑，进入灵动。
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	进入并腿跑模式。 bound 步态。
+函数名	FreeJump
+函数原型	int32_t FreeJump(bool flag)
+功能概述	跳跃模式。
+参数	flag：设置true，进入跳跃模式；设置false，退出跳跃模式，进入灵动。
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	进人跳跃模式。跳跃奔跑步态
+函数名	FreeAvoid
+函数原型	int32_t FreeAvoid(bool flag)
+功能概述	闪避模式。
+参数	flag：设置true，进入闪避模式；设置false，退出闪避模式，进入灵动。
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	进入闪避模式。该模式下，机器人移动时，可进行避障；静止状态下，可对前方物体进行闪避。
+函数名	WalkUpright
+函数原型	int32_t WalkUpright(bool flag)
+功能概述	后腿直立模式。
+参数	flag：设置true，进入后腿直立模式；设置false，退出后腿直立模式，进入灵动。
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	进入后腿直立模式。
+该步态电机容易过热， 请自行把控业务逻辑，避免因电机过热导致机身摔倒。
+函数名	CrossStep
+函数原型	int32_t CrossStep(bool flag)
+功能概述	交叉步模式。
+参数	flag：设置true，进入交叉步模式；设置false，退出交叉步模式，进入灵动。
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	进入交叉步模式。
+该步态电机容易过热， 请自行把控业务逻辑，避免因电机过热导致机身摔倒。
+函数名	AutoRecoverSet
+函数原型	int32_t AutoRecoverSet(bool flag)
+功能概述	设置自动翻身是否生效。
+参数	flag：设置true，自动翻身生效；设置false，自动翻身失效。
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	当设备有背载时，建议您关闭该配置。因为如果设备摔倒并剧烈翻转，可能会损坏背载设备，像机身头部安装的云台、相机等传感器等都容易受到影响。为了避免这种情况，请您务必注意关闭该配置。
+函数名	AutoRecoverGet
+函数原型	int32_t AutoRecoverGet(bool& flag)
+功能概述	查询自动翻身是否生效。
+参数	无。
+返回值	调用成功返回 0，否则返回相关错误码。flag为true表示自动翻身已生效；false表示自动翻身失效。
+备注	
+函数名	ClassicWalk
+函数原型	int32_t ClassicWalk(bool flag)
+功能概述	经典步态。
+参数	flag：设置true，进入经典步态；设置false，退出经典步态，进入灵动。
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	Ai-经典步态，拥有较强的复杂地形适应能力，支持爬楼梯、碎石、草甸、湿滑地面。 行走姿态比较稳定优雅。
+函数名	TrotRun
+函数原型	int32_t TrotRun()
+功能概述	进入常规跑步模式
+参数	
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	跑步步态， 跑步最高速度达 3.7m/s , 速度较高有一定的危险性，请谨慎操作。 该步态不具备复杂地形能力，因此地面不平容易摔倒。
+函数名	StaticWalk
+函数原型	int32_t StaticWalk()
+功能概述	进入常规行走模式
+参数	
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	原常规模式默认步态，该步态不具备复杂地形能力，但行走优雅。
+函数名	EconomicGait
+函数原型	int32_t EconomicGait()
+功能概述	进入常规续航模式
+参数	
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	机身高度较高，电量消耗速度变慢，可延长使用时长。 单块长续航电池满电行走将延长至4h左右。
+函数名	SwitchAvoidMode
+函数原型	int32_t SwitchAvoidMode()
+功能概述	闪避模式下，关闭摇杆未推时前方障碍物的闪避以及后方的障碍物躲避
+参数	
+返回值	调用成功返回  0，否则返回相关错误码。
+备注	建议一般不使用，如需使用请了解功能概述
+其中接口错误码如下：
+
+错误号	错误描述
+4101	轨迹点数错误，由客户端返回
+4201	动作超时错误，在期望的时间内没有完成指定动作
+4205	状态机未初始化结束
+4206	执行挥手或拜年类动作前，机器人姿态不佳，不予执行
+3104	DDS 超时
+实例
+下面给出一个控制机器狗实现站立时姿态控制的例子
+
+#include <cmath>
+#include <signal.h>
+#include <unistd.h>
+
+#include <unitree/robot/go2/sport/sport_client.hpp>
+
+bool stopped = false;
+
+void sigint_handler(int sig)
+{
+  if (sig == SIGINT)
+  {
+    stopped = true;
+  }
+}
+
+int main(int argc, char **argv)
+{
+  if (argc < 2)
+  {
+    std::cout << "Usage: " << argv[0] << " networkInterface" << std::endl;
+    exit(-1);
+  }
+  unitree::robot::ChannelFactory::Instance()->Init(0, argv[1]);
+  //argv[1]由终端传入，为机器人连接的网卡名称
+
+  //创建一个sport_client对象
+  unitree::robot::go2::SportClient sport_client;
+  sport_client.SetTimeout(10.0f); //超时时间
+  sport_client.Init(); //初始化sport client
+
+  double t = 0; //程序运行时间
+  double dt = 0.01; //控制步长
+
+  //创建一个signal对象用于捕获程序退出的信号
+  signal(SIGINT, sigint_handler);
+
+  while (1)
+  {
+    t += dt;
+    //姿态跟踪一个三角函数轨迹
+    sport_client.Euler(0.2 * sin(2 * t), 0.2 * cos(2 * t) - 0.2, 0.);
+    sport_client.BalanceStand();
+    usleep(int(dt * 1000000));
+    if(stopped)
+    {
+      break;
+    }
+
+  }
+  //程序退出时复位姿态
+  sport_client.Euler(0, 0, 0);
+  return 0;
+}
+高层状态接口
+高层状态接口调用方式
+通过订阅"rt/sportmodestate"话题可以实现对机器人的位置、速度、姿态等运动状态的获取。
+
+#include <unitree/idl/go2/SportModeState_.hpp>
+#include <unitree/robot/channel/channel_subscriber.hpp>
+
+//高层状态topic，其中rt表示实时，lf表示低频
+#define TOPIC_HIGHSTATE "rt/sportmodestate"
+
+using namespace unitree::robot;
+
+//获取运动状态的回调函数
+void HighStateHandler(const void* message)
+{
+  unitree_go::msg::dds_::SportModeState_ state = *(unitree_go::msg::dds_::SportModeState_*)message;
+
+  //打印输出机器狗位置
+  std::cout<<"position: "
+           <<state.position()[0]<<", "
+           <<state.position()[1]<<", "
+           <<state.position()[2]<<std::endl;
+  //打印输出机器狗姿态四元数 (w,x,y,z)
+  std::cout<<": "
+           <<state.imu_state().quaternion()[0]<<", "
+           <<state.imu_state().quaternion()[1]<<", "
+           <<state.imu_state().quaternion()[2]<<", "
+           <<state.imu_state().quaternion()[3]<<std::endl;
+}
+
+
+int main()
+{
+  //初始化sdk接口
+  std::string networkInterface = "enp2s0";//机器人连接的网卡名称
+  unitree::robot::ChannelFactory::Instance()->Init(0, networkInterface);
+
+  //创建一个Subscriber
+  ChannelSubscriber<unitree_go::msg::dds_::SportModeState_> suber(TOPIC_HIGHSTATE);
+
+  //初始化Channel
+  suber.InitChannel(HighStateHandler);
+
+  while(1)
+  {
+    usleep(20000);
+  }
+
+  return 0;
+}
+高层状态类型介绍
+获取高层部分状态的方法如下
+
+TimeSpec stamp(); 
+uint32_t error_code(); //当前模式（由于模式较多，采用该成员变量反馈信息）
+IMU imu_state(); //IMU状态
+std::array<float, 3> position(); //三维位置
+float body_height(); //机体高度
+std::array<float, 3> velocity(); //三维速度
+float yaw_speed(); //偏航速度
+其中获取  IMU  数据的方法为：
+
+std::array<float, 4> quaternion();     // 四元数 (w,x,y,z)
+std::array<float, 3> gyroscope();      // 角速度（unit: rad/s)
+std::array<float, 3> accelerometer();  // 加速度 m/(s2)
+std::array<float, 3> rpy();            // 欧拉角（unit: rad)
+int8_t temperature(); //温度
+"rt/sportmodestate"话题中，error_code字段对应的运动状态机如下表。
+
+error_code	状态机名称
+100	灵动
+1001	阻尼
+1002	站立锁定
+1004/2006	蹲下
+1006	打招呼/伸懒腰/舞蹈/拜年/比心/开心
+1007	坐下
+1008	前跳
+1009	扑人
+1013	平衡站立
+1015	常规行走
+1016	常规跑步
+1017	常规续航
+1091	摆姿势
+2007	闪避
+2008	并腿跑
+2009	跳跃跑
+2010	经典
+2011	倒立
+2012	前空翻
+2013	后空翻
+2014	左空翻
+2016	交叉步
+2017	直立
+2019	牵引

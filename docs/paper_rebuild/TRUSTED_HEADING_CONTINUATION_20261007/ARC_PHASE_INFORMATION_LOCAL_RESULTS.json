@@ -1,0 +1,29 @@
+{
+  "status": "PASSED_SYNTHETIC_QUALIFICATION_ONLY",
+  "registration_commit": "0cd977273ddd990332bfaf0fe9e9b66d54afdb70",
+  "pytest_processes": 1,
+  "items": 12,
+  "failures": 0,
+  "retries": 0,
+  "pytest_reported_s": 0.14,
+  "wrapper_elapsed_s": 0.36474686799999745,
+  "stage": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_INFORMATION_LOCAL_ATTEMPT01",
+  "source_pins": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/arc_phase_information.py": "6f14db775227afddd05b75b47c8cd98d5743dd1dd10466d322987012765e1c3a",
+    "tests/paper_rebuild/test_arc_phase_information.py": "3c014f1e90e1e5d178cd0ad2d7faf83dead5146adf0e60aec5ed042aad953e26"
+  },
+  "artifacts_sha256": {
+    "EXIT.json": "1f9807d167d366e7aecd30ae356318a4ef6c16be505ece8f6b6b194906f61655",
+    "INVOCATION.json": "91306f5d3762b9a07367b3d4f207935399d0062a52aa8cf876bf5ed4e2fd56be",
+    "junit.xml": "8e95a21b7e1e51de88b45cad1dceb981a3a97a9453c6549b49fb3d2554ece179",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout.log": "085f2ed3cd95bb3f44c51ec93f67fd14ebfbb5ff5329d5d28b681f13d2e8b162"
+  },
+  "actual_native_calls": 0,
+  "actual_evaluator_calls": 0,
+  "actual_saved_model_information_calls": 0,
+  "physical_cross_qualified": false,
+  "actual_availability_qualified": false,
+  "navigation_admitted": false,
+  "interpretation": "Two-pose formulas, gauge, full prior/cross and refusal behavior passed synthetic checks. No measurement-source calibration or empirical navigation improvement is established."
+}

@@ -1,0 +1,13 @@
+{
+  "source_type": "USER_PROVIDED_TEXT",
+  "provided_date": "2026-10-07",
+  "claimed_subject": "Unitree Go2 high-level motion and SportModeState interfaces",
+  "official_url": null,
+  "document_version": null,
+  "robot_firmware_version": null,
+  "actual_legacy_collector_identity_confirmed": false,
+  "sha256": "5b1126a133960dcc86728c4df7295d90d013e5f0ebc14843f0814db2d7f5cf1a",
+  "size_bytes": 17244,
+  "scope": "Interpret exactly the supplied documentation; no claim that historical March/January firmware used this variant",
+  "byte_preservation_note": "Original user excerpt contains trailing tabs/spaces and CRLF. Initial git diff --check rejected only those source-text whitespace lines; preserved exact bytes and checked all other staged files separately. No scientific test failure or source-text normalization."
+}
