@@ -1,0 +1,204 @@
+{
+  "schema": "arc_phase_dependency_information.compact_results/v1",
+  "status": "COMPLETE_LINEARIZED_WORKING_INFORMATION_READOUT_NOT_PHYSICAL_OR_NAVIGATION_GAIN",
+  "registration_commit": "f7b577458e4f851710e88460aa125d4f475c70b4",
+  "source_summary": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_DEPENDENCY_INFORMATION_ATTEMPT01/SUMMARY.json",
+  "source_summary_sha256": "8800de1d87c38b230c8075b96d7e6a7d89e00f2763e44ef59123dc66776a4a11",
+  "source_complete_sha256": "1bdab4c8bd33b1814f3f10c8fb9fb2cd128eb9541e2fc167bb1e8421091bd6a1",
+  "first_attempt": true,
+  "automatic_retries": 0,
+  "counts": {
+    "all_blocks": 921,
+    "covered_priors": 918,
+    "legal_models": 860,
+    "qualified_models": 857,
+    "model_unavailable": 61,
+    "uncovered_terminal": 3,
+    "unresolved": 0,
+    "objective_rows": 3428
+  },
+  "per_sequence": [
+    {
+      "sequence_id": "BY2",
+      "blocks": 274,
+      "statuses": {
+        "MODEL_UNAVAILABLE": 34,
+        "QUALIFIED_LINEARIZED_WORKING_DIAGNOSTIC": 239,
+        "UNCOVERED_NO_PRIOR": 1
+      },
+      "existing_scalar_diagnostics": {
+        "qualified_geometry_rows": 239,
+        "unavailable_or_unresolved_geometry_rows": 35,
+        "minimum_working_information_eigenvalue": -3.1091910540066195e-18,
+        "maximum_working_information_eigenvalue": 0.015695721422031492,
+        "maximum_J_over_T": {
+          "joint": 0.008993029003241525,
+          "current": 0.008996075051414597,
+          "relative_ecef": 0.00022659066309585,
+          "common_ecef": 0.009015943708232646
+        },
+        "two_rho_lt_one": {
+          "counts": {
+            "SUFFICIENT_WITH_NUMERICAL_MARGIN": 239
+          },
+          "assessed_rows": 239,
+          "all_block_denominator": 274,
+          "rho_definition": "maximum eigenvalue of Rbar-whitened H P6 H^T; Rbar=2S",
+          "comparison_margin": "128*machine_epsilon*max(1,abs(2*rho)); boundary remains unresolved",
+          "scope": "Numerical sufficient condition for S-H P6 H^T positive definite in the qualified linearized working arrays; not a physical error bound or navigation claim"
+        }
+      }
+    },
+    {
+      "sequence_id": "BY2H",
+      "blocks": 270,
+      "statuses": {
+        "MODEL_UNAVAILABLE": 27,
+        "QUALIFIED_LINEARIZED_WORKING_DIAGNOSTIC": 242,
+        "UNCOVERED_NO_PRIOR": 1
+      },
+      "existing_scalar_diagnostics": {
+        "qualified_geometry_rows": 242,
+        "unavailable_or_unresolved_geometry_rows": 28,
+        "minimum_working_information_eigenvalue": -1.0606292845660561e-18,
+        "maximum_working_information_eigenvalue": 0.007352460267403348,
+        "maximum_J_over_T": {
+          "joint": 0.004157956318010167,
+          "current": 0.0041598668821382035,
+          "relative_ecef": 0.00015360142999338962,
+          "common_ecef": 0.0041682960488040694
+        },
+        "two_rho_lt_one": {
+          "counts": {
+            "SUFFICIENT_WITH_NUMERICAL_MARGIN": 242
+          },
+          "assessed_rows": 242,
+          "all_block_denominator": 270,
+          "rho_definition": "maximum eigenvalue of Rbar-whitened H P6 H^T; Rbar=2S",
+          "comparison_margin": "128*machine_epsilon*max(1,abs(2*rho)); boundary remains unresolved",
+          "scope": "Numerical sufficient condition for S-H P6 H^T positive definite in the qualified linearized working arrays; not a physical error bound or navigation claim"
+        }
+      }
+    },
+    {
+      "sequence_id": "BY2O",
+      "blocks": 377,
+      "statuses": {
+        "QUALIFIED_LINEARIZED_WORKING_DIAGNOSTIC": 376,
+        "UNCOVERED_NO_PRIOR": 1
+      },
+      "existing_scalar_diagnostics": {
+        "qualified_geometry_rows": 376,
+        "unavailable_or_unresolved_geometry_rows": 1,
+        "minimum_working_information_eigenvalue": -5.878500792073952e-18,
+        "maximum_working_information_eigenvalue": 0.03275681435907679,
+        "maximum_J_over_T": {
+          "joint": 0.02069178111276875,
+          "current": 0.020692502727885836,
+          "relative_ecef": 0.00033688182739794646,
+          "common_ecef": 0.020702361164658404
+        },
+        "two_rho_lt_one": {
+          "counts": {
+            "SUFFICIENT_WITH_NUMERICAL_MARGIN": 376
+          },
+          "assessed_rows": 376,
+          "all_block_denominator": 377,
+          "rho_definition": "maximum eigenvalue of Rbar-whitened H P6 H^T; Rbar=2S",
+          "comparison_margin": "128*machine_epsilon*max(1,abs(2*rho)); boundary remains unresolved",
+          "scope": "Numerical sufficient condition for S-H P6 H^T positive definite in the qualified linearized working arrays; not a physical error bound or navigation claim"
+        }
+      }
+    }
+  ],
+  "objectives": {
+    "joint": {
+      "rows": 857,
+      "conditions": {
+        "CONTINUOUS_NO_IMPROVEMENT": 857
+      },
+      "grid_selected_count": 0
+    },
+    "current": {
+      "rows": 857,
+      "conditions": {
+        "CONTINUOUS_NO_IMPROVEMENT": 857
+      },
+      "grid_selected_count": 0
+    },
+    "relative_ecef": {
+      "rows": 857,
+      "conditions": {
+        "CONTINUOUS_NO_IMPROVEMENT": 857
+      },
+      "grid_selected_count": 0
+    },
+    "common_ecef": {
+      "rows": 857,
+      "conditions": {
+        "CONTINUOUS_NO_IMPROVEMENT": 857
+      },
+      "grid_selected_count": 0
+    }
+  },
+  "scalar_diagnostics": {
+    "qualified_geometry_rows": 857,
+    "unavailable_or_unresolved_geometry_rows": 64,
+    "minimum_working_information_eigenvalue": -5.878500792073952e-18,
+    "maximum_working_information_eigenvalue": 0.03275681435907679,
+    "maximum_J_over_T": {
+      "joint": 0.02069178111276875,
+      "current": 0.020692502727885836,
+      "relative_ecef": 0.00033688182739794646,
+      "common_ecef": 0.020702361164658404
+    },
+    "two_rho_lt_one": {
+      "counts": {
+        "SUFFICIENT_WITH_NUMERICAL_MARGIN": 857
+      },
+      "assessed_rows": 857,
+      "all_block_denominator": 921,
+      "rho_definition": "maximum eigenvalue of Rbar-whitened H P6 H^T; Rbar=2S",
+      "comparison_margin": "128*machine_epsilon*max(1,abs(2*rho)); boundary remains unresolved",
+      "scope": "Numerical sufficient condition for S-H P6 H^T positive definite in the qualified linearized working arrays; not a physical error bound or navigation claim"
+    }
+  },
+  "calls": {
+    "source_csv_reads": 3,
+    "source_event_rows": 1842,
+    "lifecycle_file_reads": 3,
+    "lifecycle_rows": 921,
+    "prior_file_reads": 3,
+    "prior_rows": 918,
+    "phase_detail_file_reads": 3,
+    "phase_detail_rows": 921,
+    "conditioning_ledger_reads": 3,
+    "prior_qualification_calls": 918,
+    "geometry_calls": 857,
+    "diagnose_calls": 1714
+  },
+  "fixed_zero_calls": {
+    "native_calls": 0,
+    "evaluator_calls": 0,
+    "residual_calls": 0,
+    "provider_payload_reads": 0,
+    "raw_reads": 0,
+    "reference_reads": 0,
+    "npz_reads": 0,
+    "integer_search_calls": 0
+  },
+  "reported_source_timing": {
+    "covered_prefixes": 918,
+    "prefix_contains_source_after_its_update": 0,
+    "within_clone_contains_source_after_its_update": 0,
+    "prefix_contains_source_after_prior_END": 0
+  },
+  "review": {
+    "status": "PASS",
+    "reviewer": "heading_evidence",
+    "scope": "Static wrapper/adapter interface review and compact output checks only. Recounted921 blocks and3428 objective rows, checked output pins and25 once-read input receipts. No upstream payload, large numerical-detail or new matrix reads/calls; no syscall access trace.",
+    "summary_and_output_consistent": true
+  },
+  "scope": "Conditional linearized working model; UNKNOWN state-phase cross. No physical covariance bound, actual arrival, hidden-slip qualification, phase admission or navigation gain.",
+  "decision": "Retain SKIP for this fixed family; no epsilon/noise/window tuning. Develop source-supported error/correlation model and qualify physical acquisition sources."
+}

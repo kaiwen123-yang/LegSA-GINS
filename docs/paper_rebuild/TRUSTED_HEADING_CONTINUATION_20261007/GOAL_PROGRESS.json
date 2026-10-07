@@ -17,7 +17,7 @@
     {
       "id": "R2",
       "requirement": "Unfixed same-physical-arc temporal phase contrast: ambiguity elimination, timing, geometry, breaks, covariance, shared endpoints; qualify before navigation",
-      "status": "REAL_WORKING_INFORMATION_DIAGNOSIS_COMPLETE_NO_GAIN_IN_FIXED_YOUNG_FAMILY",
+      "status": "DEPENDENCY_POLICY_PRIOR_INFORMATION_COMPLETE_FIXED_FAMILY_NO_GAIN",
       "registration_commit": "4754bb184cd712290fb37cad4728c6097eccdbf2",
       "fixed_blocks": 921,
       "legal_contrast_blocks": 860,
@@ -116,6 +116,23 @@
         "physical_bounds_qualified": false,
         "navigation_admitted": false,
         "evidence": "ARC_PHASE_REAL_INFORMATION_RESULTS.md"
+      },
+      "dependency_prior_information_readout": {
+        "registration_commit": "f7b577458e4f851710e88460aa125d4f475c70b4",
+        "blocks": 921,
+        "covered_priors": 918,
+        "qualified": 857,
+        "missing_model": 61,
+        "uncovered": 3,
+        "unresolved": 0,
+        "four_objectives_no_improvement_each": 857,
+        "native_calls": 0,
+        "evaluator_calls": 0,
+        "geometry_calls": 857,
+        "diagnose_calls": 1714,
+        "physical_bounds_qualified": false,
+        "navigation_admitted": false,
+        "evidence": "ARC_PHASE_DEPENDENCY_INFORMATION_RESULTS.md"
       }
     },
     {
@@ -159,7 +176,7 @@
   "main_merge_authorized": false,
   "completion_proven": false,
   "latest_decision": "CONTINUATION_DECISION.md",
-  "latest_checkpoint": "Dependency eligibility qualified locally and replayed on3windows:45oldcausal file identities;915accepted/4602 opportunities,3687noeligible,zero selected reported source/dependency future or repeats. First checker type failure retained;1native reused+5new=6total,no repeatednative/evaluation. Physical arrival/cross and heading/navigation gain remain incomplete.",
+  "latest_checkpoint": "New dependency-policy priors requalified:918 complete P24/P6;857 new H blocks,all4 targets continuous-no-improvement and gridSKIP;61 missing,3uncovered,0unresolved. All857 satisfy registered numerical2rho<1 margin,conditional working counterexample only.0native/eval. Proceed source-supported error/cross model and acquisition qualification; goal remains incomplete.",
   "causal_ned_hv_policy": {
     "status": "REAL_SOURCE_TIME_POLICY_QUALIFIED_NOT_PHYSICAL_ARRIVAL_OR_NAV_GAIN",
     "registration_commit": "531b30860b7c1389e22255ccd1339cb246983049",
@@ -185,7 +202,7 @@
     "new_evaluator_calls": 0,
     "scope": "Conditional marginal-moment linear surrogate; independent Gaussian counterexample also preserves endpoint marginals with Q01=0. Physical sources and new causal priors not qualified.",
     "upstream_a1_interpolation": "CONFIRMED_ON_SELECTED_GENERATOR_INPUTS:3683/4598_ENDPOINT_AFTER_STATE",
-    "next_executable_action": "Recorded HV dependency policy complete; no old-policy spectral numbers may be applied to newpriors. Determine bounded new-prior information readout while physical source/cross qualification remains outstanding."
+    "next_executable_action": "New dependency-prior readout complete; fixed family remains SKIP. Use known generating-source dependencies to specify shared nuisance/error and source-supported cross restrictions; physical acquisition/arrival/reference information remains pending."
   },
   "hv_a1_dependency_audit": {
     "status": "COMPLETE_REPORTED_GENERATOR_ENDPOINT_FUTURE_DEPENDENCIES_CONFIRMED",
@@ -225,6 +242,7 @@
     "first_checker_failure_retained": true,
     "actual_arrival_qualified": false,
     "physical_cross_qualified": false,
-    "new_prior_phase_information_evaluated": false
+    "new_prior_phase_information_evaluated": true,
+    "new_prior_phase_information_evidence": "ARC_PHASE_DEPENDENCY_INFORMATION_RESULTS.md"
   }
 }
