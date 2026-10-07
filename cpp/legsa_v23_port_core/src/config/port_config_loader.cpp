@@ -370,8 +370,12 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
       options.reference_point_compensation_applied) {
     formalContractFailure("solver/reference-point or propagation-IMU contract is not fail-closed");
   }
+  // Research degradations must disclose their semisynthetic input identity.
+  const bool research_semisynthetic = research && options.data_mode == "semisynthetic" &&
+      options.semisynthetic_data_used;
   if (options.trace_solver_input || options.receiver_imu_as_body_imu ||
-      options.synthetic_data_used || (options.semisynthetic_data_used && !imu_claim_identity) ||
+      options.synthetic_data_used ||
+      (options.semisynthetic_data_used && !imu_claim_identity && !research_semisynthetic) ||
       options.final_v23_output_solver_input || options.LegSA_output_solver_input ||
       options.per_case_tuning || options.output_only_correction ||
       options.bad_epoch_deletion_for_metric || options.old_runtime_input_count != 0 ||
