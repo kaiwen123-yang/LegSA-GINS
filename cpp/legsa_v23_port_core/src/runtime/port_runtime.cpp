@@ -1679,6 +1679,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   engine.writeBaseline3dDiagnostics(output_dir);
   engine.writeHeadingSourceDiagnostics(output_dir);
   engine.writeBodyVelocityDiagnostics(output_dir);
+  engine.writeSdkDiscrepancyDiagnostics(output_dir);
   engine.writeNedVelocitySourceDiagnostics(output_dir);
   engine.writeAttitudeCloneDiagnostics(output_dir);
   engine.writeArcCloneDiagnostics(output_dir);

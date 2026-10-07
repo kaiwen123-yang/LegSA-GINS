@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "synthetic_only": true,
+  "checks": 1,
+  "native_solver_runs": 0,
+  "reference_reads": 0,
+  "oracle": "First SDK correlated initialization, independent anchor and second SDK equal QR batch with improper flat b prior",
+  "QR_mean_max_abs": 1.3444106938820255e-17,
+  "QR_covariance_max_abs": 9.020562075079397e-17,
+  "reset_independent_jacobian_max_abs": 6.062782220705998e-12,
+  "evidence": {
+    "seed_old27_marginal_max_change": 0,
+    "seed_no_SA_evaluation": true,
+    "START_23_to_29_exact": true,
+    "propagation_max_abs": 1.0842021724855044e-19,
+    "retire_23_marginal_max_change": 0,
+    "replay_full23_P_max_difference": 0,
+    "replay_b_max_difference": 0,
+    "replay_v_difference": 0,
+    "pre_revoke_b_difference": 0.1888103946627736,
+    "replay_carrier_acceptances": 3
+  },
+  "source": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/tests/paper_rebuild/native_sdk_discrepancy_harness.cpp",
+    "sha256": "c668c72b0761e3f69a27fd47d430b687642070cbfb04bdefcf8923486e2acded"
+  },
+  "check_script": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/scripts/paper_rebuild/unified_legged_heading_20261007/sdk_discrepancy_check.py",
+    "sha256": "af60d9e0a0131346ec2a29462b6e9d2dfd06310fb1f10419e914dea69661ed72"
+  },
+  "library": {
+    "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/UNIFIED_LEGGED_HEADING_20261007/SUPPORT_SDK_JOINT_BUILD/liblegsa_v23_port_core.a",
+    "sha256": "f2b7744bfd25312f0ec9f5fe8016e269a4d0f9842e82102e7d0f96ef0e4c5c55"
+  },
+  "harness": {
+    "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/UNIFIED_LEGGED_HEADING_20261007/SDK_DISCREPANCY_CHECK_02/sdk_discrepancy_harness",
+    "sha256": "db311931188d2c96e1f4ce7429f1a5cc4cc5e43cef11d8102911ca137e799322"
+  },
+  "navigation_binary": {
+    "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/UNIFIED_LEGGED_HEADING_20261007/SUPPORT_SDK_JOINT_BUILD/legsa_v23_port_core_demo",
+    "sha256": "c42f1609d98fe7d60e96b5e477420393acae3ae544075e48ea9cc28d39ebe327"
+  }
+}

@@ -10,28 +10,47 @@
 #include <stdexcept>
 namespace legsa_v23_port_core {
 pose_clone::Gaussian GIEngine::supportPoseJointState() const {
-  if(!support_pose_active_) return {Cov_,dx_};
-  Matrix p(27,27);std::vector<double> mean(27);
+  const std::size_t base=supportPoseCurrentSize(),n=base+(support_pose_active_?6:0);
+  if(n==21) return {Cov_,dx_};
+  Matrix p(n,n);std::vector<double> mean(n);
   for(std::size_t i=0;i<21;++i) {
     mean[i]=dx_[i];
     for(std::size_t j=0;j<21;++j) p(i,j)=Cov_(i,j);
-    for(std::size_t j=0;j<6;++j) p(i,21+j)=p(21+j,i)=support_pose_cross_(i,j);
+    if(sdk_discrepancy_initialized_) for(std::size_t j=0;j<2;++j)
+      p(i,21+j)=p(21+j,i)=sdk_discrepancy_cross_(i,j);
+    if(support_pose_active_) for(std::size_t j=0;j<6;++j)
+      p(i,base+j)=p(base+j,i)=support_pose_cross_(i,j);
   }
-  for(std::size_t i=0;i<6;++i) {
-    mean[21+i]=support_pose_error_[i];
-    for(std::size_t j=0;j<6;++j) p(21+i,21+j)=support_pose_cov_(i,j);
+  if(sdk_discrepancy_initialized_) for(std::size_t i=0;i<2;++i) {
+    mean[21+i]=sdk_discrepancy_error_[i];
+    for(std::size_t j=0;j<2;++j) p(21+i,21+j)=sdk_discrepancy_cov_(i,j);
+    if(support_pose_active_) for(std::size_t j=0;j<6;++j)
+      p(21+i,base+j)=p(base+j,21+i)=sdk_discrepancy_clone_cross_(i,j);
+  }
+  if(support_pose_active_) for(std::size_t i=0;i<6;++i) {
+    mean[base+i]=support_pose_error_[i];
+    for(std::size_t j=0;j<6;++j) p(base+i,base+j)=support_pose_cov_(i,j);
   }
   return {p,mean};
 }
 void GIEngine::setSupportPoseJointState(const pose_clone::Gaussian& state) {
+  const std::size_t base=supportPoseCurrentSize();
   for(std::size_t i=0;i<21;++i) {
     dx_[i]=state.mean[i];
     for(std::size_t j=0;j<21;++j) Cov_(i,j)=state.covariance(i,j);
-    if(support_pose_active_) for(std::size_t j=0;j<6;++j) support_pose_cross_(i,j)=state.covariance(i,21+j);
+    if(sdk_discrepancy_initialized_) for(std::size_t j=0;j<2;++j)
+      sdk_discrepancy_cross_(i,j)=state.covariance(i,21+j);
+    if(support_pose_active_) for(std::size_t j=0;j<6;++j) support_pose_cross_(i,j)=state.covariance(i,base+j);
+  }
+  if(sdk_discrepancy_initialized_) for(std::size_t i=0;i<2;++i) {
+    sdk_discrepancy_error_[i]=state.mean[21+i];
+    for(std::size_t j=0;j<2;++j) sdk_discrepancy_cov_(i,j)=state.covariance(21+i,21+j);
+    if(support_pose_active_) for(std::size_t j=0;j<6;++j)
+      sdk_discrepancy_clone_cross_(i,j)=state.covariance(21+i,base+j);
   }
   if(support_pose_active_) for(std::size_t i=0;i<6;++i) {
-    support_pose_error_[i]=state.mean[21+i];
-    for(std::size_t j=0;j<6;++j) support_pose_cov_(i,j)=state.covariance(21+i,21+j);
+    support_pose_error_[i]=state.mean[base+i];
+    for(std::size_t j=0;j<6;++j) support_pose_cov_(i,j)=state.covariance(base+i,base+j);
   }
 }
 void GIEngine::setSupportPoseEvents(const std::vector<SupportPoseEvent>& events) {
@@ -55,7 +74,7 @@ void GIEngine::recordSupportPose(const SupportPoseEvent& e,const std::string& re
 void GIEngine::retireSupportPose() {
   // The current marginal already contains every accepted joint update.
   support_pose_active_=false;support_pose_cross_=Matrix(21,6);support_pose_cov_=Matrix(6,6);
-  support_pose_error_.assign(6,0.0);
+  support_pose_error_.assign(6,0.0);sdk_discrepancy_clone_cross_=Matrix(2,6);
 }
 void GIEngine::appendSupportPoseEvents(std::vector<JointTimedEvent>& combined) {
   if(!supportPoseEnabled()) return;
@@ -93,7 +112,8 @@ void GIEngine::processSupportPoseEvent(const SupportPoseEvent& e) {
   if(e.type=="START") {
     ++support_pose_counts_.starts;
     if(support_pose_active_) throw std::runtime_error("SUPPORT_POSE_OVERLAPPING_INTERVALS");
-    const auto joint=pose_clone::augment(Cov_,dx_,pose_clone::augmentationJacobian(pvacur_.pos_blh_rad_m));
+    const auto current=supportPoseJointState();
+    const auto joint=pose_clone::augment(current.covariance,current.mean,pose_clone::augmentationJacobian(pvacur_.pos_blh_rad_m));
     support_pose_start_=e;
     for(auto& point:support_pose_start_.positions_body_frd) point=multiply(c.foot_frd_to_engine_body,point);
     support_pose_cbe_=multiply(Earth::cne(pvacur_.pos_blh_rad_m),pvacur_.cbn);
@@ -120,9 +140,16 @@ void GIEngine::processSupportPoseEvent(const SupportPoseEvent& e) {
     recordSupportPose(e,"REVOKED_FACTOR_EXCLUDED_FROM_REPLAY");retireSupportPose();return;
   }
   Matrix sigma(12,12);for(int i=0;i<12;++i) sigma(i,i)=c.point_sigma_m*c.point_sigma_m;
-  const auto model=pose_clone::footModel(first.positions_body_frd,current,support_pose_position_ecef_,
+  auto model=pose_clone::footModel(first.positions_body_frd,current,support_pose_position_ecef_,
       support_pose_cbe_,pvacur_.cbn,pvacur_.pos_blh_rad_m,sigma,c.imu_lever_body_frd,c.horizontalOnly());
+  if(sdk_discrepancy_initialized_) {
+    Matrix h(model.H.rows,29);
+    for(std::size_t i=0;i<h.rows;++i) for(std::size_t j=0;j<27;++j)
+      h(i,j<21?j:j+2)=model.H(i,j);
+    model.H=h; // No direct b column; foot updates b only through retained cross blocks.
+  }
   const auto prior=supportPoseJointState();
+  const auto b_before=sdkDiscrepancyConditionalMean();
   const auto S=add(multiply(multiply(model.H,prior.covariance),transpose(model.H)),model.R);
   const auto whitened=multiply(inverse(S),model.residual);
   double statistic=0;for(std::size_t i=0;i<whitened.size();++i) statistic+=model.residual[i]*whitened[i];
@@ -131,7 +158,9 @@ void GIEngine::processSupportPoseEvent(const SupportPoseEvent& e) {
   } else if(!std::isfinite(statistic) || statistic>c.nisThreshold()) {
     ++support_pose_counts_.rejected;recordSupportPose(e,c.horizontalOnly()?"WORKING_FOOT_XY_INNOVATION_REJECT":"WORKING_FOOT_XYZ_INNOVATION_REJECT",true,false,statistic);
   } else {
-    setSupportPoseJointState(pose_clone::footUpdate(prior,model));stateFeedback();
+    setSupportPoseJointState(pose_clone::ordinaryUpdate(prior,model.residual,model.H,model.R));
+    recordSdkDiscrepancy("FOOT_UPDATE",e.clone_id,e.time,prior,b_before,statistic,model.residual);
+    stateFeedback();
     ++support_pose_counts_.accepted;support_pose_applied_ids_.insert(e.clone_id);
     recordSupportPose(e,c.horizontalOnly()?"SUPPORT_XY_JOINT_UPDATE":"SUPPORT_XYZ_JOINT_UPDATE",true,true,statistic);
   }
@@ -152,5 +181,49 @@ void GIEngine::writeSupportPoseDiagnostics(const std::string& output) const {
   for(const auto& e:support_pose_diagnostics_)
     out<<e.time<<','<<e.state_time<<','<<e.type<<','<<e.clone_id<<','<<e.attempted<<','<<e.accepted<<','<<e.reason<<','<<e.statistic
        <<','<<c.observed_axes<<','<<c.measurementDimension()<<','<<c.nisThreshold()<<'\n';
+}
+std::vector<double> GIEngine::sdkDiscrepancyConditionalMean() const {
+  auto result=sdk_discrepancy_mean_;
+  for(std::size_t i=0;i<2;++i) result[i]+=sdk_discrepancy_error_[i];
+  return result;
+}
+void GIEngine::recordSdkDiscrepancy(const std::string& kind,const std::string& identity,double source_time,
+                                  const pose_clone::Gaussian& prior,const std::vector<double>& before,
+                                  double nis,const std::vector<double>& innovation) {
+  if(!sdkDiscrepancyEnabled()) return;
+  SdkDiscrepancyDiagnostic d;
+  d.time=timestamp_;d.source_time=source_time;d.kind=kind;d.identity=identity;d.nis=nis;
+  d.initialized=sdk_discrepancy_initialized_;d.before=before;d.after=sdkDiscrepancyConditionalMean();
+  d.bb=sdk_discrepancy_cov_;d.innovation=innovation;
+  d.current_increment.resize(21);
+  for(std::size_t i=0;i<21;++i) d.current_increment[i]=dx_[i]-prior.mean[i];
+  for(double x:sdk_discrepancy_cross_.data) d.cross_norm+=x*x;
+  for(double x:sdk_discrepancy_clone_cross_.data) d.clone_cross_norm+=x*x;
+  d.cross_norm=std::sqrt(d.cross_norm);d.clone_cross_norm=std::sqrt(d.clone_cross_norm);
+  sdk_discrepancy_diagnostics_.push_back(std::move(d));
+}
+void GIEngine::writeSdkDiscrepancyDiagnostics(const std::string& output) const {
+  if(!sdkDiscrepancyEnabled()) return;
+  std::ofstream out(std::filesystem::path(output)/"SDK_DISCREPANCY_EVENTS.csv");
+  out<<std::setprecision(17)<<"time,source_time,kind,identity,initialized,b_forward_before,b_right_before,b_forward_after,b_right_after,Pbb00,Pbb01,Pbb11,Pxb_frobenius,Pbclone_frobenius,nis,innovation_dimensions";
+  for(int i=0;i<6;++i) out<<",innovation_"<<i;
+  out<<",delta_p_N_m,delta_p_E_m,delta_p_D_m,delta_v_N_mps,delta_v_E_mps,delta_v_D_mps,delta_phi_N_rad,delta_phi_E_rad,delta_phi_D_rad,delta_ba_x_mps2,delta_ba_y_mps2,delta_ba_z_mps2\n";
+  for(const auto& d:sdk_discrepancy_diagnostics_) {
+    out<<d.time<<','<<d.source_time<<','<<d.kind<<','<<std::quoted(d.identity)<<','<<d.initialized;
+    for(double x:d.before) out<<','<<x;for(double x:d.after) out<<','<<x;
+    out<<','<<d.bb(0,0)<<','<<d.bb(0,1)<<','<<d.bb(1,1)<<','<<d.cross_norm<<','<<d.clone_cross_norm<<','<<d.nis<<','<<d.innovation.size();
+    for(std::size_t i=0;i<6;++i) out<<','<<(i<d.innovation.size()?d.innovation[i]:0.0);
+    for(int i=0;i<3;++i) out<<','<<-d.current_increment[P_ID+i];
+    for(int i=0;i<3;++i) out<<','<<-d.current_increment[V_ID+i];
+    for(int i=0;i<3;++i) out<<','<<d.current_increment[PHI_ID+i];
+    for(int i=0;i<3;++i) out<<','<<d.current_increment[BA_ID+i];out<<'\n';
+  }
+  std::ofstream summary(std::filesystem::path(output)/"SDK_DISCREPANCY_SUMMARY.json");
+  summary<<std::setprecision(17)<<"{\n  \"mode\": \"joint_constant\",\n  \"initialized\": "<<(sdk_discrepancy_initialized_?"true":"false")
+    <<",\n  \"seed_count\": "<<sdk_discrepancy_seed_count_<<",\n  \"seed_source_time\": "<<sdk_discrepancy_seed_source_time_
+    <<",\n  \"seed_identity\": "<<std::quoted(sdk_discrepancy_seed_identity_)
+    <<",\n  \"final_b_mps\": ["<<sdk_discrepancy_mean_[0]<<','<<sdk_discrepancy_mean_[1]<<']'
+    <<",\n  \"final_Pbb\": ["<<sdk_discrepancy_cov_(0,0)<<','<<sdk_discrepancy_cov_(0,1)<<','<<sdk_discrepancy_cov_(1,0)<<','<<sdk_discrepancy_cov_(1,1)<<']'
+    <<",\n  \"process_noise_Qb\": 0,\n  \"source_cross_N\": \"zero_working_assumption_uncalibrated\",\n  \"seed_is_navigation_update\": false,\n  \"diagnostic_increment\": \"conditional_error_mean_change_mapped_to_nominal_feedback_tangent_before_reset\",\n  \"replay_includes_complete_b_state\": true\n}\n";
 }
 }

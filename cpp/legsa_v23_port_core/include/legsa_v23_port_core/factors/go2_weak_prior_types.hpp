@@ -92,6 +92,7 @@ struct Go2VelocityDiagnosticPriorConfig {
   std::string go2_velocity_prior_diagnostic_path;
   std::string go2_horizontal_velocity_prior_path;
   std::string go2_horizontal_velocity_frame = "ned";
+  std::string go2_body_velocity_discrepancy_mode = "off";
   // Opt-in source-time policy; actual arrival and physical frame lineage remain unknown.
   std::string go2_velocity_prior_time_policy = "legacy_absolute_nearest";
   std::string go2_body_velocity_prior_path;

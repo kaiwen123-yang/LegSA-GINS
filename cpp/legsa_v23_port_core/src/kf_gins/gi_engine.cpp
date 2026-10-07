@@ -138,6 +138,11 @@ GIEngine::GIEngine(PortOptions options)
        options_.quality_state_manager_config.enable_multi_state_qm))
     throw std::runtime_error("ATTITUDE_CLONE_REQUIRES_FULL_UNCLIPPED_FEEDBACK_QA_QM_OFF");
   const auto& body_cfg = options_.go2_velocity_prior_diagnostic_config;
+  if(body_cfg.go2_body_velocity_discrepancy_mode!="off" &&
+     (body_cfg.go2_body_velocity_discrepancy_mode!="joint_constant" ||
+      options_.runtime_contract!="research_experiment" || !supportPoseEnabled() ||
+      !body_cfg.enable_go2_horizontal_velocity_prior || body_cfg.go2_horizontal_velocity_frame!="body_frd"))
+    throw std::runtime_error("SDK_DISCREPANCY_REQUIRES_RESEARCH_SUPPORT_BODY_FRD");
   if (body_cfg.go2_velocity_prior_time_policy != "legacy_absolute_nearest" &&
       body_cfg.go2_velocity_prior_time_policy != "causal_unique_latest" &&
       body_cfg.go2_velocity_prior_time_policy != "causal_recorded_dependencies_unique_latest")
@@ -180,6 +185,10 @@ void GIEngine::initialize(const NavState& initial_state) {
       options_.go2_velocity_prior_diagnostic_config.go2_body_velocity_update_period_s;
   research_last_body_hv_attempt_time_ = -1.0e100;
   body_velocity_events_.clear();
+  sdk_discrepancy_initialized_=false;sdk_discrepancy_seed_count_=0;sdk_discrepancy_seed_source_time_=0;
+  sdk_discrepancy_seed_identity_.clear();sdk_discrepancy_mean_.assign(2,0);sdk_discrepancy_error_.assign(2,0);
+  sdk_discrepancy_cross_=Matrix(21,2);sdk_discrepancy_cov_=Matrix(2,2);sdk_discrepancy_clone_cross_=Matrix(2,6);
+  sdk_discrepancy_diagnostics_.clear();
   resetNedVelocitySourceGeneration("initialize");
   heading_source_policy_ = HeadingSourcePolicy{};
   heading_source_counts_ = HeadingSourceCounts{};
@@ -565,19 +574,31 @@ void GIEngine::EKFPredict(const Matrix& Phi, const Matrix& Qd) {
   dx_ = multiply(Phi, dx_);
   if (attitude_clone_active_) attitude_clone_cross_=multiply(Phi,attitude_clone_cross_);
   if (support_pose_active_) support_pose_cross_=multiply(Phi,support_pose_cross_);
+  if (sdk_discrepancy_initialized_) sdk_discrepancy_cross_=multiply(Phi,sdk_discrepancy_cross_);
+  // bdot=0,Qb=0: b mean/Pbb and b-clone cross remain constant through propagation.
   if (jointCloneEnabled()) requireFrozenCloneBlocks();
 }
 
 // 中文说明：EKFUpdate 使用 dx += K(dz-Hdx) 和 Joseph covariance form。
 void GIEngine::EKFUpdate(const std::vector<double>& dz, const Matrix& H, const Matrix& R,
                          const std::string& source_tag, const std::string& provider_measurement_identity) {
-  if (H.cols != RANK || dz.size() != H.rows || R.rows != H.rows || R.cols != H.rows) {
+  const bool full_sdk=sdk_discrepancy_initialized_ && H.cols==supportPoseCurrentSize()+(support_pose_active_?6:0);
+  if ((!full_sdk && H.cols != RANK) || dz.size() != H.rows || R.rows != H.rows || R.cols != H.rows) {
     throw std::runtime_error("EKFUpdate dimension mismatch");
   }
-  if(support_pose_active_) {
-    Matrix full_h(H.rows,pose_clone::kJoint,0.0);
-    for(std::size_t i=0;i<H.rows;++i) for(std::size_t j=0;j<RANK;++j) full_h(i,j)=H(i,j);
-    setSupportPoseJointState(pose_clone::ordinaryUpdate(supportPoseJointState(),dz,full_h,R));
+  if(support_pose_active_ || sdk_discrepancy_initialized_) {
+    const auto prior=supportPoseJointState();const auto b_before=sdkDiscrepancyConditionalMean();
+    Matrix full_h(H.rows,prior.mean.size(),0.0);
+    for(std::size_t i=0;i<H.rows;++i) for(std::size_t j=0;j<H.cols;++j) full_h(i,j)=H(i,j);
+    setSupportPoseJointState(pose_clone::ordinaryUpdate(prior,dz,full_h,R));
+    if(sdk_discrepancy_initialized_) {
+      auto innovation=dz;const auto hm=multiply(full_h,prior.mean);
+      for(std::size_t i=0;i<innovation.size();++i) innovation[i]-=hm[i];
+      const auto si=inverse(add(multiply(multiply(full_h,prior.covariance),transpose(full_h)),R));
+      const double nis=dotVector(innovation,multiply(si,innovation));
+      recordSdkDiscrepancy(source_tag,provider_measurement_identity,
+          source_tag=="BODY_HORIZONTAL_VELOCITY"?research_last_body_hv_attempt_time_:timestamp_,prior,b_before,nis,innovation);
+    }
     ++support_pose_counts_.ordinary_joint_updates;return;
   }
   if (attitude_clone_active_) {
@@ -663,6 +684,8 @@ void GIEngine::stateFeedback() {
   qa_fallback_supervisor_.setYawCorrectionOnLastDecision(requested_yaw_correction_deg,
                                                          -dx_phi[2] * R2D,
                                                          yaw_correction_clipped);
+  if(sdk_discrepancy_initialized_)
+    for(std::size_t i=0;i<2;++i) sdk_discrepancy_mean_[i]+=sdk_discrepancy_error_[i];
   zeroVector(dx_);
   if(supportPoseEnabled()) {
     setSupportPoseJointState(support_reset);
@@ -1722,7 +1745,23 @@ void GIEngine::applyBodyVelocityPriorForTime(double update_time) {
   if (best->observation_frame!="body_frd") throw std::runtime_error("BODY_HV_MEASUREMENT_FRAME_MISMATCH");
   if (!event.valid) { ++go2_velocity_diagnostic_prior_status_.reject_count; finish("provider_invalid"); return; }
   const Vec3 stddev=scale(best->std_body_frd_mps,config.go2_velocity_prior_std_scale);
-  const auto model=buildBodyVelocity2dModel(pvacur_,best->velocity_body_frd_mps,stddev);
+  auto model=buildBodyVelocity2dModel(pvacur_,best->velocity_body_frd_mps,stddev);
+  const std::string sdk_identity="SOURCE_TIME_BITS:"+arcSourceTimeBits(best->time)+":VECTOR_INDEX:"+
+      std::to_string(static_cast<std::size_t>(best-go2_velocity_diagnostic_priors_.data()));
+  if(sdkDiscrepancyEnabled() && !sdk_discrepancy_initialized_) {
+    const auto prior=supportPoseJointState();const auto before=sdkDiscrepancyConditionalMean();
+    const auto joint=seedBodyVelocityDiscrepancy(prior,model.H,model.R);
+    for(std::size_t i=0;i<2;++i) sdk_discrepancy_mean_[i]=-model.residual[i];
+    sdk_discrepancy_initialized_=true;++sdk_discrepancy_seed_count_;
+    sdk_discrepancy_seed_source_time_=best->time;sdk_discrepancy_seed_identity_=sdk_identity;
+    setSupportPoseJointState(joint);
+    recordSdkDiscrepancy("SDK_SEED_NO_NAVIGATION_UPDATE",sdk_identity,best->time,prior,before);
+    finish("seed_joint_sdk_discrepancy_no_navigation_update");return;
+  }
+  if(sdk_discrepancy_initialized_) {
+    for(std::size_t i=0;i<2;++i) model.residual[i]+=sdk_discrepancy_mean_[i];
+    model.H=bodyVelocityDiscrepancyJacobian(model.H,supportPoseJointState().mean.size());
+  }
   Matrix scaled_R=model.R;
   if (config.go2_horizontal_velocity_prior_source_aware_enabled) {
     source_aware::SourceMetadata metadata;
@@ -1736,10 +1775,21 @@ void GIEngine::applyBodyVelocityPriorForTime(double update_time) {
     metadata.quality_flag=best->quality_flag;
     metadata.covariance_available=true;
     const auto weight=applySourceAwareWeighting(metadata.source,metadata,model.residual,model.H,model.R,scaled_R);
-    if(weight.rejected) { ++go2_velocity_diagnostic_prior_status_.reject_count; finish("source_aware_reject"); return; }
+    if(weight.rejected) {
+      ++go2_velocity_diagnostic_prior_status_.reject_count;
+      const auto prior=supportPoseJointState();
+      if(sdk_discrepancy_initialized_) {
+        auto innovation=model.residual;const auto hm=multiply(model.H,prior.mean);
+        for(std::size_t i=0;i<innovation.size();++i) innovation[i]-=hm[i];
+        const auto si=inverse(add(multiply(multiply(model.H,prior.covariance),transpose(model.H)),model.R));
+        recordSdkDiscrepancy("SDK_SOURCE_AWARE_REJECT",sdk_identity,best->time,prior,
+            sdkDiscrepancyConditionalMean(),dotVector(innovation,multiply(si,innovation)),innovation);
+      }
+      finish("source_aware_reject");return;
+    }
   }
   EKFUpdate(model.residual,model.H,scaled_R, "BODY_HORIZONTAL_VELOCITY",
-      options_.arc_clone_config.mode!="off" ? "SOURCE_TIME_BITS:"+arcSourceTimeBits(best->time) + ":VECTOR_INDEX:" + std::to_string(static_cast<std::size_t>(best-go2_velocity_diagnostic_priors_.data())) : "UNKNOWN");
+      (sdkDiscrepancyEnabled() || options_.arc_clone_config.mode!="off")?sdk_identity:"UNKNOWN");
   ++go2_velocity_diagnostic_prior_status_.update_count;
   ++go2_velocity_diagnostic_prior_status_.horizontal_update_count;
   go2_velocity_diagnostic_prior_status_.horizontal_only=true;
@@ -2226,13 +2276,15 @@ source_aware::SourceWeightResult GIEngine::applySourceAwareWeighting(
   source_aware::ObservationInnovation innovation;
   // Sequential updates retain a nonzero dx until stateFeedback. Use the same
   // conditional innovation as EKFUpdate, with the current conditional covariance.
-  const std::vector<double> hdx = multiply(H, dx_);
+  const bool full_sdk=sdk_discrepancy_initialized_ && H.cols!=RANK;
+  const auto joint=full_sdk?supportPoseJointState():pose_clone::Gaussian{Cov_,dx_};
+  const std::vector<double> hdx = multiply(H, joint.mean);
   std::vector<double> conditional_residual = dz;
   for (std::size_t i = 0; i < dz.size(); ++i) conditional_residual[i] -= hdx[i];
   innovation.residual = conditional_residual;
   innovation.residual_norm = vectorNorm(conditional_residual);
   innovation.base_R_trace = matrixTrace(R);
-  const Matrix hph = multiply(multiply(H, Cov_), transpose(H));
+  const Matrix hph = multiply(multiply(H, joint.covariance), transpose(H));
   const Matrix innovation_covariance = add(hph, R);
   innovation.hph_trace = matrixTrace(hph);
   innovation.innovation_cov_trace = matrixTrace(innovation_covariance);

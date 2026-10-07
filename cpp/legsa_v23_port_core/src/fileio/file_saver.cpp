@@ -861,12 +861,18 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
         << "  \"body_velocity_update_period_s\": " << options.go2_velocity_prior_diagnostic_config.go2_body_velocity_update_period_s << ",\n"
         << "  \"body_velocity_time_policy\": \"independent_IMU_boundary_timer_past_latest_unique_attempt_no_interpolation\",\n";
   }
+  if(options.go2_velocity_prior_diagnostic_config.go2_body_velocity_discrepancy_mode!="off") {
+    out << "  \"go2_body_velocity_discrepancy_mode\": \"joint_constant\",\n"
+        << "  \"sdk_discrepancy_persistent_current_dimension\": 23,\n"
+        << "  \"sdk_discrepancy_summary\": \"SDK_DISCREPANCY_SUMMARY.json\",\n"
+        << "  \"sdk_discrepancy_events\": \"SDK_DISCREPANCY_EVENTS.csv\",\n";
+  }
   if(options.support_pose_config.mode!="off") {
     const auto& config=options.support_pose_config;
     const auto& counts=options.support_pose_counts;
     out << "  \"support_pose_mode\": \"" << escapeJson(config.mode) << "\",\n"
         << "  \"support_pose_point_sigma_m\": " << config.point_sigma_m << ",\n"
-        << "  \"support_pose_max_joint_dimension\": 27,\n"
+        << "  \"support_pose_max_joint_dimension\": " << (options.go2_velocity_prior_diagnostic_config.go2_body_velocity_discrepancy_mode=="joint_constant"?29:27) << ",\n"
         << "  \"support_pose_output_current_dimension\": 21,\n"
         << "  \"support_pose_observed_axes\": \"" << escapeJson(config.observed_axes) << "\",\n"
         << "  \"support_pose_measurement_axes\": \"" << (config.horizontalOnly()?"START_body_forward_right":"START_body_forward_right_down") << "\",\n"

@@ -11,7 +11,7 @@ void require(bool condition, const char* message) {
 }
 Matrix symmetrize(const Matrix& a) { return scale(add(a, transpose(a)), 0.5); }
 void validate(const Gaussian& s) {
-  require(s.mean.size() == kCurrent || s.mean.size() == kJoint, "POSE_CLONE_STATE_DIMENSION");
+  require(s.mean.size() == kCurrent || s.mean.size() == kJoint || s.mean.size() == 23 || s.mean.size() == 29, "POSE_CLONE_STATE_DIMENSION");
   require(s.covariance.rows == s.mean.size() && s.covariance.cols == s.mean.size(),
           "POSE_CLONE_COVARIANCE_DIMENSION");
 }
@@ -53,13 +53,14 @@ Matrix augmentationJacobian(const Vec3& blh) {
 }
 
 Gaussian augment(const Matrix& current, const std::vector<double>& mean, const Matrix& j) {
-  require(mean.size() == kCurrent && j.rows == 6 && j.cols == kCurrent,
+  const std::size_t n=mean.size();
+  require((n == kCurrent || n == 23) && j.rows == 6 && j.cols == kCurrent,
           "POSE_CLONE_AUGMENT_DIMENSION");
-  const Matrix p = attitude_clone::symmetricPsd(current, kCurrent, "POSE_CURRENT_PRIOR");
-  Matrix a(kJoint, kCurrent);
-  for (std::size_t i = 0; i < kCurrent; ++i) a(i, i) = 1.0;
+  const Matrix p = attitude_clone::symmetricPsd(current, n, "POSE_CURRENT_PRIOR");
+  Matrix a(n+6, n);
+  for (std::size_t i = 0; i < n; ++i) a(i, i) = 1.0;
   for (std::size_t i = 0; i < 6; ++i)
-    for (std::size_t q = 0; q < kCurrent; ++q) a(kCurrent + i, q) = j(i, q);
+    for (std::size_t q = 0; q < kCurrent; ++q) a(n + i, q) = j(i, q);
   return {symmetrize(multiply(multiply(a, p), transpose(a))), multiply(a, mean)};
 }
 
@@ -107,9 +108,11 @@ Gaussian reset(const Gaussian& s, const Matrix3& position_reset) {
   setBlock(g, P_ID, P_ID, position_reset);
   setBlock(g, PHI_ID, PHI_ID, attitude_clone::leftResetJacobian(
       {s.mean[PHI_ID], s.mean[PHI_ID + 1], s.mean[PHI_ID + 2]}));
-  if (s.mean.size() == kJoint)
-    setBlock(g, kCloneAttitude, kCloneAttitude, attitude_clone::leftResetJacobian(
-        {s.mean[kCloneAttitude], s.mean[kCloneAttitude + 1], s.mean[kCloneAttitude + 2]}));
+  if (s.mean.size() == kJoint || s.mean.size() == 29) {
+    const std::size_t index=s.mean.size()-3;
+    setBlock(g, index, index, attitude_clone::leftResetJacobian(
+        {s.mean[index], s.mean[index + 1], s.mean[index + 2]}));
+  }
   return {symmetrize(multiply(multiply(g, s.covariance), transpose(g))),
           std::vector<double>(s.mean.size(), 0.0)};
 }

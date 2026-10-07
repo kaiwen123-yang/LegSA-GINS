@@ -108,6 +108,9 @@ class GIEngine {
   const std::vector<Baseline3dDiagnostics>& baseline3dDiagnostics() const { return baseline3d_diagnostics_; }
   void writeBaseline3dDiagnostics(const std::string& output_dir) const;
   void writeBodyVelocityDiagnostics(const std::string& output_dir) const;
+  void writeSdkDiscrepancyDiagnostics(const std::string& output_dir) const;
+  bool sdkDiscrepancyInitialized() const {return sdk_discrepancy_initialized_;}
+  std::size_t sdkDiscrepancySeedCount() const {return sdk_discrepancy_seed_count_;}
   void writeNedVelocitySourceDiagnostics(const std::string& output_dir) const;
   const std::vector<NedVelocitySourceEvent>& nedVelocitySourceEvents() const { return ned_velocity_source_events_; }
   const HeadingSourceCounts& headingSourceCounts() const { return heading_source_counts_; }
@@ -139,6 +142,7 @@ class GIEngine {
 
 
  private:
+  friend struct SdkDiscrepancyTestAccess;
   friend struct ArcNativeTestAccess;  // Synthetic harness: no production setter is exposed.
   friend struct NedHvSourceTestAccess;  // Isolate synthetic selection/gating probes only.
   struct JointTimedEvent {
@@ -168,6 +172,12 @@ class GIEngine {
                        double prior_score=0.0, double bound_score=0.0,
                        double safe_innovation=-1.0);
   bool supportPoseEnabled() const {return options_.support_pose_config.mode!="off";}
+  bool sdkDiscrepancyEnabled() const {return options_.go2_velocity_prior_diagnostic_config.go2_body_velocity_discrepancy_mode=="joint_constant";}
+  std::size_t supportPoseCurrentSize() const {return sdk_discrepancy_initialized_?23:21;}
+  std::vector<double> sdkDiscrepancyConditionalMean() const;
+  void recordSdkDiscrepancy(const std::string& kind,const std::string& identity,double source_time,
+                           const pose_clone::Gaussian& prior,const std::vector<double>& b_before,
+                           double nis=0.0,const std::vector<double>& innovation={});
   pose_clone::Gaussian supportPoseJointState() const;
   void setSupportPoseJointState(const pose_clone::Gaussian& state);
   void appendSupportPoseEvents(std::vector<JointTimedEvent>& events);
@@ -210,6 +220,21 @@ class GIEngine {
   void setCovarianceMatrix(const Matrix& matrix);
 
   PortOptions options_;
+  bool sdk_discrepancy_initialized_=false;
+  std::size_t sdk_discrepancy_seed_count_=0;
+  double sdk_discrepancy_seed_source_time_=0.0;
+  std::string sdk_discrepancy_seed_identity_;
+  std::vector<double> sdk_discrepancy_mean_=std::vector<double>(2,0.0);
+  std::vector<double> sdk_discrepancy_error_=std::vector<double>(2,0.0);
+  Matrix sdk_discrepancy_cross_{21,2,0.0},sdk_discrepancy_cov_{2,2,0.0},sdk_discrepancy_clone_cross_{2,6,0.0};
+  struct SdkDiscrepancyDiagnostic {
+    double time=0,source_time=0,nis=0,cross_norm=0,clone_cross_norm=0;
+    std::string kind,identity;
+    bool initialized=false;
+    std::vector<double> before,after,current_increment,innovation;
+    Matrix bb{2,2,0.0};
+  };
+  std::vector<SdkDiscrepancyDiagnostic> sdk_discrepancy_diagnostics_;
   bool support_pose_active_=false,support_pose_stream_started_=false;
   Matrix support_pose_cross_{21,6,0.0},support_pose_cov_{6,6,0.0};
   std::vector<double> support_pose_error_=std::vector<double>(6,0.0);

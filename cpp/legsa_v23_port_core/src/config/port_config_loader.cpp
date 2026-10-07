@@ -1020,6 +1020,8 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       stringOrDefault(kv,
                       "go2_velocity_prior_diagnostic_path",
                       options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_diagnostic_path);
+  options.go2_velocity_prior_diagnostic_config.go2_body_velocity_discrepancy_mode =
+      stringOrDefault(kv,"go2_body_velocity_discrepancy_mode","off");
   options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame =
       stringOrDefault(kv,"go2_horizontal_velocity_frame","ned");
   options.go2_velocity_prior_diagnostic_config.go2_body_velocity_prior_path =
