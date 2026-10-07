@@ -21,7 +21,7 @@ import traceback
 
 ROOT = Path(__file__).resolve().parents[3]
 D = ROOT / "docs/paper_rebuild/TRUSTED_HEADING_CONTINUATION_20261007"
-PLAN = D / "ARC_NATIVE_LOADER_REPAIR_PLAN.json"
+PLAN = D / "ARC_NATIVE_LOADER_INSTRUMENTATION_REPAIR_PLAN.json"
 SCRIPT = "scripts/paper_rebuild/carrier_phase/arc_native_real.py"
 STAGE_REL = "TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_TELEMETRY_REPAIR01"
 SEQUENCES = ("BY2", "BY2H", "BY2O")
@@ -247,8 +247,10 @@ def loader(args):
         config = check(run["config"], aliases);configs.append(config)
         metadata.extend([config, check(run["events"], aliases), check(run["manifest"], aliases),
                          check(run["original_checker_echo"], aliases)])
+    # Retain the nested-tracer failure as pinned evidence; never overwrite it.
+    metadata.extend(check(item, aliases) for item in reg["preserved_loader_attempt_pins"])
     before = {str(p): digest(p) for p in metadata}
-    out = stage/"LOADER_CHECK"
+    out = stage/"LOADER_CHECK_REPAIR01"
     require(not out.exists(), "loader attempt already exists; no retry or alternate stage")
     out.mkdir();OWN_ATTEMPT = out
     emit(out/"REGISTERED_PLAN.json", reg)
