@@ -1,0 +1,9 @@
+# 配置报告元数据修复与剩余两个loader登记
+
+c74a52c已实际成功编译一次checker、运行一次BY2 config/ARC parser（548行274块）。退出失败发生在Python后验比较phase字段；原/新phase各自等于stage_id，生产loader.cpp462明确如此赋值。root及独立审查比较54个所列science/init字段，唯一差异是这个已授权stage元数据派生字段，其余53相同。不是噪声/滤波模型差异。
+
+不重编checker，不重跑BY2，不重新prepare。新独占LOADER_COMPLETION01验证被明确pin的已成功BY2输出，并仅执行尚未开始的BY2H与BY2O两次loader/parser。原和新都断言phase==各自stage_id；其余原science/init字段完整保留等式，全部身份/时标/输入路径与921/1842分母门不变。
+
+已成功prepare PLAN/PREPARED、成功checker/compile回执、BY2命令/回显/访问日志及两次loader失败证据都在登记前固定哈希，并在完成后复核。此修复的外层跟踪仍只覆盖Python父进程，各真正loader用独立内层strace -f，避免两个tracer竞争。
+
+源码及helper由root与heading静态审查；fusion确认phase实际来源。后续实际预算为compile0、prepare0、复用BY2验证1、新loader2/CSVparser2、native0/evaluator0。旧首次失败保留，不修改或覆写。输入provider载荷本阶段仍未重hash，不能以配置资格代表实测输入完整资格或导航收益。
