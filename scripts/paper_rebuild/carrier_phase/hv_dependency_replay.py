@@ -99,8 +99,9 @@ def manifest_gate(manifest, run, loader_record, aliases, active_hv, policy):
     # Reuse all 53 scientific fields and ARC metadata, changing only the declared HV input path.
     old_hv = str(h.expand(run['providers'][HV_KEY]['path'], aliases))
     expected = h.read(h.expand(loader_record['echo']['path'], aliases))['actual_solver_input_paths']
-    h.require(isinstance(expected, list) and expected.count(old_hv) == 1, 'one old HV path in qualified loader echo')
-    expected_active = [str(active_hv) if value == old_hv else value for value in expected]
+    role = 'go2_horizontal_velocity_weak_prior'
+    h.require(isinstance(expected, dict) and expected.get(role) == old_hv, 'old HV role path in qualified loader echo')
+    expected_active = dict(expected); expected_active[role] = str(active_hv)
     h.require(manifest['actual_solver_input_paths'] == expected_active, 'only HV path differs from qualified inputs')
     adapted = dict(manifest); adapted['actual_solver_input_paths'] = expected
     replay.manifest_gate(adapted, run, loader_record, '1', aliases)
