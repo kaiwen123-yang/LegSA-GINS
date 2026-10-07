@@ -45,9 +45,9 @@
           "warnings": 4
         },
         "evidence": "ARC_PHASE_LOCAL_QUALIFICATION_RESULTS.md",
-        "native_joint_prior": "LOCAL_QUALIFIED_AND_REAL_SOURCE_METADATA_LOADER_QUALIFIED_REAL_NATIVE_NOT_STARTED",
+        "native_joint_prior": "SIX_MATCHED_NATIVE_REPLAYS_COMPLETE_OFFLINE_WORKING_PRIORS_NOT_INFORMATION_QUALIFIED",
         "native_proposal_max_calls": 6,
-        "native_proposal_calls_executed": 0,
+        "native_proposal_calls_executed": 6,
         "native_local_evidence": "ARC_NATIVE_LOCAL_RESULTS.md",
         "native_local_first": {
           "tests": 24,
@@ -82,6 +82,24 @@
             "nested tracing wrapper before compiler",
             "derived phase metadata validation after successful BY2 parser"
           ]
+        },
+        "native_replay": {
+          "registration_commit": "9c0641beea49e541fc4d64cde5446e4f052e74cc",
+          "evidence": "ARC_NATIVE_REPLAY_RESULTS.md",
+          "native_calls": 6,
+          "evaluator_calls": 0,
+          "pair_identity_passes": 3,
+          "source_blocks": 921,
+          "source_endpoints": 1842,
+          "covered_priors": 918,
+          "terminal_uncovered_blocks": 3,
+          "legal_phase_and_prior_intersection": 857,
+          "matrix_algebra_and_information_readout_calls": 0,
+          "hv_update_rows": 4600,
+          "hv_reported_source_after_state_rows": 1880,
+          "hv_repeated_vector_index_rows": 0,
+          "all_source_online_causality_qualified": false,
+          "prior_scope": "OFFLINE_EXECUTED_PREFIX_WORKING_PRIOR"
         }
       }
     },
@@ -126,5 +144,5 @@
   "main_merge_authorized": false,
   "completion_proven": false,
   "latest_decision": "CONTINUATION_DECISION.md",
-  "latest_checkpoint": "Go2 interface semantics integrated; ARC native local qualification and 921-block source metadata preparation plus 3 configuration/parser qualifications complete, retained first failures; actual real ARC native replay 0, no navigation gain established"
+  "latest_checkpoint": "Six matched ARC passive replays pass byte identity; 918 joint working priors, 857 with legal saved phase model; 1880 of 4600 NED-HV updates use later reported source timestamps. No phase information or navigation gain qualification; next conditional readout and separate causal-source gate."
 }

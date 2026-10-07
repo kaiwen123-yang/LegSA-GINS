@@ -1,0 +1,245 @@
+{
+  "schema": "arc_native_replay.results/v1",
+  "registration_commit": "9c0641beea49e541fc4d64cde5446e4f052e74cc",
+  "status": "COMPLETE_MATCHED_EMPTY_PHASE_NATIVE_TELEMETRY_NOT_INFORMATION_GAIN",
+  "goal_status": "ACTIVE",
+  "first_scientific_attempt": true,
+  "native_calls": 6,
+  "evaluator_calls": 0,
+  "phase_math_calls": 0,
+  "information_readout_calls": 0,
+  "elapsed_s": 69.95108326299987,
+  "source_blocks": 921,
+  "source_endpoints": 1842,
+  "consumed_endpoints": 1839,
+  "covered_priors": 918,
+  "legal_model_and_prior_blocks": 857,
+  "missing_model_but_prior_blocks": 61,
+  "terminal_uncovered_blocks": 3,
+  "source_seal_sha256": "828361466eeb723743ee6941e9ef0dd9c2cb9e52e249c56cbc59b1fe620e91d4",
+  "sequences": [
+    {
+      "sequence_id": "BY2",
+      "source_blocks": 274,
+      "source_endpoints": 548,
+      "consumed_endpoints": 547,
+      "unconsumed_endpoints": 1,
+      "lifecycle_status_counts": {
+        "COVERED_END_PRIOR": 273,
+        "UNCOVERED_TERMINAL": 1
+      },
+      "prior_rows": 273,
+      "legal_model_blocks": 240,
+      "legal_model_covered": 239,
+      "missing_model_blocks": 34,
+      "missing_model_covered": 34,
+      "phase_state_cross": "UNKNOWN",
+      "actual_available_time_s": null,
+      "matrix_algebra_calls": 0,
+      "real_hv_source": "INHERITED_STATUS_A1_ROTATED_NED_WEAK_PRIOR",
+      "reported_provider_source_time_audit": {
+        "RAW_DOPPLER": {
+          "update_rows": 666,
+          "identity_unavailable": 0,
+          "source_time_after_state_rows": 0,
+          "repeated_vector_index_rows": 0,
+          "inconsistent_source_time_for_vector_index_rows": 0
+        },
+        "GO2_VELOCITY_DIAGNOSTIC": {
+          "update_rows": 1369,
+          "identity_unavailable": 0,
+          "source_time_after_state_rows": 553,
+          "repeated_vector_index_rows": 0,
+          "inconsistent_source_time_for_vector_index_rows": 0
+        },
+        "GO2_ATTITUDE_RP": {
+          "update_rows": 1369,
+          "identity_unavailable": 0,
+          "source_time_after_state_rows": 0,
+          "repeated_vector_index_rows": 0,
+          "inconsistent_source_time_for_vector_index_rows": 0
+        }
+      },
+      "source_time_audit_is_report_only_no_zero_gate": true,
+      "all_source_online_causality_qualified": false,
+      "prior_scope": "OFFLINE_EXECUTED_PREFIX_WORKING_PRIOR"
+    },
+    {
+      "sequence_id": "BY2H",
+      "source_blocks": 270,
+      "source_endpoints": 540,
+      "consumed_endpoints": 539,
+      "unconsumed_endpoints": 1,
+      "lifecycle_status_counts": {
+        "COVERED_END_PRIOR": 269,
+        "UNCOVERED_TERMINAL": 1
+      },
+      "prior_rows": 269,
+      "legal_model_blocks": 243,
+      "legal_model_covered": 242,
+      "missing_model_blocks": 27,
+      "missing_model_covered": 27,
+      "phase_state_cross": "UNKNOWN",
+      "actual_available_time_s": null,
+      "matrix_algebra_calls": 0,
+      "real_hv_source": "INHERITED_STATUS_A1_ROTATED_NED_WEAK_PRIOR",
+      "reported_provider_source_time_audit": {
+        "RAW_DOPPLER": {
+          "update_rows": 525,
+          "identity_unavailable": 0,
+          "source_time_after_state_rows": 0,
+          "repeated_vector_index_rows": 0,
+          "inconsistent_source_time_for_vector_index_rows": 0
+        },
+        "GO2_VELOCITY_DIAGNOSTIC": {
+          "update_rows": 1348,
+          "identity_unavailable": 0,
+          "source_time_after_state_rows": 540,
+          "repeated_vector_index_rows": 0,
+          "inconsistent_source_time_for_vector_index_rows": 0
+        },
+        "GO2_ATTITUDE_RP": {
+          "update_rows": 1348,
+          "identity_unavailable": 0,
+          "source_time_after_state_rows": 0,
+          "repeated_vector_index_rows": 0,
+          "inconsistent_source_time_for_vector_index_rows": 0
+        }
+      },
+      "source_time_audit_is_report_only_no_zero_gate": true,
+      "all_source_online_causality_qualified": false,
+      "prior_scope": "OFFLINE_EXECUTED_PREFIX_WORKING_PRIOR"
+    },
+    {
+      "sequence_id": "BY2O",
+      "source_blocks": 377,
+      "source_endpoints": 754,
+      "consumed_endpoints": 753,
+      "unconsumed_endpoints": 1,
+      "lifecycle_status_counts": {
+        "COVERED_END_PRIOR": 376,
+        "UNCOVERED_TERMINAL": 1
+      },
+      "prior_rows": 376,
+      "legal_model_blocks": 377,
+      "legal_model_covered": 376,
+      "missing_model_blocks": 0,
+      "missing_model_covered": 0,
+      "phase_state_cross": "UNKNOWN",
+      "actual_available_time_s": null,
+      "matrix_algebra_calls": 0,
+      "real_hv_source": "INHERITED_STATUS_A1_ROTATED_NED_WEAK_PRIOR",
+      "reported_provider_source_time_audit": {
+        "RAW_DOPPLER": {
+          "update_rows": 927,
+          "identity_unavailable": 0,
+          "source_time_after_state_rows": 0,
+          "repeated_vector_index_rows": 0,
+          "inconsistent_source_time_for_vector_index_rows": 0
+        },
+        "GO2_VELOCITY_DIAGNOSTIC": {
+          "update_rows": 1883,
+          "identity_unavailable": 0,
+          "source_time_after_state_rows": 787,
+          "repeated_vector_index_rows": 0,
+          "inconsistent_source_time_for_vector_index_rows": 0
+        },
+        "GO2_ATTITUDE_RP": {
+          "update_rows": 1877,
+          "identity_unavailable": 0,
+          "source_time_after_state_rows": 0,
+          "repeated_vector_index_rows": 0,
+          "inconsistent_source_time_for_vector_index_rows": 0
+        }
+      },
+      "source_time_audit_is_report_only_no_zero_gate": true,
+      "all_source_online_causality_qualified": false,
+      "prior_scope": "OFFLINE_EXECUTED_PREFIX_WORKING_PRIOR"
+    }
+  ],
+  "pairs": [
+    {
+      "sequence_id": "BY2",
+      "status": "PASS_COMMON_BYTE_IDENTITY",
+      "byte_equal_files": [
+        "ARC_CONDITIONING_EVENTS.jsonl",
+        "ARC_IMU_SEGMENTS.csv",
+        "ARC_LIFECYCLE.csv",
+        "BASELINE3D_DIAGNOSTICS.csv",
+        "EVAL_NAV.csv",
+        "HEADING_SOURCE_EVENTS.csv",
+        "KF_GINS_IMU_ERR.txt",
+        "KF_GINS_Navresult.nav",
+        "KF_GINS_STD.txt",
+        "LegSA_PORT_NAV.nav",
+        "LegSA_PORT_STD.csv",
+        "SOURCE_AWARE_WEIGHT_TRACE.csv"
+      ],
+      "manifest_difference_keys": [
+        "arc_native_telemetry_enabled"
+      ],
+      "telemetry_only_files": [
+        "ARC_JOINT_PRIORS.jsonl"
+      ],
+      "historical_PVT_trajectory_identity_claim": false
+    },
+    {
+      "sequence_id": "BY2H",
+      "status": "PASS_COMMON_BYTE_IDENTITY",
+      "byte_equal_files": [
+        "ARC_CONDITIONING_EVENTS.jsonl",
+        "ARC_IMU_SEGMENTS.csv",
+        "ARC_LIFECYCLE.csv",
+        "BASELINE3D_DIAGNOSTICS.csv",
+        "EVAL_NAV.csv",
+        "HEADING_SOURCE_EVENTS.csv",
+        "KF_GINS_IMU_ERR.txt",
+        "KF_GINS_Navresult.nav",
+        "KF_GINS_STD.txt",
+        "LegSA_PORT_NAV.nav",
+        "LegSA_PORT_STD.csv",
+        "SOURCE_AWARE_WEIGHT_TRACE.csv"
+      ],
+      "manifest_difference_keys": [
+        "arc_native_telemetry_enabled"
+      ],
+      "telemetry_only_files": [
+        "ARC_JOINT_PRIORS.jsonl"
+      ],
+      "historical_PVT_trajectory_identity_claim": false
+    },
+    {
+      "sequence_id": "BY2O",
+      "status": "PASS_COMMON_BYTE_IDENTITY",
+      "byte_equal_files": [
+        "ARC_CONDITIONING_EVENTS.jsonl",
+        "ARC_IMU_SEGMENTS.csv",
+        "ARC_LIFECYCLE.csv",
+        "BASELINE3D_DIAGNOSTICS.csv",
+        "EVAL_NAV.csv",
+        "HEADING_SOURCE_EVENTS.csv",
+        "KF_GINS_IMU_ERR.txt",
+        "KF_GINS_Navresult.nav",
+        "KF_GINS_STD.txt",
+        "LegSA_PORT_NAV.nav",
+        "LegSA_PORT_STD.csv",
+        "SOURCE_AWARE_WEIGHT_TRACE.csv"
+      ],
+      "manifest_difference_keys": [
+        "arc_native_telemetry_enabled"
+      ],
+      "telemetry_only_files": [
+        "ARC_JOINT_PRIORS.jsonl"
+      ],
+      "historical_PVT_trajectory_identity_claim": false
+    }
+  ],
+  "provider_hash_passes": [
+    "PRE",
+    "POST"
+  ],
+  "bytes_sealed": 599641879,
+  "independent_access_audit": "ARC_NATIVE_REPLAY_ACCESS_AUDIT.md",
+  "independent_results_review": "ARC_NATIVE_REPLAY_RESULTS_REVIEW.md",
+  "scope": "Offline executed-prefix working prior; no PSD, information, phase admission, physical availability or navigation benefit qualification"
+}
