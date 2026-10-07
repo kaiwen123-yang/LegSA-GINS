@@ -1,0 +1,60 @@
+{
+  "schema": "arc_phase_real_information.local_registration/v1",
+  "status": "REGISTERED_READY_SINGLE_EXECUTION",
+  "stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_REAL_INFORMATION_LOCAL_ATTEMPT01",
+  "source_pins": {
+    "scripts/paper_rebuild/carrier_phase/arc_phase_real_information.py": "55822aae95d650bdccfb169bd703f065f100b0384c05d22122ca081c2d3c227e",
+    "scripts/paper_rebuild/carrier_phase/arc_native_real.py": "74b9b69962caaa4fba2c37265b6d9a10662517a8efce677ba0747e8b7a277ad7",
+    "src/legsa_gins/paper_rebuild/carrier_phase/arc_phase_information.py": "6f14db775227afddd05b75b47c8cd98d5743dd1dd10466d322987012765e1c3a",
+    "src/legsa_gins/__init__.py": "996a06df703fd19f79cb4b8bee3ba2cbf917e35d9f25d06c21a29c7a0831715a",
+    "src/legsa_gins/paper_rebuild/__init__.py": "268d06de2fa275e95ea3319111f359187f492c66e812b1be1ccd07812f6014e9",
+    "src/legsa_gins/paper_rebuild/manifest.py": "05f29a41984518bea5f86b80e2a221dcbde978f9b9616ea61ad21cdad632bc91",
+    "src/legsa_gins/paper_rebuild/paths.py": "8535cca9952f8c7d55c4cf9689031ab287cc79d0d9f0cf9207997e111db4ac0b",
+    "tests/paper_rebuild/test_arc_phase_real_information_adapter.py": "36eabb44dbcaa83bcf9688abc4e61ec1e71149bd9da23368e0b7449a40fe7778"
+  },
+  "test_file": "tests/paper_rebuild/test_arc_phase_real_information_adapter.py",
+  "test_names": [
+    "test_01_equator_full_cross_prior_uses_end_frame",
+    "test_02_bad_mapping_or_indefinite_prior_is_unresolved_without_repair",
+    "test_03_exact_join_schema_and_hash_refuse_corruption"
+  ],
+  "budgets": {
+    "pytest_processes": 1,
+    "test_cases": 3,
+    "qualify_prior_calls": 5,
+    "explicit_frame_jacobian_calls": 1,
+    "join_sequence_calls": 3,
+    "diagnose_calls": 0,
+    "geometry_calls": 0,
+    "native_calls": 0,
+    "evaluator_calls": 0,
+    "real_input_reads": 0,
+    "raw_reads": 0,
+    "reference_reads": 0,
+    "automatic_retries": 0,
+    "wall_s": 60,
+    "numerical_threads": 1
+  },
+  "purpose": "Synthetic independent equator position/attitude/full-cross mapping, reject wrong Jacobian/indefinite P, START ledger-vs-dispatch and exact-source/hash corruption; old 12 core tests are not rerun.",
+  "failure_policy": "Preserve first failure; no automatic retry. Any affected repair requires a bounded follow-up record.",
+  "command": [
+    "python3",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/paper_rebuild/test_arc_phase_real_information_adapter.py::test_01_equator_full_cross_prior_uses_end_frame",
+    "tests/paper_rebuild/test_arc_phase_real_information_adapter.py::test_02_bad_mapping_or_indefinite_prior_is_unresolved_without_repair",
+    "tests/paper_rebuild/test_arc_phase_real_information_adapter.py::test_03_exact_join_schema_and_hash_refuse_corruption"
+  ],
+  "environment": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1"
+  },
+  "data_mode": "synthetic_local_only"
+}
