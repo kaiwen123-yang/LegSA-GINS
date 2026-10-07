@@ -1,0 +1,120 @@
+{
+  "schema": "trusted_heading.direction_model_trial.registration.v1",
+  "status": "REGISTERED_READY",
+  "stage_id": "TRUSTED_HEADING_DIRECTION_MODEL_20261007",
+  "protocol_id": "V3_PVT_SCALAR_PHYSICAL_PROJECTION_ONLY_V1",
+  "run_ids": [
+    "BY2__LATERAL_PROJECTION",
+    "BY2H__LATERAL_PROJECTION",
+    "BY2O__LATERAL_PROJECTION"
+  ],
+  "window_s": {
+    "BY2": [
+      66.0,
+      340.0
+    ],
+    "BY2H": [
+      413.0,
+      683.0
+    ],
+    "BY2O": [
+      3186.0,
+      3563.0
+    ]
+  },
+  "reused_stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_20261006/FULL_WINDOW_NAVIGATION_ATTEMPT01",
+  "reused_stage_pins": {
+    "PLAN.json": "8e2d476d08e3caf9cdeca78edf75d8024dc4accea2430c26a7aa263d7d6210dc",
+    "PREPARED.json": "d6204a35435fc5e210a76e0b25e9d3282f57adaaf59f0bba9641bd198be615d7",
+    "ALL_NATIVE_SEALED.json": "1d85386e07593a10d20a57f5c6421430e084a27357cd7f8fc2a9d0f7910b8d17",
+    "EVALUATION_COMPLETE.json": "39ee82e8c2d6b1f5820717590190a8e6aa45d1c9619902ad73a6b8116aa787c5"
+  },
+  "native_execution_registration_commit": "3c81e5b8e4df4bece69c5f4635f0a60bd12c4369",
+  "native_source_identity": "Reused executable and source pins in sealed prior PLAN, not current repository C++",
+  "binary_sha256": "7f8a8f332fa36b957a88231228ad73c1cab206327e701dc9f98d0abb1da1b0a2",
+  "checker_sha256": "346f502e8b6cb2cbf54ad446e424221d3331f043517efb592478aa5660b57db8",
+  "binary_path_alias": "<SCRATCH_ROOT>/TRUSTED_HEADING_20261006/PVT_CARRIER_FALLBACK_LOCAL_ATTEMPT01/BUILD/legsa_v23_port_core_demo",
+  "checker_path_alias": "<SCRATCH_ROOT>/TRUSTED_HEADING_20261006/FULL_WINDOW_NAVIGATION_ATTEMPT01/CONFIG_CHECKER/config_check",
+  "v3_lock_sha256": "d961acfd483c420e24e5b48f0b313cbac5932ef7a036a21ffe5a00dd742a09ff",
+  "evaluator_sha256": "aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da",
+  "budgets": {
+    "compile": 0,
+    "config_checker": 3,
+    "new_native": 3,
+    "new_evaluator_max": 3,
+    "comparison": 1,
+    "reused_Euler_native": 3,
+    "reused_original_V3_results": 3,
+    "integer_search": 0,
+    "new_raw_reads": 0,
+    "reference_parent_reads": 0,
+    "retries": 0
+  },
+  "scientific_change": {
+    "key": "dual_yaw_prediction_model",
+    "from": "euler_yaw",
+    "to": "lateral_projection",
+    "all_other_config_line_bytes_identical_except": [
+      "stage_id",
+      "protocol_id",
+      "case_id",
+      "run_id",
+      "run_label",
+      "outputpath"
+    ],
+    "HV_unchanged": true,
+    "heading_source_policy": "pvt_priority_control",
+    "carrier_bypassed": true,
+    "new_foot_clone_module_used": false,
+    "new_Cpp_source_used": false
+  },
+  "runtime_bounds": {
+    "loader_each_s": 60,
+    "native_each_s": 1200,
+    "evaluator": "existing frozen guarded child"
+  },
+  "evaluation": {
+    "all_three_native_sealed_before_first_reference_read": true,
+    "new_reference_paths_parsed": false,
+    "specs": "copy sealed previous sequence/evaluator/reference metadata without payload access",
+    "physical_transform": "same original V3 locked median/columns2,3,4; STD untransformed",
+    "complete_and_exact_common_support": true,
+    "missing_metrics": "NA; no output substitution or favorable trimming",
+    "comparison": "new projection vs reused matched Euler and original V3, all H/V/yaw RMSE/P95/P99 plus maxima/coverage/events"
+  },
+  "decision": {
+    "nondegradation": "unchanged NAVIGATION_EVALUATION_CONTRACT",
+    "A": "at least two full sequences yaw RMSE at least 5 percent lower than original V3; all nine metrics and coverage pass",
+    "model_attribution": "positive yaw RMSE delta improvement vs matched Euler in full and same complete exact-key common support for at least the two qualifying sequences",
+    "B": null,
+    "B_reason": "no AR recovery experiment in this one-factor measurement-model trial",
+    "AR_gain_claim": false,
+    "independent_HV_claim": false,
+    "reference_independent_truth": false,
+    "automatic_main_merge": false
+  },
+  "manifest_counter_boundary": "known old runtime counter copy bug retained; derived HEADING_SOURCE_EVENTS counts stored separately",
+  "source_pins": {
+    "scripts/paper_rebuild/carrier_phase/full_window_navigation.py": "37e8bae8ba9a0f7da5d7d8bb531b18dfb3995bb09b8b28b9f62e210097b5d7b8",
+    "scripts/paper_rebuild/v3_evaluator_observer/sitecustomize.py": "89d894869e33c51c269a15ddb65b4aef9b2e0191a0114741284ee65d5a522925",
+    "src/legsa_gins/paper_rebuild/canonical541/offline_eval_aggregate.py": "d021a503bc91dbd6a194182478770a1457cf0ca615c7d3adb2f7a6f68eadea16",
+    "src/legsa_gins/paper_rebuild/clean5_parity/evaluation.py": "cfd8b276c9fe663f823a5846dab6a54de72664688b798a6591f168dd86044d0a",
+    "src/legsa_gins/paper_rebuild/clean5_parity_p04/evaluation.py": "533b3b3bf0f6b1361fcd914c8011335aaa4c57ac7f29b41b33eeeab594793352",
+    "src/legsa_gins/paper_rebuild/clean5_sequence/io_audit.py": "418819bff1b4eec124850314ef12a83c2d935b10dc1b1db7b9b5110098ed12d7",
+    "src/legsa_gins/paper_rebuild/evidence.py": "c60b6d61cb2d1aae5431a3b973c8ea67f391df85964201c6ad03463b144dfa5a",
+    "src/legsa_gins/paper_rebuild/hext/t5a_config_fidelity.py": "486b9d95b6d0ff3ad3be48eaf31c008c8f0f88f0a88b86c6c89a9c1fe292f722",
+    "src/legsa_gins/paper_rebuild/hext/t5a_runtime.py": "a82ee2e5c5e56ded9ca078b752a00766780c811364914b5cecfaa23c1fa16bca",
+    "src/legsa_gins/paper_rebuild/manifest.py": "05f29a41984518bea5f86b80e2a221dcbde978f9b9616ea61ad21cdad632bc91",
+    "src/legsa_gins/paper_rebuild/protocol_v3/evaluation_process.py": "179c354a8d2500791d0b2cfb1c89b815fdf25575d66cac4b44eb87967b6a4489",
+    "src/legsa_gins/paper_rebuild/protocol_v3/runtime.py": "cf7d17c72ff28f08edb8356709cf0f91e764698735511bada6a2b44da0990b35",
+    "src/legsa_gins/paper_rebuild/subprocess_guard.py": "e582ee3d29dbd17246398e8e35bf8f006cf48e8aa71de92550739666ae39fac7",
+    "scripts/paper_rebuild/carrier_phase/compare_full_window_navigation.py": "194532eb7c77ecc4758663a3ea25227ab3020de3c9a228a9eebe09f48f1fda30",
+    "scripts/paper_rebuild/carrier_phase/direction_model_trial.py": "e33d580c16ee51eb42c99aab930518be6ae1cfdf5300fb53475e822ba1ab84a1",
+    "scripts/paper_rebuild/carrier_phase/compare_clone_window_navigation.py": "911e3d37e4af37100a5c99ed56e67424a08c365a14c4d55d45f386154c10aaad",
+    "docs/paper_rebuild/TRUSTED_HEADING_20261006/NAVIGATION_EVALUATION_CONTRACT.md": "740571d3d43297d96cf848dae941f0539108e3be9afbee6501280251025896b3"
+  },
+  "implementation_status": "AST and side-effect-free import checked; independent static review completed before registration; no loader/native/evaluation/comparison executed",
+  "failure_policy": "Preserve each reservation/technical failure, stop without retry; bounded divergence retains unavailable evaluation slot.",
+  "new_stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/DIRECTION_MODEL_ATTEMPT01",
+  "single_execution_policy": "One fixed output stage and one COMPARISON directory; per-run reservation prevents repeat scientific calls; no alternate stage under this registration."
+}
