@@ -1,0 +1,500 @@
+{
+  "status": "PASS_EXECUTION_ACCESS_AND_IDENTITY_WITH_LARGE_PAYLOAD_REHASH_EXCLUDED",
+  "registration_commit": "531b30860b7c1389e22255ccd1339cb246983049",
+  "stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/HV_CAUSAL_POLICY_REAL_ATTEMPT01",
+  "outer_exit": {
+    "returncode": 0,
+    "timeout": false,
+    "elapsed_s": 66.18579878300011
+  },
+  "ordered_calls": [
+    {
+      "sequence_id": "BY2",
+      "arm": "LEGACY",
+      "returncode": 0,
+      "timed_out": false,
+      "retry": 0
+    },
+    {
+      "sequence_id": "BY2H",
+      "arm": "LEGACY",
+      "returncode": 0,
+      "timed_out": false,
+      "retry": 0
+    },
+    {
+      "sequence_id": "BY2O",
+      "arm": "LEGACY",
+      "returncode": 0,
+      "timed_out": false,
+      "retry": 0
+    },
+    {
+      "sequence_id": "BY2",
+      "arm": "CAUSAL",
+      "returncode": 0,
+      "timed_out": false,
+      "retry": 0
+    },
+    {
+      "sequence_id": "BY2H",
+      "arm": "CAUSAL",
+      "returncode": 0,
+      "timed_out": false,
+      "retry": 0
+    },
+    {
+      "sequence_id": "BY2O",
+      "arm": "CAUSAL",
+      "returncode": 0,
+      "timed_out": false,
+      "retry": 0
+    }
+  ],
+  "all_six_processes_pass": true,
+  "trace_totals": {
+    "lines": 645,
+    "openat": 618,
+    "successful_opens": 611,
+    "failed_opens": 7,
+    "execve": 7,
+    "exits": 7,
+    "signals": 13,
+    "unparsed": 0,
+    "unclassified_success": 0
+  },
+  "traces": [
+    {
+      "scope": "PARENT_WITHOUT_CHILD_FOLLOW",
+      "lines": 462,
+      "sha256": "81dea308109a916839102afaebd1765e57ec62789ee51d62461f954dddd880e6",
+      "counts": {
+        "execve": 1,
+        "openat": 447,
+        "open_success": 440,
+        "open_failed": 7,
+        "signal": 13,
+        "exit": 1
+      },
+      "categories": {
+        "SYSTEM_RUNTIME": 105,
+        "DECLARED_INPUT": 91,
+        "WORKSPACE_IMPORT_OR_DIRECTORY": 1,
+        "OWN_OUTPUT": 243
+      },
+      "successful_execs": {
+        "/usr/bin/python3": 1
+      }
+    },
+    {
+      "scope": "BY2__LEGACY",
+      "lines": 30,
+      "sha256": "3c58c4450431468d6c4c1d5f5382bbb80ad386731ebca9c4e0ba2a0e0360c436",
+      "counts": {
+        "execve": 1,
+        "openat": 28,
+        "open_success": 28,
+        "exit": 1
+      },
+      "categories": {
+        "SYSTEM_RUNTIME": 5,
+        "DECLARED_INPUT": 9,
+        "OWN_OUTPUT": 14
+      },
+      "successful_execs": {
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/HV_CAUSAL_POLICY_LOCAL_ATTEMPT01/BUILD/legsa_v23_port_core_demo": 1
+      }
+    },
+    {
+      "scope": "BY2H__LEGACY",
+      "lines": 30,
+      "sha256": "cdb270d6333cb94eeb58c254f983f1995b40a89e3ab1eb553eb8c22573e9e6b1",
+      "counts": {
+        "execve": 1,
+        "openat": 28,
+        "open_success": 28,
+        "exit": 1
+      },
+      "categories": {
+        "SYSTEM_RUNTIME": 5,
+        "DECLARED_INPUT": 9,
+        "OWN_OUTPUT": 14
+      },
+      "successful_execs": {
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/HV_CAUSAL_POLICY_LOCAL_ATTEMPT01/BUILD/legsa_v23_port_core_demo": 1
+      }
+    },
+    {
+      "scope": "BY2O__LEGACY",
+      "lines": 30,
+      "sha256": "a118d64eb3b586a9be66f6b7332660bbcc9c4128c03166df856e0e08cc4765aa",
+      "counts": {
+        "execve": 1,
+        "openat": 28,
+        "open_success": 28,
+        "exit": 1
+      },
+      "categories": {
+        "SYSTEM_RUNTIME": 5,
+        "DECLARED_INPUT": 9,
+        "OWN_OUTPUT": 14
+      },
+      "successful_execs": {
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/HV_CAUSAL_POLICY_LOCAL_ATTEMPT01/BUILD/legsa_v23_port_core_demo": 1
+      }
+    },
+    {
+      "scope": "BY2__CAUSAL",
+      "lines": 31,
+      "sha256": "b5b5f878ccac9f5a5a56375493f12b9430602f3a5e435ac57d01ca7b2b4a38e3",
+      "counts": {
+        "execve": 1,
+        "openat": 29,
+        "open_success": 29,
+        "exit": 1
+      },
+      "categories": {
+        "SYSTEM_RUNTIME": 5,
+        "DECLARED_INPUT": 9,
+        "OWN_OUTPUT": 15
+      },
+      "successful_execs": {
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/HV_CAUSAL_POLICY_LOCAL_ATTEMPT01/BUILD/legsa_v23_port_core_demo": 1
+      }
+    },
+    {
+      "scope": "BY2H__CAUSAL",
+      "lines": 31,
+      "sha256": "bbb2eec978e1aefaed7f8cb70168d2b98bbe92cd64e7dff3d75a20bc2e362890",
+      "counts": {
+        "execve": 1,
+        "openat": 29,
+        "open_success": 29,
+        "exit": 1
+      },
+      "categories": {
+        "SYSTEM_RUNTIME": 5,
+        "DECLARED_INPUT": 9,
+        "OWN_OUTPUT": 15
+      },
+      "successful_execs": {
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/HV_CAUSAL_POLICY_LOCAL_ATTEMPT01/BUILD/legsa_v23_port_core_demo": 1
+      }
+    },
+    {
+      "scope": "BY2O__CAUSAL",
+      "lines": 31,
+      "sha256": "cbddbaf7d006e3cc2cf6e5dfd46baa9f08974dd9ae5f4b38a402967c784b0636",
+      "counts": {
+        "execve": 1,
+        "openat": 29,
+        "open_success": 29,
+        "exit": 1
+      },
+      "categories": {
+        "SYSTEM_RUNTIME": 5,
+        "DECLARED_INPUT": 9,
+        "OWN_OUTPUT": 15
+      },
+      "successful_execs": {
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/HV_CAUSAL_POLICY_LOCAL_ATTEMPT01/BUILD/legsa_v23_port_core_demo": 1
+      }
+    }
+  ],
+  "provider_receipts": [
+    {
+      "pass_name": "PRE",
+      "complete": true,
+      "files": 18,
+      "bytes_hashed": 120200614,
+      "values_match_registration": true
+    },
+    {
+      "pass_name": "POST",
+      "complete": true,
+      "files": 18,
+      "bytes_hashed": 120200614,
+      "values_match_registration": true
+    }
+  ],
+  "parent_provider_opens_all_two": true,
+  "native_provider_opens": [
+    {
+      "sequence_id": "BY2",
+      "arm": "LEGACY",
+      "per_role": {
+        "GNSS18.gnss": 1,
+        "GO2_ATTITUDE_PRIOR.csv": 1,
+        "GO2_HORIZONTAL_VELOCITY_PRIOR.csv": 1,
+        "CALIBRATED_IMU.imu": 2,
+        "RAW_DOPPLER.csv": 1,
+        "CARRIER.csv": 1
+      }
+    },
+    {
+      "sequence_id": "BY2H",
+      "arm": "LEGACY",
+      "per_role": {
+        "GNSS18.gnss": 1,
+        "GO2_ATTITUDE_PRIOR.csv": 1,
+        "GO2_HORIZONTAL_VELOCITY_PRIOR.csv": 1,
+        "CALIBRATED_IMU.imu": 2,
+        "RAW_DOPPLER.csv": 1,
+        "CARRIER.csv": 1
+      }
+    },
+    {
+      "sequence_id": "BY2O",
+      "arm": "LEGACY",
+      "per_role": {
+        "GNSS18.gnss": 1,
+        "GO2_ATTITUDE_PRIOR.csv": 1,
+        "GO2_HORIZONTAL_VELOCITY_PRIOR.csv": 1,
+        "CALIBRATED_IMU.imu": 2,
+        "RAW_DOPPLER.csv": 1,
+        "CARRIER.csv": 1
+      }
+    },
+    {
+      "sequence_id": "BY2",
+      "arm": "CAUSAL",
+      "per_role": {
+        "GNSS18.gnss": 1,
+        "GO2_ATTITUDE_PRIOR.csv": 1,
+        "GO2_HORIZONTAL_VELOCITY_PRIOR.csv": 1,
+        "CALIBRATED_IMU.imu": 2,
+        "RAW_DOPPLER.csv": 1,
+        "CARRIER.csv": 1
+      }
+    },
+    {
+      "sequence_id": "BY2H",
+      "arm": "CAUSAL",
+      "per_role": {
+        "GNSS18.gnss": 1,
+        "GO2_ATTITUDE_PRIOR.csv": 1,
+        "GO2_HORIZONTAL_VELOCITY_PRIOR.csv": 1,
+        "CALIBRATED_IMU.imu": 2,
+        "RAW_DOPPLER.csv": 1,
+        "CARRIER.csv": 1
+      }
+    },
+    {
+      "sequence_id": "BY2O",
+      "arm": "CAUSAL",
+      "per_role": {
+        "GNSS18.gnss": 1,
+        "GO2_ATTITUDE_PRIOR.csv": 1,
+        "GO2_HORIZONTAL_VELOCITY_PRIOR.csv": 1,
+        "CALIBRATED_IMU.imu": 2,
+        "RAW_DOPPLER.csv": 1,
+        "CARRIER.csv": 1
+      }
+    }
+  ],
+  "pins": {
+    "registered_plan_matches_git": true,
+    "plan_sha256": "00665e8f97eaa0958e46388ae3771e47b9b5f1fdd7cd3a8724e9cc205cd6ce05",
+    "runtime_source_pins": 3,
+    "source_mismatches": [],
+    "metadata_pins": 4,
+    "metadata_mismatches": [],
+    "binary_hash_matches": true,
+    "execution_evidence_count": 49,
+    "execution_evidence_mismatches": [],
+    "invocation_mismatches": [],
+    "global_seal_sha256": "eec6608b1924a75b8f0e8e20295ef1e04e878e6abe5327108173c4bb9567f1f1",
+    "complete_binds_global_seal": true
+  },
+  "output_inventory": [
+    {
+      "sequence_id": "BY2",
+      "arm": "LEGACY",
+      "files": 14,
+      "bytes": 91227259,
+      "actual_inventory_and_sizes_match": true,
+      "global_seal_matches": true,
+      "symlinks": false
+    },
+    {
+      "sequence_id": "BY2H",
+      "arm": "LEGACY",
+      "files": 14,
+      "bytes": 93684000,
+      "actual_inventory_and_sizes_match": true,
+      "global_seal_matches": true,
+      "symlinks": false
+    },
+    {
+      "sequence_id": "BY2O",
+      "arm": "LEGACY",
+      "files": 14,
+      "bytes": 123754208,
+      "actual_inventory_and_sizes_match": true,
+      "global_seal_matches": true,
+      "symlinks": false
+    },
+    {
+      "sequence_id": "BY2",
+      "arm": "CAUSAL",
+      "files": 15,
+      "bytes": 91469776,
+      "actual_inventory_and_sizes_match": true,
+      "global_seal_matches": true,
+      "symlinks": false
+    },
+    {
+      "sequence_id": "BY2H",
+      "arm": "CAUSAL",
+      "files": 15,
+      "bytes": 93922875,
+      "actual_inventory_and_sizes_match": true,
+      "global_seal_matches": true,
+      "symlinks": false
+    },
+    {
+      "sequence_id": "BY2O",
+      "arm": "CAUSAL",
+      "files": 15,
+      "bytes": 124087661,
+      "actual_inventory_and_sizes_match": true,
+      "global_seal_matches": true,
+      "symlinks": false
+    }
+  ],
+  "output_total_files": 87,
+  "output_total_bytes": 618145779,
+  "legacy_identity": [
+    {
+      "sequence_id": "BY2",
+      "old14_file_hash_size_declarations_match": true
+    },
+    {
+      "sequence_id": "BY2H",
+      "old14_file_hash_size_declarations_match": true
+    },
+    {
+      "sequence_id": "BY2O",
+      "old14_file_hash_size_declarations_match": true
+    }
+  ],
+  "policy_input_support": [
+    {
+      "sequence_id": "BY2",
+      "imu_segments_sealed_hash_size_equal": true,
+      "numeric_time_support_equal": true,
+      "only_added_file": [
+        "NED_VELOCITY_SOURCE_EVENTS.csv"
+      ],
+      "no_missing_old_files": true
+    },
+    {
+      "sequence_id": "BY2H",
+      "imu_segments_sealed_hash_size_equal": true,
+      "numeric_time_support_equal": true,
+      "only_added_file": [
+        "NED_VELOCITY_SOURCE_EVENTS.csv"
+      ],
+      "no_missing_old_files": true
+    },
+    {
+      "sequence_id": "BY2O",
+      "imu_segments_sealed_hash_size_equal": true,
+      "numeric_time_support_equal": true,
+      "only_added_file": [
+        "NED_VELOCITY_SOURCE_EVENTS.csv"
+      ],
+      "no_missing_old_files": true
+    }
+  ],
+  "reported_causal_results": [
+    {
+      "sequence_id": "BY2",
+      "blocks": 274,
+      "endpoints": 548,
+      "priors": 273,
+      "attempts": 1369,
+      "selected": 1369,
+      "accepted": 1369,
+      "reasons": {
+        "accept_ned_horizontal_2d": 1369
+      },
+      "generations": [
+        2
+      ],
+      "maximum_selected_age_s": 0.014942645659999698,
+      "accepted_source_after_state_rows": 0,
+      "accepted_repeated_index_rows": 0,
+      "accepted_csv_ledger_exact_match": true
+    },
+    {
+      "sequence_id": "BY2H",
+      "blocks": 270,
+      "endpoints": 540,
+      "priors": 269,
+      "attempts": 1349,
+      "selected": 1348,
+      "accepted": 1348,
+      "reasons": {
+        "accept_ned_horizontal_2d": 1348,
+        "no_eligible_source": 1
+      },
+      "generations": [
+        2
+      ],
+      "maximum_selected_age_s": 0.010937691050003195,
+      "accepted_source_after_state_rows": 0,
+      "accepted_repeated_index_rows": 0,
+      "accepted_csv_ledger_exact_match": true
+    },
+    {
+      "sequence_id": "BY2O",
+      "blocks": 377,
+      "endpoints": 754,
+      "priors": 376,
+      "attempts": 1884,
+      "selected": 1881,
+      "accepted": 1881,
+      "reasons": {
+        "accept_ned_horizontal_2d": 1881,
+        "no_eligible_source": 3
+      },
+      "generations": [
+        2
+      ],
+      "maximum_selected_age_s": 0.05884146727021289,
+      "accepted_source_after_state_rows": 0,
+      "accepted_repeated_index_rows": 0,
+      "accepted_csv_ledger_exact_match": true
+    }
+  ],
+  "reported_totals": {
+    "blocks": 921,
+    "endpoints": 1842,
+    "priors": 918,
+    "attempts": 4602,
+    "selected": 4598,
+    "accepted": 4598,
+    "no_eligible_source": 4,
+    "accepted_future_source_rows": 0,
+    "accepted_repeated_index_rows": 0
+  },
+  "forbidden_or_out_of_scope_calls": {
+    "native_retries": 0,
+    "evaluators": 0,
+    "phase_information": 0,
+    "phase_fusion": 0,
+    "reference_access": 0,
+    "original_raw_access": 0,
+    "old_phase_model_inputs": 0
+  },
+  "limits": [
+    "No scientific provider or old/new large OUT payload was opened or rehashed by the reviewer. New output inventories/stat sizes and registered seal hash declarations were checked.",
+    "Legacy byte identity and causal IMU-segment identity compare sealed hash/size declarations; old payloads were not reopened.",
+    "Parent trace intentionally does not follow Git/tracer-setup children. Six independent inner -f traces observe actual native processes. This is not an all-syscall proof.",
+    "IMU has two native opens per process: existing timestamp prescan and loader. This is not a second native invocation.",
+    "Causal decisions, row joins and age/count summaries above are the completed registered reader's reports; no new scientific numerical readout was run.",
+    "All observed selected rows were accepted. The four negative rows were no eligible source; rejection-after-consumption semantics were not exercised by these real windows.",
+    "Reported-time causality is not actual arrival qualification, SDK-to-NED construction causality, physical independence, calibrated error/cross bounds, heading or navigation gain."
+  ]
+}

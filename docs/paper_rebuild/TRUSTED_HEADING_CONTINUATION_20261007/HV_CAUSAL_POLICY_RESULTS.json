@@ -1,0 +1,80 @@
+{
+  "status": "COMPLETE_CAUSAL_NED_HV_POLICY_NOT_NAVIGATION_GAIN",
+  "registration_commit": "531b30860b7c1389e22255ccd1339cb246983049",
+  "local_registration_commit": "cc7ae040a3693ccde80a4c7fa72f4d0fc35889f0",
+  "rows": [
+    {
+      "sequence_id": "BY2",
+      "legacy_accepted": 1369,
+      "legacy_reported_future": 553,
+      "causal_attempts": 1369,
+      "causal_accepted": 1369,
+      "accepted_change": 0,
+      "causal_reported_future": 0,
+      "causal_repeated_index": 0,
+      "no_eligible_calls": 0,
+      "max_selected_trigger_age_s": 0.014942645659999698,
+      "prior_rows": 273,
+      "source_blocks": 274
+    },
+    {
+      "sequence_id": "BY2H",
+      "legacy_accepted": 1348,
+      "legacy_reported_future": 540,
+      "causal_attempts": 1349,
+      "causal_accepted": 1348,
+      "accepted_change": 0,
+      "causal_reported_future": 0,
+      "causal_repeated_index": 0,
+      "no_eligible_calls": 1,
+      "max_selected_trigger_age_s": 0.010937691050003195,
+      "prior_rows": 269,
+      "source_blocks": 270
+    },
+    {
+      "sequence_id": "BY2O",
+      "legacy_accepted": 1883,
+      "legacy_reported_future": 787,
+      "causal_attempts": 1884,
+      "causal_accepted": 1881,
+      "accepted_change": -2,
+      "causal_reported_future": 0,
+      "causal_repeated_index": 0,
+      "no_eligible_calls": 3,
+      "max_selected_trigger_age_s": 0.05884146727021289,
+      "prior_rows": 376,
+      "source_blocks": 377
+    }
+  ],
+  "legacy_identities": [
+    {
+      "sequence_id": "BY2",
+      "files": 14,
+      "status": "PASS_LEGACY_ALL_FILE_BYTE_IDENTITY"
+    },
+    {
+      "sequence_id": "BY2H",
+      "files": 14,
+      "status": "PASS_LEGACY_ALL_FILE_BYTE_IDENTITY"
+    },
+    {
+      "sequence_id": "BY2O",
+      "files": 14,
+      "status": "PASS_LEGACY_ALL_FILE_BYTE_IDENTITY"
+    }
+  ],
+  "new_native_calls": 6,
+  "evaluator_calls": 0,
+  "phase_information_calls": 0,
+  "automatic_retries": 0,
+  "full_source_blocks": 921,
+  "full_source_endpoints": 1842,
+  "covered_priors": 918,
+  "uncovered_terminal_blocks": 3,
+  "phase_model_prior_intersection": 857,
+  "physical_actual_arrival_qualified": false,
+  "navigation_accuracy_gain_evaluated": false,
+  "phase_admitted": false,
+  "seal_sha256": "eec6608b1924a75b8f0e8e20295ef1e04e878e6abe5327108173c4bb9567f1f1",
+  "scope": "Reported-source-time causal NED-HV use on original three windows; same-generation timestamp once-attempt; unknown physical arrival/clock/frame/error/cross remain."
+}

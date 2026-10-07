@@ -1,6 +1,6 @@
 # Independent HV causal-policy replay runner review
 
-Status: **PASS_STATIC_RUNNER_DELTA; REAL_PLAN_AND_LOCAL_COMPLETION_PENDING**. Static review only, no source/provider/native output payload or scientific execution. This document concerns the new runner; production-policy mathematics and local qualifications have separate owners.
+Status: **PASS_FINAL_PLAN_AND_RUNNER; FREEZE_READY_FOR_ROOT_REGISTRATION**. Static review only, no source/provider/native output payload or scientific execution. This document concerns the new runner; production-policy mathematics and local qualifications have separate owners.
 
 Read the 138-line first draft `scripts/paper_rebuild/carrier_phase/hv_causal_policy_replay.py`, the reused registration/launch/seal/manifest/structure helpers, and the final producer's CSV writer and selector. The intended legacy3-before-causal3 order is implemented. It appends exactly one policy line to three copied configs and requires derived size/SHA pins. All existing new-legacy output names, sizes and hashes must match the old TELEMETRY seal; no old payload is read. Causal output keeps NAV time support and input IMU segment identity, and the reused structural helper retains fixed source/lifecycle/prior identity without matrix algebra.
 
@@ -30,3 +30,16 @@ The causal CSV parser now matches the final producer. It checks finite trigger/s
 The producer's manifest contains the tolerance, old update count and new opt-in counters used by the parser. The generic producer may have different trigger and state clocks, while the registered real exact-event test requires their equality. The real policy still applies the unchanged tolerance to trigger-age only; no new state-age threshold is introduced.
 
 No local running trace, scientific input or native result was inspected for this delta review. No import, build, test or numerical execution was performed by the reviewer. Final real-plan registration remains the root's next gate after local completion.
+
+
+## Final plan and header-delta review
+
+The final functional runner SHA is `1651d583e928ee682feecadf45096b89e89b57169624ab747ff56dd8dc9fbf07`. Reviewed the newly explicit schema, common environment/telemetry flag, fixed LEGACY3 then CAUSAL3 call order, exact loader sequence and six-completed-call gates. They preserve the previous reviewed implementation. **No remaining boundary blocker was found; root can re-pin this runner and promote the plan from DRAFT to READY for registration.** Those two nonfunctional finalization changes do not need a new scientific run or expanded review.
+
+Read and hashed only the four small metadata files in `HV_CAUSAL_POLICY_REAL_PLAN.json`; every pin matched. The local COMPLETE records six first-pass synthetic cases, zero failures, registration `cc7ae040a3693ccde80a4c7fa72f4d0fc35889f0`, and carries 70 source pins for production/local provenance. Its candidate binary path/hash/size exactly match the real plan: SHA `b5bdf4451b94e45dc91df3a7bcd37da7338b2dc712d58b4160999a78979747ac`, 1,244,168 bytes. This review consumes the local receipt; the independent local trace audit has a separate owner and is not claimed here.
+
+The real runner's three Python import/source pins cover the active adapter and the two reused helpers. Production identity is transitively bound by the pinned successful local COMPLETE and the frozen binary, not inferred from whatever C++ files later happen to be in the checkout. Both old helper hashes match. The draft's old runner hash needs only the declared update to the final SHA above.
+
+The 18 provider declarations have 18 unique resolved paths and match the exact prepared three-window provider/carrier `(path,sha,size)` closure, totaling 120,200,614 bytes per hash pass. No provider bytes were opened during review. Read the three small original config texts: original hashes match, and independently deriving the sole appended `go2_velocity_prior_time_policy: causal_unique_latest` line produces all three registered expected hashes and sizes. No derived config was written by the reviewer. The fresh real stage was absent.
+
+The plan declares the actual two new-ledger field passes and output seal pass, retained full outputs, fixed 921/1842 and 918-END support, zero evaluation/reference/phase information, and inherited old-seal identity targets without old payload rereading. No new mathematical or physical-information inference is introduced. This is final static readiness, not a claim that the six real calls have executed or passed.

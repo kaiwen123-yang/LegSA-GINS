@@ -26,7 +26,7 @@
       "stage": "<SCRATCH_ROOT>/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_SAVED_MODEL_ATTEMPT01",
       "remaining": [
         "Source-supported phase endpoint and state-phase correlation model with total effective error qualification",
-        "Separate causal-source policy qualification",
+        "Physical availability and upstream SDK-to-NED source causality remain unqualified; reported-time selector qualification completed separately",
         "Only after explained admissible information gain: matched-backend fusion and recovery validation"
       ],
       "local_qualification": {
@@ -159,5 +159,20 @@
   "main_merge_authorized": false,
   "completion_proven": false,
   "latest_decision": "CONTINUATION_DECISION.md",
-  "latest_checkpoint": "One real information readout completed: 857 blocks, all four fixed UNKNOWN-cross Young objectives have no improvement; 61 missing-model and 3 terminal-uncovered blocks retained. No phase fusion. Next source/correlation qualification, causal use policy and independently referenced acquisition."
+  "latest_checkpoint": "Opt-in causal NED-HV passed six synthetic modes and six real replay calls: default legacy 42 files byte-identical, causal source future/reuse zero, accepted updates4600->4598,921 blocks and 918 prior coverage times retained; prior matrix values are policy-dependent. Physical error/cross/arrival qualification and stable trusted-heading/nav gain remain unproven.",
+  "causal_ned_hv_policy": {
+    "status": "REAL_SOURCE_TIME_POLICY_QUALIFIED_NOT_PHYSICAL_ARRIVAL_OR_NAV_GAIN",
+    "registration_commit": "531b30860b7c1389e22255ccd1339cb246983049",
+    "native_calls": 6,
+    "legacy_all_file_identity_passes": 42,
+    "legacy_accepted": 4600,
+    "legacy_source_after_state": 1880,
+    "causal_accepted": 4598,
+    "causal_source_after_trigger_or_state": 0,
+    "causal_repeated_source_index": 0,
+    "covered_priors": 918,
+    "source_blocks": 921,
+    "actual_arrival_qualified": false,
+    "evidence": "HV_CAUSAL_POLICY_RESULTS.md"
+  }
 }
