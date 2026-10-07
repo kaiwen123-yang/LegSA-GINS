@@ -1,6 +1,6 @@
 {
   "schema": "trusted_heading.continuation_goal_progress.v1",
-  "goal_status": "ACTIVE",
+  "goal_status": "BLOCKED",
   "formal_version": "V3/main@077fb725612730d743ff1dd3ba698c43499b4fcb",
   "requirements": [
     {
@@ -176,7 +176,7 @@
   "main_merge_authorized": false,
   "completion_proven": false,
   "latest_decision": "CONTINUATION_DECISION.md",
-  "latest_checkpoint": "Source trace separates direct V3 R5 heading, legacy A1 inside HV, and BY2 GNSS/SDK-derived calibration parameters. Moving END phase before GNSS does not remove historical/source dependence. Derived sharp fixed-scalar conditional cross-norm frontier; no physical gamma/moments supplied, no numeric scans or fusion. Added clock/arrival/dependency/three-state acquisition contract; concrete collector/source/reference information remains required.",
+  "latest_checkpoint": "Goal tool returned BLOCKED after repeated external source/physical qualification gap. Completed fixed-family diagnostics and source derivation retained; targeted existing-material review found no evidence closing collector/raw-FK/arrival/install/reference needs. No new numerical work.",
   "causal_ned_hv_policy": {
     "status": "REAL_SOURCE_TIME_POLICY_QUALIFIED_NOT_PHYSICAL_ARRIVAL_OR_NAV_GAIN",
     "registration_commit": "531b30860b7c1389e22255ccd1339cb246983049",
@@ -261,5 +261,35 @@
       "Source-supported effective-error and cross model including shared calibration, bias, timing and installation",
       "Independent direction reference and measured sample/arrival clock mapping"
     ]
+  },
+  "blocked_audit": {
+    "status": "BLOCKED_EXTERNAL_SOURCE_AND_PHYSICAL_EVIDENCE_REQUIRED",
+    "previous_goal_turn_classification": "PROGRESS_SOURCE_TRACE_AND_CONDITIONAL_PROOF",
+    "same_condition_seen_in_consecutive_goal_turns": 3,
+    "recurrence_evidence": [
+      "31c786b: new dependency-prior readout retained physical arrival/cross gaps",
+      "0d493f6: source trace and fixed-target proof showed black-box outputs cannot recover missing cross",
+      "Current read-only material review: no qualifying collector/time/reference evidence found in bounded search"
+    ],
+    "current_checks": [
+      "Verified current HEAD and preserved unrelated worktree changes",
+      "Searched tracked path inventory and bounded input-generation/config text; filename search in project excluding raw/stage payloads",
+      "Read CLEAN5_SENSOR_CALIBRATION_RECORD and historical Fixposition extrinsics CSV",
+      "Read BY2_FK_PROXY_CONTRACT and HARTLEY_STATE_AND_FRAME_CONTRACT: raw_joint_encoder_urdf_fk=false, same-message timestamp and software frame semantics, not a physical generation/time/installation certificate"
+    ],
+    "search_scope_limit": "Targeted existing-material review, not a proof that no such file exists anywhere on the computer.",
+    "waiting_on_live_process": false,
+    "missing": [
+      "Actual collector/firmware/IDL and raw joint/IMU/GNSS source capability",
+      "Measured sample-to-arrival clock mapping and installation/error evidence",
+      "Available independent direction reference and calibration/synchronization conditions"
+    ],
+    "not_sufficient_substitutes": [
+      "Assumed zero cross or noise/epsilon/window tuning",
+      "Moving END update order alone",
+      "Generic logging framework or repeated already completed replay",
+      "Tutorial extrinsics or SDK field names treated as physical calibration"
+    ],
+    "resume_condition": "New concrete source/equipment information or new qualified raw/reference records allow a source-supported independent or joint-raw model."
   }
 }
