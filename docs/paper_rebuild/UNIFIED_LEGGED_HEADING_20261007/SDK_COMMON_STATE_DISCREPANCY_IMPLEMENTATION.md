@@ -1,5 +1,7 @@
 # SDK持续速度差异进入共同状态：实现与集中核对
 
+后续状态：本文封存实现与数学检查；其后2＋2 NMB1匹配实测已完成，水平收益判据失败，见SDK_JOINT_NMB1_ATTRIBUTION.md。实现正确性与实测效果分开报告。
+
 已按`SDK_COMMON_STATE_DISCREPANCY_DESIGN.md`实现唯一研究模式`go2_body_velocity_discrepancy_mode: joint_constant`；默认off保持原路径。开启要求research_experiment、support-pose开启、body-FRD SDK水平速度。没有修改V3输入、IMU安装角/比例/时钟、原SDK替代时序、足点XYZ模型、工作sigma、NIS概率或已有撤销窗口。本报告只说明实现与合成数值核对，尚不代表实测导航收益。
 
 ## 实际统一状态

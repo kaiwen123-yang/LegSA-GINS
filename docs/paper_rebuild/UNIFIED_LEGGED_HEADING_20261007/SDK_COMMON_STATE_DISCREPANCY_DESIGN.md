@@ -1,6 +1,6 @@
 # SDK XY 来源差异的共同状态模型：最小设计
 
-2026-10-07；依据本地 ea5ad99 诊断封存结果。**状态：实施前冻结设计。其后实现与必要合成检查已完成，匹配实测进行中，尚未正式采用；当前状态见 SDK_COMMON_STATE_DISCREPANCY_IMPLEMENTATION.md 与 PROGRESS.json。** 本文不改 C++、不新增测试或 native，不把名义 frame 诊断转为默认配置。默认继续沿用历史输入合同（含原 IMU 安装旋转）、原初始化、XYZ 足因子、噪声、杆臂、baseline、SDK 区间替代和 carrier provider。
+2026-10-07；依据本地 ea5ad99 诊断封存结果。**状态：实施前冻结设计。其后实现与必要合成检查已完成，2＋2匹配实测水平收益判据失败，未正式采用；当前结果见 SDK_JOINT_NMB1_ATTRIBUTION.md 与 PROGRESS.json。** 本文不改 C++、不新增测试或 native，不把名义 frame 诊断转为默认配置。默认继续沿用历史输入合同（含原 IMU 安装旋转）、原初始化、XYZ 足因子、噪声、杆臂、baseline、SDK 区间替代和 carrier provider。
 
 ## 1. 要回答的问题及本次模型选择
 
