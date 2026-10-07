@@ -1,0 +1,48 @@
+{
+  "status": "PASSED_28_SYNTHETIC_CASES_ONLY",
+  "registration_commit": "66dc3fb518ab012cd1e13763d3829e97ec2d66d8",
+  "pytest_processes": 1,
+  "items": 28,
+  "failures": 0,
+  "automatic_retries": 0,
+  "pytest_reported_s": 0.68,
+  "wrapper_elapsed_s": 0.9658097139999882,
+  "warnings": {
+    "count": 4,
+    "kind": "record_property incompatible with configured junit xunit2",
+    "first_stdout_retained": true,
+    "rerun_to_suppress_warnings": false
+  },
+  "source_sha256": "e8b683d6992ed56a988e9db0651bc562d13ac49ba079e020077cc4d9dbb5cdcf",
+  "test_sha256": "e7a026d7bd926c52ce1d200c9ead3b21bfa33ce4e9d47338fa8b9c3cb889df34",
+  "stage": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_PHASE_ADMISSION_LOCAL_ATTEMPT01",
+  "recorded_test_properties": {
+    "test_01_clean_moving_geometry_independent_oracle": {
+      "clean_max_residual_m": "2.220446049250313e-15"
+    },
+    "test_02_finite_latent_second_moment_and_markov_bound": {
+      "exact_support_points": "6"
+    },
+    "test_14_detectable_target_cycle_step_is_injected_in_sd": {
+      "target_projected_statistic": "510458.1633635206"
+    },
+    "test_17_exact_physical_phase_pose_alias_is_not_projectedly_detectable": {
+      "alias_projected_template_norm": "0.0"
+    }
+  },
+  "artifact_sha256": {
+    "EXIT.json": "575aa14ec0528488d0e9887c276a9a645593d561937a33e15477a1006fe13e18",
+    "INVOCATION.json": "c70d260e9e4911820472b80a78626693ff016ae36bc70acbd6859e1ed829c27c",
+    "junit.xml": "57bcf50c162dc7412df4ab0442ea40db248c2e884f805baef764e044064ad925",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout.log": "f9affb4e44be8c2227cf0d1cb0c9b9077ddc9fbd18fa15fffbd41769b020d8e4"
+  },
+  "actual_real_data_reads": 0,
+  "actual_native_calls": 0,
+  "actual_evaluator_calls": 0,
+  "actual_CILS_calls": 0,
+  "physical_error_bounds_qualified": false,
+  "navigation_admitted": false,
+  "phase_fault_absence_proven": false,
+  "interpretation": "Local source-qualified model consistency and single-ledger lifecycle; passing faults and clean rejection counterexamples intentionally retained. No empirical fault detection rate or heading availability established."
+}

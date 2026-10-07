@@ -29,7 +29,26 @@
         "source-backed error bounds and cross structure",
         "availability and physical timing qualification",
         "explainable state information increment before navigation"
-      ]
+      ],
+      "local_qualification": {
+        "information": {
+          "registration_commit": "0cd977273ddd990332bfaf0fe9e9b66d54afdb70",
+          "tests": 12,
+          "passed": 12,
+          "first_attempt": true
+        },
+        "admission_revocation": {
+          "registration_commit": "66dc3fb518ab012cd1e13763d3829e97ec2d66d8",
+          "tests": 28,
+          "passed": 28,
+          "first_attempt": true,
+          "warnings": 4
+        },
+        "evidence": "ARC_PHASE_LOCAL_QUALIFICATION_RESULTS.md",
+        "native_joint_prior": "IMPLEMENTATION_IN_PROGRESS_NOT_BUILT_OR_RUN",
+        "native_proposal_max_calls": 6,
+        "native_proposal_calls_executed": 0
+      }
     },
     {
       "id": "R3",
@@ -43,7 +62,15 @@
       "unresolved": 0,
       "exact_old_output_identity": true,
       "evidence": "foot_information/RESULTS.md",
-      "physical_input_qualification": "PENDING_RAW_JOINT_TIME_INSTALLATION_AND_ERROR_PROVENANCE"
+      "physical_input_qualification": "PENDING_RAW_JOINT_TIME_INSTALLATION_AND_ERROR_PROVENANCE",
+      "unknown_cross_extension": {
+        "registration_commit": "f9ec34d75401a05f5466fdd4a8b92377f5fd770e",
+        "events": 2510,
+        "strict_working_witnesses": 2510,
+        "evidence": "FOOT_UNKNOWN_CROSS_RESULTS.md",
+        "scope": "Conditional unrestricted-cross fixed-linear minimax working class; numerical PSD qualification, physical marginals and actual cross unqualified"
+      },
+      "sdk_semantics_evidence": "GO2_INTERFACE_SEMANTICS_UPDATE.md"
     },
     {
       "id": "R4",
@@ -55,12 +82,14 @@
       "requirement": "Prepare independently referenced rotation/support-change/occlusion acquisition and metrics; January data not unseen holdout",
       "status": "ACQUISITION_PLAN_PREPARED_EQUIPMENT_INFORMATION_PENDING",
       "evidence": "ACQUISITION_PLAN.md",
-      "field_execution": false
+      "field_execution": false,
+      "new_source": "User-provided high-level Go2 SDK interface excerpt with SHA; firmware/collector/version still unknown"
     }
   ],
   "reference_boundary": "shared commercial GNSS reference; independent truth/real integer correctness/risk calibration not established",
   "local_registration_only": true,
   "main_merge_authorized": false,
   "completion_proven": false,
-  "latest_decision": "CONTINUATION_DECISION.md"
+  "latest_decision": "CONTINUATION_DECISION.md",
+  "latest_checkpoint": "Go2 semantics integrated; 12+28 synthetic phase cases passed; unrestricted-cross foot countermodel independently reviewed; ARC native diagnostics being implemented; no new admissible navigation gain"
 }
