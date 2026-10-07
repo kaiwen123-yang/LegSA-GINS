@@ -1,0 +1,9 @@
+arm,provider_class,fixed_provider_rows,diagnostic_rows,present,valid,attempted,accepted,rejected,accepted_unique_measurement_epochs,reason_histogram
+LEGACY,ROLLING_INVALID,1600,1599,1599.0,0.0,0.0,0.0,0.0,0,"{""provider_invalid"": 1599}"
+LEGACY,FULL_VALID,168,168,168.0,168.0,168.0,142.0,26.0,142,"{""ACCEPT"": 142, ""NIS_3DOF_REJECT"": 26}"
+LEGACY,PARTIAL_VALID,117,117,117.0,117.0,117.0,105.0,12.0,105,"{""ACCEPT"": 105, ""NIS_3DOF_REJECT"": 12}"
+LEGACY,NO_PROVIDER_SLOT,0,1884,0.0,0.0,0.0,0.0,0.0,0,"{""missing_exact_time"": 1884}"
+VECTOR,ROLLING_INVALID,1600,1599,1599.0,0.0,0.0,0.0,0.0,0,"{""provider_invalid"": 1599}"
+VECTOR,FULL_VALID,168,168,168.0,168.0,168.0,142.0,26.0,142,"{""ACCEPT"": 142, ""NIS_3DOF_REJECT"": 26}"
+VECTOR,PARTIAL_VALID,117,117,117.0,117.0,117.0,106.0,11.0,106,"{""ACCEPT"": 106, ""NIS_3DOF_REJECT"": 11}"
+VECTOR,NO_PROVIDER_SLOT,0,1884,0.0,0.0,0.0,0.0,0.0,0,"{""missing_exact_time"": 1884}"

@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-07",
+  "source": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CONTINUOUS_HEADING_20261007/PARTIAL_FULL_WINDOW_01/BY2O/PROVIDER_DETAILS.jsonl.gz",
+  "source_sha256": "1d83cff2d00bda947340e9c788955631e5d8d3257981a9eb0bbf0ade8a901015",
+  "filter": "policy == 'rolling' and kind == 'PARTIAL_GLS_LIKELIHOOD'",
+  "count": 117,
+  "phase_rank_counts": {
+    "2": 44,
+    "1": 68,
+    "3": 5
+  },
+  "combined_baseline_rank_counts": {
+    "3": 117
+  },
+  "directed_component_count_counts": {
+    "2": 41,
+    "1": 76
+  },
+  "export_additive_floor_m2": 8.396017632871156e-05,
+  "weakest_axis_raw_variance_m2": {
+    "min": 0.062118746094176065,
+    "median": 0.5296930720207393,
+    "max": 1.414860890984362
+  },
+  "information_ratio_after_floor_median_strong_middle_weak": [
+    0.396749584336634,
+    0.9995228881596109,
+    0.9998415179005015
+  ],
+  "raw_baseline_norm_m": {
+    "min": 0.16119220836271628,
+    "median": 0.48411529994090224,
+    "max": 1.38948360674514
+  },
+  "native_or_evaluator_runs": 0,
+  "scope": "Saved provider likelihood audit; phase rank is not combined code-plus-phase rank. Domain component count is not posterior mode count."
+}
