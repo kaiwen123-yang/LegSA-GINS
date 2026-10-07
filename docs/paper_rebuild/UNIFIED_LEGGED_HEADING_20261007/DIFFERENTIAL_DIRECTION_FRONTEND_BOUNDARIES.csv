@@ -1,0 +1,3 @@
+window,carrier_slot_rows,carrier_valid,partial_domain_records,partial_unique_times,raw_single_nonfull,unsigned_single_nonfull,directed_single_nonfull,actual_partial_gaussian_information_created,absolute_anchor_added,exact_raw_qualified_slots,exact_unsigned_qualified_slots,exact_directed_qualified_slots,rolling_common_raw_qualified_slots,rolling_common_unsigned_qualified_slots,rolling_common_directed_qualified_slots
+FULL,1756,227,32,32,5,16,16,False,False,0,0,0,0,0,0
+GAP,815,0,0,0,0,0,0,False,False,0,0,0,0,0,0
