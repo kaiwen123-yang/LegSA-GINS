@@ -42,6 +42,9 @@ struct SourceMetadata {
   Vec3 std_xyz = makeVec3(1.0, 1.0, 1.0);
   std::size_t active_dimensions = 3;
   double yaw_std_rad = D2R;
+  // A vector direction with full covariance need not define a scalar yaw uncertainty.
+  // Default true preserves all existing scalar-source policy semantics.
+  bool scalar_yaw_std_available = true;
   double residual_norm = 0.0;
   double time_diff_sec = 0.0;
   std::size_t sat_count = 0;

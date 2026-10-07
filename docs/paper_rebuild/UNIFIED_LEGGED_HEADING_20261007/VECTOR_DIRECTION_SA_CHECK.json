@@ -1,0 +1,163 @@
+{
+  "status": "PASS",
+  "synthetic_only": true,
+  "checks": 1,
+  "native_solver_runs": 0,
+  "reference_reads": 0,
+  "scope": "Actual SourceAwarePolicy and external-carrier vector model; no navigation gain claim",
+  "evidence": {
+    "status": "PASS",
+    "synthetic_only": true,
+    "checks": 1,
+    "native_solver_runs": 0,
+    "old_proxy_sigma_deg": [
+      1.6370222718023784,
+      62.563766371875815
+    ],
+    "old_proxy_lsim_scales": [
+      1,
+      6
+    ],
+    "vector_lsim_scales": [
+      1,
+      1
+    ],
+    "nonzero_residual_norm_m": 0.010862780491200302,
+    "predicted_down_m": -0.08519238870918013,
+    "covariance_equivariance_max_abs": 1.4141751888411155e-17,
+    "information_equivariance_max_abs": 3.342393029015511e-11,
+    "nis_coordinate_difference": 1.1934897514720433e-15,
+    "NIS": 0.1437606857204157,
+    "scalar_N6B_boundary_scales": [
+      1,
+      2,
+      2,
+      6
+    ],
+    "scalar_legacy_3_4deg_scales": [
+      1,
+      8
+    ],
+    "vector_invalid_rejected": true,
+    "vector_stale_scale": 2.5,
+    "vector_quality_scale": 1.5,
+    "vector_antenna_scale": 2,
+    "vector_covariance_missing_scale": 1.5,
+    "vector_OIM_scale": 1.0027,
+    "OIM_NIS": 9.719999999999999,
+    "R": [
+      [
+        0.0001000000000000032,
+        3.74049749507499e-18,
+        2.4801124695605914e-18
+      ],
+      [
+        1.0408340855860843e-17,
+        0.1460617820697923,
+        0.04505846937692382
+      ],
+      [
+        -8.673617379884035e-19,
+        0.0450584693769238,
+        0.014338217930207665
+      ]
+    ],
+    "R_rotated": [
+      [
+        0.1460617820697923,
+        -5.204170427930421e-18,
+        -0.04505846937692382
+      ],
+      [
+        -5.6970679323019945e-18,
+        9.999999999999977e-05,
+        6.601692921353764e-19
+      ],
+      [
+        -0.04505846937692381,
+        2.168404344971009e-18,
+        0.014338217930207661
+      ]
+    ],
+    "attitude_information": [
+      [
+        256.8734919320452,
+        107.32251697063525,
+        33.18959133605103
+      ],
+      [
+        107.32251697063171,
+        117.42577654376512,
+        -249.5608809839792
+      ],
+      [
+        33.189591336063856,
+        -249.5608809839734,
+        960.3127958131822
+      ]
+    ],
+    "attitude_information_rotated": [
+      [
+        117.42577654376751,
+        -107.32251697063455,
+        249.56088098398325
+      ],
+      [
+        -107.32251697063344,
+        256.87349193204824,
+        33.18959133606242
+      ],
+      [
+        249.56088098398502,
+        33.1895913360585,
+        960.3127958132156
+      ]
+    ],
+    "vector_metadata_summary": "valid=true;std=(0.01/0.38218/0.119742);active_dimensions=3;scalar_yaw_std_available=false;yaw_std_rad=NOT_APPLICABLE;sat_count=0;provider_status=external_carrier_experimental;quality_flag=nominal;time_diff_sec=0;covariance_available=true;go2_readiness_metadata_available=false;go2_motion_state=UNKNOWN;go2_contact_label=;go2_readiness_score=1;go2_readiness_flag=true"
+  },
+  "covariance_eigenvalues_m2": [
+    0.0001000000000000032,
+    0.0004000000000000045,
+    0.16
+  ],
+  "attitude_information_eigenvalues_rad_minus2": [
+    1.1625813159388265e-12,
+    305.93406417875485,
+    1028.6780001102366
+  ],
+  "old_proxy_information_divisor_after_rotation": 6,
+  "source": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/tests/paper_rebuild/native_vector_direction_sa_harness.cpp",
+    "sha256": "dbf3a430db63e0a9a125bab8a3d39f25ca27da68dd5a9b8e6aa2975c13c82291"
+  },
+  "check_script": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/scripts/paper_rebuild/unified_legged_heading_20261007/vector_direction_sa_check.py",
+    "sha256": "a28a58590a9b0af3449305a8a2b16f89f27aa81a7a8f808df570957cbf97e997"
+  },
+  "library": {
+    "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/UNIFIED_LEGGED_HEADING_20261007/VECTOR_DIRECTION_SA_BUILD/liblegsa_v23_port_core.a",
+    "sha256": "46c099e034f94cda70bcd8bf7251135177ef17f3b8e792de6b7f1c9ef04ed832"
+  },
+  "harness": {
+    "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/UNIFIED_LEGGED_HEADING_20261007/VECTOR_DIRECTION_SA_CHECK_01/vector_direction_sa_harness",
+    "sha256": "2dea690518e7c14e3299b7b3ec6a4da24892a4de3cfc45f231e08c85b8250485"
+  },
+  "navigation_binary": {
+    "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/UNIFIED_LEGGED_HEADING_20261007/VECTOR_DIRECTION_SA_BUILD/legsa_v23_port_core_demo",
+    "sha256": "317a66779dddd96c9f284e87dbcea3e874833d3a743953dd47b5a90582f44912"
+  },
+  "production_sources": [
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/measurement_source.hpp",
+      "sha256": "ec0446d1240085856fe9508f3731779689b792be4da5334086035b34f40fcc29"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/cpp/legsa_v23_port_core/src/source_aware/source_aware_policy.cpp",
+      "sha256": "7a76abdbf712f2b29e8127c4980219a0ac2ea80eb0814e6ad455dc8db502222a"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp",
+      "sha256": "529033b43032ad2cd56c771629027fe5eaa23672caaeec8a2547d0eeae4168db"
+    }
+  ]
+}

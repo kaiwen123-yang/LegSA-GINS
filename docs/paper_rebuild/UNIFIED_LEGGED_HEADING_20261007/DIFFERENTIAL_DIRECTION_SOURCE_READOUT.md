@@ -93,11 +93,11 @@ Sconditional = W + Hrel Qwhite Hrel^T.
 
 因此，按当前约 100 ms 窗和原 1 cm 工作噪声，把这条差分简单另接一次，尚没有足够证据预计稳定改进导航。该结论没有否认更长时间依赖链中的潜在用途，也没有授权延长区间或调小噪声。
 
-## 5. 实际载波／部分域边界
+## 5. 实际 native 供给与配套旧部分域的版本边界
 
-直接读取原完整前端 EPOCHS、实际 CARRIER provider 和保存的 PARTIAL/MOTION/PROTOCOL 表，逐槽时间及 valid 与 provider 一致：
+本次固定输入是原 native 实际使用的 227 点完整方向 CARRIER provider，及 TRANSFER_NMB1_NATIVE_READOUT_01 的配套旧 PARTIAL/MOTION/PROTOCOL；逐槽时间及 valid 与原完整前端 EPOCHS 一致。下表只描述这个版本，不代表后来最终部分质量协议：
 
-| 原供给 | 全窗 | 主空窗 |
+| 实际供给／配套旧协议 | 全窗 | 主空窗 |
 |---|---:|---:|
 | carrier 槽 | 1,756 | 815 |
 | valid carrier | 227 | 0 |
@@ -105,7 +105,7 @@ Sconditional = W + Hrel Qwhite Hrel^T.
 | raw / unsigned / directed 单非整圆域 | 5 / 16 / 16 | 0 / 0 / 0 |
 | 六种原五槽 partial 协议准入 | 全部 0 | 全部 0 |
 
-全窗只有 10 个原 END 区间内部包含 valid carrier 时刻，1 个区间内部包含一个 partial 域记录。时间重叠不等于独立的起点锚，也不等于已准入 partial；没有从这些记录选择“好片段”。当前 227 个 valid 点来自完整候选方向，不能归因于部分整数增量。本次没有将多模态域压成任意 yaw 方差，没有为缺失的 NMB gap carrier 生成高斯 A，更没有用参考作为起点锚。
+全窗只有 10 个原 END 区间内部包含 valid carrier 时刻，1 个区间内部包含一个 partial 域记录。时间重叠不等于独立的起点锚，也不等于已准入 partial；没有从这些记录选择“好片段”。实际 native 使用的 227 个 valid 点来自完整候选方向，不能归因于部分整数增量。后来 TRANSFER_FINAL_PARTIAL_01/NMB1 按子集自身质量得到 8 个新增 partial（共 235 valid）；8 个全部处于新鲜有效 PVT 覆盖中，在原 fallback 下不增加消费，且都在主空窗之外。不能把旧协议的 0 准入写成当前最终前端全为 0；具体 8 条来源和多分量域见 [LSIM 审查 §5](DIRECTION_VECTOR_LSIM_AUDIT.md)。本次封存机器表保持原版本和原数值。本次没有将多模态域压成任意 yaw 方差，没有为缺失的 NMB gap carrier 生成高斯 A，更没有用参考作为起点锚。
 
 保留的机器表可供下一次明确设计查证信息作用方向和依赖；当前结论仍是**条件相对方向的几何资格，不是共同平移可信、部分载波保持成功或导航收益成立**。
 

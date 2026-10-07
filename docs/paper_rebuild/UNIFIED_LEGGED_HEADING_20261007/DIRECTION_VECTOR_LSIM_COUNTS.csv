@@ -1,0 +1,9 @@
+stage,kind,attempted,accepted,rejected,LSIM_1,LSIM_2,LSIM_6,LSIM_other,reason_counts_json
+BY2,FULL,181,174,7,174,0,0,0,"{""nominal"": 163, ""oim_mild_normalized_innovation"": 11}"
+BY2,PARTIAL,142,123,19,0,0,123,0,"{""lsim_dual_yaw_std_extreme"": 108, ""lsim_dual_yaw_std_extreme|oim_mild_normalized_innovation"": 15}"
+BY2H,FULL,345,321,24,321,0,0,0,"{""nominal"": 281, ""oim_mild_normalized_innovation"": 40}"
+BY2H,PARTIAL,83,75,8,0,5,70,0,"{""lsim_dual_yaw_std_extreme"": 62, ""lsim_dual_yaw_std_extreme|oim_mild_normalized_innovation"": 8, ""lsim_dual_yaw_std_high"": 3, ""lsim_dual_yaw_std_high|oim_mild_normalized_innovation"": 2}"
+BY2O,FULL,168,143,25,143,0,0,0,"{""nominal"": 118, ""oim_mild_normalized_innovation"": 25}"
+BY2O,PARTIAL,117,104,13,4,12,88,0,"{""lsim_dual_yaw_std_extreme"": 78, ""lsim_dual_yaw_std_extreme|oim_mild_normalized_innovation"": 10, ""lsim_dual_yaw_std_high"": 9, ""lsim_dual_yaw_std_high|oim_mild_normalized_innovation"": 3, ""nominal"": 4}"
+BY2O_FOOT,FULL,168,142,26,142,0,0,0,"{""nominal"": 116, ""oim_mild_normalized_innovation"": 26}"
+BY2O_FOOT,PARTIAL,117,105,12,4,12,89,0,"{""lsim_dual_yaw_std_extreme"": 81, ""lsim_dual_yaw_std_extreme|oim_mild_normalized_innovation"": 8, ""lsim_dual_yaw_std_high"": 9, ""lsim_dual_yaw_std_high|oim_mild_normalized_innovation"": 3, ""nominal"": 4}"

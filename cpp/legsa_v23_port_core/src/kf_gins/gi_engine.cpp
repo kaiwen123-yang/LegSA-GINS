@@ -1491,7 +1491,10 @@ void GIEngine::applyBaseline3dUpdate(const GnssData& gnss, bool basic,
     metadata.valid = true;
     metadata.baseline_length_m = norm(row.observed_m);
     metadata.rel_acc_m = std::sqrt(model.R(0, 0));
-    metadata.yaw_std_rad = metadata.rel_acc_m / options_.baseline3d_length_m;
+    // External direction uncertainty lives in full R, not sqrt(R_NN)/length:
+    // that coordinate-dependent proxy cannot qualify a scalar yaw measurement.
+    metadata.scalar_yaw_std_available = !external;
+    if (!external) metadata.yaw_std_rad = metadata.rel_acc_m / options_.baseline3d_length_m;
     metadata.std_xyz = external ? makeVec3(std::sqrt(model.R(0, 0)), std::sqrt(model.R(1, 1)), std::sqrt(model.R(2, 2)))
                                 : makeVec3(metadata.rel_acc_m, metadata.rel_acc_m, metadata.rel_acc_m);
     metadata.provider_status = external ? "external_carrier_experimental" : "baseline3d";

@@ -70,8 +70,11 @@ std::string metadataSummary(const SourceMetadata& metadata) {
   stream << "valid=" << (metadata.valid ? "true" : "false")
          << ";std=(" << metadata.std_xyz[0] << "/" << metadata.std_xyz[1] << "/" << metadata.std_xyz[2] << ")"
          << ";active_dimensions=" << metadata.active_dimensions
-         << ";yaw_std_rad=" << metadata.yaw_std_rad
-         << ";sat_count=" << metadata.sat_count
+         << ";scalar_yaw_std_available=" << (metadata.scalar_yaw_std_available ? "true" : "false")
+         << ";yaw_std_rad=";
+  if (metadata.scalar_yaw_std_available) stream << metadata.yaw_std_rad;
+  else stream << "NOT_APPLICABLE";
+  stream << ";sat_count=" << metadata.sat_count
          << ";provider_status=" << metadata.provider_status
          << ";quality_flag=" << metadata.quality_flag
          << ";time_diff_sec=" << metadata.time_diff_sec
@@ -279,7 +282,7 @@ double SourceAwarePolicy::lsimScale(const SourceMetadata& metadata, SourceWeight
         scale_value = std::max(scale_value, 6.0);
         addReason(result, "lsim_dual_yaw_antenna_state_suspicious");
       }
-      if (metadata.yaw_std_rad > 3.0 * D2R) {
+      if (metadata.scalar_yaw_std_available && metadata.yaw_std_rad > 3.0 * D2R) {
         scale_value = std::max(scale_value, std::min(10.0, metadata.yaw_std_rad / (0.5 * D2R)));
         addReason(result, "lsim_dual_yaw_std_high");
       }
@@ -379,10 +382,10 @@ double SourceAwarePolicy::lsimScale(const SourceMetadata& metadata, SourceWeight
         scale_value = std::max(scale_value, 2.0);
         addReason(result, "lsim_dual_yaw_antenna_state_suspicious");
       }
-      if (metadata.yaw_std_rad > 30.0 * D2R) {
+      if (metadata.scalar_yaw_std_available && metadata.yaw_std_rad > 30.0 * D2R) {
         scale_value = std::max(scale_value, 6.0);
         addReason(result, "lsim_dual_yaw_std_extreme");
-      } else if (metadata.yaw_std_rad > 15.0 * D2R) {
+      } else if (metadata.scalar_yaw_std_available && metadata.yaw_std_rad > 15.0 * D2R) {
         scale_value = std::max(scale_value, 2.0);
         addReason(result, "lsim_dual_yaw_std_high");
       }
