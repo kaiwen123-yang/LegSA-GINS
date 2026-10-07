@@ -1,0 +1,11 @@
+# ARC native local repair: independent audit
+
+Registered repair `b87ff784d9a21ec419e4669f85f1da513ae90fe6` passed the two affected synthetic cases on its first execution. This does not rewrite the original23-pass/1-fail attempt.
+
+- One harness compile linked the unchanged first-attempt sealed library. One pytest process ran cases04 and06; both passed. Four successful harness processes are independently corroborated by execve and invocation records: ordering_mid1, ordering_end1, identity2. No production rebuild, navigation or evaluation was executed.
+- All four outputs report GNSS3/RP3/HV3, with three accepted BODY_VELOCITY rows each. Stored conditioning ledgers put GNSS/RP and feedback before both ARC endpoints; IMU-end endpoints additionally place body-HV and its reset before ARC. Interior endpoints correctly do not include a later IMU-end HV update.
+- NULL/TELEMETRY stdout objects and all common output bytes match. Manifest fields match after removing the one telemetry flag. Only TELEMETRY has ARC_JOINT_PRIORS.jsonl. Real synthetic PVT heading records are present and attempted. Actual availability remains null and phase-state cross UNKNOWN.
+- All76 repair source pins match registration and current files; production inventory and all production hashes match the first attempt. All10 first-attempt artifact pins still match, including failure, original logs and sealed library. Receipt, COMPLETE, JUnit and harness hashes are consistent.
+- Repair trace only: 8433 lines, openat7921 (successful5642), execve333 (successful90), unparsed0/unfinished0. No raw/reference/other real scientific access or navigation/evaluator execution was observed. First-stage reads are limited to the registered artifacts/library; remaining paths are code, runtime/toolchain, synthetic repair stage and system temporary resources. The trace is limited to openat/execve, not all syscalls.
+
+Combined evidence is24 unique local cases with passing evidence,26 test executions and55 synthetic harness calls (51 first +4 repair). The original failure remains preserved. This qualifies the bounded synthetic integration, not real ARC prior coverage, calibrated source errors, actual arrival, heading credibility or navigation benefit. The reviewer did not rerun tests or scientific code.

@@ -45,9 +45,21 @@
           "warnings": 4
         },
         "evidence": "ARC_PHASE_LOCAL_QUALIFICATION_RESULTS.md",
-        "native_joint_prior": "IMPLEMENTATION_IN_PROGRESS_NOT_BUILT_OR_RUN",
+        "native_joint_prior": "IMPLEMENTED_LOCAL_QUALIFICATION_PASSED_AFTER_FIXTURE_REPAIR_REAL_REPLAY_NOT_STARTED",
         "native_proposal_max_calls": 6,
-        "native_proposal_calls_executed": 0
+        "native_proposal_calls_executed": 0,
+        "native_local_evidence": "ARC_NATIVE_LOCAL_RESULTS.md",
+        "native_local_first": {
+          "tests": 24,
+          "passed": 23,
+          "failed": 1,
+          "registration_commit": "dcce5bb6c6fd0132b32e352ecda6dcc596761e33"
+        },
+        "native_local_repair": {
+          "tests": 2,
+          "passed": 2,
+          "registration_commit": "b87ff784d9a21ec419e4669f85f1da513ae90fe6"
+        }
       }
     },
     {
@@ -91,5 +103,5 @@
   "main_merge_authorized": false,
   "completion_proven": false,
   "latest_decision": "CONTINUATION_DECISION.md",
-  "latest_checkpoint": "Go2 semantics integrated; 12+28 synthetic phase cases passed; unrestricted-cross foot countermodel independently reviewed; ARC native diagnostics being implemented; no new admissible navigation gain"
+  "latest_checkpoint": "Go2 interface semantics integrated; ARC native local qualification covers 24 unique cases after retained 23/24 first attempt and bounded 2/2 fixture repair; real metadata/config preparation pending; no navigation gain established"
 }

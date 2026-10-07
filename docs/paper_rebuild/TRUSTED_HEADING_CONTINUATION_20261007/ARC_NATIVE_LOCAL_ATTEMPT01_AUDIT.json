@@ -1,0 +1,223 @@
+{
+  "schema": "trusted_heading.arc_native.local_attempt01_independent_audit.v1",
+  "status": "FAILED_LOCAL_QUALIFICATION_RETAINED_ACCESS_SCOPE_AUDITED",
+  "registration_commit": "dcce5bb6c6fd0132b32e352ecda6dcc596761e33",
+  "stage": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_LOCAL_ATTEMPT01",
+  "trace_sha256": "13442f12a4383eb6ce80d8a71132efdccbe533e1808e7cf01c6790813c9df59c",
+  "observed_calls": {
+    "configure": 1,
+    "build": 1,
+    "harness_compile": 2,
+    "pytest": 1,
+    "pytest_items": 24,
+    "passed": 23,
+    "failed": [
+      "test_04_production_gnss_aux_hv_before_arc_at_exact_time"
+    ],
+    "old_harness": 28,
+    "new_harness": 23,
+    "total_harness": 51,
+    "native_navigation": 0,
+    "evaluation": 0
+  },
+  "identity": {
+    "plan_matches_registration": true,
+    "source_pins_json_matches_plan": true,
+    "registered_pin_count": 73,
+    "registered_source_mismatches": [],
+    "production_inventory_matches": true,
+    "current_mismatches": {
+      "tests/paper_rebuild/native_arc_clone_harness.cpp": "680df1d08b967a77aa7c63fb1b67ba91810ce532a695f5274a5afc40e4cc0c21",
+      "tests/paper_rebuild/test_native_arc_clone.py": "613a5abe3ca15296fbf662308ba2c1b46b2149cdeef1795d8256b43c9df6f41b"
+    },
+    "authorized_current_changes": [
+      "tests/paper_rebuild/native_arc_clone_harness.cpp",
+      "tests/paper_rebuild/test_native_arc_clone.py"
+    ],
+    "source_freeze_other_than_authorized_tests_matches": true
+  },
+  "trace": {
+    "lines": 55860,
+    "openat_calls": 47456,
+    "successful_openat": 19795,
+    "execve_calls": 697,
+    "successful_execve": 352,
+    "unparsed_line_count": 0,
+    "unparsed_lines": [],
+    "pending_count": 0,
+    "other_nonexit_nonsignal_lines": [],
+    "successful_exec_counts": {
+      "/usr/bin/python3": 2,
+      "/usr/bin/git": 75,
+      "/usr/bin/cmake": 51,
+      "/bin/sh": 41,
+      "/usr/bin/uname": 2,
+      "/usr/bin/c++": 36,
+      "/usr/lib/gcc/x86_64-linux-gnu/11/cc1plus": 35,
+      "/usr/bin/as": 35,
+      "/usr/lib/gcc/x86_64-linux-gnu/11/collect2": 5,
+      "/usr/bin/ld": 5,
+      "/usr/bin/gmake": 9,
+      "/usr/bin/ar": 1,
+      "/usr/bin/ranlib": 1,
+      "/usr/bin/g++": 2,
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_LOCAL_ATTEMPT01/native_attitude_clone_harness": 28,
+      "/usr/bin/lscpu": 1,
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_LOCAL_ATTEMPT01/native_arc_clone_harness": 23
+    },
+    "absolute_unknown_science_accesses": [],
+    "relative_unique_paths": 935,
+    "relative_unclassified": [],
+    "repo_noncode_paths": [],
+    "unexpected_absolute_write_accesses": [],
+    "system_or_compiler_temporary_writes": {
+      "/dev/null": 76,
+      "/tmp/cc9upe5i.s": 2,
+      "/tmp/cclFVn3w.o": 2,
+      "/tmp/cckWf8Qs.res": 1,
+      "/tmp/ccrcwMTd.cdtor.c": 1,
+      "/tmp/ccX5dtWQ.cdtor.o": 1,
+      "/tmp/ccalETDy.s": 2,
+      "/tmp/ccu0uRwp.res": 1,
+      "/tmp/ccDJzqJn.cdtor.c": 1,
+      "/tmp/ccsVn451.cdtor.o": 1,
+      "/tmp/ccrLgxsw.s": 2,
+      "/tmp/ccr2Yec9.s": 2,
+      "/tmp/ccCFNloq.s": 2,
+      "/tmp/ccswu8i5.s": 2,
+      "/tmp/ccBEzvB2.s": 2,
+      "/tmp/ccfenDp4.s": 2,
+      "/tmp/ccCplpa5.s": 2,
+      "/tmp/ccXpcocV.s": 2,
+      "/tmp/ccxbyv8c.s": 2,
+      "/tmp/ccHUNgdr.s": 2,
+      "/tmp/ccW2AfDt.s": 2,
+      "/tmp/ccpRnfwB.s": 2,
+      "/tmp/ccPKItE1.s": 2,
+      "/tmp/ccfkpTf1.s": 2,
+      "/tmp/ccoBWq5N.s": 2,
+      "/tmp/cctblPtc.s": 2,
+      "/tmp/ccWWbADP.s": 2,
+      "/tmp/cc3s4S41.s": 2,
+      "/tmp/ccHMxCz5.s": 2,
+      "/tmp/cc6d9pH4.s": 2,
+      "/tmp/cc2tMqNt.s": 2,
+      "/tmp/cc0wdZpi.s": 2,
+      "/tmp/cczcrUol.s": 2,
+      "/tmp/cc7ZHGsS.s": 2,
+      "/tmp/ccSDXkfk.s": 2,
+      "/tmp/ccZDPlad.s": 2,
+      "/tmp/ccHTtTtL.s": 2,
+      "/tmp/ccYRAP5N.s": 2,
+      "/tmp/ccsFvOOb.s": 2,
+      "/tmp/ccVgvUC6.s": 2,
+      "/tmp/ccXHjxWv.s": 2,
+      "/tmp/ccfNsoes.res": 1,
+      "/tmp/ccObE6QC.cdtor.c": 1,
+      "/tmp/cc4N2Rt7.cdtor.o": 1,
+      "/tmp/ccbmHcMv.s": 2,
+      "/tmp/ccZbOJiI.o": 2,
+      "/tmp/cc1eioCo.res": 1,
+      "/tmp/ccy2DeTv.cdtor.c": 1,
+      "/tmp/ccW9YTIa.cdtor.o": 1,
+      "/tmp/ccAR0gF3.s": 2,
+      "/tmp/cczodfJQ.o": 2,
+      "/tmp/ccA3J789.res": 1,
+      "/tmp/ccsFQSj1.cdtor.c": 1,
+      "/tmp/ccw7LUBb.cdtor.o": 1,
+      "/tmp/60a753pe": 1,
+      "/tmp": 2
+    },
+    "raw_reference_or_other_real_science_open_observed": false,
+    "evaluation_or_real_navigation_exec_observed": false,
+    "limitation": "Only openat/execve traced. Relative compiler/build and lscpu paths classified by executable/path; chdir/fchdir/fd lineage not captured, so no claim of universal syscall coverage or every relative absolute path resolved."
+  },
+  "first_failure_retention": {
+    "failure_matches_pytest_exit": true,
+    "calls_retained": 5,
+    "returncodes": [
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    "outer_exit": {
+      "returncode": 1,
+      "elapsed_s": 27.512297624999974
+    },
+    "complete_exists": false,
+    "pass_receipt_exists": false,
+    "new_logs_all_completed": true,
+    "new_ops": {
+      "read": 5,
+      "bad_time_scale": 1,
+      "bad_manifest": 1,
+      "off": 2,
+      "lifecycle": 1,
+      "split": 1,
+      "ordering_mid": 1,
+      "mapping": 1,
+      "identity": 2,
+      "initial": 1,
+      "terminal": 1,
+      "missing_end": 1,
+      "duplicate": 1,
+      "unordered": 1,
+      "mismatch": 1,
+      "overlap": 1,
+      "guards": 1
+    }
+  },
+  "fixture_evidence": [
+    {
+      "op": "ordering_mid",
+      "telemetry": 1,
+      "GNSS": 3,
+      "RP": 3,
+      "HV": 0,
+      "body_rows": 3,
+      "body_reasons": {
+        "provider_unavailable": 3
+      }
+    },
+    {
+      "op": "identity",
+      "telemetry": 0,
+      "GNSS": 3,
+      "RP": 3,
+      "HV": 0,
+      "body_rows": 3,
+      "body_reasons": {
+        "provider_unavailable": 3
+      }
+    },
+    {
+      "op": "identity",
+      "telemetry": 1,
+      "GNSS": 3,
+      "RP": 3,
+      "HV": 0,
+      "body_rows": 3,
+      "body_reasons": {
+        "provider_unavailable": 3
+      }
+    }
+  ],
+  "artifact_sha256": {
+    "REGISTERED_PLAN.json": "7a42ba434136981af3029930a166aedac6c81cb7d99795e798a835e05ee55c56",
+    "SOURCE_PINS.json": "25ead0eb304f000086a2331f71641ef41fcd4a82e4cfccce67938623c27cbf47",
+    "CALLS.json": "724b88c0caba83b0f13f9242f1a331dc45664a93810d8492783e3f76cc57abd8",
+    "FIRST_FAILURE.json": "79c542788969f6242f235b1e207335bc044a2dbb5157b4ac733a20f13ca174ff",
+    "05_PYTEST_EXIT.json": "79c542788969f6242f235b1e207335bc044a2dbb5157b4ac733a20f13ca174ff",
+    "05_PYTEST_stdout.log": "4ecc0fc7e1c73b85a9c7fcedc7c0bed955c752bd408e4b0ef2e8dd9f3206cf65",
+    "junit.xml": "ccf4bc617f24539fba9032422d85612701a81aafb2781258f341a3bdb592484a",
+    "HARNESS_INVOCATIONS.jsonl": "c7bc1bc1c5b52f5b4209b7471bc4d9fee7aafdffbf8671fcb736018673106677",
+    "ARC_HARNESS_INVOCATIONS.jsonl": "bf11045cd8c8be472ac5fc76730f91526338670af2d0a547531eb13e65bd68de",
+    "native_attitude_clone_harness": "fd706d1681362f3edbaaadf460e9d298efd69c80633c95eeef03e12cfc488881",
+    "native_arc_clone_harness": "e83ab41bbea0d8f5bc868f948747c84ee4a4f93996062c578ea7053439145dca",
+    "BUILD/legsa_v23_port_core_demo": "3010a85d27d0571f27640f68814b522c7094e32455c9cc7b8bdf43d11331013e",
+    "BUILD/liblegsa_v23_port_core.a": "1637f34f986086847c275849f646cf1ae25fe59aca7beacc9610cd526d3bb2c8"
+  },
+  "scope": "Standard-library metadata/hash/XML/CSV/strace review only; no imported science module or new scientific execution."
+}

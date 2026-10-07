@@ -1,0 +1,364 @@
+{
+  "schema": "trusted_heading.arc_native.repair01_independent_audit.v1",
+  "status": "PASS_TWO_AFFECTED_LOCAL_CASES_FIRST_FAILURE_RETAINED",
+  "registration_commit": "b87ff784d9a21ec419e4669f85f1da513ae90fe6",
+  "stage": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_LOCAL_REPAIR01",
+  "source_identity": {
+    "source_pin_count": 76,
+    "registered_mismatches": [],
+    "current_mismatches": [],
+    "plan_matches_registration": true,
+    "receipt_plan_pins_equal": true,
+    "production_inventory_equal": true,
+    "production_pins_equal_first": {
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/baseline3d.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/common/earth.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/common/rotation.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/config/port_config_loader.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/arc_source_events.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/attitude_clone.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/body_velocity_model.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/foot_pair_events.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/go2_weak_prior_factor.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/go2_weak_prior_loader.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/go2_weak_prior_types.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/raw_doppler_factor.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/raw_doppler_factor_loader.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/raw_doppler_types.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/satellite_state_provider.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/fgo_feedback/fgo_feedback.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/fileio/file_saver.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/fileio/gnss_file_loader.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/fileio/imu_file_loader.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/gnss.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/heading_source_policy.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/imu.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/gi_engine.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/insmech.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/options.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/nav_state.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/options.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/quality_aware/qa_fallback.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/runtime/port_runtime.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/measurement_source.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/quality_state_manager.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/quality_state_trace.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/source_aware_policy.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/source_aware_trace.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/types.hpp": true,
+      "cpp/legsa_v23_port_core/include/legsa_v23_port_core/writers/port_writers.hpp": true,
+      "cpp/legsa_v23_port_core/src/baseline3d.cpp": true,
+      "cpp/legsa_v23_port_core/src/common/earth.cpp": true,
+      "cpp/legsa_v23_port_core/src/common/rotation.cpp": true,
+      "cpp/legsa_v23_port_core/src/common/types.cpp": true,
+      "cpp/legsa_v23_port_core/src/config/port_config_loader.cpp": true,
+      "cpp/legsa_v23_port_core/src/demo/legsa_v23_port_core_demo.cpp": true,
+      "cpp/legsa_v23_port_core/src/demo/port_demo.cpp": true,
+      "cpp/legsa_v23_port_core/src/factors/arc_source_events.cpp": true,
+      "cpp/legsa_v23_port_core/src/factors/attitude_clone.cpp": true,
+      "cpp/legsa_v23_port_core/src/factors/body_velocity_model.cpp": true,
+      "cpp/legsa_v23_port_core/src/factors/foot_pair_events.cpp": true,
+      "cpp/legsa_v23_port_core/src/factors/go2_weak_prior_factor.cpp": true,
+      "cpp/legsa_v23_port_core/src/factors/go2_weak_prior_loader.cpp": true,
+      "cpp/legsa_v23_port_core/src/factors/raw_doppler_factor.cpp": true,
+      "cpp/legsa_v23_port_core/src/factors/raw_doppler_factor_loader.cpp": true,
+      "cpp/legsa_v23_port_core/src/factors/satellite_state_provider.cpp": true,
+      "cpp/legsa_v23_port_core/src/fgo_feedback/fgo_feedback.cpp": true,
+      "cpp/legsa_v23_port_core/src/fileio/file_saver.cpp": true,
+      "cpp/legsa_v23_port_core/src/fileio/gnss_file_loader.cpp": true,
+      "cpp/legsa_v23_port_core/src/fileio/imu_file_loader.cpp": true,
+      "cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp": true,
+      "cpp/legsa_v23_port_core/src/kf_gins/gi_engine_arc_clone.cpp": true,
+      "cpp/legsa_v23_port_core/src/kf_gins/gi_engine_attitude_clone.cpp": true,
+      "cpp/legsa_v23_port_core/src/kf_gins/insmech.cpp": true,
+      "cpp/legsa_v23_port_core/src/quality_aware/qa_fallback.cpp": true,
+      "cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp": true,
+      "cpp/legsa_v23_port_core/src/source_aware/quality_state_manager.cpp": true,
+      "cpp/legsa_v23_port_core/src/source_aware/quality_state_trace.cpp": true,
+      "cpp/legsa_v23_port_core/src/source_aware/source_aware_policy.cpp": true,
+      "cpp/legsa_v23_port_core/src/source_aware/source_aware_trace.cpp": true,
+      "cpp/legsa_v23_port_core/src/writers/port_writers.cpp": true
+    },
+    "first_attempt_pin_count": 10,
+    "first_attempt_mismatches": []
+  },
+  "receipt_identity": {
+    "receipt_sha256": "2b01342bd13175b1840b35f0bcabfefc95117a96193a6bbe56f60c41b64bf823",
+    "complete_matches": true,
+    "junit_matches": true,
+    "harness_matches": true,
+    "calls_match": true
+  },
+  "execution": {
+    "production_builds": 0,
+    "harness_compile": 1,
+    "pytest_process": 1,
+    "test_names": [
+      "test_04_production_gnss_aux_hv_before_arc_at_exact_time",
+      "test_06_null_and_telemetry_scientific_outputs_byte_identical"
+    ],
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "harness_calls": 4,
+    "harness_ops": {
+      "ordering_mid": 1,
+      "ordering_end": 1,
+      "identity": 2
+    },
+    "all_completed_zero": true,
+    "real_navigation_calls": 0,
+    "evaluator_calls": 0,
+    "outer_exit": {
+      "returncode": 0,
+      "elapsed_s": 7.0574351019999995,
+      "registration_commit": "b87ff784d9a21ec419e4669f85f1da513ae90fe6"
+    }
+  },
+  "fixture_evidence": [
+    {
+      "op": "ordering_mid",
+      "telemetry": 1,
+      "GNSS": 3,
+      "RP": 3,
+      "HV": 3,
+      "body_rows": 3,
+      "body_reasons": {
+        "accept_body_forward_right_2d": 3
+      },
+      "body_accepted": 3,
+      "phase_updates": 0,
+      "foot_updates": 0
+    },
+    {
+      "op": "ordering_end",
+      "telemetry": 1,
+      "GNSS": 3,
+      "RP": 3,
+      "HV": 3,
+      "body_rows": 3,
+      "body_reasons": {
+        "accept_body_forward_right_2d": 3
+      },
+      "body_accepted": 3,
+      "phase_updates": 0,
+      "foot_updates": 0
+    },
+    {
+      "op": "identity",
+      "telemetry": 0,
+      "GNSS": 3,
+      "RP": 3,
+      "HV": 3,
+      "body_rows": 3,
+      "body_reasons": {
+        "accept_body_forward_right_2d": 3
+      },
+      "body_accepted": 3,
+      "phase_updates": 0,
+      "foot_updates": 0
+    },
+    {
+      "op": "identity",
+      "telemetry": 1,
+      "GNSS": 3,
+      "RP": 3,
+      "HV": 3,
+      "body_rows": 3,
+      "body_reasons": {
+        "accept_body_forward_right_2d": 3
+      },
+      "body_accepted": 3,
+      "phase_updates": 0,
+      "foot_updates": 0
+    }
+  ],
+  "ordering_checks": [
+    {
+      "op": "ordering_mid",
+      "time": 1.15,
+      "kind": "ARC_START",
+      "ordinary_tags": [
+        "GNSS_POSITION_SOURCE_AWARE",
+        "GO2_ATTITUDE_RP",
+        "RECEIVER_VELOCITY"
+      ],
+      "single_arc": true,
+      "reset_after_all_updates_before_arc": true,
+      "body_hv_present": false
+    },
+    {
+      "op": "ordering_mid",
+      "time": 1.95,
+      "kind": "ARC_END",
+      "ordinary_tags": [
+        "GNSS_POSITION_SOURCE_AWARE",
+        "GO2_ATTITUDE_RP",
+        "RECEIVER_VELOCITY"
+      ],
+      "single_arc": true,
+      "reset_after_all_updates_before_arc": true,
+      "body_hv_present": false
+    },
+    {
+      "op": "ordering_end",
+      "time": 1.2,
+      "kind": "ARC_START",
+      "ordinary_tags": [
+        "BODY_HORIZONTAL_VELOCITY",
+        "GNSS_POSITION_SOURCE_AWARE",
+        "GO2_ATTITUDE_RP",
+        "RECEIVER_VELOCITY"
+      ],
+      "single_arc": true,
+      "reset_after_all_updates_before_arc": true,
+      "body_hv_present": true
+    },
+    {
+      "op": "ordering_end",
+      "time": 2.0,
+      "kind": "ARC_END",
+      "ordinary_tags": [
+        "BODY_HORIZONTAL_VELOCITY",
+        "GNSS_POSITION_SOURCE_AWARE",
+        "GO2_ATTITUDE_RP",
+        "RECEIVER_VELOCITY"
+      ],
+      "single_arc": true,
+      "reset_after_all_updates_before_arc": true,
+      "body_hv_present": true
+    }
+  ],
+  "identity_arm": {
+    "stdout_objects_equal": true,
+    "common_files": {
+      "ARC_CONDITIONING_EVENTS.jsonl": {
+        "null_sha256": "90c0c967e562f88433fcad3edfd47db10eec65f5fd774bd003d8d488594fd702",
+        "telemetry_sha256": "90c0c967e562f88433fcad3edfd47db10eec65f5fd774bd003d8d488594fd702",
+        "equal": true
+      },
+      "ARC_IMU_SEGMENTS.csv": {
+        "null_sha256": "69f44f1e8337997fcbb3147206487865e49962f71b843588d9e052b209ffd11a",
+        "telemetry_sha256": "69f44f1e8337997fcbb3147206487865e49962f71b843588d9e052b209ffd11a",
+        "equal": true
+      },
+      "ARC_LIFECYCLE.csv": {
+        "null_sha256": "9a0499ccbf6133267ade0cf24320eba3ec9532f3ca1d84b474e1d1d0a3fe7925",
+        "telemetry_sha256": "9a0499ccbf6133267ade0cf24320eba3ec9532f3ca1d84b474e1d1d0a3fe7925",
+        "equal": true
+      },
+      "BODY_VELOCITY_EVENTS.csv": {
+        "null_sha256": "b3f2ed17f2bccaf56fef79520216958fd3d2ce8b12449a1192fb036395dcd9b3",
+        "telemetry_sha256": "b3f2ed17f2bccaf56fef79520216958fd3d2ce8b12449a1192fb036395dcd9b3",
+        "equal": true
+      },
+      "HEADING_SOURCE_EVENTS.csv": {
+        "null_sha256": "b495a90fd9c2be5c776d42ae969f971b893fe667dba12e48e521c77866873d96",
+        "telemetry_sha256": "b495a90fd9c2be5c776d42ae969f971b893fe667dba12e48e521c77866873d96",
+        "equal": true
+      },
+      "KF_GINS_IMU_ERR.txt": {
+        "null_sha256": "7ecf337076eb46d8e4e5cc4b68e18681ce014444348c78a0c4922cceafd50678",
+        "telemetry_sha256": "7ecf337076eb46d8e4e5cc4b68e18681ce014444348c78a0c4922cceafd50678",
+        "equal": true
+      },
+      "KF_GINS_Navresult.nav": {
+        "null_sha256": "2f52bfa9dc15b98287ae342164b836fac7215eb7831a9607540f4fadbba9d544",
+        "telemetry_sha256": "2f52bfa9dc15b98287ae342164b836fac7215eb7831a9607540f4fadbba9d544",
+        "equal": true
+      },
+      "KF_GINS_STD.txt": {
+        "null_sha256": "ed3a4c18a3a84e9e09f395af8784964d32dcc75574e6796dcd43000dfad7cc24",
+        "telemetry_sha256": "ed3a4c18a3a84e9e09f395af8784964d32dcc75574e6796dcd43000dfad7cc24",
+        "equal": true
+      }
+    },
+    "only_telemetry_files": [
+      "ARC_JOINT_PRIORS.jsonl"
+    ],
+    "only_null_files": [],
+    "manifest_flags": [
+      false,
+      true
+    ],
+    "manifest_other_fields_equal": true,
+    "heading_rows": 3,
+    "heading_attempted": 3,
+    "heading_accepted": 3,
+    "prior_rows": 1,
+    "actual_availability_all_NA": true,
+    "cross_all_unknown": true
+  },
+  "trace": {
+    "sha256": "4c76ff4af3fe3c65253bad927e38324c1554b7999034b753203aad7ade480244",
+    "lines": 8433,
+    "openat": 7921,
+    "successful_openat": 5642,
+    "execve": 333,
+    "successful_execve": 90,
+    "unparsed": [],
+    "pending_count": 0,
+    "other_lines": [],
+    "successful_exec_counts": {
+      "/usr/bin/python3": 2,
+      "/usr/bin/git": 78,
+      "/usr/bin/g++": 1,
+      "/usr/lib/gcc/x86_64-linux-gnu/11/cc1plus": 1,
+      "/usr/bin/as": 1,
+      "/usr/lib/gcc/x86_64-linux-gnu/11/collect2": 1,
+      "/usr/bin/ld": 1,
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_LOCAL_REPAIR01/native_arc_clone_harness": 4,
+      "/usr/bin/lscpu": 1
+    },
+    "unknown_science_paths": [],
+    "unclassified_relative_paths": [],
+    "first_attempt_reads": [
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_LOCAL_ATTEMPT01/ARC_HARNESS_INVOCATIONS.jsonl",
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_LOCAL_ATTEMPT01/BUILD/legsa_v23_port_core_demo",
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_LOCAL_ATTEMPT01/BUILD/liblegsa_v23_port_core.a",
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_LOCAL_ATTEMPT01/CALLS.json",
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_LOCAL_ATTEMPT01/FIRST_FAILURE.json",
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_LOCAL_ATTEMPT01/HARNESS_INVOCATIONS.jsonl",
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_LOCAL_ATTEMPT01/REGISTERED_PLAN.json",
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_LOCAL_ATTEMPT01/SOURCE_PINS.json",
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_LOCAL_ATTEMPT01/junit.xml",
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_CONTINUATION_20261007/ARC_NATIVE_LOCAL_ATTEMPT01/native_arc_clone_harness"
+    ],
+    "first_attempt_unregistered_reads": [],
+    "unexpected_absolute_writes": [],
+    "system_temporary_writes": {
+      "/dev/null": 79,
+      "/tmp/ccHSEJHN.s": 2,
+      "/tmp/ccOvw6pf.o": 2,
+      "/tmp/ccy7nQGQ.res": 1,
+      "/tmp/ccmgCGc5.cdtor.c": 1,
+      "/tmp/ccg1wjUx.cdtor.o": 1,
+      "/tmp/915737fm": 1,
+      "/tmp": 2
+    },
+    "raw_reference_real_science_observed": false,
+    "evaluation_or_navigation_execution_observed": false,
+    "limitation": "openat/execve-only audit, not untraced syscalls; relative lscpu directory reads are classified by executable; source identity is checked at audit time."
+  },
+  "combined": {
+    "unique_cases_with_passing_evidence": 24,
+    "test_executions": 26,
+    "first_attempt_passed": 23,
+    "first_attempt_failed": 1,
+    "first_attempt_harness": 51,
+    "repair_harness": 4,
+    "total_harness": 55,
+    "first_failure_retained": true
+  },
+  "scope": "Metadata, hash, CSV/JSON/JUnit and trace inspection only; no matrix recomputation or scientific execution.",
+  "artifact_sha256": {
+    "REGISTERED_PLAN.json": "401b512f48f3ae31b4aab1be9d42e615e9ff5629e9da2f712b77e024fbf72169",
+    "RECEIPT.json": "2b01342bd13175b1840b35f0bcabfefc95117a96193a6bbe56f60c41b64bf823",
+    "COMPLETE.json": "c878af13e6bbe0368fcca68c5f8fbab97388777c3013b6f1dfcf3f8cac9f69cd",
+    "CALLS.json": "1c9b9d111e0ed61d4739e31ad195068c2dc50bc48661db2d74a931b99b4b85a2",
+    "junit.xml": "3a3d67f15443c4037a037665245203c8165053bd19e1e51bed00a97e30669893",
+    "ARC_HARNESS_INVOCATIONS.jsonl": "0227e3d1464d5c443b63f58efee7a7f14a72efebae3a9d7fe71e4d165eaefb9f",
+    "native_arc_clone_harness": "c34f0230cb41786989d3992c2c70d9e775eee7fc01f7ea257a9be48e1211121a"
+  }
+}
