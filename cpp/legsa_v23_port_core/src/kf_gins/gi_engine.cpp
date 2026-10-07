@@ -137,9 +137,11 @@ GIEngine::GIEngine(PortOptions options)
     throw std::runtime_error("ATTITUDE_CLONE_REQUIRES_FULL_UNCLIPPED_FEEDBACK_QA_QM_OFF");
   const auto& body_cfg = options_.go2_velocity_prior_diagnostic_config;
   if (body_cfg.go2_velocity_prior_time_policy != "legacy_absolute_nearest" &&
-      body_cfg.go2_velocity_prior_time_policy != "causal_unique_latest")
+      body_cfg.go2_velocity_prior_time_policy != "causal_unique_latest" &&
+      body_cfg.go2_velocity_prior_time_policy != "causal_recorded_dependencies_unique_latest")
     throw std::runtime_error("NED_HV_UNKNOWN_TIME_POLICY");
-  if (body_cfg.go2_velocity_prior_time_policy == "causal_unique_latest" &&
+  if ((body_cfg.go2_velocity_prior_time_policy == "causal_unique_latest" ||
+       body_cfg.go2_velocity_prior_time_policy == "causal_recorded_dependencies_unique_latest") &&
       (options_.runtime_contract != "research_experiment" ||
        !body_cfg.enable_go2_horizontal_velocity_prior ||
        !body_cfg.enable_go2_velocity_prior_diagnostic ||
@@ -243,9 +245,26 @@ void GIEngine::setGo2AttitudeWeakPriors(const std::vector<Go2AttitudeWeakPriorMe
 void GIEngine::setGo2VelocityDiagnosticPriors(
     const std::vector<Go2VelocityDiagnosticPriorMeasurement>& measurements,
     const Go2VelocityDiagnosticPriorStatus& status) {
-  if (options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_policy == "causal_unique_latest") {
-    for (const auto& row : measurements)
+  const auto& policy = options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_policy;
+  const bool dependencies = policy == "causal_recorded_dependencies_unique_latest";
+  if (policy == "causal_unique_latest" || dependencies) {
+    for (std::size_t i = 0; i < measurements.size(); ++i) {
+      const auto& row = measurements[i];
       if (row.observation_frame != "ned") throw std::runtime_error("NED_HV_SOURCE_FRAME_MISMATCH");
+      if (dependencies) {
+        const bool known = row.dependency_schema == "HV_CALIBRATED_GNSS18_TIME_V1";
+        if (known != row.dependency_metadata_available)
+          throw std::runtime_error("NED_HV_DEPENDENCY_SCHEMA_STATE_MISMATCH");
+        if (!known) continue;
+        if (row.dependency_source_row_index != i)
+          throw std::runtime_error("NED_HV_DEPENDENCY_ROW_INDEX_MISMATCH");
+        if (!std::isfinite(row.time) || row.dependency_source_time_bits_hex != arcSourceTimeBits(row.time))
+          throw std::runtime_error("NED_HV_DEPENDENCY_SOURCE_TIME_BITS_MISMATCH");
+        if (row.dependency_supported && (!std::isfinite(row.dependency_ready_source_time_s) ||
+            row.dependency_ready_source_time_s < row.time))
+          throw std::runtime_error("NED_HV_DEPENDENCY_READY_INVALID");
+      }
+    }
   }
   go2_velocity_diagnostic_priors_ = measurements;
   resetNedVelocitySourceGeneration("source_vector_replacement");
@@ -1705,7 +1724,8 @@ void GIEngine::writeBodyVelocityDiagnostics(const std::string& output_dir) const
 }
 
 void GIEngine::resetNedVelocitySourceGeneration(const std::string& reason) {
-  if (options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_policy != "causal_unique_latest") return;
+  const auto& policy = options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_policy;
+  if (policy != "causal_unique_latest" && policy != "causal_recorded_dependencies_unique_latest") return;
   ned_velocity_source_has_attempt_=false;
   ned_velocity_source_last_attempt_time_=0.0;
   ned_velocity_generation_reset_reason_=reason;
@@ -1713,12 +1733,17 @@ void GIEngine::resetNedVelocitySourceGeneration(const std::string& reason) {
 }
 
 void GIEngine::writeNedVelocitySourceDiagnostics(const std::string& output_dir) const {
-  if (options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_policy != "causal_unique_latest") return;
+  const auto& policy = options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_policy;
+  const bool dependencies = policy == "causal_recorded_dependencies_unique_latest";
+  if (policy != "causal_unique_latest" && !dependencies) return;
   std::filesystem::create_directories(output_dir);
   std::ofstream out(std::filesystem::path(output_dir)/"NED_VELOCITY_SOURCE_EVENTS.csv");
   if(!out) throw std::runtime_error("NED_HV_SOURCE_DIAGNOSTICS_OPEN_FAILED");
   out<<std::setprecision(17)
-     <<"trigger_time,state_time,source_time,trigger_age_s,state_age_s,source_time_bits_hex,vector_index,generation,generation_reset_reason,source_present,consumed,accepted,reason,future_candidate_skips,future_trigger_candidate_skips,future_state_candidate_skips,used_or_older_candidate_skips,nonfinite_time_skips,actual_available_time_s,frame\n";
+     <<"trigger_time,state_time,source_time,trigger_age_s,state_age_s,source_time_bits_hex,vector_index,generation,generation_reset_reason,source_present,consumed,accepted,reason,future_candidate_skips,future_trigger_candidate_skips,future_state_candidate_skips,used_or_older_candidate_skips,nonfinite_time_skips,actual_available_time_s,frame";
+  if (dependencies)
+    out<<",selected_dependency_schema,selected_dependency_ready_source_time_s,dependency_missing_candidate_skips,dependency_unsupported_candidate_skips,dependency_future_candidate_skips,dependency_future_trigger_candidate_skips,dependency_future_state_candidate_skips";
+  out<<'\n';
   for(const auto& e:ned_velocity_source_events_) {
     out<<e.trigger_time<<','<<e.state_time<<',';if(e.source_present)out<<e.source_time;
     out<<',';if(e.source_present)out<<e.trigger_time-e.source_time;
@@ -1728,7 +1753,15 @@ void GIEngine::writeNedVelocitySourceDiagnostics(const std::string& output_dir) 
     out<<','<<e.generation<<','<<e.generation_reset_reason<<','<<e.source_present<<','<<e.consumed
        <<','<<e.accepted<<','<<e.reason<<','<<e.future_candidate_skips
        <<','<<e.future_trigger_candidate_skips<<','<<e.future_state_candidate_skips<<','<<e.used_or_older_candidate_skips
-       <<','<<e.nonfinite_time_skips<<",,ned\n";
+       <<','<<e.nonfinite_time_skips<<",,ned";
+    if (dependencies) {
+      out<<',';if(e.source_present)out<<e.selected_dependency_schema;
+      out<<',';if(e.source_present)out<<e.selected_dependency_ready_source_time_s;
+      out<<','<<e.dependency_missing_candidate_skips<<','<<e.dependency_unsupported_candidate_skips
+         <<','<<e.dependency_future_candidate_skips<<','<<e.dependency_future_trigger_candidate_skips
+         <<','<<e.dependency_future_state_candidate_skips;
+    }
+    out<<'\n';
   }
   if(!out) throw std::runtime_error("NED_HV_SOURCE_DIAGNOSTICS_WRITE_FAILED");
 }
@@ -1736,7 +1769,9 @@ void GIEngine::writeNedVelocitySourceDiagnostics(const std::string& output_dir) 
 void GIEngine::applyGo2VelocityDiagnosticPriorForTime(double update_time) {
   const bool controlled_horizontal =
       options_.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior;
-  const bool causal = options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_policy == "causal_unique_latest";
+  const auto& policy = options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_policy;
+  const bool dependencies = policy == "causal_recorded_dependencies_unique_latest";
+  const bool causal = policy == "causal_unique_latest" || dependencies;
   NedVelocitySourceEvent event;
   if (causal) {
     if(!std::isfinite(update_time) || !std::isfinite(pvacur_.time)) throw std::runtime_error("NED_HV_NONFINITE_UPDATE_TIME");
@@ -1769,6 +1804,23 @@ void GIEngine::applyGo2VelocityDiagnosticPriorForTime(double update_time) {
         event.future_state_candidate_skips+=static_cast<std::size_t>(future_state);
         continue;
       }
+      if (dependencies) {
+        if (!measurement.dependency_metadata_available ||
+            measurement.dependency_schema != "HV_CALIBRATED_GNSS18_TIME_V1") {
+          ++event.dependency_missing_candidate_skips;continue;
+        }
+        if (!measurement.dependency_supported) {
+          ++event.dependency_unsupported_candidate_skips;continue;
+        }
+        const bool future_dependency_trigger = measurement.dependency_ready_source_time_s > update_time;
+        const bool future_dependency_state = measurement.dependency_ready_source_time_s > pvacur_.time;
+        if (future_dependency_trigger || future_dependency_state) {
+          ++event.dependency_future_candidate_skips;
+          event.dependency_future_trigger_candidate_skips += static_cast<std::size_t>(future_dependency_trigger);
+          event.dependency_future_state_candidate_skips += static_cast<std::size_t>(future_dependency_state);
+          continue;
+        }
+      }
       if(ned_velocity_source_has_attempt_ && measurement.time<=ned_velocity_source_last_attempt_time_) {
         ++event.used_or_older_candidate_skips;continue;
       }
@@ -1777,9 +1829,22 @@ void GIEngine::applyGo2VelocityDiagnosticPriorForTime(double update_time) {
     }
     ned_velocity_source_counts_.future_candidate_skips+=event.future_candidate_skips;
     ned_velocity_source_counts_.used_or_older_candidate_skips+=event.used_or_older_candidate_skips;
+    if (dependencies) {
+      ned_velocity_source_counts_.dependency_missing_candidate_skips += event.dependency_missing_candidate_skips;
+      ned_velocity_source_counts_.dependency_unsupported_candidate_skips += event.dependency_unsupported_candidate_skips;
+      ned_velocity_source_counts_.dependency_future_candidate_skips += event.dependency_future_candidate_skips;
+      ned_velocity_source_counts_.dependency_future_trigger_candidate_skips += event.dependency_future_trigger_candidate_skips;
+      ned_velocity_source_counts_.dependency_future_state_candidate_skips += event.dependency_future_state_candidate_skips;
+    }
     if(!best) {++ned_velocity_source_counts_.no_eligible_calls;finish("no_eligible_source");return;}
     event.source_present=true;event.source_time=best->time;
     event.vector_index=static_cast<std::size_t>(best-go2_velocity_diagnostic_priors_.data());
+    if (dependencies) {
+      event.selected_dependency_schema = best->dependency_schema;
+      event.selected_dependency_ready_source_time_s = best->dependency_ready_source_time_s;
+    }
+    // Dependency-ineligible rows were not attempted; selection may use an older
+    // ready row above the watermark. After selection there is no fallback.
     // Consume the entire source timestamp BEFORE provider/weight gates. No refund,
     // retry of duplicates, or older backfill; guarantee is per explicit generation.
     ned_velocity_source_last_attempt_time_=best->time;ned_velocity_source_has_attempt_=true;

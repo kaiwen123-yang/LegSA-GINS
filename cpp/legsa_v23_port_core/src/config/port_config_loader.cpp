@@ -1068,9 +1068,11 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   ned_time.go2_velocity_prior_time_policy = stringOrDefault(
       kv,"go2_velocity_prior_time_policy","legacy_absolute_nearest");
   if (ned_time.go2_velocity_prior_time_policy != "legacy_absolute_nearest" &&
-      ned_time.go2_velocity_prior_time_policy != "causal_unique_latest")
+      ned_time.go2_velocity_prior_time_policy != "causal_unique_latest" &&
+      ned_time.go2_velocity_prior_time_policy != "causal_recorded_dependencies_unique_latest")
     throw std::runtime_error("NED_HV_UNKNOWN_TIME_POLICY");
-  if (ned_time.go2_velocity_prior_time_policy == "causal_unique_latest" &&
+  if ((ned_time.go2_velocity_prior_time_policy == "causal_unique_latest" ||
+       ned_time.go2_velocity_prior_time_policy == "causal_recorded_dependencies_unique_latest") &&
       (options.runtime_contract != "research_experiment" ||
        !ned_time.enable_go2_horizontal_velocity_prior ||
        ned_time.go2_horizontal_velocity_frame != "ned" ||

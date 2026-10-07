@@ -12,10 +12,15 @@
 #include <algorithm>
 #include <cctype>
 #include <cmath>
+#include <cstdint>
+#include <cstring>
+#include <iomanip>
+#include <limits>
 #include <stdexcept>
 #include <fstream>
 #include <sstream>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 namespace legsa_v23_port_core {
@@ -82,6 +87,59 @@ bool boolValue(const std::unordered_map<std::string, std::string>& row,
     return static_cast<char>(std::tolower(ch));
   });
   return value == "true" || value == "1" || value == "yes" || value == "on";
+}
+
+// Used only by the opt-in dependency policy. Do not change legacy CSV parsing.
+void readRecordedDependency(const std::unordered_map<std::string, std::string>& row,
+                            std::size_t vector_index,
+                            Go2VelocityDiagnosticPriorMeasurement& measurement) {
+  measurement.dependency_schema = stringValue(row, "dependency_schema", "");
+  if (measurement.dependency_schema != "HV_CALIBRATED_GNSS18_TIME_V1") return;
+  auto required = [&](const std::string& key) -> const std::string& {
+    const auto it = row.find(key);
+    if (it == row.end()) throw std::runtime_error("NED_HV_DEPENDENCY_FIELD_MISSING:" + key);
+    return it->second;
+  };
+  const auto& index_token = required("dependency_source_row_index");
+  if (index_token.empty() || !std::all_of(index_token.begin(), index_token.end(),
+      [](unsigned char c) { return c >= '0' && c <= '9'; }))
+    throw std::runtime_error("NED_HV_DEPENDENCY_ROW_INDEX_INVALID");
+  std::size_t consumed = 0;
+  unsigned long long parsed_index = 0;
+  try { parsed_index = std::stoull(index_token, &consumed); }
+  catch (const std::exception&) { throw std::runtime_error("NED_HV_DEPENDENCY_ROW_INDEX_INVALID"); }
+  if (consumed != index_token.size() || parsed_index > std::numeric_limits<std::size_t>::max() ||
+      parsed_index != vector_index)
+    throw std::runtime_error("NED_HV_DEPENDENCY_ROW_INDEX_MISMATCH");
+  measurement.dependency_source_row_index = static_cast<std::size_t>(parsed_index);
+  const auto& bits = required("dependency_source_time_bits_hex");
+  if (bits.size() != 16 || !std::all_of(bits.begin(), bits.end(), [](unsigned char c) {
+        return (c >= '0' && c <= '9') || (c >= 'a' && c <= 'f'); }) ||
+      !std::isfinite(measurement.time))
+    throw std::runtime_error("NED_HV_DEPENDENCY_SOURCE_TIME_BITS_INVALID");
+  static_assert(sizeof(double) == sizeof(std::uint64_t), "64-bit source time required");
+  std::uint64_t word = 0;
+  std::memcpy(&word, &measurement.time, sizeof(word));
+  std::ostringstream expected;
+  expected << std::hex << std::setfill('0') << std::setw(16) << word;
+  if (bits != expected.str()) throw std::runtime_error("NED_HV_DEPENDENCY_SOURCE_TIME_BITS_MISMATCH");
+  measurement.dependency_source_time_bits_hex = bits;
+  const auto& supported = required("dependency_supported");
+  if (supported != "0" && supported != "1")
+    throw std::runtime_error("NED_HV_DEPENDENCY_SUPPORTED_INVALID");
+  measurement.dependency_supported = supported == "1";
+  const auto& ready = required("dependency_ready_source_time_s");
+  if (!measurement.dependency_supported) {
+    if (!ready.empty()) throw std::runtime_error("NED_HV_DEPENDENCY_UNSUPPORTED_READY_MUST_BE_EMPTY");
+  } else {
+    double value = 0.0;
+    try { value = std::stod(ready, &consumed); }
+    catch (const std::exception&) { throw std::runtime_error("NED_HV_DEPENDENCY_READY_INVALID"); }
+    if (consumed != ready.size() || !std::isfinite(value) || value < measurement.time)
+      throw std::runtime_error("NED_HV_DEPENDENCY_READY_INVALID");
+    measurement.dependency_ready_source_time_s = value;
+  }
+  measurement.dependency_metadata_available = true;
 }
 
 double percentile(std::vector<double> values, double p) {
@@ -210,6 +268,13 @@ Go2VelocityDiagnosticPriorLoadResult Go2WeakPriorLoader::loadVelocityDiagnosticC
     return result;
   }
   const std::vector<std::string> header = splitCsvLine(line);
+  const bool dependencies = config.go2_velocity_prior_time_policy == "causal_recorded_dependencies_unique_latest";
+  if (dependencies) {
+    std::unordered_set<std::string> names;
+    for (const auto& name : header)
+      if (name.empty() || !names.insert(name).second)
+        throw std::runtime_error("NED_HV_DEPENDENCY_DUPLICATE_OR_EMPTY_HEADER");
+  }
   std::vector<double> std_vn_values;
   std::vector<double> std_ve_values;
   while (std::getline(input, line)) {
@@ -238,6 +303,11 @@ Go2VelocityDiagnosticPriorLoadResult Go2WeakPriorLoader::loadVelocityDiagnosticC
     measurement.update_flag = boolValue(row, "update_flag", true);
     measurement.diagnostic_only = stringValue(row, "diagnostic_only", "true") != "false";
     measurement.go2_velocity_truth_claim = stringValue(row, "go2_velocity_truth_claim", "false") == "true";
+    if (dependencies) {
+      if (stringValue(row, "dependency_schema", "") == "HV_CALIBRATED_GNSS18_TIME_V1" && cells.size() != header.size())
+        throw std::runtime_error("NED_HV_DEPENDENCY_KNOWN_SCHEMA_ROW_WIDTH_MISMATCH");
+      readRecordedDependency(row, result.measurements.size(), measurement);
+    }
     countConfidenceLevel(result.status, stringValue(row, "confidence_level", ""));
     if (measurement.std_ned_mps[2] >= 999.0 ||
         measurement.prior_policy.find("horizontal") != std::string::npos) {

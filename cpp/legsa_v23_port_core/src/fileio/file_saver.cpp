@@ -824,6 +824,27 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
         << "  \"go2_ned_source_used_or_older_candidate_skips\": " << c.used_or_older_candidate_skips << ",\n"
         << "  \"go2_ned_source_no_eligible_calls\": " << c.no_eligible_calls << ",\n";
   }
+  if (options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_policy == "causal_recorded_dependencies_unique_latest") {
+    const auto& c=options.go2_velocity_prior_diagnostic_status.ned_time_policy_counts;
+    out << "  \"go2_velocity_prior_time_policy\": \"causal_recorded_dependencies_unique_latest\",\n"
+        << "  \"go2_ned_source_policy_scope\": \"reported_HV_and_historical_GNSS18_dependency_times_only_actual_arrival_unknown\",\n"
+        << "  \"go2_ned_dependency_schema\": \"HV_CALIBRATED_GNSS18_TIME_V1\",\n"
+        << "  \"go2_ned_dependency_readiness_validation\": \"native_checks_declared_metadata_identity_and_time_inequalities_generation_lineage_is_externally_sealed\",\n"
+        << "  \"go2_ned_dependency_selection\": \"filter_dependency_eligibility_then_latest_source_above_watermark_last_vector_index_tie\",\n"
+        << "  \"go2_ned_source_consumption\": \"timestamp_once_attempt_before_provider_and_weight_gates_per_generation_no_fallback_after_selection\",\n"
+        << "  \"go2_ned_source_generation_reset\": \"initialize_or_explicit_source_vector_replacement_not_EKF_feedback\",\n"
+        << "  \"go2_ned_dependency_counter_semantics\": \"candidate_visits_in_tolerance_with_source_at_or_before_trigger_and_state_not_unique_or_independent_samples\",\n"
+        << "  \"go2_ned_source_generations\": " << c.generations << ",\n"
+        << "  \"go2_ned_source_selected_attempts\": " << c.selected_attempts << ",\n"
+        << "  \"go2_ned_source_future_candidate_skips\": " << c.future_candidate_skips << ",\n"
+        << "  \"go2_ned_source_used_or_older_candidate_skips\": " << c.used_or_older_candidate_skips << ",\n"
+        << "  \"go2_ned_source_no_eligible_calls\": " << c.no_eligible_calls << ",\n"
+        << "  \"go2_ned_dependency_missing_candidate_skips\": " << c.dependency_missing_candidate_skips << ",\n"
+        << "  \"go2_ned_dependency_unsupported_candidate_skips\": " << c.dependency_unsupported_candidate_skips << ",\n"
+        << "  \"go2_ned_dependency_future_candidate_skips\": " << c.dependency_future_candidate_skips << ",\n"
+        << "  \"go2_ned_dependency_future_trigger_candidate_skips\": " << c.dependency_future_trigger_candidate_skips << ",\n"
+        << "  \"go2_ned_dependency_future_state_candidate_skips\": " << c.dependency_future_state_candidate_skips << ",\n";
+  }
   if (options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior &&
       options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame == "body_frd") {
     out << "  \"go2_horizontal_velocity_frame\": \"body_frd\",\n"

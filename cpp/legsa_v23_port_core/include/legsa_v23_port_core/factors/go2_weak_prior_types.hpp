@@ -77,6 +77,13 @@ struct Go2VelocityDiagnosticPriorMeasurement {
   bool update_flag = true;
   bool diagnostic_only = true;
   bool go2_velocity_truth_claim = false;
+  // Declared historical GNSS18 interpolation dependencies, not actual arrival.
+  std::string dependency_schema;
+  bool dependency_metadata_available = false;
+  std::size_t dependency_source_row_index = 0;
+  std::string dependency_source_time_bits_hex;
+  bool dependency_supported = false;
+  double dependency_ready_source_time_s = 0.0;
 };
 
 struct Go2VelocityDiagnosticPriorConfig {
@@ -106,6 +113,12 @@ struct NedVelocitySourceCounts {
   std::size_t future_candidate_skips = 0;
   std::size_t used_or_older_candidate_skips = 0;
   std::size_t no_eligible_calls = 0;
+  // Candidate visits during scans; these are not independent sample counts.
+  std::size_t dependency_missing_candidate_skips = 0;
+  std::size_t dependency_unsupported_candidate_skips = 0;
+  std::size_t dependency_future_candidate_skips = 0;
+  std::size_t dependency_future_trigger_candidate_skips = 0;
+  std::size_t dependency_future_state_candidate_skips = 0;
 };
 
 struct NedVelocitySourceEvent {
@@ -116,6 +129,13 @@ struct NedVelocitySourceEvent {
   std::size_t nonfinite_time_skips = 0;
   bool source_present = false, consumed = false, accepted = false;
   std::string reason, generation_reset_reason;
+  std::string selected_dependency_schema;
+  double selected_dependency_ready_source_time_s = 0.0;
+  std::size_t dependency_missing_candidate_skips = 0;
+  std::size_t dependency_unsupported_candidate_skips = 0;
+  std::size_t dependency_future_candidate_skips = 0;
+  std::size_t dependency_future_trigger_candidate_skips = 0;
+  std::size_t dependency_future_state_candidate_skips = 0;
 };
 
 struct Go2VelocityDiagnosticPriorStatus {
