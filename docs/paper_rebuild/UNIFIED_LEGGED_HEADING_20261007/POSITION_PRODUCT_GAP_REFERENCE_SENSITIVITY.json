@@ -1,0 +1,54 @@
+{
+  "scope": "Fixed gap, time keys, frame and evaluation-point transform. Unknown common horizontal reference error shift only; no refitted frames, times or algorithm outputs. No actual reference error bound asserted.",
+  "formula": "D_true=D-2 mean(d dot u); minimum RMS common shift for a possible tie=abs(D)/(2 RMS(d)); a smaller true bound protects the sign, but no such bound is established here.",
+  "rows": [
+    {
+      "candidate": "SDK_GAP_PARTIAL",
+      "control": "SDK_GAP_FULL_ONLY",
+      "n": 6592,
+      "H_MSE_difference_m2": 0.00030701269069024687,
+      "paired_error_vector_RMS_m": 0.018324206078273515,
+      "minimum_time_varying_common_reference_shift_RMS_for_tie_m": 0.008377243995696572,
+      "minimum_constant_common_reference_shift_norm_for_tie_m": 0.01018929631807627
+    },
+    {
+      "candidate": "FOOT_GAP_PARTIAL",
+      "control": "FOOT_GAP_FULL_ONLY",
+      "n": 6592,
+      "H_MSE_difference_m2": -0.004452702686057622,
+      "paired_error_vector_RMS_m": 0.029352285341166115,
+      "minimum_time_varying_common_reference_shift_RMS_for_tie_m": 0.07584933565313869,
+      "minimum_constant_common_reference_shift_norm_for_tie_m": 0.09236806015669605
+    },
+    {
+      "candidate": "FOOT_GAP_PARTIAL",
+      "control": "SDK_GAP_PARTIAL",
+      "n": 6592,
+      "H_MSE_difference_m2": 0.46573505158402867,
+      "paired_error_vector_RMS_m": 0.4050154600874886,
+      "minimum_time_varying_common_reference_shift_RMS_for_tie_m": 0.5749595972008374,
+      "minimum_constant_common_reference_shift_norm_for_tie_m": 0.7183527052488088
+    }
+  ],
+  "inputs": {
+    "SDK_GAP_FULL_ONLY": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/UNIFIED_LEGGED_HEADING_20261007/POSITION_PRODUCT_GAP_BY2O_01/EVALUATION/BY2O__SDK_GAP_FULL_ONLY/FROZEN_EVALUATOR/error_series.csv",
+      "sha256": "7600b069c1ddf2c0ccc0c7f87c8360ca7089e8e206c18705d00a84365d81f2be"
+    },
+    "SDK_GAP_PARTIAL": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/UNIFIED_LEGGED_HEADING_20261007/POSITION_PRODUCT_GAP_BY2O_01/EVALUATION/BY2O__SDK_GAP_PARTIAL/FROZEN_EVALUATOR/error_series.csv",
+      "sha256": "e028c02f4d2143d847ae0afb92911f78f04d714a8455fdf98ad24714164dd616"
+    },
+    "FOOT_GAP_FULL_ONLY": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/UNIFIED_LEGGED_HEADING_20261007/POSITION_PRODUCT_GAP_BY2O_01/EVALUATION/BY2O__FOOT_GAP_FULL_ONLY/FROZEN_EVALUATOR/error_series.csv",
+      "sha256": "e317707f63588c536fefbd574445146f1d4caf36ed35431b5b1b567be274830f"
+    },
+    "FOOT_GAP_PARTIAL": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/UNIFIED_LEGGED_HEADING_20261007/POSITION_PRODUCT_GAP_BY2O_01/EVALUATION/BY2O__FOOT_GAP_PARTIAL/FROZEN_EVALUATOR/error_series.csv",
+      "sha256": "4652a47a0a4c471a87384b2bdbe2d9d743c637ae63b779805bd2f5e387d81435"
+    }
+  },
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "reference_payload_reads": 0
+}

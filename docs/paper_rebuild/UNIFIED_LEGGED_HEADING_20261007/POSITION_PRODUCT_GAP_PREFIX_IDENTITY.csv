@@ -1,0 +1,3 @@
+comparison,prefix_epochs,fixed_first_affected_carrier_time_s,exact_prefix_state_equal,exact_prefix_bias_scale_equal,exact_prefix_STD_equal,first_saved_state_or_bias_difference_time_s
+GAP_PARTIAL_WITH_SDK,20026,3279.99799990654,True,True,True,3280.003072
+GAP_PARTIAL_WITH_FOOT_POLICY,20026,3279.99799990654,True,True,True,3280.003072
