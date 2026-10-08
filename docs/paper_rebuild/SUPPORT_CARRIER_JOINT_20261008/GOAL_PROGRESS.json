@@ -38,9 +38,10 @@
     "Same-version SDK and frozen V3 system adoption value on real data"
   ],
   "next_core_work": [
-    "Read the running corrected full process and BY96-106 development run; model selection and whole navigation benefit remain unproven",
-    "Explain the actual BY raw integer working-domain failure and retain valid partial direction information in the same graph; do not force a fix by changing thresholds",
-    "Complete same-backend mechanism attribution and matched whole BY original-V3 comparison before freezing parameters for BYO/BYH and adverse XB/NMB evaluation"
+    "Compute shared IMU/PV physical forward consistency before changing foot thresholds: U0 and U1 both grow horizontal accelerometer bias to about 0.7 m/s^2, while the matched legged arm improves yaw and position under finite solver budgets",
+    "Read the corrected running full synthetic source-model process, then establish supported causal revocation and direction-to-navigation attribution",
+    "Explain BY raw integer-domain emptiness and preserve valid partial physical relations in the same state rather than forcing all-integer fixes",
+    "Complete BY development and original V3 whole-window comparison before freezing parameters for BYO/BYH and adverse XB/NMB tests"
   ],
   "data_policy": {
     "development": "BY",
@@ -84,12 +85,45 @@
     "joint_yaw_rmse_deg": 4.101115,
     "frozen_v3_yaw_rmse_deg": 1.118553,
     "scope": "SHORT_COLD_START_INTEGRATION_NOT_NAVIGATION_GAIN",
-    "next_run": "BY_ASYNC_PHYSICAL_03",
+    "next_run": "BY_ASYNC_PHYSICAL_04",
     "next_window_s": [
       96,
       106
     ],
-    "next_run_status": "FAILED_RECORD_PRESERVED; SQUARE_ROOT_FIX_VERIFIED_THROUGH_101.139; FULL_RETRY_PENDING",
-    "velocity_accuracy_evaluated": false
+    "next_run_status": "COMPLETED_FROM_a01cece",
+    "velocity_accuracy_evaluated": false,
+    "next_causal_rows": 325,
+    "next_finite_rows": 190,
+    "next_no_init_rows": 135,
+    "next_common_evaluation_duration_s": 5.802000045776367,
+    "next_joint_yaw_rmse_deg": 3.7658,
+    "next_v3_yaw_rmse_deg": 1.1608,
+    "next_joint_horizontal_rmse_m": 0.04679,
+    "next_v3_horizontal_rmse_m": 0.03811,
+    "next_joint_3d_rmse_m": 0.11107,
+    "next_v3_3d_rmse_m": 0.0518,
+    "complete_candidate_support_rows": 0,
+    "matched_no_foot_run": "BY_NOFOOT_PHYSICAL_04",
+    "matched_no_foot_status": "COMPLETED",
+    "matched_common_yaw_rmse_deg": {
+      "U0": 25.716516,
+      "U1": 3.765783,
+      "V3": 1.160812
+    },
+    "matched_common_horizontal_rmse_m": {
+      "U0": 0.076734,
+      "U1": 0.04679,
+      "V3": 0.038114
+    },
+    "matched_common_3d_rmse_m": {
+      "U0": 0.128034,
+      "U1": 0.111074,
+      "V3": 0.051799
+    },
+    "startup_unfinished_seeds": {
+      "U0": 3,
+      "U1": 1
+    },
+    "legged_contribution_scope": "Observed same-compute cold-start improvement; not isolated heading mediation or superiority to V3"
   }
 }

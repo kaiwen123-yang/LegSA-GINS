@@ -1,0 +1,230 @@
+{
+  "schema": "joint_navigation.BY2_matched_foot_comparison.v1",
+  "data_mode": "real_by2_raw",
+  "sequence": "BY2",
+  "requested_window_s": [
+    96.0,
+    106.0
+  ],
+  "common_finite_intervals_s": [
+    [
+      100.19799995422365,
+      106.0
+    ]
+  ],
+  "metric_policy": "time-weighted RMSE of piecewise-linear squared errors; identical physical intervals; no interval crosses a joint NO_INIT row",
+  "coverage": {
+    "U0": {
+      "causal_rows": 325,
+      "finite_state_rows": 190,
+      "no_init_rows": 135,
+      "unavailable_rows": 135,
+      "finite_interval_duration_s": 5.802000045776367,
+      "requested_duration_s": 10.0,
+      "complete_candidate_support_rows": 0,
+      "complete_direction_domain_certified": false
+    },
+    "U1": {
+      "causal_rows": 325,
+      "finite_state_rows": 190,
+      "no_init_rows": 135,
+      "unavailable_rows": 135,
+      "finite_interval_duration_s": 5.802000045776367,
+      "requested_duration_s": 10.0,
+      "complete_candidate_support_rows": 0,
+      "complete_direction_domain_certified": false
+    }
+  },
+  "matched_identity_checks": {
+    "same_algorithm_source_hashes": true,
+    "same_input_config": true,
+    "same_sensor_metadata": true,
+    "same_input_summary": true,
+    "same_causal_timestamps": true,
+    "same_no_init_mask": true,
+    "same_common_physical_intervals": true,
+    "same_frozen_v3_metrics": true
+  },
+  "common_interval_metrics": {
+    "U0": {
+      "horizontal_err_m": {
+        "time_weighted_rmse": 0.07673387348105162,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 0.1372864251767672
+      },
+      "position_3d_err_m": {
+        "time_weighted_rmse": 0.12803419142913378,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 0.2043914220018826
+      },
+      "roll_err_deg": {
+        "time_weighted_rmse": 1.5538322195866576,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 4.18950821549268
+      },
+      "pitch_err_deg": {
+        "time_weighted_rmse": 2.3334848974938707,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 6.32295532652816
+      },
+      "yaw_err_deg": {
+        "time_weighted_rmse": 25.716515849296137,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 42.205398700910166
+      }
+    },
+    "U1": {
+      "horizontal_err_m": {
+        "time_weighted_rmse": 0.04679012849517924,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 0.0932384149546446
+      },
+      "position_3d_err_m": {
+        "time_weighted_rmse": 0.11107353924299104,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 0.2027445820063566
+      },
+      "roll_err_deg": {
+        "time_weighted_rmse": 1.673903628940953,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 4.294761584790422
+      },
+      "pitch_err_deg": {
+        "time_weighted_rmse": 2.260499253862614,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 6.007330806683939
+      },
+      "yaw_err_deg": {
+        "time_weighted_rmse": 3.7657828378884393,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 5.894594555010599
+      }
+    },
+    "frozen_V3": {
+      "horizontal_err_m": {
+        "time_weighted_rmse": 0.03811369008805525,
+        "duration_s": 5.802000045776353,
+        "samples": 1267,
+        "absolute_max": 0.0817526842555185
+      },
+      "position_3d_err_m": {
+        "time_weighted_rmse": 0.05179865083786852,
+        "duration_s": 5.802000045776353,
+        "samples": 1267,
+        "absolute_max": 0.1047161740883052
+      },
+      "roll_err_deg": {
+        "time_weighted_rmse": 0.7609258591822263,
+        "duration_s": 5.802000045776353,
+        "samples": 1267,
+        "absolute_max": 1.7083428797076865
+      },
+      "pitch_err_deg": {
+        "time_weighted_rmse": 1.8982938944930532,
+        "duration_s": 5.802000045776353,
+        "samples": 1267,
+        "absolute_max": 4.589983936042302
+      },
+      "yaw_err_deg": {
+        "time_weighted_rmse": 1.1608123408505053,
+        "duration_s": 5.802000045776353,
+        "samples": 1267,
+        "absolute_max": 2.3703575876982086
+      }
+    }
+  },
+  "foot_effect_U1_vs_U0": {
+    "horizontal_err_m": {
+      "U1_minus_U0": -0.029943744985872385,
+      "relative_RMSE_reduction_percent": 39.02285083166899
+    },
+    "position_3d_err_m": {
+      "U1_minus_U0": -0.016960652186142733,
+      "relative_RMSE_reduction_percent": 13.246970982380402
+    },
+    "roll_err_deg": {
+      "U1_minus_U0": 0.12007140935429539,
+      "relative_RMSE_reduction_percent": -7.7274372252517765
+    },
+    "pitch_err_deg": {
+      "U1_minus_U0": -0.07298564363125681,
+      "relative_RMSE_reduction_percent": 3.1277529890869404
+    },
+    "yaw_err_deg": {
+      "U1_minus_U0": -21.9507330114077,
+      "relative_RMSE_reduction_percent": 85.35655895239981
+    }
+  },
+  "sources": {
+    "U0": {
+      "run_directory": "BY_NOFOOT_PHYSICAL_04",
+      "evaluation_directory": "BY_NOFOOT_EVAL_04",
+      "algorithm_commit": "a01cece3ea6316d631e07b2e4b36fbe65c89e871",
+      "navigation_sha256": "8816536fbfb635cda1b00f8703441d11925a2c84919396c258b0e0145210f948",
+      "comparison_sha256": "0102e2e7995a72763d362b470fe419e6552e533271fae6e85c1699b9f3ac60ae",
+      "evaluator_error_series_sha256": "43bda56da16cd6c41839a599e929098e3c1dcc981bf498eb8e73cfb75a05fe5d",
+      "evaluation_bridge_sha256": "8c21c93637223c5db282bb6279f2d1c6cb4408d9f993701d336250ace7eb7c27",
+      "evaluator_invocation_attempts": 1,
+      "reference_child_opens": 1,
+      "parent_reference_payload_reads": 0,
+      "evaluation_audit_passed": true
+    },
+    "U1": {
+      "run_directory": "BY_ASYNC_PHYSICAL_04",
+      "evaluation_directory": "BY_ASYNC_EVAL_04",
+      "algorithm_commit": "a01cece3ea6316d631e07b2e4b36fbe65c89e871",
+      "navigation_sha256": "090ebe8dcbea09192a8b40ae26610f20be80dbff323bfb42a4570afa4fd3c6e9",
+      "comparison_sha256": "108d3eaf7558de7f44b74676ddb8600f55531f45bb2ec466b0b18e74e9701b8c",
+      "evaluator_error_series_sha256": "4fbc54b9314ad4a7b75de92c9e17786b89073582b4eca5242c4e427a05da8ff3",
+      "evaluation_bridge_sha256": "8c21c93637223c5db282bb6279f2d1c6cb4408d9f993701d336250ace7eb7c27",
+      "evaluator_invocation_attempts": 1,
+      "reference_child_opens": 1,
+      "parent_reference_payload_reads": 0,
+      "evaluation_audit_passed": true
+    }
+  },
+  "frozen_V3": {
+    "scientific_commit": "7d43b9af26120ed5dde21f53e515386361072ba6",
+    "run_id": "RUN_00004",
+    "retained_error_series_sha256": "a98f1a5f7591c2365b0fd73b6a1146e0d6df3de2a06414fd067fc9b66b928548",
+    "original_run_window_s": [
+      66.0,
+      340.0
+    ]
+  },
+  "interpretation": {
+    "foot_mechanism": "Same-backend U0/U1 conditional accuracy comparison with the same causal inputs and parameters; foot use is the mode difference",
+    "observed_effect": "Foot constraints reduce yaw, horizontal and 3D position RMSE; pitch improves slightly and roll worsens in this interval",
+    "system_comparison": "U1 still has larger yaw, position and attitude RMSE than the frozen original V3 on the same physical interval",
+    "heading_to_position_causality": "Joint improvement does not isolate heading mediation from direct positional foot constraints",
+    "initialization": "Both joint modes start at 96 s and first publish finite states at 100.19799995422363 s; V3 has run continuously since 66 s",
+    "qualification": "All 190 finite joint rows still have incomplete candidate support; no calibrated trusted-heading claim",
+    "scope": "Single BY2 cold-start development segment, not a full-window or cross-dataset improvement"
+  },
+  "velocity_accuracy": {
+    "status": "NOT_EVALUATED",
+    "reason": "No velocity truth/error supplied by this frozen evaluator"
+  },
+  "reference_claim": "Fixposition-derived fused reference with shared GNSS lineage; not independent truth",
+  "new_navigation_calls": 0,
+  "new_evaluator_calls_this_comparison": 1,
+  "U1_evaluation_reused": true,
+  "complete_research_goal": false,
+  "solver_boundary": {
+    "U0_unfinished_startup_seeds": 3,
+    "U1_unfinished_startup_seeds": 1,
+    "per_seed_iteration_budget": 200,
+    "global_direction_coverage_certified": false,
+    "interpretation": "Observed benefit under the same finite computation policy; not a globally solved pure-information ablation or complete trusted-heading claim"
+  }
+}

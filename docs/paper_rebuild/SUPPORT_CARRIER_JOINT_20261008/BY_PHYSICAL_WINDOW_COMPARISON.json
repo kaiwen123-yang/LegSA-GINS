@@ -1,0 +1,252 @@
+{
+  "requested_window_s": [
+    96.0,
+    106.0
+  ],
+  "output_coverage": {
+    "requested_window_s": [
+      96.0,
+      106.0
+    ],
+    "causal_rows": 325,
+    "finite_state_rows": 190,
+    "no_init_rows": 135,
+    "unavailable_rows": 135,
+    "finite_intervals_s": [
+      [
+        100.19799995422363,
+        106.0
+      ]
+    ],
+    "finite_interval_duration_s": 5.802000045776367,
+    "requested_duration_s": 10.0,
+    "complete_candidate_support_rows": 0,
+    "complete_direction_domain_certified": false,
+    "input_run_status_sha256": "366285739cad5ea37b7ca0e1cc5da8cfb6242330fa81b5f962b3b71cab6ebdc2",
+    "input_navigation_sha256": "090ebe8dcbea09192a8b40ae26610f20be80dbff323bfb42a4570afa4fd3c6e9",
+    "metadata_sha256": "e070d208874321b1f84dcef150cd3fd5f4d92a5981bd59104c4bde8a212d97fa"
+  },
+  "requested_window": {
+    "joint_finite_metrics": {
+      "horizontal_err_m": {
+        "time_weighted_rmse": 0.04679012849517924,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 0.0932384149546446
+      },
+      "position_3d_err_m": {
+        "time_weighted_rmse": 0.11107353924299104,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 0.2027445820063566
+      },
+      "roll_err_deg": {
+        "time_weighted_rmse": 1.673903628940953,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 4.294761584790422
+      },
+      "pitch_err_deg": {
+        "time_weighted_rmse": 2.260499253862614,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 6.007330806683939
+      },
+      "yaw_err_deg": {
+        "time_weighted_rmse": 3.7657828378884393,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 5.894594555010599
+      }
+    },
+    "v3_metrics": {
+      "horizontal_err_m": {
+        "time_weighted_rmse": 0.041875622979090296,
+        "duration_s": 10.0,
+        "samples": 2210,
+        "absolute_max": 0.0862505377756847
+      },
+      "position_3d_err_m": {
+        "time_weighted_rmse": 0.05940964112740806,
+        "duration_s": 10.0,
+        "samples": 2210,
+        "absolute_max": 0.1238772383041019
+      },
+      "roll_err_deg": {
+        "time_weighted_rmse": 0.7938157118564159,
+        "duration_s": 10.0,
+        "samples": 2210,
+        "absolute_max": 2.042217120050396
+      },
+      "pitch_err_deg": {
+        "time_weighted_rmse": 1.613666280377101,
+        "duration_s": 10.0,
+        "samples": 2210,
+        "absolute_max": 4.589983936042302
+      },
+      "yaw_err_deg": {
+        "time_weighted_rmse": 1.1096032417418635,
+        "duration_s": 10.0,
+        "samples": 2210,
+        "absolute_max": 2.3703575876982086
+      }
+    },
+    "direct_gain_not_computed": "Joint NO_INIT and unequal availability are retained, not scored as zero"
+  },
+  "common_finite_intervals_s": [
+    [
+      100.19799995422365,
+      106.0
+    ]
+  ],
+  "common_finite": {
+    "joint": {
+      "horizontal_err_m": {
+        "time_weighted_rmse": 0.04679012849517924,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 0.0932384149546446
+      },
+      "position_3d_err_m": {
+        "time_weighted_rmse": 0.11107353924299104,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 0.2027445820063566
+      },
+      "roll_err_deg": {
+        "time_weighted_rmse": 1.673903628940953,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 4.294761584790422
+      },
+      "pitch_err_deg": {
+        "time_weighted_rmse": 2.260499253862614,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 6.007330806683939
+      },
+      "yaw_err_deg": {
+        "time_weighted_rmse": 3.7657828378884393,
+        "duration_s": 5.802000045776353,
+        "samples": 190,
+        "absolute_max": 5.894594555010599
+      }
+    },
+    "frozen_v3": {
+      "horizontal_err_m": {
+        "time_weighted_rmse": 0.03811369008805525,
+        "duration_s": 5.802000045776353,
+        "samples": 1267,
+        "absolute_max": 0.0817526842555185
+      },
+      "position_3d_err_m": {
+        "time_weighted_rmse": 0.05179865083786852,
+        "duration_s": 5.802000045776353,
+        "samples": 1267,
+        "absolute_max": 0.1047161740883052
+      },
+      "roll_err_deg": {
+        "time_weighted_rmse": 0.7609258591822263,
+        "duration_s": 5.802000045776353,
+        "samples": 1267,
+        "absolute_max": 1.7083428797076865
+      },
+      "pitch_err_deg": {
+        "time_weighted_rmse": 1.8982938944930532,
+        "duration_s": 5.802000045776353,
+        "samples": 1267,
+        "absolute_max": 4.589983936042302
+      },
+      "yaw_err_deg": {
+        "time_weighted_rmse": 1.1608123408505053,
+        "duration_s": 5.802000045776353,
+        "samples": 1267,
+        "absolute_max": 2.3703575876982086
+      }
+    },
+    "joint_minus_v3": {
+      "horizontal_err_m": 0.008676438407123989,
+      "position_3d_err_m": 0.059274888405122524,
+      "roll_err_deg": 0.9129777697587267,
+      "pitch_err_deg": 0.36220535936956066,
+      "yaw_err_deg": 2.604970497037934
+    }
+  },
+  "metric_policy": "time-weighted RMSE of piecewise-linear squared errors; identical physical intervals; no interval crosses a joint NO_INIT row",
+  "comparison_type": "original_V3_system_comparison_not_same_backend_mechanism_ablation",
+  "initialization_difference": "joint starts at requested run start; frozen V3 is the original 66--340 s causal run, not restarted at this short window",
+  "reference_claim": "Fixposition-derived fused reference with shared GNSS lineage; not independent truth",
+  "velocity_accuracy": {
+    "status": "NOT_EVALUATED",
+    "reason": "Frozen error series and evaluator do not provide velocity truth or velocity errors"
+  },
+  "uncertainty_comparison": "NOT_EVALUATED_NO_FABRICATED_STD",
+  "complete_research_goal": false,
+  "scientific_scope": "single BY2 development window",
+  "frozen_v3_commit": "7d43b9af26120ed5dde21f53e515386361072ba6",
+  "baseline_error_sha256": "a98f1a5f7591c2365b0fd73b6a1146e0d6df3de2a06414fd067fc9b66b928548",
+  "evaluator_audit": {
+    "passed": true,
+    "argv": [
+      "/usr/bin/python3",
+      "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py",
+      "--trace",
+      "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv",
+      "--nav",
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_ASYNC_EVAL_04/EVAL_NAV_V3.nav",
+      "--outdir",
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_ASYNC_EVAL_04/FROZEN_EVALUATOR",
+      "--base_time",
+      "1772784000",
+      "--yaw_truth_mode",
+      "enu"
+    ],
+    "exit_code": 0,
+    "reference_child_opens": 1,
+    "parent_reference_payload_reads": 0,
+    "evaluator_invocation_attempts": 1,
+    "raw_opens": 1,
+    "STD": "OMITTED; no uncertainty/NEES comparison",
+    "write_scope": {
+      "pass": true,
+      "write_open_count": 3,
+      "write_outside_run_count": 0,
+      "outside_run_write_open_count": 0,
+      "outside_run_write_open_records": [],
+      "write_open_records": [
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_ASYNC_EVAL_04/FROZEN_EVALUATOR/error_series.csv",
+          "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_ASYNC_EVAL_04/FROZEN_EVALUATOR/error_series.csv",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_ASYNC_EVAL_04/FROZEN_EVALUATOR/summary.json",
+          "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_ASYNC_EVAL_04/FROZEN_EVALUATOR/summary.json",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_ASYNC_EVAL_04/FROZEN_EVALUATOR/EVALUATOR_CAPTURE.json",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_ASYNC_EVAL_04/FROZEN_EVALUATOR/EVALUATOR_CAPTURE.json",
+          "anonymous_pipe": false
+        }
+      ],
+      "allowed_device_write_count": 0,
+      "allowed_device_write_records": [],
+      "allowed_anonymous_pipe_write_count": 0,
+      "allowed_anonymous_pipe_write_records": [],
+      "raw_write_open_count": 0,
+      "clean_root_outside_run_write_count": 0,
+      "write_scope_exceptions": [
+        "/dev/null",
+        "/dev/pts/*",
+        "kernel-identified anonymous pipe"
+      ]
+    }
+  }
+}
