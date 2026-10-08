@@ -1,6 +1,6 @@
 {
   "date": "2026-10-08",
-  "status": "ACTIVE",
+  "status": "STOP_AFTER_CURRENT_M2_RUN_REQUESTED",
   "active_goal_thread": "01a11959-c9c1-7901-b9c7-3d058a0f20b8",
   "continued_from_thread": "01a11984-efdc-7930-8436-76d4f86667d1",
   "continuation_base_commit": "381db924b34907e0781b6081ada0c49390d867a5",
@@ -260,7 +260,7 @@
       "repeats": 30,
       "saved_triangular_ms": 0.13464,
       "independent_QR_ms": 0.77145,
-      "covariance_max_abs_difference": 8.53E-14,
+      "covariance_max_abs_difference": 8.53e-14,
       "end_to_end_speedup_established": false
     },
     "active_shared_run_source": "1feccf3_before_this_milestone",
@@ -274,9 +274,9 @@
       "events": 10,
       "full_dimension": 184,
       "separator_dimension": 31,
-      "mean_max_abs": 1.3E-16,
-      "covariance_max_abs": 3.12E-17,
-      "objective_max_abs": 2.66E-15
+      "mean_max_abs": 1.3e-16,
+      "covariance_max_abs": 3.12e-17,
+      "objective_max_abs": 2.66e-15
     },
     "source_policy_paths_report": "SOURCE_POLICY_PATHS.md",
     "physical_release_diagnosis": "STANDING_SUPPORT_RELEASE_DIAGNOSIS.md",
@@ -349,5 +349,24 @@
     ],
     "status": "RUNNING_NOT_RESULT_EVIDENCE",
     "old_provider_and_carrier_bootstrap_retained": true
+  },
+  "user_review_boundary": {
+    "requested_at_utc": "2026-10-08T09:49:48.818623+00:00",
+    "instruction_zh": "完成这个任务之后，终止运行，我要检查一下现在完成的内容，避免跑偏",
+    "permitted_remaining_work": [
+      "Finish existing BY_M2_NATIVE_FULL_09_U1 PID10280; do not restart it",
+      "Evaluate that terminal output once with existing frozen p/yaw and approximate-geometry velocity evaluators",
+      "Record comparison against completed FULL07 and frozen V3; push completed closeout artifacts"
+    ],
+    "after_closeout": "PAUSED_FOR_USER_REVIEW; no autonomous research continuation",
+    "prohibited_before_explicit_resume": [
+      "New navigation runs",
+      "New physical-model implementation",
+      "New tuning or test-set work",
+      "Recreate the long-term goal or recurring automation"
+    ],
+    "current_app_goal_exists": false,
+    "one_shot_closeout_only": true,
+    "pending_run_is_not_completed": true
   }
 }
