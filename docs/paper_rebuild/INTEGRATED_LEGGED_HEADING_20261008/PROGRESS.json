@@ -1,5 +1,5 @@
 {
-  "plan_version": "v2.0",
+  "plan_version": "v2.1",
   "date_local": "2026-10-08",
   "timezone": "Asia/Shanghai",
   "status": "ACTIVE_M1_AUTOMATIC_ONSET_IMPLEMENTATION_NEXT",
@@ -190,6 +190,13 @@
       "trigger": "Latest human correction: support motion deserves simultaneous core research and previous acceptance was too narrow.",
       "decision": "Use overlapping integrated milestones and four evidence axes; retain old M1 failure, remove its sequential gate, permit evidence-based posterior/backend changes.",
       "impact": "No independent modules and no reduction of final trusted heading plus shared p/v goal. BY development, BYO/BYH tests, XB/NMB harsh tests and frozen V3 remain fixed."
+    },
+    {
+      "date": "2026-10-08",
+      "plan_version": "v2.1",
+      "trigger": "User requested a new understandable plan after finding the engineering-oriented v2 explanation inadequate.",
+      "decision": "Rewrite the main plan around the three scientific questions and one physical process, with concrete implementation and evidence for each; support-motion research remains throughout.",
+      "impact": "Complete-process testing begins in the first iteration, BY/V3 development is concurrent, and source-dependent heading-to-navigation benefit remains the final target."
     }
   ],
   "remaining_goal_requirements": [
@@ -212,7 +219,7 @@
     "depends_on": "Complete M1 full automatic versus fixed navigation judgment first."
   },
   "plan_review_v2": {
-    "status": "PREPARED_FOR_USER_REVIEW",
+    "status": "SUPERSEDED_BY_V2_1",
     "date_local": "2026-10-08",
     "evidence_commit": "ca73c6e4d6dc1c46acde3f57a8291fdb7b6e4878",
     "authority": "User requests support-motion research to proceed jointly with direction, withdrawal and navigation, first as a reviewable plan; explicit staged GitHub publication authorized.",
@@ -230,26 +237,58 @@
     "scientific_completion_unchanged": true
   },
   "milestones_evidence_plan_version": "v1.7",
-  "planned_milestones_v2": {
-    "M1": {
-      "days": "1-4",
+  "plan_review": {
+    "version": "v2.1",
+    "status": "PREPARED_FOR_USER_REVIEW",
+    "date_local": "2026-10-08",
+    "research_question": "Can observations distinguish incorrect body direction from moving support, and can source-dependent direction use, withdrawal and partial-information recovery improve shared velocity and position?",
+    "scope_this_turn": "Planning and GitHub publication only; no new algorithm experiment, goal or external thread message.",
+    "historical_execution_note": "Existing status, goal_thread_id, current_milestone, milestones and first_action retain last recorded v1.7 execution metadata; current planned work is described here and in PLAN.md.",
+    "three_candidate_innovations": [
+      "legged-motion short-baseline direction identifiability",
+      "proprioceptive information use and source-dependent withdrawal",
+      "support/carrier arc partial direction retention and navigation recovery"
+    ],
+    "first_implementation": "In one JointNavigator, jointly update within-arc support motion timing, direction acceptance/exclusion dependencies and affected-candidate reopening; run a complete direction-relevant process and BY development in parallel.",
+    "review_scales": [
+      "physical direction/support distinguishability",
+      "actual source-conditioned direction acceptance and withdrawal",
+      "surviving information and reacquisition",
+      "causal shared navigation benefit and fixed V3 comparison"
+    ],
+    "single_gap_dual_win_is_prerequisite": false,
+    "final_goal_unchanged": true
+  },
+  "planned_stages": [
+    {
+      "id": "P1",
+      "days": "1-3",
       "status": "PLANNED",
-      "scope": "Joint support motion, effective time, direction source dependencies and conditional-state reconstruction"
+      "deliverable": "First complete joint direction/support process, source dependency reopening and preserved prior negative-case evidence"
     },
-    "M2": {
-      "days": "3-7",
+    {
+      "id": "P2",
+      "days": "3-6",
       "status": "PLANNED",
-      "scope": "All three mechanisms in one direction-relevant continuous process and full BY development"
+      "deliverable": "Complete direction failure/partial carrier/recovery evidence and full BY causal navigation attribution"
     },
-    "M3": {
-      "days": "5-10",
+    {
+      "id": "P3",
+      "days": "5-7",
       "status": "PLANNED",
-      "scope": "Frozen BYO/BYH evaluation, heading-to-navigation attribution and V3/SDK adoption comparison"
+      "deliverable": "Frozen development version, V3 development comparison and first BYO/BYH tests"
     },
-    "M4": {
-      "days": "8-14",
+    {
+      "id": "P4",
+      "days": "8-12",
       "status": "PLANNED",
-      "scope": "Same-version XB/NMB adverse evaluation, decisive repairs and reproducible delivery"
+      "deliverable": "Fixed BYO/BYH and XB/NMB results with decisive source-supported repairs if needed"
+    },
+    {
+      "id": "P5",
+      "days": "13-14",
+      "status": "PLANNED",
+      "deliverable": "One reproducible algorithm, three-innovation evidence map and explicit final achieved/unresolved judgment"
     }
-  }
+  ]
 }
