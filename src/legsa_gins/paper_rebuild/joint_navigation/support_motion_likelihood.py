@@ -127,7 +127,8 @@ def prepare_support_motion_likelihood(navigation_graph, navigation_values, event
     if not rows:
         raise ValueError("no eligible observed foot rows in the source interval")
     origins = {arc: sums[arc]/counts[arc] for arc in sums}
-    linear = navigation_graph.linearize(navigation_values)
+    linear = (navigation_graph if isinstance(navigation_graph, gtsam.GaussianFactorGraph)
+              else navigation_graph.linearize(navigation_values))
     for j in range(linear.size()):
         if linear.at(j).isConstrained():
             raise ValueError("calibration source requires a proper unconstrained navigation chart")
@@ -257,6 +258,14 @@ def profile_support_motion(problem, sigma_grid, tau_grid, *, deviance_width=5.99
         raise ValueError("nonempty declared sigma/tau grid required")
     rows = [evaluate_support_motion_likelihood(problem, MotionParameters(s, t))
             for s in sigmas for t in (taus[:1] if s == 0 else taus)]
+    return summarize_support_motion_profile(problem, rows, deviance_width=deviance_width)
+
+
+def summarize_support_motion_profile(problem, evaluated_rows, *, deviance_width=5.991464547107982):
+    """Summarize already evaluated points, including a declared sparse extension."""
+    rows = [dict(row) for row in evaluated_rows]
+    sigmas = sorted({row['velocity_sigma_mps'] for row in rows})
+    taus = sorted({row['tau_s'] for row in rows})
     best = min(rows, key=lambda r: r["restricted_objective"])
     for row in rows:
         row["relative_deviance"] = row["restricted_objective"]-best["restricted_objective"]

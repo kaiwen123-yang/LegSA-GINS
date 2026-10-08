@@ -1,0 +1,1553 @@
+{
+  "status": "COMPLETED_BY_SOURCE_PROFILE_CONDITIONAL_WORKING_MODEL_NOT_PHYSICAL_CALIBRATION",
+  "source_root": "/home/kaiwen/research/LegSA-GINS-SCRATCH/INTEGRATED_LEGGED_HEADING_20261008/BY_SOURCE_PROFILE_FULL02",
+  "extension_root": "/home/kaiwen/research/LegSA-GINS-SCRATCH/INTEGRATED_LEGGED_HEADING_20261008/BY_SOURCE_PROFILE_FULL02_EXTENSION01",
+  "source_chart": {
+    "status": "LOCAL_NOFOOT_SOURCE_CHART",
+    "seeds": [
+      {
+        "seed_yaw_deg": 0.0,
+        "initial_seed_is_prior": false,
+        "nonlinear_cost": 258080.9187683261,
+        "iterations": 14,
+        "iteration_budget": 100,
+        "scaled_relative_gradient": 1.4550005777136819e-08,
+        "stationary": true,
+        "factors": 18894,
+        "state_dimension": 131430,
+        "original_factors_only": true,
+        "marginalized_variables": 0
+      },
+      {
+        "seed_yaw_deg": 90.0,
+        "initial_seed_is_prior": false,
+        "nonlinear_cost": 258080.71900229613,
+        "iterations": 17,
+        "iteration_budget": 100,
+        "scaled_relative_gradient": 6.8260993245298405e-09,
+        "stationary": true,
+        "factors": 18894,
+        "state_dimension": 131430,
+        "original_factors_only": true,
+        "marginalized_variables": 0
+      },
+      {
+        "seed_yaw_deg": 180.0,
+        "initial_seed_is_prior": false,
+        "nonlinear_cost": 260240.5510738631,
+        "iterations": 100,
+        "iteration_budget": 100,
+        "scaled_relative_gradient": 0.0011473859042683825,
+        "stationary": false,
+        "factors": 18894,
+        "state_dimension": 131430,
+        "original_factors_only": true,
+        "marginalized_variables": 0
+      },
+      {
+        "seed_yaw_deg": 270.0,
+        "initial_seed_is_prior": false,
+        "nonlinear_cost": 258081.39721567737,
+        "iterations": 18,
+        "iteration_budget": 100,
+        "scaled_relative_gradient": 1.5519044481002253e-08,
+        "stationary": true,
+        "factors": 18894,
+        "state_dimension": 131430,
+        "original_factors_only": true,
+        "marginalized_variables": 0
+      }
+    ],
+    "chosen_seed_yaw_deg": 90.0,
+    "selected_by": "GNSS1_PV_IMU_OBJECTIVE_ONLY",
+    "global_direction_uniqueness_proven": false,
+    "near_optimal_seed_count": 3,
+    "foot_factors_consumed": 0,
+    "raw_carrier_factors_consumed": 0,
+    "reference_reads": 0,
+    "original_factors_only": true,
+    "state_uncertainty": "FULL_ONCE_LINEARIZED_GRAPH",
+    "chart_scope": "CONDITIONAL_LOCAL_MODE_NOT_GLOBAL_NAVIGATION_SUPPORT"
+  },
+  "source_profile_runtime_s": 3066.4644652060015,
+  "extension_runtime_s": 30.24648910599717,
+  "profile": {
+    "rows": [
+      {
+        "velocity_sigma_mps": 0.0,
+        "tau_s": 0.02,
+        "restricted_objective": -163956.92886730967,
+        "residual_cost": 20775.512339943234,
+        "integrated_log_normalization": -184732.4412072529,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4326.124349537713
+      },
+      {
+        "velocity_sigma_mps": 0.005,
+        "tau_s": 0.02,
+        "restricted_objective": -163965.9960384497,
+        "residual_cost": 20756.067748058358,
+        "integrated_log_normalization": -184722.06378650805,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4317.057178397692
+      },
+      {
+        "velocity_sigma_mps": 0.005,
+        "tau_s": 0.05,
+        "restricted_objective": -163978.91051315266,
+        "residual_cost": 20734.8030487594,
+        "integrated_log_normalization": -184713.71356191207,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4304.142703694728
+      },
+      {
+        "velocity_sigma_mps": 0.005,
+        "tau_s": 0.1,
+        "restricted_objective": -163992.88997920518,
+        "residual_cost": 20714.07205745941,
+        "integrated_log_normalization": -184706.9620366646,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4290.163237642206
+      },
+      {
+        "velocity_sigma_mps": 0.005,
+        "tau_s": 0.2,
+        "restricted_objective": -164006.03782324406,
+        "residual_cost": 20695.486593498776,
+        "integrated_log_normalization": -184701.52441674285,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4277.015393603331
+      },
+      {
+        "velocity_sigma_mps": 0.005,
+        "tau_s": 0.5,
+        "restricted_objective": -164017.69318496407,
+        "residual_cost": 20679.424159772505,
+        "integrated_log_normalization": -184697.1173447366,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4265.36003188332
+      },
+      {
+        "velocity_sigma_mps": 0.005,
+        "tau_s": 1.0,
+        "restricted_objective": -164022.4738214571,
+        "residual_cost": 20672.915073356035,
+        "integrated_log_normalization": -184695.38889481314,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4260.57939539029
+      },
+      {
+        "velocity_sigma_mps": 0.005,
+        "tau_s": 2.0,
+        "restricted_objective": -164025.06642626796,
+        "residual_cost": 20669.401002244893,
+        "integrated_log_normalization": -184694.46742851287,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4257.9867905794235
+      },
+      {
+        "velocity_sigma_mps": 0.005,
+        "tau_s": 5.0,
+        "restricted_objective": -164026.69191334242,
+        "residual_cost": 20667.203035606693,
+        "integrated_log_normalization": -184693.8949489491,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4256.361303504964
+      },
+      {
+        "velocity_sigma_mps": 0.01,
+        "tau_s": 0.02,
+        "restricted_objective": -163992.97134698974,
+        "residual_cost": 20698.013903659295,
+        "integrated_log_normalization": -184690.98525064904,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4290.081869857648
+      },
+      {
+        "velocity_sigma_mps": 0.01,
+        "tau_s": 0.05,
+        "restricted_objective": -164043.82421316835,
+        "residual_cost": 20613.927089574983,
+        "integrated_log_normalization": -184657.75130274333,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4239.229003679036
+      },
+      {
+        "velocity_sigma_mps": 0.01,
+        "tau_s": 0.1,
+        "restricted_objective": -164098.37149961886,
+        "residual_cost": 20532.64191652473,
+        "integrated_log_normalization": -184631.0134161436,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4184.681717228523
+      },
+      {
+        "velocity_sigma_mps": 0.01,
+        "tau_s": 0.2,
+        "restricted_objective": -164149.23132996587,
+        "residual_cost": 20460.3662159848,
+        "integrated_log_normalization": -184609.59754595067,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4133.821886881517
+      },
+      {
+        "velocity_sigma_mps": 0.01,
+        "tau_s": 0.5,
+        "restricted_objective": -164193.96721940633,
+        "residual_cost": 20398.368069417254,
+        "integrated_log_normalization": -184592.33528882358,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4089.085997441056
+      },
+      {
+        "velocity_sigma_mps": 0.01,
+        "tau_s": 1.0,
+        "restricted_objective": -164212.22196747386,
+        "residual_cost": 20373.369168489935,
+        "integrated_log_normalization": -184585.5911359638,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4070.8312493735284
+      },
+      {
+        "velocity_sigma_mps": 0.01,
+        "tau_s": 2.0,
+        "restricted_objective": -164222.09889922806,
+        "residual_cost": 20359.9032237129,
+        "integrated_log_normalization": -184582.00212294096,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4060.9543176193256
+      },
+      {
+        "velocity_sigma_mps": 0.01,
+        "tau_s": 5.0,
+        "restricted_objective": -164228.28325751697,
+        "residual_cost": 20351.491428015335,
+        "integrated_log_normalization": -184579.77468553232,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4054.7699593304133
+      },
+      {
+        "velocity_sigma_mps": 0.02,
+        "tau_s": 0.02,
+        "restricted_objective": -164097.55873748296,
+        "residual_cost": 20469.908716907183,
+        "integrated_log_normalization": -184567.46745439013,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4185.4944793644245
+      },
+      {
+        "velocity_sigma_mps": 0.02,
+        "tau_s": 0.05,
+        "restricted_objective": -164288.75360133193,
+        "residual_cost": 20148.372531028737,
+        "integrated_log_normalization": -184437.12613236066,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 3994.299615515454
+      },
+      {
+        "velocity_sigma_mps": 0.02,
+        "tau_s": 0.1,
+        "restricted_objective": -164486.8478277914,
+        "residual_cost": 19847.40810456994,
+        "integrated_log_normalization": -184334.25593236135,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 3796.2053890559764
+      },
+      {
+        "velocity_sigma_mps": 0.02,
+        "tau_s": 0.2,
+        "restricted_objective": -164665.72453955846,
+        "residual_cost": 19587.859586773855,
+        "integrated_log_normalization": -184253.5841263323,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 3617.328677288926
+      },
+      {
+        "velocity_sigma_mps": 0.02,
+        "tau_s": 0.5,
+        "restricted_objective": -164818.7004723924,
+        "residual_cost": 19371.20201324273,
+        "integrated_log_normalization": -184189.90248563513,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 3464.3527444549836
+      },
+      {
+        "velocity_sigma_mps": 0.02,
+        "tau_s": 1.0,
+        "restricted_objective": -164879.99589514785,
+        "residual_cost": 19285.390822078978,
+        "integrated_log_normalization": -184165.38671722682,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 3403.05732169954
+      },
+      {
+        "velocity_sigma_mps": 0.02,
+        "tau_s": 2.0,
+        "restricted_objective": -164912.89446695082,
+        "residual_cost": 19239.5343725036,
+        "integrated_log_normalization": -184152.42883945443,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 3370.1587498965673
+      },
+      {
+        "velocity_sigma_mps": 0.02,
+        "tau_s": 5.0,
+        "restricted_objective": -164933.3995827891,
+        "residual_cost": 19211.01903322963,
+        "integrated_log_normalization": -184144.41861601872,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 3349.6536340582825
+      },
+      {
+        "velocity_sigma_mps": 0.05,
+        "tau_s": 0.02,
+        "restricted_objective": -164700.21560170088,
+        "residual_cost": 19035.894487034482,
+        "integrated_log_normalization": -183736.11008873535,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 3582.8376151465054
+      },
+      {
+        "velocity_sigma_mps": 0.05,
+        "tau_s": 0.05,
+        "restricted_objective": -165498.6229537805,
+        "residual_cost": 17518.77477925034,
+        "integrated_log_normalization": -183017.39773303084,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 2784.430263066897
+      },
+      {
+        "velocity_sigma_mps": 0.05,
+        "tau_s": 0.1,
+        "restricted_objective": -166183.86980599756,
+        "residual_cost": 16326.096265121505,
+        "integrated_log_normalization": -182509.96607111907,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 2099.1834108498297
+      },
+      {
+        "velocity_sigma_mps": 0.05,
+        "tau_s": 0.2,
+        "restricted_objective": -166716.23588275304,
+        "residual_cost": 15440.6240443741,
+        "integrated_log_normalization": -182156.85992712714,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 1566.8173340943467
+      },
+      {
+        "velocity_sigma_mps": 0.05,
+        "tau_s": 0.5,
+        "restricted_objective": -167122.33785857144,
+        "residual_cost": 14787.483583286636,
+        "integrated_log_normalization": -181909.82144185808,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 1160.7153582759493
+      },
+      {
+        "velocity_sigma_mps": 0.05,
+        "tau_s": 1.0,
+        "restricted_objective": -167274.7037565818,
+        "residual_cost": 14548.184700971664,
+        "integrated_log_normalization": -181822.88845755346,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 1008.3494602655992
+      },
+      {
+        "velocity_sigma_mps": 0.05,
+        "tau_s": 2.0,
+        "restricted_objective": -167354.34733255437,
+        "residual_cost": 14424.53996660143,
+        "integrated_log_normalization": -181778.88729915582,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 928.7058842930128
+      },
+      {
+        "velocity_sigma_mps": 0.05,
+        "tau_s": 5.0,
+        "restricted_objective": -167403.28088948037,
+        "residual_cost": 14349.099400890069,
+        "integrated_log_normalization": -181752.38029037043,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 879.7723273670126
+      },
+      {
+        "velocity_sigma_mps": 0.1,
+        "tau_s": 0.02,
+        "restricted_objective": -165682.198855707,
+        "residual_cost": 15459.181273046817,
+        "integrated_log_normalization": -181141.38012875384,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 2600.854361140373
+      },
+      {
+        "velocity_sigma_mps": 0.1,
+        "tau_s": 0.05,
+        "restricted_objective": -166559.47384417945,
+        "residual_cost": 12525.978427087872,
+        "integrated_log_normalization": -179085.4522712673,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 1723.5793726679403
+      },
+      {
+        "velocity_sigma_mps": 0.1,
+        "tau_s": 0.1,
+        "restricted_objective": -167094.5944942545,
+        "residual_cost": 10853.34430434492,
+        "integrated_log_normalization": -177947.9387985994,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 1188.4587225928844
+      },
+      {
+        "velocity_sigma_mps": 0.1,
+        "tau_s": 0.2,
+        "restricted_objective": -167484.7842584033,
+        "residual_cost": 9868.754758076811,
+        "integrated_log_normalization": -177353.5390164801,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 798.2689584440959
+      },
+      {
+        "velocity_sigma_mps": 0.1,
+        "tau_s": 0.5,
+        "restricted_objective": -167815.62426854862,
+        "residual_cost": 9263.766332661211,
+        "integrated_log_normalization": -177079.39060120983,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 467.42894829876604
+      },
+      {
+        "velocity_sigma_mps": 0.1,
+        "tau_s": 1.0,
+        "restricted_objective": -167956.6756100249,
+        "residual_cost": 9067.833722605881,
+        "integrated_log_normalization": -177024.50933263078,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 326.3776068224979
+      },
+      {
+        "velocity_sigma_mps": 0.1,
+        "tau_s": 2.0,
+        "restricted_objective": -168035.6723249192,
+        "residual_cost": 8972.327821010185,
+        "integrated_log_normalization": -177008.0001459294,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 247.38089192818734
+      },
+      {
+        "velocity_sigma_mps": 0.1,
+        "tau_s": 5.0,
+        "restricted_objective": -168086.29110692925,
+        "residual_cost": 8916.067362598427,
+        "integrated_log_normalization": -177002.35846952768,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 196.7621099181415
+      },
+      {
+        "velocity_sigma_mps": 0.2,
+        "tau_s": 0.02,
+        "restricted_objective": -164266.3309697121,
+        "residual_cost": 9579.759170791283,
+        "integrated_log_normalization": -173846.09014050337,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4016.7222471353016
+      },
+      {
+        "velocity_sigma_mps": 0.2,
+        "tau_s": 0.05,
+        "restricted_objective": -162875.36966434054,
+        "residual_cost": 7000.3514541100885,
+        "integrated_log_normalization": -169875.72111845063,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 5407.683552506845
+      },
+      {
+        "velocity_sigma_mps": 0.2,
+        "tau_s": 0.1,
+        "restricted_objective": -162451.64598466796,
+        "residual_cost": 5996.86639071101,
+        "integrated_log_normalization": -168448.51237537898,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 5831.407232179423
+      },
+      {
+        "velocity_sigma_mps": 0.2,
+        "tau_s": 0.2,
+        "restricted_objective": -162684.00066583435,
+        "residual_cost": 5557.8356825195415,
+        "integrated_log_normalization": -168241.83634835389,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 5599.052551013039
+      },
+      {
+        "velocity_sigma_mps": 0.2,
+        "tau_s": 0.5,
+        "restricted_objective": -163351.6391309903,
+        "residual_cost": 5392.710895931517,
+        "integrated_log_normalization": -168744.35002692183,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4931.414085857075
+      },
+      {
+        "velocity_sigma_mps": 0.2,
+        "tau_s": 1.0,
+        "restricted_objective": -163774.03217183676,
+        "residual_cost": 5380.62640569295,
+        "integrated_log_normalization": -169154.6585775297,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4509.021045010624
+      },
+      {
+        "velocity_sigma_mps": 0.2,
+        "tau_s": 2.0,
+        "restricted_objective": -164048.1628307102,
+        "residual_cost": 5390.247014211221,
+        "integrated_log_normalization": -169438.40984492144,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4234.89038613718
+      },
+      {
+        "velocity_sigma_mps": 0.2,
+        "tau_s": 5.0,
+        "restricted_objective": -164238.71171714878,
+        "residual_cost": 5403.214388928387,
+        "integrated_log_normalization": -169641.92610607715,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "relative_deviance": 4044.3414996986103
+      },
+      {
+        "velocity_sigma_mps": 0.075,
+        "tau_s": 5.0,
+        "restricted_objective": -168252.02162892898,
+        "residual_cost": 11084.287599791163,
+        "integrated_log_normalization": -179336.30922872014,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "evaluation_elapsed_s": 2.452794927001378,
+        "relative_deviance": 31.03158791840542
+      },
+      {
+        "velocity_sigma_mps": 0.075,
+        "tau_s": 20.0,
+        "restricted_objective": -168276.47897208677,
+        "residual_cost": 11047.681417462783,
+        "integrated_log_normalization": -179324.16038954956,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "evaluation_elapsed_s": 2.5644349530011823,
+        "relative_deviance": 6.574244760617148
+      },
+      {
+        "velocity_sigma_mps": 0.075,
+        "tau_s": 100.0,
+        "restricted_objective": -168283.0532168474,
+        "residual_cost": 11037.921081063536,
+        "integrated_log_normalization": -179320.97429791093,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "evaluation_elapsed_s": 2.6001871329972346,
+        "relative_deviance": 0.0
+      },
+      {
+        "velocity_sigma_mps": 0.1,
+        "tau_s": 20.0,
+        "restricted_objective": -168112.59652058917,
+        "residual_cost": 8888.275728844605,
+        "integrated_log_normalization": -177000.87224943377,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "evaluation_elapsed_s": 2.585479948000284,
+        "relative_deviance": 170.45669625821756
+      },
+      {
+        "velocity_sigma_mps": 0.1,
+        "tau_s": 100.0,
+        "restricted_objective": -168119.72918656628,
+        "residual_cost": 8880.905639850336,
+        "integrated_log_normalization": -177000.63482641662,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "evaluation_elapsed_s": 2.4232346400021925,
+        "relative_deviance": 163.32403028110275
+      },
+      {
+        "velocity_sigma_mps": 0.125,
+        "tau_s": 5.0,
+        "restricted_objective": -167369.5578992979,
+        "residual_cost": 7499.817470652272,
+        "integrated_log_normalization": -174869.3753699502,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "evaluation_elapsed_s": 2.4452327880026132,
+        "relative_deviance": 913.4953175494738
+      },
+      {
+        "velocity_sigma_mps": 0.125,
+        "tau_s": 20.0,
+        "restricted_objective": -167404.80377820352,
+        "residual_cost": 7481.932368307993,
+        "integrated_log_normalization": -174886.7361465115,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "evaluation_elapsed_s": 2.443620360998466,
+        "relative_deviance": 878.249438643863
+      },
+      {
+        "velocity_sigma_mps": 0.125,
+        "tau_s": 100.0,
+        "restricted_objective": -167414.44295067067,
+        "residual_cost": 7477.2467146045,
+        "integrated_log_normalization": -174891.68966527516,
+        "degrees_of_freedom": 23604,
+        "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+        "evaluation_elapsed_s": 2.4188163870021526,
+        "relative_deviance": 868.6102661767218
+      }
+    ],
+    "grid_minimum": {
+      "velocity_sigma_mps": 0.075,
+      "tau_s": 100.0,
+      "restricted_objective": -168283.0532168474,
+      "residual_cost": 11037.921081063536,
+      "integrated_log_normalization": -179320.97429791093,
+      "degrees_of_freedom": 23604,
+      "parameter_scope": "LOCAL_GAUSSIAN_RESTRICTED_LIKELIHOOD_NOT_PROBABILITY_CALIBRATION",
+      "evaluation_elapsed_s": 2.6001871329972346,
+      "relative_deviance": 0.0
+    },
+    "relative_deviance_width": 5.991464547107982,
+    "contour_scope": "DECLARED_PROFILE_WIDTH_NOT_CALIBRATED_CONFIDENCE_REGION",
+    "velocity_sigma_range_mps": [
+      0.075,
+      0.075
+    ],
+    "positive_sigma_tau_range_s": [
+      100.0,
+      100.0
+    ],
+    "diffusion_combination_range_m2ps3": [
+      0.0001125,
+      0.0001125
+    ],
+    "fixed_model_supported": false,
+    "tau_identified": false,
+    "tau_bounded_on_evaluated_grid": false,
+    "profile_touches_grid_boundary": true,
+    "identification_status": "ZERO_OR_BOUNDARY_UNRESOLVED",
+    "probability_calibration_complete": false,
+    "support_motion_model": {
+      "velocity_sigma_mps": 0.075,
+      "tau_s": 100.0
+    },
+    "working_value_selection": "MINIMUM_OF_PREDECLARED_SOURCE_ONLY_GRID_NOT_NAVIGATION_ERROR",
+    "automatic_parameter_freeze": false,
+    "scope": {
+      "status": "LOCAL_NOFOOT_SOURCE_CHART",
+      "seeds": [
+        {
+          "seed_yaw_deg": 0.0,
+          "initial_seed_is_prior": false,
+          "nonlinear_cost": 258080.9187683261,
+          "iterations": 14,
+          "iteration_budget": 100,
+          "scaled_relative_gradient": 1.4550005777136819e-08,
+          "stationary": true,
+          "factors": 18894,
+          "state_dimension": 131430,
+          "original_factors_only": true,
+          "marginalized_variables": 0
+        },
+        {
+          "seed_yaw_deg": 90.0,
+          "initial_seed_is_prior": false,
+          "nonlinear_cost": 258080.71900229613,
+          "iterations": 17,
+          "iteration_budget": 100,
+          "scaled_relative_gradient": 6.8260993245298405e-09,
+          "stationary": true,
+          "factors": 18894,
+          "state_dimension": 131430,
+          "original_factors_only": true,
+          "marginalized_variables": 0
+        },
+        {
+          "seed_yaw_deg": 180.0,
+          "initial_seed_is_prior": false,
+          "nonlinear_cost": 260240.5510738631,
+          "iterations": 100,
+          "iteration_budget": 100,
+          "scaled_relative_gradient": 0.0011473859042683825,
+          "stationary": false,
+          "factors": 18894,
+          "state_dimension": 131430,
+          "original_factors_only": true,
+          "marginalized_variables": 0
+        },
+        {
+          "seed_yaw_deg": 270.0,
+          "initial_seed_is_prior": false,
+          "nonlinear_cost": 258081.39721567737,
+          "iterations": 18,
+          "iteration_budget": 100,
+          "scaled_relative_gradient": 1.5519044481002253e-08,
+          "stationary": true,
+          "factors": 18894,
+          "state_dimension": 131430,
+          "original_factors_only": true,
+          "marginalized_variables": 0
+        }
+      ],
+      "chosen_seed_yaw_deg": 90.0,
+      "selected_by": "GNSS1_PV_IMU_OBJECTIVE_ONLY",
+      "global_direction_uniqueness_proven": false,
+      "near_optimal_seed_count": 3,
+      "foot_factors_consumed": 0,
+      "raw_carrier_factors_consumed": 0,
+      "reference_reads": 0,
+      "original_factors_only": true,
+      "state_uncertainty": "FULL_ONCE_LINEARIZED_GRAPH",
+      "chart_scope": "CONDITIONAL_LOCAL_MODE_NOT_GLOBAL_NAVIGATION_SUPPORT",
+      "foot_observations": 10241,
+      "foot_scalar_rows": 30723,
+      "contact_nuisance_dimension": 7119,
+      "group_count": 2257,
+      "group_size_histogram": {
+        "2": 116,
+        "1": 2141
+      },
+      "unassigned_foot_observations": 0,
+      "navigation_conditional_count": 26286,
+      "cross_time_covariance": "COMPLETE_SPARSE_GAUSSIAN_GRAPH",
+      "cross_group_navigation_covariance": "PRESERVED_JOINTLY",
+      "partition_scope": "MEASURED_SOURCE_PARTITION_NOT_SLIP_LABELS",
+      "approximation": "ONE_FIXED_NONLINEAR_NAVIGATION_AND_CONTACT_CHART"
+    },
+    "grid_design": "ORIGINAL_49_POINTS_PLUS_ONE_DECLARED_LOCAL_EXTENSION",
+    "source_profile": "/home/kaiwen/research/LegSA-GINS-SCRATCH/INTEGRATED_LEGGED_HEADING_20261008/BY_SOURCE_PROFILE_FULL02/SUPPORT_MOTION_PROFILE.json",
+    "original_rows_reused": 49,
+    "newly_added_rows": 8,
+    "equivalence_point_evaluated_once": [
+      0.1,
+      5.0
+    ],
+    "constant_velocity_limit_not_excluded": true,
+    "original_profile_and_cache_overwritten": false,
+    "twelve_second_per_axis_displacement_std_m": 0.8823543113059631
+  },
+  "source_residuals": {
+    "factor_count": 18894,
+    "scalar_residual_rows": 139647,
+    "fitted_state_dimension": 131430,
+    "state_key_counts_by_symbol": {
+      "b": 8762,
+      "v": 8762,
+      "x": 8762
+    },
+    "whitened_residual_sum_squares": 516161.43800459226,
+    "gtsam_half_squared_error": 258080.71900229613,
+    "nominal_residual_dof_if_full_column_rank": 8217,
+    "rss_per_nominal_dof": 62.81628794019621,
+    "rss_per_scalar_row": 3.696187086042609,
+    "families": {
+      "BIAS_RANDOM_WALK": {
+        "factor_count": 8761,
+        "scalar_rows": 52566,
+        "whitened_residual_sum_squares": 103680.57418867617,
+        "share_of_total_rss": 0.2008685007339772,
+        "rss_per_scalar_row": 1.9723885056629031,
+        "factor_rss_per_row_quantiles": {
+          "p50": 0.23796581227266286,
+          "p90": 4.124428731615337,
+          "p95": 11.02486644977217,
+          "p99": 29.104917305492645,
+          "maximum": 50.77116134924048
+        },
+        "largest_factors": [
+          {
+            "factor_index": 16646,
+            "family": "BIAS_RANDOM_WALK",
+            "scalar_rows": 6,
+            "first_state_index": 7715,
+            "last_state_index": 7716,
+            "whitened_residual_sum_squares": 304.62696809544286,
+            "rss_per_scalar_row": 50.77116134924048,
+            "maximum_absolute_whitened_coordinate": 17.43327892853015,
+            "keys": "b7715|b7716"
+          },
+          {
+            "factor_index": 16674,
+            "family": "BIAS_RANDOM_WALK",
+            "scalar_rows": 6,
+            "first_state_index": 7728,
+            "last_state_index": 7729,
+            "whitened_residual_sum_squares": 296.2459065608198,
+            "rss_per_scalar_row": 49.37431776013663,
+            "maximum_absolute_whitened_coordinate": 17.195913837116255,
+            "keys": "b7728|b7729"
+          },
+          {
+            "factor_index": 16726,
+            "family": "BIAS_RANDOM_WALK",
+            "scalar_rows": 6,
+            "first_state_index": 7752,
+            "last_state_index": 7753,
+            "whitened_residual_sum_squares": 295.66106653304973,
+            "rss_per_scalar_row": 49.27684442217495,
+            "maximum_absolute_whitened_coordinate": 17.184648909946517,
+            "keys": "b7752|b7753"
+          },
+          {
+            "factor_index": 16715,
+            "family": "BIAS_RANDOM_WALK",
+            "scalar_rows": 6,
+            "first_state_index": 7747,
+            "last_state_index": 7748,
+            "whitened_residual_sum_squares": 290.7761762025837,
+            "rss_per_scalar_row": 48.462696033763955,
+            "maximum_absolute_whitened_coordinate": 17.04105357438807,
+            "keys": "b7747|b7748"
+          },
+          {
+            "factor_index": 16661,
+            "family": "BIAS_RANDOM_WALK",
+            "scalar_rows": 6,
+            "first_state_index": 7722,
+            "last_state_index": 7723,
+            "whitened_residual_sum_squares": 288.7490985063021,
+            "rss_per_scalar_row": 48.124849751050355,
+            "maximum_absolute_whitened_coordinate": 16.974969901111713,
+            "keys": "b7722|b7723"
+          },
+          {
+            "factor_index": 16743,
+            "family": "BIAS_RANDOM_WALK",
+            "scalar_rows": 6,
+            "first_state_index": 7760,
+            "last_state_index": 7761,
+            "whitened_residual_sum_squares": 287.93748510217165,
+            "rss_per_scalar_row": 47.98958085036194,
+            "maximum_absolute_whitened_coordinate": 16.95948452994912,
+            "keys": "b7760|b7761"
+          },
+          {
+            "factor_index": 16676,
+            "family": "BIAS_RANDOM_WALK",
+            "scalar_rows": 6,
+            "first_state_index": 7729,
+            "last_state_index": 7730,
+            "whitened_residual_sum_squares": 287.76835682744246,
+            "rss_per_scalar_row": 47.96139280457374,
+            "maximum_absolute_whitened_coordinate": 16.948985091861886,
+            "keys": "b7729|b7730"
+          },
+          {
+            "factor_index": 16799,
+            "family": "BIAS_RANDOM_WALK",
+            "scalar_rows": 6,
+            "first_state_index": 7786,
+            "last_state_index": 7787,
+            "whitened_residual_sum_squares": 286.87435790920307,
+            "rss_per_scalar_row": 47.81239298486718,
+            "maximum_absolute_whitened_coordinate": 16.927377636123104,
+            "keys": "b7786|b7787"
+          },
+          {
+            "factor_index": 16756,
+            "family": "BIAS_RANDOM_WALK",
+            "scalar_rows": 6,
+            "first_state_index": 7766,
+            "last_state_index": 7767,
+            "whitened_residual_sum_squares": 285.58890772642724,
+            "rss_per_scalar_row": 47.59815128773787,
+            "maximum_absolute_whitened_coordinate": 16.890656265504543,
+            "keys": "b7766|b7767"
+          },
+          {
+            "factor_index": 16605,
+            "family": "BIAS_RANDOM_WALK",
+            "scalar_rows": 6,
+            "first_state_index": 7696,
+            "last_state_index": 7697,
+            "whitened_residual_sum_squares": 285.20481038552265,
+            "rss_per_scalar_row": 47.534135064253775,
+            "maximum_absolute_whitened_coordinate": 16.86104001494244,
+            "keys": "b7696|b7697"
+          }
+        ]
+      },
+      "GNSS_POSITION_VELOCITY": {
+        "factor_count": 1371,
+        "scalar_rows": 8226,
+        "whitened_residual_sum_squares": 155873.9260559273,
+        "share_of_total_rss": 0.30198677115151035,
+        "rss_per_scalar_row": 18.948933388758483,
+        "factor_rss_per_row_quantiles": {
+          "p50": 13.086628701053632,
+          "p90": 38.60075553174584,
+          "p95": 55.007700953901406,
+          "p99": 111.43952273232345,
+          "maximum": 184.6339302560178
+        },
+        "largest_factors": [
+          {
+            "factor_index": 10050,
+            "family": "GNSS_POSITION_VELOCITY",
+            "scalar_rows": 6,
+            "first_state_index": 4660,
+            "last_state_index": 4660,
+            "whitened_residual_sum_squares": 1107.8035815361068,
+            "rss_per_scalar_row": 184.6339302560178,
+            "maximum_absolute_whitened_coordinate": 32.68238470142228,
+            "keys": "x4660|v4660|b4660"
+          },
+          {
+            "factor_index": 10065,
+            "family": "GNSS_POSITION_VELOCITY",
+            "scalar_rows": 6,
+            "first_state_index": 4667,
+            "last_state_index": 4667,
+            "whitened_residual_sum_squares": 1104.3349360734885,
+            "rss_per_scalar_row": 184.05582267891475,
+            "maximum_absolute_whitened_coordinate": 32.89081145006267,
+            "keys": "x4667|v4667|b4667"
+          },
+          {
+            "factor_index": 1,
+            "family": "GNSS_POSITION_VELOCITY",
+            "scalar_rows": 6,
+            "first_state_index": 0,
+            "last_state_index": 0,
+            "whitened_residual_sum_squares": 1092.823859964191,
+            "rss_per_scalar_row": 182.13730999403182,
+            "maximum_absolute_whitened_coordinate": 31.96541315173304,
+            "keys": "x0|v0|b0"
+          },
+          {
+            "factor_index": 16390,
+            "family": "GNSS_POSITION_VELOCITY",
+            "scalar_rows": 6,
+            "first_state_index": 7597,
+            "last_state_index": 7597,
+            "whitened_residual_sum_squares": 942.6668005546923,
+            "rss_per_scalar_row": 157.11113342578204,
+            "maximum_absolute_whitened_coordinate": 30.24478259246287,
+            "keys": "x7597|v7597|b7597"
+          },
+          {
+            "factor_index": 16405,
+            "family": "GNSS_POSITION_VELOCITY",
+            "scalar_rows": 6,
+            "first_state_index": 7604,
+            "last_state_index": 7604,
+            "whitened_residual_sum_squares": 934.7712627387202,
+            "rss_per_scalar_row": 155.79521045645336,
+            "maximum_absolute_whitened_coordinate": 30.267554110943266,
+            "keys": "x7604|v7604|b7604"
+          },
+          {
+            "factor_index": 16420,
+            "family": "GNSS_POSITION_VELOCITY",
+            "scalar_rows": 6,
+            "first_state_index": 7611,
+            "last_state_index": 7611,
+            "whitened_residual_sum_squares": 863.200818515698,
+            "rss_per_scalar_row": 143.86680308594967,
+            "maximum_absolute_whitened_coordinate": 27.961704552484456,
+            "keys": "x7611|v7611|b7611"
+          },
+          {
+            "factor_index": 10000,
+            "family": "GNSS_POSITION_VELOCITY",
+            "scalar_rows": 6,
+            "first_state_index": 4637,
+            "last_state_index": 4637,
+            "whitened_residual_sum_squares": 805.1230589702935,
+            "rss_per_scalar_row": 134.18717649504893,
+            "maximum_absolute_whitened_coordinate": 27.70330929423717,
+            "keys": "x4637|v4637|b4637"
+          },
+          {
+            "factor_index": 16373,
+            "family": "GNSS_POSITION_VELOCITY",
+            "scalar_rows": 6,
+            "first_state_index": 7589,
+            "last_state_index": 7589,
+            "whitened_residual_sum_squares": 794.1783459425426,
+            "rss_per_scalar_row": 132.36305765709042,
+            "maximum_absolute_whitened_coordinate": 27.658496528034327,
+            "keys": "x7589|v7589|b7589"
+          },
+          {
+            "factor_index": 10013,
+            "family": "GNSS_POSITION_VELOCITY",
+            "scalar_rows": 6,
+            "first_state_index": 4643,
+            "last_state_index": 4643,
+            "whitened_residual_sum_squares": 759.2369865854612,
+            "rss_per_scalar_row": 126.53949776424354,
+            "maximum_absolute_whitened_coordinate": 26.450448222958894,
+            "keys": "x4643|v4643|b4643"
+          },
+          {
+            "factor_index": 10026,
+            "family": "GNSS_POSITION_VELOCITY",
+            "scalar_rows": 6,
+            "first_state_index": 4649,
+            "last_state_index": 4649,
+            "whitened_residual_sum_squares": 737.4678723310932,
+            "rss_per_scalar_row": 122.9113120551822,
+            "maximum_absolute_whitened_coordinate": 26.817173283711867,
+            "keys": "x4649|v4649|b4649"
+          }
+        ]
+      },
+      "IMU_PREINTEGRATION": {
+        "factor_count": 8761,
+        "scalar_rows": 78849,
+        "whitened_residual_sum_squares": 256578.66783139473,
+        "share_of_total_rss": 0.49708995856662963,
+        "rss_per_scalar_row": 3.25405100675208,
+        "factor_rss_per_row_quantiles": {
+          "p50": 0.5380333998353803,
+          "p90": 8.73978189140383,
+          "p95": 16.651686106095738,
+          "p99": 42.527928142709264,
+          "maximum": 89.33471363764073
+        },
+        "largest_factors": [
+          {
+            "factor_index": 10081,
+            "family": "IMU_PREINTEGRATION",
+            "scalar_rows": 9,
+            "first_state_index": 4674,
+            "last_state_index": 4675,
+            "whitened_residual_sum_squares": 804.0124227387666,
+            "rss_per_scalar_row": 89.33471363764073,
+            "maximum_absolute_whitened_coordinate": 28.16051016142867,
+            "keys": "x4674|v4674|x4675|v4675|b4674"
+          },
+          {
+            "factor_index": 10094,
+            "family": "IMU_PREINTEGRATION",
+            "scalar_rows": 9,
+            "first_state_index": 4680,
+            "last_state_index": 4681,
+            "whitened_residual_sum_squares": 772.2638016745433,
+            "rss_per_scalar_row": 85.80708907494926,
+            "maximum_absolute_whitened_coordinate": 27.53902254619753,
+            "keys": "x4680|v4680|x4681|v4681|b4680"
+          },
+          {
+            "factor_index": 10068,
+            "family": "IMU_PREINTEGRATION",
+            "scalar_rows": 9,
+            "first_state_index": 4668,
+            "last_state_index": 4669,
+            "whitened_residual_sum_squares": 765.3095995632611,
+            "rss_per_scalar_row": 85.03439995147346,
+            "maximum_absolute_whitened_coordinate": 27.54227218029915,
+            "keys": "x4668|v4668|x4669|v4669|b4668"
+          },
+          {
+            "factor_index": 10105,
+            "family": "IMU_PREINTEGRATION",
+            "scalar_rows": 9,
+            "first_state_index": 4685,
+            "last_state_index": 4686,
+            "whitened_residual_sum_squares": 754.7047979787087,
+            "rss_per_scalar_row": 83.85608866430097,
+            "maximum_absolute_whitened_coordinate": 27.293969471542745,
+            "keys": "x4685|v4685|x4686|v4686|b4685"
+          },
+          {
+            "factor_index": 16337,
+            "family": "IMU_PREINTEGRATION",
+            "scalar_rows": 9,
+            "first_state_index": 7572,
+            "last_state_index": 7573,
+            "whitened_residual_sum_squares": 742.5006954338917,
+            "rss_per_scalar_row": 82.50007727043241,
+            "maximum_absolute_whitened_coordinate": 26.849512541496935,
+            "keys": "x7572|v7572|x7573|v7573|b7572"
+          },
+          {
+            "factor_index": 10061,
+            "family": "IMU_PREINTEGRATION",
+            "scalar_rows": 9,
+            "first_state_index": 4665,
+            "last_state_index": 4666,
+            "whitened_residual_sum_squares": 737.9470813831268,
+            "rss_per_scalar_row": 81.99412015368075,
+            "maximum_absolute_whitened_coordinate": 26.933518781583913,
+            "keys": "x4665|v4665|x4666|v4666|b4665"
+          },
+          {
+            "factor_index": 16352,
+            "family": "IMU_PREINTEGRATION",
+            "scalar_rows": 9,
+            "first_state_index": 7579,
+            "last_state_index": 7580,
+            "whitened_residual_sum_squares": 735.385950401801,
+            "rss_per_scalar_row": 81.70955004464456,
+            "maximum_absolute_whitened_coordinate": 26.763245248367372,
+            "keys": "x7579|v7579|x7580|v7580|b7579"
+          },
+          {
+            "factor_index": 16354,
+            "family": "IMU_PREINTEGRATION",
+            "scalar_rows": 9,
+            "first_state_index": 7580,
+            "last_state_index": 7581,
+            "whitened_residual_sum_squares": 715.6509824385512,
+            "rss_per_scalar_row": 79.5167758265057,
+            "maximum_absolute_whitened_coordinate": 26.256049681653508,
+            "keys": "x7580|v7580|x7581|v7581|b7580"
+          },
+          {
+            "factor_index": 10107,
+            "family": "IMU_PREINTEGRATION",
+            "scalar_rows": 9,
+            "first_state_index": 4686,
+            "last_state_index": 4687,
+            "whitened_residual_sum_squares": 709.1074073917998,
+            "rss_per_scalar_row": 78.78971193242221,
+            "maximum_absolute_whitened_coordinate": 26.49124474229623,
+            "keys": "x4686|v4686|x4687|v4687|b4686"
+          },
+          {
+            "factor_index": 16324,
+            "family": "IMU_PREINTEGRATION",
+            "scalar_rows": 9,
+            "first_state_index": 7566,
+            "last_state_index": 7567,
+            "whitened_residual_sum_squares": 707.391652990831,
+            "rss_per_scalar_row": 78.59907255453678,
+            "maximum_absolute_whitened_coordinate": 26.123944283804708,
+            "keys": "x7566|v7566|x7567|v7567|b7566"
+          }
+        ]
+      },
+      "INITIAL_BIAS_PRIOR": {
+        "factor_count": 1,
+        "scalar_rows": 6,
+        "whitened_residual_sum_squares": 28.269928595944897,
+        "share_of_total_rss": 5.4769547886476134e-05,
+        "rss_per_scalar_row": 4.711654765990816,
+        "factor_rss_per_row_quantiles": {
+          "p50": 4.711654765990816,
+          "p90": 4.711654765990816,
+          "p95": 4.711654765990816,
+          "p99": 4.711654765990816,
+          "maximum": 4.711654765990816
+        },
+        "largest_factors": [
+          {
+            "factor_index": 0,
+            "family": "INITIAL_BIAS_PRIOR",
+            "scalar_rows": 6,
+            "first_state_index": 0,
+            "last_state_index": 0,
+            "whitened_residual_sum_squares": 28.269928595944897,
+            "rss_per_scalar_row": 4.711654765990816,
+            "maximum_absolute_whitened_coordinate": 3.5450520977229463,
+            "keys": "b0"
+          }
+        ]
+      }
+    },
+    "rank_computed": false,
+    "classification_scope": "SAVED_ORIGINAL_FACTOR_KEY_STRUCTURE_AND_RESIDUAL_DIMENSION",
+    "interpretation": {
+      "normalized_cost": "GTSAM error is half the whitened residual sum of squares; use 2*error for RSS.",
+      "dof": "m-n assumes full local column rank; no new global rank factorization is performed.",
+      "subgroup_dof": "Per-family RSS/row is descriptive, not a family chi-square statistic after shared-state fitting.",
+      "source_attribution": "A large family contribution locates tension in the fitted source graph; it does not identify which physical sensor caused it.",
+      "coordinates": "Whitened coordinates can mix correlated physical residual components; no metre or acceleration error is inferred from b.",
+      "indices": "State indices identify source events, not seconds; exact physical times require joining the original event mapping.",
+      "calibration": "Stationarity and fitted process parameters do not establish source-model calibration or physical sliding identification."
+    },
+    "calibration_root": "/home/kaiwen/research/LegSA-GINS-SCRATCH/INTEGRATED_LEGGED_HEADING_20261008/BY_SOURCE_PROFILE_FULL02",
+    "selected_seed_yaw_deg": 90.0,
+    "selected_original_nonlinear_cost": 258080.71900229613,
+    "source_chart_scope": "CONDITIONAL_LOCAL_MODE_NOT_GLOBAL_NAVIGATION_SUPPORT",
+    "original_cost_identity_verified": true,
+    "nonlinear_optimization_calls": 0,
+    "new_navigation_runs": 0,
+    "noise_parameters_changed": false,
+    "reference_reads": 0
+  },
+  "physical_source_residuals": {
+    "scope": "Saved chart and original source events only; no optimization, noise changes, reference, shifts or navigation",
+    "event_count": 8762,
+    "state_dimension": 131430,
+    "chosen_seed_yaw_deg": 90.0,
+    "whole_chart_summary": {
+      "bias_acc_gyro_axis_min": [
+        0.10635156293168838,
+        0.0969262869224588,
+        0.008743573234123817,
+        -0.0016554628809253727,
+        -0.002210515742032622,
+        -0.002056661452419346
+      ],
+      "bias_acc_gyro_axis_max": [
+        0.11449821685299029,
+        0.12175344121422037,
+        0.1849852867422426,
+        0.002150389128473784,
+        0.0018250716008553429,
+        0.002764517170287753
+      ],
+      "bias_acc_norm_quantiles": [
+        0.15751049065487333,
+        0.18182816566233467,
+        0.21726985093307205,
+        0.23733069941899165
+      ],
+      "bias_gyro_norm_quantiles": [
+        0.0004176470228118796,
+        0.002184181641158808,
+        0.003233116457885267,
+        0.0033676683491695412
+      ],
+      "rpy_deg_axis_min": [
+        -8.104502030747769,
+        -3.182251714051108,
+        -179.9809931263545
+      ],
+      "rpy_deg_axis_max": [
+        10.053801283206365,
+        2.7215006807357316,
+        179.87149836538003
+      ],
+      "imu_noise_metadata": {
+        "gyro_noise_density": 0.000286513,
+        "accel_noise_density": 0.0013250364409088235,
+        "gyro_bias_random_walk": 2.996871e-05,
+        "accel_bias_random_walk": 0.00016435834913177034,
+        "accel_bias_prior_sigma": 0.03,
+        "gyro_bias_prior_sigma": 0.003
+      }
+    },
+    "whole_chart_whitened_coordinate_rss": {
+      "INITIAL_BIAS_PRIOR": {
+        "axis_sum_squares": [
+          12.567394375569862,
+          10.438561218416456,
+          4.560216257501396,
+          0.2073330438517114,
+          0.028898714004872,
+          0.46752498660059943
+        ],
+        "axis_fraction": [
+          0.4445499157494356,
+          0.3692461119238125,
+          0.16130979043772767,
+          0.00733404908144875,
+          0.0010222422001100245,
+          0.01653789060746557
+        ],
+        "note": "GNSS order N/E/D position,N/E/D velocity; IMU whitened coordinates can mix physical components"
+      },
+      "GNSS_POSITION_VELOCITY": {
+        "axis_sum_squares": [
+          11341.33102336549,
+          7395.85468570393,
+          102945.73718258803,
+          11153.231780043177,
+          13846.874174457822,
+          9190.89720976922
+        ],
+        "axis_fraction": [
+          0.07275964178445221,
+          0.047447670517070904,
+          0.6604423189138832,
+          0.07155290215787206,
+          0.08883380642821272,
+          0.05896366019850889
+        ],
+        "note": "GNSS order N/E/D position,N/E/D velocity; IMU whitened coordinates can mix physical components"
+      },
+      "IMU_PREINTEGRATION": {
+        "axis_sum_squares": [
+          22892.099755231666,
+          7853.172103199804,
+          38.24565245437776,
+          21.023676205350238,
+          62.65796472588224,
+          16.115269283416218,
+          601.3616743194763,
+          1958.6068267324883,
+          223135.38490924152
+        ],
+        "axis_fraction": [
+          0.08922058855756003,
+          0.03060726820968754,
+          0.00014906014119424067,
+          8.193851960898622e-05,
+          0.0002442056670395404,
+          6.280829743026835e-05,
+          0.0023437711303211308,
+          0.007633552872055409,
+          0.8696568066051028
+        ],
+        "note": "GNSS order N/E/D position,N/E/D velocity; IMU whitened coordinates can mix physical components"
+      },
+      "BIAS_RANDOM_WALK": {
+        "axis_sum_squares": [
+          55.89886081783235,
+          257.45183699369505,
+          98009.26052424547,
+          3592.3548911944577,
+          1503.3204885493378,
+          262.287586874674
+        ],
+        "axis_fraction": [
+          0.0005391449773041276,
+          0.0024831251081344347,
+          0.9453001325580096,
+          0.034648292790674315,
+          0.014499538609938932,
+          0.002529765955938566
+        ],
+        "note": "GNSS order N/E/D position,N/E/D velocity; IMU whitened coordinates can mix physical components"
+      }
+    },
+    "full_readout": "/home/kaiwen/research/LegSA-GINS-SCRATCH/INTEGRATED_LEGGED_HEADING_20261008/BY_SOURCE_PROFILE_FULL02/SOURCE_RESIDUAL_READOUT/PHYSICAL_SOURCE_RESIDUALS.json"
+  },
+  "gnss_source_semantics": {
+    "status": "VERIFIED_CURRENT_PARITY_V2_SOURCE_SEMANTICS",
+    "velocity_source": "gnss1-raw.csv UBX-NAV-PVT velN/velE/velD",
+    "velocity_decoder": "little-endian int32 payload offsets 48/52/56 (full frame 54/58/62), millimetres/second multiplied by 0.001",
+    "velocity_frame": "receiver local NED; subsequently rotated by real_data to its fixed NED origin",
+    "velocity_is_repository_position_difference": false,
+    "velocity_is_GO2_SDK": false,
+    "velocity_is_separate_RAW_DOPPLER_csv": false,
+    "receiver_internal_velocity_filter_or_Doppler_estimator": "NOT_ESTABLISHED_BY_PROVIDER_CODE; decoded NAV-PVT receiver navigation-velocity field, not a claim of independent instantaneous Doppler truth",
+    "position_source": "same gnss1-raw.csv UBX-NAV-HPPOSECEF ECEF position converted to geodetic",
+    "matching_rule": "Exact equality of HPPOSECEF and NAV-PVT payload iTOW integer milliseconds; iterate sorted HPPOSECEF keys; duplicate/missing identities rejected",
+    "provider_time_rule": "315964800 + GPS_week*604800 + payload_iTOW_ms/1000 - 18 - 1772784000",
+    "gps_week_from_status": 2408,
+    "csv_receipt_stamp_used_as_provider_measurement_time": false,
+    "nearest_match_tolerance_applied": false,
+    "forward_or_backward_fill_applied": false,
+    "legacy_process_data_path": {
+      "applies_to_current_V2": false,
+      "scope": "Legacy V0 status-time nearest NAV-PVT receipt-stamp match <=0.1s with ffill/bfill; current V2 regenerates P/V/time from exact payload identities",
+      "legacy_parser_velocity_field_semantics_agree": true
+    },
+    "physical_point": {
+      "source": "GNSS1 receiver navigation solution",
+      "current_consumer_declares": "GNSS1_ANTENNA",
+      "consumer_leverarm_body_m": [
+        0.03,
+        0.03,
+        -0.3
+      ],
+      "receiver_antenna_phase_center_or_internal_reference_point_proven_by_this_parser": false
+    },
+    "std_policy": {
+      "position": "PVT hAcc,hAcc,vAcc tokens copied",
+      "velocity_mps": [
+        0.05,
+        0.05,
+        0.05
+      ],
+      "velocity_std_from_pvt_sAcc": false
+    },
+    "provenance": {
+      "parity_bundle": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/02_PARITY_PROVIDERS/PARITY_PROVIDER_BUNDLE.json",
+      "parity_generator_commit": "d6581ae44e41d7e0640a39381ed76fbe66dea92f",
+      "parity_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/02_PARITY_PROVIDERS/V2/PARITY.gnss",
+      "parity_sha256": "68ed8de7f91b267072bab09e968a9cab4b5220bc5eb116140adacdfde0382e7a",
+      "raw_source": {
+        "path": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv",
+        "sha256": "5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027",
+        "lock": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK.csv",
+        "lock_sha256": "f6e5d7965d17857e5b4a846501883f4675f2331a1164fab3de9e5ba9470f1ad7"
+      },
+      "raw_hash_reverified": true,
+      "parity_hash_reverified": true,
+      "generator_files": [
+        "src/legsa_gins/paper_rebuild/clean5_parity/providers.py:build_variants",
+        "src/legsa_gins/paper_rebuild/clean5_parity/input_audit.py:decode_receiver"
+      ],
+      "current_generator_files_equal_frozen_commit": true,
+      "copy_chain": [
+        "PARITY V2/PARITY.gnss",
+        "CLEAN5_CALIBRATED_SENSOR_MODEL/BY2/CALIBRATED_GNSS.gnss (byte-exact)",
+        "CLEAN6_SENSOR_MODEL_V21/BY2/GNSS18.gnss (only yaw sigma changed)",
+        "CLEAN8_PROTOCOL_V3/BY2__C00/GNSS18.gnss (only yaw/value validity changed)"
+      ]
+    },
+    "complete_provider": {
+      "rows": 1510,
+      "exact_hp_pvt_itow_matches": 1510,
+      "unmatched": 0,
+      "filled": 0,
+      "reused_pvt_rows": 0,
+      "hp_minus_pvt_measurement_time_s": {
+        "n": 1510,
+        "min": 0.0,
+        "max": 0.0,
+        "mean": 0.0,
+        "std_population": 0.0,
+        "median": 0.0,
+        "p05": 0.0,
+        "p95": 0.0
+      },
+      "provider_minus_payload_epoch_time_s": {
+        "n": 1510,
+        "min": -3.67435859516263e-10,
+        "max": 3.67435859516263e-10,
+        "mean": -4.705581031523842e-18,
+        "std_population": 3.066215956138957e-10,
+        "median": 0.0,
+        "p05": -3.67435859516263e-10,
+        "p95": 3.67435859516263e-10
+      },
+      "pvt_receipt_minus_payload_epoch_s": {
+        "n": 1510,
+        "min": 0.09938669204711914,
+        "max": 0.1809558868408203,
+        "mean": 0.13990447047530422,
+        "std_population": 0.010843468149938537,
+        "median": 0.1402280330657959,
+        "p05": 0.12253365516662598,
+        "p95": 0.1571369171142578
+      }
+    },
+    "requested_66_340": {
+      "rows": 1371,
+      "exact_hp_pvt_itow_matches": 1371,
+      "unmatched": 0,
+      "filled": 0,
+      "reused_pvt_rows": 0,
+      "hp_minus_pvt_measurement_time_s": {
+        "n": 1371,
+        "min": 0.0,
+        "max": 0.0,
+        "mean": 0.0,
+        "std_population": 0.0,
+        "median": 0.0,
+        "p05": 0.0,
+        "p95": 0.0
+      },
+      "provider_minus_payload_epoch_time_s": {
+        "n": 1371,
+        "min": -3.67435859516263e-10,
+        "max": 3.67435859516263e-10,
+        "mean": 0.0,
+        "std_population": 3.0650984300069783e-10,
+        "median": 0.0,
+        "p05": -3.67435859516263e-10,
+        "p95": 3.67435859516263e-10
+      },
+      "pvt_receipt_minus_payload_epoch_s": {
+        "n": 1371,
+        "min": 0.09938669204711914,
+        "max": 0.1809558868408203,
+        "mean": 0.13959403250184396,
+        "std_population": 0.010876819055506656,
+        "median": 0.13974666595458984,
+        "p05": 0.12232661247253418,
+        "p95": 0.15709364414215088
+      }
+    },
+    "first13_token_verification": {
+      "rows": 1510,
+      "current_equals_parity_rows": 1510,
+      "raw_exact_itow_reproduces_current_rows": 1510
+    },
+    "source_row_samples": [
+      {
+        "time_s": 55.799999952,
+        "itow_ms": 460873800,
+        "hp_csv_line": 3,
+        "pvt_csv_line": 2,
+        "hp_minus_pvt_measurement_time_s": 0.0,
+        "provider_minus_payload_epoch_time_s": -3.162838879688934e-10,
+        "pvt_receipt_minus_payload_epoch_s": 0.14333248138427734
+      },
+      {
+        "time_s": 66.0,
+        "itow_ms": 460884000,
+        "hp_csv_line": 1099,
+        "pvt_csv_line": 1098,
+        "hp_minus_pvt_measurement_time_s": 0.0,
+        "provider_minus_payload_epoch_time_s": 0.0,
+        "pvt_receipt_minus_payload_epoch_s": 0.17066144943237305
+      },
+      {
+        "time_s": 340.0,
+        "itow_ms": 461158000,
+        "hp_csv_line": 28220,
+        "pvt_csv_line": 28219,
+        "hp_minus_pvt_measurement_time_s": 0.0,
+        "provider_minus_payload_epoch_time_s": 0.0,
+        "pvt_receipt_minus_payload_epoch_s": 0.13673901557922363
+      },
+      {
+        "time_s": 357.599999905,
+        "itow_ms": 461175600,
+        "hp_csv_line": 30029,
+        "pvt_csv_line": 30028,
+        "hp_minus_pvt_measurement_time_s": 0.0,
+        "provider_minus_payload_epoch_time_s": 3.67435859516263e-10,
+        "pvt_receipt_minus_payload_epoch_s": 0.1319258213043213
+      }
+    ],
+    "interpretation": "Backward-difference agreement does not establish a time offset or interval-velocity origin. Current P and V are the same declared payload epoch, have zero matching/fill offset, and may still share receiver processing and temporal correlation. The observed CSV receipt lag is transport/publication timing, not a fitted correction to measurement time."
+  },
+  "source_time_alignment_changed": false,
+  "navigation_outcomes_used_for_selection": false,
+  "scientific_navigation_milestone_complete": false
+}

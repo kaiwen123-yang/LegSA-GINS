@@ -1,0 +1,35 @@
+{
+  "support_motion_model": {
+    "velocity_sigma_mps": 0.075,
+    "tau_s": 100.0
+  },
+  "working_value_selection": "MINIMUM_OF_ORIGINAL_BY_GRID_PLUS_ONE_PREDECLARED_SOURCE_ONLY_EXTENSION",
+  "frozen_for": "M1_FULL90_WORKING_HYPOTHESIS_ONLY",
+  "selected_before_automatic_navigation_run": true,
+  "navigation_results_used": false,
+  "calibration_window_s": [
+    66.0,
+    340.0
+  ],
+  "source_result": "BY_SOURCE_PROFILE_RESULT.json",
+  "probability_calibration_complete": false,
+  "physical_sliding_parameters_identified": false,
+  "tau_identified": false,
+  "continuous_parameter_support_resolved": false,
+  "constant_velocity_limit_not_excluded": true,
+  "source_limitations": [
+    "local no-foot Gaussian navigation chart",
+    "significant vertical IMU/GNSS/bias model tension",
+    "maximum observed support arc 0.263992284 s; 12 s propagation is extrapolation",
+    "finite tau=100 s is a declared grid working value, not an estimated unique time constant",
+    "SDK foot/IMU dependence not fully characterized"
+  ],
+  "twelve_second_prior_per_axis_displacement_std_m": 0.8823543113059631,
+  "acceptance_rule": {
+    "additional_edit_log_odds_cost": 0.0,
+    "working_relative_deviance": 5.991464547107982,
+    "calibrated_confidence_region": false,
+    "tune_after_navigation_outcome": false
+  },
+  "later_test_parameter_freeze": false
+}

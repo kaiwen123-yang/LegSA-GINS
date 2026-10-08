@@ -1,8 +1,8 @@
 {
-  "plan_version": "v1.3",
+  "plan_version": "v1.4",
   "date_local": "2026-10-08",
   "timezone": "Asia/Shanghai",
-  "status": "ACTIVE_M1_FIXED_FULL_COMPARISON_COMPLETE_SOURCE_IDENTIFICATION_IN_PROGRESS",
+  "status": "ACTIVE_M1_BY_WORKING_MODEL_SELECTED_FULL_AUTOMATIC_NAVIGATION_PENDING",
   "goal_thread_id": "01a11afd-6d44-7bc0-94df-ae1fbfc584d1",
   "plan": "PLAN.md",
   "authorization": "Explicit user request in this thread to create a plan, then an active long-term goal, implement one integrated algorithm, and push completed stages.",
@@ -43,31 +43,49 @@
     "primary_system_baseline": "frozen V3"
   },
   "required_sequence_adapter": "Current joint real_data/run_joint_by2 remains BY2-specific; explicit registered sequence/base-time/provider identity adaptation required before test execution.",
-  "first_action": "Read complete BY source profile, original source-factor residual decomposition and prediction-range implications; resolve working-model scope, freeze source-selected working values without claiming probability calibration, then run the full 90-second same-version U3 fixed-support versus finite automatic-support comparison.",
+  "time_alignment_authority": "User reaffirmed 2026-10-08: locate the deliberate kick in the IMU, then use GNSS and IMU/body motion after that peak to define algorithm startup. Preserve existing event alignment; do not substitute navigation-error/xcorr lag optimization or the GNSS message receipt delay. No current input timestamps or startup windows changed.",
+  "time_alignment_existing_evidence": "BY2 kick 62.579067 s and frozen start 66 s; BY2O kick 3154.351049 s and motion onsets 3186.205730/3186.215055 s, frozen start 3186 s. BY2H frozen kick detector reports NOT_DETECTED; start 413 s includes its original propagation-start adjustment. Its kick-event confirmation remains an explicit review item, not silently asserted complete.",
+  "time_alignment_implementation_difference": "The frozen kick detector uses raw IMU transients; the subsequent body-motion onset uses the Go2 SDK horizontal-velocity proxy (1 s mean, 3 s persistence), not a second independent raw-IMU movement detector. BY2 GNSS/body onsets are 66.217880/65.717063 s; the pre-existing whole-second floor gives start 66 s. These facts are preserved explicitly, not relabeled as exact simultaneous IMU/GNSS motion.",
+  "source_epoch_readout": "BY_SOURCE_PROFILE_FULL02/GNSS_INTERNAL_KINEMATICS.json: current PARITY V2 HPPOSECEF/NAV-PVT exact iTOW pairing reproduced all 1510 input P/V rows; no nearest matching, fill or repeated PVT source. Approximately 0.14 s CSV receipt lag is not a measurement-time correction.",
+  "test_input_gap_requirement": "BY2H contains real IMU gaps retained by its frozen contract, including 414.905–415.081 s. Current joint loader rejects uncovered integration; define missing-data state qualification/recovery without filling increments or changing the formal window before claiming test-sequence support.",
+  "first_action": "Run one full 90-second automatic finite model with M1_SUPPORT_WORKING_MODEL.json and the prospectively fixed comparison rule; compare with the completed matched H0. Do not choose another source grid point from navigation error.",
   "m1_current_evidence": {
     "integrated_code": "Finite common support motion, proper joint foot/external prediction, existing nonlinear conditional-history expansion and source-only restricted likelihood are connected to the same JointNavigator state.",
     "necessary_math_checks": "Exact OU and fixed limit; foot Jacobians and original AR likelihood; joint prediction covariance from actual process graph and conditional-density decomposition; checkpoint and Gaussian-separator lifecycle; sparse source likelihood equals dense full-covariance integration.",
     "short_by_profile": {
       "root": "/home/kaiwen/research/LegSA-GINS-SCRATCH/INTEGRATED_LEGGED_HEADING_20261008/BY_SOURCE_PROFILE_SHORT01",
-      "window_s": [96, 106],
+      "window_s": [
+        96,
+        106
+      ],
       "status": "BOUNDARY_UNRESOLVED_NOT_FROZEN",
-      "grid_minimum": {"velocity_sigma_mps": 0.05, "tau_s": 1.0},
+      "grid_minimum": {
+        "velocity_sigma_mps": 0.05,
+        "tau_s": 1.0
+      },
       "fixed_relative_deviance": 65.43970262120365,
       "scope": "Local source-only no-foot navigation Gaussian chart; one of four initial yaw seeds stationary within 100 iterations. No reference reads, no navigation outcome evaluation, not global qualification."
     },
     "full_by_profile": {
       "root": "/home/kaiwen/research/LegSA-GINS-SCRATCH/INTEGRATED_LEGGED_HEADING_20261008/BY_SOURCE_PROFILE_FULL02",
-      "window_s": [66, 340],
-      "status": "RUNNING",
-      "previous_attempt": "FULL01 intentionally interrupted after 1594.81 s to remove unused O(n^2) prefix scoring during deferred construction; same original factors, seed states, linearization and final optimization verified. Not a model/data failure."
+      "window_s": [
+        66,
+        340
+      ],
+      "status": "COMPLETED_CONDITIONAL_SOURCE_PROFILE_NOT_PHYSICAL_CALIBRATION",
+      "previous_attempt": "FULL01 intentionally interrupted after 1594.81 s to remove unused O(n^2) prefix scoring during deferred construction; same original factors, seed states, linearization and final optimization verified. Not a model/data failure.",
+      "result": "BY_SOURCE_PROFILE_RESULT.json",
+      "extension_root": "/home/kaiwen/research/LegSA-GINS-SCRATCH/INTEGRATED_LEGGED_HEADING_20261008/BY_SOURCE_PROFILE_FULL02_EXTENSION01",
+      "tau_identified": false
     },
-    "full_m1_navigation": "FIXED_COMPLETE_AUTOMATIC_FINITE_NOT_RUN",
+    "full_m1_navigation": "FIXED_COMPLETE_AUTOMATIC_FINITE_READY",
     "fixed_complete_result": "M1_FIXED90_RESULT.json",
     "source_duration_scope": "BY_SOURCE_DURATION_SCOPE.json: 2373 arcs, maximum span 0.263992 s; no group spans 1 s, 5 s or 12 s. Long-horizon support motion is a process-model extrapolation.",
     "source_model_interpretation": "Stationarity is not source-model calibration. Source-only likelihood normalizes the navigation posterior, so the source residual constant is not added to the foot-parameter objective; biased state means or narrow covariance may still be absorbed indirectly. Inspect original factor-family residuals once, do not infer sensor blame or inflate noise from total cost. Frozen BY-selected working-model navigation comparison remains meaningful under explicit local-chart, correlation and long-arc limitations.",
     "fair_fixed_comparison": "Same U3 mode, same partial carriers and foot_external evidence, same support lifecycle, monitor_support=False; U1 is not an equivalent baseline.",
     "prospective_support_rule": "Before the first automatic full run: proper foot_external uses normalized predictive scores with zero additional edit odds; the legacy unestimated 1:100 structure odds are removed. Keep the original 1:20 working support band and nominal-preferred publication unchanged. This is not a calibrated confidence set or multiple-search guarantee; do not tune after observing navigation outcomes. Fixed H0 has no edited policy, so this change does not alter its states or scores.",
-    "policy_scope": "Observed single-group fixed/finite alternatives. Arbitrary multi-fault policy coverage and direction-dependent recovery remain M2 work."
+    "policy_scope": "Observed single-group fixed/finite alternatives. Arbitrary multi-fault policy coverage and direction-dependent recovery remain M2 work.",
+    "working_model": "M1_SUPPORT_WORKING_MODEL.json: sigma 0.075 m/s, tau 100 s, selected by BY source likelihood before automatic navigation; tau remains unresolved and this is not the later BYO/BYH algorithm freeze."
   },
   "overall_scientific_goal_complete": false,
   "new_algorithm_implementation_in_plan_turn": false,
