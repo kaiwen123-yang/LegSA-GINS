@@ -1,0 +1,77 @@
+{
+  "plan_version": "v1",
+  "date_local": "2026-10-08",
+  "timezone": "Asia/Shanghai",
+  "status": "ACTIVE_LONG_TERM_GOAL_PLAN_DELIVERED",
+  "goal_thread_id": "01a11afd-6d44-7bc0-94df-ae1fbfc584d1",
+  "plan": "PLAN.md",
+  "authorization": "Explicit user request in this thread to create a plan, then an active long-term goal, implement one integrated algorithm, and push completed stages.",
+  "branch": "research/support-carrier-joint-20261008",
+  "initial_commit": "dc67595114bdfd4b9744b94647a53d8e3bf26060",
+  "frozen_v3_commit": "7d43b9af26120ed5dde21f53e515386361072ba6",
+  "current_milestone": "M1",
+  "milestones": {
+    "M1": {
+      "status": "PLANNED",
+      "deliverable": "Integrated finite support motion, same-row joint prediction and automatic historical reconstruction with complete navigation evidence."
+    },
+    "M2": {
+      "status": "PLANNED",
+      "deliverable": "All three candidate innovations in one continuous direction-relevant failure and recovery process."
+    },
+    "M3": {
+      "status": "PLANNED",
+      "deliverable": "Frozen BYO/BYH tests after BY development, causal attribution and frozen V3 system comparison."
+    },
+    "M4": {
+      "status": "PLANNED",
+      "deliverable": "XB/NMB adverse real-data validation and complete reproducible scientific deliverable."
+    }
+  },
+  "data_roles": {
+    "development": [
+      "BY2"
+    ],
+    "frozen_parameter_test": [
+      "BY2O",
+      "BY2H"
+    ],
+    "adverse_real_test": [
+      "XB series",
+      "NMB series"
+    ],
+    "primary_system_baseline": "frozen V3"
+  },
+  "required_sequence_adapter": "Current joint real_data/run_joint_by2 remains BY2-specific; explicit registered sequence/base-time/provider identity adaptation required before test execution.",
+  "first_action": "Implement finite within-arc common motion and foot-plus-external pre-consumption joint prediction inside existing JointNavigator; identify working parameters from BY sources, then judge the complete M1 scene.",
+  "overall_scientific_goal_complete": false,
+  "new_algorithm_implementation_in_plan_turn": false,
+  "new_navigation_runs_in_plan_turn": 0,
+  "existing_m2_closeout": {
+    "owner_thread": "01a11959-c9c1-7901-b9c7-3d058a0f20b8",
+    "status_at_last_check": "RUNNING_WITH_EXISTING_ONE_SHOT_CLOSEOUT",
+    "policy": "Do not duplicate or interfere; its old-task PAUSED record does not override this newer authorization.",
+    "files_to_avoid_during_closeout": [
+      "../SUPPORT_CARRIER_JOINT_20261008/BY_M2_FULL_NAVIGATION_RESULT.json",
+      "../SUPPORT_CARRIER_JOINT_20261008/BY_M2_FULL_NAVIGATION_RESULT.md",
+      "../SUPPORT_CARRIER_JOINT_20261008/USER_REVIEW_STOP.md",
+      "../SUPPORT_CARRIER_JOINT_20261008/GOAL_PROGRESS.json",
+      "../SUPPORT_CARRIER_JOINT_20261008/README.md"
+    ]
+  },
+  "plan_adjustments": [
+    {
+      "date": "2026-10-08",
+      "evidence": "Complete nonlinear whole-arc release diagnosis loses valid translation; newer BY entry still lacks global support qualification and stable p/v gains.",
+      "decision": "Prioritize physical support repair, then require direction-relevant integrated evidence; do not replace estimator architecture without specific evidence."
+    }
+  ],
+  "remaining_goal_requirements": [
+    "observable and calibrated direction qualification",
+    "causal support-dependent acceptance and historical withdrawal",
+    "partial carrier/support co-retention and recovery",
+    "heading-mediated shared p/v benefit",
+    "same-version frozen tests and V3 adoption evidence"
+  ],
+  "publication_policy": "Push each completed substantive stage or decisive positive/negative substage with necessary code/configuration/results; never claim a local check is a completed research milestone."
+}
