@@ -1,0 +1,241 @@
+{
+  "scope": "One existing dynamic-scene raw geometry diagnostic, not a new constant-speed scene or navigation result",
+  "scene": {
+    "duration_s": 26.0,
+    "seed": 6100801,
+    "event_window_s": [
+      25.0,
+      25.8
+    ]
+  },
+  "navigation_runs": 0,
+  "scene_modified": false,
+  "reference_reads": 0,
+  "ideal_attitude_scope": "R_eval is used only after raw enumeration to condition on ideal gravity tilt AND ideal relative attitude; never an online source or candidate seed",
+  "rotation_family": "R_k(delta)=Rz(delta)*R_eval_k; delta=0 is the original generator trajectory, not absolute yaw zero",
+  "absolute_yaw_at_first_epoch_deg": 10.034837948390699,
+  "physical_limit": "Existing dynamic segment has horizontal acceleration. This result does not establish GNSS/IMU observational equivalence for its alternative yaw, nor the future constant-speed scene.",
+  "gnss_lever_scope": "Current synthetic events/metadata specify no antenna lever; branch defaults both levers to zero. A nonzero rotating lever needs p_body=p_A-R*l_p and v_body=v_A-R*((omega-b_g) cross l_v), plus IMU consistency.",
+  "angle_solver": {
+    "method": "Exact degree-two trigonometric objective; quartic real roots in tan(delta/2), plus circle seam",
+    "yaw_grid_used": false,
+    "imaginary_root_acceptance_tolerance": 1e-08,
+    "numeric_scope": "Double-precision polynomial roots, not rigorous interval arithmetic",
+    "endpoint_method": "Roots of cost(delta)-original expanded threshold; midpoint determines each arc membership"
+  },
+  "cases": [
+    {
+      "phase_count": 2,
+      "times_s": [
+        25.0,
+        25.2,
+        25.4,
+        25.6,
+        25.8
+      ],
+      "original_row_indices_zero_based": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "original_ambiguity_column_indices_zero_based": [
+        0,
+        1
+      ],
+      "ambiguity_labels": [
+        "G01_G02_L1_arc0",
+        "G01_G03_L1_arc0"
+      ],
+      "integer_continuity": "assemble_epochs shares one integer column per identical physical arc label across all five epochs",
+      "threshold_scope": "Unchanged candidate.py chi2.ppf(RAW_WORKING_QUANTILE=0.999, number of retained raw rows), including its original numeric guard; not calibrated false-fix probability",
+      "proposal_metadata": {
+        "status": "COMPLETE_RELAXED_SUPPORT",
+        "termination_reason": "GAUSSIAN_RELAXED_DOMAIN_EXHAUSTED",
+        "enumeration_complete": true,
+        "length_support_complete": true,
+        "active_support_complete": true,
+        "enumerated_count": 45,
+        "length_qualified_count": 6,
+        "active_count": 6,
+        "dormant_count": 0,
+        "expanded_nodes": 53,
+        "integer_leaves": 45,
+        "elapsed_s": 0.004909587998554343,
+        "node_limit": 20000,
+        "candidate_limit": 1024,
+        "timeout_s": 0.5,
+        "raw_cost_threshold": 66.61882884370104,
+        "expanded_working_threshold": 66.61882885136292,
+        "raw_working_quantile": 0.999,
+        "threshold_degrees_of_freedom": 35
+      },
+      "all_length_feasible_candidates": [
+        {
+          "integer_by_label": {
+            "G01_G02_L1_arc0": 8,
+            "G01_G03_L1_arc0": -5
+          },
+          "raw_sphere_profile_cost": 34.12959273361327,
+          "same_tilt_relative_attitude_minimum_cost": 41.22672380363683,
+          "minimum_yaw_offset_deg": 0.2871078685570346,
+          "accepted_yaw_offset_intervals_deg": [
+            [
+              -1.5812137087822922,
+              2.1764385960612165
+            ]
+          ],
+          "maximum_finite_endpoint_cost_error": 7.23332505003782e-12
+        },
+        {
+          "integer_by_label": {
+            "G01_G02_L1_arc0": 9,
+            "G01_G03_L1_arc0": -4
+          },
+          "raw_sphere_profile_cost": 35.43163973623294,
+          "same_tilt_relative_attitude_minimum_cost": 7819.720140041928,
+          "minimum_yaw_offset_deg": -32.625017157347365,
+          "accepted_yaw_offset_intervals_deg": [],
+          "maximum_finite_endpoint_cost_error": 0.0
+        },
+        {
+          "integer_by_label": {
+            "G01_G02_L1_arc0": 9,
+            "G01_G03_L1_arc0": -5
+          },
+          "raw_sphere_profile_cost": 40.18339484982795,
+          "same_tilt_relative_attitude_minimum_cost": 2418.0151277187997,
+          "minimum_yaw_offset_deg": 78.66683172823966,
+          "accepted_yaw_offset_intervals_deg": [],
+          "maximum_finite_endpoint_cost_error": 0.0
+        },
+        {
+          "integer_by_label": {
+            "G01_G02_L1_arc0": 9,
+            "G01_G03_L1_arc0": -3
+          },
+          "raw_sphere_profile_cost": 42.362409088420904,
+          "same_tilt_relative_attitude_minimum_cost": 339.15210419173127,
+          "minimum_yaw_offset_deg": -73.0345513772963,
+          "accepted_yaw_offset_intervals_deg": [],
+          "maximum_finite_endpoint_cost_error": 0.0
+        },
+        {
+          "integer_by_label": {
+            "G01_G02_L1_arc0": 10,
+            "G01_G03_L1_arc0": -3
+          },
+          "raw_sphere_profile_cost": 47.68813862132062,
+          "same_tilt_relative_attitude_minimum_cost": 3882.558488885349,
+          "minimum_yaw_offset_deg": -176.52842331166298,
+          "accepted_yaw_offset_intervals_deg": [],
+          "maximum_finite_endpoint_cost_error": 0.0
+        },
+        {
+          "integer_by_label": {
+            "G01_G02_L1_arc0": 10,
+            "G01_G03_L1_arc0": -4
+          },
+          "raw_sphere_profile_cost": 48.306206603700176,
+          "same_tilt_relative_attitude_minimum_cost": 949.884603719689,
+          "minimum_yaw_offset_deg": 134.27763567593792,
+          "accepted_yaw_offset_intervals_deg": [],
+          "maximum_finite_endpoint_cost_error": 0.0
+        }
+      ]
+    },
+    {
+      "phase_count": 1,
+      "times_s": [
+        25.0,
+        25.2,
+        25.4,
+        25.6,
+        25.8
+      ],
+      "original_row_indices_zero_based": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "original_ambiguity_column_indices_zero_based": [
+        0
+      ],
+      "ambiguity_labels": [
+        "G01_G02_L1_arc0"
+      ],
+      "integer_continuity": "assemble_epochs shares one integer column per identical physical arc label across all five epochs",
+      "threshold_scope": "Unchanged candidate.py chi2.ppf(RAW_WORKING_QUANTILE=0.999, number of retained raw rows), including its original numeric guard; not calibrated false-fix probability",
+      "proposal_metadata": {
+        "status": "COMPLETE_RELAXED_SUPPORT",
+        "termination_reason": "GAUSSIAN_RELAXED_DOMAIN_EXHAUSTED",
+        "enumeration_complete": true,
+        "length_support_complete": true,
+        "active_support_complete": true,
+        "enumerated_count": 9,
+        "length_qualified_count": 3,
+        "active_count": 3,
+        "dormant_count": 0,
+        "expanded_nodes": 10,
+        "integer_leaves": 9,
+        "elapsed_s": 0.0011256830002821516,
+        "node_limit": 20000,
+        "candidate_limit": 1024,
+        "timeout_s": 0.5,
+        "raw_cost_threshold": 59.70306430442994,
+        "expanded_working_threshold": 59.70306431140024,
+        "raw_working_quantile": 0.999,
+        "threshold_degrees_of_freedom": 30
+      },
+      "all_length_feasible_candidates": [
+        {
+          "integer_by_label": {
+            "G01_G02_L1_arc0": 8
+          },
+          "raw_sphere_profile_cost": 32.21437214459489,
+          "same_tilt_relative_attitude_minimum_cost": 39.66326263244527,
+          "minimum_yaw_offset_deg": -3.7875622051035767,
+          "accepted_yaw_offset_intervals_deg": [
+            [
+              -16.12978735885736,
+              12.607844675191
+            ]
+          ],
+          "maximum_finite_endpoint_cost_error": 3.254285729781259e-12
+        },
+        {
+          "integer_by_label": {
+            "G01_G02_L1_arc0": 9
+          },
+          "raw_sphere_profile_cost": 33.59314414513605,
+          "same_tilt_relative_attitude_minimum_cost": 51.693025007903316,
+          "minimum_yaw_offset_deg": -77.78482607229293,
+          "accepted_yaw_offset_intervals_deg": [
+            [
+              -79.05523714272248,
+              -76.5074941848411
+            ]
+          ],
+          "maximum_finite_endpoint_cost_error": 4.106937012693379e-12
+        },
+        {
+          "integer_by_label": {
+            "G01_G02_L1_arc0": 10
+          },
+          "raw_sphere_profile_cost": 45.13699449993807,
+          "same_tilt_relative_attitude_minimum_cost": 61.45011461947462,
+          "minimum_yaw_offset_deg": -123.38619507610365,
+          "accepted_yaw_offset_intervals_deg": [],
+          "maximum_finite_endpoint_cost_error": 0.0
+        }
+      ]
+    }
+  ],
+  "evaluation_truth_used": true
+}

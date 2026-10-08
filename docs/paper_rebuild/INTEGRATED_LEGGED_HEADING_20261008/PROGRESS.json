@@ -1,8 +1,8 @@
 {
-  "plan_version": "v1.4",
+  "plan_version": "v1.5",
   "date_local": "2026-10-08",
   "timezone": "Asia/Shanghai",
-  "status": "ACTIVE_M1_BY_WORKING_MODEL_SELECTED_FULL_AUTOMATIC_NAVIGATION_PENDING",
+  "status": "ACTIVE_M1_FULL_AUTOMATIC_NAVIGATION_RUNNING",
   "goal_thread_id": "01a11afd-6d44-7bc0-94df-ae1fbfc584d1",
   "plan": "PLAN.md",
   "authorization": "Explicit user request in this thread to create a plan, then an active long-term goal, implement one integrated algorithm, and push completed stages.",
@@ -16,7 +16,7 @@
       "deliverable": "Integrated finite support motion, same-row joint prediction and automatic historical reconstruction with complete navigation evidence."
     },
     "M2": {
-      "status": "PLANNED",
+      "status": "PLANNED_RAW_GEOMETRY_PREMISE_CHECKED_NAVIGATION_NOT_RUN",
       "deliverable": "All three candidate innovations in one continuous direction-relevant failure and recovery process."
     },
     "M3": {
@@ -78,14 +78,26 @@
       "extension_root": "/home/kaiwen/research/LegSA-GINS-SCRATCH/INTEGRATED_LEGGED_HEADING_20261008/BY_SOURCE_PROFILE_FULL02_EXTENSION01",
       "tau_identified": false
     },
-    "full_m1_navigation": "FIXED_COMPLETE_AUTOMATIC_FINITE_READY",
+    "full_m1_navigation": "FIXED_COMPLETE_AUTOMATIC_FINITE_RUNNING",
     "fixed_complete_result": "M1_FIXED90_RESULT.json",
     "source_duration_scope": "BY_SOURCE_DURATION_SCOPE.json: 2373 arcs, maximum span 0.263992 s; no group spans 1 s, 5 s or 12 s. Long-horizon support motion is a process-model extrapolation.",
     "source_model_interpretation": "Stationarity is not source-model calibration. Source-only likelihood normalizes the navigation posterior, so the source residual constant is not added to the foot-parameter objective; biased state means or narrow covariance may still be absorbed indirectly. Inspect original factor-family residuals once, do not infer sensor blame or inflate noise from total cost. Frozen BY-selected working-model navigation comparison remains meaningful under explicit local-chart, correlation and long-arc limitations.",
     "fair_fixed_comparison": "Same U3 mode, same partial carriers and foot_external evidence, same support lifecycle, monitor_support=False; U1 is not an equivalent baseline.",
     "prospective_support_rule": "Before the first automatic full run: proper foot_external uses normalized predictive scores with zero additional edit odds; the legacy unestimated 1:100 structure odds are removed. Keep the original 1:20 working support band and nominal-preferred publication unchanged. This is not a calibrated confidence set or multiple-search guarantee; do not tune after observing navigation outcomes. Fixed H0 has no edited policy, so this change does not alter its states or scores.",
     "policy_scope": "Observed single-group fixed/finite alternatives. Arbitrary multi-fault policy coverage and direction-dependent recovery remain M2 work.",
-    "working_model": "M1_SUPPORT_WORKING_MODEL.json: sigma 0.075 m/s, tau 100 s, selected by BY source likelihood before automatic navigation; tau remains unresolved and this is not the later BYO/BYH algorithm freeze."
+    "working_model": "M1_SUPPORT_WORKING_MODEL.json: sigma 0.075 m/s, tau 100 s, selected by BY source likelihood before automatic navigation; tau remains unresolved and this is not the later BYO/BYH algorithm freeze.",
+    "automatic_full_run": {
+      "root": "/home/kaiwen/research/LegSA-GINS-SCRATCH/INTEGRATED_LEGGED_HEADING_20261008/M1_FULL01_AUTOMATIC_FINITE",
+      "status": "RUNNING",
+      "code_commit": "0760d6a7ef878cdf6c17ccb6f3670e0a6bdfa390",
+      "session_id": 10844,
+      "model": "M1_SUPPORT_WORKING_MODEL.json",
+      "seed": 6100801,
+      "duration_s": 90,
+      "mode": "U3",
+      "support_inference": "shared_separator",
+      "support_prediction": "foot_external"
+    }
   },
   "overall_scientific_goal_complete": false,
   "new_algorithm_implementation_in_plan_turn": false,
@@ -117,6 +129,11 @@
       "date": "2026-10-08",
       "evidence": "The proper finite model inherited an unestimated 1:100 edit penalty from legacy external-only improper releases. Its normalized prediction already integrates the motion process; duplicate policy identities and repeated source rows are handled explicitly, so neither requires this extra odds term.",
       "decision": "Remove that additional penalty for foot_external before any automatic full navigation result; retain the existing 1:20 working band. Preserve the unresolved global acceptance-calibration requirement for M2, and never select this rule from navigation error."
+    },
+    {
+      "date": "2026-10-08",
+      "evidence": "One raw geometry diagnostic found only one same-tilt direction interval for the existing two-phase fragment, but separated intervals when only its second phase relation is removed. Code review found directional acceptance remains conditional on retained integer and single-group policy coverage.",
+      "decision": "Use a prospectively declared truly ambiguous partial observation condition, initially reuse common contact motion, and prioritize source-dependent direction reopening within the existing navigator. Do not add fault freedoms, tune thresholds or claim recovery without full navigation evidence."
     }
   ],
   "remaining_goal_requirements": [
@@ -126,5 +143,16 @@
     "heading-mediated shared p/v benefit",
     "same-version frozen tests and V3 adoption evidence"
   ],
-  "publication_policy": "Push each completed substantive stage or decisive positive/negative substage with necessary code/configuration/results; never claim a local check is a completed research milestone."
+  "publication_policy": "Push each completed substantive stage or decisive positive/negative substage with necessary code/configuration/results; never claim a local check is a completed research milestone.",
+  "m2_direction_design": {
+    "note": "M2_DIRECTION_DEPENDENCY_DESIGN.md",
+    "raw_geometry_result": "M2_RAW_GEOMETRY.json",
+    "diagnostic_script": "scripts/paper_rebuild/read_joint_raw_yaw_geometry.py",
+    "navigation_runs": 0,
+    "finding": "Existing two-phase dynamic fragment has one conditional same-tilt direction interval; one-phase observation view retains separated intervals with all code rows and covariance.",
+    "scope": "Ideal evaluation tilt and relative attitude only after raw enumeration; not online truth, a navigation result, or evidence that the future constant-speed scene is already valid.",
+    "next_algorithm_gap": "Reopen source-dependent integer/direction exclusions after support withdrawal; an evaluated-family winner or compute omission cannot certify the full direction domain.",
+    "model_scope": "Prioritize existing finite common motion; only add relative foot failure freedom if a full direction-relevant scene establishes necessity.",
+    "depends_on": "Complete M1 full automatic versus fixed navigation judgment first."
+  }
 }
