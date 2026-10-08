@@ -1,0 +1,127 @@
+{
+  "status": "PASS_SMALL_WINDOW_MATHEMATICAL_EQUIVALENCE_ONLY",
+  "scope": {
+    "window_s": [
+      100.19799995422363,
+      109.99799990653992
+    ],
+    "epochs": 50,
+    "raw_rows": 1680,
+    "geometry_rank": 150,
+    "fixed_geometry_contrast_rows": 1530,
+    "integer_rank": 41,
+    "source_beta_dimension": 25,
+    "dof": 1489,
+    "reference_reads": 0,
+    "navigation_calls": 0,
+    "optimization_calls": 0,
+    "calibration_or_validation_windows_read": false
+  },
+  "method": "Fixed original-Q geometry contrasts; stationary OU beta source states; exact full-epoch Kalman innovations on y and all physical float integer design columns; final QR integrates the fixed-rank integer nuisance coordinates. Covariance and integer-information log determinants included; fixed contrast constants cancel across parameter models.",
+  "cases": [
+    {
+      "case": "ORIGINAL_Q",
+      "parameters": {
+        "white_sd_sigma_m": 0.0,
+        "beta_sd_sigma_m": 0.0,
+        "tau_s": 0.8
+      },
+      "comparison": {
+        "residual_cost": {
+          "efficient": 2834.9320228750203,
+          "dense": 2834.9320228750203,
+          "absolute_difference": 0.0
+        },
+        "covariance_log_determinant": {
+          "efficient": 0.0,
+          "dense": 0.0,
+          "absolute_difference": 0.0
+        },
+        "integer_information_log_determinant": {
+          "efficient": 323.83616503011746,
+          "dense": 323.83616503011746,
+          "absolute_difference": 0.0
+        },
+        "restricted_objective": {
+          "efficient": 3158.768187905138,
+          "dense": 3158.768187905138,
+          "absolute_difference": 0.0
+        }
+      },
+      "efficient_s": 0.0042064750005010865,
+      "dense_s": 0.09155054900020332
+    },
+    {
+      "case": "FIXED_WHITE_EXAMPLE",
+      "parameters": {
+        "white_sd_sigma_m": 0.005,
+        "beta_sd_sigma_m": 0.0,
+        "tau_s": 0.8
+      },
+      "comparison": {
+        "residual_cost": {
+          "efficient": 1985.6854988307,
+          "dense": 1985.6854988306943,
+          "absolute_difference": 5.6843418860808015e-12
+        },
+        "covariance_log_determinant": {
+          "efficient": 335.90375678473396,
+          "dense": 335.9037567847339,
+          "absolute_difference": 5.684341886080802e-14
+        },
+        "integer_information_log_determinant": {
+          "efficient": 307.9468526172836,
+          "dense": 307.9468526172836,
+          "absolute_difference": 0.0
+        },
+        "restricted_objective": {
+          "efficient": 2629.5361082327177,
+          "dense": 2629.5361082327117,
+          "absolute_difference": 5.9117155615240335e-12
+        }
+      },
+      "efficient_s": 0.0038229599995247554,
+      "dense_s": 0.07633251400056906
+    },
+    {
+      "case": "FIXED_COLORED_EXAMPLE",
+      "parameters": {
+        "white_sd_sigma_m": 0.005,
+        "beta_sd_sigma_m": 0.01,
+        "tau_s": 0.8
+      },
+      "comparison": {
+        "residual_cost": {
+          "efficient": 1468.4237734468777,
+          "dense": 1468.4237734468734,
+          "absolute_difference": 4.320099833421409e-12
+        },
+        "covariance_log_determinant": {
+          "efficient": 770.3296999044393,
+          "dense": 770.3296999044393,
+          "absolute_difference": 0.0
+        },
+        "integer_information_log_determinant": {
+          "efficient": 240.5052701779792,
+          "dense": 240.5052701779792,
+          "absolute_difference": 0.0
+        },
+        "restricted_objective": {
+          "efficient": 2479.258743529296,
+          "dense": 2479.2587435292917,
+          "absolute_difference": 4.547473508864641e-12
+        }
+      },
+      "efficient_s": 0.005130878000272787,
+      "dense_s": 0.08587205899948458
+    }
+  ],
+  "integer_annihilator_previous_cost": 2834.9320228750157,
+  "prepare_s": 0.030461442000159877,
+  "provenance": {
+    "PLAN_sha256": "16580a87ee787d4890edd22a8fc8bfb9b0771242e427201a952f323f233879ea",
+    "module_sha256": "029a011e85844d542d49a8df4e3691d45b5fa6791516cf7e874bb87c1285d148",
+    "script_sha256": "bab0b037c94d460e893e3f44509fbf3655195bce9189af87fde5868928c21d5d"
+  },
+  "boundary": "Fixed example parameters are not estimates or qualified noise models. Lower residual alone is not evidence of better model or valid integer acceptance. No Q or navigation algorithm was changed."
+}

@@ -76,6 +76,11 @@ class NavigationBranch:
         self.support_geometry: dict[str, dict[str, tuple[str, int | None]]] = {}
         self._support_serial = 0
         self._support_retain: set[int] = set()
+        # Only the explicit separator mode consumes lifecycle evidence. Missing
+        # foot measurements alone never close a source arc.
+        self._support_arc_foot: dict[str, int] = {}
+        self._support_pending_closed: set[str] = set()
+        self._support_state_time: float | None = None
         self.fixed: dict[str, int] = {}
         self._conditioned_labels: set[str] = set()
         self.time = 0.0
@@ -190,6 +195,9 @@ class NavigationBranch:
             unmapped_contact_arcs=tuple(unmapped["contact_keys"]),
             background_chart_id=deepcopy(anchor.get("background_chart_id")),
             model_specific_nuisance_charts=True, strict_nonlinear_model_exclusion=False)
+        if self.metadata.get("gaussian_future_separator", False):
+            self.linearization_scope.update(history_elimination="SOURCE_FUTURE_SEPARATOR",
+                eliminated_history_jacobians="FROZEN", five_second_reanchoring_equivalent=False)
         return result
 
     def _seed_source(self, values, key):
@@ -201,11 +209,106 @@ class NavigationBranch:
     def _sigmas(value, dimension=3):
         return np.broadcast_to(np.asarray(value, float), (dimension,)).copy()
 
-    def _retained_keys(self) -> set[int]:
+    def _retained_keys(self, *, gaussian: bool | None = None) -> set[int]:
         retained = set(self.ambiguity_keys.values()) | self._support_retain
         if self.constant_bias:
             retained.add(B(0))
+        mode = self.window.gaussian_only if gaussian is None else gaussian
+        if mode and self.metadata.get("gaussian_future_separator", False):
+            # step's ordinary lag elimination runs before controller compression.
+            # Preserve every future source reference, including an unobserved
+            # singleton's older AR expression, until lifecycle cleanup below.
+            retained.update(self._future_separator_keys())
         return retained
+
+    def _future_separator_keys(self) -> set[int]:
+        retained = set(self.ambiguity_keys.values()) | set(self.contact_keys.values())
+        if self.index is not None:
+            retained.update((X(self.index), V(self.index), self.bias_key))
+        for arc in set(self.foot_history) | set(self.foot_error_history):
+            if arc in self.foot_error_history:
+                retained.update(self.foot_error_history[arc][0].keys)
+            else:
+                retained.add(self.foot_history[arc][0])
+                retained.add(self.contact_keys[arc])
+        # Component joins read all mapped points, not just currently seen feet.
+        for geometry in self.support_geometry.values():
+            retained.update(key for _, key in geometry.values() if key is not None)
+        return retained
+
+    def _observe_support_lifecycle(self, event: dict) -> None:
+        if not self.metadata.get("gaussian_future_separator", False):
+            return
+        state_time = float(event.get("support_state_source_time_s", event["time_s"]))
+        states = event.get("support_states", ())
+        if self._support_state_time is None or state_time >= self._support_state_time:
+            # Each supplied state is an actual source report for that foot.
+            # active_support_arcs, when supplied, is the complete active set.
+            reported = {int(state["foot_id"]): state.get("arc_id") for state in states}
+            for arc, foot in self._support_arc_foot.items():
+                if foot in reported and reported[foot] != arc:
+                    self._support_pending_closed.add(arc)
+            if "active_support_arcs" in event:
+                known = set(self._support_arc_foot) | set(self.contact_keys) | set(self.foot_history) | set(self.foot_error_history)
+                known.update(arc for geometry in self.support_geometry.values() for arc in geometry)
+                self._support_pending_closed.update(known-set(event["active_support_arcs"]))
+            for foot, arc in reported.items():
+                if arc is not None:
+                    self._support_arc_foot[arc] = foot
+            if states or "active_support_arcs" in event:
+                self._support_state_time = state_time
+        for observation in event.get("feet", ()):
+            arc, foot = observation["arc_id"], int(observation["foot_id"])
+            # A new token for the same physical foot proves the old arc ended;
+            # a missing packet, ineligible singleton or empty list does not.
+            self._support_pending_closed.update(
+                old for old, identity in self._support_arc_foot.items()
+                if identity == foot and old != arc)
+            self._support_arc_foot[arc] = foot
+
+    def compress_gaussian_history(self, event: dict) -> dict:
+        """Eliminate consumed history after step/condition and accepted startup.
+
+        Exact marginalization of the currently stored Gaussian rows. Eliminated
+        history cannot later follow the nonlinear root's changing chart: this is
+        a frozen-history approximation, not the ordinary five-second model.
+        Source policies, integer lineage, predictive evidence and replay logs
+        remain controller-owned and are not retired by this operation.
+        """
+        if not self.window.gaussian_only or not self.metadata.get("gaussian_future_separator", False):
+            return dict(status="NOT_ENABLED", eliminated_key_count=0)
+        if self.bootstrap_status == "NO_INIT":
+            raise ValueError("Gaussian startup must be accepted before history compression")
+        self._observe_support_lifecycle(event)
+        closed = tuple(sorted(self._support_pending_closed))
+        for arc in closed:
+            self.contact_keys.pop(arc, None)
+            self.foot_history.pop(arc, None)
+            self.foot_error_history.pop(arc, None)
+            self._support_arc_foot.pop(arc, None)
+            for geometry in self.support_geometry.values():
+                geometry.pop(arc, None)
+        self.support_geometry = {group: geometry for group, geometry in self.support_geometry.items() if geometry}
+        self._support_pending_closed.clear()
+        before_keys = set(self.window.values.keys())
+        before_dimension = int(self.window.values.dim())
+        retained = self._future_separator_keys()
+        expired = sorted(before_keys-retained, key=lambda key: (self.window.times[key], key))
+        self.window.last_marginalized = tuple(expired)
+        if expired:
+            self.window._marginalize(expired)
+        self._support_retain = retained-set(self.ambiguity_keys.values())
+        self._current()
+        return dict(status="COMPRESSED", scope="FROZEN_HISTORY_GAUSSIAN_SEPARATOR",
+                    equivalence="EXACT_FOR_CONSUMED_FIXED_JACOBIANS_ONLY",
+                    historical_relinearization=False, hypothesis_count_bounded=False,
+                    closed_support_arcs=closed, before_key_count=len(before_keys),
+                    retained_key_count=len(self.window.values.keys()), eliminated_key_count=len(expired),
+                    before_dimension=before_dimension, retained_dimension=int(self.window.values.dim()),
+                    separator_dimension=int(self.window.values.dim()),
+                    retained_ambiguity_count=len(self.ambiguity_keys),
+                    open_support_arc_count=len(self._support_arc_foot),
+                    retained_factor_count=len(self.window.factors))
 
     def _initial_pose(self, event: dict) -> gtsam.Pose3:
         block = event["carrier"]
@@ -849,6 +952,7 @@ class NavigationBranch:
         values, factors = gtsam.Values(), []
         times = {pose_key: self.time, velocity_key: self.time, bias_key: self.time}
         self.last_gnss_innovation = {}
+        self._observe_support_lifecycle(event)
         if previous_index is None:
             if initial_rotation is None:
                 # Keep the historical synthetic initialization for reproducible
@@ -952,7 +1056,7 @@ class NavigationBranch:
             self.window.time_s = self.time
         else:
             self.window.update(factors, values, times, self.time,
-                               retain_keys=self._retained_keys(),
+                               retain_keys=self._retained_keys(gaussian=model_anchor is not None),
                                linearization_values=model_anchor, gaussian_only=model_anchor is not None)
         self._factor_seed_values = None
         self.last_factor_counts = dict(
@@ -1159,6 +1263,7 @@ class NavigationBranch:
                  "direction_history", "fixed", "_conditioned_labels", "time", "index",
                  "last_gnss_innovation", "last_factor_counts", "constant_bias", "bias_key",
                  "foot_error_history", "support_geometry", "_support_serial", "_support_retain",
+                 "_support_arc_foot", "_support_pending_closed", "_support_state_time",
                  "predictive_score", "predictive_row_count", "predictive_frontier", "integer_lineage",
                  "bootstrap_status", "bootstrap_diagnostics", "linearization_scope", "background_chart_id")
         return BranchSnapshot(self.window.snapshot(),

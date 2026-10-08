@@ -1,0 +1,243 @@
+{
+  "status": "BOUNDED_RESTRICTED_FIT_AND_FROZEN_VALIDATION_COMPLETE_NOT_AR_QUALIFIED",
+  "calibration_input": {
+    "declared_bounds_s": [
+      110.0,
+      170.0
+    ],
+    "actual_first_last_s": [
+      110.19799995422363,
+      169.99799990653992
+    ],
+    "epochs": 300,
+    "raw_rows": 11078,
+    "geometry_rank": 900,
+    "fixed_geometry_contrast_rows": 10178,
+    "integer_rank": 167,
+    "source_beta_dimension": 33,
+    "dof": 10011,
+    "excluded_nonbuilt_records": []
+  },
+  "validation_input": {
+    "declared_bounds_s": [
+      180.0,
+      240.0
+    ],
+    "actual_first_last_s": [
+      180.19799995422363,
+      239.99799990653992
+    ],
+    "epochs": 300,
+    "raw_rows": 11718,
+    "geometry_rank": 900,
+    "fixed_geometry_contrast_rows": 10818,
+    "integer_rank": 158,
+    "source_beta_dimension": 43,
+    "dof": 10660,
+    "excluded_nonbuilt_records": []
+  },
+  "frozen_parameters": {
+    "M0": {
+      "white_sd_sigma_m": 0.0,
+      "beta_sd_sigma_m": 0.0,
+      "tau_s": 0.8
+    },
+    "M1": {
+      "white_sd_sigma_m": 0.008422995661631493,
+      "beta_sd_sigma_m": 0,
+      "tau_s": 0.8
+    },
+    "M2": {
+      "white_sd_sigma_m": 0.007702886967438229,
+      "beta_sd_sigma_m": 0.0039176487826473065,
+      "tau_s": 2.0
+    }
+  },
+  "calibration_results": {
+    "M0": {
+      "residual_cost": 17679.90608424302,
+      "degrees_of_freedom": 10011,
+      "cost_over_dof": 1.7660479556730615,
+      "covariance_log_determinant": 0.0,
+      "integer_information_log_determinant": 1359.8044854474679,
+      "restricted_objective": 19039.710569690487
+    },
+    "M1": {
+      "residual_cost": 9417.838732407583,
+      "degrees_of_freedom": 10011,
+      "cost_over_dof": 0.9407490492865431,
+      "covariance_log_determinant": 4921.6686007651015,
+      "integer_information_log_determinant": 1222.408470008095,
+      "restricted_objective": 15561.91580318078
+    },
+    "M2": {
+      "residual_cost": 9428.844215390913,
+      "degrees_of_freedom": 10011,
+      "cost_over_dof": 0.9418483883119482,
+      "covariance_log_determinant": 4887.480165830622,
+      "integer_information_log_determinant": 1136.815019671967,
+      "restricted_objective": 15453.139400893502
+    }
+  },
+  "validation_results": {
+    "M0": {
+      "residual_cost": 15373.680673944586,
+      "degrees_of_freedom": 10660,
+      "cost_over_dof": 1.4421839281373907,
+      "covariance_log_determinant": 0.0,
+      "integer_information_log_determinant": 1249.2265082770837,
+      "restricted_objective": 16622.90718222167,
+      "objective_delta_from_M0": 0.0,
+      "objective_delta_from_M1": 3472.902060489174
+    },
+    "M1": {
+      "residual_cost": 6144.663883007554,
+      "degrees_of_freedom": 10660,
+      "cost_over_dof": 0.5764225030963934,
+      "covariance_log_determinant": 5883.446067959052,
+      "integer_information_log_determinant": 1121.8951707658894,
+      "restricted_objective": 13150.005121732494,
+      "objective_delta_from_M0": -3472.902060489174,
+      "objective_delta_from_M1": 0.0
+    },
+    "M2": {
+      "residual_cost": 5845.861542544675,
+      "degrees_of_freedom": 10660,
+      "cost_over_dof": 0.5483922647790502,
+      "covariance_log_determinant": 5837.516960857964,
+      "integer_information_log_determinant": 1049.497472399696,
+      "restricted_objective": 12732.875975802335,
+      "objective_delta_from_M0": -3890.031206419333,
+      "objective_delta_from_M1": -417.1291459301592
+    }
+  },
+  "tau_profile": [
+    {
+      "tau_s": 0.2,
+      "white_sd_sigma_m": 0.005418764219512741,
+      "beta_sd_sigma_m": 0.006572204180996486,
+      "restricted_objective": 15478.112311567627,
+      "both_fixed_starts_converged": true,
+      "start_objective_difference": 1.5200930647552013e-07
+    },
+    {
+      "tau_s": 0.3,
+      "white_sd_sigma_m": 0.006419386508668601,
+      "beta_sd_sigma_m": 0.005625812815103564,
+      "restricted_objective": 15471.572635436554,
+      "both_fixed_starts_converged": true,
+      "start_objective_difference": 1.4551915228366852e-09
+    },
+    {
+      "tau_s": 0.5,
+      "white_sd_sigma_m": 0.0070417778777325385,
+      "beta_sd_sigma_m": 0.004859866465473719,
+      "restricted_objective": 15465.804517129858,
+      "both_fixed_starts_converged": true,
+      "start_objective_difference": 7.029120752122253e-08
+    },
+    {
+      "tau_s": 0.8,
+      "white_sd_sigma_m": 0.007367264239797233,
+      "beta_sd_sigma_m": 0.004386667757543134,
+      "restricted_objective": 15461.282767480732,
+      "both_fixed_starts_converged": true,
+      "start_objective_difference": 1.2574673746712506e-08
+    },
+    {
+      "tau_s": 1.2,
+      "white_sd_sigma_m": 0.007549500818574501,
+      "beta_sd_sigma_m": 0.004110611847810715,
+      "restricted_objective": 15457.4095481839,
+      "both_fixed_starts_converged": true,
+      "start_objective_difference": 3.009881766047329e-08
+    },
+    {
+      "tau_s": 2.0,
+      "white_sd_sigma_m": 0.007702886967438229,
+      "beta_sd_sigma_m": 0.0039176487826473065,
+      "restricted_objective": 15453.139400893502,
+      "both_fixed_starts_converged": true,
+      "start_objective_difference": 1.0371877579018474e-08
+    }
+  ],
+  "optimizer_status": {
+    "M1": {
+      "success": true,
+      "message": "Solution found.",
+      "nfev": 20
+    },
+    "M2_refinement": {
+      "success": false,
+      "message": "ABNORMAL_TERMINATION_IN_LNSRCH",
+      "nfev": 52,
+      "nit": 0,
+      "u_and_log_tau": [
+        0.5933446763312973,
+        0.1534797198417792,
+        0.6931471805599453
+      ],
+      "objective": 15453.139400893502
+    },
+    "M2_used": "Best fixed-tau profile point; every fixed-tau amplitude optimization converged from both declared starts. Final3D line search failed without changing the selected profile point. This is not a continuous/global optimum certificate.",
+    "tau_on_working_upper_boundary": true,
+    "amplitude_boundaries": {
+      "white_at_zero": false,
+      "beta_at_zero": false,
+      "white_at_upper": false,
+      "beta_at_upper": false
+    }
+  },
+  "finding": {
+    "time_structure_increment": "M2 improves full held-out restricted objective by417.1291459301592 relative to M1, including covariance and nuisance-information determinant terms. It is evidence for useful temporal covariance within these declared models, not identification of a unique physical source.",
+    "tau_not_identified": "Objective decreases throughout declared0.2..2s profile and reaches the upper bound.2s is a frozen working-model value, not a measured physical correlation time.",
+    "validation_scale_not_calibrated": "M1/M2 held-out residual cost per nominal DOF is0.5764/0.5484 versus0.9407/0.9418 on calibration. The complete model is broader than the held-out residual energy indicates; no source-group/white-versus-code attribution follows from this aggregate alone.",
+    "not_a_navigation_or_integer_success": "No navigation, reference, best-integer fitting, partial-subset search, Q replacement or acceptance-quantile change. Restricted likelihood removes continuous integer nuisance, so this result does not establish integer-lattice support, tail calibration, AR reliability or p/v improvement.",
+    "next_joint_model_implication": "Temporal physical-SD covariance has held-out evidence beyond white inflation. Any research integration must put the same source-identified beta process and white SD covariance into raw proposal likelihood and common IMU/contact/navigation state, preserve physical source lifetime across integer slips, and retain this unqualified scale/time boundary. A nonempty domain alone cannot qualify it."
+  },
+  "mathematics": {
+    "geometry": "Fixed original-Q whitening followed by parameter-independent L_j B_j=0 contrasts. No theta-dependent contrast normalization is omitted.",
+    "covariance": "Within-epoch source white covariance I+sigma_white^2 H_j H_j.T and stationary SD beta OU covariance across actual times/pivots. beta is keyed by signal identity independent of integer arc.",
+    "REML": "Kalman innovation whitening applied to y and all fixed physical integer design columns as multiple RHS; one QR removes those continuous nuisance coordinates. Objective=cost+logdet innovation covariance+logdet whitened integer information.",
+    "small_window_equivalence": "50-epoch M0/white/beta examples match full dense cost and both determinant terms to at most5.92e-12. Original-Q cost also matches the earlier integer-annihilating difference diagnostic.",
+    "physical_identity_check": "One pivot-change plus actual integer-slip synthetic identity case passes: four physical SD beta sources persist while the integer rank changes to four. Direct Python test function executed; configured runtime lacks pytest.",
+    "integration_api_consistency": "Added raw incidence/full covariance APIs after fitting without changing the fitted likelihood function bodies. Original, white, beta and total covariance components match the existing fixed-contrast likelihood on the pivot/slip case; code rows remain zero and beta cross-slip covariance survives."
+  },
+  "scope": {
+    "reference_reads": 0,
+    "navigation_calls": 0,
+    "integer_search_calls": 0,
+    "testset_reads": 0,
+    "acceptance_quantile_changed": false,
+    "calibration_not_global_optimality_certificate": true
+  },
+  "runtime": {
+    "elapsed_s": 110.28679574499984,
+    "likelihood_evaluations": 722
+  },
+  "reproducibility": {
+    "module": "src/legsa_gins/paper_rebuild/joint_navigation/source_noise_likelihood.py",
+    "equivalence_script": "scripts/paper_rebuild/check_by_source_noise_likelihood.py",
+    "calibration_script": "scripts/paper_rebuild/calibrate_by_source_noise.py",
+    "test": "tests/paper_rebuild/test_source_noise_likelihood.py",
+    "declaration": "BY_NOISE_CALIBRATION_PLAN.json",
+    "machine_paths": "--config with repository,plan_path,output_directory; reuse BY_PHASE_DIAGNOSTIC_CONFIG.example.json shape",
+    "command": "python scripts/paper_rebuild/calibrate_by_source_noise.py --config <LOCAL_CONFIG> --declaration docs/paper_rebuild/SUPPORT_CARRIER_JOINT_20261008/BY_NOISE_CALIBRATION_PLAN.json",
+    "full_scratch_receipt_relative": "SUPPORT_CARRIER_JOINT_20261008/BY_NOISE_CALIBRATION_110_170_VALIDATE_180_240_01/SUMMARY.json",
+    "all_evaluations_relative": "SUPPORT_CARRIER_JOINT_20261008/BY_NOISE_CALIBRATION_110_170_VALIDATE_180_240_01/CALIBRATION_EVALUATIONS.json",
+    "module_sha256": "029a011e85844d542d49a8df4e3691d45b5fa6791516cf7e874bb87c1285d148",
+    "script_sha256": "62b7ebe51e18a3da8406a956ff0c607855faf8774911df0539515dd37e03dd88",
+    "PLAN_sha256": "16580a87ee787d4890edd22a8fc8bfb9b0771242e427201a952f323f233879ea",
+    "declaration_sha256": "7b085b01e436ba36d37249edc31174d302951f189e6dbf5964e648ef31432e39",
+    "frozen_before_validation_receipt_sha256": "a1da78cfe2eb201d04b67d9419b037cd260deb87d6839397c380602babcb1bf3",
+    "ordered_source_receipt_sha256": "a7ef5b44356df034ba16d0f96d8cdb845332e6ff98758a744f19ba85f63ebfab",
+    "fit_source_snapshot_relative": "SUPPORT_CARRIER_JOINT_20261008/BY_NOISE_CALIBRATION_110_170_VALIDATE_180_240_01/SOURCE_SNAPSHOT",
+    "current_additive_api_module_sha256": "a5ae76b0d5c0ef5e2a8b69a1b54eca5382e3a789b7d9aca6d89876be55dc0440"
+  },
+  "integration_api": {
+    "incidence": "physical_source_incidence(block, source_signals=None) -> PhysicalSourceIncidence(source_signals, D). Original code rows zero; phase target +1/pivot -1; source identity omits integer arc token.",
+    "window_covariance": "assemble_source_noise_covariance(blocks, parameters, source_signals=None) -> SourceNoiseCovariance(source_signals, source_incidence, row_slices, times_s, original, white, beta, total).",
+    "components": "original=blockdiag(original Q); white=blockdiag(sigma_w^2 D_i D_i.T); beta_ij=sigma_beta^2 exp(-abs(t_i-t_j)/tau) D_i D_j.T. Source errors and scales are in meters.",
+    "scope": "Dense assembly only for short proposal windows; long calibration uses the Kalman multiple-RHS evaluator. These APIs do not implement coupled multi-sphere lower bounds or qualify candidates."
+  }
+}

@@ -387,7 +387,7 @@ def main(argv=None):
     parser.add_argument("--seed", type=int, default=6100801)
     parser.add_argument("--modes", nargs="+", choices=MODES, default=list(MODES))
     parser.add_argument("--duration", type=float, default=90.)
-    parser.add_argument("--support-inference", choices=("full_nonlinear", "shared_linearization"),
+    parser.add_argument("--support-inference", choices=("full_nonlinear", "shared_linearization", "shared_separator"),
                         default="full_nonlinear")
     parser.add_argument("--plot-only", action="store_true", help="redraw saved navigation CSV/NPZ only; never run a navigator or regenerate the scene")
     parser.add_argument("--plot-stem", default="joint_process_review", help="filename stem for --plot-only output; the original plot is preserved by default")

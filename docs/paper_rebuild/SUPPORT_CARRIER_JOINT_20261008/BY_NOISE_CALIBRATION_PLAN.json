@@ -62,5 +62,20 @@
     "integer slip implies beta reset",
     "two separate receiver variances have been estimated from identical SD structure"
   ],
-  "scope": "Implementation/equivalence first; optimization and validation remain separate steps. No navigation run, no BYO/BYH/XB/NMB reads."
+  "scope": "Implementation/equivalence first; optimization and validation remain separate steps. No navigation run, no BYO/BYH/XB/NMB reads.",
+  "bounded_optimization_declaration": {
+    "amplitude_variance_coordinates": "u=(sigma_m/0.01)^2, independently0..100 for white and beta; endpoints retained and reported, no post-result bound expansion",
+    "tau_profile_s": [
+      0.2,
+      0.3,
+      0.5,
+      0.8,
+      1.2,
+      2.0
+    ],
+    "M1": "Bounded scalar minimization, include exact zero endpoint; xatol1e-5/maxiter80",
+    "M2": "At each fixed tau, bounded L-BFGS-B for two variance coordinates, two declared starts [M1_variance,0.1] and [0,1], maxiter50/maxfun180 per start, ftol1e-10/gtol1e-5. Retain exact M1 endpoint. Then one bounded three-coordinate refinement from best profile point with log(tau), same budget. This is numerical local/profile evidence, not a global optimum certificate.",
+    "validation_order": "Write frozen parameter receipt before loading validation block arrays. Evaluate every M0/M1/M2 frozen model once; do not select or refit using validation.",
+    "validation_diagnostics": "Restricted likelihood components and residual cost/DOF after continuous integer nuisance projection; this is not causal integer-conditioned innovation coverage."
+  }
 }

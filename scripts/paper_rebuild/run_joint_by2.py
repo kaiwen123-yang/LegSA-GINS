@@ -109,7 +109,7 @@ def main(argv=None):
     parser.add_argument("--end", type=float, default=101.)
     parser.add_argument("--key-dt", type=float, default=.1)
     parser.add_argument("--mode", choices=("U0", "U1", "U2", "U3"), default="U1")
-    parser.add_argument("--support-inference", choices=("full_nonlinear", "shared_linearization"),
+    parser.add_argument("--support-inference", choices=("full_nonlinear", "shared_linearization", "shared_separator"),
                         default="full_nonlinear")
     parser.add_argument("--output-root", type=Path, required=True)
     args = parser.parse_args(argv)

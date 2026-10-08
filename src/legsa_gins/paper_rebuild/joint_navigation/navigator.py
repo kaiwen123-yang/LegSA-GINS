@@ -63,6 +63,11 @@ class JointNavigator:
     def __init__(self, metadata: dict, mode: str = "U3", *,
                  monitor_support: bool = True, support_models: list[dict] | None = None):
         self.metadata = copy.deepcopy(metadata)
+        self.gaussian_future_separator = metadata.get("support_inference") == "shared_separator"
+        if self.gaussian_future_separator:
+            self.metadata["gaussian_future_separator"] = True
+        self.gaussian_compressed_key_count = 0
+        self.maximum_gaussian_separator_dimension = 0
         self.mode = mode
         self.use_foot = mode != "U0"
         self.use_partial = mode in ("U2", "U3")
@@ -94,7 +99,7 @@ class JointNavigator:
         self.last_phase_relation_count = 0
         self.monitor_support = monitor_support and mode in ("U2", "U3")
         self.shared_support = (self.monitor_support and
-            metadata.get("support_inference", "full_nonlinear") == "shared_linearization")
+            metadata.get("support_inference", "full_nonlinear") in ("shared_linearization", "shared_separator"))
         self.anchor_history = {}
         # The last published nonlinear conditional supplies the next common
         # chart. Choosing a chart does not adopt or discard a source model.
@@ -339,6 +344,7 @@ class JointNavigator:
                 self._propose(index, packet, None if shared_anchors is None else shared_anchors.get("conditioned", []))
                 if self.shared_support or record_anchors:
                     self.anchor_history.setdefault(index, {})["conditioned"] = [b.export_linearization_anchor() for b in self.branches]
+                self._compress_gaussian_histories(packet)
             return (), 0.
         anchors = [None]*len(self.branches) if shared_anchors is None else [
             self._matching_anchor(branch, shared_anchors.get("step", [])) for branch in self.branches]
@@ -355,7 +361,22 @@ class JointNavigator:
         self._propose(index, packet, None if shared_anchors is None else shared_anchors.get("conditioned", []))
         if self.shared_support or record_anchors:
             self.anchor_history.setdefault(index, {})["conditioned"] = [b.export_linearization_anchor() for b in self.branches]
+        self._compress_gaussian_histories(packet)
         return rows, nis
+
+    def _compress_gaussian_histories(self, packet):
+        """Eliminate only coordinates outside the future measurement separator.
+
+        Consumed Gaussian history is frozen; source models and their scores are
+        retained. The nonlinear reference continues its original fixed lag.
+        """
+        if self.gaussian_future_separator:
+            for branch in self.branches:
+                if branch.window.gaussian_only:
+                    report = branch.compress_gaussian_history(packet)
+                    self.gaussian_compressed_key_count += report["eliminated_key_count"]
+                    self.maximum_gaussian_separator_dimension = max(
+                        self.maximum_gaussian_separator_dimension, report["separator_dimension"])
 
     def _restore(self, checkpoint: Checkpoint):
         self.branches = []
@@ -1006,6 +1027,8 @@ class JointNavigator:
                 common_linearization_reference_used=self.linearization_reference_used,
                 next_common_linearization_reference=(self.linearization_reference_identity or "fixed"
                     if self.shared_support else None),
+                support_gaussian_history_policy=("FROZEN_HISTORY_FUTURE_SEPARATOR"
+                    if self.gaussian_future_separator else "FIXED_LAG_SHARED_RELINEARIZATION"),
                 contact_inference_scope=("CONDITIONAL_COMMON_LINEARIZATION_WITH_ON_DEMAND_NONLINEAR_REPLAY"
                     if self.shared_support else "FULL_NONLINEAR_CONDITIONAL_MODELS"),
                 unexpanded_nonlinear_explanations=(sum(not track.nonlinear_expanded for track in self.support_tracks.values())
@@ -1064,6 +1087,12 @@ class JointNavigator:
             nonlinear_support_step_events=self.nonlinear_support_step_events,
             recovery_archive_events=len(self.recovery_events),
             anchor_history_epochs=len(self.anchor_history),
+            support_gaussian_history_policy=("FROZEN_HISTORY_FUTURE_SEPARATOR"
+                if self.gaussian_future_separator else "FIXED_LAG_SHARED_RELINEARIZATION"),
+            gaussian_support_compressed_key_count=sum(track.navigator.gaussian_compressed_key_count
+                for track in self.support_tracks.values()),
+            maximum_gaussian_separator_dimension=max((track.navigator.maximum_gaussian_separator_dimension
+                for track in self.support_tracks.values()), default=0),
             linearization_reference_switches=self.linearization_reference_switches,
             last_common_linearization_reference_used=self.linearization_reference_used,
             next_common_linearization_reference=self.linearization_reference_identity or "fixed",

@@ -34,7 +34,9 @@
     "BY first-four full integer minimum exhausted: relaxed279.553786 and rigid287.794259 exceed original204.546546; empty support is not an enumeration-budget issue",
     "Gaussian covariance queries reuse saved square-root conditionals with exact constraints and full cross covariance; independent query equivalence checked",
     "Published nonlinear conditional history supplies next shared chart while all alternative source models remain recoverable; reference can return to fixed",
-    "Fixed BY 50-packet temporal diagnostic eliminates all constant integer coordinates and still exposes original measurement-noise mismatch; raw Q field/units rebuild exactly"
+    "Fixed BY 50-packet temporal diagnostic eliminates all constant integer coordinates and still exposes original measurement-noise mismatch; raw Q field/units rebuild exactly",
+    "Gaussian support histories compress to actual future-factor separator, preserving original full covariance and source identities; 10-event fixed-Jacobian equivalence complete",
+    "Predeclared BY300-packet calibration and separate300-packet frozen noise validation complete; OU adds likelihood evidence but tau boundary and covariance calibration remain unresolved"
   ],
   "not_proven": [
     "Material legged contribution to heading qualification or integer-candidate acceptance",
@@ -68,7 +70,7 @@
     ],
     "real_velocity_accuracy_claim_allowed": false
   },
-  "latest_implementation": "reused_Gaussian_square_root_queries_and_reversible_conditional_reference",
+  "latest_implementation": "future_separator_Gaussian_support_storage_and_BY_phase_noise_working_calibration",
   "latest_full_cohort": "cohort_analytic_20261008_seed6100801",
   "latest_full_cohort_status_at_commit": "RUNNING_NOT_RESULT_EVIDENCE",
   "scientifically_interrupted_cohort": {
@@ -184,14 +186,24 @@
       "end_to_end_speedup_established": false
     },
     "active_shared_run_source": "1feccf3_before_this_milestone",
-    "pending_next_computational_change": "Minimal future-dependency separator; frozen-history Gaussian approximation not yet implemented"
+    "pending_next_computational_change": null,
+    "separator_implementation_report": "SEPARATOR_AND_PHASE_NOISE_MODEL.md",
+    "separator_status": "IMPLEMENTED_FULL_CONTINUOUS_RUN_PENDING",
+    "fixed_jacobian_equivalence": {
+      "events": 10,
+      "full_dimension": 184,
+      "separator_dimension": 31,
+      "mean_max_abs": 1.3e-16,
+      "covariance_max_abs": 3.12e-17,
+      "objective_max_abs": 2.66e-15
+    }
   },
   "measurement_noise_development": {
     "diagnostic": "BY_PHASE_TIME_DIFFERENCE.json",
     "calibration_plan": "BY_NOISE_CALIBRATION_PLAN.json",
-    "status": "ORIGINAL_Q_MISMATCH_CONFIRMED_AFTER_INTEGER_ELIMINATION_CALIBRATION_NOT_RUN",
+    "status": "BOUNDED_BY_RESTRICTED_FIT_AND_FROZEN_VALIDATION_COMPLETE_NOT_AR_QUALIFIED",
     "constant_integer_error_explains_excess": false,
-    "white_vs_colored_distinguished": false,
+    "white_vs_colored_distinguished": "INCREMENTAL_COLORED_LIKELIHOOD_EVIDENCE_TAU_NOT_IDENTIFIED",
     "calibration_window_s": [
       110,
       170
@@ -200,6 +212,16 @@
       180,
       240
     ],
-    "phase_model_changed_in_navigation": false
+    "phase_model_changed_in_navigation": false,
+    "calibration_report": "BY_NOISE_CALIBRATION.json",
+    "candidate_and_graph_integration": "NEXT_IN_PROGRESS",
+    "working_M2": {
+      "white_sd_sigma_m": 0.007702886967438229,
+      "beta_sd_sigma_m": 0.0039176487826473065,
+      "tau_s": 2.0
+    },
+    "probability_calibration_complete": false,
+    "validation_M2_cost_over_dof": 0.5483922647790502,
+    "joint_refinement_status": "LINE_SEARCH_FAILED_CONVERGED_FIXED_TAU_PROFILE_ENDPOINT_USED"
   }
 }
