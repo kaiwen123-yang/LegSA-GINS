@@ -1,6 +1,6 @@
 {
   "date": "2026-10-08",
-  "status": "STOP_AFTER_CURRENT_M2_RUN_REQUESTED",
+  "status": "PAUSED_FOR_USER_REVIEW",
   "active_goal_thread": "01a11959-c9c1-7901-b9c7-3d058a0f20b8",
   "continued_from_thread": "01a11984-efdc-7930-8436-76d4f86667d1",
   "continuation_base_commit": "381db924b34907e0781b6081ada0c49390d867a5",
@@ -129,7 +129,7 @@
       "heading_mediated_navigation_benefit_established": false,
       "new_algorithm_superiority_to_V3_established": false,
       "full_followup": "BY_M2_NATIVE_FULL_09_U1",
-      "full_followup_status_at_commit": "RUNNING_NOT_RESULT_EVIDENCE",
+      "full_followup_status_at_commit": "PROCESS_EXITED_WITHOUT_TERMINAL_RECEIPT",
       "parameters_changed_after_short_result": false
     },
     "next_causal_rows": 325,
@@ -238,6 +238,12 @@
         "joint_v3D_rmse_mps": 0.3454184403953415,
         "scope": "user approximate 0.325m same-point transport, not exact extrinsics or independent truth"
       }
+    },
+    "M2_full_run": {
+      "status": "NAVIGATION_PROCESS_EXITED_WITHOUT_TERMINAL_RECEIPT",
+      "record": "docs/paper_rebuild/SUPPORT_CARRIER_JOINT_20261008/BY_M2_FULL_NAVIGATION_RESULT.json",
+      "source_commit": "b5adc7a6b5557b106950733296de2e593842870f",
+      "new_navigation_calls": 0
     }
   },
   "shared_inference": {
@@ -338,18 +344,7 @@
     }
   ],
   "obsolete_long_runs_reason": "Existing old broad implementations were explicitly SIGINT after the newer same-source full90/controls and two targeted full nonlinear source histories answered the physical-model question; preserve snapshots and existing outputs; no completion claim or retry.",
-  "active_run_at_milestone": {
-    "name": "BY_M2_NATIVE_FULL_09_U1",
-    "session": 93159,
-    "pid": 10280,
-    "source_commit": "b5adc7a6b5557b106950733296de2e593842870f",
-    "window_s": [
-      66,
-      340
-    ],
-    "status": "RUNNING_NOT_RESULT_EVIDENCE",
-    "old_provider_and_carrier_bootstrap_retained": true
-  },
+  "active_run_at_milestone": null,
   "user_review_boundary": {
     "requested_at_utc": "2026-10-08T09:49:48.818623+00:00",
     "instruction_zh": "完成这个任务之后，终止运行，我要检查一下现在完成的内容，避免跑偏",
@@ -367,6 +362,13 @@
     ],
     "current_app_goal_exists": false,
     "one_shot_closeout_only": true,
-    "pending_run_is_not_completed": true
+    "pending_run_is_not_completed": true,
+    "closed_at_utc": "2026-10-08T14:45:46.625419+00:00",
+    "original_run_terminal_status": "PROCESS_EXITED_WITHOUT_TERMINAL_RECEIPT",
+    "closeout_status": "NAVIGATION_PROCESS_EXITED_WITHOUT_TERMINAL_RECEIPT",
+    "remaining_work_completed": false,
+    "closeout_attempt_finished": true,
+    "no_additional_work_authorized": true,
+    "explicit_resume_required": true
   }
 }

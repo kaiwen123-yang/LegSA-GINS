@@ -1,0 +1,95 @@
+{
+  "recorded_at_utc": "2026-10-08T14:45:44.850146+00:00",
+  "status": "NAVIGATION_PROCESS_EXITED_WITHOUT_TERMINAL_RECEIPT",
+  "requested_window_s": [
+    66.0,
+    340.0
+  ],
+  "source_commit": "b5adc7a6b5557b106950733296de2e593842870f",
+  "original_run_status": "RUNNING",
+  "observed_terminal_status": "PROCESS_EXITED_WITHOUT_TERMINAL_RECEIPT",
+  "source_run": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_M2_NATIVE_FULL_09_U1",
+  "old_source_run": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_NATIVE_FULL_07_U1",
+  "source_sha256": {
+    "src/legsa_gins/paper_rebuild/joint_navigation/__init__.py": "1e4531f3053fd9736435af940484c056adae614ba3700cd09def0b848d57cba0",
+    "src/legsa_gins/paper_rebuild/joint_navigation/branch.py": "77a0c07e788fb9df456ee916b6969ba431abacd8463146cae0b68b45a90e9d6e",
+    "src/legsa_gins/paper_rebuild/joint_navigation/candidate.py": "927b9a832b2d7b5e05e8e1e0babc30b7a1db2036a848eeac6fcd9ea1b9317396",
+    "src/legsa_gins/paper_rebuild/joint_navigation/carrier_relations.py": "65e9ac0b5a6decb69d18171410104b0b6a12f51012d4dd6b5b21aa92f5da6588",
+    "src/legsa_gins/paper_rebuild/joint_navigation/coupled_length_profile.py": "e8e692ee3e587b4f3c53f7afa9fb7431017c2735986cf6c165f7737aae001ce6",
+    "src/legsa_gins/paper_rebuild/joint_navigation/factors.py": "a529814ef2932e371d4f6cdac67762cefaa6e9bebf7ecf50c284e865d9c23822",
+    "src/legsa_gins/paper_rebuild/joint_navigation/navigator.py": "569320c76abff90c6d2b52c0a51e3fee05a7127529ba9e3c0a5e4e688b65f43b",
+    "src/legsa_gins/paper_rebuild/joint_navigation/real_data.py": "e3d4dbd90cdb0add6056597bdf1b0f8bb8c410015b6e4abd229714194db2c9df",
+    "src/legsa_gins/paper_rebuild/joint_navigation/source_noise_likelihood.py": "a5ae76b0d5c0ef5e2a8b69a1b54eca5382e3a789b7d9aca6d89876be55dc0440",
+    "src/legsa_gins/paper_rebuild/joint_navigation/synthetic.py": "516d25ad70292e6d7c0f87717208c0352321a94711c7d66b8226c449a3b64e65",
+    "src/legsa_gins/paper_rebuild/joint_navigation/window.py": "e2cd85768d2667688160bb6a68f9e9d264b11e42c58b70d17eca686fda284351",
+    "scripts/paper_rebuild/run_joint_by2.py": "339d6d5d5d8de1a595a38e2252a5644773ba919a659c828bee854c51ba600cb5"
+  },
+  "phase_noise_model": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/configs/paper_rebuild/joint_navigation/BY_PHASE_NOISE_M2_WORKING.json",
+    "sha256": "39cf6e5174c13e1da51ebd3436f070e14de67b302be02be9409d3d098a0a6115",
+    "content": {
+      "model_id": "BY110_170_FROZEN_M2_STATIONARY_SD_OU_WORKING",
+      "parameters": {
+        "white_sd_sigma_m": 0.007702886967438229,
+        "beta_sd_sigma_m": 0.0039176487826473065,
+        "tau_s": 2.0
+      },
+      "qualification_scope": "DEVELOPMENT_WORKING_MODEL_TAU_BOUNDARY_PROBABILITY_UNCALIBRATED",
+      "calibration_report": "docs/paper_rebuild/SUPPORT_CARRIER_JOINT_20261008/BY_NOISE_CALIBRATION.json",
+      "calibration_window_s": [
+        110,
+        170
+      ],
+      "validation_window_s": [
+        180,
+        240
+      ],
+      "physical_source_identity": "SD signal, independent of integer arc token",
+      "covariance_application": "Original Q plus SD white covariance in raw factor; beta explicit in same navigation graph and marginalized across time only for candidate proposals",
+      "tau_identified": false,
+      "probability_calibration_complete": false,
+      "integer_acceptance_qualified": false
+    }
+  },
+  "navigation_summary": {
+    "input_event_count": 8762,
+    "causal_output_rows": null,
+    "elapsed_s": null,
+    "navigation_status": null
+  },
+  "evaluator_attempts": [],
+  "limitations": [
+    "One BY2 development sequence; frozen M2 working model, tau=2 boundary, not completed probability calibration.",
+    "FULL09 b5adc7a and FULL07 9e67a are different source versions; their difference is not a pure noise-only causal ablation.",
+    "Old provider and carrier-required bootstrap retained here; initial NO_INIT is not proof of raw carrier absence.",
+    "Fixposition fused reference shares GNSS lineage and is not independent truth.",
+    "Velocity uses existing approximate 0.325 m geometry, not exact same-point independent truth.",
+    "Working integer support completeness is not a formal ambiguity-fix guarantee.",
+    "Foot contribution, successful failure withdrawal, stable navigation gain and heading-to-velocity mediation require separate evidence."
+  ],
+  "no_parameter_changes_from_this_result": true,
+  "new_navigation_calls": 0,
+  "followup_execution": "PAUSED_FOR_USER_REVIEW",
+  "navigation_counts": {
+    "navigation_file_present": false
+  },
+  "artifacts_sha256": {
+    "M2": {
+      "run_status.json": "46a2aabd37caed34741f58d3dfdb7352fea943a25390e5f6fec0fe9602eb35ae",
+      "sensor_metadata.json": "52c44f920d731202347f686f34c1e7c77b0bc166a8eebb1cb355a2760365cac5",
+      "phase_noise_model.json": "39cf6e5174c13e1da51ebd3436f070e14de67b302be02be9409d3d098a0a6115"
+    },
+    "old_U1": {
+      "run_status.json": "2b69f1ce040e1ef8e72d4ef8b62191d5ab30ef8bb68d06d97df3314ae059ee1b",
+      "navigation.jsonl": "f1ea873e3392a853cad1ff4ad41380aa10b37ecafb19904fcfcd9bd6a017994b",
+      "sensor_metadata.json": "ecd2b78c9a4d5064eab215efe28a1c99bfe410ea8cbd0ae531f271c8dea57a67"
+    },
+    "position_yaw": {},
+    "velocity": {},
+    "evaluators": {
+      "evaluate_joint_by2.py": "142328885910baac57d20c91e78da1f84d02f84388d40a0b7162bf788171d7fb",
+      "evaluate_joint_by2_velocity.py": "d5e76962a2be365985c2e9ef50b9373ea7333b1032294eee306018e8b9209d0f"
+    },
+    "extrinsic": "492230c24d87169804695503e1d9846db027842158197ed20e0f00df78e0666e"
+  }
+}

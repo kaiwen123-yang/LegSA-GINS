@@ -8,4 +8,12 @@
 
 已完成并推送至99b34a0的内容见 README.md 当前主线，重点检查：BY_NATIVE_FULL_NAVIGATION_RESULT.md、SEPARATOR_90S_SAME_SOURCE_RESULT.md、STANDING_SUPPORT_RELEASE_DIAGNOSIS.md、BY_CAUSAL_EARLY_NAVIGATION_RESULT.md。原算法及负结果保留，完整研究目标未完成。
 
-状态：等待现有M2终态及一次收尾；尚未全部停止。收尾后本文件会更新为实际完成或失败状态。
+上面的等待状态是用户下达停止指令时的历史记录；最终状态以下面收尾记录为准。
+
+## 一次性收尾终态
+
+`PAUSED_FOR_USER_REVIEW`。既有 PID 10280 已退出；导航终态 `PROCESS_EXITED_WITHOUT_TERMINAL_RECEIPT`，收尾 `NAVIGATION_PROCESS_EXITED_WITHOUT_TERMINAL_RECEIPT`。
+
+仅调用已冻结评估入口，次数与退出码见结果 JSON；失败不重跑。没有启动新导航、测试集、新模型或长期任务。
+
+结果：[BY_M2_FULL_NAVIGATION_RESULT.md](BY_M2_FULL_NAVIGATION_RESULT.md)。提交推送由外层仅执行一次，此记录不预先宣称推送成功。后续研究须用户明确恢复。
