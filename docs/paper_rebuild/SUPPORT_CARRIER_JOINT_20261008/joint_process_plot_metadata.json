@@ -1,0 +1,26 @@
+{
+  "plot_source_sha256": "d0440a69ece612ff49564ecd4ecb8c7e06baba83d109953338268a35832f2790",
+  "input_timeline_source": "observed_input_events",
+  "source_result_modes": [
+    "U0",
+    "U1",
+    "U2",
+    "U3"
+  ],
+  "rows_per_mode": {
+    "U0": 1287,
+    "U1": 1287,
+    "U2": 1287,
+    "U3": 1287
+  },
+  "full_time_interval_s": [
+    0.0,
+    90.0
+  ],
+  "yaw_axis": {
+    "scale": "symlog",
+    "linear_threshold_deg": 0.1
+  },
+  "data_or_metric_recomputed": false,
+  "research_deliverable_complete": false
+}

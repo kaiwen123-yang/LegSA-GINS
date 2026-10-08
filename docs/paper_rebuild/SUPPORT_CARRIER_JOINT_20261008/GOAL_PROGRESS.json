@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-08",
+  "status": "ACTIVE",
+  "deliverable": "One integrated support-arc/carrier-arc navigation algorithm covering all three candidate innovations",
+  "first_research_deliverable_complete": false,
+  "latest_algorithm_commit": "d77919c",
+  "latest_primary_cohort": "cohort_allan_seed6100801",
+  "completed": [
+    "Shared fixed-lag R/p/v/b/contact/carrier inference with correlated support factors and full-rate IMU preintegration",
+    "One 90-second continuous sensor scene executed under all four causal mechanism configurations",
+    "Physical carrier relation survival, conditional candidate state, source-scoped replay machinery",
+    "Historical replay state equivalence demonstrated under the explicitly superseded constant-bias model",
+    "Registered Go2 noise-model correction and same-scenario four-configuration rerun",
+    "Source-backed numerical record and continuous process figure pushed with code"
+  ],
+  "not_proven": [
+    "Material legged contribution to heading qualification or integer-candidate acceptance",
+    "Recovery of a candidate actually excluded by subsequently invalidated support",
+    "Exact preservation of unaffected and two/three-foot relative information during support changes",
+    "Successful causal support revocation under the current registered IMU model",
+    "Navigation improvement causally attributable to heading improvement",
+    "Same-version SDK and frozen V3 system adoption value on real data"
+  ],
+  "next_core_work": [
+    "Joint predictive comparison of fixed-contact/common-translation-release/relative-release hypotheses using retained support history",
+    "Arc-scoped component preservation across two/three/four-foot support subsets",
+    "Continuous direction support and acceptance evidence, including real initialization qualification",
+    "Complete the same 90-second process before broadening seeds and real-data evaluation"
+  ],
+  "data_policy": {
+    "development": "BY",
+    "frozen_parameter_test": ["BYO", "BYH"],
+    "adverse_real_conditions": ["XB series", "NMB series"],
+    "persistent_comparators": ["same-backend no-foot", "same-backend SDK velocity source", "frozen V3"],
+    "real_velocity_accuracy_claim_allowed": false
+  }
+}
