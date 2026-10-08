@@ -97,6 +97,8 @@ class JointNavigator:
         if block is None or not block.ambiguity_labels:
             return
         labels = tuple(block.ambiguity_labels)
+        if all(all(label in branch.fixed for label in labels) for branch in self.branches):
+            return
         # Reuse a physical-label cohort's proposal; no overlapping-window
         # likelihood multiplication and no gyro/RP-based preselection.
         if labels in self.proposal_times:
@@ -110,7 +112,10 @@ class JointNavigator:
                 recent.append(candidate_block)
         if len(recent) < 4:
             return
-        proposal = propose_candidates(recent, np.asarray(self.metadata["baseline_body"]), self.active_limit)
+        common_fixed = {label: value for label, value in self.branches[0].fixed.items()
+                        if all(branch.fixed.get(label) == value for branch in self.branches)}
+        proposal = propose_candidates(recent, np.asarray(self.metadata["baseline_body"]), self.active_limit,
+                                      conditioned_integer_by_label=common_fixed)
         self.proposal_attempts += 1
         self.proposal_times[labels] = packet["time_s"]
         self.support_incomplete |= not proposal.metadata["active_support_complete"]
@@ -173,14 +178,9 @@ class JointNavigator:
             return 0.0, set()
         if min(packet["time_s"] - self.arc_first_use.get(arc, packet["time_s"]) for arc in ids) <= 5.0:
             return 0.0, set()
-        previous = self.rows[-1]
-        dt = packet["time_s"] - previous["time_s"]
-        prediction = np.asarray(previous["p"]) + dt * np.asarray(previous["v"])
-        innovation = np.asarray(packet["gnss_position"]) - prediction
-        # Explicit working uncertainty of the independent product plus bounded
-        # within-event prediction; this threshold is set before scenario runs.
-        sigma = np.broadcast_to(np.asarray(self.metadata.get("gnss_position_sigma", 0.05)), (3,))
-        nis = float(np.sum(innovation**2 / (2.0 * sigma * sigma)))
+        prior_branch = min(self.branches, key=lambda branch: branch.window.error())
+        innovation, prediction_covariance = prior_branch.predict_gnss_position(packet)
+        nis = float(innovation @ np.linalg.solve(prediction_covariance, innovation))
         early = next((e for _, e in self.events
                       if {f["arc_id"] for f in e.get("feet", [])} == ids), None)
         if early is None:

@@ -214,6 +214,57 @@ class NavigationBranch:
                     previous_measured_body=previous_measured,
                     rho=math.exp(-(self.time-previous_time)/self.foot_tau))
 
+    def _preintegrate(self, event, bias):
+        preintegrated = gtsam.PreintegratedImuMeasurements(self.imu_params, bias)
+        for row in np.asarray(event["imu"], float):
+            preintegrated.integrateMeasurement(row[1:4], row[4:7], float(row[0]))
+        return preintegrated
+
+    def predict_gnss_position(self, event: dict) -> tuple[np.ndarray, np.ndarray]:
+        """Return the not-yet-consumed position innovation and its covariance.
+
+        Propagate the branch's actual joint pose/velocity/bias posterior through
+        the same IMU preintegration used by ``step``. This is a conditional
+        consistency diagnostic, not an added factor or a multimodal integrity
+        probability. The incoming GNSS row is used only as the observation.
+        """
+        keys = [X(self.index), V(self.index), self.bias_key]
+        pose = self.window.values.atPose3(keys[0])
+        velocity = self.window.values.atVector(keys[1])
+        bias = self.window.values.atConstantBias(keys[2])
+        joint = gtsam.Marginals(self.window.graph, self.window.values).jointMarginalCovariance(
+            gtsam.KeyVector(keys))
+        # JointMarginal's internal key ordering is not the X,V,B tangent order.
+        covariance = np.block([[joint.at(a, b) for b in keys] for a in keys])
+        preintegrated = self._preintegrate(event, bias)
+
+        def position_at(delta):
+            shifted_pose = pose.retract(delta[:6])
+            shifted_velocity = velocity + delta[6:9]
+            shifted_bias = gtsam.imuBias.ConstantBias(
+                bias.accelerometer() + delta[9:12],
+                bias.gyroscope() + delta[12:15])
+            return preintegrated.predict(
+                gtsam.NavState(shifted_pose, shifted_velocity), shifted_bias).position()
+
+        origin = np.zeros(15)
+        predicted = position_at(origin)
+        jacobian = np.empty((3, 15))
+        step = 1e-6
+        for column in range(15):
+            delta = origin.copy()
+            delta[column] = step
+            jacobian[:, column] = (position_at(delta) - position_at(-delta)) / (2. * step)
+        rotation = pose.rotation().matrix()
+        process_covariance = rotation @ preintegrated.preintMeasCov()[3:6, 3:6] @ rotation.T
+        observation_covariance = np.diag(
+            self._sigmas(self.metadata.get("gnss_position_sigma", .05)) ** 2)
+        innovation_covariance = (
+            jacobian @ covariance @ jacobian.T + process_covariance + observation_covariance)
+        innovation_covariance = .5 * (innovation_covariance + innovation_covariance.T)
+        innovation = np.asarray(event["gnss_position"], float) - predicted
+        return innovation, innovation_covariance
+
     def step(self, event: dict, index: int, revoked_arcs: set[str] | None = None):
         """Consume one causal event and return pose, velocity, bias, cost."""
         revoked_arcs = set() if revoked_arcs is None else revoked_arcs
@@ -242,9 +293,7 @@ class NavigationBranch:
             factors.append(gtsam.PriorFactorConstantBias(
                 bias_key, self.bias, gtsam.noiseModel.Diagonal.Sigmas(bias_sigma)))
         else:
-            preintegrated = gtsam.PreintegratedImuMeasurements(self.imu_params, self.bias)
-            for row in np.asarray(event["imu"], float):
-                preintegrated.integrateMeasurement(row[1:4], row[4:7], float(row[0]))
+            preintegrated = self._preintegrate(event, self.bias)
             prediction = preintegrated.predict(gtsam.NavState(self.pose, self.velocity), self.bias)
             predicted_pose, predicted_velocity = prediction.pose(), prediction.velocity()
             factors.append(gtsam.ImuFactor(
