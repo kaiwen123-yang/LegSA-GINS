@@ -1,0 +1,100 @@
+{
+  "status": "COMPLETED_SOURCE_DURATION_READOUT_NO_FIT",
+  "recorded_at_utc": "2026-10-08T19:05:45.047427+08:00",
+  "window_s": [
+    66.0,
+    340.0
+  ],
+  "event_count": 8762,
+  "eligible_foot_observations": 10241,
+  "expected_foot_observations": 10241,
+  "expected_count_matches": true,
+  "group_count": 2257,
+  "arc_count": 2373,
+  "group_size_histogram": {
+    "2": 116,
+    "1": 2141
+  },
+  "group_span_statistics": {
+    "count": 2257,
+    "positive_count": 2174,
+    "quantiles_s": {
+      "min": 0.0,
+      "p25": 0.16999701100002085,
+      "median": 0.21202363099996546,
+      "p75": 0.23195198900000946,
+      "p95": 0.24601569940000445,
+      "max": 0.26399228399998265
+    },
+    "at_least_seconds": {
+      "1": 0,
+      "5": 0,
+      "12": 0
+    }
+  },
+  "arc_span_statistics": {
+    "count": 2373,
+    "positive_count": 2287,
+    "quantiles_s": {
+      "min": 0.0,
+      "p25": 0.16800543799999446,
+      "median": 0.2119889650000033,
+      "p75": 0.2301612849999799,
+      "p95": 0.24601038320000726,
+      "max": 0.26399228399998265
+    },
+    "at_least_seconds": {
+      "1": 0,
+      "5": 0,
+      "12": 0
+    }
+  },
+  "group_span_by_size": {
+    "1": {
+      "count": 2141,
+      "positive_count": 2058,
+      "quantiles_s": {
+        "min": 0.0,
+        "p25": 0.1699872200000243,
+        "median": 0.2119980479999981,
+        "p75": 0.2301612849999799,
+        "p95": 0.24601016600001913,
+        "max": 0.26399228399998265
+      },
+      "at_least_seconds": {
+        "1": 0,
+        "5": 0,
+        "12": 0
+      }
+    },
+    "2": {
+      "count": 116,
+      "positive_count": 116,
+      "quantiles_s": {
+        "min": 0.005996135999993157,
+        "p25": 0.18351123374999645,
+        "median": 0.2219937470000133,
+        "p75": 0.23801119674998716,
+        "p95": 0.24850437300000294,
+        "max": 0.25202230299998973
+      },
+      "at_least_seconds": {
+        "1": 0,
+        "5": 0,
+        "12": 0
+      }
+    }
+  },
+  "partition": "FIRST_OBSERVED_UNASSIGNED_ARCS_JOINT_PARTITION_SAME_AS_CALIBRATION",
+  "span_scope": "FIRST_TO_LAST_OBSERVED_EPOCH_INCLUDING_GAPS_NOT_CONTINUOUS_MULTIFOOT_DURATION",
+  "reference_reads": 0,
+  "navigation_calls": 0,
+  "evaluator_calls": 0,
+  "new_fits": 0,
+  "does_not_modify_running_status_or_chart": true,
+  "source_modules_sha256": {
+    "real_data.py": "3785a3eb84ab1485b936cfbe70986bdc6cbdc5d22bb8c54a60c0af9bd3ed8cad",
+    "support_motion_likelihood.py": "ccd3d5d1c4e2e17359bdd719bd581dbc8aec7e52bee90dcda329868781ac7a72"
+  },
+  "full_record": "/home/kaiwen/research/LegSA-GINS-SCRATCH/INTEGRATED_LEGGED_HEADING_20261008/BY_SOURCE_PROFILE_FULL01/SOURCE_DURATION_SCOPE.json"
+}

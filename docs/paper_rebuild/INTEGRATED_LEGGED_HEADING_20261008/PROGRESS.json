@@ -1,8 +1,8 @@
 {
-  "plan_version": "v1.1",
+  "plan_version": "v1.2",
   "date_local": "2026-10-08",
   "timezone": "Asia/Shanghai",
-  "status": "ACTIVE_M1_IMPLEMENTED_SOURCE_IDENTIFICATION_IN_PROGRESS",
+  "status": "ACTIVE_M1_FIXED_FULL_COMPARISON_COMPLETE_SOURCE_IDENTIFICATION_IN_PROGRESS",
   "goal_thread_id": "01a11afd-6d44-7bc0-94df-ae1fbfc584d1",
   "plan": "PLAN.md",
   "authorization": "Explicit user request in this thread to create a plan, then an active long-term goal, implement one integrated algorithm, and push completed stages.",
@@ -43,7 +43,7 @@
     "primary_system_baseline": "frozen V3"
   },
   "required_sequence_adapter": "Current joint real_data/run_joint_by2 remains BY2-specific; explicit registered sequence/base-time/provider identity adaptation required before test execution.",
-  "first_action": "Read complete BY source profile, resolve parameter-identification scope, freeze the source-selected working model, then run the full 90-second same-version U3 fixed-support versus finite automatic-support comparison.",
+  "first_action": "Read complete BY source profile, original source-factor residual decomposition and prediction-range implications; resolve working-model scope, freeze source-selected working values without claiming probability calibration, then run the full 90-second same-version U3 fixed-support versus finite automatic-support comparison.",
   "m1_current_evidence": {
     "integrated_code": "Finite common support motion, proper joint foot/external prediction, existing nonlinear conditional-history expansion and source-only restricted likelihood are connected to the same JointNavigator state.",
     "necessary_math_checks": "Exact OU and fixed limit; foot Jacobians and original AR likelihood; joint prediction covariance from actual process graph and conditional-density decomposition; checkpoint and Gaussian-separator lifecycle; sparse source likelihood equals dense full-covariance integration.",
@@ -56,11 +56,15 @@
       "scope": "Local source-only no-foot navigation Gaussian chart; one of four initial yaw seeds stationary within 100 iterations. No reference reads, no navigation outcome evaluation, not global qualification."
     },
     "full_by_profile": {
-      "root": "/home/kaiwen/research/LegSA-GINS-SCRATCH/INTEGRATED_LEGGED_HEADING_20261008/BY_SOURCE_PROFILE_FULL01",
+      "root": "/home/kaiwen/research/LegSA-GINS-SCRATCH/INTEGRATED_LEGGED_HEADING_20261008/BY_SOURCE_PROFILE_FULL02",
       "window_s": [66, 340],
-      "status": "RUNNING"
+      "status": "RUNNING",
+      "previous_attempt": "FULL01 intentionally interrupted after 1594.81 s to remove unused O(n^2) prefix scoring during deferred construction; same original factors, seed states, linearization and final optimization verified. Not a model/data failure."
     },
-    "full_m1_navigation": "NOT_RUN_WITH_NEW_MODEL",
+    "full_m1_navigation": "FIXED_COMPLETE_AUTOMATIC_FINITE_NOT_RUN",
+    "fixed_complete_result": "M1_FIXED90_RESULT.json",
+    "source_duration_scope": "BY_SOURCE_DURATION_SCOPE.json: 2373 arcs, maximum span 0.263992 s; no group spans 1 s, 5 s or 12 s. Long-horizon support motion is a process-model extrapolation.",
+    "source_model_interpretation": "Stationarity is not source-model calibration. Source-only likelihood normalizes the navigation posterior, so the source residual constant is not added to the foot-parameter objective; biased state means or narrow covariance may still be absorbed indirectly. Inspect original factor-family residuals once, do not infer sensor blame or inflate noise from total cost. Frozen BY-selected working-model navigation comparison remains meaningful under explicit local-chart, correlation and long-arc limitations.",
     "fair_fixed_comparison": "Same U3 mode, same partial carriers and foot_external evidence, same support lifecycle, monitor_support=False; U1 is not an equivalent baseline.",
     "policy_scope": "Observed single-group fixed/finite alternatives. Arbitrary multi-fault policy coverage and direction-dependent recovery remain M2 work."
   },
@@ -84,6 +88,11 @@
       "date": "2026-10-08",
       "evidence": "Complete nonlinear whole-arc release diagnosis loses valid translation; newer BY entry still lacks global support qualification and stable p/v gains.",
       "decision": "Prioritize physical support repair, then require direction-relevant integrated evidence; do not replace estimator architecture without specific evidence."
+    },
+    {
+      "date": "2026-10-08",
+      "evidence": "The complete BY interval contains only short individual support arcs (max 0.264 s); the 90-second matched fixed comparison is complete with gap p/v 0.140418 m / 0.045018 m/s.",
+      "decision": "Inspect the source-profile long-horizon implications before freezing a working process, preserve extrapolation and unresolved parameters, then judge the automatic full-scene result against this fixed comparison."
     }
   ],
   "remaining_goal_requirements": [

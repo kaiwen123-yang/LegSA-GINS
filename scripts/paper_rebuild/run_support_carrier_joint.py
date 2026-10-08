@@ -391,6 +391,8 @@ def main(argv=None):
                         default="full_nonlinear")
     parser.add_argument("--support-motion-model", type=Path,
                         help="BY-derived finite common-motion model; enables same-row foot/external prediction")
+    parser.add_argument("--support-prediction", choices=("external", "foot_external"),
+                        help="prediction rows; permits the fixed comparison without unused finite-motion parameters")
     parser.add_argument("--fixed-support", action="store_true",
                         help="same-mode fixed-support comparison; disables only support-model monitoring")
     parser.add_argument("--plot-only", action="store_true", help="redraw saved navigation CSV/NPZ only; never run a navigator or regenerate the scene")
@@ -414,13 +416,16 @@ def main(argv=None):
         motion_content = args.support_motion_model.read_bytes()
         motion_model = json.loads(motion_content)
         scene["metadata"]["support_motion_model"] = motion_model["support_motion_model"]
-        scene["metadata"]["support_prediction"] = "foot_external"
+    scene["metadata"]["support_prediction"] = (args.support_prediction or
+        ("foot_external" if motion_content is not None else "external"))
+    if scene["metadata"]["support_prediction"] == "foot_external":
         scene["metadata"]["support_policy_search"] = "observed_groups"
     purpose = "full_90_second_process" if args.duration >= 90 else "internal_short_debug_not_scientific_milestone"
     run_record = dict(seed=args.seed, duration_s=args.duration, modes=args.modes, purpose=purpose,
                       data_mode="synthetic", estimator_truth_input=False,
                       support_inference=args.support_inference,
                       support_monitoring=not args.fixed_support,
+                      support_prediction=scene["metadata"]["support_prediction"],
                       scenario_kind=scene["metadata"]["scenario_kind"], completed_modes=[], status="RUNNING")
     if motion_content is not None:
         run_record["support_motion_model"] = dict(path=str(args.support_motion_model.resolve()),

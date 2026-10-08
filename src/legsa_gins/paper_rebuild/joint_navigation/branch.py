@@ -1272,8 +1272,9 @@ class NavigationBranch:
              linearization_anchor: dict | None = None):
         """Consume factors at their actual event time.
 
-        Deferred construction is used only for an uninitialized asynchronous
-        batch. Initial rotation is a Values seed; it never becomes a yaw prior.
+        Deferred construction assembles an asynchronous batch without solving
+        or scoring each prefix; its returned cost is None. Initial rotation is
+        a Values seed; it never becomes a yaw prior.
         """
         if self.bootstrap_status == "NO_INIT" and not defer_optimize:
             raise ValueError("bootstrap must be qualified before normal step")
@@ -1406,7 +1407,7 @@ class NavigationBranch:
             foot=nfoot, differential=ndifference,
             carrier_rows=0 if block is None else len(block.y),
             total=len(factors), imu_intervals=len(event["imu"]))
-        return self._current()
+        return self._current(compute_error=not defer_optimize)
 
     def bootstrap(self, events: list[dict], seed_rotation: gtsam.Rot3, *, start_index: int = 0,
                   gravity_tilt: dict | None = None, support_models: list[dict] | None = None,
@@ -1555,11 +1556,11 @@ class NavigationBranch:
         self._prune_phase_coordinates()
         return self._current()
 
-    def _current(self):
+    def _current(self, *, compute_error: bool = True):
         self.pose = self.window.values.atPose3(X(self.index))
         self.velocity = self.window.values.atVector(V(self.index)).copy()
         self.bias = self.window.values.atConstantBias(self.bias_key)
-        return self.pose, self.velocity.copy(), self.bias, self.window.error()
+        return self.pose, self.velocity.copy(), self.bias, self.window.error() if compute_error else None
 
     def current_output(self) -> dict:
         """Current conditional navigation state, with no truth/evaluation data."""

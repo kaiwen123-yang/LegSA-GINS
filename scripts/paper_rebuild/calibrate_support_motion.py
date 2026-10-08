@@ -84,6 +84,7 @@ def build_nofoot_source_graph(inputs, yaw_seeds_deg, max_iterations, gradient_to
     metadata['lag_s'] = events[-1]['time_s']-events[0]['time_s']+1.
     reports, accepted = [], []
     for yaw in yaw_seeds_deg:
+        print(f'Source chart seed {yaw:g} deg: building {len(events)} original events', flush=True)
         branch = NavigationBranch(metadata, use_foot=False)
         for index,event in enumerate(events):
             branch.step(event,index,defer_optimize=True,
@@ -92,6 +93,7 @@ def build_nofoot_source_graph(inputs, yaw_seeds_deg, max_iterations, gradient_to
         params.setMaxIterations(max_iterations)
         params.setRelativeErrorTol(1e-9)
         params.setAbsoluteErrorTol(1e-9)
+        print(f'Source chart seed {yaw:g} deg: optimizing complete graph', flush=True)
         optimizer = gtsam.LevenbergMarquardtOptimizer(branch.window.graph,branch.window.values,params)
         values = optimizer.optimize()
         linear = branch.window.graph.linearize(values)
@@ -104,6 +106,7 @@ def build_nofoot_source_graph(inputs, yaw_seeds_deg, max_iterations, gradient_to
                       factors=branch.window.graph.size(), state_dimension=values.dim(),
                       original_factors_only=True, marginalized_variables=branch.window.marginalized_total)
         reports.append(report)
+        print(json.dumps(report, ensure_ascii=False), flush=True)
         if report['stationary']:
             accepted.append((report['nonlinear_cost'],branch.window.graph,values,report))
     if not accepted:
@@ -138,12 +141,17 @@ def main(argv=None):
     args=parser.parse_args(argv)
     args.output_root.mkdir(parents=True,exist_ok=False)
     started=time.monotonic()
+    sources=sorted((ROOT/'src/legsa_gins/paper_rebuild/joint_navigation').glob('*.py'))+[Path(__file__).resolve()]
     report=dict(status='READING_SOURCE_EVENTS',started_at_utc=datetime.now(timezone.utc).isoformat(),
                 requested_window_s=[args.start,args.end],reference_reads=0,evaluator_calls=0,
                 navigation_results_produced=False,foot_factors_used_for_source_state=0,
                 sigma_grid=args.sigma_grid,tau_grid=args.tau_grid,
                 implementation_sha256={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
-                    for p in [Path(__file__).resolve(),ROOT/'src/legsa_gins/paper_rebuild/joint_navigation/support_motion_likelihood.py']})
+                    for p in sources})
+    for source in sources:
+        target=args.output_root/'SOURCE_SNAPSHOT'/source.relative_to(ROOT)
+        target.parent.mkdir(parents=True,exist_ok=True)
+        target.write_bytes(source.read_bytes())
     _save(args.output_root/'CALIBRATION_STATUS.json',report)
     try:
         config=By2InputConfig(args.body,args.imu,args.gnss,args.carrier_plan,args.calibration_model,

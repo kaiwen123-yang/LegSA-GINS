@@ -166,8 +166,67 @@ def test_shared_separator_retains_motion_and_closes_only_explicit_source_arcs():
     assert not conditional.foot_error_history
 
 
+def test_deferred_source_graph_is_identical_without_prefix_scoring():
+    class PrefixScoringBranch(NavigationBranch):
+        def _current(self, *, compute_error=True):
+            # Original construction path evaluated the whole prefix here.
+            return super()._current(compute_error=True)
+
+    def assert_identical_source_values(actual, expected):
+        assert list(actual.keys()) == list(expected.keys())
+        for key in actual.keys():
+            symbol = chr(gtsam.Symbol(key).chr())
+            if symbol == "x":
+                left, right = actual.atPose3(key).matrix(), expected.atPose3(key).matrix()
+            elif symbol == "b":
+                a, b = actual.atConstantBias(key), expected.atConstantBias(key)
+                left, right = np.r_[a.accelerometer(), a.gyroscope()], np.r_[b.accelerometer(), b.gyroscope()]
+            else:
+                left, right = actual.atVector(key), expected.atVector(key)
+            np.testing.assert_array_equal(left, right)
+
+    source_events = [dict(event, carrier=None, feet=[]) for event in _events()]
+    deferred = NavigationBranch(_metadata(), use_foot=False)
+    legacy = PrefixScoringBranch(_metadata(), use_foot=False)
+    calls = [0, 0]
+    for slot, branch in enumerate((deferred, legacy)):
+        original_error = branch.window.error
+
+        def counted_error(slot=slot, original_error=original_error):
+            calls[slot] += 1
+            return original_error()
+
+        branch.window.error = counted_error
+
+    for index, event in enumerate(source_events):
+        rotation = gtsam.Rot3.Rz(.7) if index == 0 else None
+        result = deferred.step(event, index, defer_optimize=True, initial_rotation=rotation)
+        original = legacy.step(event, index, defer_optimize=True, initial_rotation=rotation)
+        assert result[3] is None
+        assert np.isfinite(original[3])
+        assert_identical_source_values(deferred.window.values, legacy.window.values)
+        assert deferred.window.times == legacy.window.times
+
+    assert calls == [0, len(source_events)]
+    assert deferred.window.graph.equals(legacy.window.graph, 1e-14)
+    assert deferred.window.marginalized_total == legacy.window.marginalized_total == 0
+    keys = list(deferred.window.values.keys())
+    for actual, expected in zip(
+            deferred.window.graph.linearize(deferred.window.values).jacobian(key_ordering(keys)),
+            legacy.window.graph.linearize(legacy.window.values).jacobian(key_ordering(keys))):
+        np.testing.assert_array_equal(actual, expected)
+
+    # Same source graph and same seed lead to the same final batch solution.
+    deferred.window.optimize()
+    legacy.window.optimize()
+    assert_identical_source_values(deferred.window.values, legacy.window.values)
+    assert deferred._current()[3] == legacy._current()[3]
+    assert calls == [1, len(source_events)+1]
+
+
 if __name__ == "__main__":
     test_joint_prediction_keeps_cross_information_and_does_not_score_birth()
     test_finite_zero_limit_equals_fixed_and_checkpoint_reconstruction()
     test_shared_separator_retains_motion_and_closes_only_explicit_source_arcs()
-    print("PASS: joint density, exact fixed limit, source-history reconstruction, shared separator")
+    test_deferred_source_graph_is_identical_without_prefix_scoring()
+    print("PASS: joint density, exact fixed limit, source-history reconstruction, shared separator, deferred source graph identity")
