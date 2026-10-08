@@ -1,0 +1,42 @@
+{
+  "status": "USER_APPROXIMATE_INSTALLATION",
+  "purpose": "OFFLINE_VELOCITY_DIMENSION_SENSITIVITY_ONLY",
+  "reference_point": "FP_POI",
+  "target_point": "GO2_PROPAGATION_IMU",
+  "lever_poi_to_imu_in_poi_m": [
+    0,
+    0,
+    -0.325
+  ],
+  "source_evidence": [
+    {
+      "source": "Direct user statement in current task, 2026-10-08",
+      "statement": "Go2 IMU lies approximately 30--35 cm below VRTK, approximately vertical; Fixposition camera faces forward; horizontal installation and lateral antenna baseline perpendicular to robot heading",
+      "measurement_quality": "approximate recollection; not surveyed or exact extrinsic"
+    },
+    {
+      "source": "https://docs.fixposition.com/fd/fp_a-tf",
+      "definition": "VRTK X forward, Y left, Z up"
+    },
+    {
+      "source": "BY2 userio-raw.csv; actual FP_A-TF records",
+      "sha256": "3eb2eb90d9dbe226204e76f0ac40827e0ffd0a839b3d50ecbb87503096c08233",
+      "identity": "301 POI,VRTK transforms: zero translation and unit quaternion"
+    }
+  ],
+  "axis_mapping": "POI=VRTK; approximately vertical down is -Z in the stated normal horizontal installation",
+  "height_m": 0.325,
+  "height_sensitivity_interval_m": [
+    0.3,
+    0.35
+  ],
+  "horizontal_offset_m": [
+    0,
+    0
+  ],
+  "horizontal_offset_status": "approximate zero assumption; unknown error bound",
+  "mounting_axis_alignment": "approximate normal horizontal installation; unmeasured angular error",
+  "range_is_statistical_confidence_interval": false,
+  "exact_same_point_accuracy_claim": false,
+  "online_algorithm_config_changed": false
+}

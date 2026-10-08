@@ -1,0 +1,159 @@
+{
+  "status": "VELOCITY_EVALUATED_WITH_USER_APPROXIMATE_INSTALLATION_SENSITIVITY",
+  "sequence": "BY2",
+  "scope": "Separate velocity evaluation capability, not a change to frozen position/yaw metrics",
+  "reference_schema": {
+    "scope": "Offline child schema only; numeric navigation reference values not exported to online algorithm",
+    "geodetic": {
+      "rows": 6040,
+      "unique_measurement_epochs": 3020,
+      "frame_v_omega": "ENU",
+      "fields": [
+        "v.vector3.xyz",
+        "omega.vector3.xyz",
+        "v_var.vector3.xyz"
+      ],
+      "sha256": "d7e1943a82162ab2a2bd988909c4b01d22be2e52b946282a7d98010e68effbf7",
+      "duplicate_velocity_equality_checked": false
+    },
+    "odometry": {
+      "rows": 3020,
+      "measurement_epoch_range_s": [
+        55.7,
+        357.6
+      ],
+      "sample_interval_s": 0.1,
+      "pose_parent": "ECEF",
+      "twist_child": "POI",
+      "fields": [
+        "pose.pose.orientation.xyzw",
+        "twist.twist.linear.xyz",
+        "twist.twist.angular.xyz"
+      ],
+      "sha256": "b2c9887c6fcb6e86cd95f4a221a04a8e4646eaf4826e677a791b69b8ee7545fe"
+    },
+    "base_time_unix_s": 1772784000
+  },
+  "actual_frame_metadata": {
+    "poi_vrtk_identity_messages": 301,
+    "all_tf_ascii_checksums_valid": 602,
+    "poi_vrtk_translation_m": [
+      0,
+      0,
+      0
+    ],
+    "poi_vrtk_quaternion_wxyz": [
+      1,
+      0,
+      0,
+      0
+    ],
+    "static_frame_edges": [
+      [
+        "ENU",
+        "VISION"
+      ],
+      [
+        "BODY",
+        "CAM"
+      ],
+      [
+        "ECEF",
+        "ENU"
+      ]
+    ],
+    "dynamic_frame_edges": [
+      [
+        "ENU",
+        "BODY"
+      ]
+    ],
+    "go2_imu_endpoint_present": false,
+    "source_sha256": {
+      "tf_static.csv": "ec9f09fca0b71a4f890f63f72481aae3857803b39978aef3f99ce65e4c58c0fa",
+      "tf.csv": "ac40fffeaf67c8d1f97f08a7abb969021ee9cc7c132ddf0efdb7527cccc63146",
+      "userio-raw.csv": "3eb2eb90d9dbe226204e76f0ac40827e0ffd0a839b3d50ecbb87503096c08233"
+    }
+  },
+  "v3_retained_replay": {
+    "path": "<CLEAN_ROOT>/stages/V3_MECHANISM_EVIDENCE_20261002T042234Z/replays/RUN_00004/original",
+    "receipt_status": "COMPLETED_BYTE_IDENTICAL",
+    "nav_sha256": "2fda678fbc9d760e7bd4b93b6e7f99861b41ea91aef86252566ea059abbeb0f4",
+    "std_sha256": "06fb77697eb2a2b5b53a9fb5702560907920f389de08fd45af2d6d9cb7fa1da9",
+    "imu_err_sha256": "4ba9ea61fe4cdaea882585cfdf265a20aa41288d5e942a0cb0ee12c1c8317290",
+    "native_velocity_columns_zero_based": [
+      5,
+      6,
+      7
+    ],
+    "native_velocity_point": "propagation Go2 IMU",
+    "native_velocity_axes": "geographic NED",
+    "gyro_bias_output_units": "deg/hour; columns 1--3 after time",
+    "std_role": "present, but complete cross covariance and reference point uncertainty are not available; no velocity NEES planned"
+  },
+  "missing_physical_input": {
+    "quantity": "lever_poi_to_imu_in_poi_m",
+    "definition": "vector from FP_POI/VRTK housing reference origin to Go2 propagation IMU origin, expressed in POI/VRTK axes",
+    "required_source": "installation measurement/CAD/extrinsic record with endpoints and axis convention",
+    "not_a_substitute": "Frozen IMU-to-antenna-midpoint lever [.03,.03-b_med/2,-.30] does not establish VRTK-to-Go2 geometry",
+    "zero_lever_assumed": false,
+    "fit_to_reference": false,
+    "current_resolution": "User approximate 30--35 cm downward displacement; exact installation and horizontal/angular error bounds remain unavailable"
+  },
+  "bridge": {
+    "path": "scripts/paper_rebuild/evaluate_joint_by2_velocity.py",
+    "selected_reference": "user_io-out-poi_odometry.csv (unique measurement epochs and unambiguous ROS child twist frame)",
+    "formula": "v_IMU_ecef = R_ecef_from_POI @ (v_POI + omega_POI cross r_POI_to_IMU)",
+    "joint_frame_rotation": "fixed local NED to ECEF via recorded origin rotation",
+    "v3_frame_rotation": "native geographic NED to ECEF per native LLH",
+    "report_axes": "fixed local NED of first joint run",
+    "reference_clock": "header.stamp, not arrival Time; base time 1772784000",
+    "interpolation": "adjacent finite native outputs and 10 Hz reference only; no extrapolation or NO_INIT bridging",
+    "metric": "exact integral of squared piecewise-linear velocity error on common physical intervals",
+    "source_independence": "reference never consumed by online algorithm; Fixposition GNSS lineage is shared, so not independent truth",
+    "uncertainty_evaluated": false,
+    "frozen_position_yaw_evaluation_changed": false,
+    "required_extrinsic_json": {
+      "status": "SOURCE_EXPLICIT",
+      "reference_point": "FP_POI",
+      "target_point": "GO2_PROPAGATION_IMU",
+      "lever_poi_to_imu_in_poi_m": "three sourced coordinates, not supplied yet",
+      "source_evidence": "source document/measurement and axes",
+      "accepted_statuses": [
+        "SOURCE_EXPLICIT",
+        "USER_APPROXIMATE_INSTALLATION"
+      ]
+    }
+  },
+  "validation": {
+    "test": "tests/paper_rebuild/test_joint_velocity_evaluator.py",
+    "checks": [
+      "rigid point velocity matches derivative of rotated lever; axes transformation invariance",
+      "NO_INIT interrupts interpolation; exact squared linear velocity-error integration"
+    ],
+    "passed": 2,
+    "real_velocity_evaluations": 3,
+    "navigator_calls": 0,
+    "result_record": "BY_VELOCITY_APPROXIMATE_SENSITIVITY.json"
+  },
+  "read_scope": {
+    "poi_schema_child_readonly_opens": 2,
+    "frame_metadata_child_readonly_opens": 3,
+    "parent_reference_payload_opens": 0,
+    "trace_payload_opens": 0,
+    "source_scope": "BY2 only; no other dataset payload opened",
+    "artifact_root": "<JOINT_SCRATCH>/BY_REFERENCE_VELOCITY_SCHEMA_01",
+    "artifacts": [
+      "SCHEMA.json",
+      "READ_AUDIT.json",
+      "FRAME_METADATA_COMPACT.json",
+      "FRAME_METADATA_OPENAT.strace",
+      "V3_REPLAY_FILES.json"
+    ]
+  },
+  "official_semantics": [
+    "https://docs.fixposition.com/fd/fixposition-ros-driver",
+    "https://docs.fixposition.com/fd/fp_a-tf"
+  ],
+  "next_action": "After completed long-run output exists, reuse this separate velocity bridge with the same approximate geometry scope; no frozen p/yaw changes"
+}

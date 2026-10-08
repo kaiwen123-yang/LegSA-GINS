@@ -37,7 +37,9 @@
     "Fixed BY 50-packet temporal diagnostic eliminates all constant integer coordinates and still exposes original measurement-noise mismatch; raw Q field/units rebuild exactly",
     "Gaussian support histories compress to actual future-factor separator, preserving original full covariance and source identities; 10-event fixed-Jacobian equivalence complete",
     "Predeclared BY300-packet calibration and separate300-packet frozen noise validation complete; OU adds likelihood evidence but tau boundary and covariance calibration remain unresolved",
-    "Physical phase beta enters the same navigation graph, pre-consumption predictive likelihood and full-temporal-covariance candidate proposal; correlated sphere lower/upper bounds retain unresolved identities"
+    "Physical phase beta enters the same navigation graph, pre-consumption predictive likelihood and full-temporal-covariance candidate proposal; correlated sphere lower/upper bounds retain unresolved identities",
+    "Same-window real BY M2 common-graph run completed: yaw and horizontal position improved relative to original-noise U1, but velocity did not and frozen V3 still has lower yaw and position errors",
+    "Offline velocity comparison now uses user approximate POI-to-IMU installation with 30/32.5/35 cm height sensitivity; shared-source reference and unknown horizontal/alignment errors remain explicit"
   ],
   "not_proven": [
     "Material legged contribution to heading qualification or integer-candidate acceptance",
@@ -49,8 +51,8 @@
   ],
   "next_core_work": [
     "Complete current full90s and fullBY runs under their pinned source versions; evaluate full BY U1 against frozen original V3 once terminal",
-    "Run integrated BY M2 working likelihood on the same native-increment development interval and evaluate navigation; calibration is conditional and not AR-qualified",
-    "Run the full90s future-separator model and inspect actual continuous source-model decisions, recovery and navigation effects",
+    "Complete running full BY M2 U1 (BY_M2_NATIVE_FULL_09_U1) and original-noise U1 (BY_NATIVE_FULL_07_U1), both66--340s; compare fixed-parameter yaw/p/v and coverage once terminal",
+    "Complete running full90s future-separator model (cohort_separator_20261008_seed6100801) and inspect actual continuous source-model decisions, recovery and navigation effects",
     "Complete reversible composite source-policy inference and show actual retained heading and shared v/p gain through continuous failure/recovery",
     "Freeze only after BY development; then test BYO/BYH and XB/NMB without test-set tuning"
   ],
@@ -69,7 +71,9 @@
       "same-backend SDK velocity source",
       "frozen V3"
     ],
-    "real_velocity_accuracy_claim_allowed": false
+    "real_velocity_accuracy_claim_allowed": false,
+    "approximate_geometry_velocity_readout_available": true,
+    "velocity_readout_scope": "USER_APPROXIMATE_INSTALLATION_NOT_PRECISE_CALIBRATED_POINT_OR_INDEPENDENT_TRUTH"
   },
   "latest_implementation": "physical_phase_source_joint_graph_prediction_and_correlated_candidate_support",
   "latest_full_cohort": "cohort_analytic_20261008_seed6100801",
@@ -102,7 +106,25 @@
       106
     ],
     "next_run_status": "COMPLETED_FROM_a01cece",
-    "velocity_accuracy_evaluated": false,
+    "velocity_accuracy_evaluated": true,
+    "velocity_evaluation_scope": "SHORT_INTERVAL_WITH_USER_APPROXIMATE_INSTALLATION_SENSITIVITY",
+    "velocity_evaluation_report": "BY_VELOCITY_APPROXIMATE_SENSITIVITY.json",
+    "M2_same_window_comparison": {
+      "report": "BY_M2_SHORT_NAVIGATION_RESULT.json",
+      "run": "BY_M2_NATIVE_SHORT_08_U1",
+      "source_commit": "b5adc7a6b5557b106950733296de2e593842870f",
+      "finite_duration_s": 5.802000045776367,
+      "yaw_rmse_deg": 1.7140911238749756,
+      "horizontal_rmse_m": 0.04005732788183194,
+      "position_3d_rmse_m": 0.11180202091205074,
+      "velocity_report": "BY_M2_VELOCITY_COMPARISON.json",
+      "velocity_improved_vs_original_noise_U1": false,
+      "heading_mediated_navigation_benefit_established": false,
+      "new_algorithm_superiority_to_V3_established": false,
+      "full_followup": "BY_M2_NATIVE_FULL_09_U1",
+      "full_followup_status_at_commit": "RUNNING_NOT_RESULT_EVIDENCE",
+      "parameters_changed_after_short_result": false
+    },
     "next_causal_rows": 325,
     "next_finite_rows": 190,
     "next_no_init_rows": 135,
@@ -189,7 +211,10 @@
     "active_shared_run_source": "1feccf3_before_this_milestone",
     "pending_next_computational_change": null,
     "separator_implementation_report": "SEPARATOR_AND_PHASE_NOISE_MODEL.md",
-    "separator_status": "IMPLEMENTED_FULL_CONTINUOUS_RUN_PENDING",
+    "separator_status": "FULL_CONTINUOUS_RUN_ACTIVE_NOT_RESULT_EVIDENCE",
+    "separator_run": "cohort_separator_20261008_seed6100801",
+    "separator_run_source": "b5adc7a6b5557b106950733296de2e593842870f",
+    "continuous_policy_combination_limit": "SHARED_REFERENCE_SWITCH_DOES_NOT_CREATE_MULTI_GROUP_POLICY; CURRENT90s_HAS_ONE_PHYSICAL_SLIDING_GROUP",
     "fixed_jacobian_equivalence": {
       "events": 10,
       "full_dimension": 184,
@@ -215,7 +240,7 @@
     ],
     "phase_model_changed_in_navigation": true,
     "calibration_report": "BY_NOISE_CALIBRATION.json",
-    "candidate_and_graph_integration": "IMPLEMENTED_MATHEMATICAL_CHECKS_PASSED_NAVIGATION_RESULT_PENDING",
+    "candidate_and_graph_integration": "SHORT_REAL_NAVIGATION_COMPLETE_FULL_BY_ACTIVE",
     "integration_report": "PHASE_NOISE_JOINT_INTEGRATION.md",
     "working_M2": {
       "white_sd_sigma_m": 0.007702886967438229,

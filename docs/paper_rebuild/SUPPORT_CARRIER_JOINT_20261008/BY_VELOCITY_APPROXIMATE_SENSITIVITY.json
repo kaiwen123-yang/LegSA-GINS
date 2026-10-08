@@ -1,0 +1,282 @@
+{
+  "status": "COMPLETED_APPROXIMATE_INSTALLATION_SENSITIVITY_NOT_EXACT_EXTRINSIC",
+  "source_runs": [
+    "BY_NATIVE_INCREMENT_05_U0",
+    "BY_NATIVE_INCREMENT_05_U1",
+    "original_V3_RUN_00004"
+  ],
+  "source_generation": "native-increment 05 completed short runs, before the new source-noise calibration",
+  "requested_window_s": [
+    96,
+    106
+  ],
+  "common_window_s": [
+    100.19799995422363,
+    106.0
+  ],
+  "common_finite_duration_s": 5.802000045776367,
+  "uninitialized_duration_s": 4.197999954223633,
+  "geometry_source": "Direct user 2026-10-08: IMU approximately 30--35 cm below VRTK, nearly vertical",
+  "axis_source": "https://docs.fixposition.com/fd/fp_a-tf",
+  "axis_definition": "VRTK X forward, Y left, Z up; actual BY2 POI,VRTK TF is identity",
+  "approximation": {
+    "horizontal_offset_m": [
+      0,
+      0
+    ],
+    "horizontal_error_bound": null,
+    "mounting_rotation_error_bound": null,
+    "height_range_is_confidence_interval": false,
+    "exact_same_point_claim": false
+  },
+  "reference_sha256": "b2c9887c6fcb6e86cd95f4a221a04a8e4646eaf4826e677a791b69b8ee7545fe",
+  "reference_role": "Fixposition fused POI twist with shared GNSS lineage; not independent truth",
+  "reference_clock": "header.stamp measurement epochs, never fit an offset or use arrival Time",
+  "cases": [
+    {
+      "height_m": 0.3,
+      "lever_poi_to_imu_in_poi_m": [
+        0,
+        0,
+        -0.3
+      ],
+      "metrics": {
+        "U0": {
+          "duration_s": 5.802000045776367,
+          "rmse_ned_mps": [
+            0.09801635776406088,
+            0.1486704323416497,
+            0.15616551354793254
+          ],
+          "horizontal_rmse_mps": 0.17807331030220508,
+          "three_d_rmse_mps": 0.23684968115594945
+        },
+        "U1": {
+          "duration_s": 5.802000045776367,
+          "rmse_ned_mps": [
+            0.10314490946134232,
+            0.14236499387744672,
+            0.15540765009684968
+          ],
+          "horizontal_rmse_mps": 0.1758029118914529,
+          "three_d_rmse_mps": 0.23464484127749072
+        },
+        "original_V3": {
+          "duration_s": 5.802000045776367,
+          "rmse_ned_mps": [
+            0.10912741745310398,
+            0.14575674002416283,
+            0.13946954625790234
+          ],
+          "horizontal_rmse_mps": 0.1820819060270828,
+          "three_d_rmse_mps": 0.22935905222127287
+        }
+      },
+      "U1_minus_U0": {
+        "horizontal_rmse_mps": -0.002270398410752189,
+        "three_d_rmse_mps": -0.0022048398784587364
+      },
+      "U1_minus_original_V3": {
+        "horizontal_rmse_mps": -0.006278994135629906,
+        "three_d_rmse_mps": 0.005285789056217849
+      },
+      "result_root": "<JOINT_SCRATCH>/BY_VELOCITY_APPROXIMATE_01_H030",
+      "comparison_sha256": "d9961c1fd2c973dd6533fa625f181dc393cc5efb08ea4420683c9f886bd8b706",
+      "receipt_sha256": "d7817710e8b06fcdd12c823a5ad4615c65bc56b93c300cee02f23d6b66c48cec",
+      "error_series_sha256": "79e889d01c5676b209c94314422c0822e40047cf7505e1ee04b1f5f13ba278d7",
+      "reference_openat_sha256": "141040cc1ee92b15364f0a144ac61deb2135636c701df624634849908775500c",
+      "evaluator_sha256": "d5e76962a2be365985c2e9ef50b9373ea7333b1032294eee306018e8b9209d0f",
+      "geometry_sha256": "6eae50f166ef7857d3dbc1dfc1645f0f72c5e033880f08bc35e34bd8dd811322",
+      "readonly_reference_opens": 1,
+      "reference_opened_once_readonly": true,
+      "source_output_identities": {
+        "U0": {
+          "run_status.json": "e0a912f241152901675dccaf9a298f6dbce1c351c059ddf10f8fe7ea69be8384",
+          "sensor_metadata.json": "7072592a8f8ff49549239e65ae9c483f3a7304c6e5273571b88db91513c9dae5",
+          "navigation.jsonl": "39924f4587425dfc52a581ca38b0d3b977357ca23fe11e39beccbe40e404eed1"
+        },
+        "U1": {
+          "run_status.json": "9eb14406fcc0d641b0ffcd8ed147233e68d0be558bf600066139e3c6fb89dc48",
+          "sensor_metadata.json": "7072592a8f8ff49549239e65ae9c483f3a7304c6e5273571b88db91513c9dae5",
+          "navigation.jsonl": "e91f7f0dd9afe39f0f01225dc8b8f580d4227851c30851e0a39bb19e998ac1f1"
+        },
+        "original_V3": {
+          "native_nav_sha256": "2fda678fbc9d760e7bd4b93b6e7f99861b41ea91aef86252566ea059abbeb0f4",
+          "run_id": "RUN_00004"
+        }
+      }
+    },
+    {
+      "height_m": 0.325,
+      "lever_poi_to_imu_in_poi_m": [
+        0,
+        0,
+        -0.325
+      ],
+      "metrics": {
+        "U0": {
+          "duration_s": 5.802000045776367,
+          "rmse_ned_mps": [
+            0.1007147193817348,
+            0.157790462277624,
+            0.15623790521865938
+          ],
+          "horizontal_rmse_mps": 0.18719317478457345,
+          "three_d_rmse_mps": 0.24382692163303596
+        },
+        "U1": {
+          "duration_s": 5.802000045776367,
+          "rmse_ned_mps": [
+            0.10574578064688778,
+            0.15175626638563877,
+            0.15547907116972154
+          ],
+          "horizontal_rmse_mps": 0.18496522514226468,
+          "three_d_rmse_mps": 0.24163169511413027
+        },
+        "original_V3": {
+          "duration_s": 5.802000045776367,
+          "rmse_ned_mps": [
+            0.1113167610465945,
+            0.15530507141895394,
+            0.13948626964085092
+          ],
+          "horizontal_rmse_mps": 0.19107874423480758,
+          "three_d_rmse_mps": 0.23657452507966953
+        }
+      },
+      "U1_minus_U0": {
+        "horizontal_rmse_mps": -0.0022279496423087686,
+        "three_d_rmse_mps": -0.0021952265189056908
+      },
+      "U1_minus_original_V3": {
+        "horizontal_rmse_mps": -0.006113519092542902,
+        "three_d_rmse_mps": 0.0050571700344607395
+      },
+      "result_root": "<JOINT_SCRATCH>/BY_VELOCITY_APPROXIMATE_01_H0325",
+      "comparison_sha256": "1449b036ec75b4a0f2f83a2a34f29b2150a6f010a18630da3682095072070239",
+      "receipt_sha256": "15e06a674f5150cb0b3b08e035e265c65a45614b53fc67b5e91aee2d2c415ef0",
+      "error_series_sha256": "5119679ede250ee767e341ea8f00adb95219c796a5e49190efb20c345d376ef9",
+      "reference_openat_sha256": "cda48c323490a667c91b45842634ec35b80b3206d8117e35b4d5bcae10b9508e",
+      "evaluator_sha256": "d5e76962a2be365985c2e9ef50b9373ea7333b1032294eee306018e8b9209d0f",
+      "geometry_sha256": "492230c24d87169804695503e1d9846db027842158197ed20e0f00df78e0666e",
+      "readonly_reference_opens": 1,
+      "reference_opened_once_readonly": true,
+      "source_output_identities": {
+        "U0": {
+          "run_status.json": "e0a912f241152901675dccaf9a298f6dbce1c351c059ddf10f8fe7ea69be8384",
+          "sensor_metadata.json": "7072592a8f8ff49549239e65ae9c483f3a7304c6e5273571b88db91513c9dae5",
+          "navigation.jsonl": "39924f4587425dfc52a581ca38b0d3b977357ca23fe11e39beccbe40e404eed1"
+        },
+        "U1": {
+          "run_status.json": "9eb14406fcc0d641b0ffcd8ed147233e68d0be558bf600066139e3c6fb89dc48",
+          "sensor_metadata.json": "7072592a8f8ff49549239e65ae9c483f3a7304c6e5273571b88db91513c9dae5",
+          "navigation.jsonl": "e91f7f0dd9afe39f0f01225dc8b8f580d4227851c30851e0a39bb19e998ac1f1"
+        },
+        "original_V3": {
+          "native_nav_sha256": "2fda678fbc9d760e7bd4b93b6e7f99861b41ea91aef86252566ea059abbeb0f4",
+          "run_id": "RUN_00004"
+        }
+      }
+    },
+    {
+      "height_m": 0.35,
+      "lever_poi_to_imu_in_poi_m": [
+        0,
+        0,
+        -0.35
+      ],
+      "metrics": {
+        "U0": {
+          "duration_s": 5.802000045776367,
+          "rmse_ned_mps": [
+            0.10365520864812508,
+            0.16759404086370533,
+            0.1563110532712067
+          ],
+          "horizontal_rmse_mps": 0.19705878517059744,
+          "three_d_rmse_mps": 0.25152596324766496
+        },
+        "U1": {
+          "duration_s": 5.802000045776367,
+          "rmse_ned_mps": [
+            0.10858253621271934,
+            0.16182440269316078,
+            0.155551253216385
+          ],
+          "horizontal_rmse_mps": 0.194877665414446,
+          "three_d_rmse_mps": 0.24934613863978863
+        },
+        "original_V3": {
+          "duration_s": 5.802000045776367,
+          "rmse_ned_mps": [
+            0.11374862024992108,
+            0.16549713945723424,
+            0.13950387609478496
+          ],
+          "horizontal_rmse_mps": 0.20081845477268268,
+          "three_d_rmse_mps": 0.24451867663382507
+        }
+      },
+      "U1_minus_U0": {
+        "horizontal_rmse_mps": -0.0021811197561514284,
+        "three_d_rmse_mps": -0.0021798246078763295
+      },
+      "U1_minus_original_V3": {
+        "horizontal_rmse_mps": -0.005940789358236664,
+        "three_d_rmse_mps": 0.0048274620059635676
+      },
+      "result_root": "<JOINT_SCRATCH>/BY_VELOCITY_APPROXIMATE_01_H035",
+      "comparison_sha256": "0ab52524dd4f35de6275822a9d0f7bac76809bd0acd16ef5d18b62452f27f75a",
+      "receipt_sha256": "faad673a67468438bf07a3b67b823b15d08898ff9b19e716c5de474b3eb72ad3",
+      "error_series_sha256": "45989b0a965d1aad2d04039855053f332a4e23129b594c059932731071d3cc85",
+      "reference_openat_sha256": "1f8dcac2ee6f3c6df61074bc24b39fa5840ab3430cd6d19de97a2583cfcd24fe",
+      "evaluator_sha256": "d5e76962a2be365985c2e9ef50b9373ea7333b1032294eee306018e8b9209d0f",
+      "geometry_sha256": "165db3dba44cdc55605abcd2b3b72399c4d6b9dbf103465653fc2ec5837c0ef2",
+      "readonly_reference_opens": 1,
+      "reference_opened_once_readonly": true,
+      "source_output_identities": {
+        "U0": {
+          "run_status.json": "e0a912f241152901675dccaf9a298f6dbce1c351c059ddf10f8fe7ea69be8384",
+          "sensor_metadata.json": "7072592a8f8ff49549239e65ae9c483f3a7304c6e5273571b88db91513c9dae5",
+          "navigation.jsonl": "39924f4587425dfc52a581ca38b0d3b977357ca23fe11e39beccbe40e404eed1"
+        },
+        "U1": {
+          "run_status.json": "9eb14406fcc0d641b0ffcd8ed147233e68d0be558bf600066139e3c6fb89dc48",
+          "sensor_metadata.json": "7072592a8f8ff49549239e65ae9c483f3a7304c6e5273571b88db91513c9dae5",
+          "navigation.jsonl": "e91f7f0dd9afe39f0f01225dc8b8f580d4227851c30851e0a39bb19e998ac1f1"
+        },
+        "original_V3": {
+          "native_nav_sha256": "2fda678fbc9d760e7bd4b93b6e7f99861b41ea91aef86252566ea059abbeb0f4",
+          "run_id": "RUN_00004"
+        }
+      }
+    }
+  ],
+  "sensitivity_U1_range_mps": {
+    "horizontal_rmse_mps": [
+      0.1758029118914529,
+      0.194877665414446
+    ],
+    "three_d_rmse_mps": [
+      0.23464484127749072,
+      0.24934613863978863
+    ]
+  },
+  "findings": [
+    "Across these three vertical dimensions U1 has slightly lower horizontal and 3D velocity RMSE than U0.",
+    "Across these three dimensions U1 horizontal velocity is slightly better than original V3, while 3D velocity is worse.",
+    "Vertical-size sensitivity of absolute RMSE exceeds the U1-versus-U0 gain; horizontal/angle installation uncertainty remains unbounded.",
+    "The short runs initialize at 96 s; original V3 carries its original continuous state from 66 s. This is not an initialization-matched system comparison.",
+    "Foot velocity improvement does not isolate a heading-mediated effect from direct foot constraints. Stable whole-run benefit is not established."
+  ],
+  "execution_scope": {
+    "offline_reference_readonly_opens": 3,
+    "parent_reference_payload_opens": 0,
+    "new_navigation_runs": 0,
+    "frozen_position_yaw_evaluator_calls": 0,
+    "online_algorithm_configuration_changed": false
+  },
+  "full_07_status_at_evaluation": "RUNNING",
+  "full_07_velocity_evaluation_performed": false
+}

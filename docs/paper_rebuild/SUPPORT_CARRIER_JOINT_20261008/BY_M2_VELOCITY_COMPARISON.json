@@ -1,0 +1,136 @@
+{
+  "status": "COMPLETED_M2_SHORT_VELOCITY_COMPARISON_SAME_FROZEN_BRIDGE_AND_APPROXIMATE_GEOMETRY",
+  "result_root": "<JOINT_SCRATCH>/BY_M2_NATIVE_SHORT_VELOCITY_08_U1",
+  "source_runs": {
+    "M2_U1": "BY_M2_NATIVE_SHORT_08_U1",
+    "old_U1": "BY_NATIVE_INCREMENT_05_U1",
+    "original_V3": "V3_MECHANISM_EVIDENCE_20261002T042234Z/replays/RUN_00004/original"
+  },
+  "requested_window_s": [
+    96.0,
+    106.0
+  ],
+  "common_window_s": [
+    100.19799995422363,
+    106.0
+  ],
+  "common_finite_duration_s": 5.802000045776367,
+  "approximate_geometry_config": "docs/paper_rebuild/SUPPORT_CARRIER_JOINT_20261008/BY_VELOCITY_APPROXIMATE_GEOMETRY_0325.json",
+  "geometry_scope": "User approximate height 0.325 m; POI-to-IMU [0,0,-0.325] in POI/VRTK; horizontal/angle uncertainty unbounded, not exact extrinsic",
+  "metrics": {
+    "M2_U1": {
+      "duration_s": 5.802000045776367,
+      "rmse_ned_mps": [
+        0.10111674960397177,
+        0.15504387349107038,
+        0.1556724484469634
+      ],
+      "horizontal_rmse_mps": 0.1851032137959451,
+      "three_d_rmse_mps": 0.24186176002638335
+    },
+    "old_U1": {
+      "duration_s": 5.802000045776367,
+      "rmse_ned_mps": [
+        0.10574578064688778,
+        0.15175626638563877,
+        0.15547907116972154
+      ],
+      "horizontal_rmse_mps": 0.18496522514226468,
+      "three_d_rmse_mps": 0.24163169511413027
+    },
+    "original_V3": {
+      "duration_s": 5.802000045776367,
+      "rmse_ned_mps": [
+        0.1113167610465945,
+        0.15530507141895394,
+        0.13948626964085092
+      ],
+      "horizontal_rmse_mps": 0.19107874423480758,
+      "three_d_rmse_mps": 0.23657452507966953
+    }
+  },
+  "M2_minus_old_U1_mps": {
+    "horizontal_rmse_mps": 0.0001379886536804209,
+    "three_d_rmse_mps": 0.00023006491225308068
+  },
+  "M2_minus_original_V3_mps": {
+    "horizontal_rmse_mps": -0.005975530438862481,
+    "three_d_rmse_mps": 0.00528723494671382
+  },
+  "old_U1_and_V3_reproduce_prior_center_values_exactly": true,
+  "conclusion": "No short-window velocity benefit from M2 versus old U1: horizontal and 3D RMSE increased by approximately 0.000138 and 0.000230 m/s. M2 horizontal remains below original V3, while 3D remains above V3.",
+  "scope": [
+    "One completed 96--106 s development window, with common finite support beginning at 100.198 s.",
+    "This compares M2 vs old U1 using the same frozen velocity script and center geometry; no new 30/35 cm sweep.",
+    "Independent offline computation; Fixposition fused reference shares GNSS lineage and is not independent truth.",
+    "Measurement-epoch velocity accuracy; arrival-time delay accuracy is not evaluated.",
+    "Original V3 retains continuous history from 66 s, while the two joint runs initialize at 96 s.",
+    "No claim of exact same-point accuracy, stable whole-run velocity improvement, or isolated heading-to-velocity causality."
+  ],
+  "evaluator_receipt": {
+    "exit_code": 0,
+    "reference_readonly_opens": 1,
+    "reference_opened_once_readonly": true,
+    "parent_reference_payload_opens": 0,
+    "reference_file_hash_in_parent": false,
+    "navigator_calls": 0,
+    "evaluator_sha256": "d5e76962a2be365985c2e9ef50b9373ea7333b1032294eee306018e8b9209d0f",
+    "extrinsic_sha256": "492230c24d87169804695503e1d9846db027842158197ed20e0f00df78e0666e",
+    "sources": {
+      "M2_U1": {
+        "run_status.json": "7950b268ecb470bbb7c0e5aec7ef4d1978d8cc73627ac9bb4c868dd1bfc85c9d",
+        "sensor_metadata.json": "1e00a9016e2ec30610e5760e697b1f426ba48317849af407a3318e67995e7b66",
+        "navigation.jsonl": "b2ffee6a4b0b9ba807b84e8076d3b2cb9636b2cc7e493a80b6bcbe5f2b5de107"
+      },
+      "old_U1": {
+        "run_status.json": "9eb14406fcc0d641b0ffcd8ed147233e68d0be558bf600066139e3c6fb89dc48",
+        "sensor_metadata.json": "7072592a8f8ff49549239e65ae9c483f3a7304c6e5273571b88db91513c9dae5",
+        "navigation.jsonl": "e91f7f0dd9afe39f0f01225dc8b8f580d4227851c30851e0a39bb19e998ac1f1"
+      },
+      "original_V3": {
+        "native_nav_sha256": "2fda678fbc9d760e7bd4b93b6e7f99861b41ea91aef86252566ea059abbeb0f4",
+        "run_id": "RUN_00004"
+      }
+    },
+    "frozen_position_yaw_evaluation_changed": false
+  },
+  "source_code_sha256": {
+    "M2_U1": {
+      "src/legsa_gins/paper_rebuild/joint_navigation/__init__.py": "1e4531f3053fd9736435af940484c056adae614ba3700cd09def0b848d57cba0",
+      "src/legsa_gins/paper_rebuild/joint_navigation/branch.py": "77a0c07e788fb9df456ee916b6969ba431abacd8463146cae0b68b45a90e9d6e",
+      "src/legsa_gins/paper_rebuild/joint_navigation/candidate.py": "927b9a832b2d7b5e05e8e1e0babc30b7a1db2036a848eeac6fcd9ea1b9317396",
+      "src/legsa_gins/paper_rebuild/joint_navigation/carrier_relations.py": "65e9ac0b5a6decb69d18171410104b0b6a12f51012d4dd6b5b21aa92f5da6588",
+      "src/legsa_gins/paper_rebuild/joint_navigation/coupled_length_profile.py": "e8e692ee3e587b4f3c53f7afa9fb7431017c2735986cf6c165f7737aae001ce6",
+      "src/legsa_gins/paper_rebuild/joint_navigation/factors.py": "a529814ef2932e371d4f6cdac67762cefaa6e9bebf7ecf50c284e865d9c23822",
+      "src/legsa_gins/paper_rebuild/joint_navigation/navigator.py": "569320c76abff90c6d2b52c0a51e3fee05a7127529ba9e3c0a5e4e688b65f43b",
+      "src/legsa_gins/paper_rebuild/joint_navigation/real_data.py": "e3d4dbd90cdb0add6056597bdf1b0f8bb8c410015b6e4abd229714194db2c9df",
+      "src/legsa_gins/paper_rebuild/joint_navigation/source_noise_likelihood.py": "a5ae76b0d5c0ef5e2a8b69a1b54eca5382e3a789b7d9aca6d89876be55dc0440",
+      "src/legsa_gins/paper_rebuild/joint_navigation/synthetic.py": "516d25ad70292e6d7c0f87717208c0352321a94711c7d66b8226c449a3b64e65",
+      "src/legsa_gins/paper_rebuild/joint_navigation/window.py": "e2cd85768d2667688160bb6a68f9e9d264b11e42c58b70d17eca686fda284351",
+      "scripts/paper_rebuild/run_joint_by2.py": "339d6d5d5d8de1a595a38e2252a5644773ba919a659c828bee854c51ba600cb5"
+    },
+    "old_U1": {
+      "src/legsa_gins/paper_rebuild/joint_navigation/__init__.py": "1e4531f3053fd9736435af940484c056adae614ba3700cd09def0b848d57cba0",
+      "src/legsa_gins/paper_rebuild/joint_navigation/branch.py": "46d7443c4df4f28ac9200afbaa0ad95876d39b557763903e53e1380c78da42e6",
+      "src/legsa_gins/paper_rebuild/joint_navigation/candidate.py": "cac1aedb6d8a3623207a7dc29c5edc3ac70cb721493b4cd94020ef2cc6b32946",
+      "src/legsa_gins/paper_rebuild/joint_navigation/carrier_relations.py": "65e9ac0b5a6decb69d18171410104b0b6a12f51012d4dd6b5b21aa92f5da6588",
+      "src/legsa_gins/paper_rebuild/joint_navigation/factors.py": "69064271859600c892d6e50bfadf4b5d8e6afd3f471fc009024e92aefda6f82c",
+      "src/legsa_gins/paper_rebuild/joint_navigation/navigator.py": "9116c6b971195287a2a034f3a4c3a74a76e0209f78525aedcd495d2255ae500e",
+      "src/legsa_gins/paper_rebuild/joint_navigation/real_data.py": "33acc7464b968a2428d0037bef6b7b8b262b7871b3f49249bef10468e7e02085",
+      "src/legsa_gins/paper_rebuild/joint_navigation/synthetic.py": "516d25ad70292e6d7c0f87717208c0352321a94711c7d66b8226c449a3b64e65",
+      "src/legsa_gins/paper_rebuild/joint_navigation/window.py": "c294ef0ca67d3e9f4215b64614cf8e1bbbffe40b08e0cbc9fe3d03fb92e09b41",
+      "scripts/paper_rebuild/run_joint_by2.py": "fca4e8d9155b7eb0ea6b0b488e65ebebf7a381298db37cba6ac85324021da4af"
+    }
+  },
+  "artifact_sha256": {
+    "VELOCITY_COMPARISON.json": "65efd5cce52244a8a36b255e69112f4cfb2429e1aab97a5953928c19a27b5152",
+    "velocity_error_series.csv": "c47a39e1adc52fc6b0ad3952d6b5a488eeb55e24b88d8b579f54dbd92feeb26d",
+    "EVALUATION_RECEIPT.json": "c435ed7b898a96cc049d7ec45faf1496c036c5412bd48db4ebc3025a2a5da08a",
+    "REFERENCE_OPENAT.strace": "3937aac69bd0a492bbcae4537293ba6185cef2d3902f4723f20862564c40fba1"
+  },
+  "reference_sha256": "b2c9887c6fcb6e86cd95f4a221a04a8e4646eaf4826e677a791b69b8ee7545fe",
+  "new_navigation_runs": 0,
+  "frozen_position_yaw_evaluator_calls": 0,
+  "original_reports_modified": false,
+  "GOAL_PROGRESS_modified": false
+}

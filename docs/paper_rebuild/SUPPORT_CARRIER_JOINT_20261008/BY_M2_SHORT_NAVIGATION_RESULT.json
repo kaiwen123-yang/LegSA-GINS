@@ -1,0 +1,222 @@
+{
+  "schema": "BY_M2_SHORT_NAVIGATION_RESULT_V1",
+  "status": "COMPLETED_SHORT_DEVELOPMENT_RESULT_FORMAL_GOAL_UNFINISHED",
+  "conclusion_zh": "M2工作噪声模型在同一短窗中改善了U1航向和位置，速度没有改善；原V3在该共同区间的航向、水平位置和3D位置仍更好。首个有限工作域支持21维物理整数候选进入共同图，但最终支持不完全，不能称正式AR、持续可信航向或稳定导航收益。",
+  "scope": {
+    "sequence": "BY2",
+    "mode": "U1",
+    "run_id": "BY_M2_NATIVE_SHORT_08_U1",
+    "run_git_commit": "b5adc7a6b5557b106950733296de2e593842870f",
+    "requested_window_s": [
+      96.0,
+      106.0
+    ],
+    "common_finite_window_s": [
+      100.19799995422363,
+      106.0
+    ],
+    "common_finite_duration_s": 5.802000045776367,
+    "causal_output_rows": 325,
+    "finite_state_rows": 190,
+    "NO_INIT_rows": 135,
+    "requested_window_entirely_available": false,
+    "only_existing_outputs_read": true,
+    "new_navigation_calls": 0,
+    "new_evaluator_calls": 0,
+    "raw_reference_payload_reads": 0,
+    "testset_reads": 0
+  },
+  "shared_interval_time_weighted_RMSE": {
+    "yaw_err_deg": {
+      "old_native05_U1": 3.9324261347116236,
+      "M2_U1": 1.7140911238749756,
+      "frozen_V3": 1.1608123408505053,
+      "M2_minus_old_U1": -2.2183350108366477,
+      "M2_minus_V3": 0.5532787830244703
+    },
+    "horizontal_err_m": {
+      "old_native05_U1": 0.04803795115653245,
+      "M2_U1": 0.04005732788183194,
+      "frozen_V3": 0.03811369008805525,
+      "M2_minus_old_U1": -0.007980623274700512,
+      "M2_minus_V3": 0.0019436377937766883
+    },
+    "position_3d_err_m": {
+      "old_native05_U1": 0.11378684900559392,
+      "M2_U1": 0.11180202091205074,
+      "frozen_V3": 0.05179865083786852,
+      "M2_minus_old_U1": -0.001984828093543181,
+      "M2_minus_V3": 0.06000337007418222
+    }
+  },
+  "velocity_same_frozen_bridge": {
+    "report": "BY_M2_VELOCITY_COMPARISON.json",
+    "report_sha256": "467b3c3d99c222967f32451b61a911fdf3910a7a7154aaf3a72741d10f0e698b",
+    "common_duration_s": 5.802000045776367,
+    "approximate_geometry": "User approximate height 0.325 m; POI-to-IMU [0,0,-0.325] in POI/VRTK; horizontal/angle uncertainty unbounded, not exact extrinsic",
+    "metrics": {
+      "M2_U1": {
+        "horizontal_rmse_mps": 0.1851032137959451,
+        "three_d_rmse_mps": 0.24186176002638335
+      },
+      "old_U1": {
+        "horizontal_rmse_mps": 0.18496522514226468,
+        "three_d_rmse_mps": 0.24163169511413027
+      },
+      "original_V3": {
+        "horizontal_rmse_mps": 0.19107874423480758,
+        "three_d_rmse_mps": 0.23657452507966953
+      }
+    },
+    "M2_minus_old_U1_mps": {
+      "horizontal_rmse_mps": 0.0001379886536804209,
+      "three_d_rmse_mps": 0.00023006491225308068
+    },
+    "conclusion": "Both horizontal and3D velocity RMSE increase slightly versus oldU1; heading-to-velocity benefit is not demonstrated. Approximate POI-to-IMU geometry and shared GNSS reference lineage prevent an independent exact-point claim.",
+    "evaluator_sha256": "d5e76962a2be365985c2e9ef50b9373ea7333b1032294eee306018e8b9209d0f",
+    "geometry_sha256": "492230c24d87169804695503e1d9846db027842158197ed20e0f00df78e0666e",
+    "output_sha256": {
+      "VELOCITY_COMPARISON.json": "65efd5cce52244a8a36b255e69112f4cfb2429e1aab97a5953928c19a27b5152",
+      "velocity_error_series.csv": "c47a39e1adc52fc6b0ad3952d6b5a488eeb55e24b88d8b579f54dbd92feeb26d",
+      "EVALUATION_RECEIPT.json": "c435ed7b898a96cc049d7ec45faf1496c036c5412bd48db4ebc3025a2a5da08a",
+      "REFERENCE_OPENAT.strace": "3937aac69bd0a492bbcae4537293ba6185cef2d3902f4723f20862564c40fba1"
+    }
+  },
+  "first_integer_conditioned_working_domain": {
+    "time_s": 100.79800009727478,
+    "raw_window_s": [
+      100.19799995422363,
+      100.79800009727478
+    ],
+    "physical_integer_basis_rank": 21,
+    "conditioned_rank_in_published_lineage": 21,
+    "raw_enumerated_count": 1,
+    "raw_enumeration_complete": true,
+    "length_support_complete": true,
+    "active_working_support_complete": true,
+    "relaxed_raw_cost": 114.74127933626193,
+    "guarded_raw_lower_bound": 115.44757089417746,
+    "guarded_feasible_raw_upper_bound": 116.12836779079932,
+    "raw_working_threshold": 204.54654583438844,
+    "fixed_raw_working_quantile": 0.999,
+    "sphere_status": "FEASIBLE_UPPER_WITHIN_BUDGET",
+    "global_coupled_sphere_optimum_certified": false,
+    "formal_integer_acceptance_qualified": false,
+    "interpretation": "Exactly one integer candidate was found in the completely enumerated finite Gaussian raw working domain and has a rigid-length feasible witness. Conditioning the common graph on that candidate is not a false-fix guarantee or a physical-domain coverage certificate."
+  },
+  "whole_short_run_support": {
+    "proposal_attempts": 12,
+    "proposal_termination_counts": {
+      "GAUSSIAN_RELAXED_DOMAIN_EXHAUSTED": 6,
+      "NODE_LIMIT": 6
+    },
+    "complete_working_support_output_rows": 24,
+    "final_active_support_complete": false,
+    "final_active_integer_support_complete": false,
+    "probability_calibrated": false,
+    "formal_AR_qualified": false,
+    "global_direction_domain_certified": false,
+    "later_incompleteness": "Finite raw enumerations reach the20000-node budget; surviving candidates remain conditional and omitted possibilities are not declared scientifically excluded. Later complete local windows do not erase earlier omitted support."
+  },
+  "foot_common_state_and_research_progress": {
+    "actual_participation": "U1 consumes actual foot/contact factors in the shared navigation state together with IMU and raw code/carrier; beta is an explicit physical SD source process in that graph, with the identical temporal covariance used by raw candidate proposals.",
+    "published_rows_showing_positive_foot_factor_counts": 119,
+    "foot_increment": "This M2 run has no paired M2-U0 ablation. The older native05 U1-vs-U0 short-window evidence showed only0.162921deg yaw,0.001479m H and0.002387m3D RMSE reductions; those old increments cannot be attributed to the new M2 result.",
+    "heading_mediation": "Lower yaw and position errors coexist in the shared-state output, but this version comparison does not isolate heading as the mediator. Velocity is slightly worse; the heading-to-velocity/position causal chain remains unproved.",
+    "failure_revocation": "This is U1: no support-model revocation or historical replay occurs in this run. It does not validate contact-aid invalidation/retraction.",
+    "innovation_1": "Progress: physical short-baseline integer coordinates and full correlated likelihood now produce a real rigid-length-feasible conditional candidate. Open: calibrated use eligibility, tilt/support robustness and false-fix/direction coverage.",
+    "innovation_2": "Progress: feet participate in common-state estimation. Open: new-model foot increment, information acceptance under impact/support changes, and valid dependency revocation evidence.",
+    "innovation_3": "Progress: physical arc relations and source-noise identity survive pivot/arc changes in the same graph. Open: sustained partial carrier/support information retention, outages and reliable navigation recovery.",
+    "stable_navigation_gain_established": false,
+    "complete_research_goal": false
+  },
+  "fairness_and_limits": {
+    "old_native05_comparison": "Same requested start and common finite measurement interval, native IMU input configuration and U1 role; source versions differ, so this is a same-backend research-version comparison, not an isolated single-factor M2 or foot ablation.",
+    "input_config_equal_to_old_native05_U1": true,
+    "frozen_V3_comparison_type": "original_V3_system_comparison_not_same_backend_mechanism_ablation",
+    "frozen_V3_startup_difference": "joint starts at requested run start; frozen V3 is the original 66--340 s causal run, not restarted at this short window",
+    "reference": "Fixposition-derived fused reference with shared GNSS lineage; not independent truth",
+    "timing_scope": "state accuracy at measurement epochs; not a zero-delay arrival-time navigation comparison",
+    "original_GNSS_receipt_delays_modeled": false,
+    "maximum_recorded_IMU_publication_delay_s": 0.007308983776368905,
+    "finite_only_policy": "NO_INIT rows remain unavailable, not zero error; every reported position/heading comparison uses the same5.802s physical interval.",
+    "no_stable_gain_claim": "A5.802s finite development interval with incomplete final support does not establish performance over turning, support changes and carrier interruption."
+  },
+  "frozen_model_and_next_decision": {
+    "model_id": "BY110_170_FROZEN_M2_STATIONARY_SD_OU_WORKING",
+    "parameters": {
+      "white_sd_sigma_m": 0.007702886967438229,
+      "beta_sd_sigma_m": 0.0039176487826473065,
+      "tau_s": 2.0
+    },
+    "parameter_file_sha256": "39cf6e5174c13e1da51ebd3436f070e14de67b302be02be9409d3d098a0a6115",
+    "qualification_scope": "DEVELOPMENT_WORKING_MODEL_TAU_BOUNDARY_PROBABILITY_UNCALIBRATED",
+    "tau_identified": false,
+    "probability_calibration_complete": false,
+    "short_window_parameter_retuning_authorized_by_this_report": false,
+    "decision": "Keep the frozen BY M2 scales/tau and original raw-domain quantile. Do not tune parameters against this short-window accuracy readout.",
+    "next_run": "FULL09 M2 versus FULL07 original-Q U1 on the same66--340s measurement interval and start; retain complete requested-window coverage/NO_INIT, compare common finite yaw/p/v, source-support status and outage/recovery behavior.",
+    "next_run_started_by_this_report": false,
+    "full09_is_independent_noise_validation": false,
+    "development_overlap_boundary": "The66--340s BY development interval includes the110--170s noise-calibration and180--240s validation blocks; it is a full navigation-development comparison, not an independent unseen-sequence generalization claim."
+  },
+  "provenance": {
+    "scratch_alias": "<JOINT_SCRATCH>=SUPPORT_CARRIER_JOINT_20261008",
+    "run": "<JOINT_SCRATCH>/BY_M2_NATIVE_SHORT_08_U1",
+    "evaluation": "<JOINT_SCRATCH>/BY_M2_NATIVE_SHORT_EVAL_08_U1",
+    "velocity": "<JOINT_SCRATCH>/BY_M2_NATIVE_SHORT_VELOCITY_08_U1",
+    "source_sha256": {
+      "src/legsa_gins/paper_rebuild/joint_navigation/__init__.py": "1e4531f3053fd9736435af940484c056adae614ba3700cd09def0b848d57cba0",
+      "src/legsa_gins/paper_rebuild/joint_navigation/branch.py": "77a0c07e788fb9df456ee916b6969ba431abacd8463146cae0b68b45a90e9d6e",
+      "src/legsa_gins/paper_rebuild/joint_navigation/candidate.py": "927b9a832b2d7b5e05e8e1e0babc30b7a1db2036a848eeac6fcd9ea1b9317396",
+      "src/legsa_gins/paper_rebuild/joint_navigation/carrier_relations.py": "65e9ac0b5a6decb69d18171410104b0b6a12f51012d4dd6b5b21aa92f5da6588",
+      "src/legsa_gins/paper_rebuild/joint_navigation/coupled_length_profile.py": "e8e692ee3e587b4f3c53f7afa9fb7431017c2735986cf6c165f7737aae001ce6",
+      "src/legsa_gins/paper_rebuild/joint_navigation/factors.py": "a529814ef2932e371d4f6cdac67762cefaa6e9bebf7ecf50c284e865d9c23822",
+      "src/legsa_gins/paper_rebuild/joint_navigation/navigator.py": "569320c76abff90c6d2b52c0a51e3fee05a7127529ba9e3c0a5e4e688b65f43b",
+      "src/legsa_gins/paper_rebuild/joint_navigation/real_data.py": "e3d4dbd90cdb0add6056597bdf1b0f8bb8c410015b6e4abd229714194db2c9df",
+      "src/legsa_gins/paper_rebuild/joint_navigation/source_noise_likelihood.py": "a5ae76b0d5c0ef5e2a8b69a1b54eca5382e3a789b7d9aca6d89876be55dc0440",
+      "src/legsa_gins/paper_rebuild/joint_navigation/synthetic.py": "516d25ad70292e6d7c0f87717208c0352321a94711c7d66b8226c449a3b64e65",
+      "src/legsa_gins/paper_rebuild/joint_navigation/window.py": "e2cd85768d2667688160bb6a68f9e9d264b11e42c58b70d17eca686fda284351",
+      "scripts/paper_rebuild/run_joint_by2.py": "339d6d5d5d8de1a595a38e2252a5644773ba919a659c828bee854c51ba600cb5"
+    },
+    "all_recorded_source_snapshots_match_hashes": true,
+    "run_output_sha256": {
+      "run_status.json": "7950b268ecb470bbb7c0e5aec7ef4d1978d8cc73627ac9bb4c868dd1bfc85c9d",
+      "navigation.jsonl": "b2ffee6a4b0b9ba807b84e8076d3b2cb9636b2cc7e493a80b6bcbe5f2b5de107",
+      "navigation.csv": "5c6bb3466b2bd68d03a6dd01a6ba993e16dd2e83994e8a85611f6563902aa7be",
+      "decisions.json": "ba236d47d674c79e2ae6740d1fcd829c517196515f2598a12adc756d8cfbf0fb",
+      "summary.json": "7a3d85613850796b85f6fd3faf14298004ac49071411d6b3579d8adbb5b2dbc9",
+      "estimator_summary.json": "d98f5134a1571eae670a66a9c6c113ce041963db0b36d4b0ac83d009dae49c6a",
+      "sensor_metadata.json": "1e00a9016e2ec30610e5760e697b1f426ba48317849af407a3318e67995e7b66",
+      "input_summary.json": "1151e35dbce82b1fa708b9e8865ed2867d72258f2abd73c276487ca58e7f81b4",
+      "phase_noise_model.json": "39cf6e5174c13e1da51ebd3436f070e14de67b302be02be9409d3d098a0a6115"
+    },
+    "evaluation_output_sha256": {
+      "COMPARISON.json": "a461d865355d73b139e5b42e4bcead4d6da84c2a77de6097772da60ab8daae6a",
+      "OUTPUT_COVERAGE.json": "d98e48db3551858330e44daa5294137facec76854604ea09ce85ad493610a2a0",
+      "NAV_TRANSFORM.json": "f039c5258bcd51563baacff466275dcf90a4ea097cfa587d891a118cb87ca703",
+      "run_status.json": "e9906c8af6ad79a7712e8f0eca986f4c7b779890b3ede2a1ed575135b990980a",
+      "EVAL_NAV_V3.nav": "77505b3a01b626f4853afe001dcde7ac495c868646f87aae1e5ad14c735336f5",
+      "FROZEN_EVALUATOR/EVALUATION_AUDIT.json": "645bc570b907abe51ac19952aaaedaee74b0c7ab32d9585de6ba5d7a918cdd01",
+      "FROZEN_EVALUATOR/EVALUATOR_CAPTURE.json": "fdd997144a8870bb101e4a2afe44b6ba35f6a02f80437f09f06e4eb644c999f5",
+      "FROZEN_EVALUATOR/error_series.csv": "6c370d97fac4c66cce63874f3552e63e842637657dd62d6ffa5cdadaf02666e9"
+    },
+    "evaluation_driver_source_sha256": "142328885910baac57d20c91e78da1f84d02f84388d40a0b7162bf788171d7fb",
+    "frozen_position_yaw_evaluator_sha256": "aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da",
+    "old_native05_U1_commit": "8c7bdff7a70c89f9cdd58e2ddab8ea4102964138",
+    "old_native05_U1_output_sha256": {
+      "run_status.json": "9eb14406fcc0d641b0ffcd8ed147233e68d0be558bf600066139e3c6fb89dc48",
+      "navigation.jsonl": "e91f7f0dd9afe39f0f01225dc8b8f580d4227851c30851e0a39bb19e998ac1f1",
+      "sensor_metadata.json": "7072592a8f8ff49549239e65ae9c483f3a7304c6e5273571b88db91513c9dae5",
+      "estimator_summary.json": "15a258b2353828ef90e024085e9327bb315d4ba453f14821907fa02fee6181de",
+      "summary.json": "c115bab8883d7c989a057714f6c83581cb5d4e92c13ce89a162891de21b403c9",
+      "input_summary.json": "1151e35dbce82b1fa708b9e8865ed2867d72258f2abd73c276487ca58e7f81b4"
+    },
+    "old_comparison_report_sha256": "23e1dc840f273c68c453bdc908cd0c86b29a97d396126e1a66c496fa5cf01652",
+    "frozen_V3_commit": "7d43b9af26120ed5dde21f53e515386361072ba6",
+    "frozen_V3_error_series_sha256": "a98f1a5f7591c2365b0fd73b6a1146e0d6df3de2a06414fd067fc9b66b928548",
+    "velocity_reference_hash_recorded_not_payload_read": "b2c9887c6fcb6e86cd95f4a221a04a8e4646eaf4826e677a791b69b8ee7545fe",
+    "position_yaw_evaluator_previous_reference_child_opens": 1,
+    "this_report_reference_payload_opens": 0
+  }
+}
