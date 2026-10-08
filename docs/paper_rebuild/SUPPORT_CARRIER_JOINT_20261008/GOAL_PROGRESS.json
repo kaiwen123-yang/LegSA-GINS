@@ -36,7 +36,8 @@
     "Published nonlinear conditional history supplies next shared chart while all alternative source models remain recoverable; reference can return to fixed",
     "Fixed BY 50-packet temporal diagnostic eliminates all constant integer coordinates and still exposes original measurement-noise mismatch; raw Q field/units rebuild exactly",
     "Gaussian support histories compress to actual future-factor separator, preserving original full covariance and source identities; 10-event fixed-Jacobian equivalence complete",
-    "Predeclared BY300-packet calibration and separate300-packet frozen noise validation complete; OU adds likelihood evidence but tau boundary and covariance calibration remain unresolved"
+    "Predeclared BY300-packet calibration and separate300-packet frozen noise validation complete; OU adds likelihood evidence but tau boundary and covariance calibration remain unresolved",
+    "Physical phase beta enters the same navigation graph, pre-consumption predictive likelihood and full-temporal-covariance candidate proposal; correlated sphere lower/upper bounds retain unresolved identities"
   ],
   "not_proven": [
     "Material legged contribution to heading qualification or integer-candidate acceptance",
@@ -48,8 +49,8 @@
   ],
   "next_core_work": [
     "Complete current full90s and fullBY runs under their pinned source versions; evaluate full BY U1 against frozen original V3 once terminal",
-    "Calibrate identifiable physical SD phase-noise terms only on predeclared BY development block, then validate on separate BY block; integrate justified likelihood in the same navigation state",
-    "Reduce Gaussian model QR to actual future-dependency separator while preserving full historical information and source explanations; no arbitrary model deletion",
+    "Run integrated BY M2 working likelihood on the same native-increment development interval and evaluate navigation; calibration is conditional and not AR-qualified",
+    "Run the full90s future-separator model and inspect actual continuous source-model decisions, recovery and navigation effects",
     "Complete reversible composite source-policy inference and show actual retained heading and shared v/p gain through continuous failure/recovery",
     "Freeze only after BY development; then test BYO/BYH and XB/NMB without test-set tuning"
   ],
@@ -70,7 +71,7 @@
     ],
     "real_velocity_accuracy_claim_allowed": false
   },
-  "latest_implementation": "future_separator_Gaussian_support_storage_and_BY_phase_noise_working_calibration",
+  "latest_implementation": "physical_phase_source_joint_graph_prediction_and_correlated_candidate_support",
   "latest_full_cohort": "cohort_analytic_20261008_seed6100801",
   "latest_full_cohort_status_at_commit": "RUNNING_NOT_RESULT_EVIDENCE",
   "scientifically_interrupted_cohort": {
@@ -212,9 +213,10 @@
       180,
       240
     ],
-    "phase_model_changed_in_navigation": false,
+    "phase_model_changed_in_navigation": true,
     "calibration_report": "BY_NOISE_CALIBRATION.json",
-    "candidate_and_graph_integration": "NEXT_IN_PROGRESS",
+    "candidate_and_graph_integration": "IMPLEMENTED_MATHEMATICAL_CHECKS_PASSED_NAVIGATION_RESULT_PENDING",
+    "integration_report": "PHASE_NOISE_JOINT_INTEGRATION.md",
     "working_M2": {
       "white_sd_sigma_m": 0.007702886967438229,
       "beta_sd_sigma_m": 0.0039176487826473065,

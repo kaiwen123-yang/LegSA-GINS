@@ -205,34 +205,61 @@ def carrier_relation_factor(
     ambiguity_keys: list[int],
     block: EpochBlock,
     baseline_body: np.ndarray,
+    *,
+    beta_keys: tuple[int, ...] = (),
+    source_design: np.ndarray | None = None,
+    covariance: np.ndarray | None = None,
 ) -> gtsam.CustomFactor:
     """Carrier model with one scalar-vector key per physical ambiguity relation.
 
     Keys follow ``block.ambiguity_labels``. A relation key can survive loss of
     other rows; a new physical arc gets a new key. With no ambiguity columns the
-    same factor supplies the code-only pose observation.
+    same factor supplies the code-only pose observation. Optional meter-valued
+    physical SD beta coordinates enter through D; their OU process lives in the
+    same graph. ``covariance`` contains original Q and the added white term only.
     """
     baseline = np.asarray(baseline_body, dtype=float).copy()
     A = np.asarray(block.A, dtype=float).copy()
     B = np.asarray(block.B, dtype=float).copy()
     y = np.asarray(block.y, dtype=float).copy()
     ambiguity_keys = tuple(ambiguity_keys)
-    noise = gtsam.noiseModel.Gaussian.Covariance(np.asarray(block.Q, dtype=float))
+    beta_keys = tuple(beta_keys)
+    D = None if source_design is None else np.asarray(source_design, dtype=float).copy()
+    noise = gtsam.noiseModel.Gaussian.Covariance(np.asarray(block.Q if covariance is None else covariance, dtype=float))
 
     def error(_factor, values, jacobians):
         rotation = values.atPose3(pose_key).rotation()
         residual = B @ rotation.rotate(baseline) - y
         for j, key in enumerate(ambiguity_keys):
             residual += A[:, j] * values.atVector(key)[0]
+        for j, key in enumerate(beta_keys):
+            residual += D[:, j] * values.atVector(key)[0]
         if jacobians is not None:
             H_pose = np.zeros((len(y), 6), order="F")
             H_pose[:, :3] = -B @ rotation.matrix() @ _skew(baseline)
             jacobians[0] = H_pose
             for j in range(len(ambiguity_keys)):
                 jacobians[j + 1] = np.asfortranarray(A[:, j:j+1])
+            for j in range(len(beta_keys)):
+                jacobians[1 + len(ambiguity_keys) + j] = np.asfortranarray(D[:, j:j+1])
         return residual
 
-    return gtsam.CustomFactor(noise, [pose_key, *ambiguity_keys], error)
+    return gtsam.CustomFactor(noise, [pose_key, *ambiguity_keys, *beta_keys], error)
+
+
+def source_ou_factor(previous_key: int, current_key: int, rho: float,
+                     innovation_sigma_m: float) -> gtsam.CustomFactor:
+    """Meter-valued physical SD error transition; zero interval is exact."""
+    noise = (gtsam.noiseModel.Constrained.All(1) if innovation_sigma_m == 0. else
+             gtsam.noiseModel.Isotropic.Sigma(1, innovation_sigma_m))
+
+    def error(_factor, values, jacobians):
+        if jacobians is not None:
+            jacobians[0] = np.array([[-rho]], order="F")
+            jacobians[1] = np.ones((1, 1), order="F")
+        return values.atVector(current_key)-rho*values.atVector(previous_key)
+
+    return gtsam.CustomFactor(noise, [previous_key, current_key], error)
 
 
 def differential_foot_factor(

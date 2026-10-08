@@ -1,0 +1,17 @@
+{
+  "model_id": "BY110_170_FROZEN_M2_STATIONARY_SD_OU_WORKING",
+  "parameters": {
+    "white_sd_sigma_m": 0.007702886967438229,
+    "beta_sd_sigma_m": 0.0039176487826473065,
+    "tau_s": 2.0
+  },
+  "qualification_scope": "DEVELOPMENT_WORKING_MODEL_TAU_BOUNDARY_PROBABILITY_UNCALIBRATED",
+  "calibration_report": "docs/paper_rebuild/SUPPORT_CARRIER_JOINT_20261008/BY_NOISE_CALIBRATION.json",
+  "calibration_window_s": [110, 170],
+  "validation_window_s": [180, 240],
+  "physical_source_identity": "SD signal, independent of integer arc token",
+  "covariance_application": "Original Q plus SD white covariance in raw factor; beta explicit in same navigation graph and marginalized across time only for candidate proposals",
+  "tau_identified": false,
+  "probability_calibration_complete": false,
+  "integer_acceptance_qualified": false
+}

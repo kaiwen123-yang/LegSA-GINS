@@ -18,6 +18,7 @@ from gtsam.symbol_shorthand import X
 from ..carrier_phase.temporal import EpochBlock
 from .branch import NavigationBranch
 from .candidate import propose_candidates
+from .source_noise_likelihood import NoiseParameters, assemble_source_noise_covariance
 from .carrier_relations import analyze_relation_transition, reparameterize_epoch_blocks
 
 
@@ -635,6 +636,20 @@ class JointNavigator:
         if len(recent) < 4:
             return
         coordinate_metadata = None
+        temporal_covariance = None
+        noise_parameters = self.metadata.get("phase_noise_model")
+        if noise_parameters is not None:
+            parameters = NoiseParameters(**{name: noise_parameters[name] for name in
+                ("white_sd_sigma_m", "beta_sd_sigma_m", "tau_s")})
+            noise = assemble_source_noise_covariance(recent, parameters)
+            temporal_covariance = noise.total
+            # The graph keeps explicit beta states. The raw-only proposal
+            # integrates the same stationary beta process out, including its
+            # cross-time covariance. These are proposal copies, not new data.
+            recent = [EpochBlock(block.time_s, block.y, block.A, block.B,
+                temporal_covariance[section, section], block.ambiguity_labels,
+                dict(block.metadata, phase_noise_model_scope="MARGINAL_PHYSICAL_SD_SOURCE_PROCESS"))
+                for block, section in zip(recent, noise.row_slices)]
         if self.asynchronous_start:
             physical = reparameterize_epoch_blocks(recent, label_mode="physical_sd_arcs",
                                                    available_time_s=packet["time_s"])
@@ -652,9 +667,14 @@ class JointNavigator:
                         if all(branch.fixed.get(label) == value for branch in self.branches)}
         linear_conditions = self._physical_integer_conditions(common_fixed, labels)
         proposal = propose_candidates(recent, np.asarray(self.metadata["baseline_body"]), self.active_limit,
-            conditioned_integer_by_label=common_fixed, conditioned_linear_relations=linear_conditions)
+            conditioned_integer_by_label=common_fixed, conditioned_linear_relations=linear_conditions,
+            temporal_covariance=temporal_covariance)
         if coordinate_metadata is not None:
             proposal.metadata["physical_window_coordinates"] = coordinate_metadata
+        if noise_parameters is not None:
+            proposal.metadata["phase_noise_model"] = copy.deepcopy(noise_parameters)
+            proposal.metadata["source_noise_covariance_scope"] = "FULL_TEMPORAL_STATIONARY_SD_OU_MARGINAL"
+            proposal.metadata["source_noise_probability_calibrated"] = False
         self.proposal_attempts += 1
         self.proposal_times[labels] = packet["time_s"]
         if self.asynchronous_start and (not proposal.active or not proposal.metadata["active_support_complete"]):

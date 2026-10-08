@@ -15,12 +15,13 @@ import gtsam
 import numpy as np
 from gtsam.symbol_shorthand import X, V, B
 
-from .factors import (carrier_relation_factor, foot_factor, ar1_error_factor,
+from .factors import (carrier_relation_factor, source_ou_factor, foot_factor, ar1_error_factor,
                       foot_error_coordinate_factor, point3_coordinate_factor, projected_foot_factor,
                       gnss_position_velocity_factor, gnss_antenna_factor, gnss_antenna_prediction, gravity_tilt_factor,
                       FootErrorExpression, algebraic_foot_error_factor)
 from .window import JointWindow, WindowSnapshot, eliminate_qr
 from .carrier_relations import CarrierRelationTracker
+from .source_noise_likelihood import physical_source_incidence, PhysicalSourceIncidence
 
 
 @dataclass(frozen=True)
@@ -62,6 +63,17 @@ class NavigationBranch:
         self.foot_tau = float(metadata.get("foot_correlation_tau_s", .08))
         self.ambiguity_keys: dict[str, int] = {}
         self._ambiguity_serial = 0
+        self.phase_noise_model = deepcopy(metadata.get("phase_noise_model"))
+        if self.phase_noise_model is not None:
+            white = float(self.phase_noise_model["white_sd_sigma_m"])
+            beta = float(self.phase_noise_model["beta_sd_sigma_m"])
+            tau = float(self.phase_noise_model["tau_s"])
+            if not all(math.isfinite(v) for v in (white, beta, tau)) or min(white, beta) < 0. or tau <= 0.:
+                raise ValueError("phase source model needs finite nonnegative SD sigmas and positive tau")
+        self.phase_beta_keys: dict[str, int] = {}
+        self.phase_beta_times: dict[str, float] = {}
+        self.phase_beta_coordinates: dict[tuple[str, float], int] = {}
+        self._phase_beta_serial = 0
         self._carrier_relation_tracker = CarrierRelationTracker(
             label_mode=metadata.get("carrier_label_mode", "synthetic_scalar"))
         self._carrier_coordinate_constraints: set[tuple] = set()
@@ -99,6 +111,8 @@ class NavigationBranch:
         self.bootstrap_status = "NOT_REQUESTED"
         self.bootstrap_diagnostics = {}
         self.linearization_scope = {"kind": "FULL_NONLINEAR_CONDITIONAL"}
+        if self.phase_noise_model is not None:
+            self.linearization_scope["phase_source_scope"] = self._phase_noise_scope()
         self._factor_seed_values = None
         self.background_chart_id = ("SYNTHETIC_CODE_INITIALIZATION",)
 
@@ -111,6 +125,8 @@ class NavigationBranch:
         """
         return dict(values=gtsam.Values(self.window.values),
                     ambiguity_keys=dict(self.ambiguity_keys), contact_keys=dict(self.contact_keys),
+                    phase_beta_coordinates={identity: key for identity, key in self.phase_beta_coordinates.items()
+                                            if self.window.values.exists(key)},
                     index=self.index, time_s=self.time, integer_lineage=deepcopy(self.integer_lineage),
                     background_chart_id=deepcopy(self.background_chart_id),
                     scope=("GAUSSIAN_CONDITIONAL_MEAN" if self.window.gaussian_only else
@@ -172,10 +188,10 @@ class NavigationBranch:
                     raise ValueError("shared linearization anchor lacks current navigation state")
                 frozen.append(key)
         unmapped = {}
-        for mapping_name in ("ambiguity_keys", "contact_keys"):
+        for mapping_name in ("ambiguity_keys", "contact_keys", "phase_beta_coordinates"):
             unmapped[mapping_name] = []
             target_mapping = getattr(self, mapping_name)
-            source_mapping = anchor[mapping_name]
+            source_mapping = anchor.get(mapping_name, {})
             for identity, key in target_mapping.items():
                 other = source_mapping.get(identity)
                 if key in required and other is not None and source.exists(other):
@@ -193,11 +209,14 @@ class NavigationBranch:
             frozen_history_keys=tuple(sorted(frozen)),
             unmapped_ambiguity_labels=tuple(unmapped["ambiguity_keys"]),
             unmapped_contact_arcs=tuple(unmapped["contact_keys"]),
+            unmapped_phase_beta_coordinates=tuple(unmapped["phase_beta_coordinates"]),
             background_chart_id=deepcopy(anchor.get("background_chart_id")),
             model_specific_nuisance_charts=True, strict_nonlinear_model_exclusion=False)
         if self.metadata.get("gaussian_future_separator", False):
             self.linearization_scope.update(history_elimination="SOURCE_FUTURE_SEPARATOR",
                 eliminated_history_jacobians="FROZEN", five_second_reanchoring_equivalent=False)
+        if self.phase_noise_model is not None:
+            self.linearization_scope["phase_source_scope"] = self._phase_noise_scope()
         return result
 
     def _seed_source(self, values, key):
@@ -210,7 +229,7 @@ class NavigationBranch:
         return np.broadcast_to(np.asarray(value, float), (dimension,)).copy()
 
     def _retained_keys(self, *, gaussian: bool | None = None) -> set[int]:
-        retained = set(self.ambiguity_keys.values()) | self._support_retain
+        retained = set(self.ambiguity_keys.values()) | set(self.phase_beta_keys.values()) | self._support_retain
         if self.constant_bias:
             retained.add(B(0))
         mode = self.window.gaussian_only if gaussian is None else gaussian
@@ -222,7 +241,7 @@ class NavigationBranch:
         return retained
 
     def _future_separator_keys(self) -> set[int]:
-        retained = set(self.ambiguity_keys.values()) | set(self.contact_keys.values())
+        retained = set(self.ambiguity_keys.values()) | set(self.phase_beta_keys.values()) | set(self.contact_keys.values())
         if self.index is not None:
             retained.update((X(self.index), V(self.index), self.bias_key))
         for arc in set(self.foot_history) | set(self.foot_error_history):
@@ -297,6 +316,7 @@ class NavigationBranch:
         self.window.last_marginalized = tuple(expired)
         if expired:
             self.window._marginalize(expired)
+        self._prune_phase_coordinates()
         self._support_retain = retained-set(self.ambiguity_keys.values())
         self._current()
         return dict(status="COMPRESSED", scope="FROZEN_HISTORY_GAUSSIAN_SEPARATOR",
@@ -307,6 +327,8 @@ class NavigationBranch:
                     before_dimension=before_dimension, retained_dimension=int(self.window.values.dim()),
                     separator_dimension=int(self.window.values.dim()),
                     retained_ambiguity_count=len(self.ambiguity_keys),
+                    retained_phase_source_count=len(self.phase_beta_keys),
+                    phase_source_scope=self._phase_noise_scope(),
                     open_support_arc_count=len(self._support_arc_foot),
                     retained_factor_count=len(self.window.factors))
 
@@ -352,7 +374,61 @@ class NavigationBranch:
         return gtsam.CustomFactor(gtsam.noiseModel.Constrained.All(3),
                                   [direction_key, *contact_keys], error)
 
+    def _phase_noise_scope(self):
+        if self.phase_noise_model is None:
+            return None
+        return dict(model=deepcopy(self.phase_noise_model), units="m", identity="PHYSICAL_SIGNAL_NOT_INTEGER_ARC",
+                    inference="JOINT_NAVIGATION_GRAPH", unseen_signal_prior="INDEPENDENT_STATIONARY_ZERO_MEAN",
+                    source_parameters_qualification="CONDITIONAL_ON_SUPPLIED_NOISE_PARAMETERS",
+                    integer_slip_resets_beta=False, missing_signal_restarts_beta=False)
+
+    def _phase_observation_model(self, block):
+        if self.phase_noise_model is None:
+            return None
+        incidence = (physical_source_incidence(block) if block.ambiguity_labels else
+                     PhysicalSourceIncidence((), np.zeros((len(block.y), 0))))
+        white = float(self.phase_noise_model["white_sd_sigma_m"])
+        covariance = np.asarray(block.Q)+white*white*(incidence.D@incidence.D.T)
+        return incidence, covariance
+
+    def _phase_beta_transition(self, signal, timestamp):
+        sigma = float(self.phase_noise_model["beta_sd_sigma_m"])
+        previous = self.phase_beta_keys.get(signal)
+        if previous is None:
+            return None, 0., sigma*sigma
+        elapsed = float(timestamp)-self.phase_beta_times[signal]
+        if elapsed < 0.:
+            raise ValueError("phase beta cannot propagate backwards across source epochs")
+        tau = float(self.phase_noise_model["tau_s"])
+        rho = math.exp(-elapsed/tau)
+        return previous, rho, sigma*sigma*(-math.expm1(-2.*elapsed/tau))
+
+    def _prune_phase_coordinates(self):
+        self.phase_beta_coordinates = {identity: key for identity, key in self.phase_beta_coordinates.items()
+                                       if self.window.values.exists(key)}
+
     def _carrier(self, block, pose, pose_key, values, times, factors):
+        phase_model = self._phase_observation_model(block)
+        beta_keys, beta_seeds = [], []
+        if phase_model is not None and float(self.phase_noise_model["beta_sd_sigma_m"]) > 0.:
+            for signal in phase_model[0].source_signals:
+                previous, rho, process_variance = self._phase_beta_transition(signal, block.time_s)
+                seed = (0. if previous is None else
+                        rho*float(self._seed_source(values, previous).atVector(previous)[0]))
+                key = gtsam.symbol("e", self._phase_beta_serial)
+                self._phase_beta_serial += 1
+                values.insert_vector(key, np.array([seed]))
+                times[key] = float(block.time_s)
+                if previous is None:
+                    factors.append(gtsam.PriorFactorVector(key, np.zeros(1),
+                        gtsam.noiseModel.Isotropic.Sigma(1, math.sqrt(process_variance))))
+                else:
+                    factors.append(source_ou_factor(previous, key, rho, math.sqrt(process_variance)))
+                self.phase_beta_keys[signal] = key
+                self.phase_beta_times[signal] = float(block.time_s)
+                self.phase_beta_coordinates[(signal, float(block.time_s))] = key
+                beta_keys.append(key)
+                beta_seeds.append(seed)
         labels = tuple(block.ambiguity_labels)
         # Coordinate constraints can only name variables still present in the
         # common graph. Retired keys are not resurrected by a label dictionary.
@@ -370,6 +446,8 @@ class NavigationBranch:
             labels, time_s=self.time, history_labels=history_labels)
         unknown = [label for label in labels if label not in self.ambiguity_keys]
         residual = np.asarray(block.y, float) - np.asarray(block.B) @ pose.rotation().rotate(self.baseline_body)
+        if beta_keys:
+            residual -= phase_model[0].D@np.asarray(beta_seeds)
         for j, label in enumerate(labels):
             if label not in unknown:
                 key = self.ambiguity_keys[label]
@@ -377,7 +455,7 @@ class NavigationBranch:
                 residual -= np.asarray(block.A)[:, j] * source.atVector(key)[0]
         if unknown:
             columns = [labels.index(label) for label in unknown]
-            chol = np.linalg.cholesky(np.asarray(block.Q))
+            chol = np.linalg.cholesky(np.asarray(block.Q) if phase_model is None else phase_model[1])
             whitened_design = np.linalg.solve(chol, np.asarray(block.A)[:, columns])
             initial, _, _, _ = np.linalg.lstsq(
                 whitened_design, np.linalg.solve(chol, residual), rcond=None)
@@ -448,7 +526,11 @@ class NavigationBranch:
             observation_transport_applied=False, covariance_transformed=False)
         keys = [self.ambiguity_keys[label] for label in labels]
         times.update({key: self.time for key in keys})
-        factors.append(carrier_relation_factor(pose_key, keys, block, self.baseline_body))
+        if phase_model is None:
+            factors.append(carrier_relation_factor(pose_key, keys, block, self.baseline_body))
+        else:
+            factors.append(carrier_relation_factor(pose_key, keys, block, self.baseline_body,
+                beta_keys=tuple(beta_keys), source_design=phase_model[0].D, covariance=phase_model[1]))
 
     @staticmethod
     def _carrier_coordinate_factor(identity):
@@ -771,7 +853,10 @@ class NavigationBranch:
         ambiguity labels already have posterior variables. Rows depending on a
         new unknown ambiguity are omitted, never initialized using the row being
         scored. Shared state, ambiguity and preintegration cross covariance is
-        retained. Synthetic GNSS product/raw-row independence is the declared
+        retained. Physical SD beta means, OU innovations and their complete
+        joint cross covariance enter these same original rows before consumption;
+        a previously unseen source contributes its independent stationary prior.
+        Synthetic GNSS product/raw-row independence is the declared
         working source model, not an assertion about receiver products in field
         data. No likelihood or state mutation is performed by this method.
         """
@@ -785,6 +870,7 @@ class NavigationBranch:
         predicted_state = preintegrated.predict(gtsam.NavState(pose, velocity), bias)
         gnss_inputs = self._gnss_inputs(event, predicted_state.pose())
         block = event.get("carrier")
+        phase_model = None if block is None else self._phase_observation_model(block)
         known_labels, selected_rows, excluded_rows = [], np.empty(0, int), []
         if block is not None:
             labels = tuple(block.ambiguity_labels)
@@ -797,11 +883,33 @@ class NavigationBranch:
             known_labels = [label for j, label in enumerate(labels)
                             if label in self.ambiguity_keys and
                             np.any(np.asarray(block.A)[selected_rows, j] != 0.)]
+        known_beta_signals, new_beta_signals, beta_columns, beta_rhos = [], [], [], []
+        phase_process_covariance = np.zeros((len(selected_rows), len(selected_rows)))
+        if phase_model is not None and float(self.phase_noise_model["beta_sd_sigma_m"]) > 0.:
+            incidence = phase_model[0]
+            selected_D = incidence.D[selected_rows]
+            for column, signal in enumerate(incidence.source_signals):
+                direction = selected_D[:, column]
+                if not np.any(direction):
+                    continue
+                previous, rho, process_variance = self._phase_beta_transition(signal, block.time_s)
+                phase_process_covariance += process_variance*np.outer(direction, direction)
+                if previous is None:
+                    new_beta_signals.append(signal)
+                else:
+                    known_beta_signals.append(signal)
+                    beta_columns.append(direction)
+                    beta_rhos.append(rho)
+        carrier_beta_design = (np.column_stack(beta_columns)*np.asarray(beta_rhos)
+                               if beta_columns else np.empty((len(selected_rows), 0)))
         keys = [X(self.index), V(self.index), self.bias_key,
-                *[self.ambiguity_keys[label] for label in known_labels]]
+                *[self.ambiguity_keys[label] for label in known_labels],
+                *[self.phase_beta_keys[signal] for signal in known_beta_signals]]
         prior_covariance = (self.window.joint_covariance(keys) if gaussian else self.joint_covariance(keys))
         n0 = np.array([chart.atVector(self.ambiguity_keys[label])[0]
                        for label in known_labels])
+        beta0 = np.array([chart.atVector(self.phase_beta_keys[signal])[0]
+                          for signal in known_beta_signals])
         observations, noise_blocks, identities, row_identities, slices = [], [], [], [], {}
         dimension = 0
         for name, metadata_name, default in (
@@ -818,7 +926,8 @@ class NavigationBranch:
                 row_identities.extend(f"{identity}:{axis}" for axis in range(3))
         if len(selected_rows):
             observations.append(np.asarray(block.y)[selected_rows])
-            noise_blocks.append(np.asarray(block.Q)[np.ix_(selected_rows, selected_rows)])
+            measurement_q = np.asarray(block.Q) if phase_model is None else phase_model[1]
+            noise_blocks.append(measurement_q[np.ix_(selected_rows, selected_rows)])
             slices["carrier"] = slice(dimension, dimension+len(selected_rows))
             dimension += len(selected_rows)
             identities.append(f"raw_code_carrier:{timestamp:.9f}")
@@ -827,7 +936,7 @@ class NavigationBranch:
             carrier_A = np.asarray(block.A)[np.ix_(selected_rows, columns)]
             carrier_B = np.asarray(block.B)[selected_rows]
 
-        def measurement(rotation, position, speed, integers, gyro_bias):
+        def measurement(rotation, position, speed, integers, gyro_bias, beta_values):
             antenna_position, antenna_velocity = gnss_antenna_prediction(
                 gtsam.Pose3(rotation, position), speed, gyro_bias,
                 gnss_inputs["position_lever"], gnss_inputs["velocity_lever"], gnss_inputs["angular_rate"])
@@ -837,7 +946,10 @@ class NavigationBranch:
             if "gnss_velocity" in slices:
                 parts.append(antenna_velocity)
             if "carrier" in slices:
-                parts.append(carrier_B @ rotation.rotate(self.baseline_body) + carrier_A @ integers)
+                raw_prediction = carrier_B @ rotation.rotate(self.baseline_body) + carrier_A @ integers
+                if known_beta_signals:
+                    raw_prediction += carrier_beta_design@beta_values
+                parts.append(raw_prediction)
             return np.concatenate(parts) if parts else np.empty(0)
 
         def prediction_at(delta):
@@ -845,10 +957,13 @@ class NavigationBranch:
                 bias.accelerometer()+delta[9:12], bias.gyroscope()+delta[12:15])
             state = preintegrated.predict(
                 gtsam.NavState(pose.retract(delta[:6]), velocity+delta[6:9]), shifted_bias)
-            return measurement(state.attitude(), state.position(), state.velocity(), n0+delta[15:], shifted_bias.gyroscope())
+            nend = 15+len(known_labels)
+            return measurement(state.attitude(), state.position(), state.velocity(),
+                               n0+delta[15:nend], shifted_bias.gyroscope(), beta0+delta[nend:])
 
-        predicted = prediction_at(np.zeros(15+len(known_labels)))
-        state_jacobian = np.empty((dimension, 15+len(known_labels)))
+        prior_dimension = 15+len(known_labels)+len(known_beta_signals)
+        predicted = prediction_at(np.zeros(prior_dimension))
+        state_jacobian = np.empty((dimension, prior_dimension))
         epsilon = 1e-6
         for column in range(state_jacobian.shape[1]):
             delta = np.zeros(state_jacobian.shape[1])
@@ -872,7 +987,8 @@ class NavigationBranch:
         def process_at(delta):
             shifted_pose = predicted_pose.retract(delta[:6])
             shifted_velocity = predicted_velocity+delta[6:9]
-            predicted = measurement(shifted_pose.rotation(), shifted_pose.translation(), shifted_velocity, n0, bias.gyroscope())
+            predicted = measurement(shifted_pose.rotation(), shifted_pose.translation(), shifted_velocity,
+                                    n0, bias.gyroscope(), beta0)
             residual = imu_factor.evaluateError(pose, velocity, shifted_pose, shifted_velocity, bias)
             return predicted, residual
 
@@ -894,6 +1010,9 @@ class NavigationBranch:
             offset += size
         gnss_dimension = len(gnss_inputs["covariance"])
         sensor_covariance[:gnss_dimension, :gnss_dimension] = gnss_inputs["covariance"]
+        if "carrier" in slices and phase_model is not None:
+            target = slices["carrier"]
+            sensor_covariance[target, target] += phase_process_covariance
         # The mean new bias equals the old bias; its independent interval random
         # walk also enters the antenna velocity likelihood through current b_g.
         bias_process_covariance = np.zeros((dimension, dimension))
@@ -922,6 +1041,9 @@ class NavigationBranch:
             source_covariance_assumption=gnss_inputs["source_covariance_assumption"],
             angular_rate_source_time_s=gnss_inputs["angular_source_time_s"],
             angular_rate_source_noise_interval_s=gnss_inputs["angular_source_noise_interval_s"],
+            phase_source_scope=self._phase_noise_scope(),
+            existing_phase_beta_signals=tuple(known_beta_signals),
+            new_phase_beta_signals=tuple(new_beta_signals),
         )
 
     # Compatibility with the interrupted implementation's provisional API.
@@ -1058,6 +1180,7 @@ class NavigationBranch:
             self.window.update(factors, values, times, self.time,
                                retain_keys=self._retained_keys(gaussian=model_anchor is not None),
                                linearization_values=model_anchor, gaussian_only=model_anchor is not None)
+            self._prune_phase_coordinates()
         self._factor_seed_values = None
         self.last_factor_counts = dict(
             foot=nfoot, differential=ndifference,
@@ -1209,6 +1332,7 @@ class NavigationBranch:
         self.window.last_marginalized = tuple(expired)
         if expired:
             self.window._marginalize(expired)
+        self._prune_phase_coordinates()
         return self._current()
 
     def _current(self):
@@ -1258,6 +1382,7 @@ class NavigationBranch:
 
     def snapshot(self) -> BranchSnapshot:
         names = ("ambiguity_keys", "_ambiguity_serial", "_carrier_relation_tracker",
+                 "phase_beta_keys", "phase_beta_times", "phase_beta_coordinates", "_phase_beta_serial",
                  "_carrier_coordinate_constraints", "last_carrier_relations",
                  "contact_keys", "direction_keys", "foot_history",
                  "direction_history", "fixed", "_conditioned_labels", "time", "index",

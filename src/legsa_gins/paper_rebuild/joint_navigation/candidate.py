@@ -15,7 +15,8 @@ from ..carrier_phase.candidate_envelope import (
     enumerate_candidate_envelope, filter_length_necessary_support,
 )
 from ..carrier_phase.solver import evaluate_integer
-from ..carrier_phase.temporal import EpochBlock, assemble_epochs, joint_float
+from ..carrier_phase.temporal import EpochBlock, assemble_epochs, joint_float, has_cross_epoch_covariance
+from .coupled_length_profile import coupled_length_profile
 
 
 RAW_WORKING_QUANTILE = 0.999
@@ -29,6 +30,9 @@ class IntegerCandidate:
     integer_by_label: dict[str, int]
     raw_cost: float
     baseline_center_m: tuple[float, float, float]
+    support_status: str = "EXACT_EPOCH_LENGTH_PROFILE"
+    raw_cost_lower_bound: float | None = None
+    raw_cost_upper_bound: float | None = None
 
 
 @dataclass(frozen=True)
@@ -45,13 +49,16 @@ def propose_candidates(
     *,
     conditioned_integer_by_label: dict[str, int] | None = None,
     conditioned_linear_relations: Sequence[dict] | None = None,
+    temporal_covariance: np.ndarray | None = None,
 ) -> CandidateProposal:
     """Qualify every enumerated raw candidate before allocating active branches.
 
     The fixed chi-square quantile sets a working Gaussian raw-cost budget, not
     a physical coverage or false-fix probability. A whole-ellipsoid radial bound
     first excludes impossible lengths. Each survivor then receives the exact
-    epoch-separable fixed-length raw profile cost. Body attitude and foot/IMU
+    epoch-separable fixed-length profile when Q separates by epoch. Cross-epoch
+    Q instead receives necessary lower and feasible upper bounds; straddling
+    candidates remain unresolved and retained. Body attitude and foot/IMU
     evidence are absent here; R*b_body in the shared graph supplies those links.
     These costs allocate interpretations, never become additional observations.
     Existing physical relations can condition the candidate domain before its
@@ -67,7 +74,9 @@ def propose_candidates(
             dormant_count=0, remaining_count=None, remaining_count_lower_bound=0,
             integer_acceptance_defined=False, conditioned_on=conditioned,
         ))
-    problem = assemble_epochs(blocks, length_m=float(np.linalg.norm(baseline_body)))
+    problem = assemble_epochs(blocks, length_m=float(np.linalg.norm(baseline_body)),
+                              temporal_covariance=temporal_covariance)
+    coupled = has_cross_epoch_covariance(problem)
     threshold = float(chi2.ppf(RAW_WORKING_QUANTILE, len(problem.y)))
     envelope = enumerate_candidate_envelope(
         problem, threshold, lambda_library=None,
@@ -120,15 +129,66 @@ def propose_candidates(
             qualifications.append(record)
             continue
 
-        exact = evaluate_integer(problem, floating, item.integer)
-        # The existing solver checks the raw/reduced identity at this tolerance.
-        # Retain the numerical boundary; these are floating-point working-model
-        # bounds, not interval-arithmetic certificates.
-        cost_guard = (2e-6 + 2e-8 * max(abs(exact.full_residual_cost),
-                                      abs(exact.reduced_cost))
-                      + float(envelope.floating_cost_guard))
-        lower_bound = float(exact.full_residual_cost - cost_guard)
-        retained = lower_bound <= threshold_expanded
+        if coupled:
+            profile = coupled_length_profile(problem, floating, item.integer)
+            cost_guard = (2e-6 + 2e-8 * max(abs(profile.raw_cost_upper_bound),
+                                          abs(profile.relaxed_raw_cost + profile.conditional_cost_upper_bound))
+                          + float(envelope.floating_cost_guard))
+            lower_bound = float(profile.raw_cost_lower_bound - cost_guard)
+            upper_bound = float(profile.raw_cost_upper_bound + cost_guard)
+            identity_qualified = (abs(profile.objective_identity_error) <= cost_guard and
+                                  abs(profile.relaxed_objective_identity_error) <= cost_guard and
+                                  profile.maximum_length_error_m <= 1e-8)
+            if not identity_qualified:
+                length_qualified, support_status = None, "NUMERICAL_PROFILE_UNRESOLVED"
+            elif upper_bound <= threshold_expanded:
+                length_qualified, support_status = True, "FEASIBLE_UPPER_WITHIN_BUDGET"
+            elif lower_bound > threshold_expanded:
+                length_qualified, support_status = False, "LOWER_BOUND_EXCEEDS_BUDGET"
+            else:
+                length_qualified, support_status = None, "LOWER_UPPER_STRADDLE"
+            allocation_cost = float(profile.raw_cost_upper_bound)
+            record.update(
+                coupled_length_profile=True, support_status=support_status,
+                length_support_decided=length_qualified is not None,
+                constrained_raw_cost=allocation_cost,
+                constrained_raw_cost_semantics="FEASIBLE_UPPER_BOUND_NOT_GLOBAL_PROFILE_MINIMUM",
+                joint_raw_cost_lower_bound=lower_bound,
+                joint_raw_cost_upper_bound=upper_bound,
+                unguarded_raw_cost_lower_bound=profile.raw_cost_lower_bound,
+                unguarded_raw_cost_upper_bound=profile.raw_cost_upper_bound,
+                conditional_cost_lower_bound=profile.conditional_cost_lower_bound,
+                conditional_cost_upper_bound=profile.conditional_cost_upper_bound,
+                marginal_sphere_costs=list(profile.marginal_sphere_costs),
+                marginal_bound_combination="MAX_NOT_SUM",
+                comparison_cost_guard=cost_guard,
+                maximum_length_error_m=profile.maximum_length_error_m,
+                objective_identity_error=profile.objective_identity_error,
+                relaxed_objective_identity_error=profile.relaxed_objective_identity_error,
+                objective_identity_qualified=identity_qualified,
+                constrained_baselines_m=profile.baselines.tolist(),
+                local_optimizations=list(profile.local_optimizations),
+                global_profile_optimum_certified=False,
+            )
+        else:
+            # Keep the existing independent-Q numerical path unchanged.
+            exact = evaluate_integer(problem, floating, item.integer)
+            cost_guard = (2e-6 + 2e-8 * max(abs(exact.full_residual_cost),
+                                          abs(exact.reduced_cost))
+                          + float(envelope.floating_cost_guard))
+            lower_bound = float(exact.full_residual_cost - cost_guard)
+            upper_bound = float(exact.full_residual_cost + cost_guard)
+            length_qualified = lower_bound <= threshold_expanded
+            support_status = "EXACT_EPOCH_LENGTH_PROFILE"
+            allocation_cost = float(exact.full_residual_cost)
+            record.update(
+                constrained_raw_cost=allocation_cost,
+                joint_raw_cost_lower_bound=lower_bound,
+                comparison_cost_guard=cost_guard,
+                maximum_length_error_m=float(exact.maximum_length_error_m),
+                objective_identity_error=float(exact.objective_identity_error),
+                constrained_baselines_m=exact.baselines.tolist(),
+            )
         integer_by_label = dict(zip(envelope.ambiguity_labels, item.integer))
         incompatible = {
             label: dict(candidate_value=integer_by_label[label], history_value=value)
@@ -141,29 +201,26 @@ def propose_candidates(
                         for label, coefficient in relation["coefficients"])
             if value != relation["rhs_integer"]:
                 linear_conflicts.append(dict(relation=relation, candidate_value=value))
-        length_qualified = retained
-        retained = retained and not incompatible and not linear_conflicts
+        # An unresolved product-sphere profile remains a possible interpretation.
+        # A local optimizer's budget or upper cost cannot exclude that integer.
+        retained = length_qualified is not False and not incompatible and not linear_conflicts
         record.update(
             retained=retained,
             length_qualified=length_qualified,
             history_relation_compatible=not incompatible and not linear_conflicts,
             history_relation_conflicts=incompatible,
             history_linear_relation_conflicts=linear_conflicts,
-            reason=("HISTORY_RELATION_CONDITION" if length_qualified and (incompatible or linear_conflicts) else
+            reason=("HISTORY_RELATION_CONDITION" if length_qualified is not False and (incompatible or linear_conflicts) else
+                    "COUPLED_LENGTH_PROFILE_UNRESOLVED" if retained and length_qualified is None else
                     "WITHIN_FIXED_LENGTH_RAW_SUPPORT" if retained else
+                    "COUPLED_LENGTH_LOWER_BOUND_EXCEEDS_BUDGET" if coupled else
                     "FIXED_LENGTH_RAW_PROFILE_EXCEEDS_BUDGET"),
-            constrained_raw_cost=float(exact.full_residual_cost),
-            joint_raw_cost_lower_bound=lower_bound,
-            comparison_cost_guard=cost_guard,
-            maximum_length_error_m=float(exact.maximum_length_error_m),
-            objective_identity_error=float(exact.objective_identity_error),
-            constrained_baselines_m=exact.baselines.tolist(),
         )
         qualifications.append(record)
         if retained:
             qualified.append(IntegerCandidate(
-                integer_by_label,
-                float(exact.full_residual_cost), item.baseline_center_m,
+                integer_by_label, allocation_cost, item.baseline_center_m,
+                support_status, lower_bound, upper_bound,
             ))
 
     candidates = tuple(sorted(
@@ -172,17 +229,25 @@ def propose_candidates(
     active_count = min(max_active, len(candidates))
     active, dormant = candidates[:active_count], candidates[active_count:]
     complete = envelope.numerical_support_complete
+    length_complete = (envelope.status != "UNQUALIFIED_NUMERICS" and not any(
+        record["retained"] is None or record.get("length_support_decided") is False
+        for record in qualifications))
     metadata = dict(
         status=envelope.status,
         termination_reason=envelope.termination_reason,
         enumeration_complete=complete,
-        active_support_complete=complete and len(dormant) == 0,
+        length_support_complete=length_complete,
+        has_cross_epoch_covariance=coupled,
+        active_support_complete=complete and length_complete and len(dormant) == 0,
         enumerated_count=len(envelope.candidates),
-        length_qualified_count=sum(record.get("length_qualified", False) for record in qualifications),
+        length_qualified_count=sum(record.get("length_qualified") is True for record in qualifications),
         length_rejected_count=sum(record["reason"] in (
             "WHOLE_ELLIPSOID_MISSES_BASELINE_LENGTH",
-            "FIXED_LENGTH_RAW_PROFILE_EXCEEDS_BUDGET") for record in qualifications),
-        length_unqualified_count=sum(record["retained"] is None for record in qualifications),
+            "FIXED_LENGTH_RAW_PROFILE_EXCEEDS_BUDGET",
+            "COUPLED_LENGTH_LOWER_BOUND_EXCEEDS_BUDGET") for record in qualifications),
+        length_unqualified_count=sum(record["retained"] is None or
+            record.get("length_support_decided") is False for record in qualifications),
+        length_unresolved_count=sum(record.get("length_support_decided") is False for record in qualifications),
         history_condition_excluded_count=sum(
             record["reason"] == "HISTORY_RELATION_CONDITION" for record in qualifications),
         history_compatible_candidate_count=len(candidates),
@@ -203,11 +268,14 @@ def propose_candidates(
         timeout_s=ENUMERATION_TIMEOUT_S,
         integer_acceptance_defined=False,
         raw_coverage_scope=envelope.coverage_scope,
-        coverage_scope=("NUMERICAL_RAW_LENGTH_SUPPORT_CONDITIONED_ON_HISTORY_RELATIONS"
+        coverage_scope=("NUMERICAL_RAW_COUPLED_LENGTH_BOUNDS_WITH_UNRESOLVED_IDENTITIES" if coupled else
+                        "NUMERICAL_RAW_LENGTH_SUPPORT_CONDITIONED_ON_HISTORY_RELATIONS"
                         if conditioned or linear_relations else
                         "NUMERICAL_RAW_SUPPORT_WITH_EPOCH_SEPARABLE_EXACT_BASELINE_LENGTH"),
-        sphere_feasibility="RADIAL_NECESSARY_FILTER_THEN_EXACT_EPOCH_LENGTH_PROFILE",
-        length_qualification_status=length_support.status,
+        sphere_feasibility=("RADIAL_THEN_MARGINAL_MAX_LOWER_AND_FEASIBLE_JOINT_UPPER" if coupled else
+                            "RADIAL_NECESSARY_FILTER_THEN_EXACT_EPOCH_LENGTH_PROFILE"),
+        length_qualification_status=(("COUPLED_LENGTH_SUPPORT_DECIDED" if length_complete else
+                                      "INCOMPLETE_COUPLED_LENGTH_SUPPORT") if coupled else length_support.status),
         candidate_qualifications=qualifications,
         rigorous_interval_certificate=False,
         physical_coverage_probability=None,
