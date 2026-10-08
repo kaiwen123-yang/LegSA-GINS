@@ -178,6 +178,73 @@ def number(value):
     return "未得出" if value is None else f"{value:.6f}"
 
 
+def plot_completed_pair(report, output_root):
+    """Plot qualified complete emitted histories, including an unsuccessful M1."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.patches import Patch
+
+    with plt.rc_context({"font.family": "DejaVu Sans", "font.size": 8,
+                         "axes.spines.top": False, "axes.spines.right": False,
+                         "axes.linewidth": .65, "legend.frameon": False,
+                         "pdf.fonttype": 42}):
+        fig, axes = plt.subplots(4, 1, sharex=True, figsize=(174 / 25.4, 174 / 25.4),
+            gridspec_kw={"height_ratios": [1., 1., 1., .65]})
+        fig.subplots_adjust(left=.17, right=.985, top=.89, bottom=.09, hspace=.25)
+        handles = []
+        for label, color, style, display in (
+                ("fixed", "#555555", "--", "Fixed support"),
+                ("automatic", "#0072B2", "-", "Automatic support")):
+            with np.load(Path(report[label]["root"]) / "U3/offline_error_series.npz",
+                         allow_pickle=False) as archive:
+                times = archive["time_s"]
+                for axis, field in zip(axes[:3], ERRORS):
+                    line, = axis.plot(times, archive[field], color=color, linestyle=style,
+                                      linewidth=1., label=display)
+                handles.append(line)
+                selected = np.zeros(len(times), dtype=bool)
+                # Reuse the exact publication/expansion match from history_readout;
+                # the predictive score winner alone never sets this trace.
+                for run in report[label]["history"]["selected_policy_runs"]:
+                    if run["value"]["selected_expanded_finite_history"]:
+                        selected[(times >= run["first_sample_s"])
+                                 & (times <= run["last_sample_s"])] = True
+                axes[3].step(times, selected.astype(int), where="post", color=color,
+                             linestyle=style, linewidth=1.)
+        for axis, ylabel in zip(axes, ("Position error (m)", "Velocity error (m/s)",
+                "Yaw error (deg)", "Published rebuilt\nfinite history")):
+            axis.set_ylabel(ylabel)
+            axis.axvspan(65., 77., color="#999999", alpha=.16, linewidth=0)
+            axis.axvspan(67., 70., color="#E69F00", alpha=.22, linewidth=0)
+            axis.grid(axis="y", color=".88", linewidth=.5)
+            axis.set_xlim(0., 90.)
+        # Error panels keep matplotlib's full-data limits: no clipping, zoom,
+        # smoothing, initialization removal, or failure-row filtering.
+        axes[2].axhline(0., color=".6", linewidth=.55, zorder=0)
+        axes[3].set_yticks([0, 1], labels=["No", "Yes"])
+        axes[3].set_ylim(-.08, 1.08)
+        axes[3].set_xlabel("Time (s)")
+        fig.legend(handles=handles + [
+            Patch(facecolor="#999999", alpha=.16, label="GNSS P/V gap: 65–77 s"),
+            Patch(facecolor="#E69F00", alpha=.22, label="Common motion: 67–70 s (evaluation)")],
+            loc="upper center", bbox_to_anchor=(.55, .995), ncol=2, fontsize=7.5)
+        stem = "M1_FINITE_PAIR_PROCESS"
+        for suffix in ("png", "pdf"):
+            fig.savefig(output_root / f"{stem}.{suffix}", dpi=300)
+        plt.close(fig)
+    caption = (
+        "固定支撑与自动支撑的完整 0–90 s 因果发布结果。前三行分别为已保存的三维位置误差模长、"
+        "三维速度误差模长和有符号航向误差；全部初始化与失败状态行保留，未截断纵轴。"
+        "末行仅在发布行实际选择 finite_common_motion、标记历史重算，且存在此前同身份、同源策略的"
+        "非线性历史展开时为 Yes；阶梯线保持上一发布行的标记，不将分数赢家视为已发布修复。"
+        "灰色为 65–77 s GNSS P/V 缺口，橙色为仅用于评价标注的 67–70 s 共同接触运动。"
+        f"该完整配对的判定为 {report['status']}，不代表三个创新完成，也不独立证明航向导致 p/v 收益。\n")
+    (output_root / f"{stem}_CAPTION.md").write_text(caption, encoding="utf-8")
+    return dict(png=f"{stem}.png", pdf=f"{stem}.pdf", caption=f"{stem}_CAPTION.md",
+                scope="COMPLETE_QUALIFIED_PAIR_PUBLISHED_ROWS_ONLY")
+
+
 def markdown(report):
     lines = ["# M1 有限共同运动完整配对读出", "", f"状态：`{report['status']}`。", "",
         "只评价已保存的因果发布行；无重跑、无历史输出替换、无新参数选择。"]
@@ -220,6 +287,10 @@ def markdown(report):
         "", "该判定仅覆盖这一个配对的 M1 必要条件，不宣称三个创新完成，也不单凭 p/v 或状态变化宣称航向造成导航收益。"]
     if not report["paired_evidence_qualified"]:
         lines += ["", "配对资格未满足，数值仅作单次结果读出；逐项原因见 JSON 的 identity_checks 和 coverage。"]
+    if "process_figure" in report:
+        figure = report["process_figure"]
+        lines += ["", f"完整过程图：[PNG]({figure['png']})、[PDF]({figure['pdf']})；"
+                  f"[图注]({figure['caption']})。"]
     return "\n".join(lines) + "\n"
 
 
@@ -265,8 +336,10 @@ def main():
                 met=qualified and improves and selected),
             status=("UNQUALIFIED_PAIR" if not qualified else
                     "M1_NECESSARY_CONDITIONS_MET" if improves and selected else "M1_NECESSARY_CONDITIONS_NOT_MET"))
-    report = json_value(report)
     args.output_root.mkdir(parents=True, exist_ok=True)
+    if report.get("paired_evidence_qualified") is True:
+        report["process_figure"] = plot_completed_pair(report, args.output_root)
+    report = json_value(report)
     (args.output_root / "M1_FINITE_PAIR.json").write_text(
         json.dumps(report, indent=2, ensure_ascii=False, allow_nan=False) + "\n", encoding="utf-8")
     (args.output_root / "M1_FINITE_PAIR.md").write_text(markdown(report), encoding="utf-8")

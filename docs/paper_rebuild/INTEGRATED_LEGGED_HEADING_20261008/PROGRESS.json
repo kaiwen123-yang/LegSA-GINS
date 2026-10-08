@@ -1,8 +1,8 @@
 {
-  "plan_version": "v1.5",
+  "plan_version": "v1.6",
   "date_local": "2026-10-08",
   "timezone": "Asia/Shanghai",
-  "status": "ACTIVE_M1_FULL_AUTOMATIC_NAVIGATION_RUNNING",
+  "status": "ACTIVE_M1_FULL_RESULT_FAILED_NAVIGATION_BENEFIT_PHYSICAL_DIAGNOSIS_NEXT",
   "goal_thread_id": "01a11afd-6d44-7bc0-94df-ae1fbfc584d1",
   "plan": "PLAN.md",
   "authorization": "Explicit user request in this thread to create a plan, then an active long-term goal, implement one integrated algorithm, and push completed stages.",
@@ -12,7 +12,7 @@
   "current_milestone": "M1",
   "milestones": {
     "M1": {
-      "status": "PARTIAL_IMPLEMENTATION_AND_NECESSARY_MATH_CHECKS_COMPLETE_FULL_NAVIGATION_UNVERIFIED",
+      "status": "FULL_AUTOMATIC_RECONSTRUCTION_OBSERVED_NAVIGATION_BENEFIT_FAILED",
       "deliverable": "Integrated finite support motion, same-row joint prediction and automatic historical reconstruction with complete navigation evidence."
     },
     "M2": {
@@ -48,7 +48,7 @@
   "time_alignment_implementation_difference": "The frozen kick detector uses raw IMU transients; the subsequent body-motion onset uses the Go2 SDK horizontal-velocity proxy (1 s mean, 3 s persistence), not a second independent raw-IMU movement detector. BY2 GNSS/body onsets are 66.217880/65.717063 s; the pre-existing whole-second floor gives start 66 s. These facts are preserved explicitly, not relabeled as exact simultaneous IMU/GNSS motion.",
   "source_epoch_readout": "BY_SOURCE_PROFILE_FULL02/GNSS_INTERNAL_KINEMATICS.json: current PARITY V2 HPPOSECEF/NAV-PVT exact iTOW pairing reproduced all 1510 input P/V rows; no nearest matching, fill or repeated PVT source. Approximately 0.14 s CSV receipt lag is not a measurement-time correction.",
   "test_input_gap_requirement": "BY2H contains real IMU gaps retained by its frozen contract, including 414.905–415.081 s. Current joint loader rejects uncovered integration; define missing-data state qualification/recovery without filling increments or changing the formal window before claiming test-sequence support.",
-  "first_action": "Run one full 90-second automatic finite model with M1_SUPPORT_WORKING_MODEL.json and the prospectively fixed comparison rule; compare with the completed matched H0. Do not choose another source grid point from navigation error.",
+  "first_action": "One source-only onset-time profile through the first main finite-history publication; preserve the existing working parameters and use observed event boundaries, not truth or navigation error.",
   "m1_current_evidence": {
     "integrated_code": "Finite common support motion, proper joint foot/external prediction, existing nonlinear conditional-history expansion and source-only restricted likelihood are connected to the same JointNavigator state.",
     "necessary_math_checks": "Exact OU and fixed limit; foot Jacobians and original AR likelihood; joint prediction covariance from actual process graph and conditional-density decomposition; checkpoint and Gaussian-separator lifecycle; sparse source likelihood equals dense full-covariance integration.",
@@ -78,7 +78,7 @@
       "extension_root": "/home/kaiwen/research/LegSA-GINS-SCRATCH/INTEGRATED_LEGGED_HEADING_20261008/BY_SOURCE_PROFILE_FULL02_EXTENSION01",
       "tau_identified": false
     },
-    "full_m1_navigation": "FIXED_COMPLETE_AUTOMATIC_FINITE_RUNNING",
+    "full_m1_navigation": "COMPLETED_M1_NECESSARY_CONDITIONS_NOT_MET",
     "fixed_complete_result": "M1_FIXED90_RESULT.json",
     "source_duration_scope": "BY_SOURCE_DURATION_SCOPE.json: 2373 arcs, maximum span 0.263992 s; no group spans 1 s, 5 s or 12 s. Long-horizon support motion is a process-model extrapolation.",
     "source_model_interpretation": "Stationarity is not source-model calibration. Source-only likelihood normalizes the navigation posterior, so the source residual constant is not added to the foot-parameter objective; biased state means or narrow covariance may still be absorbed indirectly. Inspect original factor-family residuals once, do not infer sensor blame or inflate noise from total cost. Frozen BY-selected working-model navigation comparison remains meaningful under explicit local-chart, correlation and long-arc limitations.",
@@ -88,7 +88,7 @@
     "working_model": "M1_SUPPORT_WORKING_MODEL.json: sigma 0.075 m/s, tau 100 s, selected by BY source likelihood before automatic navigation; tau remains unresolved and this is not the later BYO/BYH algorithm freeze.",
     "automatic_full_run": {
       "root": "/home/kaiwen/research/LegSA-GINS-SCRATCH/INTEGRATED_LEGGED_HEADING_20261008/M1_FULL01_AUTOMATIC_FINITE",
-      "status": "RUNNING",
+      "status": "COMPLETED",
       "code_commit": "0760d6a7ef878cdf6c17ccb6f3670e0a6bdfa390",
       "session_id": 10844,
       "model": "M1_SUPPORT_WORKING_MODEL.json",
@@ -96,7 +96,34 @@
       "duration_s": 90,
       "mode": "U3",
       "support_inference": "shared_separator",
-      "support_prediction": "foot_external"
+      "support_prediction": "foot_external",
+      "exit_code": 0,
+      "session_closed": true,
+      "elapsed_s": 1989.5311687970025,
+      "published_rows": 1287
+    },
+    "automatic_complete_result": "M1_AUTOMATIC90_RESULT.json",
+    "full_navigation_verdict": {
+      "status": "FAILED_NAVIGATION_BENEFIT",
+      "gap_fixed_p_v": [
+        0.14041816269146062,
+        0.0450177982242679
+      ],
+      "gap_automatic_p_v": [
+        0.4052484176334637,
+        0.05609696074246796
+      ],
+      "actual_reconstructed_history_rows": 287,
+      "principal_history_first_published_s": 67.9,
+      "principal_checkpoint_s": 64.0,
+      "principal_arc_first_use_s": 64.8,
+      "source": "M1_AUTOMATIC90_RESULT.json"
+    },
+    "onset_diagnosis": {
+      "status": "PREPARING_ONE_SOURCE_ONLY_PROFILE",
+      "origin": "Observed principal publication at67.9 and its pre-use checkpoint64.0",
+      "hypotheses": "Whole-arc finite motion relaxes the healthy prefix; long-tau process shape may also mismatch finite start/stop motion. Both remain to be separated.",
+      "prohibitions": "No truth-selected onset, no navigation-error tuning, no new full automatic run before diagnosis, no M2 navigation until M1 passes."
     }
   },
   "overall_scientific_goal_complete": false,
@@ -134,6 +161,11 @@
       "date": "2026-10-08",
       "evidence": "One raw geometry diagnostic found only one same-tilt direction interval for the existing two-phase fragment, but separated intervals when only its second phase relation is removed. Code review found directional acceptance remains conditional on retained integer and single-group policy coverage.",
       "decision": "Use a prospectively declared truly ambiguous partial observation condition, initially reuse common contact motion, and prioritize source-dependent direction reopening within the existing navigator. Do not add fault freedoms, tune thresholds or claim recovery without full navigation evidence."
+    },
+    {
+      "date": "2026-10-08",
+      "evidence": "Full90 actual conditional history was published, but gap p/v worsened by188.60%/24.61% and whole trajectory worsened. Automatic replacement activates finite motion from entire arc birth64.8, including pre-motion fixed support.",
+      "decision": "M1 remains unfinished. Diagnose onset-time source evidence and joint body/contact velocity uncertainty with frozen parameters before the next integrated physical change. Do not advance M2 or retune acceptance to declare success."
     }
   ],
   "remaining_goal_requirements": [

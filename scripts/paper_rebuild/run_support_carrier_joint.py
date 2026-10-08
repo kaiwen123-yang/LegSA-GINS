@@ -171,6 +171,8 @@ def write_rows(path, rows):
 
 def read_rows(path):
     """Read the emitted state log without re-estimating or re-evaluating it."""
+    # Complete conditional direction histories exceed csv's 128 KiB default.
+    csv.field_size_limit(sys.maxsize)
     rows = []
     with path.open(encoding="utf-8", newline="") as file:
         for saved in csv.DictReader(file):
