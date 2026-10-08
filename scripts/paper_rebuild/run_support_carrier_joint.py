@@ -20,7 +20,6 @@ import time
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
-from legsa_gins.paper_rebuild.joint_navigation.synthetic import generate_scene
 
 
 MODES = ("U0", "U1", "U2", "U3")
@@ -170,7 +169,68 @@ def write_rows(path, rows):
             writer.writerow(data)
 
 
-def plot_process(output_root, events, results, evaluated):
+def read_rows(path):
+    """Read the emitted state log without re-estimating or re-evaluating it."""
+    rows = []
+    with path.open(encoding="utf-8", newline="") as file:
+        for saved in csv.DictReader(file):
+            row = dict(time_s=float(saved["time_s"]),
+                       p=np.array([float(saved[f"p_{axis}_m"]) for axis in "NED"]),
+                       v=np.array([float(saved[f"v_{axis}_mps"]) for axis in "NED"]),
+                       rpy_rad=np.array([float(saved[key]) for key in ("roll_rad", "pitch_rad", "yaw_rad")]),
+                       bias=np.array([float(saved[f"bias_{i}"]) for i in range(6)]),
+                       direction_status=saved["direction_status"],
+                       candidate_support_complete={"True": True, "False": False, "": None}[saved["candidate_support_complete"]])
+            for key in ("candidate_yaws_rad", "candidate_costs", "support_ids"):
+                row[key] = json.loads(saved[key])
+            row.update(json.loads(saved["extra_fields"]))
+            rows.append(row)
+    return rows
+
+
+def input_timeline(events):
+    return [dict(time_s=event["time_s"],
+                 feet=[dict(foot_id=foot["foot_id"], arc_id=foot["arc_id"]) for foot in event["feet"]],
+                 phase_relations=len(event["carrier"].ambiguity_labels) if event["carrier"] is not None else None,
+                 gnss_position_available=event["gnss_position"] is not None)
+            for event in events]
+
+
+def write_input_timeline(path, timeline):
+    with path.open("w", encoding="utf-8", newline="") as file:
+        writer = csv.DictWriter(file, fieldnames=["time_s", "feet", "phase_relations", "gnss_position_available"])
+        writer.writeheader()
+        for row in timeline:
+            writer.writerow(dict(row, feet=json.dumps(row["feet"])))
+
+
+def read_saved_plot_inputs(output_root, modes):
+    results, evaluated = {}, {}
+    for mode in modes:
+        results[mode] = dict(rows=read_rows(output_root / mode / "navigation.csv"))
+        with np.load(output_root / mode / "offline_error_series.npz", allow_pickle=False) as archive:
+            evaluated[mode] = {key: archive[key].copy() for key in archive.files}
+    timeline_path = output_root / "input_timeline.csv"
+    if timeline_path.exists():
+        with timeline_path.open(encoding="utf-8", newline="") as file:
+            timeline = [dict(time_s=float(row["time_s"]), feet=json.loads(row["feet"]),
+                             phase_relations=int(row["phase_relations"]) if row["phase_relations"] else None,
+                             gnss_position_available={"True": True, "False": False, "": None}[row["gnss_position_available"]])
+                        for row in csv.DictReader(file)]
+        source = "saved_input_timeline"
+    else:
+        # Earlier runs saved observed arc IDs and consumed phase counts in each
+        # output, but not every GNSS arrival. Recover only those recorded fields.
+        mode = next(mode for mode in ("U3", "U2", "U1", "U0") if mode in results)
+        timeline = [dict(time_s=row["time_s"],
+                         feet=[dict(foot_id=int(arc.split("_")[1]), arc_id=arc) for arc in row["support_ids"]],
+                         phase_relations=row["consumed_phase_relations"], gnss_position_available=None)
+                    for row in results[mode]["rows"]]
+        source = f"saved_{mode}_observed_support_ids_and_consumed_phase_relations_GNSS_arrivals_not_saved"
+    return timeline, results, evaluated, source
+
+
+def plot_process(output_root, timeline, results, evaluated, *, stem="joint_process", input_source="observed_input_events"):
     """One figure asks whether retained direction improves the common navigation state.
 
     Input availability establishes the perturbation; candidate support shows the
@@ -181,17 +241,18 @@ def plot_process(output_root, events, results, evaluated):
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     from matplotlib.lines import Line2D
+    from matplotlib.ticker import FormatStrFormatter
 
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 7.5, "axes.labelsize": 8,
                          "axes.spines.top": False, "axes.spines.right": False, "axes.linewidth": .65,
                          "legend.frameon": False, "pdf.fonttype": 42, "svg.fonttype": "none"})
-    fig, axes = plt.subplots(6, 1, sharex=True, figsize=(174 / 25.4, 225 / 25.4),
-                             gridspec_kw={"height_ratios": [1., .7, 1.6, 1.2, 1.1, 1.1]})
-    fig.subplots_adjust(left=.14, right=.98, top=.91, bottom=.065, hspace=.24)
-    duration = float(events[-1]["time_s"])
+    fig, axes = plt.subplots(7, 1, sharex=True, figsize=(174 / 25.4, 245 / 25.4),
+                             gridspec_kw={"height_ratios": [1., .6, 1.5, .55, 1.7, 1.1, 1.1]})
+    fig.subplots_adjust(left=.15, right=.98, top=.91, bottom=.06, hspace=.29)
+    duration = float(timeline[-1]["time_s"])
     support_arcs = {}
-    for i, event in enumerate(events[:-1]):
-        end = events[i + 1]["time_s"]
+    for i, event in enumerate(timeline[:-1]):
+        end = timeline[i + 1]["time_s"]
         for foot in event["feet"]:
             identity = (foot["foot_id"], foot["arc_id"])
             if identity in support_arcs:
@@ -200,16 +261,28 @@ def plot_process(output_root, events, results, evaluated):
                 support_arcs[identity] = [event["time_s"], end]
     for (foot, _), (start, end) in support_arcs.items():
         axes[0].broken_barh([(start, end-start)], (3-foot-.27, .54), facecolors="#777777", linewidth=0)
-    fix_times = [event["time_s"] for event in events if event["gnss_position"] is not None]
-    axes[0].scatter(fix_times, np.full(len(fix_times), -1), marker="|", s=16, c="#444444", linewidths=.6)
-    axes[0].set_yticks([-1, 0, 1, 2, 3], ["GNSS", "RL", "RR", "FL", "FR"])
-    axes[0].set_ylabel("Observed\ninputs")
-    carrier_events = [event for event in events if event["carrier"] is not None]
+    gnss_arrivals_saved = any(event["gnss_position_available"] is not None for event in timeline)
+    if gnss_arrivals_saved:
+        fix_times = [event["time_s"] for event in timeline if event["gnss_position_available"]]
+        axes[0].scatter(fix_times, np.full(len(fix_times), -1), marker="|", s=16, c="#444444", linewidths=.6)
+        axes[0].set_yticks([-1, 0, 1, 2, 3], ["GNSS", "RL", "RR", "FL", "FR"])
+        axes[0].set_ylabel("Observed\ninputs")
+    else:
+        axes[0].set_yticks([0, 1, 2, 3], ["RL", "RR", "FL", "FR"])
+        axes[0].set_ylabel("Logged\nsupport")
+    carrier_events = [event for event in timeline if event["phase_relations"] is not None]
     axes[1].step([event["time_s"] for event in carrier_events],
-                 [len(event["carrier"].ambiguity_labels) for event in carrier_events], where="post", color="#444444", linewidth=.9)
+                 [event["phase_relations"] for event in carrier_events], where="post", color="#444444", linewidth=.9)
     axes[1].set_yticks([0, 2, 5])
     axes[1].set_ylim(-.3, 5.5)
     axes[1].set_ylabel("Phase\nrelations")
+    mode_order = list(results)
+    axes[3].set_yticks(range(len(mode_order)), mode_order)
+    axes[3].set_ylim(len(mode_order)-.5, -.5)
+    axes[3].set_ylabel("Set\nstatus")
+    axes[3].text(1., 1.22, "Filled = incomplete", transform=axes[3].transAxes,
+                 ha="right", va="bottom", fontsize=6.5)
+    axes[3].tick_params(axis="y", length=0, labelsize=6.5)
     all_candidates = []
     revocation_times = []
     for mode, result in results.items():
@@ -229,14 +302,20 @@ def plot_process(output_root, events, results, evaluated):
             revoked_seen |= revoked
         all_candidates.extend(candidate_yaw)
         axes[2].scatter(candidate_t, candidate_yaw, s=2.4, color=COLORS[mode], alpha=.55, linewidths=0, rasterized=True)
-        incomplete_t = [row["time_s"] for row in rows if row.get("candidate_support_complete") is False]
-        axes[2].scatter(incomplete_t, np.full(len(incomplete_t), 1.0 - .05 * MODES.index(mode)), marker="x", s=5,
-                        color=COLORS[mode], linewidths=.4, transform=axes[2].get_xaxis_transform(), clip_on=False)
-        for axis, field in zip(axes[3:], ("yaw_deg", "velocity_3d_mps", "position_3d_m")):
+        # Status has its own categorical axis, so it cannot be mistaken for yaw.
+        for i, row in enumerate(rows[:-1]):
+            complete = row.get("candidate_support_complete")
+            if complete is not True:
+                interval = [(row["time_s"], rows[i+1]["time_s"]-row["time_s"])]
+                axes[3].broken_barh(interval, (mode_order.index(mode)-.3, .6),
+                                    facecolors=COLORS[mode] if complete is False else "none",
+                                    edgecolors=COLORS[mode] if complete is None else "none",
+                                    hatch="////" if complete is None else None, linewidth=.3)
+        for axis, field in zip(axes[4:], ("yaw_deg", "velocity_3d_mps", "position_3d_m")):
             axis.plot(data["time_s"], data[field], color=COLORS[mode], linestyle=STYLES[mode], linewidth=.9)
         if mode == "U3" and all("yaw_conditional_std_rad" in row for row in rows):
             std_deg = np.degrees([row["yaw_conditional_std_rad"] for row in rows])
-            axes[3].fill_between(data["time_s"], data["yaw_deg"]-1.96*std_deg,
+            axes[4].fill_between(data["time_s"], data["yaw_deg"]-1.96*std_deg,
                                  data["yaw_deg"]+1.96*std_deg, color=COLORS[mode], alpha=.12, linewidth=0)
     if evaluated:
         data = next(iter(evaluated.values()))
@@ -244,48 +323,62 @@ def plot_process(output_root, events, results, evaluated):
     if not all_candidates:
         axes[2].text(.5, .5, "No active direction candidates emitted", transform=axes[2].transAxes, ha="center")
     axes[2].set_ylabel("Candidate\nyaw (deg)")
-    axes[3].set_ylabel("Yaw error\n(deg)")
-    axes[4].set_ylabel("Velocity error\n(m/s)")
-    axes[5].set_ylabel("Position error\n(m)")
-    axes[5].set_xlabel("Time (s)")
+    axes[4].set_yscale("symlog", linthresh=.1, linscale=1., base=10)
+    axes[4].set_yticks([-100., -10., -1., -.1, 0., .1, 1., 10., 100.])
+    axes[4].yaxis.set_major_formatter(FormatStrFormatter("%g"))
+    axes[4].set_ylabel("Yaw error (deg)\nsymlog")
+    axes[5].set_ylabel("Velocity error\n(m/s)")
+    axes[6].set_ylabel("Position error\n(m)")
+    axes[6].set_xlabel("Time (s)")
     for i, axis in enumerate(axes):
         axis.annotate(f"({chr(97+i)})", xy=(0, 1), xycoords="axes fraction", xytext=(-37, 3),
                       textcoords="offset points", fontsize=8.5, fontweight="bold", ha="left", va="bottom")
         axis.set_xlim(0., duration)
         axis.tick_params(axis="both", length=2.5, width=.6)
-        if i >= 2:
+        if i >= 2 and i != 3:
             axis.grid(axis="y", color="#dddddd", linewidth=.4)
         for t in sorted(set(revocation_times)):
             axis.axvline(t, color="#AA3377", linewidth=.65, linestyle=":", alpha=.7)
-    handles = [Line2D([], [], color=COLORS[mode], linestyle=STYLES[mode], label=LABELS[mode], linewidth=1.2) for mode in results]
-    handles += [Line2D([], [], color="black", linestyle="--", label="Truth (candidate panel)", linewidth=.7),
-                Line2D([], [], color="#777777", marker="x", linestyle="none", markersize=3, label="Incomplete candidate support")]
+    handles = [Line2D([], [], color=COLORS[mode], linestyle=STYLES[mode], label=f"{mode}: {LABELS[mode]}", linewidth=1.2) for mode in results]
+    handles += [Line2D([], [], color="black", linestyle="--", label="Truth (candidate panel)", linewidth=.7)]
     fig.legend(handles=handles, loc="upper center", bbox_to_anchor=(.55, .99), ncol=3, fontsize=7, handlelength=2.1, columnspacing=1.3)
     fig.canvas.draw()
-    # All six axes share one column. Record final physical rectangles so visual
+    # All seven axes share one column. Record final physical rectangles so visual
     # review can inspect the actual result without another plotting pipeline.
     rectangles = [dict(panel=chr(97+i), bounds_pt=(axis.get_position().bounds * np.array([fig.get_figwidth()*72, fig.get_figheight()*72]*2)).tolist())
                   for i, axis in enumerate(axes)]
-    write_json(output_root / "process_plot_geometry.json", rectangles)
+    write_json(output_root / f"{stem}_geometry.json", rectangles)
     for suffix in ("png", "pdf", "svg"):
-        fig.savefig(output_root / f"joint_process.{suffix}", dpi=600)
+        fig.savefig(output_root / f"{stem}.{suffix}", dpi=600)
     plt.close(fig)
-    (output_root / "joint_process_caption.md").write_text(
-        "(a) Observed force-support arcs and received GNSS navigation epochs. "
+    (output_root / f"{stem}_caption.md").write_text(
+        "First-round diagnostic process figure; this figure does not mark completion of the research deliverable. "
+        "(a) Logged force-support arcs"
+        + (" and received GNSS navigation epochs. " if gnss_arrivals_saved else ". GNSS arrival times were not saved and are omitted. ") +
         "(b) Actually available carrier-phase relations. "
-        "(c) Active direction candidates for each configuration; crosses indicate "
-        "explicitly incomplete candidate support and the dashed black curve is Truth. "
+        "(c) Active direction candidates for each configuration; the dashed black curve is Truth. "
         "Only branches inside the declared conditional profile-cost support are shown; "
         "budget-omitted raw support remains unresolved. Candidate branches are not averaged "
-        "into one precise heading. The green band is U3's selected-branch local 1.96 sigma, "
+        "into one precise heading. (d) Separate categorical candidate-set status: filled "
+        "bands mean incomplete, empty means complete, and hatching means unreported. "
+        "These marks are not angles. The green band in (e) is U3's selected-branch local 1.96 sigma, "
         "not a calibrated bound on the unresolved direction union. "
-        "(d) Signed wrapped yaw error. (e) True three-dimensional velocity-vector "
-        "error. (f) Three-dimensional position error. Purple dotted lines, when "
+        "(e) Signed wrapped yaw error on a symmetric-logarithmic axis, linear from -0.1 to +0.1 deg. "
+        "The full initialization spike and every subsequent timestamp are retained. "
+        "(f) True three-dimensional velocity-vector error. (g) Three-dimensional position error. Purple dotted lines, when "
         "present, mark reported dependency revocations or replay events. All states "
         "are outputs published with the information available at their timestamps; "
         "repaired historical estimates do not replace them. Curves show one noise "
         "instance, not an uncertainty interval across instances.\n", encoding="utf-8")
-    return [f"joint_process.{suffix}" for suffix in ("png", "pdf", "svg")]
+    write_json(output_root / f"{stem}_plot_metadata.json", dict(
+        plot_source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        input_timeline_source=input_source, source_result_modes=list(results),
+        rows_per_mode={mode: len(result["rows"]) for mode, result in results.items()},
+        full_time_interval_s=[timeline[0]["time_s"], duration],
+        yaw_axis=dict(scale="symlog", linear_threshold_deg=.1),
+        data_or_metric_recomputed=False, research_deliverable_complete=False,
+    ))
+    return [f"{stem}.{suffix}" for suffix in ("png", "pdf", "svg")]
 
 
 def main(argv=None):
@@ -294,10 +387,19 @@ def main(argv=None):
     parser.add_argument("--seed", type=int, default=6100801)
     parser.add_argument("--modes", nargs="+", choices=MODES, default=list(MODES))
     parser.add_argument("--duration", type=float, default=90.)
+    parser.add_argument("--plot-only", action="store_true", help="redraw saved navigation CSV/NPZ only; never run a navigator or regenerate the scene")
+    parser.add_argument("--plot-stem", default="joint_process_review", help="filename stem for --plot-only output; the original plot is preserved by default")
     args = parser.parse_args(argv)
-    from legsa_gins.paper_rebuild.joint_navigation.navigator import JointNavigator
-
     output_root = args.output_root.resolve()
+    if args.plot_only:
+        timeline, results, evaluated, source = read_saved_plot_inputs(output_root, args.modes)
+        files = plot_process(output_root, timeline, results, evaluated, stem=args.plot_stem, input_source=source)
+        print(json.dumps(dict(status="PLOT_ONLY_COMPLETE", plot_files=files, navigator_calls=0,
+                              scene_generation_calls=0, research_deliverable_complete=False)), flush=True)
+        return
+    from legsa_gins.paper_rebuild.joint_navigation.navigator import JointNavigator
+    from legsa_gins.paper_rebuild.joint_navigation.synthetic import generate_scene
+
     output_root.mkdir(parents=True, exist_ok=True)
     scene = generate_scene(duration_s=args.duration, seed=args.seed)
     purpose = "full_90_second_process" if args.duration >= 90 else "internal_short_debug_not_scientific_milestone"
@@ -313,6 +415,8 @@ def main(argv=None):
     write_json(output_root / "run_status.json", run_record)
     write_json(output_root / "sensor_metadata.json", scene["metadata"])
     write_json(output_root / "evaluation_metadata.json", scene["evaluation_metadata"])
+    timeline = input_timeline(scene["events"])
+    write_input_timeline(output_root / "input_timeline.csv", timeline)
     results, evaluated, metrics = {}, {}, {}
     for mode in args.modes:
         print(f"{mode}: starting {args.duration:g} s {purpose}", flush=True)
@@ -343,7 +447,7 @@ def main(argv=None):
                 metrics[mode]["shared_state_difference_vs_U0"] = shared_state_differences(results[mode]["rows"], results["U0"]["rows"])
                 write_json(output_root / mode / "metrics.json", metrics[mode])
     write_json(output_root / "metrics.json", metrics)
-    plot_files = plot_process(output_root, scene["events"], results, evaluated)
+    plot_files = plot_process(output_root, timeline, results, evaluated)
     run_record.update(status="COMPLETED", plot_files=plot_files)
     write_json(output_root / "run_status.json", run_record)
     print(json.dumps(dict(status="COMPLETED", output_root=str(output_root), purpose=purpose, modes=args.modes)), flush=True)

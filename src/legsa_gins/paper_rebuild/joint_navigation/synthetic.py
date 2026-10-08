@@ -6,6 +6,9 @@ evaluation_metadata are separate evaluation-only products. A diagonal trot
 transitions to standing. Common contact motion later contradicts fixed-world
 support without changing pair geometry. Force identities do not disclose it.
 This is a continuous kinematic sensor simulation, not rigid-body dynamics.
+The IMU uses the repository's recovered Go2 continuous noise profile, including
+nonzero bias random walks. Initial bias values and priors are engineering inputs;
+Allan bias-instability diagnostics are not used as initial bias uncertainty.
 """
 from __future__ import annotations
 from functools import lru_cache
@@ -21,6 +24,19 @@ FOOT_CORRELATION_S = 0.08
 CODE_SD_SIGMA_M = 0.30
 PHASE_SD_SIGMA_M = 0.003
 L1_WAVELENGTH_M = 299792458.0 / 1575420000.0
+GO2_IMU_PROFILE_PATH = (
+    "configs/paper_rebuild/horizontal_literature/hartley/stage_payload/"
+    "04_METHOD_CONTRACTS/GO2_IMU_ALLAN_90MIN_RECOVERED_V1.yaml")
+# Source profile lines 32-72: continuous amplitudes, never per-sample sigmas.
+GYRO_WHITE_DENSITY = 2.865130e-04    # rad/s/sqrt(Hz), lines 33-42
+ACCEL_WHITE_DENSITY = 1.285395e-03   # m/s^2/sqrt(Hz), lines 43-52
+GYRO_BIAS_RW_DENSITY = 2.996871e-05  # rad/s^2/sqrt(Hz), lines 53-62
+ACCEL_BIAS_RW_DENSITY = 1.594412e-04 # m/s^3/sqrt(Hz), lines 63-72
+# The profile supplies no initial bias covariance (lines 94-104 explicitly
+# exclude its instability diagnostics). Use the existing NavigationBranch
+# engineering defaults, not the Allan bias-instability magnitudes.
+INITIAL_ACCEL_BIAS_PRIOR_SIGMA = .03
+INITIAL_GYRO_BIAS_PRIOR_SIGMA = .003
 GAIT_PERIOD_S = 0.72
 STANCE_FRACTION = 0.64
 FOOT_PHASE_S = np.array([0.0, 0.36, 0.36, 0.0])  # FR FL RR RL
@@ -145,6 +161,11 @@ def generate_scene(duration_s: float = 90.0, seed: int = 6100801,
     Shared-pivot DD covariance is sigma_SD^2 (I+11.T). Code-only epochs have
     A.shape=(5,0). Lost phase relations receive new physical labels on return.
 
+    White sensor rate samples use density/sqrt(dt). Bias endpoints follow
+    b_next = b + density*sqrt(dt)*z; their interval mean is sampled jointly
+    with the endpoint using the independent Brownian-bridge mean term. This
+    preserves both the registered bias random walk and its rate contribution.
+
     Foot body noise is stationary OU/AR(1), independently begun per observed
     force arc. Its sigma/tau must be used to avoid counting repeated points
     as IID. No true integers, world contacts, state, fault labels or
@@ -154,12 +175,16 @@ def generate_scene(duration_s: float = 90.0, seed: int = 6100801,
             math.isfinite(key_dt) and key_dt > 0 and
             math.isfinite(imu_dt) and imu_dt > 0):
         raise ValueError("duration, key_dt and imu_dt must be positive and finite")
-    streams = np.random.SeedSequence(seed).spawn(5)
-    imu_rng, foot_rng, code_rng, phase_rng, gnss_rng = [
+    # Appending a sixth child preserves the original five stream identities;
+    # bias draws do not change code, feet, GNSS, phase, or IMU-white draws.
+    streams = np.random.SeedSequence(seed).spawn(6)
+    imu_rng, foot_rng, code_rng, phase_rng, gnss_rng, bias_rng = [
         np.random.default_rng(stream) for stream in streams]
-    bias_acc = np.array([.015, -.012, .010])
-    bias_gyro = np.array([2e-5, -1.5e-5, 3e-5])
-    accel_density, gyro_density = .015, math.radians(.985)/60.
+    # Fixed engineering initial sensor errors, not recovered Allan fit values.
+    bias = np.array([.015, -.012, .010, 2e-5, -1.5e-5, 3e-5])
+    bias_density = np.r_[np.full(3, ACCEL_BIAS_RW_DENSITY),
+                         np.full(3, GYRO_BIAS_RW_DENSITY)]
+    accel_density, gyro_density = ACCEL_WHITE_DENSITY, GYRO_WHITE_DENSITY
     gnss_p_sigma = np.array([.05, .05, .08])
     gnss_v_sigma = np.array([.04, .04, .04])
     azimuth = np.radians([5., 65., 125., 195., 250., 315.])
@@ -186,8 +211,14 @@ def generate_scene(duration_s: float = 90.0, seed: int = 6100801,
                 midpoint = previous_time+(j+.5)*dt
                 source = _kinematics(midpoint, position=False)
                 specific_force = source["R"].T@(source["acceleration"]-GRAVITY_N)
-                accel = specific_force+bias_acc+accel_density/math.sqrt(dt)*imu_rng.normal(size=3)
-                gyro = source["omega_body"]+bias_gyro+gyro_density/math.sqrt(dt)*imu_rng.normal(size=3)
+                step_bias = bias_density*math.sqrt(dt)*bias_rng.normal(size=6)
+                # Conditional on endpoint increment db, Brownian mean is
+                # b + db/2 + density*sqrt(dt/12)*z_independent.
+                mean_bias = (bias + .5*step_bias +
+                             bias_density*math.sqrt(dt/12.)*bias_rng.normal(size=6))
+                accel = specific_force+mean_bias[:3]+accel_density/math.sqrt(dt)*imu_rng.normal(size=3)
+                gyro = source["omega_body"]+mean_bias[3:]+gyro_density/math.sqrt(dt)*imu_rng.normal(size=3)
+                bias += step_bias
                 rows.append(np.r_[dt, accel, gyro])
         imu = np.asarray(rows, dtype=float).reshape((-1, 7))
         foot_observations = []
@@ -256,10 +287,10 @@ def generate_scene(duration_s: float = 90.0, seed: int = 6100801,
         events.append(dict(time_s=t, imu=imu, carrier=carrier, feet=foot_observations,
                            gnss_position=gnss_position, gnss_velocity=gnss_velocity))
         truth.append(dict(time_s=t, R=state["R"].copy(), p=state["p"].copy(),
-                          v=state["v"].copy(), bias_acc=bias_acc.copy(), bias_gyro=bias_gyro.copy()))
+                          v=state["v"].copy(), bias_acc=bias[:3].copy(), bias_gyro=bias[3:].copy()))
         previous_time = t
     metadata = dict(
-        schema="joint_navigation.synthetic.v1", data_mode="synthetic",
+        schema="joint_navigation.synthetic.v2", data_mode="synthetic",
         duration_s=float(duration_s), seed=int(seed), key_dt_s=float(key_dt),
         imu_max_dt_s=float(imu_dt), baseline_body=BASELINE_BODY_M.copy(),
         gravity_n=GRAVITY_N.copy(), body_frame="FRD", world_frame="NED",
@@ -267,8 +298,30 @@ def generate_scene(duration_s: float = 90.0, seed: int = 6100801,
         imu_row_order=("dt", "ax", "ay", "az", "gx", "gy", "gz"),
         imu_sampling="interval_midpoint_average_rate_approximation",
         accel_noise_density=accel_density, gyro_noise_density=gyro_density,
-        accel_bias_prior_sigma=.03, gyro_bias_prior_sigma=math.radians(9.38)/3600.,
-        accel_bias_random_walk=0., gyro_bias_random_walk=0.,
+        accel_bias_prior_sigma=INITIAL_ACCEL_BIAS_PRIOR_SIGMA,
+        gyro_bias_prior_sigma=INITIAL_GYRO_BIAS_PRIOR_SIGMA,
+        accel_bias_random_walk=ACCEL_BIAS_RW_DENSITY,
+        gyro_bias_random_walk=GYRO_BIAS_RW_DENSITY,
+        imu_noise_source=dict(
+            profile_id="GO2_IMU_ALLAN_90MIN_RECOVERED_V1",
+            repository_file=GO2_IMU_PROFILE_PATH,
+            parameter_lines=dict(gyro_noise_density="33-42", accel_noise_density="43-52",
+                                 gyro_bias_random_walk="53-62", accel_bias_random_walk="63-72"),
+            stochastic_model_lines="25-30",
+            units=dict(gyro_noise_density="rad/s/sqrt(Hz)",
+                       accel_noise_density="m/s^2/sqrt(Hz)",
+                       gyro_bias_random_walk="rad/s^2/sqrt(Hz)",
+                       accel_bias_random_walk="m/s^3/sqrt(Hz)"),
+            evidence="THESIS_AND_CONTEMPORANEOUS_TERMINAL_RECORD_CROSS_CONFIRMED",
+            original_static_csv_available=False, original_fitting_script_available=False,
+            bias_instability_used_as_initial_sigma=False),
+        imu_bias_process="continuous_random_walk_with_joint_endpoint_and_interval_mean",
+        initial_bias_prior_source=dict(
+            role="ENGINEERING_PRIOR_NOT_ALLAN_MEASUREMENT",
+            source="existing_NavigationBranch_defaults",
+            accel_sigma_unit="m/s^2", gyro_sigma_unit="rad/s",
+            profile_has_initial_bias_covariance=False,
+            profile_excludes_instability_as_initial_covariance_lines="94-104"),
         foot_sigma=FOOT_SIGMA_M, foot_correlation_tau_s=FOOT_CORRELATION_S,
         foot_noise_model="stationary_body_frame_AR1_per_force_arc",
         force_support_threshold=60., force_units="uncalibrated_SDK_proxy",
