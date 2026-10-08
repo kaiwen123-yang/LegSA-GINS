@@ -31,7 +31,9 @@ class NavigationBranch:
     Working defaults, when absent from source metadata: accelerometer/gyro
     noise densities 0.02 and 0.001, bias random walks 1e-4 and 1e-5,
     position/velocity sigma 0.05/0.03 m(/s), foot sigma 0.01 m and tau 0.08 s.
-    Explicit zero bias random walk means an exact constant-bias constraint.
+    When both bias random walks are exactly zero, one persistent bias variable
+    represents b_k = b_0. This is the equality-constrained model with redundant
+    copies eliminated algebraically, not a noise floor or additional prior.
     """
 
     def __init__(self, metadata: dict, use_foot: bool = True):
@@ -50,6 +52,8 @@ class NavigationBranch:
             np.full(3, float(metadata.get("accel_bias_random_walk", 1e-4))),
             np.full(3, float(metadata.get("gyro_bias_random_walk", 1e-5))),
         ]
+        self.constant_bias = bool(np.all(self.bias_rw == 0.0))
+        self.bias_key: int | None = None
         self.foot_sigma = float(metadata.get("foot_sigma", .01))
         self.foot_tau = float(metadata.get("foot_correlation_tau_s", .08))
         self.ambiguity_keys: dict[str, int] = {}
@@ -70,6 +74,12 @@ class NavigationBranch:
     @staticmethod
     def _sigmas(value, dimension=3):
         return np.broadcast_to(np.asarray(value, float), (dimension,)).copy()
+
+    def _retained_keys(self) -> set[int]:
+        retained = set(self.ambiguity_keys.values())
+        if self.constant_bias:
+            retained.add(B(0))
+        return retained
 
     def _initial_pose(self, event: dict) -> gtsam.Pose3:
         block = event["carrier"]
@@ -210,7 +220,9 @@ class NavigationBranch:
         previous_index, previous_time = self.index, self.time
         self.time = float(event["time_s"])
         self.index = int(index)
-        pose_key, velocity_key, bias_key = X(index), V(index), B(index)
+        pose_key, velocity_key = X(index), V(index)
+        bias_key = B(0) if self.constant_bias else B(index)
+        self.bias_key = bias_key
         values, factors = gtsam.Values(), []
         times = {pose_key: self.time, velocity_key: self.time, bias_key: self.time}
         self.last_gnss_innovation = {}
@@ -237,13 +249,15 @@ class NavigationBranch:
             predicted_pose, predicted_velocity = prediction.pose(), prediction.velocity()
             factors.append(gtsam.ImuFactor(
                 X(previous_index), V(previous_index), pose_key, velocity_key,
-                B(previous_index), preintegrated))
-            factors.append(gtsam.BetweenFactorConstantBias(
-                B(previous_index), bias_key, gtsam.imuBias.ConstantBias(),
-                gtsam.noiseModel.Diagonal.Sigmas(self.bias_rw * math.sqrt(self.time-previous_time))))
+                B(0) if self.constant_bias else B(previous_index), preintegrated))
+            if not self.constant_bias:
+                factors.append(gtsam.BetweenFactorConstantBias(
+                    B(previous_index), bias_key, gtsam.imuBias.ConstantBias(),
+                    gtsam.noiseModel.Diagonal.Sigmas(self.bias_rw * math.sqrt(self.time-previous_time))))
         values.insert(pose_key, predicted_pose)
         values.insert(velocity_key, predicted_velocity)
-        values.insert(bias_key, self.bias)
+        if previous_index is None or not self.constant_bias:
+            values.insert(bias_key, self.bias)
 
         position, velocity = event.get("gnss_position"), event.get("gnss_velocity")
         if position is not None:
@@ -264,7 +278,7 @@ class NavigationBranch:
             nfoot, ndifference = self._support(
                 event.get("feet", []), revoked_arcs, predicted_pose, pose_key, values, times, factors)
         self.window.update(factors, values, times, self.time,
-                           retain_keys=set(self.ambiguity_keys.values()))
+                           retain_keys=self._retained_keys())
         self.last_factor_counts = dict(
             foot=nfoot, differential=ndifference,
             carrier_rows=0 if block is None else len(block.y),
@@ -274,7 +288,7 @@ class NavigationBranch:
     def _current(self):
         self.pose = self.window.values.atPose3(X(self.index))
         self.velocity = self.window.values.atVector(V(self.index)).copy()
-        self.bias = self.window.values.atConstantBias(B(self.index))
+        self.bias = self.window.values.atConstantBias(self.bias_key)
         return self.pose, self.velocity.copy(), self.bias, self.window.error()
 
     def current_output(self) -> dict:
@@ -298,13 +312,13 @@ class NavigationBranch:
                 factors.append(self._fixed_factor(label))
         if factors:
             self.window.update(factors, gtsam.Values(), {}, self.time,
-                               retain_keys=set(self.ambiguity_keys.values()))
+                               retain_keys=self._retained_keys())
         return self._current()
 
     def snapshot(self) -> BranchSnapshot:
         names = ("ambiguity_keys", "contact_keys", "direction_keys", "foot_history",
                  "direction_history", "fixed", "_conditioned_labels", "time", "index",
-                 "last_gnss_innovation", "last_factor_counts")
+                 "last_gnss_innovation", "last_factor_counts", "constant_bias", "bias_key")
         return BranchSnapshot(self.window.snapshot(),
                               {name: deepcopy(getattr(self, name)) for name in names})
 

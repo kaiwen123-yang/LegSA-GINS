@@ -62,6 +62,7 @@ class JointNavigator:
         self.last_checkpoint_time = -math.inf
         self.replayed_events = 0
         self.proposal_attempts = 0
+        self.last_phase_relation_count = 0
 
     def _filter(self, event: dict, replay: bool = False) -> dict:
         packet = dict(event)
@@ -242,6 +243,8 @@ class JointNavigator:
             oldest = self.checkpoints[0].time_s if self.checkpoints else max(0.0, t-self.history_s)
             self.events = [(i, e) for i, e in self.events if e["time_s"] >= oldest]
             packet = self._filter(event)
+            if packet.get("carrier") is not None:
+                self.last_phase_relation_count = len(packet["carrier"].ambiguity_labels)
             for foot in packet.get("feet", []):
                 self.arc_first_use.setdefault(foot["arc_id"], t)
             nis, affected = self._gnss_conflict(packet)
@@ -275,12 +278,17 @@ class JointNavigator:
             status = "CONDITIONAL_SUPPORT" if self.proposal_complete else "UNRESOLVED_ENUMERATION_OR_BRANCH_BUDGET"
             if sum(supported) > 1:
                 status = "MULTIPLE_CONDITIONAL_DIRECTIONS_" + status
+            phase_context = ("FULL_PHASE" if self.last_phase_relation_count >= 5 else
+                             "PARTIAL_PHASE" if self.last_phase_relation_count else
+                             "PHASE_ABSENT_CODE_AND_MOTION")
+            status = phase_context + "_" + status
             output.update(
                 time_s=t, candidate_yaws_rad=[float(r[2]) for r in candidate_rpy],
                 candidate_costs=costs.tolist(), candidate_supported=supported.tolist(),
                 support_ids=[f["arc_id"] for f in packet.get("feet", [])],
                 direction_status=status, gnss_innovation_nis=nis,
                 candidate_support_complete=self.proposal_complete,
+                consumed_phase_relations=self.last_phase_relation_count,
                 selected_branch=int(order[0]), branch_conditional_navigation=True,
                 revocation=bool(affected and self.mode in ("U2", "U3")),
                 revoked_support_ids=sorted(self.stop_from),

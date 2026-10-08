@@ -5,14 +5,17 @@ set is an allocation of computation, never an ambiguity acceptance declaration.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from typing import Sequence
 
 import numpy as np
 from scipy.stats import chi2
 
-from ..carrier_phase.candidate_envelope import enumerate_candidate_envelope
-from ..carrier_phase.temporal import EpochBlock, assemble_epochs
+from ..carrier_phase.candidate_envelope import (
+    enumerate_candidate_envelope, filter_length_necessary_support,
+)
+from ..carrier_phase.solver import evaluate_integer
+from ..carrier_phase.temporal import EpochBlock, assemble_epochs, joint_float
 
 
 RAW_WORKING_QUANTILE = 0.999
@@ -40,12 +43,14 @@ def propose_candidates(
     baseline_body: np.ndarray,
     max_active: int = 4,
 ) -> CandidateProposal:
-    """Enumerate raw GLS support, retaining every enumerated dormant candidate.
+    """Qualify every enumerated raw candidate before allocating active branches.
 
-    The fixed chi-square quantile only sets a working Gaussian raw-cost budget.
-    It is not a calibrated physical coverage or a false-fix probability. Body
-    geometry supplies its length; neither body attitude nor foot/IMU evidence is
-    admitted here. Reduced per-epoch ambiguity columns are assembled by label.
+    The fixed chi-square quantile sets a working Gaussian raw-cost budget, not
+    a physical coverage or false-fix probability. A whole-ellipsoid radial bound
+    first excludes impossible lengths. Each survivor then receives the exact
+    epoch-separable fixed-length raw profile cost. Body attitude and foot/IMU
+    evidence are absent here; R*b_body in the shared graph supplies those links.
+    These costs allocate interpretations, never become additional observations.
     """
     blocks = tuple(blocks)
     if not blocks:
@@ -64,17 +69,81 @@ def propose_candidates(
         candidate_limit=ENUMERATION_CANDIDATE_LIMIT,
         timeout_s=ENUMERATION_TIMEOUT_S,
     )
-    candidates = tuple(
-        IntegerCandidate(
-            dict(zip(envelope.ambiguity_labels, item.integer)),
-            float(envelope.float_residual_cost + item.gaussian_integer_cost),
-            item.baseline_center_m,
+    length_support = filter_length_necessary_support(problem, envelope)
+    length_checks = {item.integer: item for item in length_support.items}
+    floating = (joint_float(problem) if envelope.candidates and
+                envelope.status != "UNQUALIFIED_NUMERICS" else None)
+    threshold_expanded = envelope.expanded_working_threshold
+    qualified, qualifications = [], []
+    for item in envelope.candidates:
+        raw_relaxed_cost = float(envelope.float_residual_cost + item.gaussian_integer_cost)
+        record = dict(
+            integer_by_label=dict(zip(envelope.ambiguity_labels, item.integer)),
+            relaxed_raw_cost=raw_relaxed_cost,
+            relaxed_target_center_m=item.baseline_center_m,
+            remaining_raw_budget=item.remaining_raw_budget,
         )
-        for item in sorted(envelope.candidates, key=lambda c: (c.gaussian_integer_cost, c.integer))
-    )
-    # Numerically unqualified leaves remain recorded, but cannot seed an active
-    # claim about support. Incomplete resource-bounded enumeration can seed work.
-    active_count = min(max_active, len(candidates)) if envelope.status != "UNQUALIFIED_NUMERICS" else 0
+        if envelope.status == "UNQUALIFIED_NUMERICS":
+            record.update(
+                retained=None, reason="UNQUALIFIED_NUMERICS_NOT_SCIENTIFIC_EXCLUSION",
+                constrained_raw_cost=None, joint_raw_cost_lower_bound=None,
+            )
+            qualifications.append(record)
+            continue
+        radial = length_checks[item.integer]
+        record["radial_checks"] = [asdict(check) for check in radial.checks]
+        # The projected conditional ellipsoid is enclosed by this ball. If it
+        # misses any required sphere, no trajectory R_k*b_body can fit the same
+        # raw support budget, regardless of its IMU or foot observations.
+        if not radial.retained:
+            radial_penalty = max(
+                (check.center_norm_m-check.exact_model_length_m)**2 /
+                float(np.linalg.eigvalsh(
+                    floating.conditional_covariance_b[section, section])[-1])
+                for check, section in zip(radial.checks, problem.baseline_slices))
+            bound = raw_relaxed_cost + radial_penalty
+            guard = (float(envelope.floating_cost_guard) +
+                     envelope.relative_numerical_guard * max(1.0, abs(bound)))
+            record.update(
+                retained=False, reason="WHOLE_ELLIPSOID_MISSES_BASELINE_LENGTH",
+                rejection_witness="RADIAL_SEPARATION_EXCEEDS_OUTER_RADIUS",
+                constrained_raw_cost=None, joint_raw_cost_lower_bound=bound-guard,
+                comparison_cost_guard=guard,
+            )
+            qualifications.append(record)
+            continue
+
+        exact = evaluate_integer(problem, floating, item.integer)
+        # The existing solver checks the raw/reduced identity at this tolerance.
+        # Retain the numerical boundary; these are floating-point working-model
+        # bounds, not interval-arithmetic certificates.
+        cost_guard = (2e-6 + 2e-8 * max(abs(exact.full_residual_cost),
+                                      abs(exact.reduced_cost))
+                      + float(envelope.floating_cost_guard))
+        lower_bound = float(exact.full_residual_cost - cost_guard)
+        retained = lower_bound <= threshold_expanded
+        record.update(
+            retained=retained,
+            reason=("WITHIN_FIXED_LENGTH_RAW_SUPPORT" if retained else
+                    "FIXED_LENGTH_RAW_PROFILE_EXCEEDS_BUDGET"),
+            constrained_raw_cost=float(exact.full_residual_cost),
+            joint_raw_cost_lower_bound=lower_bound,
+            comparison_cost_guard=cost_guard,
+            maximum_length_error_m=float(exact.maximum_length_error_m),
+            objective_identity_error=float(exact.objective_identity_error),
+            constrained_baselines_m=exact.baselines.tolist(),
+        )
+        qualifications.append(record)
+        if retained:
+            qualified.append(IntegerCandidate(
+                dict(zip(envelope.ambiguity_labels, item.integer)),
+                float(exact.full_residual_cost), item.baseline_center_m,
+            ))
+
+    candidates = tuple(sorted(
+        qualified, key=lambda candidate: (candidate.raw_cost,
+                                          tuple(candidate.integer_by_label.values()))))
+    active_count = min(max_active, len(candidates))
     active, dormant = candidates[:active_count], candidates[active_count:]
     complete = envelope.numerical_support_complete
     metadata = dict(
@@ -82,11 +151,16 @@ def propose_candidates(
         termination_reason=envelope.termination_reason,
         enumeration_complete=complete,
         active_support_complete=complete and len(dormant) == 0,
-        enumerated_count=len(candidates), active_count=len(active), dormant_count=len(dormant),
+        enumerated_count=len(envelope.candidates),
+        length_qualified_count=len(candidates),
+        length_rejected_count=sum(record["retained"] is False for record in qualifications),
+        length_unqualified_count=sum(record["retained"] is None for record in qualifications),
+        active_count=len(active), dormant_count=len(dormant),
         remaining_count=len(dormant) if complete else None,
         remaining_count_lower_bound=len(dormant),
         ambiguity_labels=envelope.ambiguity_labels,
         raw_cost_threshold=threshold,
+        expanded_working_threshold=threshold_expanded,
         raw_working_quantile=RAW_WORKING_QUANTILE,
         threshold_degrees_of_freedom=len(problem.y),
         expanded_nodes=envelope.expanded_nodes,
@@ -96,11 +170,16 @@ def propose_candidates(
         candidate_limit=ENUMERATION_CANDIDATE_LIMIT,
         timeout_s=ENUMERATION_TIMEOUT_S,
         integer_acceptance_defined=False,
-        coverage_scope=envelope.coverage_scope,
-        sphere_feasibility="NOT_TESTED_LENGTH_CONSTRAINT_RELAXED",
+        raw_coverage_scope=envelope.coverage_scope,
+        coverage_scope="NUMERICAL_RAW_SUPPORT_WITH_EPOCH_SEPARABLE_EXACT_BASELINE_LENGTH",
+        sphere_feasibility="RADIAL_NECESSARY_FILTER_THEN_EXACT_EPOCH_LENGTH_PROFILE",
+        length_qualification_status=length_support.status,
+        candidate_qualifications=qualifications,
+        rigorous_interval_certificate=False,
         physical_coverage_probability=None,
         false_fix_probability=None,
-        proposal_sources=("raw_code", "raw_carrier"),
+        proposal_sources=("raw_code", "raw_carrier", "rigid_baseline_length"),
+        qualification_added_to_navigation_likelihood=False,
     )
     return CandidateProposal(active, dormant, metadata)
 
