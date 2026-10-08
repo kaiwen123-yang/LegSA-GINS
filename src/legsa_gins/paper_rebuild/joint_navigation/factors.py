@@ -185,3 +185,149 @@ def differential_foot_factor(
         return residual
 
     return gtsam.CustomFactor(noise, keys, error)
+
+
+def ar1_error_factor(
+    previous_noise_key: int,
+    current_noise_key: int,
+    rho: float,
+    sigma_m: float,
+) -> gtsam.CustomFactor:
+    """Carry the declared body-frame foot error across an observation-mode change."""
+    noise = gtsam.noiseModel.Isotropic.Sigma(3, sigma_m * np.sqrt(1. - rho * rho))
+
+    def error(_factor, values, jacobians):
+        if jacobians is not None:
+            jacobians[0] = np.asfortranarray(-rho * np.eye(3))
+            jacobians[1] = np.eye(3, order="F")
+        return values.atPoint3(current_noise_key) - rho * values.atPoint3(previous_noise_key)
+
+    return gtsam.CustomFactor(noise, [previous_noise_key, current_noise_key], error)
+
+
+def foot_error_coordinate_factor(
+    noise_key: int,
+    pose_key: int,
+    contact_key: int,
+    measured_body: np.ndarray,
+) -> gtsam.CustomFactor:
+    """Define n = R.T(c-p)-r exactly; stochastic uncertainty lives in n's AR chain.
+
+    A constrained coordinate identity is not a zero-noise foot measurement.
+    Keeping n explicit preserves its posterior when common translation is later
+    released, without introducing a second noise prior at that transition.
+    """
+    measured = np.asarray(measured_body, dtype=float).copy()
+
+    def error(_factor, values, jacobians):
+        pose, contact = values.atPose3(pose_key), values.atPoint3(contact_key)
+        if jacobians is None:
+            prediction = pose.transformTo(contact)
+        else:
+            H_pose = np.empty((3, 6), order="F")
+            H_contact = np.empty((3, 3), order="F")
+            prediction = pose.transformTo(contact, H_pose, H_contact)
+            jacobians[0] = np.eye(3, order="F")
+            jacobians[1] = np.asfortranarray(-H_pose)
+            jacobians[2] = np.asfortranarray(-H_contact)
+        return values.atPoint3(noise_key) - prediction + measured
+
+    return gtsam.CustomFactor(gtsam.noiseModel.Constrained.All(3), [noise_key, pose_key, contact_key], error)
+
+
+def point3_coordinate_factor(target_key: int, terms: dict[int, float]) -> gtsam.CustomFactor:
+    """Exact coordinate identity target = sum(coefficient * source).
+
+    For example, d_global = d_local + component_offset joins two contact
+    components without measuring or tightly regularizing that offset.
+    """
+    coefficients = {target_key: 1.}
+    for key, coefficient in terms.items():
+        coefficients[key] = coefficients.get(key, 0.) - coefficient
+    coefficients = {key: value for key, value in coefficients.items() if value != 0.}
+    keys = tuple(coefficients)
+
+    def error(_factor, values, jacobians):
+        residual = np.zeros(3)
+        for i, key in enumerate(keys):
+            residual += coefficients[key] * values.atPoint3(key)
+            if jacobians is not None:
+                jacobians[i] = np.asfortranarray(coefficients[key] * np.eye(3))
+        return residual
+
+    return gtsam.CustomFactor(gtsam.noiseModel.Constrained.All(3), list(keys), error)
+
+
+def relative_geometry_coordinate_factor(
+    direction_key: int,
+    contact_key: int,
+    anchor_contact_key: int,
+) -> gtsam.CustomFactor:
+    """Define d = c-c_anchor exactly, retaining its existing joint posterior."""
+    terms = {contact_key: 1.}
+    terms[anchor_contact_key] = terms.get(anchor_contact_key, 0.) - 1.
+    return point3_coordinate_factor(direction_key, terms)
+
+
+def projected_foot_factor(
+    pose_key: int,
+    geometry_keys: list[int | None],
+    noise_keys: list[int],
+    measured_body: np.ndarray,
+) -> gtsam.CustomFactor:
+    """Retain observable simultaneous-foot contrasts, for at least two feet.
+
+    Residual = vec(H [R.T*d_i-r_i-n_i]), where H is the orthonormal Helmert
+    contrast matrix and None denotes the chosen component's zero geometry gauge.
+    No body translation or new independent measurement noise enters this factor.
+    Each n_i retains its original working prior and temporal noise chain.
+    """
+    from scipy.linalg import helmert
+
+    geometry_keys, noise_keys = tuple(geometry_keys), tuple(noise_keys)
+    measured = np.asarray(measured_body, dtype=float).copy()
+    count = len(geometry_keys)
+    contrasts = helmert(count)
+    projection = np.kron(contrasts, np.eye(3))
+    keys = tuple(dict.fromkeys([pose_key, *[key for key in geometry_keys if key is not None], *noise_keys]))
+    key_indices = {key: i for i, key in enumerate(keys)}
+
+    def error(_factor, values, jacobians):
+        rotation = values.atPose3(pose_key).rotation()
+        predictions = np.array([rotation.unrotate(values.atPoint3(key)) if key is not None else np.zeros(3)
+                                for key in geometry_keys])
+        errors = predictions - measured - np.array([values.atPoint3(key) for key in noise_keys])
+        if jacobians is not None:
+            matrices = [np.zeros((3*(count-1), 6 if key == pose_key else 3), order="F") for key in keys]
+            pose_rows = np.zeros((3*count, 6))
+            for i, prediction in enumerate(predictions):
+                pose_rows[3*i:3*i+3, :3] = _skew(prediction)
+                weights = contrasts[:, i:i+1]
+                if geometry_keys[i] is not None:
+                    matrices[key_indices[geometry_keys[i]]] += np.kron(weights, rotation.matrix().T)
+                matrices[key_indices[noise_keys[i]]] -= np.kron(weights, np.eye(3))
+            matrices[0] = np.asfortranarray(projection @ pose_rows)
+            for i, matrix in enumerate(matrices):
+                jacobians[i] = matrix
+        return (contrasts @ errors).reshape(-1)
+
+    return gtsam.CustomFactor(gtsam.noiseModel.Constrained.All(3*(count-1)), list(keys), error)
+
+
+def gnss_position_velocity_factor(pose_key, velocity_key, position, velocity, covariance):
+    """Consume the same declared joint GNSS product covariance used in prediction."""
+    measured = np.r_[np.asarray(position, float), np.asarray(velocity, float)]
+    noise = gtsam.noiseModel.Gaussian.Covariance(np.asarray(covariance, float))
+
+    def error(_factor, values, jacobians):
+        pose = values.atPose3(pose_key)
+        if jacobians is not None:
+            h_pose = np.zeros((6, 6), order="F")
+            h_pose[:3, 3:] = pose.rotation().matrix()
+            jacobians[0] = h_pose
+            h_velocity = np.zeros((6, 3), order="F")
+            h_velocity[3:] = np.eye(3)
+            jacobians[1] = h_velocity
+        return np.r_[pose.translation(), values.atVector(velocity_key)]-measured
+
+    return gtsam.CustomFactor(noise, [pose_key, velocity_key], error)

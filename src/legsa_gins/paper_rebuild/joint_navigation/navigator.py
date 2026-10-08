@@ -263,8 +263,29 @@ class JointNavigator:
             order = np.argsort(costs)
             best = self.branches[int(order[0])]
             output = best.current_output()
-            attitude_covariance = best.window.covariance(X(index))[:3, :3]
+            attitude_covariance = best.joint_covariance([X(index)])[:3, :3]
             rotation = best.pose.rotation()
+            # Read physical short-baseline direction from the same joint state.
+            # This local covariance is conditional on the selected integer and
+            # support model; it is not the coverage of the complete direction set
+            # and must never be fused back as another heading measurement.
+            body_unit = np.asarray(self.metadata["baseline_body"], float)
+            body_unit = body_unit / np.linalg.norm(body_unit)
+            direction = rotation.rotate(body_unit)
+            bx, by, bz = body_unit
+            body_cross = np.array([[0., -bz, by], [bz, 0., -bx], [-by, bx, 0.]])
+            direction_jacobian = -rotation.matrix() @ body_cross
+            direction_covariance = direction_jacobian @ attitude_covariance @ direction_jacobian.T
+            tangent_first = np.cross(direction, np.eye(3)[np.argmin(np.abs(direction))])
+            tangent_first /= np.linalg.norm(tangent_first)
+            tangent_basis = np.column_stack((tangent_first, np.cross(direction, tangent_first)))
+            output.update(
+                baseline_direction_n=direction.tolist(),
+                baseline_tangent_basis_n=tangent_basis.tolist(),
+                baseline_tangent_covariance_rad2=(tangent_basis.T @ direction_covariance @ tangent_basis).tolist(),
+                direction_uncertainty_kind="LOCAL_GAUSSIAN_CONDITIONAL_ON_INTEGER_AND_SUPPORT_MODEL",
+                direction_domain_coverage_certified=False,
+            )
             yaw_gradient = np.zeros(3)
             for axis in range(3):
                 perturbation = np.eye(3)[axis] * 1e-6

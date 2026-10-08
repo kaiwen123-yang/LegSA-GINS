@@ -1,0 +1,53 @@
+{
+  "status": "COMPLETED_COMPONENT_CONTINUATION_NOT_COMPLETE_RESEARCH_GOAL",
+  "source_base_commit": "381db924b34907e0781b6081ada0c49390d867a5",
+  "source_sha256": {
+    "src/legsa_gins/paper_rebuild/joint_navigation/__init__.py": "1e4531f3053fd9736435af940484c056adae614ba3700cd09def0b848d57cba0",
+    "src/legsa_gins/paper_rebuild/joint_navigation/branch.py": "c524e54b60711559d7036cf708c9b39bfd0787b1bf0013affcf6dc2aef381123",
+    "src/legsa_gins/paper_rebuild/joint_navigation/candidate.py": "e03041678774bf01bfb9b3fc8b5457a63325fe8f230c86f539962642259371b1",
+    "src/legsa_gins/paper_rebuild/joint_navigation/factors.py": "9c505c542c16de9eb9d6b89ccb58926b408575f6a59c84560f409884f5ed88ed",
+    "src/legsa_gins/paper_rebuild/joint_navigation/navigator.py": "a10dc9d4fe4b912855d80c3aae6defd9ee14faba9311a8a9103cc5f4f01195b4",
+    "src/legsa_gins/paper_rebuild/joint_navigation/synthetic.py": "1217f8a7e1220663444918b35ea4a4ae1936d1c8f86a39dbdad737377a51fd31",
+    "src/legsa_gins/paper_rebuild/joint_navigation/window.py": "1b85658c6e1d36be2c2ca5e60954a059f60f76fb4d37059fcc9223676bbf0d1f",
+    "scripts/paper_rebuild/run_support_carrier_joint.py": "d0440a69ece612ff49564ecd4ecb8c7e06baba83d109953338268a35832f2790"
+  },
+  "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 /home/kaiwen/research/LegSA-GINS-ENV/support-carrier-joint/bin/python -u scripts/paper_rebuild/run_support_carrier_joint.py --output-root /mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/SUPPORT_CARRIER_JOINT_20261008/cohort_component_20261008_seed6100801 --seed 6100801 --duration 90 --modes U3",
+  "output_root": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/SUPPORT_CARRIER_JOINT_20261008/cohort_component_20261008_seed6100801",
+  "comparison_output_root": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/SUPPORT_CARRIER_JOINT_20261008/cohort_allan_seed6100801",
+  "causal_output_rows": 1287,
+  "retained_full_interval_s": [
+    0.0,
+    90.0
+  ],
+  "max_shared_state_difference_vs_previous_U3": {
+    "p_N_m": 0.0,
+    "p_E_m": 0.0,
+    "p_D_m": 0.0,
+    "v_N_mps": 0.0,
+    "v_E_mps": 0.0,
+    "v_D_mps": 0.0,
+    "roll_rad": 0.0,
+    "pitch_rad": 0.0,
+    "yaw_rad": 0.0,
+    "bias_0": 0.0,
+    "bias_1": 0.0,
+    "bias_2": 0.0,
+    "bias_3": 0.0,
+    "bias_4": 0.0,
+    "bias_5": 0.0
+  },
+  "whole_time_weighted_rmse": {
+    "position_3d_m": 0.0750662214512377,
+    "position_horizontal_m": 0.06820607266708088,
+    "velocity_3d_mps": 0.026658271437667535,
+    "speed_mps": 0.022552259815636314,
+    "yaw_deg": 2.1457143265083993
+  },
+  "replayed_events": 0,
+  "physical_direction_covariance_rows": 1287,
+  "conditional_covariance_only": true,
+  "mathematical_checks_passed": 12,
+  "automatic_predictive_model_selection_implemented": false,
+  "new_navigation_gain_claimed": false,
+  "full_goal_complete": false
+}

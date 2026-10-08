@@ -1,9 +1,14 @@
 {
   "date": "2026-10-08",
   "status": "ACTIVE",
+  "active_goal_thread": "01a11959-c9c1-7901-b9c7-3d058a0f20b8",
+  "continued_from_thread": "01a11984-efdc-7930-8436-76d4f86667d1",
+  "continuation_base_commit": "381db924b34907e0781b6081ada0c49390d867a5",
   "deliverable": "One integrated support-arc/carrier-arc navigation algorithm covering all three candidate innovations",
   "first_research_deliverable_complete": false,
-  "latest_algorithm_commit": "d77919c",
+  "previous_validated_algorithm_commit": "d77919c",
+  "latest_algorithm_identity": "COMPONENT_CONTINUATION_RESULT.json source_sha256 and its containing Git commit",
+  "latest_continuation_cohort": "cohort_component_20261008_seed6100801",
   "latest_primary_cohort": "cohort_allan_seed6100801",
   "completed": [
     "Shared fixed-lag R/p/v/b/contact/carrier inference with correlated support factors and full-rate IMU preintegration",
@@ -11,19 +16,22 @@
     "Physical carrier relation survival, conditional candidate state, source-scoped replay machinery",
     "Historical replay state equivalence demonstrated under the explicitly superseded constant-bias model",
     "Registered Go2 noise-model correction and same-scenario four-configuration rerun",
-    "Source-backed numerical record and continuous process figure pushed with code"
+    "Source-backed numerical record and continuous process figure pushed with code",
+    "Shared-graph component models preserve unaffected feet, original per-arc error correlations and changing two/three/four-foot subsets",
+    "Joint pre-consumption external prediction interface and physical baseline tangent covariance readout",
+    "Continuation U3 completed all 90 seconds and 1287 causal outputs; automatic model competition remains unfinished"
   ],
   "not_proven": [
     "Material legged contribution to heading qualification or integer-candidate acceptance",
     "Recovery of a candidate actually excluded by subsequently invalidated support",
-    "Exact preservation of unaffected and two/three-foot relative information during support changes",
+    "End-to-end selection of valid components across two/three/four-foot support changes; component mathematics is now checked",
     "Successful causal support revocation under the current registered IMU model",
     "Navigation improvement causally attributable to heading improvement",
     "Same-version SDK and frozen V3 system adoption value on real data"
   ],
   "next_core_work": [
     "Joint predictive comparison of fixed-contact/common-translation-release/relative-release hypotheses using retained support history",
-    "Arc-scoped component preservation across two/three/four-foot support subsets",
+    "Integrate checked arc-scoped component models into model competition and historical replay",
     "Continuous direction support and acceptance evidence, including real initialization qualification",
     "Complete the same 90-second process before broadening seeds and real-data evaluation"
   ],

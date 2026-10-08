@@ -12,10 +12,11 @@ import math
 
 import gtsam
 import numpy as np
-from scipy.linalg import helmert
 from gtsam.symbol_shorthand import X, V, B
 
-from .factors import carrier_relation_factor, differential_foot_factor, foot_factor
+from .factors import (carrier_relation_factor, foot_factor, ar1_error_factor,
+                      foot_error_coordinate_factor, point3_coordinate_factor, projected_foot_factor,
+                      gnss_position_velocity_factor)
 from .window import JointWindow, WindowSnapshot
 
 
@@ -61,6 +62,11 @@ class NavigationBranch:
         self.direction_keys: dict[tuple, int] = {}
         self.foot_history: dict[str, tuple] = {}
         self.direction_history: dict[tuple, tuple] = {}
+        # Last latent body-error is keyed by original arc, never by foot subset.
+        self.foot_noise_history: dict[str, tuple[int, float]] = {}
+        self.support_geometry: dict[str, dict[str, tuple[str, int | None]]] = {}
+        self._support_serial = 0
+        self._support_retain: set[int] = set()
         self.fixed: dict[str, int] = {}
         self._conditioned_labels: set[str] = set()
         self.time = 0.0
@@ -76,7 +82,7 @@ class NavigationBranch:
         return np.broadcast_to(np.asarray(value, float), (dimension,)).copy()
 
     def _retained_keys(self) -> set[int]:
-        retained = set(self.ambiguity_keys.values())
+        retained = set(self.ambiguity_keys.values()) | self._support_retain
         if self.constant_bias:
             retained.add(B(0))
         return retained
@@ -146,65 +152,159 @@ class NavigationBranch:
         times.update({key: self.time for key in keys})
         factors.append(carrier_relation_factor(pose_key, keys, block, self.baseline_body))
 
-    def _support(self, feet, revoked_arcs, pose, pose_key, values, times, factors):
-        observed = sorted(feet, key=lambda foot: foot["foot_id"])
-        force_threshold = float(self.metadata.get("force_support_threshold", 60.))
-        observed = [foot for foot in observed if float(foot["force"]) >= force_threshold]
-        arcs = tuple(foot["arc_id"] for foot in observed)
-        # Revocation here means the observed common-translation model failed;
-        # the controller must not use this mode for relative-geometry failure.
-        common_withdrawn = len(observed) == 4 and any(arc in revoked_arcs for arc in arcs)
-        if common_withdrawn:
-            transform = helmert(4)
-            contrasts = transform @ np.vstack([foot["point_body"] for foot in observed])
-            for contrast_index, measured in enumerate(contrasts):
-                identity = (arcs, contrast_index)
-                if identity not in self.direction_keys:
-                    key = gtsam.symbol("d", len(self.direction_keys))
-                    self.direction_keys[identity] = key
-                    existing_contacts = all(
-                        arc in self.contact_keys and self.window.values.exists(self.contact_keys[arc])
-                        for arc in arcs)
-                    if existing_contacts:
-                        contact_keys = [self.contact_keys[arc] for arc in arcs]
-                        prior_points = np.vstack([self.window.values.atPoint3(k) for k in contact_keys])
-                        values.insert_point3(key, transform[contrast_index] @ prior_points)
-                        factors.append(self._contrast_coordinates(
-                            key, contact_keys, transform[contrast_index]))
-                        histories = [self.foot_history[arc] for arc in arcs]
-                        if len({history[0] for history in histories}) == 1:
-                            self.direction_history[identity] = (
-                                histories[0][0],
-                                transform[contrast_index] @ np.vstack([h[1] for h in histories]),
-                                histories[0][2])
-                    else:
-                        values.insert_point3(key, pose.rotation().rotate(measured))
-                key = self.direction_keys[identity]
-                history = self.direction_history.get(identity)
-                options = self._correlated_options(history)
-                factors.append(differential_foot_factor(
-                    pose_key, key, measured, self.foot_sigma, **options))
-                self.direction_history[identity] = (pose_key, np.asarray(measured).copy(), self.time)
-                times[key] = self.time
-            return 0, len(contrasts)
+    def _support_key(self, symbol):
+        key = gtsam.symbol(symbol, self._support_serial)
+        self._support_serial += 1
+        return key
 
-        added = 0
+    def _point(self, key, values):
+        return values.atPoint3(key) if values.exists(key) else self.window.values.atPoint3(key)
+
+    def _foot_noise(self, arc, measured, pose, values, times, factors):
+        """Expose the original AR error without scoring its previous value twice."""
+        history = self.foot_noise_history.get(arc)
+        if history is None and arc in self.foot_history:
+            old_pose_key, old_measured, old_time = self.foot_history[arc]
+            contact_key = self.contact_keys[arc]
+            old_key = self._support_key("e")
+            old_pose = self.window.values.atPose3(old_pose_key)
+            values.insert_point3(old_key, old_pose.transformTo(self._point(contact_key, values))-old_measured)
+            factors.append(foot_error_coordinate_factor(old_key, old_pose_key, contact_key, old_measured))
+            times[old_key] = old_time
+            history = (old_key, old_time)
+        key = self._support_key("e")
+        if history is None:
+            initial = np.zeros(3)
+            factors.append(gtsam.PriorFactorPoint3(
+                key, initial, gtsam.noiseModel.Isotropic.Sigma(3, self.foot_sigma)))
+        else:
+            previous_key, previous_time = history
+            rho = math.exp(-(self.time-previous_time)/self.foot_tau)
+            initial = rho*self._point(previous_key, values)
+            factors.append(ar1_error_factor(previous_key, key, rho, self.foot_sigma))
+        values.insert_point3(key, initial)
+        times[key] = self.time
+        self.foot_noise_history[arc] = (key, self.time)
+        return key
+
+    def _common_geometry(self, group_id, observed, pose, values, times, factors):
+        """Persistent world geometry, with one translation gauge per component.
+
+        Observing a new subset does not create independent directions. Components
+        only join when a simultaneous observation genuinely bridges their arcs.
+        Existing fixed contacts retain their previous joint posterior; newly
+        released groups have no artificial world-position anchor.
+        """
+        geometry = self.support_geometry.setdefault(group_id, {})
+        arcs = [foot["arc_id"] for foot in observed]
+        points = {foot["arc_id"]: np.asarray(foot["point_body"], float) for foot in observed}
+        for arc in arcs:
+            if arc not in geometry and arc in self.contact_keys:
+                geometry[arc] = ("world", self.contact_keys[arc])
+        known = [arc for arc in arcs if arc in geometry]
+        if not known:
+            anchor = arcs[0]
+            geometry[anchor] = (anchor, None)
+            known = [anchor]
+        # Prefer a physically anchored component; otherwise keep one existing
+        # local gauge. An offset joining another component is inferred solely by
+        # the current cross-component observation, never assigned a noise prior.
+        anchor = next((arc for arc in known if geometry[arc][0] == "world"), known[0])
+        component, anchor_key = geometry[anchor]
+        anchor_point = np.zeros(3) if anchor_key is None else self._point(anchor_key, values)
+        for other_component in dict.fromkeys(geometry[arc][0] for arc in known):
+            if other_component == component:
+                continue
+            bridge = next(arc for arc in known if geometry[arc][0] == other_component)
+            bridge_key = geometry[bridge][1]
+            bridge_point = np.zeros(3) if bridge_key is None else self._point(bridge_key, values)
+            offset = self._support_key("d")
+            initial_offset = anchor_point + pose.rotation().rotate(points[bridge]-points[anchor])-bridge_point
+            values.insert_point3(offset, initial_offset)
+            times[offset] = self.time
+            for arc, (old_component, old_key) in list(geometry.items()):
+                if old_component != other_component:
+                    continue
+                if old_key is None:
+                    geometry[arc] = (component, offset)
+                else:
+                    transformed = self._support_key("d")
+                    values.insert_point3(transformed, self._point(old_key, values)+initial_offset)
+                    factors.append(point3_coordinate_factor(transformed, {old_key: 1., offset: 1.}))
+                    times[transformed] = self.time
+                    geometry[arc] = (component, transformed)
+        for arc in arcs:
+            if arc not in geometry:
+                key = self._support_key("d")
+                values.insert_point3(key, anchor_point+pose.rotation().rotate(points[arc]-points[anchor]))
+                times[key] = self.time
+                geometry[arc] = (component, key)
+        return [geometry[arc][1] for arc in arcs]
+
+    def _support(self, feet, revoked_arcs, support_models, pose, pose_key, values, times, factors):
+        threshold = float(self.metadata.get("force_support_threshold", 60.))
+        observed = sorted((f for f in feet if float(f["force"]) >= threshold), key=lambda f: f["foot_id"])
+        models = [] if support_models is None else list(support_models)
+        if revoked_arcs:
+            models.append(dict(group_id="legacy_common_release", arc_ids=tuple(sorted(revoked_arcs)),
+                               mode="common_translation_release"))
+        assigned = {}
+        for model in models:
+            mode = model["mode"]
+            if mode not in ("fixed", "common_translation_release", "relative_release"):
+                raise ValueError(f"unknown contact model {mode}")
+            for arc in model["arc_ids"]:
+                if arc in assigned:
+                    raise ValueError(f"overlapping support model groups for {arc}")
+                assigned[arc] = model
+        self._support_retain = set()
+        added, contrasts = 0, 0
         for foot in observed:
             arc = foot["arc_id"]
-            if arc in revoked_arcs:
+            model = assigned.get(arc)
+            if model is not None and model["mode"] != "fixed":
                 continue
             measured = np.asarray(foot["point_body"], float)
             if arc not in self.contact_keys:
-                key = gtsam.symbol("c", len(self.contact_keys))
+                key = self._support_key("c")
                 self.contact_keys[arc] = key
                 values.insert_point3(key, pose.transformFrom(measured))
             key = self.contact_keys[arc]
-            options = self._correlated_options(self.foot_history.get(arc))
-            factors.append(foot_factor(pose_key, key, measured, self.foot_sigma, **options))
+            if arc in self.foot_noise_history:
+                noise_key = self._foot_noise(arc, measured, pose, values, times, factors)
+                factors.append(foot_error_coordinate_factor(noise_key, pose_key, key, measured))
+            else:
+                factors.append(foot_factor(pose_key, key, measured, self.foot_sigma,
+                                           **self._correlated_options(self.foot_history.get(arc))))
             self.foot_history[arc] = (pose_key, measured.copy(), self.time)
             times[key] = self.time
             added += 1
-        return added, 0
+        for model in models:
+            if model["mode"] != "common_translation_release":
+                continue
+            members = [foot for foot in observed if foot["arc_id"] in model["arc_ids"]]
+            # A singleton provides no relative direction. It neither resets the
+            # original AR chain nor creates a fresh geometry anchor.
+            if len(members) < 2:
+                continue
+            geometry = self._common_geometry(str(model["group_id"]), members, pose, values, times, factors)
+            noise = [self._foot_noise(f["arc_id"], f["point_body"], pose, values, times, factors) for f in members]
+            factors.append(projected_foot_factor(pose_key, geometry, noise,
+                                                np.array([f["point_body"] for f in members])))
+            contrasts += len(members)-1
+        # Declared groups outlive temporary visibility/normal departure: their
+        # posterior and per-arc error remain available to subsequent evidence.
+        live_arcs = set(assigned) | {foot["arc_id"] for foot in observed}
+        for arc in live_arcs:
+            if arc in self.contact_keys:
+                self._support_retain.add(self.contact_keys[arc])
+            if arc in self.foot_noise_history:
+                self._support_retain.add(self.foot_noise_history[arc][0])
+            elif arc in self.foot_history:
+                self._support_retain.add(self.foot_history[arc][0])
+        for group in self.support_geometry.values():
+            self._support_retain.update(key for _, key in group.values() if key is not None)
+        return added, contrasts
 
     def _correlated_options(self, history):
         if history is None:
@@ -220,6 +320,30 @@ class NavigationBranch:
             preintegrated.integrateMeasurement(row[1:4], row[4:7], float(row[0]))
         return preintegrated
 
+    def joint_covariance(self, keys: list[int]) -> np.ndarray:
+        """Query the actual joint marginal after eliminating coordinate variables.
+
+        Constrained foot-error coordinates are algebraic identities. Eliminate
+        non-query variables with GTSAM's constraint-aware QR first, rather than
+        applying a full-graph Cholesky to that augmented singular representation.
+        The fixed-contact path keeps its previous numerical marginal operation.
+        """
+        if not self.foot_noise_history:
+            joint = gtsam.Marginals(self.window.graph, self.window.values).jointMarginalCovariance(
+                gtsam.KeyVector(keys))
+        else:
+            ordering = gtsam.Ordering()
+            for key in self.window.values.keys():
+                if key not in keys:
+                    ordering.push_back(key)
+            _, remaining = self.window.graph.linearize(self.window.values).eliminatePartialSequential(ordering)
+            anchor = gtsam.Values(self.window.values)
+            for key in list(anchor.keys()):
+                if key not in keys:
+                    anchor.erase(key)
+            joint = gtsam.Marginals(remaining, anchor).jointMarginalCovariance(gtsam.KeyVector(keys))
+        return np.block([[joint.at(a, b) for b in keys] for a in keys])
+
     def predict_gnss_position(self, event: dict) -> tuple[np.ndarray, np.ndarray]:
         """Return the not-yet-consumed position innovation and its covariance.
 
@@ -232,10 +356,8 @@ class NavigationBranch:
         pose = self.window.values.atPose3(keys[0])
         velocity = self.window.values.atVector(keys[1])
         bias = self.window.values.atConstantBias(keys[2])
-        joint = gtsam.Marginals(self.window.graph, self.window.values).jointMarginalCovariance(
-            gtsam.KeyVector(keys))
-        # JointMarginal's internal key ordering is not the X,V,B tangent order.
-        covariance = np.block([[joint.at(a, b) for b in keys] for a in keys])
+        # Preserve caller X,V,B order rather than JointMarginal's internal order.
+        covariance = self.joint_covariance(keys)
         preintegrated = self._preintegrate(event, bias)
 
         def position_at(delta):
@@ -265,7 +387,135 @@ class NavigationBranch:
         innovation = np.asarray(event["gnss_position"], float) - predicted
         return innovation, innovation_covariance
 
-    def step(self, event: dict, index: int, revoked_arcs: set[str] | None = None):
+    def predict_external(self, event: dict) -> dict:
+        """Joint predictive density ingredients before consuming this event.
+
+        Include observed GNSS position/velocity and raw code/carrier rows whose
+        ambiguity labels already have posterior variables. Rows depending on a
+        new unknown ambiguity are omitted, never initialized using the row being
+        scored. Shared state, ambiguity and preintegration cross covariance is
+        retained. Synthetic GNSS product/raw-row independence is the declared
+        working source model, not an assertion about receiver products in field
+        data. No likelihood or state mutation is performed by this method.
+        """
+        timestamp = float(event["time_s"])
+        pose = self.window.values.atPose3(X(self.index))
+        velocity = self.window.values.atVector(V(self.index))
+        bias = self.window.values.atConstantBias(self.bias_key)
+        preintegrated = self._preintegrate(event, bias)
+        predicted_state = preintegrated.predict(gtsam.NavState(pose, velocity), bias)
+        block = event.get("carrier")
+        known_labels, selected_rows, excluded_rows = [], np.empty(0, int), []
+        if block is not None:
+            labels = tuple(block.ambiguity_labels)
+            unknown_columns = [j for j, label in enumerate(labels) if label not in self.ambiguity_keys]
+            used = np.ones(len(block.y), bool)
+            if unknown_columns:
+                used &= np.all(np.asarray(block.A)[:, unknown_columns] == 0., axis=1)
+            selected_rows = np.flatnonzero(used)
+            excluded_rows = np.flatnonzero(~used).tolist()
+            known_labels = [label for j, label in enumerate(labels)
+                            if label in self.ambiguity_keys and
+                            np.any(np.asarray(block.A)[selected_rows, j] != 0.)]
+        keys = [X(self.index), V(self.index), self.bias_key,
+                *[self.ambiguity_keys[label] for label in known_labels]]
+        prior_covariance = self.joint_covariance(keys)
+        n0 = np.array([self.window.values.atVector(self.ambiguity_keys[label])[0]
+                       for label in known_labels])
+        observations, noise_blocks, identities, row_identities, slices = [], [], [], [], {}
+        dimension = 0
+        for name, metadata_name, default in (
+            ("gnss_position", "gnss_position_sigma", .05),
+            ("gnss_velocity", "gnss_velocity_sigma", .03),
+        ):
+            if event.get(name) is not None:
+                observations.append(np.asarray(event[name], float))
+                noise_blocks.append(np.diag(self._sigmas(self.metadata.get(metadata_name, default)) ** 2))
+                slices[name] = slice(dimension, dimension+3)
+                dimension += 3
+                identity = f"{name}:{timestamp:.9f}"
+                identities.append(identity)
+                row_identities.extend(f"{identity}:{axis}" for axis in range(3))
+        if len(selected_rows):
+            observations.append(np.asarray(block.y)[selected_rows])
+            noise_blocks.append(np.asarray(block.Q)[np.ix_(selected_rows, selected_rows)])
+            slices["carrier"] = slice(dimension, dimension+len(selected_rows))
+            dimension += len(selected_rows)
+            identities.append(f"raw_code_carrier:{timestamp:.9f}")
+            row_identities.extend(f"raw_code_carrier:{timestamp:.9f}:row{row}" for row in selected_rows)
+            columns = [tuple(block.ambiguity_labels).index(label) for label in known_labels]
+            carrier_A = np.asarray(block.A)[np.ix_(selected_rows, columns)]
+            carrier_B = np.asarray(block.B)[selected_rows]
+
+        def measurement(rotation, position, speed, integers):
+            parts = []
+            if "gnss_position" in slices:
+                parts.append(position)
+            if "gnss_velocity" in slices:
+                parts.append(speed)
+            if "carrier" in slices:
+                parts.append(carrier_B @ rotation.rotate(self.baseline_body) + carrier_A @ integers)
+            return np.concatenate(parts) if parts else np.empty(0)
+
+        def prediction_at(delta):
+            shifted_bias = gtsam.imuBias.ConstantBias(
+                bias.accelerometer()+delta[9:12], bias.gyroscope()+delta[12:15])
+            state = preintegrated.predict(
+                gtsam.NavState(pose.retract(delta[:6]), velocity+delta[6:9]), shifted_bias)
+            return measurement(state.attitude(), state.position(), state.velocity(), n0+delta[15:])
+
+        predicted = prediction_at(np.zeros(15+len(known_labels)))
+        state_jacobian = np.empty((dimension, 15+len(known_labels)))
+        epsilon = 1e-6
+        for column in range(state_jacobian.shape[1]):
+            delta = np.zeros(state_jacobian.shape[1])
+            delta[column] = epsilon
+            state_jacobian[:, column] = (prediction_at(delta)-prediction_at(-delta))/(2*epsilon)
+
+        # PIM error coordinates are delta rotation, start-frame delta position,
+        # start-frame delta velocity. Preserve their full 9x9 covariance.
+        start_rotation = pose.rotation().matrix()
+        def process_at(delta):
+            return measurement(
+                predicted_state.attitude().retract(delta[:3]),
+                predicted_state.position()+start_rotation@delta[3:6],
+                predicted_state.velocity()+start_rotation@delta[6:9], n0)
+        process_jacobian = np.empty((dimension, 9))
+        for column in range(9):
+            delta = np.zeros(9)
+            delta[column] = epsilon
+            process_jacobian[:, column] = (process_at(delta)-process_at(-delta))/(2*epsilon)
+        sensor_covariance = np.zeros((dimension, dimension))
+        offset = 0
+        for noise in noise_blocks:
+            size = len(noise)
+            sensor_covariance[offset:offset+size, offset:offset+size] = noise
+            offset += size
+        if ("gnss_position" in slices and "gnss_velocity" in slices and
+                "gnss_position_velocity_covariance" in self.metadata):
+            sensor_covariance[:6, :6] = np.asarray(self.metadata["gnss_position_velocity_covariance"], float)
+        covariance = (state_jacobian@prior_covariance@state_jacobian.T +
+                      process_jacobian@preintegrated.preintMeasCov()@process_jacobian.T +
+                      sensor_covariance)
+        covariance = .5*(covariance+covariance.T)
+        observed = np.concatenate(observations) if observations else np.empty(0)
+        return dict(
+            innovation=observed-predicted, covariance=covariance,
+            observed=observed, predicted=predicted,
+            event_id=f"independent:{timestamp:.9f}", observation_ids=tuple(identities),
+            row_ids=tuple(row_identities), existing_ambiguity_labels=tuple(known_labels),
+            excluded_unknown_ambiguity_rows=excluded_rows,
+            prior_time_s=self.time, measurement_time_s=timestamp,
+            source_noise_assumption=self.metadata.get("source_noise_assumption",
+                "working_independent_GNSS_product_and_raw_blocks_except_declared_covariances"),
+            conditional_on_branch=True,
+        )
+
+    # Compatibility with the interrupted implementation's provisional API.
+    predict_independent = predict_external
+
+    def step(self, event: dict, index: int, revoked_arcs: set[str] | None = None,
+             *, support_models: list[dict] | None = None):
         """Consume one causal event and return pose, velocity, bias, cost."""
         revoked_arcs = set() if revoked_arcs is None else revoked_arcs
         previous_index, previous_time = self.index, self.time
@@ -309,23 +559,31 @@ class NavigationBranch:
             values.insert(bias_key, self.bias)
 
         position, velocity = event.get("gnss_position"), event.get("gnss_velocity")
+        joint_gnss = (position is not None and velocity is not None and
+                      "gnss_position_velocity_covariance" in self.metadata)
+        if joint_gnss:
+            factors.append(gnss_position_velocity_factor(
+                pose_key, velocity_key, position, velocity,
+                np.asarray(self.metadata["gnss_position_velocity_covariance"], float)))
         if position is not None:
             self.last_gnss_innovation["position"] = np.asarray(position)-predicted_pose.translation()
-            factors.append(gtsam.GPSFactor(
-                pose_key, np.asarray(position, float), gtsam.noiseModel.Diagonal.Sigmas(
-                    self._sigmas(self.metadata.get("gnss_position_sigma", .05)))))
+            if not joint_gnss:
+                factors.append(gtsam.GPSFactor(
+                    pose_key, np.asarray(position, float), gtsam.noiseModel.Diagonal.Sigmas(
+                        self._sigmas(self.metadata.get("gnss_position_sigma", .05)))))
         if velocity is not None:
             self.last_gnss_innovation["velocity"] = np.asarray(velocity)-predicted_velocity
-            factors.append(gtsam.PriorFactorVector(
-                velocity_key, np.asarray(velocity, float), gtsam.noiseModel.Diagonal.Sigmas(
-                    self._sigmas(self.metadata.get("gnss_velocity_sigma", .03)))))
+            if not joint_gnss:
+                factors.append(gtsam.PriorFactorVector(
+                    velocity_key, np.asarray(velocity, float), gtsam.noiseModel.Diagonal.Sigmas(
+                        self._sigmas(self.metadata.get("gnss_velocity_sigma", .03)))))
         block = event.get("carrier")
         if block is not None:
             self._carrier(block, predicted_pose, pose_key, values, times, factors)
         nfoot, ndifference = (0, 0)
         if self.use_foot:
             nfoot, ndifference = self._support(
-                event.get("feet", []), revoked_arcs, predicted_pose, pose_key, values, times, factors)
+                event.get("feet", []), revoked_arcs, support_models, predicted_pose, pose_key, values, times, factors)
         self.window.update(factors, values, times, self.time,
                            retain_keys=self._retained_keys())
         self.last_factor_counts = dict(
@@ -367,7 +625,8 @@ class NavigationBranch:
     def snapshot(self) -> BranchSnapshot:
         names = ("ambiguity_keys", "contact_keys", "direction_keys", "foot_history",
                  "direction_history", "fixed", "_conditioned_labels", "time", "index",
-                 "last_gnss_innovation", "last_factor_counts", "constant_bias", "bias_key")
+                 "last_gnss_innovation", "last_factor_counts", "constant_bias", "bias_key",
+                 "foot_noise_history", "support_geometry", "_support_serial", "_support_retain")
         return BranchSnapshot(self.window.snapshot(),
                               {name: deepcopy(getattr(self, name)) for name in names})
 
