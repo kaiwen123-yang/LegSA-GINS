@@ -16,7 +16,7 @@ from gtsam.symbol_shorthand import X, V, B
 
 from .factors import (carrier_relation_factor, foot_factor, ar1_error_factor,
                       foot_error_coordinate_factor, point3_coordinate_factor, projected_foot_factor,
-                      gnss_position_velocity_factor)
+                      gnss_position_velocity_factor, gnss_antenna_factor, gnss_antenna_prediction)
 from .window import JointWindow, WindowSnapshot
 
 
@@ -76,6 +76,12 @@ class NavigationBranch:
         self.bias = gtsam.imuBias.ConstantBias()
         self.last_gnss_innovation: dict = {}
         self.last_factor_counts: dict = {}
+        # Controller-owned cumulative predictive support for one actual integer
+        # lineage. Values travel with checkpoints; they are never added factors.
+        self.predictive_score = 0.0  # -2 log predictive density, including log|S|
+        self.predictive_row_count = 0
+        self.predictive_frontier = -1
+        self.integer_lineage = ()
 
     @staticmethod
     def _sigmas(value, dimension=3):
@@ -243,7 +249,8 @@ class NavigationBranch:
 
     def _support(self, feet, revoked_arcs, support_models, pose, pose_key, values, times, factors):
         threshold = float(self.metadata.get("force_support_threshold", 60.))
-        observed = sorted((f for f in feet if float(f["force"]) >= threshold), key=lambda f: f["foot_id"])
+        observed = sorted((f for f in feet if (bool(f["support_eligible"]) if "support_eligible" in f
+                                             else float(f["force"]) >= threshold)), key=lambda f: f["foot_id"])
         models = [] if support_models is None else list(support_models)
         if revoked_arcs:
             models.append(dict(group_id="legacy_common_release", arc_ids=tuple(sorted(revoked_arcs)),
@@ -320,72 +327,143 @@ class NavigationBranch:
             preintegrated.integrateMeasurement(row[1:4], row[4:7], float(row[0]))
         return preintegrated
 
-    def joint_covariance(self, keys: list[int]) -> np.ndarray:
-        """Query the actual joint marginal after eliminating coordinate variables.
+    @staticmethod
+    def _ordering(keys):
+        ordering = gtsam.Ordering()
+        for key in keys:
+            ordering.push_back(int(key))
+        return ordering
 
-        Constrained foot-error coordinates are algebraic identities. Eliminate
-        non-query variables with GTSAM's constraint-aware QR first, rather than
-        applying a full-graph Cholesky to that augmented singular representation.
-        The fixed-contact path keeps its previous numerical marginal operation.
+    def joint_covariance(self, keys: list[int]) -> np.ndarray:
+        """Actual joint marginal, retaining the exact foot-coordinate identities.
+
+        The graph's default elimination can choose Cholesky at an unconstrained
+        local clique even when another clique contains exact coordinates. After
+        lag marginalization this fails on the strongly scaled bias/integer
+        system. Explicit local Jacobian QR avoids forming normal equations;
+        COLAMD keeps the query variables last without densifying the whole graph.
+        Fixed-contact branches keep their original marginal operation.
         """
         if not self.foot_noise_history:
             joint = gtsam.Marginals(self.window.graph, self.window.values).jointMarginalCovariance(
                 gtsam.KeyVector(keys))
+            return np.block([[joint.at(a, b) for b in keys] for a in keys])
+        linear = self.window.graph.linearize(self.window.values)
+        ordering = gtsam.Ordering.ColamdConstrainedLastGaussianFactorGraph(linear, keys, True)
+        factors = {j: linear.at(j) for j in range(linear.size())}
+        incident = {}
+        for j, factor in factors.items():
+            for key in factor.keys():
+                incident.setdefault(key, set()).add(j)
+        next_id = linear.size()
+        query = set(keys)
+        for index in range(ordering.size()):
+            key = ordering.at(index)
+            if key in query:
+                continue
+            local = gtsam.GaussianFactorGraph()
+            for j in sorted(incident[key]):
+                factor = factors.pop(j)
+                local.push_back(factor)
+                for neighbor in factor.keys():
+                    incident[neighbor].remove(j)
+            neighbors = sorted({neighbor for j in range(local.size())
+                                for neighbor in local.at(j).keys()} - {key})
+            jacobian = gtsam.JacobianFactor(local, self._ordering([key, *neighbors]))
+            _, remainder = jacobian.eliminate(self._ordering([key]))
+            if remainder.keys():
+                factors[next_id] = remainder
+                for neighbor in remainder.keys():
+                    incident.setdefault(neighbor, set()).add(next_id)
+                next_id += 1
+        remaining = gtsam.GaussianFactorGraph()
+        for factor in factors.values():
+            remaining.push_back(factor)
+        # Solve the square root directly. The conditional's row sigmas include
+        # exact zero rows where applicable; none are replaced by a noise floor.
+        jacobian = gtsam.JacobianFactor(remaining, self._ordering(keys))
+        conditional, _ = jacobian.eliminate(self._ordering(keys))
+        covariance_root = np.linalg.solve(conditional.R(), np.diag(conditional.get_model().sigmas()))
+        return covariance_root @ covariance_root.T
+
+    @staticmethod
+    def _skew(vector):
+        x, y, z = vector
+        return np.array([[0., -z, y], [z, 0., -x], [-y, x, 0.]])
+
+    def _gnss_inputs(self, event, predicted_pose):
+        """Physical antenna input and working source covariance, shared by both paths.
+
+        The gyro-rate variance is retained. Its reuse in IMU propagation and
+        across asynchronous packets is explicitly an unmodelled cross covariance
+        in this first field-data interface, not an independent high-precision rate.
+        """
+        present = [name for name in ("gnss_position", "gnss_velocity") if event.get(name) is not None]
+        position_lever = np.asarray(event.get("gnss_position_leverarm_body_m",
+                                   self.metadata.get("gnss_leverarm_body_m", np.zeros(3))), float)
+        velocity_lever = np.asarray(event.get("gnss_velocity_leverarm_body_m",
+                                   self.metadata.get("gnss_leverarm_body_m", np.zeros(3))), float)
+        angular_rate = np.zeros(3)
+        gyro_covariance = np.zeros((3, 3))
+        angular_source_time = None
+        angular_source_interval = None
+        uses_gyro = "gnss_velocity" in present and np.any(velocity_lever != 0.)
+        if uses_gyro:
+            if event.get("gnss_angular_rate_body_rad_s") is not None:
+                angular_rate = np.asarray(event["gnss_angular_rate_body_rad_s"], float)
+                angular_source_time = event["gnss_angular_rate_source_time_s"]
+            else:
+                if len(event["imu"]) == 0:
+                    raise ValueError("antenna velocity requires a causal observed angular-rate sample")
+                angular_rate = np.asarray(event["imu"][-1, 4:7], float)
+                sources = event.get("imu_interval_sources")
+                angular_source_time = float(sources[-1, 2]) if sources is not None and len(sources) else event["time_s"]
+            if angular_source_time > event["time_s"]:
+                raise ValueError("antenna angular rate is not yet available at the measurement event")
+            angular_source_interval = event.get("last_gyro_source_noise_interval_s")
+            if angular_source_interval is None:
+                angular_source_interval = event.get("source_noise_interval_s")
+            if angular_source_interval is None:
+                sources = event.get("imu_interval_sources")
+                if sources is not None and len(sources) and np.shape(sources)[1] >= 4:
+                    angular_source_interval = float(sources[-1, 3])
+            if angular_source_interval is None or angular_source_interval <= 0.:
+                raise ValueError("antenna gyro variance requires the original source sample interval")
+            density = self._sigmas(self.metadata.get("gyro_noise_density", .001))
+            gyro_covariance = np.diag(density**2/float(angular_source_interval))
+        covariance = np.zeros((3*len(present), 3*len(present)))
+        slices = {name: slice(3*i, 3*i+3) for i, name in enumerate(present)}
+        has_event_covariance = any(event.get(name+"_covariance") is not None for name in present)
+        joint = event.get("gnss_position_velocity_covariance")
+        if joint is None and not has_event_covariance:
+            joint = self.metadata.get("gnss_position_velocity_covariance")
+        if len(present) == 2 and joint is not None:
+            covariance[:] = np.asarray(joint, float)
         else:
-            ordering = gtsam.Ordering()
-            for key in self.window.values.keys():
-                if key not in keys:
-                    ordering.push_back(key)
-            _, remaining = self.window.graph.linearize(self.window.values).eliminatePartialSequential(ordering)
-            anchor = gtsam.Values(self.window.values)
-            for key in list(anchor.keys()):
-                if key not in keys:
-                    anchor.erase(key)
-            joint = gtsam.Marginals(remaining, anchor).jointMarginalCovariance(gtsam.KeyVector(keys))
-        return np.block([[joint.at(a, b) for b in keys] for a in keys])
+            for name in present:
+                source = event.get(name+"_covariance")
+                default = .05 if name == "gnss_position" else .03
+                if source is None:
+                    source = np.diag(self._sigmas(self.metadata.get(name+"_sigma", default))**2)
+                covariance[slices[name], slices[name]] = source
+        if uses_gyro:
+            gyro_map = -predicted_pose.rotation().matrix()@self._skew(velocity_lever)
+            covariance[slices["gnss_velocity"], slices["gnss_velocity"]] += gyro_map@gyro_covariance@gyro_map.T
+        return dict(position_lever=position_lever, velocity_lever=velocity_lever,
+                    angular_rate=angular_rate, covariance=covariance, slices=slices,
+                    uses_gyro=uses_gyro, angular_source_time_s=angular_source_time,
+                    angular_source_noise_interval_s=angular_source_interval,
+                    gyro_covariance=gyro_covariance,
+                    source_covariance_assumption=(
+                        "gyro_sample_variance_retained;shared_IMU_and_cross_packet_gyro_cross_unmodelled"
+                        if uses_gyro else "no_angular_rate_noise_in_zero_velocity_lever_model"),
+                    custom=(has_event_covariance or event.get("gnss_position_velocity_covariance") is not None or
+                            ("gnss_position" in present and np.any(position_lever != 0.)) or uses_gyro))
 
     def predict_gnss_position(self, event: dict) -> tuple[np.ndarray, np.ndarray]:
-        """Return the not-yet-consumed position innovation and its covariance.
-
-        Propagate the branch's actual joint pose/velocity/bias posterior through
-        the same IMU preintegration used by ``step``. This is a conditional
-        consistency diagnostic, not an added factor or a multimodal integrity
-        probability. The incoming GNSS row is used only as the observation.
-        """
-        keys = [X(self.index), V(self.index), self.bias_key]
-        pose = self.window.values.atPose3(keys[0])
-        velocity = self.window.values.atVector(keys[1])
-        bias = self.window.values.atConstantBias(keys[2])
-        # Preserve caller X,V,B order rather than JointMarginal's internal order.
-        covariance = self.joint_covariance(keys)
-        preintegrated = self._preintegrate(event, bias)
-
-        def position_at(delta):
-            shifted_pose = pose.retract(delta[:6])
-            shifted_velocity = velocity + delta[6:9]
-            shifted_bias = gtsam.imuBias.ConstantBias(
-                bias.accelerometer() + delta[9:12],
-                bias.gyroscope() + delta[12:15])
-            return preintegrated.predict(
-                gtsam.NavState(shifted_pose, shifted_velocity), shifted_bias).position()
-
-        origin = np.zeros(15)
-        predicted = position_at(origin)
-        jacobian = np.empty((3, 15))
-        step = 1e-6
-        for column in range(15):
-            delta = origin.copy()
-            delta[column] = step
-            jacobian[:, column] = (position_at(delta) - position_at(-delta)) / (2. * step)
-        rotation = pose.rotation().matrix()
-        process_covariance = rotation @ preintegrated.preintMeasCov()[3:6, 3:6] @ rotation.T
-        observation_covariance = np.diag(
-            self._sigmas(self.metadata.get("gnss_position_sigma", .05)) ** 2)
-        innovation_covariance = (
-            jacobian @ covariance @ jacobian.T + process_covariance + observation_covariance)
-        innovation_covariance = .5 * (innovation_covariance + innovation_covariance.T)
-        innovation = np.asarray(event["gnss_position"], float) - predicted
-        return innovation, innovation_covariance
+        """Legacy position-only view of the same not-yet-consumed joint model."""
+        prediction = self.predict_external(dict(event, gnss_velocity=None, carrier=None))
+        return prediction["innovation"], prediction["covariance"]
 
     def predict_external(self, event: dict) -> dict:
         """Joint predictive density ingredients before consuming this event.
@@ -404,6 +482,7 @@ class NavigationBranch:
         bias = self.window.values.atConstantBias(self.bias_key)
         preintegrated = self._preintegrate(event, bias)
         predicted_state = preintegrated.predict(gtsam.NavState(pose, velocity), bias)
+        gnss_inputs = self._gnss_inputs(event, predicted_state.pose())
         block = event.get("carrier")
         known_labels, selected_rows, excluded_rows = [], np.empty(0, int), []
         if block is not None:
@@ -447,12 +526,15 @@ class NavigationBranch:
             carrier_A = np.asarray(block.A)[np.ix_(selected_rows, columns)]
             carrier_B = np.asarray(block.B)[selected_rows]
 
-        def measurement(rotation, position, speed, integers):
+        def measurement(rotation, position, speed, integers, gyro_bias):
+            antenna_position, antenna_velocity = gnss_antenna_prediction(
+                gtsam.Pose3(rotation, position), speed, gyro_bias,
+                gnss_inputs["position_lever"], gnss_inputs["velocity_lever"], gnss_inputs["angular_rate"])
             parts = []
             if "gnss_position" in slices:
-                parts.append(position)
+                parts.append(antenna_position)
             if "gnss_velocity" in slices:
-                parts.append(speed)
+                parts.append(antenna_velocity)
             if "carrier" in slices:
                 parts.append(carrier_B @ rotation.rotate(self.baseline_body) + carrier_A @ integers)
             return np.concatenate(parts) if parts else np.empty(0)
@@ -462,7 +544,7 @@ class NavigationBranch:
                 bias.accelerometer()+delta[9:12], bias.gyroscope()+delta[12:15])
             state = preintegrated.predict(
                 gtsam.NavState(pose.retract(delta[:6]), velocity+delta[6:9]), shifted_bias)
-            return measurement(state.attitude(), state.position(), state.velocity(), n0+delta[15:])
+            return measurement(state.attitude(), state.position(), state.velocity(), n0+delta[15:], shifted_bias.gyroscope())
 
         predicted = prediction_at(np.zeros(15+len(known_labels)))
         state_jacobian = np.empty((dimension, 15+len(known_labels)))
@@ -472,31 +554,52 @@ class NavigationBranch:
             delta[column] = epsilon
             state_jacobian[:, column] = (prediction_at(delta)-prediction_at(-delta))/(2*epsilon)
 
-        # PIM error coordinates are delta rotation, start-frame delta position,
-        # start-frame delta velocity. Preserve their full 9x9 covariance.
-        start_rotation = pose.rotation().matrix()
+        # Use the actual ImuFactor residual coordinates. PIM covariance is not
+        # generally a block of independent end-rotation/start-frame p/v errors;
+        # hand-rotating its blocks loses process cross terms during rotation.
+        # E maps predicted end-state tangent [Pose3 local(6), world velocity(3)]
+        # to the factor's 9D residual, so H E^-1 maps its full Q to observations.
+        predicted_pose = predicted_state.pose()
+        predicted_velocity = predicted_state.velocity()
+        imu_factor = gtsam.ImuFactor(X(self.index), V(self.index), X(self.index+1),
+                                     V(self.index+1), self.bias_key, preintegrated)
+
         def process_at(delta):
-            return measurement(
-                predicted_state.attitude().retract(delta[:3]),
-                predicted_state.position()+start_rotation@delta[3:6],
-                predicted_state.velocity()+start_rotation@delta[6:9], n0)
-        process_jacobian = np.empty((dimension, 9))
+            shifted_pose = predicted_pose.retract(delta[:6])
+            shifted_velocity = predicted_velocity+delta[6:9]
+            predicted = measurement(shifted_pose.rotation(), shifted_pose.translation(), shifted_velocity, n0, bias.gyroscope())
+            residual = imu_factor.evaluateError(pose, velocity, shifted_pose, shifted_velocity, bias)
+            return predicted, residual
+
+        observation_end_jacobian = np.empty((dimension, 9))
+        error_end_jacobian = np.empty((9, 9))
         for column in range(9):
             delta = np.zeros(9)
             delta[column] = epsilon
-            process_jacobian[:, column] = (process_at(delta)-process_at(-delta))/(2*epsilon)
+            plus_measurement, plus_error = process_at(delta)
+            minus_measurement, minus_error = process_at(-delta)
+            observation_end_jacobian[:, column] = (plus_measurement-minus_measurement)/(2*epsilon)
+            error_end_jacobian[:, column] = (plus_error-minus_error)/(2*epsilon)
+        process_jacobian = np.linalg.solve(error_end_jacobian.T, observation_end_jacobian.T).T
         sensor_covariance = np.zeros((dimension, dimension))
         offset = 0
         for noise in noise_blocks:
             size = len(noise)
             sensor_covariance[offset:offset+size, offset:offset+size] = noise
             offset += size
-        if ("gnss_position" in slices and "gnss_velocity" in slices and
-                "gnss_position_velocity_covariance" in self.metadata):
-            sensor_covariance[:6, :6] = np.asarray(self.metadata["gnss_position_velocity_covariance"], float)
+        gnss_dimension = len(gnss_inputs["covariance"])
+        sensor_covariance[:gnss_dimension, :gnss_dimension] = gnss_inputs["covariance"]
+        # The mean new bias equals the old bias; its independent interval random
+        # walk also enters the antenna velocity likelihood through current b_g.
+        bias_process_covariance = np.zeros((dimension, dimension))
+        if gnss_inputs["uses_gyro"] and not self.constant_bias:
+            bg_map = predicted_state.attitude().matrix()@self._skew(gnss_inputs["velocity_lever"])
+            bg_cov = np.diag(self.bias_rw[3:]**2*(timestamp-self.time))
+            target = slices["gnss_velocity"]
+            bias_process_covariance[target, target] = bg_map@bg_cov@bg_map.T
         covariance = (state_jacobian@prior_covariance@state_jacobian.T +
                       process_jacobian@preintegrated.preintMeasCov()@process_jacobian.T +
-                      sensor_covariance)
+                      sensor_covariance + bias_process_covariance)
         covariance = .5*(covariance+covariance.T)
         observed = np.concatenate(observations) if observations else np.empty(0)
         return dict(
@@ -509,6 +612,9 @@ class NavigationBranch:
             source_noise_assumption=self.metadata.get("source_noise_assumption",
                 "working_independent_GNSS_product_and_raw_blocks_except_declared_covariances"),
             conditional_on_branch=True,
+            source_covariance_assumption=gnss_inputs["source_covariance_assumption"],
+            angular_rate_source_time_s=gnss_inputs["angular_source_time_s"],
+            angular_rate_source_noise_interval_s=gnss_inputs["angular_source_noise_interval_s"],
         )
 
     # Compatibility with the interrupted implementation's provisional API.
@@ -559,21 +665,30 @@ class NavigationBranch:
             values.insert(bias_key, self.bias)
 
         position, velocity = event.get("gnss_position"), event.get("gnss_velocity")
-        joint_gnss = (position is not None and velocity is not None and
-                      "gnss_position_velocity_covariance" in self.metadata)
-        if joint_gnss:
+        gnss_inputs = self._gnss_inputs(event, predicted_pose)
+        antenna_position, antenna_velocity = gnss_antenna_prediction(
+            predicted_pose, predicted_velocity, self.bias.gyroscope(),
+            gnss_inputs["position_lever"], gnss_inputs["velocity_lever"], gnss_inputs["angular_rate"])
+        if position is not None:
+            self.last_gnss_innovation["position"] = np.asarray(position)-antenna_position
+        if velocity is not None:
+            self.last_gnss_innovation["velocity"] = np.asarray(velocity)-antenna_velocity
+        if gnss_inputs["custom"] and (position is not None or velocity is not None):
+            factors.append(gnss_antenna_factor(
+                pose_key, velocity_key, bias_key, position, velocity, gnss_inputs["covariance"],
+                gnss_inputs["position_lever"], gnss_inputs["velocity_lever"], gnss_inputs["angular_rate"]))
+            self.last_gnss_innovation["source_covariance_assumption"] = gnss_inputs["source_covariance_assumption"]
+        elif position is not None and velocity is not None and "gnss_position_velocity_covariance" in self.metadata:
             factors.append(gnss_position_velocity_factor(
                 pose_key, velocity_key, position, velocity,
                 np.asarray(self.metadata["gnss_position_velocity_covariance"], float)))
-        if position is not None:
-            self.last_gnss_innovation["position"] = np.asarray(position)-predicted_pose.translation()
-            if not joint_gnss:
+        else:
+            # Preserve the original zero-lever synthetic numerical path.
+            if position is not None:
                 factors.append(gtsam.GPSFactor(
                     pose_key, np.asarray(position, float), gtsam.noiseModel.Diagonal.Sigmas(
                         self._sigmas(self.metadata.get("gnss_position_sigma", .05)))))
-        if velocity is not None:
-            self.last_gnss_innovation["velocity"] = np.asarray(velocity)-predicted_velocity
-            if not joint_gnss:
+            if velocity is not None:
                 factors.append(gtsam.PriorFactorVector(
                     velocity_key, np.asarray(velocity, float), gtsam.noiseModel.Diagonal.Sigmas(
                         self._sigmas(self.metadata.get("gnss_velocity_sigma", .03)))))
@@ -626,7 +741,8 @@ class NavigationBranch:
         names = ("ambiguity_keys", "contact_keys", "direction_keys", "foot_history",
                  "direction_history", "fixed", "_conditioned_labels", "time", "index",
                  "last_gnss_innovation", "last_factor_counts", "constant_bias", "bias_key",
-                 "foot_noise_history", "support_geometry", "_support_serial", "_support_retain")
+                 "foot_noise_history", "support_geometry", "_support_serial", "_support_retain",
+                 "predictive_score", "predictive_row_count", "predictive_frontier", "integer_lineage")
         return BranchSnapshot(self.window.snapshot(),
                               {name: deepcopy(getattr(self, name)) for name in names})
 

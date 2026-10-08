@@ -1,0 +1,397 @@
+"""BY2 source-time events for the joint navigator, without running navigation.
+
+Only existing code/carrier arrays, calibrated IMU increments, receiver P/V and
+allowed raw body fields are read. No reference or PVT-derived heading is read.
+Feet are measured only at selected *actual* body epochs. An asynchronous GNSS
+event carries contact history as context, never as a new simultaneous foot
+measurement. Initialization and physical GNSS factors remain backend duties.
+"""
+from __future__ import annotations
+
+from dataclasses import dataclass
+import json
+import math
+from pathlib import Path
+
+import numpy as np
+import yaml
+
+from ..body_velocity import iter_messages
+from ..carrier_phase.support_arcs import FootForceThreshold, SupportArcTracker, SupportPolicy
+from ..carrier_phase.temporal import EpochBlock
+from ..horizontal_literature.hartley_h0_h2 import (
+    FROZEN_CONTACT_DWELL_SECONDS, FROZEN_CONTACT_OFF_THRESHOLDS,
+    FROZEN_CONTACT_ON_THRESHOLDS, NATIVE_FOOT_ORDER,
+)
+from ..horizontal_literature.hartley_h5 import _parse_allowed_record
+
+
+@dataclass(frozen=True)
+class By2InputConfig:
+    body_path: Path
+    imu_path: Path
+    gnss_path: Path
+    carrier_plan_path: Path
+    calibration_model_path: Path
+    imu_noise_profile_path: Path
+    start_s: float = 66.0
+    end_s: float = 340.0
+    key_dt_s: float = 0.1
+    base_time_unix_s: int = 1772784000
+    family: str = "GPS_GAL_BDS_DUAL"
+    # If absent, use the last valid receiver position at/before start. This
+    # chooses a coordinate origin only, not an additional navigation prior.
+    origin_blh_deg_m: tuple[float, float, float] | None = None
+
+
+def ecef_from_blh(blh_deg_m) -> np.ndarray:
+    lat, lon = np.radians(np.asarray(blh_deg_m, float)[:2])
+    height = float(blh_deg_m[2])
+    a, e2 = 6378137.0, 6.6943799901413165e-3
+    radius = a / math.sqrt(1.0-e2*math.sin(lat)**2)
+    return np.array([(radius+height)*math.cos(lat)*math.cos(lon),
+                     (radius+height)*math.cos(lat)*math.sin(lon),
+                     (radius*(1.0-e2)+height)*math.sin(lat)])
+
+
+def ecef_from_ned(blh_deg_m) -> np.ndarray:
+    lat, lon = np.radians(np.asarray(blh_deg_m, float)[:2])
+    sl, cl, so, co = math.sin(lat), math.cos(lat), math.sin(lon), math.cos(lon)
+    return np.array([[-sl*co, -so, -cl*co],
+                     [-sl*so, co, -cl*so], [cl, 0., -sl]])
+
+
+def _gnss_rows(path: Path) -> list[dict]:
+    rows = []
+    with Path(path).open(encoding="utf-8") as stream:
+        for line_number, line in enumerate(stream, 1):
+            if not line.strip() or line.lstrip().startswith("#"):
+                continue
+            tokens = line.split()
+            if len(tokens) != 18:
+                raise ValueError(f"GNSS18 width at source line {line_number}")
+            # Deliberately do not decode tokens 13,14,17: heading is excluded.
+            numbers = np.array([float(x) for x in tokens[:13]])
+            flags = [int(tokens[k]) for k in (15, 16)]
+            if not np.isfinite(numbers[0]) or any(x not in (0, 1) for x in flags):
+                raise ValueError(f"GNSS time/validity at source line {line_number}")
+            if rows and numbers[0] <= rows[-1]["time_s"]:
+                raise ValueError("GNSS source times must be strictly increasing")
+            if flags[0] and (not np.isfinite(numbers[1:7]).all() or np.any(numbers[4:7] <= 0)):
+                raise ValueError("valid GNSS position requires finite position and positive sigma")
+            if flags[1] and (not np.isfinite(numbers[7:13]).all() or np.any(numbers[10:13] <= 0)):
+                raise ValueError("valid GNSS velocity requires finite velocity and positive sigma")
+            rows.append(dict(time_s=float(numbers[0]), source_row=line_number,
+                             blh=numbers[1:4], position_sigma=numbers[4:7],
+                             velocity=numbers[7:10], velocity_sigma=numbers[10:13],
+                             position_valid=bool(flags[0]), velocity_valid=bool(flags[1])))
+    return rows
+
+
+def _body_rows(config: By2InputConfig) -> tuple[list[dict], dict]:
+    policy = SupportPolicy(tuple(FootForceThreshold(name, on, off) for name, on, off in
+        zip(NATIVE_FOOT_ORDER, FROZEN_CONTACT_ON_THRESHOLDS, FROZEN_CONTACT_OFF_THRESHOLDS)),
+        FROZEN_CONTACT_DWELL_SECONDS, .05)
+    tracker = SupportArcTracker(policy, stream_id="BY2_JOINT_INPUT")
+    token_names, counters = {}, [0]*4
+    rows, previous_ns, previous_legacy = [], None, None
+    previous_arcs = None
+    grid_index = 0
+    for source_row, message in enumerate(iter_messages(config.body_path), 1):
+        ns, _, _, forces, foot_values, _ = _parse_allowed_record(message.splitlines(), source_row)
+        t = (ns-config.base_time_unix_s*1_000_000_000)*1e-9
+        if t > config.end_s:
+            break
+        if previous_ns is not None and ns <= previous_ns:
+            raise ValueError(f"nonmonotonic BY2 body source row {source_row}; no silent repair")
+        sec, nsec = divmod(ns, 1_000_000_000)
+        # Reproduce the frozen increment builder's dt when recovering its
+        # rates; retain integer-stamp relative time for actual availability.
+        legacy_time = float(sec+nsec*1e-9)-config.base_time_unix_s
+        legacy_dt = None if previous_legacy is None else legacy_time-previous_legacy
+        support = tracker.update(t, dict(zip(NATIVE_FOOT_ORDER, forces)), available_time_s=t)
+        feet, states = [], []
+        points = np.asarray(foot_values, float).reshape(4, 3)*[1., -1., -1.]
+        for foot_id, state in enumerate(support.feet):
+            arc = None
+            if state.token is not None:
+                if state.token not in token_names:
+                    counters[foot_id] += 1
+                    token_names[state.token] = f"BY2_force_{foot_id}_{counters[foot_id]:05d}"
+                arc = token_names[state.token]
+            states.append(dict(foot_id=foot_id, foot_name=state.foot_id,
+                               arc_id=arc, eligible=state.eligible, state=state.state,
+                               force=state.force_sdk_units, reasons=state.reasons))
+            if state.eligible:
+                feet.append(dict(foot_id=foot_id, foot_name=state.foot_id, arc_id=arc,
+                                 point_body=points[foot_id].copy(), force=float(forces[foot_id]),
+                                 support_eligible=True, source_time_s=t, source_row=source_row,
+                                 point_covariance=np.eye(3)*.01**2))
+        arcs = tuple(state["arc_id"] for state in states)
+        changed = previous_arcs is not None and arcs != previous_arcs
+        on_grid = t >= config.start_s+grid_index*config.key_dt_s
+        selected = t >= config.start_s and (changed or on_grid)
+        if on_grid:
+            grid_index = int(math.floor((t-config.start_s)/config.key_dt_s))+1
+        rows.append(dict(time_s=t, source_row=source_row, stamp_ns=ns,
+                         legacy_time_s=legacy_time, legacy_dt_s=legacy_dt,
+                         feet=feet, support_states=states, active_arcs=arcs,
+                         selected=selected, support_changed=changed))
+        previous_ns, previous_legacy, previous_arcs = ns, legacy_time, arcs
+    if not rows or rows[0]["time_s"] >= config.start_s:
+        raise ValueError("BY2 input needs an observed body prefix before start")
+    return rows, dict(source_rows_read=len(rows), body_prefix_start_time_s=rows[0]["time_s"],
+                      force_arcs_seen_include_pre_window_prefix=True,
+                      force_arcs_by_foot=dict(zip(NATIVE_FOOT_ORDER, counters)),
+                      selected_body_events=sum(row["selected"] for row in rows),
+                      support_change_events=sum(row["selected"] and row["support_changed"] for row in rows))
+
+
+def _imu_rates(config: By2InputConfig, body: list[dict]) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    saved = np.loadtxt(config.imu_path, ndmin=2)
+    if saved.shape[1] != 7 or not np.isfinite(saved).all() or np.any(np.diff(saved[:, 0]) <= 0):
+        raise ValueError("calibrated IMU needs finite increasing seven-column increments")
+    by_printed_time = {int(round(t*1e6)): i for i, t in enumerate(saved[:, 0])}
+    if len(by_printed_time) != len(saved):
+        raise ValueError("calibrated IMU has ambiguous microsecond source keys")
+    times, rates, identities, source_noise_intervals = [], [], [], []
+    for row in body:
+        dt = row["legacy_dt_s"]
+        if dt is None or not 0 < dt <= .1:
+            continue
+        # The frozen writer first rounds to .12g, then writes six decimals.
+        key = int(round(float(format(row["legacy_time_s"], ".12g"))*1e6))
+        index = by_printed_time.get(key)
+        if index is None:
+            raise ValueError(f"body/IMU mapping absent at raw row {row['source_row']}")
+        times.append(row["time_s"])
+        rates.append(np.r_[saved[index, 4:7]/dt, saved[index, 1:4]/dt])
+        identities.append((index+1, row["source_row"]))
+        source_noise_intervals.append(dt)
+    times, rates, identities = np.asarray(times), np.asarray(rates), np.asarray(identities, dtype=int)
+    if not len(times) or times[0] > config.start_s:
+        raise ValueError("no calibrated rate available at requested start")
+    return times, rates, identities, np.asarray(source_noise_intervals)
+
+
+def _imu_packet(t0, t1, times, rates, identities, source_noise_intervals):
+    if t1 == t0:
+        return np.empty((0, 7)), np.empty((0, 4)), np.empty((0, 2), dtype=int)
+    index = int(np.searchsorted(times, t0, side="right")-1)
+    if index < 0:
+        raise ValueError("IMU packet has no causal left-boundary sample")
+    rows, support, source_rows = [], [], []
+    cursor = t0
+    while cursor < t1:
+        boundary = min(t1, times[index+1]) if index+1 < len(times) else t1
+        if boundary-times[index] > .05:
+            raise ValueError("IMU source gap exceeds 50 ms; missing integration is not filled")
+        rows.append(np.r_[boundary-cursor, rates[index]])
+        # Splitting or holding a rate does not create another noise sample.
+        # Its variance uses the original increment-generation interval.
+        support.append((cursor, boundary, times[index], source_noise_intervals[index]))
+        source_rows.append(identities[index])
+        cursor = boundary
+        if index+1 < len(times) and cursor == times[index+1]:
+            index += 1
+    return np.asarray(rows), np.asarray(support), np.asarray(source_rows, dtype=int)
+
+
+def _noise_metadata(config: By2InputConfig, calibration: dict) -> dict:
+    profile = yaml.safe_load(Path(config.imu_noise_profile_path).read_text())
+    source = profile["continuous_noise_density_asd"]
+    scale = float(calibration["s"])
+    def value(name):
+        return float(source[name]["value"])
+    return dict(
+        gyro_noise_density=value("gyro_measurement_white_noise_density"),
+        accel_noise_density=scale*value("accelerometer_measurement_white_noise_density"),
+        gyro_bias_random_walk=value("gyro_bias_random_walk_density"),
+        accel_bias_random_walk=scale*value("accelerometer_bias_random_walk_density"),
+        accel_bias_prior_sigma=.03, gyro_bias_prior_sigma=.003,
+        imu_noise_source=dict(profile_id=profile["profile_id"], path=str(config.imu_noise_profile_path),
+            units="continuous_ASD_not_per_sample_sigma",
+            calibrated_accel_density_multiplier=scale, gyro_density_multiplier=1.,
+            scale_reason="same_linear_scale_as_calibrated_accelerometer_measurement",
+            bias_instability_used_as_initial_sigma=False,
+            initial_bias_prior="inherited_joint_prototype_engineering_prior_not_Allan_instability"))
+
+
+def load_by2_events(config: By2InputConfig) -> dict:
+    """Return events/metadata/input_summary; never initialize or call a navigator.
+
+    Each event includes the synthetic schema plus explicit source identities,
+    validity, per-event P/V covariance and lever arms. Metadata deliberately
+    marks backend initialization, GNSS, support and partial-policy integration
+    as still required. A zero-copy event is not an authorization to use old
+    synthetic assumptions on field observations.
+    """
+    if not (math.isfinite(config.start_s) and math.isfinite(config.end_s) and
+            config.end_s > config.start_s and math.isfinite(config.key_dt_s) and config.key_dt_s > 0):
+        raise ValueError("ordered finite input window and positive key period required")
+    gnss = _gnss_rows(config.gnss_path)
+    calibration = yaml.safe_load(Path(config.calibration_model_path).read_text())
+    origin_source = None
+    if config.origin_blh_deg_m is None:
+        candidates = [r for r in gnss if r["time_s"] <= config.start_s and r["position_valid"]]
+        if not candidates:
+            raise ValueError("coordinate origin needs an explicit origin or prior valid receiver position")
+        origin_source = candidates[-1]
+        origin = origin_source["blh"].copy()
+    else:
+        origin = np.asarray(config.origin_blh_deg_m, float)
+    ecef_origin, rotation = ecef_from_blh(origin), ecef_from_ned(origin)
+    for row in gnss:
+        local_rotation = rotation.T @ ecef_from_ned(row["blh"])
+        row["position_ned"] = rotation.T @ (ecef_from_blh(row["blh"])-ecef_origin) if row["position_valid"] else None
+        row["velocity_ned"] = local_rotation @ row["velocity"] if row["velocity_valid"] else None
+        row["position_covariance"] = local_rotation @ np.diag(row["position_sigma"]**2) @ local_rotation.T if row["position_valid"] else None
+        row["velocity_covariance"] = local_rotation @ np.diag(row["velocity_sigma"]**2) @ local_rotation.T if row["velocity_valid"] else None
+    body, body_summary = _body_rows(config)
+    if len(body) < 1000 or body[999]["time_s"] > config.start_s:
+        raise ValueError("the calibrated first-1000 gyro prefix is not available by requested start")
+    imu_times, imu_rates, imu_identities, imu_noise_intervals = _imu_rates(config, body)
+    plan = json.loads(Path(config.carrier_plan_path).read_text())
+    if plan["base_time"] != config.base_time_unix_s or plan["sequence"] != "BY2":
+        raise ValueError("carrier plan sequence or time origin differs from requested BY2")
+    carrier_rows = [r for r in plan["records"] if config.start_s <= r["time_s"] <= config.end_s]
+    gnss_rows = [r for r in gnss if config.start_s <= r["time_s"] <= config.end_s]
+    body_events = {r["time_s"]: r for r in body if r["selected"]}
+    by_gnss, by_carrier = {r["time_s"]: r for r in gnss_rows}, {r["time_s"]: r for r in carrier_rows}
+    if len(by_carrier) != len(carrier_rows):
+        raise ValueError("carrier source has duplicate epochs")
+    event_times = sorted({config.start_s, config.end_s, *body_events, *by_gnss, *by_carrier})
+    body_times = np.array([r["time_s"] for r in body])
+    events, previous, built_count, unavailable = [], config.start_s, 0, {}
+    lever = np.array([.03, .03, -.30])
+    first_carrier = None
+    for t in event_times:
+        imu, intervals, identities = _imu_packet(previous, t, imu_times, imu_rates, imu_identities, imu_noise_intervals)
+        gyro_index = int(np.searchsorted(imu_times, t, side="right")-1)
+        gyro_source_dt = float(imu_noise_intervals[gyro_index])
+        current_body = body_events.get(t)
+        latest_body = body[int(np.searchsorted(body_times, t, side="right")-1)]
+        event = dict(time_s=t, available_time_s=t, imu=imu, imu_interval_sources=intervals,
+            gnss_angular_rate_body_rad_s=imu_rates[gyro_index, 3:6].copy(),
+            gnss_angular_rate_source_time_s=float(imu_times[gyro_index]),
+            last_gyro_source_noise_interval_s=gyro_source_dt,
+            source_noise_interval_s=gyro_source_dt,
+            imu_source_rows=identities, carrier=None, feet=[] if current_body is None else current_body["feet"],
+            foot_measurement_available=current_body is not None,
+            active_support_arcs=tuple(x for x in latest_body["active_arcs"] if x is not None),
+            support_state_source_time_s=latest_body["time_s"], support_states=latest_body["support_states"],
+            latest_foot_observations=latest_body["feet"],
+            gnss_position=None, gnss_velocity=None, gnss_position_covariance=None,
+            gnss_velocity_covariance=None, gnss_position_valid=None, gnss_velocity_valid=None,
+            gnss_position_leverarm_body_m=lever.copy(), gnss_velocity_leverarm_body_m=lever.copy(),
+            source_kinds=[])
+        if current_body is not None:
+            event["source_kinds"].append("body_key_or_support_change")
+            event["body_source_row"] = current_body["source_row"]
+        if t in by_gnss:
+            row = by_gnss[t]
+            event.update(gnss_position=row["position_ned"], gnss_velocity=row["velocity_ned"],
+                gnss_position_covariance=row["position_covariance"], gnss_velocity_covariance=row["velocity_covariance"],
+                gnss_position_valid=row["position_valid"], gnss_velocity_valid=row["velocity_valid"],
+                gnss_source_time_s=t, gnss_source_row=row["source_row"],
+                gnss_measurement_point="GNSS1_ANTENNA", gnss_pvt_heading_consumed=False)
+            event["source_kinds"].append("receiver_pv")
+        if t in by_carrier:
+            row = by_carrier[t]
+            entry = row["families"].get(config.family, {})
+            event["source_kinds"].append("raw_code_carrier_slot")
+            status = entry.get("status", "MODEL_UNAVAILABLE")
+            event["carrier_source"] = dict(time_s=t, status=status,
+                reason=entry.get("reason", row.get("spp_failure")), gps_key=row["key"],
+                family=config.family, model_file=entry.get("file"))
+            if status == "BUILT":
+                if entry["metadata"].get("baseline_frame") != "ECEF":
+                    raise ValueError("expected original ECEF DD design")
+                path = Path(config.carrier_plan_path).parent / entry["file"]
+                with np.load(path, allow_pickle=False) as saved:
+                    y, A, B, Q = (saved[k].copy() for k in ("y", "A", "B", "Q"))
+                code_rows = np.flatnonzero(np.all(A == 0., axis=1))
+                meta = dict(entry["metadata"], baseline_frame="NED", original_baseline_frame="ECEF",
+                    source="saved_raw_dual_receiver_DD", source_file=str(path), source_time_s=t,
+                    code_rows=len(code_rows), code_row_indices=code_rows.tolist(), row_units="m",
+                    partial_classification="requires_physical_arc_relation_policy_not_fixed_satellite_count")
+                event["carrier"] = EpochBlock(t, y, A, B @ rotation, Q, tuple(entry["ambiguity_labels"]), meta)
+                built_count += 1
+                first_carrier = t if first_carrier is None else first_carrier
+            else:
+                unavailable[status] = unavailable.get(status, 0)+1
+        events.append(event)
+        previous = t
+    previous_p = [r for r in gnss if r["time_s"] <= config.start_s and r["position_valid"]]
+    previous_v = [r for r in gnss if r["time_s"] <= config.start_s and r["velocity_valid"]]
+    def initial_source(rows, field, covariance):
+        if not rows:
+            return None
+        r = rows[-1]
+        return dict(source_time_s=r["time_s"], source_row=r["source_row"],
+                    value=r[field], covariance=r[covariance], leverarm_body_m=lever.copy(),
+                    role="source_context_not_an_extra_factor_or_synchronized_measurement")
+    metadata = dict(schema="joint_navigation.BY2_real_inputs.v1", data_mode="real_by2_raw",
+        sequence="BY2", base_time_unix_s=config.base_time_unix_s,
+        window_s=[config.start_s, config.end_s], key_dt_s=config.key_dt_s,
+        baseline_body=np.array([0., -.35, 0.]), body_frame="FRD", world_frame="FIXED_LOCAL_NED",
+        gravity_n=np.array([0., 0., float(calibration["g_local_mps2"])]),
+        origin_blh_deg_m=origin, origin_ecef_m=ecef_origin, R_ecef_from_ned=rotation,
+        origin_source_time_s=None if origin_source is None else origin_source["time_s"],
+        origin_role="coordinate_definition_not_independent_navigation_observation",
+        imu_row_order=("dt", "ax", "ay", "az", "gx", "gy", "gz"),
+        imu_interval_source_columns=("segment_start_s", "segment_end_s", "source_time_s", "source_noise_interval_s"),
+        imu_source_noise_interval="original_increment_generation_dt; shared_across_split_or_held_segments_of_one_source_sample",
+        last_gyro_source_noise_interval="original_dt_of_explicit_GNSS_angular_rate_source; source_noise_interval_s_is_an_alias",
+        gnss_angular_rate_sampling="last_arrived_IMU_source_at_or_before_event; available_for_empty_packet; can_differ_from_last_integration_segment_source",
+        imu_sampling="calibrated_increment_over_original_dt_then_causal_previous_sample_ZOH",
+        imu_availability="integer_body_stamp; no next_sample_used_before_arrival",
+        imu_quadrature_change="causal_rate_hold_differs_from_original_current_sample_times_previous_dt",
+        imu_calibration=dict(already_applied=True, flu_to_frd=True, install_rpy_deg=[-1., 0., 0.],
+            initial_gyro_mean_samples=1000, accel_scale=float(calibration["s"]),
+            initial_gyro_mean_prefix_end_time_s=body[999]["time_s"],
+            static_scale_development_dataset="BY2; inherited calibration, not refitted here",
+            initial_gyro_mean_uncertainty="shared_prefix_dependence_not_independently_calibrated"),
+        foot_sigma=.01, foot_correlation_tau_s=.08,
+        foot_noise_model="inherited_stationary_body_frame_AR1_working_model_not_field_calibrated",
+        support_eligibility_policy="explicit_provider_hysteresis_tokens_no_second_force_threshold",
+        force_on=FROZEN_CONTACT_ON_THRESHOLDS, force_off=FROZEN_CONTACT_OFF_THRESHOLDS,
+        force_dwell_s=FROZEN_CONTACT_DWELL_SECONDS, force_max_source_gap_s=.05,
+        foot_order=NATIVE_FOOT_ORDER, foot_to_imu_translation_body_m=np.zeros(3),
+        foot_origin_assumption="SDK_body_origin_equals_IMU_origin_working_assumption",
+        physical_no_slip_certified=False, foot_force_units="uncalibrated_SDK_proxy",
+        foot_observations="new_measurement_only_at_its_actual_body_event; latest_feet_are_context_only",
+        gnss_measurement_point="GNSS1_ANTENNA", gnss_leverarm_body_m=lever,
+        gnss_covariance_policy="per_event_source_sigma_rotated_to_fixed_NED",
+        source_noise_assumption="raw_DD_and_receiver_PV_share_GNSS; SDK_foot_IMU_dependence_unknown",
+        source_cross_covariance_available=False, independent_streams=False,
+        heading_source="raw_code_carrier_EpochBlock_only", PVT_heading_consumed=False,
+        SDK_yaw_consumed=False, SDK_velocity_consumed=False, reference_read=False,
+        full_phase_relations_policy="variable_physical_arc_relations_not_synthetic_five_relation_rule",
+        initialization=dict(status="BACKEND_POLICY_REQUIRED", first_built_carrier_time_s=first_carrier,
+            prior_receiver_position=initial_source(previous_p, "position_ned", "position_covariance"),
+            prior_receiver_velocity=initial_source(previous_v, "velocity_ned", "velocity_covariance"),
+            simultaneous_pv_carrier_assumed=False, future_carrier_backfilled=False),
+        required_backend_support=["asynchronous_initialization", "per_event_PV_covariance_and_antenna_model",
+                                  "provider_support_eligibility", "physical_partial_arc_relation_policy"],
+        **_noise_metadata(config, calibration))
+    packets = [event["imu"] for event in events if len(event["imu"])]
+    total_dt = sum(float(np.sum(packet[:, 0])) for packet in packets)
+    source_intervals = np.concatenate([event["imu_interval_sources"] for event in events if len(event["imu"])])
+    summary = dict(**body_summary, event_count=len(events), first_event_time_s=event_times[0],
+        last_event_time_s=event_times[-1], gnss_source_epochs=len(gnss_rows),
+        valid_position_epochs=sum(r["position_valid"] for r in gnss_rows),
+        valid_velocity_epochs=sum(r["velocity_valid"] for r in gnss_rows),
+        carrier_source_slots=len(carrier_rows), carrier_built_epochs=built_count,
+        carrier_unavailable_by_status=unavailable, first_built_carrier_time_s=first_carrier,
+        foot_measurement_count=sum(len(event["feet"]) for event in events),
+        imu_rate_samples_available=len(imu_times), imu_segments=sum(len(packet) for packet in packets),
+        integrated_duration_s=total_dt, requested_duration_s=config.end_s-config.start_s,
+        maximum_imu_packet_duration_error_s=max(abs(float(np.sum(event["imu"][:, 0]))-(event["time_s"]-(events[i-1]["time_s"] if i else config.start_s))) for i, event in enumerate(events)),
+        maximum_IMU_source_minus_segment_start_s=float(np.max(source_intervals[:, 2]-source_intervals[:, 0])),
+        foot_measurements_have_exact_event_time=all(foot["source_time_s"] == event["time_s"] for event in events for foot in event["feet"]),
+        coordinate_rotation_orthogonality_error=float(np.max(np.abs(rotation.T@rotation-np.eye(3)))),
+        navigation_calls=0, evaluator_calls=0, reference_reads=0,
+        source_paths={name: str(getattr(config, name)) for name in (
+            "body_path", "imu_path", "gnss_path", "carrier_plan_path", "calibration_model_path", "imu_noise_profile_path")})
+    return dict(events=events, metadata=metadata, input_summary=summary)

@@ -19,7 +19,10 @@
     "Source-backed numerical record and continuous process figure pushed with code",
     "Shared-graph component models preserve unaffected feet, original per-arc error correlations and changing two/three/four-foot subsets",
     "Joint pre-consumption external prediction interface and physical baseline tangent covariance readout",
-    "Continuation U3 completed all 90 seconds and 1287 causal outputs; automatic model competition remains unfinished"
+    "Continuation U3 completed all 90 seconds and 1287 causal outputs; automatic model competition remains unfinished",
+    "Automatic competing source models and per-integer-lineage pre-consumption predictive evidence integrated into the shared navigator",
+    "Physical BY2 input adapter and per-event antenna observation model; BY navigation not yet run",
+    "Explicit sparse QR fixes the actual 5.4-second conditional covariance failure without adding information; 18 necessary mathematical checks pass"
   ],
   "not_proven": [
     "Material legged contribution to heading qualification or integer-candidate acceptance",
@@ -30,16 +33,28 @@
     "Same-version SDK and frozen V3 system adoption value on real data"
   ],
   "next_core_work": [
-    "Joint predictive comparison of fixed-contact/common-translation-release/relative-release hypotheses using retained support history",
-    "Integrate checked arc-scoped component models into model competition and historical replay",
-    "Continuous direction support and acceptance evidence, including real initialization qualification",
-    "Complete the same 90-second process before broadening seeds and real-data evaluation"
+    "Complete the running identical-stream 90-second U0/U1/U3/U2 cohort and evaluate natural model support, published navigation and retained information",
+    "Address mechanism failures using the joint model rather than thresholds tuned to this realization",
+    "Implement asynchronous real initialization and physical carrier relation continuity, then BY development and frozen real evaluation"
   ],
   "data_policy": {
     "development": "BY",
-    "frozen_parameter_test": ["BYO", "BYH"],
-    "adverse_real_conditions": ["XB series", "NMB series"],
-    "persistent_comparators": ["same-backend no-foot", "same-backend SDK velocity source", "frozen V3"],
+    "frozen_parameter_test": [
+      "BYO",
+      "BYH"
+    ],
+    "adverse_real_conditions": [
+      "XB series",
+      "NMB series"
+    ],
+    "persistent_comparators": [
+      "same-backend no-foot",
+      "same-backend SDK velocity source",
+      "frozen V3"
+    ],
     "real_velocity_accuracy_claim_allowed": false
-  }
+  },
+  "latest_implementation": "predictive_model_competition_with_same_causal_controller_U2_U3",
+  "latest_full_cohort": "cohort_predictive_qr_20261008_seed6100801",
+  "latest_full_cohort_status_at_commit": "RUNNING_NOT_RESULT_EVIDENCE"
 }

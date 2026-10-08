@@ -331,3 +331,62 @@ def gnss_position_velocity_factor(pose_key, velocity_key, position, velocity, co
         return np.r_[pose.translation(), values.atVector(velocity_key)]-measured
 
     return gtsam.CustomFactor(noise, [pose_key, velocity_key], error)
+
+
+def gnss_antenna_prediction(pose, velocity, gyro_bias, position_lever, velocity_lever, angular_rate):
+    """Predict original antenna observations in the navigation frame."""
+    rotation = pose.rotation().matrix()
+    relative_velocity = np.cross(np.asarray(angular_rate)-np.asarray(gyro_bias), velocity_lever)
+    return (pose.translation()+rotation@position_lever,
+            np.asarray(velocity)+rotation@relative_velocity)
+
+
+def gnss_antenna_factor(pose_key, velocity_key, bias_key, position, velocity, covariance,
+                        position_lever, velocity_lever, angular_rate):
+    """Original antenna p/v likelihood; angular-rate noise is in supplied covariance.
+
+    Bias is estimated jointly; the measured angular rate is a causal source
+    sample, never a truth rate or a GNSS-precorrected independent observation.
+    The caller owns its measurement-noise covariance and shared-IMU dependence.
+    """
+    has_position, has_velocity = position is not None, velocity is not None
+    position_lever = np.asarray(position_lever, float).copy()
+    velocity_lever = np.asarray(velocity_lever, float).copy()
+    angular_rate = np.asarray(angular_rate, float).copy()
+    bias_used = has_velocity and np.any(velocity_lever != 0.)
+    keys = [pose_key]
+    if has_velocity:
+        keys.append(velocity_key)
+    if bias_used:
+        keys.append(bias_key)
+    measured = np.concatenate([np.asarray(z, float) for z in (position, velocity) if z is not None])
+    dimension = len(measured)
+    noise = gtsam.noiseModel.Gaussian.Covariance(np.asarray(covariance, float))
+
+    def error(_factor, values, jacobians):
+        pose = values.atPose3(pose_key)
+        speed = values.atVector(velocity_key) if has_velocity else np.zeros(3)
+        gyro_bias = values.atConstantBias(bias_key).gyroscope() if bias_used else np.zeros(3)
+        p, v = gnss_antenna_prediction(pose, speed, gyro_bias, position_lever, velocity_lever, angular_rate)
+        if jacobians is not None:
+            rotation = pose.rotation().matrix()
+            h_pose = np.zeros((dimension, 6), order="F")
+            offset = 0
+            if has_position:
+                h_pose[:3, :3] = -rotation@_skew(position_lever)
+                h_pose[:3, 3:] = rotation
+                offset = 3
+            if has_velocity:
+                relative_velocity = np.cross(angular_rate-gyro_bias, velocity_lever)
+                h_pose[offset:, :3] = -rotation@_skew(relative_velocity)
+                h_velocity = np.zeros((dimension, 3), order="F")
+                h_velocity[offset:] = np.eye(3)
+                jacobians[1] = h_velocity
+                if bias_used:
+                    h_bias = np.zeros((dimension, 6), order="F")
+                    h_bias[offset:, 3:] = rotation@_skew(velocity_lever)
+                    jacobians[2] = h_bias
+            jacobians[0] = h_pose
+        return np.concatenate([z for z, used in ((p, has_position), (v, has_velocity)) if used])-measured
+
+    return gtsam.CustomFactor(noise, keys, error)

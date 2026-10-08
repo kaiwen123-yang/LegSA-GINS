@@ -9,14 +9,16 @@ from legsa_gins.paper_rebuild.joint_navigation.factors import carrier_factor, ca
 from legsa_gins.paper_rebuild.joint_navigation.factors import (
     ar1_error_factor, foot_error_coordinate_factor, point3_coordinate_factor,
     relative_geometry_coordinate_factor, projected_foot_factor, gnss_position_velocity_factor,
+    gnss_antenna_factor, gnss_antenna_prediction,
 )
 
 
 def central_jacobian(factor, values, keys_and_types, epsilon=1e-6):
     columns = []
     for key, kind in keys_and_types:
-        original = values.atPose3(key) if kind == "pose" else values.atVector(key)
-        dimension = 6 if kind == "pose" else len(original)
+        original = (values.atPose3(key) if kind == "pose" else
+                    values.atConstantBias(key) if kind == "bias" else values.atVector(key))
+        dimension = 6 if kind in ("pose", "bias") else len(original)
         for index in range(dimension):
             delta = np.zeros(dimension)
             delta[index] = epsilon
@@ -25,6 +27,9 @@ def central_jacobian(factor, values, keys_and_types, epsilon=1e-6):
             if kind == "pose":
                 plus.update(key, original.retract(delta))
                 minus.update(key, original.retract(-delta))
+            elif kind == "bias":
+                plus.update(key, gtsam.imuBias.ConstantBias(original.accelerometer()+delta[:3], original.gyroscope()+delta[3:]))
+                minus.update(key, gtsam.imuBias.ConstantBias(original.accelerometer()-delta[:3], original.gyroscope()-delta[3:]))
             else:
                 plus_vector, minus_vector = gtsam.Values(), gtsam.Values()
                 plus_vector.insert_vector(key, original + delta)
@@ -252,8 +257,14 @@ class JointNavigationFactorsTest(unittest.TestCase):
         self.assertGreater(branch.window.marginalized_total, 0)
         self.assertEqual(set(branch.foot_noise_history), {f"arc{i}" for i in range(4)})
         # State and factor closures remain reproducible from an actual snapshot.
+        branch.predictive_score = 17.3
+        branch.predictive_row_count = 21
+        branch.predictive_frontier = len(subsets)-1
+        branch.integer_lineage = (("physical_proposal", ("arc", 2)),)
         restored = NavigationBranch(branch.metadata)
         restored.restore(branch.snapshot())
+        for name in ("predictive_score", "predictive_row_count", "predictive_frontier", "integer_lineage"):
+            self.assertEqual(getattr(restored, name), getattr(branch, name))
         event = self._stationary_event(len(subsets), (0, 1, 2, 3))
         np.testing.assert_allclose(restored.predict_external(event)["covariance"],
                                    branch.predict_external(event)["covariance"], atol=1e-12)
@@ -282,6 +293,182 @@ class JointNavigationFactorsTest(unittest.TestCase):
         self.assertTrue(np.all(np.linalg.eigvalsh(branch.predict_external(
             self._stationary_event(5, range(4)))["covariance"]) > 0.))
 
+    def test_external_prediction_matches_actual_imu_factor_under_rotation(self):
+        from gtsam.symbol_shorthand import X, V
+        from legsa_gins.paper_rebuild.joint_navigation.branch import NavigationBranch
+        metadata = dict(baseline_body=[0., -.35, 0.], accel_noise_density=.1,
+                        gyro_noise_density=.02, accel_bias_random_walk=.0002,
+                        gyro_bias_random_walk=.00002)
+        branch = NavigationBranch(metadata, use_foot=False)
+        branch.step(self._stationary_event(0, ()), 0)
+        event = self._stationary_event(1, ())
+        event["time_s"] = 1.
+        event["imu"] = np.tile([.01, .1, .2, -9.7, .2, .1, .4], (100, 1))
+        prediction = branch.predict_external(event)
+        # Independent oracle: really add the source IMU factor, but no current
+        # GNSS/carrier/foot observation, then query the propagated joint state.
+        propagated = NavigationBranch(metadata, use_foot=False)
+        propagated.restore(branch.snapshot())
+        propagated.step(dict(event, gnss_position=None, gnss_velocity=None, carrier=None), 1)
+        covariance = propagated.joint_covariance([X(1), V(1)])
+        rotation = propagated.pose.rotation().matrix()
+        baseline = np.asarray(metadata["baseline_body"])
+        x, y, z = baseline
+        skew = np.array([[0., -z, y], [z, 0., -x], [-y, x, 0.]])
+        H = np.zeros((9, 9))
+        H[:3, 3:6] = rotation
+        H[3:6, 6:9] = np.eye(3)
+        H[6:, :3] = -rotation@skew
+        sensor = np.diag([.05**2]*3+[.03**2]*3+[.0001]*3)
+        expected = H@covariance@H.T+sensor
+        np.testing.assert_allclose(prediction["covariance"], expected, atol=2e-8, rtol=2e-8)
+        legacy_r, legacy_s = branch.predict_gnss_position(event)
+        np.testing.assert_allclose(legacy_r, prediction["innovation"][:3], atol=1e-12)
+        np.testing.assert_allclose(legacy_s, expected[:3, :3], atol=2e-8, rtol=2e-8)
+
+    def test_external_prediction_uses_only_common_physically_predictable_rows(self):
+        from legsa_gins.paper_rebuild.joint_navigation.branch import NavigationBranch
+        metadata = dict(baseline_body=[0., -.35, 0.])
+        branch = NavigationBranch(metadata, use_foot=False)
+        branch.step(self._stationary_event(0, ()), 0)
+        event = self._stationary_event(1, ())
+        B = np.vstack([np.eye(3), np.eye(3)])
+        A = np.r_[np.zeros(3), np.ones(3)].reshape(6, 1)
+        root = np.array([[.01, 0.], [.003, .007]])
+        block_covariance = np.kron(root@root.T, np.eye(3))
+        event["carrier"] = EpochBlock(.1, B@np.array(metadata["baseline_body"]), A, B,
+                                       block_covariance, ("new_physical_arc",))
+        before = branch.snapshot()
+        prediction = branch.predict_external(event)
+        self.assertEqual(prediction["excluded_unknown_ambiguity_rows"], [3, 4, 5])
+        self.assertEqual(len(prediction["row_ids"]), 9)
+        self.assertFalse(branch.ambiguity_keys)
+        self.assertEqual(tuple(branch.window.values.keys()), tuple(before.window.values.keys()))
+        self.assertEqual(branch.window.error(), sum(f.error(before.window.values)
+                         for f in before.window.factors)+before.window.objective_offset)
+        # Marginalizing unavailable rows takes Q[known,known], not the smaller
+        # conditional covariance obtained by pretending the omitted rows are known.
+        code_event = dict(event, carrier=EpochBlock(.1, event["carrier"].y[:3],
+                          np.empty((3, 0)), B[:3], block_covariance[:3, :3], ()))
+        code_prediction = branch.predict_external(code_event)
+        self.assertEqual(prediction["row_ids"], code_prediction["row_ids"])
+        np.testing.assert_allclose(prediction["covariance"], code_prediction["covariance"], atol=1e-12)
+
+    def test_antenna_factor_pose_velocity_bias_jacobians(self):
+        velocity_key, bias_key = gtsam.symbol("v", 1), gtsam.symbol("b", 1)
+        self.values.insert_vector(velocity_key, np.array([.3, .1, -.02]))
+        self.values.insert(bias_key, gtsam.imuBias.ConstantBias([.01, -.02, .03], [.001, -.002, .003]))
+        covariance = np.eye(6)*.01
+        covariance[:3, 3:] = covariance[3:, :3] = np.eye(3)*.002
+        options = ([.03, .03, -.30], [.04, -.02, -.26], [.4, -.2, .1])
+        factor = gnss_antenna_factor(self.x1, velocity_key, bias_key, [1., 2., .5], [.2, .1, 0.], covariance, *options)
+        numeric = central_jacobian(factor, self.values,
+                                   [(self.x1, "pose"), (velocity_key, "vector"), (bias_key, "bias")])
+        linear = factor.linearize(self.values)
+        np.testing.assert_allclose(linear.getA(), numeric, atol=2e-8, rtol=2e-8)
+        for p, v, C in (([1., 2., .5], None, covariance[:3, :3]),
+                        (None, [.2, .1, 0.], covariance[3:, 3:])):
+            part = gnss_antenna_factor(self.x1, velocity_key, bias_key, p, v, C, *options)
+            types = [(key, "pose" if key == self.x1 else "bias" if key == bias_key else "vector")
+                     for key in part.keys()]
+            linear = part.linearize(self.values)
+            np.testing.assert_allclose(linear.getA(), central_jacobian(part, self.values, types), atol=2e-8, rtol=2e-8)
+
+    def test_event_antenna_prediction_and_consumption_share_covariance(self):
+        from gtsam.symbol_shorthand import X, V, B
+        from legsa_gins.paper_rebuild.joint_navigation.branch import NavigationBranch
+        metadata = dict(baseline_body=[0., -.35, 0.], accel_noise_density=.01,
+                        gyro_noise_density=.002, accel_bias_random_walk=.0002,
+                        gyro_bias_random_walk=.0002)
+        branch = NavigationBranch(metadata, use_foot=False)
+        branch.step(self._stationary_event(0, ()), 0)
+        event = self._stationary_event(1, ())
+        event["imu"] = np.tile([.01, .1, .2, -9.7, .2, .1, .4], (10, 1))
+        event.update(gnss_position_leverarm_body_m=np.array([.03, .03, -.3]),
+                     gnss_velocity_leverarm_body_m=np.array([.04, -.02, -.26]),
+                     gnss_angular_rate_body_rad_s=np.array([.21, .11, .39]),
+                     gnss_angular_rate_source_time_s=.098,
+                     last_gyro_source_noise_interval_s=.003,
+                     gnss_position_covariance=np.diag([.04, .03, .02])**2,
+                     gnss_velocity_covariance=np.array([[.004, .0002, 0.], [.0002, .002, 0.], [0., 0., .003]]))
+        prediction = branch.predict_external(event)
+        propagated = NavigationBranch(metadata, use_foot=False)
+        propagated.restore(branch.snapshot())
+        propagated.step(dict(event, gnss_position=None, gnss_velocity=None, carrier=None), 1)
+        P = propagated.joint_covariance([X(1), V(1), B(1)])
+        pose, rotation = propagated.pose, propagated.pose.rotation().matrix()
+        p_lever, v_lever = event["gnss_position_leverarm_body_m"], event["gnss_velocity_leverarm_body_m"]
+        omega = event["gnss_angular_rate_body_rad_s"]
+        relative = np.cross(omega-propagated.bias.gyroscope(), v_lever)
+        skew = branch._skew
+        H = np.zeros((9, 15))
+        H[:3, :3], H[:3, 3:6] = -rotation@skew(p_lever), rotation
+        H[3:6, :3], H[3:6, 6:9], H[3:6, 12:15] = -rotation@skew(relative), np.eye(3), rotation@skew(v_lever)
+        H[6:, :3] = -rotation@skew(np.asarray(metadata["baseline_body"]))
+        physical = branch._gnss_inputs(event, pose)
+        noise = np.zeros((9, 9));noise[:6, :6] = physical["covariance"];noise[6:, 6:] = np.eye(3)*.0001
+        np.testing.assert_allclose(prediction["covariance"], H@P@H.T+noise, atol=2e-8, rtol=2e-8)
+        expected_p, expected_v = gnss_antenna_prediction(pose, propagated.velocity, propagated.bias.gyroscope(), p_lever, v_lever, omega)
+        np.testing.assert_allclose(prediction["predicted"][:6], np.r_[expected_p, expected_v], atol=1e-10)
+        gyro_map = -rotation@skew(v_lever)
+        extra = gyro_map@(np.eye(3)*metadata["gyro_noise_density"]**2/.003)@gyro_map.T
+        np.testing.assert_allclose(physical["covariance"][3:, 3:], event["gnss_velocity_covariance"]+extra, atol=1e-12)
+        self.assertGreater(np.trace(extra), 0.)
+        self.assertIn("cross_unmodelled", prediction["source_covariance_assumption"])
+        # Actually consume the event; the custom factor receives the identical
+        # covariance at the same predicted pose, not a pre-corrected p/v product.
+        branch.step(event, 1)
+        antenna = next(f for f in branch.window.factors if tuple(f.keys()) == (X(1), V(1), B(1)))
+        np.testing.assert_allclose(antenna.noiseModel().covariance(), physical["covariance"], atol=1e-12)
+
+    def test_provider_eligibility_is_not_rethresholded(self):
+        from legsa_gins.paper_rebuild.joint_navigation.branch import NavigationBranch
+        branch = NavigationBranch(dict(baseline_body=[0., -.35, 0.]))
+        event = self._stationary_event(0, (0, 1))
+        event["feet"][0].update(support_eligible=True, force=1.)
+        event["feet"][1].update(support_eligible=False, force=1000.)
+        branch.step(event, 0)
+        self.assertEqual(branch.last_factor_counts["foot"], 1)
+        self.assertEqual(set(branch.contact_keys), {"arc0"})
+
+    def test_initial_released_group_predicts_after_lag_marginalization(self):
+        from gtsam.symbol_shorthand import X, V
+        from legsa_gins.paper_rebuild.joint_navigation.navigator import JointNavigator
+        from legsa_gins.paper_rebuild.joint_navigation.synthetic import generate_scene
+        scene = generate_scene(duration_s=90., seed=6100801)
+        # First observed support pair, chosen from input topology, not fault truth.
+        arcs = tuple(sorted(foot["arc_id"] for foot in scene["events"][0]["feet"]))
+        model = dict(group_id="initial_pair", arc_ids=arcs, mode="common_translation_release")
+        navigator = JointNavigator(scene["metadata"], "U3", monitor_support=False, support_models=[model])
+        compared = False
+        for index, event in enumerate(scene["events"]):
+            if event["time_s"] > 5.6 + 1e-9:
+                break
+            navigator.events.append((index, event))
+            if abs(event["time_s"] - 5.4) < 1e-9:
+                branch = navigator.branches[0]
+                self.assertGreater(branch.window.marginalized_total, 0)
+                self.assertTrue(branch.integer_lineage)
+                keys = [X(branch.index), V(branch.index), branch.bias_key,
+                        *branch.ambiguity_keys.values()]
+                sparse = branch.joint_covariance(keys)
+                linear = branch.window.graph.linearize(branch.window.values)
+                other = [key for key in branch.window.values.keys() if key not in keys]
+                # Independent dense constrained QR oracle at the formerly
+                # failing state; production uses sparse local QR throughout.
+                dense = gtsam.JacobianFactor(linear, branch._ordering([*other, *keys]))
+                _, remainder = dense.eliminate(branch._ordering(other))
+                final = gtsam.GaussianFactorGraph(); final.push_back(remainder)
+                dense = gtsam.JacobianFactor(final, branch._ordering(keys))
+                conditional, _ = dense.eliminate(branch._ordering(keys))
+                root = np.linalg.solve(conditional.R(), np.diag(conditional.get_model().sigmas()))
+                np.testing.assert_allclose(sparse, root @ root.T, atol=1e-10, rtol=1e-6)
+                self.assertGreater(np.linalg.eigvalsh(sparse)[0], 0.)
+                compared = True
+            navigator._advance(navigator._filter(event), index)
+        self.assertTrue(compared)
+        self.assertGreater(navigator.branches[0].predictive_frontier, 81)
+
     def test_joint_gnss_prediction_noise_matches_consumed_factor(self):
         velocity_key = gtsam.symbol("v", 1)
         self.values.insert_vector(velocity_key, np.array([.2, .1, -.01]))
@@ -289,7 +476,8 @@ class JointNavigationFactorsTest(unittest.TestCase):
         covariance[:3, 3:] = covariance[3:, :3] = np.eye(3)*.003
         factor = gnss_position_velocity_factor(self.x1, velocity_key, [1., 2., .5], [0., 0., 0.], covariance)
         numeric = central_jacobian(factor, self.values, [(self.x1, "pose"), (velocity_key, "vector")])
-        np.testing.assert_allclose(factor.linearize(self.values).getA(), numeric, atol=2e-8, rtol=2e-8)
+        linear = factor.linearize(self.values)
+        np.testing.assert_allclose(linear.getA(), numeric, atol=2e-8, rtol=2e-8)
 
     def test_differential_support_analytic_jacobians(self):
         measured, previous = np.array([.2, -.21, -.49]), np.array([.22, -.22, -.5])
