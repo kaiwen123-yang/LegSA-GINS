@@ -109,6 +109,8 @@ def main(argv=None):
     parser.add_argument("--end", type=float, default=101.)
     parser.add_argument("--key-dt", type=float, default=.1)
     parser.add_argument("--mode", choices=("U0", "U1", "U2", "U3"), default="U1")
+    parser.add_argument("--support-inference", choices=("full_nonlinear", "shared_linearization"),
+                        default="full_nonlinear")
     parser.add_argument("--output-root", type=Path, required=True)
     args = parser.parse_args(argv)
     output = args.output_root.resolve()
@@ -123,6 +125,7 @@ def main(argv=None):
     record = dict(
         status="STARTING", started_at_utc=datetime.now(timezone.utc).isoformat(),
         data_mode="real_by2_raw", sequence="BY2", mode=args.mode,
+        support_inference=args.support_inference,
         window_s=[args.start, args.end], key_dt_s=args.key_dt,
         purpose="REAL_ASYNCHRONOUS_INITIALIZATION_INTEGRATION_ONLY",
         estimator_truth_input=False, synthetic_data_used=False, reference_reads=0,
@@ -155,6 +158,7 @@ def main(argv=None):
         record["status"] = "READING_INPUT"
         write_json(output / "run_status.json", record)
         inputs = load_by2_events(config)
+        inputs["metadata"]["support_inference"] = args.support_inference
         write_json(output / "input_summary.json", inputs["input_summary"])
         write_json(output / "sensor_metadata.json", inputs["metadata"])
         record.update(status="RUNNING", input_event_count=len(inputs["events"]),

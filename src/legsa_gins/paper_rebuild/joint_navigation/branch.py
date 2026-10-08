@@ -93,6 +93,108 @@ class NavigationBranch:
         self.integer_lineage = ()
         self.bootstrap_status = "NOT_REQUESTED"
         self.bootstrap_diagnostics = {}
+        self.linearization_scope = {"kind": "FULL_NONLINEAR_CONDITIONAL"}
+        self._factor_seed_values = None
+        self.background_chart_id = ("SYNTHETIC_CODE_INITIALIZATION",)
+
+    def export_linearization_anchor(self) -> dict:
+        """Copy a background chart with physical, rather than local-key, identity.
+
+        A controller can store this before startup marginalization and at each
+        history frontier. An exported conditional Gaussian mean is explicitly
+        identified and must not be mistaken for a nonlinear background solve.
+        """
+        return dict(values=gtsam.Values(self.window.values),
+                    ambiguity_keys=dict(self.ambiguity_keys), contact_keys=dict(self.contact_keys),
+                    index=self.index, time_s=self.time, integer_lineage=deepcopy(self.integer_lineage),
+                    background_chart_id=deepcopy(self.background_chart_id),
+                    scope=("GAUSSIAN_CONDITIONAL_MEAN" if self.window.gaussian_only else
+                           "BACKGROUND_NONLINEAR_ANCHOR"))
+
+    @staticmethod
+    def _copy_chart_value(target, key, source, source_key):
+        symbol = chr(gtsam.Symbol(key).chr())
+        if symbol == "x":
+            value = source.atPose3(source_key)
+        elif symbol == "b":
+            value = source.atConstantBias(source_key)
+        elif symbol in ("c", "d"):
+            value = source.atPoint3(source_key)
+        else:
+            value = source.atVector(source_key)
+        if target.exists(key):
+            target.erase(key)
+        if symbol in ("c", "d"):
+            target.insert_point3(key, value)
+        elif symbol in ("x", "b"):
+            target.insert(key, value)
+        else:
+            target.insert_vector(key, value)
+
+    def _model_linearization_values(self, anchor: dict, new_values=None):
+        """Map common physical variables; retain each nuisance's own old chart.
+
+        Contact/direction/common-error serial keys differ between support models.
+        Numeric equality of their keys therefore never implies shared identity.
+        Historical common variables absent from a later background lag retain
+        their last common chart, supplied by checkpoint/replay, not a new chart
+        at the conditional shadow mean.
+        """
+        source = anchor["values"]
+        parent = tuple(anchor["integer_lineage"])
+        lineage = tuple(self.integer_lineage)
+        if lineage[:len(parent)] != parent:
+            raise ValueError("background anchor is not this integer lineage or an ancestor")
+        previous = self.window.linearization_values if self.window.gaussian_only else self.window.values
+        result = gtsam.Values(previous)
+        if new_values is not None:
+            for key in new_values.keys():
+                self._copy_chart_value(result, key, new_values, key)
+        required = set(self.window.values.keys()) | (set() if new_values is None else set(new_values.keys()))
+        for key in list(result.keys()):
+            if key not in required:
+                result.erase(key)
+        matched, frozen = [], []
+        for key in required:
+            if chr(gtsam.Symbol(key).chr()) not in ("x", "v", "b"):
+                continue
+            if source.exists(key):
+                self._copy_chart_value(result, key, source, key)
+                matched.append(key)
+            else:
+                # A fresh event key needs a real common background chart.
+                if new_values is not None and new_values.exists(key):
+                    raise ValueError("shared linearization anchor lacks current navigation state")
+                frozen.append(key)
+        unmapped = {}
+        for mapping_name in ("ambiguity_keys", "contact_keys"):
+            unmapped[mapping_name] = []
+            target_mapping = getattr(self, mapping_name)
+            source_mapping = anchor[mapping_name]
+            for identity, key in target_mapping.items():
+                other = source_mapping.get(identity)
+                if key in required and other is not None and source.exists(other):
+                    self._copy_chart_value(result, key, source, other)
+                    matched.append(key)
+                elif key in required:
+                    unmapped[mapping_name].append(identity)
+        self.linearization_scope = dict(
+            kind="COMMON_LINEARIZATION_GAUSSIAN_CONDITIONAL", qualification_scope="COMMON_LINEARIZATION_ONLY",
+            reference_scope=anchor["scope"], reference_index=anchor["index"],
+            reference_time_s=anchor["time_s"], reference_integer_lineage=deepcopy(parent),
+            lineage_relation="EXACT" if lineage == parent else "ANCESTOR_CONDITIONED",
+            shared_variable_count=len(matched), shared_variable_keys=tuple(sorted(matched)),
+            frozen_history_keys=tuple(sorted(frozen)),
+            unmapped_ambiguity_labels=tuple(unmapped["ambiguity_keys"]),
+            unmapped_contact_arcs=tuple(unmapped["contact_keys"]),
+            background_chart_id=deepcopy(anchor.get("background_chart_id")),
+            model_specific_nuisance_charts=True, strict_nonlinear_model_exclusion=False)
+        return result
+
+    def _seed_source(self, values, key):
+        if values.exists(key):
+            return values
+        return self.window.values if self._factor_seed_values is None else self._factor_seed_values
 
     @staticmethod
     def _sigmas(value, dimension=3):
@@ -167,7 +269,7 @@ class NavigationBranch:
         for j, label in enumerate(labels):
             if label not in unknown:
                 key = self.ambiguity_keys[label]
-                source = values if values.exists(key) else self.window.values
+                source = self._seed_source(values, key)
                 residual -= np.asarray(block.A)[:, j] * source.atVector(key)[0]
         if unknown:
             columns = [labels.index(label) for label in unknown]
@@ -218,8 +320,7 @@ class NavigationBranch:
             new_set = set(new_keys)
             design = np.array([[relation.get(key, 0) for key in new_keys]
                                for relation in added_coordinates], dtype=float)
-            target = np.array([-sum(coefficient*(
-                values if values.exists(key) else self.window.values).atVector(key)[0]
+            target = np.array([-sum(coefficient*self._seed_source(values, key).atVector(key)[0]
                 for key, coefficient in relation.items() if key not in new_set)
                 for relation in added_coordinates])
             initial = np.array([values.atVector(key)[0] for key in new_keys])
@@ -267,7 +368,7 @@ class NavigationBranch:
         return key
 
     def _point(self, key, values):
-        return values.atPoint3(key) if values.exists(key) else self.window.values.atPoint3(key)
+        return self._seed_source(values, key).atPoint3(key)
 
     def _previous_foot_error(self, arc):
         if arc in self.foot_error_history:
@@ -392,7 +493,8 @@ class NavigationBranch:
                 point = np.zeros(3) if point_key is None else self._point(point_key, values)
                 history = self._previous_foot_error(foot["arc_id"])
                 previous_error = (np.zeros(3) if history is None else
-                    math.exp(-(self.time-history[1])/self.foot_tau)*history[0].evaluate(self.window.values))
+                    math.exp(-(self.time-history[1])/self.foot_tau)*history[0].evaluate(
+                         self.window.values if self._factor_seed_values is None else self._factor_seed_values))
                 seeds.append(pose.rotation().unrotate(point)-np.asarray(foot["point_body"])-previous_error)
             values.insert_vector(common_key, np.mean(seeds, axis=0))
             times[common_key] = self.time
@@ -445,6 +547,24 @@ class NavigationBranch:
         COLAMD keeps the query variables last without densifying the whole graph.
         Fixed-contact branches keep their original marginal operation.
         """
+        if self.window.gaussian_only:
+            covariance = self.window.joint_covariance(keys)
+            sizes = [len(self.window.linearization_delta.at(key)) for key in keys]
+            transport = np.eye(sum(sizes))
+            offset, epsilon = 0, 1e-6
+            for key, size in zip(keys, sizes):
+                if chr(gtsam.Symbol(key).chr()) == "x":
+                    origin = self.window.linearization_values.atPose3(key)
+                    mean = self.window.values.atPose3(key)
+                    delta = self.window.linearization_delta.at(key)
+                    for column in range(size):
+                        perturbation = np.zeros(size)
+                        perturbation[column] = epsilon
+                        transport[offset:offset+size, offset+column] = (
+                            mean.localCoordinates(origin.retract(delta+perturbation))-
+                            mean.localCoordinates(origin.retract(delta-perturbation)))/(2*epsilon)
+                offset += size
+            return transport @ covariance @ transport.T
         if not self.foot_error_history and not self._carrier_coordinate_constraints:
             joint = gtsam.Marginals(self.window.graph, self.window.values).jointMarginalCovariance(
                 gtsam.KeyVector(keys))
@@ -552,9 +672,11 @@ class NavigationBranch:
         data. No likelihood or state mutation is performed by this method.
         """
         timestamp = float(event["time_s"])
-        pose = self.window.values.atPose3(X(self.index))
-        velocity = self.window.values.atVector(V(self.index))
-        bias = self.window.values.atConstantBias(self.bias_key)
+        gaussian = self.window.gaussian_only
+        chart = self.window.linearization_values if gaussian else self.window.values
+        pose = chart.atPose3(X(self.index))
+        velocity = chart.atVector(V(self.index))
+        bias = chart.atConstantBias(self.bias_key)
         preintegrated = self._preintegrate(event, bias)
         predicted_state = preintegrated.predict(gtsam.NavState(pose, velocity), bias)
         gnss_inputs = self._gnss_inputs(event, predicted_state.pose())
@@ -573,8 +695,8 @@ class NavigationBranch:
                             np.any(np.asarray(block.A)[selected_rows, j] != 0.)]
         keys = [X(self.index), V(self.index), self.bias_key,
                 *[self.ambiguity_keys[label] for label in known_labels]]
-        prior_covariance = self.joint_covariance(keys)
-        n0 = np.array([self.window.values.atVector(self.ambiguity_keys[label])[0]
+        prior_covariance = (self.window.joint_covariance(keys) if gaussian else self.joint_covariance(keys))
+        n0 = np.array([chart.atVector(self.ambiguity_keys[label])[0]
                        for label in known_labels])
         observations, noise_blocks, identities, row_identities, slices = [], [], [], [], {}
         dimension = 0
@@ -628,6 +750,10 @@ class NavigationBranch:
             delta = np.zeros(state_jacobian.shape[1])
             delta[column] = epsilon
             state_jacobian[:, column] = (prediction_at(delta)-prediction_at(-delta))/(2*epsilon)
+
+        if gaussian:
+            delta_mean = np.concatenate([self.window.linearization_delta.at(key) for key in keys])
+            predicted = predicted + state_jacobian @ delta_mean
 
         # Use the actual ImuFactor residual coordinates. PIM covariance is not
         # generally a block of independent end-rotation/start-frame p/v errors;
@@ -687,6 +813,8 @@ class NavigationBranch:
             source_noise_assumption=self.metadata.get("source_noise_assumption",
                 "working_independent_GNSS_product_and_raw_blocks_except_declared_covariances"),
             conditional_on_branch=True,
+            inference_scope=deepcopy(self.linearization_scope),
+            prediction_linearization=("COMMON_ANCHOR_AFFINE_GAUSSIAN" if gaussian else "CONDITIONAL_NONLINEAR_MEAN"),
             source_covariance_assumption=gnss_inputs["source_covariance_assumption"],
             angular_rate_source_time_s=gnss_inputs["angular_source_time_s"],
             angular_rate_source_noise_interval_s=gnss_inputs["angular_source_noise_interval_s"],
@@ -697,7 +825,8 @@ class NavigationBranch:
 
     def step(self, event: dict, index: int, revoked_arcs: set[str] | None = None,
              *, support_models: list[dict] | None = None, defer_optimize: bool = False,
-             initial_rotation: gtsam.Rot3 | None = None, gravity_tilt: dict | None = None):
+             initial_rotation: gtsam.Rot3 | None = None, gravity_tilt: dict | None = None,
+             linearization_anchor: dict | None = None):
         """Consume factors at their actual event time.
 
         Deferred construction is used only for an uninitialized asynchronous
@@ -705,6 +834,10 @@ class NavigationBranch:
         """
         if self.bootstrap_status == "NO_INIT" and not defer_optimize:
             raise ValueError("bootstrap must be qualified before normal step")
+        if self.window.gaussian_only and linearization_anchor is None:
+            raise ValueError("a Gaussian support step requires its matched background anchor")
+        self._factor_seed_values = (None if linearization_anchor is None else
+                                   self._model_linearization_values(linearization_anchor))
         revoked_arcs = set() if revoked_arcs is None else revoked_arcs
         previous_index, previous_time = self.index, self.time
         self.time = float(event["time_s"])
@@ -749,8 +882,10 @@ class NavigationBranch:
             factors.append(gtsam.PriorFactorConstantBias(
                 bias_key, self.bias, gtsam.noiseModel.Diagonal.Sigmas(bias_sigma)))
         else:
-            preintegrated = self._preintegrate(event, self.bias)
-            prediction = preintegrated.predict(gtsam.NavState(self.pose, self.velocity), self.bias)
+            factor_bias = (self.bias if self._factor_seed_values is None else
+                           self._factor_seed_values.atConstantBias(B(0) if self.constant_bias else B(previous_index)))
+            preintegrated = self._preintegrate(event, factor_bias)
+            prediction = preintegrated.predict(gtsam.NavState(self.pose, self.velocity), factor_bias)
             predicted_pose, predicted_velocity = prediction.pose(), prediction.velocity()
             factors.append(gtsam.ImuFactor(
                 X(previous_index), V(previous_index), pose_key, velocity_key,
@@ -759,15 +894,21 @@ class NavigationBranch:
                 factors.append(gtsam.BetweenFactorConstantBias(
                     B(previous_index), bias_key, gtsam.imuBias.ConstantBias(),
                     gtsam.noiseModel.Diagonal.Sigmas(self.bias_rw * math.sqrt(self.time-previous_time))))
+        predicted_bias = self.bias
+        if linearization_anchor is not None:
+            common = linearization_anchor["values"]
+            predicted_pose = common.atPose3(pose_key)
+            predicted_velocity = common.atVector(velocity_key)
+            predicted_bias = common.atConstantBias(bias_key)
         values.insert(pose_key, predicted_pose)
         values.insert(velocity_key, predicted_velocity)
         if previous_index is None or not self.constant_bias:
-            values.insert(bias_key, self.bias)
+            values.insert(bias_key, predicted_bias)
 
         position, velocity = event.get("gnss_position"), event.get("gnss_velocity")
         gnss_inputs = self._gnss_inputs(event, predicted_pose)
         antenna_position, antenna_velocity = gnss_antenna_prediction(
-            predicted_pose, predicted_velocity, self.bias.gyroscope(),
+            predicted_pose, predicted_velocity, predicted_bias.gyroscope(),
             gnss_inputs["position_lever"], gnss_inputs["velocity_lever"], gnss_inputs["angular_rate"])
         if position is not None:
             self.last_gnss_innovation["position"] = np.asarray(position)-antenna_position
@@ -799,14 +940,20 @@ class NavigationBranch:
         if self.use_foot:
             nfoot, ndifference = self._support(
                 event.get("feet", []), revoked_arcs, support_models, predicted_pose, pose_key, values, times, factors)
+        model_anchor = (None if linearization_anchor is None else
+                        self._model_linearization_values(linearization_anchor, values))
         if defer_optimize:
             self.window.values.insert(values)
+            if model_anchor is not None:
+                self.window.values.update(model_anchor)
             self.window.times.update(times)
             self.window.factors.extend(factors)
             self.window.time_s = self.time
         else:
             self.window.update(factors, values, times, self.time,
-                               retain_keys=self._retained_keys())
+                               retain_keys=self._retained_keys(),
+                               linearization_values=model_anchor, gaussian_only=model_anchor is not None)
+        self._factor_seed_values = None
         self.last_factor_counts = dict(
             foot=nfoot, differential=ndifference,
             carrier_rows=0 if block is None else len(block.y),
@@ -814,7 +961,8 @@ class NavigationBranch:
         return self._current()
 
     def bootstrap(self, events: list[dict], seed_rotation: gtsam.Rot3, *, start_index: int = 0,
-                  gravity_tilt: dict | None = None, support_models: list[dict] | None = None) -> dict:
+                  gravity_tilt: dict | None = None, support_models: list[dict] | None = None,
+                  linearization_anchor: dict | None = None) -> dict:
         """Build one causal asynchronous startup graph before any marginalization.
 
         Every PV, IMU, code/carrier and support factor is constructed by step at
@@ -829,10 +977,38 @@ class NavigationBranch:
             return dict(status="NO_INIT", reason="NO_BUFFERED_OBSERVATIONS",
                         nonlinear_support="UNRESOLVED")
         self.bootstrap_status = "NO_INIT"
+        self.background_chart_id = (deepcopy(linearization_anchor["background_chart_id"])
+            if linearization_anchor is not None else
+            ("ASYNC_BOOTSTRAP", start_index, float(events[-1]["time_s"]),
+             tuple(float(v).hex() for v in seed_rotation.rpy())))
         for offset, event in enumerate(events):
             self.step(event, start_index+offset, support_models=support_models, defer_optimize=True,
                       initial_rotation=seed_rotation if offset == 0 else None,
-                      gravity_tilt=gravity_tilt if offset == 0 else None)
+                      gravity_tilt=gravity_tilt if offset == 0 else None,
+                      linearization_anchor=linearization_anchor)
+        if linearization_anchor is not None:
+            # All observations retain their own epoch.  Solve the completed
+            # startup graph in the supplied background chart before any lag
+            # elimination; this establishes only conditional Gaussian support.
+            chart = self._model_linearization_values(linearization_anchor)
+            self.window.optimize(gaussian_only=True, linearization_values=chart)
+            self._current()
+            dimension = int(self.window.values.dim())
+            self.bootstrap_diagnostics = dict(
+                status="NO_INIT", nonlinear_support="UNRESOLVED", cost=float(self.window.error()),
+                seed_rpy_rad=seed_rotation.rpy().tolist(),
+                solution_rpy_rad=self.pose.rotation().rpy().tolist(),
+                first_time_s=float(events[0]["time_s"]), last_time_s=self.time,
+                event_count=len(events), marginalized_state_count=self.window.marginalized_total,
+                initial_tilt_source=deepcopy(gravity_tilt),
+                qualification_scope="COMMON_LINEARIZATION_ONLY", solver_status="GAUSSIAN_QR_SOLVED",
+                solver_converged=True, local_full_rank=True, state_dimension=dimension,
+                numerical_rank=dimension,
+                rank_evidence="FULL_RANK_QR_SOLVE_NO_PSEUDOINVERSE_OR_ADDED_PRIOR",
+                nonlinear_solver_iterations=0, solver_iterations=1, solver_budget_exhausted=False,
+                directional_global_coverage_certified=False,
+                inference_scope=deepcopy(self.linearization_scope))
+            return deepcopy(self.bootstrap_diagnostics)
         # LM damping is only the numerical step model; it is not stored as a
         # prior and is absent from the subsequent likelihood/rank calculation.
         params = gtsam.LevenbergMarquardtParams()
@@ -859,6 +1035,13 @@ class NavigationBranch:
 
     def bootstrap_qualification(self) -> dict:
         """Local likelihood/rank readout; global directional support stays external."""
+        if self.window.gaussian_only:
+            self.bootstrap_diagnostics.update(cost=float(self.window.error()),
+                solution_rpy_rad=self.pose.rotation().rpy().tolist(),
+                qualification_scope="COMMON_LINEARIZATION_ONLY", solver_status="GAUSSIAN_QR_SOLVED",
+                solver_converged=True, local_full_rank=True, nonlinear_solver_iterations=0,
+                directional_global_coverage_certified=False)
+            return deepcopy(self.bootstrap_diagnostics)
         linear = self.window.graph.linearize(self.window.values)
         combined = gtsam.JacobianFactor(linear)
         matrix, rhs = combined.jacobianUnweighted()
@@ -938,7 +1121,7 @@ class NavigationBranch:
             bias=np.r_[self.bias.accelerometer(), self.bias.gyroscope()],
         )
 
-    def condition(self, integer_by_label: dict[str, int]):
+    def condition(self, integer_by_label: dict[str, int], *, linearization_anchor: dict | None = None):
         """Add explicit scalar integer relations once; leave other labels float."""
         factors = []
         for label, integer in integer_by_label.items():
@@ -949,7 +1132,15 @@ class NavigationBranch:
             if label in self.ambiguity_keys and label not in self._conditioned_labels:
                 factors.append(self._fixed_factor(label))
         if factors:
-            if self.bootstrap_status == "NO_INIT":
+            if self.window.gaussian_only or linearization_anchor is not None:
+                chart = (self.window.linearization_values if linearization_anchor is None else
+                         self._model_linearization_values(linearization_anchor))
+                self.window.factors.extend(factors)
+                self.window.optimize(gaussian_only=True, linearization_values=chart)
+                self._current()
+                if self.bootstrap_status == "NO_INIT":
+                    self.bootstrap_qualification()
+            elif self.bootstrap_status == "NO_INIT":
                 self.window.factors.extend(factors)
                 self.window.values = gtsam.LevenbergMarquardtOptimizer(
                     self.window.graph, self.window.values, self.window.params).optimize()
@@ -968,7 +1159,7 @@ class NavigationBranch:
                  "last_gnss_innovation", "last_factor_counts", "constant_bias", "bias_key",
                  "foot_error_history", "support_geometry", "_support_serial", "_support_retain",
                  "predictive_score", "predictive_row_count", "predictive_frontier", "integer_lineage",
-                 "bootstrap_status", "bootstrap_diagnostics")
+                 "bootstrap_status", "bootstrap_diagnostics", "linearization_scope", "background_chart_id")
         return BranchSnapshot(self.window.snapshot(),
                               {name: deepcopy(getattr(self, name)) for name in names})
 

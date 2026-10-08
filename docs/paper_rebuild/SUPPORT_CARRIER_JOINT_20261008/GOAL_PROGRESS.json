@@ -28,7 +28,10 @@
     "Offline BY2 export and frozen original V3 evaluation point/evaluator bridge; first short cold-start result is worse in heading",
     "34 necessary mathematical checks pass including physical partial/pivot graph recovery and correlated changing-subset foot likelihood",
     "Square-root marginalization preserves original information and crosses the actual BY first-marginalization failure; no added anchor or covariance floor",
-    "Corrected nonuniform IMU increment reassignment; matched short BY U0/U1 rerun and frozen V3 readout completed; former large foot benefit retracted"
+    "Corrected nonuniform IMU increment reassignment; matched short BY U0/U1 rerun and frozen V3 readout completed; former large foot benefit retracted",
+    "Common-chart Gaussian support propagation integrated in the same navigator, physical chart mapping and asynchronous Gaussian bootstrap; original nonlinear comparator preserved",
+    "Pre-consumption shared-chart prediction and on-demand nonlinear source-history reconstruction wired; short runs have not yet triggered reconstruction",
+    "BY first-four full integer minimum exhausted: relaxed279.553786 and rigid287.794259 exceed original204.546546; empty support is not an enumeration-budget issue"
   ],
   "not_proven": [
     "Material legged contribution to heading qualification or integer-candidate acceptance",
@@ -39,10 +42,10 @@
     "Same-version SDK and frozen V3 system adoption value on real data"
   ],
   "next_core_work": [
-    "Run the corrected shared navigation backbone over full BY development window with original V3 comparison; retain NO_INIT and all degradation, no short-window tuning",
-    "Replace every-observed-group full nonlinear shadows with a tractable shared inference and explicit unresolved explanation policy; keep the running full synthetic comparison",
-    "Explain raw integer-domain emptiness without arbitrary noninteger releases or covariance inflation; preserve partial information and source-scoped revocation",
-    "Complete heading-to-common-velocity/position attribution and freeze BY parameters before BYO/BYH and XB/NMB"
+    "Execute the same full90s sequence with shared support inference and actual nonlinear history reconstruction; compare against existing controls and pending full nonlinear U3",
+    "Complete and evaluate running full BY corrected native-increment U1 against original V3; shared dynamic model and heading mediation remain unresolved",
+    "Test a source-grounded correlated phase-bias hypothesis in the same measurement/state model; preserve integer ambiguity and bias identifiability, do not force a nonempty domain",
+    "Complete BY development then freeze parameters for BYO/BYH and XB/NMB; no test-set tuning"
   ],
   "data_policy": {
     "development": "BY",
@@ -61,7 +64,7 @@
     ],
     "real_velocity_accuracy_claim_allowed": false
   },
-  "latest_implementation": "native_IMU_increment_support_and_explicit_IMU_availability",
+  "latest_implementation": "integrated_common_chart_Gaussian_support_and_on_demand_nonlinear_history",
   "latest_full_cohort": "cohort_analytic_20261008_seed6100801",
   "latest_full_cohort_status_at_commit": "RUNNING_NOT_RESULT_EVIDENCE",
   "scientifically_interrupted_cohort": {
@@ -152,5 +155,18 @@
         "failed_attempt_phase": "READING_INPUT_BEFORE_NAVIGATION"
       }
     }
+  },
+  "shared_inference": {
+    "report": "SHARED_INFERENCE_IMPLEMENTATION.md",
+    "status": "SHORT_INTEGRATION_COMPLETED_FULL_VALIDATION_PENDING",
+    "synthetic_short_rows": 31,
+    "real_short_rows": 161,
+    "real_short_finite_rows": 26,
+    "nonlinear_history_expansion_observed": false,
+    "model_count_bounded": false,
+    "finite_recovery_archive_bounded": false,
+    "linearization_approximation_explicit": true,
+    "direction_covariance_short_run_superseded": true,
+    "next_full_run": "cohort_shared_20261008_seed6100801"
   }
 }

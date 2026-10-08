@@ -48,6 +48,8 @@ class SupportTrack:
     origin: Checkpoint
     navigator: object
     processed_events: int = 0
+    nonlinear_expanded: bool = False
+    unresolved_reason: str | None = None
 
 
 def code_only(block: EpochBlock) -> EpochBlock:
@@ -91,6 +93,16 @@ class JointNavigator:
         self.proposal_attempts = 0
         self.last_phase_relation_count = 0
         self.monitor_support = monitor_support and mode in ("U2", "U3")
+        self.shared_support = (self.monitor_support and
+            metadata.get("support_inference", "full_nonlinear") == "shared_linearization")
+        self.anchor_history = {}
+        # Finite-run recovery archive. This makes old-source nonlinear replay
+        # possible; its memory is explicitly not a bounded online log claim.
+        self.recovery_events = []
+        self.recovery_rows = {}
+        self.nonlinear_support_expansions = 0
+        self.gaussian_support_step_events = 0
+        self.nonlinear_support_step_events = 0
         self.support_models = copy.deepcopy(support_models or [])
         # Fixed engineering decision costs, not calibrated model probabilities.
         # Both releases have the same cost; geometry is not presumed valid merely
@@ -130,7 +142,7 @@ class JointNavigator:
     def _initialized(self):
         return self.branches[0].index is not None and self.branches[0].bootstrap_status != "NO_INIT"
 
-    def _try_bootstrap(self, packet: dict, index: int):
+    def _try_bootstrap(self, packet: dict, index: int, common_anchors=None):
         """Use only arrived observations in one finite asynchronous startup graph.
 
         Finite yaw seeds locate conditional modes. Their convergence is neither
@@ -138,6 +150,9 @@ class JointNavigator:
         """
         t = float(packet["time_s"])
         if packet.get("carrier") is None or t-self.bootstrap_last_attempt < 1.:
+            return False
+        if common_anchors is not None and not common_anchors:
+            self.bootstrap_diagnostic = dict(status="NO_INIT", reason="WAITING_FOR_COMMON_BOOTSTRAP_ANCHOR")
             return False
         buffered = [(i, self._filter(e)) for i, e in self.events
                     if i <= index and t-self.bootstrap_window_s <= e["time_s"] <= t]
@@ -161,10 +176,16 @@ class JointNavigator:
             roll = math.atan2(gravity_body[1], gravity_body[2])
             pitch = math.atan2(-gravity_body[0], math.hypot(gravity_body[1], gravity_body[2]))
         solutions, reports = [], []
-        for yaw in (0., math.pi/2., math.pi, -math.pi/2.):
+        seeds = [(gtsam.Rot3.RzRyRx(roll, pitch, yaw), None)
+                 for yaw in (0., math.pi/2., math.pi, -math.pi/2.)]
+        if common_anchors is not None:
+            seeds = [(anchor["values"].atPose3(X(buffered[0][0])).rotation(), anchor)
+                     for anchor in common_anchors]
+        for seed_rotation, anchor in seeds:
             branch = NavigationBranch(self.metadata, use_foot=self.use_foot)
-            diagnostic = branch.bootstrap([e for _, e in buffered], gtsam.Rot3.RzRyRx(roll, pitch, yaw),
-                start_index=buffered[0][0], support_models=self._models_at(t))
+            diagnostic = branch.bootstrap([e for _, e in buffered], seed_rotation,
+                start_index=buffered[0][0], support_models=self._models_at(t),
+                linearization_anchor=anchor)
             reports.append(diagnostic)
             if diagnostic["local_full_rank"] and diagnostic["solver_converged"]:
                 solutions.append(branch)
@@ -173,7 +194,9 @@ class JointNavigator:
             first_index=buffered[0][0], frontier_index=index, conditional_seed_reports=reports,
             locally_identifiable_converged_modes=len(solutions),
             computationally_unresolved_seeds=sum(not report["solver_converged"] for report in reports),
-            yaw_seeds_rad=[0., math.pi/2., math.pi, -math.pi/2.],
+            yaw_seeds_rad=[float(seed.yaw()) for seed, _ in seeds],
+            qualification_scope=("COMMON_LINEARIZATION_ONLY" if common_anchors is not None else
+                                 "LOCAL_NONLINEAR_STATIONARITY"),
             directional_global_coverage_certified=False, gravity_observation_added=False,
             future_observations_used=False, already_published_rows_revised=0)
         if not solutions:
@@ -198,6 +221,11 @@ class JointNavigator:
         qualification = dict(qualified=True, scope="LOCAL_FULL_RANK_CONDITIONAL_STATE_ONLY",
             globally_certified=False, finite_seed_search=True, modes_retained=len(modes),
             initial_direction_status="FLOAT_INIT_DIRECTION_UNRESOLVED")
+        if common_anchors is not None:
+            qualification["scope"] = "COMMON_LINEARIZATION_ONLY"
+        if self.shared_support:
+            self.anchor_history.setdefault(index, {})["bootstrap"] = [
+                branch.export_linearization_anchor() for branch in modes]
         for branch in modes:
             branch.accept_bootstrap(qualification)
             branch.predictive_frontier = index
@@ -282,18 +310,44 @@ class JointNavigator:
                 position_nis = float(r @ np.linalg.solve(covariance[np.ix_(p, p)], r))
         return rows, position_nis
 
-    def _advance(self, packet: dict, index: int, expected_rows=None):
+    @staticmethod
+    def _matching_anchor(branch, anchors):
+        anchors = [anchor for anchor in anchors if
+                   anchor["background_chart_id"] == branch.background_chart_id]
+        exact = [anchor for anchor in anchors if anchor["integer_lineage"] == branch.integer_lineage]
+        if len(exact) == 1:
+            return exact[0]
+        # A unique parent chart may be conditioned by newly introduced integer
+        # relations. Multiple different parent/child charts are not averaged.
+        parents = [anchor for anchor in anchors if
+                   branch.integer_lineage[:len(anchor["integer_lineage"])] == anchor["integer_lineage"]]
+        return parents[0] if len(parents) == 1 else None
+
+    def _advance(self, packet: dict, index: int, expected_rows=None, shared_anchors=None):
         if self.asynchronous_start and not self._initialized():
-            self._try_bootstrap(packet, index)
+            self._try_bootstrap(packet, index, None if shared_anchors is None else shared_anchors.get("bootstrap", []))
             if self._initialized():
-                self._propose(index, packet)
+                if self.shared_support:
+                    self.anchor_history.setdefault(index, {})["step"] = [b.export_linearization_anchor() for b in self.branches]
+                self._propose(index, packet, None if shared_anchors is None else shared_anchors.get("conditioned", []))
+                if self.shared_support:
+                    self.anchor_history.setdefault(index, {})["conditioned"] = [b.export_linearization_anchor() for b in self.branches]
             return (), 0.
+        anchors = [None]*len(self.branches) if shared_anchors is None else [
+            self._matching_anchor(branch, shared_anchors.get("step", [])) for branch in self.branches]
+        if shared_anchors is not None and any(anchor is None for anchor in anchors):
+            return None
         for foot in packet.get("feet", []):
             self.arc_first_use.setdefault(foot["arc_id"], packet["time_s"])
         rows, nis = self._score_prediction(packet, index, expected_rows)
-        for branch in self.branches:
-            branch.step(packet, index, support_models=self._models_at(packet["time_s"]))
-        self._propose(index, packet)
+        for branch, anchor in zip(self.branches, anchors):
+            branch.step(packet, index, support_models=self._models_at(packet["time_s"]),
+                        linearization_anchor=anchor)
+        if self.shared_support:
+            self.anchor_history.setdefault(index, {})["step"] = [b.export_linearization_anchor() for b in self.branches]
+        self._propose(index, packet, None if shared_anchors is None else shared_anchors.get("conditioned", []))
+        if self.shared_support:
+            self.anchor_history.setdefault(index, {})["conditioned"] = [b.export_linearization_anchor() for b in self.branches]
         return rows, nis
 
     def _restore(self, checkpoint: Checkpoint):
@@ -371,7 +425,7 @@ class JointNavigator:
         ids = self._register_support_group(packet)
         expired = []
         for identity, track in self.support_tracks.items():
-            if (t-track.first_use > self.history_s and
+            if (not self.shared_support and t-track.first_use > self.history_s and
                     not set(track.arc_ids).intersection(ids) and
                     identity not in self.last_supported_tracks):
                 expired.append(identity)
@@ -380,26 +434,73 @@ class JointNavigator:
                 self.support_groups[track.arc_ids]["status"] = "UNRESOLVED_HISTORY_EXPIRED"
                 continue
             shadow = track.navigator
-            shadow.events = self.events
+            replay_events = self.recovery_events if self.shared_support else self.events
+            replay_rows = self.recovery_rows if self.shared_support else self.reference_rows
+            shadow.events = replay_events
             after = shadow.branches[0].index
             after = -1 if after is None else after
-            for event_index, event in self.events:
+            for event_index, event in replay_events:
                 if after < event_index <= index:
                     try:
-                        shadow._advance(shadow._filter(event), event_index,
-                                        self.reference_rows[event_index])
+                        outcome = shadow._advance(shadow._filter(event), event_index,
+                                        replay_rows[event_index],
+                                        self.anchor_history.get(event_index, {})
+                                        if self.shared_support and not track.nonlinear_expanded else None)
+                        if outcome is None:
+                            track.unresolved_reason = "UNRESOLVED_COMMON_INTEGER_LINEAGE_ANCHOR"
+                            break
+                        track.unresolved_reason = None
                     except RuntimeError:
                         print(f"FAILED_SUPPORT_MODEL identity={identity} time={event['time_s']} "
                               f"index={event_index} origin={track.origin.time_s}", flush=True)
                         raise
                     track.processed_events += 1
                     self.model_replay_events += 1
+                    if self.shared_support and not track.nonlinear_expanded:
+                        self.gaussian_support_step_events += 1
+                    else:
+                        self.nonlinear_support_step_events += 1
         for identity in expired:
             del self.support_tracks[identity]
-        return self._contact_support(packet)
+        result = self._contact_support(packet)
+        while self.shared_support:
+            alternatives, costs, in_support, winner, _ = result
+            fixed_supported = any(in_support[j] and item[0] == "fixed" for j, item in enumerate(alternatives))
+            track = alternatives[winner][3]
+            if not fixed_supported and track is not None and not track.nonlinear_expanded:
+                self._expand_support_history(track, index, t)
+                result = self._contact_support(packet)
+            else:
+                break
+        return result
+
+    def _expand_support_history(self, track, index, time_s):
+        """Reconstruct an actual nonlinear conditional history, not just future R."""
+        rebuilt = JointNavigator(self.metadata, self.mode, monitor_support=False,
+            support_models=self._candidate_policy(track.arc_ids, track.model, track.group_id))
+        rebuilt._restore(track.origin)
+        rebuilt.events = self.recovery_events
+        count = 0
+        for event_index, event in self.recovery_events:
+            if track.origin.index < event_index <= index:
+                rebuilt._advance(rebuilt._filter(event), event_index, self.recovery_rows[event_index])
+                count += 1
+        old_score = min(branch.predictive_score for branch in track.navigator.branches)
+        track.navigator = rebuilt
+        track.nonlinear_expanded = True
+        track.processed_events = count
+        self.nonlinear_support_expansions += 1
+        self.model_replay_events += count
+        self.decisions.append(dict(time_s=time_s, kind="NONLINEAR_CONDITIONAL_HISTORY_EXPANDED",
+            support_identity=track.identity, first_use_s=track.first_use,
+            checkpoint_time_s=track.origin.time_s, replayed_events=count,
+            common_linearization_score_before=old_score,
+            nonlinear_predictive_score=min(branch.predictive_score for branch in rebuilt.branches),
+            globally_unique_explanation=False, historical_online_rows_rewritten=0))
 
     def _same_predictive_rows(self, other):
         return (other._initialized()
+                and {(b.index, b.time) for b in other.branches} == {(b.index, b.time) for b in self.branches}
                 and other.predictive_rows_fingerprint == self.predictive_rows_fingerprint
                 and {b.predictive_frontier for b in other.branches} == {b.predictive_frontier for b in self.branches}
                 and {b.predictive_row_count for b in other.branches} == {b.predictive_row_count for b in self.branches})
@@ -407,7 +508,7 @@ class JointNavigator:
     def _contact_support(self, packet: dict):
         alternatives = [("fixed", branch, 0., None) for branch in self.branches]
         for identity, track in self.support_tracks.items():
-            if self._same_predictive_rows(track.navigator):
+            if track.unresolved_reason is None and self._same_predictive_rows(track.navigator):
                 alternatives.extend((identity, branch, self.model_edit_cost, track)
                                     for branch in track.navigator.branches)
         costs = np.array([branch.predictive_score+penalty for _, branch, penalty, _ in alternatives])
@@ -426,12 +527,16 @@ class JointNavigator:
                 fixed_minus_best_score=float(min(b.predictive_score for b in self.branches)-costs[winner]),
                 compared_groups=len(self.support_groups), evaluated_models=len(self.support_tracks),
                 integer_lineage_scores=True, probability_calibrated=False,
+                comparison_scope=("MIXED_NONLINEAR_AND_COMMON_LINEARIZATION_CONDITIONAL_MODELS"
+                                  if self.shared_support else "FULL_NONLINEAR_CONDITIONAL_MODELS"),
             ))
             self.last_support_signature = signature
         selected = alternatives[winner][3]
         complete = self.proposal_complete and all(
             track.navigator.proposal_complete and self._same_predictive_rows(track.navigator)
             for track in self.support_tracks.values())
+        if self.shared_support:
+            complete = complete and all(track.nonlinear_expanded for track in self.support_tracks.values())
         # Only a unique source explanation commits a model change. Otherwise
         # U3 retains the separate clean conditional states and their directions.
         accepted = selected if (len(identities) == 1 and "fixed" not in identities and complete) else None
@@ -461,7 +566,7 @@ class JointNavigator:
                      rhs_integer=int(rhs), source="INHERITED_CONDITIONAL_PHYSICAL_ARC_RELATION")
                 for row, rhs in zip(transition.current_transform, transition.history_transform@values)]
 
-    def _propose(self, index: int, packet: dict):
+    def _propose(self, index: int, packet: dict, conditioned_anchors=None):
         block = packet.get("carrier")
         if block is None or not block.ambiguity_labels:
             return
@@ -543,7 +648,8 @@ class JointNavigator:
                 child.restore(parent.snapshot())
                 child.integer_lineage += ((float(packet["time_s"]),
                     tuple(sorted(candidate.integer_by_label.items()))),)
-                child.condition(candidate.integer_by_label)
+                anchor = None if conditioned_anchors is None else self._matching_anchor(child, conditioned_anchors)
+                child.condition(candidate.integer_by_label, linearization_anchor=anchor)
                 expanded.append(child)
         if not expanded:
             self.pending_proposals[labels] = dict(time_s=packet["time_s"], status="NO_COMPATIBLE_PARENT_CANDIDATE")
@@ -612,7 +718,8 @@ class JointNavigator:
         for event_index, event in self.events:
             if checkpoint.index < event_index <= index:
                 packet = self._filter(event, replay=True)
-                self.reference_rows[event_index], _ = self._advance(packet, event_index)
+                self.reference_rows[event_index], _ = self._advance(packet, event_index,
+                    self.recovery_rows[event_index] if self.shared_support else None)
                 self._save(event_index, packet["time_s"])
                 count += 1
         self.replayed_events += count
@@ -626,7 +733,8 @@ class JointNavigator:
 
     def _direction_summary(self, branch: NavigationBranch, index: int):
         """Local physical direction for one joint source/integer hypothesis."""
-        attitude_covariance = branch.joint_covariance([X(index)])[:3, :3]
+        attitude_covariance = (branch.window.joint_covariance([X(index)]) if branch.window.gaussian_only
+                               else branch.joint_covariance([X(index)]))[:3, :3]
         rotation = branch.pose.rotation()
         body_unit = np.asarray(self.metadata["baseline_body"], float)
         body_unit = body_unit / np.linalg.norm(body_unit)
@@ -639,16 +747,28 @@ class JointNavigator:
         first /= np.linalg.norm(first)
         basis = np.column_stack((first, np.cross(direction, first)))
         yaw_gradient = np.zeros(3)
+        if branch.window.gaussian_only:
+            chart_rotation = branch.window.linearization_values.atPose3(X(index)).rotation()
+            chart_mean = branch.window.linearization_delta.at(X(index))[:3]
+            jacobian = np.empty((3, 3))
         for axis in range(3):
             delta = np.eye(3)[axis]*1e-6
-            plus, minus = rotation.retract(delta).yaw(), rotation.retract(-delta).yaw()
+            if branch.window.gaussian_only:
+                plus_rotation = chart_rotation.retract(chart_mean+delta)
+                minus_rotation = chart_rotation.retract(chart_mean-delta)
+                jacobian[:, axis] = (plus_rotation.rotate(body_unit)-minus_rotation.rotate(body_unit))/(2e-6)
+            else:
+                plus_rotation, minus_rotation = rotation.retract(delta), rotation.retract(-delta)
+            plus, minus = plus_rotation.yaw(), minus_rotation.yaw()
             yaw_gradient[axis] = math.atan2(math.sin(plus-minus), math.cos(plus-minus))/(2e-6)
+        covariance = jacobian @ attitude_covariance @ jacobian.T
         return dict(
             baseline_direction_n=direction.tolist(),
             baseline_tangent_basis_n=basis.tolist(),
             baseline_tangent_covariance_rad2=(basis.T @ covariance @ basis).tolist(),
             yaw_conditional_std_rad=math.sqrt(max(0., float(yaw_gradient @ attitude_covariance @ yaw_gradient))),
-            direction_uncertainty_kind="LOCAL_GAUSSIAN_CONDITIONAL_ON_INTEGER_AND_SUPPORT_MODEL",
+            direction_uncertainty_kind=("PUSHFORWARD_OF_COMMON_CHART_GAUSSIAN_CONDITIONAL" if branch.window.gaussian_only
+                                        else "LOCAL_GAUSSIAN_CONDITIONAL_ON_INTEGER_AND_SUPPORT_MODEL"),
             direction_domain_coverage_certified=False,
         )
 
@@ -713,7 +833,8 @@ class JointNavigator:
         return dict(rows=self.rows, decisions=result["decisions"], summary=dict(
             mode="U2", causal_output_rows=len(self.rows), elapsed_s=time.monotonic()-started,
             replayed_events=0, proposal_attempts=self.proposal_attempts,
-            dormant_candidates=len(self.dormant_candidates), active_support_complete=self.proposal_complete,
+            dormant_candidates=len(self.dormant_candidates), active_support_complete=result["summary"]["active_support_complete"],
+            active_integer_support_complete=self.proposal_complete,
             unresolved_raw_cohorts=len(self.pending_proposals),
             future_policy_changes=policy_changes,
             diagnostic_controller_summary=result["summary"],
@@ -729,6 +850,8 @@ class JointNavigator:
         for index, event in enumerate(events):
             t = float(event["time_s"])
             self.events.append((index, event))
+            if self.shared_support:
+                self.recovery_events.append((index, event))
             # Keep one event just before the 30s boundary for timing, and the
             # oldest retained checkpoint's entire future input stream.
             oldest = self.checkpoints[0].time_s if self.checkpoints else max(0.0, t-self.history_s)
@@ -741,6 +864,8 @@ class JointNavigator:
             elif self.asynchronous_start and packet.get("carrier_source") is not None:
                 self.last_phase_relation_count = 0
             self.reference_rows[index], nis = self._advance(packet, index)
+            if self.shared_support:
+                self.recovery_rows[index] = self.reference_rows[index]
             if self.asynchronous_start and not self._initialized():
                 output = self._no_init_output(t)
                 output.update(measurement_time_s=t,
@@ -809,7 +934,11 @@ class JointNavigator:
             comparison_complete = self.proposal_complete and all(
                 track.navigator.proposal_complete and self._same_predictive_rows(track.navigator)
             for track in self.support_tracks.values())
+            nonlinear_comparison_complete = comparison_complete and (
+                not self.shared_support or all(track.nonlinear_expanded for track in self.support_tracks.values()))
             status = "CONDITIONAL_SUPPORT" if comparison_complete else "UNRESOLVED_ENUMERATION_OR_BRANCH_BUDGET"
+            if self.shared_support and not nonlinear_comparison_complete:
+                status = "COMMON_LINEARIZATION_ONLY_NONLINEAR_EXPLANATIONS_UNRESOLVED_"+status
             if sum(supported) > 1:
                 status = "MULTIPLE_CONDITIONAL_DIRECTIONS_" + status
             if self.asynchronous_start:
@@ -829,7 +958,16 @@ class JointNavigator:
                 candidate_costs=costs.tolist(), candidate_supported=supported.tolist(),
                 support_ids=[f["arc_id"] for f in packet.get("feet", [])],
                 direction_status=status, gnss_innovation_nis=nis,
-                candidate_support_complete=comparison_complete,
+                candidate_support_complete=nonlinear_comparison_complete,
+                conditional_model_evidence_frontier_complete=comparison_complete,
+                nonlinear_contact_support_complete=nonlinear_comparison_complete,
+                contact_inference_scope=("CONDITIONAL_COMMON_LINEARIZATION_WITH_ON_DEMAND_NONLINEAR_REPLAY"
+                    if self.shared_support else "FULL_NONLINEAR_CONDITIONAL_MODELS"),
+                unexpanded_nonlinear_explanations=(sum(not track.nonlinear_expanded for track in self.support_tracks.values())
+                    if self.shared_support else 0),
+                unique_within_evaluated_nonlinear_source_family=bool(nonlinear_comparison_complete and sum(supported) == 1),
+                unexpanded_source_identities=([identity for identity, track in self.support_tracks.items()
+                    if not track.nonlinear_expanded] if self.shared_support else []),
                 consumed_phase_relations=self.last_phase_relation_count,
                 selected_branch=selected_index, branch_conditional_navigation=True,
                 selected_support_model=output_models[selected_index][0],
@@ -862,7 +1000,10 @@ class JointNavigator:
             initialization=copy.deepcopy(self.bootstrap_diagnostic) if self.asynchronous_start else None,
             no_init_rows=sum(row["direction_status"] == "NO_INIT" for row in self.rows),
             replayed_events=self.replayed_events, proposal_attempts=self.proposal_attempts,
-            dormant_candidates=len(self.dormant_candidates), active_support_complete=self.proposal_complete,
+            dormant_candidates=len(self.dormant_candidates), active_support_complete=(self.proposal_complete and
+                (not self.shared_support or all(track.nonlinear_expanded and self._same_predictive_rows(track.navigator)
+                    for track in self.support_tracks.values()))),
+            active_integer_support_complete=self.proposal_complete,
             unresolved_raw_cohorts=len(self.pending_proposals),
             revoked_arcs=sorted(self.revoked_arcs),
             support_model_replayed_events=self.model_replay_events,
@@ -872,4 +1013,11 @@ class JointNavigator:
             marginalized_variables=sum(b.window.marginalized_total for b in self.branches),
             truth_used_online=False, probability_calibrated=False,
             complete_research_goal=False,
+            support_inference=self.metadata.get("support_inference", "full_nonlinear"),
+            nonlinear_support_expansions=self.nonlinear_support_expansions,
+            gaussian_support_step_events=self.gaussian_support_step_events,
+            nonlinear_support_step_events=self.nonlinear_support_step_events,
+            recovery_archive_events=len(self.recovery_events),
+            anchor_history_epochs=len(self.anchor_history),
+            recovery_storage_bounded=False if self.shared_support else None,
         ))

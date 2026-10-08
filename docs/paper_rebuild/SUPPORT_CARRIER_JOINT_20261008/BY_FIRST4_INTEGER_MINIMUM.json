@@ -1,0 +1,264 @@
+{
+  "schema": "BY_FIRST4_INTEGER_MINIMUM_V1",
+  "status": "NUMERICALLY_EXHAUSTED_COMPLETE_INTEGER_MODELS_REMAIN_OUTSIDE_ORIGINAL_GATE",
+  "scope": {
+    "sequence": "BY2",
+    "times_s": [
+      100.19799995422363,
+      100.39800000190735,
+      100.59800004959106,
+      100.79800009727478
+    ],
+    "raw_rows": 146,
+    "physical_integer_basis_dimension": 21,
+    "free_baseline_dimensions": 12,
+    "covariance": "Original full within-DD Q retained; original cross-epoch independence working assumption retained.",
+    "reference_reads": 0,
+    "navigation_runs": 0,
+    "observations_removed": 0,
+    "subset_searches": 0,
+    "algorithm_changes": false
+  },
+  "provenance": {
+    "scratch_directory": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_FIRST4_INTEGER_MINIMUM_01",
+    "summary_sha256": "d3f35530d8227477bbd033919d2fe89dd8df0ded1b50d62af2e3b4f4fd6e1858",
+    "script_sha256": "da41c8bbe5f983b86a9ffe69b8ab65b16f897b2865614e8a900c969a358e86c3",
+    "PLAN_sha256": "16580a87ee787d4890edd22a8fc8bfb9b0771242e427201a952f323f233879ea",
+    "source_npz": [
+      {
+        "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_ATTEMPT02/BY2/MODELS/GPS_GAL_BDS_DUAL_170.npz",
+        "sha256": "83a90cc1a7c49395b22e94a2f03a3827c5fa6b7b94fdd84e171e2204a668dd20"
+      },
+      {
+        "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_ATTEMPT02/BY2/MODELS/GPS_GAL_BDS_DUAL_171.npz",
+        "sha256": "2e22c775bf921983704c37472c628a1e5f807104f449d034e7d242ea8bb1e7ce"
+      },
+      {
+        "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_ATTEMPT02/BY2/MODELS/GPS_GAL_BDS_DUAL_172.npz",
+        "sha256": "b2b4cb9c77d0b8af4f106880f91b1d23d6727543d8808ed77c3380a76ad43f8d"
+      },
+      {
+        "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_ATTEMPT02/BY2/MODELS/GPS_GAL_BDS_DUAL_173.npz",
+        "sha256": "b3f3834dc871ffbc20f01c17d9802edb5c3aa2949eb1e52fcefb1a8363140ac7"
+      }
+    ],
+    "lambda_library": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_20261002T124139Z/lib/librtklib_legsa.so",
+      "sha256": "28c25b1cc7fade9b956bfdf77005de8fcb0a382c8411ae6e608c83b82bff53f2"
+    },
+    "problem_fingerprint": "e0beb681cd2907adca2e97a74f4320d4ab77e556f5d33d68bb7b97f421432519",
+    "full_source_hashes_and_row_diagnostics": "Retained in scratch SUMMARY.json and *_BEST_DIAGNOSTICS.json."
+  },
+  "qualification": {
+    "raw_chi_square_threshold": 204.54654583438844,
+    "unchanged": true,
+    "Babai_radius_is_search_bound_not_acceptance": true,
+    "best_integer_accepted": false
+  },
+  "resources_declared_before_search": {
+    "relaxed": {
+      "timeout_s": 30.0,
+      "node_limit": 2000000,
+      "candidate_limit": 100000
+    },
+    "fixed_length": {
+      "timeout_s": 30.0,
+      "node_limit": 500000,
+      "initial_candidates": 8
+    },
+    "acceptance_threshold": 204.54654583438844,
+    "diagnostic_search_radius_is_not_acceptance": true
+  },
+  "float_relaxation": {
+    "cost": 126.697588133875,
+    "integer_constraints_enforced": false
+  },
+  "babai": {
+    "full_raw_relaxed_cost": 279.5537863887612,
+    "is_numerically_global_relaxed_minimum": true
+  },
+  "complete_gaussian_integer_search": {
+    "model": "Every physical coordinate integer; independent free3D baseline per epoch; all146 original rows and full Q.",
+    "complete": true,
+    "lower_bound_full_cost": 279.55378638880575,
+    "upper_bound_full_cost": 279.55378638880575,
+    "expanded_nodes": 22,
+    "integer_leaves": 1,
+    "elapsed_s": 0.0020844150003540562,
+    "code_cost": 23.601665158924995,
+    "phase_cost": 255.95212122988073,
+    "excess_over_qualification": 75.00724055441731,
+    "cost_ratio_to_qualification": 1.366700108517829,
+    "integer_over_float_increment": 152.85619825493075
+  },
+  "complete_fixed_length_integer_search": {
+    "baseline_length_m": 0.35,
+    "complete": true,
+    "termination_reason": "GLOBAL_ENUMERATION_EXHAUSTED",
+    "lower_bound_full_cost": 287.79425872111244,
+    "upper_bound_full_cost": 287.79425872111244,
+    "expanded_nodes": 50,
+    "integer_leaves": 2,
+    "full_candidates_evaluated": 8,
+    "elapsed_s": 0.017921521000062057,
+    "code_cost": 23.595777488888096,
+    "phase_cost": 264.1984812322147,
+    "same_integer_as_relaxed_minimum": true
+  },
+  "best_complete_integer_vector": [
+    7,
+    -112,
+    -2,
+    51,
+    70,
+    -37,
+    -8,
+    -40,
+    5,
+    9,
+    17,
+    -29,
+    -95,
+    -29,
+    21,
+    -31,
+    -19,
+    23,
+    -3,
+    -29,
+    4
+  ],
+  "ordered_physical_basis_labels": [
+    "[\"0:6:0:0\",\"[\\\"1|0:6:0:0|arc=2\\\",\\\"2|0:6:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+    "[\"0:11:0:0\",\"[\\\"1|0:11:0:0|arc=1\\\",\\\"2|0:11:0:0|arc=3\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+    "[\"0:17:0:0\",\"[\\\"1|0:17:0:0|arc=1\\\",\\\"2|0:17:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+    "[\"0:11:3:0\",\"[\\\"1|0:11:3:0|arc=6\\\",\\\"2|0:11:3:0|arc=7\\\"]\",\"0:6:3:0\",\"[\\\"1|0:6:3:0|arc=1\\\",\\\"2|0:6:3:0|arc=1\\\"]\"]",
+    "[\"0:17:3:0\",\"[\\\"1|0:17:3:0|arc=2\\\",\\\"2|0:17:3:0|arc=1\\\"]\",\"0:6:3:0\",\"[\\\"1|0:6:3:0|arc=1\\\",\\\"2|0:6:3:0|arc=1\\\"]\"]",
+    "[\"2:2:0:0\",\"[\\\"1|2:2:0:0|arc=1\\\",\\\"2|2:2:0:0|arc=2\\\"]\",\"2:11:0:0\",\"[\\\"1|2:11:0:0|arc=1\\\",\\\"2|2:11:0:0|arc=1\\\"]\"]",
+    "[\"2:10:0:0\",\"[\\\"1|2:10:0:0|arc=6\\\",\\\"2|2:10:0:0|arc=9\\\"]\",\"2:11:0:0\",\"[\\\"1|2:11:0:0|arc=1\\\",\\\"2|2:11:0:0|arc=1\\\"]\"]",
+    "[\"2:36:0:0\",\"[\\\"1|2:36:0:0|arc=1\\\",\\\"2|2:36:0:0|arc=1\\\"]\",\"2:11:0:0\",\"[\\\"1|2:11:0:0|arc=1\\\",\\\"2|2:11:0:0|arc=1\\\"]\"]",
+    "[\"2:2:6:0\",\"[\\\"1|2:2:6:0|arc=1\\\",\\\"2|2:2:6:0|arc=1\\\"]\",\"2:11:6:0\",\"[\\\"1|2:11:6:0|arc=1\\\",\\\"2|2:11:6:0|arc=2\\\"]\"]",
+    "[\"2:10:6:0\",\"[\\\"1|2:10:6:0|arc=4\\\",\\\"2|2:10:6:0|arc=2\\\"]\",\"2:11:6:0\",\"[\\\"1|2:11:6:0|arc=1\\\",\\\"2|2:11:6:0|arc=2\\\"]\"]",
+    "[\"2:36:6:0\",\"[\\\"1|2:36:6:0|arc=1\\\",\\\"2|2:36:6:0|arc=1\\\"]\",\"2:11:6:0\",\"[\\\"1|2:11:6:0|arc=1\\\",\\\"2|2:11:6:0|arc=2\\\"]\"]",
+    "[\"3:10:0:0\",\"[\\\"1|3:10:0:0|arc=2\\\",\\\"2|3:10:0:0|arc=1\\\"]\",\"3:7:0:0\",\"[\\\"1|3:7:0:0|arc=1\\\",\\\"2|3:7:0:0|arc=1\\\"]\"]",
+    "[\"3:14:0:0\",\"[\\\"1|3:14:0:0|arc=1\\\",\\\"2|3:14:0:0|arc=2\\\"]\",\"3:7:0:0\",\"[\\\"1|3:7:0:0|arc=1\\\",\\\"2|3:7:0:0|arc=1\\\"]\"]",
+    "[\"3:27:0:0\",\"[\\\"1|3:27:0:0|arc=3\\\",\\\"2|3:27:0:0|arc=3\\\"]\",\"3:7:0:0\",\"[\\\"1|3:7:0:0|arc=1\\\",\\\"2|3:7:0:0|arc=1\\\"]\"]",
+    "[\"3:28:0:0\",\"[\\\"1|3:28:0:0|arc=3\\\",\\\"2|3:28:0:0|arc=1\\\"]\",\"3:7:0:0\",\"[\\\"1|3:7:0:0|arc=1\\\",\\\"2|3:7:0:0|arc=1\\\"]\"]",
+    "[\"3:40:0:0\",\"[\\\"1|3:40:0:0|arc=1\\\",\\\"2|3:40:0:0|arc=1\\\"]\",\"3:7:0:0\",\"[\\\"1|3:7:0:0|arc=1\\\",\\\"2|3:7:0:0|arc=1\\\"]\"]",
+    "[\"3:43:0:0\",\"[\\\"1|3:43:0:0|arc=1\\\",\\\"2|3:43:0:0|arc=6\\\"]\",\"3:7:0:0\",\"[\\\"1|3:7:0:0|arc=1\\\",\\\"2|3:7:0:0|arc=1\\\"]\"]",
+    "[\"3:10:2:0\",\"[\\\"1|3:10:2:0|arc=1\\\",\\\"2|3:10:2:0|arc=1\\\"]\",\"3:7:2:0\",\"[\\\"1|3:7:2:0|arc=2\\\",\\\"2|3:7:2:0|arc=1\\\"]\"]",
+    "[\"3:14:2:0\",\"[\\\"1|3:14:2:0|arc=5\\\",\\\"2|3:14:2:0|arc=1\\\"]\",\"3:7:2:0\",\"[\\\"1|3:7:2:0|arc=2\\\",\\\"2|3:7:2:0|arc=1\\\"]\"]",
+    "[\"3:27:0:0\",\"[\\\"1|3:27:0:0|arc=3\\\",\\\"2|3:27:0:0|arc=4\\\"]\",\"3:7:0:0\",\"[\\\"1|3:7:0:0|arc=1\\\",\\\"2|3:7:0:0|arc=1\\\"]\"]",
+    "[\"2:10:6:0\",\"[\\\"1|2:10:6:0|arc=5\\\",\\\"2|2:10:6:0|arc=2\\\"]\",\"2:11:6:0\",\"[\\\"1|2:11:6:0|arc=1\\\",\\\"2|2:11:6:0|arc=2\\\"]\"]"
+  ],
+  "six_group_conditional_residuals": [
+    {
+      "group": "GPS_L1",
+      "gnss_sig_freq": [
+        0,
+        0,
+        0
+      ],
+      "total_cost": 27.768309488306837,
+      "code_cost": 0.5628111703594921,
+      "phase_cost": 27.205498317947345,
+      "dd_rows": 12,
+      "code_residual_rms_m": 0.28015046535405275,
+      "phase_residual_rms_m": 0.009799607917042348,
+      "phase_residual_max_abs_m": 0.022678349429713168
+    },
+    {
+      "group": "GPS_L2_CL",
+      "gnss_sig_freq": [
+        0,
+        3,
+        0
+      ],
+      "total_cost": 55.71871667709798,
+      "code_cost": 0.12471646604977081,
+      "phase_cost": 55.59400021104821,
+      "dd_rows": 8,
+      "code_residual_rms_m": 0.2117292478556946,
+      "phase_residual_rms_m": 0.025563497980920263,
+      "phase_residual_max_abs_m": 0.03980591053380472
+    },
+    {
+      "group": "GAL_E1_C",
+      "gnss_sig_freq": [
+        2,
+        0,
+        0
+      ],
+      "total_cost": 67.02228559701149,
+      "code_cost": 7.858323128443004,
+      "phase_cost": 59.16396246856849,
+      "dd_rows": 11,
+      "code_residual_rms_m": 2.4234954286909978,
+      "phase_residual_rms_m": 0.028184774361547732,
+      "phase_residual_max_abs_m": 0.0531450284451094
+    },
+    {
+      "group": "GAL_E5B_Q",
+      "gnss_sig_freq": [
+        2,
+        6,
+        0
+      ],
+      "total_cost": 17.148360758188996,
+      "code_cost": 2.4651153861618,
+      "phase_cost": 14.683245372027196,
+      "dd_rows": 10,
+      "code_residual_rms_m": 0.8404913549661035,
+      "phase_residual_rms_m": 0.01610838577748467,
+      "phase_residual_max_abs_m": 0.03229641267949045
+    },
+    {
+      "group": "BDS_B1I_D1",
+      "gnss_sig_freq": [
+        3,
+        0,
+        0
+      ],
+      "total_cost": 99.02206155953883,
+      "code_cost": 4.673275380209116,
+      "phase_cost": 94.34878617932971,
+      "dd_rows": 24,
+      "code_residual_rms_m": 0.4935325001835984,
+      "phase_residual_rms_m": 0.013458472341990482,
+      "phase_residual_max_abs_m": 0.0260350361970325
+    },
+    {
+      "group": "BDS_B2I_D1",
+      "gnss_sig_freq": [
+        3,
+        2,
+        0
+      ],
+      "total_cost": 12.874052308661643,
+      "code_cost": 7.91742362770181,
+      "phase_cost": 4.956628680959832,
+      "dd_rows": 8,
+      "code_residual_rms_m": 1.0594613425034345,
+      "phase_residual_rms_m": 0.008513486949893812,
+      "phase_residual_max_abs_m": 0.015353304273283845
+    }
+  ],
+  "residual_interpretation": "Group costs preserve shared-pivot covariance and condition on the same fitted common baselines and complete integer vector. Correlated residuals are not independent votes. No group or arc is declared faulty from this fit.",
+  "prior_timing_template_bound": {
+    "white_distance_gap": 2.4178850421728484,
+    "prior_template_projected_white_norm": 0.07957777115462046,
+    "triangle_inequality_min_cost_after_prior_template": 276.89906030133534,
+    "bound_meaning": "After free-baseline projection, for any sign/direction of a perturbation with this norm, the reverse triangle inequality bounds the all-integer minimum from below. This describes the previously computed Doppler/known_sd template only, not all possible timing/calibration errors."
+  },
+  "conclusion": "The all-integer working model is clearly outside its unchanged gate in this four-packet window, not merely a numerical-guard boundary case. Phase residuals dominate and occur across several groups. This does not identify a faulty physical arc or establish persistent system-wide integer failure.",
+  "certificate_boundary": "Exhaustive numerical working-model results, not rigorous interval arithmetic, physical confidence calibration or true-integer validation.",
+  "next_physical_model_hypothesis": {
+    "status": "PROPOSED_NOT_IMPLEMENTED_OR_VALIDATED",
+    "hypothesis": "A satellite-dependent, time-correlated phase bias or multipath component may be absent from the present receiver-internal precision model. Group-constant receiver phase biases cancel under DD and are not a sufficient explanation.",
+    "measurement": "y_e = B_e*b_e(x) + A_e*N + D_e*beta_e + epsilon_e; epsilon retains original Q. beta is a physical-SD-signal latent phase error in meters, and D is the observed target-minus-pivot map. The shared x contains pose, velocity, position, IMU bias and support states.",
+    "temporal_model": "A finite-covariance stationary colored process such as beta(t+dt)=exp(-dt/tau)*beta(t)+eta may be tested only with physically justified or separately calibrated scale/tau. Identify beta by physical receiver/signal source; pivot changes only D. An integer arc break alone does not establish that multipath bias resets or persists, so any bias transition at reacquisition needs its own declared physical assumption. Do not give every DD an unpenalized offset.",
+    "integer_bias_identifiability": "An unrestricted constant beta and lambda*N are confounded: N->N+k, beta->beta-lambda*k leaves phase predictions unchanged. This four-packet window cannot identify bias mean, variance and time scale by itself. Without externally justified stochastic anchoring, integer qualification must remain unresolved.",
+    "shared_likelihood_and_legged_role": "Carrier, calibrated IMU propagation and valid contact factors must act on the same x and latent beta in one graph. Marginalize beta with its temporal correlation and normalization retained; do not inject a separately fitted heading. Support failure must remove or replay the dependent common-state evidence.",
+    "qualification_boundary": "Calibrate or declare the new physical likelihood independently of whether this window becomes nonempty; compare next-arriving predictive likelihood with unchanged raw inputs. Lower fitted residual alone is not validation. Preserve this original-model failure receipt and do not tune Q, thresholds, process variance or arbitrary integer subsets until it passes."
+  }
+}

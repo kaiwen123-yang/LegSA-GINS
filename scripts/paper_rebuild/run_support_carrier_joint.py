@@ -387,6 +387,8 @@ def main(argv=None):
     parser.add_argument("--seed", type=int, default=6100801)
     parser.add_argument("--modes", nargs="+", choices=MODES, default=list(MODES))
     parser.add_argument("--duration", type=float, default=90.)
+    parser.add_argument("--support-inference", choices=("full_nonlinear", "shared_linearization"),
+                        default="full_nonlinear")
     parser.add_argument("--plot-only", action="store_true", help="redraw saved navigation CSV/NPZ only; never run a navigator or regenerate the scene")
     parser.add_argument("--plot-stem", default="joint_process_review", help="filename stem for --plot-only output; the original plot is preserved by default")
     args = parser.parse_args(argv)
@@ -402,9 +404,11 @@ def main(argv=None):
 
     output_root.mkdir(parents=True, exist_ok=True)
     scene = generate_scene(duration_s=args.duration, seed=args.seed)
+    scene["metadata"]["support_inference"] = args.support_inference
     purpose = "full_90_second_process" if args.duration >= 90 else "internal_short_debug_not_scientific_milestone"
     run_record = dict(seed=args.seed, duration_s=args.duration, modes=args.modes, purpose=purpose,
                       data_mode="synthetic", estimator_truth_input=False,
+                      support_inference=args.support_inference,
                       scenario_kind=scene["metadata"]["scenario_kind"], completed_modes=[], status="RUNNING")
     repository = Path(__file__).resolve().parents[2]
     sources = sorted((repository / "src/legsa_gins/paper_rebuild/joint_navigation").glob("*.py")) + [Path(__file__).resolve()]
@@ -428,12 +432,21 @@ def main(argv=None):
     for mode in args.modes:
         print(f"{mode}: starting {args.duration:g} s {purpose}", flush=True)
         started = time.monotonic()
+        navigator = JointNavigator(scene["metadata"], mode=mode)
         try:
-            result = JointNavigator(scene["metadata"], mode=mode).run(scene["events"])
+            result = navigator.run(scene["events"])
         except (Exception, KeyboardInterrupt) as error:
             run_record.update(status="INTERRUPTED" if isinstance(error, KeyboardInterrupt) else "FAILED",
-                              failed_mode=mode, error_type=type(error).__name__, error=str(error))
+                              failed_mode=mode, error_type=type(error).__name__, error=str(error),
+                              failed_mode_published_rows=len(navigator.rows))
             write_json(output_root / "run_status.json", run_record)
+            arm_root = output_root / mode
+            arm_root.mkdir(exist_ok=True)
+            write_rows(arm_root / "navigation.csv", navigator.rows)
+            write_json(arm_root / "decisions.json", navigator.decisions)
+            write_json(arm_root / "estimator_summary.json", dict(status=run_record["status"],
+                causal_output_rows=len(navigator.rows), partial_output=True,
+                complete_research_goal=False))
             raise
         arm_root = output_root / mode
         arm_root.mkdir(exist_ok=True)
