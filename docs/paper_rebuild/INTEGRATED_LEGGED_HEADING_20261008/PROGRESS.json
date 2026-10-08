@@ -1,5 +1,5 @@
 {
-  "plan_version": "v1.7",
+  "plan_version": "v2.0",
   "date_local": "2026-10-08",
   "timezone": "Asia/Shanghai",
   "status": "ACTIVE_M1_AUTOMATIC_ONSET_IMPLEMENTATION_NEXT",
@@ -183,6 +183,13 @@
       "date": "2026-10-08",
       "evidence": "One34-hypothesis source profile exactly reproduced the original whole-arc conditional. Local onset67.4 improves source score11.103, lowers rho(vN,uN) .920→.672, with no truth/error selection. External score slightly worsens and relative-velocity uncertainty increases.",
       "decision": "Implement automatic event-boundary onset hypotheses and historical dependency handling with existing finite physics. Treat the profile as attribution only; retain full M1 failure and require a new complete90-second navigation result."
+    },
+    {
+      "date": "2026-10-08",
+      "plan_version": "v2.0",
+      "trigger": "Latest human correction: support motion deserves simultaneous core research and previous acceptance was too narrow.",
+      "decision": "Use overlapping integrated milestones and four evidence axes; retain old M1 failure, remove its sequential gate, permit evidence-based posterior/backend changes.",
+      "impact": "No independent modules and no reduction of final trusted heading plus shared p/v goal. BY development, BYO/BYH tests, XB/NMB harsh tests and frozen V3 remain fixed."
     }
   ],
   "remaining_goal_requirements": [
@@ -203,5 +210,46 @@
     "next_algorithm_gap": "Reopen source-dependent integer/direction exclusions after support withdrawal; an evaluated-family winner or compute omission cannot certify the full direction domain.",
     "model_scope": "Prioritize existing finite common motion; only add relative foot failure freedom if a full direction-relevant scene establishes necessity.",
     "depends_on": "Complete M1 full automatic versus fixed navigation judgment first."
+  },
+  "plan_review_v2": {
+    "status": "PREPARED_FOR_USER_REVIEW",
+    "date_local": "2026-10-08",
+    "evidence_commit": "ca73c6e4d6dc1c46acde3f57a8291fdb7b6e4878",
+    "authority": "User requests support-motion research to proceed jointly with direction, withdrawal and navigation, first as a reviewable plan; explicit staged GitHub publication authorized.",
+    "scope_this_turn": "Plan and GitHub documentation publication only; no new estimator run, goal creation or message to another thread.",
+    "execution_state_note": "Existing status, goal_thread_id, current_milestone, milestone results and first_action remain the last recorded execution state under v1.7. They are historical execution metadata, not v2.0 stage gates.",
+    "replaces_planning_rule": "Remove the single 65-77s position/velocity dual-win gate as a prerequisite for direction work; preserve the failed run and evaluate all four evidence axes.",
+    "planned_first_work": "In the same JointNavigator, integrate support effective-time histories and source-dependent direction exclusion/reopening together; prepare the continuous direction process and registered test inputs concurrently.",
+    "research_horizon": "Seven-day first complete scientific judgment; up to fourteen days for fixed real-data comparisons and reviewable convergence, not a promise of positive results.",
+    "backend_change_conditions": [
+      "multimodal direction loss",
+      "irreversible marginalized dependencies",
+      "spurious observability from parametrization or linearization",
+      "measured computational limit preventing complete scientific tests"
+    ],
+    "scientific_completion_unchanged": true
+  },
+  "milestones_evidence_plan_version": "v1.7",
+  "planned_milestones_v2": {
+    "M1": {
+      "days": "1-4",
+      "status": "PLANNED",
+      "scope": "Joint support motion, effective time, direction source dependencies and conditional-state reconstruction"
+    },
+    "M2": {
+      "days": "3-7",
+      "status": "PLANNED",
+      "scope": "All three mechanisms in one direction-relevant continuous process and full BY development"
+    },
+    "M3": {
+      "days": "5-10",
+      "status": "PLANNED",
+      "scope": "Frozen BYO/BYH evaluation, heading-to-navigation attribution and V3/SDK adoption comparison"
+    },
+    "M4": {
+      "days": "8-14",
+      "status": "PLANNED",
+      "scope": "Same-version XB/NMB adverse evaluation, decisive repairs and reproducible delivery"
+    }
   }
 }
