@@ -7,6 +7,7 @@ import gtsam
 import numpy as np
 
 from ..carrier_phase.temporal import EpochBlock
+from .support_motion import support_motion_transition
 
 
 def _skew(vector: np.ndarray) -> np.ndarray:
@@ -18,22 +19,32 @@ def _skew(vector: np.ndarray) -> np.ndarray:
 class FootErrorExpression:
     """Original body foot error with redundant equality coordinates eliminated.
 
-    Fixed: e=R.T(c-p)-r. Common translation released: e=R.T(d)-r-q,
+    Fixed: e=R.T(c-p)-r. Finite common motion: e=R.T(c+s-p)-r,
+    where the first three entries of motion_key are world displacement s.
+    Common translation released: e=R.T(d)-r-q,
     with one unconstrained q shared by the simultaneously observed group.
     """
     pose_key: int
     point_key: int | None
     measured_body: tuple[float, float, float]
     common_key: int | None = None
+    motion_key: int | None = None
+
+    def __post_init__(self):
+        if self.common_key is not None and self.motion_key is not None:
+            raise ValueError("common projection and finite world motion are different foot models")
 
     @property
     def keys(self):
         return (self.pose_key, *(() if self.point_key is None else (self.point_key,)),
-                *(() if self.common_key is None else (self.common_key,)))
+                *(() if self.common_key is None else (self.common_key,)),
+                *(() if self.motion_key is None else (self.motion_key,)))
 
     def evaluate(self, values, derivatives=False):
         pose = values.atPose3(self.pose_key)
         point = np.zeros(3) if self.point_key is None else values.atPoint3(self.point_key)
+        if self.motion_key is not None:
+            point = point+values.atVector(self.motion_key)[:3]
         relative = pose.rotation().unrotate(point if self.common_key is not None else point-pose.translation())
         error = relative-np.asarray(self.measured_body)
         if self.common_key is not None:
@@ -49,7 +60,45 @@ class FootErrorExpression:
             jacobians[self.point_key] = pose.rotation().matrix().T
         if self.common_key is not None:
             jacobians[self.common_key] = -np.eye(3)
+        if self.motion_key is not None:
+            motion_jacobian = np.zeros((3, 6))
+            motion_jacobian[:, :3] = pose.rotation().matrix().T
+            jacobians[self.motion_key] = motion_jacobian
         return error, jacobians
+
+
+def _support_motion_factor(previous_key: int, current_key: int, dt: float,
+                           velocity_sigma_mps: float, tau_s: float, *, birth: bool):
+    transition, covariance = support_motion_transition(dt, velocity_sigma_mps, tau_s)
+    mapping = transition[:, 3:] if birth else transition
+    noise = (gtsam.noiseModel.Constrained.All(6) if not np.any(covariance) else
+             gtsam.noiseModel.Gaussian.Covariance(covariance))
+
+    def error(_factor, values, jacobians):
+        if jacobians is not None:
+            jacobians[0] = np.asfortranarray(-mapping)
+            jacobians[1] = np.eye(6, order="F")
+        return values.atVector(current_key)-mapping@values.atVector(previous_key)
+
+    return gtsam.CustomFactor(noise, [previous_key, current_key], error)
+
+
+def integrated_ou_factor(previous_motion_key: int, motion_key: int, dt: float,
+                         velocity_sigma_mps: float, tau_s: float):
+    """Transition between consecutive six-dimensional common-motion states."""
+    return _support_motion_factor(previous_motion_key, motion_key, dt,
+                                  velocity_sigma_mps, tau_s, birth=False)
+
+
+def integrated_ou_birth_factor(initial_velocity_key: int, motion_key: int, dt: float,
+                               velocity_sigma_mps: float, tau_s: float):
+    """First transition from u0 with s0=0 by omission of that coordinate.
+
+    The caller supplies the finite stationary N(0, sigma_u**2 I) prior on u0.
+    No foot-error noise or contact-position prior is introduced here.
+    """
+    return _support_motion_factor(initial_velocity_key, motion_key, dt,
+                                  velocity_sigma_mps, tau_s, birth=True)
 
 
 def algebraic_foot_error_factor(current: FootErrorExpression, sigma: float, *,

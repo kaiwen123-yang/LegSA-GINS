@@ -107,6 +107,8 @@ def main(argv=None):
     parser.add_argument("--noise-profile", type=Path, default=ROOT / "configs/paper_rebuild/horizontal_literature/hartley/stage_payload/04_METHOD_CONTRACTS/GO2_IMU_ALLAN_90MIN_RECOVERED_V1.yaml")
     parser.add_argument("--phase-noise-model", type=Path,
                         help="Frozen BY development working measurement model JSON; raw input files remain original")
+    parser.add_argument("--support-motion-model", type=Path,
+                        help="BY-derived finite common-motion model with joint foot/external source qualification")
     parser.add_argument("--start", type=float, default=96.)
     parser.add_argument("--end", type=float, default=101.)
     parser.add_argument("--key-dt", type=float, default=.1)
@@ -161,6 +163,15 @@ def main(argv=None):
         write_json(output / "run_status.json", record)
         inputs = load_by2_events(config)
         inputs["metadata"]["support_inference"] = args.support_inference
+        if args.support_motion_model is not None:
+            motion_content = args.support_motion_model.read_bytes()
+            motion_model = json.loads(motion_content)
+            inputs["metadata"]["support_motion_model"] = motion_model["support_motion_model"]
+            inputs["metadata"]["support_prediction"] = "foot_external"
+            inputs["metadata"]["support_policy_search"] = "observed_groups"
+            record["support_motion_model"] = dict(path=str(args.support_motion_model.resolve()),
+                sha256=hashlib.sha256(motion_content).hexdigest(), content=motion_model)
+            (output / "support_motion_model.json").write_bytes(motion_content)
         if args.phase_noise_model is not None:
             model_content = args.phase_noise_model.read_bytes()
             model = json.loads(model_content)

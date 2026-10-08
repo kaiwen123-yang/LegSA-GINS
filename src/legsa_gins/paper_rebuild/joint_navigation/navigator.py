@@ -70,6 +70,17 @@ class JointNavigator:
     def __init__(self, metadata: dict, mode: str = "U3", *,
                  monitor_support: bool = True, support_models: list[dict] | None = None):
         self.metadata = copy.deepcopy(metadata)
+        self.support_prediction = metadata.get("support_prediction", "external")
+        proper_support_prediction = self.support_prediction == "foot_external"
+        self.support_alternative_models = (("finite_common_motion",) if proper_support_prediction
+                                           else ("common_translation_release", "relative_release"))
+        self.support_policy_search = metadata.get("support_policy_search",
+            "observed_groups" if proper_support_prediction else "combined_paths")
+        self.expand_support_policy_paths = self.support_policy_search == "combined_paths"
+        self.metadata["support_policy_search"] = self.support_policy_search
+        if proper_support_prediction and any(item["mode"] not in ("fixed", "finite_common_motion")
+                                             for item in (support_models or [])):
+            raise ValueError("joint foot density compares fixed and proper finite-motion models on the same rows")
         self.gaussian_future_separator = metadata.get("support_inference") == "shared_separator"
         if self.gaussian_future_separator:
             self.metadata["gaussian_future_separator"] = True
@@ -122,8 +133,8 @@ class JointNavigator:
         self.nonlinear_support_step_events = 0
         self.support_models = list(canonical_policy(support_models or []))
         # Fixed engineering decision costs, not calibrated model probabilities.
-        # Both releases have the same cost; geometry is not presumed valid merely
-        # because common translation failed. Unresolved models remain separate.
+        # The finite-motion comparison retains the original engineering cost.
+        # Legacy projection releases remain an external-only diagnostic family.
         self.model_edit_cost = 2. * math.log(100.)
         self.model_support_delta = 2. * math.log(20.)
         self.support_groups = {}
@@ -141,6 +152,7 @@ class JointNavigator:
         self.policy_exploration_tail_probability = float(metadata.get("policy_exploration_tail_probability", 1e-4))
         self.last_external_prediction_nis = None
         self.last_external_prediction_dimension = 0
+        self.last_prediction_blocks = []
         self.reference_rows = {}
         self.predictive_rows_fingerprint = ""
         self.last_support_signature = None
@@ -305,15 +317,20 @@ class JointNavigator:
         """Score each real integer lineage before this event is consumed.
 
         Different models compare marginal blocks of identical physical rows.
-        Scores are conditional external predictive evidence, not the normalized
-        joint likelihood of all foot measurements and not model probabilities.
+        With foot_external, fixed and finite-motion models compare a proper
+        joint prediction of existing-foot and external rows, conditional on IMU.
+        The legacy mode compares external rows only. Neither is a calibrated
+        model probability, and neither re-scores already consumed measurements.
         """
         self.last_external_prediction_nis = None
         self.last_external_prediction_dimension = 0
-        if self.branches[0].index is None or all(
-                packet.get(name) is None for name in ("carrier", "gnss_position", "gnss_velocity")):
+        self.last_prediction_blocks = []
+        has_external = any(packet.get(name) is not None for name in ("carrier", "gnss_position", "gnss_velocity"))
+        has_foot = self.support_prediction == "foot_external" and self.use_foot and bool(packet.get("feet"))
+        if self.branches[0].index is None or not (has_external or has_foot):
             return (), 0.
-        predictions = [branch.predict_external(packet) for branch in self.branches]
+        predictions = [branch.predict_external(packet, support_models=self._models_at(packet["time_s"]))
+                       for branch in self.branches]
         common = set(predictions[0]["row_ids"])
         for prediction in predictions[1:]:
             common.intersection_update(prediction["row_ids"])
@@ -328,20 +345,48 @@ class JointNavigator:
         position_nis, external_nis = 0., []
         for branch, prediction in zip(self.branches, predictions):
             if index <= branch.predictive_frontier:
-                raise ValueError("an external event was scored twice in one integer lineage")
+                raise ValueError("a prediction event was scored twice in one integer lineage")
             branch.predictive_frontier = index
+            foot_prediction_scope = dict(
+                predicted_foot_arcs=prediction.get("predicted_foot_arcs", []),
+                excluded_contact_birth_arcs=prediction.get("excluded_contact_birth_arcs", []))
             if not rows:
+                self.last_prediction_blocks.append(dict(
+                    integer_lineage=branch.integer_lineage, joint_dimension=0,
+                    external_dimension=0, conditional_foot_dimension=0,
+                    score_accumulations=0, scope=self.support_prediction,
+                    **foot_prediction_scope))
                 continue
             positions = [prediction["row_ids"].index(row) for row in rows]
             residual = prediction["innovation"][positions]
             covariance = prediction["covariance"][np.ix_(positions, positions)]
             chol = np.linalg.cholesky(covariance)
             whitened = np.linalg.solve(chol, residual)
-            external_nis.append(float(whitened@whitened))
-            branch.predictive_score += float(
+            joint_nis = float(whitened@whitened)
+            external_nis.append(joint_nis)
+            joint_score = float(
                 whitened @ whitened + 2.*np.log(np.diag(chol)).sum()
                 + len(rows)*math.log(2.*math.pi))
+            branch.predictive_score += joint_score
             branch.predictive_row_count += len(rows)
+            external = [j for j, row in enumerate(rows) if not row.startswith("foot:")]
+            external_score, external_block_nis = 0., 0.
+            if external:
+                external_chol = np.linalg.cholesky(covariance[np.ix_(external, external)])
+                external_white = np.linalg.solve(external_chol, residual[external])
+                external_block_nis = float(external_white@external_white)
+                external_score = float(external_block_nis + 2.*np.log(np.diag(external_chol)).sum()
+                                       + len(external)*math.log(2.*math.pi))
+            self.last_prediction_blocks.append(dict(
+                integer_lineage=branch.integer_lineage, joint_dimension=len(rows),
+                external_dimension=len(external), conditional_foot_dimension=len(rows)-len(external),
+                joint_nis=joint_nis, external_marginal_nis=external_block_nis,
+                conditional_foot_nis=joint_nis-external_block_nis,
+                joint_negative_twice_log_density=joint_score,
+                external_marginal_negative_twice_log_density=external_score,
+                conditional_foot_negative_twice_log_density=joint_score-external_score,
+                score_accumulations=1, scope=self.support_prediction,
+                **foot_prediction_scope))
             if packet.get("gnss_position") is not None:
                 p = [j for j, row in enumerate(rows) if row.startswith("gnss_position:")]
                 r = residual[p]
@@ -455,7 +500,7 @@ class JointNavigator:
         track = SupportTrack(identity, group_id, ids, model, first, origin, shadow,
                              policy=policy, parent_ids={parent_id}, edit_count=len(policy), created_index=index)
         self.support_tracks[identity] = track
-        if self.shared_support:
+        if self.shared_support and self.expand_support_policy_paths:
             self.policy_parent_cursors[identity] = 0
             self._queue_policy_parent(identity)
         return track
@@ -471,7 +516,10 @@ class JointNavigator:
         expired = sum(group["status"] == "UNRESOLVED_HISTORY_EXPIRED" for group in self.support_groups.values())
         unresolved_frontiers = sum(track.unresolved_reason is not None or not self._same_predictive_rows(track.navigator)
                                    for track in self.support_tracks.values())
-        return dict(scope="OBSERVED_GROUP_REPLACEMENT_POLICY_PATHS",
+        return dict(scope=("OBSERVED_GROUP_REPLACEMENT_POLICY_PATHS" if self.expand_support_policy_paths
+                           else "OBSERVED_SINGLE_GROUP_PROPER_CONDITIONAL_MODELS"),
+            alternative_models=list(self.support_alternative_models),
+            multigroup_policy_combinations_searched=self.expand_support_policy_paths,
             exploration_started=self.policy_exploration_started,
             exploration_tail_probability=self.policy_exploration_tail_probability,
             exploration_threshold_role="WORKING_COMPUTE_SCHEDULER_NOT_TRUST_OR_ACCEPTANCE_GATE",
@@ -494,7 +542,8 @@ class JointNavigator:
                     policy_edit_count=len(policy))
 
     def _extend_policy_paths(self, packet, index):
-        if not self.shared_support or not self.reference_rows.get(index) or index <= self.policy_last_extension_frontier:
+        if (not self.shared_support or not self.expand_support_policy_paths
+                or not self.reference_rows.get(index) or index <= self.policy_last_extension_frontier):
             return
         self.policy_last_extension_frontier = index
         threshold = (float(chi2.isf(self.policy_exploration_tail_probability, self.last_external_prediction_dimension))
@@ -532,7 +581,7 @@ class JointNavigator:
             self.policy_parent_cursors[identity] += 1
             self._queue_policy_parent(identity)
             created = []
-            for model in ("common_translation_release", "relative_release"):
+            for model in self.support_alternative_models:
                 policy = self._candidate_policy(ids, model, group["group_id"], base_policy=parent.policy)
                 track = self._create_policy_track(policy, identity, ids, model, group["group_id"], index)
                 if track is not None:
@@ -562,7 +611,7 @@ class JointNavigator:
             for identity in self.policy_parent_cursors:
                 self._queue_policy_parent(identity)
             if prior:
-                for model in ("common_translation_release", "relative_release"):
+                for model in self.support_alternative_models:
                     self._create_policy_track(self._candidate_policy(ids, model, group_id),
                         "fixed", ids, model, group_id, self.branches[0].index)
             else:
@@ -1099,7 +1148,7 @@ class JointNavigator:
                     affected=sorted(affected), support_model=accepted.model,
                     first_use_s=accepted.first_use, discovered_at_s=t,
                     evidence_conditioned_on_integer_lineages=True,
-                    relative_geometry_retained=accepted.model == "common_translation_release"))
+                    relative_geometry_retained=accepted.model in ("common_translation_release", "finite_common_motion")))
                 if self.rebuild_history:
                     self.revoked_arcs.update(affected)
                     self._rebuild(affected, index, t, accepted)
@@ -1189,6 +1238,8 @@ class JointNavigator:
                 candidate_costs=costs.tolist(), candidate_supported=supported.tolist(),
                 support_ids=[f["arc_id"] for f in packet.get("feet", [])],
                 direction_status=status, gnss_innovation_nis=nis,
+                predictive_evidence_scope=self.support_prediction,
+                background_predictive_blocks=copy.deepcopy(self.last_prediction_blocks),
                 candidate_support_complete=nonlinear_comparison_complete,
                 conditional_model_evidence_frontier_complete=comparison_complete,
                 evaluated_policy_evidence_frontier_complete=evaluated_frontier_complete,
@@ -1252,6 +1303,8 @@ class JointNavigator:
             policy_search=self._policy_search_readout(),
             expired_unresolved_groups=self.expired_unresolved_groups,
             model_edit_cost=self.model_edit_cost, model_support_delta=self.model_support_delta,
+            predictive_evidence_scope=self.support_prediction,
+            support_motion_model=copy.deepcopy(self.metadata.get("support_motion_model")),
             marginalized_variables=sum(b.window.marginalized_total for b in self.branches),
             truth_used_online=False, probability_calibrated=False,
             complete_research_goal=False,

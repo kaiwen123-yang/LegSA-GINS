@@ -389,6 +389,10 @@ def main(argv=None):
     parser.add_argument("--duration", type=float, default=90.)
     parser.add_argument("--support-inference", choices=("full_nonlinear", "shared_linearization", "shared_separator"),
                         default="full_nonlinear")
+    parser.add_argument("--support-motion-model", type=Path,
+                        help="BY-derived finite common-motion model; enables same-row foot/external prediction")
+    parser.add_argument("--fixed-support", action="store_true",
+                        help="same-mode fixed-support comparison; disables only support-model monitoring")
     parser.add_argument("--plot-only", action="store_true", help="redraw saved navigation CSV/NPZ only; never run a navigator or regenerate the scene")
     parser.add_argument("--plot-stem", default="joint_process_review", help="filename stem for --plot-only output; the original plot is preserved by default")
     args = parser.parse_args(argv)
@@ -405,11 +409,23 @@ def main(argv=None):
     output_root.mkdir(parents=True, exist_ok=True)
     scene = generate_scene(duration_s=args.duration, seed=args.seed)
     scene["metadata"]["support_inference"] = args.support_inference
+    motion_content = None
+    if args.support_motion_model is not None:
+        motion_content = args.support_motion_model.read_bytes()
+        motion_model = json.loads(motion_content)
+        scene["metadata"]["support_motion_model"] = motion_model["support_motion_model"]
+        scene["metadata"]["support_prediction"] = "foot_external"
+        scene["metadata"]["support_policy_search"] = "observed_groups"
     purpose = "full_90_second_process" if args.duration >= 90 else "internal_short_debug_not_scientific_milestone"
     run_record = dict(seed=args.seed, duration_s=args.duration, modes=args.modes, purpose=purpose,
                       data_mode="synthetic", estimator_truth_input=False,
                       support_inference=args.support_inference,
+                      support_monitoring=not args.fixed_support,
                       scenario_kind=scene["metadata"]["scenario_kind"], completed_modes=[], status="RUNNING")
+    if motion_content is not None:
+        run_record["support_motion_model"] = dict(path=str(args.support_motion_model.resolve()),
+            sha256=hashlib.sha256(motion_content).hexdigest(), content=motion_model)
+        (output_root / "support_motion_model.json").write_bytes(motion_content)
     repository = Path(__file__).resolve().parents[2]
     sources = sorted((repository / "src/legsa_gins/paper_rebuild/joint_navigation").glob("*.py")) + [Path(__file__).resolve()]
     run_record["source_sha256"] = {str(path.relative_to(repository)): hashlib.sha256(path.read_bytes()).hexdigest() for path in sources}
@@ -432,7 +448,8 @@ def main(argv=None):
     for mode in args.modes:
         print(f"{mode}: starting {args.duration:g} s {purpose}", flush=True)
         started = time.monotonic()
-        navigator = JointNavigator(scene["metadata"], mode=mode)
+        navigator = JointNavigator(scene["metadata"], mode=mode,
+                                   monitor_support=not args.fixed_support)
         try:
             result = navigator.run(scene["events"])
         except (Exception, KeyboardInterrupt) as error:

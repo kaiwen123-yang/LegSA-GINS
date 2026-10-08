@@ -1,8 +1,8 @@
 {
-  "plan_version": "v1",
+  "plan_version": "v1.1",
   "date_local": "2026-10-08",
   "timezone": "Asia/Shanghai",
-  "status": "ACTIVE_LONG_TERM_GOAL_PLAN_DELIVERED",
+  "status": "ACTIVE_M1_IMPLEMENTED_SOURCE_IDENTIFICATION_IN_PROGRESS",
   "goal_thread_id": "01a11afd-6d44-7bc0-94df-ae1fbfc584d1",
   "plan": "PLAN.md",
   "authorization": "Explicit user request in this thread to create a plan, then an active long-term goal, implement one integrated algorithm, and push completed stages.",
@@ -12,7 +12,7 @@
   "current_milestone": "M1",
   "milestones": {
     "M1": {
-      "status": "PLANNED",
+      "status": "PARTIAL_IMPLEMENTATION_AND_NECESSARY_MATH_CHECKS_COMPLETE_FULL_NAVIGATION_UNVERIFIED",
       "deliverable": "Integrated finite support motion, same-row joint prediction and automatic historical reconstruction with complete navigation evidence."
     },
     "M2": {
@@ -43,7 +43,27 @@
     "primary_system_baseline": "frozen V3"
   },
   "required_sequence_adapter": "Current joint real_data/run_joint_by2 remains BY2-specific; explicit registered sequence/base-time/provider identity adaptation required before test execution.",
-  "first_action": "Implement finite within-arc common motion and foot-plus-external pre-consumption joint prediction inside existing JointNavigator; identify working parameters from BY sources, then judge the complete M1 scene.",
+  "first_action": "Read complete BY source profile, resolve parameter-identification scope, freeze the source-selected working model, then run the full 90-second same-version U3 fixed-support versus finite automatic-support comparison.",
+  "m1_current_evidence": {
+    "integrated_code": "Finite common support motion, proper joint foot/external prediction, existing nonlinear conditional-history expansion and source-only restricted likelihood are connected to the same JointNavigator state.",
+    "necessary_math_checks": "Exact OU and fixed limit; foot Jacobians and original AR likelihood; joint prediction covariance from actual process graph and conditional-density decomposition; checkpoint and Gaussian-separator lifecycle; sparse source likelihood equals dense full-covariance integration.",
+    "short_by_profile": {
+      "root": "/home/kaiwen/research/LegSA-GINS-SCRATCH/INTEGRATED_LEGGED_HEADING_20261008/BY_SOURCE_PROFILE_SHORT01",
+      "window_s": [96, 106],
+      "status": "BOUNDARY_UNRESOLVED_NOT_FROZEN",
+      "grid_minimum": {"velocity_sigma_mps": 0.05, "tau_s": 1.0},
+      "fixed_relative_deviance": 65.43970262120365,
+      "scope": "Local source-only no-foot navigation Gaussian chart; one of four initial yaw seeds stationary within 100 iterations. No reference reads, no navigation outcome evaluation, not global qualification."
+    },
+    "full_by_profile": {
+      "root": "/home/kaiwen/research/LegSA-GINS-SCRATCH/INTEGRATED_LEGGED_HEADING_20261008/BY_SOURCE_PROFILE_FULL01",
+      "window_s": [66, 340],
+      "status": "RUNNING"
+    },
+    "full_m1_navigation": "NOT_RUN_WITH_NEW_MODEL",
+    "fair_fixed_comparison": "Same U3 mode, same partial carriers and foot_external evidence, same support lifecycle, monitor_support=False; U1 is not an equivalent baseline.",
+    "policy_scope": "Observed single-group fixed/finite alternatives. Arbitrary multi-fault policy coverage and direction-dependent recovery remain M2 work."
+  },
   "overall_scientific_goal_complete": false,
   "new_algorithm_implementation_in_plan_turn": false,
   "new_navigation_runs_in_plan_turn": 0,
