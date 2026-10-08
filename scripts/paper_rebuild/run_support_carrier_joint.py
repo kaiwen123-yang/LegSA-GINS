@@ -412,6 +412,13 @@ def main(argv=None):
     run_record["git_commit"] = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=repository, text=True).strip()
     run_record["runtime"] = dict(python=platform.python_version(), platform=platform.platform(),
                                   packages={name: importlib.metadata.version(name) for name in ("gtsam", "numpy", "scipy", "matplotlib")})
+    # A long research run can overlap later source edits. Keep the exact text
+    # corresponding to its recorded hashes, not only the previous commit id.
+    repository = Path(__file__).resolve().parents[2]
+    for relative in run_record["source_sha256"]:
+        target = output_root / "SOURCE_SNAPSHOT" / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes((repository / relative).read_bytes())
     write_json(output_root / "run_status.json", run_record)
     write_json(output_root / "sensor_metadata.json", scene["metadata"])
     write_json(output_root / "evaluation_metadata.json", scene["evaluation_metadata"])

@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 from dataclasses import dataclass
+from fractions import Fraction
 import math
 
 import gtsam
@@ -16,8 +17,10 @@ from gtsam.symbol_shorthand import X, V, B
 
 from .factors import (carrier_relation_factor, foot_factor, ar1_error_factor,
                       foot_error_coordinate_factor, point3_coordinate_factor, projected_foot_factor,
-                      gnss_position_velocity_factor, gnss_antenna_factor, gnss_antenna_prediction)
-from .window import JointWindow, WindowSnapshot
+                      gnss_position_velocity_factor, gnss_antenna_factor, gnss_antenna_prediction, gravity_tilt_factor,
+                      FootErrorExpression, algebraic_foot_error_factor)
+from .window import JointWindow, WindowSnapshot, eliminate_qr
+from .carrier_relations import CarrierRelationTracker
 
 
 @dataclass(frozen=True)
@@ -58,12 +61,18 @@ class NavigationBranch:
         self.foot_sigma = float(metadata.get("foot_sigma", .01))
         self.foot_tau = float(metadata.get("foot_correlation_tau_s", .08))
         self.ambiguity_keys: dict[str, int] = {}
+        self._ambiguity_serial = 0
+        self._carrier_relation_tracker = CarrierRelationTracker(
+            label_mode=metadata.get("carrier_label_mode", "synthetic_scalar"))
+        self._carrier_coordinate_constraints: set[tuple] = set()
+        self.last_carrier_relations: dict = {}
         self.contact_keys: dict[str, int] = {}
         self.direction_keys: dict[tuple, int] = {}
         self.foot_history: dict[str, tuple] = {}
         self.direction_history: dict[tuple, tuple] = {}
-        # Last latent body-error is keyed by original arc, never by foot subset.
-        self.foot_noise_history: dict[str, tuple[int, float]] = {}
+        # The original per-arc body error is an exact expression in R/p/d/q.
+        # It is never an independently optimized redundant equality coordinate.
+        self.foot_error_history: dict[str, tuple[FootErrorExpression, float]] = {}
         self.support_geometry: dict[str, dict[str, tuple[str, int | None]]] = {}
         self._support_serial = 0
         self._support_retain: set[int] = set()
@@ -82,6 +91,8 @@ class NavigationBranch:
         self.predictive_row_count = 0
         self.predictive_frontier = -1
         self.integer_lineage = ()
+        self.bootstrap_status = "NOT_REQUESTED"
+        self.bootstrap_diagnostics = {}
 
     @staticmethod
     def _sigmas(value, dimension=3):
@@ -137,11 +148,27 @@ class NavigationBranch:
 
     def _carrier(self, block, pose, pose_key, values, times, factors):
         labels = tuple(block.ambiguity_labels)
+        # Coordinate constraints can only name variables still present in the
+        # common graph. Retired keys are not resurrected by a label dictionary.
+        stale = [label for label, key in self.ambiguity_keys.items()
+                 if not values.exists(key) and not self.window.values.exists(key)]
+        for label in stale:
+            del self.ambiguity_keys[label]
+            self._conditioned_labels.discard(label)
+        live_keys = set(self.ambiguity_keys.values())
+        self._carrier_coordinate_constraints = {
+            identity for identity in self._carrier_coordinate_constraints
+            if all(key in live_keys for key, _ in identity)}
+        history_labels = tuple(self.ambiguity_keys)
+        transition = self._carrier_relation_tracker.advance(
+            labels, time_s=self.time, history_labels=history_labels)
         unknown = [label for label in labels if label not in self.ambiguity_keys]
         residual = np.asarray(block.y, float) - np.asarray(block.B) @ pose.rotation().rotate(self.baseline_body)
         for j, label in enumerate(labels):
             if label not in unknown:
-                residual -= np.asarray(block.A)[:, j] * self.window.values.atVector(self.ambiguity_keys[label])[0]
+                key = self.ambiguity_keys[label]
+                source = values if values.exists(key) else self.window.values
+                residual -= np.asarray(block.A)[:, j] * source.atVector(key)[0]
         if unknown:
             columns = [labels.index(label) for label in unknown]
             chol = np.linalg.cholesky(np.asarray(block.Q))
@@ -149,14 +176,90 @@ class NavigationBranch:
             initial, _, _, _ = np.linalg.lstsq(
                 whitened_design, np.linalg.solve(chol, residual), rcond=None)
             for label, estimate in zip(unknown, initial):
-                key = gtsam.symbol("a", len(self.ambiguity_keys))
+                key = gtsam.symbol("a", self._ambiguity_serial)
+                self._ambiguity_serial += 1
                 self.ambiguity_keys[label] = key
                 values.insert_vector(key, np.array([float(estimate)]))
                 if label in self.fixed:
                     factors.append(self._fixed_factor(label))
+        coordinate_count = 0
+        new_coordinate_basis = {}
+        added_coordinates = []
+        for relation in transition.graph_constraints():
+            coefficients = dict(relation["coefficients"])
+            row = [Fraction(coefficients.get(label, 0)) for label in unknown]
+            # The old variables already obey their coordinate identities.
+            # Keep only independent extensions on the newly created variables;
+            # repeated old combinations add no equation or sensor information.
+            for pivot, basis in sorted(new_coordinate_basis.items()):
+                if row[pivot]:
+                    scale = row[pivot]
+                    row = [value-scale*entry for value, entry in zip(row, basis)]
+            pivot = next((j for j, value in enumerate(row) if value), None)
+            if pivot is None:
+                continue
+            scale = row[pivot]
+            new_coordinate_basis[pivot] = [value/scale for value in row]
+            identity = tuple(sorted((self.ambiguity_keys[label], int(coefficient))
+                                    for label, coefficient in relation["coefficients"]))
+            if identity[0][1] < 0:
+                identity = tuple((key, -coefficient) for key, coefficient in identity)
+            if identity in self._carrier_coordinate_constraints:
+                continue
+            factors.append(self._carrier_coordinate_factor(identity))
+            self._carrier_coordinate_constraints.add(identity)
+            added_coordinates.append(dict(identity))
+            coordinate_count += 1
+        if added_coordinates:
+            # Begin on the exact coordinate manifold, as for the foot latent
+            # coordinates. This only changes Values: the raw observation and
+            # its Q are untouched, and unconstrained float directions remain.
+            new_keys = [self.ambiguity_keys[label] for label in unknown]
+            new_set = set(new_keys)
+            design = np.array([[relation.get(key, 0) for key in new_keys]
+                               for relation in added_coordinates], dtype=float)
+            target = np.array([-sum(coefficient*(
+                values if values.exists(key) else self.window.values).atVector(key)[0]
+                for key, coefficient in relation.items() if key not in new_set)
+                for relation in added_coordinates])
+            initial = np.array([values.atVector(key)[0] for key in new_keys])
+            initial += np.linalg.lstsq(design, target-design @ initial, rcond=None)[0]
+            replacement = gtsam.Values()
+            for key, estimate in zip(new_keys, initial):
+                replacement.insert_vector(key, np.array([estimate]))
+            values.update(replacement)
+        self._carrier_relation_tracker.remember(labels)
+        self.last_carrier_relations = dict(
+            history_relation_rank=transition.history_relation_rank,
+            current_relation_rank=transition.current_relation_rank,
+            intersection_rank=transition.intersection_rank,
+            new_relation_rank=transition.new_relation_rank,
+            continuation_status=transition.continuation_status,
+            pivot_only_change=transition.pivot_only_change,
+            new_coordinate_factors=coordinate_count,
+            history_scope="ACTUALLY_PRESENT_SHARED_GRAPH_AMBIGUITY_VARIABLES",
+            expired_variable_labels=tuple(stale),
+            coordinate_identity_is_integer_fix=False,
+            observation_transport_applied=False, covariance_transformed=False)
         keys = [self.ambiguity_keys[label] for label in labels]
         times.update({key: self.time for key in keys})
         factors.append(carrier_relation_factor(pose_key, keys, block, self.baseline_body))
+
+    @staticmethod
+    def _carrier_coordinate_factor(identity):
+        """Exact new/old DD coordinate relation; no additional sensor evidence."""
+        identity = tuple(identity)
+
+        def error(_factor, values, jacobians):
+            residual = 0.0
+            for index, (key, coefficient) in enumerate(identity):
+                residual += coefficient*float(values.atVector(key)[0])
+                if jacobians is not None:
+                    jacobians[index] = np.array([[float(coefficient)]], order="F")
+            return np.array([residual])
+
+        return gtsam.CustomFactor(gtsam.noiseModel.Constrained.All(1),
+                                  [key for key, _ in identity], error)
 
     def _support_key(self, symbol):
         key = gtsam.symbol(symbol, self._support_serial)
@@ -166,32 +269,20 @@ class NavigationBranch:
     def _point(self, key, values):
         return values.atPoint3(key) if values.exists(key) else self.window.values.atPoint3(key)
 
-    def _foot_noise(self, arc, measured, pose, values, times, factors):
-        """Expose the original AR error without scoring its previous value twice."""
-        history = self.foot_noise_history.get(arc)
-        if history is None and arc in self.foot_history:
-            old_pose_key, old_measured, old_time = self.foot_history[arc]
-            contact_key = self.contact_keys[arc]
-            old_key = self._support_key("e")
-            old_pose = self.window.values.atPose3(old_pose_key)
-            values.insert_point3(old_key, old_pose.transformTo(self._point(contact_key, values))-old_measured)
-            factors.append(foot_error_coordinate_factor(old_key, old_pose_key, contact_key, old_measured))
-            times[old_key] = old_time
-            history = (old_key, old_time)
-        key = self._support_key("e")
-        if history is None:
-            initial = np.zeros(3)
-            factors.append(gtsam.PriorFactorPoint3(
-                key, initial, gtsam.noiseModel.Isotropic.Sigma(3, self.foot_sigma)))
-        else:
-            previous_key, previous_time = history
-            rho = math.exp(-(self.time-previous_time)/self.foot_tau)
-            initial = rho*self._point(previous_key, values)
-            factors.append(ar1_error_factor(previous_key, key, rho, self.foot_sigma))
-        values.insert_point3(key, initial)
-        times[key] = self.time
-        self.foot_noise_history[arc] = (key, self.time)
-        return key
+    def _previous_foot_error(self, arc):
+        if arc in self.foot_error_history:
+            return self.foot_error_history[arc]
+        if arc in self.foot_history:
+            pose_key, measured, timestamp = self.foot_history[arc]
+            return FootErrorExpression(pose_key, self.contact_keys[arc], tuple(measured)), timestamp
+        return None
+
+    def _add_foot_error(self, arc, expression, factors):
+        history = self._previous_foot_error(arc)
+        previous, rho = (None, 0.) if history is None else (
+            history[0], math.exp(-(self.time-history[1])/self.foot_tau))
+        factors.append(algebraic_foot_error_factor(expression, self.foot_sigma, previous=previous, rho=rho))
+        self.foot_error_history[arc] = (expression, self.time)
 
     def _common_geometry(self, group_id, observed, pose, values, times, factors):
         """Persistent world geometry, with one translation gauge per component.
@@ -277,9 +368,9 @@ class NavigationBranch:
                 self.contact_keys[arc] = key
                 values.insert_point3(key, pose.transformFrom(measured))
             key = self.contact_keys[arc]
-            if arc in self.foot_noise_history:
-                noise_key = self._foot_noise(arc, measured, pose, values, times, factors)
-                factors.append(foot_error_coordinate_factor(noise_key, pose_key, key, measured))
+            if arc in self.foot_error_history:
+                expression = FootErrorExpression(pose_key, key, tuple(measured))
+                self._add_foot_error(arc, expression, factors)
             else:
                 factors.append(foot_factor(pose_key, key, measured, self.foot_sigma,
                                            **self._correlated_options(self.foot_history.get(arc))))
@@ -295,9 +386,19 @@ class NavigationBranch:
             if len(members) < 2:
                 continue
             geometry = self._common_geometry(str(model["group_id"]), members, pose, values, times, factors)
-            noise = [self._foot_noise(f["arc_id"], f["point_body"], pose, values, times, factors) for f in members]
-            factors.append(projected_foot_factor(pose_key, geometry, noise,
-                                                np.array([f["point_body"] for f in members])))
+            common_key = self._support_key("q")
+            seeds = []
+            for foot, point_key in zip(members, geometry):
+                point = np.zeros(3) if point_key is None else self._point(point_key, values)
+                history = self._previous_foot_error(foot["arc_id"])
+                previous_error = (np.zeros(3) if history is None else
+                    math.exp(-(self.time-history[1])/self.foot_tau)*history[0].evaluate(self.window.values))
+                seeds.append(pose.rotation().unrotate(point)-np.asarray(foot["point_body"])-previous_error)
+            values.insert_vector(common_key, np.mean(seeds, axis=0))
+            times[common_key] = self.time
+            for foot, point_key in zip(members, geometry):
+                expression = FootErrorExpression(pose_key, point_key, tuple(foot["point_body"]), common_key)
+                self._add_foot_error(foot["arc_id"], expression, factors)
             contrasts += len(members)-1
         # Declared groups outlive temporary visibility/normal departure: their
         # posterior and per-arc error remain available to subsequent evidence.
@@ -305,8 +406,8 @@ class NavigationBranch:
         for arc in live_arcs:
             if arc in self.contact_keys:
                 self._support_retain.add(self.contact_keys[arc])
-            if arc in self.foot_noise_history:
-                self._support_retain.add(self.foot_noise_history[arc][0])
+            if arc in self.foot_error_history:
+                self._support_retain.update(self.foot_error_history[arc][0].keys)
             elif arc in self.foot_history:
                 self._support_retain.add(self.foot_history[arc][0])
         for group in self.support_geometry.values():
@@ -335,7 +436,7 @@ class NavigationBranch:
         return ordering
 
     def joint_covariance(self, keys: list[int]) -> np.ndarray:
-        """Actual joint marginal, retaining the exact foot-coordinate identities.
+        """Actual joint marginal, retaining exact foot/carrier coordinates.
 
         The graph's default elimination can choose Cholesky at an unconstrained
         local clique even when another clique contains exact coordinates. After
@@ -344,41 +445,15 @@ class NavigationBranch:
         COLAMD keeps the query variables last without densifying the whole graph.
         Fixed-contact branches keep their original marginal operation.
         """
-        if not self.foot_noise_history:
+        if not self.foot_error_history and not self._carrier_coordinate_constraints:
             joint = gtsam.Marginals(self.window.graph, self.window.values).jointMarginalCovariance(
                 gtsam.KeyVector(keys))
             return np.block([[joint.at(a, b) for b in keys] for a in keys])
         linear = self.window.graph.linearize(self.window.values)
         ordering = gtsam.Ordering.ColamdConstrainedLastGaussianFactorGraph(linear, keys, True)
-        factors = {j: linear.at(j) for j in range(linear.size())}
-        incident = {}
-        for j, factor in factors.items():
-            for key in factor.keys():
-                incident.setdefault(key, set()).add(j)
-        next_id = linear.size()
         query = set(keys)
-        for index in range(ordering.size()):
-            key = ordering.at(index)
-            if key in query:
-                continue
-            local = gtsam.GaussianFactorGraph()
-            for j in sorted(incident[key]):
-                factor = factors.pop(j)
-                local.push_back(factor)
-                for neighbor in factor.keys():
-                    incident[neighbor].remove(j)
-            neighbors = sorted({neighbor for j in range(local.size())
-                                for neighbor in local.at(j).keys()} - {key})
-            jacobian = gtsam.JacobianFactor(local, self._ordering([key, *neighbors]))
-            _, remainder = jacobian.eliminate(self._ordering([key]))
-            if remainder.keys():
-                factors[next_id] = remainder
-                for neighbor in remainder.keys():
-                    incident.setdefault(neighbor, set()).add(next_id)
-                next_id += 1
-        remaining = gtsam.GaussianFactorGraph()
-        for factor in factors.values():
-            remaining.push_back(factor)
+        eliminated = [ordering.at(index) for index in range(ordering.size()) if ordering.at(index) not in query]
+        _, remaining = eliminate_qr(linear, eliminated)
         # Solve the square root directly. The conditional's row sigmas include
         # exact zero rows where applicable; none are replaced by a noise floor.
         jacobian = gtsam.JacobianFactor(remaining, self._ordering(keys))
@@ -621,8 +696,15 @@ class NavigationBranch:
     predict_independent = predict_external
 
     def step(self, event: dict, index: int, revoked_arcs: set[str] | None = None,
-             *, support_models: list[dict] | None = None):
-        """Consume one causal event and return pose, velocity, bias, cost."""
+             *, support_models: list[dict] | None = None, defer_optimize: bool = False,
+             initial_rotation: gtsam.Rot3 | None = None, gravity_tilt: dict | None = None):
+        """Consume factors at their actual event time.
+
+        Deferred construction is used only for an uninitialized asynchronous
+        batch. Initial rotation is a Values seed; it never becomes a yaw prior.
+        """
+        if self.bootstrap_status == "NO_INIT" and not defer_optimize:
+            raise ValueError("bootstrap must be qualified before normal step")
         revoked_arcs = set() if revoked_arcs is None else revoked_arcs
         previous_index, previous_time = self.index, self.time
         self.time = float(event["time_s"])
@@ -634,15 +716,33 @@ class NavigationBranch:
         times = {pose_key: self.time, velocity_key: self.time, bias_key: self.time}
         self.last_gnss_innovation = {}
         if previous_index is None:
-            predicted_pose = self._initial_pose(event)
-            predicted_velocity = np.asarray(event["gnss_velocity"], float).copy()
-            # Code-derived yaw is an optimizer initial value, not another yaw
-            # observation. The effectively free yaw/position prior only leaves
-            # the declared broad upright roll/pitch initialization informative.
-            rotation_sigmas = [math.radians(20.), math.radians(20.), 1e6]
-            factors.append(gtsam.PriorFactorPose3(
-                pose_key, predicted_pose,
-                gtsam.noiseModel.Diagonal.Sigmas(np.r_[rotation_sigmas, [1e6]*3])))
+            if initial_rotation is None:
+                # Keep the historical synthetic initialization for reproducible
+                # existing runs. The real asynchronous bootstrap does not use it.
+                predicted_pose = self._initial_pose(event)
+                predicted_velocity = np.asarray(event["gnss_velocity"], float).copy()
+                rotation_sigmas = [math.radians(20.), math.radians(20.), 1e6]
+                factors.append(gtsam.PriorFactorPose3(
+                    pose_key, predicted_pose,
+                    gtsam.noiseModel.Diagonal.Sigmas(np.r_[rotation_sigmas, [1e6]*3])))
+            else:
+                rotation = initial_rotation
+                position = event.get("gnss_position")
+                lever = np.asarray(event.get("gnss_position_leverarm_body_m",
+                                   self.metadata.get("gnss_leverarm_body_m", np.zeros(3))), float)
+                seed_position = (np.zeros(3) if position is None else
+                                 np.asarray(position, float)-rotation.rotate(lever))
+                predicted_pose = gtsam.Pose3(rotation, seed_position)
+                velocity = event.get("gnss_velocity")
+                predicted_velocity = np.zeros(3) if velocity is None else np.asarray(velocity, float).copy()
+                if velocity is not None:
+                    inputs = self._gnss_inputs(event, predicted_pose)
+                    predicted_velocity -= rotation.rotate(np.cross(
+                        inputs["angular_rate"]-self.bias.gyroscope(), inputs["velocity_lever"]))
+                if gravity_tilt is not None:
+                    factors.append(gravity_tilt_factor(
+                        pose_key, gravity_tilt["direction_body"],
+                        self.metadata.get("gravity_n", [0., 0., 9.81]), gravity_tilt["sigma_rad"]))
             bias_sigma = np.r_[
                 np.full(3, float(self.metadata.get("accel_bias_prior_sigma", .03))),
                 np.full(3, float(self.metadata.get("gyro_bias_prior_sigma", .003)))]
@@ -699,12 +799,128 @@ class NavigationBranch:
         if self.use_foot:
             nfoot, ndifference = self._support(
                 event.get("feet", []), revoked_arcs, support_models, predicted_pose, pose_key, values, times, factors)
-        self.window.update(factors, values, times, self.time,
-                           retain_keys=self._retained_keys())
+        if defer_optimize:
+            self.window.values.insert(values)
+            self.window.times.update(times)
+            self.window.factors.extend(factors)
+            self.window.time_s = self.time
+        else:
+            self.window.update(factors, values, times, self.time,
+                               retain_keys=self._retained_keys())
         self.last_factor_counts = dict(
             foot=nfoot, differential=ndifference,
             carrier_rows=0 if block is None else len(block.y),
             total=len(factors), imu_intervals=len(event["imu"]))
+        return self._current()
+
+    def bootstrap(self, events: list[dict], seed_rotation: gtsam.Rot3, *, start_index: int = 0,
+                  gravity_tilt: dict | None = None, support_models: list[dict] | None = None) -> dict:
+        """Build one causal asynchronous startup graph before any marginalization.
+
+        Every PV, IMU, code/carrier and support factor is constructed by step at
+        its original time. The caller chooses the buffered interval and performs
+        the multi-seed/nonlinear direction qualification; local rank alone never
+        authorizes initialization. No observations are moved to the first raw
+        carrier time and no synthetic attitude or position prior is introduced.
+        """
+        if self.index is not None:
+            raise ValueError("bootstrap requires an empty branch")
+        if not events:
+            return dict(status="NO_INIT", reason="NO_BUFFERED_OBSERVATIONS",
+                        nonlinear_support="UNRESOLVED")
+        self.bootstrap_status = "NO_INIT"
+        for offset, event in enumerate(events):
+            self.step(event, start_index+offset, support_models=support_models, defer_optimize=True,
+                      initial_rotation=seed_rotation if offset == 0 else None,
+                      gravity_tilt=gravity_tilt if offset == 0 else None)
+        # LM damping is only the numerical step model; it is not stored as a
+        # prior and is absent from the subsequent likelihood/rank calculation.
+        params = gtsam.LevenbergMarquardtParams()
+        params.setMaxIterations(int(self.metadata.get("bootstrap_max_iterations", 200)))
+        params.setRelativeErrorTol(self.window.params.getRelativeErrorTol())
+        params.setAbsoluteErrorTol(self.window.params.getAbsoluteErrorTol())
+        initial_cost = float(self.window.error())
+        optimizer = gtsam.LevenbergMarquardtOptimizer(self.window.graph, self.window.values, params)
+        self.window.values = optimizer.optimize()
+        self._current()
+        self.bootstrap_diagnostics = dict(
+            status="NO_INIT", nonlinear_support="UNRESOLVED", cost=float(self.window.error()),
+            seed_rpy_rad=seed_rotation.rpy().tolist(), solution_rpy_rad=self.pose.rotation().rpy().tolist(),
+            first_time_s=float(events[0]["time_s"]), last_time_s=self.time,
+            event_count=len(events), marginalized_state_count=self.window.marginalized_total,
+            initial_tilt_source=deepcopy(gravity_tilt),
+            bias_prior_source="inherited_joint_prototype_engineering_prior",
+            solver_iterations=int(optimizer.iterations()), solver_max_iterations=params.getMaxIterations(),
+            solver_initial_cost=initial_cost, solver_final_cost=float(self.window.error()),
+            solver_lambda=float(optimizer.lambda_()),
+            solver_budget_exhausted=optimizer.iterations() >= params.getMaxIterations(),
+        )
+        return self.bootstrap_qualification()
+
+    def bootstrap_qualification(self) -> dict:
+        """Local likelihood/rank readout; global directional support stays external."""
+        linear = self.window.graph.linearize(self.window.values)
+        combined = gtsam.JacobianFactor(linear)
+        matrix, rhs = combined.jacobianUnweighted()
+        noise = combined.get_model()
+        sigmas = np.ones(len(rhs)) if noise is None else noise.sigmas()
+        stochastic = sigmas > 0.
+        whitened = matrix.copy()
+        whitened[stochastic] /= sigmas[stochastic, None]
+        rhs_white = rhs[stochastic]/sigmas[stochastic]
+        # Column equilibration changes coordinates, not rank or information.
+        # The tolerance is the standard floating-point rank tolerance, not a
+        # stochastic noise floor. Exact constraint rows remain exact graph rows.
+        norms = np.linalg.norm(whitened, axis=0)
+        scaled = whitened.copy()
+        nonzero = norms > 0.
+        scaled[:, nonzero] /= norms[nonzero]
+        singular = np.linalg.svd(scaled, compute_uv=False)
+        tolerance = np.finfo(float).eps*max(scaled.shape)*singular[0] if len(singular) else 0.
+        rank = int(np.count_nonzero(singular > tolerance))
+        dimension = int(self.window.values.dim())
+        gradient = -scaled[stochastic].T @ rhs_white
+        constraints = scaled[~stochastic]
+        if len(constraints):
+            _, constraint_singular, row_basis = np.linalg.svd(constraints, full_matrices=False)
+            constraint_tolerance = np.finfo(float).eps*max(constraints.shape)*constraint_singular[0]
+            row_basis = row_basis[constraint_singular > constraint_tolerance]
+            gradient -= row_basis.T @ (row_basis @ gradient)
+        gradient_norm = float(np.linalg.norm(gradient, ord=np.inf))
+        gradient_relative = gradient_norm/max(1., float(np.linalg.norm(rhs_white)))
+        gradient_tolerance = float(self.metadata.get("bootstrap_gradient_tolerance", 1e-6))
+        converged = gradient_relative <= gradient_tolerance
+        budget_exhausted = self.bootstrap_diagnostics.get("solver_budget_exhausted", False)
+        self.bootstrap_diagnostics.update(
+            local_full_rank=rank == dimension, numerical_rank=rank, state_dimension=dimension,
+            rank_tolerance=float(tolerance),
+            minimum_scaled_singular_value=float(singular[-1]) if len(singular) else 0.,
+            cost=float(self.window.error()), solution_rpy_rad=self.pose.rotation().rpy().tolist(),
+            projected_gradient_inf=gradient_norm, projected_gradient_relative_inf=gradient_relative,
+            projected_gradient_tolerance=gradient_tolerance,
+            max_exact_constraint_residual=float(np.max(np.abs(rhs[~stochastic]))) if len(constraints) else 0.,
+            solver_converged=converged,
+            solver_status=("FIRST_ORDER_STATIONARY" if converged else
+                           "ITERATION_BUDGET_EXHAUSTED" if budget_exhausted else
+                           "LM_STOPPED_WITH_UNRESOLVED_STATIONARITY"))
+        return deepcopy(self.bootstrap_diagnostics)
+
+    def accept_bootstrap(self, nonlinear_support: dict):
+        """Release the jointly optimized startup only after controller qualification."""
+        if not self.bootstrap_diagnostics.get("local_full_rank", False):
+            raise ValueError("rank-deficient bootstrap remains NO_INIT")
+        if nonlinear_support.get("qualified") is not True:
+            raise ValueError("nonlinear direction support remains unresolved")
+        self.bootstrap_diagnostics["nonlinear_support"] = deepcopy(nonlinear_support)
+        self.bootstrap_diagnostics["status"] = "INITIALIZED"
+        self.bootstrap_status = "INITIALIZED"
+        retained = self._retained_keys()
+        expired = sorted((key for key, stamp in self.window.times.items()
+                          if stamp < self.time-self.window.lag_s and key not in retained),
+                         key=lambda key: (self.window.times[key], key))
+        self.window.last_marginalized = tuple(expired)
+        if expired:
+            self.window._marginalize(expired)
         return self._current()
 
     def _current(self):
@@ -733,16 +949,26 @@ class NavigationBranch:
             if label in self.ambiguity_keys and label not in self._conditioned_labels:
                 factors.append(self._fixed_factor(label))
         if factors:
-            self.window.update(factors, gtsam.Values(), {}, self.time,
-                               retain_keys=self._retained_keys())
+            if self.bootstrap_status == "NO_INIT":
+                self.window.factors.extend(factors)
+                self.window.values = gtsam.LevenbergMarquardtOptimizer(
+                    self.window.graph, self.window.values, self.window.params).optimize()
+                self._current()
+                self.bootstrap_qualification()
+            else:
+                self.window.update(factors, gtsam.Values(), {}, self.time,
+                                   retain_keys=self._retained_keys())
         return self._current()
 
     def snapshot(self) -> BranchSnapshot:
-        names = ("ambiguity_keys", "contact_keys", "direction_keys", "foot_history",
+        names = ("ambiguity_keys", "_ambiguity_serial", "_carrier_relation_tracker",
+                 "_carrier_coordinate_constraints", "last_carrier_relations",
+                 "contact_keys", "direction_keys", "foot_history",
                  "direction_history", "fixed", "_conditioned_labels", "time", "index",
                  "last_gnss_innovation", "last_factor_counts", "constant_bias", "bias_key",
-                 "foot_noise_history", "support_geometry", "_support_serial", "_support_retain",
-                 "predictive_score", "predictive_row_count", "predictive_frontier", "integer_lineage")
+                 "foot_error_history", "support_geometry", "_support_serial", "_support_retain",
+                 "predictive_score", "predictive_row_count", "predictive_frontier", "integer_lineage",
+                 "bootstrap_status", "bootstrap_diagnostics")
         return BranchSnapshot(self.window.snapshot(),
                               {name: deepcopy(getattr(self, name)) for name in names})
 

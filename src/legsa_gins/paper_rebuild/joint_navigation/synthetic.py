@@ -291,6 +291,7 @@ def generate_scene(duration_s: float = 90.0, seed: int = 6100801,
         previous_time = t
     metadata = dict(
         schema="joint_navigation.synthetic.v2", data_mode="synthetic",
+        carrier_label_mode="synthetic_scalar",
         duration_s=float(duration_s), seed=int(seed), key_dt_s=float(key_dt),
         imu_max_dt_s=float(imu_dt), baseline_body=BASELINE_BODY_M.copy(),
         gravity_n=GRAVITY_N.copy(), body_frame="FRD", world_frame="NED",

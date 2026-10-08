@@ -21,8 +21,13 @@
     "Joint pre-consumption external prediction interface and physical baseline tangent covariance readout",
     "Continuation U3 completed all 90 seconds and 1287 causal outputs; automatic model competition remains unfinished",
     "Automatic competing source models and per-integer-lineage pre-consumption predictive evidence integrated into the shared navigator",
-    "Physical BY2 input adapter and per-event antenna observation model; BY navigation not yet run",
-    "Explicit sparse QR fixes the actual 5.4-second conditional covariance failure without adding information; 18 necessary mathematical checks pass"
+    "Explicit sparse QR fixes the actual 5.4-second conditional covariance failure without adding information; 18 necessary mathematical checks pass",
+    "BY2 asynchronous shared-state bootstrap and original-event antenna/IMU/foot/carrier consumption, preserving NO_INIT before the first qualified solution",
+    "Physical DD coordinate identities enter shared graph and checkpoint recovery; changing-pivot raw proposal windows use a bijective integer forest basis with original full Q",
+    "Analytic common-translation nuisance eliminates nonlinear exact-foot LM infeasibility while preserving original per-foot AR correlations",
+    "Offline BY2 export and frozen original V3 evaluation point/evaluator bridge; first short cold-start result is worse in heading",
+    "34 necessary mathematical checks pass including physical partial/pivot graph recovery and correlated changing-subset foot likelihood",
+    "Square-root marginalization preserves original information and crosses the actual BY first-marginalization failure; no added anchor or covariance floor"
   ],
   "not_proven": [
     "Material legged contribution to heading qualification or integer-candidate acceptance",
@@ -33,9 +38,9 @@
     "Same-version SDK and frozen V3 system adoption value on real data"
   ],
   "next_core_work": [
-    "Complete the running identical-stream 90-second U0/U1/U3/U2 cohort and evaluate natural model support, published navigation and retained information",
-    "Address mechanism failures using the joint model rather than thresholds tuned to this realization",
-    "Implement asynchronous real initialization and physical carrier relation continuity, then BY development and frozen real evaluation"
+    "Read the running corrected full process and BY96-106 development run; model selection and whole navigation benefit remain unproven",
+    "Explain the actual BY raw integer working-domain failure and retain valid partial direction information in the same graph; do not force a fix by changing thresholds",
+    "Complete same-backend mechanism attribution and matched whole BY original-V3 comparison before freezing parameters for BYO/BYH and adverse XB/NMB evaluation"
   ],
   "data_policy": {
     "development": "BY",
@@ -54,7 +59,37 @@
     ],
     "real_velocity_accuracy_claim_allowed": false
   },
-  "latest_implementation": "predictive_model_competition_with_same_causal_controller_U2_U3",
-  "latest_full_cohort": "cohort_predictive_qr_20261008_seed6100801",
-  "latest_full_cohort_status_at_commit": "RUNNING_NOT_RESULT_EVIDENCE"
+  "latest_implementation": "analytic_support_errors_asynchronous_bootstrap_physical_DD_joint_graph",
+  "latest_full_cohort": "cohort_analytic_20261008_seed6100801",
+  "latest_full_cohort_status_at_commit": "RUNNING_NOT_RESULT_EVIDENCE",
+  "scientifically_interrupted_cohort": {
+    "name": "cohort_predictive_qr_20261008_seed6100801",
+    "status": "INTERRUPTED_SCIENTIFIC_MODEL_ERROR",
+    "reason": "Nonlinear exact support-coordinate infeasibility reached 0.03921 m; incomplete U3 must not be interpreted",
+    "completed_valid_modes": [
+      "U0",
+      "U1"
+    ]
+  },
+  "real_development": {
+    "first_bootstrap": "BY_ASYNC_BOOTSTRAP_02",
+    "requested_window_s": [
+      96,
+      101
+    ],
+    "no_init_rows": 135,
+    "finite_rows": 26,
+    "first_finite_time_s": 100.19799995422363,
+    "common_evaluation_duration_s": 0.8020000457763672,
+    "joint_yaw_rmse_deg": 4.101115,
+    "frozen_v3_yaw_rmse_deg": 1.118553,
+    "scope": "SHORT_COLD_START_INTEGRATION_NOT_NAVIGATION_GAIN",
+    "next_run": "BY_ASYNC_PHYSICAL_03",
+    "next_window_s": [
+      96,
+      106
+    ],
+    "next_run_status": "FAILED_RECORD_PRESERVED; SQUARE_ROOT_FIX_VERIFIED_THROUGH_101.139; FULL_RETRY_PENDING",
+    "velocity_accuracy_evaluated": false
+  }
 }

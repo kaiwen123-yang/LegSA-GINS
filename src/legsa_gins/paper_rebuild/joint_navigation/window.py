@@ -13,6 +13,51 @@ import gtsam
 import numpy as np
 
 
+def key_ordering(keys):
+    ordering = gtsam.Ordering()
+    for key in keys:
+        ordering.push_back(int(key))
+    return ordering
+
+
+def eliminate_qr(linear: gtsam.GaussianFactorGraph, eliminated_keys):
+    """Sparse local QR with a Jacobian separator throughout.
+
+    Forming a Hessian Schur complement can lose positive semidefiniteness when
+    millisecond IMU bias transitions coexist with much weaker PV/contact rows.
+    The square-root representation preserves these scales without adding a
+    prior or modifying the source noise. Exact linear coordinates stay exact.
+    """
+    factors = {j: linear.at(j) for j in range(linear.size())}
+    incident = {}
+    for j, factor in factors.items():
+        for key in factor.keys():
+            incident.setdefault(key, set()).add(j)
+    next_id = linear.size()
+    conditionals = gtsam.GaussianBayesNet()
+    for key in eliminated_keys:
+        local = gtsam.GaussianFactorGraph()
+        for j in sorted(incident[key]):
+            factor = factors.pop(j)
+            local.push_back(factor)
+            for neighbor in factor.keys():
+                incident[neighbor].remove(j)
+        neighbors = sorted({neighbor for j in range(local.size())
+                            for neighbor in local.at(j).keys()} - {key})
+        jacobian = gtsam.JacobianFactor(local, key_ordering([key, *neighbors]))
+        conditional, remainder = jacobian.eliminate(key_ordering([key]))
+        conditionals.push_back(conditional)
+        if remainder.keys():
+            factors[next_id] = remainder
+            for neighbor in remainder.keys():
+                incident.setdefault(neighbor, set()).add(next_id)
+            next_id += 1
+    remaining = gtsam.GaussianFactorGraph()
+    for factor in factors.values():
+        remaining.push_back(factor)
+    return conditionals, remaining
+
+
 @dataclass(frozen=True)
 class WindowSnapshot:
     """In-memory checkpoint; referenced factors must remain immutable."""
@@ -100,10 +145,7 @@ class JointWindow:
         # Constrained QR can omit constant residual rows from its remainder;
         # retain that conditional cost explicitly for comparing hypotheses.
         linear = self._graph(incident).linearize(self.values)
-        ordering = gtsam.Ordering()
-        for key in expired:
-            ordering.push_back(key)
-        eliminated, remainder = linear.eliminatePartialSequential(ordering)
+        eliminated, remainder = eliminate_qr(linear, expired)
 
         separator = {key for factor in incident for key in factor.keys()} - expired_set
         anchor = gtsam.Values(self.values)

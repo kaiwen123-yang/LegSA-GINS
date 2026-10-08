@@ -9,7 +9,8 @@ from legsa_gins.paper_rebuild.joint_navigation.factors import carrier_factor, ca
 from legsa_gins.paper_rebuild.joint_navigation.factors import (
     ar1_error_factor, foot_error_coordinate_factor, point3_coordinate_factor,
     relative_geometry_coordinate_factor, projected_foot_factor, gnss_position_velocity_factor,
-    gnss_antenna_factor, gnss_antenna_prediction,
+    gnss_antenna_factor, gnss_antenna_prediction, gravity_tilt_factor,
+    FootErrorExpression, algebraic_foot_error_factor,
 )
 
 
@@ -217,6 +218,69 @@ class JointNavigationFactorsTest(unittest.TestCase):
         linear = graph.linearize(values)
         self.assertAlmostEqual(linear.error(linear.optimize()), dense_cost, places=8)
 
+    def test_algebraic_foot_error_jacobians_fixed_and_released_history(self):
+        common0, common1 = gtsam.symbol("q", 0), gtsam.symbol("q", 1)
+        self.values.insert_vector(common0, np.array([.3, -.1, .2]))
+        self.values.insert_vector(common1, np.array([.2, -.2, .1]))
+        fixed = FootErrorExpression(self.x0, self.c, (.1, -.2, -.5))
+        released = FootErrorExpression(self.x1, self.c, (.15, -.18, -.51), common1)
+        old_released = FootErrorExpression(self.x0, self.c, (.1, -.2, -.5), common0)
+        for previous in (None, fixed, old_released):
+            factor = algebraic_foot_error_factor(released, .01, previous=previous, rho=.8)
+            kinds = [(key, "pose" if key in (self.x0, self.x1) else "vector") for key in factor.keys()]
+            numeric = central_jacobian(factor, self.values, kinds)
+            linear = factor.linearize(self.values)
+            np.testing.assert_allclose(linear.getA(), numeric, atol=1e-7, rtol=2e-8)
+
+    def test_algebraic_subsets_match_dense_AR_likelihood_without_exact_foot_factors(self):
+        from scipy.linalg import helmert, block_diag
+        sigma, rho = .01, .72
+        subsets = [(0, 1), (1, 2, 3), (0, 1, 2, 3), (0, 2)]
+        rng = np.random.default_rng(45)
+        geometry = np.vstack([np.zeros(3), rng.normal(size=(3, 3))])
+        values, graph = gtsam.Values(), gtsam.NonlinearFactorGraph()
+        pose_key = gtsam.symbol("x", 10)
+        values.insert(pose_key, gtsam.Pose3())
+        graph.add(gtsam.PriorFactorPose3(pose_key, gtsam.Pose3(), gtsam.noiseModel.Constrained.All(6)))
+        geometry_keys = [None, *[gtsam.symbol("d", i) for i in range(1, 4)]]
+        for key, point in zip(geometry_keys[1:], geometry[1:]):
+            values.insert_point3(key, point)
+            graph.add(gtsam.PriorFactorPoint3(key, point, gtsam.noiseModel.Constrained.All(3)))
+        history, blocks, residuals = {}, [], []
+        expressions = []
+        for time, subset in enumerate(subsets):
+            common = gtsam.symbol("q", time)
+            values.insert_vector(common, np.zeros(3))
+            errors = rng.normal(0., sigma, (len(subset), 3))
+            current_expressions = []
+            for foot, error in zip(subset, errors):
+                expression = FootErrorExpression(pose_key, geometry_keys[foot], tuple(geometry[foot]-error), common)
+                old, correlation = (None, 0.) if foot not in history else (history[foot][0], rho**(time-history[foot][1]))
+                graph.add(algebraic_foot_error_factor(expression, sigma, previous=old, rho=correlation))
+                history[foot] = expression, time
+                current_expressions.append(expression)
+            expressions.append(current_expressions)
+            H = helmert(len(subset))
+            blocks.append(np.kron(H @ np.eye(4)[list(subset)], np.eye(3)))
+            residuals.append((H @ errors).ravel())
+        transform = block_diag(*blocks)
+        times = np.arange(len(subsets))
+        covariance = transform @ (sigma**2*np.kron(rho**np.abs(times[:, None]-times), np.eye(12))) @ transform.T
+        residual = np.concatenate(residuals)
+        expected = .5*residual @ np.linalg.solve(covariance, residual)
+        optimized = gtsam.LevenbergMarquardtOptimizer(graph, values).optimize()
+        self.assertAlmostEqual(graph.error(optimized), expected, places=8)
+        # The original nonlinear projected equality is an identity for arbitrary
+        # attitude, geometry and q, not a soft constraint accepted by LM's mu.
+        optimized.update(pose_key, gtsam.Pose3(gtsam.Rot3.RzRyRx(.2, -.1, .7), [.5, -.2, .3]))
+        for group in expressions:
+            H = helmert(len(group))
+            raw = np.array([optimized.atPose3(e.pose_key).rotation().unrotate(
+                np.zeros(3) if e.point_key is None else optimized.atPoint3(e.point_key))-np.asarray(e.measured_body)
+                for e in group])
+            errors = np.array([e.evaluate(optimized) for e in group])
+            np.testing.assert_allclose(H @ (raw-errors), 0., atol=1e-14)
+
     @staticmethod
     def _stationary_event(index, subset):
         time = index*.1
@@ -255,7 +319,7 @@ class JointNavigationFactorsTest(unittest.TestCase):
                 self.assertEqual(len({value[0] for value in branch.support_geometry["group"].values()}), 2)
         self.assertEqual(len({value[0] for value in branch.support_geometry["group"].values()}), 1)
         self.assertGreater(branch.window.marginalized_total, 0)
-        self.assertEqual(set(branch.foot_noise_history), {f"arc{i}" for i in range(4)})
+        self.assertEqual(set(branch.foot_error_history), {f"arc{i}" for i in range(4)})
         # State and factor closures remain reproducible from an actual snapshot.
         branch.predictive_score = 17.3
         branch.predictive_row_count = 21
@@ -278,11 +342,11 @@ class JointNavigationFactorsTest(unittest.TestCase):
         branch.step(self._stationary_event(1, (0, 1, 3)), 1, support_models=group)
         self.assertEqual(branch.last_factor_counts["foot"], 1)
         self.assertEqual(branch.last_factor_counts["differential"], 1)
-        self.assertEqual(set(branch.foot_noise_history), {"arc0", "arc1"})
-        old_key = branch.foot_noise_history["arc0"][0]
+        self.assertEqual(set(branch.foot_error_history), {"arc0", "arc1"})
+        old_key = branch.foot_error_history["arc0"][0]
         # A singleton supplies no direction and must not restart an IID history.
         branch.step(self._stationary_event(2, (0, 3)), 2, support_models=group)
-        self.assertEqual(branch.foot_noise_history["arc0"][0], old_key)
+        self.assertEqual(branch.foot_error_history["arc0"][0], old_key)
         branch.step(self._stationary_event(3, (0, 1, 2, 3)), 3, support_models=group)
         self.assertEqual(branch.last_factor_counts["foot"], 1)
         self.assertEqual(branch.last_factor_counts["differential"], 2)
@@ -430,6 +494,93 @@ class JointNavigationFactorsTest(unittest.TestCase):
         branch.step(event, 0)
         self.assertEqual(branch.last_factor_counts["foot"], 1)
         self.assertEqual(set(branch.contact_keys), {"arc0"})
+
+    def test_gravity_tilt_has_no_world_yaw_or_translation_information(self):
+        rotation = self.values.atPose3(self.x1).rotation()
+        gravity = np.array([0., 0., 1.])
+        body = rotation.unrotate(gravity)
+        factor = gravity_tilt_factor(self.x1, body, gravity, .05)
+        linear = factor.linearize(self.values)
+        columns = []
+        for index in range(6):
+            delta = np.zeros(6); delta[index] = 1e-6
+            plus, minus = gtsam.Values(self.values), gtsam.Values(self.values)
+            pose = self.values.atPose3(self.x1)
+            plus.update(self.x1, pose.retract(delta)); minus.update(self.x1, pose.retract(-delta))
+            columns.append((-factor.linearize(plus).getb()+factor.linearize(minus).getb())/2e-6)
+        numeric = np.column_stack(columns)
+        np.testing.assert_allclose(linear.getA(), numeric, atol=2e-8, rtol=2e-8)
+        self.assertEqual(np.linalg.matrix_rank(linear.getA()), 2)
+        np.testing.assert_allclose(linear.getA()[:, :3] @ body, 0., atol=1e-12)
+        np.testing.assert_array_equal(linear.getA()[:, 3:], np.zeros((2, 3)))
+        for yaw in (-2.4, -.3, 1.8):
+            values = gtsam.Values(self.values)
+            values.update(self.x1, gtsam.Pose3(gtsam.Rot3.Rz(yaw).compose(rotation), [9., 3., 4.]))
+            self.assertLess(factor.error(values), 1e-20)
+
+    def test_gravity_tilt_log_uses_angle_and_its_off_solution_jacobian(self):
+        factor = gravity_tilt_factor(self.x1, [0., 0., 1.], [0., 0., 1.], .05)
+        numeric = central_jacobian(factor, self.values, [(self.x1, "pose")])
+        linear = factor.linearize(self.values)
+        np.testing.assert_allclose(linear.getA(), numeric, atol=2e-8, rtol=2e-8)
+        values = gtsam.Values(self.values)
+        values.update(self.x1, gtsam.Pose3(gtsam.Rot3.Rx(2.8), [0., 0., 0.]))
+        self.assertAlmostEqual(factor.error(values), .5*(2.8/.05)**2, places=8)
+        values.update(self.x1, gtsam.Pose3(gtsam.Rot3.Rx(np.pi), [0., 0., 0.]))
+        with self.assertRaisesRegex(ValueError, "antipodal"):
+            factor.error(values)
+
+    def test_asynchronous_bootstrap_uses_original_nodes_before_one_optimization(self):
+        from gtsam.symbol_shorthand import X
+        from legsa_gins.paper_rebuild.joint_navigation.branch import NavigationBranch
+        events = [self._stationary_event(i, ()) for i in range(4)]
+        events[0].update(carrier=None, gnss_velocity=None)
+        events[1].update(carrier=None, gnss_position=None)
+        branch = NavigationBranch(dict(baseline_body=[0., -.35, 0.], lag_s=.05), use_foot=False)
+        report = branch.bootstrap(events, gtsam.Rot3.Ypr(.4, 0., 0.),
+                                  gravity_tilt=dict(direction_body=[0., 0., 1.], sigma_rad=.05))
+        self.assertEqual(report["status"], "NO_INIT")
+        self.assertEqual(report["nonlinear_support"], "UNRESOLVED")
+        self.assertTrue(report["local_full_rank"])
+        self.assertEqual(branch.window.marginalized_total, 0)
+        self.assertEqual(sum(isinstance(f, gtsam.ImuFactor) for f in branch.window.factors), 3)
+        self.assertFalse(any(isinstance(f, gtsam.PriorFactorPose3) for f in branch.window.factors))
+        for i, event in enumerate(events):
+            self.assertEqual(branch.window.times[X(i)], event["time_s"])
+        self.assertTrue(any(isinstance(f, gtsam.GPSFactor) and f.keys()[0] == X(0)
+                            for f in branch.window.factors))
+        np.testing.assert_allclose(branch.pose.rotation().rpy(), 0., atol=1e-8)
+        snapshot = branch.snapshot()
+        restored = NavigationBranch(branch.metadata, use_foot=False); restored.restore(snapshot)
+        self.assertEqual(restored.bootstrap_diagnostics, branch.bootstrap_diagnostics)
+        branch.accept_bootstrap(dict(qualified=True, method="controlled_test_known_direction"))
+        self.assertGreater(branch.window.marginalized_total, 0)
+        self.assertEqual(branch.bootstrap_status, "INITIALIZED")
+
+    def test_bootstrap_iteration_budget_is_distinct_from_direction_exclusion(self):
+        from legsa_gins.paper_rebuild.joint_navigation.branch import NavigationBranch
+        branch = NavigationBranch(dict(baseline_body=[0., -.35, 0.], bootstrap_max_iterations=1), use_foot=False)
+        events = [self._stationary_event(i, ()) for i in range(4)]
+        report = branch.bootstrap(events, gtsam.Rot3.Ypr(1.8, 0., 0.),
+                                  gravity_tilt=dict(direction_body=[0., 0., 1.], sigma_rad=.05))
+        self.assertTrue(report["local_full_rank"])
+        self.assertTrue(report["solver_budget_exhausted"])
+        self.assertFalse(report["solver_converged"])
+        self.assertEqual(report["solver_status"], "ITERATION_BUDGET_EXHAUSTED")
+        self.assertEqual(report["status"], "NO_INIT")
+        self.assertEqual(report["nonlinear_support"], "UNRESOLVED")
+
+    def test_bootstrap_without_direction_stays_rank_deficient_and_unmarginalized(self):
+        from legsa_gins.paper_rebuild.joint_navigation.branch import NavigationBranch
+        events = [dict(self._stationary_event(i, ()), carrier=None) for i in range(4)]
+        branch = NavigationBranch(dict(baseline_body=[0., -.35, 0.], lag_s=.05), use_foot=False)
+        report = branch.bootstrap(events, gtsam.Rot3.Ypr(.8, 0., 0.),
+                                  gravity_tilt=dict(direction_body=[0., 0., 1.], sigma_rad=.05))
+        self.assertFalse(report["local_full_rank"])
+        self.assertEqual(report["state_dimension"]-report["numerical_rank"], 1)
+        self.assertEqual(branch.bootstrap_status, "NO_INIT")
+        self.assertEqual(branch.window.marginalized_total, 0)
+        np.testing.assert_allclose(branch.pose.rotation().rpy(), [0., 0., .8], atol=1e-12)
 
     def test_initial_released_group_predicts_after_lag_marginalization(self):
         from gtsam.symbol_shorthand import X, V

@@ -60,3 +60,5 @@
 - 可复用原始模型：`src/legsa_gins/paper_rebuild/carrier_phase/{temporal,observations,multignss,arcs,arc_relations,arc_projection,support_arcs,candidate_envelope}.py`。
 
 原讨论稿及 2026-10-08 本地对照报告保留原文；上述数字本轮核对其已有报告和关键源码，未重跑旧导航、未作全仓逐行审计。
+
+当前继续入口：[真实异步启动、物理载波关系与解析支撑模型](ASYNC_BY_AND_ANALYTIC_SUPPORT.md)。目标仍 active；该阶段的短 BY 冷启动没有超过 V3 的航向结果。

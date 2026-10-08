@@ -332,6 +332,7 @@ def load_by2_events(config: By2InputConfig) -> dict:
                     value=r[field], covariance=r[covariance], leverarm_body_m=lever.copy(),
                     role="source_context_not_an_extra_factor_or_synchronized_measurement")
     metadata = dict(schema="joint_navigation.BY2_real_inputs.v1", data_mode="real_by2_raw",
+        carrier_label_mode="physical_sd_arcs",
         sequence="BY2", base_time_unix_s=config.base_time_unix_s,
         window_s=[config.start_s, config.end_s], key_dt_s=config.key_dt_s,
         baseline_body=np.array([0., -.35, 0.]), body_frame="FRD", world_frame="FIXED_LOCAL_NED",

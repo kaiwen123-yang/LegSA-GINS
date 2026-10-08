@@ -1,0 +1,145 @@
+{
+  "mode": "U1",
+  "causal_output_rows": 161,
+  "elapsed_s": 18.24793598800011,
+  "initialization": {
+    "status": "FLOAT_INIT_DIRECTION_UNRESOLVED",
+    "first_time_s": 96.0,
+    "last_time_s": 100.19799995422363,
+    "first_index": 0,
+    "frontier_index": 135,
+    "conditional_seed_reports": [
+      {
+        "status": "NO_INIT",
+        "nonlinear_support": "UNRESOLVED",
+        "cost": 20603.375824282964,
+        "seed_rpy_rad": [
+          0.03348189912404825,
+          -0.0435259609310797,
+          3.0192667007809986e-19
+        ],
+        "solution_rpy_rad": [
+          0.025136963652167027,
+          -0.10741384027800162,
+          -0.177992179524848
+        ],
+        "first_time_s": 96.0,
+        "last_time_s": 100.19799995422363,
+        "event_count": 136,
+        "marginalized_state_count": 0,
+        "initial_tilt_source": null,
+        "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+        "local_full_rank": true,
+        "numerical_rank": 2173,
+        "state_dimension": 2173,
+        "rank_tolerance": 9.639797030365495e-13,
+        "minimum_scaled_singular_value": 1.2249082145611442e-05
+      },
+      {
+        "status": "NO_INIT",
+        "nonlinear_support": "UNRESOLVED",
+        "cost": 18936.90516325255,
+        "seed_rpy_rad": [
+          0.03348189912404825,
+          -0.0435259609310797,
+          1.5707963267948966
+        ],
+        "solution_rpy_rad": [
+          0.02643681355078097,
+          -0.06997859635804599,
+          0.8990886899580164
+        ],
+        "first_time_s": 96.0,
+        "last_time_s": 100.19799995422363,
+        "event_count": 136,
+        "marginalized_state_count": 0,
+        "initial_tilt_source": null,
+        "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+        "local_full_rank": true,
+        "numerical_rank": 2173,
+        "state_dimension": 2173,
+        "rank_tolerance": 9.639824188036214e-13,
+        "minimum_scaled_singular_value": 1.2216807711441289e-05
+      },
+      {
+        "status": "NO_INIT",
+        "nonlinear_support": "UNRESOLVED",
+        "cost": 16876.55573044831,
+        "seed_rpy_rad": [
+          0.03348189912404825,
+          -0.0435259609310797,
+          3.141592653589793
+        ],
+        "solution_rpy_rad": [
+          -0.04388168050334647,
+          -0.0672956295866462,
+          -2.7393026092694694
+        ],
+        "first_time_s": 96.0,
+        "last_time_s": 100.19799995422363,
+        "event_count": 136,
+        "marginalized_state_count": 0,
+        "initial_tilt_source": null,
+        "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+        "local_full_rank": true,
+        "numerical_rank": 2173,
+        "state_dimension": 2173,
+        "rank_tolerance": 9.63981735077511e-13,
+        "minimum_scaled_singular_value": 1.2061882632619572e-05
+      },
+      {
+        "status": "NO_INIT",
+        "nonlinear_support": "UNRESOLVED",
+        "cost": 345.4020392739845,
+        "seed_rpy_rad": [
+          0.03348189912404825,
+          -0.0435259609310797,
+          -1.5707963267948966
+        ],
+        "solution_rpy_rad": [
+          0.027031849658226165,
+          -0.0060588111046947606,
+          -1.4432454843022438
+        ],
+        "first_time_s": 96.0,
+        "last_time_s": 100.19799995422363,
+        "event_count": 136,
+        "marginalized_state_count": 0,
+        "initial_tilt_source": null,
+        "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+        "local_full_rank": true,
+        "numerical_rank": 2173,
+        "state_dimension": 2173,
+        "rank_tolerance": 9.639822302170715e-13,
+        "minimum_scaled_singular_value": 1.2124884861364217e-05
+      }
+    ],
+    "local_full_rank_modes": 4,
+    "yaw_seeds_rad": [
+      0.0,
+      1.5707963267948966,
+      3.141592653589793,
+      -1.5707963267948966
+    ],
+    "directional_global_coverage_certified": false,
+    "gravity_observation_added": false,
+    "future_observations_used": false,
+    "already_published_rows_revised": 0,
+    "retained_modes": 1
+  },
+  "no_init_rows": 135,
+  "replayed_events": 0,
+  "proposal_attempts": 0,
+  "dormant_candidates": 0,
+  "active_support_complete": false,
+  "revoked_arcs": [],
+  "support_model_replayed_events": 0,
+  "live_support_models": 0,
+  "expired_unresolved_groups": 0,
+  "model_edit_cost": 9.210340371976184,
+  "model_support_delta": 5.991464547107982,
+  "marginalized_variables": 0,
+  "truth_used_online": false,
+  "probability_calibrated": false,
+  "complete_research_goal": false
+}

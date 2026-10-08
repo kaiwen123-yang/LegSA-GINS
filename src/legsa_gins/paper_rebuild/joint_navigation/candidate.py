@@ -44,6 +44,7 @@ def propose_candidates(
     max_active: int = 4,
     *,
     conditioned_integer_by_label: dict[str, int] | None = None,
+    conditioned_linear_relations: Sequence[dict] | None = None,
 ) -> CandidateProposal:
     """Qualify every enumerated raw candidate before allocating active branches.
 
@@ -57,6 +58,7 @@ def propose_candidates(
     active/dormant allocation; the controller retains their source dependencies.
     """
     conditioned = dict(conditioned_integer_by_label or {})
+    linear_relations = tuple(conditioned_linear_relations or ())
     blocks = tuple(blocks)
     if not blocks:
         return CandidateProposal((), (), dict(
@@ -133,14 +135,21 @@ def propose_candidates(
             for label, value in conditioned.items()
             if label in integer_by_label and integer_by_label[label] != value
         }
+        linear_conflicts = []
+        for relation in linear_relations:
+            value = sum(int(coefficient)*integer_by_label[label]
+                        for label, coefficient in relation["coefficients"])
+            if value != relation["rhs_integer"]:
+                linear_conflicts.append(dict(relation=relation, candidate_value=value))
         length_qualified = retained
-        retained = retained and not incompatible
+        retained = retained and not incompatible and not linear_conflicts
         record.update(
             retained=retained,
             length_qualified=length_qualified,
-            history_relation_compatible=not incompatible,
+            history_relation_compatible=not incompatible and not linear_conflicts,
             history_relation_conflicts=incompatible,
-            reason=("HISTORY_RELATION_CONDITION" if length_qualified and incompatible else
+            history_linear_relation_conflicts=linear_conflicts,
+            reason=("HISTORY_RELATION_CONDITION" if length_qualified and (incompatible or linear_conflicts) else
                     "WITHIN_FIXED_LENGTH_RAW_SUPPORT" if retained else
                     "FIXED_LENGTH_RAW_PROFILE_EXCEEDS_BUDGET"),
             constrained_raw_cost=float(exact.full_residual_cost),
@@ -177,7 +186,7 @@ def propose_candidates(
         history_condition_excluded_count=sum(
             record["reason"] == "HISTORY_RELATION_CONDITION" for record in qualifications),
         history_compatible_candidate_count=len(candidates),
-        conditioned_on=conditioned,
+        conditioned_on=conditioned, conditioned_linear_relations=linear_relations,
         active_count=len(active), dormant_count=len(dormant),
         remaining_count=len(dormant) if complete else None,
         remaining_count_lower_bound=len(dormant),
@@ -195,7 +204,7 @@ def propose_candidates(
         integer_acceptance_defined=False,
         raw_coverage_scope=envelope.coverage_scope,
         coverage_scope=("NUMERICAL_RAW_LENGTH_SUPPORT_CONDITIONED_ON_HISTORY_RELATIONS"
-                        if conditioned else
+                        if conditioned or linear_relations else
                         "NUMERICAL_RAW_SUPPORT_WITH_EPOCH_SEPARABLE_EXACT_BASELINE_LENGTH"),
         sphere_feasibility="RADIAL_NECESSARY_FILTER_THEN_EXACT_EPOCH_LENGTH_PROFILE",
         length_qualification_status=length_support.status,

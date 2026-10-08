@@ -6,16 +6,19 @@ simulation truth. Profile costs express conditional support, not probabilities.
 from __future__ import annotations
 
 import copy
+import hashlib
 from dataclasses import dataclass
 import math
 import time
 
 import numpy as np
+import gtsam
 from gtsam.symbol_shorthand import X
 
 from ..carrier_phase.temporal import EpochBlock
 from .branch import NavigationBranch
 from .candidate import propose_candidates
+from .carrier_relations import analyze_relation_transition, reparameterize_epoch_blocks
 
 
 @dataclass
@@ -28,6 +31,11 @@ class Checkpoint:
     support_incomplete: bool
     candidates: list
     arc_first_use: dict
+    bootstrap_last_attempt: float = -math.inf
+    bootstrap_diagnostic: dict | None = None
+    predictive_rows_fingerprint: str = ""
+    proposal_retry_after: dict | None = None
+    pending_proposals: dict | None = None
 
 
 @dataclass
@@ -58,10 +66,16 @@ class JointNavigator:
         self.use_partial = mode in ("U2", "U3")
         self.rebuild_history = mode == "U3"
         self.branches = [NavigationBranch(self.metadata, use_foot=self.use_foot)]
+        self.asynchronous_start = metadata.get("data_mode") == "real_by2_raw"
+        self.bootstrap_window_s = float(metadata.get("bootstrap_window_s", 5.))
+        self.bootstrap_last_attempt = -math.inf
+        self.bootstrap_diagnostic = dict(status="NO_INIT", reason="WAITING_FOR_CAUSAL_RAW_AND_PV_BUFFER")
         self.history_s = 30.0
         self.active_limit = 4
         self.profile_support_delta = 25.0
         self.proposal_times = {}
+        self.proposal_retry_after = {}
+        self.pending_proposals = {}
         self.proposal_complete = False
         self.support_incomplete = False
         self.dormant_candidates = []
@@ -86,6 +100,7 @@ class JointNavigator:
         self.support_groups = {}
         self.support_tracks = {}
         self.reference_rows = {}
+        self.predictive_rows_fingerprint = ""
         self.last_support_signature = None
         self.last_supported_tracks = set()
         self.model_generation = 0
@@ -93,7 +108,7 @@ class JointNavigator:
         self.expired_unresolved_groups = 0
         self.rescan_support_history = False
         self.checkpoints.append(Checkpoint(
-            -1, -1e-9, [b.snapshot() for b in self.branches],
+            -1, float(metadata.get("window_s", [0.])[0])-1e-9, [b.snapshot() for b in self.branches],
             {}, False, False, [], {},
         ))
 
@@ -101,12 +116,118 @@ class JointNavigator:
         packet = dict(event)
         block = packet.get("carrier")
         # The source declares measurement counts, not truth failure labels.
-        full_count = int(self.metadata.get("full_phase_relations", 5))
-        if block is not None and not self.use_partial and len(block.ambiguity_labels) < full_count:
+        # Real DD sets have changing dimension and pivot. Their physical partial
+        # relation comparison is emitted separately; a five-relation synthetic
+        # rule must never erase a real observation block.
+        full_count = self.metadata.get("full_phase_relations", None if self.asynchronous_start else 5)
+        if (block is not None and not self.use_partial and full_count is not None
+                and len(block.ambiguity_labels) < int(full_count)):
             packet["carrier"] = code_only(block)
         # U2 stops future use at discovery, U3 rebuilds the past with the same
         # physically restricted common-translation model.
         return packet
+
+    def _initialized(self):
+        return self.branches[0].index is not None and self.branches[0].bootstrap_status != "NO_INIT"
+
+    def _try_bootstrap(self, packet: dict, index: int):
+        """Use only arrived observations in one finite asynchronous startup graph.
+
+        Finite yaw seeds locate conditional modes. Their convergence is neither
+        global directional coverage nor an integer-fix or trust declaration.
+        """
+        t = float(packet["time_s"])
+        if packet.get("carrier") is None or t-self.bootstrap_last_attempt < 1.:
+            return False
+        buffered = [(i, self._filter(e)) for i, e in self.events
+                    if i <= index and t-self.bootstrap_window_s <= e["time_s"] <= t]
+        positions = [j for j, (_, e) in enumerate(buffered) if e.get("gnss_position") is not None]
+        if not positions:
+            self.bootstrap_diagnostic = dict(status="NO_INIT", reason="NO_POSITION_IN_CAUSAL_BUFFER")
+            return False
+        buffered = buffered[positions[0]:]
+        if not any(e.get("gnss_velocity") is not None for _, e in buffered):
+            self.bootstrap_diagnostic = dict(status="NO_INIT", reason="NO_VELOCITY_IN_CAUSAL_BUFFER")
+            return False
+        self.bootstrap_last_attempt = t
+        # IMU tilt supplies Values only. No static-body assumption is inserted
+        # as a measurement and no artificial yaw prior is used.
+        seed_imu = [e["imu"] for _, e in buffered
+                    if e["time_s"] <= buffered[0][1]["time_s"]+.2 and len(e["imu"])]
+        roll = pitch = 0.
+        if seed_imu:
+            rates = np.concatenate(seed_imu)
+            gravity_body = -np.average(rates[:, 1:4], axis=0, weights=rates[:, 0])
+            roll = math.atan2(gravity_body[1], gravity_body[2])
+            pitch = math.atan2(-gravity_body[0], math.hypot(gravity_body[1], gravity_body[2]))
+        solutions, reports = [], []
+        for yaw in (0., math.pi/2., math.pi, -math.pi/2.):
+            branch = NavigationBranch(self.metadata, use_foot=self.use_foot)
+            diagnostic = branch.bootstrap([e for _, e in buffered], gtsam.Rot3.RzRyRx(roll, pitch, yaw),
+                start_index=buffered[0][0], support_models=self._models_at(t))
+            reports.append(diagnostic)
+            if diagnostic["local_full_rank"] and diagnostic["solver_converged"]:
+                solutions.append(branch)
+        self.bootstrap_diagnostic = dict(
+            status="NO_INIT", first_time_s=buffered[0][1]["time_s"], last_time_s=t,
+            first_index=buffered[0][0], frontier_index=index, conditional_seed_reports=reports,
+            locally_identifiable_converged_modes=len(solutions),
+            computationally_unresolved_seeds=sum(not report["solver_converged"] for report in reports),
+            yaw_seeds_rad=[0., math.pi/2., math.pi, -math.pi/2.],
+            directional_global_coverage_certified=False, gravity_observation_added=False,
+            future_observations_used=False, already_published_rows_revised=0)
+        if not solutions:
+            self.bootstrap_diagnostic["reason"] = "BUFFERED_GRAPH_NOT_LOCALLY_IDENTIFIABLE"
+            self.decisions.append(dict(time_s=t, kind="ASYNCHRONOUS_BOOTSTRAP_UNRESOLVED",
+                                       **self.bootstrap_diagnostic))
+            return False
+        costs = np.array([b.window.error() for b in solutions])
+        supported = [b for b, cost in zip(solutions, costs) if 2.*(cost-costs.min()) <= self.profile_support_delta]
+        # Duplicate numerical starts at the same local solution carry no extra
+        # evidence. Distinct solutions remain distinct conditional states.
+        modes = []
+        for branch in sorted(supported, key=lambda b: b.window.error()):
+            if any(np.linalg.norm(gtsam.Rot3.Logmap(other.pose.rotation().between(branch.pose.rotation()))) < 1e-5
+                   and np.linalg.norm(other.velocity-branch.velocity) < 1e-5
+                   and np.linalg.norm(other.pose.translation()-branch.pose.translation()) < 1e-5
+                   and all(abs(other.window.values.atVector(other.ambiguity_keys[label])[0]
+                               -branch.window.values.atVector(key)[0]) < 1e-4
+                           for label, key in branch.ambiguity_keys.items()) for other in modes):
+                continue
+            modes.append(branch)
+        qualification = dict(qualified=True, scope="LOCAL_FULL_RANK_CONDITIONAL_STATE_ONLY",
+            globally_certified=False, finite_seed_search=True, modes_retained=len(modes),
+            initial_direction_status="FLOAT_INIT_DIRECTION_UNRESOLVED")
+        for branch in modes:
+            branch.accept_bootstrap(qualification)
+            branch.predictive_frontier = index
+        self.branches = modes
+        # An unfinished local solve is not a scientifically excluded direction.
+        self.support_incomplete |= any(not report["solver_converged"] for report in reports)
+        self.bootstrap_diagnostic.update(status="FLOAT_INIT_DIRECTION_UNRESOLVED", retained_modes=len(modes))
+        # Recover from before the first actually consumed support, not from an
+        # arbitrary time zero or a state contaminated by the startup factors.
+        empty = NavigationBranch(self.metadata, use_foot=self.use_foot)
+        self.checkpoints = [Checkpoint(buffered[0][0]-1, buffered[0][1]["time_s"]-1e-9,
+            [empty.snapshot()], {}, False, False, [], {})]
+        self.last_checkpoint_time = -math.inf
+        self.arc_first_use = {}
+        for _, event in buffered:
+            for foot in event.get("feet", []):
+                self.arc_first_use.setdefault(foot["arc_id"], event["time_s"])
+        self.decisions.append(dict(time_s=t, kind="ASYNCHRONOUS_FLOAT_STATE_INITIALIZED",
+                                   **self.bootstrap_diagnostic))
+        return True
+
+    def _no_init_output(self, t):
+        return dict(time_s=t, p=np.full(3, np.nan), v=np.full(3, np.nan),
+            rpy_rad=np.full(3, np.nan), bias=np.full(6, np.nan),
+            direction_status="NO_INIT", initialization_status="NO_INIT",
+            initialization_diagnostic=copy.deepcopy(self.bootstrap_diagnostic),
+            candidate_yaws_rad=[], candidate_costs=[], candidate_local_directions=[],
+            candidate_supported=[], candidate_support_complete=False,
+            support_ids=[], gnss_innovation_nis=None, branch_conditional_navigation=False,
+            revocation=False, replay_performed=False)
 
     def _released(self, time_s: float) -> set[str]:
         if self.rebuild_history:
@@ -136,6 +257,9 @@ class JointNavigator:
             if not set(expected_rows).issubset(common):
                 raise ValueError("support models do not share the reference prediction rows")
             rows = tuple(expected_rows)
+        if rows:
+            self.predictive_rows_fingerprint = hashlib.sha256(
+                (self.predictive_rows_fingerprint+repr((index, rows))).encode()).hexdigest()
         position_nis = 0.
         for branch, prediction in zip(self.branches, predictions):
             if index <= branch.predictive_frontier:
@@ -159,6 +283,11 @@ class JointNavigator:
         return rows, position_nis
 
     def _advance(self, packet: dict, index: int, expected_rows=None):
+        if self.asynchronous_start and not self._initialized():
+            self._try_bootstrap(packet, index)
+            if self._initialized():
+                self._propose(index, packet)
+            return (), 0.
         for foot in packet.get("feet", []):
             self.arc_first_use.setdefault(foot["arc_id"], packet["time_s"])
         rows, nis = self._score_prediction(packet, index, expected_rows)
@@ -174,10 +303,16 @@ class JointNavigator:
             branch.restore(snapshot)
             self.branches.append(branch)
         self.proposal_times = dict(checkpoint.proposal_times)
+        self.proposal_retry_after = dict(checkpoint.proposal_retry_after or {})
+        self.pending_proposals = dict(checkpoint.pending_proposals or {})
         self.proposal_complete = checkpoint.proposal_complete
         self.support_incomplete = checkpoint.support_incomplete
         self.dormant_candidates = copy.deepcopy(checkpoint.candidates)
         self.arc_first_use = dict(checkpoint.arc_first_use)
+        self.bootstrap_last_attempt = checkpoint.bootstrap_last_attempt
+        self.predictive_rows_fingerprint = checkpoint.predictive_rows_fingerprint
+        self.bootstrap_diagnostic = copy.deepcopy(checkpoint.bootstrap_diagnostic or
+            dict(status="NO_INIT", reason="RECONSTRUCT_FROM_PRE_USE_CHECKPOINT"))
 
     def _candidate_policy(self, arc_ids, model, group_id):
         """A competing source model replaces overlapping components, never adds them."""
@@ -196,7 +331,7 @@ class JointNavigator:
         observed = packet.get("active_support_arcs")
         if observed is None:
             observed = [foot["arc_id"] for foot in packet.get("feet", [])]
-        ids = tuple(sorted(observed))
+        ids = tuple(sorted(arc for arc in observed if arc in self.arc_first_use))
         if len(ids) >= 2 and ids not in self.support_groups:
             first = min(self.arc_first_use[arc] for arc in ids)
             prior = [c for c in self.checkpoints if c.time_s < first]
@@ -263,11 +398,18 @@ class JointNavigator:
             del self.support_tracks[identity]
         return self._contact_support(packet)
 
+    def _same_predictive_rows(self, other):
+        return (other._initialized()
+                and other.predictive_rows_fingerprint == self.predictive_rows_fingerprint
+                and {b.predictive_frontier for b in other.branches} == {b.predictive_frontier for b in self.branches}
+                and {b.predictive_row_count for b in other.branches} == {b.predictive_row_count for b in self.branches})
+
     def _contact_support(self, packet: dict):
         alternatives = [("fixed", branch, 0., None) for branch in self.branches]
         for identity, track in self.support_tracks.items():
-            alternatives.extend((identity, branch, self.model_edit_cost, track)
-                                for branch in track.navigator.branches)
+            if self._same_predictive_rows(track.navigator):
+                alternatives.extend((identity, branch, self.model_edit_cost, track)
+                                    for branch in track.navigator.branches)
         costs = np.array([branch.predictive_score+penalty for _, branch, penalty, _ in alternatives])
         winner = int(np.argmin(costs))
         supported = costs-costs[winner] <= self.model_support_delta
@@ -288,7 +430,8 @@ class JointNavigator:
             self.last_support_signature = signature
         selected = alternatives[winner][3]
         complete = self.proposal_complete and all(
-            track.navigator.proposal_complete for track in self.support_tracks.values())
+            track.navigator.proposal_complete and self._same_predictive_rows(track.navigator)
+            for track in self.support_tracks.values())
         # Only a unique source explanation commits a model change. Otherwise
         # U3 retains the separate clean conditional states and their directions.
         accepted = selected if (len(identities) == 1 and "fixed" not in identities and complete) else None
@@ -302,38 +445,76 @@ class JointNavigator:
             dict(self.proposal_times), self.proposal_complete,
             self.support_incomplete,
             copy.deepcopy(self.dormant_candidates), dict(self.arc_first_use),
+            self.bootstrap_last_attempt, copy.deepcopy(self.bootstrap_diagnostic),
+            self.predictive_rows_fingerprint, dict(self.proposal_retry_after), dict(self.pending_proposals),
         ))
         self.checkpoints = [c for c in self.checkpoints if c.time_s >= time_s - self.history_s]
         self.last_checkpoint_time = time_s
+
+    def _physical_integer_conditions(self, fixed, labels):
+        if not self.asynchronous_start or not fixed:
+            return []
+        history = tuple(fixed)
+        transition = analyze_relation_transition(history, labels, label_mode="physical_sd_arcs")
+        values = np.array([fixed[label] for label in history], dtype=np.int64)
+        return [dict(coefficients=tuple((label, int(value)) for label, value in zip(labels, row) if value),
+                     rhs_integer=int(rhs), source="INHERITED_CONDITIONAL_PHYSICAL_ARC_RELATION")
+                for row, rhs in zip(transition.current_transform, transition.history_transform@values)]
 
     def _propose(self, index: int, packet: dict):
         block = packet.get("carrier")
         if block is None or not block.ambiguity_labels:
             return
-        labels = tuple(block.ambiguity_labels)
-        if all(all(label in branch.fixed for label in labels) for branch in self.branches):
-            return
-        # Reuse a physical-label cohort's proposal; no overlapping-window
-        # likelihood multiplication and no gyro/RP-based preselection.
-        if labels in self.proposal_times:
+        current_labels = tuple(block.ambiguity_labels)
+        if all(all(label in branch.fixed for label in current_labels) for branch in self.branches):
             return
         recent = []
-        for _, raw in self.events:
-            if raw["time_s"] < packet["time_s"] - 0.8 or raw["time_s"] > packet["time_s"]:
+        for event_index, raw in self.events:
+            if event_index > index or raw["time_s"] < packet["time_s"]-0.8:
                 continue
             candidate_block = self._filter(raw).get("carrier")
-            if candidate_block is not None and tuple(candidate_block.ambiguity_labels) == labels:
+            if candidate_block is not None and candidate_block.ambiguity_labels and (
+                    self.asynchronous_start or tuple(candidate_block.ambiguity_labels) == current_labels):
                 recent.append(candidate_block)
         if len(recent) < 4:
             return
+        coordinate_metadata = None
+        if self.asynchronous_start:
+            physical = reparameterize_epoch_blocks(recent, label_mode="physical_sd_arcs",
+                                                   available_time_s=packet["time_s"])
+            recent, labels = physical.blocks, physical.basis_labels
+            coordinate_metadata = physical.basis_metadata
+        else:
+            labels = current_labels
+        # A cohort is identified by physical integer coordinates, independent
+        # of transient DD pivots. Raw rows and complete Q are not projected.
+        if labels in self.proposal_times:
+            retry_at = self.proposal_retry_after.get(labels)
+            if retry_at is None or packet["time_s"] < retry_at:
+                return
         common_fixed = {label: value for label, value in self.branches[0].fixed.items()
                         if all(branch.fixed.get(label) == value for branch in self.branches)}
+        linear_conditions = self._physical_integer_conditions(common_fixed, labels)
         proposal = propose_candidates(recent, np.asarray(self.metadata["baseline_body"]), self.active_limit,
-                                      conditioned_integer_by_label=common_fixed)
+            conditioned_integer_by_label=common_fixed, conditioned_linear_relations=linear_conditions)
+        if coordinate_metadata is not None:
+            proposal.metadata["physical_window_coordinates"] = coordinate_metadata
         self.proposal_attempts += 1
         self.proposal_times[labels] = packet["time_s"]
-        self.support_incomplete |= not proposal.metadata["active_support_complete"]
-        self.proposal_complete = not self.support_incomplete
+        if self.asynchronous_start and (not proposal.active or not proposal.metadata["active_support_complete"]):
+            # Reconsider only when the whole finite raw window has advanced.
+            # A failed first window must not permanently close a physical arc;
+            # neither its cost nor subsequent overlapping costs become factors.
+            self.proposal_retry_after[labels] = packet["time_s"]+.8
+        else:
+            self.proposal_retry_after.pop(labels, None)
+        proposal.metadata["raw_window_time_s"] = [recent[0].time_s, recent[-1].time_s]
+        proposal.metadata["next_attempt_not_before_s"] = self.proposal_retry_after.get(labels)
+        # Empty proposals have not discarded a float branch. They are a
+        # retryable unresolved work window, distinct from omitted active modes.
+        if proposal.active:
+            self.support_incomplete |= not proposal.metadata["active_support_complete"]
+        self.proposal_complete = not self.support_incomplete and not self.pending_proposals
         for candidate in proposal.dormant:
             self.dormant_candidates.append(dict(
                 integer_by_label=candidate.integer_by_label, raw_cost=candidate.raw_cost,
@@ -341,8 +522,8 @@ class JointNavigator:
                 proposal_time_s=packet["time_s"],
             ))
         if not proposal.active:
+            self.pending_proposals[labels] = dict(time_s=packet["time_s"], status=proposal.metadata["status"])
             self.proposal_complete = False
-            self.support_incomplete = True
             self.decisions.append(dict(time_s=packet["time_s"], kind="RAW_SUPPORT_UNRESOLVED",
                                        proposal=proposal.metadata))
             return
@@ -353,13 +534,31 @@ class JointNavigator:
                 if any(label in parent.fixed and parent.fixed[label] != value
                        for label, value in candidate.integer_by_label.items()):
                     continue
+                conditions = self._physical_integer_conditions(parent.fixed, tuple(candidate.integer_by_label))
+                if any(sum(coefficient*candidate.integer_by_label[label]
+                           for label, coefficient in relation["coefficients"]) != relation["rhs_integer"]
+                       for relation in conditions):
+                    continue
                 child = NavigationBranch(self.metadata, use_foot=self.use_foot)
                 child.restore(parent.snapshot())
                 child.integer_lineage += ((float(packet["time_s"]),
                     tuple(sorted(candidate.integer_by_label.items()))),)
                 child.condition(candidate.integer_by_label)
                 expanded.append(child)
+        if not expanded:
+            self.pending_proposals[labels] = dict(time_s=packet["time_s"], status="NO_COMPATIBLE_PARENT_CANDIDATE")
+            self.proposal_complete = False
+            self.proposal_retry_after[labels] = packet["time_s"]+.8
+            self.decisions.append(dict(time_s=packet["time_s"], kind="NO_COMPATIBLE_PARENT_CANDIDATE",
+                                       proposal=proposal.metadata))
+            return
         if expanded:
+            self.pending_proposals.pop(labels, None)
+            if self.asynchronous_start:
+                for old in list(self.pending_proposals):
+                    if analyze_relation_transition(old, labels, label_mode="physical_sd_arcs").history_preserved_by_current:
+                        self.pending_proposals.pop(old)
+            self.proposal_complete = not self.support_incomplete and not self.pending_proposals
             expanded.sort(key=lambda b: b.window.error())
             for omitted in expanded[self.active_limit:]:
                 self.dormant_candidates.append(dict(
@@ -393,7 +592,9 @@ class JointNavigator:
             self._restore(Checkpoint(index, time_s,
                 [b.snapshot() for b in shadow.branches], dict(shadow.proposal_times),
                 shadow.proposal_complete, shadow.support_incomplete,
-                copy.deepcopy(shadow.dormant_candidates), dict(shadow.arc_first_use)))
+                copy.deepcopy(shadow.dormant_candidates), dict(shadow.arc_first_use),
+                shadow.bootstrap_last_attempt, copy.deepcopy(shadow.bootstrap_diagnostic),
+                shadow.predictive_rows_fingerprint, dict(shadow.proposal_retry_after), dict(shadow.pending_proposals)))
             self.checkpoints.clear()
             self.last_checkpoint_time = -math.inf
             self.decisions.append(dict(time_s=time_s,
@@ -476,6 +677,9 @@ class JointNavigator:
             self.support_models = copy.deepcopy(policy)
             packet = self._filter(event)
             _, nis = self._advance(packet, index)
+            if not self._initialized():
+                self.rows.append(self._no_init_output(t))
+                return
             matches = [(j, b) for j, b in enumerate(self.branches)
                        if all(b.fixed.get(label) == value for label, value in integers.items())]
             if not matches:
@@ -507,6 +711,7 @@ class JointNavigator:
             mode="U2", causal_output_rows=len(self.rows), elapsed_s=time.monotonic()-started,
             replayed_events=0, proposal_attempts=self.proposal_attempts,
             dormant_candidates=len(self.dormant_candidates), active_support_complete=self.proposal_complete,
+            unresolved_raw_cohorts=len(self.pending_proposals),
             future_policy_changes=policy_changes,
             diagnostic_controller_summary=result["summary"],
             marginalized_variables=sum(b.window.marginalized_total for b in self.branches),
@@ -530,7 +735,15 @@ class JointNavigator:
             packet = self._filter(event)
             if packet.get("carrier") is not None:
                 self.last_phase_relation_count = len(packet["carrier"].ambiguity_labels)
+            elif self.asynchronous_start and packet.get("carrier_source") is not None:
+                self.last_phase_relation_count = 0
             self.reference_rows[index], nis = self._advance(packet, index)
+            if self.asynchronous_start and not self._initialized():
+                output = self._no_init_output(t)
+                self.rows.append(output)
+                if output_callback is not None:
+                    output_callback(index, event, output, self.support_models, {})
+                continue
             affected = set()
             support_result = self._update_support_tracks(packet, index) if self.monitor_support else None
             accepted = support_result[4] if support_result is not None else None
@@ -580,23 +793,32 @@ class JointNavigator:
             local_directions = [self._direction_summary(item[1], index) for item in output_models]
             output.update(local_directions[selected_index])
             output["candidate_local_directions"] = [
-                dict(support_model=item[0], integer_lineage=item[1].integer_lineage, **direction)
+                dict(support_model=item[0], integer_lineage=item[1].integer_lineage,
+                     conditional_state=item[1].current_output(), factor_counts=dict(item[1].last_factor_counts),
+                     **direction)
                 for item, direction in zip(output_models, local_directions)]
             candidate_rpy = [item[1].current_output()["rpy_rad"] for item in output_models]
             predictive_costs = self.mode in ("U2", "U3")
             delta = (1. if predictive_costs else 2.) * (costs - costs.min())
             supported = delta <= (self.model_support_delta if predictive_costs else self.profile_support_delta)
             comparison_complete = self.proposal_complete and all(
-                track.navigator.proposal_complete for track in self.support_tracks.values())
+                track.navigator.proposal_complete and self._same_predictive_rows(track.navigator)
+            for track in self.support_tracks.values())
             status = "CONDITIONAL_SUPPORT" if comparison_complete else "UNRESOLVED_ENUMERATION_OR_BRANCH_BUDGET"
             if sum(supported) > 1:
                 status = "MULTIPLE_CONDITIONAL_DIRECTIONS_" + status
-            phase_context = ("FULL_PHASE" if self.last_phase_relation_count >= 5 else
-                             "PARTIAL_PHASE" if self.last_phase_relation_count else
-                             "PHASE_ABSENT_CODE_AND_MOTION")
+            if self.asynchronous_start:
+                phase_context = ("RAW_PHASE_RELATIONS" if self.last_phase_relation_count else
+                                 "NO_CURRENT_PHASE_RELATIONS")
+            else:
+                phase_context = ("FULL_PHASE" if self.last_phase_relation_count >= 5 else
+                                 "PARTIAL_PHASE" if self.last_phase_relation_count else
+                                 "PHASE_ABSENT_CODE_AND_MOTION")
             status = phase_context + "_" + status
             output.update(
-                time_s=t, candidate_yaws_rad=[float(r[2]) for r in candidate_rpy],
+                time_s=t, initialization_status=(self.bootstrap_diagnostic["status"]
+                    if self.asynchronous_start else "SYNTHETIC_LEGACY_START"),
+                candidate_yaws_rad=[float(r[2]) for r in candidate_rpy],
                 candidate_costs=costs.tolist(), candidate_supported=supported.tolist(),
                 support_ids=[f["arc_id"] for f in packet.get("feet", [])],
                 direction_status=status, gnss_innovation_nis=nis,
@@ -608,6 +830,12 @@ class JointNavigator:
                 supported_contact_models=sorted({item[0] for item in output_models}),
                 contact_model_family="ONE_ADDITIONAL_OBSERVED_COSUPPORT_GROUP_PER_GENERATION",
                 contact_model_probability_calibrated=False,
+                unresolved_predictive_frontier_models=sum(not self._same_predictive_rows(track.navigator)
+                    for track in self.support_tracks.values()),
+                carrier_relation_state=copy.deepcopy(best.last_carrier_relations),
+                carrier_event_status=("OBSERVED_RAW_BLOCK" if packet.get("carrier") is not None else
+                    packet["carrier_source"]["status"] if packet.get("carrier_source") is not None else
+                    "NO_NEW_CARRIER_PACKET"),
                 candidate_cost_kind="CONDITIONAL_PREQUENTIAL_NEGATIVE_TWICE_LOG_DENSITY" if predictive_costs else "JOINT_GRAPH_HALF_SQUARED_ERROR",
                 conditional_history_recomputed=output_models[selected_index][3] is not None,
                 revocation=bool(affected and self.mode in ("U2", "U3")),
@@ -624,8 +852,11 @@ class JointNavigator:
                 print(f"{self.mode} t={t:.1f}/{events[-1]['time_s']:.1f}s branches={len(self.branches)} models={len(self.support_tracks)} replayed={self.replayed_events}", flush=True)
         return dict(rows=self.rows, decisions=self.decisions, summary=dict(
             mode=self.mode, causal_output_rows=len(self.rows), elapsed_s=time.monotonic()-started,
+            initialization=copy.deepcopy(self.bootstrap_diagnostic) if self.asynchronous_start else None,
+            no_init_rows=sum(row["direction_status"] == "NO_INIT" for row in self.rows),
             replayed_events=self.replayed_events, proposal_attempts=self.proposal_attempts,
             dormant_candidates=len(self.dormant_candidates), active_support_complete=self.proposal_complete,
+            unresolved_raw_cohorts=len(self.pending_proposals),
             revoked_arcs=sorted(self.revoked_arcs),
             support_model_replayed_events=self.model_replay_events,
             live_support_models=len(self.support_tracks),

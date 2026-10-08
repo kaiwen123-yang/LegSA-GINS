@@ -1,6 +1,8 @@
 """Carrier and correlated support measurements on the shared navigation states."""
 from __future__ import annotations
 
+from dataclasses import dataclass
+
 import gtsam
 import numpy as np
 
@@ -10,6 +12,105 @@ from ..carrier_phase.temporal import EpochBlock
 def _skew(vector: np.ndarray) -> np.ndarray:
     x, y, z = vector
     return np.array([[0.0, -z, y], [z, 0.0, -x], [-y, x, 0.0]])
+
+
+@dataclass(frozen=True)
+class FootErrorExpression:
+    """Original body foot error with redundant equality coordinates eliminated.
+
+    Fixed: e=R.T(c-p)-r. Common translation released: e=R.T(d)-r-q,
+    with one unconstrained q shared by the simultaneously observed group.
+    """
+    pose_key: int
+    point_key: int | None
+    measured_body: tuple[float, float, float]
+    common_key: int | None = None
+
+    @property
+    def keys(self):
+        return (self.pose_key, *(() if self.point_key is None else (self.point_key,)),
+                *(() if self.common_key is None else (self.common_key,)))
+
+    def evaluate(self, values, derivatives=False):
+        pose = values.atPose3(self.pose_key)
+        point = np.zeros(3) if self.point_key is None else values.atPoint3(self.point_key)
+        relative = pose.rotation().unrotate(point if self.common_key is not None else point-pose.translation())
+        error = relative-np.asarray(self.measured_body)
+        if self.common_key is not None:
+            error -= values.atVector(self.common_key)
+        if not derivatives:
+            return error
+        pose_jacobian = np.zeros((3, 6))
+        pose_jacobian[:, :3] = _skew(relative)
+        if self.common_key is None:
+            pose_jacobian[:, 3:] = -np.eye(3)
+        jacobians = {self.pose_key: pose_jacobian}
+        if self.point_key is not None:
+            jacobians[self.point_key] = pose.rotation().matrix().T
+        if self.common_key is not None:
+            jacobians[self.common_key] = -np.eye(3)
+        return error, jacobians
+
+
+def algebraic_foot_error_factor(current: FootErrorExpression, sigma: float, *,
+                                previous: FootErrorExpression | None = None, rho: float = 0.):
+    """Original per-arc AR likelihood, evaluated exactly on the contact manifold.
+
+    No new noise or pseudo measurement is introduced by q. Eliminating each
+    unconstrained common q gives the same projected directional likelihood,
+    including all cross-time correlations from each original arc's AR error.
+    """
+    keys = tuple(dict.fromkeys((*current.keys, *(() if previous is None else previous.keys))))
+    innovation_sigma = sigma if previous is None else sigma*np.sqrt(1.-rho*rho)
+
+    def error(_factor, values, jacobians):
+        residual, blocks = current.evaluate(values, True)
+        if previous is not None:
+            old, old_blocks = previous.evaluate(values, True)
+            residual -= rho*old
+            for key, block in old_blocks.items():
+                blocks[key] = blocks.get(key, np.zeros_like(block))-rho*block
+        if jacobians is not None:
+            for index, key in enumerate(keys):
+                jacobians[index] = np.asfortranarray(blocks[key])
+        return residual
+
+    return gtsam.CustomFactor(gtsam.noiseModel.Isotropic.Sigma(3, innovation_sigma), list(keys), error)
+
+
+def gravity_tilt_factor(pose_key: int, direction_body, gravity_world, sigma_rad):
+    """Two-dimensional S2 log residual with no world-gravity yaw information.
+
+    The body direction and angular uncertainty require an eligible source. A
+    raw accelerometer sample is not silently treated as gravity. The spherical
+    log chart has its usual undefined antipode; it is not a second zero-error
+    gravity solution as it would be for a tangent-projection residual.
+    """
+    measured = gtsam.Unit3(np.asarray(direction_body, float))
+    body = measured.point3()
+    basis = measured.basis().T
+    gravity = gtsam.Unit3(np.asarray(gravity_world, float)).point3()
+
+    def error(_factor, values, jacobians):
+        predicted = values.atPose3(pose_key).rotation().unrotate(gravity)
+        tangent = basis @ predicted
+        sine, cosine = np.linalg.norm(tangent), float(body @ predicted)
+        if sine < 1e-8 and cosine < 0.:
+            raise ValueError("gravity tilt tangent chart is undefined at the antipodal prediction")
+        angle = np.arctan2(sine, cosine)
+        if sine < 1e-5:
+            scale, derivative = 1.+sine*sine/6., -1./3.
+        else:
+            scale = angle/sine
+            derivative = (angle*cosine-sine)/sine**3
+        if jacobians is not None:
+            jacobian = np.zeros((2, 6), order="F")
+            jacobian[:, :3] = (scale*basis+derivative*np.outer(tangent, body)) @ _skew(predicted)
+            jacobians[0] = jacobian
+        return scale*tangent
+
+    return gtsam.CustomFactor(gtsam.noiseModel.Diagonal.Sigmas(
+        np.broadcast_to(np.asarray(sigma_rad, float), (2,)).copy()), [pose_key], error)
 
 
 def carrier_factor(

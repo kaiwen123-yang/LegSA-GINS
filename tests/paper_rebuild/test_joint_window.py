@@ -101,3 +101,19 @@ if __name__ == "__main__":
     test_separator_and_checkpoint_match_full_three_state_graph()
     test_constrained_elimination_retains_inconsistent_prior_cost()
     print("PASS: separator covariance, constrained objective constants, checkpoint restore and retained key")
+
+
+def test_square_root_separator_keeps_weak_anchor_beside_strong_transition():
+    # H-based Schur subtraction loses the unit prior next to 1e18 transition
+    # information. Local QR must retain that prior, without an artificial floor.
+    factors = [gtsam.PriorFactorDouble(0, 0., gtsam.noiseModel.Isotropic.Sigma(1, 1.)),
+               gtsam.BetweenFactorDouble(0, 1, 0., gtsam.noiseModel.Isotropic.Sigma(1, 1e-9))]
+    values = gtsam.Values(); values.insert(0, 0.); values.insert(1, 0.)
+    window = JointWindow(lag_s=.05)
+    window.update(factors, values, {0: 0., 1: .1}, .1)
+    assert window.last_marginalized == (0,)
+    linear = window.graph.linearize(window.values)
+    assert all(isinstance(linear.at(i), gtsam.JacobianFactor) for i in range(linear.size()))
+    np.testing.assert_allclose(window.covariance(1), [[1.]], atol=1e-12, rtol=1e-12)
+    restored = JointWindow(lag_s=.05); restored.restore(window.snapshot())
+    np.testing.assert_allclose(restored.covariance(1), [[1.]], atol=1e-12, rtol=1e-12)
