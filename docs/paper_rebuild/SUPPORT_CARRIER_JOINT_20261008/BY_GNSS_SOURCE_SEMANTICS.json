@@ -1,0 +1,396 @@
+{
+  "schema": "by_gnss_source_semantics_v1",
+  "checked_at_utc": "2026-10-08T06:43:19.751880+00:00",
+  "scope": {
+    "sequence": "BY2",
+    "data_mode": "real_by2_raw",
+    "requested_window_s": [
+      96.0,
+      106.0
+    ],
+    "gnss_rows_checked": 51,
+    "gnss_source_lines_one_based": [
+      202,
+      252
+    ],
+    "run": "BY_ASYNC_PHYSICAL_04",
+    "run_git_commit": "a01cece3ea6316d631e07b2e4b36fbe65c89e871",
+    "run_loader_hash_matches_git_blob": true,
+    "frozen_v3_commit": "7d43b9af26120ed5dde21f53e515386361072ba6",
+    "frozen_v3_run_id": "RUN_00004",
+    "navigation_runs_in_this_check": 0,
+    "reference_trajectory_reads_in_this_check": 0,
+    "physical_closure_not_recomputed": true
+  },
+  "conclusions": [
+    {
+      "id": "same_receiver_and_field_semantics",
+      "status": "VERIFIED_NO_RECEIVER_FRAME_OR_UNIT_MISMATCH_FOUND",
+      "finding": "All 51 position and velocity rows match GNSS1 HPPOSECEF and NAV-PVT at the same integer iTOW. Values refer to GNSS1 antenna; provider performs no IMU-point or body-velocity conversion.",
+      "columns_zero_based": {
+        "0": "GPS iTOW measurement epoch mapped to frozen UTC-relative seconds",
+        "1:4": "WGS84 latitude deg, longitude deg, ellipsoid height m; from HPPOSECEF ECEF",
+        "4:7": "PVT hAcc, hAcc, vAcc in m",
+        "7:10": "PVT velN, velE, velD; geographic NED m/s",
+        "10:13": "fixed working velocity sigma 0.05 m/s on each axis",
+        "15:17": "position-valid and velocity-valid flags"
+      },
+      "decoder": "NAV-PVT payload offsets 48,52,56: signed int32 mm/s multiplied by 0.001",
+      "checked_max_absolute_differences": {
+        "time_s": 3.674e-10,
+        "latitude_deg": 4.903e-13,
+        "longitude_deg": 4.832e-13,
+        "height_m": 4.926e-10,
+        "velocity_mps": 2.220446049250313e-16,
+        "sigma_m_or_mps": 0.0
+      },
+      "evidence_sources": [
+        "raw_gnss1",
+        "by04_gnss18",
+        "parity_decoder",
+        "parity_generator",
+        "by04_loader"
+      ]
+    },
+    {
+      "id": "measurement_time_is_not_arrival_time",
+      "status": "VERIFIED_BOUNDARY_ARRIVAL_DELAY_NOT_MODELED",
+      "finding": "GNSS18 contains measurement epochs, not receipt stamps. BY04 sets available_time_s=time_s; ordering is causal by measurement epoch but does not reproduce raw log arrival availability.",
+      "epoch_formula": "315964800 + gps_week*604800 + iTOW_ms/1000 - 18 - base_time",
+      "gps_week": 2408,
+      "base_time_unix_s": 1772784000.0,
+      "raw_recorded_stamp_minus_measurement_epoch_s": {
+        "NAV_PVT": {
+          "n": 51,
+          "min": 0.1177966595,
+          "median": 0.1407191753,
+          "max": 0.1646814346
+        },
+        "NAV_HPPOSECEF": {
+          "n": 51,
+          "min": 0.1178202629,
+          "median": 0.1407399178,
+          "max": 0.1646845341
+        }
+      },
+      "interpretation_limit": "Recorded stamp is the receipt stamp used by the existing decoder. This readout does not independently measure hardware transport latency or prove the cause of position/velocity closure errors.",
+      "follow_up": "Preserve measurement epoch and arrival/availability time separately in a future unified online event-time implementation; no change applied here.",
+      "evidence_sources": [
+        "raw_gnss1",
+        "parity_decoder",
+        "parity_generator",
+        "by04_loader"
+      ]
+    },
+    {
+      "id": "covariance_model_and_rotation",
+      "status": "VERIFIED_ROTATION_CONSISTENT_WORKING_NOISE_MODEL",
+      "finding": "GNSS18 stores standard-deviation/accuracy columns, not full 3x3 covariances. Current loader constructs diagonal sigma-squared matrices and rotates both values and covariance from geographic NED to fixed NED consistently.",
+      "position_working_sigma": "PVT hAcc copied to both horizontal axes; PVT vAcc on down axis. HPPOSECEF pAcc and full cross covariance are not used.",
+      "velocity_working_sigma_mps": [
+        0.05,
+        0.05,
+        0.05
+      ],
+      "raw_pvt_sAcc_in_checked_window_mps": {
+        "min": 0.072,
+        "max": 0.09,
+        "used_in_GNSS18": false
+      },
+      "transform": "A=ECEF_from_NED(origin).T @ ECEF_from_NED(row_BLH); v_fixed=A@v_geo; Cov_fixed=A@diag(sigma**2)@A.T",
+      "velocity_input_covariance_m2_s2_diagonal": [
+        0.0025,
+        0.0025,
+        0.0025
+      ],
+      "interpretation_limit": "No complete receiver covariance or position/velocity cross covariance is available in these columns. The working diagonal model must not be described as a measured full covariance.",
+      "follow_up": "Document fixed sigma and omitted P/V cross covariance; defer sAcc policy changes until the event-time/noise contract is revised together.",
+      "evidence_sources": [
+        "parity_generator",
+        "by04_loader",
+        "raw_gnss1"
+      ]
+    },
+    {
+      "id": "frozen_v3_uses_same_provider_with_different_velocity_weight",
+      "status": "VERIFIED_SYSTEM_COMPARISON_NOT_IDENTICAL_WEIGHT_ABLATION",
+      "finding": "Frozen V3 RUN_00004 reads the same GNSS18 and enables receiver velocity. It predicts GNSS1 antenna position and velocity with the configured body lever arm. Its velocity update adds 0.05 m/s linearly to each input sigma before source-aware weighting.",
+      "antenna_lever_body_frd_m": [
+        0.03,
+        0.03,
+        -0.3
+      ],
+      "receiver_velocity_enabled": true,
+      "velocity_prediction": "v_IMU + R_body_to_NED @ cross(omega_body, antenna_lever_body)",
+      "velocity_sigma_before_source_aware_mps": [
+        0.1,
+        0.1,
+        0.1
+      ],
+      "velocity_covariance_before_source_aware_m2_s2_diagonal": [
+        0.01,
+        0.01,
+        0.01
+      ],
+      "position_covariance_policy": "diag(positiveStd(input position sigma,1e-3)**2), then source-aware weighting",
+      "interpretation_limit": "These are input/pre-source-aware covariance values, not the final effective covariance at every epoch. V3 versus joint is a system comparison, not an isolated identical-weight structural ablation.",
+      "evidence_sources": [
+        "frozen_v3_runtime_config",
+        "frozen_v3_loader",
+        "frozen_v3_engine",
+        "by04_loader"
+      ]
+    }
+  ],
+  "raw_examples": [
+    {
+      "gnss18_line": 202,
+      "measurement_time_s": 96.0,
+      "velocity_ned_mps": [
+        0.156,
+        -1.328,
+        -0.054
+      ],
+      "position_sigma_m": [
+        0.014,
+        0.014,
+        0.012
+      ],
+      "raw_pvt_line": 4071,
+      "raw_pvt_recorded_time_s": 96.14902448654175,
+      "raw_pvt_sAcc_mps": 0.072,
+      "raw_hpposecef_line": 4072,
+      "raw_hpposecef_recorded_time_s": 96.14902710914612,
+      "raw_hpposecef_pAcc_m": 0.0184
+    },
+    {
+      "gnss18_line": 252,
+      "measurement_time_s": 106.0,
+      "velocity_ned_mps": [
+        -0.077,
+        -1.188,
+        0.004
+      ],
+      "position_sigma_m": [
+        0.015,
+        0.015,
+        0.012
+      ],
+      "raw_pvt_line": 5055,
+      "raw_pvt_recorded_time_s": 106.14164233207703,
+      "raw_pvt_sAcc_mps": 0.086,
+      "raw_hpposecef_line": 5056,
+      "raw_hpposecef_recorded_time_s": 106.14165544509888,
+      "raw_hpposecef_pAcc_m": 0.0188
+    }
+  ],
+  "provider_lineage": {
+    "ordered_stages": [
+      "GNSS1 raw HPPOSECEF + PVT",
+      "CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/02_PARITY_PROVIDERS/V2/PARITY.gnss",
+      "CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_GNSS.gnss",
+      "CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss",
+      "CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__C00_clean_normal/GNSS18.gnss"
+    ],
+    "clean5_copy_ledger": "PARITY.gnss and CALIBRATED_GNSS.gnss byte-identical in retained manifest; original PARITY file not rehashed in this check.",
+    "clean6_change": "Only nominal yaw sigma changed; all other tokens preserved by retained bundle.",
+    "clean8_change": "Only zero-based columns 13 and 17 changed; byte gate reports all other bytes identical."
+  },
+  "sources": {
+    "raw_gnss1": {
+      "path": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv",
+      "sha256": "5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027",
+      "hash_checked_now": true,
+      "relevant_lines_one_based": [
+        [
+          4071,
+          4072
+        ],
+        [
+          5055,
+          5056
+        ]
+      ]
+    },
+    "by04_gnss18": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+      "sha256": "fc6dd49c0a35c41208fc7d94da1c78ad63fe6938bd8f599021750c3bf5e20760",
+      "hash_checked_now": true,
+      "relevant_lines_one_based": [
+        [
+          202,
+          252
+        ]
+      ]
+    },
+    "by04_run_status": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_ASYNC_PHYSICAL_04/run_status.json",
+      "sha256": "366285739cad5ea37b7ca0e1cc5da8cfb6242330fa81b5f962b3b71cab6ebdc2",
+      "hash_checked_now": true
+    },
+    "clean8_provider_manifest": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/PROVIDER_MANIFEST.json",
+      "sha256": "9bab15f67ae6e432df371f2273a1e2a9b4bc588b77860abfdb0cae3c9aa02f92",
+      "hash_checked_now": true,
+      "relevant_lines_one_based": [
+        [
+          27,
+          33
+        ],
+        [
+          55,
+          67
+        ]
+      ]
+    },
+    "clean6_gnss18": {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss",
+      "sha256": "b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663",
+      "hash_checked_now": true
+    },
+    "clean6_bundle": {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/PROVIDER_BUNDLE.json",
+      "sha256": "89796f43088b2e704cc00969e5d6877f5e69bbc7b23b94b9db6a44daa2cdddb3",
+      "hash_checked_now": true,
+      "relevant_lines_one_based": [
+        [
+          94,
+          96
+        ],
+        [
+          1730,
+          1731
+        ]
+      ]
+    },
+    "clean5_calibrated_gnss": {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_GNSS.gnss",
+      "sha256": "68ed8de7f91b267072bab09e968a9cab4b5220bc5eb116140adacdfde0382e7a",
+      "hash_checked_now": true
+    },
+    "clean5_manifest": {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/PROVIDER_MANIFEST.json",
+      "sha256": "cd29237a621ae7a8d4ef6fcaf44c113ca8b41a221bff9849c4e99740cc568b79",
+      "hash_checked_now": true,
+      "relevant_lines_one_based": [
+        [
+          35,
+          37
+        ],
+        [
+          107,
+          111
+        ],
+        [
+          140,
+          140
+        ]
+      ]
+    },
+    "parity_decoder": {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/clean5_parity/input_audit.py",
+      "sha256": "da6fefef6d5166369c01b785177999e0ecd552496c2738402d6a36a6caa9e9d9",
+      "hash_checked_now": true,
+      "relevant_lines_one_based": [
+        [
+          41,
+          70
+        ]
+      ]
+    },
+    "parity_generator": {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/clean5_parity/providers.py",
+      "sha256": "9d8959617c76ac94ed329c88a76477fd58645f48028c51c2505018f72b7567fd",
+      "hash_checked_now": true,
+      "relevant_lines_one_based": [
+        [
+          61,
+          65
+        ],
+        [
+          99,
+          109
+        ],
+        [
+          142,
+          143
+        ],
+        [
+          163,
+          165
+        ]
+      ]
+    },
+    "by04_loader": {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/joint_navigation/real_data.py",
+      "git_revision": "a01cece3ea6316d631e07b2e4b36fbe65c89e871",
+      "sha256": "2f0276c50eae44cf8191f831ab42473820eb68c94df8ca9f6b708d5a53a347ad",
+      "hash_checked_now": true,
+      "relevant_lines_one_based": [
+        [
+          64,
+          87
+        ],
+        [
+          243,
+          249
+        ],
+        [
+          274,
+          297
+        ]
+      ]
+    },
+    "frozen_v3_loader": {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/cpp/legsa_v23_port_core/src/fileio/gnss_file_loader.cpp",
+      "git_revision": "7d43b9af26120ed5dde21f53e515386361072ba6",
+      "sha256": "6132f390d2a9fd1a298bc6b3c7a1a3080fdbbe2a2cb1f5a0313fef0d0e6e5726",
+      "hash_checked_now": true,
+      "relevant_lines_one_based": [
+        [
+          130,
+          149
+        ]
+      ]
+    },
+    "frozen_v3_engine": {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp",
+      "git_revision": "7d43b9af26120ed5dde21f53e515386361072ba6",
+      "sha256": "19962a218121639dd85e646e20c1e922273ae739d3beac856c8dd9c04aea15b2",
+      "hash_checked_now": true,
+      "relevant_lines_one_based": [
+        [
+          852,
+          883
+        ],
+        [
+          929,
+          947
+        ]
+      ]
+    },
+    "frozen_v3_runtime_config": {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00004/V3_RUNTIME_CONFIG.yaml",
+      "sha256": "3ac059cbaf5cacbf68929ca6027074629ab4efc969b4e8a5ddbb2ca300f4c542",
+      "hash_checked_now": true,
+      "relevant_lines_one_based": [
+        [
+          11,
+          11
+        ],
+        [
+          44,
+          50
+        ],
+        [
+          61,
+          65
+        ],
+        [
+          159,
+          161
+        ]
+      ]
+    }
+  }
+}

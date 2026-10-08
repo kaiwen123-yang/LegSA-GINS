@@ -1,0 +1,2166 @@
+{
+  "schema": "joint_navigation.BY_NATIVE_INCREMENT_COMPARISON.v1",
+  "status": "COMPLETED_EXISTING_OUTPUT_READOUT",
+  "scope": {
+    "sequence": "BY2",
+    "requested_measurement_window_s": [
+      96.0,
+      106.0
+    ],
+    "common_finite_measurement_window_s": [
+      100.19799995422363,
+      106.0
+    ],
+    "startup_no_init_interval_s": [
+      96.0,
+      100.19799995422363
+    ],
+    "navigation_calls": 0,
+    "evaluator_calls": 0,
+    "reference_payload_reads": 0,
+    "testset_reads": 0,
+    "new_reads": "Existing run metadata, published navigation rows, and aggregate evaluation JSON only.",
+    "formal_gain_established": false,
+    "complete_research_goal": false,
+    "velocity_benefit_evaluated": false
+  },
+  "conclusions_zh": [
+    "原IMU增量支撑和数据可用时刻修正有直接守恒与来源语义依据，不以导航误差下降定义其正确性。",
+    "旧04的足式大幅航向收益不可作为平台贡献保留：相同后端在修正共享IMU输入后，U0已经从25.7165°降至4.09535°，而U1从3.76578°变为3.93243°。",
+    "修正后U1对U0只体现本短窗的小幅航向与位置差异，同时存在启动求解完成度差异；不能将该差异全部归因于足式信息量。",
+    "05 U0仅1/4初始seed达到一阶条件，3个仍未求完；05 U1四个均达到一阶条件，但合并为一个局部mode，仍未认证全局方向覆盖。",
+    "U1尚未超过同物理有限窗口的冻结V3：yaw、水平及3D位置RMSE均更大。V3为长时运行裁窗，当前为96秒冷启动，因此这是系统层对照，不是同后端消融或正式普适优劣结论。",
+    "05的终值加计偏置范数并未减小：U0 0.72109→0.83520 m/s²，U1 0.72668→0.74222 m/s²；ba与Rᵀg共同显著改变，剩余共享动态模型问题仍未解决。",
+    "加计偏置与重力投影必须共同解释；这些在线条件状态并非统一batch后验，相邻估计变化不能直接视为真实传感器偏置随机游走。",
+    "05输出保留IMU可用延迟，评价仍按测量时刻对齐；原GNSS接收延迟未建模。参考与GNSS同源，速度精度未评价。"
+  ],
+  "run_records": {
+    "04_U0": {
+      "run_directory": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_NOFOOT_PHYSICAL_04",
+      "evaluation_directory": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_NOFOOT_EVAL_04",
+      "run_status": "COMPLETED",
+      "run_git_commit": "a01cece3ea6316d631e07b2e4b36fbe65c89e871",
+      "run_source_sha256": {
+        "src/legsa_gins/paper_rebuild/joint_navigation/__init__.py": "1e4531f3053fd9736435af940484c056adae614ba3700cd09def0b848d57cba0",
+        "src/legsa_gins/paper_rebuild/joint_navigation/branch.py": "46d7443c4df4f28ac9200afbaa0ad95876d39b557763903e53e1380c78da42e6",
+        "src/legsa_gins/paper_rebuild/joint_navigation/candidate.py": "cac1aedb6d8a3623207a7dc29c5edc3ac70cb721493b4cd94020ef2cc6b32946",
+        "src/legsa_gins/paper_rebuild/joint_navigation/carrier_relations.py": "65e9ac0b5a6decb69d18171410104b0b6a12f51012d4dd6b5b21aa92f5da6588",
+        "src/legsa_gins/paper_rebuild/joint_navigation/factors.py": "69064271859600c892d6e50bfadf4b5d8e6afd3f471fc009024e92aefda6f82c",
+        "src/legsa_gins/paper_rebuild/joint_navigation/navigator.py": "9c2a07bf3732b4eab68f88e3b3267c482844a2fba2e80ecf3c28b6116be825b5",
+        "src/legsa_gins/paper_rebuild/joint_navigation/real_data.py": "2f0276c50eae44cf8191f831ab42473820eb68c94df8ca9f6b708d5a53a347ad",
+        "src/legsa_gins/paper_rebuild/joint_navigation/synthetic.py": "516d25ad70292e6d7c0f87717208c0352321a94711c7d66b8226c449a3b64e65",
+        "src/legsa_gins/paper_rebuild/joint_navigation/window.py": "c294ef0ca67d3e9f4215b64614cf8e1bbbffe40b08e0cbc9fe3d03fb92e09b41",
+        "scripts/paper_rebuild/run_joint_by2.py": "bcb96ce0844d7b1da6b9f7459f212d278b06e89332f80dbb9469be2c60691c1f"
+      },
+      "run_artifact_sha256": {
+        "run_status.json": "224297092b2b6d28e3bd379faba2d68936507723e51a2012a0cf2ccfe586f7ef",
+        "navigation.jsonl": "8816536fbfb635cda1b00f8703441d11925a2c84919396c258b0e0145210f948",
+        "sensor_metadata.json": "e070d208874321b1f84dcef150cd3fd5f4d92a5981bd59104c4bde8a212d97fa",
+        "estimator_summary.json": "f686d6f789798cca4101fdbb6ea31bb9049bfad3113fcb2e90dbefb4902644c7",
+        "summary.json": "a12485bdc2b15fc36cc66f83086b345ee5c394365d3ad567f331c60d93884a1f",
+        "input_summary.json": "f2e08a2e77c93c8addf7cfc8e2d595a03bed750ade07c8fac106848106540a93"
+      },
+      "evaluation_artifact_sha256": {
+        "run_status.json": "6ec5e792c21574d6a1882d90e4daf53190f40972d5eb7befe7132ca8bca7118a",
+        "COMPARISON.json": "0102e2e7995a72763d362b470fe419e6552e533271fae6e85c1699b9f3ac60ae",
+        "OUTPUT_COVERAGE.json": "6d05b6eece648b4f41c9dacce81702989f351debaf9ea151f621a0caa7b4fc7f",
+        "NAV_TRANSFORM.json": "4d5d3808c45a3b01c50f653c8c453f522a619777dd1c54bc56169a171c9f2f6d"
+      },
+      "evaluator_source_sha256": "8c21c93637223c5db282bb6279f2d1c6cb4408d9f993701d336250ace7eb7c27",
+      "input_config": {
+        "body_path": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/高层数据/by2.txt",
+        "imu_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu",
+        "gnss_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+        "carrier_plan_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_ATTEMPT02/BY2/MODELS/PLAN.json",
+        "calibration_model_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/00_CALIBRATION/CLEAN5_CALIBRATED_SENSOR_MODEL.yaml",
+        "imu_noise_profile_path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/configs/paper_rebuild/horizontal_literature/hartley/stage_payload/04_METHOD_CONTRACTS/GO2_IMU_ALLAN_90MIN_RECOVERED_V1.yaml",
+        "start_s": 96.0,
+        "end_s": 106.0,
+        "key_dt_s": 0.1,
+        "base_time_unix_s": 1772784000,
+        "family": "GPS_GAL_BDS_DUAL",
+        "origin_blh_deg_m": null
+      },
+      "output": {
+        "requested_window_s": [
+          96.0,
+          106.0
+        ],
+        "published_rows": 325,
+        "finite_rows": 190,
+        "no_init_rows": 135,
+        "finite_measurement_window_s": [
+          100.19799995422363,
+          106.0
+        ],
+        "finite_duration_s": 5.802000045776367,
+        "maximum_recorded_imu_publication_delay_s": null,
+        "complete_candidate_support_rows": 0,
+        "direction_domain_coverage_certified": false
+      },
+      "initialization": {
+        "status": "FLOAT_INIT_DIRECTION_UNRESOLVED",
+        "buffer_window_s": [
+          96.0,
+          100.19799995422363
+        ],
+        "seed_count": 4,
+        "solver_converged_count": 1,
+        "computationally_unresolved_seeds": 3,
+        "budget_exhausted_count": 3,
+        "retained_distinct_modes": 1,
+        "globally_certified": false,
+        "seed_reports": [
+          {
+            "status": "NO_INIT",
+            "nonlinear_support": "UNRESOLVED",
+            "cost": 259.316391483206,
+            "seed_rpy_rad": [
+              0.03348189912404825,
+              -0.0435259609310797,
+              3.0192667007809986e-19
+            ],
+            "solution_rpy_rad": [
+              0.023433880267797497,
+              -0.027139164203319882,
+              -0.7358868148706244
+            ],
+            "first_time_s": 96.0,
+            "last_time_s": 100.19799995422363,
+            "event_count": 136,
+            "marginalized_state_count": 0,
+            "initial_tilt_source": null,
+            "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+            "solver_iterations": 200,
+            "solver_max_iterations": 200,
+            "solver_initial_cost": 419174.14196845086,
+            "solver_final_cost": 259.316391483206,
+            "solver_lambda": 10.0,
+            "solver_budget_exhausted": true,
+            "local_full_rank": true,
+            "numerical_rank": 2059,
+            "state_dimension": 2059,
+            "rank_tolerance": 7.892364232786979e-13,
+            "minimum_scaled_singular_value": 8.883347771659594e-06,
+            "projected_gradient_inf": 0.026971799784345656,
+            "projected_gradient_relative_inf": 0.001184349673277025,
+            "projected_gradient_tolerance": 1e-06,
+            "max_exact_constraint_residual": 0.0,
+            "solver_converged": false,
+            "solver_status": "ITERATION_BUDGET_EXHAUSTED"
+          },
+          {
+            "status": "NO_INIT",
+            "nonlinear_support": "UNRESOLVED",
+            "cost": 315.16651410964846,
+            "seed_rpy_rad": [
+              0.03348189912404825,
+              -0.0435259609310797,
+              1.5707963267948966
+            ],
+            "solution_rpy_rad": [
+              -0.003081029419844925,
+              0.009780711908593595,
+              2.9436118219514444
+            ],
+            "first_time_s": 96.0,
+            "last_time_s": 100.19799995422363,
+            "event_count": 136,
+            "marginalized_state_count": 0,
+            "initial_tilt_source": null,
+            "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+            "solver_iterations": 200,
+            "solver_max_iterations": 200,
+            "solver_initial_cost": 305237.5633935038,
+            "solver_final_cost": 315.16651410964846,
+            "solver_lambda": 10.0,
+            "solver_budget_exhausted": true,
+            "local_full_rank": true,
+            "numerical_rank": 2059,
+            "state_dimension": 2059,
+            "rank_tolerance": 7.892350963309768e-13,
+            "minimum_scaled_singular_value": 8.859404267983284e-06,
+            "projected_gradient_inf": 0.027599966458883685,
+            "projected_gradient_relative_inf": 0.001099318463879874,
+            "projected_gradient_tolerance": 1e-06,
+            "max_exact_constraint_residual": 0.0,
+            "solver_converged": false,
+            "solver_status": "ITERATION_BUDGET_EXHAUSTED"
+          },
+          {
+            "status": "NO_INIT",
+            "nonlinear_support": "UNRESOLVED",
+            "cost": 241.3479140118678,
+            "seed_rpy_rad": [
+              0.03348189912404825,
+              -0.0435259609310797,
+              3.141592653589793
+            ],
+            "solution_rpy_rad": [
+              0.01974796635279044,
+              0.006135440844551816,
+              -2.3148709766067777
+            ],
+            "first_time_s": 96.0,
+            "last_time_s": 100.19799995422363,
+            "event_count": 136,
+            "marginalized_state_count": 0,
+            "initial_tilt_source": null,
+            "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+            "solver_iterations": 200,
+            "solver_max_iterations": 200,
+            "solver_initial_cost": 249202.78901005513,
+            "solver_final_cost": 241.3479140118678,
+            "solver_lambda": 10.0,
+            "solver_budget_exhausted": true,
+            "local_full_rank": true,
+            "numerical_rank": 2059,
+            "state_dimension": 2059,
+            "rank_tolerance": 7.892362617725474e-13,
+            "minimum_scaled_singular_value": 8.892982223065422e-06,
+            "projected_gradient_inf": 0.019899185012035997,
+            "projected_gradient_relative_inf": 0.0009057295086482577,
+            "projected_gradient_tolerance": 1e-06,
+            "max_exact_constraint_residual": 0.0,
+            "solver_converged": false,
+            "solver_status": "ITERATION_BUDGET_EXHAUSTED"
+          },
+          {
+            "status": "NO_INIT",
+            "nonlinear_support": "UNRESOLVED",
+            "cost": 225.09584067570367,
+            "seed_rpy_rad": [
+              0.03348189912404825,
+              -0.0435259609310797,
+              -1.5707963267948966
+            ],
+            "solution_rpy_rad": [
+              0.02785564028412408,
+              -0.006199583734795302,
+              -1.678552293487268
+            ],
+            "first_time_s": 96.0,
+            "last_time_s": 100.19799995422363,
+            "event_count": 136,
+            "marginalized_state_count": 0,
+            "initial_tilt_source": null,
+            "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+            "solver_iterations": 97,
+            "solver_max_iterations": 200,
+            "solver_initial_cost": 363138.46090476954,
+            "solver_final_cost": 225.09584067570367,
+            "solver_lambda": 1e-17,
+            "solver_budget_exhausted": false,
+            "local_full_rank": true,
+            "numerical_rank": 2059,
+            "state_dimension": 2059,
+            "rank_tolerance": 7.892352173703611e-13,
+            "minimum_scaled_singular_value": 8.901862768564994e-06,
+            "projected_gradient_inf": 4.43785171780567e-06,
+            "projected_gradient_relative_inf": 2.091577947037061e-07,
+            "projected_gradient_tolerance": 1e-06,
+            "max_exact_constraint_residual": 0.0,
+            "solver_converged": true,
+            "solver_status": "FIRST_ORDER_STATIONARY"
+          }
+        ],
+        "seed_status_note": "Per-seed status=NO_INIT is the pre-acceptance qualification record; use solver_converged/gradient and the accepted initialization status, not this field alone.",
+        "convergence_note": "Budget exhaustion alone does not imply nonconvergence: a seed reaching the iteration cap can meet the projected-gradient first-order criterion; finite seeds never establish global directional coverage."
+      },
+      "conditional_state_summary": {
+        "first": {
+          "measurement_time_s": 100.19799995422363,
+          "available_time_s": null,
+          "rpy_deg": [
+            1.596010623914907,
+            -0.35520998274172305,
+            -96.17396210882517
+          ],
+          "ba_mps2": [
+            -0.0026450033156568127,
+            0.011908795903860014,
+            0.05241674149318344
+          ],
+          "bg_radps": [
+            -0.0016417811333765571,
+            0.002420669822842077,
+            -0.000176391234153816
+          ],
+          "Rt_g_body_mps2": [
+            0.060765167702326255,
+            0.27298801867960965,
+            9.797563620968088
+          ],
+          "ba_minus_Rt_g_body_mps2": [
+            -0.06341017101798306,
+            -0.26107922277574963,
+            -9.745146879474904
+          ],
+          "ba_norm_mps2": 0.053817564522958924,
+          "horizontal_ba_norm_mps2": 0.012198994320009687,
+          "yaw_local_conditional_sigma_deg": 3.2587339285390877,
+          "direction_status": "RAW_PHASE_RELATIONS_UNRESOLVED_ENUMERATION_OR_BRANCH_BUDGET",
+          "direction_domain_coverage_certified": false
+        },
+        "last": {
+          "measurement_time_s": 106.0,
+          "available_time_s": null,
+          "rpy_deg": [
+            4.4781645204787415,
+            -2.6206094040723986,
+            -106.54830760633725
+          ],
+          "ba_mps2": [
+            0.3734968798123233,
+            0.6106598502519383,
+            0.08700040793308036
+          ],
+          "bg_radps": [
+            0.007482287289350988,
+            0.00048297118231909256,
+            0.0017895487682362578
+          ],
+          "Rt_g_body_mps2": [
+            0.4481497739003587,
+            0.7644968113565532,
+            9.761412509285966
+          ],
+          "ba_minus_Rt_g_body_mps2": [
+            -0.07465289408803538,
+            -0.15383696110461498,
+            -9.674412101352885
+          ],
+          "ba_norm_mps2": 0.7210925342282939,
+          "horizontal_ba_norm_mps2": 0.7158249590083184,
+          "yaw_local_conditional_sigma_deg": 0.9156203781633597,
+          "direction_status": "RAW_PHASE_RELATIONS_UNRESOLVED_ENUMERATION_OR_BRANCH_BUDGET",
+          "direction_domain_coverage_certified": false
+        },
+        "time_weighted": {
+          "ba_mps2": {
+            "time_weighted_mean": [
+              0.08640297328499746,
+              0.11367555328008352,
+              0.07647182672937043
+            ],
+            "time_weighted_rms": [
+              0.15489509085274036,
+              0.2450887479668036,
+              0.07802236178100959
+            ],
+            "norm_time_weighted_rms": 0.30024735217500387,
+            "max_abs": [
+              0.37978597721969226,
+              0.6106598502519383,
+              0.09867719315861216
+            ],
+            "max_norm": 0.7210925342282939
+          },
+          "bg_radps": {
+            "time_weighted_mean": [
+              0.0066669115367930225,
+              -0.00016639863356540527,
+              0.0005163995562099487
+            ],
+            "time_weighted_rms": [
+              0.006961093917379717,
+              0.0009043469432467684,
+              0.001681304237148384
+            ],
+            "norm_time_weighted_rms": 0.00721813382102284,
+            "max_abs": [
+              0.008465840570602822,
+              0.002420669822842077,
+              0.0037506488637961697
+            ],
+            "max_norm": 0.008692909740170611
+          },
+          "Rt_g_body_mps2": {
+            "time_weighted_mean": [
+              0.1298716414114452,
+              0.22970833819428227,
+              9.793035416333314
+            ],
+            "time_weighted_rms": [
+              0.23210678680064592,
+              0.3360456129482608,
+              9.793041792844813
+            ],
+            "norm_time_weighted_rms": 9.801554354839126,
+            "max_abs": [
+              0.6436462432370661,
+              0.836498598458434,
+              9.801490491019976
+            ],
+            "max_norm": 9.801554354839128
+          },
+          "ba_minus_Rt_g_body_mps2": {
+            "time_weighted_mean": [
+              -0.04346866812644779,
+              -0.1160327849141989,
+              -9.716563589603952
+            ],
+            "time_weighted_rms": [
+              0.13582324327661105,
+              0.19457105006229422,
+              9.716588790747126
+            ],
+            "norm_time_weighted_rms": 9.719485767025395,
+            "max_abs": [
+              0.28727345374567076,
+              0.5733318514786119,
+              9.748730166734514
+            ],
+            "max_norm": 9.748922521872746
+          }
+        },
+        "statistical_scope": "All 190 finite published measurement-epoch rows, 100.19799995422363–106 s. These are successive causal conditional estimates, not one joint batch posterior; no state is imputed over NO_INIT.",
+        "averaging_policy": "Trapezoidal mean and piecewise-linear squared-value integration over actual measurement timestamps; components body FRD."
+      },
+      "evaluation": {
+        "common_finite_intervals_s": [
+          [
+            100.19799995422365,
+            106.0
+          ]
+        ],
+        "common_finite_metrics": {
+          "joint": {
+            "horizontal_err_m": {
+              "time_weighted_rmse": 0.07673387348105162,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 0.1372864251767672
+            },
+            "position_3d_err_m": {
+              "time_weighted_rmse": 0.12803419142913378,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 0.2043914220018826
+            },
+            "roll_err_deg": {
+              "time_weighted_rmse": 1.5538322195866576,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 4.18950821549268
+            },
+            "pitch_err_deg": {
+              "time_weighted_rmse": 2.3334848974938707,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 6.32295532652816
+            },
+            "yaw_err_deg": {
+              "time_weighted_rmse": 25.716515849296137,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 42.205398700910166
+            }
+          },
+          "frozen_v3": {
+            "horizontal_err_m": {
+              "time_weighted_rmse": 0.03811369008805525,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 0.0817526842555185
+            },
+            "position_3d_err_m": {
+              "time_weighted_rmse": 0.05179865083786852,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 0.1047161740883052
+            },
+            "roll_err_deg": {
+              "time_weighted_rmse": 0.7609258591822263,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 1.7083428797076865
+            },
+            "pitch_err_deg": {
+              "time_weighted_rmse": 1.8982938944930532,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 4.589983936042302
+            },
+            "yaw_err_deg": {
+              "time_weighted_rmse": 1.1608123408505053,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 2.3703575876982086
+            }
+          },
+          "joint_minus_v3": {
+            "horizontal_err_m": 0.038620183392996374,
+            "position_3d_err_m": 0.07623554059126525,
+            "roll_err_deg": 0.7929063604044313,
+            "pitch_err_deg": 0.4351910030008175,
+            "yaw_err_deg": 24.55570350844563
+          }
+        },
+        "metric_policy": "time-weighted RMSE of piecewise-linear squared errors; identical physical intervals; no interval crosses a joint NO_INIT row",
+        "comparison_type": "original_V3_system_comparison_not_same_backend_mechanism_ablation",
+        "initialization_difference": "joint starts at requested run start; frozen V3 is the original 66--340 s causal run, not restarted at this short window",
+        "reference_claim": "Fixposition-derived fused reference with shared GNSS lineage; not independent truth",
+        "velocity_accuracy": {
+          "status": "NOT_EVALUATED",
+          "reason": "Frozen error series and evaluator do not provide velocity truth or velocity errors"
+        },
+        "timing_scope": "legacy04 measurement epoch readout; IMU publication delay was not recorded",
+        "original_gnss_receipt_delays_modeled": false,
+        "frozen_v3_commit": "7d43b9af26120ed5dde21f53e515386361072ba6",
+        "baseline_error_sha256": "a98f1a5f7591c2365b0fd73b6a1146e0d6df3de2a06414fd067fc9b66b928548",
+        "actual_reference_opened_by_this_comparison": false
+      },
+      "evaluation_lineage_matches": {
+        "run_status": true,
+        "navigation": true,
+        "metadata": true
+      }
+    },
+    "04_U1": {
+      "run_directory": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_ASYNC_PHYSICAL_04",
+      "evaluation_directory": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_ASYNC_EVAL_04",
+      "run_status": "COMPLETED",
+      "run_git_commit": "a01cece3ea6316d631e07b2e4b36fbe65c89e871",
+      "run_source_sha256": {
+        "src/legsa_gins/paper_rebuild/joint_navigation/__init__.py": "1e4531f3053fd9736435af940484c056adae614ba3700cd09def0b848d57cba0",
+        "src/legsa_gins/paper_rebuild/joint_navigation/branch.py": "46d7443c4df4f28ac9200afbaa0ad95876d39b557763903e53e1380c78da42e6",
+        "src/legsa_gins/paper_rebuild/joint_navigation/candidate.py": "cac1aedb6d8a3623207a7dc29c5edc3ac70cb721493b4cd94020ef2cc6b32946",
+        "src/legsa_gins/paper_rebuild/joint_navigation/carrier_relations.py": "65e9ac0b5a6decb69d18171410104b0b6a12f51012d4dd6b5b21aa92f5da6588",
+        "src/legsa_gins/paper_rebuild/joint_navigation/factors.py": "69064271859600c892d6e50bfadf4b5d8e6afd3f471fc009024e92aefda6f82c",
+        "src/legsa_gins/paper_rebuild/joint_navigation/navigator.py": "9c2a07bf3732b4eab68f88e3b3267c482844a2fba2e80ecf3c28b6116be825b5",
+        "src/legsa_gins/paper_rebuild/joint_navigation/real_data.py": "2f0276c50eae44cf8191f831ab42473820eb68c94df8ca9f6b708d5a53a347ad",
+        "src/legsa_gins/paper_rebuild/joint_navigation/synthetic.py": "516d25ad70292e6d7c0f87717208c0352321a94711c7d66b8226c449a3b64e65",
+        "src/legsa_gins/paper_rebuild/joint_navigation/window.py": "c294ef0ca67d3e9f4215b64614cf8e1bbbffe40b08e0cbc9fe3d03fb92e09b41",
+        "scripts/paper_rebuild/run_joint_by2.py": "bcb96ce0844d7b1da6b9f7459f212d278b06e89332f80dbb9469be2c60691c1f"
+      },
+      "run_artifact_sha256": {
+        "run_status.json": "366285739cad5ea37b7ca0e1cc5da8cfb6242330fa81b5f962b3b71cab6ebdc2",
+        "navigation.jsonl": "090ebe8dcbea09192a8b40ae26610f20be80dbff323bfb42a4570afa4fd3c6e9",
+        "sensor_metadata.json": "e070d208874321b1f84dcef150cd3fd5f4d92a5981bd59104c4bde8a212d97fa",
+        "estimator_summary.json": "fa388c62c4529982b8e2cc145c9c619767092338f101eabe92ae52ecec485ffb",
+        "summary.json": "81e62ab5d46510f90d25eb731b3b0e62a386e9015715ceb7dcd0342efddbcd69",
+        "input_summary.json": "f2e08a2e77c93c8addf7cfc8e2d595a03bed750ade07c8fac106848106540a93"
+      },
+      "evaluation_artifact_sha256": {
+        "run_status.json": "c052643a4ee3c81ce33f223a3dfec83f8f364cfb6f6f340ba490d46e39b6581d",
+        "COMPARISON.json": "108d3eaf7558de7f44b74676ddb8600f55531f45bb2ec466b0b18e74e9701b8c",
+        "OUTPUT_COVERAGE.json": "eb90c2e982f1e33bc16d95d87627122508adbb3c655390ef4224328716674d21",
+        "NAV_TRANSFORM.json": "0c9d1f853267fcf15544cc59558a220df620d90f5c1ab2a01571afb207474a0a"
+      },
+      "evaluator_source_sha256": "8c21c93637223c5db282bb6279f2d1c6cb4408d9f993701d336250ace7eb7c27",
+      "input_config": {
+        "body_path": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/高层数据/by2.txt",
+        "imu_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu",
+        "gnss_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+        "carrier_plan_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_ATTEMPT02/BY2/MODELS/PLAN.json",
+        "calibration_model_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/00_CALIBRATION/CLEAN5_CALIBRATED_SENSOR_MODEL.yaml",
+        "imu_noise_profile_path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/configs/paper_rebuild/horizontal_literature/hartley/stage_payload/04_METHOD_CONTRACTS/GO2_IMU_ALLAN_90MIN_RECOVERED_V1.yaml",
+        "start_s": 96.0,
+        "end_s": 106.0,
+        "key_dt_s": 0.1,
+        "base_time_unix_s": 1772784000,
+        "family": "GPS_GAL_BDS_DUAL",
+        "origin_blh_deg_m": null
+      },
+      "output": {
+        "requested_window_s": [
+          96.0,
+          106.0
+        ],
+        "published_rows": 325,
+        "finite_rows": 190,
+        "no_init_rows": 135,
+        "finite_measurement_window_s": [
+          100.19799995422363,
+          106.0
+        ],
+        "finite_duration_s": 5.802000045776367,
+        "maximum_recorded_imu_publication_delay_s": null,
+        "complete_candidate_support_rows": 0,
+        "direction_domain_coverage_certified": false
+      },
+      "initialization": {
+        "status": "FLOAT_INIT_DIRECTION_UNRESOLVED",
+        "buffer_window_s": [
+          96.0,
+          100.19799995422363
+        ],
+        "seed_count": 4,
+        "solver_converged_count": 3,
+        "computationally_unresolved_seeds": 1,
+        "budget_exhausted_count": 1,
+        "retained_distinct_modes": 1,
+        "globally_certified": false,
+        "seed_reports": [
+          {
+            "status": "NO_INIT",
+            "nonlinear_support": "UNRESOLVED",
+            "cost": 345.39409718261317,
+            "seed_rpy_rad": [
+              0.03348189912404825,
+              -0.0435259609310797,
+              3.0192667007809986e-19
+            ],
+            "solution_rpy_rad": [
+              0.02703178586776812,
+              -0.006058880656506116,
+              -1.443244795180026
+            ],
+            "first_time_s": 96.0,
+            "last_time_s": 100.19799995422363,
+            "event_count": 136,
+            "marginalized_state_count": 0,
+            "initial_tilt_source": null,
+            "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+            "solver_iterations": 197,
+            "solver_max_iterations": 200,
+            "solver_initial_cost": 446478.1210109801,
+            "solver_final_cost": 345.39409718261317,
+            "solver_lambda": 0.0001,
+            "solver_budget_exhausted": false,
+            "local_full_rank": true,
+            "numerical_rank": 2173,
+            "state_dimension": 2173,
+            "rank_tolerance": 9.63982230230434e-13,
+            "minimum_scaled_singular_value": 1.212488777344625e-05,
+            "projected_gradient_inf": 2.7043204911536556e-08,
+            "projected_gradient_relative_inf": 1.0289297052080365e-09,
+            "projected_gradient_tolerance": 1e-06,
+            "max_exact_constraint_residual": 0.0,
+            "solver_converged": true,
+            "solver_status": "FIRST_ORDER_STATIONARY"
+          },
+          {
+            "status": "NO_INIT",
+            "nonlinear_support": "UNRESOLVED",
+            "cost": 345.3975578884858,
+            "seed_rpy_rad": [
+              0.03348189912404825,
+              -0.0435259609310797,
+              1.5707963267948966
+            ],
+            "solution_rpy_rad": [
+              0.027032014271561034,
+              -0.006059098874687285,
+              -1.443244239613967
+            ],
+            "first_time_s": 96.0,
+            "last_time_s": 100.19799995422363,
+            "event_count": 136,
+            "marginalized_state_count": 0,
+            "initial_tilt_source": null,
+            "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+            "solver_iterations": 117,
+            "solver_max_iterations": 200,
+            "solver_initial_cost": 322089.17574363743,
+            "solver_final_cost": 345.3975578884858,
+            "solver_lambda": 0.0001,
+            "solver_budget_exhausted": false,
+            "local_full_rank": true,
+            "numerical_rank": 2173,
+            "state_dimension": 2173,
+            "rank_tolerance": 9.639822302332615e-13,
+            "minimum_scaled_singular_value": 1.2124883703647203e-05,
+            "projected_gradient_inf": 2.6392002153152738e-08,
+            "projected_gradient_relative_inf": 1.0041479566359318e-09,
+            "projected_gradient_tolerance": 1e-06,
+            "max_exact_constraint_residual": 0.0,
+            "solver_converged": true,
+            "solver_status": "FIRST_ORDER_STATIONARY"
+          },
+          {
+            "status": "NO_INIT",
+            "nonlinear_support": "UNRESOLVED",
+            "cost": 348.7373385116906,
+            "seed_rpy_rad": [
+              0.03348189912404825,
+              -0.0435259609310797,
+              3.141592653589793
+            ],
+            "solution_rpy_rad": [
+              0.02707332255439736,
+              -0.0025434497177925217,
+              -1.4619744797454892
+            ],
+            "first_time_s": 96.0,
+            "last_time_s": 100.19799995422363,
+            "event_count": 136,
+            "marginalized_state_count": 0,
+            "initial_tilt_source": null,
+            "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+            "solver_iterations": 200,
+            "solver_max_iterations": 200,
+            "solver_initial_cost": 261708.4939485334,
+            "solver_final_cost": 348.7373385116906,
+            "solver_lambda": 10.0,
+            "solver_budget_exhausted": true,
+            "local_full_rank": true,
+            "numerical_rank": 2173,
+            "state_dimension": 2173,
+            "rank_tolerance": 9.639819465349388e-13,
+            "minimum_scaled_singular_value": 1.212632193098397e-05,
+            "projected_gradient_inf": 0.4076116639592501,
+            "projected_gradient_relative_inf": 0.01543413806156598,
+            "projected_gradient_tolerance": 1e-06,
+            "max_exact_constraint_residual": 0.0,
+            "solver_converged": false,
+            "solver_status": "ITERATION_BUDGET_EXHAUSTED"
+          },
+          {
+            "status": "NO_INIT",
+            "nonlinear_support": "UNRESOLVED",
+            "cost": 345.4020392739845,
+            "seed_rpy_rad": [
+              0.03348189912404825,
+              -0.0435259609310797,
+              -1.5707963267948966
+            ],
+            "solution_rpy_rad": [
+              0.027031849658226165,
+              -0.0060588111046947606,
+              -1.4432454843022438
+            ],
+            "first_time_s": 96.0,
+            "last_time_s": 100.19799995422363,
+            "event_count": 136,
+            "marginalized_state_count": 0,
+            "initial_tilt_source": null,
+            "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+            "solver_iterations": 31,
+            "solver_max_iterations": 200,
+            "solver_initial_cost": 386097.75716250075,
+            "solver_final_cost": 345.4020392739845,
+            "solver_lambda": 0.0001,
+            "solver_budget_exhausted": false,
+            "local_full_rank": true,
+            "numerical_rank": 2173,
+            "state_dimension": 2173,
+            "rank_tolerance": 9.6398223021707e-13,
+            "minimum_scaled_singular_value": 1.2124884861332592e-05,
+            "projected_gradient_inf": 1.062368033821759e-08,
+            "projected_gradient_relative_inf": 4.042011529711936e-10,
+            "projected_gradient_tolerance": 1e-06,
+            "max_exact_constraint_residual": 0.0,
+            "solver_converged": true,
+            "solver_status": "FIRST_ORDER_STATIONARY"
+          }
+        ],
+        "seed_status_note": "Per-seed status=NO_INIT is the pre-acceptance qualification record; use solver_converged/gradient and the accepted initialization status, not this field alone.",
+        "convergence_note": "Budget exhaustion alone does not imply nonconvergence: a seed reaching the iteration cap can meet the projected-gradient first-order criterion; finite seeds never establish global directional coverage."
+      },
+      "conditional_state_summary": {
+        "first": {
+          "measurement_time_s": 100.19799995422363,
+          "available_time_s": null,
+          "rpy_deg": [
+            1.548807242924497,
+            -0.34714829019125387,
+            -82.69183556803843
+          ],
+          "ba_mps2": [
+            -0.0069939755528402175,
+            0.012764306281749299,
+            0.05171553721226152
+          ],
+          "bg_radps": [
+            -0.0013517252949312643,
+            0.002857183607599017,
+            -0.00039874303838680015
+          ],
+          "Rt_g_body_mps2": [
+            0.05938608473846559,
+            0.26491638935778405,
+            9.797793648085007
+          ],
+          "ba_minus_Rt_g_body_mps2": [
+            -0.0663800602913058,
+            -0.25215208307603476,
+            -9.746078110872745
+          ],
+          "ba_norm_mps2": 0.05372466843118567,
+          "horizontal_ba_norm_mps2": 0.014554834553784226,
+          "yaw_local_conditional_sigma_deg": 0.614172325602931,
+          "direction_status": "RAW_PHASE_RELATIONS_UNRESOLVED_ENUMERATION_OR_BRANCH_BUDGET",
+          "direction_domain_coverage_certified": false
+        },
+        "last": {
+          "measurement_time_s": 106.0,
+          "available_time_s": null,
+          "rpy_deg": [
+            4.620121290619731,
+            -2.350376524594015,
+            -94.13393714416178
+          ],
+          "ba_mps2": [
+            0.32893812324442945,
+            0.6423143968549352,
+            0.08542903258379872
+          ],
+          "bg_radps": [
+            0.00772940326580305,
+            0.0007628392762781038,
+            0.0017051233022863845
+          ],
+          "Rt_g_body_mps2": [
+            0.4019647317055375,
+            0.7888409249018071,
+            9.761486675733916
+          ],
+          "ba_minus_Rt_g_body_mps2": [
+            -0.07302660846110803,
+            -0.14652652804687194,
+            -9.676057643150118
+          ],
+          "ba_norm_mps2": 0.7266816310729826,
+          "horizontal_ba_norm_mps2": 0.7216426216145265,
+          "yaw_local_conditional_sigma_deg": 0.41486771974934106,
+          "direction_status": "RAW_PHASE_RELATIONS_UNRESOLVED_ENUMERATION_OR_BRANCH_BUDGET",
+          "direction_domain_coverage_certified": false
+        },
+        "time_weighted": {
+          "ba_mps2": {
+            "time_weighted_mean": [
+              0.09602999008685868,
+              0.13027818352608475,
+              0.07587682037137285
+            ],
+            "time_weighted_rms": [
+              0.15309468986898633,
+              0.26437220478824036,
+              0.07729629231168672
+            ],
+            "norm_time_weighted_rms": 0.31512753535007076,
+            "max_abs": [
+              0.33097721425466653,
+              0.6423143968549352,
+              0.09691398285445997
+            ],
+            "max_norm": 0.7266816310729826
+          },
+          "bg_radps": {
+            "time_weighted_mean": [
+              0.006455081183267329,
+              -0.00017575999497445628,
+              -0.001386602222395677
+            ],
+            "time_weighted_rms": [
+              0.006850242748729618,
+              0.0007743264832973284,
+              0.0027038395695087665
+            ],
+            "norm_time_weighted_rms": 0.007405143863349292,
+            "max_abs": [
+              0.008294055179586238,
+              0.002857183607599017,
+              0.006751943579869023
+            ],
+            "max_norm": 0.010280955304052371
+          },
+          "Rt_g_body_mps2": {
+            "time_weighted_mean": [
+              0.12561368777531762,
+              0.25128941131874233,
+              9.792582330992007
+            ],
+            "time_weighted_rms": [
+              0.21637972877390943,
+              0.3589665151051028,
+              9.792588555886272
+            ],
+            "norm_time_weighted_rms": 9.801554354839123,
+            "max_abs": [
+              0.5738667083833195,
+              0.8545943270547904,
+              9.80149570030925
+            ],
+            "max_norm": 9.801554354839128
+          },
+          "ba_minus_Rt_g_body_mps2": {
+            "time_weighted_mean": [
+              -0.029583697688458952,
+              -0.12101122779265769,
+              -9.716705510620633
+            ],
+            "time_weighted_rms": [
+              0.1245218021969769,
+              0.20027121029998807,
+              9.716729237522292
+            ],
+            "norm_time_weighted_rms": 9.71959059385826,
+            "max_abs": [
+              0.2569060645591739,
+              0.5938189989414272,
+              9.74864982845434
+            ],
+            "max_norm": 9.749565402039043
+          }
+        },
+        "statistical_scope": "All 190 finite published measurement-epoch rows, 100.19799995422363–106 s. These are successive causal conditional estimates, not one joint batch posterior; no state is imputed over NO_INIT.",
+        "averaging_policy": "Trapezoidal mean and piecewise-linear squared-value integration over actual measurement timestamps; components body FRD."
+      },
+      "evaluation": {
+        "common_finite_intervals_s": [
+          [
+            100.19799995422365,
+            106.0
+          ]
+        ],
+        "common_finite_metrics": {
+          "joint": {
+            "horizontal_err_m": {
+              "time_weighted_rmse": 0.04679012849517924,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 0.0932384149546446
+            },
+            "position_3d_err_m": {
+              "time_weighted_rmse": 0.11107353924299104,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 0.2027445820063566
+            },
+            "roll_err_deg": {
+              "time_weighted_rmse": 1.673903628940953,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 4.294761584790422
+            },
+            "pitch_err_deg": {
+              "time_weighted_rmse": 2.260499253862614,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 6.007330806683939
+            },
+            "yaw_err_deg": {
+              "time_weighted_rmse": 3.7657828378884393,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 5.894594555010599
+            }
+          },
+          "frozen_v3": {
+            "horizontal_err_m": {
+              "time_weighted_rmse": 0.03811369008805525,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 0.0817526842555185
+            },
+            "position_3d_err_m": {
+              "time_weighted_rmse": 0.05179865083786852,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 0.1047161740883052
+            },
+            "roll_err_deg": {
+              "time_weighted_rmse": 0.7609258591822263,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 1.7083428797076865
+            },
+            "pitch_err_deg": {
+              "time_weighted_rmse": 1.8982938944930532,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 4.589983936042302
+            },
+            "yaw_err_deg": {
+              "time_weighted_rmse": 1.1608123408505053,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 2.3703575876982086
+            }
+          },
+          "joint_minus_v3": {
+            "horizontal_err_m": 0.008676438407123989,
+            "position_3d_err_m": 0.059274888405122524,
+            "roll_err_deg": 0.9129777697587267,
+            "pitch_err_deg": 0.36220535936956066,
+            "yaw_err_deg": 2.604970497037934
+          }
+        },
+        "metric_policy": "time-weighted RMSE of piecewise-linear squared errors; identical physical intervals; no interval crosses a joint NO_INIT row",
+        "comparison_type": "original_V3_system_comparison_not_same_backend_mechanism_ablation",
+        "initialization_difference": "joint starts at requested run start; frozen V3 is the original 66--340 s causal run, not restarted at this short window",
+        "reference_claim": "Fixposition-derived fused reference with shared GNSS lineage; not independent truth",
+        "velocity_accuracy": {
+          "status": "NOT_EVALUATED",
+          "reason": "Frozen error series and evaluator do not provide velocity truth or velocity errors"
+        },
+        "timing_scope": "legacy04 measurement epoch readout; IMU publication delay was not recorded",
+        "original_gnss_receipt_delays_modeled": false,
+        "frozen_v3_commit": "7d43b9af26120ed5dde21f53e515386361072ba6",
+        "baseline_error_sha256": "a98f1a5f7591c2365b0fd73b6a1146e0d6df3de2a06414fd067fc9b66b928548",
+        "actual_reference_opened_by_this_comparison": false
+      },
+      "evaluation_lineage_matches": {
+        "run_status": true,
+        "navigation": true,
+        "metadata": true
+      }
+    },
+    "05_U0": {
+      "run_directory": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_NATIVE_INCREMENT_05_U0",
+      "evaluation_directory": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_NATIVE_INCREMENT_EVAL_05_U0",
+      "run_status": "COMPLETED",
+      "run_git_commit": "8c7bdff7a70c89f9cdd58e2ddab8ea4102964138",
+      "run_source_sha256": {
+        "src/legsa_gins/paper_rebuild/joint_navigation/__init__.py": "1e4531f3053fd9736435af940484c056adae614ba3700cd09def0b848d57cba0",
+        "src/legsa_gins/paper_rebuild/joint_navigation/branch.py": "46d7443c4df4f28ac9200afbaa0ad95876d39b557763903e53e1380c78da42e6",
+        "src/legsa_gins/paper_rebuild/joint_navigation/candidate.py": "cac1aedb6d8a3623207a7dc29c5edc3ac70cb721493b4cd94020ef2cc6b32946",
+        "src/legsa_gins/paper_rebuild/joint_navigation/carrier_relations.py": "65e9ac0b5a6decb69d18171410104b0b6a12f51012d4dd6b5b21aa92f5da6588",
+        "src/legsa_gins/paper_rebuild/joint_navigation/factors.py": "69064271859600c892d6e50bfadf4b5d8e6afd3f471fc009024e92aefda6f82c",
+        "src/legsa_gins/paper_rebuild/joint_navigation/navigator.py": "9116c6b971195287a2a034f3a4c3a74a76e0209f78525aedcd495d2255ae500e",
+        "src/legsa_gins/paper_rebuild/joint_navigation/real_data.py": "33acc7464b968a2428d0037bef6b7b8b262b7871b3f49249bef10468e7e02085",
+        "src/legsa_gins/paper_rebuild/joint_navigation/synthetic.py": "516d25ad70292e6d7c0f87717208c0352321a94711c7d66b8226c449a3b64e65",
+        "src/legsa_gins/paper_rebuild/joint_navigation/window.py": "c294ef0ca67d3e9f4215b64614cf8e1bbbffe40b08e0cbc9fe3d03fb92e09b41",
+        "scripts/paper_rebuild/run_joint_by2.py": "fca4e8d9155b7eb0ea6b0b488e65ebebf7a381298db37cba6ac85324021da4af"
+      },
+      "run_artifact_sha256": {
+        "run_status.json": "e0a912f241152901675dccaf9a298f6dbce1c351c059ddf10f8fe7ea69be8384",
+        "navigation.jsonl": "39924f4587425dfc52a581ca38b0d3b977357ca23fe11e39beccbe40e404eed1",
+        "sensor_metadata.json": "7072592a8f8ff49549239e65ae9c483f3a7304c6e5273571b88db91513c9dae5",
+        "estimator_summary.json": "16398179cbe9cb5a7cf0cc6f5cbf6fc5ea6897e3f92af82eecb6b3ce0da2dd0d",
+        "summary.json": "59325cdeeda6b95fd0c63b5de0374ce54e85f698ed1c3127a8ca599a712ca939",
+        "input_summary.json": "1151e35dbce82b1fa708b9e8865ed2867d72258f2abd73c276487ca58e7f81b4"
+      },
+      "evaluation_artifact_sha256": {
+        "run_status.json": "0b4b4ccc20b0a596c3a566d785d8272ab57c8757fba34f4a6d1881213cfa74e1",
+        "COMPARISON.json": "069256732a17ac33c376ab8d93b7fe2ebcf9142f01a6031df3dc6539211f7330",
+        "OUTPUT_COVERAGE.json": "c647b1a203076f6430b72c3b2fd2efcf159c2fc195e33a01810941e0a36a9514",
+        "NAV_TRANSFORM.json": "0863f230a9846b86240eb1be15444d733c8bff21241d9d1005fc59d9f1b34350"
+      },
+      "evaluator_source_sha256": "142328885910baac57d20c91e78da1f84d02f84388d40a0b7162bf788171d7fb",
+      "input_config": {
+        "body_path": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/高层数据/by2.txt",
+        "imu_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu",
+        "gnss_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+        "carrier_plan_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_ATTEMPT02/BY2/MODELS/PLAN.json",
+        "calibration_model_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/00_CALIBRATION/CLEAN5_CALIBRATED_SENSOR_MODEL.yaml",
+        "imu_noise_profile_path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/configs/paper_rebuild/horizontal_literature/hartley/stage_payload/04_METHOD_CONTRACTS/GO2_IMU_ALLAN_90MIN_RECOVERED_V1.yaml",
+        "start_s": 96.0,
+        "end_s": 106.0,
+        "key_dt_s": 0.1,
+        "base_time_unix_s": 1772784000,
+        "family": "GPS_GAL_BDS_DUAL",
+        "origin_blh_deg_m": null
+      },
+      "output": {
+        "requested_window_s": [
+          96.0,
+          106.0
+        ],
+        "published_rows": 325,
+        "finite_rows": 190,
+        "no_init_rows": 135,
+        "finite_measurement_window_s": [
+          100.19799995422363,
+          106.0
+        ],
+        "finite_duration_s": 5.802000045776367,
+        "maximum_recorded_imu_publication_delay_s": 0.007308983776368905,
+        "complete_candidate_support_rows": 0,
+        "direction_domain_coverage_certified": false
+      },
+      "initialization": {
+        "status": "FLOAT_INIT_DIRECTION_UNRESOLVED",
+        "buffer_window_s": [
+          96.0,
+          100.19799995422363
+        ],
+        "seed_count": 4,
+        "solver_converged_count": 1,
+        "computationally_unresolved_seeds": 3,
+        "budget_exhausted_count": 3,
+        "retained_distinct_modes": 1,
+        "globally_certified": false,
+        "seed_reports": [
+          {
+            "status": "NO_INIT",
+            "nonlinear_support": "UNRESOLVED",
+            "cost": 264.04130842007726,
+            "seed_rpy_rad": [
+              0.04075153036767368,
+              -0.041572256105330885,
+              2.8838239144553614e-19
+            ],
+            "solution_rpy_rad": [
+              0.01292344540258938,
+              -0.019053601392465012,
+              -0.7270845134904247
+            ],
+            "first_time_s": 96.0,
+            "last_time_s": 100.19799995422363,
+            "event_count": 136,
+            "marginalized_state_count": 0,
+            "initial_tilt_source": null,
+            "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+            "solver_iterations": 200,
+            "solver_max_iterations": 200,
+            "solver_initial_cost": 384299.7767063531,
+            "solver_final_cost": 264.04130842007726,
+            "solver_lambda": 10.0,
+            "solver_budget_exhausted": true,
+            "local_full_rank": true,
+            "numerical_rank": 2059,
+            "state_dimension": 2059,
+            "rank_tolerance": 7.891757118698412e-13,
+            "minimum_scaled_singular_value": 9.117552909850036e-06,
+            "projected_gradient_inf": 0.024962431197513932,
+            "projected_gradient_relative_inf": 0.0010862653961058951,
+            "projected_gradient_tolerance": 1e-06,
+            "max_exact_constraint_residual": 0.0,
+            "solver_converged": false,
+            "solver_status": "ITERATION_BUDGET_EXHAUSTED"
+          },
+          {
+            "status": "NO_INIT",
+            "nonlinear_support": "UNRESOLVED",
+            "cost": 342.1339104306218,
+            "seed_rpy_rad": [
+              0.04075153036767368,
+              -0.041572256105330885,
+              1.5707963267948966
+            ],
+            "solution_rpy_rad": [
+              -0.012644940726001731,
+              0.01806563280796318,
+              2.9754394427892543
+            ],
+            "first_time_s": 96.0,
+            "last_time_s": 100.19799995422363,
+            "event_count": 136,
+            "marginalized_state_count": 0,
+            "initial_tilt_source": null,
+            "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+            "solver_iterations": 200,
+            "solver_max_iterations": 200,
+            "solver_initial_cost": 276362.4623143652,
+            "solver_final_cost": 342.1339104306218,
+            "solver_lambda": 10.0,
+            "solver_budget_exhausted": true,
+            "local_full_rank": true,
+            "numerical_rank": 2059,
+            "state_dimension": 2059,
+            "rank_tolerance": 7.891765888656421e-13,
+            "minimum_scaled_singular_value": 9.092646397168776e-06,
+            "projected_gradient_inf": 0.0410327687297181,
+            "projected_gradient_relative_inf": 0.0015686200578500266,
+            "projected_gradient_tolerance": 1e-06,
+            "max_exact_constraint_residual": 0.0,
+            "solver_converged": false,
+            "solver_status": "ITERATION_BUDGET_EXHAUSTED"
+          },
+          {
+            "status": "NO_INIT",
+            "nonlinear_support": "UNRESOLVED",
+            "cost": 258.3135086312204,
+            "seed_rpy_rad": [
+              0.04075153036767368,
+              -0.041572256105330885,
+              3.141592653589793
+            ],
+            "solution_rpy_rad": [
+              0.01079330377338456,
+              0.01296074087700622,
+              -2.2337408187702845
+            ],
+            "first_time_s": 96.0,
+            "last_time_s": 100.19799995422363,
+            "event_count": 136,
+            "marginalized_state_count": 0,
+            "initial_tilt_source": null,
+            "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+            "solver_iterations": 200,
+            "solver_max_iterations": 200,
+            "solver_initial_cost": 223112.8989469728,
+            "solver_final_cost": 258.3135086312204,
+            "solver_lambda": 10.0,
+            "solver_budget_exhausted": true,
+            "local_full_rank": true,
+            "numerical_rank": 2059,
+            "state_dimension": 2059,
+            "rank_tolerance": 7.891758823248558e-13,
+            "minimum_scaled_singular_value": 9.122039568430777e-06,
+            "projected_gradient_inf": 0.02377532585070636,
+            "projected_gradient_relative_inf": 0.001046015020185165,
+            "projected_gradient_tolerance": 1e-06,
+            "max_exact_constraint_residual": 0.0,
+            "solver_converged": false,
+            "solver_status": "ITERATION_BUDGET_EXHAUSTED"
+          },
+          {
+            "status": "NO_INIT",
+            "nonlinear_support": "UNRESOLVED",
+            "cost": 237.58295098527265,
+            "seed_rpy_rad": [
+              0.04075153036767368,
+              -0.041572256105330885,
+              -1.5707963267948966
+            ],
+            "solution_rpy_rad": [
+              0.018082685315204898,
+              -0.0015028546387659129,
+              -1.528965661633161
+            ],
+            "first_time_s": 96.0,
+            "last_time_s": 100.19799995422363,
+            "event_count": 136,
+            "marginalized_state_count": 0,
+            "initial_tilt_source": null,
+            "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+            "solver_iterations": 56,
+            "solver_max_iterations": 200,
+            "solver_initial_cost": 331049.30617823574,
+            "solver_final_cost": 237.58295098527265,
+            "solver_lambda": 1.0000000000000001e-20,
+            "solver_budget_exhausted": false,
+            "local_full_rank": true,
+            "numerical_rank": 2059,
+            "state_dimension": 2059,
+            "rank_tolerance": 7.891767959906501e-13,
+            "minimum_scaled_singular_value": 9.129784467148186e-06,
+            "projected_gradient_inf": 9.672042149079648e-06,
+            "projected_gradient_relative_inf": 4.43706250252845e-07,
+            "projected_gradient_tolerance": 1e-06,
+            "max_exact_constraint_residual": 0.0,
+            "solver_converged": true,
+            "solver_status": "FIRST_ORDER_STATIONARY"
+          }
+        ],
+        "seed_status_note": "Per-seed status=NO_INIT is the pre-acceptance qualification record; use solver_converged/gradient and the accepted initialization status, not this field alone.",
+        "convergence_note": "Budget exhaustion alone does not imply nonconvergence: a seed reaching the iteration cap can meet the projected-gradient first-order criterion; finite seeds never establish global directional coverage."
+      },
+      "conditional_state_summary": {
+        "first": {
+          "measurement_time_s": 100.19799995422363,
+          "available_time_s": 100.198251458,
+          "rpy_deg": [
+            1.0360615508244313,
+            -0.08610722802294472,
+            -87.60327943200762
+          ],
+          "ba_mps2": [
+            -0.0006283772738320157,
+            0.0009580248278411474,
+            0.0680298072648603
+          ],
+          "bg_radps": [
+            -0.002314233181588297,
+            0.0015000152385608834,
+            -4.110462802378859e-05
+          ],
+          "Rt_g_body_mps2": [
+            0.01473030588437519,
+            0.17722856400752715,
+            9.799940858242676
+          ],
+          "ba_minus_Rt_g_body_mps2": [
+            -0.015358683158207206,
+            -0.176270539179686,
+            -9.731911050977816
+          ],
+          "ba_norm_mps2": 0.06803945433396029,
+          "horizontal_ba_norm_mps2": 0.001145717927340153,
+          "yaw_local_conditional_sigma_deg": 3.0979263636962555,
+          "direction_status": "RAW_PHASE_RELATIONS_UNRESOLVED_ENUMERATION_OR_BRANCH_BUDGET",
+          "direction_domain_coverage_certified": false
+        },
+        "last": {
+          "measurement_time_s": 106.0,
+          "available_time_s": 106.001067207,
+          "rpy_deg": [
+            5.19438327631098,
+            2.58072140008122,
+            -98.04631765705491
+          ],
+          "ba_mps2": [
+            -0.4730374450254458,
+            0.683030429381538,
+            0.08519365845570341
+          ],
+          "bg_radps": [
+            -0.0009341256297123988,
+            0.0006212713755905301,
+            0.0037596744449520823
+          ],
+          "Rt_g_body_mps2": [
+            -0.4413331853477911,
+            0.8864832570776067,
+            9.751401962041033
+          ],
+          "ba_minus_Rt_g_body_mps2": [
+            -0.03170425967765472,
+            -0.20345282769606865,
+            -9.66620830358533
+          ],
+          "ba_norm_mps2": 0.8351963549360096,
+          "horizontal_ba_norm_mps2": 0.8308399315495915,
+          "yaw_local_conditional_sigma_deg": 0.826108675337806,
+          "direction_status": "RAW_PHASE_RELATIONS_UNRESOLVED_ENUMERATION_OR_BRANCH_BUDGET",
+          "direction_domain_coverage_certified": false
+        },
+        "time_weighted": {
+          "ba_mps2": {
+            "time_weighted_mean": [
+              -0.06934660914306683,
+              0.13150782346373247,
+              0.08423466476080481
+            ],
+            "time_weighted_rms": [
+              0.15043491363361852,
+              0.25885611853088614,
+              0.08494918976822159
+            ],
+            "norm_time_weighted_rms": 0.3112129788153247,
+            "max_abs": [
+              0.4730374450254458,
+              0.683030429381538,
+              0.10141071648340656
+            ],
+            "max_norm": 0.8351963549360096
+          },
+          "bg_radps": {
+            "time_weighted_mean": [
+              -0.00035490496671153945,
+              -0.0005188048209066593,
+              0.00011627840319896013
+            ],
+            "time_weighted_rms": [
+              0.000739666859378645,
+              0.0008789083123069914,
+              0.0030893533588263393
+            ],
+            "norm_time_weighted_rms": 0.0032960113865089995,
+            "max_abs": [
+              0.002314233181588297,
+              0.0018977201841337426,
+              0.006924348142855137
+            ],
+            "max_norm": 0.006932304071584714
+          },
+          "Rt_g_body_mps2": {
+            "time_weighted_mean": [
+              -0.03880609529054223,
+              0.3093410393683253,
+              9.791478418720308
+            ],
+            "time_weighted_rms": [
+              0.20848637663895597,
+              0.39215344898985177,
+              9.791486959296183
+            ],
+            "norm_time_weighted_rms": 9.801554354839128,
+            "max_abs": [
+              0.5667629225655118,
+              0.9062878771634578,
+              9.801526748522726
+            ],
+            "max_norm": 9.801554354839128
+          },
+          "ba_minus_Rt_g_body_mps2": {
+            "time_weighted_mean": [
+              -0.030540513852524584,
+              -0.1778332159045928,
+              -9.707243753959505
+            ],
+            "time_weighted_rms": [
+              0.13127267116396352,
+              0.22312736787980395,
+              9.707263822449484
+            ],
+            "norm_time_weighted_rms": 9.710715177324895,
+            "max_abs": [
+              0.3314113686426409,
+              0.5447210879764439,
+              9.734675791309138
+            ],
+            "max_norm": 9.734716330920213
+          }
+        },
+        "statistical_scope": "All 190 finite published measurement-epoch rows, 100.19799995422363–106 s. These are successive causal conditional estimates, not one joint batch posterior; no state is imputed over NO_INIT.",
+        "averaging_policy": "Trapezoidal mean and piecewise-linear squared-value integration over actual measurement timestamps; components body FRD."
+      },
+      "evaluation": {
+        "common_finite_intervals_s": [
+          [
+            100.19799995422365,
+            106.0
+          ]
+        ],
+        "common_finite_metrics": {
+          "joint": {
+            "horizontal_err_m": {
+              "time_weighted_rmse": 0.049517108324403786,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 0.1210522759782005
+            },
+            "position_3d_err_m": {
+              "time_weighted_rmse": 0.11617424303562267,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 0.2403224760097753
+            },
+            "roll_err_deg": {
+              "time_weighted_rmse": 1.8845842138132018,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 4.543009507563966
+            },
+            "pitch_err_deg": {
+              "time_weighted_rmse": 1.659281231007564,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 3.934654562443825
+            },
+            "yaw_err_deg": {
+              "time_weighted_rmse": 4.095347500479411,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 10.323455459404215
+            }
+          },
+          "frozen_v3": {
+            "horizontal_err_m": {
+              "time_weighted_rmse": 0.03811369008805525,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 0.0817526842555185
+            },
+            "position_3d_err_m": {
+              "time_weighted_rmse": 0.05179865083786852,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 0.1047161740883052
+            },
+            "roll_err_deg": {
+              "time_weighted_rmse": 0.7609258591822263,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 1.7083428797076865
+            },
+            "pitch_err_deg": {
+              "time_weighted_rmse": 1.8982938944930532,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 4.589983936042302
+            },
+            "yaw_err_deg": {
+              "time_weighted_rmse": 1.1608123408505053,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 2.3703575876982086
+            }
+          },
+          "joint_minus_v3": {
+            "horizontal_err_m": 0.011403418236348536,
+            "position_3d_err_m": 0.06437559219775416,
+            "roll_err_deg": 1.1236583546309755,
+            "pitch_err_deg": -0.23901266348548922,
+            "yaw_err_deg": 2.934535159628906
+          }
+        },
+        "metric_policy": "time-weighted RMSE of piecewise-linear squared errors; identical physical intervals; no interval crosses a joint NO_INIT row",
+        "comparison_type": "original_V3_system_comparison_not_same_backend_mechanism_ablation",
+        "initialization_difference": "joint starts at requested run start; frozen V3 is the original 66--340 s causal run, not restarted at this short window",
+        "reference_claim": "Fixposition-derived fused reference with shared GNSS lineage; not independent truth",
+        "velocity_accuracy": {
+          "status": "NOT_EVALUATED",
+          "reason": "Frozen error series and evaluator do not provide velocity truth or velocity errors"
+        },
+        "timing_scope": "state accuracy at measurement epochs; not a zero-delay arrival-time navigation comparison",
+        "original_gnss_receipt_delays_modeled": false,
+        "frozen_v3_commit": "7d43b9af26120ed5dde21f53e515386361072ba6",
+        "baseline_error_sha256": "a98f1a5f7591c2365b0fd73b6a1146e0d6df3de2a06414fd067fc9b66b928548",
+        "actual_reference_opened_by_this_comparison": false
+      },
+      "evaluation_lineage_matches": {
+        "run_status": true,
+        "navigation": true,
+        "metadata": true
+      }
+    },
+    "05_U1": {
+      "run_directory": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_NATIVE_INCREMENT_05_U1",
+      "evaluation_directory": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_NATIVE_INCREMENT_EVAL_05_U1",
+      "run_status": "COMPLETED",
+      "run_git_commit": "8c7bdff7a70c89f9cdd58e2ddab8ea4102964138",
+      "run_source_sha256": {
+        "src/legsa_gins/paper_rebuild/joint_navigation/__init__.py": "1e4531f3053fd9736435af940484c056adae614ba3700cd09def0b848d57cba0",
+        "src/legsa_gins/paper_rebuild/joint_navigation/branch.py": "46d7443c4df4f28ac9200afbaa0ad95876d39b557763903e53e1380c78da42e6",
+        "src/legsa_gins/paper_rebuild/joint_navigation/candidate.py": "cac1aedb6d8a3623207a7dc29c5edc3ac70cb721493b4cd94020ef2cc6b32946",
+        "src/legsa_gins/paper_rebuild/joint_navigation/carrier_relations.py": "65e9ac0b5a6decb69d18171410104b0b6a12f51012d4dd6b5b21aa92f5da6588",
+        "src/legsa_gins/paper_rebuild/joint_navigation/factors.py": "69064271859600c892d6e50bfadf4b5d8e6afd3f471fc009024e92aefda6f82c",
+        "src/legsa_gins/paper_rebuild/joint_navigation/navigator.py": "9116c6b971195287a2a034f3a4c3a74a76e0209f78525aedcd495d2255ae500e",
+        "src/legsa_gins/paper_rebuild/joint_navigation/real_data.py": "33acc7464b968a2428d0037bef6b7b8b262b7871b3f49249bef10468e7e02085",
+        "src/legsa_gins/paper_rebuild/joint_navigation/synthetic.py": "516d25ad70292e6d7c0f87717208c0352321a94711c7d66b8226c449a3b64e65",
+        "src/legsa_gins/paper_rebuild/joint_navigation/window.py": "c294ef0ca67d3e9f4215b64614cf8e1bbbffe40b08e0cbc9fe3d03fb92e09b41",
+        "scripts/paper_rebuild/run_joint_by2.py": "fca4e8d9155b7eb0ea6b0b488e65ebebf7a381298db37cba6ac85324021da4af"
+      },
+      "run_artifact_sha256": {
+        "run_status.json": "9eb14406fcc0d641b0ffcd8ed147233e68d0be558bf600066139e3c6fb89dc48",
+        "navigation.jsonl": "e91f7f0dd9afe39f0f01225dc8b8f580d4227851c30851e0a39bb19e998ac1f1",
+        "sensor_metadata.json": "7072592a8f8ff49549239e65ae9c483f3a7304c6e5273571b88db91513c9dae5",
+        "estimator_summary.json": "15a258b2353828ef90e024085e9327bb315d4ba453f14821907fa02fee6181de",
+        "summary.json": "c115bab8883d7c989a057714f6c83581cb5d4e92c13ce89a162891de21b403c9",
+        "input_summary.json": "1151e35dbce82b1fa708b9e8865ed2867d72258f2abd73c276487ca58e7f81b4"
+      },
+      "evaluation_artifact_sha256": {
+        "run_status.json": "b46e21bffdaf5f4f76c451114ac09cf4711c4de1c3025ee3da871531efd5f98e",
+        "COMPARISON.json": "0c70f61af2e14e6ee8b4961ee4dbc8c878cd35309637552fa27efc51885b0512",
+        "OUTPUT_COVERAGE.json": "f8793e874145cc228137092b0216bd6e1bc30c4e5a13c3e4b27b8d2d6ca74209",
+        "NAV_TRANSFORM.json": "945eed0e997c2c0efb1cf5aa7d82595619e0ea9ce9e50ab0cd132ff192265af4"
+      },
+      "evaluator_source_sha256": "142328885910baac57d20c91e78da1f84d02f84388d40a0b7162bf788171d7fb",
+      "input_config": {
+        "body_path": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/高层数据/by2.txt",
+        "imu_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu",
+        "gnss_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+        "carrier_plan_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_ATTEMPT02/BY2/MODELS/PLAN.json",
+        "calibration_model_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/00_CALIBRATION/CLEAN5_CALIBRATED_SENSOR_MODEL.yaml",
+        "imu_noise_profile_path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/configs/paper_rebuild/horizontal_literature/hartley/stage_payload/04_METHOD_CONTRACTS/GO2_IMU_ALLAN_90MIN_RECOVERED_V1.yaml",
+        "start_s": 96.0,
+        "end_s": 106.0,
+        "key_dt_s": 0.1,
+        "base_time_unix_s": 1772784000,
+        "family": "GPS_GAL_BDS_DUAL",
+        "origin_blh_deg_m": null
+      },
+      "output": {
+        "requested_window_s": [
+          96.0,
+          106.0
+        ],
+        "published_rows": 325,
+        "finite_rows": 190,
+        "no_init_rows": 135,
+        "finite_measurement_window_s": [
+          100.19799995422363,
+          106.0
+        ],
+        "finite_duration_s": 5.802000045776367,
+        "maximum_recorded_imu_publication_delay_s": 0.007308983776368905,
+        "complete_candidate_support_rows": 0,
+        "direction_domain_coverage_certified": false
+      },
+      "initialization": {
+        "status": "FLOAT_INIT_DIRECTION_UNRESOLVED",
+        "buffer_window_s": [
+          96.0,
+          100.19799995422363
+        ],
+        "seed_count": 4,
+        "solver_converged_count": 4,
+        "computationally_unresolved_seeds": 0,
+        "budget_exhausted_count": 1,
+        "retained_distinct_modes": 1,
+        "globally_certified": false,
+        "seed_reports": [
+          {
+            "status": "NO_INIT",
+            "nonlinear_support": "UNRESOLVED",
+            "cost": 359.93273232884013,
+            "seed_rpy_rad": [
+              0.04075153036767368,
+              -0.041572256105330885,
+              2.8838239144553614e-19
+            ],
+            "solution_rpy_rad": [
+              0.01678457869675025,
+              0.0013275628184852314,
+              -1.4438062259280984
+            ],
+            "first_time_s": 96.0,
+            "last_time_s": 100.19799995422363,
+            "event_count": 136,
+            "marginalized_state_count": 0,
+            "initial_tilt_source": null,
+            "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+            "solver_iterations": 196,
+            "solver_max_iterations": 200,
+            "solver_initial_cost": 411448.7861620605,
+            "solver_final_cost": 359.93273232884013,
+            "solver_lambda": 0.0001,
+            "solver_budget_exhausted": false,
+            "local_full_rank": true,
+            "numerical_rank": 2173,
+            "state_dimension": 2173,
+            "rank_tolerance": 9.639102042566508e-13,
+            "minimum_scaled_singular_value": 1.2124553641621698e-05,
+            "projected_gradient_inf": 3.578698073601269e-08,
+            "projected_gradient_relative_inf": 1.3338266489256987e-09,
+            "projected_gradient_tolerance": 1e-06,
+            "max_exact_constraint_residual": 0.0,
+            "solver_converged": true,
+            "solver_status": "FIRST_ORDER_STATIONARY"
+          },
+          {
+            "status": "NO_INIT",
+            "nonlinear_support": "UNRESOLVED",
+            "cost": 359.93569915998637,
+            "seed_rpy_rad": [
+              0.04075153036767368,
+              -0.041572256105330885,
+              1.5707963267948966
+            ],
+            "solution_rpy_rad": [
+              0.01678447193057629,
+              0.001327376976948184,
+              -1.4438057067134664
+            ],
+            "first_time_s": 96.0,
+            "last_time_s": 100.19799995422363,
+            "event_count": 136,
+            "marginalized_state_count": 0,
+            "initial_tilt_source": null,
+            "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+            "solver_iterations": 115,
+            "solver_max_iterations": 200,
+            "solver_initial_cost": 294349.0555388182,
+            "solver_final_cost": 359.93569915998637,
+            "solver_lambda": 0.0001,
+            "solver_budget_exhausted": false,
+            "local_full_rank": true,
+            "numerical_rank": 2173,
+            "state_dimension": 2173,
+            "rank_tolerance": 9.639102042573316e-13,
+            "minimum_scaled_singular_value": 1.2124549442477362e-05,
+            "projected_gradient_inf": 3.7600924528819434e-08,
+            "projected_gradient_relative_inf": 1.4014288836638935e-09,
+            "projected_gradient_tolerance": 1e-06,
+            "max_exact_constraint_residual": 0.0,
+            "solver_converged": true,
+            "solver_status": "FIRST_ORDER_STATIONARY"
+          },
+          {
+            "status": "NO_INIT",
+            "nonlinear_support": "UNRESOLVED",
+            "cost": 359.94614586026694,
+            "seed_rpy_rad": [
+              0.04075153036767368,
+              -0.041572256105330885,
+              3.141592653589793
+            ],
+            "solution_rpy_rad": [
+              0.016784356130202342,
+              0.0013276265532614622,
+              -1.4438125090768992
+            ],
+            "first_time_s": 96.0,
+            "last_time_s": 100.19799995422363,
+            "event_count": 136,
+            "marginalized_state_count": 0,
+            "initial_tilt_source": null,
+            "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+            "solver_iterations": 200,
+            "solver_max_iterations": 200,
+            "solver_initial_cost": 235666.53460245495,
+            "solver_final_cost": 359.94614586026694,
+            "solver_lambda": 0.001,
+            "solver_budget_exhausted": true,
+            "local_full_rank": true,
+            "numerical_rank": 2173,
+            "state_dimension": 2173,
+            "rank_tolerance": 9.639102042373252e-13,
+            "minimum_scaled_singular_value": 1.2124549647760579e-05,
+            "projected_gradient_inf": 3.8129761961043767e-06,
+            "projected_gradient_relative_inf": 1.421118628490284e-07,
+            "projected_gradient_tolerance": 1e-06,
+            "max_exact_constraint_residual": 0.0,
+            "solver_converged": true,
+            "solver_status": "FIRST_ORDER_STATIONARY"
+          },
+          {
+            "status": "NO_INIT",
+            "nonlinear_support": "UNRESOLVED",
+            "cost": 359.94295413719476,
+            "seed_rpy_rad": [
+              0.04075153036767368,
+              -0.041572256105330885,
+              -1.5707963267948966
+            ],
+            "solution_rpy_rad": [
+              0.016784604678738713,
+              0.0013273572360185516,
+              -1.4438070033927848
+            ],
+            "first_time_s": 96.0,
+            "last_time_s": 100.19799995422363,
+            "event_count": 136,
+            "marginalized_state_count": 0,
+            "initial_tilt_source": null,
+            "bias_prior_source": "inherited_joint_prototype_engineering_prior",
+            "solver_iterations": 30,
+            "solver_max_iterations": 200,
+            "solver_initial_cost": 352766.1825673982,
+            "solver_final_cost": 359.94295413719476,
+            "solver_lambda": 0.0001,
+            "solver_budget_exhausted": false,
+            "local_full_rank": true,
+            "numerical_rank": 2173,
+            "state_dimension": 2173,
+            "rank_tolerance": 9.639102042509805e-13,
+            "minimum_scaled_singular_value": 1.2124550872480076e-05,
+            "projected_gradient_inf": 1.1317955095693777e-08,
+            "projected_gradient_relative_inf": 4.2182870563745133e-10,
+            "projected_gradient_tolerance": 1e-06,
+            "max_exact_constraint_residual": 0.0,
+            "solver_converged": true,
+            "solver_status": "FIRST_ORDER_STATIONARY"
+          }
+        ],
+        "seed_status_note": "Per-seed status=NO_INIT is the pre-acceptance qualification record; use solver_converged/gradient and the accepted initialization status, not this field alone.",
+        "convergence_note": "Budget exhaustion alone does not imply nonconvergence: a seed reaching the iteration cap can meet the projected-gradient first-order criterion; finite seeds never establish global directional coverage."
+      },
+      "conditional_state_summary": {
+        "first": {
+          "measurement_time_s": 100.19799995422363,
+          "available_time_s": 100.198251458,
+          "rpy_deg": [
+            0.9616855202289809,
+            0.07606374653769594,
+            -82.72400318039185
+          ],
+          "ba_mps2": [
+            -0.00014988889990514385,
+            0.00018524791157204673,
+            0.06699702837398569
+          ],
+          "bg_radps": [
+            -0.0017981596701695645,
+            0.00040460848481324504,
+            6.476687044384799e-05
+          ],
+          "Rt_g_body_mps2": [
+            -0.013012175302686054,
+            0.16450709097956875,
+            9.80016509407761
+          ],
+          "ba_minus_Rt_g_body_mps2": [
+            0.01286228640278091,
+            -0.16432184306799671,
+            -9.733168065703623
+          ],
+          "ba_norm_mps2": 0.06699745214868771,
+          "horizontal_ba_norm_mps2": 0.0002382928262801444,
+          "yaw_local_conditional_sigma_deg": 0.613800463659354,
+          "direction_status": "RAW_PHASE_RELATIONS_UNRESOLVED_ENUMERATION_OR_BRANCH_BUDGET",
+          "direction_domain_coverage_certified": false
+        },
+        "last": {
+          "measurement_time_s": 106.0,
+          "available_time_s": 106.001067207,
+          "rpy_deg": [
+            5.159593879218643,
+            1.3368446800166258,
+            -94.51122289722478
+          ],
+          "ba_mps2": [
+            -0.23975203375103535,
+            0.6967112616375475,
+            0.089441514923344
+          ],
+          "bg_radps": [
+            0.0002498704535348713,
+            -3.8853734118798705e-05,
+            0.003275528125603805
+          ],
+          "Rt_g_body_mps2": [
+            -0.22867246156536017,
+            0.8812162175566545,
+            9.759182068908368
+          ],
+          "ba_minus_Rt_g_body_mps2": [
+            -0.01107957218567518,
+            -0.18450495591910698,
+            -9.669740553985024
+          ],
+          "ba_norm_mps2": 0.7422178954809183,
+          "horizontal_ba_norm_mps2": 0.7368090795995532,
+          "yaw_local_conditional_sigma_deg": 0.4123964963806856,
+          "direction_status": "RAW_PHASE_RELATIONS_UNRESOLVED_ENUMERATION_OR_BRANCH_BUDGET",
+          "direction_domain_coverage_certified": false
+        },
+        "time_weighted": {
+          "ba_mps2": {
+            "time_weighted_mean": [
+              -0.023978699809952257,
+              0.14998919954154066,
+              0.08381836412992312
+            ],
+            "time_weighted_rms": [
+              0.07268431737613273,
+              0.2855940171496218,
+              0.08448417564116174
+            ],
+            "norm_time_weighted_rms": 0.3065689621567381,
+            "max_abs": [
+              0.23975203375103535,
+              0.6967112616375475,
+              0.10053954259477613
+            ],
+            "max_norm": 0.7422178954809183
+          },
+          "bg_radps": {
+            "time_weighted_mean": [
+              -0.0002822931856524393,
+              -0.0007244553442536443,
+              -4.9247228508423295e-05
+            ],
+            "time_weighted_rms": [
+              0.0007276042957043011,
+              0.000817619725170963,
+              0.002770986088933168
+            ],
+            "norm_time_weighted_rms": 0.0029793076261401957,
+            "max_abs": [
+              0.0017981596701695645,
+              0.0014856019677469113,
+              0.006690177060431985
+            ],
+            "max_norm": 0.006736551771960394
+          },
+          "Rt_g_body_mps2": {
+            "time_weighted_mean": [
+              -0.005039176267102726,
+              0.3291816690026022,
+              9.791344525125758
+            ],
+            "time_weighted_rms": [
+              0.15626448531143414,
+              0.4189053705270495,
+              9.791351667264317
+            ],
+            "norm_time_weighted_rms": 9.801554354839123,
+            "max_abs": [
+              0.36180354011418375,
+              0.9264310214948647,
+              9.80153719600763
+            ],
+            "max_norm": 9.801554354839128
+          },
+          "ba_minus_Rt_g_body_mps2": {
+            "time_weighted_mean": [
+              -0.01893952354284953,
+              -0.1791924694610616,
+              -9.707526160995833
+            ],
+            "time_weighted_rms": [
+              0.12700029826860046,
+              0.22490906857015125,
+              9.707545432347896
+            ],
+            "norm_time_weighted_rms": 9.710980974442485,
+            "max_abs": [
+              0.31838542644806567,
+              0.5465266986299772,
+              9.735073044334614
+            ],
+            "max_norm": 9.7351027067599
+          }
+        },
+        "statistical_scope": "All 190 finite published measurement-epoch rows, 100.19799995422363–106 s. These are successive causal conditional estimates, not one joint batch posterior; no state is imputed over NO_INIT.",
+        "averaging_policy": "Trapezoidal mean and piecewise-linear squared-value integration over actual measurement timestamps; components body FRD."
+      },
+      "evaluation": {
+        "common_finite_intervals_s": [
+          [
+            100.19799995422365,
+            106.0
+          ]
+        ],
+        "common_finite_metrics": {
+          "joint": {
+            "horizontal_err_m": {
+              "time_weighted_rmse": 0.04803795115653245,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 0.1044025506986036
+            },
+            "position_3d_err_m": {
+              "time_weighted_rmse": 0.11378684900559392,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 0.2269888202071511
+            },
+            "roll_err_deg": {
+              "time_weighted_rmse": 2.040252582935864,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 4.720274373944022
+            },
+            "pitch_err_deg": {
+              "time_weighted_rmse": 1.6036815106577795,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 3.914818707506157
+            },
+            "yaw_err_deg": {
+              "time_weighted_rmse": 3.9324261347116236,
+              "duration_s": 5.802000045776353,
+              "samples": 190,
+              "absolute_max": 6.159337440624881
+            }
+          },
+          "frozen_v3": {
+            "horizontal_err_m": {
+              "time_weighted_rmse": 0.03811369008805525,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 0.0817526842555185
+            },
+            "position_3d_err_m": {
+              "time_weighted_rmse": 0.05179865083786852,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 0.1047161740883052
+            },
+            "roll_err_deg": {
+              "time_weighted_rmse": 0.7609258591822263,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 1.7083428797076865
+            },
+            "pitch_err_deg": {
+              "time_weighted_rmse": 1.8982938944930532,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 4.589983936042302
+            },
+            "yaw_err_deg": {
+              "time_weighted_rmse": 1.1608123408505053,
+              "duration_s": 5.802000045776353,
+              "samples": 1267,
+              "absolute_max": 2.3703575876982086
+            }
+          },
+          "joint_minus_v3": {
+            "horizontal_err_m": 0.0099242610684772,
+            "position_3d_err_m": 0.061988198167725404,
+            "roll_err_deg": 1.2793267237536379,
+            "pitch_err_deg": -0.29461238383527366,
+            "yaw_err_deg": 2.7716137938611185
+          }
+        },
+        "metric_policy": "time-weighted RMSE of piecewise-linear squared errors; identical physical intervals; no interval crosses a joint NO_INIT row",
+        "comparison_type": "original_V3_system_comparison_not_same_backend_mechanism_ablation",
+        "initialization_difference": "joint starts at requested run start; frozen V3 is the original 66--340 s causal run, not restarted at this short window",
+        "reference_claim": "Fixposition-derived fused reference with shared GNSS lineage; not independent truth",
+        "velocity_accuracy": {
+          "status": "NOT_EVALUATED",
+          "reason": "Frozen error series and evaluator do not provide velocity truth or velocity errors"
+        },
+        "timing_scope": "state accuracy at measurement epochs; not a zero-delay arrival-time navigation comparison",
+        "original_gnss_receipt_delays_modeled": false,
+        "frozen_v3_commit": "7d43b9af26120ed5dde21f53e515386361072ba6",
+        "baseline_error_sha256": "a98f1a5f7591c2365b0fd73b6a1146e0d6df3de2a06414fd067fc9b66b928548",
+        "actual_reference_opened_by_this_comparison": false
+      },
+      "evaluation_lineage_matches": {
+        "run_status": true,
+        "navigation": true,
+        "metadata": true
+      }
+    }
+  },
+  "quantitative_contrasts": {
+    "04_foot_U1_vs_U0": {
+      "yaw_err_deg": {
+        "U0": 25.716515849296137,
+        "U1": 3.7657828378884393,
+        "reduction": 21.9507330114077,
+        "relative_reduction_percent": 85.35655895239981
+      },
+      "horizontal_err_m": {
+        "U0": 0.07673387348105162,
+        "U1": 0.04679012849517924,
+        "reduction": 0.029943744985872385,
+        "relative_reduction_percent": 39.02285083166899
+      },
+      "position_3d_err_m": {
+        "U0": 0.12803419142913378,
+        "U1": 0.11107353924299104,
+        "reduction": 0.016960652186142733,
+        "relative_reduction_percent": 13.246970982380402
+      },
+      "roll_err_deg": {
+        "U0": 1.5538322195866576,
+        "U1": 1.673903628940953,
+        "reduction": -0.12007140935429539,
+        "relative_reduction_percent": -7.7274372252517765
+      },
+      "pitch_err_deg": {
+        "U0": 2.3334848974938707,
+        "U1": 2.260499253862614,
+        "reduction": 0.07298564363125681,
+        "relative_reduction_percent": 3.1277529890869404
+      }
+    },
+    "05_foot_U1_vs_U0": {
+      "yaw_err_deg": {
+        "U0": 4.095347500479411,
+        "U1": 3.9324261347116236,
+        "reduction": 0.16292136576778748,
+        "relative_reduction_percent": 3.9782061412057312
+      },
+      "horizontal_err_m": {
+        "U0": 0.049517108324403786,
+        "U1": 0.04803795115653245,
+        "reduction": 0.0014791571678713367,
+        "relative_reduction_percent": 2.9871638670434186
+      },
+      "position_3d_err_m": {
+        "U0": 0.11617424303562267,
+        "U1": 0.11378684900559392,
+        "reduction": 0.0023873940300287444,
+        "relative_reduction_percent": 2.055011479004598
+      },
+      "roll_err_deg": {
+        "U0": 1.8845842138132018,
+        "U1": 2.040252582935864,
+        "reduction": -0.15566836912266235,
+        "relative_reduction_percent": -8.260090898654425
+      },
+      "pitch_err_deg": {
+        "U0": 1.659281231007564,
+        "U1": 1.6036815106577795,
+        "reduction": 0.05559972034978444,
+        "relative_reduction_percent": 3.3508316318399345
+      }
+    },
+    "05_minus_04_U0": {
+      "yaw_err_deg": -21.621168348816724,
+      "horizontal_err_m": -0.027216765156647837,
+      "position_3d_err_m": -0.011859948393511108,
+      "roll_err_deg": 0.3307519942265442,
+      "pitch_err_deg": -0.6742036664863067,
+      "last_conditional_state_difference": {
+        "ba_mps2": [
+          -0.8465343248377691,
+          0.07237057912959977,
+          -0.0018067494773769538
+        ],
+        "bg_radps": [
+          -0.008416412919063388,
+          0.00013830019327143754,
+          0.0019701256767158245
+        ],
+        "Rt_g_body_mps2": [
+          -0.8894829592481498,
+          0.12198644572105344,
+          -0.010010547244933221
+        ],
+        "ba_minus_Rt_g_body_mps2": [
+          0.04294863441038066,
+          -0.04961586659145367,
+          0.008203797767555088
+        ]
+      }
+    },
+    "05_minus_04_U1": {
+      "yaw_err_deg": 0.16664329682318435,
+      "horizontal_err_m": 0.001247822661353211,
+      "position_3d_err_m": 0.0027133097626028807,
+      "roll_err_deg": 0.3663489539949112,
+      "pitch_err_deg": -0.6568177432048343,
+      "last_conditional_state_difference": {
+        "ba_mps2": [
+          -0.5686901569954648,
+          0.0543968647826123,
+          0.0040124823395452786
+        ],
+        "bg_radps": [
+          -0.007479532812268179,
+          -0.0008016930103969024,
+          0.0015704048233174204
+        ],
+        "Rt_g_body_mps2": [
+          -0.6306371932708976,
+          0.09237529265484734,
+          -0.0023046068255485608
+        ],
+        "ba_minus_Rt_g_body_mps2": [
+          0.061947036275432854,
+          -0.03797842787223504,
+          0.006317089165094103
+        ]
+      }
+    }
+  },
+  "changed_source_hashes_04_to_05": {
+    "src/legsa_gins/paper_rebuild/joint_navigation/navigator.py": {
+      "old": "9c2a07bf3732b4eab68f88e3b3267c482844a2fba2e80ecf3c28b6116be825b5",
+      "new": "9116c6b971195287a2a034f3a4c3a74a76e0209f78525aedcd495d2255ae500e"
+    },
+    "src/legsa_gins/paper_rebuild/joint_navigation/real_data.py": {
+      "old": "2f0276c50eae44cf8191f831ab42473820eb68c94df8ca9f6b708d5a53a347ad",
+      "new": "33acc7464b968a2428d0037bef6b7b8b262b7871b3f49249bef10468e7e02085"
+    },
+    "scripts/paper_rebuild/run_joint_by2.py": {
+      "old": "bcb96ce0844d7b1da6b9f7459f212d278b06e89332f80dbb9469be2c60691c1f",
+      "new": "fca4e8d9155b7eb0ea6b0b488e65ebebf7a381298db37cba6ac85324021da4af"
+    }
+  },
+  "unchanged_input_config_across_four_runs": true,
+  "paired_measurement_epochs_equal": true,
+  "within_version_U0_U1_source_hashes_equal": {
+    "04": true,
+    "05": true
+  },
+  "correction_evidence": {
+    "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_SHARED_CLOSURE_01/INPUT_CORRECTION_CONSERVATION.json",
+    "sha256": "5dba807e05a3d06d4d6ac3829a0c15dec6f232a1de1960066e73939dd25707e0",
+    "result": {
+      "status": "PASS_ORIGINAL_INCREMENT_CONSERVATION_AND_IMU_AVAILABILITY",
+      "navigation_calls": 0,
+      "reference_reads": 0,
+      "event_count": 325,
+      "integrated_duration_s": 10.0,
+      "actual_increment_sum": [
+        0.19651640995259792,
+        -1.736390658000801,
+        -96.95756896186901,
+        -0.03683410690325425,
+        -0.007056990068347642,
+        -0.10544679203860047
+      ],
+      "independent_source_overlap_sum": [
+        0.19651640995259817,
+        -1.7363906580008042,
+        -96.95756896186893,
+        -0.03683410690325439,
+        -0.007056990068347613,
+        -0.10544679203860027
+      ],
+      "increment_conservation_error": [
+        -2.498001805406602e-16,
+        3.1086244689504383e-15,
+        -8.526512829121202e-14,
+        1.457167719820518e-16,
+        -2.862293735361732e-17,
+        -1.942890293094024e-16
+      ],
+      "max_abs_increment_conservation_error": 8.526512829121202e-14,
+      "per_segment_increment_conservation_error": [
+        -3.0531133177191805e-16,
+        1.5543122344752192e-15,
+        -7.105427357601002e-14,
+        9.71445146547012e-17,
+        -3.5561831257524545e-17,
+        -2.636779683484747e-16
+      ],
+      "fully_consumed_source_count": 2209,
+      "maximum_full_source_fraction_error": 1.1102230246251565e-16,
+      "terminal_imu_only_time_s": 106.001067207,
+      "final_measurement_time_s": 106.0,
+      "final_available_time_s": 106.001067207,
+      "max_availability_delay_s": 0.007308983776368905,
+      "all_sources_available_by_publication": true,
+      "no_foot_measurement_after_requested_end": true,
+      "original_event_times_unchanged": true,
+      "packet_duration_error_s": 0.0,
+      "maximum_source_endpoint_minus_measurement_epoch_s": 0.007308983776368905
+    }
+  }
+}

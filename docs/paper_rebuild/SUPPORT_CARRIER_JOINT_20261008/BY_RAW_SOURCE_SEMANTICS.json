@@ -1,0 +1,1126 @@
+{
+  "schema": "BY_RAW_SOURCE_SEMANTICS_V1",
+  "status": "READ_ONLY_SOURCE_SEMANTICS_AUDIT_COMPLETE_NO_SOURCE_CONFLICT_FOUND_WITHIN_DECLARED_SCOPE",
+  "sequence": "BY2",
+  "scope": {
+    "time_s": [
+      100.19799995422363,
+      100.39800000190735,
+      100.59800004959106,
+      100.79800009727478
+    ],
+    "raw_paired_epochs": 4,
+    "receiver_packets": 8,
+    "raw_semantic_rows_decoded": 441,
+    "scope_description": "Only original RAWX semantics of four paired packets; no reference, new estimation, Q or threshold changes",
+    "reference_reads": 0,
+    "navigation_runs": 0,
+    "algorithm_changes": false,
+    "covariance_changes": false,
+    "threshold_changes": false,
+    "other_sequence_or_window_selection": false
+  },
+  "provenance": {
+    "scratch_receipt": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_INPUT_ADAPTER_01/raw_source_semantics_100198_100798_01.json",
+    "scratch_receipt_sha256": "1b8e484881f294e95aa1cf67d8fd116ca50cd38851e7d7523ad38c30ef1b4b90",
+    "plan": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_ATTEMPT02/BY2/MODELS/PLAN.json",
+    "plan_sha256": "16580a87ee787d4890edd22a8fc8bfb9b0771242e427201a952f323f233879ea",
+    "source_code_pins": [
+      {
+        "path": "src/legsa_gins/paper_rebuild/carrier_phase/multignss.py",
+        "sha256": "20704c075335edc7fa0e10092ca4efbd2e7a8c28a43497d514e88d31e6842555",
+        "PLAN_pin_match": true
+      },
+      {
+        "path": "src/legsa_gins/paper_rebuild/carrier_phase/arcs.py",
+        "sha256": "5f4b030fcc55ffa5fa1bd4bb41e06641281b17248e34f32d877f8ebac7526953",
+        "PLAN_pin_match": true
+      },
+      {
+        "path": "src/legsa_gins/paper_rebuild/carrier_phase/observations.py",
+        "sha256": "637ada354ec2132c6d4aeb7f615d2e7eb1ef7f1c5ebcf7f688e2847b798ca44c",
+        "PLAN_pin_match": true
+      },
+      {
+        "path": "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py",
+        "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+        "PLAN_pin_match": true
+      },
+      {
+        "path": "scripts/paper_rebuild/carrier_phase/real_trial.py",
+        "source_commit": "d60bfa0275a859a9c352f4f132767d593572bf81",
+        "sha256": "a5d53ad4bc412a322237f45227631d9c29070736032a92aebbbd432d46862de9",
+        "PLAN_pin_match": true,
+        "current_file_matches_generation": false
+      }
+    ],
+    "raw_sources": [
+      {
+        "rx": 1,
+        "ubx_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss1.ubx",
+        "ubx_sha256": "24177f2d6f25c0b614f769e66c4e4147eea727f3a7f55e22d5e04419eaa10f8b",
+        "ubx_hash_matches_pin": true,
+        "original_csv_path": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv",
+        "original_csv_sha256": "5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027",
+        "csv_hash_matches_pin": true,
+        "packets": [
+          {
+            "time_ms": 100198,
+            "original_csv_row": 4479,
+            "payload_sha256": "7ed28873767172e129eff98f13075675a9c8f0627f50d15c73a16aabfc6c4357",
+            "original_payload_equals_normalized_payload": true
+          },
+          {
+            "time_ms": 100398,
+            "original_csv_row": 4494,
+            "payload_sha256": "9b522818ff45b239429b7a130c7672890e1c6fbd9b83f586ffae0c7d8626c532",
+            "original_payload_equals_normalized_payload": true
+          },
+          {
+            "time_ms": 100598,
+            "original_csv_row": 4523,
+            "payload_sha256": "079836ec55b956a3fbc0e6d6439ff2924c35fd70233d5d181b3deb06f5200466",
+            "original_payload_equals_normalized_payload": true
+          },
+          {
+            "time_ms": 100798,
+            "original_csv_row": 4536,
+            "payload_sha256": "ae2faf91b9550b9d2de6b02d555211dbdd27f012a6e91201436847b831e6b465",
+            "original_payload_equals_normalized_payload": true
+          }
+        ]
+      },
+      {
+        "rx": 2,
+        "ubx_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss2.ubx",
+        "ubx_sha256": "0876d7e67441ddfce66b4ce8e39838b4245bddab3d6d3cce60d5eb9bad42c2c2",
+        "ubx_hash_matches_pin": true,
+        "original_csv_path": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss2-raw.csv",
+        "original_csv_sha256": "39249696329530452a1049b5b39e2c1d8f7e89ae2190d2c95bce70f5b4f44583",
+        "csv_hash_matches_pin": true,
+        "packets": [
+          {
+            "time_ms": 100198,
+            "original_csv_row": 4467,
+            "payload_sha256": "48112e32050ef4e3290fb8f8b8705252fe4970b3c8a988a9b75be98534ab0bad",
+            "original_payload_equals_normalized_payload": true
+          },
+          {
+            "time_ms": 100398,
+            "original_csv_row": 4480,
+            "payload_sha256": "ddc45a2460ab0b2c118302213b70ec8db7d91af8af3d032f0df5e37695cfca83",
+            "original_payload_equals_normalized_payload": true
+          },
+          {
+            "time_ms": 100598,
+            "original_csv_row": 4511,
+            "payload_sha256": "f0d576b74dd150e16868fec0cf105418d805ccd82d592fb648dec51a4d64707a",
+            "original_payload_equals_normalized_payload": true
+          },
+          {
+            "time_ms": 100798,
+            "original_csv_row": 4524,
+            "payload_sha256": "9a8f0219ab2120d22a2387533fd7a01f8f0fdeaf0063c7da2d8ea1b41bf811cf",
+            "original_payload_equals_normalized_payload": true
+          }
+        ]
+      }
+    ],
+    "generation_note": "PLAN source_commit d60bfa0275a859a9c352f4f132767d593572bf81 real_trial.py matches PLAN hash exactly. Current real_trial.py contains later optional overlay extensions; those are not the source of these cached raw blocks."
+  },
+  "observation_contract": {
+    "code_unit": "meter",
+    "phase_unit": "cycle",
+    "phase_to_meter": "lambda_m * cpMes_as_reported",
+    "receiver_sd": "GNSS2_MINUS_GNSS1",
+    "satellite_dd": "TARGET_MINUS_PIVOT",
+    "baseline": "ECEF position(GNSS2)-position(GNSS1)",
+    "integer_coordinate": "(N_rx2_target-N_rx1_target)-(N_rx2_pivot-N_rx1_pivot)",
+    "A_code": "zero",
+    "A_phase": "positive diagonal of target wavelength; target and pivot belong to identical (gnssId,sigId,freqId) group",
+    "B": "negative DD of receiver2 line-of-sight vectors; code and phase halves identical",
+    "Q": "original independent receiver/SD stochastic working model transformed by full DD operator; shared-pivot covariance retained exactly",
+    "half_cycle": "Require cpValid and halfCyc. subHalfCyc reports a correction already present in cpMes and is not applied again. Changes reset tracking arc.",
+    "groups": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        3,
+        0
+      ],
+      [
+        2,
+        0,
+        0
+      ],
+      [
+        2,
+        6,
+        0
+      ],
+      [
+        3,
+        0,
+        0
+      ],
+      [
+        3,
+        2,
+        0
+      ]
+    ],
+    "cross_group_dd_present": false,
+    "source_locations": [
+      "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py:460",
+      "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py:1139",
+      "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py:1166",
+      "src/legsa_gins/paper_rebuild/carrier_phase/multignss.py:263",
+      "src/legsa_gins/paper_rebuild/carrier_phase/multignss.py:273",
+      "src/legsa_gins/paper_rebuild/carrier_phase/arcs.py:147"
+    ]
+  },
+  "packet_headers": [
+    {
+      "rx": 1,
+      "time_ms": 100198,
+      "gps_week": 2408,
+      "tow_s": 460918.19800000003,
+      "version": 1,
+      "receiver_status": 1,
+      "measurement_count": 57
+    },
+    {
+      "rx": 1,
+      "time_ms": 100398,
+      "gps_week": 2408,
+      "tow_s": 460918.398,
+      "version": 1,
+      "receiver_status": 1,
+      "measurement_count": 57
+    },
+    {
+      "rx": 1,
+      "time_ms": 100598,
+      "gps_week": 2408,
+      "tow_s": 460918.598,
+      "version": 1,
+      "receiver_status": 1,
+      "measurement_count": 58
+    },
+    {
+      "rx": 1,
+      "time_ms": 100798,
+      "gps_week": 2408,
+      "tow_s": 460918.798,
+      "version": 1,
+      "receiver_status": 1,
+      "measurement_count": 57
+    },
+    {
+      "rx": 2,
+      "time_ms": 100198,
+      "gps_week": 2408,
+      "tow_s": 460918.19800000003,
+      "version": 1,
+      "receiver_status": 1,
+      "measurement_count": 53
+    },
+    {
+      "rx": 2,
+      "time_ms": 100398,
+      "gps_week": 2408,
+      "tow_s": 460918.398,
+      "version": 1,
+      "receiver_status": 1,
+      "measurement_count": 53
+    },
+    {
+      "rx": 2,
+      "time_ms": 100598,
+      "gps_week": 2408,
+      "tow_s": 460918.598,
+      "version": 1,
+      "receiver_status": 1,
+      "measurement_count": 53
+    },
+    {
+      "rx": 2,
+      "time_ms": 100798,
+      "gps_week": 2408,
+      "tow_s": 460918.798,
+      "version": 1,
+      "receiver_status": 1,
+      "measurement_count": 53
+    }
+  ],
+  "block_reconstruction_checks": [
+    {
+      "time_s": 100.19799995422363,
+      "file": "GPS_GAL_BDS_DUAL_170.npz",
+      "sha256": "83a90cc1a7c49395b22e94a2f03a3827c5fa6b7b94fdd84e171e2204a668dd20",
+      "dd_rows": 19,
+      "raw_endpoint_count": 50,
+      "A_max_abs_diff": 0.0,
+      "y_max_abs_diff_m": 0.0,
+      "Q_max_abs_diff_m2": 0.0,
+      "B_code_phase_half_max_diff": 0.0,
+      "all_labels_match_cached_raw_arc_events": true,
+      "all_admitted_raw_fields_eligible": true,
+      "same_signal_group_all_rows": true,
+      "pivots": [
+        {
+          "group": [
+            0,
+            0,
+            0
+          ],
+          "pivot": "0:19:0:0",
+          "identities": [
+            "0:6:0:0",
+            "0:11:0:0",
+            "0:17:0:0",
+            "0:19:0:0"
+          ]
+        },
+        {
+          "group": [
+            0,
+            3,
+            0
+          ],
+          "pivot": "0:6:3:0",
+          "identities": [
+            "0:6:3:0",
+            "0:11:3:0",
+            "0:17:3:0"
+          ]
+        },
+        {
+          "group": [
+            2,
+            0,
+            0
+          ],
+          "pivot": "2:11:0:0",
+          "identities": [
+            "2:2:0:0",
+            "2:10:0:0",
+            "2:11:0:0",
+            "2:36:0:0"
+          ]
+        },
+        {
+          "group": [
+            2,
+            6,
+            0
+          ],
+          "pivot": "2:11:6:0",
+          "identities": [
+            "2:2:6:0",
+            "2:10:6:0",
+            "2:11:6:0",
+            "2:36:6:0"
+          ]
+        },
+        {
+          "group": [
+            3,
+            0,
+            0
+          ],
+          "pivot": "3:7:0:0",
+          "identities": [
+            "3:7:0:0",
+            "3:10:0:0",
+            "3:14:0:0",
+            "3:27:0:0",
+            "3:28:0:0",
+            "3:40:0:0",
+            "3:43:0:0"
+          ]
+        },
+        {
+          "group": [
+            3,
+            2,
+            0
+          ],
+          "pivot": "3:7:2:0",
+          "identities": [
+            "3:7:2:0",
+            "3:10:2:0",
+            "3:14:2:0"
+          ]
+        }
+      ],
+      "rejected": [
+        {
+          "signal": "0:3:0:0",
+          "reason": "carrier half-cycle ambiguity is unresolved"
+        },
+        {
+          "signal": "0:4:0:0",
+          "reason": "carrier half-cycle ambiguity is unresolved"
+        },
+        {
+          "signal": "0:12:0:0",
+          "reason": "carrier half-cycle ambiguity is unresolved"
+        },
+        {
+          "signal": "0:3:3:0",
+          "reason": "no broadcast ephemeris audit for G03"
+        },
+        {
+          "signal": "0:4:3:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "0:12:3:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "2:12:0:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "2:12:6:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "3:11:0:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "3:33:0:0",
+          "reason": "no broadcast ephemeris audit for C33"
+        },
+        {
+          "signal": "3:42:0:0",
+          "reason": "carrier half-cycle ambiguity is unresolved"
+        }
+      ]
+    },
+    {
+      "time_s": 100.39800000190735,
+      "file": "GPS_GAL_BDS_DUAL_171.npz",
+      "sha256": "2e22c775bf921983704c37472c628a1e5f807104f449d034e7d242ea8bb1e7ce",
+      "dd_rows": 18,
+      "raw_endpoint_count": 48,
+      "A_max_abs_diff": 0.0,
+      "y_max_abs_diff_m": 0.0,
+      "Q_max_abs_diff_m2": 0.0,
+      "B_code_phase_half_max_diff": 0.0,
+      "all_labels_match_cached_raw_arc_events": true,
+      "all_admitted_raw_fields_eligible": true,
+      "same_signal_group_all_rows": true,
+      "pivots": [
+        {
+          "group": [
+            0,
+            0,
+            0
+          ],
+          "pivot": "0:19:0:0",
+          "identities": [
+            "0:6:0:0",
+            "0:11:0:0",
+            "0:17:0:0",
+            "0:19:0:0"
+          ]
+        },
+        {
+          "group": [
+            0,
+            3,
+            0
+          ],
+          "pivot": "0:6:3:0",
+          "identities": [
+            "0:6:3:0",
+            "0:11:3:0",
+            "0:17:3:0"
+          ]
+        },
+        {
+          "group": [
+            2,
+            0,
+            0
+          ],
+          "pivot": "2:11:0:0",
+          "identities": [
+            "2:2:0:0",
+            "2:10:0:0",
+            "2:11:0:0",
+            "2:36:0:0"
+          ]
+        },
+        {
+          "group": [
+            2,
+            6,
+            0
+          ],
+          "pivot": "2:11:6:0",
+          "identities": [
+            "2:2:6:0",
+            "2:11:6:0",
+            "2:36:6:0"
+          ]
+        },
+        {
+          "group": [
+            3,
+            0,
+            0
+          ],
+          "pivot": "3:7:0:0",
+          "identities": [
+            "3:7:0:0",
+            "3:10:0:0",
+            "3:14:0:0",
+            "3:27:0:0",
+            "3:28:0:0",
+            "3:40:0:0",
+            "3:43:0:0"
+          ]
+        },
+        {
+          "group": [
+            3,
+            2,
+            0
+          ],
+          "pivot": "3:7:2:0",
+          "identities": [
+            "3:7:2:0",
+            "3:10:2:0",
+            "3:14:2:0"
+          ]
+        }
+      ],
+      "rejected": [
+        {
+          "signal": "0:3:0:0",
+          "reason": "carrier half-cycle ambiguity is unresolved"
+        },
+        {
+          "signal": "0:4:0:0",
+          "reason": "carrier half-cycle ambiguity is unresolved"
+        },
+        {
+          "signal": "0:12:0:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "0:3:3:0",
+          "reason": "no broadcast ephemeris audit for G03"
+        },
+        {
+          "signal": "0:4:3:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "0:12:3:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "2:12:0:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "2:10:6:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "2:12:6:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "3:11:0:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "3:33:0:0",
+          "reason": "no broadcast ephemeris audit for C33"
+        },
+        {
+          "signal": "3:42:0:0",
+          "reason": "carrier half-cycle ambiguity is unresolved"
+        }
+      ]
+    },
+    {
+      "time_s": 100.59800004959106,
+      "file": "GPS_GAL_BDS_DUAL_172.npz",
+      "sha256": "b2b4cb9c77d0b8af4f106880f91b1d23d6727543d8808ed77c3380a76ad43f8d",
+      "dd_rows": 18,
+      "raw_endpoint_count": 48,
+      "A_max_abs_diff": 0.0,
+      "y_max_abs_diff_m": 0.0,
+      "Q_max_abs_diff_m2": 0.0,
+      "B_code_phase_half_max_diff": 0.0,
+      "all_labels_match_cached_raw_arc_events": true,
+      "all_admitted_raw_fields_eligible": true,
+      "same_signal_group_all_rows": true,
+      "pivots": [
+        {
+          "group": [
+            0,
+            0,
+            0
+          ],
+          "pivot": "0:19:0:0",
+          "identities": [
+            "0:6:0:0",
+            "0:11:0:0",
+            "0:17:0:0",
+            "0:19:0:0"
+          ]
+        },
+        {
+          "group": [
+            0,
+            3,
+            0
+          ],
+          "pivot": "0:6:3:0",
+          "identities": [
+            "0:6:3:0",
+            "0:11:3:0",
+            "0:17:3:0"
+          ]
+        },
+        {
+          "group": [
+            2,
+            0,
+            0
+          ],
+          "pivot": "2:11:0:0",
+          "identities": [
+            "2:2:0:0",
+            "2:10:0:0",
+            "2:11:0:0",
+            "2:36:0:0"
+          ]
+        },
+        {
+          "group": [
+            2,
+            6,
+            0
+          ],
+          "pivot": "2:11:6:0",
+          "identities": [
+            "2:2:6:0",
+            "2:11:6:0",
+            "2:36:6:0"
+          ]
+        },
+        {
+          "group": [
+            3,
+            0,
+            0
+          ],
+          "pivot": "3:7:0:0",
+          "identities": [
+            "3:7:0:0",
+            "3:10:0:0",
+            "3:14:0:0",
+            "3:27:0:0",
+            "3:28:0:0",
+            "3:40:0:0",
+            "3:43:0:0"
+          ]
+        },
+        {
+          "group": [
+            3,
+            2,
+            0
+          ],
+          "pivot": "3:7:2:0",
+          "identities": [
+            "3:7:2:0",
+            "3:10:2:0",
+            "3:14:2:0"
+          ]
+        }
+      ],
+      "rejected": [
+        {
+          "signal": "0:3:0:0",
+          "reason": "carrier half-cycle ambiguity is unresolved"
+        },
+        {
+          "signal": "0:4:0:0",
+          "reason": "carrier half-cycle ambiguity is unresolved"
+        },
+        {
+          "signal": "0:12:0:0",
+          "reason": "carrier half-cycle ambiguity is unresolved"
+        },
+        {
+          "signal": "0:3:3:0",
+          "reason": "no broadcast ephemeris audit for G03"
+        },
+        {
+          "signal": "0:4:3:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "0:12:3:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "2:12:0:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "2:10:6:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "2:12:6:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "3:11:0:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "3:33:0:0",
+          "reason": "no broadcast ephemeris audit for C33"
+        },
+        {
+          "signal": "3:42:0:0",
+          "reason": "carrier half-cycle ambiguity is unresolved"
+        }
+      ]
+    },
+    {
+      "time_s": 100.79800009727478,
+      "file": "GPS_GAL_BDS_DUAL_173.npz",
+      "sha256": "b3f3834dc871ffbc20f01c17d9802edb5c3aa2949eb1e52fcefb1a8363140ac7",
+      "dd_rows": 18,
+      "raw_endpoint_count": 48,
+      "A_max_abs_diff": 0.0,
+      "y_max_abs_diff_m": 0.0,
+      "Q_max_abs_diff_m2": 0.0,
+      "B_code_phase_half_max_diff": 0.0,
+      "all_labels_match_cached_raw_arc_events": true,
+      "all_admitted_raw_fields_eligible": true,
+      "same_signal_group_all_rows": true,
+      "pivots": [
+        {
+          "group": [
+            0,
+            0,
+            0
+          ],
+          "pivot": "0:19:0:0",
+          "identities": [
+            "0:6:0:0",
+            "0:11:0:0",
+            "0:17:0:0",
+            "0:19:0:0"
+          ]
+        },
+        {
+          "group": [
+            0,
+            3,
+            0
+          ],
+          "pivot": "0:6:3:0",
+          "identities": [
+            "0:6:3:0",
+            "0:11:3:0",
+            "0:17:3:0"
+          ]
+        },
+        {
+          "group": [
+            2,
+            0,
+            0
+          ],
+          "pivot": "2:36:0:0",
+          "identities": [
+            "2:2:0:0",
+            "2:10:0:0",
+            "2:36:0:0"
+          ]
+        },
+        {
+          "group": [
+            2,
+            6,
+            0
+          ],
+          "pivot": "2:11:6:0",
+          "identities": [
+            "2:2:6:0",
+            "2:10:6:0",
+            "2:11:6:0",
+            "2:36:6:0"
+          ]
+        },
+        {
+          "group": [
+            3,
+            0,
+            0
+          ],
+          "pivot": "3:7:0:0",
+          "identities": [
+            "3:7:0:0",
+            "3:10:0:0",
+            "3:14:0:0",
+            "3:27:0:0",
+            "3:28:0:0",
+            "3:40:0:0",
+            "3:43:0:0"
+          ]
+        },
+        {
+          "group": [
+            3,
+            2,
+            0
+          ],
+          "pivot": "3:7:2:0",
+          "identities": [
+            "3:7:2:0",
+            "3:10:2:0",
+            "3:14:2:0"
+          ]
+        }
+      ],
+      "rejected": [
+        {
+          "signal": "0:3:0:0",
+          "reason": "carrier half-cycle ambiguity is unresolved"
+        },
+        {
+          "signal": "0:4:0:0",
+          "reason": "carrier half-cycle ambiguity is unresolved"
+        },
+        {
+          "signal": "0:12:0:0",
+          "reason": "carrier half-cycle ambiguity is unresolved"
+        },
+        {
+          "signal": "0:3:3:0",
+          "reason": "no broadcast ephemeris audit for G03"
+        },
+        {
+          "signal": "0:4:3:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "0:12:3:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "2:11:0:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "2:12:0:0",
+          "reason": "no broadcast ephemeris audit for E12"
+        },
+        {
+          "signal": "2:12:6:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "3:11:0:0",
+          "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+        },
+        {
+          "signal": "3:33:0:0",
+          "reason": "no broadcast ephemeris audit for C33"
+        },
+        {
+          "signal": "3:42:0:0",
+          "reason": "carrier half-cycle ambiguity is unresolved"
+        }
+      ]
+    }
+  ],
+  "aggregate_checks": {
+    "original_csv_and_normalized_ubx_hashes_match_pins": true,
+    "selected_raw_payload_bytes_identical_csv_to_ubx": true,
+    "admitted_receiver_signal_observations": 194,
+    "admitted_tracking_status_counts": {
+      "15": 64,
+      "7": 130
+    },
+    "admitted_cpValid_and_halfCyc_all_true": true,
+    "admitted_subHalfCyc_true_count": 64,
+    "admitted_locktime_range_ms": [
+      200,
+      64500
+    ],
+    "admitted_cpStdev_range": [
+      2,
+      9
+    ],
+    "checked_dd_label_endpoint_occurrences": 292,
+    "label_arc_token_mismatches": 0,
+    "unsplit_source_discontinuities": 0,
+    "max_abs_tdcp_residual_cycles_on_surviving_token": 0.4846298419124935,
+    "max_recomputed_vs_cached_tdcp_residual_difference_cycles": 0.0,
+    "new_admitted_arc_samples": [
+      {
+        "time_s": 100.39800000190735,
+        "rx": 2,
+        "signal": "3:27:0:0",
+        "arc_token": "2|3:27:0:0|arc=4",
+        "reasons": [
+          "TDCP_DOPPLER_INCONSISTENT"
+        ],
+        "tdcp": {
+          "dt_s": 0.19999999995343387,
+          "tdcp_cycles": -383.99312131106853,
+          "integrated_doppler_cycles": -383.44467764509733,
+          "residual_cycles": -0.548443665971206,
+          "tdcp_m": -73.74184176325728,
+          "status": "INCONSISTENT"
+        }
+      },
+      {
+        "time_s": 100.79800009727478,
+        "rx": 1,
+        "signal": "2:10:6:0",
+        "arc_token": "1|2:10:6:0|arc=5",
+        "reasons": [
+          "CARRIER_VALIDITY_CHANGED",
+          "REACQUIRED_AFTER_INVALID"
+        ],
+        "tdcp": null
+      }
+    ]
+  },
+  "source_driven_arc_events": [
+    {
+      "rx": 1,
+      "signal": "2:10:6:0",
+      "from_time_s": 100.198,
+      "time_s": 100.398,
+      "locktime_ms": [
+        4080,
+        0
+      ],
+      "tracking_status": [
+        7,
+        1
+      ],
+      "cno_dbhz": [
+        33,
+        29
+      ],
+      "raw_flags": [
+        "LOCKTIME_REGRESSION",
+        "HALF_CYCLE_VALIDITY_CHANGED",
+        "CARRIER_VALIDITY_CHANGED",
+        "RAW_ENDPOINT_PHASE_INELIGIBLE"
+      ],
+      "tdcp_residual_cycles": null,
+      "cache_tdcp_residual_max_diff": null,
+      "cached_reasons": [
+        "CARRIER_INVALID",
+        "HALF_CYCLE_UNRESOLVED",
+        "PHASE_STD_INVALID",
+        "NO_CARRIER_LOCK",
+        "LOCKTIME_REGRESSION",
+        "HALF_CYCLE_VALIDITY_CHANGED",
+        "CARRIER_VALIDITY_CHANGED"
+      ],
+      "arc_tokens": [
+        "1|2:10:6:0|arc=4",
+        null
+      ],
+      "same_token": false,
+      "current_admitted": false
+    },
+    {
+      "rx": 1,
+      "signal": "2:10:6:0",
+      "from_time_s": 100.398,
+      "time_s": 100.598,
+      "locktime_ms": [
+        0,
+        0
+      ],
+      "tracking_status": [
+        1,
+        5
+      ],
+      "cno_dbhz": [
+        29,
+        30
+      ],
+      "raw_flags": [
+        "HALF_CYCLE_VALIDITY_CHANGED",
+        "RAW_ENDPOINT_PHASE_INELIGIBLE"
+      ],
+      "tdcp_residual_cycles": null,
+      "cache_tdcp_residual_max_diff": null,
+      "cached_reasons": [
+        "CARRIER_INVALID",
+        "NO_CARRIER_LOCK",
+        "HALF_CYCLE_VALIDITY_CHANGED",
+        "REACQUIRED_AFTER_INVALID"
+      ],
+      "arc_tokens": [
+        null,
+        null
+      ],
+      "same_token": false,
+      "current_admitted": false
+    },
+    {
+      "rx": 1,
+      "signal": "2:10:6:0",
+      "from_time_s": 100.598,
+      "time_s": 100.798,
+      "locktime_ms": [
+        0,
+        200
+      ],
+      "tracking_status": [
+        5,
+        7
+      ],
+      "cno_dbhz": [
+        30,
+        34
+      ],
+      "raw_flags": [
+        "CARRIER_VALIDITY_CHANGED",
+        "RAW_ENDPOINT_PHASE_INELIGIBLE"
+      ],
+      "tdcp_residual_cycles": null,
+      "cache_tdcp_residual_max_diff": null,
+      "cached_reasons": [
+        "CARRIER_VALIDITY_CHANGED",
+        "REACQUIRED_AFTER_INVALID"
+      ],
+      "arc_tokens": [
+        null,
+        "1|2:10:6:0|arc=5"
+      ],
+      "same_token": false,
+      "current_admitted": true
+    },
+    {
+      "rx": 2,
+      "signal": "3:27:0:0",
+      "from_time_s": 100.198,
+      "time_s": 100.398,
+      "locktime_ms": [
+        64500,
+        64500
+      ],
+      "tracking_status": [
+        7,
+        7
+      ],
+      "cno_dbhz": [
+        42,
+        43
+      ],
+      "raw_flags": [],
+      "tdcp_residual_cycles": -0.548443665971206,
+      "cache_tdcp_residual_max_diff": 0.0,
+      "cached_reasons": [
+        "TDCP_DOPPLER_INCONSISTENT"
+      ],
+      "arc_tokens": [
+        "2|3:27:0:0|arc=3",
+        "2|3:27:0:0|arc=4"
+      ],
+      "same_token": false,
+      "current_admitted": true
+    },
+    {
+      "rx": 2,
+      "signal": "2:11:0:0",
+      "from_time_s": 100.598,
+      "time_s": 100.798,
+      "locktime_ms": [
+        64500,
+        0
+      ],
+      "tracking_status": [
+        7,
+        1
+      ],
+      "cno_dbhz": [
+        33,
+        29
+      ],
+      "raw_flags": [
+        "LOCKTIME_REGRESSION",
+        "HALF_CYCLE_VALIDITY_CHANGED",
+        "CARRIER_VALIDITY_CHANGED",
+        "RAW_ENDPOINT_PHASE_INELIGIBLE"
+      ],
+      "tdcp_residual_cycles": null,
+      "cache_tdcp_residual_max_diff": null,
+      "cached_reasons": [
+        "CARRIER_INVALID",
+        "HALF_CYCLE_UNRESOLVED",
+        "PHASE_STD_INVALID",
+        "NO_CARRIER_LOCK",
+        "LOCKTIME_REGRESSION",
+        "HALF_CYCLE_VALIDITY_CHANGED",
+        "CARRIER_VALIDITY_CHANGED"
+      ],
+      "arc_tokens": [
+        "2|2:11:0:0|arc=1",
+        null
+      ],
+      "same_token": false,
+      "current_admitted": false
+    }
+  ],
+  "source_conflicts": [],
+  "integer_qualification_boundary": {
+    "conclusion": "Source evidence supports breaking old-to-new arc equality, not removing integer membership of the new arc. Both already-observed arc breaks are represented by distinct physical tokens.",
+    "E10_E5b_rx1": "Loss of lock at100.398/100.598 excludes those rows; valid100.798 reacquisition creates arc5 instead of arc4. This requires a new ambiguity; it does not establish a noninteger new ambiguity.",
+    "C27_B1_rx2": "At100.398, TDCP-Doppler residual -0.548443665971206 cycles exceeds the frozen0.5-cycle continuity bound; arc3 becomes arc4. The scalar residual is a continuity diagnostic, not an integer/noninteger phase-bias certificate.",
+    "E11_E1_rx2": "Loss of lock at100.798 excludes old pivot E11. E36 becomes pivot within the same signal group; surviving physical satellite relations remain transportable.",
+    "allowed_hypothesis_only": "A C27 new-arc noninteger bias may be specified as a source-localized, falsifiable fault hypothesis. A nonempty relaxed model cannot by itself establish that this arc is faulty.",
+    "prohibited_inference": "Do not infer a faulty arc from EMPTY alone, release coordinate subsets until enumeration passes, or claim a high-confidence partial domain by projecting an empty full integer domain."
+  },
+  "verification_limits": {
+    "first_packet_predecessor": "cached ARC_EVENTS only; prior raw packet not read",
+    "known_sd": "The exact y reconstruction reused cached known_sd_m and therefore verifies raw-to-cache semantics, not independent physical correctness of the geometric correction.",
+    "B": "Sign and duplicated code/phase rows were verified against pinned source and cached matrices. Satellite geometry was not regenerated.",
+    "unverified_model_assumptions": [
+      "Independent RAWX SD noise and cross-epoch independence",
+      "Receiver physical sampling synchronization (exact tag equality only)",
+      "Residual noninteger antenna/hardware/multipath effects",
+      "Geometric correction accuracy; y reconstruction uses cached known_sd_m"
+    ],
+    "conclusion": "No source-semantic conflict was found. The physical cause of EMPTY remains unresolved; stochastic mismatch has not been established."
+  },
+  "next_hypothesis": {
+    "status": "PROPOSED_DERIVATION_NOT_RUN",
+    "question": "Does the common geometric/time model leave a deterministic fractional-cycle DD term despite correct raw fields and arc identities?",
+    "most_discriminating_next_step": "Trace the pinned known_sd_m derivation for these same four pairs into its two receiver transmit times, satellite-clock terms and reference point. Derive the DD phase equation at the actual receiver sampling times before invoking integer enumeration. In particular, establish from source whether the receiver clock contribution used in code-based transmit times and the nominal shared epoch is removed consistently.",
+    "causal_time_offset_signature": "For source-supported offsets delta_t1 and delta_t2 from the nominal state time, the first-order omitted term is DD(range_rate_rx2*delta_t2-range_rate_rx1*delta_t1), with range_rate=-lambda*Doppler. This gives one physical structured template across all admitted satellites, not an independent bias per ambiguity. Values require clock/timing evidence; exact equal RAWX tags alone do not supply physical synchronization calibration.",
+    "hardware_bias_cancellation": "A receiver-specific phase offset constant across satellites within a fixed signal group cancels under target-minus-pivot DD. Because groups are not mixed, a generic constant cross-signal receiver bias is not sufficient to explain this domain being empty. Satellite-dependent, receiver-channel-dependent or time-varying terms would require their own source or calibration evidence.",
+    "decision_boundary": "Use one source-supported geometric/time derivation for all four unchanged blocks. If it predicts a noncancelling term, quantify that term before proposing any corrected model. If timing/geometry provenance does not establish it, retain the hypothesis as unresolved; do not fit arbitrary offsets or relax integer membership merely to remove EMPTY."
+  }
+}

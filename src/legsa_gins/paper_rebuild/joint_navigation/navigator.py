@@ -678,7 +678,10 @@ class JointNavigator:
             packet = self._filter(event)
             _, nis = self._advance(packet, index)
             if not self._initialized():
-                self.rows.append(self._no_init_output(t))
+                output = self._no_init_output(t)
+                output.update(measurement_time_s=t,
+                              available_time_s=float(event.get("available_time_s", t)))
+                self.rows.append(output)
                 return
             matches = [(j, b) for j, b in enumerate(self.branches)
                        if all(b.fixed.get(label) == value for label, value in integers.items())]
@@ -740,6 +743,8 @@ class JointNavigator:
             self.reference_rows[index], nis = self._advance(packet, index)
             if self.asynchronous_start and not self._initialized():
                 output = self._no_init_output(t)
+                output.update(measurement_time_s=t,
+                              available_time_s=float(event.get("available_time_s", t)))
                 self.rows.append(output)
                 if output_callback is not None:
                     output_callback(index, event, output, self.support_models, {})
@@ -816,7 +821,9 @@ class JointNavigator:
                                  "PHASE_ABSENT_CODE_AND_MOTION")
             status = phase_context + "_" + status
             output.update(
-                time_s=t, initialization_status=(self.bootstrap_diagnostic["status"]
+                time_s=t, measurement_time_s=t,
+                available_time_s=float(event.get("available_time_s", t)),
+                initialization_status=(self.bootstrap_diagnostic["status"]
                     if self.asynchronous_start else "SYNTHETIC_LEGACY_START"),
                 candidate_yaws_rad=[float(r[2]) for r in candidate_rpy],
                 candidate_costs=costs.tolist(), candidate_supported=supported.tolist(),

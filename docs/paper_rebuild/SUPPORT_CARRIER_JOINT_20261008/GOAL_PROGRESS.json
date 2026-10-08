@@ -27,7 +27,8 @@
     "Analytic common-translation nuisance eliminates nonlinear exact-foot LM infeasibility while preserving original per-foot AR correlations",
     "Offline BY2 export and frozen original V3 evaluation point/evaluator bridge; first short cold-start result is worse in heading",
     "34 necessary mathematical checks pass including physical partial/pivot graph recovery and correlated changing-subset foot likelihood",
-    "Square-root marginalization preserves original information and crosses the actual BY first-marginalization failure; no added anchor or covariance floor"
+    "Square-root marginalization preserves original information and crosses the actual BY first-marginalization failure; no added anchor or covariance floor",
+    "Corrected nonuniform IMU increment reassignment; matched short BY U0/U1 rerun and frozen V3 readout completed; former large foot benefit retracted"
   ],
   "not_proven": [
     "Material legged contribution to heading qualification or integer-candidate acceptance",
@@ -38,10 +39,10 @@
     "Same-version SDK and frozen V3 system adoption value on real data"
   ],
   "next_core_work": [
-    "Compute shared IMU/PV physical forward consistency before changing foot thresholds: U0 and U1 both grow horizontal accelerometer bias to about 0.7 m/s^2, while the matched legged arm improves yaw and position under finite solver budgets",
-    "Read the corrected running full synthetic source-model process, then establish supported causal revocation and direction-to-navigation attribution",
-    "Explain BY raw integer-domain emptiness and preserve valid partial physical relations in the same state rather than forcing all-integer fixes",
-    "Complete BY development and original V3 whole-window comparison before freezing parameters for BYO/BYH and adverse XB/NMB tests"
+    "Run the corrected shared navigation backbone over full BY development window with original V3 comparison; retain NO_INIT and all degradation, no short-window tuning",
+    "Replace every-observed-group full nonlinear shadows with a tractable shared inference and explicit unresolved explanation policy; keep the running full synthetic comparison",
+    "Explain raw integer-domain emptiness without arbitrary noninteger releases or covariance inflation; preserve partial information and source-scoped revocation",
+    "Complete heading-to-common-velocity/position attribution and freeze BY parameters before BYO/BYH and XB/NMB"
   ],
   "data_policy": {
     "development": "BY",
@@ -60,7 +61,7 @@
     ],
     "real_velocity_accuracy_claim_allowed": false
   },
-  "latest_implementation": "analytic_support_errors_asynchronous_bootstrap_physical_DD_joint_graph",
+  "latest_implementation": "native_IMU_increment_support_and_explicit_IMU_availability",
   "latest_full_cohort": "cohort_analytic_20261008_seed6100801",
   "latest_full_cohort_status_at_commit": "RUNNING_NOT_RESULT_EVIDENCE",
   "scientifically_interrupted_cohort": {
@@ -124,6 +125,23 @@
       "U0": 3,
       "U1": 1
     },
-    "legged_contribution_scope": "Observed same-compute cold-start improvement; not isolated heading mediation or superiority to V3"
+    "legged_contribution_scope": "Observed same-compute cold-start improvement; not isolated heading mediation or superiority to V3",
+    "native_increment_correction": {
+      "report": "BY_NATIVE_INCREMENT_COMPARISON.json",
+      "U0_yaw_rmse_deg": 4.095347500479411,
+      "U1_yaw_rmse_deg": 3.932426134711624,
+      "V3_yaw_rmse_deg": 1.1608123408505053,
+      "U0_horizontal_rmse_m": 0.049517108324403786,
+      "U1_horizontal_rmse_m": 0.04803795115653245,
+      "V3_horizontal_rmse_m": 0.03811369008805525,
+      "U0_3d_rmse_m": 0.11617424303562267,
+      "U1_3d_rmse_m": 0.11378684900559392,
+      "V3_3d_rmse_m": 0.05179865083786852,
+      "maximum_IMU_delay_s": 0.007308983776368905,
+      "actual_GNSS_arrival_modeled": false,
+      "large_previous_foot_gain_superseded": true,
+      "shared_dynamic_model_resolved": false,
+      "full_BY_next_run": "BY_NATIVE_FULL_06_U1"
+    }
   }
 }

@@ -100,8 +100,7 @@ def _body_rows(config: By2InputConfig) -> tuple[list[dict], dict]:
     for source_row, message in enumerate(iter_messages(config.body_path), 1):
         ns, _, _, forces, foot_values, _ = _parse_allowed_record(message.splitlines(), source_row)
         t = (ns-config.base_time_unix_s*1_000_000_000)*1e-9
-        if t > config.end_s:
-            break
+        terminal_imu_only = t > config.end_s
         if previous_ns is not None and ns <= previous_ns:
             raise ValueError(f"nonmonotonic BY2 body source row {source_row}; no silent repair")
         sec, nsec = divmod(ns, 1_000_000_000)
@@ -109,6 +108,15 @@ def _body_rows(config: By2InputConfig) -> tuple[list[dict], dict]:
         # rates; retain integer-stamp relative time for actual availability.
         legacy_time = float(sec+nsec*1e-9)-config.base_time_unix_s
         legacy_dt = None if previous_legacy is None else legacy_time-previous_legacy
+        if terminal_imu_only:
+            # One closing IMU sample is allowed to arrive after the final
+            # measurement epoch. Do not advance support or expose its feet.
+            rows.append(dict(time_s=t, source_row=source_row, stamp_ns=ns,
+                             legacy_time_s=legacy_time, legacy_dt_s=legacy_dt,
+                             feet=[], support_states=[], active_arcs=(),
+                             selected=False, support_changed=False,
+                             terminal_imu_only=True))
+            break
         support = tracker.update(t, dict(zip(NATIVE_FOOT_ORDER, forces)), available_time_s=t)
         feet, states = [], []
         points = np.asarray(foot_values, float).reshape(4, 3)*[1., -1., -1.]
@@ -143,6 +151,7 @@ def _body_rows(config: By2InputConfig) -> tuple[list[dict], dict]:
     return rows, dict(source_rows_read=len(rows), body_prefix_start_time_s=rows[0]["time_s"],
                       force_arcs_seen_include_pre_window_prefix=True,
                       force_arcs_by_foot=dict(zip(NATIVE_FOOT_ORDER, counters)),
+                      terminal_imu_only_source_time_s=(rows[-1]["time_s"] if rows[-1].get("terminal_imu_only") else None),
                       selected_body_events=sum(row["selected"] for row in rows),
                       support_change_events=sum(row["selected"] and row["support_changed"] for row in rows))
 
@@ -174,26 +183,36 @@ def _imu_rates(config: By2InputConfig, body: list[dict]) -> tuple[np.ndarray, np
     return times, rates, identities, np.asarray(source_noise_intervals)
 
 
-def _imu_packet(t0, t1, times, rates, identities, source_noise_intervals):
+def _imu_packet(t0, t1, times, rates, identities, source_noise_intervals,
+                source_support_starts):
+    """Split saved right-endpoint increments over their actual source intervals.
+
+    ``rates`` were recovered using the original writer's (floating timestamp)
+    dt. Scale by that dt / physical support duration so each original increment
+    is conserved exactly despite the small timestamp-representation difference.
+    The returned source timestamp is the right endpoint: callers must delay
+    availability until every used endpoint has arrived. No future sample is
+    represented as available at an earlier measurement epoch.
+    """
     if t1 == t0:
         return np.empty((0, 7)), np.empty((0, 4)), np.empty((0, 2), dtype=int)
-    index = int(np.searchsorted(times, t0, side="right")-1)
-    if index < 0:
-        raise ValueError("IMU packet has no causal left-boundary sample")
+    index = int(np.searchsorted(times, t0, side="right"))
     rows, support, source_rows = [], [], []
     cursor = t0
     while cursor < t1:
-        boundary = min(t1, times[index+1]) if index+1 < len(times) else t1
-        if boundary-times[index] > .05:
-            raise ValueError("IMU source gap exceeds 50 ms; missing integration is not filled")
-        rows.append(np.r_[boundary-cursor, rates[index]])
-        # Splitting or holding a rate does not create another noise sample.
-        # Its variance uses the original increment-generation interval.
-        support.append((cursor, boundary, times[index], source_noise_intervals[index]))
+        if index >= len(times):
+            raise ValueError("IMU interval requires an unobserved closing source sample")
+        source_start, source_end = source_support_starts[index], times[index]
+        duration = source_end-source_start
+        if source_start > cursor or not 0 < duration <= .05:
+            raise ValueError("IMU source does not cover interval; missing integration is not filled")
+        boundary = min(t1, source_end)
+        physical_rate = rates[index]*(source_noise_intervals[index]/duration)
+        rows.append(np.r_[boundary-cursor, physical_rate])
+        support.append((cursor, boundary, source_end, source_noise_intervals[index]))
         source_rows.append(identities[index])
         cursor = boundary
-        if index+1 < len(times) and cursor == times[index+1]:
-            index += 1
+        index += 1
     return np.asarray(rows), np.asarray(support), np.asarray(source_rows, dtype=int)
 
 
@@ -251,6 +270,7 @@ def load_by2_events(config: By2InputConfig) -> dict:
     if len(body) < 1000 or body[999]["time_s"] > config.start_s:
         raise ValueError("the calibrated first-1000 gyro prefix is not available by requested start")
     imu_times, imu_rates, imu_identities, imu_noise_intervals = _imu_rates(config, body)
+    imu_support_starts = np.asarray([body[int(i)-2]["time_s"] for i in imu_identities[:, 1]])
     plan = json.loads(Path(config.carrier_plan_path).read_text())
     if plan["base_time"] != config.base_time_unix_s or plan["sequence"] != "BY2":
         raise ValueError("carrier plan sequence or time origin differs from requested BY2")
@@ -266,12 +286,17 @@ def load_by2_events(config: By2InputConfig) -> dict:
     lever = np.array([.03, .03, -.30])
     first_carrier = None
     for t in event_times:
-        imu, intervals, identities = _imu_packet(previous, t, imu_times, imu_rates, imu_identities, imu_noise_intervals)
+        imu, intervals, identities = _imu_packet(previous, t, imu_times, imu_rates,
+            imu_identities, imu_noise_intervals, imu_support_starts)
+        used_source_indexes = np.searchsorted(imu_times, intervals[:, 2])
+        available_time = max(t, float(intervals[:, 2].max())) if len(intervals) else t
         gyro_index = int(np.searchsorted(imu_times, t, side="right")-1)
         gyro_source_dt = float(imu_noise_intervals[gyro_index])
         current_body = body_events.get(t)
         latest_body = body[int(np.searchsorted(body_times, t, side="right")-1)]
-        event = dict(time_s=t, available_time_s=t, imu=imu, imu_interval_sources=intervals,
+        event = dict(time_s=t, available_time_s=available_time, imu=imu, imu_interval_sources=intervals,
+            imu_original_support_intervals=np.column_stack((imu_support_starts[used_source_indexes], imu_times[used_source_indexes])),
+            imu_original_increments=imu_rates[used_source_indexes]*imu_noise_intervals[used_source_indexes, None],
             gnss_angular_rate_body_rad_s=imu_rates[gyro_index, 3:6].copy(),
             gnss_angular_rate_source_time_s=float(imu_times[gyro_index]),
             last_gyro_source_noise_interval_s=gyro_source_dt,
@@ -345,9 +370,15 @@ def load_by2_events(config: By2InputConfig) -> dict:
         imu_source_noise_interval="original_increment_generation_dt; shared_across_split_or_held_segments_of_one_source_sample",
         last_gyro_source_noise_interval="original_dt_of_explicit_GNSS_angular_rate_source; source_noise_interval_s_is_an_alias",
         gnss_angular_rate_sampling="last_arrived_IMU_source_at_or_before_event; available_for_empty_packet; can_differ_from_last_integration_segment_source",
-        imu_sampling="calibrated_increment_over_original_dt_then_causal_previous_sample_ZOH",
-        imu_availability="integer_body_stamp; no next_sample_used_before_arrival",
-        imu_quadrature_change="causal_rate_hold_differs_from_original_current_sample_times_previous_dt",
+        imu_sampling="saved_current_sample_times_previous_dt_increments_preserved_over_actual_previous_to_current_source_support",
+        imu_original_support_columns=("source_interval_start_s", "source_interval_end_s"),
+        imu_original_increment_columns=("dv_x_mps", "dv_y_mps", "dv_z_mps", "dtheta_x_rad", "dtheta_y_rad", "dtheta_z_rad"),
+        imu_original_increment_rows="full_saved_source_increment_repeated_for_each_split_segment; source_rows_identify_repeats_not_new_samples",
+        imu_availability="event_available_time_is_max_measurement_epoch_and_used_IMU_source_right_endpoints",
+        imu_terminal_sample="first_body_row_after_requested_end_is_IMU_only; no_beyond_window_foot_or_support_consumption",
+        imu_quadrature_change="none_relative_to_saved_increment_support; fractional_split_conserves_each_source_increment",
+        source_arrival_scope="only_IMU_right_endpoint_delay_modeled; actual_GNSS_receiver_arrival_latency_unavailable_and_not_modeled",
+        measurement_and_availability_times_separate=True,
         imu_calibration=dict(already_applied=True, flu_to_frd=True, install_rpy_deg=[-1., 0., 0.],
             initial_gyro_mean_samples=1000, accel_scale=float(calibration["s"]),
             initial_gyro_mean_prefix_end_time_s=body[999]["time_s"],
@@ -390,6 +421,9 @@ def load_by2_events(config: By2InputConfig) -> dict:
         integrated_duration_s=total_dt, requested_duration_s=config.end_s-config.start_s,
         maximum_imu_packet_duration_error_s=max(abs(float(np.sum(event["imu"][:, 0]))-(event["time_s"]-(events[i-1]["time_s"] if i else config.start_s))) for i, event in enumerate(events)),
         maximum_IMU_source_minus_segment_start_s=float(np.max(source_intervals[:, 2]-source_intervals[:, 0])),
+        maximum_event_IMU_availability_delay_s=max(event["available_time_s"]-event["time_s"] for event in events),
+        last_event_available_time_s=events[-1]["available_time_s"],
+        all_used_IMU_sources_available_by_event_publication=all(not len(event["imu"]) or np.max(event["imu_interval_sources"][:, 2]) <= event["available_time_s"] for event in events),
         foot_measurements_have_exact_event_time=all(foot["source_time_s"] == event["time_s"] for event in events for foot in event["feet"]),
         coordinate_rotation_orthogonality_error=float(np.max(np.abs(rotation.T@rotation-np.eye(3)))),
         navigation_calls=0, evaluator_calls=0, reference_reads=0,

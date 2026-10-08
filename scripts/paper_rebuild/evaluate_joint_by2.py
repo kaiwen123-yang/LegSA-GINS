@@ -252,6 +252,11 @@ def main(argv=None):
             metric_policy="time-weighted RMSE of piecewise-linear squared errors; identical physical intervals; no interval crosses a joint NO_INIT row",
             comparison_type="original_V3_system_comparison_not_same_backend_mechanism_ablation",
             initialization_difference="joint starts at requested run start; frozen V3 is the original 66--340 s causal run, not restarted at this short window",
+            timing_scope="state accuracy at measurement epochs; not a zero-delay arrival-time navigation comparison",
+            joint_imu_availability_recorded=all("available_time_s" in row for row in rows),
+            maximum_recorded_imu_publication_delay_s=(max(row["available_time_s"]-row["time_s"] for row in rows)
+                if all("available_time_s" in row for row in rows) else None),
+            original_gnss_receipt_delays_modeled=False,
             reference_claim="Fixposition-derived fused reference with shared GNSS lineage; not independent truth",
             velocity_accuracy=dict(status="NOT_EVALUATED", reason="Frozen error series and evaluator do not provide velocity truth or velocity errors"),
             uncertainty_comparison="NOT_EVALUATED_NO_FABRICATED_STD",

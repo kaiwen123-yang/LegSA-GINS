@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Run one BY2 input window through the causal joint navigator, without a reference."""
+"""Run BY2 measurement epochs through the joint navigator, without a reference.
+
+Output retains the required IMU source availability separately from measurement
+time. Original GNSS receipt delays are not yet represented by GNSS18 inputs.
+"""
 from __future__ import annotations
 
 import argparse
@@ -86,7 +90,11 @@ def output_summary(rows):
         last_output_time_s=rows[-1]["time_s"] if rows else None,
         navigation_status=navigation_status,
         json_nonfinite_representation="null; CSV numeric state columns retain nan/inf",
-        output_scope="causal_emitted_rows_only_no_historical_replacement",
+        output_scope="emitted_measurement_epoch_rows_with_IMU_availability_no_historical_replacement",
+        arrival_time_online_equivalence=False,
+        arrival_time_limitation="original_GNSS_receipt_delays_not_in_GNSS18",
+        maximum_imu_publication_delay_s=max((row.get("available_time_s", row["time_s"])-row["time_s"]
+                                           for row in rows), default=0.),
         navigation_accuracy_evaluated=False, navigation_benefit_established=False,
         reference_reads=0, evaluator_calls=0,
     )

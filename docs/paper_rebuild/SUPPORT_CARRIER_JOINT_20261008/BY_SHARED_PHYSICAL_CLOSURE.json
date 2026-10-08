@@ -1,0 +1,1076 @@
+{
+  "schema": "joint_navigation.BY2_shared_sensor_closure.v1",
+  "status": "COMPLETED_NO_NEW_NAVIGATION",
+  "navigation_calls": 0,
+  "evaluation_calls": 0,
+  "reference_reads": 0,
+  "testset_reads": 0,
+  "config": {
+    "body_path": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/高层数据/by2.txt",
+    "imu_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu",
+    "gnss_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+    "carrier_plan_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_ATTEMPT02/BY2/MODELS/PLAN.json",
+    "calibration_model_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/00_CALIBRATION/CLEAN5_CALIBRATED_SENSOR_MODEL.yaml",
+    "imu_noise_profile_path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/configs/paper_rebuild/horizontal_literature/hartley/stage_payload/04_METHOD_CONTRACTS/GO2_IMU_ALLAN_90MIN_RECOVERED_V1.yaml",
+    "start_s": 96.0,
+    "end_s": 106.0,
+    "key_dt_s": 0.1,
+    "base_time_unix_s": 1772784000,
+    "family": "GPS_GAL_BDS_DUAL",
+    "origin_blh_deg_m": null
+  },
+  "runs": {
+    "U0": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_NOFOOT_PHYSICAL_04",
+    "U1": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_ASYNC_PHYSICAL_04"
+  },
+  "source_sha256": {
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_NOFOOT_PHYSICAL_04/run_status.json": "224297092b2b6d28e3bd379faba2d68936507723e51a2012a0cf2ccfe586f7ef",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_NOFOOT_PHYSICAL_04/navigation.jsonl": "8816536fbfb635cda1b00f8703441d11925a2c84919396c258b0e0145210f948",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_NOFOOT_PHYSICAL_04/sensor_metadata.json": "e070d208874321b1f84dcef150cd3fd5f4d92a5981bd59104c4bde8a212d97fa",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_ASYNC_PHYSICAL_04/run_status.json": "366285739cad5ea37b7ca0e1cc5da8cfb6242330fa81b5f962b3b71cab6ebdc2",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_ASYNC_PHYSICAL_04/navigation.jsonl": "090ebe8dcbea09192a8b40ae26610f20be80dbff323bfb42a4570afa4fd3c6e9",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_ASYNC_PHYSICAL_04/sensor_metadata.json": "e070d208874321b1f84dcef150cd3fd5f4d92a5981bd59104c4bde8a212d97fa"
+  },
+  "diagnostic_source_sha256": {
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/scripts/paper_rebuild/diagnose_joint_by2_closure.py": "5899f4c89ecf224b1264d1a3d8ca456a4a1a2def7171d8ed11c99d70aac8aa9e",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/joint_navigation/real_data.py": "33acc7464b968a2428d0037bef6b7b8b262b7871b3f49249bef10468e7e02085"
+  },
+  "source_contract": {
+    "PV": "receiver antenna P and velocity rotated into the recorded fixed local NED",
+    "original": "saved calibrated increments assigned to their original previous-to-current body interval; fractional endpoint overlap preserves whole increments",
+    "causal_zoh": "same adapter rate reconstruction and past-only hold; actual event splits preserved",
+    "original_lookahead_max_s": 0.0053088899999949035,
+    "body_requested_read_end_s": 106.05,
+    "body_last_read_source_time_s": 106.05306652600001,
+    "comparison_ZOH": "frozen_BY04_previous_sample_formula_in_this_script_not_live_adapter_packet",
+    "legacy_vs_integer_interval_max_abs_s": 2.3289611306154256e-07,
+    "preintegration": "kinematic mean calculation only; no new graph, optimization, covariance fit, or navigation run",
+    "body_axis_sums": "algebraic sums of vectors expressed in changing body axes; not navigation-frame cumulative errors",
+    "rotation_difference": "Log(deltaR_original^-1 deltaR_causal); accumulated SO(3), not summed gyro components",
+    "velocity_difference": "deltaV_causal-deltaV_original in their common interval-initial body frame; whole-window result recomputed, not sum of 0.2s outputs",
+    "online_closure": "0.2s antenna delta-v predicted from each interval-start causal published R and constant bias; endpoint rotation propagated through IMU; not a unified posterior ImuFactor residual",
+    "cross_covariance": "unknown temporal/PV/IMU/shared-GNSS dependence; no NIS or white-noise identification from these closures"
+  },
+  "counts": {
+    "gnss_epochs": 51,
+    "intervals": 50,
+    "online_state_rows": 60,
+    "online_closure_rows": 58
+  },
+  "interval_statistics": {
+    "pv_dpdt_minus_vavg_mps": {
+      "count": 50,
+      "mean": [
+        -0.0022090379198052086,
+        -0.007597667544742092,
+        0.0013251522708689475
+      ],
+      "rms": [
+        0.07079776959529843,
+        0.05096701552042474,
+        0.08153683272113584
+      ],
+      "std_ddof1": [
+        0.07148172544496684,
+        0.050909204080810594,
+        0.08235376068915388
+      ],
+      "max_abs": [
+        0.16177833385515203,
+        0.10499868589432793,
+        0.17136570382768218
+      ],
+      "norm_rms": 0.11940777169398427,
+      "norm_max": 0.22693365070009386
+    },
+    "body_axis_accel_sum_difference_mps": {
+      "count": 50,
+      "mean": [
+        0.0002261652075598867,
+        0.006913353938847424,
+        -0.0019346014995028993
+      ],
+      "rms": [
+        0.026457996023580843,
+        0.03202768162017878,
+        0.030734763211005774
+      ],
+      "std_ddof1": [
+        0.02672563553553544,
+        0.03159013549337121,
+        0.030985233261673555
+      ],
+      "max_abs": [
+        0.07677381410134723,
+        0.11422199111845194,
+        0.07153520066722363
+      ],
+      "norm_rms": 0.0516761416243894,
+      "norm_max": 0.1322140929255291
+    },
+    "body_axis_gyro_sum_difference_rad": {
+      "count": 50,
+      "mean": [
+        0.0011111619019197711,
+        3.742573515178527e-05,
+        -4.350527699885864e-05
+      ],
+      "rms": [
+        0.003015299652125057,
+        0.0022792497667161065,
+        0.0025252905263408953
+      ],
+      "std_ddof1": [
+        0.002831555284001112,
+        0.002302079542018338,
+        0.0025505500673824897
+      ],
+      "max_abs": [
+        0.00681262188363068,
+        0.005917115860076446,
+        0.005357785146784189
+      ],
+      "norm_rms": 0.00454577867186778,
+      "norm_max": 0.009218810284953008
+    },
+    "preintegrated_dv_difference_initial_body_mps": {
+      "count": 50,
+      "mean": [
+        4.649381036598381e-05,
+        0.007489496876766346,
+        -0.0019474778475838893
+      ],
+      "rms": [
+        0.025758244272918066,
+        0.0329560111646897,
+        0.030731908338676305
+      ],
+      "std_ddof1": [
+        0.02601971360861611,
+        0.03241954104001101,
+        0.030981520498812504
+      ],
+      "max_abs": [
+        0.07243625112684365,
+        0.11683203366355922,
+        0.07163320646240279
+      ],
+      "norm_rms": 0.05190410398077661,
+      "norm_max": 0.1352819177001721
+    },
+    "relative_rotation_log_rad": {
+      "count": 50,
+      "mean": [
+        0.001118031281128524,
+        2.376890625223303e-06,
+        -4.7487462494973344e-05
+      ],
+      "rms": [
+        0.0030342070658063024,
+        0.0022883419118330437,
+        0.0025154733744288116
+      ],
+      "std_ddof1": [
+        0.002849349831425387,
+        0.002311573158077757,
+        0.0025405590013123174
+      ],
+      "max_abs": [
+        0.006841017426554155,
+        0.005848125300693031,
+        0.0053155878316926055
+      ],
+      "norm_rms": 0.004557469420753239,
+      "norm_max": 0.00923543726834093
+    }
+  },
+  "whole_window_preintegration": {
+    "time_start_s": 96.0,
+    "time_end_s": 106.0,
+    "dt_s": 10.0,
+    "original_lookahead_s": 0.00106720700000551,
+    "original_segment_count": 2310,
+    "causal_segment_count": 2310,
+    "original_body_axis_accel_sum_mps_x": 0.19651640995259823,
+    "original_body_axis_accel_sum_mps_y": -1.7363906580008026,
+    "original_body_axis_accel_sum_mps_z": -96.95756896186894,
+    "original_body_axis_gyro_sum_rad_x": -0.03683410690325437,
+    "original_body_axis_gyro_sum_rad_y": -0.007056990068347613,
+    "original_body_axis_gyro_sum_rad_z": -0.1054467920386002,
+    "causal_zoh_body_axis_accel_sum_mps_x": 0.20782467033059318,
+    "causal_zoh_body_axis_accel_sum_mps_y": -1.3907229610584348,
+    "causal_zoh_body_axis_accel_sum_mps_z": -97.0542990368441,
+    "causal_zoh_body_axis_gyro_sum_rad_x": 0.01872398819273424,
+    "causal_zoh_body_axis_gyro_sum_rad_y": -0.005185703310758309,
+    "causal_zoh_body_axis_gyro_sum_rad_z": -0.1076220558885429,
+    "body_axis_accel_sum_difference_mps_x": 0.011308260377994955,
+    "body_axis_accel_sum_difference_mps_y": 0.34566769694236776,
+    "body_axis_accel_sum_difference_mps_z": -0.09673007497515584,
+    "body_axis_gyro_sum_difference_rad_x": 0.05555809509598861,
+    "body_axis_gyro_sum_difference_rad_y": 0.0018712867575893044,
+    "body_axis_gyro_sum_difference_rad_z": -0.0021752638499426963,
+    "original_preintegrated_dv_initial_body_mps_x": 1.6212249896177477,
+    "original_preintegrated_dv_initial_body_mps_y": -5.300383030093071,
+    "original_preintegrated_dv_initial_body_mps_z": -96.94627742530172,
+    "causal_preintegrated_dv_initial_body_mps_x": 1.338822976699777,
+    "causal_preintegrated_dv_initial_body_mps_y": -2.460941662812279,
+    "causal_preintegrated_dv_initial_body_mps_z": -97.13822254295847,
+    "preintegrated_dv_difference_initial_body_mps_x": -0.28240201291797074,
+    "preintegrated_dv_difference_initial_body_mps_y": 2.8394413672807923,
+    "preintegrated_dv_difference_initial_body_mps_z": -0.1919451176567577,
+    "relative_rotation_log_rad_x": 0.054291413595610655,
+    "relative_rotation_log_rad_y": 0.007988418329733637,
+    "relative_rotation_log_rad_z": -0.0031972945773005635
+  },
+  "quadrature_source_weighting": {
+    "source_interval_ms_percentiles": [
+      0.3231590000041251,
+      1.9792531099994903,
+      4.003897000004031,
+      8.078764229993991,
+      16.00100200001009
+    ],
+    "percentile_levels": [
+      0,
+      1,
+      50,
+      99,
+      100
+    ],
+    "all": {
+      "source_count": 2212,
+      "accel_difference_mps": [
+        0.011308260377994643,
+        0.34566769694237076,
+        -0.09673007497514152
+      ],
+      "gyro_difference_rad": [
+        0.05555809509598853,
+        0.0018712867575892823,
+        -0.0021752638499428524
+      ]
+    },
+    "interior": {
+      "source_count": 2208,
+      "accel_difference_mps": [
+        -0.009362459122651665,
+        0.3480095021014952,
+        -0.1363925762238592
+      ],
+      "gyro_difference_rad": [
+        0.055265803708027736,
+        -0.0015697698097078125,
+        -0.004738489515098092
+      ]
+    },
+    "boundary": {
+      "source_count": 4,
+      "accel_difference_mps": [
+        0.020670719500646223,
+        -0.0023418051591245236,
+        0.039662501248717924
+      ],
+      "gyro_difference_rad": [
+        0.0002922913879607888,
+        0.003441056567297091,
+        0.0025632256651552466
+      ]
+    }
+  },
+  "gravity_n_mps2": [
+    0.0,
+    0.0,
+    9.801554354839126
+  ],
+  "state_statistics": {
+    "U0": {
+      "ba_mps2": {
+        "count": 30,
+        "mean": [
+          0.09562159046781536,
+          0.13050600479483454,
+          0.07681512163127624
+        ],
+        "rms": [
+          0.16608957759452622,
+          0.26625844094124385,
+          0.07832900570047921
+        ],
+        "std_ddof1": [
+          0.13812385454766193,
+          0.2360488116199533,
+          0.01558746919797661
+        ],
+        "max_abs": [
+          0.3744131313038154,
+          0.6106598502519383,
+          0.09864445138061749
+        ],
+        "norm_rms": 0.32344201689331536,
+        "norm_max": 0.7210925342282939
+      },
+      "Rt_g_mps2": {
+        "count": 30,
+        "mean": [
+          0.1472210892366676,
+          0.24682820363188576,
+          9.791500750960664
+        ],
+        "rms": [
+          0.2597620503777154,
+          0.3596377370936729,
+          9.79150918633627
+        ],
+        "std_ddof1": [
+          0.21767329291553814,
+          0.26603436354463844,
+          0.013072346869662022
+        ],
+        "max_abs": [
+          0.6225876393193439,
+          0.7941915598820086,
+          9.801352647448189
+        ],
+        "norm_rms": 9.801554354839126,
+        "norm_max": 9.801554354839126
+      },
+      "ba_minus_Rt_g_mps2": {
+        "count": 30,
+        "mean": [
+          -0.051599498768852246,
+          -0.11632219883705118,
+          -9.714685629329388
+        ],
+        "rms": [
+          0.14921467032949082,
+          0.19316591394818733,
+          9.714714182624228
+        ],
+        "std_ddof1": [
+          0.14240245143306607,
+          0.15685118040892942,
+          0.02395628305875307
+        ],
+        "max_abs": [
+          0.28727345374567076,
+          0.5197477125925255,
+          9.748620107994007
+        ],
+        "norm_rms": 9.717780082829275,
+        "norm_max": 9.748792217985848
+      },
+      "lever_velocity_mps": {
+        "count": 30,
+        "mean": [
+          -0.015510673873086528,
+          0.0036547820455973675,
+          -0.001623060607901025
+        ],
+        "rms": [
+          0.08748552413467132,
+          0.07956596384797793,
+          0.012287844204383922
+        ],
+        "std_ddof1": [
+          0.08757146399362722,
+          0.08084074492006668,
+          0.01238840348127168
+        ],
+        "max_abs": [
+          0.29632487002436714,
+          0.14517516986955475,
+          0.0283336312954421
+        ],
+        "norm_rms": 0.11889260133148362,
+        "norm_max": 0.31058971893979126
+      },
+      "published_antenna_v_minus_gnss_v_mps": {
+        "count": 30,
+        "mean": [
+          0.011235356802298877,
+          -0.020438073081857733,
+          0.07871456884523005
+        ],
+        "rms": [
+          0.1315146785578539,
+          0.14125669760097373,
+          0.14288066711380684
+        ],
+        "std_ddof1": [
+          0.13327393658474188,
+          0.14215971998194524,
+          0.1212815263801513
+        ],
+        "max_abs": [
+          0.29037820665388125,
+          0.2767527033552786,
+          0.32517835053159433
+        ],
+        "norm_rms": 0.24013423397798792,
+        "norm_max": 0.39645978513640606
+      },
+      "published_antenna_p_minus_gnss_p_m": {
+        "count": 30,
+        "mean": [
+          0.00948584283035603,
+          -0.0020039537860063144,
+          0.05884688968979202
+        ],
+        "rms": [
+          0.019394617513635873,
+          0.01717984735828012,
+          0.07617655041318828
+        ],
+        "std_ddof1": [
+          0.017205752074414583,
+          0.017354259870885576,
+          0.049199562726089476
+        ],
+        "max_abs": [
+          0.044304529726126765,
+          0.04056498876852466,
+          0.14399021951611315
+        ],
+        "norm_rms": 0.08046219718978008,
+        "norm_max": 0.14921717313568197
+      },
+      "first": {
+        "arm": "U0",
+        "time_s": 100.200000048,
+        "gyro_source_time_s": 100.198251458,
+        "yaw_local_conditional_sigma_rad": 0.054900926731331304,
+        "gnss_innovation_nis": 14.160509216314512,
+        "rpy_rad_roll": 0.020051683431539895,
+        "rpy_rad_pitch": 0.0014137435089999852,
+        "rpy_rad_yaw": -1.847470184716441,
+        "ba_mps2_x": -0.002931458762141292,
+        "ba_mps2_y": 0.011209896669499545,
+        "ba_mps2_z": 0.054842851268648185,
+        "bg_radps_x": 0.0019416098082998582,
+        "bg_radps_y": -0.0011104127489904314,
+        "bg_radps_z": -0.0001266385127749409,
+        "Rt_g_mps2_x": -0.013856879231373504,
+        "Rt_g_mps2_y": 0.19652429861441426,
+        "Rt_g_mps2_z": 9.79957417226983,
+        "ba_minus_Rt_g_mps2_x": 0.010925420469232212,
+        "ba_minus_Rt_g_mps2_y": -0.18531440194491472,
+        "ba_minus_Rt_g_mps2_z": -9.744731321001183,
+        "lever_velocity_mps_n": 0.04898540548338051,
+        "lever_velocity_mps_e": -0.13406843825506043,
+        "lever_velocity_mps_d": 0.02149207416846988,
+        "published_antenna_v_minus_gnss_v_mps_n": 0.29037820665388125,
+        "published_antenna_v_minus_gnss_v_mps_e": -0.2630196031232739,
+        "published_antenna_v_minus_gnss_v_mps_d": 0.06067575054135384,
+        "published_antenna_p_minus_gnss_p_m_n": 0.004413806725916375,
+        "published_antenna_p_minus_gnss_p_m_e": -0.01757830233302471,
+        "published_antenna_p_minus_gnss_p_m_d": 0.011663598711691398
+      },
+      "last": {
+        "arm": "U0",
+        "time_s": 106.0,
+        "gyro_source_time_s": 105.995077237,
+        "yaw_local_conditional_sigma_rad": 0.015980590297306217,
+        "gnss_innovation_nis": 7.640731016893097,
+        "rpy_rad_roll": 0.07815871532834708,
+        "rpy_rad_pitch": -0.04573826250978985,
+        "rpy_rad_yaw": -1.859618780158303,
+        "ba_mps2_x": 0.3734968798123233,
+        "ba_mps2_y": 0.6106598502519383,
+        "ba_mps2_z": 0.08700040793308036,
+        "bg_radps_x": 0.007482287289350988,
+        "bg_radps_y": 0.00048297118231909256,
+        "bg_radps_z": 0.0017895487682362578,
+        "Rt_g_mps2_x": 0.4481497739003587,
+        "Rt_g_mps2_y": 0.7644968113565532,
+        "Rt_g_mps2_z": 9.761412509285966,
+        "ba_minus_Rt_g_mps2_x": -0.07465289408803538,
+        "ba_minus_Rt_g_mps2_y": -0.15383696110461498,
+        "ba_minus_Rt_g_mps2_z": -9.674412101352885,
+        "lever_velocity_mps_n": 0.0024858775355357443,
+        "lever_velocity_mps_e": -0.14517516986955475,
+        "lever_velocity_mps_d": 0.0283336312954421,
+        "published_antenna_v_minus_gnss_v_mps_n": 0.05823360008761298,
+        "published_antenna_v_minus_gnss_v_mps_e": -0.2767527033552786,
+        "published_antenna_v_minus_gnss_v_mps_d": -0.07498025839480553,
+        "published_antenna_p_minus_gnss_p_m_n": -0.011441939307239857,
+        "published_antenna_p_minus_gnss_p_m_e": -0.005629663112298289,
+        "published_antenna_p_minus_gnss_p_m_d": 0.02609964644323462
+      }
+    },
+    "U1": {
+      "ba_mps2": {
+        "count": 30,
+        "mean": [
+          0.10160739126284896,
+          0.14257840916952402,
+          0.07623027750264848
+        ],
+        "rms": [
+          0.16221924810965913,
+          0.28175334097092725,
+          0.07764823591912369
+        ],
+        "std_ddof1": [
+          0.12861740576966538,
+          0.2471695126558249,
+          0.015023889019265298
+        ],
+        "max_abs": [
+          0.33097721425466653,
+          0.6423143968549352,
+          0.09691398285445997
+        ],
+        "norm_rms": 0.33425929777179664,
+        "norm_max": 0.7266816310729826
+      },
+      "Rt_g_mps2": {
+        "count": 30,
+        "mean": [
+          0.14278524629498618,
+          0.263748008294589,
+          9.791244731822637
+        ],
+        "rms": [
+          0.2434401648880152,
+          0.37758703550116945,
+          9.79125286608443
+        ],
+        "std_ddof1": [
+          0.20053932623488652,
+          0.274820864851619,
+          0.012836739920332695
+        ],
+        "max_abs": [
+          0.5738667083833195,
+          0.8109920894197844,
+          9.801273469110985
+        ],
+        "norm_rms": 9.801554354839126,
+        "norm_max": 9.801554354839126
+      },
+      "ba_minus_Rt_g_mps2": {
+        "count": 30,
+        "mean": [
+          -0.04117785503213722,
+          -0.12116959912506502,
+          -9.715014454319988
+        ],
+        "rms": [
+          0.1362464205331104,
+          0.1984580162364343,
+          9.715041399464788
+        ],
+        "std_ddof1": [
+          0.13209507298378118,
+          0.1598604319820516,
+          0.023272278945912873
+        ],
+        "max_abs": [
+          0.2569060645591739,
+          0.5456294614022041,
+          9.74864982845434
+        ],
+        "norm_rms": 9.718023362013042,
+        "norm_max": 9.748882527390808
+      },
+      "lever_velocity_mps": {
+        "count": 30,
+        "mean": [
+          -0.01627587387991589,
+          -0.0036050117289003615,
+          -0.0016279286055978454
+        ],
+        "rms": [
+          0.08079006301948145,
+          0.0863728081042608,
+          0.01231191198446799
+        ],
+        "std_ddof1": [
+          0.08048643200374395,
+          0.08777282120131424,
+          0.012412439193240485
+        ],
+        "max_abs": [
+          0.28924602750985756,
+          0.1868238562440383,
+          0.027787055081597695
+        ],
+        "norm_rms": 0.1189070201427171,
+        "norm_max": 0.31033706844866504
+      },
+      "published_antenna_v_minus_gnss_v_mps": {
+        "count": 30,
+        "mean": [
+          0.01138379850369022,
+          -0.016140581999723274,
+          0.07858258045349327
+        ],
+        "rms": [
+          0.1442514509700549,
+          0.13422681465567096,
+          0.14224870292798134
+        ],
+        "std_ddof1": [
+          0.1462598899877704,
+          0.13553083140257735,
+          0.12059967204434455
+        ],
+        "max_abs": [
+          0.35916433735633446,
+          0.27478294834515604,
+          0.32441333500322445
+        ],
+        "norm_rms": 0.24302265812937504,
+        "norm_max": 0.40975284708278337
+      },
+      "published_antenna_p_minus_gnss_p_m": {
+        "count": 30,
+        "mean": [
+          0.00892594680664479,
+          0.011654637502576589,
+          0.058736756773461254
+        ],
+        "rms": [
+          0.021935410985326795,
+          0.01846347578823208,
+          0.07548792478142613
+        ],
+        "std_ddof1": [
+          0.020379749804735,
+          0.014565051328655872,
+          0.048228123769065635
+        ],
+        "max_abs": [
+          0.042138771393823576,
+          0.04325223568458725,
+          0.14126495257980257
+        ],
+        "norm_rms": 0.08074954477323125,
+        "norm_max": 0.14233723924603414
+      },
+      "first": {
+        "arm": "U1",
+        "time_s": 100.200000048,
+        "gyro_source_time_s": 100.198251458,
+        "yaw_local_conditional_sigma_rad": 0.010574128429773122,
+        "gnss_innovation_nis": 6.877505205090406,
+        "rpy_rad_roll": 0.022701590035121573,
+        "rpy_rad_pitch": -0.0034821543309790214,
+        "rpy_rad_yaw": -1.4511901424287732,
+        "ba_mps2_x": -0.007381543090791449,
+        "ba_mps2_y": 0.01167690635052402,
+        "ba_mps2_z": 0.05422115792776453,
+        "bg_radps_x": 0.0006394090222075014,
+        "bg_radps_y": 0.0015808096185944932,
+        "bg_radps_z": 0.0003999664817534392,
+        "Rt_g_mps2_x": 0.034130455972700216,
+        "Rt_g_mps2_y": 0.22249040798228942,
+        "Rt_g_mps2_z": 9.798969379541749,
+        "ba_minus_Rt_g_mps2_x": -0.041511999063491664,
+        "ba_minus_Rt_g_mps2_y": -0.2108135016317654,
+        "ba_minus_Rt_g_mps2_z": -9.744748221613984,
+        "lever_velocity_mps_n": 0.09733565974686464,
+        "lever_velocity_mps_e": -0.10544343521906255,
+        "lever_velocity_mps_d": 0.022410709716955923,
+        "published_antenna_v_minus_gnss_v_mps_n": 0.35916433735633446,
+        "published_antenna_v_minus_gnss_v_mps_e": -0.18675016569236047,
+        "published_antenna_v_minus_gnss_v_mps_d": 0.06342515335186744,
+        "published_antenna_p_minus_gnss_p_m_n": 0.0071090917383979935,
+        "published_antenna_p_minus_gnss_p_m_e": -0.0015087313015831327,
+        "published_antenna_p_minus_gnss_p_m_d": 0.01294771443442308
+      },
+      "last": {
+        "arm": "U1",
+        "time_s": 106.0,
+        "gyro_source_time_s": 105.995077237,
+        "yaw_local_conditional_sigma_rad": 0.0072408076698671055,
+        "gnss_innovation_nis": 8.812022402736407,
+        "rpy_rad_roll": 0.08063632836280411,
+        "rpy_rad_pitch": -0.04102180901574704,
+        "rpy_rad_yaw": -1.642947141031011,
+        "ba_mps2_x": 0.32893812324442945,
+        "ba_mps2_y": 0.6423143968549352,
+        "ba_mps2_z": 0.08542903258379872,
+        "bg_radps_x": 0.00772940326580305,
+        "bg_radps_y": 0.0007628392762781038,
+        "bg_radps_z": 0.0017051233022863845,
+        "Rt_g_mps2_x": 0.4019647317055375,
+        "Rt_g_mps2_y": 0.7888409249018071,
+        "Rt_g_mps2_z": 9.761486675733916,
+        "ba_minus_Rt_g_mps2_x": -0.07302660846110803,
+        "ba_minus_Rt_g_mps2_y": -0.14652652804687194,
+        "ba_minus_Rt_g_mps2_z": -9.676057643150118,
+        "lever_velocity_mps_n": 0.03349677432486605,
+        "lever_velocity_mps_e": -0.14144590530563717,
+        "lever_velocity_mps_d": 0.027787055081597695,
+        "published_antenna_v_minus_gnss_v_mps_n": 0.10055123366485327,
+        "published_antenna_v_minus_gnss_v_mps_e": -0.2325533702106608,
+        "published_antenna_v_minus_gnss_v_mps_d": -0.07280330239936836,
+        "published_antenna_p_minus_gnss_p_m_n": -0.015005188271254244,
+        "published_antenna_p_minus_gnss_p_m_e": 0.01281758885613904,
+        "published_antenna_p_minus_gnss_p_m_d": 0.029404483442963064
+      }
+    }
+  },
+  "online_closure_statistics": {
+    "U0": {
+      "original_antenna_dv_residual_mps": {
+        "count": 29,
+        "mean": [
+          0.010819930245093071,
+          -7.705668043271464e-05,
+          -0.009375699193331689
+        ],
+        "rms": [
+          0.17120307401145254,
+          0.17927363979933367,
+          0.12025192709295839
+        ],
+        "std_ddof1": [
+          0.17388514560658017,
+          0.1824468540704689,
+          0.12200791028102348
+        ],
+        "max_abs": [
+          0.3593083681070752,
+          0.3784794981064274,
+          0.2257265004808215
+        ],
+        "norm_rms": 0.2755177969704358,
+        "norm_max": 0.457362729135817
+      },
+      "causal_zoh_antenna_dv_residual_mps": {
+        "count": 29,
+        "mean": [
+          0.001813681279099927,
+          0.0028957896805734025,
+          -0.0059041473665017545
+        ],
+        "rms": [
+          0.1740373148426838,
+          0.1751817351280835,
+          0.11340540206100644
+        ],
+        "std_ddof1": [
+          0.17710824253003846,
+          0.17825817823492346,
+          0.1152562148238036
+        ],
+        "max_abs": [
+          0.36244559978664603,
+          0.38555324152389486,
+          0.21705086211808194
+        ],
+        "norm_rms": 0.2717322441241672,
+        "norm_max": 0.5002378697688461
+      },
+      "original_lever_dv_mps": {
+        "count": 29,
+        "mean": [
+          -0.001116341458201873,
+          -0.0005698583309933531,
+          0.0007116510902560812
+        ],
+        "rms": [
+          0.12221758504940314,
+          0.10261034290632483,
+          0.016277184229812152
+        ],
+        "std_ddof1": [
+          0.12437570738271875,
+          0.10442498576426058,
+          0.016549458446181102
+        ],
+        "max_abs": [
+          0.33160392613435685,
+          0.21653078282632027,
+          0.030279200201022136
+        ],
+        "norm_rms": 0.1604087506749956,
+        "norm_max": 0.36439882563326265
+      },
+      "causal_zoh_lever_dv_mps": {
+        "count": 29,
+        "mean": [
+          -0.0010681676732067372,
+          -0.0006369232641652242,
+          0.0005002404074440179
+        ],
+        "rms": [
+          0.12218670913621509,
+          0.1026392852045147,
+          0.016275060644574894
+        ],
+        "std_ddof1": [
+          0.1243447219158782,
+          0.10445403956584187,
+          0.016555311401762505
+        ],
+        "max_abs": [
+          0.33156348510355993,
+          0.2165757462467327,
+          0.029904965125464422
+        ],
+        "norm_rms": 0.16040352974861968,
+        "norm_max": 0.3644072311698722
+      }
+    },
+    "U1": {
+      "original_antenna_dv_residual_mps": {
+        "count": 29,
+        "mean": [
+          0.010343528658147529,
+          0.00687499624537267,
+          -0.009255068481904343
+        ],
+        "rms": [
+          0.19335909549709396,
+          0.17256600848572715,
+          0.12023250973973497
+        ],
+        "std_ddof1": [
+          0.19649988963684825,
+          0.17548108258119843,
+          0.12199762923129916
+        ],
+        "max_abs": [
+          0.3715670732201882,
+          0.37105370934496185,
+          0.2258587704700109
+        ],
+        "norm_rms": 0.28569673343331353,
+        "norm_max": 0.4687092203193903
+      },
+      "causal_zoh_antenna_dv_residual_mps": {
+        "count": 29,
+        "mean": [
+          0.001832716462325503,
+          0.006263205541621285,
+          -0.0058116703998873235
+        ],
+        "rms": [
+          0.19191864109724538,
+          0.17295726571164738,
+          0.11339118448421842
+        ],
+        "std_ddof1": [
+          0.19530678912368307,
+          0.17590324578189803,
+          0.1152465944602233
+        ],
+        "max_abs": [
+          0.38184760295804043,
+          0.3547046028569262,
+          0.21635023711494972
+        ],
+        "norm_rms": 0.2821427675518136,
+        "norm_max": 0.5013653589445413
+      },
+      "original_lever_dv_mps": {
+        "count": 29,
+        "mean": [
+          -0.0022599337484736455,
+          -0.0011837525665712497,
+          0.0006233024878840805
+        ],
+        "rms": [
+          0.11709714561152104,
+          0.10840603910384539,
+          0.01636397157189701
+        ],
+        "std_ddof1": [
+          0.11914762633040125,
+          0.11031830136947912,
+          0.01664153659717056
+        ],
+        "max_abs": [
+          0.28979797597462836,
+          0.23127628415011295,
+          0.030866817983749986
+        ],
+        "norm_rms": 0.16041006947868353,
+        "norm_max": 0.3644029734274165
+      },
+      "causal_zoh_lever_dv_mps": {
+        "count": 29,
+        "mean": [
+          -0.0021853980244517734,
+          -0.0012309259872172625,
+          0.0004120926122389533
+        ],
+        "rms": [
+          0.11703900772231528,
+          0.10846107456975156,
+          0.016364365754104986
+        ],
+        "std_ddof1": [
+          0.11908988915324006,
+          0.11037377988698494,
+          0.016648741630031043
+        ],
+        "max_abs": [
+          0.28975228846707474,
+          0.23117443947223865,
+          0.03091180368834888
+        ],
+        "norm_rms": 0.16040488300542322,
+        "norm_max": 0.3644115412329112
+      }
+    }
+  },
+  "prior_dynamic_calibration": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/00_CALIBRATION/CLEAN5_CALIBRATED_SENSOR_MODEL.yaml",
+    "q_NED_m2ps3": [
+      0.024955479759623252,
+      0.026591815116529294,
+      0.01618043453873932
+    ],
+    "c_NED_m2ps2": [
+      0.010830809489394968,
+      0.013550612232080246,
+      0.020536668097236248
+    ],
+    "c_role": "GNSS_VELOCITY_NOISE_DIAGNOSTIC_ONLY",
+    "rotation": "Rz(A1 NED yaw) Ry(raw Go2 pitch) Rx(raw Go2 roll)",
+    "lag_200ms": [
+      {
+        "axis": "north",
+        "lag_ms": 200,
+        "lag_s": 0.2,
+        "exact_pair_count": 1370,
+        "sample_count": 1370,
+        "ddof": 1,
+        "variance_m2ps2": 0.024537905066082697,
+        "mean_residual_mps": -0.000816719882225895,
+        "status": "AVAILABLE"
+      },
+      {
+        "axis": "east",
+        "lag_ms": 200,
+        "lag_s": 0.2,
+        "exact_pair_count": 1370,
+        "sample_count": 1370,
+        "ddof": 1,
+        "variance_m2ps2": 0.02820850489234666,
+        "mean_residual_mps": 0.0014656343176049182,
+        "status": "AVAILABLE"
+      },
+      {
+        "axis": "down",
+        "lag_ms": 200,
+        "lag_s": 0.2,
+        "exact_pair_count": 1370,
+        "sample_count": 1370,
+        "ddof": 1,
+        "variance_m2ps2": 0.015570559355558506,
+        "mean_residual_mps": 0.022803227807435343,
+        "status": "AVAILABLE"
+      }
+    ],
+    "scope": "historical residual scale under a different recorded attitude source; not transferable body white noise, not applied here"
+  },
+  "registered_static_accel_ASD_mps2_sqrtHz": 0.0013250364409088235,
+  "static_white_accel_only_delta_v_sigma_at_0p2s_mps": 0.0005925743109073025,
+  "U1_minus_U0_paired_state_statistics": {
+    "ba_mps2": {
+      "count": 30,
+      "mean": [
+        0.005985800795033595,
+        0.012072404374689474,
+        -0.0005848441286277576
+      ],
+      "rms": [
+        0.023619786406430206,
+        0.024659838003183387,
+        0.001139177931127569
+      ],
+      "std_ddof1": [
+        0.023239335679438304,
+        0.021870259989874755,
+        0.000994302928920416
+      ],
+      "max_abs": [
+        0.05171887065544323,
+        0.0736259213020633,
+        0.0031389698740932614
+      ],
+      "norm_rms": 0.034165767173991585,
+      "norm_max": 0.09002065072988977
+    },
+    "Rt_g_mps2": {
+      "count": 30,
+      "mean": [
+        -0.004435842941681426,
+        0.01691980466270331,
+        -0.00025601913803055727
+      ],
+      "rms": [
+        0.02873478193366694,
+        0.0251908576310384,
+        0.0010560897983391908
+      ],
+      "std_ddof1": [
+        0.028875672677737836,
+        0.018981829379241342,
+        0.001042103242842555
+      ],
+      "max_abs": [
+        0.06333592031244106,
+        0.07467454303048152,
+        0.0029207074274548717
+      ],
+      "norm_rms": 0.038228030640157146,
+      "norm_max": 0.07560569997022376
+    },
+    "ba_minus_Rt_g_mps2": {
+      "count": 30,
+      "mean": [
+        0.010421643736715022,
+        -0.0048474002880138384,
+        -0.00032882499059703937
+      ],
+      "rms": [
+        0.032258415754147084,
+        0.011348365080269901,
+        0.0009948373197094787
+      ],
+      "std_ddof1": [
+        0.031050482734751427,
+        0.010436413397142451,
+        0.0009549735968072064
+      ],
+      "max_abs": [
+        0.06807493423530822,
+        0.02588174880967864,
+        0.003253300027889594
+      ],
+      "norm_rms": 0.0342108239926369,
+      "norm_max": 0.07282906096103411
+    },
+    "lever_velocity_mps": {
+      "count": 30,
+      "mean": [
+        -0.0007652000068293504,
+        -0.007259793774497727,
+        -4.867997696818698e-06
+      ],
+      "rms": [
+        0.03771302781193892,
+        0.04317635281158084,
+        0.000272957605030084
+      ],
+      "std_ddof1": [
+        0.03834984515133454,
+        0.043289237769735464,
+        0.00027757973084263947
+      ],
+      "max_abs": [
+        0.08087563307988593,
+        0.2020332102810396,
+        0.0009186355484860423
+      ],
+      "norm_rms": 0.05732839100051847,
+      "norm_max": 0.20215733820178255
+    }
+  }
+}

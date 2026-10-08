@@ -1,0 +1,51 @@
+{
+  "status": "PASS_ORIGINAL_INCREMENT_CONSERVATION_AND_IMU_AVAILABILITY",
+  "navigation_calls": 0,
+  "reference_reads": 0,
+  "event_count": 325,
+  "integrated_duration_s": 10.0,
+  "actual_increment_sum": [
+    0.19651640995259792,
+    -1.736390658000801,
+    -96.95756896186901,
+    -0.03683410690325425,
+    -0.007056990068347642,
+    -0.10544679203860047
+  ],
+  "independent_source_overlap_sum": [
+    0.19651640995259817,
+    -1.7363906580008042,
+    -96.95756896186893,
+    -0.03683410690325439,
+    -0.007056990068347613,
+    -0.10544679203860027
+  ],
+  "increment_conservation_error": [
+    -2.498001805406602e-16,
+    3.1086244689504383e-15,
+    -8.526512829121202e-14,
+    1.457167719820518e-16,
+    -2.862293735361732e-17,
+    -1.942890293094024e-16
+  ],
+  "max_abs_increment_conservation_error": 8.526512829121202e-14,
+  "per_segment_increment_conservation_error": [
+    -3.0531133177191805e-16,
+    1.5543122344752192e-15,
+    -7.105427357601002e-14,
+    9.71445146547012e-17,
+    -3.5561831257524545e-17,
+    -2.636779683484747e-16
+  ],
+  "fully_consumed_source_count": 2209,
+  "maximum_full_source_fraction_error": 1.1102230246251565e-16,
+  "terminal_imu_only_time_s": 106.001067207,
+  "final_measurement_time_s": 106.0,
+  "final_available_time_s": 106.001067207,
+  "max_availability_delay_s": 0.007308983776368905,
+  "all_sources_available_by_publication": true,
+  "no_foot_measurement_after_requested_end": true,
+  "original_event_times_unchanged": true,
+  "packet_duration_error_s": 0.0,
+  "maximum_source_endpoint_minus_measurement_epoch_s": 0.007308983776368905
+}

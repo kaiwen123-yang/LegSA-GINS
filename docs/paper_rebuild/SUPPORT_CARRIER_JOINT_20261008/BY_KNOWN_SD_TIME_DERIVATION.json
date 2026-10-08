@@ -1,0 +1,2988 @@
+{
+  "scope": "Same first four BY2 raw blocks, causal100.0 s navigation prefix only. Broadcast-state/measurement algebra calculations; no navigation estimation, new integer enumeration, reference, Q changes or threshold changes.",
+  "source_receipt": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_INPUT_ADAPTER_01/raw_source_semantics_100198_100798_01.json",
+  "navigation_manifest": {
+    "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_ATTEMPT02/BY2/PREFIX_0100.000/NAVIGATION_MANIFEST.json",
+    "sha256": "306b8c241e563fc772d8a75fc4df3466659c8cc01f3c828ccb1bd8590579748a",
+    "causal_cutoff_relative_s": 100.0,
+    "navigation_files": [
+      {
+        "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CARRIER_PHASE_DEVELOPMENT_20261006/GAL_NAV_QUALIFICATION_V2/broadcast_prefix_rx1.nav",
+        "sha256": "69fa3e41b16e0de6a1bec26d185e406d6600ca6b646617bc63fccb7c06790420",
+        "receiver": 1,
+        "role": "NEW_ALL_GNSS_CAUSAL_PREFIX_GAL_E1B_ONLY",
+        "records": {
+          "G19": 1,
+          "G17": 1,
+          "G06": 1,
+          "G11": 1,
+          "J07": 1,
+          "J02": 1,
+          "J03": 1,
+          "R20": 1,
+          "R11": 1,
+          "R21": 1,
+          "R04": 1,
+          "R05": 1,
+          "E11": 1,
+          "E10": 1,
+          "E02": 1,
+          "E36": 1,
+          "C28": 1,
+          "C27": 1,
+          "C14": 1,
+          "C43": 1,
+          "C42": 1,
+          "C56": 1,
+          "C07": 1,
+          "C10": 1,
+          "C40": 1,
+          "C38": 1,
+          "R19": 1
+        }
+      },
+      {
+        "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CARRIER_PHASE_DEVELOPMENT_20261006/GAL_NAV_QUALIFICATION_V2/broadcast_prefix_rx2.nav",
+        "sha256": "da8c583e684a74f2901d534706ac896aaa1108de66a3c7e6e72a83f112bf50e9",
+        "receiver": 2,
+        "role": "NEW_ALL_GNSS_CAUSAL_PREFIX_GAL_E1B_ONLY",
+        "records": {
+          "G19": 1,
+          "G17": 1,
+          "G06": 1,
+          "G11": 1,
+          "J02": 1,
+          "J03": 1,
+          "R20": 1,
+          "R11": 1,
+          "R21": 1,
+          "R05": 1,
+          "R04": 1,
+          "R19": 1,
+          "E02": 1,
+          "E36": 1,
+          "E10": 1,
+          "E11": 1,
+          "C28": 1,
+          "C27": 1,
+          "C14": 1,
+          "C43": 1,
+          "C42": 1,
+          "C07": 1,
+          "C40": 1,
+          "C10": 1,
+          "C38": 1,
+          "R10": 1
+        }
+      }
+    ]
+  },
+  "source_hashes": [
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_20261002T124139Z/lib/liblegsa_rtklib_bridge.so",
+      "sha256": "6df66600892404dd1c892879fe6e10693e808995fe359e32a6afc983629f8a3b"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_20261002T124139Z/lib/librtklib_legsa.so",
+      "sha256": "28c25b1cc7fade9b956bfdf77005de8fcb0a382c8411ae6e608c83b82bff53f2"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-EXTERNAL/rtklib_bridge/legsa_rtklib_bridge.c",
+      "sha256": "8449592c9a4bbb0bf77ca6a03b2a31e74ccf6ca41ad94bba123d9b66b1a06854"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-EXTERNAL/RTKLIB/src/ephemeris.c",
+      "sha256": "d1f50cfa0a7935844726d389c33b9c6a9270904cfaa5a7967a73e1d628eefa59"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py",
+      "sha256": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py",
+      "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/carrier_phase/ephemeris.py",
+      "sha256": "0e095ab821618553f47e699f009a8d5622d6c66b9109a96143cfb79810803d8d"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/carrier_phase/temporal.py",
+      "sha256": "1c48b863e7e132b0cfa281ca0f7bb45e1dd9b7c443906d775c4e25b3226a7177"
+    }
+  ],
+  "derivation": {
+    "receiver_clock_cancellation": "With T_r=t_r+dt_r and P_r=rho_r+c(dt_r-dt_sat)+propagation/code terms, T_r-P_r/c cancels receiver clock. RTKLIB satposs then subtracts broadcast satellite clock once. Subtracting receiver clock again would double-correct.",
+    "implemented_known_sd": "range(sat2_at_own_transmit,anchor)-range(sat1_at_own_transmit,anchor)-c*(satclock2-satclock1), using geometric Earth-rotation flight delay once.",
+    "corrected_phase_model": "After removing DD(known_sd), first-order raw DD phase is B*[p_ant2(t2)-p_ant1(t1)]+lambda*N.",
+    "same_time_approximation_remainder": "For desired instantaneous baseline b(t1), p_ant2(t2)-p_ant1(t1)=b(t1)+v_ant2(t1)*(t2-t1)+O(dt^2). The first-order remainder is B*v_ant2*dt.",
+    "free_baseline_invariance": "For each N and any displacement d, min_b ||y-B*d-A*N-B*b||_Q^2 = min_b ||y-A*N-B*b||_Q^2. The Gaussian relaxed domain allows an independent3D baseline per epoch, so this first-order displacement cannot change its emptiness.",
+    "doppler_comparison": "The raw DD Doppler times common clock-skew proxy contains satellite motion as well as receiver motion. Subtract the already-implemented known DD before judging an omitted term. Applying the full Doppler alignment on top of existing known_sd would double-count satellite motion.",
+    "timing_proxy_boundary": "Minus median((P2-P1-known_sd)/c) diagnoses relative receive time under the short-baseline RAWX clock convention. It retains baseline/code/atmosphere/hardware uncertainty and is not an independent receiver synchronization calibration."
+  },
+  "epochs": [
+    {
+      "time_s": 100.19799995422363,
+      "same_rawx_receiver_tag": true,
+      "inferred_common_receive_time_difference_proxy_s": 0.00044205416840190586,
+      "not_a_clock_calibration": true,
+      "raw_transmit_time_difference_range_s": [
+        0.0004420276619493983,
+        0.0004420585203915751
+      ],
+      "raw_code_receiver_clock_proxy_range_s": [
+        -0.00044205841749537643,
+        -0.0004420282586711985
+      ],
+      "max_known_sd_cache_difference_m": 0.0,
+      "max_abs_known_dd_m": 0.19753494984892078,
+      "max_abs_satellite_clock_dd_m": 1.9530578673499768e-05,
+      "max_abs_doppler_alignment_template_m": 0.19797505946610675,
+      "max_abs_remaining_doppler_minus_known_dd_m": 0.0004886797186015313,
+      "remaining_template_unchanged_Q_whitened_norm": 0.1596312514920585,
+      "remaining_template_after_free_baseline_projection_whitened_norm": 0.03690006823336498,
+      "dd_rows": [
+        {
+          "target": "0:6:0:0",
+          "pivot": "0:19:0:0",
+          "known_dd_m": 0.008847456436138233,
+          "satellite_motion_dd_m": 0.0088474340736866,
+          "satellite_clock_dd_m": 2.236245163697581e-08,
+          "raw_doppler_dd_rx1_mps": 19.890938608460928,
+          "raw_doppler_dd_rx2_mps": 19.561827188025475,
+          "raw_doppler_time_alignment_template_m": 0.008647387250024395,
+          "doppler_template_minus_implemented_known_dd_m": -0.00020006918611383852
+        },
+        {
+          "target": "0:11:0:0",
+          "pivot": "0:19:0:0",
+          "known_dd_m": -0.15521062256187898,
+          "satellite_motion_dd_m": -0.1552087515592575,
+          "satellite_clock_dd_m": -1.8710026214814515e-06,
+          "raw_doppler_dd_rx1_mps": -352.13263421134786,
+          "raw_doppler_dd_rx2_mps": -352.21769957142936,
+          "raw_doppler_time_alignment_template_m": -0.1556993022804805,
+          "doppler_template_minus_implemented_known_dd_m": -0.0004886797186015313
+        },
+        {
+          "target": "0:17:0:0",
+          "pivot": "0:19:0:0",
+          "known_dd_m": 0.1403076162567871,
+          "satellite_motion_dd_m": 0.14030686765909195,
+          "satellite_clock_dd_m": 7.485976951513069e-07,
+          "raw_doppler_dd_rx1_mps": 318.1427742018101,
+          "raw_doppler_dd_rx2_mps": 317.6483172780813,
+          "raw_doppler_time_alignment_template_m": 0.140417762738627,
+          "doppler_template_minus_implemented_known_dd_m": 0.00011014648183990672
+        },
+        {
+          "target": "0:11:3:0",
+          "pivot": "0:6:3:0",
+          "known_dd_m": -0.16405679749815455,
+          "satellite_motion_dd_m": -0.16405490413308144,
+          "satellite_clock_dd_m": -1.8933650731184273e-06,
+          "raw_doppler_dd_rx1_mps": -371.5592440822042,
+          "raw_doppler_dd_rx2_mps": -371.35456301221234,
+          "raw_doppler_time_alignment_template_m": -0.16415883253461666,
+          "doppler_template_minus_implemented_known_dd_m": -0.00010203503646211143
+        },
+        {
+          "target": "0:17:3:0",
+          "pivot": "0:6:3:0",
+          "known_dd_m": 0.13145946690852744,
+          "satellite_motion_dd_m": 0.13145874068140984,
+          "satellite_clock_dd_m": 7.262271176234746e-07,
+          "raw_doppler_dd_rx1_mps": 298.10782040718686,
+          "raw_doppler_dd_rx2_mps": 298.35560791865964,
+          "raw_doppler_time_alignment_template_m": 0.13188934014652817,
+          "doppler_template_minus_implemented_known_dd_m": 0.0004298732380007275
+        },
+        {
+          "target": "2:2:0:0",
+          "pivot": "2:11:0:0",
+          "known_dd_m": -0.1975345959483739,
+          "satellite_motion_dd_m": -0.19755301997065544,
+          "satellite_clock_dd_m": 1.842402228154879e-05,
+          "raw_doppler_dd_rx1_mps": -447.9045686006431,
+          "raw_doppler_dd_rx2_mps": -447.8524887160711,
+          "raw_doppler_time_alignment_template_m": -0.19797505946610675,
+          "doppler_template_minus_implemented_known_dd_m": -0.00044046351773285863
+        },
+        {
+          "target": "2:10:0:0",
+          "pivot": "2:11:0:0",
+          "known_dd_m": 0.07223059099924249,
+          "satellite_motion_dd_m": 0.07221145182847977,
+          "satellite_clock_dd_m": 1.913917076272584e-05,
+          "raw_doppler_dd_rx1_mps": 163.8727250410155,
+          "raw_doppler_dd_rx2_mps": 163.43211342167479,
+          "raw_doppler_time_alignment_template_m": 0.0722458469887844,
+          "doppler_template_minus_implemented_known_dd_m": 1.525598954191243e-05
+        },
+        {
+          "target": "2:36:0:0",
+          "pivot": "2:11:0:0",
+          "known_dd_m": -0.18622509874480903,
+          "satellite_motion_dd_m": -0.1862446293234825,
+          "satellite_clock_dd_m": 1.9530578673499768e-05,
+          "raw_doppler_dd_rx1_mps": -422.20307587673017,
+          "raw_doppler_dd_rx2_mps": -422.207024842108,
+          "raw_doppler_time_alignment_template_m": -0.18663837526002086,
+          "doppler_template_minus_implemented_known_dd_m": -0.0004132765152118356
+        },
+        {
+          "target": "2:2:6:0",
+          "pivot": "2:11:6:0",
+          "known_dd_m": -0.19753494984892078,
+          "satellite_motion_dd_m": -0.1975533738732338,
+          "satellite_clock_dd_m": 1.8424024313021504e-05,
+          "raw_doppler_dd_rx1_mps": -447.2977082949007,
+          "raw_doppler_dd_rx2_mps": -447.5438749063539,
+          "raw_doppler_time_alignment_template_m": -0.19783863544509486,
+          "doppler_template_minus_implemented_known_dd_m": -0.0003036855961740803
+        },
+        {
+          "target": "2:10:6:0",
+          "pivot": "2:11:6:0",
+          "known_dd_m": 0.07223912936460657,
+          "satellite_motion_dd_m": 0.07221999019384384,
+          "satellite_clock_dd_m": 1.913917076272584e-05,
+          "raw_doppler_dd_rx1_mps": 164.0338794439651,
+          "raw_doppler_dd_rx2_mps": 163.46699896766418,
+          "raw_doppler_time_alignment_template_m": 0.07226126828980599,
+          "doppler_template_minus_implemented_known_dd_m": 2.2138925199421955e-05
+        },
+        {
+          "target": "2:36:6:0",
+          "pivot": "2:11:6:0",
+          "known_dd_m": -0.18622595556157767,
+          "satellite_motion_dd_m": -0.18624548614025116,
+          "satellite_clock_dd_m": 1.9530578673499768e-05,
+          "raw_doppler_dd_rx1_mps": -421.9448513376934,
+          "raw_doppler_dd_rx2_mps": -422.34459923653844,
+          "raw_doppler_time_alignment_template_m": -0.1866991905945442,
+          "doppler_template_minus_implemented_known_dd_m": -0.0004732350329665347
+        },
+        {
+          "target": "3:10:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": -0.02272113607594948,
+          "satellite_motion_dd_m": -0.02272704243659973,
+          "satellite_clock_dd_m": 5.906360650253389e-06,
+          "raw_doppler_dd_rx1_mps": -51.590451550595446,
+          "raw_doppler_dd_rx2_mps": -51.58693447000701,
+          "raw_doppler_time_alignment_template_m": -0.02280421941754256,
+          "doppler_template_minus_implemented_known_dd_m": -8.308334159308137e-05
+        },
+        {
+          "target": "3:14:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": -0.020852691842151407,
+          "satellite_motion_dd_m": -0.020861461758613586,
+          "satellite_clock_dd_m": 8.769916462178767e-06,
+          "raw_doppler_dd_rx1_mps": -46.31902391294661,
+          "raw_doppler_dd_rx2_mps": -46.29248647401384,
+          "raw_doppler_time_alignment_template_m": -0.020463786611526664,
+          "doppler_template_minus_implemented_known_dd_m": 0.0003889052306247434
+        },
+        {
+          "target": "3:27:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": -0.15809489250819983,
+          "satellite_motion_dd_m": -0.15809741988778114,
+          "satellite_clock_dd_m": 2.5273795813028025e-06,
+          "raw_doppler_dd_rx1_mps": -358.1917591811584,
+          "raw_doppler_dd_rx2_mps": -358.20343272399873,
+          "raw_doppler_time_alignment_template_m": -0.1583453205715153,
+          "doppler_template_minus_implemented_known_dd_m": -0.00025042806331546097
+        },
+        {
+          "target": "3:28:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": -0.014825440706599777,
+          "satellite_motion_dd_m": -0.014828015118837357,
+          "satellite_clock_dd_m": 2.5744122375799885e-06,
+          "raw_doppler_dd_rx1_mps": -33.566214236593964,
+          "raw_doppler_dd_rx2_mps": -33.56495054902574,
+          "raw_doppler_time_alignment_template_m": -0.014837526302400665,
+          "doppler_template_minus_implemented_known_dd_m": -1.2085595800888013e-05
+        },
+        {
+          "target": "3:40:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": 0.0007158233165338503,
+          "satellite_motion_dd_m": 0.0007122159004211426,
+          "satellite_clock_dd_m": 3.6074161127073686e-06,
+          "raw_doppler_dd_rx1_mps": 2.066909363766733,
+          "raw_doppler_dd_rx2_mps": 1.7541895461220633,
+          "raw_doppler_time_alignment_template_m": 0.0007754468010303054,
+          "doppler_template_minus_implemented_known_dd_m": 5.9623484496455076e-05
+        },
+        {
+          "target": "3:43:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": 0.17930004791341136,
+          "satellite_motion_dd_m": 0.17929701507091522,
+          "satellite_clock_dd_m": 3.0328424961379927e-06,
+          "raw_doppler_dd_rx1_mps": 406.3585536495186,
+          "raw_doppler_dd_rx2_mps": 406.15882581478604,
+          "raw_doppler_time_alignment_template_m": 0.17954420198464976,
+          "doppler_template_minus_implemented_known_dd_m": 0.0002441540712384005
+        },
+        {
+          "target": "3:10:2:0",
+          "pivot": "3:7:2:0",
+          "known_dd_m": -0.022720830632617095,
+          "satellite_motion_dd_m": -0.022726736962795258,
+          "satellite_clock_dd_m": 5.9063301781626774e-06,
+          "raw_doppler_dd_rx1_mps": -51.6980200136863,
+          "raw_doppler_dd_rx2_mps": -51.5364352798137,
+          "raw_doppler_time_alignment_template_m": -0.022781896040016687,
+          "doppler_template_minus_implemented_known_dd_m": -6.106540739959226e-05
+        },
+        {
+          "target": "3:14:2:0",
+          "pivot": "3:7:2:0",
+          "known_dd_m": -0.020852360356321972,
+          "satellite_motion_dd_m": -0.020861130207777023,
+          "satellite_clock_dd_m": 8.769851455051915e-06,
+          "raw_doppler_dd_rx1_mps": -46.020965486004705,
+          "raw_doppler_dd_rx2_mps": -46.54446364444975,
+          "raw_doppler_time_alignment_template_m": -0.020575174170059975,
+          "doppler_template_minus_implemented_known_dd_m": 0.0002771861862619976
+        }
+      ]
+    },
+    {
+      "time_s": 100.39800000190735,
+      "same_rawx_receiver_tag": true,
+      "inferred_common_receive_time_difference_proxy_s": 0.0004420570208463362,
+      "not_a_clock_calibration": true,
+      "raw_transmit_time_difference_range_s": [
+        0.00044204329256899023,
+        0.0004420611876994297
+      ],
+      "raw_code_receiver_clock_proxy_range_s": [
+        -0.00044206108480405125,
+        -0.0004420438893146362
+      ],
+      "max_known_sd_cache_difference_m": 0.0,
+      "max_abs_known_dd_m": 0.1975324092029687,
+      "max_abs_satellite_clock_dd_m": 1.9530611177063194e-05,
+      "max_abs_doppler_alignment_template_m": 0.19823316384422335,
+      "max_abs_remaining_doppler_minus_known_dd_m": 0.0007007546412546584,
+      "remaining_template_unchanged_Q_whitened_norm": 0.1753200105105547,
+      "remaining_template_after_free_baseline_projection_whitened_norm": 0.04482469834113347,
+      "dd_rows": [
+        {
+          "target": "0:6:0:0",
+          "pivot": "0:19:0:0",
+          "known_dd_m": 0.00884668902633675,
+          "satellite_motion_dd_m": 0.008846666663885117,
+          "satellite_clock_dd_m": 2.236245163697581e-08,
+          "raw_doppler_dd_rx1_mps": 19.71086578722887,
+          "raw_doppler_dd_rx2_mps": 19.409908167017008,
+          "raw_doppler_time_alignment_template_m": 0.008580286179212509,
+          "doppler_template_minus_implemented_known_dd_m": -0.0002664028471242412
+        },
+        {
+          "target": "0:11:0:0",
+          "pivot": "0:19:0:0",
+          "known_dd_m": -0.1552148619584904,
+          "satellite_motion_dd_m": -0.15521299093961716,
+          "satellite_clock_dd_m": -1.8710188732631644e-06,
+          "raw_doppler_dd_rx1_mps": -351.79339485617857,
+          "raw_doppler_dd_rx2_mps": -352.29435595817677,
+          "raw_doppler_time_alignment_template_m": -0.15573419345585032,
+          "doppler_template_minus_implemented_known_dd_m": -0.000519331497359915
+        },
+        {
+          "target": "0:17:0:0",
+          "pivot": "0:19:0:0",
+          "known_dd_m": 0.14030724373588313,
+          "satellite_motion_dd_m": 0.1403064951300621,
+          "satellite_clock_dd_m": 7.486058210421634e-07,
+          "raw_doppler_dd_rx1_mps": 317.6339616274722,
+          "raw_doppler_dd_rx2_mps": 317.5440181336886,
+          "raw_doppler_time_alignment_template_m": 0.14037256264375333,
+          "doppler_template_minus_implemented_known_dd_m": 6.531890787020433e-05
+        },
+        {
+          "target": "0:11:3:0",
+          "pivot": "0:6:3:0",
+          "known_dd_m": -0.16406027695179687,
+          "satellite_motion_dd_m": -0.1640583835542202,
+          "satellite_clock_dd_m": -1.893397576681853e-06,
+          "raw_doppler_dd_rx1_mps": -372.1412481165354,
+          "raw_doppler_dd_rx2_mps": -371.7100644584576,
+          "raw_doppler_time_alignment_template_m": -0.16431704371310538,
+          "doppler_template_minus_implemented_known_dd_m": -0.00025676676130850784
+        },
+        {
+          "target": "0:17:3:0",
+          "pivot": "0:6:3:0",
+          "known_dd_m": 0.13145989532910063,
+          "satellite_motion_dd_m": 0.13145916908979416,
+          "satellite_clock_dd_m": 7.262393064597593e-07,
+          "raw_doppler_dd_rx1_mps": 297.73452190315174,
+          "raw_doppler_dd_rx2_mps": 298.40478831411826,
+          "raw_doppler_time_alignment_template_m": 0.13191193172842072,
+          "doppler_template_minus_implemented_known_dd_m": 0.00045203639932009376
+        },
+        {
+          "target": "2:2:0:0",
+          "pivot": "2:11:0:0",
+          "known_dd_m": -0.19753188792540263,
+          "satellite_motion_dd_m": -0.19755031168460846,
+          "satellite_clock_dd_m": 1.8423759205832312e-05,
+          "raw_doppler_dd_rx1_mps": -448.0583924167162,
+          "raw_doppler_dd_rx2_mps": -447.809003638498,
+          "raw_doppler_time_alignment_template_m": -0.19795711405660055,
+          "doppler_template_minus_implemented_known_dd_m": -0.0004252261311979144
+        },
+        {
+          "target": "2:10:0:0",
+          "pivot": "2:11:0:0",
+          "known_dd_m": 0.07223402169907531,
+          "satellite_motion_dd_m": 0.07221488282084465,
+          "satellite_clock_dd_m": 1.9138878230655007e-05,
+          "raw_doppler_dd_rx1_mps": 163.47457641409125,
+          "raw_doppler_dd_rx2_mps": 163.8628758567789,
+          "raw_doppler_time_alignment_template_m": 0.07243673472856071,
+          "doppler_template_minus_implemented_known_dd_m": 0.00020271302948540737
+        },
+        {
+          "target": "2:36:0:0",
+          "pivot": "2:11:0:0",
+          "known_dd_m": -0.1862252852368489,
+          "satellite_motion_dd_m": -0.18624481558799744,
+          "satellite_clock_dd_m": 1.9530351148555787e-05,
+          "raw_doppler_dd_rx1_mps": -422.37389185853226,
+          "raw_doppler_dd_rx2_mps": -422.1839350092514,
+          "raw_doppler_time_alignment_template_m": -0.1866293725593729,
+          "doppler_template_minus_implemented_known_dd_m": -0.0004040873225240049
+        },
+        {
+          "target": "2:2:6:0",
+          "pivot": "2:11:6:0",
+          "known_dd_m": -0.1975324092029687,
+          "satellite_motion_dd_m": -0.19755083322525024,
+          "satellite_clock_dd_m": 1.842402228154879e-05,
+          "raw_doppler_dd_rx1_mps": -447.5593815839103,
+          "raw_doppler_dd_rx2_mps": -448.4334701091227,
+          "raw_doppler_time_alignment_template_m": -0.19823316384422335,
+          "doppler_template_minus_implemented_known_dd_m": -0.0007007546412546584
+        },
+        {
+          "target": "2:36:6:0",
+          "pivot": "2:11:6:0",
+          "known_dd_m": -0.18622610081539573,
+          "satellite_motion_dd_m": -0.1862456314265728,
+          "satellite_clock_dd_m": 1.9530611177063194e-05,
+          "raw_doppler_dd_rx1_mps": -422.1615507143766,
+          "raw_doppler_dd_rx2_mps": -422.23546132998285,
+          "raw_doppler_time_alignment_template_m": -0.18665215013121061,
+          "doppler_template_minus_implemented_known_dd_m": -0.0004260493158148859
+        },
+        {
+          "target": "3:10:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": -0.022721560740760247,
+          "satellite_motion_dd_m": -0.022727467119693756,
+          "satellite_clock_dd_m": 5.906378933507816e-06,
+          "raw_doppler_dd_rx1_mps": -51.58810731858482,
+          "raw_doppler_dd_rx2_mps": -52.00819369488855,
+          "raw_doppler_time_alignment_template_m": -0.02299058716436164,
+          "doppler_template_minus_implemented_known_dd_m": -0.00026902642360139215
+        },
+        {
+          "target": "3:14:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": -0.02084369150828676,
+          "satellite_motion_dd_m": -0.020852461457252502,
+          "satellite_clock_dd_m": 8.769948965742192e-06,
+          "raw_doppler_dd_rx1_mps": -46.30397394343841,
+          "raw_doppler_dd_rx2_mps": -46.40754211366775,
+          "raw_doppler_time_alignment_template_m": -0.02051477981156885,
+          "doppler_template_minus_implemented_known_dd_m": 0.00032891169671791023
+        },
+        {
+          "target": "3:27:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": -0.15809460566084685,
+          "satellite_motion_dd_m": -0.15809713304042816,
+          "satellite_clock_dd_m": 2.5273795813028025e-06,
+          "raw_doppler_dd_rx1_mps": -358.4723871951501,
+          "raw_doppler_dd_rx2_mps": -358.2364402432808,
+          "raw_doppler_time_alignment_template_m": -0.15836093353254127,
+          "doppler_template_minus_implemented_known_dd_m": -0.00026632787169442174
+        },
+        {
+          "target": "3:28:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": -0.014822661640037125,
+          "satellite_motion_dd_m": -0.014825236052274704,
+          "satellite_clock_dd_m": 2.5744122375799885e-06,
+          "raw_doppler_dd_rx1_mps": -33.54056833839774,
+          "raw_doppler_dd_rx2_mps": -33.71422904574472,
+          "raw_doppler_time_alignment_template_m": -0.014903611652092929,
+          "doppler_template_minus_implemented_known_dd_m": -8.095001205580404e-05
+        },
+        {
+          "target": "3:40:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": 0.0007155699967935549,
+          "satellite_motion_dd_m": 0.0007119625806808472,
+          "satellite_clock_dd_m": 3.6074161127073686e-06,
+          "raw_doppler_dd_rx1_mps": 1.7966662975820569,
+          "raw_doppler_dd_rx2_mps": 1.8212807336936034,
+          "raw_doppler_time_alignment_template_m": 0.0008051099352614238,
+          "doppler_template_minus_implemented_known_dd_m": 8.953993846786887e-05
+        },
+        {
+          "target": "3:43:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": 0.17930252149804365,
+          "satellite_motion_dd_m": 0.1792994886636734,
+          "satellite_clock_dd_m": 3.0328343702471362e-06,
+          "raw_doppler_dd_rx1_mps": 406.3819959696249,
+          "raw_doppler_dd_rx2_mps": 406.22708911836287,
+          "raw_doppler_time_alignment_template_m": 0.1795755368027426,
+          "doppler_template_minus_implemented_known_dd_m": 0.0002730153046989481
+        },
+        {
+          "target": "3:10:2:0",
+          "pivot": "3:7:2:0",
+          "known_dd_m": -0.0227212552649243,
+          "satellite_motion_dd_m": -0.022727161645889282,
+          "satellite_clock_dd_m": 5.90638096498053e-06,
+          "raw_doppler_dd_rx1_mps": -51.74591942823015,
+          "raw_doppler_dd_rx2_mps": -51.71675535431169,
+          "raw_doppler_time_alignment_template_m": -0.02286175479976583,
+          "doppler_template_minus_implemented_known_dd_m": -0.00014049953484153097
+        },
+        {
+          "target": "3:14:2:0",
+          "pivot": "3:7:2:0",
+          "known_dd_m": -0.02084338606698585,
+          "satellite_motion_dd_m": -0.02085215598344803,
+          "satellite_clock_dd_m": 8.769916462178767e-06,
+          "raw_doppler_dd_rx1_mps": -46.458244698270825,
+          "raw_doppler_dd_rx2_mps": -46.34480569713395,
+          "raw_doppler_time_alignment_template_m": -0.020487046738177344,
+          "doppler_template_minus_implemented_known_dd_m": 0.0003563393288085054
+        }
+      ]
+    },
+    {
+      "time_s": 100.59800004959106,
+      "same_rawx_receiver_tag": true,
+      "inferred_common_receive_time_difference_proxy_s": 0.0004420598458360236,
+      "not_a_clock_calibration": true,
+      "raw_transmit_time_difference_range_s": [
+        0.0004420549971982773,
+        0.0004420637188013546
+      ],
+      "raw_code_receiver_clock_proxy_range_s": [
+        -0.0004420636159067714,
+        -0.0004420549006000362
+      ],
+      "max_known_sd_cache_difference_m": 0.0,
+      "max_abs_known_dd_m": 0.19752938054805047,
+      "max_abs_satellite_clock_dd_m": 1.9530611177063194e-05,
+      "max_abs_doppler_alignment_template_m": 0.19811888272483016,
+      "max_abs_remaining_doppler_minus_known_dd_m": 0.0006503010054386971,
+      "remaining_template_unchanged_Q_whitened_norm": 0.21394752638304496,
+      "remaining_template_after_free_baseline_projection_whitened_norm": 0.037863144609846196,
+      "dd_rows": [
+        {
+          "target": "0:6:0:0",
+          "pivot": "0:19:0:0",
+          "known_dd_m": 0.008845832209568104,
+          "satellite_motion_dd_m": 0.00884580984711647,
+          "satellite_clock_dd_m": 2.236245163697581e-08,
+          "raw_doppler_dd_rx1_mps": 19.62153206015803,
+          "raw_doppler_dd_rx2_mps": 19.40781753828753,
+          "raw_doppler_time_alignment_template_m": 0.00857941682898906,
+          "doppler_template_minus_implemented_known_dd_m": -0.000266415380579043
+        },
+        {
+          "target": "0:11:0:0",
+          "pivot": "0:19:0:0",
+          "known_dd_m": -0.15521930253702976,
+          "satellite_motion_dd_m": -0.15521743148565292,
+          "satellite_clock_dd_m": -1.8710513768265902e-06,
+          "raw_doppler_dd_rx1_mps": -351.6719525562042,
+          "raw_doppler_dd_rx2_mps": -352.3381662446633,
+          "raw_doppler_time_alignment_template_m": -0.1557545554522631,
+          "doppler_template_minus_implemented_known_dd_m": -0.0005352529152333474
+        },
+        {
+          "target": "0:17:0:0",
+          "pivot": "0:19:0:0",
+          "known_dd_m": 0.1403068823908501,
+          "satellite_motion_dd_m": 0.14030613377690315,
+          "satellite_clock_dd_m": 7.486139469330198e-07,
+          "raw_doppler_dd_rx1_mps": 318.03359692371527,
+          "raw_doppler_dd_rx2_mps": 318.0401940188172,
+          "raw_doppler_time_alignment_template_m": 0.14059279913761735,
+          "doppler_template_minus_implemented_known_dd_m": 0.0002859167467672563
+        },
+        {
+          "target": "0:11:3:0",
+          "pivot": "0:6:3:0",
+          "known_dd_m": -0.1640638085269998,
+          "satellite_motion_dd_m": -0.16406191512942314,
+          "satellite_clock_dd_m": -1.893397576681853e-06,
+          "raw_doppler_dd_rx1_mps": -371.66087661029474,
+          "raw_doppler_dd_rx2_mps": -371.84471991915575,
+          "raw_doppler_time_alignment_template_m": -0.16437761956240135,
+          "doppler_template_minus_implemented_known_dd_m": -0.00031381103540154
+        },
+        {
+          "target": "0:17:3:0",
+          "pivot": "0:6:3:0",
+          "known_dd_m": 0.13146027159154666,
+          "satellite_motion_dd_m": 0.1314595453441143,
+          "satellite_clock_dd_m": 7.262474323506158e-07,
+          "raw_doppler_dd_rx1_mps": 298.207738813296,
+          "raw_doppler_dd_rx2_mps": 298.33175181230064,
+          "raw_doppler_time_alignment_template_m": 0.13188048821413648,
+          "doppler_template_minus_implemented_known_dd_m": 0.00042021662258981407
+        },
+        {
+          "target": "2:2:0:0",
+          "pivot": "2:11:0:0",
+          "known_dd_m": -0.19752938054805047,
+          "satellite_motion_dd_m": -0.1975478045642376,
+          "satellite_clock_dd_m": 1.8424016187130648e-05,
+          "raw_doppler_dd_rx1_mps": -447.92672926517554,
+          "raw_doppler_dd_rx2_mps": -448.1590213462282,
+          "raw_doppler_time_alignment_template_m": -0.19811310788633685,
+          "doppler_template_minus_implemented_known_dd_m": -0.0005837273382863772
+        },
+        {
+          "target": "2:10:0:0",
+          "pivot": "2:11:0:0",
+          "known_dd_m": 0.07223755732460417,
+          "satellite_motion_dd_m": 0.07221841812133789,
+          "satellite_clock_dd_m": 1.9139203266289265e-05,
+          "raw_doppler_dd_rx1_mps": 164.25763301931985,
+          "raw_doppler_dd_rx2_mps": 163.90366634621174,
+          "raw_doppler_time_alignment_template_m": 0.07245522947696541,
+          "doppler_template_minus_implemented_known_dd_m": 0.00021767215236123683
+        },
+        {
+          "target": "2:36:0:0",
+          "pivot": "2:11:0:0",
+          "known_dd_m": -0.1862254414390129,
+          "satellite_motion_dd_m": -0.18624497205018997,
+          "satellite_clock_dd_m": 1.9530611177063194e-05,
+          "raw_doppler_dd_rx1_mps": -422.3933230911123,
+          "raw_doppler_dd_rx2_mps": -422.6355921170462,
+          "raw_doppler_time_alignment_template_m": -0.186830224696078,
+          "doppler_template_minus_implemented_known_dd_m": -0.0006047832570650891
+        },
+        {
+          "target": "2:2:6:0",
+          "pivot": "2:11:6:0",
+          "known_dd_m": -0.19752879567442638,
+          "satellite_motion_dd_m": -0.19754721969366074,
+          "satellite_clock_dd_m": 1.842401923433972e-05,
+          "raw_doppler_dd_rx1_mps": -447.9317843739462,
+          "raw_doppler_dd_rx2_mps": -448.172084822922,
+          "raw_doppler_time_alignment_template_m": -0.19811888272483016,
+          "doppler_template_minus_implemented_known_dd_m": -0.0005900870504037814
+        },
+        {
+          "target": "2:36:6:0",
+          "pivot": "2:11:6:0",
+          "known_dd_m": -0.18622524030584037,
+          "satellite_motion_dd_m": -0.18624477088451385,
+          "satellite_clock_dd_m": 1.9530578673499768e-05,
+          "raw_doppler_dd_rx1_mps": -422.28384580188913,
+          "raw_doppler_dd_rx2_mps": -422.4864178828904,
+          "raw_doppler_time_alignment_template_m": -0.18676428075712437,
+          "doppler_template_minus_implemented_known_dd_m": -0.0005390404512840008
+        },
+        {
+          "target": "3:10:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": -0.022722015138823333,
+          "satellite_motion_dd_m": -0.02272792160511017,
+          "satellite_clock_dd_m": 5.906466286834523e-06,
+          "raw_doppler_dd_rx1_mps": -51.563399113192844,
+          "raw_doppler_dd_rx2_mps": -51.55524118579588,
+          "raw_doppler_time_alignment_template_m": -0.02279050197063194,
+          "doppler_template_minus_implemented_known_dd_m": -6.848683180860765e-05
+        },
+        {
+          "target": "3:14:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": -0.020834780532633927,
+          "satellite_motion_dd_m": -0.02084355056285858,
+          "satellite_clock_dd_m": 8.770030224650757e-06,
+          "raw_doppler_dd_rx1_mps": -46.19923365720374,
+          "raw_doppler_dd_rx2_mps": -45.981266964855976,
+          "raw_doppler_time_alignment_template_m": -0.020326471785829275,
+          "doppler_template_minus_implemented_known_dd_m": 0.0005083087468046518
+        },
+        {
+          "target": "3:27:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": -0.1580946056283433,
+          "satellite_motion_dd_m": -0.15809713304042816,
+          "satellite_clock_dd_m": 2.5274120848662283e-06,
+          "raw_doppler_dd_rx1_mps": -358.51446615974083,
+          "raw_doppler_dd_rx2_mps": -358.2271805268389,
+          "raw_doppler_time_alignment_template_m": -0.15835785219796777,
+          "doppler_template_minus_implemented_known_dd_m": -0.00026324656962448123
+        },
+        {
+          "target": "3:28:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": -0.014819893651834675,
+          "satellite_motion_dd_m": -0.014822468161582947,
+          "satellite_clock_dd_m": 2.574509748270266e-06,
+          "raw_doppler_dd_rx1_mps": -33.398323270283115,
+          "raw_doppler_dd_rx2_mps": -33.30853625398623,
+          "raw_doppler_time_alignment_template_m": -0.014724366401460756,
+          "doppler_template_minus_implemented_known_dd_m": 9.552725037391928e-05
+        },
+        {
+          "target": "3:40:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": 0.0007153092996056805,
+          "satellite_motion_dd_m": 0.0007117018103599548,
+          "satellite_clock_dd_m": 3.6074892457250768e-06,
+          "raw_doppler_dd_rx1_mps": 2.3157726677282717,
+          "raw_doppler_dd_rx2_mps": 2.3659857511095748,
+          "raw_doppler_time_alignment_template_m": 0.0010459072963857272,
+          "doppler_template_minus_implemented_known_dd_m": 0.0003305979967800467
+        },
+        {
+          "target": "3:43:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": 0.17930500260638957,
+          "satellite_motion_dd_m": 0.17930196970701218,
+          "satellite_clock_dd_m": 3.032899377373988e-06,
+          "raw_doppler_dd_rx1_mps": 406.62931244674564,
+          "raw_doppler_dd_rx2_mps": 407.08357772576426,
+          "raw_doppler_time_alignment_template_m": 0.17995530361182827,
+          "doppler_template_minus_implemented_known_dd_m": 0.0006503010054386971
+        },
+        {
+          "target": "3:10:2:0",
+          "pivot": "3:7:2:0",
+          "known_dd_m": -0.0227216799277036,
+          "satellite_motion_dd_m": -0.022727586328983307,
+          "satellite_clock_dd_m": 5.9064012797076714e-06,
+          "raw_doppler_dd_rx1_mps": -51.47567805565377,
+          "raw_doppler_dd_rx2_mps": -51.83959613135704,
+          "raw_doppler_time_alignment_template_m": -0.022916203874029418,
+          "doppler_template_minus_implemented_known_dd_m": -0.00019452394632581832
+        },
+        {
+          "target": "3:14:2:0",
+          "pivot": "3:7:2:0",
+          "known_dd_m": -0.020834441644979242,
+          "satellite_motion_dd_m": -0.02084321156144142,
+          "satellite_clock_dd_m": 8.769916462178767e-06,
+          "raw_doppler_dd_rx1_mps": -46.470856189695034,
+          "raw_doppler_dd_rx2_mps": -46.30788070541597,
+          "raw_doppler_time_alignment_template_m": -0.020470854605629155,
+          "doppler_template_minus_implemented_known_dd_m": 0.0003635870393500877
+        }
+      ]
+    },
+    {
+      "time_s": 100.79800009727478,
+      "same_rawx_receiver_tag": true,
+      "inferred_common_receive_time_difference_proxy_s": 0.0004420622189491692,
+      "not_a_clock_calibration": true,
+      "raw_transmit_time_difference_range_s": [
+        0.00044205771014094284,
+        0.0004420707623939993
+      ],
+      "raw_code_receiver_clock_proxy_range_s": [
+        -0.0004420713591823171,
+        -0.0004420576135748611
+      ],
+      "max_known_sd_cache_difference_m": 0.0,
+      "max_abs_known_dd_m": 0.2584647384416829,
+      "max_abs_satellite_clock_dd_m": 1.953109873051458e-05,
+      "max_abs_doppler_alignment_template_m": 0.25934671807472487,
+      "max_abs_remaining_doppler_minus_known_dd_m": 0.0008819796330419849,
+      "remaining_template_unchanged_Q_whitened_norm": 0.22939836692901763,
+      "remaining_template_after_free_baseline_projection_whitened_norm": 0.039091371492829645,
+      "dd_rows": [
+        {
+          "target": "0:6:0:0",
+          "pivot": "0:19:0:0",
+          "known_dd_m": 0.008845031239650372,
+          "satellite_motion_dd_m": 0.008845008909702301,
+          "satellite_clock_dd_m": 2.2329948073549974e-08,
+          "raw_doppler_dd_rx1_mps": 19.28219398085423,
+          "raw_doppler_dd_rx2_mps": 19.482522671554065,
+          "raw_doppler_time_alignment_template_m": 0.008612487202914685,
+          "doppler_template_minus_implemented_known_dd_m": -0.00023254403673568687
+        },
+        {
+          "target": "0:11:0:0",
+          "pivot": "0:19:0:0",
+          "known_dd_m": -0.15522354569143504,
+          "satellite_motion_dd_m": -0.15522167459130287,
+          "satellite_clock_dd_m": -1.871100132171729e-06,
+          "raw_doppler_dd_rx1_mps": -352.69510625640885,
+          "raw_doppler_dd_rx2_mps": -352.5764979198234,
+          "raw_doppler_time_alignment_template_m": -0.15586074901976427,
+          "doppler_template_minus_implemented_known_dd_m": -0.0006372033283292278
+        },
+        {
+          "target": "0:17:0:0",
+          "pivot": "0:19:0:0",
+          "known_dd_m": 0.1403065172920861,
+          "satellite_motion_dd_m": 0.1403057686984539,
+          "satellite_clock_dd_m": 7.485936322058787e-07,
+          "raw_doppler_dd_rx1_mps": 318.21441307960674,
+          "raw_doppler_dd_rx2_mps": 317.8582164025205,
+          "raw_doppler_time_alignment_template_m": 0.14051310845412343,
+          "doppler_template_minus_implemented_known_dd_m": 0.00020659116203733396
+        },
+        {
+          "target": "0:11:3:0",
+          "pivot": "0:6:3:0",
+          "known_dd_m": -0.16406736990452514,
+          "satellite_motion_dd_m": -0.16406547650694847,
+          "satellite_clock_dd_m": -1.893397576681853e-06,
+          "raw_doppler_dd_rx1_mps": -371.9937441936808,
+          "raw_doppler_dd_rx2_mps": -371.72291292061414,
+          "raw_doppler_time_alignment_template_m": -0.1643246557199355,
+          "doppler_template_minus_implemented_known_dd_m": -0.00025728581541034634
+        },
+        {
+          "target": "0:17:3:0",
+          "pivot": "0:6:3:0",
+          "known_dd_m": 0.13146074843683075,
+          "satellite_motion_dd_m": 0.1314600221812725,
+          "satellite_clock_dd_m": 7.262555582414722e-07,
+          "raw_doppler_dd_rx1_mps": 298.5424099511147,
+          "raw_doppler_dd_rx2_mps": 298.56131000913604,
+          "raw_doppler_time_alignment_template_m": 0.13198267519500947,
+          "doppler_template_minus_implemented_known_dd_m": 0.0005219267581787201
+        },
+        {
+          "target": "2:2:0:0",
+          "pivot": "2:36:0:0",
+          "known_dd_m": -0.011300988681152646,
+          "satellite_motion_dd_m": -0.01129988208413124,
+          "satellite_clock_dd_m": -1.1065970214052602e-06,
+          "raw_doppler_dd_rx1_mps": -25.478910451848265,
+          "raw_doppler_dd_rx2_mps": -25.862192385585217,
+          "raw_doppler_time_alignment_template_m": -0.011432698152862108,
+          "doppler_template_minus_implemented_known_dd_m": -0.0001317094717094621
+        },
+        {
+          "target": "2:10:0:0",
+          "pivot": "2:36:0:0",
+          "known_dd_m": 0.2584647384416829,
+          "satellite_motion_dd_m": 0.25846512988209724,
+          "satellite_clock_dd_m": -3.914404143373542e-07,
+          "raw_doppler_dd_rx1_mps": 586.6279591944079,
+          "raw_doppler_dd_rx2_mps": 586.6746963611157,
+          "raw_doppler_time_alignment_template_m": 0.25934671807472487,
+          "doppler_template_minus_implemented_known_dd_m": 0.0008819796330419849
+        },
+        {
+          "target": "2:2:6:0",
+          "pivot": "2:11:6:0",
+          "known_dd_m": -0.19752575531951733,
+          "satellite_motion_dd_m": -0.1975441798567772,
+          "satellite_clock_dd_m": 1.8424537259881818e-05,
+          "raw_doppler_dd_rx1_mps": -448.46657527411116,
+          "raw_doppler_dd_rx2_mps": -447.9392572889367,
+          "raw_doppler_time_alignment_template_m": -0.19801702203159016,
+          "doppler_template_minus_implemented_known_dd_m": -0.0004912667120728353
+        },
+        {
+          "target": "2:10:6:0",
+          "pivot": "2:11:6:0",
+          "known_dd_m": 0.07223402623695468,
+          "satellite_motion_dd_m": 0.07221488654613495,
+          "satellite_clock_dd_m": 1.9139690819740653e-05,
+          "raw_doppler_dd_rx1_mps": 163.83476339667143,
+          "raw_doppler_dd_rx2_mps": 164.0077166624769,
+          "raw_doppler_time_alignment_template_m": 0.07250161515260116,
+          "doppler_template_minus_implemented_known_dd_m": 0.00026758891564647447
+        },
+        {
+          "target": "2:36:6:0",
+          "pivot": "2:11:6:0",
+          "known_dd_m": -0.18622505724655872,
+          "satellite_motion_dd_m": -0.18624458834528923,
+          "satellite_clock_dd_m": 1.953109873051458e-05,
+          "raw_doppler_dd_rx1_mps": -422.53686384858725,
+          "raw_doppler_dd_rx2_mps": -422.39910755764595,
+          "raw_doppler_time_alignment_template_m": -0.18672668676908175,
+          "doppler_template_minus_implemented_known_dd_m": -0.0005016295225230283
+        },
+        {
+          "target": "3:10:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": -0.022722469601893544,
+          "satellite_motion_dd_m": -0.02272837609052658,
+          "satellite_clock_dd_m": 5.906488633034378e-06,
+          "raw_doppler_dd_rx1_mps": -51.6756409418615,
+          "raw_doppler_dd_rx2_mps": -51.65965327954905,
+          "raw_doppler_time_alignment_template_m": -0.022836780958902177,
+          "doppler_template_minus_implemented_known_dd_m": -0.00011431135700863335
+        },
+        {
+          "target": "3:14:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": -0.02082583233658168,
+          "satellite_motion_dd_m": -0.020834602415561676,
+          "satellite_clock_dd_m": 8.770078979995896e-06,
+          "raw_doppler_dd_rx1_mps": -46.11259084209111,
+          "raw_doppler_dd_rx2_mps": -46.04456122914281,
+          "raw_doppler_time_alignment_template_m": -0.020354560907495756,
+          "doppler_template_minus_implemented_known_dd_m": 0.0004712714290859253
+        },
+        {
+          "target": "3:27:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": -0.15809418463803598,
+          "satellite_motion_dd_m": -0.15809671208262444,
+          "satellite_clock_dd_m": 2.527444588429654e-06,
+          "raw_doppler_dd_rx1_mps": -358.73044025487957,
+          "raw_doppler_dd_rx2_mps": -358.4248227276546,
+          "raw_doppler_time_alignment_template_m": -0.1584460724614496,
+          "doppler_template_minus_implemented_known_dd_m": -0.00035188782341361025
+        },
+        {
+          "target": "3:28:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": -0.01481711089248529,
+          "satellite_motion_dd_m": -0.014819685369729996,
+          "satellite_clock_dd_m": 2.5744772447068402e-06,
+          "raw_doppler_dd_rx1_mps": -33.47666457378814,
+          "raw_doppler_dd_rx2_mps": -33.269906240741165,
+          "raw_doppler_time_alignment_template_m": -0.014707368577012851,
+          "doppler_template_minus_implemented_known_dd_m": 0.00010974231547243932
+        },
+        {
+          "target": "3:40:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": 0.0007150410787041912,
+          "satellite_motion_dd_m": 0.0007114335894584656,
+          "satellite_clock_dd_m": 3.6074892457250768e-06,
+          "raw_doppler_dd_rx1_mps": 2.4013843870424934,
+          "raw_doppler_dd_rx2_mps": 2.0989308404593476,
+          "raw_doppler_time_alignment_template_m": 0.0009278580247543038,
+          "doppler_template_minus_implemented_known_dd_m": 0.0002128169460501126
+        },
+        {
+          "target": "3:43:0:0",
+          "pivot": "3:7:0:0",
+          "known_dd_m": 0.17930745756457037,
+          "satellite_motion_dd_m": 0.17930442467331886,
+          "satellite_clock_dd_m": 3.0328912514831314e-06,
+          "raw_doppler_dd_rx1_mps": 406.9563328122276,
+          "raw_doppler_dd_rx2_mps": 407.25606631710593,
+          "raw_doppler_time_alignment_template_m": 0.18003252035664985,
+          "doppler_template_minus_implemented_known_dd_m": 0.0007250627920794839
+        },
+        {
+          "target": "3:10:2:0",
+          "pivot": "3:7:2:0",
+          "known_dd_m": -0.02272210456001081,
+          "satellite_motion_dd_m": -0.02272801101207733,
+          "satellite_clock_dd_m": 5.906452066525524e-06,
+          "raw_doppler_dd_rx1_mps": -51.66594559559302,
+          "raw_doppler_dd_rx2_mps": -51.50048040282066,
+          "raw_doppler_time_alignment_template_m": -0.022766416643819107,
+          "doppler_template_minus_implemented_known_dd_m": -4.431208380829832e-05
+        },
+        {
+          "target": "3:14:2:0",
+          "pivot": "3:7:2:0",
+          "known_dd_m": -0.020825478515262237,
+          "satellite_motion_dd_m": -0.020834248512983322,
+          "satellite_clock_dd_m": 8.769997721087331e-06,
+          "raw_doppler_dd_rx1_mps": -45.86108224241139,
+          "raw_doppler_dd_rx2_mps": -46.12683304487429,
+          "raw_doppler_time_alignment_template_m": -0.02039093016891499,
+          "doppler_template_minus_implemented_known_dd_m": 0.0004345483463472459
+        }
+      ]
+    }
+  ],
+  "sd_components": [
+    {
+      "time_s": 100.19799995422363,
+      "signal": "0:6:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132524.5532245487,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420543268788593,
+      "satellite_clock_biases_s": [
+        -0.0006123746621632883,
+        -0.0006123746621635869
+      ],
+      "satellite_clock_sd_m": 8.951481367475492e-08,
+      "satellite_motion_sd_m": -0.047510284930467606,
+      "recomputed_known_sd_m": -0.04751019541565393,
+      "cached_known_sd_m": -0.04751019541565393,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -95.49527452076147,
+      "raw_range_rate_rx2_mps": -99.2003332135519,
+      "receiver_clock_sd_proxy_s": -0.00044205416840190586
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "0:6:3:0",
+      "wavelength_m": 0.24421021342456825,
+      "raw_code_sd_m": -132524.05142608657,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420526530593594,
+      "satellite_clock_biases_s": [
+        -0.0006123746621632883,
+        -0.0006123746621635869
+      ],
+      "satellite_clock_sd_m": 8.951481367475492e-08,
+      "satellite_motion_sd_m": -0.04751010984182358,
+      "recomputed_known_sd_m": -0.047510020327009905,
+      "cached_known_sd_m": -0.047510020327009905,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -95.83433162343556,
+      "raw_range_rate_rx2_mps": -99.563664838696,
+      "receiver_clock_sd_proxy_s": -0.00044205249458299
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "0:11:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132524.85064605996,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420553189702323,
+      "satellite_clock_biases_s": [
+        -0.00041693313923206986,
+        -0.00041693313922605286
+      ],
+      "satellite_clock_sd_m": -1.8038502594436723e-06,
+      "satellite_motion_sd_m": -0.2115664705634117,
+      "recomputed_known_sd_m": -0.21156827441367115,
+      "cached_known_sd_m": -0.21156827441367115,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -467.5188473405703,
+      "raw_range_rate_rx2_mps": -470.97985997300674,
+      "receiver_clock_sd_proxy_s": -0.000442054613254432
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "0:11:3:0",
+      "wavelength_m": 0.24421021342456825,
+      "raw_code_sd_m": -132523.9477717951,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205230730585987,
+      "satellite_clock_biases_s": [
+        -0.0004169331392320699,
+        -0.0004169331392260529
+      ],
+      "satellite_clock_sd_m": -1.8038502594436723e-06,
+      "satellite_motion_sd_m": -0.21156501397490501,
+      "recomputed_known_sd_m": -0.21156681782516445,
+      "cached_known_sd_m": -0.21156681782516445,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -467.39357570563976,
+      "raw_range_rate_rx2_mps": -470.91822785090835,
+      "receiver_clock_sd_proxy_s": -0.00044205160159491825
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "0:17:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132524.52739822865,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420542407315285,
+      "satellite_clock_biases_s": [
+        -8.010647377564518e-05,
+        -8.010647377836622e-05
+      ],
+      "satellite_clock_sd_m": 8.15750057189086e-07,
+      "satellite_motion_sd_m": 0.08394914865493774,
+      "recomputed_known_sd_m": 0.08394996440499493,
+      "cached_known_sd_m": 0.08394996440499493,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 202.75656107258766,
+      "raw_range_rate_rx2_mps": 198.88615687650392,
+      "receiver_clock_sd_proxy_s": -0.0004420545207584677
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "0:17:3:0",
+      "wavelength_m": 0.24421021342456825,
+      "raw_code_sd_m": -132523.7342509292,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205159507691553,
+      "satellite_clock_biases_s": [
+        -8.010647377564526e-05,
+        -8.010647377836628e-05
+      ],
+      "satellite_clock_sd_m": 8.157419312982295e-07,
+      "satellite_motion_sd_m": 0.08394863083958626,
+      "recomputed_known_sd_m": 0.08394944658151755,
+      "cached_known_sd_m": 0.08394944658151755,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 202.2734887837513,
+      "raw_range_rate_rx2_mps": 198.79194307996363,
+      "receiver_clock_sd_proxy_s": -0.0004420518751021275
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "0:19:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132524.75718269497,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420550072100045,
+      "satellite_clock_biases_s": [
+        0.0006926655294923773,
+        0.0006926655294921533
+      ],
+      "satellite_clock_sd_m": 6.71523620377791e-08,
+      "satellite_motion_sd_m": -0.056357719004154205,
+      "recomputed_known_sd_m": -0.056357651851792166,
+      "cached_known_sd_m": -0.056357651851792166,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -115.3862131292224,
+      "raw_range_rate_rx2_mps": -118.76216040157738,
+      "receiver_clock_sd_proxy_s": -0.000442054819221113
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "2:2:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132524.64089444652,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420546193141607,
+      "satellite_clock_biases_s": [
+        2.2928484817330333e-05,
+        2.2928484818569918e-05
+      ],
+      "satellite_clock_sd_m": -3.7161831932937896e-07,
+      "satellite_motion_sd_m": -0.09087212011218071,
+      "recomputed_known_sd_m": -0.09087249173050004,
+      "cached_known_sd_m": -0.09087249173050004,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -194.09936042066732,
+      "raw_range_rate_rx2_mps": -197.73347711190425,
+      "receiver_clock_sd_proxy_s": -0.0004420543161961559
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "2:2:6:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132523.712752264,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205152336508743,
+      "satellite_clock_biases_s": [
+        2.2928484817330326e-05,
+        2.2928484818569905e-05
+      ],
+      "satellite_clock_sd_m": -3.7161628785666484e-07,
+      "satellite_motion_sd_m": -0.09087147936224937,
+      "recomputed_known_sd_m": -0.09087185097853723,
+      "cached_known_sd_m": -0.09087185097853723,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -193.76531889609808,
+      "raw_range_rate_rx2_mps": -197.4417505427642,
+      "receiver_clock_sd_proxy_s": -0.0004420512202492199
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "2:10:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132516.5592798032,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420276619493983,
+      "satellite_clock_biases_s": [
+        -0.0007760360954931542,
+        -0.0007760360954943001
+      ],
+      "satellite_clock_sd_m": 3.4353016184767056e-07,
+      "satellite_motion_sd_m": 0.1788923516869545,
+      "recomputed_known_sd_m": 0.17889269521711634,
+      "cached_known_sd_m": 0.17889269521711634,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 417.6779332209913,
+      "raw_range_rate_rx2_mps": 413.5511250258416,
+      "receiver_clock_sd_proxy_s": -0.0004420282586711985
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "2:10:6:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132523.6238259524,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420512267388408,
+      "satellite_clock_biases_s": [
+        -0.0007760360954931542,
+        -0.0007760360954943001
+      ],
+      "satellite_clock_sd_m": 3.4353016184767056e-07,
+      "satellite_motion_sd_m": 0.17890188470482826,
+      "recomputed_known_sd_m": 0.1789022282349901,
+      "cached_known_sd_m": 0.1789022282349901,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 417.5662688427677,
+      "raw_range_rate_rx2_mps": 413.5691233312539,
+      "receiver_clock_sd_proxy_s": -0.00044205182349243977
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "2:11:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132523.0113233067,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044204918364993263,
+      "satellite_clock_biases_s": [
+        0.004275572461569027,
+        0.0042755724616317225
+      ],
+      "satellite_clock_sd_m": -1.879564060087817e-05,
+      "satellite_motion_sd_m": 0.10668089985847473,
+      "recomputed_known_sd_m": 0.10666210421787385,
+      "cached_known_sd_m": 0.10666210421787385,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 253.80520817997578,
+      "raw_range_rate_rx2_mps": 250.11901160416681,
+      "receiver_clock_sd_proxy_s": -0.0004420495394364155
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "2:11:6:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132524.23367616162,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420532609801732,
+      "satellite_clock_biases_s": [
+        0.004275572461569028,
+        0.004275572461631723
+      ],
+      "satellite_clock_sd_m": -1.879564060087817e-05,
+      "satellite_motion_sd_m": 0.10668189451098442,
+      "recomputed_known_sd_m": 0.10666309887038354,
+      "cached_known_sd_m": 0.10666309887038354,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 253.53238939880262,
+      "raw_range_rate_rx2_mps": 250.1021243635897,
+      "receiver_clock_sd_proxy_s": -0.0004420536167699739
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "2:36:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132524.1340703182,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205292873084284,
+      "satellite_clock_biases_s": [
+        -0.0005327786555123465,
+        -0.000532778655514798
+      ],
+      "satellite_clock_sd_m": 7.349380726215989e-07,
+      "satellite_motion_sd_m": -0.07956372946500778,
+      "recomputed_known_sd_m": -0.07956299452693516,
+      "cached_known_sd_m": -0.07956299452693516,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -168.3978676967544,
+      "raw_range_rate_rx2_mps": -172.08801323794123,
+      "receiver_clock_sd_proxy_s": -0.00044205266333726
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "2:36:6:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132523.91329016536,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205219228752365,
+      "satellite_clock_biases_s": [
+        -0.0005327786555123465,
+        -0.000532778655514798
+      ],
+      "satellite_clock_sd_m": 7.349380726215989e-07,
+      "satellite_motion_sd_m": -0.07956359162926674,
+      "recomputed_known_sd_m": -0.07956285669119412,
+      "cached_known_sd_m": -0.07956285669119412,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -168.41246193889077,
+      "raw_range_rate_rx2_mps": -172.24247487294875,
+      "receiver_clock_sd_proxy_s": -0.0004420519268944006
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "3:7:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132525.03317533433,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420559278223548,
+      "satellite_clock_biases_s": [
+        0.0005639897781614812,
+        0.0005639897781719859
+      ],
+      "satellite_clock_sd_m": -3.1492377567659147e-06,
+      "satellite_motion_sd_m": -0.008123219013214111,
+      "recomputed_known_sd_m": -0.008126368250970878,
+      "cached_known_sd_m": -0.008126368250970878,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -6.291918716513453,
+      "raw_range_rate_rx2_mps": -9.902740015049321,
+      "receiver_clock_sd_proxy_s": -0.0004420559007157081
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "3:7:2:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132524.70741467178,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420548412017482,
+      "satellite_clock_biases_s": [
+        0.0005639897781614822,
+        0.0005639897781719869
+      ],
+      "satellite_clock_sd_m": -3.1492377567659147e-06,
+      "satellite_motion_sd_m": -0.00812319666147232,
+      "recomputed_known_sd_m": -0.008126345899229087,
+      "cached_known_sd_m": -0.008126345899229087,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -6.3315143844827215,
+      "raw_range_rate_rx2_mps": -9.829687450441359,
+      "receiver_clock_sd_proxy_s": -0.0004420548140951761
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "3:10:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132525.81040803343,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420585203915751,
+      "satellite_clock_biases_s": [
+        -5.22921522006759e-05,
+        -5.229215220987267e-05
+      ],
+      "satellite_clock_sd_m": 2.7571228934874744e-06,
+      "satellite_motion_sd_m": -0.030850261449813843,
+      "recomputed_known_sd_m": -0.030847504326920357,
+      "cached_known_sd_m": -0.030847504326920357,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -57.8823702671089,
+      "raw_range_rate_rx2_mps": -61.48967448505633,
+      "receiver_clock_sd_proxy_s": -0.00044205841749537643
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "3:10:2:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132524.3727194965,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420537247788151,
+      "satellite_clock_biases_s": [
+        -5.229215220067649e-05,
+        -5.229215220987316e-05
+      ],
+      "satellite_clock_sd_m": 2.7570924213967627e-06,
+      "satellite_motion_sd_m": -0.030849933624267578,
+      "recomputed_known_sd_m": -0.030847176531846182,
+      "cached_known_sd_m": -0.030847176531846182,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -58.02953439816903,
+      "raw_range_rate_rx2_mps": -61.366122730255064,
+      "receiver_clock_sd_proxy_s": -0.0004420536218837098
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "3:14:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132524.95297413692,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420556602999563,
+      "satellite_clock_biases_s": [
+        -0.00048321005586402546,
+        -0.000483210055882774
+      ],
+      "satellite_clock_sd_m": 5.620678705412852e-06,
+      "satellite_motion_sd_m": -0.028984680771827698,
+      "recomputed_known_sd_m": -0.028979060093122285,
+      "cached_known_sd_m": -0.028979060093122285,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -52.61094262946006,
+      "raw_range_rate_rx2_mps": -56.19522648906317,
+      "receiver_clock_sd_proxy_s": -0.0004420555636362167
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "3:14:2:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132523.2686093226,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420500418637036,
+      "satellite_clock_biases_s": [
+        -0.0004832100558640267,
+        -0.00048321005588277505
+      ],
+      "satellite_clock_sd_m": 5.620613698286e-06,
+      "satellite_motion_sd_m": -0.028984326869249344,
+      "recomputed_known_sd_m": -0.02897870625555106,
+      "cached_known_sd_m": -0.02897870625555106,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -52.35247987048743,
+      "raw_range_rate_rx2_mps": -56.37415109489111,
+      "receiver_clock_sd_proxy_s": -0.0004420499452011443
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "3:27:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132525.7373963222,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205827685072117,
+      "satellite_clock_biases_s": [
+        0.0006034319453599184,
+        0.0006034319453619927
+      ],
+      "satellite_clock_sd_m": -6.218581754631122e-07,
+      "satellite_motion_sd_m": -0.16622063890099525,
+      "recomputed_known_sd_m": -0.1662212607591707,
+      "cached_known_sd_m": -0.1662212607591707,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -364.48367789767184,
+      "raw_range_rate_rx2_mps": -368.1061727390481,
+      "receiver_clock_sd_proxy_s": -0.0004420577223962767
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "3:28:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132525.47906330228,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420574151445207,
+      "satellite_clock_biases_s": [
+        0.0004912623269640277,
+        0.0004912623269659451
+      ],
+      "satellite_clock_sd_m": -5.748255191859262e-07,
+      "satellite_motion_sd_m": -0.022951234132051468,
+      "recomputed_known_sd_m": -0.022951808957570655,
+      "cached_known_sd_m": -0.022951808957570655,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -39.858132953107415,
+      "raw_range_rate_rx2_mps": -43.467690564075056,
+      "receiver_clock_sd_proxy_s": -0.0004420573385855268
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "3:40:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132525.04252865165,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420559590216631,
+      "satellite_clock_biases_s": [
+        -0.00021303519768145924,
+        -0.00021303519768298756
+      ],
+      "satellite_clock_sd_m": 4.581783559414539e-07,
+      "satellite_motion_sd_m": -0.007411003112792969,
+      "recomputed_known_sd_m": -0.007410544934437028,
+      "cached_known_sd_m": -0.007410544934437028,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -4.22500935274672,
+      "raw_range_rate_rx2_mps": -8.148550468927258,
+      "receiver_clock_sd_proxy_s": -0.00044205593430274596
+    },
+    {
+      "time_s": 100.19799995422363,
+      "signal": "3:43:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132525.18534123525,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420564353931654,
+      "satellite_clock_biases_s": [
+        0.00013338062478389582,
+        0.00013338062478428407
+      ],
+      "satellite_clock_sd_m": -1.1639526062792206e-07,
+      "satellite_motion_sd_m": 0.1711737960577011,
+      "recomputed_known_sd_m": 0.1711736796624405,
+      "cached_known_sd_m": 0.1711736796624405,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 400.06663493300516,
+      "raw_range_rate_rx2_mps": 396.2560857997367,
+      "receiver_clock_sd_proxy_s": -0.0004420570063671012
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "0:6:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132525.29185736552,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420567906927316,
+      "satellite_clock_biases_s": [
+        -0.0006123746622984137,
+        -0.0006123746622987122
+      ],
+      "satellite_clock_sd_m": 8.951481367475492e-08,
+      "satellite_motion_sd_m": -0.04750455915927887,
+      "recomputed_known_sd_m": -0.0475044696444652,
+      "cached_known_sd_m": -0.0475044696444652,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -95.79841568653524,
+      "raw_range_rate_rx2_mps": -99.46630764635724,
+      "receiver_clock_sd_proxy_s": -0.00044205663223487727
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "0:6:3:0",
+      "wavelength_m": 0.24421021342456825,
+      "raw_code_sd_m": -132524.72360847518,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.000442054895218462,
+      "satellite_clock_biases_s": [
+        -0.0006123746622984137,
+        -0.0006123746622987122
+      ],
+      "satellite_clock_sd_m": 8.951481367475492e-08,
+      "satellite_motion_sd_m": -0.047504350543022156,
+      "recomputed_known_sd_m": -0.04750426102820848,
+      "cached_known_sd_m": -0.04750426102820848,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -95.56602681711544,
+      "raw_range_rate_rx2_mps": -99.62327902012859,
+      "receiver_clock_sd_proxy_s": -0.0004420547367613036
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "0:11:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132525.64874922112,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205798115582053,
+      "satellite_clock_biases_s": [
+        -0.00041693313650976294,
+        -0.0004169331365037459
+      ],
+      "satellite_clock_sd_m": -1.8038665112253853e-06,
+      "satellite_motion_sd_m": -0.21156421676278114,
+      "recomputed_known_sd_m": -0.21156602062929236,
+      "cached_known_sd_m": -0.21156602062929236,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -467.30267632994264,
+      "raw_range_rate_rx2_mps": -471.170571771551,
+      "receiver_clock_sd_proxy_s": -0.0004420572754475381
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "0:11:3:0",
+      "wavelength_m": 0.24421021342456825,
+      "raw_code_sd_m": -132524.72367827594,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420548954512923,
+      "satellite_clock_biases_s": [
+        -0.00041693313650976305,
+        -0.00041693313650374594
+      ],
+      "satellite_clock_sd_m": -1.8038827630070982e-06,
+      "satellite_motion_sd_m": -0.21156273409724236,
+      "recomputed_known_sd_m": -0.21156453798000535,
+      "cached_known_sd_m": -0.21156453798000535,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -467.70727493365087,
+      "raw_range_rate_rx2_mps": -471.33334347858624,
+      "receiver_clock_sd_proxy_s": -0.00044205418974795546
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "0:17:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132525.27035869658,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.000442056718980891,
+      "satellite_clock_biases_s": [
+        -8.01064750067382e-05,
+        -8.010647500945928e-05
+      ],
+      "satellite_clock_sd_m": 8.157581830799425e-07,
+      "satellite_motion_sd_m": 0.08395526930689812,
+      "recomputed_known_sd_m": 0.08395608506508119,
+      "cached_known_sd_m": 0.08395608506508119,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 202.12468015370814,
+      "raw_range_rate_rx2_mps": 198.6678023203144,
+      "receiver_clock_sd_proxy_s": -0.00044205699902824655
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "0:17:3:0",
+      "wavelength_m": 0.24421021342456825,
+      "raw_code_sd_m": -132524.53535552695,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420542672742186,
+      "satellite_clock_biases_s": [
+        -8.010647500673828e-05,
+        -8.010647500945935e-05
+      ],
+      "satellite_clock_sd_m": 8.157541201345142e-07,
+      "satellite_motion_sd_m": 0.083954818546772,
+      "recomputed_known_sd_m": 0.08395563430089213,
+      "cached_known_sd_m": 0.08395563430089213,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 202.1684950860363,
+      "raw_range_rate_rx2_mps": 198.7815092939897,
+      "receiver_clock_sd_proxy_s": -0.0004420545473200705
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "0:19:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132525.59695697203,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420578083954735,
+      "satellite_clock_biases_s": [
+        0.0006926655293910483,
+        0.0006926655293908243
+      ],
+      "satellite_clock_sd_m": 6.71523620377791e-08,
+      "satellite_motion_sd_m": -0.056351225823163986,
+      "recomputed_known_sd_m": -0.05635115867080195,
+      "cached_known_sd_m": -0.05635115867080195,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -115.5092814737641,
+      "raw_range_rate_rx2_mps": -118.87621581337424,
+      "receiver_clock_sd_proxy_s": -0.0004420576204282409
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "2:2:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132525.4582626447,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205734576099545,
+      "satellite_clock_biases_s": [
+        2.2928485378160487e-05,
+        2.2928485379400082e-05
+      ],
+      "satellite_clock_sd_m": -3.7162136653845013e-07,
+      "satellite_motion_sd_m": -0.09086569398641586,
+      "recomputed_known_sd_m": -0.0908660656077824,
+      "cached_known_sd_m": -0.0908660656077824,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -194.36575297921854,
+      "raw_range_rate_rx2_mps": -198.06179873926413,
+      "receiver_clock_sd_proxy_s": -0.00044205704266442585
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "2:2:6:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132524.50918019935,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420541799627239,
+      "satellite_clock_biases_s": [
+        2.292848537816048e-05,
+        2.2928485379400065e-05
+      ],
+      "satellite_clock_sd_m": -3.7161831932937896e-07,
+      "satellite_motion_sd_m": -0.09086507558822632,
+      "recomputed_known_sd_m": -0.09086544720654564,
+      "cached_known_sd_m": -0.09086544720654564,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -194.2025223181513,
+      "raw_range_rate_rx2_mps": -198.54277012339932,
+      "receiver_clock_sd_proxy_s": -0.00044205387686821707
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "2:10:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132521.24522167072,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044204329256899023,
+      "satellite_clock_biases_s": [
+        -0.0007760360960115917,
+        -0.0007760360960127375
+      ],
+      "satellite_clock_sd_m": 3.434976582842447e-07,
+      "satellite_motion_sd_m": 0.17889950051903725,
+      "recomputed_known_sd_m": 0.17889984401669554,
+      "cached_known_sd_m": 0.17889984401669554,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 417.1672158515889,
+      "raw_range_rate_rx2_mps": 413.6100807560128,
+      "receiver_clock_sd_proxy_s": -0.0004420438893146362
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "2:11:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132524.10161291435,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420528204645974,
+      "satellite_clock_biases_s": [
+        0.004275572489934745,
+        0.004275572489997439
+      ],
+      "satellite_clock_sd_m": -1.8795380572370762e-05,
+      "satellite_motion_sd_m": 0.1066846176981926,
+      "recomputed_known_sd_m": 0.10666582231762023,
+      "cached_known_sd_m": 0.10666582231762023,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 253.69263943749763,
+      "raw_range_rate_rx2_mps": 249.74720489923388,
+      "receiver_clock_sd_proxy_s": -0.0004420531762634825
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "2:11:6:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132525.51598796248,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420575383119294,
+      "satellite_clock_biases_s": [
+        0.004275572489934746,
+        0.004275572489997441
+      ],
+      "satellite_clock_sd_m": -1.879564060087817e-05,
+      "satellite_motion_sd_m": 0.10668575763702393,
+      "recomputed_known_sd_m": 0.10666696199642305,
+      "cached_known_sd_m": 0.10666696199642305,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 253.35685926575903,
+      "raw_range_rate_rx2_mps": 249.89069998572336,
+      "receiver_clock_sd_proxy_s": -0.0004420578941146161
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "2:36:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132525.09097046033,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420561206061439,
+      "satellite_clock_biases_s": [
+        -0.0005327786566215236,
+        -0.0005327786566239752
+      ],
+      "satellite_clock_sd_m": 7.349705761850248e-07,
+      "satellite_motion_sd_m": -0.07956019788980484,
+      "recomputed_known_sd_m": -0.07955946291922865,
+      "cached_known_sd_m": -0.07955946291922865,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -168.6812524210346,
+      "raw_range_rate_rx2_mps": -172.43673011001752,
+      "receiver_clock_sd_proxy_s": -0.0004420558552243412
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "2:36:6:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132524.59315064922,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420544600579953,
+      "satellite_clock_biases_s": [
+        -0.0005327786566215236,
+        -0.0005327786566239752
+      ],
+      "satellite_clock_sd_m": 7.349705761850248e-07,
+      "satellite_motion_sd_m": -0.07955987378954887,
+      "recomputed_known_sd_m": -0.07955913881897268,
+      "cached_known_sd_m": -0.07955913881897268,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -168.80469144861755,
+      "raw_range_rate_rx2_mps": -172.34476134425947,
+      "receiver_clock_sd_proxy_s": -0.00044205419467727364
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "3:7:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132525.795540452,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205847079866167,
+      "satellite_clock_biases_s": [
+        0.0005639897829141523,
+        0.0005639897829246571
+      ],
+      "satellite_clock_sd_m": -3.1492377567659147e-06,
+      "satellite_motion_sd_m": -0.008122548460960388,
+      "recomputed_known_sd_m": -0.008125697698717155,
+      "cached_known_sd_m": -0.008125697698717155,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -6.373966836885275,
+      "raw_range_rate_rx2_mps": -10.02257642285989,
+      "receiver_clock_sd_proxy_s": -0.00044205844369425164
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "3:7:2:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132525.49023143947,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205745239741644,
+      "satellite_clock_biases_s": [
+        0.0005639897829141532,
+        0.000563989782924658
+      ],
+      "satellite_clock_sd_m": -3.1492702603293406e-06,
+      "satellite_motion_sd_m": -0.008122518658638,
+      "recomputed_known_sd_m": -0.00812566792889833,
+      "cached_known_sd_m": -0.00812566792889833,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -6.322419558936422,
+      "raw_range_rate_rx2_mps": -10.177594843672498,
+      "receiver_clock_sd_proxy_s": -0.00044205742529310573
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "3:10:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132526.6100468114,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420611876994297,
+      "satellite_clock_biases_s": [
+        -5.2292156361564626e-05,
+        -5.229215637076146e-05
+      ],
+      "satellite_clock_sd_m": 2.7571411767419014e-06,
+      "satellite_motion_sd_m": -0.030850015580654144,
+      "recomputed_known_sd_m": -0.0308472584394774,
+      "cached_known_sd_m": -0.0308472584394774,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -57.96207415547009,
+      "raw_range_rate_rx2_mps": -62.03077011774844,
+      "receiver_clock_sd_proxy_s": -0.00044206108480405125
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "3:10:2:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132525.12314866483,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420562279410806,
+      "satellite_clock_biases_s": [
+        -5.229215636156521e-05,
+        -5.229215637076194e-05
+      ],
+      "satellite_clock_sd_m": 2.7571107046511897e-06,
+      "satellite_motion_sd_m": -0.030849680304527283,
+      "recomputed_known_sd_m": -0.03084692319382263,
+      "cached_known_sd_m": -0.03084692319382263,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -58.06833898716658,
+      "raw_range_rate_rx2_mps": -61.89435019798418,
+      "receiver_clock_sd_proxy_s": -0.0004420561250468204
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "3:14:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132525.73027663678,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420582531020069,
+      "satellite_clock_biases_s": [
+        -0.00048321006434646135,
+        -0.00048321006436521
+      ],
+      "satellite_clock_sd_m": 5.620711208976278e-06,
+      "satellite_motion_sd_m": -0.02897500991821289,
+      "recomputed_known_sd_m": -0.028969389207003916,
+      "cached_known_sd_m": -0.028969389207003916,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -52.67794078032368,
+      "raw_range_rate_rx2_mps": -56.430118536527644,
+      "receiver_clock_sd_proxy_s": -0.00044205815647052594
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "3:14:2:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132523.99411957338,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205246190540717,
+      "satellite_clock_biases_s": [
+        -0.0004832100643464626,
+        -0.00048321006436521105
+      ],
+      "satellite_clock_sd_m": 5.620646201849426e-06,
+      "satellite_motion_sd_m": -0.02897467464208603,
+      "recomputed_known_sd_m": -0.02896905399588418,
+      "cached_known_sd_m": -0.02896905399588418,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -52.78066425720725,
+      "raw_range_rate_rx2_mps": -56.52240054080645,
+      "receiver_clock_sd_proxy_s": -0.00044205236527504433
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "3:27:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132526.44678257406,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044206064310855364,
+      "satellite_clock_biases_s": [
+        0.0006034319462983841,
+        0.0006034319463004584
+      ],
+      "satellite_clock_sd_m": -6.218581754631122e-07,
+      "satellite_motion_sd_m": -0.16621968150138855,
+      "recomputed_known_sd_m": -0.166220303359564,
+      "cached_known_sd_m": -0.166220303359564,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -364.8463540320354,
+      "raw_range_rate_rx2_mps": -368.2590166661407,
+      "receiver_clock_sd_proxy_s": -0.00044206008865730267
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "3:28:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132526.2051319629,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205983704887896,
+      "satellite_clock_biases_s": [
+        0.0004912623278315167,
+        0.0004912623278334341
+      ],
+      "satellite_clock_sd_m": -5.748255191859262e-07,
+      "satellite_motion_sd_m": -0.022947784513235092,
+      "recomputed_known_sd_m": -0.02294835933875428,
+      "cached_known_sd_m": -0.02294835933875428,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -39.914535175283014,
+      "raw_range_rate_rx2_mps": -43.736805468604615,
+      "receiver_clock_sd_proxy_s": -0.00044205976050139175
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "3:40:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132525.84712329507,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420586428605054,
+      "satellite_clock_biases_s": [
+        -0.00021303519837291402,
+        -0.00021303519837444234
+      ],
+      "satellite_clock_sd_m": 4.581783559414539e-07,
+      "satellite_motion_sd_m": -0.007410585880279541,
+      "recomputed_known_sd_m": -0.0074101277019236,
+      "cached_known_sd_m": -0.0074101277019236,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -4.577300539303218,
+      "raw_range_rate_rx2_mps": -8.201295689166287,
+      "receiver_clock_sd_proxy_s": -0.00044205861814298
+    },
+    {
+      "time_s": 100.39800000190735,
+      "signal": "3:43:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132525.91406233236,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420588661450995,
+      "satellite_clock_biases_s": [
+        0.0001333806249595606,
+        0.0001333806249599489
+      ],
+      "satellite_clock_sd_m": -1.1640338651877852e-07,
+      "satellite_motion_sd_m": 0.171176940202713,
+      "recomputed_known_sd_m": 0.1711768237993265,
+      "cached_known_sd_m": 0.1711768237993265,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 400.0080291327396,
+      "raw_range_rate_rx2_mps": 396.20451269550296,
+      "receiver_clock_sd_proxy_s": -0.00044205943712952297
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "0:6:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132525.94603112713,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420589727815205,
+      "satellite_clock_biases_s": [
+        -0.0006123746624335313,
+        -0.0006123746624338299
+      ],
+      "satellite_clock_sd_m": 8.951481367475492e-08,
+      "satellite_motion_sd_m": -0.04749883711338043,
+      "recomputed_known_sd_m": -0.04749874759856676,
+      "cached_known_sd_m": -0.04749874759856676,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -96.19098349621225,
+      "raw_range_rate_rx2_mps": -99.91811574400472,
+      "receiver_clock_sd_proxy_s": -0.00044205881434275285
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "0:6:3:0",
+      "wavelength_m": 0.24421021342456825,
+      "raw_code_sd_m": -132525.3782010451,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420570787042451,
+      "satellite_clock_biases_s": [
+        -0.0006123746624335313,
+        -0.0006123746624338299
+      ],
+      "satellite_clock_sd_m": 8.951481367475492e-08,
+      "satellite_motion_sd_m": -0.04749862849712372,
+      "recomputed_known_sd_m": -0.047498538982310046,
+      "cached_known_sd_m": -0.047498538982310046,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -96.05939583959794,
+      "raw_range_rate_rx2_mps": -99.5263938646562,
+      "receiver_clock_sd_proxy_s": -0.00044205692026617335
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "0:11:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132526.50492670387,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044206083705649414,
+      "satellite_clock_biases_s": [
+        -0.0004169331337874541,
+        -0.00041693313378143697
+      ],
+      "satellite_clock_sd_m": -1.803899014788811e-06,
+      "satellite_motion_sd_m": -0.21156207844614983,
+      "recomputed_known_sd_m": -0.21156388234516463,
+      "cached_known_sd_m": -0.21156388234516463,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -467.48446811257446,
+      "raw_range_rate_rx2_mps": -471.66409952695557,
+      "receiver_clock_sd_proxy_s": -0.0004420601313553443
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "0:11:3:0",
+      "wavelength_m": 0.24421021342456825,
+      "raw_code_sd_m": -132525.5464909412,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205764005891433,
+      "satellite_clock_biases_s": [
+        -0.0004169331337874542,
+        -0.0004169331337814371
+      ],
+      "satellite_clock_sd_m": -1.8038827630070982e-06,
+      "satellite_motion_sd_m": -0.21156054362654686,
+      "recomputed_known_sd_m": -0.21156234750930986,
+      "cached_known_sd_m": -0.21156234750930986,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -467.72027244989266,
+      "raw_range_rate_rx2_mps": -471.37111378381195,
+      "receiver_clock_sd_proxy_s": -0.00044205693436288407
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "0:17:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132526.10189647228,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205949269234874,
+      "satellite_clock_biases_s": [
+        -8.010647623783879e-05,
+        -8.01064762405599e-05
+      ],
+      "satellite_clock_sd_m": 8.157663089707989e-07,
+      "satellite_motion_sd_m": 0.08396148681640625,
+      "recomputed_known_sd_m": 0.08396230258271523,
+      "cached_known_sd_m": 0.08396230258271523,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 202.221081367345,
+      "raw_range_rate_rx2_mps": 198.71426073652495,
+      "receiver_clock_sd_proxy_s": -0.00044205977276044376
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "0:17:3:0",
+      "wavelength_m": 0.24421021342456825,
+      "raw_code_sd_m": -132525.1938569434,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205646379851026,
+      "satellite_clock_biases_s": [
+        -8.010647623783887e-05,
+        -8.010647624055996e-05
+      ],
+      "satellite_clock_sd_m": 8.157622460253707e-07,
+      "satellite_motion_sd_m": 0.08396091684699059,
+      "recomputed_known_sd_m": 0.08396173260923662,
+      "cached_known_sd_m": 0.08396173260923662,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 202.14834297369802,
+      "raw_range_rate_rx2_mps": 198.80535794764444,
+      "receiver_clock_sd_proxy_s": -0.0004420567438647039
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "0:19:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132526.34752573818,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044206031202338714,
+      "satellite_clock_biases_s": [
+        0.0006926655292897006,
+        0.0006926655292894766
+      ],
+      "satellite_clock_sd_m": 6.71523620377791e-08,
+      "satellite_motion_sd_m": -0.0563446469604969,
+      "recomputed_known_sd_m": -0.05634457980813486,
+      "cached_known_sd_m": -0.05634457980813486,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -115.81251555637029,
+      "raw_range_rate_rx2_mps": -119.32593328229225,
+      "receiver_clock_sd_proxy_s": -0.0004420601240780993
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "2:2:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132526.35422662273,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044206033437513205,
+      "satellite_clock_biases_s": [
+        2.2928485938991314e-05,
+        2.292848594023092e-05
+      ],
+      "satellite_clock_sd_m": -3.716244137475213e-07,
+      "satellite_motion_sd_m": -0.0908593088388443,
+      "recomputed_known_sd_m": -0.09085968046325804,
+      "cached_known_sd_m": -0.09085968046325804,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -194.460295856207,
+      "raw_range_rate_rx2_mps": -198.1180134228789,
+      "receiver_clock_sd_proxy_s": -0.000442060031299861
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "2:2:6:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132525.271126505,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205672154202423,
+      "satellite_clock_biases_s": [
+        2.2928485938991308e-05,
+        2.2928485940230903e-05
+      ],
+      "satellite_clock_sd_m": -3.7162136653845013e-07,
+      "satellite_motion_sd_m": -0.0908585824072361,
+      "recomputed_known_sd_m": -0.09085895402860264,
+      "cached_known_sd_m": -0.09085895402860264,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -194.24617748077355,
+      "raw_range_rate_rx2_mps": -198.24039749007,
+      "receiver_clock_sd_proxy_s": -0.0004420564184691763
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "2:10:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132526.11166859418,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420595252886388,
+      "satellite_clock_biases_s": [
+        -0.0007760360965300289,
+        -0.0007760360965311749
+      ],
+      "satellite_clock_sd_m": 3.435626654110964e-07,
+      "satellite_motion_sd_m": 0.17890691384673119,
+      "recomputed_known_sd_m": 0.1789072574093966,
+      "cached_known_sd_m": 0.1789072574093966,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 417.7240664282884,
+      "raw_range_rate_rx2_mps": 413.94467426956106,
+      "receiver_clock_sd_proxy_s": -0.0004420601220590132
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "2:11:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132525.42419981584,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420572321396285,
+      "satellite_clock_biases_s": [
+        0.0042755725183004625,
+        0.004275572518363158
+      ],
+      "satellite_clock_sd_m": -1.879564060087817e-05,
+      "satellite_motion_sd_m": 0.1066884957253933,
+      "recomputed_known_sd_m": 0.10666970008479242,
+      "cached_known_sd_m": 0.10666970008479242,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 253.46643340896853,
+      "raw_range_rate_rx2_mps": 250.04100792334933,
+      "receiver_clock_sd_proxy_s": -0.0004420575879514485
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "2:11:6:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132525.58634724095,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205777300522,
+      "satellite_clock_biases_s": [
+        0.004275572518300463,
+        0.004275572518363159
+      ],
+      "satellite_clock_sd_m": -1.879564060087817e-05,
+      "satellite_motion_sd_m": 0.10668863728642464,
+      "recomputed_known_sd_m": 0.10666984164582376,
+      "cached_known_sd_m": 0.10666984164582376,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 253.68560689317263,
+      "raw_range_rate_rx2_mps": 249.93168733285202,
+      "receiver_clock_sd_proxy_s": -0.00044205812881751216
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "2:36:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132525.7707611397,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205838814377277,
+      "satellite_clock_biases_s": [
+        -0.0005327786577307002,
+        -0.0005327786577331518
+      ],
+      "satellite_clock_sd_m": 7.349705761850248e-07,
+      "satellite_motion_sd_m": -0.07955647632479668,
+      "recomputed_known_sd_m": -0.07955574135422049,
+      "cached_known_sd_m": -0.07955574135422049,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -168.92688968214378,
+      "raw_range_rate_rx2_mps": -172.59458419369687,
+      "receiver_clock_sd_proxy_s": -0.00044205812277438387
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "2:36:6:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132525.20572308823,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205650337970887,
+      "satellite_clock_biases_s": [
+        -0.0005327786577307002,
+        -0.0005327786577331517
+      ],
+      "satellite_clock_sd_m": 7.349380726215989e-07,
+      "satellite_motion_sd_m": -0.07955613359808922,
+      "recomputed_known_sd_m": -0.0795553986600166,
+      "cached_known_sd_m": -0.0795553986600166,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -168.59823890871652,
+      "raw_range_rate_rx2_mps": -172.55473055003839,
+      "receiver_clock_sd_proxy_s": -0.00044205623801146316
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "3:7:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132526.56635147333,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044206104194747067,
+      "satellite_clock_biases_s": [
+        0.0005639897876668205,
+        0.0005639897876773255
+      ],
+      "satellite_clock_sd_m": -3.1493027638927664e-06,
+      "satellite_motion_sd_m": -0.008121855556964874,
+      "recomputed_known_sd_m": -0.008125004859728767,
+      "cached_known_sd_m": -0.008125004859728767,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -6.655274678160095,
+      "raw_range_rate_rx2_mps": -10.47702924043936,
+      "receiver_clock_sd_proxy_s": -0.0004420610148453717
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "3:7:2:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132526.23779877275,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420599460136277,
+      "satellite_clock_biases_s": [
+        0.0005639897876668215,
+        0.0005639897876773263
+      ],
+      "satellite_clock_sd_m": -3.1492702603293406e-06,
+      "satellite_motion_sd_m": -0.008121833205223083,
+      "recomputed_known_sd_m": -0.008124982475483412,
+      "cached_known_sd_m": -0.008124982475483412,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -6.5588850231402285,
+      "raw_range_rate_rx2_mps": -9.902809847833613,
+      "receiver_clock_sd_proxy_s": -0.00044205991891160346
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "3:10:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132527.36885207891,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420637188013546,
+      "satellite_clock_biases_s": [
+        -5.2292160522459284e-05,
+        -5.229216053165619e-05
+      ],
+      "satellite_clock_sd_m": 2.7571635229417567e-06,
+      "satellite_motion_sd_m": -0.030849777162075043,
+      "recomputed_known_sd_m": -0.030847019998552102,
+      "cached_known_sd_m": -0.030847019998552102,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -58.21867379135294,
+      "raw_range_rate_rx2_mps": -62.032270426235236,
+      "receiver_clock_sd_proxy_s": -0.0004420636159067714
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "3:10:2:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132525.8497757241,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205865170805634,
+      "satellite_clock_biases_s": [
+        -5.2292160522459874e-05,
+        -5.229216053165667e-05
+      ],
+      "satellite_clock_sd_m": 2.757131019378331e-06,
+      "satellite_motion_sd_m": -0.03084941953420639,
+      "recomputed_known_sd_m": -0.030846662403187012,
+      "cached_known_sd_m": -0.030846662403187012,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -58.034563078794,
+      "raw_range_rate_rx2_mps": -61.74240597919066,
+      "receiver_clock_sd_proxy_s": -0.00044205854881466597
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "3:14:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132526.49675999954,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420608098153008,
+      "satellite_clock_biases_s": [
+        -0.00048321007282889545,
+        -0.0004832100728476442
+      ],
+      "satellite_clock_sd_m": 5.620727460757991e-06,
+      "satellite_motion_sd_m": -0.028965406119823456,
+      "recomputed_known_sd_m": -0.028959785392362696,
+      "cached_known_sd_m": -0.028959785392362696,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -52.85450833536384,
+      "raw_range_rate_rx2_mps": -56.45829620529533,
+      "receiver_clock_sd_proxy_s": -0.0004420607132158547
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "3:14:2:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132524.75418125466,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420549971982773,
+      "satellite_clock_biases_s": [
+        -0.0004832100728288967,
+        -0.00048321007284764516
+      ],
+      "satellite_clock_sd_m": 5.620646201849426e-06,
+      "satellite_motion_sd_m": -0.028965044766664505,
+      "recomputed_known_sd_m": -0.028959424120462655,
+      "cached_known_sd_m": -0.028959424120462655,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -53.02974121283526,
+      "raw_range_rate_rx2_mps": -56.210690553249584,
+      "receiver_clock_sd_proxy_s": -0.0004420549006000362
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "3:27:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132527.3569161296,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044206367898731323,
+      "satellite_clock_biases_s": [
+        0.0006034319472368494,
+        0.0006034319472389238
+      ],
+      "satellite_clock_sd_m": -6.218906790265381e-07,
+      "satellite_motion_sd_m": -0.16621898859739304,
+      "recomputed_known_sd_m": -0.16621961048807207,
+      "cached_known_sd_m": -0.16621961048807207,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -365.1697408379009,
+      "raw_range_rate_rx2_mps": -368.70420976727826,
+      "receiver_clock_sd_proxy_s": -0.00044206312453837346
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "3:28:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132526.82775572687,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420619138982038,
+      "satellite_clock_biases_s": [
+        0.000491262328699006,
+        0.0004912623287009233
+      ],
+      "satellite_clock_sd_m": -5.747930156225003e-07,
+      "satellite_motion_sd_m": -0.02294432371854782,
+      "recomputed_known_sd_m": -0.022944898511563443,
+      "cached_known_sd_m": -0.022944898511563443,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -40.05359794844321,
+      "raw_range_rate_rx2_mps": -43.78556549442559,
+      "receiver_clock_sd_proxy_s": -0.00044206183736226063
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "3:40:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132526.71593473852,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420615409035357,
+      "satellite_clock_biases_s": [
+        -0.00021303519906437103,
+        -0.00021303519906589938
+      ],
+      "satellite_clock_sd_m": 4.5818648183231035e-07,
+      "satellite_motion_sd_m": -0.007410153746604919,
+      "recomputed_known_sd_m": -0.007409695560123087,
+      "cached_known_sd_m": -0.007409695560123087,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -4.339502010431823,
+      "raw_range_rate_rx2_mps": -8.111043489329786,
+      "receiver_clock_sd_proxy_s": -0.00044206151618745177
+    },
+    {
+      "time_s": 100.59800004959106,
+      "signal": "3:43:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132526.68633916602,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420614421833321,
+      "satellite_clock_biases_s": [
+        0.0001333806251352266,
+        0.00013338062513561488
+      ],
+      "satellite_clock_sd_m": -1.1640338651877852e-07,
+      "satellite_motion_sd_m": 0.1711801141500473,
+      "recomputed_known_sd_m": 0.1711799977466608,
+      "cached_known_sd_m": 0.1711799977466608,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 399.97403776858556,
+      "raw_range_rate_rx2_mps": 396.6065484853249,
+      "receiver_clock_sd_proxy_s": -0.0004420620131783427
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "0:6:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132526.65018231422,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044206132157705654,
+      "satellite_clock_biases_s": [
+        -0.0006123746625686415,
+        -0.0006123746625689401
+      ],
+      "satellite_clock_sd_m": 8.951481367475492e-08,
+      "satellite_motion_sd_m": -0.0474931038916111,
+      "recomputed_known_sd_m": -0.04749301437679743,
+      "cached_known_sd_m": -0.04749301437679743,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -96.22815603648272,
+      "raw_range_rate_rx2_mps": -99.69046950457309,
+      "receiver_clock_sd_proxy_s": -0.00044206116315741287
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "0:6:3:0",
+      "wavelength_m": 0.24421021342456825,
+      "raw_code_sd_m": -132526.17267455533,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205972878262113,
+      "satellite_clock_biases_s": [
+        -0.0006123746625686415,
+        -0.0006123746625689401
+      ],
+      "satellite_clock_sd_m": 8.951481367475492e-08,
+      "satellite_motion_sd_m": -0.04749293252825737,
+      "recomputed_known_sd_m": -0.0474928430134437,
+      "cached_known_sd_m": -0.0474928430134437,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -95.94462419388448,
+      "raw_range_rate_rx2_mps": -99.84387906643497,
+      "receiver_clock_sd_proxy_s": -0.00044205957036354905
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "0:11:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132527.28181039542,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420634284615506,
+      "satellite_clock_biases_s": [
+        -0.0004169331310651433,
+        -0.0004169331310591261
+      ],
+      "satellite_clock_sd_m": -1.803915266570524e-06,
+      "satellite_motion_sd_m": -0.21155978739261627,
+      "recomputed_known_sd_m": -0.21156159130788285,
+      "cached_known_sd_m": -0.21156159130788285,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -468.2054562737458,
+      "raw_range_rate_rx2_mps": -471.74949009595053,
+      "receiver_clock_sd_proxy_s": -0.0004420627227680428
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "0:11:3:0",
+      "wavelength_m": 0.24421021342456825,
+      "raw_code_sd_m": -132526.4138365686,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044206053321250863,
+      "satellite_clock_biases_s": [
+        -0.0004169331310651433,
+        -0.0004169331310591262
+      ],
+      "satellite_clock_sd_m": -1.8038827630070982e-06,
+      "satellite_motion_sd_m": -0.21155840903520584,
+      "recomputed_known_sd_m": -0.21156021291796884,
+      "cached_known_sd_m": -0.21156021291796884,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -467.9383683875653,
+      "raw_range_rate_rx2_mps": -471.5667919870491,
+      "receiver_clock_sd_proxy_s": -0.0004420598275235986
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "0:17:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132526.89204233512,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420621283352469,
+      "satellite_clock_biases_s": [
+        -8.010647746894694e-05,
+        -8.010647747166809e-05
+      ],
+      "satellite_clock_sd_m": 8.157784978070836e-07,
+      "satellite_motion_sd_m": 0.0839676558971405,
+      "recomputed_known_sd_m": 0.08396847167563831,
+      "cached_known_sd_m": 0.08396847167563831,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 202.70406306226977,
+      "raw_range_rate_rx2_mps": 198.68522422639336,
+      "receiver_clock_sd_proxy_s": -0.00044206240842391975
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "0:17:3:0",
+      "wavelength_m": 0.24421021342456825,
+      "raw_code_sd_m": -132525.98456120864,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205910130403825,
+      "satellite_clock_biases_s": [
+        -8.010647746894702e-05,
+        -8.010647747166814e-05
+      ],
+      "satellite_clock_sd_m": 8.157703719162271e-07,
+      "satellite_motion_sd_m": 0.08396708965301514,
+      "recomputed_known_sd_m": 0.08396790542338706,
+      "cached_known_sd_m": 0.08396790542338706,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 202.5977857572302,
+      "raw_range_rate_rx2_mps": 198.7174309427011,
+      "receiver_clock_sd_proxy_s": -0.00044205938139082226
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "0:19:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132527.13201772794,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044206292880699465,
+      "satellite_clock_biases_s": [
+        0.0006926655291883342,
+        0.0006926655291881101
+      ],
+      "satellite_clock_sd_m": 6.718486560120494e-08,
+      "satellite_motion_sd_m": -0.0563381128013134,
+      "recomputed_known_sd_m": -0.0563380456164478,
+      "cached_known_sd_m": -0.0563380456164478,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -115.51035001733695,
+      "raw_range_rate_rx2_mps": -119.17299217612715,
+      "receiver_clock_sd_proxy_s": -0.0004420627408835025
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "2:2:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132526.95325769484,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420623325277077,
+      "satellite_clock_biases_s": [
+        2.292848649982282e-05,
+        2.2928486501062432e-05
+      ],
+      "satellite_clock_sd_m": -3.716264452202354e-07,
+      "satellite_motion_sd_m": -0.09085271880030632,
+      "recomputed_known_sd_m": -0.09085309042675153,
+      "cached_known_sd_m": -0.09085309042675153,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -194.29885285987538,
+      "raw_range_rate_rx2_mps": -198.3053337570398,
+      "receiver_clock_sd_proxy_s": -0.00044206202947441863
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "2:2:6:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132525.99454273656,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205913459883156,
+      "satellite_clock_biases_s": [
+        2.2928486499822813e-05,
+        2.2928486501062415e-05
+      ],
+      "satellite_clock_sd_m": -3.7162339801116424e-07,
+      "satellite_motion_sd_m": -0.09085206314921379,
+      "recomputed_known_sd_m": -0.0908524347726118,
+      "cached_known_sd_m": -0.0908524347726118,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -194.7531988469372,
+      "raw_range_rate_rx2_mps": -197.9684015740653,
+      "receiver_clock_sd_proxy_s": -0.00044205883154772955
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "2:10:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132529.48046803102,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420707623939993,
+      "satellite_clock_biases_s": [
+        -0.0007760360970484661,
+        -0.000776036097049612
+      ],
+      "satellite_clock_sd_m": 3.4353016184767056e-07,
+      "satellite_motion_sd_m": 0.17891229316592216,
+      "recomputed_known_sd_m": 0.178912636696084,
+      "cached_known_sd_m": 0.178912636696084,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 417.8080167863808,
+      "raw_range_rate_rx2_mps": 414.23155498966116,
+      "receiver_clock_sd_proxy_s": -0.0004420713591823171
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "2:10:6:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132525.57476029545,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205773435533006,
+      "satellite_clock_biases_s": [
+        -0.0007760360970484661,
+        -0.000776036097049612
+      ],
+      "satellite_clock_sd_m": 3.4353016184767056e-07,
+      "satellite_motion_sd_m": 0.17890700325369835,
+      "recomputed_known_sd_m": 0.1789073467838602,
+      "cached_known_sd_m": 0.1789073467838602,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 417.5481398238454,
+      "raw_range_rate_rx2_mps": 413.9785723773483,
+      "receiver_clock_sd_proxy_s": -0.00044205833112600265
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "2:11:6:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132526.43498622626,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044206060376017286,
+      "satellite_clock_biases_s": [
+        0.004275572546666181,
+        0.004275572546728878
+      ],
+      "satellite_clock_sd_m": -1.8796160657892982e-05,
+      "satellite_motion_sd_m": 0.1066921167075634,
+      "recomputed_known_sd_m": 0.10667332054690551,
+      "cached_known_sd_m": 0.10667332054690551,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 253.71337642717398,
+      "raw_range_rate_rx2_mps": 249.97085571487142,
+      "receiver_clock_sd_proxy_s": -0.00044206095958406936
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "2:36:0:0",
+      "wavelength_m": 0.19029367279836487,
+      "raw_code_sd_m": -132526.55999958888,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044206102075986474,
+      "satellite_clock_biases_s": [
+        -0.0005327786588398763,
+        -0.0005327786588423279
+      ],
+      "satellite_clock_sd_m": 7.349705761850248e-07,
+      "satellite_motion_sd_m": -0.07955283671617508,
+      "recomputed_known_sd_m": -0.07955210174559889,
+      "cached_known_sd_m": -0.07955210174559889,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -168.81994240802712,
+      "raw_range_rate_rx2_mps": -172.44314137145457,
+      "receiver_clock_sd_proxy_s": -0.0004420607554026163
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "2:36:6:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132525.939120844,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205894973129713,
+      "satellite_clock_biases_s": [
+        -0.0005327786588398763,
+        -0.0005327786588423278
+      ],
+      "satellite_clock_sd_m": 7.349380726215989e-07,
+      "satellite_motion_sd_m": -0.07955247163772583,
+      "recomputed_known_sd_m": -0.07955173669965321,
+      "cached_known_sd_m": -0.07955173669965321,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -168.82348742141323,
+      "raw_range_rate_rx2_mps": -172.4282518427745,
+      "receiver_clock_sd_proxy_s": -0.00044205868437526637
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "3:7:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132527.29423494637,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420634699053916,
+      "satellite_clock_biases_s": [
+        0.000563989792419486,
+        0.000563989792429991
+      ],
+      "satellite_clock_sd_m": -3.1493027638927664e-06,
+      "satellite_motion_sd_m": -0.008121170103549957,
+      "recomputed_known_sd_m": -0.00812431940631385,
+      "cached_known_sd_m": -0.00812431940631385,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -6.472424581331462,
+      "raw_range_rate_rx2_mps": -10.385791730585895,
+      "receiver_clock_sd_proxy_s": -0.00044206344280557907
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "3:7:2:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132527.0627054572,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044206269760614593,
+      "satellite_clock_biases_s": [
+        0.0005639897924194869,
+        0.0005639897924299918
+      ],
+      "satellite_clock_sd_m": -3.1493027638927664e-06,
+      "satellite_motion_sd_m": -0.008121155202388763,
+      "recomputed_known_sd_m": -0.008124304505152656,
+      "cached_known_sd_m": -0.008124304505152656,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -6.411852010141708,
+      "raw_range_rate_rx2_mps": -10.137092553906308,
+      "receiver_clock_sd_proxy_s": -0.0004420626705063832
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "3:10:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132528.23445267975,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044206660613416686,
+      "satellite_clock_biases_s": [
+        -5.229216468335989e-05,
+        -5.2292164692556874e-05
+      ],
+      "satellite_clock_sd_m": 2.757185869141612e-06,
+      "satellite_motion_sd_m": -0.030849546194076538,
+      "recomputed_known_sd_m": -0.030846789008207396,
+      "cached_known_sd_m": -0.030846789008207396,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -58.14806552319296,
+      "raw_range_rate_rx2_mps": -62.04544501013494,
+      "receiver_clock_sd_proxy_s": -0.00044206650324035414
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "3:10:2:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132526.58010223508,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044206108781507465,
+      "satellite_clock_biases_s": [
+        -5.229216468336048e-05,
+        -5.229216469255734e-05
+      ],
+      "satellite_clock_sd_m": 2.757149302632758e-06,
+      "satellite_motion_sd_m": -0.030849166214466095,
+      "recomputed_known_sd_m": -0.030846409065163463,
+      "cached_known_sd_m": -0.030846409065163463,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -58.07779760573473,
+      "raw_range_rate_rx2_mps": -61.63757295672697,
+      "receiver_clock_sd_proxy_s": -0.00044206098492252936
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "3:14:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132527.2846722342,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420634380076173,
+      "satellite_clock_biases_s": [
+        -0.00048321008131132766,
+        -0.00048321008133007655
+      ],
+      "satellite_clock_sd_m": 5.620776216103129e-06,
+      "satellite_motion_sd_m": -0.028955772519111633,
+      "recomputed_known_sd_m": -0.02895015174289553,
+      "cached_known_sd_m": -0.02895015174289553,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -52.58501542342257,
+      "raw_range_rate_rx2_mps": -56.4303529597287,
+      "receiver_clock_sd_proxy_s": -0.0004420633414403055
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "3:14:2:0",
+      "wavelength_m": 0.2483493695843067,
+      "raw_code_sd_m": -132525.56750100479,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044205771014094284,
+      "satellite_clock_biases_s": [
+        -0.00048321008131132896,
+        -0.0004832100813300776
+      ],
+      "satellite_clock_sd_m": 5.620694957194565e-06,
+      "satellite_motion_sd_m": -0.028955403715372086,
+      "recomputed_known_sd_m": -0.028949783020414892,
+      "cached_known_sd_m": -0.028949783020414892,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -52.2729342525531,
+      "raw_range_rate_rx2_mps": -56.263925598780595,
+      "receiver_clock_sd_proxy_s": -0.0004420576135748611
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "3:27:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132527.96062386408,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044206569273955545,
+      "satellite_clock_biases_s": [
+        0.0006034319481753143,
+        0.0006034319481773886
+      ],
+      "satellite_clock_sd_m": -6.218581754631122e-07,
+      "satellite_motion_sd_m": -0.1662178821861744,
+      "recomputed_known_sd_m": -0.16621850404434985,
+      "cached_known_sd_m": -0.16621850404434985,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -365.202864836211,
+      "raw_range_rate_rx2_mps": -368.8106144582405,
+      "receiver_clock_sd_proxy_s": -0.0004420651382943064
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "3:28:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132527.5342103429,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044206427037715175,
+      "satellite_clock_biases_s": [
+        0.0004912623295664953,
+        0.0004912623295684127
+      ],
+      "satellite_clock_sd_m": -5.748255191859262e-07,
+      "satellite_motion_sd_m": -0.022940855473279953,
+      "recomputed_known_sd_m": -0.02294143029879914,
+      "cached_known_sd_m": -0.02294143029879914,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -39.9490891551196,
+      "raw_range_rate_rx2_mps": -43.65569797132706,
+      "receiver_clock_sd_proxy_s": -0.00044206419385277735
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "3:40:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132527.49742528796,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.00044206414767541605,
+      "satellite_clock_biases_s": [
+        -0.00021303519975583032,
+        -0.00021303519975735867
+      ],
+      "satellite_clock_sd_m": 4.5818648183231035e-07,
+      "satellite_motion_sd_m": -0.007409736514091492,
+      "recomputed_known_sd_m": -0.007409278327609659,
+      "cached_known_sd_m": -0.007409278327609659,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": -4.071040194288969,
+      "raw_range_rate_rx2_mps": -8.286860890126547,
+      "receiver_clock_sd_proxy_s": -0.00044206412296072384
+    },
+    {
+      "time_s": 100.79800009727478,
+      "signal": "3:43:0:0",
+      "wavelength_m": 0.19203948631027648,
+      "raw_code_sd_m": -132527.4252511859,
+      "tag_time_difference_s": 0.0,
+      "raw_transmit_time_difference_before_satclock_s": 0.0004420639069285255,
+      "satellite_clock_biases_s": [
+        0.00013338062531089378,
+        0.00013338062531128208
+      ],
+      "satellite_clock_sd_m": -1.1641151240963498e-07,
+      "satellite_motion_sd_m": 0.1711832545697689,
+      "recomputed_known_sd_m": 0.1711831381582565,
+      "cached_known_sd_m": 0.1711831381582565,
+      "known_sd_abs_difference_m": 0.0,
+      "raw_range_rate_rx1_mps": 400.48390823089613,
+      "raw_range_rate_rx2_mps": 396.87027458652005,
+      "receiver_clock_sd_proxy_s": -0.0004420644779340114
+    }
+  ],
+  "aggregate": {
+    "max_known_sd_cache_difference_m": 0.0,
+    "max_abs_known_dd_m": 0.2584647384416829,
+    "max_abs_satellite_clock_dd_m": 1.953109873051458e-05,
+    "max_abs_remaining_doppler_minus_known_dd_m": 0.0008819796330419849,
+    "remaining_template_unchanged_Q_whitened_norm": 0.3932129160308265,
+    "remaining_template_after_free_baseline_projection_whitened_norm": 0.07957777115462046
+  },
+  "existing_empty_domain_context": {
+    "source": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_INPUT_ADAPTER_01/proposal_raw_100198_100798_diagnostics_01.json",
+    "sha256": "983eb9d31f616d0d9e8876c1ceb26ba18fcf0f76c0416b1fdd30d6df90003ade",
+    "status": "EMPTY_RELAXED_SUPPORT",
+    "float_residual_cost": 126.697588133875,
+    "float_residual_whitened_norm": 11.256002315825766,
+    "raw_threshold": 204.54654583438844,
+    "raw_radius": 14.30197699041599,
+    "integer_global_best_cost_known": false
+  },
+  "conclusion": {
+    "missing_satellite_motion_or_clock_correction_found": false,
+    "source_cache_geometry_reproduction": "All admitted SD known_sd values exactly reproduced using the same causal prefix and broadcast provider.",
+    "relaxed_empty_explanation": "No omitted identified common time/clock term explains EMPTY_RELAXED_SUPPORT. The major satellite term is already removed; first-order receiver displacement is inside the existing free-baseline nuisance subspace.",
+    "shared_graph_approximation": "Instantaneous rigid baseline remains an approximation for asynchronous physical antenna samples. A future source-calibrated model could use p(t2)+R(t2)*l2-p(t1)-R(t1)*l1, or its IMU-derived first-order equivalent, rather than adding a full raw Doppler time shift. This is not demonstrated as the cause or remedy of the current empty relaxed domain.",
+    "small_residual_boundary": "The remaining Doppler-minus-known template includes Doppler noise, code-derived timing uncertainty and linearization error; it is not a calibrated correction. Its nonzero projected component is quantified only. No outside-domain global integer minimum was computed, so no numerical claim is made that an arbitrarily small non-B perturbation could never change a boundary case.",
+    "implementation_change_recommended_now": null
+  }
+}
