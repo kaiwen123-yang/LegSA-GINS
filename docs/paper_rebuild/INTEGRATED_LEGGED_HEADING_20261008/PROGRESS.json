@@ -1,8 +1,8 @@
 {
-  "plan_version": "v1.6",
+  "plan_version": "v1.7",
   "date_local": "2026-10-08",
   "timezone": "Asia/Shanghai",
-  "status": "ACTIVE_M1_FULL_RESULT_FAILED_NAVIGATION_BENEFIT_PHYSICAL_DIAGNOSIS_NEXT",
+  "status": "ACTIVE_M1_AUTOMATIC_ONSET_IMPLEMENTATION_NEXT",
   "goal_thread_id": "01a11afd-6d44-7bc0-94df-ae1fbfc584d1",
   "plan": "PLAN.md",
   "authorization": "Explicit user request in this thread to create a plan, then an active long-term goal, implement one integrated algorithm, and push completed stages.",
@@ -48,7 +48,7 @@
   "time_alignment_implementation_difference": "The frozen kick detector uses raw IMU transients; the subsequent body-motion onset uses the Go2 SDK horizontal-velocity proxy (1 s mean, 3 s persistence), not a second independent raw-IMU movement detector. BY2 GNSS/body onsets are 66.217880/65.717063 s; the pre-existing whole-second floor gives start 66 s. These facts are preserved explicitly, not relabeled as exact simultaneous IMU/GNSS motion.",
   "source_epoch_readout": "BY_SOURCE_PROFILE_FULL02/GNSS_INTERNAL_KINEMATICS.json: current PARITY V2 HPPOSECEF/NAV-PVT exact iTOW pairing reproduced all 1510 input P/V rows; no nearest matching, fill or repeated PVT source. Approximately 0.14 s CSV receipt lag is not a measurement-time correction.",
   "test_input_gap_requirement": "BY2H contains real IMU gaps retained by its frozen contract, including 414.905–415.081 s. Current joint loader rejects uncovered integration; define missing-data state qualification/recovery without filling increments or changing the formal window before claiming test-sequence support.",
-  "first_action": "One source-only onset-time profile through the first main finite-history publication; preserve the existing working parameters and use observed event boundaries, not truth or navigation error.",
+  "first_action": "Implement unknown finite-support effective_from hypotheses from actual observed event boundaries in JointNavigator, retain fixed/whole-arc alternatives and original joint history, then run the full90 automatic comparison with the unchanged working parameters.",
   "m1_current_evidence": {
     "integrated_code": "Finite common support motion, proper joint foot/external prediction, existing nonlinear conditional-history expansion and source-only restricted likelihood are connected to the same JointNavigator state.",
     "necessary_math_checks": "Exact OU and fixed limit; foot Jacobians and original AR likelihood; joint prediction covariance from actual process graph and conditional-density decomposition; checkpoint and Gaussian-separator lifecycle; sparse source likelihood equals dense full-covariance integration.",
@@ -120,10 +120,22 @@
       "source": "M1_AUTOMATIC90_RESULT.json"
     },
     "onset_diagnosis": {
-      "status": "PREPARING_ONE_SOURCE_ONLY_PROFILE",
+      "status": "COMPLETED_SOURCE_DIAGNOSTIC",
       "origin": "Observed principal publication at67.9 and its pre-use checkpoint64.0",
-      "hypotheses": "Whole-arc finite motion relaxes the healthy prefix; long-tau process shape may also mismatch finite start/stop motion. Both remain to be separated.",
-      "prohibitions": "No truth-selected onset, no navigation-error tuning, no new full automatic run before diagnosis, no M2 navigation until M1 passes."
+      "hypotheses": 34,
+      "prohibitions": "No truth-selected onset, no navigation-error tuning, no new full automatic run before diagnosis, no M2 navigation until M1 passes.",
+      "session_id": 19969,
+      "root": "/home/kaiwen/research/LegSA-GINS-SCRATCH/INTEGRATED_LEGGED_HEADING_20261008/M1_ONSET_SOURCE_PROFILE01",
+      "publication_frontier_s": 67.9,
+      "session_closed": true,
+      "exit_code": 0,
+      "elapsed_s": 137.05578683800195,
+      "result": "M1_ONSET_SOURCE_PROFILE_RESULT.json",
+      "source_optimum_effective_from_s": 67.4,
+      "original_whole_arc_state_and_score_exactly_reproduced": true,
+      "source_score_improvement_vs_whole_arc": 11.103018062400224,
+      "scope": "Only observations through the actual main publication67.9; no truth/reference/error-array ranking. Effective onset is a support-model parameter, not IMU/GNSS alignment or algorithm startup. No full-navigation success claimed.",
+      "next_implementation": "Unknown observed-event onset within the same navigator; preserve prefix fixed factors, shared contacts and cross-boundary foot AR. Keep sigma/tau, random birth-velocity semantics and2log20. Never hardcode67.4 or add an arbitrary onset prior."
     }
   },
   "overall_scientific_goal_complete": false,
@@ -166,6 +178,11 @@
       "date": "2026-10-08",
       "evidence": "Full90 actual conditional history was published, but gap p/v worsened by188.60%/24.61% and whole trajectory worsened. Automatic replacement activates finite motion from entire arc birth64.8, including pre-motion fixed support.",
       "decision": "M1 remains unfinished. Diagnose onset-time source evidence and joint body/contact velocity uncertainty with frozen parameters before the next integrated physical change. Do not advance M2 or retune acceptance to declare success."
+    },
+    {
+      "date": "2026-10-08",
+      "evidence": "One34-hypothesis source profile exactly reproduced the original whole-arc conditional. Local onset67.4 improves source score11.103, lowers rho(vN,uN) .920→.672, with no truth/error selection. External score slightly worsens and relative-velocity uncertainty increases.",
+      "decision": "Implement automatic event-boundary onset hypotheses and historical dependency handling with existing finite physics. Treat the profile as attribution only; retain full M1 failure and require a new complete90-second navigation result."
     }
   ],
   "remaining_goal_requirements": [

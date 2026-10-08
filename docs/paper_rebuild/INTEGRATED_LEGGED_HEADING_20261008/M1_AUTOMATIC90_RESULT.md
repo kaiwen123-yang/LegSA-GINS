@@ -42,6 +42,8 @@
 
 若原始观测支持弧内起动且保留前段约束能降低共同速度混淆，下一步才在同一导航算法中实现未知变化时刻及对应依赖撤销。若源profile不定位起动，或仍不能解释运动形状，就据该结果修改物理假设；不能固定一个方便的起动时刻、继续扫tau或改门限。profile只作归因，不作经过校准的概率，也不冒充自动完整成果。
 
+后续这一诊断已完成，见[M1_ONSET_SOURCE_PROFILE_RESULT.md](M1_ONSET_SOURCE_PROFILE_RESULT.md)：源证据支持弧内局部生效，下一项转为接入未知生效时间的自动推断。本文件的完整导航失败结论保持不变。
+
 ## 复现与范围
 
 输入种子6100801；自动导航代码提交0760d6a7ef878cdf6c17ccb6f3670e0a6bdfa390。固定完整结果见M1_FIXED90_RESULT.json。自动结果根：`/home/kaiwen/research/LegSA-GINS-SCRATCH/INTEGRATED_LEGGED_HEADING_20261008/M1_FULL01_AUTOMATIC_FINITE`。完整原始决策、CSV、NPZ和输入快照保留在各运行根；2.6MB完整配对JSON保留在相邻M1_FULL01_PAIR_READOUT，仓库摘要保留全部发布策略分段和展开事件。
