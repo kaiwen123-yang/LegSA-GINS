@@ -1,0 +1,472 @@
+{
+  "schema": "joint_navigation.BY_pre_carrier_bootstrap.v1",
+  "status": "SCIENTIFIC_CALCULATIONS_COMPLETE_WITH_THREE_UNFINISHED_LOCAL_SEEDS",
+  "evidence_root": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_PRE_CARRIER_BOOTSTRAP_01",
+  "git_commit": "a26bdefd53497df2dcc46214fd8d3e39eb90f5b2",
+  "design": {
+    "requested_window_s": [
+      66.0,
+      71.0
+    ],
+    "arrival_frontier_s": 71.0,
+    "actual_measurement_window_s": [
+      66.0,
+      70.99799990653992
+    ],
+    "last_available_time_s": 70.99904467900001,
+    "excluded_unarrived_packets": [
+      {
+        "time_s": 71.0,
+        "available_time_s": 71.003052533
+      }
+    ],
+    "events": 157,
+    "position_velocity_epochs": 25,
+    "eligible_foot_measurements": 204,
+    "foot_arc_count": 45,
+    "foot_toggle_is_only_inference_arm_difference": true,
+    "yaw_seeds_deg": [
+      0,
+      90,
+      180,
+      -90
+    ],
+    "bootstrap_max_iterations": 200,
+    "tilt_seed_rp_rad": [
+      -0.020726641693471378,
+      0.0684898661852142
+    ],
+    "tilt_is_values_only": true,
+    "gravity_observation": false,
+    "artificial_yaw_prior": false,
+    "carrier_factors": 0,
+    "carrier_ambiguity_keys": 0,
+    "bias_prior": "Original engineering accel sigma0.03 m/s², gyro sigma0.003 rad/s; retained",
+    "reference_reads": 0,
+    "algorithm_changes": 0
+  },
+  "seed_results": [
+    {
+      "seed": "foot_seed0",
+      "initial_yaw_deg": 0.0,
+      "solver_status": "FIRST_ORDER_STATIONARY",
+      "iterations": 57,
+      "local_rank": 2490,
+      "dimension": 2490,
+      "cost": 696.1836286949726,
+      "projected_gradient_relative": 3.2421387562543707e-09,
+      "terminal_yaw_deg": -5.70018104752428,
+      "yaw_std_deg_initial": 0.6312718636330553,
+      "yaw_std_deg_terminal": 0.609307875162451,
+      "terminal_rpy_std_deg": [
+        0.19502283456070027,
+        0.18465722601649417,
+        0.609307875162451
+      ],
+      "terminal_velocity_std_mps": [
+        0.015374733059115471,
+        0.015197923022753324,
+        0.005555430944652337
+      ],
+      "terminal_position_std_m": [
+        0.010020649829283947,
+        0.010104935216901393,
+        0.006166493257830806
+      ],
+      "conditional_covariance_scope": "stationary local graph mode"
+    },
+    {
+      "seed": "foot_seed1",
+      "initial_yaw_deg": 90.0,
+      "solver_status": "FIRST_ORDER_STATIONARY",
+      "iterations": 153,
+      "local_rank": 2490,
+      "dimension": 2490,
+      "cost": 696.1754347837788,
+      "projected_gradient_relative": 2.5902768958749666e-09,
+      "terminal_yaw_deg": -5.700044908840458,
+      "yaw_std_deg_initial": 0.6312719271314231,
+      "yaw_std_deg_terminal": 0.609308037879578,
+      "terminal_rpy_std_deg": [
+        0.19502282195376253,
+        0.18465726186695305,
+        0.609308037879578
+      ],
+      "terminal_velocity_std_mps": [
+        0.015374726614108186,
+        0.015197926021365082,
+        0.005555431443925356
+      ],
+      "terminal_position_std_m": [
+        0.01002064508879692,
+        0.01010493529136086,
+        0.006166493762676003
+      ],
+      "conditional_covariance_scope": "stationary local graph mode"
+    },
+    {
+      "seed": "foot_seed2",
+      "initial_yaw_deg": 180.0,
+      "solver_status": "FIRST_ORDER_STATIONARY",
+      "iterations": 193,
+      "local_rank": 2490,
+      "dimension": 2490,
+      "cost": 696.1852768215385,
+      "projected_gradient_relative": 2.8861822728641245e-09,
+      "terminal_yaw_deg": -5.700060552881458,
+      "yaw_std_deg_initial": 0.6312718960058207,
+      "yaw_std_deg_terminal": 0.6093080353100373,
+      "terminal_rpy_std_deg": [
+        0.19502266754913658,
+        0.1846572533203552,
+        0.6093080353100373
+      ],
+      "terminal_velocity_std_mps": [
+        0.01537473316154425,
+        0.015197922668050924,
+        0.0055554315932498325
+      ],
+      "terminal_position_std_m": [
+        0.010020648969465813,
+        0.010104937224069462,
+        0.006166493232805589
+      ],
+      "conditional_covariance_scope": "stationary local graph mode"
+    },
+    {
+      "seed": "foot_seed3",
+      "initial_yaw_deg": -90.0,
+      "solver_status": "FIRST_ORDER_STATIONARY",
+      "iterations": 73,
+      "local_rank": 2490,
+      "dimension": 2490,
+      "cost": 696.1930072497975,
+      "projected_gradient_relative": 7.110752043555163e-09,
+      "terminal_yaw_deg": -5.700233123805118,
+      "yaw_std_deg_initial": 0.6312718083781674,
+      "yaw_std_deg_terminal": 0.6093078554613504,
+      "terminal_rpy_std_deg": [
+        0.19502271499205104,
+        0.18465718748011214,
+        0.6093078554613504
+      ],
+      "terminal_velocity_std_mps": [
+        0.015374731053079266,
+        0.01519792655888787,
+        0.005555431547584693
+      ],
+      "terminal_position_std_m": [
+        0.01002064732958277,
+        0.010104937407958054,
+        0.006166493719038568
+      ],
+      "conditional_covariance_scope": "stationary local graph mode"
+    },
+    {
+      "seed": "nofoot_seed0",
+      "initial_yaw_deg": 0.0,
+      "solver_status": "ITERATION_BUDGET_EXHAUSTED",
+      "iterations": 200,
+      "local_rank": 2355,
+      "dimension": 2355,
+      "cost": 496.1945796903079,
+      "projected_gradient_relative": 0.00018484946617596684,
+      "terminal_yaw_deg": -42.91081472909485,
+      "yaw_std_deg_initial": 3.296313779631852,
+      "yaw_std_deg_terminal": 3.288495195944844,
+      "terminal_rpy_std_deg": [
+        0.20878247806175004,
+        0.20191525724469186,
+        3.288495195944844
+      ],
+      "terminal_velocity_std_mps": [
+        0.01992264245064719,
+        0.024144380379014733,
+        0.005814963127103373
+      ],
+      "terminal_position_std_m": [
+        0.011205541568916039,
+        0.012426537466542622,
+        0.006353746938948043
+      ],
+      "conditional_covariance_scope": "nonstationary local curvature, not qualified mode"
+    },
+    {
+      "seed": "nofoot_seed1",
+      "initial_yaw_deg": 90.0,
+      "solver_status": "ITERATION_BUDGET_EXHAUSTED",
+      "iterations": 200,
+      "local_rank": 2355,
+      "dimension": 2355,
+      "cost": 594.9373655761983,
+      "projected_gradient_relative": 0.0010550228594919334,
+      "terminal_yaw_deg": 37.130551410764156,
+      "yaw_std_deg_initial": 3.2961486777713023,
+      "yaw_std_deg_terminal": 3.286007602249136,
+      "terminal_rpy_std_deg": [
+        0.2001363991961582,
+        0.21075686047688547,
+        3.286007602249136
+      ],
+      "terminal_velocity_std_mps": [
+        0.024741461238567256,
+        0.018645627640926626,
+        0.00579329628996757
+      ],
+      "terminal_position_std_m": [
+        0.01244651191781674,
+        0.011044395149973284,
+        0.006353043469736446
+      ],
+      "conditional_covariance_scope": "nonstationary local curvature, not qualified mode"
+    },
+    {
+      "seed": "nofoot_seed2",
+      "initial_yaw_deg": 180.0,
+      "solver_status": "ITERATION_BUDGET_EXHAUSTED",
+      "iterations": 200,
+      "local_rank": 2355,
+      "dimension": 2355,
+      "cost": 546.3116007268134,
+      "projected_gradient_relative": 0.0009823817025583618,
+      "terminal_yaw_deg": -137.20422890240633,
+      "yaw_std_deg_initial": 3.3038251288384757,
+      "yaw_std_deg_terminal": 3.2959465415486355,
+      "terminal_rpy_std_deg": [
+        0.20057453733497294,
+        0.20951995641365445,
+        3.2959465415486355
+      ],
+      "terminal_velocity_std_mps": [
+        0.024830375058916762,
+        0.01964143560530517,
+        0.005820265164231028
+      ],
+      "terminal_position_std_m": [
+        0.012557694699124296,
+        0.011179003426542967,
+        0.006354711961416613
+      ],
+      "conditional_covariance_scope": "nonstationary local curvature, not qualified mode"
+    },
+    {
+      "seed": "nofoot_seed3",
+      "initial_yaw_deg": -90.0,
+      "solver_status": "FIRST_ORDER_STATIONARY",
+      "iterations": 108,
+      "local_rank": 2355,
+      "dimension": 2355,
+      "cost": 488.9677366871357,
+      "projected_gradient_relative": 7.636213066987448e-07,
+      "terminal_yaw_deg": -66.6499860184472,
+      "yaw_std_deg_initial": 3.298177824352134,
+      "yaw_std_deg_terminal": 3.290750791035215,
+      "terminal_rpy_std_deg": [
+        0.20997424699734038,
+        0.20050573204896524,
+        3.290750791035215
+      ],
+      "terminal_velocity_std_mps": [
+        0.01736294999460237,
+        0.026212049522637434,
+        0.005819195855509439
+      ],
+      "terminal_position_std_m": [
+        0.010951649538461486,
+        0.012696816687138401,
+        0.00635394741496124
+      ],
+      "conditional_covariance_scope": "stationary local graph mode"
+    }
+  ],
+  "modes": {
+    "foot_stationary_seeds": 4,
+    "foot_terminal_mode_clusters_under_existing_navigator_1e_5_R_p_v_tolerance": 1,
+    "foot_max_pair_rotation_rad": 3.3119044313326503e-06,
+    "foot_max_pair_position_m": 2.227318953506279e-06,
+    "foot_max_pair_velocity_mps": 4.658236643399694e-06,
+    "nofoot_stationary_seeds": 1,
+    "nofoot_unfinished_seeds": 3,
+    "global_mode_coverage_certified": false
+  },
+  "shared_state_effect": {
+    "representative_stationary_seeds": [
+      "foot_seed1",
+      "nofoot_seed3"
+    ],
+    "terminal_foot_minus_nofoot_position_ned_m": [
+      0.030755308177175422,
+      -0.094217251427838,
+      -0.002992166452310596
+    ],
+    "terminal_foot_minus_nofoot_velocity_ned_mps": [
+      0.18707656427656172,
+      -0.27017795169707887,
+      -0.006976732953625636
+    ],
+    "position_delta_norm_m": 0.099155093201347,
+    "velocity_delta_norm_mps": 0.32869810052304504,
+    "scope": "Shows foot factors change the actual common R/p/v graph state. No reference, accuracy benefit or isolated heading mediation established."
+  },
+  "conclusion": "Existing carrier-required navigator trigger suppresses a pre-carrier foot/PV/IMU batch with reproducible stationary local direction information. This supports testing a source-neutral bootstrap trigger in the common algorithm, not declaring trusted heading or changing qualification thresholds from this result.",
+  "limits": [
+    "Foot four seeds agree locally; they are not exhaustive nonlinear direction coverage.",
+    "Both arms are locally full rank; full rank alone does not imply reliable direction or completed optimization.",
+    "No-foot three nonstationary seeds remain unresolved, not excluded.",
+    "Foot/no-foot total objective values contain different observed factor sets and must not be ranked as same-likelihood model evidence.",
+    "The smaller foot covariance is conditional on inherited contact/noise/bias and source independence approximations, not calibrated reliability.",
+    "A 61 degree difference between stationary foot/no-foot yaw modes does not identify which is accurate without independent evidence.",
+    "Position/velocity changes combine direct foot constraints and attitude coupling; this is not a heading-only mediation experiment.",
+    "No carrier gate, threshold, iteration budget, data window or reference-based tuning was changed."
+  ],
+  "execution": {
+    "computations_completed": 8,
+    "stationary_seeds": 5,
+    "unfinished_nonlinear_seeds": 3,
+    "process_exit_code": 1,
+    "process_status": "CALCULATIONS_COMPLETED_FINAL_LOG_FAILED",
+    "failure_scope": "final logging only; all graph solutions, rank and covariance records already saved",
+    "elapsed_s": 83.28541427699929,
+    "reruns": 0,
+    "executed_script_sha256": "7383a5913db3e1be88ee90325c6697782dc677b680cc630764077d2746829fc7",
+    "reporting_only_corrected_reproducible_script_sha256": "1ef473743092e226611ca1a9842412916d72a7c9300df5a1b5c44ae6cb772b17",
+    "reporting_corrections": [
+      "final logging duplicated elapsed_s after all result files had been saved",
+      "diagnostic foot eligibility counter corrected from eligible to support_eligible; no estimator inputs altered"
+    ]
+  },
+  "factor_counts_by_arm": {
+    "foot": {
+      "factor_types": {
+        "PriorFactorConstantBias": 1,
+        "CustomFactor": 229,
+        "ImuFactor": 156,
+        "BetweenFactorConstantBias": 156
+      },
+      "factor_count": 542,
+      "carrier_blocks": 0,
+      "carrier_ambiguity_keys": 0,
+      "carrier_relation_constraints": 0,
+      "artificial_PriorFactorPose3_count": 0,
+      "gravity_tilt_argument": null,
+      "static_gravity_observation_added": false,
+      "initial_rotation_is_values_only": true,
+      "bias_prior": "inherited engineering prior; unchanged",
+      "marginalized_states": 0,
+      "contact_keys": 45
+    },
+    "nofoot": {
+      "factor_types": {
+        "PriorFactorConstantBias": 1,
+        "CustomFactor": 25,
+        "ImuFactor": 156,
+        "BetweenFactorConstantBias": 156
+      },
+      "factor_count": 338,
+      "carrier_blocks": 0,
+      "carrier_ambiguity_keys": 0,
+      "carrier_relation_constraints": 0,
+      "artificial_PriorFactorPose3_count": 0,
+      "gravity_tilt_argument": null,
+      "static_gravity_observation_added": false,
+      "initial_rotation_is_values_only": true,
+      "bias_prior": "inherited engineering prior; unchanged",
+      "marginalized_states": 0,
+      "contact_keys": 0
+    }
+  },
+  "covariance_scope": "*_covariance.npz: 18x18 initial/terminal common pose+velocity local marginal, all cross blocks retained",
+  "source_verification": {
+    "verified_snapshot_Python_files": 926,
+    "all_snapshot_bytes_match": true,
+    "source_manifest_sha256": "d3b746cbfb5e44ea6f8de7dca485791da0b25c7cc96e03d87ebfe37fda5b3447",
+    "key_module_sha256": {
+      "src/legsa_gins/paper_rebuild/joint_navigation/__init__.py": "1e4531f3053fd9736435af940484c056adae614ba3700cd09def0b848d57cba0",
+      "src/legsa_gins/paper_rebuild/joint_navigation/source_noise_likelihood.py": "a5ae76b0d5c0ef5e2a8b69a1b54eca5382e3a789b7d9aca6d89876be55dc0440",
+      "src/legsa_gins/paper_rebuild/joint_navigation/coupled_length_profile.py": "e8e692ee3e587b4f3c53f7afa9fb7431017c2735986cf6c165f7737aae001ce6",
+      "src/legsa_gins/paper_rebuild/joint_navigation/branch.py": "77a0c07e788fb9df456ee916b6969ba431abacd8463146cae0b68b45a90e9d6e",
+      "src/legsa_gins/paper_rebuild/joint_navigation/candidate.py": "927b9a832b2d7b5e05e8e1e0babc30b7a1db2036a848eeac6fcd9ea1b9317396",
+      "src/legsa_gins/paper_rebuild/joint_navigation/window.py": "e2cd85768d2667688160bb6a68f9e9d264b11e42c58b70d17eca686fda284351",
+      "src/legsa_gins/paper_rebuild/joint_navigation/support_policy.py": "dad47368d82c75d5b0acb09e8f8d833b9040c8e91800b7258c2225f1d51c6277",
+      "src/legsa_gins/paper_rebuild/joint_navigation/real_data.py": "3785a3eb84ab1485b936cfbe70986bdc6cbdc5d22bb8c54a60c0af9bd3ed8cad",
+      "src/legsa_gins/paper_rebuild/joint_navigation/navigator.py": "c62451f71eaa3530756359797031601cc6e31feaeac9e5bb3ff37b9f9a22ad16",
+      "src/legsa_gins/paper_rebuild/joint_navigation/carrier_relations.py": "65e9ac0b5a6decb69d18171410104b0b6a12f51012d4dd6b5b21aa92f5da6588",
+      "src/legsa_gins/paper_rebuild/joint_navigation/synthetic.py": "516d25ad70292e6d7c0f87717208c0352321a94711c7d66b8226c449a3b64e65",
+      "src/legsa_gins/paper_rebuild/joint_navigation/factors.py": "a529814ef2932e371d4f6cdac67762cefaa6e9bebf7ecf50c284e865d9c23822"
+    }
+  },
+  "input_source_identity": {
+    "body_path": {
+      "path": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/高层数据/by2.txt",
+      "sha256": "95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278",
+      "bytes": 92352512
+    },
+    "imu_path": {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu",
+      "sha256": "74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647",
+      "bytes": 5091513
+    },
+    "gnss_path": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+      "sha256": "fc6dd49c0a35c41208fc7d94da1c78ad63fe6938bd8f599021750c3bf5e20760",
+      "bytes": 253682
+    },
+    "carrier_plan_path": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_ATTEMPT02/BY2/MODELS/PLAN.json",
+      "sha256": "16580a87ee787d4890edd22a8fc8bfb9b0771242e427201a952f323f233879ea",
+      "bytes": 36238023
+    },
+    "calibration_model_path": {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/00_CALIBRATION/CLEAN5_CALIBRATED_SENSOR_MODEL.yaml",
+      "sha256": "4ce6ca6c544c2ba39988ea0b0631a60207a4cea36987c3a2139052fedd3a4871",
+      "bytes": 18040
+    },
+    "imu_noise_profile_path": {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/configs/paper_rebuild/horizontal_literature/hartley/stage_payload/04_METHOD_CONTRACTS/GO2_IMU_ALLAN_90MIN_RECOVERED_V1.yaml",
+      "sha256": "fcf3964caf8142f262f9df767df62d3f18454d18ca331a9dcc0722f8786b4480",
+      "bytes": 4094
+    }
+  },
+  "artifact_sha256": {
+    "PREDECLARATION.json": "0f09d3256796fcc8e95b933791c45ecc393c2f646d5f1b608349bb0f31e725cf",
+    "READOUT.json": "468180e1899efff6c8eb3083a7242dc837789593140b4eba434590f167a0be28",
+    "READOUT.md": "7713bd7c2e93b48eb699223143423258a0c74c546ded4b4ff4ddc59468fc8dbf",
+    "SUMMARY.json": "7c8c611954dc89215f3812de81c7337c0e165f660da4b6b5776f4b78436bfa9c",
+    "INPUT_SUMMARY.json": "464ce351569c4a8146051680783527a385047995b96ca70bf6cefe8fbc7fbfc8",
+    "REPORT_RECEIPT.json": "7a0ab60f81e0645c81a03423080593d878432abb57845d7a81dfe56844ad75a1",
+    "run.log": "e2c25d056c099c3a0cc98debdf7ae161db562b1669e3729523daa140a1d0771f"
+  },
+  "per_seed_result_sha256": {
+    "nofoot_seed1.json": "ce41a03d66ac6ff7dc829463c2b368fc60c0a577daf3dad993d4868efe7d4333",
+    "foot_seed1_covariance.npz": "fb4f3d687002239e83d5eae2b1014182584b2b475d4c997c11a8eff84791e40a",
+    "foot_seed2_covariance.npz": "ed880516ac95fcb076c85203064d56e3a0e0cf4109caed0523cf40fc8ea4cce2",
+    "foot_seed1_states.npz": "99fd3fe3bf122c077e75314bbd0498f8788ceb2fe5c1e5e5283654c2172ff385",
+    "foot_seed1.json": "37d586bd4ffd9d87708319ba5af74d6a61fe52df1a70fa8e76455d45e3efa73b",
+    "nofoot_seed0_covariance.npz": "92616683ca9cc9bd408c12e19d4f855ddabdf0f83ec33521b71e39c459310f95",
+    "nofoot_seed3.json": "f2568354a80c06e130b0894f0cc7be251ea9d15602dfa5d492dbe8324762ddcf",
+    "nofoot_seed2.json": "343dfb2ea4cecd13c21944d4f7143769bc5e2932f40e44bf4af041c8a67b342e",
+    "nofoot_seed0_states.npz": "1cd7e297e286cb4e38f067f7f513ff21c86021c4c7096f347002ab48e41df627",
+    "nofoot_seed2_states.npz": "92eaa1d0c37e3b9c7aca5070e3489f64d63d8a45b21c14d167a99e8aed63f293",
+    "foot_seed0_states.npz": "df6c58f2faa049a9ea0b6580b0c3ff0d619d504d3c55bef9a16de546ff98da5a",
+    "nofoot_seed2_covariance.npz": "5d9f7c90e75a8cf7253c49020dea163b50f45684714eb876811a05c7fda622c8",
+    "nofoot_seed1_states.npz": "6f222d68c14353e27862f312b0de2a37f6091a473f315ffcd803f652f1edce81",
+    "foot_seed3_covariance.npz": "a5e8b9ec5e6fd4fe2234a956b6ee3480910fd708a910d810fa77a0a61ce832a1",
+    "foot_seed2.json": "d659b5921fefb025d0946bd4f8b2c878f02cba163228de2e0cab6ceddf6a0411",
+    "foot_seed0_covariance.npz": "39d5f3b71039f9660100f52601dafee1d2533c73422709097c8bf0ad912dcdf1",
+    "foot_seed3.json": "aac744ab8940d422fcdef989a5dabc37f181ef8f64b715dd998444467642c4c4",
+    "foot_seed2_states.npz": "ab83ed521d4b2b99e30e21ea841cdeb64b63a3898d0b8729c07e3a6551634659",
+    "foot_seed0.json": "dd5df8ed85027246f33d13dfd918b4aa3adfc79a6fde83f7d3ac00a2c0bcab9f",
+    "nofoot_seed3_covariance.npz": "6537763b1120e561e5d60c385f097fa3a7b2c1faf8735a653f392e873b7a9d19",
+    "nofoot_seed1_covariance.npz": "c18682f70610d2613cfb318e9bb17b2ef6d5cabdd12bcc12b4dc895363a8294a",
+    "nofoot_seed3_states.npz": "497cf6416a9ba65f0da9ef4ae1827df10111205a8db32727509f54ce6423df44",
+    "nofoot_seed0.json": "2954fc2d885a30288e257a385bee746d46ad810b6ac71f3556a95f620217a8dd",
+    "foot_seed3_states.npz": "bd2a4cae27de34dbbdade5ab8a37d7960b21a1047ff8447991b4dfdaed580a32"
+  },
+  "formal_AR": false,
+  "probability_calibrated": false,
+  "heading_accuracy_benefit_established": false,
+  "heading_to_velocity_mediation_established": false,
+  "exceeds_V3": false,
+  "algorithm_changes": 0,
+  "reference_reads": 0
+}

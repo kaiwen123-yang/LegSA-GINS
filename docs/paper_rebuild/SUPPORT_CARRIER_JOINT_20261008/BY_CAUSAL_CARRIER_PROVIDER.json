@@ -1,0 +1,213 @@
+{
+  "schema": "BY2_causal_carrier_provider_continuation.v1",
+  "status": "PHYSICAL_INPUT_COMPLETE_NO_NAVIGATION",
+  "window_s": [
+    66,
+    340
+  ],
+  "source_commit_at_preparation": "a26bdefd53497df2dcc46214fd8d3e39eb90f5b2",
+  "provider_contract": {
+    "schema": "causal_by2_physical_carrier.v1",
+    "provider": "CAUSAL_ORIGINAL_UBX_SFRBX_RTKLIB_BROADCAST",
+    "ephemeris_availability": "each_original_SFRBX_released_at_next_RAWX_in_same_receiver; no_fixed_snapshot_grid",
+    "receiver_page_banks": "independent; only_complete_native_decoded_ephemerides_merged",
+    "geometry_anchor": "last_valid_GNSS18_GNSS1_position_at_or_before_measurement_epoch",
+    "anchor_is_extra_position_factor": false,
+    "PVT_heading_consumed": false,
+    "reference_reads": 0,
+    "source_arrival_scope": "SFRBX_original_file_order_bounded_by_RAWX; GNSS18_uses_measurement_epoch_not_unavailable_transport_arrival",
+    "raw_SD_covariance_and_arc_policy": "unchanged; physical_SD_source_noise_model_is_a_separate_backend_contract"
+  },
+  "source_inputs": {
+    "raw_sources": {
+      "1": {
+        "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss1.ubx",
+        "sha256": "24177f2d6f25c0b614f769e66c4e4147eea727f3a7f55e22d5e04419eaa10f8b"
+      },
+      "2": {
+        "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss2.ubx",
+        "sha256": "0876d7e67441ddfce66b4ce8e39838b4245bddab3d6d3cce60d5eb9bad42c2c2"
+      }
+    },
+    "gnss18": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+      "sha256": "fc6dd49c0a35c41208fc7d94da1c78ad63fe6938bd8f599021750c3bf5e20760"
+    },
+    "previous_plan": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_ATTEMPT02/BY2/MODELS/PLAN.json",
+      "sha256": "16580a87ee787d4890edd22a8fc8bfb9b0771242e427201a952f323f233879ea"
+    },
+    "registry": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/EXT_REPRODUCTION_20261002T124139Z/inputs/BY2/INPUT.json",
+    "registry_sha256": "8d016923133d6c2971a2d3bee286696a43c055a241a61e76a04a1b50c0e21501",
+    "build_library": {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_CAUSAL_CARRIER_PROVIDER_02/BUILD/libcausal_carrier_rtklib.so",
+      "sha256": "98f6dbaaf5f92be69b22a2f6bf686d06ad04f919944dabf1ce8a5b67190919ff"
+    }
+  },
+  "summary": {
+    "carrier_slots": 1370,
+    "built_carrier_slots": 1329,
+    "first_built_time_s": 74.39800000190735,
+    "early_66_100_slots": 170,
+    "early_built_slots": 129,
+    "early_unavailable_reasons": {
+      "NO_QUALIFIED_DD_GROUP": 41
+    },
+    "native_decoded_ephemeris_updates": 51,
+    "native_decoder_rejected_frames": 0,
+    "qualified_state_queries": 29490,
+    "all_queried_ephemeris_available_by_measurement_epoch": true,
+    "maximum_anchor_age_s": 0.19800019227477605,
+    "all_anchor_epochs_at_or_before_measurement": true,
+    "common_100plus_epochs": 1200,
+    "common_100plus_physical_DD_pairs": 20377,
+    "comparison_maxima": {
+      "anchor_difference_m": 536.297707057838,
+      "max_abs_y_delta_m": 2.1647661924362183e-05,
+      "max_abs_B_delta": 1.773973571428389e-05,
+      "max_abs_Q_delta_m2": 0.0
+    },
+    "navigation_calls": 0,
+    "integer_solver_calls": 0,
+    "reference_reads": 0
+  },
+  "first_built": {
+    "time_s": 74.39800000190735,
+    "rows": 20,
+    "ambiguities": 10,
+    "B_rank": 3,
+    "source_groups": [
+      "BDS_B1I_D1_9_satellites",
+      "BDS_B2I_D1_3_satellites"
+    ],
+    "anchor": {
+      "status": "LAST_ARRIVED_GNSS1_POSITION_LOS_ONLY",
+      "available": true,
+      "position_ecef_m": [
+        -2171609.076999965,
+        4385607.254200007,
+        4076728.924500006
+      ],
+      "source_time_s": 74.200000048,
+      "source_row": 93,
+      "age_s": 0.19799995390734182,
+      "source_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+      "role": "LOS_linearization_point_only_not_an_extra_position_observation",
+      "availability_scope": "GNSS18_measurement_epoch; actual_receiver_transport_latency_unavailable"
+    }
+  },
+  "first_B_rank3_time_s": 74.39800000190735,
+  "first_constellation_built_times_s": {
+    "3": 74.39800000190735,
+    "0": 90.19799995422363,
+    "2": 99.19799995422363
+  },
+  "early_B_rank_counts": {
+    "3": 129
+  },
+  "early_built_group_counts": {
+    "(3, 0, 0)": 129,
+    "(3, 2, 0)": 129,
+    "(0, 0, 0)": 50,
+    "(0, 3, 0)": 50,
+    "(2, 0, 0)": 5,
+    "(2, 6, 0)": 5
+  },
+  "integration": {
+    "event_count": 8762,
+    "carrier_source_slots": 1370,
+    "carrier_built_epochs": 1329,
+    "first_built_carrier_time_s": 74.39800000190735,
+    "gnss_source_epochs": 1371,
+    "valid_position_epochs": 1371,
+    "valid_velocity_epochs": 1371,
+    "maximum_event_IMU_availability_delay_s": 0.01304523800001789
+  },
+  "scientific_limits": [
+    "B_rank3 is geometry only, not integer or global direction qualification",
+    "same original RAWX times, raw noise Q and arc eligibility; earlier satellite availability changes DD pivots and row support",
+    "GNSS18 uses receiver measurement times; unrecorded physical transport latency is not inferred",
+    "GNSS1 position only a shared LOS linearization anchor, no additional factor or heading",
+    "no navigation/evaluation performed; old full07 remains valid under old provider coverage, not earliest available carrier coverage",
+    "first legal carrier 74.398 does not establish navigation bootstrap time or final navigation gain"
+  ],
+  "navigation_calls": 0,
+  "integer_solver_calls": 0,
+  "reference_reads": 0,
+  "preparation_source_sha256": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/stream_provider.py": "508e2c8860fc0e66a53e5cc8050683169eb9195b574740554531cee49ebd7dd1",
+    "src/legsa_gins/paper_rebuild/carrier_phase/stream_rtklib.c": "29082a239fdb51155952450f9fee8e16acbe2d17380d6c5b84e355a97a460fab",
+    "src/legsa_gins/paper_rebuild/joint_navigation/real_data.py": "3785a3eb84ab1485b936cfbe70986bdc6cbdc5d22bb8c54a60c0af9bd3ed8cad",
+    "scripts/paper_rebuild/carrier_phase/prepare_by2_stream_provider.py": "eae82148ce55ee7814a197266f345d95358d7695a2715b161c9878338f6d4a8a"
+  },
+  "artifacts": {
+    "PLAN.json": "436a56c4d8e756a1431bd56af628dd1c0be621b43d760319f653d52e8f7a5845",
+    "SUMMARY.json": "02f3f413f4b7124e89fbd40c80077c3f072d8709cd1d0fad6c787c57871ba88e",
+    "BUILD/BUILD.json": "a8c91476d1e17d1ecb9d8046b47429618e9c2201c67ef8dbf606ef8c58cc7ae2",
+    "BUILD/libcausal_carrier_rtklib.so": "98f6dbaaf5f92be69b22a2f6bf686d06ad04f919944dabf1ce8a5b67190919ff",
+    "FIRST_BLOCK_CHECK/CHECK.json": "0b154d578276d0bd3c81df65729f80ecaf727cdf22a33498398d4cac465534cf",
+    "input_config.json": "eee8b38702acf35bbe015dedef796d8dcd946727a160213fbe0cf1e379e0d7c4",
+    "input_summary.json": "ef60aa5c9ebf3e6b6e86ba2ca1cfbb3bc3a08e846d9ac93607eaef9348659a15",
+    "sensor_metadata.json": "1d429012328c0429d1cbaec5fe3e15d6f5b289aa132693f960b896a76543ec5c",
+    "EPHEMERIS_EVENTS.json": "67dd7323ed8df74279b9bffe9edc011d463a422e9beeef83b036c979d8fd09ee",
+    "EPHEMERIS_QUALIFICATION.json": "8609db6f448759c3f2cd64f32ec07f5358fc9c65d746933cb62b7e59ec4bf6e8",
+    "COMMON_GEOMETRY_COMPARISON.json": "d5a6ccdca7755298e9682179352141a4b6eaaad58b2bc7c57ad26a95e99927be"
+  },
+  "artifact_root": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_CAUSAL_CARRIER_PROVIDER_02",
+  "complete_continuation_record_sha256": "e23efd46adaed6f18d6f58d88447bae48ed4049281cce9ed0dec8148455b74b1",
+  "complete_dependency_pins": "PLAN.json/source_sha256 and BUILD/BUILD.json/source_sha256",
+  "earlier_first_block_time_s": 100.19799995422363,
+  "artificial_provider_wait_removed_s": 25.799999952316284,
+  "old_wait_cause": "GPS_L1_SPP_global_anchor_gate_plus_20s_navigation_snapshot_schedule; not_raw_carrier_absence",
+  "one_actual_check": {
+    "scope": "one_actual_first_legal_DD_block_stream_vs_independently_truncated_prefix_convbin",
+    "time_s": 74.39800000190735,
+    "rows": 20,
+    "ambiguities": 10,
+    "B_rank": 3,
+    "differences": {
+      "y": 4.842877388000488e-08,
+      "A": 0.0,
+      "B": 8.14751044408979e-12,
+      "Q": 0.0
+    },
+    "converter_sha256": "dd9e6d3bf3b68047f53f1efb5c8504ae4849b920b3ab8bf41f2a2a6619396f3c",
+    "broadcast_bridge_sha256": "6df66600892404dd1c892879fe6e10693e808995fe359e32a6afc983629f8a3b",
+    "no_future_rawx_in_prefix": true,
+    "reference_reads": 0,
+    "navigation_calls": 0,
+    "integer_solver_calls": 0,
+    "pass_": true
+  },
+  "focused_scientific_read": {
+    "status": "NO_CURRENT_BY2_CAUSAL_OR_MEASUREMENT_DEFECT_IDENTIFIED",
+    "examined": [
+      "original per-receiver frame order and next-RAWX availability bound",
+      "independent native receiver page buffers and complete ephemeris merge only",
+      "native ephemeris selector equals source audit selector at receive epoch",
+      "per-receiver own-code transmit time, existing Earth rotation and satellite clock terms",
+      "unchanged physical signal/arc labels, pivot policy and raw SD covariance propagation",
+      "GNSS18 same-source LOS anchor does not create a second position factor"
+    ],
+    "remaining_model_scope": [
+      "SFRBX arrival is a following-RAWX upper bound, not a separately logged exact receiver arrival clock",
+      "GNSS18 transport latency is unavailable; source measurement epoch defines availability",
+      "LOS geometry is conditional on a same-source GNSS1 position; anchor/PV/raw cross-covariance remains unmodeled, as declared by existing shared-source contract",
+      "matrix B rank does not certify integer uniqueness or globally trusted heading"
+    ]
+  },
+  "prior_attempts": [
+    {
+      "directory": "BY_CAUSAL_CARRIER_PROVIDER_01",
+      "stage": "library_load",
+      "status": "FAILED_BEFORE_OBSERVATION_CONSTRUCTION",
+      "reason": "external bridge rtklib_compat.c showmsg object initially omitted; included in 02 build"
+    },
+    {
+      "script": "verify_and_assemble.py",
+      "stage": "post_check_input_summary_unpack",
+      "status": "FIRST_BLOCK_CHECK_PASSED_THEN_CALLER_API_UNPACK_FAILED",
+      "reason": "load_by2_events returns dict, caller initially unpacked its keys; assemble_input.py uses the actual dictionary API and completed"
+    }
+  ]
+}

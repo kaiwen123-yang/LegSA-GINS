@@ -9,6 +9,7 @@ measurement. Initialization and physical GNSS factors remain backend duties.
 from __future__ import annotations
 
 from dataclasses import dataclass
+import hashlib
 import json
 import math
 from pathlib import Path
@@ -276,6 +277,13 @@ def load_by2_events(config: By2InputConfig) -> dict:
     plan = json.loads(Path(config.carrier_plan_path).read_text())
     if plan["base_time"] != config.base_time_unix_s or plan["sequence"] != "BY2":
         raise ValueError("carrier plan sequence or time origin differs from requested BY2")
+    carrier_provider_contract = plan.get("provider_contract")
+    if carrier_provider_contract is not None:
+        # The carrier geometry reuses this receiver position solely as a LOS
+        # anchor. The ordinary GNSS factors below remain its only P/V use.
+        source = plan["inputs"]["gnss18"]
+        if hashlib.sha256(Path(config.gnss_path).read_bytes()).hexdigest() != source["sha256"]:
+            raise ValueError("carrier LOS anchor and navigation GNSS18 sources differ")
     carrier_rows = [r for r in plan["records"] if config.start_s <= r["time_s"] <= config.end_s]
     gnss_rows = [r for r in gnss if config.start_s <= r["time_s"] <= config.end_s]
     body_events = {r["time_s"]: r for r in body if r["selected"]}
@@ -331,6 +339,10 @@ def load_by2_events(config: By2InputConfig) -> dict:
             event["carrier_source"] = dict(time_s=t, status=status,
                 reason=entry.get("reason", row.get("spp_failure")), gps_key=row["key"],
                 family=config.family, model_file=entry.get("file"))
+            if carrier_provider_contract is not None:
+                event["carrier_source"].update(provider_contract=carrier_provider_contract,
+                    geometry_anchor_source_time_s=row["anchor_decision"]["source_time_s"],
+                    geometry_anchor_source_row=row["anchor_decision"]["source_row"])
             if status == "BUILT":
                 if entry["metadata"].get("baseline_frame") != "ECEF":
                     raise ValueError("expected original ECEF DD design")
@@ -400,6 +412,7 @@ def load_by2_events(config: By2InputConfig) -> dict:
         source_noise_assumption="raw_DD_and_receiver_PV_share_GNSS; SDK_foot_IMU_dependence_unknown",
         source_cross_covariance_available=False, independent_streams=False,
         heading_source="raw_code_carrier_EpochBlock_only", PVT_heading_consumed=False,
+        carrier_provider_contract=carrier_provider_contract,
         SDK_yaw_consumed=False, SDK_velocity_consumed=False, reference_read=False,
         full_phase_relations_policy="variable_physical_arc_relations_not_synthetic_five_relation_rule",
         initialization=dict(status="BACKEND_POLICY_REQUIRED", first_built_carrier_time_s=first_carrier,

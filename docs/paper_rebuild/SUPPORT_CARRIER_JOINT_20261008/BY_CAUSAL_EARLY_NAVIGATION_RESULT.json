@@ -1,0 +1,537 @@
+{
+  "schema": "joint_navigation.BY_causal_early_navigation_result.v1",
+  "status": "UNIFIED_EARLY_START_AND_CARRIER_CONSUMPTION_COMPLETE_GAIN_NOT_ESTABLISHED",
+  "evidence_roots": {
+    "navigation": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_M2_CAUSAL_EARLY_10_U1",
+    "position_yaw": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_M2_CAUSAL_EARLY_EVAL_10_U1",
+    "velocity": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_M2_CAUSAL_EARLY_VELOCITY_10_U1"
+  },
+  "source_identity": {
+    "git_context_commit": "a26bdefd53497df2dcc46214fd8d3e39eb90f5b2",
+    "exact_scientific_identity": "actual SOURCE_SNAPSHOT hashes; working-tree changes are represented by hashes, not implied to equal git context commit",
+    "verified_snapshot_files": 13,
+    "source_sha256": {
+      "src/legsa_gins/paper_rebuild/joint_navigation/__init__.py": "1e4531f3053fd9736435af940484c056adae614ba3700cd09def0b848d57cba0",
+      "src/legsa_gins/paper_rebuild/joint_navigation/branch.py": "77a0c07e788fb9df456ee916b6969ba431abacd8463146cae0b68b45a90e9d6e",
+      "src/legsa_gins/paper_rebuild/joint_navigation/candidate.py": "927b9a832b2d7b5e05e8e1e0babc30b7a1db2036a848eeac6fcd9ea1b9317396",
+      "src/legsa_gins/paper_rebuild/joint_navigation/carrier_relations.py": "65e9ac0b5a6decb69d18171410104b0b6a12f51012d4dd6b5b21aa92f5da6588",
+      "src/legsa_gins/paper_rebuild/joint_navigation/coupled_length_profile.py": "e8e692ee3e587b4f3c53f7afa9fb7431017c2735986cf6c165f7737aae001ce6",
+      "src/legsa_gins/paper_rebuild/joint_navigation/factors.py": "a529814ef2932e371d4f6cdac67762cefaa6e9bebf7ecf50c284e865d9c23822",
+      "src/legsa_gins/paper_rebuild/joint_navigation/navigator.py": "9d2fc73d5eefc4e4703f4441ada399cbc6809a4e862aacc4a55ee0e46c747036",
+      "src/legsa_gins/paper_rebuild/joint_navigation/real_data.py": "3785a3eb84ab1485b936cfbe70986bdc6cbdc5d22bb8c54a60c0af9bd3ed8cad",
+      "src/legsa_gins/paper_rebuild/joint_navigation/source_noise_likelihood.py": "a5ae76b0d5c0ef5e2a8b69a1b54eca5382e3a789b7d9aca6d89876be55dc0440",
+      "src/legsa_gins/paper_rebuild/joint_navigation/support_policy.py": "dad47368d82c75d5b0acb09e8f8d833b9040c8e91800b7258c2225f1d51c6277",
+      "src/legsa_gins/paper_rebuild/joint_navigation/synthetic.py": "516d25ad70292e6d7c0f87717208c0352321a94711c7d66b8226c449a3b64e65",
+      "src/legsa_gins/paper_rebuild/joint_navigation/window.py": "e2cd85768d2667688160bb6a68f9e9d264b11e42c58b70d17eca686fda284351",
+      "scripts/paper_rebuild/run_joint_by2.py": "339d6d5d5d8de1a595a38e2252a5644773ba919a659c828bee854c51ba600cb5"
+    },
+    "branch_source_identical_to_pre_carrier_experiment": true,
+    "causal_provider_record_sha256": "936255ac37dda53f557a94094d34f85e66422f079dbad3ac19d19ab686745339",
+    "causal_provider_plan_sha256": "436a56c4d8e756a1431bd56af628dd1c0be621b43d760319f653d52e8f7a5845",
+    "phase_noise_config_sha256": "39cf6e5174c13e1da51ebd3436f070e14de67b302be02be9409d3d098a0a6115"
+  },
+  "input_config": {
+    "body_path": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/高层数据/by2.txt",
+    "imu_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu",
+    "gnss_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+    "carrier_plan_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_CAUSAL_CARRIER_PROVIDER_02/PLAN.json",
+    "calibration_model_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/00_CALIBRATION/CLEAN5_CALIBRATED_SENSOR_MODEL.yaml",
+    "imu_noise_profile_path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/configs/paper_rebuild/horizontal_literature/hartley/stage_payload/04_METHOD_CONTRACTS/GO2_IMU_ALLAN_90MIN_RECOVERED_V1.yaml",
+    "start_s": 66.0,
+    "end_s": 82.0,
+    "key_dt_s": 0.1,
+    "base_time_unix_s": 1772784000,
+    "family": "GPS_GAL_BDS_DUAL",
+    "origin_blh_deg_m": null
+  },
+  "input_contract": {
+    "provider": {
+      "schema": "causal_by2_physical_carrier.v1",
+      "provider": "CAUSAL_ORIGINAL_UBX_SFRBX_RTKLIB_BROADCAST",
+      "ephemeris_availability": "each_original_SFRBX_released_at_next_RAWX_in_same_receiver; no_fixed_snapshot_grid",
+      "receiver_page_banks": "independent; only_complete_native_decoded_ephemerides_merged",
+      "geometry_anchor": "last_valid_GNSS18_GNSS1_position_at_or_before_measurement_epoch",
+      "anchor_is_extra_position_factor": false,
+      "PVT_heading_consumed": false,
+      "reference_reads": 0,
+      "source_arrival_scope": "SFRBX_original_file_order_bounded_by_RAWX; GNSS18_uses_measurement_epoch_not_unavailable_transport_arrival",
+      "raw_SD_covariance_and_arc_policy": "unchanged; physical_SD_source_noise_model_is_a_separate_backend_contract"
+    },
+    "input_event_count": 506,
+    "foot_observations": 647,
+    "position_velocity_epochs": 81,
+    "carrier_source_slots": 80,
+    "carrier_built_epochs": 39,
+    "first_built_carrier_time_s": 74.39800000190735,
+    "PVT_heading_consumed": false,
+    "SDK_yaw_consumed": false,
+    "SDK_velocity_consumed": false,
+    "normal_receiver_PV_kept": true,
+    "source_cross_covariance_available": false,
+    "source_noise_assumption": "raw_DD_and_receiver_PV_share_GNSS; SDK_foot_IMU_dependence_unknown"
+  },
+  "coverage": {
+    "requested_window_s": [
+      66.0,
+      82.0
+    ],
+    "finite_interval_s": [
+      67.0,
+      82.0
+    ],
+    "finite_duration_s": 15.0,
+    "causal_rows": 506,
+    "finite_state_rows": 473,
+    "no_init_rows": 33,
+    "first_finite_measurement_time_s": 67.0,
+    "first_finite_available_time_s": 67.001043951,
+    "last_finite_available_time_s": 82.001080693,
+    "maximum_imu_publication_delay_s": 0.008734050408946814,
+    "arrival_time_online_equivalence": false,
+    "original_GNSS_transport_latency_available": false,
+    "complete_working_candidate_support_rows": 229,
+    "globally_certified_direction_rows": 0
+  },
+  "bootstrap": {
+    "trigger_change": "fresh carrier OR position OR velocity can trigger the same buffered graph attempt, with existing one-second scheduling",
+    "qualification_unchanged": "existing branch scaled numerical rank and nonlinear projected-gradient stationarity; no new threshold or yaw prior",
+    "first_buffer_s": [
+      66.0,
+      67.0
+    ],
+    "events": 34,
+    "seed_reports": [
+      {
+        "seed_rpy_rad": [
+          -0.020726641693471375,
+          0.06848986618521422,
+          2.3743622575077164e-19
+        ],
+        "solution_rpy_rad": [
+          0.05063609427824083,
+          -0.024617144330718228,
+          0.05178196042444006
+        ],
+        "solver_iterations": 47,
+        "solver_max_iterations": 200,
+        "cost": 81.49468576603448,
+        "numerical_rank": 546,
+        "state_dimension": 546,
+        "projected_gradient_relative_inf": 1.4054833659153314e-09,
+        "projected_gradient_tolerance": 1e-06,
+        "solver_status": "FIRST_ORDER_STATIONARY",
+        "solver_converged": true
+      },
+      {
+        "seed_rpy_rad": [
+          -0.020726641693471375,
+          0.06848986618521422,
+          1.5707963267948966
+        ],
+        "solution_rpy_rad": [
+          0.05063522286218429,
+          -0.02461638442264064,
+          0.051787698124210996
+        ],
+        "solver_iterations": 114,
+        "solver_max_iterations": 200,
+        "cost": 81.4926896866366,
+        "numerical_rank": 546,
+        "state_dimension": 546,
+        "projected_gradient_relative_inf": 6.122433297984081e-08,
+        "projected_gradient_tolerance": 1e-06,
+        "solver_status": "FIRST_ORDER_STATIONARY",
+        "solver_converged": true
+      },
+      {
+        "seed_rpy_rad": [
+          -0.020726641693471375,
+          0.06848986618521422,
+          3.141592653589793
+        ],
+        "solution_rpy_rad": [
+          0.05063399763226703,
+          -0.024616742675660375,
+          0.05178903141426664
+        ],
+        "solver_iterations": 199,
+        "solver_max_iterations": 200,
+        "cost": 81.49596062135295,
+        "numerical_rank": 546,
+        "state_dimension": 546,
+        "projected_gradient_relative_inf": 6.278580322597532e-08,
+        "projected_gradient_tolerance": 1e-06,
+        "solver_status": "FIRST_ORDER_STATIONARY",
+        "solver_converged": true
+      },
+      {
+        "seed_rpy_rad": [
+          -0.020726641693471375,
+          0.06848986618521422,
+          -1.5707963267948966
+        ],
+        "solution_rpy_rad": [
+          0.05063504807396284,
+          -0.024617559420545297,
+          0.05177961002885693
+        ],
+        "solver_iterations": 122,
+        "solver_max_iterations": 200,
+        "cost": 81.49789272947496,
+        "numerical_rank": 546,
+        "state_dimension": 546,
+        "projected_gradient_relative_inf": 6.037803294779692e-08,
+        "projected_gradient_tolerance": 1e-06,
+        "solver_status": "FIRST_ORDER_STATIONARY",
+        "solver_converged": true
+      }
+    ],
+    "stationary_full_rank_seeds": 4,
+    "unfinished_seeds": 0,
+    "retained_local_modes": 1,
+    "initialization_status": "FLOAT_INIT_DIRECTION_UNRESOLVED",
+    "initial_yaw_conditional_std_deg": 1.5298954386674632,
+    "gravity_observation_added": false,
+    "artificial_yaw_prior": false,
+    "prior_no_init_rows_rewritten": 0,
+    "global_direction_coverage_certified": false
+  },
+  "measurement_consumption": {
+    "foot_new_factor_rows_after_start": 316,
+    "foot_new_factor_count_after_start": 607,
+    "carrier_factor_event_count": 39,
+    "carrier_measurement_row_count": 654,
+    "first_carrier_event_time_s": 74.39800000190735,
+    "first_carrier_group": "BDS B1I D1 + B2I D1,20 raw rows,10 DD relations",
+    "first_conditioned_integer_time_s": 74.99799990653992,
+    "integer_lineage_entries_final": 4,
+    "distinct_conditioned_physical_relations_final": 14,
+    "physical_relation_scope_final": {
+      "history_relation_rank": 14,
+      "current_relation_rank": 8,
+      "intersection_rank": 8,
+      "new_relation_rank": 0,
+      "continuation_status": "PARTIAL_HISTORY_CONTINUATION",
+      "pivot_only_change": false,
+      "new_coordinate_factors": 0,
+      "history_scope": "ACTUALLY_PRESENT_SHARED_GRAPH_AMBIGUITY_VARIABLES",
+      "expired_variable_labels": [],
+      "coordinate_identity_is_integer_fix": false,
+      "observation_transport_applied": false,
+      "covariance_transformed": false
+    },
+    "qualification_does_not_add_second_navigation_likelihood": true,
+    "formal_AR": false,
+    "proposals": [
+      {
+        "time_s": 74.99799990653992,
+        "window_s": [
+          74.39800000190735,
+          74.99799990653992
+        ],
+        "integer_basis_rank": 10,
+        "enumerated_count": 1,
+        "length_qualified_count": 1,
+        "length_rejected_count": 0,
+        "length_unresolved_count": 0,
+        "enumeration_complete": true,
+        "length_support_complete": true,
+        "active_support_complete": true,
+        "has_cross_epoch_covariance": true,
+        "raw_threshold": 124.83922401576478,
+        "retained_bounds": [
+          {
+            "status": "FEASIBLE_UPPER_WITHIN_BUDGET",
+            "lower": 91.42446959982142,
+            "upper": 92.26038181574708,
+            "global_profile_optimum_certified": false
+          }
+        ],
+        "formal_integer_acceptance_defined": false,
+        "false_fix_probability": null
+      },
+      {
+        "time_s": 76.99799990653992,
+        "window_s": [
+          76.19799995422363,
+          76.99799990653992
+        ],
+        "integer_basis_rank": 10,
+        "enumerated_count": 8,
+        "length_qualified_count": 1,
+        "length_rejected_count": 7,
+        "length_unresolved_count": 0,
+        "enumeration_complete": true,
+        "length_support_complete": true,
+        "active_support_complete": true,
+        "has_cross_epoch_covariance": true,
+        "raw_threshold": 134.7454810251423,
+        "retained_bounds": [
+          {
+            "status": "FEASIBLE_UPPER_WITHIN_BUDGET",
+            "lower": 75.29351247132871,
+            "upper": 79.56469505831055,
+            "global_profile_optimum_certified": false
+          }
+        ],
+        "formal_integer_acceptance_defined": false,
+        "false_fix_probability": null
+      },
+      {
+        "time_s": 79.39800000190735,
+        "window_s": [
+          78.59800004959106,
+          79.39800000190735
+        ],
+        "integer_basis_rank": 8,
+        "enumerated_count": 106,
+        "length_qualified_count": 1,
+        "length_rejected_count": 105,
+        "length_unresolved_count": 0,
+        "enumeration_complete": true,
+        "length_support_complete": true,
+        "active_support_complete": true,
+        "has_cross_epoch_covariance": true,
+        "raw_threshold": 112.31693185051572,
+        "retained_bounds": [
+          {
+            "status": "FEASIBLE_UPPER_WITHIN_BUDGET",
+            "lower": 61.94655518025342,
+            "upper": 63.61335552805568,
+            "global_profile_optimum_certified": false
+          }
+        ],
+        "formal_integer_acceptance_defined": false,
+        "false_fix_probability": null
+      },
+      {
+        "time_s": 80.39800000190735,
+        "window_s": [
+          79.59800004959106,
+          80.39800000190735
+        ],
+        "integer_basis_rank": 9,
+        "enumerated_count": 12,
+        "length_qualified_count": 1,
+        "length_rejected_count": 11,
+        "length_unresolved_count": 0,
+        "enumeration_complete": true,
+        "length_support_complete": true,
+        "active_support_complete": true,
+        "has_cross_epoch_covariance": true,
+        "raw_threshold": 117.34616056833929,
+        "retained_bounds": [
+          {
+            "status": "FEASIBLE_UPPER_WITHIN_BUDGET",
+            "lower": 79.43685613308783,
+            "upper": 82.6776925488872,
+            "global_profile_optimum_certified": false
+          }
+        ],
+        "formal_integer_acceptance_defined": false,
+        "false_fix_probability": null
+      }
+    ]
+  },
+  "foot_scope": {
+    "actual_common_state_R_p_v_factors": true,
+    "matched_nofoot_ablation_in_this_window": false,
+    "foot_increment_isolated": false,
+    "mode": "U1 fixed-contact working model",
+    "failure_revocation_exercised": false,
+    "revoked_arcs": [],
+    "support_policy_search_exercised": false,
+    "heading_only_mediation_isolated": false
+  },
+  "noise_working_model": {
+    "parameters": {
+      "white_sd_sigma_m": 0.007702886967438229,
+      "beta_sd_sigma_m": 0.0039176487826473065,
+      "tau_s": 2.0
+    },
+    "calibration_window_s": [
+      110,
+      170
+    ],
+    "validation_window_s": [
+      180,
+      240
+    ],
+    "parameter_role": "previously frozen offline BY development calibration, not a model learned from only data arrived by t=66",
+    "tau_identified": false,
+    "probability_calibration_complete": false,
+    "no_retuning_from_this_short_result": true
+  },
+  "common_interval_metrics": {
+    "interval_s": [
+      67.0,
+      82.0
+    ],
+    "duration_s": 15.0,
+    "statistic": "time-weighted RMSE",
+    "values": {
+      "horizontal_err_m": {
+        "joint": 0.05685870151256716,
+        "frozen_v3": 0.03870320013622125
+      },
+      "position_3d_err_m": {
+        "joint": 0.130407884517048,
+        "frozen_v3": 0.05325062644993961
+      },
+      "roll_err_deg": {
+        "joint": 1.5018394426218484,
+        "frozen_v3": 1.019986511907598
+      },
+      "pitch_err_deg": {
+        "joint": 2.0141975962011904,
+        "frozen_v3": 1.7436721602334209
+      },
+      "yaw_err_deg": {
+        "joint": 2.2613410567020344,
+        "frozen_v3": 2.087442092699225
+      },
+      "velocity_horizontal_mps": {
+        "joint": 0.20346578208121108,
+        "frozen_v3": 0.19254143185076852
+      },
+      "velocity_3d_mps": {
+        "joint": 0.2675836939812002,
+        "frozen_v3": 0.23758688407728307
+      }
+    },
+    "position_yaw_joint_samples": 473,
+    "position_yaw_V3_samples": 3297,
+    "comparison_type": "original_V3_system_comparison_not_same_backend_mechanism_ablation",
+    "V3_identity": {
+      "commit": "7d43b9af26120ed5dde21f53e515386361072ba6",
+      "run_id": "RUN_00004",
+      "formal_window_s": [
+        66.0,
+        340.0
+      ],
+      "baseline_error_sha256": "a98f1a5f7591c2365b0fd73b6a1146e0d6df3de2a06414fd067fc9b66b928548"
+    }
+  },
+  "velocity_evaluation": {
+    "status": "COMPLETED_SEPARATE_VELOCITY_READOUT",
+    "common_finite_support": {
+      "M2_U1": {
+        "duration_s": 15.0,
+        "rmse_ned_mps": [
+          0.13832176042241157,
+          0.1492160013924909,
+          0.17378926551057666
+        ],
+        "horizontal_rmse_mps": 0.20346578208121108,
+        "three_d_rmse_mps": 0.2675836939812002
+      },
+      "original_V3": {
+        "duration_s": 15.0,
+        "rmse_ned_mps": [
+          0.14047034746027104,
+          0.13168251388675287,
+          0.13919527472729887
+        ],
+        "horizontal_rmse_mps": 0.19254143185076852,
+        "three_d_rmse_mps": 0.23758688407728307
+      }
+    },
+    "physical_point": "GO2_PROPAGATION_IMU",
+    "point_transport": "v_IMU_ecef=R_ecef_from_POI*(v_POI+omega_POI cross r_POI_to_IMU)",
+    "height_m": 0.325,
+    "approximate_height_interval_m": [
+      0.3,
+      0.35
+    ],
+    "horizontal_offset_assumed_m": [
+      0,
+      0
+    ],
+    "extrinsic_status": "USER_APPROXIMATE_INSTALLATION",
+    "exact_same_point_accuracy_claim": false,
+    "extrinsic_sha256": "492230c24d87169804695503e1d9846db027842158197ed20e0f00df78e0666e",
+    "evaluator_sha256": "d5e76962a2be365985c2e9ef50b9373ea7333b1032294eee306018e8b9209d0f",
+    "reference_payload_opens_by_evaluator": 1,
+    "parent_reference_payload_opens": 0,
+    "exit_code": 0
+  },
+  "reference_and_timing_limits": {
+    "reference": "Fixposition-derived fused reference with shared GNSS lineage; not independent truth",
+    "measurement_epoch_accuracy": true,
+    "zero_delay_arrival_time_accuracy": false,
+    "position_evaluation_transform": {
+      "source_frame": "fixed_local_NED",
+      "exported_frame": "geographic_NED_at_IMU",
+      "source_point": "IMU",
+      "evaluation_point": "original_V3_dual_antenna_midpoint",
+      "baseline_median_m": 0.356191491865984,
+      "lever_frd_m": [
+        0.03,
+        -0.148095745932992,
+        -0.3
+      ],
+      "position_transform_applications": 1,
+      "fit_used": false,
+      "time_shift_s": 0.0,
+      "position_only_POI_transform": true,
+      "exported_velocity_point": "IMU",
+      "velocity_accuracy_evaluated": false,
+      "STD": "NOT_AVAILABLE_NOT_FABRICATED",
+      "source_nav_sha256": "92386b6aed3e08e2b81f3843d920df72cb96dc861d98cdf8d8ac964cd6b05e10",
+      "evaluator_nav_sha256": "0bf8252f1160c4ae2daa6d5ba1a719f81152cc02c3af2a47aeb574e62cc48872"
+    },
+    "uncertainty_calibration_evaluated": false,
+    "reference_payload_reads_by_this_report": 0
+  },
+  "conclusions": [
+    "The unchanged estimator branch now initializes from actual foot/PV/IMU before the first causal carrier block, and later raw carrier/physical integer hypotheses enter the same R/p/v graph.",
+    "Fresh-PV triggering establishes a usable common algorithm path, not trusted heading, calibrated ambiguity fixing, or global direction coverage.",
+    "On identical 67--82 s coverage, frozen V3 is better in yaw, horizontal/3D position and horizontal/3D velocity RMSE.",
+    "U1 contains actual foot factors but has no matched no-foot or revocation arm in this window; foot incremental benefit, failure withdrawal and heading-mediated p/v benefit remain unproved.",
+    "The saved M2 noise model stays frozen; the unfavorable short-window result does not justify tuning its thresholds or parameters."
+  ],
+  "claim_boundaries": {
+    "trusted_heading_goal_complete": false,
+    "stable_navigation_improvement_established": false,
+    "formal_AR": false,
+    "exceeds_V3": false,
+    "independent_truth": false,
+    "complete_research_goal": false
+  },
+  "runtime_wall_s": {
+    "navigation": 135.75809528799982
+  },
+  "report_only_actions": {
+    "new_navigation_runs": 0,
+    "algorithm_files_modified": 0,
+    "goal_progress_modified": false,
+    "raw_reference_payload_reads": 0
+  },
+  "artifact_sha256": {
+    "navigation": {
+      "run_status.json": "612f6e1603893356acba9c6645624ebfd73c4a6502cdc29b876cdbaf10647088",
+      "summary.json": "897d54ad2b344f7652b8aece4e7ca002ecc34879bff630a0d913ca20f8a24280",
+      "input_summary.json": "347b734141d006d590a3a6638f29679876242a4131156abc9b83049e98ea6e94",
+      "sensor_metadata.json": "f69546644c6accfee843ed0cbc873f76f76eeaf136332356cf6827b4fd1763c7",
+      "estimator_summary.json": "0909a416531461f2504b79b39fa66cb11448113e76c9967f53b52b19c275b66b",
+      "decisions.json": "a26540b29c1cf11988e46fbc8a017214cafa9a2c8103c516daf4f6e51d84227a",
+      "navigation.csv": "148ef957e1cad7952f652bc4ff6c96e393f660b25e7e0b972a87a31846bb0c7a",
+      "navigation.jsonl": "25960e1a5d9b79e4719daa7f32c6d7375923c3cfb1ada51ea365672cabea922a",
+      "phase_noise_model.json": "39cf6e5174c13e1da51ebd3436f070e14de67b302be02be9409d3d098a0a6115"
+    },
+    "position_yaw_evaluation": {
+      "run_status.json": "06d9d018ff195db8e2f034064ca741f2d784388845cf2bfd001b6b65f5bcbca0",
+      "COMPARISON.json": "f4badf55a81f47c17180caf40c649a0fc16e2426871c955eae5ddc023885b30f",
+      "OUTPUT_COVERAGE.json": "782c62241892ff40e93af88905cb1c63a2f3213e1d9699787bcde178e8111c11",
+      "NAV_TRANSFORM.json": "85a4ed4ecc3ecf15d5fbcf26d85056d605efeb48ea6f2ccc2c0ef415aac011af",
+      "FROZEN_EVALUATOR/summary.json": "205c13bde3e7862ff4a1e0fd3e961e4fe93f94f0c2b8efc943722c0a560e1b03",
+      "FROZEN_EVALUATOR/EVALUATION_AUDIT.json": "6cb0cb54675658b3b7c86793096f78e5ea7bc8e20a074b75a4e513597c190347",
+      "FROZEN_EVALUATOR/error_series.csv": "e15af6c94c0dd3d66fc5f9a774ad65b4721ec893ee55e85c48afad2db4979a95"
+    },
+    "velocity_evaluation": {
+      "VELOCITY_COMPARISON.json": "5875e3c323e8d56a212fc3a749883d66d82e866db8e69004550cf2abfc38cce8",
+      "EVALUATION_RECEIPT.json": "968b499327e7e6a28b187691da9f1fd1cf470b2900a41500ac32ccf07d4203bd",
+      "velocity_error_series.csv": "61a8d0ef132ae27396dfbad1755f1eacf596be683719e824b5c5415aa8dd56db"
+    }
+  }
+}

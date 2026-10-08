@@ -7,7 +7,7 @@
   "deliverable": "One integrated support-arc/carrier-arc navigation algorithm covering all three candidate innovations",
   "first_research_deliverable_complete": false,
   "previous_validated_algorithm_commit": "d77919c",
-  "latest_algorithm_identity": "COMPONENT_CONTINUATION_RESULT.json source_sha256 and its containing Git commit",
+  "latest_algorithm_identity": "BY_CAUSAL_EARLY_NAVIGATION_RESULT.json source_sha256; SOURCE_POLICY_PATHS.md; containing Git commit",
   "latest_continuation_cohort": "cohort_component_20261008_seed6100801",
   "latest_primary_cohort": "cohort_allan_seed6100801",
   "completed": [
@@ -39,7 +39,13 @@
     "Predeclared BY300-packet calibration and separate300-packet frozen noise validation complete; OU adds likelihood evidence but tau boundary and covariance calibration remain unresolved",
     "Physical phase beta enters the same navigation graph, pre-consumption predictive likelihood and full-temporal-covariance candidate proposal; correlated sphere lower/upper bounds retain unresolved identities",
     "Same-window real BY M2 common-graph run completed: yaw and horizontal position improved relative to original-noise U1, but velocity did not and frozen V3 still has lower yaw and position errors",
-    "Offline velocity comparison now uses user approximate POI-to-IMU installation with 30/32.5/35 cm height sensitivity; shared-source reference and unknown horizontal/alignment errors remain explicit"
+    "Offline velocity comparison now uses user approximate POI-to-IMU installation with 30/32.5/35 cm height sensitivity; shared-source reference and unknown horizontal/alignment errors remain explicit",
+    "b5 full90 separator U3 and exact-source U0/U1 controls completed: fixed source explanation remained best; source revocation not achieved",
+    "Two pinned full nonlinear histories of the actual standing source group completed; whole-arc releases worsen PV-gap navigation and do not overcome unchanged model cost",
+    "Full source-policy paths retain disjoint edits, reconstruct combined histories and continue weak parents; only 20-event mechanism equivalence established",
+    "Original UBX streaming broadcast provider supplies first legal BDS DD at74.398s instead of100.198s; independent raw prefix validation complete",
+    "Fresh-PV bootstrap admits existing foot/IMU/PV information under unchanged local rank and stationarity criteria; real66--82s unified run completes with first finite conditional output67s",
+    "Original-noise complete BY66--340s U1 finished with239.802s finite coverage; frozen original V3 p/yaw comparison complete, yaw modestly better but position worse"
   ],
   "not_proven": [
     "Material legged contribution to heading qualification or integer-candidate acceptance",
@@ -50,10 +56,11 @@
     "Same-version SDK and frozen V3 system adoption value on real data"
   ],
   "next_core_work": [
-    "Complete current full90s and fullBY runs under their pinned source versions; evaluate full BY U1 against frozen original V3 once terminal",
-    "Complete running full BY M2 U1 (BY_M2_NATIVE_FULL_09_U1) and original-noise U1 (BY_NATIVE_FULL_07_U1), both66--340s; compare fixed-parameter yaw/p/v and coverage once terminal",
-    "Complete running full90s future-separator model (cohort_separator_20261008_seed6100801) and inspect actual continuous source-model decisions, recovery and navigation effects",
-    "Complete reversible composite source-policy inference and show actual retained heading and shared v/p gain through continuous failure/recovery",
+    "Implement finite within-arc common world displacement and slip velocity in the same R/p/v/b/foot/carrier graph; keep useful pre/post support and original per-arc AR error without duplicating information",
+    "Score same-row proper foot-plus-external predictive density conditioned on IMU, including full covariance; compare fixed and finite-process histories before expanding policy combinations",
+    "Use BY only to identify/freeze working slip process parameters; if identification fails retain explicit uncertainty rather than using synthetic truth fault times or reducing kappa",
+    "Run one matched continuous diagnostic of the new physical source model, then require actual automatic historical retraction and shared p/v gain; existing full90 negative result remains comparator",
+    "Complete current frozen M2 full BY09 once under its existing pinned source/input, then compare against completed original-noise FULL07 and frozen V3 without rerunning old matrices",
     "Freeze only after BY development; then test BYO/BYH and XB/NMB without test-set tuning"
   ],
   "data_policy": {
@@ -75,9 +82,9 @@
     "approximate_geometry_velocity_readout_available": true,
     "velocity_readout_scope": "USER_APPROXIMATE_INSTALLATION_NOT_PRECISE_CALIBRATED_POINT_OR_INDEPENDENT_TRUTH"
   },
-  "latest_implementation": "physical_phase_source_joint_graph_prediction_and_correlated_candidate_support",
-  "latest_full_cohort": "cohort_analytic_20261008_seed6100801",
-  "latest_full_cohort_status_at_commit": "RUNNING_NOT_RESULT_EVIDENCE",
+  "latest_implementation": "causal_multiconstellation_input_source_neutral_bootstrap_and_complete_source_policy_paths",
+  "latest_full_cohort": "cohort_separator_20261008_seed6100801",
+  "latest_full_cohort_status_at_commit": "COMPLETED_90S_REVOCATION_FAILED",
   "scientifically_interrupted_cohort": {
     "name": "cohort_predictive_qr_20261008_seed6100801",
     "status": "INTERRUPTED_SCIENTIFIC_MODEL_ERROR",
@@ -183,10 +190,58 @@
         "failed_attempt": "BY_NATIVE_FULL_06_U1",
         "failed_attempt_phase": "READING_INPUT_BEFORE_NAVIGATION"
       }
+    },
+    "causal_provider": {
+      "report": "BY_CAUSAL_CARRIER_PROVIDER.json",
+      "first_legal_carrier_s": 74.39800000190735,
+      "built": 1329,
+      "slots": 1370,
+      "cause_of_old_delay": "GPS-only SPP global gate plus coarse NAV snapshots; not absence of raw carrier"
+    },
+    "causal_early_run": {
+      "report": "BY_CAUSAL_EARLY_NAVIGATION_RESULT.json",
+      "window_s": [
+        66,
+        82
+      ],
+      "first_finite_s": 67.0,
+      "finite_rows": 473,
+      "no_init_rows": 33,
+      "qualification": "LOCAL_CONDITIONAL_NOT_GLOBAL_TRUST",
+      "joint_yaw_rmse_deg": 2.2613410567020344,
+      "V3_yaw_rmse_deg": 2.087442092699225,
+      "all_reported_yaw_p_v_metrics_worse_than_V3": true,
+      "automatic_revocation_run": false
+    },
+    "original_noise_full_run": {
+      "report": "BY_NATIVE_FULL_NAVIGATION_RESULT.json",
+      "status": "COMPLETED",
+      "window_s": [
+        66,
+        340
+      ],
+      "finite_rows": 7673,
+      "no_init_rows": 1089,
+      "finite_duration_s": 239.80200004577637,
+      "joint_yaw_rmse_deg": 1.7559229710255395,
+      "V3_yaw_rmse_deg": 1.9238604308960066,
+      "joint_H_rmse_m": 0.1292620669538003,
+      "V3_H_rmse_m": 0.10293810746180392,
+      "joint_3D_rmse_m": 0.26559323401494667,
+      "V3_3D_rmse_m": 0.11411060702365565,
+      "stable_navigation_benefit_established": false,
+      "complete_candidate_support_rows": 0,
+      "velocity_evaluation": {
+        "joint_vH_rmse_mps": 0.2509338583464142,
+        "V3_vH_rmse_mps": 0.21796451071791026,
+        "V3_v3D_rmse_mps": 0.26311945170333984,
+        "joint_v3D_rmse_mps": 0.3454184403953415,
+        "scope": "user approximate 0.325m same-point transport, not exact extrinsics or independent truth"
+      }
     }
   },
   "shared_inference": {
-    "report": "SHARED_INFERENCE_COMPUTATION_AND_REFERENCE.md",
+    "report": "SEPARATOR_90S_SAME_SOURCE_RESULT.md",
     "status": "COMPUTATION_AND_REVERSIBLE_REFERENCE_IMPLEMENTED_FULL_VALIDATION_PENDING",
     "synthetic_short_rows": 31,
     "real_short_rows": 161,
@@ -198,31 +253,34 @@
     "direction_covariance_short_run_superseded": true,
     "next_full_run": "cohort_shared_20261008_seed6100801",
     "common_reference_can_return_to_fixed": true,
-    "source_model_family": "ONE_ADDITIONAL_OBSERVED_COSUPPORT_GROUP_NO_COMPOSITE_FAULT_COVERAGE",
+    "source_model_family": "FULL_CANONICAL_OBSERVED_GROUP_REPLACEMENT_POLICIES_IMPLEMENTED_CONTINUOUS_FAULT_BENEFIT_UNVALIDATED",
     "kernel_query_benchmark": {
       "state_dimension": 98,
       "query_dimension": 6,
       "repeats": 30,
       "saved_triangular_ms": 0.13464,
       "independent_QR_ms": 0.77145,
-      "covariance_max_abs_difference": 8.53e-14,
+      "covariance_max_abs_difference": 8.53E-14,
       "end_to_end_speedup_established": false
     },
     "active_shared_run_source": "1feccf3_before_this_milestone",
     "pending_next_computational_change": null,
     "separator_implementation_report": "SEPARATOR_AND_PHASE_NOISE_MODEL.md",
-    "separator_status": "FULL_CONTINUOUS_RUN_ACTIVE_NOT_RESULT_EVIDENCE",
+    "separator_status": "COMPLETED_FULL90_REVOCATION_FAILED",
     "separator_run": "cohort_separator_20261008_seed6100801",
     "separator_run_source": "b5adc7a6b5557b106950733296de2e593842870f",
-    "continuous_policy_combination_limit": "SHARED_REFERENCE_SWITCH_DOES_NOT_CREATE_MULTI_GROUP_POLICY; CURRENT90s_HAS_ONE_PHYSICAL_SLIDING_GROUP",
+    "continuous_policy_combination_limit": "No fixed depth cap; pending items and state storage remain unbounded; only 20-event full-policy reconstruction checked",
     "fixed_jacobian_equivalence": {
       "events": 10,
       "full_dimension": 184,
       "separator_dimension": 31,
-      "mean_max_abs": 1.3e-16,
-      "covariance_max_abs": 3.12e-17,
-      "objective_max_abs": 2.66e-15
-    }
+      "mean_max_abs": 1.3E-16,
+      "covariance_max_abs": 3.12E-17,
+      "objective_max_abs": 2.66E-15
+    },
+    "source_policy_paths_report": "SOURCE_POLICY_PATHS.md",
+    "physical_release_diagnosis": "STANDING_SUPPORT_RELEASE_DIAGNOSIS.md",
+    "next_physical_model": "TIME_LOCAL_SUPPORT_MODEL_PLAN.md; proposed, not yet implemented or calibrated"
   },
   "measurement_noise_development": {
     "diagnostic": "BY_PHASE_TIME_DIFFERENCE.json",
@@ -250,5 +308,46 @@
     "probability_calibration_complete": false,
     "validation_M2_cost_over_dof": 0.5483922647790502,
     "joint_refinement_status": "LINE_SEARCH_FAILED_CONVERGED_FIXED_TAU_PROFILE_ENDPOINT_USED"
+  },
+  "obsolete_long_runs": [
+    {
+      "cohort": "cohort_analytic_20261008_seed6100801",
+      "session": 10871,
+      "pid": 533,
+      "status": "INTERRUPTED_BY_SCIENTIFIC_SUPERSESSION",
+      "completed_modes": [
+        "U0",
+        "U1"
+      ],
+      "incomplete_mode": "U3",
+      "never_started_mode": "U2",
+      "partial_U3_navigation_saved": false,
+      "last_console_time_s": 40.0,
+      "source_commit": "9faa97c7a5c55f7e8e6c794fe9eb05f0b9e0c6c6"
+    },
+    {
+      "cohort": "cohort_shared_20261008_seed6100801",
+      "session": 80960,
+      "pid": 5811,
+      "status": "INTERRUPTED_BY_SCIENTIFIC_SUPERSESSION",
+      "completed_modes": [],
+      "incomplete_mode": "U3",
+      "partial_U3_rows_saved": 628,
+      "partial_U3_last_time_s": 41.8,
+      "source_commit": "1feccf3778a393b06f087abb7550451b92d2d256"
+    }
+  ],
+  "obsolete_long_runs_reason": "Existing old broad implementations were explicitly SIGINT after the newer same-source full90/controls and two targeted full nonlinear source histories answered the physical-model question; preserve snapshots and existing outputs; no completion claim or retry.",
+  "active_run_at_milestone": {
+    "name": "BY_M2_NATIVE_FULL_09_U1",
+    "session": 93159,
+    "pid": 10280,
+    "source_commit": "b5adc7a6b5557b106950733296de2e593842870f",
+    "window_s": [
+      66,
+      340
+    ],
+    "status": "RUNNING_NOT_RESULT_EVIDENCE",
+    "old_provider_and_carrier_bootstrap_retained": true
   }
 }

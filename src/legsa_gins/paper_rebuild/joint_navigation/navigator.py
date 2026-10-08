@@ -7,12 +7,13 @@ from __future__ import annotations
 
 import copy
 import hashlib
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import math
 import time
 
 import numpy as np
 import gtsam
+from scipy.stats import chi2
 from gtsam.symbol_shorthand import X
 
 from ..carrier_phase.temporal import EpochBlock
@@ -20,6 +21,7 @@ from .branch import NavigationBranch
 from .candidate import propose_candidates
 from .source_noise_likelihood import NoiseParameters, assemble_source_noise_covariance
 from .carrier_relations import analyze_relation_transition, reparameterize_epoch_blocks
+from .support_policy import canonical_policy, policy_identity, policy_readout, replace_group
 
 
 @dataclass
@@ -48,6 +50,10 @@ class SupportTrack:
     first_use: float
     origin: Checkpoint
     navigator: object
+    policy: tuple[dict, ...] = ()
+    parent_ids: set[str] = field(default_factory=set)
+    edit_count: int = 0
+    created_index: int = -1
     processed_events: int = 0
     nonlinear_expanded: bool = False
     unresolved_reason: str | None = None
@@ -114,7 +120,7 @@ class JointNavigator:
         self.nonlinear_support_expansions = 0
         self.gaussian_support_step_events = 0
         self.nonlinear_support_step_events = 0
-        self.support_models = copy.deepcopy(support_models or [])
+        self.support_models = list(canonical_policy(support_models or []))
         # Fixed engineering decision costs, not calibrated model probabilities.
         # Both releases have the same cost; geometry is not presumed valid merely
         # because common translation failed. Unresolved models remain separate.
@@ -122,6 +128,19 @@ class JointNavigator:
         self.model_support_delta = 2. * math.log(20.)
         self.support_groups = {}
         self.support_tracks = {}
+        # One cursor and FIFO ticket per policy, not a materialized Cartesian
+        # product. Low-scoring ancestors retain their continuation opportunity.
+        self.support_group_order = []
+        self.policy_parent_cursors = {}
+        self.policy_queue_tickets = {}
+        self.policy_ticket_serial = 0
+        self.policy_extension_items = 0
+        self.policy_extension_nodes = 0
+        self.policy_last_extension_frontier = -1
+        self.policy_exploration_started = False
+        self.policy_exploration_tail_probability = float(metadata.get("policy_exploration_tail_probability", 1e-4))
+        self.last_external_prediction_nis = None
+        self.last_external_prediction_dimension = 0
         self.reference_rows = {}
         self.predictive_rows_fingerprint = ""
         self.last_support_signature = None
@@ -160,7 +179,12 @@ class JointNavigator:
         global directional coverage nor an integer-fix or trust declaration.
         """
         t = float(packet["time_s"])
-        if packet.get("carrier") is None or t-self.bootstrap_last_attempt < 1.:
+        # A fresh external observation may make the buffered joint graph
+        # identifiable. Foot/IMU/PV can supply direction before any carrier;
+        # the existing rank and nonlinear stationarity checks decide locally.
+        fresh_external = any(packet.get(name) is not None for name in
+                             ("carrier", "gnss_position", "gnss_velocity"))
+        if not fresh_external or t-self.bootstrap_last_attempt < 1.:
             return False
         if common_anchors is not None and not common_anchors:
             self.bootstrap_diagnostic = dict(status="NO_INIT", reason="WAITING_FOR_COMMON_BOOTSTRAP_ANCHOR")
@@ -284,6 +308,8 @@ class JointNavigator:
         Scores are conditional external predictive evidence, not the normalized
         joint likelihood of all foot measurements and not model probabilities.
         """
+        self.last_external_prediction_nis = None
+        self.last_external_prediction_dimension = 0
         if self.branches[0].index is None or all(
                 packet.get(name) is None for name in ("carrier", "gnss_position", "gnss_velocity")):
             return (), 0.
@@ -299,7 +325,7 @@ class JointNavigator:
         if rows:
             self.predictive_rows_fingerprint = hashlib.sha256(
                 (self.predictive_rows_fingerprint+repr((index, rows))).encode()).hexdigest()
-        position_nis = 0.
+        position_nis, external_nis = 0., []
         for branch, prediction in zip(self.branches, predictions):
             if index <= branch.predictive_frontier:
                 raise ValueError("an external event was scored twice in one integer lineage")
@@ -311,6 +337,7 @@ class JointNavigator:
             covariance = prediction["covariance"][np.ix_(positions, positions)]
             chol = np.linalg.cholesky(covariance)
             whitened = np.linalg.solve(chol, residual)
+            external_nis.append(float(whitened@whitened))
             branch.predictive_score += float(
                 whitened @ whitened + 2.*np.log(np.diag(chol)).sum()
                 + len(rows)*math.log(2.*math.pi))
@@ -319,6 +346,9 @@ class JointNavigator:
                 p = [j for j, row in enumerate(rows) if row.startswith("gnss_position:")]
                 r = residual[p]
                 position_nis = float(r @ np.linalg.solve(covariance[np.ix_(p, p)], r))
+        if external_nis:
+            self.last_external_prediction_nis = min(external_nis)
+            self.last_external_prediction_dimension = len(rows)
         return rows, position_nis
 
     @staticmethod
@@ -397,17 +427,123 @@ class JointNavigator:
         self.bootstrap_diagnostic = copy.deepcopy(checkpoint.bootstrap_diagnostic or
             dict(status="NO_INIT", reason="RECONSTRUCT_FROM_PRE_USE_CHECKPOINT"))
 
-    def _candidate_policy(self, arc_ids, model, group_id):
-        """A competing source model replaces overlapping components, never adds them."""
-        affected = set(arc_ids)
-        result = []
-        for old in self.support_models:
-            remainder = set(old["arc_ids"]) - affected
-            if remainder:
-                result.append({**old, "arc_ids": tuple(sorted(remainder))})
-        result.append(dict(group_id=group_id, arc_ids=tuple(arc_ids), mode=model,
-                           effective_from=-math.inf))
-        return result
+    def _candidate_policy(self, arc_ids, model, group_id, *, base_policy=None):
+        """Replacement preserves disjoint old components, never duplicates an arc."""
+        return replace_group(self.support_models if base_policy is None else base_policy,
+                             arc_ids, model, group_id)
+
+    def _create_policy_track(self, policy, parent_id, ids, model, group_id, index):
+        policy = canonical_policy(policy)
+        identity = policy_identity(policy)
+        if identity == policy_identity(self.support_models) or identity == parent_id:
+            return None
+        if identity in self.support_tracks:
+            self.support_tracks[identity].parent_ids.add(parent_id)
+            return None
+        first = min(self.arc_first_use[arc] for part in policy for arc in part["arc_ids"])
+        origins = [*self.checkpoints, *(track.origin for track in self.support_tracks.values()),
+                   *(group["origin"] for group in self.support_groups.values() if group.get("origin") is not None)]
+        prior = [origin for origin in origins if origin.time_s < first]
+        if not prior:
+            self.support_groups[ids]["status"] = "UNRESOLVED_HISTORY_EXPIRED"
+            return None
+        # Before every edited source's first use the full policy and root
+        # policy coincide. No parent score or contaminated posterior is spliced.
+        origin = max(prior, key=lambda checkpoint: (checkpoint.time_s, checkpoint.index))
+        shadow = JointNavigator(self.metadata, self.mode, monitor_support=False, support_models=list(policy))
+        shadow._restore(origin)
+        track = SupportTrack(identity, group_id, ids, model, first, origin, shadow,
+                             policy=policy, parent_ids={parent_id}, edit_count=len(policy), created_index=index)
+        self.support_tracks[identity] = track
+        if self.shared_support:
+            self.policy_parent_cursors[identity] = 0
+            self._queue_policy_parent(identity)
+        return track
+
+    def _queue_policy_parent(self, identity):
+        if (self.policy_parent_cursors[identity] < len(self.support_group_order)
+                and identity not in self.policy_queue_tickets):
+            self.policy_queue_tickets[identity] = self.policy_ticket_serial
+            self.policy_ticket_serial += 1
+
+    def _policy_search_readout(self):
+        pending = sum(len(self.support_group_order)-cursor for cursor in self.policy_parent_cursors.values())
+        expired = sum(group["status"] == "UNRESOLVED_HISTORY_EXPIRED" for group in self.support_groups.values())
+        unresolved_frontiers = sum(track.unresolved_reason is not None or not self._same_predictive_rows(track.navigator)
+                                   for track in self.support_tracks.values())
+        return dict(scope="OBSERVED_GROUP_REPLACEMENT_POLICY_PATHS",
+            exploration_started=self.policy_exploration_started,
+            exploration_tail_probability=self.policy_exploration_tail_probability,
+            exploration_threshold_role="WORKING_COMPUTE_SCHEDULER_NOT_TRUST_OR_ACCEPTANCE_GATE",
+            pending_parent_group_items=pending, queued_parent_count=len(self.policy_queue_tickets),
+            unresolved_history_groups=expired, unresolved_policy_frontiers=unresolved_frontiers,
+            extension_items_processed=self.policy_extension_items,
+            continuation_nodes_created=self.policy_extension_nodes,
+            registered_policy_count=len(self.support_tracks), registered_group_count=len(self.support_group_order),
+            evaluated_policy_coverage_complete=pending == 0 and expired == 0 and unresolved_frontiers == 0,
+            construction="ONE_EVIDENCE_PRIORITY_AND_ONE_FIFO_ITEM_PER_EXTERNAL_EPOCH_AFTER_ACTIVATION",
+            unsupported_parent_cursors_retained=True, depth_limit=None,
+            overlap_semantics="REPLACE_OVERLAPPING_ARCS_NOT_INDEPENDENT_OVERLAPPING_FAULTS",
+            fairness="FINITE_QUEUE_PREFIX_WITH_CONTINUED_COMPUTE;NO_BOUNDED_DELAY_ON_INFINITE_STREAM",
+            policy_state_storage_bounded=False)
+
+    def _policy_descriptor(self, track):
+        policy = self.support_models if track is None else track.policy
+        return dict(source_policy=policy_readout(policy), source_policy_id=policy_identity(policy),
+                    parent_policy_ids=[] if track is None else sorted(track.parent_ids),
+                    policy_edit_count=len(policy))
+
+    def _extend_policy_paths(self, packet, index):
+        if not self.shared_support or not self.reference_rows.get(index) or index <= self.policy_last_extension_frontier:
+            return
+        self.policy_last_extension_frontier = index
+        threshold = (float(chi2.isf(self.policy_exploration_tail_probability, self.last_external_prediction_dimension))
+                     if self.last_external_prediction_dimension else None)
+        incompatible = (threshold is not None and self.last_external_prediction_nis is not None
+                        and self.last_external_prediction_nis > threshold)
+        if not self.policy_exploration_started and (self.last_supported_tracks or incompatible):
+            self.policy_exploration_started = True
+            self.decisions.append(dict(time_s=packet["time_s"], kind="POLICY_PATH_EXPLORATION_ACTIVATED",
+                reason="NONFIXED_POLICY_SUPPORTED" if self.last_supported_tracks else "NOMINAL_EXTERNAL_PREDICTION_INCOMPATIBLE",
+                nominal_best_integer_lineage_nis=self.last_external_prediction_nis,
+                observed_row_dimension=self.last_external_prediction_dimension, working_chi_square_threshold=threshold,
+                working_tail_probability=self.policy_exploration_tail_probability,
+                threshold_is_acceptance_gate=False))
+        if not self.policy_exploration_started:
+            return
+        for route in ("EVIDENCE_PRIORITY", "FIFO_FAIR_EXPLORATION"):
+            eligible = [identity for identity in self.policy_queue_tickets
+                        if self.support_tracks[identity].created_index < index
+                        and self.support_tracks[identity].unresolved_reason is None
+                        and self._same_predictive_rows(self.support_tracks[identity].navigator)]
+            if not eligible:
+                break
+            if route == "EVIDENCE_PRIORITY":
+                identity = min(eligible, key=lambda item: (item not in self.last_supported_tracks,
+                    min(branch.predictive_score for branch in self.support_tracks[item].navigator.branches)
+                    + self.model_edit_cost*self.support_tracks[item].edit_count,
+                    self.policy_queue_tickets[item]))
+            else:
+                identity = min(eligible, key=self.policy_queue_tickets.get)
+            parent = self.support_tracks[identity]
+            ids = self.support_group_order[self.policy_parent_cursors[identity]]
+            group = self.support_groups[ids]
+            del self.policy_queue_tickets[identity]
+            self.policy_parent_cursors[identity] += 1
+            self._queue_policy_parent(identity)
+            created = []
+            for model in ("common_translation_release", "relative_release"):
+                policy = self._candidate_policy(ids, model, group["group_id"], base_policy=parent.policy)
+                track = self._create_policy_track(policy, identity, ids, model, group["group_id"], index)
+                if track is not None:
+                    self._advance_support_track(track, index)
+                    created.append(track.identity)
+            self.policy_extension_items += 1
+            self.policy_extension_nodes += len(created)
+            self.decisions.append(dict(time_s=packet["time_s"], kind="SOURCE_POLICY_PATH_ITEM_EXPLORED",
+                route=route, parent_policy_id=identity, observed_group_id=group["group_id"],
+                parent_was_supported=identity in self.last_supported_tracks,
+                created_policy_ids=created, parent_score_is_not_descendant_bound=True))
 
     def _register_support_group(self, packet: dict):
         t = float(packet["time_s"])
@@ -420,23 +556,15 @@ class JointNavigator:
             prior = [c for c in self.checkpoints if c.time_s < first]
             group_id = "support:" + "|".join(ids)
             self.support_groups[ids] = dict(first_use=first, group_id=group_id,
-                                             status="PENDING", last_observed=t)
+                                             status="PENDING", last_observed=t,
+                                             origin=prior[-1] if prior else None)
+            self.support_group_order.append(ids)
+            for identity in self.policy_parent_cursors:
+                self._queue_policy_parent(identity)
             if prior:
-                origin = prior[-1]
                 for model in ("common_translation_release", "relative_release"):
-                    # Do not propose reinstating a component already withdrawn.
-                    severity = {arc: old["mode"] for old in self.support_models for arc in old["arc_ids"]}
-                    if model == "common_translation_release" and any(
-                            severity.get(arc) == "relative_release" for arc in ids):
-                        continue
-                    if all(severity.get(arc) == model for arc in ids):
-                        continue
-                    shadow = JointNavigator(self.metadata, self.mode, monitor_support=False,
-                        support_models=self._candidate_policy(ids, model, group_id))
-                    shadow._restore(origin)
-                    identity = f"g{self.model_generation}:{group_id}:{model}"
-                    self.support_tracks[identity] = SupportTrack(
-                        identity, group_id, ids, model, first, origin, shadow)
+                    self._create_policy_track(self._candidate_policy(ids, model, group_id),
+                        "fixed", ids, model, group_id, self.branches[0].index)
             else:
                 self.support_groups[ids]["status"] = "UNRESOLVED_HISTORY_EXPIRED"
                 self.expired_unresolved_groups += 1
@@ -470,47 +598,13 @@ class JointNavigator:
                     self.expired_unresolved_groups += 1
                 self.support_groups[track.arc_ids]["status"] = "UNRESOLVED_HISTORY_EXPIRED"
                 continue
-            shadow = track.navigator
-            replay_events = self.recovery_events if self.shared_support else self.events
-            replay_rows = self.recovery_rows if self.shared_support else self.reference_rows
-            shadow.events = replay_events
-            after = shadow.branches[0].index
-            after = -1 if after is None else after
-            for event_index, event in replay_events:
-                if after < event_index <= index:
-                    try:
-                        outcome = shadow._advance(shadow._filter(event), event_index,
-                                        replay_rows[event_index],
-                                        self.anchor_history.get(event_index, {})
-                                        if self.shared_support and not track.nonlinear_expanded else None,
-                                        record_anchors=supplies_reference)
-                        if outcome is None:
-                            track.unresolved_reason = "UNRESOLVED_COMMON_INTEGER_LINEAGE_ANCHOR"
-                            break
-                        track.unresolved_reason = None
-                    except RuntimeError:
-                        print(f"FAILED_SUPPORT_MODEL identity={identity} time={event['time_s']} "
-                              f"index={event_index} origin={track.origin.time_s}", flush=True)
-                        raise
-                    track.processed_events += 1
-                    self.model_replay_events += 1
-                    if self.shared_support and not track.nonlinear_expanded:
-                        self.gaussian_support_step_events += 1
-                    else:
-                        self.nonlinear_support_step_events += 1
-            if supplies_reference and self._same_predictive_rows(shadow):
-                charts = shadow.anchor_history.pop(index, None)
-                if charts is not None:
-                    for anchors in charts.values():
-                        for anchor in anchors:
-                            anchor["reference_support_identity"] = identity
-                    # Only the current event changes provider. Earlier charts
-                    # remain the actual history used by Gaussian replay.
-                    self.anchor_history[index] = charts
-                    self.linearization_reference_used = identity
+            self._advance_support_track(track, index, supplies_reference=supplies_reference)
         for identity in expired:
             del self.support_tracks[identity]
         result = self._contact_support(packet)
+        if self.shared_support:
+            self._extend_policy_paths(packet, index)
+            result = self._contact_support(packet)
         while self.shared_support:
             alternatives, costs, in_support, winner, _ = result
             fixed_supported = any(in_support[j] and item[0] == "fixed" for j, item in enumerate(alternatives))
@@ -522,10 +616,47 @@ class JointNavigator:
                 break
         return result
 
+    def _advance_support_track(self, track, index, *, supplies_reference=False):
+        shadow = track.navigator
+        replay_events = self.recovery_events if self.shared_support else self.events
+        replay_rows = self.recovery_rows if self.shared_support else self.reference_rows
+        shadow.events = replay_events
+        after = shadow.branches[0].index
+        after = -1 if after is None else after
+        for event_index, event in replay_events:
+            if after < event_index <= index:
+                try:
+                    outcome = shadow._advance(shadow._filter(event), event_index, replay_rows[event_index],
+                        self.anchor_history.get(event_index, {})
+                        if self.shared_support and not track.nonlinear_expanded else None,
+                        record_anchors=supplies_reference)
+                    if outcome is None:
+                        track.unresolved_reason = "UNRESOLVED_COMMON_INTEGER_LINEAGE_ANCHOR"
+                        break
+                    track.unresolved_reason = None
+                except RuntimeError:
+                    print(f"FAILED_SUPPORT_MODEL identity={track.identity} time={event['time_s']} "
+                          f"index={event_index} origin={track.origin.time_s}", flush=True)
+                    raise
+                track.processed_events += 1
+                self.model_replay_events += 1
+                if self.shared_support and not track.nonlinear_expanded:
+                    self.gaussian_support_step_events += 1
+                else:
+                    self.nonlinear_support_step_events += 1
+        if supplies_reference and self._same_predictive_rows(shadow):
+            charts = shadow.anchor_history.pop(index, None)
+            if charts is not None:
+                for anchors in charts.values():
+                    for anchor in anchors:
+                        anchor["reference_support_identity"] = track.identity
+                self.anchor_history[index] = charts
+                self.linearization_reference_used = track.identity
+
     def _expand_support_history(self, track, index, time_s):
         """Reconstruct an actual nonlinear conditional history, not just future R."""
         rebuilt = JointNavigator(self.metadata, self.mode, monitor_support=False,
-            support_models=self._candidate_policy(track.arc_ids, track.model, track.group_id))
+            support_models=list(track.policy))
         rebuilt._restore(track.origin)
         rebuilt.events = self.recovery_events
         count = 0
@@ -541,6 +672,8 @@ class JointNavigator:
         self.model_replay_events += count
         self.decisions.append(dict(time_s=time_s, kind="NONLINEAR_CONDITIONAL_HISTORY_EXPANDED",
             support_identity=track.identity, first_use_s=track.first_use,
+            source_policy=policy_readout(track.policy), parent_policy_ids=sorted(track.parent_ids),
+            policy_edit_count=track.edit_count,
             checkpoint_time_s=track.origin.time_s, replayed_events=count,
             common_linearization_score_before=old_score,
             nonlinear_predictive_score=min(branch.predictive_score for branch in rebuilt.branches),
@@ -554,10 +687,10 @@ class JointNavigator:
                 and {b.predictive_row_count for b in other.branches} == {b.predictive_row_count for b in self.branches})
 
     def _contact_support(self, packet: dict):
-        alternatives = [("fixed", branch, 0., None) for branch in self.branches]
+        alternatives = [("fixed", branch, self.model_edit_cost*len(self.support_models), None) for branch in self.branches]
         for identity, track in self.support_tracks.items():
             if track.unresolved_reason is None and self._same_predictive_rows(track.navigator):
-                alternatives.extend((identity, branch, self.model_edit_cost, track)
+                alternatives.extend((identity, branch, self.model_edit_cost*track.edit_count, track)
                                     for branch in track.navigator.branches)
         costs = np.array([branch.predictive_score+penalty for _, branch, penalty, _ in alternatives])
         winner = int(np.argmin(costs))
@@ -569,12 +702,17 @@ class JointNavigator:
             self.decisions.append(dict(
                 time_s=packet["time_s"], kind="CONTACT_MODEL_PREDICTIVE_SUPPORT",
                 selected=signature[0], supported_models=list(signature[1]),
+                selected_source_policy=policy_readout(self.support_models if alternatives[winner][3] is None
+                                                      else alternatives[winner][3].policy),
                 fixed_contact_in_support="fixed" in identities,
                 working_edit_cost=self.model_edit_cost,
                 working_support_delta=self.model_support_delta,
-                fixed_minus_best_score=float(min(b.predictive_score for b in self.branches)-costs[winner]),
+                fixed_minus_best_score=float(min(b.predictive_score for b in self.branches)
+                                            +self.model_edit_cost*len(self.support_models)-costs[winner]),
                 compared_groups=len(self.support_groups), evaluated_models=len(self.support_tracks),
                 integer_lineage_scores=True, probability_calibrated=False,
+                policy_selection_scope="BEST_AMONG_EVALUATED_POLICIES",
+                policy_search=self._policy_search_readout(),
                 comparison_scope=("MIXED_NONLINEAR_AND_COMMON_LINEARIZATION_CONDITIONAL_MODELS"
                                   if self.shared_support else "FULL_NONLINEAR_CONDITIONAL_MODELS"),
             ))
@@ -585,6 +723,7 @@ class JointNavigator:
             for track in self.support_tracks.values())
         if self.shared_support:
             complete = complete and all(track.nonlinear_expanded for track in self.support_tracks.values())
+            complete = complete and self._policy_search_readout()["evaluated_policy_coverage_complete"]
         # Only a unique source explanation commits a model change. Otherwise
         # U3 retains the separate clean conditional states and their directions.
         accepted = selected if (not self.shared_support and len(identities) == 1
@@ -953,7 +1092,7 @@ class JointNavigator:
                 self.support_models = copy.deepcopy(accepted.navigator.support_models)
                 if not self.rebuild_history:
                     for model in self.support_models:
-                        if model["group_id"] == accepted.group_id:
+                        if set(model["arc_ids"]) == set(accepted.arc_ids) and model["mode"] == accepted.model:
                             model["effective_from"] = t
                 self.stop_from.update({arc: t for arc in affected})
                 self.decisions.append(dict(time_s=t, kind="PREDICTIVE_SUPPORT_MODEL_SELECTED",
@@ -967,12 +1106,16 @@ class JointNavigator:
                 self.model_generation += 1
                 self.support_groups.clear()
                 self.support_tracks.clear()
+                self.support_group_order.clear()
+                self.policy_parent_cursors.clear()
+                self.policy_queue_tickets.clear()
                 self.last_supported_tracks.clear()
                 self.last_support_signature = None
                 self.rescan_support_history = True
                 support_result = None
-            output_models = [("fixed", branch, 0., None) for branch in self.branches]
-            output_costs = np.array([b.predictive_score if self.mode in ("U2", "U3") else b.window.error()
+            base_penalty = self.model_edit_cost*len(self.support_models)
+            output_models = [("fixed", branch, base_penalty, None) for branch in self.branches]
+            output_costs = np.array([b.predictive_score+base_penalty if self.mode in ("U2", "U3") else b.window.error()
                                     for b in self.branches])
             model_status = "BACKGROUND_CONTACT_MODEL"
             if support_result is not None and self.rebuild_history:
@@ -1008,6 +1151,7 @@ class JointNavigator:
             output["candidate_local_directions"] = [
                 dict(support_model=item[0], integer_lineage=item[1].integer_lineage,
                      conditional_state=item[1].current_output(), factor_counts=dict(item[1].last_factor_counts),
+                     **self._policy_descriptor(item[3]),
                      **direction)
                 for item, direction in zip(output_models, local_directions)]
             candidate_rpy = [item[1].current_output()["rpy_rad"] for item in output_models]
@@ -1017,6 +1161,10 @@ class JointNavigator:
             comparison_complete = self.proposal_complete and all(
                 track.navigator.proposal_complete and self._same_predictive_rows(track.navigator)
             for track in self.support_tracks.values())
+            evaluated_frontier_complete = comparison_complete
+            policy_search = self._policy_search_readout()
+            if self.shared_support:
+                comparison_complete = comparison_complete and policy_search["evaluated_policy_coverage_complete"]
             nonlinear_comparison_complete = comparison_complete and (
                 not self.shared_support or all(track.nonlinear_expanded for track in self.support_tracks.values()))
             status = "CONDITIONAL_SUPPORT" if comparison_complete else "UNRESOLVED_ENUMERATION_OR_BRANCH_BUDGET"
@@ -1043,6 +1191,7 @@ class JointNavigator:
                 direction_status=status, gnss_innovation_nis=nis,
                 candidate_support_complete=nonlinear_comparison_complete,
                 conditional_model_evidence_frontier_complete=comparison_complete,
+                evaluated_policy_evidence_frontier_complete=evaluated_frontier_complete,
                 nonlinear_contact_support_complete=nonlinear_comparison_complete,
                 common_linearization_reference_used=self.linearization_reference_used,
                 next_common_linearization_reference=(self.linearization_reference_identity or "fixed"
@@ -1059,9 +1208,12 @@ class JointNavigator:
                 consumed_phase_relations=self.last_phase_relation_count,
                 selected_branch=selected_index, branch_conditional_navigation=True,
                 selected_support_model=output_models[selected_index][0],
+                selected_support_policy=self._policy_descriptor(output_models[selected_index][3]),
+                policy_search=policy_search, policy_selection_scope="BEST_AMONG_EVALUATED_POLICIES",
                 support_model_status=model_status,
                 supported_contact_models=sorted({item[0] for item in output_models}),
-                contact_model_family="ONE_ADDITIONAL_OBSERVED_COSUPPORT_GROUP_PER_GENERATION",
+                contact_model_family=("OBSERVED_GROUP_REPLACEMENT_POLICY_PATHS" if self.shared_support else
+                                      "ONE_ADDITIONAL_OBSERVED_COSUPPORT_GROUP_PER_GENERATION"),
                 contact_model_probability_calibrated=False,
                 unresolved_predictive_frontier_models=sum(not self._same_predictive_rows(track.navigator)
                     for track in self.support_tracks.values()),
@@ -1089,13 +1241,15 @@ class JointNavigator:
             no_init_rows=sum(row["direction_status"] == "NO_INIT" for row in self.rows),
             replayed_events=self.replayed_events, proposal_attempts=self.proposal_attempts,
             dormant_candidates=len(self.dormant_candidates), active_support_complete=(self.proposal_complete and
-                (not self.shared_support or all(track.nonlinear_expanded and self._same_predictive_rows(track.navigator)
-                    for track in self.support_tracks.values()))),
+                (not self.shared_support or (self._policy_search_readout()["evaluated_policy_coverage_complete"]
+                    and all(track.nonlinear_expanded and self._same_predictive_rows(track.navigator)
+                    for track in self.support_tracks.values())))),
             active_integer_support_complete=self.proposal_complete,
             unresolved_raw_cohorts=len(self.pending_proposals),
             revoked_arcs=sorted(self.revoked_arcs),
             support_model_replayed_events=self.model_replay_events,
             live_support_models=len(self.support_tracks),
+            policy_search=self._policy_search_readout(),
             expired_unresolved_groups=self.expired_unresolved_groups,
             model_edit_cost=self.model_edit_cost, model_support_delta=self.model_support_delta,
             marginalized_variables=sum(b.window.marginalized_total for b in self.branches),

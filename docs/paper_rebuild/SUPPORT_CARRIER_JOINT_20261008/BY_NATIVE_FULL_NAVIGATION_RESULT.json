@@ -1,0 +1,439 @@
+{
+  "schema": "joint_navigation.BY_native_full_navigation_result.v1",
+  "status": "FULL07_COMPLETED_SMALL_YAW_GAIN_WITH_WORSE_POSITION_AND_VELOCITY",
+  "sequence": "BY2",
+  "configuration_identity": "OLD_RAW_Q_OLD_CARRIER_PROVIDER_OLD_CARRIER_REQUIRED_BOOTSTRAP_U1",
+  "evidence_roots": {
+    "navigation": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_NATIVE_FULL_07_U1",
+    "position_yaw": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_NATIVE_FULL_EVAL_07_U1",
+    "velocity": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/BY_NATIVE_FULL_VELOCITY_07_U1"
+  },
+  "source_identity": {
+    "git_commit": "9e67a744fa99519f190810fb0500e02089b7b52d",
+    "verified_source_snapshot_files": 10,
+    "source_sha256": {
+      "src/legsa_gins/paper_rebuild/joint_navigation/__init__.py": "1e4531f3053fd9736435af940484c056adae614ba3700cd09def0b848d57cba0",
+      "src/legsa_gins/paper_rebuild/joint_navigation/branch.py": "46d7443c4df4f28ac9200afbaa0ad95876d39b557763903e53e1380c78da42e6",
+      "src/legsa_gins/paper_rebuild/joint_navigation/candidate.py": "cac1aedb6d8a3623207a7dc29c5edc3ac70cb721493b4cd94020ef2cc6b32946",
+      "src/legsa_gins/paper_rebuild/joint_navigation/carrier_relations.py": "65e9ac0b5a6decb69d18171410104b0b6a12f51012d4dd6b5b21aa92f5da6588",
+      "src/legsa_gins/paper_rebuild/joint_navigation/factors.py": "69064271859600c892d6e50bfadf4b5d8e6afd3f471fc009024e92aefda6f82c",
+      "src/legsa_gins/paper_rebuild/joint_navigation/navigator.py": "9116c6b971195287a2a034f3a4c3a74a76e0209f78525aedcd495d2255ae500e",
+      "src/legsa_gins/paper_rebuild/joint_navigation/real_data.py": "e3d4dbd90cdb0add6056597bdf1b0f8bb8c410015b6e4abd229714194db2c9df",
+      "src/legsa_gins/paper_rebuild/joint_navigation/synthetic.py": "516d25ad70292e6d7c0f87717208c0352321a94711c7d66b8226c449a3b64e65",
+      "src/legsa_gins/paper_rebuild/joint_navigation/window.py": "c294ef0ca67d3e9f4215b64614cf8e1bbbffe40b08e0cbc9fe3d03fb92e09b41",
+      "scripts/paper_rebuild/run_joint_by2.py": "fca4e8d9155b7eb0ea6b0b488e65ebebf7a381298db37cba6ac85324021da4af"
+    },
+    "different_from_early10_modules": {
+      "src/legsa_gins/paper_rebuild/joint_navigation/branch.py": {
+        "FULL07": "46d7443c4df4f28ac9200afbaa0ad95876d39b557763903e53e1380c78da42e6",
+        "early10": "77a0c07e788fb9df456ee916b6969ba431abacd8463146cae0b68b45a90e9d6e"
+      },
+      "src/legsa_gins/paper_rebuild/joint_navigation/candidate.py": {
+        "FULL07": "cac1aedb6d8a3623207a7dc29c5edc3ac70cb721493b4cd94020ef2cc6b32946",
+        "early10": "927b9a832b2d7b5e05e8e1e0babc30b7a1db2036a848eeac6fcd9ea1b9317396"
+      },
+      "src/legsa_gins/paper_rebuild/joint_navigation/factors.py": {
+        "FULL07": "69064271859600c892d6e50bfadf4b5d8e6afd3f471fc009024e92aefda6f82c",
+        "early10": "a529814ef2932e371d4f6cdac67762cefaa6e9bebf7ecf50c284e865d9c23822"
+      },
+      "src/legsa_gins/paper_rebuild/joint_navigation/navigator.py": {
+        "FULL07": "9116c6b971195287a2a034f3a4c3a74a76e0209f78525aedcd495d2255ae500e",
+        "early10": "9d2fc73d5eefc4e4703f4441ada399cbc6809a4e862aacc4a55ee0e46c747036"
+      },
+      "src/legsa_gins/paper_rebuild/joint_navigation/real_data.py": {
+        "FULL07": "e3d4dbd90cdb0add6056597bdf1b0f8bb8c410015b6e4abd229714194db2c9df",
+        "early10": "3785a3eb84ab1485b936cfbe70986bdc6cbdc5d22bb8c54a60c0af9bd3ed8cad"
+      },
+      "src/legsa_gins/paper_rebuild/joint_navigation/window.py": {
+        "FULL07": "c294ef0ca67d3e9f4215b64614cf8e1bbbffe40b08e0cbc9fe3d03fb92e09b41",
+        "early10": "e2cd85768d2667688160bb6a68f9e9d264b11e42c58b70d17eca686fda284351"
+      },
+      "scripts/paper_rebuild/run_joint_by2.py": {
+        "FULL07": "fca4e8d9155b7eb0ea6b0b488e65ebebf7a381298db37cba6ac85324021da4af",
+        "early10": "339d6d5d5d8de1a595a38e2252a5644773ba919a659c828bee854c51ba600cb5"
+      }
+    },
+    "phase_noise_M2_used": false,
+    "causal_stream_provider_used": false,
+    "old_provider_plan_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_ATTEMPT02/BY2/MODELS/PLAN.json",
+    "old_provider_plan_sha256": "16580a87ee787d4890edd22a8fc8bfb9b0771242e427201a952f323f233879ea",
+    "identity_separation": "FULL07 and causal early10 are distinct source versions/configurations. Their metrics are not spliced into one algorithm or a same-backend mechanism comparison."
+  },
+  "input_config": {
+    "body_path": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/高层数据/by2.txt",
+    "imu_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu",
+    "gnss_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+    "carrier_plan_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_ATTEMPT02/BY2/MODELS/PLAN.json",
+    "calibration_model_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/00_CALIBRATION/CLEAN5_CALIBRATED_SENSOR_MODEL.yaml",
+    "imu_noise_profile_path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/configs/paper_rebuild/horizontal_literature/hartley/stage_payload/04_METHOD_CONTRACTS/GO2_IMU_ALLAN_90MIN_RECOVERED_V1.yaml",
+    "start_s": 66.0,
+    "end_s": 340.0,
+    "key_dt_s": 0.1,
+    "base_time_unix_s": 1772784000,
+    "family": "GPS_GAL_BDS_DUAL",
+    "origin_blh_deg_m": null
+  },
+  "coverage": {
+    "requested_window_s": [
+      66.0,
+      340.0
+    ],
+    "requested_duration_s": 274.0,
+    "causal_output_rows": 8762,
+    "finite_navigation_rows": 7673,
+    "no_init_rows": 1089,
+    "finite_navigation_interval_s": [
+      100.19799995422363,
+      340.0
+    ],
+    "finite_navigation_duration_s": 239.80200004577637,
+    "common_scored_interval_s": [
+      100.19799995422365,
+      339.997056
+    ],
+    "common_scored_duration_s": 239.79905604577635,
+    "position_yaw_joint_samples": 7671,
+    "position_yaw_V3_samples": 48949,
+    "complete_global_candidate_support_rows": 0,
+    "finite_direction_status_counts": {
+      "RAW_PHASE_RELATIONS_UNRESOLVED_ENUMERATION_OR_BRANCH_BUDGET": 7673
+    },
+    "past_no_init_replaced": false
+  },
+  "old_initialization_scope": {
+    "first_built_carrier_time_s": 100.19799995422363,
+    "bootstrap_buffer_s": [
+      95.200000048,
+      100.19799995422363
+    ],
+    "frontier_index": 1089,
+    "seed_reports": [
+      {
+        "seed_rpy_rad": [
+          -0.05067043716105629,
+          0.02207102388435861,
+          0.0
+        ],
+        "solution_rpy_rad": [
+          0.023752555494897562,
+          -0.0012073778579649772,
+          -1.4403197396364245
+        ],
+        "solver_iterations": 161,
+        "solver_max_iterations": 200,
+        "cost": 433.91986896897345,
+        "numerical_rank": 2536,
+        "state_dimension": 2536,
+        "projected_gradient_relative_inf": 1.376983203894376e-09,
+        "projected_gradient_tolerance": 1e-06,
+        "solver_status": "FIRST_ORDER_STATIONARY",
+        "solver_converged": true
+      },
+      {
+        "seed_rpy_rad": [
+          -0.05067043716105629,
+          0.02207102388435861,
+          1.5707963267948966
+        ],
+        "solution_rpy_rad": [
+          0.023752517411012076,
+          -0.0012074461730069003,
+          -1.4403195551237364
+        ],
+        "solver_iterations": 198,
+        "solver_max_iterations": 200,
+        "cost": 433.92168225488496,
+        "numerical_rank": 2536,
+        "state_dimension": 2536,
+        "projected_gradient_relative_inf": 1.2280350848679881e-09,
+        "projected_gradient_tolerance": 1e-06,
+        "solver_status": "FIRST_ORDER_STATIONARY",
+        "solver_converged": true
+      },
+      {
+        "seed_rpy_rad": [
+          -0.05067043716105629,
+          0.02207102388435861,
+          3.141592653589793
+        ],
+        "solution_rpy_rad": [
+          0.02375250642031056,
+          -0.0012074207011549863,
+          -1.4403211053305935
+        ],
+        "solver_iterations": 75,
+        "solver_max_iterations": 200,
+        "cost": 433.9264867367784,
+        "numerical_rank": 2536,
+        "state_dimension": 2536,
+        "projected_gradient_relative_inf": 1.0347280451283907e-09,
+        "projected_gradient_tolerance": 1e-06,
+        "solver_status": "FIRST_ORDER_STATIONARY",
+        "solver_converged": true
+      },
+      {
+        "seed_rpy_rad": [
+          -0.05067043716105629,
+          0.02207102388435861,
+          -1.5707963267948966
+        ],
+        "solution_rpy_rad": [
+          0.0237525386893414,
+          -0.0012073703416417315,
+          -1.4403211702432637
+        ],
+        "solver_iterations": 56,
+        "solver_max_iterations": 200,
+        "cost": 433.9245010469178,
+        "numerical_rank": 2536,
+        "state_dimension": 2536,
+        "projected_gradient_relative_inf": 9.551078707413538e-10,
+        "projected_gradient_tolerance": 1e-06,
+        "solver_status": "FIRST_ORDER_STATIONARY",
+        "solver_converged": true
+      }
+    ],
+    "retained_local_modes": 1,
+    "unfinished_seeds": 0,
+    "artificial_yaw_prior": false,
+    "static_gravity_observation": false,
+    "initialization_status": "FLOAT_INIT_DIRECTION_UNRESOLVED",
+    "trigger": "saved navigator.py requires packet.carrier before a bootstrap attempt",
+    "availability_interpretation": "100.198 s is the first BUILT block in this old provider and therefore this old trigger time; it is not the first physically available original raw carrier epoch",
+    "later_independent_provider_evidence": {
+      "first_legal_raw_carrier_s": 74.39800000190735,
+      "report": "BY_CAUSAL_CARRIER_PROVIDER.json",
+      "report_sha256": "936255ac37dda53f557a94094d34f85e66422f079dbad3ac19d19ab686745339"
+    },
+    "causal_early10_start_s": 67.0,
+    "old_results_rewritten": false
+  },
+  "input_participation": {
+    "receiver_PV_epochs": 1371,
+    "carrier_source_slots": 1370,
+    "built_carrier_epochs": 1200,
+    "old_provider_unavailable_slots": {
+      "MODEL_UNAVAILABLE": 170
+    },
+    "foot_measurements": 10241,
+    "use_foot": true,
+    "PVT_heading_consumed": false,
+    "SDK_yaw_consumed": false,
+    "SDK_velocity_consumed": false,
+    "receiver_PV_removed": false,
+    "source_noise_assumption": "raw_DD_and_receiver_PV_share_GNSS; SDK_foot_IMU_dependence_unknown"
+  },
+  "candidate_support_layers": {
+    "proposal_attempts": 716,
+    "proposal_status_counts": {
+      "EMPTY_RELAXED_SUPPORT": 650,
+      "COMPLETE_RELAXED_SUPPORT": 60,
+      "INCOMPLETE_RELAXED_SUPPORT": 6
+    },
+    "proposal_termination_counts": {
+      "GAUSSIAN_RELAXED_DOMAIN_EXHAUSTED": 549,
+      "FLOAT_RESIDUAL_EXCEEDS_EXPANDED_THRESHOLD": 161,
+      "NODE_LIMIT": 6
+    },
+    "raw_support_unresolved_decisions": 667,
+    "empty_relaxed_domains": 650,
+    "raw_domain_complete_but_no_length_candidate": 14,
+    "raw_complete_no_length_reasons": {
+      "WHOLE_ELLIPSOID_MISSES_BASELINE_LENGTH": 3,
+      "FIXED_LENGTH_RAW_PROFILE_EXCEEDS_BUDGET": 11
+    },
+    "conditional_direction_updates": 49,
+    "conditional_update_complete_local_proposals": 46,
+    "conditional_update_node_limited_proposals": 3,
+    "first_conditional_update_s": 120.59800004959106,
+    "last_conditional_update_s": 311.39800000190735,
+    "first_conditional_update_integer_basis_rank": 19,
+    "unresolved_raw_cohorts_final": 650,
+    "global_active_support_complete_final": false,
+    "complete_published_rows": 0,
+    "local_complete_does_not_mean_complete_history": true,
+    "formal_AR": false,
+    "probability_calibrated": false
+  },
+  "common_interval_metrics": {
+    "statistic": "time-weighted RMSE",
+    "interval_s": [
+      100.19799995422365,
+      339.997056
+    ],
+    "duration_s": 239.79905604577635,
+    "values": {
+      "horizontal_err_m": {
+        "joint": 0.1292620669538003,
+        "frozen_v3": 0.10293810746180392,
+        "joint_minus_v3": 0.026323959491996382
+      },
+      "position_3d_err_m": {
+        "joint": 0.26559323401494667,
+        "frozen_v3": 0.11411060702365565,
+        "joint_minus_v3": 0.151482626991291
+      },
+      "roll_err_deg": {
+        "joint": 2.9233486430977904,
+        "frozen_v3": 2.385213729901369,
+        "joint_minus_v3": 0.5381349131964215
+      },
+      "pitch_err_deg": {
+        "joint": 2.7500609499847037,
+        "frozen_v3": 2.369288049586317,
+        "joint_minus_v3": 0.38077290039838685
+      },
+      "yaw_err_deg": {
+        "joint": 1.7559229710255395,
+        "frozen_v3": 1.9238604308960066,
+        "joint_minus_v3": -0.16793745987046704
+      },
+      "velocity_horizontal_mps": {
+        "joint": 0.2509338583464142,
+        "frozen_v3": 0.21796451071791026,
+        "joint_minus_v3": 0.032969347628503926
+      },
+      "velocity_3d_mps": {
+        "joint": 0.3454184403953415,
+        "frozen_v3": 0.26311945170333984,
+        "joint_minus_v3": 0.08229898869200164
+      }
+    },
+    "comparison_type": "original_V3_system_comparison_not_same_backend_mechanism_ablation",
+    "V3_commit": "7d43b9af26120ed5dde21f53e515386361072ba6",
+    "V3_run_id": "RUN_00004",
+    "V3_formal_window_s": [
+      66.0,
+      340.0
+    ],
+    "V3_baseline_error_sha256": "a98f1a5f7591c2365b0fd73b6a1146e0d6df3de2a06414fd067fc9b66b928548"
+  },
+  "velocity_evaluation": {
+    "status": "COMPLETED_SEPARATE_VELOCITY_READOUT",
+    "exit_code": 0,
+    "common_finite_support": {
+      "old_U1": {
+        "duration_s": 239.79905604577635,
+        "rmse_ned_mps": [
+          0.18524360913699106,
+          0.16927080828813906,
+          0.237373329800405
+        ],
+        "horizontal_rmse_mps": 0.2509338583464142,
+        "three_d_rmse_mps": 0.3454184403953415
+      },
+      "original_V3": {
+        "duration_s": 239.79905604577635,
+        "rmse_ned_mps": [
+          0.15333020337168243,
+          0.1549140944733452,
+          0.14738832359508053
+        ],
+        "horizontal_rmse_mps": 0.21796451071791026,
+        "three_d_rmse_mps": 0.26311945170333984
+      }
+    },
+    "physical_point": "GO2_PROPAGATION_IMU",
+    "point_transport": "v_IMU_ecef=R_ecef_from_POI*(v_POI+omega_POI cross r_POI_to_IMU)",
+    "extrinsic_status": "USER_APPROXIMATE_INSTALLATION",
+    "lever_poi_to_imu_in_poi_m": [
+      0,
+      0,
+      -0.325
+    ],
+    "approximate_height_interval_m": [
+      0.3,
+      0.35
+    ],
+    "horizontal_offset_m": [
+      0,
+      0
+    ],
+    "exact_same_point_accuracy_claim": false,
+    "extrinsic_sha256": "492230c24d87169804695503e1d9846db027842158197ed20e0f00df78e0666e",
+    "evaluator_sha256": "d5e76962a2be365985c2e9ef50b9373ea7333b1032294eee306018e8b9209d0f",
+    "reference_child_readonly_opens": 1,
+    "parent_reference_payload_reads": 0
+  },
+  "research_interpretation": {
+    "main": "This first completed full BY run has a small common-interval yaw RMSE gain versus frozen V3, accompanied by worse horizontal/3D position and velocity. Stable navigation improvement and heading-mediated p/v benefit are not established.",
+    "foot": "U1 uses actual foot factors in the common state, but there is no matched full-window no-foot or withdrawal arm here; foot increment and revocation effectiveness remain unmeasured.",
+    "causal_attribution": "Do not attribute differences across FULL07, early10 or other source versions to one noise, bootstrap, marginalization or carrier mechanism without a matched comparison.",
+    "source_failure_revocation_exercised": false,
+    "revoked_arcs": [],
+    "historical_replay_events": 0,
+    "full_M2_09_results_included": false,
+    "full_M2_09_status_at_record": "still running as reported by root; no result read or inferred"
+  },
+  "limits": {
+    "reference": "Fixposition-derived fused reference with shared GNSS lineage; not independent truth",
+    "accuracy_time_scope": "state accuracy at measurement epochs; not a zero-delay arrival-time navigation comparison",
+    "maximum_recorded_imu_publication_delay_s": 0.01304523800001789,
+    "original_GNSS_transport_latencies_available": false,
+    "position_evaluation_transform": {
+      "source_frame": "fixed_local_NED",
+      "exported_frame": "geographic_NED_at_IMU",
+      "source_point": "IMU",
+      "evaluation_point": "original_V3_dual_antenna_midpoint",
+      "baseline_median_m": 0.356191491865984,
+      "lever_frd_m": [
+        0.03,
+        -0.148095745932992,
+        -0.3
+      ],
+      "position_transform_applications": 1,
+      "fit_used": false,
+      "time_shift_s": 0.0,
+      "position_only_POI_transform": true,
+      "exported_velocity_point": "IMU",
+      "velocity_accuracy_evaluated": false,
+      "STD": "NOT_AVAILABLE_NOT_FABRICATED",
+      "source_nav_sha256": "10643abf3d050cc1849d354390ce0856bae06c5f88a1fd69acf3da297c5be921",
+      "evaluator_nav_sha256": "c9922257be276dad153056e1567b8e3bd01ca1c16bd4f2b69f54c4ab5d543a60"
+    },
+    "uncertainty_calibration_evaluated": false,
+    "formal_AR": false,
+    "trusted_heading_goal_complete": false,
+    "stable_navigation_gain_established": false,
+    "exceeds_V3_as_navigation_system": false
+  },
+  "execution": {
+    "navigation_status": "COMPLETED",
+    "navigation_exit_code": 0,
+    "navigation_exit_evidence": "parent verified session exit0; artifact run_status COMPLETED",
+    "navigation_wall_s": 8493.271561608,
+    "estimator_wall_s": 8472.494207005999,
+    "position_yaw_evaluator_exit_code": 0,
+    "velocity_evaluator_exit_code": 0,
+    "report_new_navigation_runs": 0,
+    "report_reference_payload_reads": 0,
+    "report_source_changes": 0,
+    "report_goal_progress_changes": 0
+  },
+  "artifact_sha256": {
+    "navigation": {
+      "run_status.json": "2b69f1ce040e1ef8e72d4ef8b62191d5ab30ef8bb68d06d97df3314ae059ee1b",
+      "summary.json": "959cc8fc82d9eefadebb37147b58591d216ef5045722f119920c9b11dbb5d803",
+      "input_summary.json": "6f70a1f9fc97ab11b0a8af27b2ed870294a16c6f9d5235576911241f32880b26",
+      "sensor_metadata.json": "ecd2b78c9a4d5064eab215efe28a1c99bfe410ea8cbd0ae531f271c8dea57a67",
+      "estimator_summary.json": "b821ff7e5b57f62d32a084e8cbbeda7f5cda3a8a0d0d10adba8e6febef038261",
+      "decisions.json": "152ba453a62026056a00a9d3991f2667e08cce2dc7d820d10338a43053489605",
+      "navigation.csv": "78e9df31233a4bedfd1885acb50dea668def52c25f17040dcd24b48ada1d072c",
+      "navigation.jsonl": "f1ea873e3392a853cad1ff4ad41380aa10b37ecafb19904fcfcd9bd6a017994b"
+    },
+    "position_yaw_evaluation": {
+      "run_status.json": "bd6702c62b1ffc92556794c7e16c395320b34ae4166395406818c2bf288c092d",
+      "COMPARISON.json": "199ba00fcb76e5dbf98e5cc2362be0959fdef2f7231cfe6c4a40187e34d85146",
+      "OUTPUT_COVERAGE.json": "648244f770aead49d7f152cff910adabc2eb4a582f50f804db2e8744f065c4e4",
+      "NAV_TRANSFORM.json": "3834d1cf9f52887d0c1b74dbf777cb94474ff6532550ab53499a08bf3846fb96",
+      "FROZEN_EVALUATOR/summary.json": "f8a32e4deb3574e3eaefcaafa35aa1c4ba7993c4e68d5086fb042efa77d8dd43",
+      "FROZEN_EVALUATOR/EVALUATION_AUDIT.json": "8b5feb9ccfb0c90c5b5924011a4a5213270f8ef5089bdb7a88321e3c01cb8eac",
+      "FROZEN_EVALUATOR/error_series.csv": "3b81b909c34f04adb14545e83276714a1ae90a701d52512ccad84c6d4971a708"
+    },
+    "velocity_evaluation": {
+      "VELOCITY_COMPARISON.json": "14eae7e5b87a246bc6e80bac8a8ef5f4abdde6432cec6e1b5b2f0fb9688ede54",
+      "EVALUATION_RECEIPT.json": "7844b3240e424d5a684a4ebf571809ad74620ecfc8a4a12ce5a25818fbabe6cf",
+      "velocity_error_series.csv": "b3acbfad41eeaa529c3fb1523f57fd8453ebda289827069ccfff93caf5f68aa5"
+    }
+  }
+}

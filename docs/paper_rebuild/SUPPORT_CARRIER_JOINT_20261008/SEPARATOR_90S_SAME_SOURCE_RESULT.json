@@ -1,0 +1,445 @@
+{
+  "schema": "joint_navigation.separator90_result.v1",
+  "status": "COMPLETED_NEGATIVE_REVOCATION_RESULT",
+  "sequence_kind": "synthetic continuous kinematic sensor scene, not rigid-body dynamics",
+  "seed": 6100801,
+  "duration_s": 90.0,
+  "git_commit": "b5adc7a6b5557b106950733296de2e593842870f",
+  "evidence_roots": {
+    "U3": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/SUPPORT_CARRIER_JOINT_20261008/cohort_separator_20261008_seed6100801",
+    "controls": "/home/kaiwen/research/LegSA-GINS-SCRATCH/SUPPORT_CARRIER_JOINT_20261008/cohort_separator_controls_20261008_seed6100801"
+  },
+  "same_source_verification": {
+    "declared_source_maps_equal": true,
+    "verified_snapshot_files_per_root": 12,
+    "all_snapshot_bytes_match_declared_hash": true,
+    "source_sha256": {
+      "src/legsa_gins/paper_rebuild/joint_navigation/__init__.py": "1e4531f3053fd9736435af940484c056adae614ba3700cd09def0b848d57cba0",
+      "src/legsa_gins/paper_rebuild/joint_navigation/branch.py": "77a0c07e788fb9df456ee916b6969ba431abacd8463146cae0b68b45a90e9d6e",
+      "src/legsa_gins/paper_rebuild/joint_navigation/candidate.py": "927b9a832b2d7b5e05e8e1e0babc30b7a1db2036a848eeac6fcd9ea1b9317396",
+      "src/legsa_gins/paper_rebuild/joint_navigation/carrier_relations.py": "65e9ac0b5a6decb69d18171410104b0b6a12f51012d4dd6b5b21aa92f5da6588",
+      "src/legsa_gins/paper_rebuild/joint_navigation/coupled_length_profile.py": "e8e692ee3e587b4f3c53f7afa9fb7431017c2735986cf6c165f7737aae001ce6",
+      "src/legsa_gins/paper_rebuild/joint_navigation/factors.py": "a529814ef2932e371d4f6cdac67762cefaa6e9bebf7ecf50c284e865d9c23822",
+      "src/legsa_gins/paper_rebuild/joint_navigation/navigator.py": "569320c76abff90c6d2b52c0a51e3fee05a7127529ba9e3c0a5e4e688b65f43b",
+      "src/legsa_gins/paper_rebuild/joint_navigation/real_data.py": "e3d4dbd90cdb0add6056597bdf1b0f8bb8c410015b6e4abd229714194db2c9df",
+      "src/legsa_gins/paper_rebuild/joint_navigation/source_noise_likelihood.py": "a5ae76b0d5c0ef5e2a8b69a1b54eca5382e3a789b7d9aca6d89876be55dc0440",
+      "src/legsa_gins/paper_rebuild/joint_navigation/synthetic.py": "516d25ad70292e6d7c0f87717208c0352321a94711c7d66b8226c449a3b64e65",
+      "src/legsa_gins/paper_rebuild/joint_navigation/window.py": "e2cd85768d2667688160bb6a68f9e9d264b11e42c58b70d17eca686fda284351",
+      "scripts/paper_rebuild/run_support_carrier_joint.py": "9a70a99fab1104b6f7ba7e9029daa86e77a0de5df3e467170a035a54681e6067"
+    },
+    "shared_metadata_and_input_timeline_sha256": {
+      "sensor_metadata.json": "95c7a3bd319f66cca95bf36e1533d65a16402f27eff7fea749b966a7ffee87c5",
+      "evaluation_metadata.json": "501ed7cea3d70670e7488078e5b91402b5d6899c122ba174acead147e1cd0eb6",
+      "input_timeline.csv": "68c54e58271d71b44ddde295640511a24b0907252dabbd8536d1b15d388d2897"
+    },
+    "controls_source_binding": "VERIFIED_BYTE_SNAPSHOT_PACKAGE_PATH",
+    "controls_runner_script_sha256": "368305d0543d17718af8123641e47b65f27ff797925a184bc7f72861671469a5",
+    "runtime": {
+      "python": "3.10.12",
+      "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+      "packages": {
+        "gtsam": "4.2",
+        "numpy": "1.26.4",
+        "scipy": "1.11.4",
+        "matplotlib": "3.8.4"
+      }
+    }
+  },
+  "mode_semantics": {
+    "U0": "carrier/IMU/PV; no foot; incomplete phase sets reduced to code-only",
+    "U1": "same as U0 plus fixed-world foot factors",
+    "U3": "foot plus partial phase use and shared-separator contact explanation inference; actual selected explanation remained fixed"
+  },
+  "comparison_scope": "same code and generated input; U3-vs-U1 is not a pure revocation ablation because partial phase policy also changes",
+  "metric_definition": {
+    "primary": "time_weighted_rmse of causal emitted states against offline synthetic true state",
+    "columns": [
+      "position_3d_m",
+      "position_horizontal_m",
+      "velocity_3d_mps",
+      "yaw_deg"
+    ],
+    "all_initialization_transients_included": true,
+    "predefined_intervals_overlap": true,
+    "historical_revisions_scored": false
+  },
+  "predefined_metrics": [
+    {
+      "stage": "whole",
+      "interval_s": [
+        0.0,
+        90.0
+      ],
+      "U0": [
+        0.1800093463920887,
+        0.1674086270274541,
+        0.11360513954768389,
+        1.6679739884677784
+      ],
+      "U1": [
+        0.0750571671929201,
+        0.06821577204012091,
+        0.026655008220382664,
+        2.1459594219959857
+      ],
+      "U3": [
+        0.07506623085755702,
+        0.06820608100219769,
+        0.026658271239304827,
+        2.1457143265661687
+      ],
+      "samples_per_arm": 1287,
+      "finite_duration_s_per_arm": 90.0
+    },
+    {
+      "stage": "tilted_turning_and_support_changes",
+      "interval_s": [
+        0.0,
+        25.0
+      ],
+      "U0": [
+        0.10048918970489158,
+        0.09421436407782845,
+        0.1914198707386105,
+        3.1585798757262737
+      ],
+      "U1": [
+        0.046077609664276244,
+        0.03130232183730858,
+        0.032512097060096376,
+        4.066775761327572
+      ],
+      "U3": [
+        0.0460776066102644,
+        0.03130230999842564,
+        0.032512056608883365,
+        4.066775720168529
+      ],
+      "samples_per_arm": 377,
+      "finite_duration_s_per_arm": 25.0
+    },
+    {
+      "stage": "two_of_five_phase_relations_remain",
+      "interval_s": [
+        25.0,
+        35.0
+      ],
+      "U0": [
+        0.06949464764654613,
+        0.06700471619028699,
+        0.038344665647269266,
+        0.10245963037350382
+      ],
+      "U1": [
+        0.04795831439376096,
+        0.028563320146192676,
+        0.014317988438888915,
+        0.11564144887464307
+      ],
+      "U3": [
+        0.04791964561090342,
+        0.028536861916921015,
+        0.014447853833176559,
+        0.09366576182104742
+      ],
+      "samples_per_arm": 150,
+      "finite_duration_s_per_arm": 10.0
+    },
+    {
+      "stage": "all_carrier_phase_absent_code_remains",
+      "interval_s": [
+        40.0,
+        55.0
+      ],
+      "U0": [
+        0.07398150208914187,
+        0.05761177789988598,
+        0.026189714026673406,
+        0.15426332134407822
+      ],
+      "U1": [
+        0.04473825377877204,
+        0.0418828476767952,
+        0.015802507752117154,
+        0.1530824939612662
+      ],
+      "U3": [
+        0.04468211674775878,
+        0.04181335844911756,
+        0.015739037803070195,
+        0.1499390779646817
+      ],
+      "samples_per_arm": 226,
+      "finite_duration_s_per_arm": 15.0
+    },
+    {
+      "stage": "fresh_physical_carrier_arcs",
+      "interval_s": [
+        55.0,
+        65.0
+      ],
+      "U0": [
+        0.07857046910732733,
+        0.03936259060591434,
+        0.020178334869535863,
+        0.14952047699556528
+      ],
+      "U1": [
+        0.0563810640577217,
+        0.04090211884401789,
+        0.016549124963807133,
+        0.14589284553629708
+      ],
+      "U3": [
+        0.05638319169749217,
+        0.04089399025226295,
+        0.016558774723600227,
+        0.1452088249539138
+      ],
+      "samples_per_arm": 151,
+      "finite_duration_s_per_arm": 10.0
+    },
+    {
+      "stage": "persistent_standing_support",
+      "interval_s": [
+        65.0,
+        78.0
+      ],
+      "U0": [
+        0.42502871539814835,
+        0.4030989270802956,
+        0.12335781254652158,
+        0.12014734392337093
+      ],
+      "U1": [
+        0.14031846648884,
+        0.13830789461735066,
+        0.04326762932717105,
+        0.12068252271213431
+      ],
+      "U3": [
+        0.1403577641710816,
+        0.1383162603618082,
+        0.04326534773202195,
+        0.12031688868798582
+      ],
+      "samples_per_arm": 131,
+      "finite_duration_s_per_arm": 13.0
+    },
+    {
+      "stage": "all_four_contacts_translate_together",
+      "interval_s": [
+        67.0,
+        70.0
+      ],
+      "U0": [
+        0.1161803586997569,
+        0.05558037738839873,
+        0.03022282676964505,
+        0.17100411772805635
+      ],
+      "U1": [
+        0.10671199160709383,
+        0.10478183767731127,
+        0.07758556596404148,
+        0.1704807114895247
+      ],
+      "U3": [
+        0.10676587596156102,
+        0.10479173811628346,
+        0.07758237786341352,
+        0.17000481049335886
+      ],
+      "samples_per_arm": 31,
+      "finite_duration_s_per_arm": 3.0
+    },
+    {
+      "stage": "receiver_navigation_products_absent",
+      "interval_s": [
+        65.0,
+        77.0
+      ],
+      "U0": [
+        0.44118625220132857,
+        0.4192760241631234,
+        0.1269596764017279,
+        0.1236835401283973
+      ],
+      "U1": [
+        0.1403796031827856,
+        0.13849608372345637,
+        0.04502019894099543,
+        0.12438280200677447
+      ],
+      "U3": [
+        0.14041816269146062,
+        0.13850457607200645,
+        0.0450177982242679,
+        0.12401069762123564
+      ],
+      "samples_per_arm": 121,
+      "finite_duration_s_per_arm": 12.0
+    },
+    {
+      "stage": "receiver_corroboration_and_resume",
+      "interval_s": [
+        77.0,
+        90.0
+      ],
+      "U0": [
+        0.08974609566568503,
+        0.06326756749778943,
+        0.03590770987541715,
+        0.06523089077497274
+      ],
+      "U1": [
+        0.09424243964048223,
+        0.09091691868355574,
+        0.017404455301198045,
+        0.06021386280348755
+      ],
+      "U3": [
+        0.09428076991176362,
+        0.0909160474896364,
+        0.017400798456117694,
+        0.06011896907810081
+      ],
+      "samples_per_arm": 192,
+      "finite_duration_s_per_arm": 13.0
+    }
+  ],
+  "coverage": {
+    "U0": {
+      "published_rows": 1287,
+      "finite_state_rows": 1287,
+      "unmatched_event_count": 0,
+      "incomplete_support_rows": 9
+    },
+    "U1": {
+      "published_rows": 1287,
+      "finite_state_rows": 1287,
+      "unmatched_event_count": 0,
+      "incomplete_support_rows": 9
+    },
+    "U3": {
+      "published_rows": 1287,
+      "finite_state_rows": 1287,
+      "unmatched_event_count": 0,
+      "incomplete_support_rows": 1287
+    }
+  },
+  "mechanism_evidence": {
+    "row_counts": {
+      "selected_support_model": {
+        "fixed": 1287
+      },
+      "common_linearization_reference_used": {
+        "fixed": 1287
+      },
+      "next_common_linearization_reference": {
+        "fixed": 1287
+      },
+      "conditional_history_recomputed": {
+        "False": 1287
+      },
+      "revocation": {
+        "False": 1287
+      },
+      "replay_performed": {
+        "False": 1287
+      },
+      "nonlinear_contact_support_complete": {
+        "False": 1287
+      }
+    },
+    "contact_support_signature_changes": 14,
+    "signature_change_times_s": [
+      0.0,
+      79.0,
+      80.0,
+      81.0,
+      81.4,
+      81.6,
+      82.0,
+      83.0,
+      84.0,
+      85.0,
+      86.0,
+      87.0,
+      88.0,
+      89.0
+    ],
+    "winner_always_fixed_in_recorded_working_comparison": true,
+    "fixed_minus_best_score_all_zero": true,
+    "winner_coverage_basis": "Snapshot navigator._contact_support logs every change of winner or support-set signature; all 14 records choose fixed. All 1287 emitted rows and references also remain fixed.",
+    "comparison_scope": "MIXED_NONLINEAR_AND_COMMON_LINEARIZATION_CONDITIONAL_MODELS",
+    "model_edit_cost": 9.210340371976184,
+    "model_support_delta": 5.991464547107982,
+    "nonlinear_expansions": 0,
+    "reference_switches": 0,
+    "successful_revocations": 0,
+    "nonlinear_support_step_events": 0,
+    "gaussian_support_step_events": 600762,
+    "live_alternative_models_final": 858,
+    "unexpanded_nonlinear_explanations_final": 858,
+    "final_active_integer_support_complete": true,
+    "final_active_support_complete": false,
+    "maximum_gaussian_separator_dimension": 49,
+    "recovery_archive_events": 1287,
+    "recovery_storage_bounded": false,
+    "policy_family": "ONE_ADDITIONAL_OBSERVED_COSUPPORT_GROUP_PER_GENERATION"
+  },
+  "runtime_wall_s": {
+    "U0": 24.396010137999838,
+    "U1": 92.88781075099905,
+    "U3": 2304.6972438190005
+  },
+  "conclusions": [
+    "The fixed-contact explanation remained the best evaluated working-score explanation throughout; no evidence supports blaming output selection for hiding a better internal explanation.",
+    "U3 did not achieve contact information revocation/recovery: zero nonlinear expansions, zero reference switches, zero successful revocations.",
+    "Foot U1 improves whole-run p/v over U0 under this synthetic story, but whole-run yaw RMSE is worse, and common-contact translation retains a velocity failure.",
+    "U3 whole-run p/v nearly equal U1. Smaller partial-phase yaw error is not evidence of successful source revocation.",
+    "858 Gaussian alternatives and 600762 support steps demonstrate executed inference work, not a successful mechanism or complete source-family coverage.",
+    "This is a negative result for the specified implemented explanation/scoring path; it does not identify a calibrated failure probability or prove that all physically valid explanations are rejected."
+  ],
+  "claim_boundaries": {
+    "formal_AR": false,
+    "probability_calibrated": false,
+    "complete_research_goal": false,
+    "real_robot_validation": false,
+    "exceeds_V3": false,
+    "V3_run_or_comparison_performed": false,
+    "raw_reference_payload_read_for_this_report": false,
+    "new_navigation_runs": 0,
+    "algorithm_changes": 0
+  },
+  "artifact_sha256": {
+    "U3": {
+      "run_status.json": "ac11758f7f64f45344f52df924ec6c1de166dffc52ea3d2cb068d0668e20bb27",
+      "sensor_metadata.json": "95c7a3bd319f66cca95bf36e1533d65a16402f27eff7fea749b966a7ffee87c5",
+      "evaluation_metadata.json": "501ed7cea3d70670e7488078e5b91402b5d6899c122ba174acead147e1cd0eb6",
+      "input_timeline.csv": "68c54e58271d71b44ddde295640511a24b0907252dabbd8536d1b15d388d2897",
+      "U3/metrics.json": "beed4e95689321211ab71483b4e683766a84b693e9a874c21028ed4dba862a7a",
+      "U3/estimator_summary.json": "eab39455a103f5eade09cbccf7076c8636e508ff901ae0c5ab6792ea79c49746",
+      "U3/decisions.json": "923e3fdc9fc89f4fb260bc3a53b03534c3b55b18b74eaba53b23fdbf477df83b",
+      "U3/navigation.csv": "74c831ff331a1a3662fad213c70ef0d0bca7de6ba11718305d679a4eee451da5",
+      "U3/offline_error_series.npz": "fecaa474ac430444b01ad0822d6ddf01ffcf49b816098b9017bd161fae6e131b"
+    },
+    "controls": {
+      "run_status.json": "392e732290461dbe4b9139fedc536fdf2f3d84f50133f29516019a9a8c509573",
+      "sensor_metadata.json": "95c7a3bd319f66cca95bf36e1533d65a16402f27eff7fea749b966a7ffee87c5",
+      "evaluation_metadata.json": "501ed7cea3d70670e7488078e5b91402b5d6899c122ba174acead147e1cd0eb6",
+      "input_timeline.csv": "68c54e58271d71b44ddde295640511a24b0907252dabbd8536d1b15d388d2897",
+      "U0/metrics.json": "8c9d17ba07de371ec77d7727e2a93ef496c71bc9a95ae1ff75d01aad89e171ef",
+      "U0/estimator_summary.json": "c4b13f400843691981679edc97bc7b85e5c1a777e8a400d812f8286b68145931",
+      "U0/decisions.json": "2fcc2fb4e2c1ff87796ae0482a07a9bf5fab6b0ac4714d794ee7a71f50247b6b",
+      "U0/navigation.csv": "0643504b2f62c454b43584c832079bb12dd372bfafeec7a37aa82f533c0912e9",
+      "U0/offline_error_series.npz": "3531fae5a20054b1e9d91db06f9027f1c046fdccb29719af1e684d8ba44349c8",
+      "U1/metrics.json": "a025db74e16acdf198a0000b414a958b3f3a61ce7988bf5e13343ea4f4c7b869",
+      "U1/estimator_summary.json": "61378d70a2399c21015139866abc7096a80e2190504ff78aabce17ff25a13197",
+      "U1/decisions.json": "d38b2b8ab82b3a0a6784c3348f57d13728d7ec328962347609fae6345d7fee0b",
+      "U1/navigation.csv": "a7dd3ba2ea8a71a39cb3afb2c215da50c6f4cfb818b21aedba12d85294cd5815",
+      "U1/offline_error_series.npz": "4f6bc7fb10ce619dace7599609fbdce9fdf1f52199cd8965357bfbc4bb922960"
+    }
+  }
+}
