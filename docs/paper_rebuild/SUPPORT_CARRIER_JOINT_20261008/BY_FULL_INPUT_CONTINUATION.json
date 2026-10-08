@@ -1,0 +1,125 @@
+{
+  "status": "PASS_FULL_INPUT_ASSEMBLY_NO_NAVIGATION",
+  "failed_attempt": "BY_NATIVE_FULL_06_U1",
+  "next_attempt": "BY_NATIVE_FULL_07_U1",
+  "failed_record_sha256": "00e6d6d055d2885e1fce411edb97d7a66f350465cf3128c60ab63ff5f53ceba3",
+  "failed_source_commit": "d3762d5bd13259697cab40cae71b04e2c7f8f83b",
+  "exact_token_issue": {
+    "raw_body_row_1based": 17717,
+    "stamp_ns": 1772784124843065596,
+    "relative_integer_stamp_time_s": 124.843065596,
+    "legacy_float_time_s": 124.8430655002594,
+    "intermediate_12g": "124.8430655",
+    "original_writer_6f_token": "124.843065",
+    "faulty_microsecond_integer_key": 124843066,
+    "actual_saved_imu_row_1based": 17716,
+    "actual_saved_line": "124.843065 -0.00024893 -0.00040578 -0.00072357 -0.00160943 0.00005165 -0.02094394",
+    "root_cause": "Multiplying the .12g-rounded float by 1e6 and integer rounding differs from the literal .6f writer token at this half-microsecond boundary. The original row exists.",
+    "correction": "Use the literal saved timestamp token and the exact original .12g then .6f serialization; no tolerance or nearest-neighbor lookup."
+  },
+  "retained_long_increment_issue": {
+    "raw_body_row_1based": 30367,
+    "actual_saved_imu_row_1based": 30366,
+    "source_support_s": [
+      188.055379031,
+      188.14705511300002
+    ],
+    "physical_source_duration_s": 0.09167608200002064,
+    "writer_duration_s": 0.09167623519897461,
+    "actual_saved_line": "188.147055 -0.02195589 0.00943132 -0.00542312 0.35749156 -0.02181737 -0.57576611",
+    "root_cause": "The source writer accepts positive measured dt <= 0.1 s. A leftover 50 ms ZOH held-rate duration limit incorrectly rejected this present, valid 91.676 ms saved increment.",
+    "correction": "Remove the old held-rate duration cap. Retain positive physical duration, continuous actual coverage, exact source mapping, and the original writer dt eligibility. No increment is fabricated or skipped."
+  },
+  "original_writer_evidence": [
+    {
+      "path": "src/legsa_gins/paper_rebuild/clean5_calibrated/calibration_runner.py",
+      "line": 123,
+      "expression": "format(float(format(ft[k]-base, '.12g')), '.6f')"
+    },
+    {
+      "path": "src/legsa_gins/input_generation/imu_txt_builder.py",
+      "line": 122,
+      "expression": "skip only dt <= 0.0 or dt > 0.1"
+    },
+    {
+      "path": "src/legsa_gins/paper_rebuild/clean5_calibrated/calibration_runner.py",
+      "line": 119,
+      "expression": "keep measured_dt > 0 and measured_dt <= .1"
+    }
+  ],
+  "validation": {
+    "window_s": [
+      66.0,
+      340.0
+    ],
+    "elapsed_s": 6.651082039999892,
+    "input_summary": {
+      "source_rows_read": 61180,
+      "body_prefix_start_time_s": 44.887078145000004,
+      "force_arcs_seen_include_pre_window_prefix": true,
+      "force_arcs_by_foot": {
+        "FR": 566,
+        "FL": 616,
+        "RR": 617,
+        "RL": 583
+      },
+      "terminal_imu_only_source_time_s": 340.007061467,
+      "selected_body_events": 6021,
+      "support_change_events": 3470,
+      "event_count": 8762,
+      "first_event_time_s": 66.0,
+      "last_event_time_s": 340.0,
+      "gnss_source_epochs": 1371,
+      "valid_position_epochs": 1371,
+      "valid_velocity_epochs": 1371,
+      "carrier_source_slots": 1370,
+      "carrier_built_epochs": 1200,
+      "carrier_unavailable_by_status": {
+        "MODEL_UNAVAILABLE": 170
+      },
+      "first_built_carrier_time_s": 100.19799995422363,
+      "foot_measurement_count": 10241,
+      "imu_rate_samples_available": 61179,
+      "imu_segments": 59383,
+      "integrated_duration_s": 274.0,
+      "requested_duration_s": 274.0,
+      "maximum_imu_packet_duration_error_s": 0.0,
+      "maximum_IMU_source_minus_segment_start_s": 0.09167608200002064,
+      "maximum_event_IMU_availability_delay_s": 0.01304523800001789,
+      "last_event_available_time_s": 340.007061467,
+      "all_used_IMU_sources_available_by_event_publication": true,
+      "foot_measurements_have_exact_event_time": true,
+      "coordinate_rotation_orthogonality_error": 1.1102230246251565e-16,
+      "navigation_calls": 0,
+      "evaluator_calls": 0,
+      "reference_reads": 0,
+      "source_paths": {
+        "body_path": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/高层数据/by2.txt",
+        "imu_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu",
+        "gnss_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+        "carrier_plan_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/FULL_WINDOW_PREPARE_ATTEMPT02/BY2/MODELS/PLAN.json",
+        "calibration_model_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/00_CALIBRATION/CLEAN5_CALIBRATED_SENSOR_MODEL.yaml",
+        "imu_noise_profile_path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/configs/paper_rebuild/horizontal_literature/hartley/stage_payload/04_METHOD_CONTRACTS/GO2_IMU_ALLAN_90MIN_RECOVERED_V1.yaml"
+      }
+    },
+    "all_IMU_sources_available_by_publication": true,
+    "maximum_event_IMU_availability_delay_s": 0.01304523800001789,
+    "maximum_delay_event": {
+      "measurement_time_s": 237.400000095,
+      "available_time_s": 237.413045333,
+      "source_kinds": [
+        "receiver_pv"
+      ]
+    },
+    "no_out_of_window_foot_consumption": true,
+    "navigation_calls": 0,
+    "evaluator_calls": 0,
+    "reference_reads": 0
+  },
+  "changed_source_sha256": {
+    "src/legsa_gins/paper_rebuild/joint_navigation/real_data.py": "e3d4dbd90cdb0add6056597bdf1b0f8bb8c410015b6e4abd229714194db2c9df"
+  },
+  "availability_scope": "Recorded measurement epochs are retained; IMU endpoint availability is explicit. Original GNSS receipt latency remains unavailable and unmodeled.",
+  "failed_attempt_preserved": true,
+  "scientific_navigation_result": "NOT_RUN_BY_THIS_CHECK"
+}

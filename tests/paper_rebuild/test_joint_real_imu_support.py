@@ -1,12 +1,32 @@
 """Physical source-interval conservation, independent of event partitioning."""
 import unittest
+from pathlib import Path
+from tempfile import TemporaryDirectory
 
 import numpy as np
 
-from legsa_gins.paper_rebuild.joint_navigation.real_data import _imu_packet
+from legsa_gins.paper_rebuild.joint_navigation.real_data import By2InputConfig, _imu_packet, _imu_rates
 
 
 class OriginalIncrementSupportTest(unittest.TestCase):
+    def test_original_writer_half_microsecond_token_is_matched_exactly(self):
+        # Actual BY raw row 17717: .12g -> .6f differs from round(t*1e6).
+        legacy_time = 124.8430655002594
+        self.assertEqual(format(float(format(legacy_time, ".12g")), ".6f"), "124.843065")
+        self.assertEqual(int(round(float(format(legacy_time, ".12g"))*1e6)), 124843066)
+        with TemporaryDirectory() as folder:
+            path = Path(folder)/"saved.imu"
+            path.write_text("124.843065 -0.00024893 -0.00040578 -0.00072357 -0.00160943 0.00005165 -0.02094394\n")
+            config = By2InputConfig(path, path, path, path, path, path, start_s=124.844)
+            body = [dict(legacy_dt_s=.0020003318786621094, legacy_time_s=legacy_time,
+                         time_s=124.843065596, source_row=17717)]
+            times, rates, ids, intervals = _imu_rates(config, body)
+            np.testing.assert_array_equal(ids, [[1, 17717]])
+            np.testing.assert_array_equal(times, [124.843065596])
+            np.testing.assert_allclose(rates[0]*intervals[0],
+                [-.00160943, .00005165, -.02094394, -.00024893, -.00040578, -.00072357],
+                rtol=0., atol=1e-18)
+
     def test_nonuniform_intervals_preserve_saved_increments_and_availability(self):
         ends = np.array([.003, .010, .012])
         starts = np.r_[0., ends[:-1]]

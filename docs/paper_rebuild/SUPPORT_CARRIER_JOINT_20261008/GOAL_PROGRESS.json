@@ -141,7 +141,16 @@
       "actual_GNSS_arrival_modeled": false,
       "large_previous_foot_gain_superseded": true,
       "shared_dynamic_model_resolved": false,
-      "full_BY_next_run": "BY_NATIVE_FULL_06_U1"
+      "full_BY_next_run": "BY_NATIVE_FULL_07_U1",
+      "full_BY_input": {
+        "status": "FULL_INPUT_READY",
+        "event_count": 8762,
+        "integrated_duration_s": 274.0,
+        "maximum_IMU_delay_s": 0.013045238,
+        "report": "BY_FULL_INPUT_CONTINUATION.json",
+        "failed_attempt": "BY_NATIVE_FULL_06_U1",
+        "failed_attempt_phase": "READING_INPUT_BEFORE_NAVIGATION"
+      }
     }
   }
 }

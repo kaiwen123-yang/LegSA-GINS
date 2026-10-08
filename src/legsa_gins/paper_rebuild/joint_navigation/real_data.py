@@ -157,10 +157,11 @@ def _body_rows(config: By2InputConfig) -> tuple[list[dict], dict]:
 
 
 def _imu_rates(config: By2InputConfig, body: list[dict]) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-    saved = np.loadtxt(config.imu_path, ndmin=2)
+    saved_tokens = np.loadtxt(config.imu_path, ndmin=2, dtype=str)
+    saved = saved_tokens.astype(float)
     if saved.shape[1] != 7 or not np.isfinite(saved).all() or np.any(np.diff(saved[:, 0]) <= 0):
         raise ValueError("calibrated IMU needs finite increasing seven-column increments")
-    by_printed_time = {int(round(t*1e6)): i for i, t in enumerate(saved[:, 0])}
+    by_printed_time = {token: i for i, token in enumerate(saved_tokens[:, 0])}
     if len(by_printed_time) != len(saved):
         raise ValueError("calibrated IMU has ambiguous microsecond source keys")
     times, rates, identities, source_noise_intervals = [], [], [], []
@@ -168,8 +169,9 @@ def _imu_rates(config: By2InputConfig, body: list[dict]) -> tuple[np.ndarray, np
         dt = row["legacy_dt_s"]
         if dt is None or not 0 < dt <= .1:
             continue
-        # The frozen writer first rounds to .12g, then writes six decimals.
-        key = int(round(float(format(row["legacy_time_s"], ".12g"))*1e6))
+        # Match the writer's literal serialization. Multiplication by 1e6
+        # before round() is not equivalent at .12g half-microsecond ties.
+        key = format(float(format(row["legacy_time_s"], ".12g")), ".6f")
         index = by_printed_time.get(key)
         if index is None:
             raise ValueError(f"body/IMU mapping absent at raw row {row['source_row']}")
@@ -204,7 +206,7 @@ def _imu_packet(t0, t1, times, rates, identities, source_noise_intervals,
             raise ValueError("IMU interval requires an unobserved closing source sample")
         source_start, source_end = source_support_starts[index], times[index]
         duration = source_end-source_start
-        if source_start > cursor or not 0 < duration <= .05:
+        if source_start > cursor or duration <= 0:
             raise ValueError("IMU source does not cover interval; missing integration is not filled")
         boundary = min(t1, source_end)
         physical_rate = rates[index]*(source_noise_intervals[index]/duration)
