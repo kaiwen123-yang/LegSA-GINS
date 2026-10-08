@@ -1,0 +1,8 @@
+{
+  "repository": "<ABSOLUTE_REPOSITORY>",
+  "plan_path": "<ABSOLUTE_PLAN_PATH>",
+  "output_directory": "<ABSOLUTE_OUTPUT_DIRECTORY>",
+  "input_registry": "<ABSOLUTE_INPUT_REGISTRY>",
+  "clean_root": "<ABSOLUTE_CLEAN_ROOT>",
+  "raw_root": "<ABSOLUTE_RAW_ROOT>"
+}

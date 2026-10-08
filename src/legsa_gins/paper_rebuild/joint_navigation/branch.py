@@ -182,6 +182,7 @@ class NavigationBranch:
             kind="COMMON_LINEARIZATION_GAUSSIAN_CONDITIONAL", qualification_scope="COMMON_LINEARIZATION_ONLY",
             reference_scope=anchor["scope"], reference_index=anchor["index"],
             reference_time_s=anchor["time_s"], reference_integer_lineage=deepcopy(parent),
+            reference_support_identity=anchor.get("reference_support_identity", "fixed"),
             lineage_relation="EXACT" if lineage == parent else "ANCESTOR_CONDITIONED",
             shared_variable_count=len(matched), shared_variable_keys=tuple(sorted(matched)),
             frozen_history_keys=tuple(sorted(frozen)),

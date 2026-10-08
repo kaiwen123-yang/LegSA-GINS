@@ -58,6 +58,31 @@ def eliminate_qr(linear: gtsam.GaussianFactorGraph, eliminated_keys):
     return conditionals, remaining
 
 
+def conditional_joint_covariance(conditionals, dimensions, keys):
+    """Select covariance with noise-weighted triangular solves, without QR.
+
+    GTSAM backSubstituteTranspose returns D R_raw^-T e: conditional sigmas D,
+    including exact zeros, are already included. Their columns' inner products
+    give every requested cross block. Multiplying sigmas again would be wrong.
+    """
+    zero = gtsam.VectorValues()
+    for key, dimension in dimensions.items():
+        zero.insert(key, np.zeros(dimension))
+    columns = []
+    for key in keys:
+        dimension = dimensions[key]
+        for axis in range(dimension):
+            unit = gtsam.VectorValues()
+            basis = np.zeros(dimension)
+            basis[axis] = 1.
+            unit.insert(key, basis)
+            rhs = gtsam.VectorValues(zero)
+            rhs.update(unit)
+            columns.append(conditionals.backSubstituteTranspose(rhs).vector())
+    root_columns = np.column_stack(columns)
+    return root_columns.T @ root_columns
+
+
 @dataclass(frozen=True)
 class WindowSnapshot:
     """In-memory checkpoint; referenced factors must remain immutable."""
@@ -71,6 +96,7 @@ class WindowSnapshot:
     linearization_values: gtsam.Values | None = None
     linear_factors: tuple | None = None
     conditional_delta: gtsam.VectorValues | None = None
+    gaussian_conditionals: gtsam.GaussianBayesNet | None = None
 
 
 class JointWindow:
@@ -87,6 +113,8 @@ class JointWindow:
         self.linearization_values: gtsam.Values | None = None
         self._linear_factors: tuple | None = None
         self._conditional_delta: gtsam.VectorValues | None = None
+        self._gaussian_conditionals: gtsam.GaussianBayesNet | None = None
+        self._conditional_dimensions: dict[int, int] = {}
         self.params = gtsam.LevenbergMarquardtParams()
         self.params.setMaxIterations(40)
         self.params.setRelativeErrorTol(1e-8)
@@ -132,6 +160,8 @@ class JointWindow:
             self.linearization_values = None
             self._linear_factors = None
             self._conditional_delta = None
+            self._gaussian_conditionals = None
+            self._conditional_dimensions = {}
             return self.values
         if linearization_values is None and self.linearization_values is None:
             raise ValueError("a Gaussian conditional needs an explicit linearization anchor")
@@ -147,6 +177,10 @@ class JointWindow:
         ordering = gtsam.Ordering.ColamdGaussianFactorGraph(linear)
         keys = [ordering.at(i) for i in range(ordering.size())]
         conditionals, _ = eliminate_qr(linear, keys)
+        self._gaussian_conditionals = conditionals
+        self._conditional_dimensions = {
+            conditional.firstFrontalKey(): conditional.R().shape[0]
+            for conditional in (conditionals.at(i) for i in range(conditionals.size()))}
         self._conditional_delta = conditionals.optimize()
         self.values = anchor.retract(self._conditional_delta)
         self.gaussian_only = True
@@ -237,6 +271,9 @@ class JointWindow:
             for key in self.values.keys():
                 retained_delta.insert(key, self._conditional_delta.at(key))
             self._conditional_delta = retained_delta
+            # The pre-marginalization triangular system still represents every
+            # retained variable's exact joint marginal. Keep it for queries;
+            # the next optimize replaces it rather than extending this system.
         self.marginalized_total += len(expired)
 
     def snapshot(self) -> WindowSnapshot:
@@ -251,6 +288,7 @@ class JointWindow:
             None if self.linearization_values is None else gtsam.Values(self.linearization_values),
             self._linear_factors,
             None if self._conditional_delta is None else gtsam.VectorValues(self._conditional_delta),
+            self._gaussian_conditionals,
         )
 
     def restore(self, snapshot: WindowSnapshot) -> gtsam.Values:
@@ -266,6 +304,11 @@ class JointWindow:
         self._linear_factors = snapshot.linear_factors
         self._conditional_delta = (None if snapshot.conditional_delta is None
                                    else gtsam.VectorValues(snapshot.conditional_delta))
+        self._gaussian_conditionals = snapshot.gaussian_conditionals
+        self._conditional_dimensions = ({} if self._gaussian_conditionals is None else {
+            conditional.firstFrontalKey(): conditional.R().shape[0]
+            for conditional in (self._gaussian_conditionals.at(i)
+                                for i in range(self._gaussian_conditionals.size()))})
         self.gaussian_only = self.linearization_values is not None
         return self.values
 
@@ -283,8 +326,11 @@ class JointWindow:
         conditional keeps its external anchor; callers querying a different
         manifold chart must transport this covariance explicitly.
         """
-        linear = (self._linear_graph(self._linear_factors) if self.gaussian_only
-                  else self.graph.linearize(self.values))
+        if self.gaussian_only:
+            # One frontal variable per conditional, emitted by eliminate_qr.
+            return conditional_joint_covariance(
+                self._gaussian_conditionals, self._conditional_dimensions, keys)
+        linear = self.graph.linearize(self.values)
         ordering = gtsam.Ordering.ColamdConstrainedLastGaussianFactorGraph(linear, keys, True)
         query = set(keys)
         eliminated = [ordering.at(i) for i in range(ordering.size()) if ordering.at(i) not in query]

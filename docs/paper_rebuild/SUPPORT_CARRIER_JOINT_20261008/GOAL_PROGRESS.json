@@ -31,7 +31,10 @@
     "Corrected nonuniform IMU increment reassignment; matched short BY U0/U1 rerun and frozen V3 readout completed; former large foot benefit retracted",
     "Common-chart Gaussian support propagation integrated in the same navigator, physical chart mapping and asynchronous Gaussian bootstrap; original nonlinear comparator preserved",
     "Pre-consumption shared-chart prediction and on-demand nonlinear source-history reconstruction wired; short runs have not yet triggered reconstruction",
-    "BY first-four full integer minimum exhausted: relaxed279.553786 and rigid287.794259 exceed original204.546546; empty support is not an enumeration-budget issue"
+    "BY first-four full integer minimum exhausted: relaxed279.553786 and rigid287.794259 exceed original204.546546; empty support is not an enumeration-budget issue",
+    "Gaussian covariance queries reuse saved square-root conditionals with exact constraints and full cross covariance; independent query equivalence checked",
+    "Published nonlinear conditional history supplies next shared chart while all alternative source models remain recoverable; reference can return to fixed",
+    "Fixed BY 50-packet temporal diagnostic eliminates all constant integer coordinates and still exposes original measurement-noise mismatch; raw Q field/units rebuild exactly"
   ],
   "not_proven": [
     "Material legged contribution to heading qualification or integer-candidate acceptance",
@@ -42,10 +45,11 @@
     "Same-version SDK and frozen V3 system adoption value on real data"
   ],
   "next_core_work": [
-    "Execute the same full90s sequence with shared support inference and actual nonlinear history reconstruction; compare against existing controls and pending full nonlinear U3",
-    "Complete and evaluate running full BY corrected native-increment U1 against original V3; shared dynamic model and heading mediation remain unresolved",
-    "Test a source-grounded correlated phase-bias hypothesis in the same measurement/state model; preserve integer ambiguity and bias identifiability, do not force a nonempty domain",
-    "Complete BY development then freeze parameters for BYO/BYH and XB/NMB; no test-set tuning"
+    "Complete current full90s and fullBY runs under their pinned source versions; evaluate full BY U1 against frozen original V3 once terminal",
+    "Calibrate identifiable physical SD phase-noise terms only on predeclared BY development block, then validate on separate BY block; integrate justified likelihood in the same navigation state",
+    "Reduce Gaussian model QR to actual future-dependency separator while preserving full historical information and source explanations; no arbitrary model deletion",
+    "Complete reversible composite source-policy inference and show actual retained heading and shared v/p gain through continuous failure/recovery",
+    "Freeze only after BY development; then test BYO/BYH and XB/NMB without test-set tuning"
   ],
   "data_policy": {
     "development": "BY",
@@ -64,7 +68,7 @@
     ],
     "real_velocity_accuracy_claim_allowed": false
   },
-  "latest_implementation": "integrated_common_chart_Gaussian_support_and_on_demand_nonlinear_history",
+  "latest_implementation": "reused_Gaussian_square_root_queries_and_reversible_conditional_reference",
   "latest_full_cohort": "cohort_analytic_20261008_seed6100801",
   "latest_full_cohort_status_at_commit": "RUNNING_NOT_RESULT_EVIDENCE",
   "scientifically_interrupted_cohort": {
@@ -128,7 +132,7 @@
       "U0": 3,
       "U1": 1
     },
-    "legged_contribution_scope": "Observed same-compute cold-start improvement; not isolated heading mediation or superiority to V3",
+    "legged_contribution_scope": "Historical04 large foot gain superseded by native increment correction; current short gain small, below frozen V3, heading mediation unresolved",
     "native_increment_correction": {
       "report": "BY_NATIVE_INCREMENT_COMPARISON.json",
       "U0_yaw_rmse_deg": 4.095347500479411,
@@ -157,8 +161,8 @@
     }
   },
   "shared_inference": {
-    "report": "SHARED_INFERENCE_IMPLEMENTATION.md",
-    "status": "SHORT_INTEGRATION_COMPLETED_FULL_VALIDATION_PENDING",
+    "report": "SHARED_INFERENCE_COMPUTATION_AND_REFERENCE.md",
+    "status": "COMPUTATION_AND_REVERSIBLE_REFERENCE_IMPLEMENTED_FULL_VALIDATION_PENDING",
     "synthetic_short_rows": 31,
     "real_short_rows": 161,
     "real_short_finite_rows": 26,
@@ -167,6 +171,35 @@
     "finite_recovery_archive_bounded": false,
     "linearization_approximation_explicit": true,
     "direction_covariance_short_run_superseded": true,
-    "next_full_run": "cohort_shared_20261008_seed6100801"
+    "next_full_run": "cohort_shared_20261008_seed6100801",
+    "common_reference_can_return_to_fixed": true,
+    "source_model_family": "ONE_ADDITIONAL_OBSERVED_COSUPPORT_GROUP_NO_COMPOSITE_FAULT_COVERAGE",
+    "kernel_query_benchmark": {
+      "state_dimension": 98,
+      "query_dimension": 6,
+      "repeats": 30,
+      "saved_triangular_ms": 0.13464,
+      "independent_QR_ms": 0.77145,
+      "covariance_max_abs_difference": 8.53e-14,
+      "end_to_end_speedup_established": false
+    },
+    "active_shared_run_source": "1feccf3_before_this_milestone",
+    "pending_next_computational_change": "Minimal future-dependency separator; frozen-history Gaussian approximation not yet implemented"
+  },
+  "measurement_noise_development": {
+    "diagnostic": "BY_PHASE_TIME_DIFFERENCE.json",
+    "calibration_plan": "BY_NOISE_CALIBRATION_PLAN.json",
+    "status": "ORIGINAL_Q_MISMATCH_CONFIRMED_AFTER_INTEGER_ELIMINATION_CALIBRATION_NOT_RUN",
+    "constant_integer_error_explains_excess": false,
+    "white_vs_colored_distinguished": false,
+    "calibration_window_s": [
+      110,
+      170
+    ],
+    "validation_window_s": [
+      180,
+      240
+    ],
+    "phase_model_changed_in_navigation": false
   }
 }

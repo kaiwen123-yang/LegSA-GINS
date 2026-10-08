@@ -1,0 +1,295 @@
+{
+  "scope": {
+    "sequence": "BY2",
+    "fixed_source_window_s": [
+      100.19799995422363,
+      110.0
+    ],
+    "actual_first_last_s": [
+      100.19799995422363,
+      109.99799990653992
+    ],
+    "epochs": 50,
+    "raw_rows": 1680,
+    "raw_physical_forest_integer_dimension": 41,
+    "code_rows_preserved": 840,
+    "same_arc_phase_difference_rows": 799,
+    "joint_difference_rows": 1639,
+    "free_baseline_rank": 150,
+    "reference_reads": 0,
+    "navigation_calls": 0,
+    "integer_search_calls": 0,
+    "best_integer_residuals_used": false,
+    "Q_or_threshold_changes": false
+  },
+  "method": {
+    "model": "y=A*N+B*b+epsilon; adjacent physical relation maps obey C*N_current=H*N_previous. Preserve every code row and transform phase rows with C*y_current-H*y_previous.",
+    "integer_annihilation_max_abs_DA": 0.0,
+    "covariance": "Q_difference=D*Q_original*D.T; includes shared-pivot correlations and negative cross-time covariance from reused original phase packets. No diagonalization or independent-difference assumption.",
+    "baseline_projection": "One arbitrary3D baseline at each of50 epochs, generalized least squares against full transformed covariance; no constant-heading/rotation approximation across epochs.",
+    "residual_covariance": "R=Q_difference-B*(B.T*Q_difference^-1*B)^-1*B.T; all lag-null expectations include this projection.",
+    "lag_statistic": "For exact same physical relation and fixed lag, sum(r_i*r_j/sqrt(Rii*Rjj)). Null expectation=sum(Rij/sqrt(Rii*Rjj)); variance=sum_ab(C_ia,ib*C_ja,jb+C_ia,jb*C_ja,ib) via Isserlis. Standardized excess is a descriptive quadratic-score scale, not an independent-vote z-test or calibrated normal p-value.",
+    "maximal_integer_annihilator_dimension_check": {
+      "phase_raw_rows": 840,
+      "physical_integer_dimension": 41,
+      "phase_difference_rows": 799,
+      "complete_annihilator": true,
+      "rank_evidence": "Successful SPD Cholesky of D Q D.T, with D A=0 and correct annihilator dimension."
+    }
+  },
+  "joint_fit": {
+    "cost": 2834.9320228750157,
+    "null_degrees_of_freedom": 1489,
+    "cost_over_degrees_of_freedom": 1.9039167379953095,
+    "code_cost": 659.2375184652519,
+    "code_expected_cost": 837.0079324462546,
+    "phase_difference_cost": 2175.6945044097656,
+    "phase_expected_cost_after_baseline_fit": 651.9920675537453
+  },
+  "phase_groups": [
+    {
+      "group": "0:0:0",
+      "phase_difference_rows": 147,
+      "full_temporal_Q_residual_cost": 260.77253481581977,
+      "null_expected_cost_after_baseline_fit": 99.9446867118891,
+      "cost_over_null_expectation": 2.6091685650839014,
+      "raw_phase_difference_residual_rms_m": 0.012389539877236691,
+      "residual_covariance_expected_rms_m": 0.008199222291985817
+    },
+    {
+      "group": "0:3:0",
+      "phase_difference_rows": 91,
+      "full_temporal_Q_residual_cost": 215.42840229939736,
+      "null_expected_cost_after_baseline_fit": 78.80677978774389,
+      "cost_over_null_expectation": 2.733627777706773,
+      "raw_phase_difference_residual_rms_m": 0.023717244193280345,
+      "residual_covariance_expected_rms_m": 0.01694881103586564
+    },
+    {
+      "group": "2:0:0",
+      "phase_difference_rows": 114,
+      "full_temporal_Q_residual_cost": 368.5604607212849,
+      "null_expected_cost_after_baseline_fit": 93.55224993575426,
+      "cost_over_null_expectation": 3.939621558801513,
+      "raw_phase_difference_residual_rms_m": 0.02917159819015268,
+      "residual_covariance_expected_rms_m": 0.014430562828341991
+    },
+    {
+      "group": "2:6:0",
+      "phase_difference_rows": 135,
+      "full_temporal_Q_residual_cost": 265.1726561866817,
+      "null_expected_cost_after_baseline_fit": 116.00441570589804,
+      "cost_over_null_expectation": 2.2858841585734524,
+      "raw_phase_difference_residual_rms_m": 0.023500749948956078,
+      "residual_covariance_expected_rms_m": 0.01678601720723031
+    },
+    {
+      "group": "3:0:0",
+      "phase_difference_rows": 244,
+      "full_temporal_Q_residual_cost": 808.5654712875357,
+      "null_expected_cost_after_baseline_fit": 200.45381978381764,
+      "cost_over_null_expectation": 4.0336745498766,
+      "raw_phase_difference_residual_rms_m": 0.019052637310982164,
+      "residual_covariance_expected_rms_m": 0.010159509272954304
+    },
+    {
+      "group": "3:2:0",
+      "phase_difference_rows": 68,
+      "full_temporal_Q_residual_cost": 257.19497909904624,
+      "null_expected_cost_after_baseline_fit": 63.23011562864237,
+      "cost_over_null_expectation": 4.067602542585584,
+      "raw_phase_difference_residual_rms_m": 0.023764914389880994,
+      "residual_covariance_expected_rms_m": 0.012906262300165118
+    }
+  ],
+  "interpretation": {
+    "constant_integer_offset_explains_excess": false,
+    "time_varying_error_model_inadequacy_supported": true,
+    "temporal_coloring_uniquely_established": false,
+    "reason": "Integer-annihilating differences retain excess phase energy, but underestimated independent phase variance also amplifies mandatory negative adjacent-difference correlations. Original-Q score scales are not calibrated significance after amplitude misspecification.",
+    "not_identified": [
+      "absolute constant phase bias",
+      "a unique physical error source",
+      "beta amplitude and correlation time suitable for navigation",
+      "integer acceptance reliability"
+    ],
+    "ten_second_identifiability": "No fitted likelihood or information-rank evidence separates white amplitude from beta sigma/tau here. tau far below0.2s is white-like; tau above surviving arc/window duration is constant-like or identifies only sigma^2/tau through small increments. Geometry/synchronization can also remain outside the free-baseline subspace."
+  },
+  "raw_noise_source_check": {
+    "receiver_signal_samples": 2280,
+    "original_csv_to_ubx_selected_payloads_identical": true,
+    "selected_payload_count": 100,
+    "source_hashes_match_registry": true,
+    "Q_max_abs_reconstruction_difference": 0.0,
+    "unit_policy": "RAWX cpStdev code is linear0.004*code cycles; convert once by physical signal wavelength into meters. The existing0.004-cycle floor has no effect on admitted rows in this window because all observed codes>=2.",
+    "CNO_policy": "CNO gates eligibility, while original phaseQ uses receiver-reported cpStdev and wavelength. It is not an additional fitted phase-variance multiplier.",
+    "conclusion": "No field/unit construction error in this fixed window; receiver-reported precision does not ensure environmental errors are fully represented.",
+    "details": "RAW_PHASE_NOISE_CHECK.json and RAW_PHASE_NOISE_ROWS.json"
+  },
+  "next_measurement_model_study_not_run": {
+    "source_defined_windows_s": {
+      "calibration_BY2": [
+        110.0,
+        170.0
+      ],
+      "validation_BY2": [
+        180.0,
+        240.0
+      ],
+      "interval_semantics": "left closed, right open"
+    },
+    "selection": "Windows fixed before reading their observations or outcomes. PLAN time coverage exists from100.198 to339.998s. No new windows were analyzed in this diagnostic.",
+    "independence_boundary": "Nonoverlapping held-out time blocks with10s separation. Approximate decorrelation follows only for a finite candidate tau<=2s; physical independence is not presumed and longer dependence invalidates that assumption.",
+    "models": [
+      "M0: original source Q.",
+      "M1: original Q plus additive white variance per identifiable physical SD signal group, mapped to DD with the actual target/pivot incidence.",
+      "M2: M1 plus zero-mean finite-time stationary beta on each physical SD source signal, independent of integer arc identity and with no automatic beta reset at integer slip, covariance sigma_beta_g^2 exp(-abs(dt)/tau), mapped through the same DD incidence; retain integer N and do not add an unrestricted constant beta."
+    ],
+    "identifiable_parameters": "Fit only covariance combinations identifiable after physical integer and geometry elimination. Two receiver white variances with identical DD structure appear only as a sum; do not claim separate receiver estimates. A common tau and group SD amplitudes are a candidate low-dimensional model, not a validated choice.",
+    "restricted_likelihood": "For fixed integer-annihilator D, Qd(theta)=D Qraw(theta) D.T. Profile free per-epoch geometry B by GLS and minimize logdet(Qd)+logdet(B.T inv(Qd) B)+r.T inv(Qd) r. Check projected covariance-derivative rank/profile curvature. Constant components annihilated by D cannot be estimated.",
+    "tau_scope": "Initially study finite resolvable0.2..2s correlation time only. A bound optimum or flat profile means unresolved parameters, not permission to assert a colored source. Subsample-white and slow-constant limits are explicitly outside a separately identified tau claim.",
+    "direct_discriminator": "Predefine nonoverlapping same-physical-relation endpoint intervals at h=0.2,0.4,0.8,1.6s. For each h use source-index anchored disjoint endpoints, preserve the cross-h and state-projection covariance. Compare variogram shapes after original reported heteroscedastic precision and fitted white SD terms: use a quadratic contrast orthogonal to the identifiable white-amplitude derivative span. A colored covariance contributes an h-dependent1-exp(-h/tau) shape; actual projected expectations must be computed rather than substituting this ideal shape.",
+    "variogram_full_null_covariance": "For quadratic statistics V_h=r.T W_h r on one common projected raw/differenced residual vector with covariance R, E[V_h]=tr(W_h R), Cov(V_h,V_k)=2 tr(W_h R W_k R). Overlapping sources across h and all geometry-fit effects remain in R. Parameter-estimation uncertainty must be propagated for calibrated coverage or assessed on held-out blocks.",
+    "validation": "Freeze source-noise parameters from calibration. Evaluate held-out predictive/restricted likelihood, projected innovation covariance and the registered variogram contrast on the validation block. Use the same complete input likelihood and unchanged integer-domain quantile, not selected passing subsets. No ordinary chi-square likelihood-ratio claim at sigma_beta=0 where tau is unidentified.",
+    "success_does_not_establish": [
+      "absolute beta means",
+      "unique multipath attribution",
+      "AR reliability or navigation accuracy",
+      "permission to release arbitrary N integrality"
+    ]
+  },
+  "physical_lag_product_ratios": {
+    "scope": "Descriptive only. Not invariant to heterogeneous unknown variances and not a significance test.",
+    "all_groups": [
+      {
+        "lag_intervals": 1,
+        "group": null,
+        "pairs": 746,
+        "uncentered_product_ratio": -0.4407262613962236,
+        "nominal_covariance_product_ratio": -0.5004600590315796
+      },
+      {
+        "lag_intervals": 2,
+        "group": null,
+        "pairs": 699,
+        "uncentered_product_ratio": -0.08165458559308816,
+        "nominal_covariance_product_ratio": 0.00013668932642471037
+      },
+      {
+        "lag_intervals": 3,
+        "group": null,
+        "pairs": 657,
+        "uncentered_product_ratio": 0.009179976429062752,
+        "nominal_covariance_product_ratio": 0.00011304586965648558
+      }
+    ],
+    "group_lag1": [
+      {
+        "lag_intervals": 1,
+        "group": "0:0:0",
+        "pairs": 144,
+        "uncentered_product_ratio": -0.5242854721298996,
+        "nominal_covariance_product_ratio": -0.5008708102654107
+      },
+      {
+        "lag_intervals": 1,
+        "group": "0:3:0",
+        "pairs": 80,
+        "uncentered_product_ratio": -0.17263938633576364,
+        "nominal_covariance_product_ratio": -0.4996090540109644
+      },
+      {
+        "lag_intervals": 1,
+        "group": "2:0:0",
+        "pairs": 92,
+        "uncentered_product_ratio": -0.5545777766964373,
+        "nominal_covariance_product_ratio": -0.5018491823957213
+      },
+      {
+        "lag_intervals": 1,
+        "group": "2:6:0",
+        "pairs": 129,
+        "uncentered_product_ratio": -0.47455304632247663,
+        "nominal_covariance_product_ratio": -0.5009687589750007
+      },
+      {
+        "lag_intervals": 1,
+        "group": "3:0:0",
+        "pairs": 236,
+        "uncentered_product_ratio": -0.44708192457979085,
+        "nominal_covariance_product_ratio": -0.5000826004957778
+      },
+      {
+        "lag_intervals": 1,
+        "group": "3:2:0",
+        "pairs": 65,
+        "uncentered_product_ratio": -0.2376617338263689,
+        "nominal_covariance_product_ratio": -0.4989922251273393
+      }
+    ]
+  },
+  "reproducibility": {
+    "scripts": [
+      "scripts/paper_rebuild/diagnose_by_phase_time_difference.py",
+      "scripts/paper_rebuild/inspect_by_raw_phase_precision.py",
+      "scripts/paper_rebuild/write_by_phase_diagnostic_readout.py"
+    ],
+    "path_config_example": "BY_PHASE_DIAGNOSTIC_CONFIG.example.json",
+    "full_receipt_relative_to_scratch_root": "SUPPORT_CARRIER_JOINT_20261008/BY_PHASE_TIME_DIFFERENCE_100198_110000_01/SUMMARY.json",
+    "source_PLAN_sha256": "16580a87ee787d4890edd22a8fc8bfb9b0771242e427201a952f323f233879ea",
+    "source_blocks_sha256": [
+      "83a90cc1a7c49395b22e94a2f03a3827c5fa6b7b94fdd84e171e2204a668dd20",
+      "2e22c775bf921983704c37472c628a1e5f807104f449d034e7d242ea8bb1e7ce",
+      "b2b4cb9c77d0b8af4f106880f91b1d23d6727543d8808ed77c3380a76ad43f8d",
+      "b3f3834dc871ffbc20f01c17d9802edb5c3aa2949eb1e52fcefb1a8363140ac7",
+      "c423d790d5e3b9cc5cfebcde789fba2a015586e66b725ea30165b1e29f9499df",
+      "0baf79746e1cd79bae3e80fdf797576b96d59135c91c0db19bd1727614d1fb28",
+      "133c16fa58664f2d4aa0c2a0230cc2b3d3e050633879e111987ffa39b27356ef",
+      "62afe8a41247e629fed23d0900bc8b42885b878a9ac70bec5ac3582a44c56592",
+      "039cfe81972e0fa6cc66f9c597f4dc13f7a07c1f5e8b7dc2e72ed45a5726d24c",
+      "7170d086c65c675c5774322879053ae5617c666767ed4640ea2af74c1943998a",
+      "0db0edc1f7145a11bd8e41a244d7de67348b070437b9c33a9a55f10757d7cfeb",
+      "5472755533df3ac885893f067de71181643c1e6647270a77513677c63ef5ba52",
+      "55fcd42ebc53579d98aae3c0f2fec05d74593b7513c2e74a144a7b01c3896b97",
+      "2302dda7f23280cc88f46a260698febdab872e358489fc9e0210078d864d02ba",
+      "8da7a7582217bb7e07f7663a0862c9f9c425222b3654ac940fc04790bde56aaf",
+      "501fdad80d37b190009bb32c76689ee7e7c8dcaab68964a7532b7efab738fb2d",
+      "6e92ad113eb6bd1b176f230b72c1e8699d93831205579eb05695bd9d551f8023",
+      "a203a25ff36e54d3c5bd648ae4ac092b3173059e1475a7d4a5b991518a72b8e3",
+      "2f9e3323e2cd984bde64e3c66ce481ad676a3a82742f03be05618923cb904fde",
+      "42a5a8280070e9d3959ddc7c58980005fd4463da71beb7984ddd3dc09a757384",
+      "11f614fe3770e1e02e709affc16fffe595e5f63a1f60cca6594600a923c76e66",
+      "66a32dbcb696ba37b72870604b0d1bdfa2733387be7e61b2c9a919cce194aa4f",
+      "59703ece8849fc751a23684a7a61292453e1696b0bdeb71d314efb9463a43d94",
+      "2bd1da9b4f4c7160e11ca1989afb54feaf0c5b7e6cac25ee9ba56dcf02007145",
+      "845f5fb03d86401e955ca9b53df8b0bac335ec4275976112ff52677299998881",
+      "730a862e7e5c8eda47e810370d1fdf02153e6bc7a514a78136fa6ba519adc272",
+      "8d024988723510e5b384996f3e84f248079fb92621d1595d8b4a135cde18a88f",
+      "3bf16507c473f5bb75783b161e20d50cf4ec87640ac7b99f13ba8db98c66075b",
+      "a3550709a321fa52cd7953443f6c73f21c337d2238ba35d673ccdce6a5ae8163",
+      "d59b0fe95746a08589953514b212400fc0897f30e500618bb08252747c0a8a73",
+      "2404b82e3d5c5486e705174928aa669c4c1b96d0cd02f7c1dd145b65d10ba767",
+      "980eb75c0548c648b10bcc0327457cf7d745a99e268cb1d11686cb97dfe0cf33",
+      "ad161747be59dd97b90520d204fcf1cefbda6bcd5a0ac8f7cd0be6faf1829334",
+      "4221e88ab162be3c0a3444f906f2d8f206d3d95be6c78fb6bd898c7d31135366",
+      "dfbcdb6d78f7b2f852ba32326847be1a0967573d6554ffefe761be035c3fbf7b",
+      "a93d093b85ba3adbd2eea341fd039867f96f4544c30da4061aa3d8e537f3dfbf",
+      "b4a3b452304ba91e3d0eb26e5ea36362566efd3e21bf380811992e7794c8dcaa",
+      "17eb61d336ab57fb84a4eba952d8807d327ad184beb3fd90bbd69370c8c3d07b",
+      "de12598d71656c1443ea7a120fc5577635367ee5010c7b6f0a98741e9a9593bf",
+      "63670b4c237ad3ee0d27377c320e02259840d0da97b7d1d60b4f97328974c033",
+      "02d00bb6225870667a09a95874e8c456e59239f5e33d70ba5599fb722132a636",
+      "05a99426fa8c35593d5bc943eb6fc7c30c385d672e5507986e95530421038102",
+      "cac008fd4d322c3c8fceb9cd587841037bae95857fb20a8b98e2a8594ba005d5",
+      "4b8e4c1205fe8c74a242b050d4decff1608e41b5387b34a6d17b284ac5929b0c",
+      "7a21b6a63ee875454e114bf79fc601fad4536a63e77872c695ddbe35ce289a8d",
+      "ef932e5633cabef35eb92b3761d66072973f1f3705dc592212b9de4934e22450",
+      "1ce943cca6139ee8d265ca2bafebaa4058f3fe92af5c7f8e9e3f8b51f4250345",
+      "e6ad82dda7f55f82745bba54971c7f5ee3349508164de48d8a04305714fdc8d7",
+      "717315fe196e5e32691e2993b96c6a36d705e9129c9ae707e0d9e0f2d635a975",
+      "78033d3d4789991e56b6db28f73ac6033b3d9dcf676c4aced881f302442c5098"
+    ],
+    "runtime_script_sha256": "42230ac2ec151ae3a1c3707889dd37eaeedb91bb93129cfccdb83966c3feba05",
+    "postprocessor_sha256": "73141750ab13b4338c4ce0b8aee4fbd898ad997ea6ef230b41d98356b14286a5"
+  }
+}

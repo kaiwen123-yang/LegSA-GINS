@@ -96,6 +96,11 @@ class JointNavigator:
         self.shared_support = (self.monitor_support and
             metadata.get("support_inference", "full_nonlinear") == "shared_linearization")
         self.anchor_history = {}
+        # The last published nonlinear conditional supplies the next common
+        # chart. Choosing a chart does not adopt or discard a source model.
+        self.linearization_reference_identity = None
+        self.linearization_reference_used = None
+        self.linearization_reference_switches = 0
         # Finite-run recovery archive. This makes old-source nonlinear replay
         # possible; its memory is explicitly not a bounded online log claim.
         self.recovery_events = []
@@ -142,7 +147,7 @@ class JointNavigator:
     def _initialized(self):
         return self.branches[0].index is not None and self.branches[0].bootstrap_status != "NO_INIT"
 
-    def _try_bootstrap(self, packet: dict, index: int, common_anchors=None):
+    def _try_bootstrap(self, packet: dict, index: int, common_anchors=None, *, record_anchors=False):
         """Use only arrived observations in one finite asynchronous startup graph.
 
         Finite yaw seeds locate conditional modes. Their convergence is neither
@@ -223,7 +228,7 @@ class JointNavigator:
             initial_direction_status="FLOAT_INIT_DIRECTION_UNRESOLVED")
         if common_anchors is not None:
             qualification["scope"] = "COMMON_LINEARIZATION_ONLY"
-        if self.shared_support:
+        if self.shared_support or record_anchors:
             self.anchor_history.setdefault(index, {})["bootstrap"] = [
                 branch.export_linearization_anchor() for branch in modes]
         for branch in modes:
@@ -323,14 +328,16 @@ class JointNavigator:
                    branch.integer_lineage[:len(anchor["integer_lineage"])] == anchor["integer_lineage"]]
         return parents[0] if len(parents) == 1 else None
 
-    def _advance(self, packet: dict, index: int, expected_rows=None, shared_anchors=None):
+    def _advance(self, packet: dict, index: int, expected_rows=None, shared_anchors=None, *, record_anchors=False):
         if self.asynchronous_start and not self._initialized():
-            self._try_bootstrap(packet, index, None if shared_anchors is None else shared_anchors.get("bootstrap", []))
+            self._try_bootstrap(packet, index,
+                None if shared_anchors is None else shared_anchors.get("bootstrap", []),
+                record_anchors=record_anchors)
             if self._initialized():
-                if self.shared_support:
+                if self.shared_support or record_anchors:
                     self.anchor_history.setdefault(index, {})["step"] = [b.export_linearization_anchor() for b in self.branches]
                 self._propose(index, packet, None if shared_anchors is None else shared_anchors.get("conditioned", []))
-                if self.shared_support:
+                if self.shared_support or record_anchors:
                     self.anchor_history.setdefault(index, {})["conditioned"] = [b.export_linearization_anchor() for b in self.branches]
             return (), 0.
         anchors = [None]*len(self.branches) if shared_anchors is None else [
@@ -343,10 +350,10 @@ class JointNavigator:
         for branch, anchor in zip(self.branches, anchors):
             branch.step(packet, index, support_models=self._models_at(packet["time_s"]),
                         linearization_anchor=anchor)
-        if self.shared_support:
+        if self.shared_support or record_anchors:
             self.anchor_history.setdefault(index, {})["step"] = [b.export_linearization_anchor() for b in self.branches]
         self._propose(index, packet, None if shared_anchors is None else shared_anchors.get("conditioned", []))
-        if self.shared_support:
+        if self.shared_support or record_anchors:
             self.anchor_history.setdefault(index, {})["conditioned"] = [b.export_linearization_anchor() for b in self.branches]
         return rows, nis
 
@@ -423,8 +430,16 @@ class JointNavigator:
                 self._register_support_group(old)
             self.rescan_support_history = False
         ids = self._register_support_group(packet)
+        self.linearization_reference_used = "fixed" if self.shared_support else None
         expired = []
-        for identity, track in self.support_tracks.items():
+        tracks = list(self.support_tracks.items())
+        reference = self.linearization_reference_identity if self.shared_support else None
+        # Advance the previously published nonlinear conditional first. Its
+        # posterior at this event is then a shared chart, not a new factor or a
+        # substitute for any model's predictive evidence accumulated so far.
+        tracks.sort(key=lambda item: item[0] != reference)
+        for identity, track in tracks:
+            supplies_reference = identity == reference and track.nonlinear_expanded
             if (not self.shared_support and t-track.first_use > self.history_s and
                     not set(track.arc_ids).intersection(ids) and
                     identity not in self.last_supported_tracks):
@@ -445,7 +460,8 @@ class JointNavigator:
                         outcome = shadow._advance(shadow._filter(event), event_index,
                                         replay_rows[event_index],
                                         self.anchor_history.get(event_index, {})
-                                        if self.shared_support and not track.nonlinear_expanded else None)
+                                        if self.shared_support and not track.nonlinear_expanded else None,
+                                        record_anchors=supplies_reference)
                         if outcome is None:
                             track.unresolved_reason = "UNRESOLVED_COMMON_INTEGER_LINEAGE_ANCHOR"
                             break
@@ -460,6 +476,16 @@ class JointNavigator:
                         self.gaussian_support_step_events += 1
                     else:
                         self.nonlinear_support_step_events += 1
+            if supplies_reference and self._same_predictive_rows(shadow):
+                charts = shadow.anchor_history.pop(index, None)
+                if charts is not None:
+                    for anchors in charts.values():
+                        for anchor in anchors:
+                            anchor["reference_support_identity"] = identity
+                    # Only the current event changes provider. Earlier charts
+                    # remain the actual history used by Gaussian replay.
+                    self.anchor_history[index] = charts
+                    self.linearization_reference_used = identity
         for identity in expired:
             del self.support_tracks[identity]
         result = self._contact_support(packet)
@@ -539,7 +565,11 @@ class JointNavigator:
             complete = complete and all(track.nonlinear_expanded for track in self.support_tracks.values())
         # Only a unique source explanation commits a model change. Otherwise
         # U3 retains the separate clean conditional states and their directions.
-        accepted = selected if (len(identities) == 1 and "fixed" not in identities and complete) else None
+        accepted = selected if (not self.shared_support and len(identities) == 1
+                                and "fixed" not in identities and complete) else None
+        # Shared-chart selection is a reversible conditional reference choice.
+        # It must not enter the legacy adopt/clear path, which discards the old
+        # fixed model and prevents reinstating a released source component.
         return alternatives, costs, supported, winner, accepted
 
     def _save(self, index: int, time_s: float):
@@ -919,6 +949,18 @@ class JointNavigator:
             if nominal and support_result is not None and self.rebuild_history:
                 selected_index = min(nominal, key=lambda j: costs[j])
             best = output_models[selected_index][1]
+            if self.shared_support:
+                chosen_track = output_models[selected_index][3]
+                reference = (chosen_track.identity if chosen_track is not None
+                             and chosen_track.nonlinear_expanded else None)
+                if reference != self.linearization_reference_identity:
+                    self.decisions.append(dict(time_s=t, kind="COMMON_LINEARIZATION_REFERENCE_CHANGED",
+                        previous_reference=self.linearization_reference_identity or "fixed",
+                        selected_reference=reference or "fixed", effective_after_time_s=t,
+                        source_models_discarded=0, historical_scores_rewritten=0,
+                        historical_online_rows_rewritten=0, new_observation_added=False))
+                    self.linearization_reference_identity = reference
+                    self.linearization_reference_switches += 1
             output = best.current_output()
             local_directions = [self._direction_summary(item[1], index) for item in output_models]
             output.update(local_directions[selected_index])
@@ -961,6 +1003,9 @@ class JointNavigator:
                 candidate_support_complete=nonlinear_comparison_complete,
                 conditional_model_evidence_frontier_complete=comparison_complete,
                 nonlinear_contact_support_complete=nonlinear_comparison_complete,
+                common_linearization_reference_used=self.linearization_reference_used,
+                next_common_linearization_reference=(self.linearization_reference_identity or "fixed"
+                    if self.shared_support else None),
                 contact_inference_scope=("CONDITIONAL_COMMON_LINEARIZATION_WITH_ON_DEMAND_NONLINEAR_REPLAY"
                     if self.shared_support else "FULL_NONLINEAR_CONDITIONAL_MODELS"),
                 unexpanded_nonlinear_explanations=(sum(not track.nonlinear_expanded for track in self.support_tracks.values())
@@ -1019,5 +1064,8 @@ class JointNavigator:
             nonlinear_support_step_events=self.nonlinear_support_step_events,
             recovery_archive_events=len(self.recovery_events),
             anchor_history_epochs=len(self.anchor_history),
+            linearization_reference_switches=self.linearization_reference_switches,
+            last_common_linearization_reference_used=self.linearization_reference_used,
+            next_common_linearization_reference=self.linearization_reference_identity or "fixed",
             recovery_storage_bounded=False if self.shared_support else None,
         ))

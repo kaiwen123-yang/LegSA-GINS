@@ -1,0 +1,66 @@
+{
+  "status": "PREDECLARED_NOT_RUN",
+  "sequence": "BY2",
+  "model_purpose": "Source-driven measurement-likelihood calibration, not candidate-domain quantile adjustment or navigation scoring.",
+  "calibration_window_s": [
+    110.0,
+    170.0
+  ],
+  "validation_window_s": [
+    180.0,
+    240.0
+  ],
+  "interval_semantics": "left closed/right open; every GPS_GAL_BDS_DUAL BUILT record, eligibility only from source metadata",
+  "inspected_before_declaration": "Only PLAN time coverage, not observation or residual values for these two windows. First100.198..109.998s is development evidence and dense-equivalence fixture.",
+  "models": [
+    {
+      "id": "M0",
+      "parameters": {},
+      "covariance": "Original complete source Q."
+    },
+    {
+      "id": "M1",
+      "parameters": [
+        "white_sd_sigma_m"
+      ],
+      "covariance": "Original Q plus one nonnegative common additive white variance on physical SD signals, transported through actual DD incidence."
+    },
+    {
+      "id": "M2",
+      "parameters": [
+        "white_sd_sigma_m",
+        "beta_sd_sigma_m",
+        "tau_s"
+      ],
+      "covariance": "M1 plus one common stationary OU SD-source variance and finite tau, mapped through true DD incidence. No unrestricted constant beta. Integer N remains integral in navigation; continuous N is integrated/profiled only for restricted calibration."
+    }
+  ],
+  "parameter_identifiability": "One SD variance represents the sum of two indistinguishable receiver contributions. All amplitudes start shared across six signal groups to avoid six-group overfitting. Parameter combinations must have observable projected covariance derivatives.",
+  "beta_identity": "Physical source signal identity, independent of integer arc token. Do not reset beta merely for a lock/TDCP integer slip; actual missing observations advance OU time with no fabricated samples.",
+  "tau_working_domain_s": [
+    0.2,
+    2.0
+  ],
+  "tau_boundary_interpretation": "A working calibration domain, not a prior proof of identifiability. Flat or boundary profile does not identify tau; tau below sampling interval is white-like and long tau constant-like.",
+  "held_out_boundary": "Ten-second separation only makes dependence small under the finite<=2s OU hypothesis; no blanket claim of independent physical data.",
+  "objective": "Exact restricted Gaussian likelihood with free per-epoch 3D baseline and full continuous physical integer design removed. No best integer, reference, subset passing or AR-domain outcome enters fitting.",
+  "efficient_engine": "Build fixed per-epoch contrasts from original Q whitening and full QR nullspace of whitened B, independent of calibration parameters. Projected covariance is I+white_sigma^2 H H.T. Kalman innovations on physical SD beta propagate y and all float N columns as multiple RHS, then QR removes fixed-rank N. Objective includes logdet innovations and logdet whitened N information; fixed contrast-coordinate constants are parameter-independent.",
+  "equivalence_gate": "On fixed first50 epochs compare beta=0 and one predeclared nonzero beta example with complete dense covariance, both residual cost and restricted log determinant. No calibration before equivalence.",
+  "dense_example_parameters": {
+    "white_sd_sigma_m": 0.005,
+    "beta_sd_sigma_m": 0.01,
+    "tau_s": 0.8
+  },
+  "validation_outputs": [
+    "frozen-parameter predictive/restricted likelihood",
+    "projected innovation covariance",
+    "nonoverlapping same-physical-relation variogram shape at0.2,0.4,0.8,1.6s with full joint projected covariance"
+  ],
+  "prohibited_claims": [
+    "calibration or validation establishes AR reliability",
+    "a nonempty acceptance domain validates the model",
+    "integer slip implies beta reset",
+    "two separate receiver variances have been estimated from identical SD structure"
+  ],
+  "scope": "Implementation/equivalence first; optimization and validation remain separate steps. No navigation run, no BYO/BYH/XB/NMB reads."
+}
