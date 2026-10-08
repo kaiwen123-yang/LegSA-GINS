@@ -132,10 +132,12 @@ class JointNavigator:
         self.gaussian_support_step_events = 0
         self.nonlinear_support_step_events = 0
         self.support_models = list(canonical_policy(support_models or []))
-        # Fixed engineering decision costs, not calibrated model probabilities.
-        # The finite-motion comparison retains the original engineering cost.
-        # Legacy projection releases remain an external-only diagnostic family.
-        self.model_edit_cost = 2. * math.log(100.)
+        # Proper joint predictive densities already integrate finite motion and
+        # include their normalization. Do not add the legacy release family's
+        # unsupported 1:100 edit odds to that likelihood comparison.
+        # The retained 1:20 working support band affects publication; it is not
+        # a calibrated confidence set or a multiple-search error guarantee.
+        self.model_edit_cost = 0. if proper_support_prediction else 2. * math.log(100.)
         self.model_support_delta = 2. * math.log(20.)
         self.support_groups = {}
         self.support_tracks = {}
