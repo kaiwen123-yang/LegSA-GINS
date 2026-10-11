@@ -1,0 +1,18 @@
+[
+  {
+    "id": "Q1_proprioception_absolute_heading",
+    "title_zh": "机器人自身观测与绝对航向",
+    "role": "main",
+    "question": "Q1",
+    "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/robot/Q1_proprioception_absolute_heading.png",
+    "metadata_path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/robot/Q1_proprioception_absolute_heading.json"
+  },
+  {
+    "id": "Q3_oisam_precision_continuity",
+    "title_zh": "LegSA-GINS与OiSAM的精度及输出连续性",
+    "role": "main",
+    "question": "Q3",
+    "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_oisam_precision_continuity.png",
+    "metadata_path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_oisam_precision_continuity.json"
+  }
+]

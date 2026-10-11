@@ -1,0 +1,35 @@
+{
+  "id": "S_Q4_tilt_aiding",
+  "caption_en": "Roll and pitch errors with and without robot tilt aiding during nominal walking, large body motion and single-antenna obstruction. Each column shows one recording, with roll above and pitch below. The zero-error line represents the reference attitude. All curves use the same fixed parameters and their recorded timestamps.",
+  "caption_zh": "三条实测序列中机身倾角辅助对横滚、俯仰误差的影响。蓝线为完整方法，橙色虚线为关闭倾角辅助；每列对应一个序列，上下分别为横滚和俯仰。",
+  "meaning_zh": "蓝线相对零线更近的区段，就是倾角辅助直接改善机身姿态的时段。",
+  "sources": [
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00007/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00004/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_A05/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F04/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_A05/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F04/v3/FROZEN_EVALUATOR/error_series.csv.gz"
+  ],
+  "technical_notes": {
+    "comparison": "F04 versus A05",
+    "gap_break_s": 0.1
+  },
+  "width_mm": 174.0,
+  "height_mm": 112.0,
+  "alignment_status": "PASS",
+  "audit_returncodes": {
+    "pdf_text": 0,
+    "collisions": 0
+  },
+  "visual_review": "PASS",
+  "visual_review_notes": "彩色/灰度逐面板检查；同一误差分量跨场景共享纵轴；三场景自然全时序无降采样，叠合保留。",
+  "role": "supplement",
+  "question": "Q4",
+  "title_zh": "机载倾角辅助与姿态误差",
+  "export_sha256": {
+    "png": "28e5943860890ac674c29ef231c7aadccad1672b333430d245e17914b6d5f5dc",
+    "pdf": "b3d077e9f1ebb6b3adaf7b00b58fac19f4815a2d042b9f1f277e1ce940ceb22b",
+    "svg": "400393e2e4d370c95719629353059e95d7d97998b2c7da3c8b54a3601f187e66"
+  }
+}

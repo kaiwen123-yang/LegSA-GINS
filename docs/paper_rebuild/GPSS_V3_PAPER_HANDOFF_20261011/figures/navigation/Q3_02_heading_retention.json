@@ -1,0 +1,40 @@
+{
+  "id": "Q3_02_heading_retention",
+  "caption_en": "Navigation during GNSS position interruptions. (a,b) Horizontal and heading errors for the first registered 20-s interruption; gray shading marks the interrupted interval, and the inset enlarges its first 8 s. The dual- and single-position IEKFs omit their position updates, while the baseline-retaining IEKF continues relative-baseline updates. LegSA-GINS retains its available heading and robot-motion aids. (c,d) Whole-run RMSE for every registered 10-s and 20-s interruption, with nine placements per duration; thin lines connect the same placement across methods. The baseline-retaining IEKF preserves heading but does not automatically improve positioning. Logarithmic scales retain all finite outcomes.",
+  "caption_zh": "GNSS位置中断时的导航结果。（a,b）首个登记20秒中断的位置和航向误差，灰带表示中断区间，小窗放大中断后的前8秒；双位置和单位置IEKF停止位置更新，保留基线的IEKF继续进行相对基线更新，LegSA-GINS保留可用航向及机身运动辅助。（c,d）全部10秒和20秒中断的整段RMSE，每个时长九个布置；细线连接同一布置的四种方法。保留基线的IEKF维持了航向，但没有自动改善位置结果。对数坐标保留全部有限结果。",
+  "meaning_zh": "上排显示位置中断中误差如何增长，下排说明这一现象在全部18个登记条件中的分布。",
+  "sources": [
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/F04_A2_20s_seed00.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/LC01_A2_20s_seed00.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/EXT05C_A2_20s_seed00.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/LC01-BR_A2_20s_seed00.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/A2_ALL18_MATCHED_RESULTS.csv"
+  ],
+  "technical_notes": {
+    "example_case": "D62_20s_seed_00",
+    "time_origin_s": 196.2,
+    "display_window_s": [
+      -5,
+      35
+    ],
+    "selection": "First registered case, fixed input interruption and 5s-before/15s-after window",
+    "paired_cases": 18,
+    "native_finite_per_method": 18,
+    "all_rows_drawn": true,
+    "systems_have_different_auxiliary_inputs": true,
+    "new_solver_evaluator_provider_calls": 0
+  },
+  "width_mm": 174.0,
+  "height_mm": 150.0,
+  "alignment_status": "PASS",
+  "audit_returncodes": {
+    "pdf_text": 0,
+    "collisions": 0
+  },
+  "visual_review": "PASS",
+  "visual_review_notes": "Inspected actual color and grayscale previews: every panel readable, common units and no clipping, deliberate curve intersections retained. Insets show fixed input-defined windows. Dense native IEKF curves use the retained full sampling and readable local insets.",
+  "title_zh": "保留方向与位置中断中的导航表现",
+  "question": "Q3",
+  "role": "supplement",
+  "preview_sha256": "d53674ba6d67f245b92cca6fec799d11859626cedbba105fcd662a1473ead23c"
+}

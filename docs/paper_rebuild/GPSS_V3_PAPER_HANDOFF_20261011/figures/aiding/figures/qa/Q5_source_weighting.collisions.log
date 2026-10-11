@@ -1,0 +1,12 @@
+Nature Figure Rendered Collision Audit
+pdf: /mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/Q5_source_weighting.pdf
+pages: 1
+visible text boxes: 64
+stroke paths: 113
+
+[WARN] page 1 text-image-edge: Text partially overlaps the edge of 1 raster image(s) — 'Median change: +0.98 mm'
+  text bbox: (313.0126953125, 373.8912048339844, 407.9487609863281, 381.8912048339844)
+
+summary: 0 fail, 1 warn, 10 contained fill overlays, 4 contained image overlays
+verdict: REVIEW REQUIRED
+note: contained overlays can be intentional; WARN findings need final-size visual review

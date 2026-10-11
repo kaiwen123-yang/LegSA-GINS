@@ -1,0 +1,37 @@
+{
+  "id": "Q3_03_OiSAM_reinitialized_heading",
+  "caption_en": "Heading errors with OiSAM reinitialized at recorded IMU gaps. Left panels show all matched dynamic-output epochs throughout the three trials. Right panels enlarge a fixed central interval for nominal walking and the first restart inside the other two evaluation windows. Light shading in the left panels identifies the enlarged interval; darker shading in the right panels marks the recorded IMU gap. Initialization-only states are excluded, and curves break across unavailable dynamic outputs. Both methods use the same nominal evaluation seconds and the same heading convention. These heading comparisons do not mix the different position reference points used in the archived evaluations.",
+  "caption_zh": "OiSAM在实测IMU缺口处重新初始化后的航向误差。左列展示三条记录全部匹配动态输出历元，右列分别放大常规行走的固定中间时段，以及另外两条记录评价窗内的首次恢复过程。左图浅色带表示放大区间，右图深灰带表示实测IMU缺口。仅初始化状态不进入曲线，动态输出缺失处断线。两方法使用相同名义评价秒及一致航向定义；本图不混用原评价中不同的位置参考点。",
+  "meaning_zh": "在允许按真实输入缺口重新初始化后，比较两方法整段航向，而非只用OiSAM一次初始化后的早停描述它。",
+  "sources": [
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2_COMMON_SEGMENTED_HEADING.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2H_COMMON_SEGMENTED_HEADING.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2O_COMMON_SEGMENTED_HEADING.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/GAPS.csv"
+  ],
+  "technical_notes": {
+    "heading": "wrapped estimated NED body yaw minus reference NED body yaw; already evaluated",
+    "matched_dynamic_counts": {
+      "BY2": 274,
+      "BY2H": 267,
+      "BY2O": 367
+    },
+    "position_metrics_not_plotted": true,
+    "protocol": "OiSAM predeclared IMU blocks, one initialization per block, not failure-triggered restart",
+    "zoom_selection": "Nominal centered interval; H/O first actual in-window input restart",
+    "new_solver_evaluator_provider_calls": 0
+  },
+  "width_mm": 174.0,
+  "height_mm": 178.0,
+  "alignment_status": "PASS",
+  "audit_returncodes": {
+    "pdf_text": 0,
+    "collisions": 0
+  },
+  "visual_review": "PASS",
+  "visual_review_notes": "Inspected actual color and grayscale previews: every panel readable, common units and no clipping, deliberate curve intersections retained. Insets show fixed input-defined windows. Dense native IEKF curves use the retained full sampling and readable local insets.",
+  "title_zh": "OiSAM重新初始化后的完整航向比较",
+  "question": "Q3",
+  "role": "supplement",
+  "preview_sha256": "4c111dd2b2e90d8c34b60ec8db60c9aa3e3661a620b092f6139a7faf141b1173"
+}

@@ -1,0 +1,97 @@
+{
+  "pdf": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/C01.pdf",
+  "auditable": true,
+  "verdict": "REVIEW REQUIRED",
+  "page_count": 1,
+  "visible_text_box_count": 72,
+  "text_trace_count": 72,
+  "stroke_path_count": 89,
+  "filled_region_count": 70,
+  "image_region_count": 14,
+  "summary": {
+    "fail": 0,
+    "warn": 3,
+    "contained_fill_overlays": 12,
+    "contained_image_overlays": 10
+  },
+  "thresholds": {
+    "text_inset_pt": 0.6,
+    "min_overlap_ratio": 0.05,
+    "clipping_tolerance_pt": 0.5
+  },
+  "findings": [
+    {
+      "severity": "WARN",
+      "kind": "text-fill-edge",
+      "page": 1,
+      "message": "Text partially overlaps the edge of 1 filled region(s)",
+      "text": "185",
+      "text_bbox": [
+        417.3540344238281,
+        327.92584228515625,
+        429.86517333984375,
+        335.42584228515625
+      ],
+      "other_text": null,
+      "other_bbox": [
+        425.41552734375,
+        227.37637329101562,
+        438.5617370605469,
+        339.2503967285156
+      ],
+      "object_count": 1,
+      "object_indexes": [
+        74
+      ]
+    },
+    {
+      "severity": "WARN",
+      "kind": "text-image-edge",
+      "page": 1,
+      "message": "Text partially overlaps the edge of 2 raster image(s)",
+      "text": "0.10",
+      "text_bbox": [
+        393.4119873046875,
+        60.86093521118164,
+        408.00811767578125,
+        68.36093139648438
+      ],
+      "other_text": null,
+      "other_bbox": [
+        367.79998779296875,
+        66.36000061035156,
+        485.8800048828125,
+        165.72000122070312
+      ],
+      "object_count": 2,
+      "object_indexes": [
+        4,
+        5
+      ]
+    },
+    {
+      "severity": "WARN",
+      "kind": "text-image-edge",
+      "page": 1,
+      "message": "Text partially overlaps the edge of 1 raster image(s)",
+      "text": "10",
+      "text_bbox": [
+        410.27972412109375,
+        290.21661376953125,
+        418.6208801269531,
+        297.71661376953125
+      ],
+      "other_text": null,
+      "other_bbox": [
+        367.79998779296875,
+        231.3599853515625,
+        485.8800048828125,
+        295.91998291015625
+      ],
+      "object_count": 1,
+      "object_indexes": [
+        11
+      ]
+    }
+  ]
+}

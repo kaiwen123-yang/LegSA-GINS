@@ -1,0 +1,16 @@
+method,version,scope,status,used_in,source_table,role
+RTKLIB V0,HX07R,3 trials,completed,SQ2_RTKLIB_all_configurations + Q2_heading_availability_and_consistency,tables/EXISTING_HEADING_METRICS.csv,heading_output_comparison
+RTKLIB V0E,HX07R,3 trials,completed,SQ2_RTKLIB_all_configurations,tables/EXISTING_HEADING_METRICS.csv,heading_output_comparison
+RTKLIB V1,HX07R,3 trials,completed,SQ2_RTKLIB_all_configurations,tables/EXISTING_HEADING_METRICS.csv,heading_output_comparison
+RTKLIB V2,HX07R,3 trials,completed,SQ2_RTKLIB_all_configurations,tables/EXISTING_HEADING_METRICS.csv,heading_output_comparison
+EXT01 C-LAMBDA,EXT V2 generation2,3 trials,completed,SQ2_raw_dual_antenna_methods,tables/EXISTING_HEADING_METRICS.csv,candidate_direction_comparison
+EXT02 C-WLS,EXT V2 generation2,3 trials,completed,SQ2_raw_dual_antenna_methods,tables/EXISTING_HEADING_METRICS.csv,candidate_direction_comparison
+EXT03 DD-KF,EXT V2 generation2,3 trials,completed,SQ2_raw_dual_antenna_methods,tables/EXISTING_HEADING_METRICS.csv,candidate_direction_comparison
+EXT04 FAR,HX02 declared policies,3 trials,completed_zero_accepted,Supplemental result table,tables/FAR_PAR_ALL_THREE_TRIALS.csv,acceptance_outcome
+EXT04 PAR,HX02 declared policies,3 trials,completed_zero_accepted,Supplemental result table,tables/FAR_PAR_ALL_THREE_TRIALS.csv,acceptance_outcome
+DG01,Saved completed results,See source table,completed,Supplemental evidence table,tables/DG01_OVERVIEW.csv,input_conditions
+DG01R,Saved completed results,See source table,completed,Supplemental evidence table,tables/DG01R_VERSION_COMPARISON.csv,clock_and_halfcycle_diagnosis
+RTKLIB trace4,Saved completed results,See source table,completed,Q2_heading_availability_and_consistency,tables/RTKLIB_EPOCH_DIAGNOSTICS.csv,main_figure_mechanism
+Input history,Saved completed results,See source table,completed,Supplemental evidence table,tables/INPUT_AUDIT_SUMMARY.json,input_equivalence
+Classic candidate qualification,Saved completed results,See source table,completed,Supplemental evidence table,tables/CLASSIC_QUALIFICATION_RESULTS.csv,synthetic_implementation_qualification
+Two-epoch motion prototype,Saved completed results,See source table,completed,Supplemental evidence table,tables/MOTION_PAIR_RESULTS.csv,separate_research_branch

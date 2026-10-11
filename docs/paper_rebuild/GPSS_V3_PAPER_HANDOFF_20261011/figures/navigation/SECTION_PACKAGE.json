@@ -1,0 +1,182 @@
+{
+  "question": "Q3",
+  "figures": [
+    {
+      "id": "Q3_01_IEKF_natural",
+      "title_zh": "自然工况下与双位置IEKF的比较",
+      "role": "main",
+      "question": "Q3",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_01_IEKF_natural.png",
+      "metadata_path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_01_IEKF_natural.json"
+    },
+    {
+      "id": "Q3_02_heading_retention",
+      "title_zh": "保留方向与位置中断中的导航表现",
+      "role": "supplement",
+      "question": "Q3",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_02_heading_retention.png",
+      "metadata_path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_02_heading_retention.json"
+    },
+    {
+      "id": "Q3_03_OiSAM_reinitialized_heading",
+      "title_zh": "OiSAM重新初始化后的完整航向比较",
+      "role": "supplement",
+      "question": "Q3",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_03_OiSAM_reinitialized_heading.png",
+      "metadata_path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_03_OiSAM_reinitialized_heading.json"
+    },
+    {
+      "id": "Q3_04_all_degradation_pairs",
+      "title_zh": "全部外部退化类型的配对比较",
+      "role": "supplement",
+      "question": "Q3",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_04_all_degradation_pairs.png",
+      "metadata_path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_04_all_degradation_pairs.json"
+    },
+    {
+      "id": "Q3_05_FGO_position",
+      "title_zh": "不同GNSS信息处理路线的定位结果",
+      "role": "supplement",
+      "question": "Q3",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_05_FGO_position.png",
+      "metadata_path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_05_FGO_position.json"
+    }
+  ],
+  "tables": [
+    {
+      "title": "A2_ALL18_MATCHED_RESULTS",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/A2_ALL18_MATCHED_RESULTS.csv"
+    },
+    {
+      "title": "A2_F04_existing",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/A2_F04_existing.csv"
+    },
+    {
+      "title": "ALL_DEGRADATION_CASE_DEFINITIONS",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/ALL_DEGRADATION_CASE_DEFINITIONS.csv"
+    },
+    {
+      "title": "BY2H_OISAM_SEGMENTED_EXISTING_METRICS",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2H_OISAM_SEGMENTED_EXISTING_METRICS.csv"
+    },
+    {
+      "title": "BY2O_OISAM_SEGMENTED_EXISTING_METRICS",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2O_OISAM_SEGMENTED_EXISTING_METRICS.csv"
+    },
+    {
+      "title": "BY2_OISAM_SEGMENTED_EXISTING_METRICS",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2_OISAM_SEGMENTED_EXISTING_METRICS.csv"
+    },
+    {
+      "title": "CLASSIC18_LABEL_MAP",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/CLASSIC18_LABEL_MAP.csv"
+    },
+    {
+      "title": "DEGRADATION_EXTERNAL_SUMMARY_R2",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/DEGRADATION_EXTERNAL_SUMMARY_R2.csv"
+    },
+    {
+      "title": "DEGRADATION_EXTERNAL_TABLE_R2",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/DEGRADATION_EXTERNAL_TABLE_R2.csv"
+    },
+    {
+      "title": "DEGRADATION_PAIRED_R2",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/DEGRADATION_PAIRED_R2.csv"
+    },
+    {
+      "title": "EXPERIMENTS",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/EXPERIMENTS.csv"
+    },
+    {
+      "title": "GAPS",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/GAPS.csv"
+    },
+    {
+      "title": "GINAV_ACTUAL_RESULTS",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/GINAV_ACTUAL_RESULTS.csv"
+    },
+    {
+      "title": "IEKF_A2_PARAMETERS",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/IEKF_A2_PARAMETERS.csv"
+    },
+    {
+      "title": "IEKF_ALL16_CONDITIONS_WITH_PARAMETERS",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/IEKF_ALL16_CONDITIONS_WITH_PARAMETERS.csv"
+    },
+    {
+      "title": "LC_NATIVE_TABLE_READ",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/LC_NATIVE_TABLE_READ.csv"
+    },
+    {
+      "title": "METHOD_COVERAGE",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/METHOD_COVERAGE.csv"
+    },
+    {
+      "title": "OUTPUT_INTERVALS",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/OUTPUT_INTERVALS.csv"
+    },
+    {
+      "title": "SOURCE_BLOCKS",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/SOURCE_BLOCKS.csv"
+    },
+    {
+      "title": "SOURCE_MANIFEST",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/SOURCE_MANIFEST.csv"
+    }
+  ],
+  "method_coverage": [
+    {
+      "method": "Two-position IEKF (LC01)",
+      "use": "Q3_01, Q3_02, Q3_04",
+      "conditions": "Literature and calibrated parameters, FILE_START/CONTRACT_START, all 16 natural method/config rows retained",
+      "table": "IEKF_ALL16_CONDITIONS_WITH_PARAMETERS.csv"
+    },
+    {
+      "method": "Single-position IEKF (EXT05C)",
+      "use": "Q3_02, Q3_04; all natural results table",
+      "conditions": "Same IEKF backbone; GNSS2 retained only for initialization; LIT/S and start conditions retained",
+      "table": "IEKF_ALL16_CONDITIONS_WITH_PARAMETERS.csv"
+    },
+    {
+      "method": "Baseline-retaining IEKF (LC01-BR)",
+      "use": "Q3_02",
+      "conditions": "A2, 18/18 finite; negative position result retained",
+      "table": "A2_ALL18_MATCHED_RESULTS.csv"
+    },
+    {
+      "method": "OiSAM strict",
+      "use": "Main F02 copied by root from focused package",
+      "conditions": "Same POI and matched-time precision, full output support, no repeated initialization",
+      "table": "Root common-point package"
+    },
+    {
+      "method": "OiSAM segmented",
+      "use": "Q3_03, Q3_05",
+      "conditions": "Three real runs, 11 preregistered input blocks, prior-only excluded; heading and GNSS1 position definitions kept separate",
+      "table": "BY2_OISAM_SEGMENTED_EXISTING_METRICS.csv and BY2H/BY2O counterparts"
+    },
+    {
+      "method": "Wen TC-FGO",
+      "use": "Q3_05",
+      "conditions": "Raw code and adapted attitude/velocity, GNSS1 position; attitude is not an independently estimated output",
+      "table": "EXPERIMENTS.csv"
+    },
+    {
+      "method": "GNC-FGO",
+      "use": "Q3_05",
+      "conditions": "Raw code+Doppler, GNSS1 position",
+      "table": "EXPERIMENTS.csv"
+    },
+    {
+      "method": "Official GINav SPP/INS",
+      "use": "Complete actual-run table",
+      "conditions": "Native runs on three trials, initialization support and speed-gate failures retained, no full-window fictitious precision",
+      "table": "GINAV_ACTUAL_RESULTS.csv"
+    }
+  ],
+  "new_solver_calls": 0,
+  "new_evaluator_calls": 0,
+  "new_provider_calls": 0,
+  "full_read_source_files": 74,
+  "output_styles": "174 mm; 600 dpi PNG; editable vector PDF/SVG; 300 dpi color/grayscale previews"
+}

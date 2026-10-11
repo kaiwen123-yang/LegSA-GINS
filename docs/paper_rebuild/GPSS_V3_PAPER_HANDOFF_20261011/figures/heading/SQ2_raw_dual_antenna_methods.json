@@ -1,0 +1,104 @@
+{
+  "id": "SQ2_raw_dual_antenna_methods",
+  "caption_en": "Heading-error distributions and output availability for three raw dual-antenna processing methods during nominal walking, large body motion and single-antenna obstruction. The upper row shows cumulative distributions of absolute directional error at each method’s recorded valid outputs; the lower row marks their output times. C-LAMBDA and C-WLS denote independent implementations of the constrained objectives, with no integer acceptance test on these candidates. DD-KF uses the saved double-difference filter output. No held heading is added. The plotted direction is derived from the horizontal projection of the lateral baseline and compared with the reference yaw.",
+  "caption_zh": "三种原始双天线观测处理方法在常规行走、大幅机身运动与单侧天线遮挡下的航向误差分布和可用输出。上排为各方法已记录有效输出时刻的绝对方向误差累积分布，下排标出对应输出时间。C-LAMBDA和C-WLS为对应约束目标的独立实现，这些方向候选未设整数接受检验；DD-KF使用保存的双差滤波输出，不插入保持航向。所画方向由横向基线的水平投影换算，并与参考航向比较。",
+  "meaning_zh": "完整使用九组保存结果，把方向误差分布与输出覆盖分开呈现，避免密集正负180度跳转线遮住三种方法的差别。",
+  "sources": [
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2_all_methods_all_window_epochs.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2H_all_methods_all_window_epochs.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2O_all_methods_all_window_epochs.csv.gz"
+  ],
+  "technical_notes": {
+    "identity": "EXT V2 TECH_RETRY_2 generation2 saved results; no post-result guard backfill",
+    "support": [
+      {
+        "sequence": "BY2",
+        "method": "EXT01",
+        "available": 980,
+        "denominator": 1370
+      },
+      {
+        "sequence": "BY2",
+        "method": "EXT02",
+        "available": 961,
+        "denominator": 1370
+      },
+      {
+        "sequence": "BY2",
+        "method": "EXT03",
+        "available": 541,
+        "denominator": 1370
+      },
+      {
+        "sequence": "BY2H",
+        "method": "EXT01",
+        "available": 1059,
+        "denominator": 1350
+      },
+      {
+        "sequence": "BY2H",
+        "method": "EXT02",
+        "available": 1029,
+        "denominator": 1350
+      },
+      {
+        "sequence": "BY2H",
+        "method": "EXT03",
+        "available": 467,
+        "denominator": 1350
+      },
+      {
+        "sequence": "BY2O",
+        "method": "EXT01",
+        "available": 1173,
+        "denominator": 1885
+      },
+      {
+        "sequence": "BY2O",
+        "method": "EXT02",
+        "available": 1210,
+        "denominator": 1885
+      },
+      {
+        "sequence": "BY2O",
+        "method": "EXT03",
+        "available": 269,
+        "denominator": 1885
+      }
+    ],
+    "cdf": "Absolute saved native-valid errors sorted for display only; no interpolation, holding or scientific recomputation. Each method uses its own valid support.",
+    "candidate_vs_fixed": "EXT01/02 have no acceptance test; DD-KF ratio-accepted subset78/70/5 is not true integer success.",
+    "quantity": "Projected lateral-baseline heading versus commercial fused Euler yaw.",
+    "read_scope": "All3 combined-window source tables and every method row read.",
+    "no_new_scientific_calls": true
+  },
+  "width_mm": 174.0,
+  "height_mm": 131.99999999999997,
+  "alignment_status": "PASS",
+  "audit_returncodes": {
+    "pdf_text": 0,
+    "collisions": 0
+  },
+  "visual_review": "PASS",
+  "title_zh": "三种原始双天线处理路线的误差分布与输出",
+  "visual_review_receipt": {
+    "date": "2026-10-11",
+    "color": "viewed",
+    "grayscale": "viewed",
+    "assessment": "Panel alignment, uncut labels, retained full error scales and clear independent output rows. CDF panels retain all native-valid samples. Main figure has0–20deg inset and10–22s baseline enlargement.",
+    "export_sha256": {
+      "png": "fee64a5758e59516b7a33cbb6c7a70d3dc67bf0480b47ce347b0d8bf3efe8f49",
+      "pdf": "87124364b64721f00b4f1c60336e21577cc014b803f1bf6aa59b367dcec057e7",
+      "svg": "faed8a72d9eaa39f1dbdc726684a0f528a176a62df1b954f4725fdf1b29bc975"
+    },
+    "png_size": [
+      4110,
+      3118
+    ],
+    "png_dpi": [
+      599.9988,
+      599.9988
+    ],
+    "pdf_width_mm": 173.99999508327906
+  }
+}

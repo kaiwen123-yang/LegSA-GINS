@@ -1,0 +1,1505 @@
+[
+  {
+    "sequence": "BY2",
+    "method": "GNC",
+    "run_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/RUN.json",
+    "run": {
+      "schema": "fgo_comparison.native.v1",
+      "sequence": "BY2",
+      "method": "GNC",
+      "attempt": "PAPER_CONTRACT",
+      "terminal_status": "COMPLETED",
+      "output_root": "<FGO_ROOT>/runs/BY2/GNC/PAPER_CONTRACT",
+      "data_mode": "real_raw_reuse",
+      "synthetic_data_used": false,
+      "semisynthetic_data_used": false,
+      "trace_used_online": false,
+      "receiver_imu_as_body_imu": false,
+      "final_v23_output_solver_input": false,
+      "LegSA_output_solver_input": false,
+      "per_case_tuning": false,
+      "output_only_correction": false,
+      "epoch_deleted_for_metric": false,
+      "old_runtime_input_count": 0,
+      "code_commit": "0625cea2c137859d1319c2e1011178cea19af10a",
+      "config_hash": "5f54a3ed91b32788e0c404e26cade6f5d211627097a9027ce46078322c54242f",
+      "config_path": "<CODE_ROOT>/configs/paper_rebuild/fgo_comparison/GNC_PAPER_CONTRACT_20261004.json",
+      "implementation_source_hashes": {
+        "src/legsa_gins/datasets/by2/go2_body_state_parser.py": "3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/__init__.py": "d6f38207b797390b236ae145565bb4fd2bf5f1507a809a55effc7dadd552745c",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/broadcast_identity.py": "404b23476738e747d2abc4608bb5f99c72934f4e40a2ce4107b6967f1695b976",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/ceres_relinearize.py": "49a8b3782931360abe9bdf527b9a0f1a21f289f6b7257807fe06a99b38deb4ce",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/evaluation.py": "823fd2fc81ecac1f33ab503698a4856f87b324fbdfc842bc9855cd896109ea47",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/gnc.py": "4d347d1e745ba330130745490934bfc5b9caab86446d006c5adb7477616ff750",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/obgins_bridge.cc": "de71d58f3f822b9c018cfe8ce1e82ef193ae48255480a80292525f385278d994",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/obgins_preintegration.py": "7d4a211541fe0cfddced87074d19c41adeaf3cc1fc116c88408914dbb03d1aa5",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": "6733fceead5a464dc398610f39e7d0b9aa2223e5b1b67d6d5ad2d9eb004b9862",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/oisam_inputs.py": "9cca453bcef6e355b3e4b2e6ee00075034854c7189a98f7634eaa213279696b6",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/plotting.py": "3f5f75c89c66d196f5dafb151d927173abb0f4b807218146867c6790b7e8c294",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/raw_inputs.py": "ad6de0fd9a1077947d3c852ed10b54a861497d6953f6a66639681dda97bd5e42",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/report.py": "77e24d7f27a6a29dfd166f89f443ac8933da44186839529cf6cdee0ed2a0eb94",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/retained_results.py": "9b7e272e7c8451d0c80ca1d6d382bbb4fd022c6cc0aeb096bc70ec8a1c949739",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/rtklib_corrections.c": "c63abcc4a6cec027a4fb290536211fe67d2aade34b57b00179d9cb371800649e",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/runner.py": "32ef37454667a9da4890178d976fdbf82a615b74be002d0976ecc6a974005415",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/wen_ahrs.py": "29463290c27485ba0f00d88049d69afabfaeb3d797e3318a20c8da65f2735017",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/wen_tc.py": "21799406825343811611cf99dde979d0cd1b28d0031879042bebbee1488b6498",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49"
+      },
+      "source_snapshot_root": "<FGO_ROOT>/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT",
+      "source_identity": "uncommitted per-file overlay plus baseline HEAD; exact bytes sealed in SOURCE_SNAPSHOT",
+      "solver_and_adapter_elapsed_s": 0.5797921100001986,
+      "hardware": {
+        "cpu": "Intel(R) Core(TM) Ultra 9 275HX",
+        "logical_cpus": 24,
+        "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+        "python": "3.10.12",
+        "numpy": "1.26.4",
+        "threads": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        }
+      },
+      "mode": "FULL_BATCH_SPARSE_GAUSS_NEWTON",
+      "native_process_count": 1,
+      "evaluator_process_count": 0,
+      "reference_payload_reads": 0,
+      "reference_paths_denied": 3,
+      "input_provenance": {
+        "raw_source_hashes": {
+          "gnss1": {
+            "relative_path": "BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv",
+            "sha256": "5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027",
+            "size_bytes": 27874623,
+            "hash_status": "NEWLY_VERIFIED"
+          },
+          "gnss2": {
+            "relative_path": "BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss2-raw.csv",
+            "sha256": "39249696329530452a1049b5b39e2c1d8f7e89ae2190d2c95bce70f5b4f44583",
+            "size_bytes": 26827144,
+            "hash_status": "NEWLY_VERIFIED"
+          }
+        },
+        "provider_hashes": {
+          "epochs": "712f134012e49b9946543b00f148995da9bcb4253dec6d74857000137e98a485",
+          "receiver1_measurements": "30c13aa28157b76029bd887d72dd2e8cabb84a350d0068281fb47acaee8bf43e",
+          "receiver2_measurements": "ba5ddeb9107108026f5a4154b1dd3d7b4eab998c124039790644afefd121cc6b"
+        },
+        "navigation_hashes": {
+          "gnss1.nav": "107409d66734988652ba4a38ea7b8bf31094ee2746232c1885fbaa1eec136205",
+          "gnss2.nav": "299d5e881d480e388194e981e402785b3b494d002838b435df5404345ad54974"
+        },
+        "input_sha256": "9b3841f2e15d45ac476a418b495c25a87b8f70f77f4888905b3d138c8820886f",
+        "base_time": 1772784000.0,
+        "window_seconds": [
+          66.0,
+          340.0
+        ],
+        "input_manifest_path": "<FGO_INPUT_BY2>/INPUT_MANIFEST.json",
+        "input_manifest_sha256": "2970889fb7a34a2b62464c6ee14496ea53830a0ce8b3fcc2d1c9894201d0ecdc",
+        "epoch_count": 285,
+        "expected_window_one_hz_slots": 275,
+        "missing_one_hz_slots": []
+      },
+      "output_hashes": {
+        "STATES.csv": "677f014145bea705fd50f240767a7dbbae13062723035b504c3d066667fb0595",
+        "WEIGHTS.npz": "5fb2e2e7c510aa41b5867cebc2139851bea3cfd2baa7a591eddf255689650242",
+        "SOLVER.json": "55ad19a33c45c0d90594f0d518ebe6f75af530e262185a195b00d00e0848a529",
+        "WEIGHT_HISTORY_INDEX.json": "23662533fd34e054d85edc91e19477164592bcfefdf88aceb9601df1890ad376",
+        "STATE_ARRAYS.npz": "d8acfd8a0da527761c1ad961e8d8737ed54ec374eb8dcf7bd6b0ee3551aaf9dc",
+        "WEIGHT_HISTORY.npz": "aaa0d37a81b6cc688d5cf9dde74511cbc5a04094e206149c891f9dce11ca5c10"
+      }
+    }
+  },
+  {
+    "sequence": "BY2",
+    "method": "WEN_TC",
+    "run_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/RUN.json",
+    "run": {
+      "schema": "fgo_comparison.native.v1",
+      "sequence": "BY2",
+      "method": "WEN_TC",
+      "attempt": "PAPER_CONTRACT",
+      "terminal_status": "COMPLETED",
+      "output_root": "<FGO_ROOT>/runs/BY2/WEN_TC/PAPER_CONTRACT",
+      "data_mode": "real_raw_reuse",
+      "synthetic_data_used": false,
+      "semisynthetic_data_used": false,
+      "trace_used_online": false,
+      "receiver_imu_as_body_imu": false,
+      "final_v23_output_solver_input": false,
+      "LegSA_output_solver_input": false,
+      "per_case_tuning": false,
+      "output_only_correction": false,
+      "epoch_deleted_for_metric": false,
+      "old_runtime_input_count": 0,
+      "code_commit": "0625cea2c137859d1319c2e1011178cea19af10a",
+      "config_hash": "fe2a42c415fffc7aa371a326c86886c7fa38baa9530a60a18294f07e2ecf0214",
+      "config_path": "<CODE_ROOT>/configs/paper_rebuild/fgo_comparison/WEN_TC_PAPER_CONTRACT_20261004.json",
+      "implementation_source_hashes": {
+        "src/legsa_gins/datasets/by2/go2_body_state_parser.py": "3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/__init__.py": "d6f38207b797390b236ae145565bb4fd2bf5f1507a809a55effc7dadd552745c",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/broadcast_identity.py": "404b23476738e747d2abc4608bb5f99c72934f4e40a2ce4107b6967f1695b976",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/ceres_relinearize.py": "49a8b3782931360abe9bdf527b9a0f1a21f289f6b7257807fe06a99b38deb4ce",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/evaluation.py": "823fd2fc81ecac1f33ab503698a4856f87b324fbdfc842bc9855cd896109ea47",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/gnc.py": "4d347d1e745ba330130745490934bfc5b9caab86446d006c5adb7477616ff750",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/obgins_bridge.cc": "de71d58f3f822b9c018cfe8ce1e82ef193ae48255480a80292525f385278d994",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/obgins_preintegration.py": "7d4a211541fe0cfddced87074d19c41adeaf3cc1fc116c88408914dbb03d1aa5",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": "6733fceead5a464dc398610f39e7d0b9aa2223e5b1b67d6d5ad2d9eb004b9862",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/oisam_inputs.py": "9cca453bcef6e355b3e4b2e6ee00075034854c7189a98f7634eaa213279696b6",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/plotting.py": "3f5f75c89c66d196f5dafb151d927173abb0f4b807218146867c6790b7e8c294",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/raw_inputs.py": "ad6de0fd9a1077947d3c852ed10b54a861497d6953f6a66639681dda97bd5e42",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/report.py": "77e24d7f27a6a29dfd166f89f443ac8933da44186839529cf6cdee0ed2a0eb94",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/retained_results.py": "9b7e272e7c8451d0c80ca1d6d382bbb4fd022c6cc0aeb096bc70ec8a1c949739",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/rtklib_corrections.c": "c63abcc4a6cec027a4fb290536211fe67d2aade34b57b00179d9cb371800649e",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/runner.py": "32ef37454667a9da4890178d976fdbf82a615b74be002d0976ecc6a974005415",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/wen_ahrs.py": "29463290c27485ba0f00d88049d69afabfaeb3d797e3318a20c8da65f2735017",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/wen_tc.py": "21799406825343811611cf99dde979d0cd1b28d0031879042bebbee1488b6498",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49"
+      },
+      "source_snapshot_root": "<FGO_ROOT>/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT",
+      "source_identity": "uncommitted per-file overlay plus baseline HEAD; exact bytes sealed in SOURCE_SNAPSHOT",
+      "solver_and_adapter_elapsed_s": 39.21373741100069,
+      "hardware": {
+        "cpu": "Intel(R) Core(TM) Ultra 9 275HX",
+        "logical_cpus": 24,
+        "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+        "python": "3.10.12",
+        "numpy": "1.26.4",
+        "threads": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        }
+      },
+      "mode": "OFFLINE_FULL_BATCH_LM",
+      "native_process_count": 1,
+      "evaluator_process_count": 0,
+      "reference_payload_reads": 0,
+      "reference_paths_denied": 3,
+      "input_provenance": {
+        "raw_source_hashes": {
+          "gnss1": {
+            "relative_path": "BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv",
+            "sha256": "5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027",
+            "size_bytes": 27874623,
+            "hash_status": "NEWLY_VERIFIED"
+          },
+          "gnss2": {
+            "relative_path": "BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss2-raw.csv",
+            "sha256": "39249696329530452a1049b5b39e2c1d8f7e89ae2190d2c95bce70f5b4f44583",
+            "size_bytes": 26827144,
+            "hash_status": "NEWLY_VERIFIED"
+          }
+        },
+        "provider_hashes": {
+          "epochs": "712f134012e49b9946543b00f148995da9bcb4253dec6d74857000137e98a485",
+          "receiver1_measurements": "30c13aa28157b76029bd887d72dd2e8cabb84a350d0068281fb47acaee8bf43e",
+          "receiver2_measurements": "ba5ddeb9107108026f5a4154b1dd3d7b4eab998c124039790644afefd121cc6b"
+        },
+        "navigation_hashes": {
+          "gnss1.nav": "107409d66734988652ba4a38ea7b8bf31094ee2746232c1885fbaa1eec136205",
+          "gnss2.nav": "299d5e881d480e388194e981e402785b3b494d002838b435df5404345ad54974"
+        },
+        "input_sha256": "9b3841f2e15d45ac476a418b495c25a87b8f70f77f4888905b3d138c8820886f",
+        "base_time": 1772784000.0,
+        "window_seconds": [
+          66.0,
+          340.0
+        ],
+        "input_manifest_path": "<FGO_INPUT_BY2>/INPUT_MANIFEST.json",
+        "input_manifest_sha256": "2970889fb7a34a2b62464c6ee14496ea53830a0ce8b3fcc2d1c9894201d0ecdc",
+        "epoch_count": 285,
+        "expected_window_one_hz_slots": 275,
+        "missing_one_hz_slots": [],
+        "ahrs": {
+          "ins_discretization": "RIGHT_ENDPOINT_ACCELERATION_EQ25",
+          "source_imu_retained_interval_count": 63277,
+          "source_imu_skipped_interval_count": 0,
+          "missing_ahrs_sample_count": 0,
+          "initialization": {
+            "time_rel_s": 56.0,
+            "gnss_llh_deg_deg_m": [
+              39.984829856346,
+              116.343128127804,
+              41.780577303
+            ],
+            "a1_body_yaw_ned_deg": 1.485569,
+            "ahrs_heading_gauge_rad": 2.80265905285078,
+            "heading_alignment_count": 1,
+            "gravity_mps2": 9.801554421309328
+          },
+          "provenance": {
+            "raw_body": {
+              "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by2.txt",
+              "sha256": "95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278"
+            },
+            "raw_lock": {
+              "path": "<CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK.csv",
+              "sha256": "f6e5d7965d17857e5b4a846501883f4675f2331a1164fab3de9e5ba9470f1ad7"
+            },
+            "providers": {
+              "imupath": {
+                "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu",
+                "sha256": "74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647"
+              },
+              "gnsspath": {
+                "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_GNSS.gnss",
+                "sha256": "68ed8de7f91b267072bab09e968a9cab4b5220bc5eb116140adacdfde0382e7a"
+              }
+            },
+            "execution_contract_sha256": "698ede92e0251b896d488283544421a9f0dc3f689e2168ff841804e0950bc983",
+            "bundle_sha256": "cd29237a621ae7a8d4ef6fcaf44c113ca8b41a221bff9849c4e99740cc568b79",
+            "preparation": {
+              "execution_contract": "<CODE_ROOT>/configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_EXECUTION_CONTRACT.yaml",
+              "provider_bundle_template": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/{sequence}/CALIBRATED_PROVIDER_BUNDLE.json",
+              "imu_install_rpy_deg": [
+                -1.0,
+                0.0,
+                0.0
+              ],
+              "imu_to_gnss1_lever_body_m": [
+                0.03,
+                0.03,
+                -0.3
+              ],
+              "maximum_ahrs_gap_s": 0.1,
+              "heading_initialization": "one first valid A1 body-yaw plus GNSS1 LLH with Go2/IMU support; fixed world-yaw gauge thereafter",
+              "orientation_formula": "R_E_N * Rz(alpha) * D * R_quaternion_wxyz * D * R_install.T",
+              "imu_input": "already calibrated current-sample measured-dt FRD increments; do not reapply acceleration scale or installation",
+              "lever_velocity": "delta of R_E_B*(omega_body cross lever) at graph interval endpoints",
+              "missing_interval": "omit only unsupported INS link; retain graph nodes and code/motion/bias factors; record coverage"
+            },
+            "parser_counts": {
+              "message_count": 63278,
+              "incomplete_imu_messages": 0,
+              "invalid_quaternion_messages": 0,
+              "normalized_quaternion_messages": 53404
+            },
+            "base_time_unix_s": 1772784000.0,
+            "data_mode": "real_raw_sensor_adaptation",
+            "synthetic_data_used": false,
+            "semisynthetic_data_used": false,
+            "trace_used_online": false,
+            "receiver_imu_as_body_imu": false,
+            "final_v23_output_solver_input": false,
+            "LegSA_output_solver_input": false,
+            "per_case_tuning": false,
+            "output_only_correction": false,
+            "epoch_deleted_for_metric": false,
+            "old_runtime_input_count": 0,
+            "continuous_a1_heading_used": false,
+            "go2_odometry_used": false,
+            "second_imu_scale_or_install_applied": false,
+            "gravity_source": "existing WGS84 gravity_model at sensor-only initial LLH",
+            "coordinate_frame": "ECEF; fixed seed NED basis for AHRS/gravity; corrected FRD body bias",
+            "coriolis_or_transport_added": false,
+            "attitude_estimated": false,
+            "linear_acceleration_contract": "Go2 calibrated specific force plus AHRS-rotated fixed normal gravity in body; not author XSens Ti10 output",
+            "acceleration_interpolation": "linear interpolation of current-sample f=dvel/unrounded_dt at node times; maximum gap gate retained",
+            "author_AHRS_statistical_equivalence_proven": false,
+            "graph_R_GL": "current right-node ECEF position"
+          }
+        }
+      },
+      "output_hashes": {
+        "STATES.csv": "d3340736b525d5d6cc71a80136f24ec1456c1e34f38f8c9b4af39de11e0b1687",
+        "AHRS_INTERVALS.npz": "391661d405dc3549c9532629656e1b83d54fedcd09bd91b6e86a6cab4c45c6c2",
+        "SOLVER.json": "66ea87eec9d7f08449a2743488e6417ea3feb3f2e4675089cb4573503777535f",
+        "STATE_ARRAYS.npz": "35717fe55a92ce3d4a170c9fc6e58aa810478b645c0e3104385aaf6942f49dce",
+        "AHRS_PROVENANCE.json": "aa0441186e3e55bd5429b511143d1456fd354f8fbc5b26d043dbf72939d7c4a6"
+      }
+    }
+  },
+  {
+    "sequence": "BY2",
+    "method": "OISAM",
+    "run_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/RUN.json",
+    "run": {
+      "schema": "fgo_comparison.native.v1",
+      "sequence": "BY2",
+      "method": "OISAM",
+      "attempt": "PAPER_CONTRACT",
+      "terminal_status": "COMPLETED",
+      "output_root": "<FGO_ROOT>/runs/BY2/OISAM/PAPER_CONTRACT",
+      "data_mode": "real_raw_reuse",
+      "synthetic_data_used": false,
+      "semisynthetic_data_used": false,
+      "trace_used_online": false,
+      "receiver_imu_as_body_imu": false,
+      "final_v23_output_solver_input": false,
+      "LegSA_output_solver_input": false,
+      "per_case_tuning": false,
+      "output_only_correction": false,
+      "epoch_deleted_for_metric": false,
+      "old_runtime_input_count": 0,
+      "code_commit": "0625cea2c137859d1319c2e1011178cea19af10a",
+      "config_hash": "e18a6ee7ae316cc78630996f63c58927d33d4b4f48df3609794fced1f8ae09d1",
+      "config_path": "<CODE_ROOT>/configs/paper_rebuild/fgo_comparison/OISAM_PAPER_CONTRACT_20261004.json",
+      "implementation_source_hashes": {
+        "src/legsa_gins/datasets/by2/go2_body_state_parser.py": "3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/__init__.py": "d6f38207b797390b236ae145565bb4fd2bf5f1507a809a55effc7dadd552745c",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/broadcast_identity.py": "404b23476738e747d2abc4608bb5f99c72934f4e40a2ce4107b6967f1695b976",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/ceres_relinearize.py": "49a8b3782931360abe9bdf527b9a0f1a21f289f6b7257807fe06a99b38deb4ce",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/evaluation.py": "823fd2fc81ecac1f33ab503698a4856f87b324fbdfc842bc9855cd896109ea47",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/gnc.py": "4d347d1e745ba330130745490934bfc5b9caab86446d006c5adb7477616ff750",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/obgins_bridge.cc": "de71d58f3f822b9c018cfe8ce1e82ef193ae48255480a80292525f385278d994",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/obgins_preintegration.py": "7d4a211541fe0cfddced87074d19c41adeaf3cc1fc116c88408914dbb03d1aa5",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": "6733fceead5a464dc398610f39e7d0b9aa2223e5b1b67d6d5ad2d9eb004b9862",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/oisam_inputs.py": "9cca453bcef6e355b3e4b2e6ee00075034854c7189a98f7634eaa213279696b6",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/plotting.py": "3f5f75c89c66d196f5dafb151d927173abb0f4b807218146867c6790b7e8c294",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/raw_inputs.py": "ad6de0fd9a1077947d3c852ed10b54a861497d6953f6a66639681dda97bd5e42",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/report.py": "77e24d7f27a6a29dfd166f89f443ac8933da44186839529cf6cdee0ed2a0eb94",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/retained_results.py": "9b7e272e7c8451d0c80ca1d6d382bbb4fd022c6cc0aeb096bc70ec8a1c949739",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/rtklib_corrections.c": "c63abcc4a6cec027a4fb290536211fe67d2aade34b57b00179d9cb371800649e",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/runner.py": "32ef37454667a9da4890178d976fdbf82a615b74be002d0976ecc6a974005415",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/wen_ahrs.py": "29463290c27485ba0f00d88049d69afabfaeb3d797e3318a20c8da65f2735017",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/wen_tc.py": "21799406825343811611cf99dde979d0cd1b28d0031879042bebbee1488b6498",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49"
+      },
+      "source_snapshot_root": "<FGO_ROOT>/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT",
+      "source_identity": "uncommitted per-file overlay plus baseline HEAD; exact bytes sealed in SOURCE_SNAPSHOT",
+      "solver_and_adapter_elapsed_s": 48.727976890999344,
+      "hardware": {
+        "cpu": "Intel(R) Core(TM) Ultra 9 275HX",
+        "logical_cpus": 24,
+        "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+        "python": "3.10.12",
+        "numpy": "1.26.4",
+        "threads": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        }
+      },
+      "mode": "incremental_OiSAM_1Hz_current_node_with_30_40_node_AJSWR_and_Ceres_relinearization",
+      "native_process_count": 1,
+      "evaluator_process_count": 0,
+      "reference_payload_reads": 0,
+      "reference_paths_denied": 3,
+      "input_provenance": {
+        "method_id": "OISAM_2025_PAPER_CONTRACT_20261004",
+        "sequence": "BY2",
+        "terminal_status": "COMPLETED",
+        "wall_seconds": 10.268567172000985,
+        "expected_nodes": 285,
+        "actual_rows": 285,
+        "finite_nodes": 285,
+        "unavailable_nodes": 0,
+        "core_counts": {
+          "full_relinearizations": 70,
+          "incremental_updates": 213,
+          "initial_qr_builds": 43,
+          "marginalized_nodes": 247,
+          "imu_factors": 284,
+          "gnss_factors": 285,
+          "heading_factors": 0,
+          "initial_attitude_priors": 1,
+          "givens_rotations": 578970,
+          "nonlinear_max_iterations": 18,
+          "attitude_triggers": 27,
+          "window_triggers": 16,
+          "nonlinear_converged_calls": 70,
+          "nonlinear_usable_limit_calls": 0
+        },
+        "A1_yaw_initialization_count": 1,
+        "maximum_imu_endpoint_wait_s": 0.011050701141357422,
+        "input_provenance": {
+          "sequence": "BY2",
+          "base_time": 1772784000.0,
+          "evaluation_window_s": [
+            66.0,
+            340.0
+          ],
+          "input_provider_hashes": {
+            "imupath": {
+              "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu",
+              "sha256": "74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647",
+              "rows": 63277
+            },
+            "gnsspath": {
+              "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_GNSS.gnss",
+              "sha256": "68ed8de7f91b267072bab09e968a9cab4b5220bc5eb116140adacdfde0382e7a",
+              "rows": 1510
+            }
+          },
+          "raw_source_hashes": {
+            "body": {
+              "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by2.txt",
+              "sha256": "95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278"
+            },
+            "status": {
+              "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-status.csv",
+              "sha256": "9761d2d7055356857bd7b26a251fdd60fdf6c2b18a882dac74bc35d164e42e08"
+            },
+            "gnss1": {
+              "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv",
+              "sha256": "5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027"
+            },
+            "gnss2": {
+              "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss2-raw.csv",
+              "sha256": "39249696329530452a1049b5b39e2c1d8f7e89ae2190d2c95bce70f5b4f44583"
+            }
+          },
+          "raw_hash_status": "BODY_VERIFIED_FROM_SAME_READ_OTHER_ROLES_INHERITED_FROM_FROZEN_BUNDLE",
+          "raw_body_time_reader_counts": {
+            "message_count": 63278,
+            "incomplete_imu_messages": 0
+          },
+          "raw_lock": {
+            "path": "<CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK.csv",
+            "sha256": "f6e5d7965d17857e5b4a846501883f4675f2331a1164fab3de9e5ba9470f1ad7"
+          },
+          "execution_contract_sha256": "698ede92e0251b896d488283544421a9f0dc3f689e2168ff841804e0950bc983",
+          "raw_current_sample_interval_identity": "PASS_ALL_PROVIDER_ROWS_WITHIN_0.56_MICROSECOND_ROUNDING",
+          "imu_interval_count": 63277,
+          "imu_dt_source": "unrounded_source_raw_stamps",
+          "provider_bundle_sha256": "cd29237a621ae7a8d4ef6fcaf44c113ca8b41a221bff9849c4e99740cc568b79",
+          "provider_bundle_path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_PROVIDER_BUNDLE.json",
+          "provider_code_commit": "d2a9f2a0fab652949e2f981a40ea1d6eb41151e1",
+          "provider_model_sha256": "4ce6ca6c544c2ba39988ea0b0631a60207a4cea36987c3a2139052fedd3a4871",
+          "imu_gaps_s": [],
+          "imu_transform_reapplied": false,
+          "acceleration_scale_reapplied": false,
+          "receiver_imu_as_body_imu": false
+        },
+        "evaluation_window_s": [
+          66.0,
+          340.0
+        ],
+        "manifest_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/RUN_MANIFEST.json",
+        "states_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/STATES.csv"
+      },
+      "output_hashes": {
+        "RUN_MANIFEST.json": "324344e53a4eeb625917f41a0bb9977a368de9315e724fe8b26028fc1c293e8e",
+        "STATES.csv": "446585d25b1ab9b015dfc263aaea19613f76f2c6d82bced423864773e367b1cc",
+        "SOLVER_EVENTS.jsonl": "8816094e02818ae3c6a56894633ae6bd3e5d2b0cfa6bbb40be2d0210bc230946"
+      }
+    }
+  },
+  {
+    "sequence": "BY2H",
+    "method": "GNC",
+    "run_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/RUN.json",
+    "run": {
+      "schema": "fgo_comparison.native.v1",
+      "sequence": "BY2H",
+      "method": "GNC",
+      "attempt": "PAPER_CONTRACT",
+      "terminal_status": "COMPLETED",
+      "output_root": "<FGO_ROOT>/runs/BY2H/GNC/PAPER_CONTRACT",
+      "data_mode": "real_raw_reuse",
+      "synthetic_data_used": false,
+      "semisynthetic_data_used": false,
+      "trace_used_online": false,
+      "receiver_imu_as_body_imu": false,
+      "final_v23_output_solver_input": false,
+      "LegSA_output_solver_input": false,
+      "per_case_tuning": false,
+      "output_only_correction": false,
+      "epoch_deleted_for_metric": false,
+      "old_runtime_input_count": 0,
+      "code_commit": "0625cea2c137859d1319c2e1011178cea19af10a",
+      "config_hash": "5f54a3ed91b32788e0c404e26cade6f5d211627097a9027ce46078322c54242f",
+      "config_path": "<CODE_ROOT>/configs/paper_rebuild/fgo_comparison/GNC_PAPER_CONTRACT_20261004.json",
+      "implementation_source_hashes": {
+        "src/legsa_gins/datasets/by2/go2_body_state_parser.py": "3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/__init__.py": "d6f38207b797390b236ae145565bb4fd2bf5f1507a809a55effc7dadd552745c",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/broadcast_identity.py": "404b23476738e747d2abc4608bb5f99c72934f4e40a2ce4107b6967f1695b976",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/ceres_relinearize.py": "49a8b3782931360abe9bdf527b9a0f1a21f289f6b7257807fe06a99b38deb4ce",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/evaluation.py": "823fd2fc81ecac1f33ab503698a4856f87b324fbdfc842bc9855cd896109ea47",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/gnc.py": "4d347d1e745ba330130745490934bfc5b9caab86446d006c5adb7477616ff750",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/obgins_bridge.cc": "de71d58f3f822b9c018cfe8ce1e82ef193ae48255480a80292525f385278d994",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/obgins_preintegration.py": "7d4a211541fe0cfddced87074d19c41adeaf3cc1fc116c88408914dbb03d1aa5",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": "6733fceead5a464dc398610f39e7d0b9aa2223e5b1b67d6d5ad2d9eb004b9862",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/oisam_inputs.py": "9cca453bcef6e355b3e4b2e6ee00075034854c7189a98f7634eaa213279696b6",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/plotting.py": "3f5f75c89c66d196f5dafb151d927173abb0f4b807218146867c6790b7e8c294",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/raw_inputs.py": "ad6de0fd9a1077947d3c852ed10b54a861497d6953f6a66639681dda97bd5e42",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/report.py": "77e24d7f27a6a29dfd166f89f443ac8933da44186839529cf6cdee0ed2a0eb94",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/retained_results.py": "9b7e272e7c8451d0c80ca1d6d382bbb4fd022c6cc0aeb096bc70ec8a1c949739",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/rtklib_corrections.c": "c63abcc4a6cec027a4fb290536211fe67d2aade34b57b00179d9cb371800649e",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/runner.py": "32ef37454667a9da4890178d976fdbf82a615b74be002d0976ecc6a974005415",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/wen_ahrs.py": "29463290c27485ba0f00d88049d69afabfaeb3d797e3318a20c8da65f2735017",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/wen_tc.py": "21799406825343811611cf99dde979d0cd1b28d0031879042bebbee1488b6498",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49"
+      },
+      "source_snapshot_root": "<FGO_ROOT>/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT",
+      "source_identity": "uncommitted per-file overlay plus baseline HEAD; exact bytes sealed in SOURCE_SNAPSHOT",
+      "solver_and_adapter_elapsed_s": 0.49902796700007457,
+      "hardware": {
+        "cpu": "Intel(R) Core(TM) Ultra 9 275HX",
+        "logical_cpus": 24,
+        "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+        "python": "3.10.12",
+        "numpy": "1.26.4",
+        "threads": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        }
+      },
+      "mode": "FULL_BATCH_SPARSE_GAUSS_NEWTON",
+      "native_process_count": 1,
+      "evaluator_process_count": 0,
+      "reference_payload_reads": 0,
+      "reference_paths_denied": 3,
+      "input_provenance": {
+        "raw_source_hashes": {
+          "gnss1": {
+            "relative_path": "BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss1-raw.csv",
+            "sha256": "b6e0e3108b0902350eb7655fe1a2db23a8f320136ddc6c54bcd7e5dbe2d17508",
+            "size_bytes": 27331317,
+            "hash_status": "NEWLY_VERIFIED"
+          },
+          "gnss2": {
+            "relative_path": "BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss2-raw.csv",
+            "sha256": "87e4056c85b58595792578a62aeceb1b594475d654e4e49eb7fccaf5bfff56aa",
+            "size_bytes": 26928657,
+            "hash_status": "NEWLY_VERIFIED"
+          }
+        },
+        "provider_hashes": {
+          "epochs": "d2548998486bf78f193c0e7a3b065875c8b99322c6b4c4db1f5181525e000997",
+          "receiver1_measurements": "f027af5b81f65a16a184f0a366822af455702b84b28497016f012ebe7b62c39e",
+          "receiver2_measurements": "029cadbd0db2417f35c28f95d004eb7e519a01741b342b7c5abcedc07173d1fc"
+        },
+        "navigation_hashes": {
+          "gnss1.nav": "fa12cb9485682b433e19f11f6058fc7dca37ee652dd65e374a87758f6ddb8dca",
+          "gnss2.nav": "080d03a74c686a39a14d8f26ae13028a619e61b611ccbec72ddbccf42011c83b"
+        },
+        "input_sha256": "9e9936c18d517950a9ced0773314b261578e4a72ae28e3011949e53460ebe4a1",
+        "base_time": 1772784000.0,
+        "window_seconds": [
+          413.0,
+          683.0
+        ],
+        "input_manifest_path": "<FGO_INPUT_BY2H>/INPUT_MANIFEST.json",
+        "input_manifest_sha256": "7c7491dcfa7d36928a1c2cc42045a85f8b0b87834a4a6a2dd11facf4752aa5cb",
+        "epoch_count": 282,
+        "expected_window_one_hz_slots": 271,
+        "missing_one_hz_slots": [
+          401
+        ]
+      },
+      "output_hashes": {
+        "STATES.csv": "c0705e51501663872502a21c948de99e8b59ca8c913f02422115c85560fd5d08",
+        "WEIGHTS.npz": "3a31a2adf769d6c154c5f137ee63217345b278ed308b0351573e4f2bde48338b",
+        "SOLVER.json": "c4796b6b7658655ec4c9c3e967ed287ba6123ff98873c90ff6535f7643f9e91f",
+        "WEIGHT_HISTORY_INDEX.json": "8cf412b03d8905fdd19d496a35ede0049f722e0713794c805647eed0fd8fd224",
+        "STATE_ARRAYS.npz": "fe683296b9fecdf7f28154d2786728bd100423752c1525f65c9f9e6696dc9306",
+        "WEIGHT_HISTORY.npz": "44256a86427f2a66843dd5c31b438eb3c9ed810f13cab3fe8ef24e1d71ebfb6f"
+      }
+    }
+  },
+  {
+    "sequence": "BY2H",
+    "method": "WEN_TC",
+    "run_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/RUN.json",
+    "run": {
+      "schema": "fgo_comparison.native.v1",
+      "sequence": "BY2H",
+      "method": "WEN_TC",
+      "attempt": "PAPER_CONTRACT",
+      "terminal_status": "COMPLETED",
+      "output_root": "<FGO_ROOT>/runs/BY2H/WEN_TC/PAPER_CONTRACT",
+      "data_mode": "real_raw_reuse",
+      "synthetic_data_used": false,
+      "semisynthetic_data_used": false,
+      "trace_used_online": false,
+      "receiver_imu_as_body_imu": false,
+      "final_v23_output_solver_input": false,
+      "LegSA_output_solver_input": false,
+      "per_case_tuning": false,
+      "output_only_correction": false,
+      "epoch_deleted_for_metric": false,
+      "old_runtime_input_count": 0,
+      "code_commit": "0625cea2c137859d1319c2e1011178cea19af10a",
+      "config_hash": "fe2a42c415fffc7aa371a326c86886c7fa38baa9530a60a18294f07e2ecf0214",
+      "config_path": "<CODE_ROOT>/configs/paper_rebuild/fgo_comparison/WEN_TC_PAPER_CONTRACT_20261004.json",
+      "implementation_source_hashes": {
+        "src/legsa_gins/datasets/by2/go2_body_state_parser.py": "3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/__init__.py": "d6f38207b797390b236ae145565bb4fd2bf5f1507a809a55effc7dadd552745c",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/broadcast_identity.py": "404b23476738e747d2abc4608bb5f99c72934f4e40a2ce4107b6967f1695b976",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/ceres_relinearize.py": "49a8b3782931360abe9bdf527b9a0f1a21f289f6b7257807fe06a99b38deb4ce",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/evaluation.py": "823fd2fc81ecac1f33ab503698a4856f87b324fbdfc842bc9855cd896109ea47",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/gnc.py": "4d347d1e745ba330130745490934bfc5b9caab86446d006c5adb7477616ff750",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/obgins_bridge.cc": "de71d58f3f822b9c018cfe8ce1e82ef193ae48255480a80292525f385278d994",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/obgins_preintegration.py": "7d4a211541fe0cfddced87074d19c41adeaf3cc1fc116c88408914dbb03d1aa5",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": "6733fceead5a464dc398610f39e7d0b9aa2223e5b1b67d6d5ad2d9eb004b9862",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/oisam_inputs.py": "9cca453bcef6e355b3e4b2e6ee00075034854c7189a98f7634eaa213279696b6",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/plotting.py": "3f5f75c89c66d196f5dafb151d927173abb0f4b807218146867c6790b7e8c294",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/raw_inputs.py": "ad6de0fd9a1077947d3c852ed10b54a861497d6953f6a66639681dda97bd5e42",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/report.py": "77e24d7f27a6a29dfd166f89f443ac8933da44186839529cf6cdee0ed2a0eb94",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/retained_results.py": "9b7e272e7c8451d0c80ca1d6d382bbb4fd022c6cc0aeb096bc70ec8a1c949739",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/rtklib_corrections.c": "c63abcc4a6cec027a4fb290536211fe67d2aade34b57b00179d9cb371800649e",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/runner.py": "32ef37454667a9da4890178d976fdbf82a615b74be002d0976ecc6a974005415",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/wen_ahrs.py": "29463290c27485ba0f00d88049d69afabfaeb3d797e3318a20c8da65f2735017",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/wen_tc.py": "21799406825343811611cf99dde979d0cd1b28d0031879042bebbee1488b6498",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49"
+      },
+      "source_snapshot_root": "<FGO_ROOT>/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT",
+      "source_identity": "uncommitted per-file overlay plus baseline HEAD; exact bytes sealed in SOURCE_SNAPSHOT",
+      "solver_and_adapter_elapsed_s": 38.796024655999645,
+      "hardware": {
+        "cpu": "Intel(R) Core(TM) Ultra 9 275HX",
+        "logical_cpus": 24,
+        "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+        "python": "3.10.12",
+        "numpy": "1.26.4",
+        "threads": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        }
+      },
+      "mode": "OFFLINE_FULL_BATCH_LM",
+      "native_process_count": 1,
+      "evaluator_process_count": 0,
+      "reference_payload_reads": 0,
+      "reference_paths_denied": 3,
+      "input_provenance": {
+        "raw_source_hashes": {
+          "gnss1": {
+            "relative_path": "BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss1-raw.csv",
+            "sha256": "b6e0e3108b0902350eb7655fe1a2db23a8f320136ddc6c54bcd7e5dbe2d17508",
+            "size_bytes": 27331317,
+            "hash_status": "NEWLY_VERIFIED"
+          },
+          "gnss2": {
+            "relative_path": "BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss2-raw.csv",
+            "sha256": "87e4056c85b58595792578a62aeceb1b594475d654e4e49eb7fccaf5bfff56aa",
+            "size_bytes": 26928657,
+            "hash_status": "NEWLY_VERIFIED"
+          }
+        },
+        "provider_hashes": {
+          "epochs": "d2548998486bf78f193c0e7a3b065875c8b99322c6b4c4db1f5181525e000997",
+          "receiver1_measurements": "f027af5b81f65a16a184f0a366822af455702b84b28497016f012ebe7b62c39e",
+          "receiver2_measurements": "029cadbd0db2417f35c28f95d004eb7e519a01741b342b7c5abcedc07173d1fc"
+        },
+        "navigation_hashes": {
+          "gnss1.nav": "fa12cb9485682b433e19f11f6058fc7dca37ee652dd65e374a87758f6ddb8dca",
+          "gnss2.nav": "080d03a74c686a39a14d8f26ae13028a619e61b611ccbec72ddbccf42011c83b"
+        },
+        "input_sha256": "9e9936c18d517950a9ced0773314b261578e4a72ae28e3011949e53460ebe4a1",
+        "base_time": 1772784000.0,
+        "window_seconds": [
+          413.0,
+          683.0
+        ],
+        "input_manifest_path": "<FGO_INPUT_BY2H>/INPUT_MANIFEST.json",
+        "input_manifest_sha256": "7c7491dcfa7d36928a1c2cc42045a85f8b0b87834a4a6a2dd11facf4752aa5cb",
+        "epoch_count": 282,
+        "expected_window_one_hz_slots": 271,
+        "missing_one_hz_slots": [
+          401
+        ],
+        "ahrs": {
+          "ins_discretization": "RIGHT_ENDPOINT_ACCELERATION_EQ25",
+          "source_imu_retained_interval_count": 63217,
+          "source_imu_skipped_interval_count": 4,
+          "missing_ahrs_sample_count": 0,
+          "initialization": {
+            "time_rel_s": 402.0,
+            "gnss_llh_deg_deg_m": [
+              39.984832626921,
+              116.3431297249,
+              41.77137799
+            ],
+            "a1_body_yaw_ned_deg": -8.880872,
+            "ahrs_heading_gauge_rad": 2.7065900752309373,
+            "heading_alignment_count": 1,
+            "gravity_mps2": 9.801554452164613
+          },
+          "provenance": {
+            "raw_body": {
+              "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by3.txt",
+              "sha256": "b2e80763c613a5a0d6739aea90ea3ed4f8c9170cf5f2f6b73e5a000a666f0c49"
+            },
+            "raw_lock": {
+              "path": "<CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK_CLEAN5.csv",
+              "sha256": "faa31580c7fff73b52fcf6d27c97cfdd9187e67a55968a2ab42e6737b0eabb67"
+            },
+            "providers": {
+              "imupath": {
+                "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/CALIBRATED_IMU.imu",
+                "sha256": "d32e4891080e300e6edde4526146636f15ec54df945a0470c57fbbdc3aa5115c"
+              },
+              "gnsspath": {
+                "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/CALIBRATED_GNSS.gnss",
+                "sha256": "88d18be4ec1b4efe4d74f8fc59683d7209fc803f52c60268a763ce457fa55f00"
+              }
+            },
+            "execution_contract_sha256": "698ede92e0251b896d488283544421a9f0dc3f689e2168ff841804e0950bc983",
+            "bundle_sha256": "522e2cba60c1341cefea80d5c0576dbffe6eff67fffae52cd23924124b5ab7e3",
+            "preparation": {
+              "execution_contract": "<CODE_ROOT>/configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_EXECUTION_CONTRACT.yaml",
+              "provider_bundle_template": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/{sequence}/CALIBRATED_PROVIDER_BUNDLE.json",
+              "imu_install_rpy_deg": [
+                -1.0,
+                0.0,
+                0.0
+              ],
+              "imu_to_gnss1_lever_body_m": [
+                0.03,
+                0.03,
+                -0.3
+              ],
+              "maximum_ahrs_gap_s": 0.1,
+              "heading_initialization": "one first valid A1 body-yaw plus GNSS1 LLH with Go2/IMU support; fixed world-yaw gauge thereafter",
+              "orientation_formula": "R_E_N * Rz(alpha) * D * R_quaternion_wxyz * D * R_install.T",
+              "imu_input": "already calibrated current-sample measured-dt FRD increments; do not reapply acceleration scale or installation",
+              "lever_velocity": "delta of R_E_B*(omega_body cross lever) at graph interval endpoints",
+              "missing_interval": "omit only unsupported INS link; retain graph nodes and code/motion/bias factors; record coverage"
+            },
+            "parser_counts": {
+              "message_count": 63222,
+              "incomplete_imu_messages": 0,
+              "invalid_quaternion_messages": 0,
+              "normalized_quaternion_messages": 53358
+            },
+            "base_time_unix_s": 1772784000.0,
+            "data_mode": "real_raw_sensor_adaptation",
+            "synthetic_data_used": false,
+            "semisynthetic_data_used": false,
+            "trace_used_online": false,
+            "receiver_imu_as_body_imu": false,
+            "final_v23_output_solver_input": false,
+            "LegSA_output_solver_input": false,
+            "per_case_tuning": false,
+            "output_only_correction": false,
+            "epoch_deleted_for_metric": false,
+            "old_runtime_input_count": 0,
+            "continuous_a1_heading_used": false,
+            "go2_odometry_used": false,
+            "second_imu_scale_or_install_applied": false,
+            "gravity_source": "existing WGS84 gravity_model at sensor-only initial LLH",
+            "coordinate_frame": "ECEF; fixed seed NED basis for AHRS/gravity; corrected FRD body bias",
+            "coriolis_or_transport_added": false,
+            "attitude_estimated": false,
+            "linear_acceleration_contract": "Go2 calibrated specific force plus AHRS-rotated fixed normal gravity in body; not author XSens Ti10 output",
+            "acceleration_interpolation": "linear interpolation of current-sample f=dvel/unrounded_dt at node times; maximum gap gate retained",
+            "author_AHRS_statistical_equivalence_proven": false,
+            "graph_R_GL": "current right-node ECEF position"
+          }
+        }
+      },
+      "output_hashes": {
+        "STATES.csv": "3ff226872326029f207606069567150a3d562b2842ef3092416cb9580ab06114",
+        "AHRS_INTERVALS.npz": "76eb0892cdf25430a462e5c2c841b68e204ba95fe5f0b76afe9c3e55080362c8",
+        "SOLVER.json": "06f08b38be820823ba989a6b6679282ff2a70799d502321dd9209317fad1c744",
+        "STATE_ARRAYS.npz": "682e3340af7eb7c99a1ef8ecbcffed69394dc08983260f38ae936828626a13be",
+        "AHRS_PROVENANCE.json": "e3f7a1f176c48927fe955b14378b8b903a28d2278c50519fce3c5226f8e044e7"
+      }
+    }
+  },
+  {
+    "sequence": "BY2H",
+    "method": "OISAM",
+    "run_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/RUN.json",
+    "run": {
+      "schema": "fgo_comparison.native.v1",
+      "sequence": "BY2H",
+      "method": "OISAM",
+      "attempt": "PAPER_CONTRACT",
+      "terminal_status": "INPUT_UNSUPPORTED_IMU_GAP",
+      "output_root": "<FGO_ROOT>/runs/BY2H/OISAM/PAPER_CONTRACT",
+      "data_mode": "real_raw_reuse",
+      "synthetic_data_used": false,
+      "semisynthetic_data_used": false,
+      "trace_used_online": false,
+      "receiver_imu_as_body_imu": false,
+      "final_v23_output_solver_input": false,
+      "LegSA_output_solver_input": false,
+      "per_case_tuning": false,
+      "output_only_correction": false,
+      "epoch_deleted_for_metric": false,
+      "old_runtime_input_count": 0,
+      "code_commit": "0625cea2c137859d1319c2e1011178cea19af10a",
+      "config_hash": "e18a6ee7ae316cc78630996f63c58927d33d4b4f48df3609794fced1f8ae09d1",
+      "config_path": "<CODE_ROOT>/configs/paper_rebuild/fgo_comparison/OISAM_PAPER_CONTRACT_20261004.json",
+      "implementation_source_hashes": {
+        "src/legsa_gins/datasets/by2/go2_body_state_parser.py": "3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/__init__.py": "d6f38207b797390b236ae145565bb4fd2bf5f1507a809a55effc7dadd552745c",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/broadcast_identity.py": "404b23476738e747d2abc4608bb5f99c72934f4e40a2ce4107b6967f1695b976",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/ceres_relinearize.py": "49a8b3782931360abe9bdf527b9a0f1a21f289f6b7257807fe06a99b38deb4ce",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/evaluation.py": "823fd2fc81ecac1f33ab503698a4856f87b324fbdfc842bc9855cd896109ea47",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/gnc.py": "4d347d1e745ba330130745490934bfc5b9caab86446d006c5adb7477616ff750",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/obgins_bridge.cc": "de71d58f3f822b9c018cfe8ce1e82ef193ae48255480a80292525f385278d994",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/obgins_preintegration.py": "7d4a211541fe0cfddced87074d19c41adeaf3cc1fc116c88408914dbb03d1aa5",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": "6733fceead5a464dc398610f39e7d0b9aa2223e5b1b67d6d5ad2d9eb004b9862",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/oisam_inputs.py": "9cca453bcef6e355b3e4b2e6ee00075034854c7189a98f7634eaa213279696b6",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/plotting.py": "3f5f75c89c66d196f5dafb151d927173abb0f4b807218146867c6790b7e8c294",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/raw_inputs.py": "ad6de0fd9a1077947d3c852ed10b54a861497d6953f6a66639681dda97bd5e42",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/report.py": "77e24d7f27a6a29dfd166f89f443ac8933da44186839529cf6cdee0ed2a0eb94",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/retained_results.py": "9b7e272e7c8451d0c80ca1d6d382bbb4fd022c6cc0aeb096bc70ec8a1c949739",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/rtklib_corrections.c": "c63abcc4a6cec027a4fb290536211fe67d2aade34b57b00179d9cb371800649e",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/runner.py": "32ef37454667a9da4890178d976fdbf82a615b74be002d0976ecc6a974005415",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/wen_ahrs.py": "29463290c27485ba0f00d88049d69afabfaeb3d797e3318a20c8da65f2735017",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/wen_tc.py": "21799406825343811611cf99dde979d0cd1b28d0031879042bebbee1488b6498",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49"
+      },
+      "source_snapshot_root": "<FGO_ROOT>/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT",
+      "source_identity": "uncommitted per-file overlay plus baseline HEAD; exact bytes sealed in SOURCE_SNAPSHOT",
+      "solver_and_adapter_elapsed_s": 36.6424514729988,
+      "hardware": {
+        "cpu": "Intel(R) Core(TM) Ultra 9 275HX",
+        "logical_cpus": 24,
+        "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+        "python": "3.10.12",
+        "numpy": "1.26.4",
+        "threads": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        }
+      },
+      "mode": "incremental_OiSAM_1Hz_current_node_with_30_40_node_AJSWR_and_Ceres_relinearization",
+      "native_process_count": 1,
+      "evaluator_process_count": 0,
+      "reference_payload_reads": 0,
+      "reference_paths_denied": 3,
+      "input_provenance": {
+        "method_id": "OISAM_2025_PAPER_CONTRACT_20261004",
+        "sequence": "BY2H",
+        "terminal_status": "INPUT_UNSUPPORTED_IMU_GAP",
+        "wall_seconds": 0.1636196920007933,
+        "expected_nodes": 282,
+        "actual_rows": 282,
+        "finite_nodes": 6,
+        "unavailable_nodes": 276,
+        "core_counts": {
+          "full_relinearizations": 5,
+          "incremental_updates": 0,
+          "initial_qr_builds": 0,
+          "marginalized_nodes": 0,
+          "imu_factors": 5,
+          "gnss_factors": 6,
+          "heading_factors": 0,
+          "initial_attitude_priors": 1,
+          "givens_rotations": 0,
+          "nonlinear_max_iterations": 5,
+          "attitude_triggers": 0,
+          "window_triggers": 0,
+          "nonlinear_converged_calls": 5,
+          "nonlinear_usable_limit_calls": 0
+        },
+        "A1_yaw_initialization_count": 1,
+        "maximum_imu_endpoint_wait_s": 0.005344390869140625,
+        "input_provenance": {
+          "sequence": "BY2H",
+          "base_time": 1772784000.0,
+          "evaluation_window_s": [
+            413.0,
+            683.0
+          ],
+          "input_provider_hashes": {
+            "imupath": {
+              "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/CALIBRATED_IMU.imu",
+              "sha256": "d32e4891080e300e6edde4526146636f15ec54df945a0470c57fbbdc3aa5115c",
+              "rows": 63217
+            },
+            "gnsspath": {
+              "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/CALIBRATED_GNSS.gnss",
+              "sha256": "88d18be4ec1b4efe4d74f8fc59683d7209fc803f52c60268a763ce457fa55f00",
+              "rows": 1483
+            }
+          },
+          "raw_source_hashes": {
+            "body": {
+              "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by3.txt",
+              "sha256": "b2e80763c613a5a0d6739aea90ea3ed4f8c9170cf5f2f6b73e5a000a666f0c49"
+            },
+            "status": {
+              "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss1-status.csv",
+              "sha256": "6e169474adea70ef9899ef02409015f7cd225aadf1efbe63e51af2a39e297ef2"
+            },
+            "gnss1": {
+              "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss1-raw.csv",
+              "sha256": "b6e0e3108b0902350eb7655fe1a2db23a8f320136ddc6c54bcd7e5dbe2d17508"
+            },
+            "gnss2": {
+              "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss2-raw.csv",
+              "sha256": "87e4056c85b58595792578a62aeceb1b594475d654e4e49eb7fccaf5bfff56aa"
+            }
+          },
+          "raw_hash_status": "BODY_VERIFIED_FROM_SAME_READ_OTHER_ROLES_INHERITED_FROM_FROZEN_BUNDLE",
+          "raw_body_time_reader_counts": {
+            "message_count": 63222,
+            "incomplete_imu_messages": 0
+          },
+          "raw_lock": {
+            "path": "<CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK_CLEAN5.csv",
+            "sha256": "faa31580c7fff73b52fcf6d27c97cfdd9187e67a55968a2ab42e6737b0eabb67"
+          },
+          "execution_contract_sha256": "698ede92e0251b896d488283544421a9f0dc3f689e2168ff841804e0950bc983",
+          "raw_current_sample_interval_identity": "PASS_ALL_PROVIDER_ROWS_WITHIN_0.56_MICROSECOND_ROUNDING",
+          "imu_interval_count": 63217,
+          "imu_dt_source": "unrounded_source_raw_stamps",
+          "provider_bundle_sha256": "522e2cba60c1341cefea80d5c0576dbffe6eff67fffae52cd23924124b5ab7e3",
+          "provider_bundle_path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/CALIBRATED_PROVIDER_BUNDLE.json",
+          "provider_code_commit": "d2a9f2a0fab652949e2f981a40ea1d6eb41151e1",
+          "provider_model_sha256": "4ce6ca6c544c2ba39988ea0b0631a60207a4cea36987c3a2139052fedd3a4871",
+          "imu_gaps_s": [
+            [
+              407.01705837249756,
+              413.0370919704437
+            ],
+            [
+              414.9050672054291,
+              415.0807819366455
+            ]
+          ],
+          "imu_transform_reapplied": false,
+          "acceleration_scale_reapplied": false,
+          "receiver_imu_as_body_imu": false
+        },
+        "evaluation_window_s": [
+          413.0,
+          683.0
+        ],
+        "manifest_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/RUN_MANIFEST.json",
+        "states_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/STATES.csv"
+      },
+      "output_hashes": {
+        "RUN_MANIFEST.json": "fb58c93ef9851db22ed70dd54c5a116b6bb919b8e731ca9e0a7055ab13651b24",
+        "STATES.csv": "109592620878e2d91a383cac36053daccc391a4b3ed5f781ac7f6ca2d1856e7c",
+        "SOLVER_EVENTS.jsonl": "b914067122df23bf785dc21270a4722f9a4905f8769d2d7a763aa0f9b9470a35"
+      }
+    }
+  },
+  {
+    "sequence": "BY2O",
+    "method": "GNC",
+    "run_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/RUN.json",
+    "run": {
+      "schema": "fgo_comparison.native.v1",
+      "sequence": "BY2O",
+      "method": "GNC",
+      "attempt": "PAPER_CONTRACT",
+      "terminal_status": "COMPLETED",
+      "output_root": "<FGO_ROOT>/runs/BY2O/GNC/PAPER_CONTRACT",
+      "data_mode": "real_raw_reuse",
+      "synthetic_data_used": false,
+      "semisynthetic_data_used": false,
+      "trace_used_online": false,
+      "receiver_imu_as_body_imu": false,
+      "final_v23_output_solver_input": false,
+      "LegSA_output_solver_input": false,
+      "per_case_tuning": false,
+      "output_only_correction": false,
+      "epoch_deleted_for_metric": false,
+      "old_runtime_input_count": 0,
+      "code_commit": "0625cea2c137859d1319c2e1011178cea19af10a",
+      "config_hash": "5f54a3ed91b32788e0c404e26cade6f5d211627097a9027ce46078322c54242f",
+      "config_path": "<CODE_ROOT>/configs/paper_rebuild/fgo_comparison/GNC_PAPER_CONTRACT_20261004.json",
+      "implementation_source_hashes": {
+        "src/legsa_gins/datasets/by2/go2_body_state_parser.py": "3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/__init__.py": "d6f38207b797390b236ae145565bb4fd2bf5f1507a809a55effc7dadd552745c",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/broadcast_identity.py": "404b23476738e747d2abc4608bb5f99c72934f4e40a2ce4107b6967f1695b976",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/ceres_relinearize.py": "49a8b3782931360abe9bdf527b9a0f1a21f289f6b7257807fe06a99b38deb4ce",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/evaluation.py": "823fd2fc81ecac1f33ab503698a4856f87b324fbdfc842bc9855cd896109ea47",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/gnc.py": "4d347d1e745ba330130745490934bfc5b9caab86446d006c5adb7477616ff750",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/obgins_bridge.cc": "de71d58f3f822b9c018cfe8ce1e82ef193ae48255480a80292525f385278d994",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/obgins_preintegration.py": "7d4a211541fe0cfddced87074d19c41adeaf3cc1fc116c88408914dbb03d1aa5",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": "6733fceead5a464dc398610f39e7d0b9aa2223e5b1b67d6d5ad2d9eb004b9862",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/oisam_inputs.py": "9cca453bcef6e355b3e4b2e6ee00075034854c7189a98f7634eaa213279696b6",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/plotting.py": "3f5f75c89c66d196f5dafb151d927173abb0f4b807218146867c6790b7e8c294",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/raw_inputs.py": "ad6de0fd9a1077947d3c852ed10b54a861497d6953f6a66639681dda97bd5e42",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/report.py": "77e24d7f27a6a29dfd166f89f443ac8933da44186839529cf6cdee0ed2a0eb94",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/retained_results.py": "9b7e272e7c8451d0c80ca1d6d382bbb4fd022c6cc0aeb096bc70ec8a1c949739",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/rtklib_corrections.c": "c63abcc4a6cec027a4fb290536211fe67d2aade34b57b00179d9cb371800649e",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/runner.py": "32ef37454667a9da4890178d976fdbf82a615b74be002d0976ecc6a974005415",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/wen_ahrs.py": "29463290c27485ba0f00d88049d69afabfaeb3d797e3318a20c8da65f2735017",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/wen_tc.py": "21799406825343811611cf99dde979d0cd1b28d0031879042bebbee1488b6498",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49"
+      },
+      "source_snapshot_root": "<FGO_ROOT>/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT",
+      "source_identity": "uncommitted per-file overlay plus baseline HEAD; exact bytes sealed in SOURCE_SNAPSHOT",
+      "solver_and_adapter_elapsed_s": 0.5673251010011882,
+      "hardware": {
+        "cpu": "Intel(R) Core(TM) Ultra 9 275HX",
+        "logical_cpus": 24,
+        "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+        "python": "3.10.12",
+        "numpy": "1.26.4",
+        "threads": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        }
+      },
+      "mode": "FULL_BATCH_SPARSE_GAUSS_NEWTON",
+      "native_process_count": 1,
+      "evaluator_process_count": 0,
+      "reference_payload_reads": 0,
+      "reference_paths_denied": 3,
+      "input_provenance": {
+        "raw_source_hashes": {
+          "gnss1": {
+            "relative_path": "BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss1-raw.csv",
+            "sha256": "6035d50419eaa0ff29d9a4b053dbed5d715fd2bec38f44ad4b4be02ca54a4ba9",
+            "size_bytes": 40997421,
+            "hash_status": "NEWLY_VERIFIED"
+          },
+          "gnss2": {
+            "relative_path": "BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss2-raw.csv",
+            "sha256": "4f18ec7d618c675238d5c40a868ba01802a9d2da9325877d715f75f2f939119f",
+            "size_bytes": 38866433,
+            "hash_status": "NEWLY_VERIFIED"
+          }
+        },
+        "provider_hashes": {
+          "epochs": "7de5abd5be7575890a7bfc9f04dae3cb7e51eb6cbe58ce1017be9c311dc14a34",
+          "receiver1_measurements": "dd92d18adbe5a36720f0415755699c25ed4a0eda1b35206ff190aa6b771a8c6b",
+          "receiver2_measurements": "acbb6606653f56ca4a74e13205a05b4be2222e16df707c93ffe3ca0b3dd3888f"
+        },
+        "navigation_hashes": {
+          "gnss1.nav": "c8b68013684793b1578bb4ab22a2108ba5bcdfb3a08f68547d384d26a7de3e56",
+          "gnss2.nav": "32a1e033290f1eae0b39301008df2e3eaa6f443399076e5fbeda6d9eb6db1755"
+        },
+        "input_sha256": "90fbc5995a8a2da7285b247304fed0ec7aa593cd84b4901f07a1d1c9f035c08f",
+        "base_time": 1772780400.0,
+        "window_seconds": [
+          3186.0,
+          3563.0
+        ],
+        "input_manifest_path": "<FGO_INPUT_BY2O>/INPUT_MANIFEST.json",
+        "input_manifest_sha256": "3f1696dd6fcfdab9350fc4ed792677ea8c2f6d014c7cc7a9dd66bd3c59f8260c",
+        "epoch_count": 420,
+        "expected_window_one_hz_slots": 378,
+        "missing_one_hz_slots": [
+          3143
+        ]
+      },
+      "output_hashes": {
+        "STATES.csv": "0eba3d15a8e8db77a98722100d2919624ea294307d2ead5cb48cbca54c2ad54d",
+        "WEIGHTS.npz": "2f10f7bc7049b732f45b95a8bd49d19ba095de002dd611b2d111bce5b017d028",
+        "SOLVER.json": "2eda2718ced747921987e74d993e34434fbb201306b091598a57dfbc284297a0",
+        "WEIGHT_HISTORY_INDEX.json": "f8f0690d76cb8b1d81a181ab94529058fa6baf1ab66fbd6c3f66e17c221b5a10",
+        "STATE_ARRAYS.npz": "12d5eb76baf40fa8a4fa98744330cb1536347f01f4fec543063776707d89f6de",
+        "WEIGHT_HISTORY.npz": "8f166ecc38a3e0a3578148fd3368faeb0cd17a350a54d79476f7c1d04edb2b1f"
+      }
+    }
+  },
+  {
+    "sequence": "BY2O",
+    "method": "WEN_TC",
+    "run_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/RUN.json",
+    "run": {
+      "schema": "fgo_comparison.native.v1",
+      "sequence": "BY2O",
+      "method": "WEN_TC",
+      "attempt": "PAPER_CONTRACT",
+      "terminal_status": "COMPLETED",
+      "output_root": "<FGO_ROOT>/runs/BY2O/WEN_TC/PAPER_CONTRACT",
+      "data_mode": "real_raw_reuse",
+      "synthetic_data_used": false,
+      "semisynthetic_data_used": false,
+      "trace_used_online": false,
+      "receiver_imu_as_body_imu": false,
+      "final_v23_output_solver_input": false,
+      "LegSA_output_solver_input": false,
+      "per_case_tuning": false,
+      "output_only_correction": false,
+      "epoch_deleted_for_metric": false,
+      "old_runtime_input_count": 0,
+      "code_commit": "0625cea2c137859d1319c2e1011178cea19af10a",
+      "config_hash": "fe2a42c415fffc7aa371a326c86886c7fa38baa9530a60a18294f07e2ecf0214",
+      "config_path": "<CODE_ROOT>/configs/paper_rebuild/fgo_comparison/WEN_TC_PAPER_CONTRACT_20261004.json",
+      "implementation_source_hashes": {
+        "src/legsa_gins/datasets/by2/go2_body_state_parser.py": "3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/__init__.py": "d6f38207b797390b236ae145565bb4fd2bf5f1507a809a55effc7dadd552745c",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/broadcast_identity.py": "404b23476738e747d2abc4608bb5f99c72934f4e40a2ce4107b6967f1695b976",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/ceres_relinearize.py": "49a8b3782931360abe9bdf527b9a0f1a21f289f6b7257807fe06a99b38deb4ce",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/evaluation.py": "823fd2fc81ecac1f33ab503698a4856f87b324fbdfc842bc9855cd896109ea47",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/gnc.py": "4d347d1e745ba330130745490934bfc5b9caab86446d006c5adb7477616ff750",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/obgins_bridge.cc": "de71d58f3f822b9c018cfe8ce1e82ef193ae48255480a80292525f385278d994",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/obgins_preintegration.py": "7d4a211541fe0cfddced87074d19c41adeaf3cc1fc116c88408914dbb03d1aa5",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": "6733fceead5a464dc398610f39e7d0b9aa2223e5b1b67d6d5ad2d9eb004b9862",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/oisam_inputs.py": "9cca453bcef6e355b3e4b2e6ee00075034854c7189a98f7634eaa213279696b6",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/plotting.py": "3f5f75c89c66d196f5dafb151d927173abb0f4b807218146867c6790b7e8c294",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/raw_inputs.py": "ad6de0fd9a1077947d3c852ed10b54a861497d6953f6a66639681dda97bd5e42",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/report.py": "77e24d7f27a6a29dfd166f89f443ac8933da44186839529cf6cdee0ed2a0eb94",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/retained_results.py": "9b7e272e7c8451d0c80ca1d6d382bbb4fd022c6cc0aeb096bc70ec8a1c949739",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/rtklib_corrections.c": "c63abcc4a6cec027a4fb290536211fe67d2aade34b57b00179d9cb371800649e",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/runner.py": "32ef37454667a9da4890178d976fdbf82a615b74be002d0976ecc6a974005415",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/wen_ahrs.py": "29463290c27485ba0f00d88049d69afabfaeb3d797e3318a20c8da65f2735017",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/wen_tc.py": "21799406825343811611cf99dde979d0cd1b28d0031879042bebbee1488b6498",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49"
+      },
+      "source_snapshot_root": "<FGO_ROOT>/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT",
+      "source_identity": "uncommitted per-file overlay plus baseline HEAD; exact bytes sealed in SOURCE_SNAPSHOT",
+      "solver_and_adapter_elapsed_s": 58.54360654700031,
+      "hardware": {
+        "cpu": "Intel(R) Core(TM) Ultra 9 275HX",
+        "logical_cpus": 24,
+        "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+        "python": "3.10.12",
+        "numpy": "1.26.4",
+        "threads": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        }
+      },
+      "mode": "OFFLINE_FULL_BATCH_LM",
+      "native_process_count": 1,
+      "evaluator_process_count": 0,
+      "reference_payload_reads": 0,
+      "reference_paths_denied": 3,
+      "input_provenance": {
+        "raw_source_hashes": {
+          "gnss1": {
+            "relative_path": "BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss1-raw.csv",
+            "sha256": "6035d50419eaa0ff29d9a4b053dbed5d715fd2bec38f44ad4b4be02ca54a4ba9",
+            "size_bytes": 40997421,
+            "hash_status": "NEWLY_VERIFIED"
+          },
+          "gnss2": {
+            "relative_path": "BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss2-raw.csv",
+            "sha256": "4f18ec7d618c675238d5c40a868ba01802a9d2da9325877d715f75f2f939119f",
+            "size_bytes": 38866433,
+            "hash_status": "NEWLY_VERIFIED"
+          }
+        },
+        "provider_hashes": {
+          "epochs": "7de5abd5be7575890a7bfc9f04dae3cb7e51eb6cbe58ce1017be9c311dc14a34",
+          "receiver1_measurements": "dd92d18adbe5a36720f0415755699c25ed4a0eda1b35206ff190aa6b771a8c6b",
+          "receiver2_measurements": "acbb6606653f56ca4a74e13205a05b4be2222e16df707c93ffe3ca0b3dd3888f"
+        },
+        "navigation_hashes": {
+          "gnss1.nav": "c8b68013684793b1578bb4ab22a2108ba5bcdfb3a08f68547d384d26a7de3e56",
+          "gnss2.nav": "32a1e033290f1eae0b39301008df2e3eaa6f443399076e5fbeda6d9eb6db1755"
+        },
+        "input_sha256": "90fbc5995a8a2da7285b247304fed0ec7aa593cd84b4901f07a1d1c9f035c08f",
+        "base_time": 1772780400.0,
+        "window_seconds": [
+          3186.0,
+          3563.0
+        ],
+        "input_manifest_path": "<FGO_INPUT_BY2O>/INPUT_MANIFEST.json",
+        "input_manifest_sha256": "3f1696dd6fcfdab9350fc4ed792677ea8c2f6d014c7cc7a9dd66bd3c59f8260c",
+        "epoch_count": 420,
+        "expected_window_one_hz_slots": 378,
+        "missing_one_hz_slots": [
+          3143
+        ],
+        "ahrs": {
+          "ins_discretization": "RIGHT_ENDPOINT_ACCELERATION_EQ25",
+          "source_imu_retained_interval_count": 95853,
+          "source_imu_skipped_interval_count": 6,
+          "missing_ahrs_sample_count": 0,
+          "initialization": {
+            "time_rel_s": 3144.0,
+            "gnss_llh_deg_deg_m": [
+              39.984821533434,
+              116.343127977942,
+              41.77075125
+            ],
+            "a1_body_yaw_ned_deg": -5.573825,
+            "ahrs_heading_gauge_rad": 2.9317565813912845,
+            "heading_alignment_count": 1,
+            "gravity_mps2": 9.80155444421881
+          },
+          "provenance": {
+            "raw_body": {
+              "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by1.txt",
+              "sha256": "0e5c62e0a5af0b6c32c51b535cc90701677276fc73c5623b72abda66cc148f2e"
+            },
+            "raw_lock": {
+              "path": "<CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK_CLEAN5.csv",
+              "sha256": "faa31580c7fff73b52fcf6d27c97cfdd9187e67a55968a2ab42e6737b0eabb67"
+            },
+            "providers": {
+              "imupath": {
+                "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/CALIBRATED_IMU.imu",
+                "sha256": "48943f3e704ceebbf517bfb073856c1c215b5216e3a5d8b6cd91e7ea7586e49b"
+              },
+              "gnsspath": {
+                "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/CALIBRATED_GNSS.gnss",
+                "sha256": "96ffaa3a88f97d2519381baf20c1e139269665281ff0de2f56fb55f0b2446394"
+              }
+            },
+            "execution_contract_sha256": "698ede92e0251b896d488283544421a9f0dc3f689e2168ff841804e0950bc983",
+            "bundle_sha256": "a1c608720fc4ae2ea9b3f8c3813896f1ed137c706f65c36ddf4a10351274ede3",
+            "preparation": {
+              "execution_contract": "<CODE_ROOT>/configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_EXECUTION_CONTRACT.yaml",
+              "provider_bundle_template": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/{sequence}/CALIBRATED_PROVIDER_BUNDLE.json",
+              "imu_install_rpy_deg": [
+                -1.0,
+                0.0,
+                0.0
+              ],
+              "imu_to_gnss1_lever_body_m": [
+                0.03,
+                0.03,
+                -0.3
+              ],
+              "maximum_ahrs_gap_s": 0.1,
+              "heading_initialization": "one first valid A1 body-yaw plus GNSS1 LLH with Go2/IMU support; fixed world-yaw gauge thereafter",
+              "orientation_formula": "R_E_N * Rz(alpha) * D * R_quaternion_wxyz * D * R_install.T",
+              "imu_input": "already calibrated current-sample measured-dt FRD increments; do not reapply acceleration scale or installation",
+              "lever_velocity": "delta of R_E_B*(omega_body cross lever) at graph interval endpoints",
+              "missing_interval": "omit only unsupported INS link; retain graph nodes and code/motion/bias factors; record coverage"
+            },
+            "parser_counts": {
+              "message_count": 95860,
+              "incomplete_imu_messages": 0,
+              "invalid_quaternion_messages": 0,
+              "normalized_quaternion_messages": 80874
+            },
+            "base_time_unix_s": 1772780400.0,
+            "data_mode": "real_raw_sensor_adaptation",
+            "synthetic_data_used": false,
+            "semisynthetic_data_used": false,
+            "trace_used_online": false,
+            "receiver_imu_as_body_imu": false,
+            "final_v23_output_solver_input": false,
+            "LegSA_output_solver_input": false,
+            "per_case_tuning": false,
+            "output_only_correction": false,
+            "epoch_deleted_for_metric": false,
+            "old_runtime_input_count": 0,
+            "continuous_a1_heading_used": false,
+            "go2_odometry_used": false,
+            "second_imu_scale_or_install_applied": false,
+            "gravity_source": "existing WGS84 gravity_model at sensor-only initial LLH",
+            "coordinate_frame": "ECEF; fixed seed NED basis for AHRS/gravity; corrected FRD body bias",
+            "coriolis_or_transport_added": false,
+            "attitude_estimated": false,
+            "linear_acceleration_contract": "Go2 calibrated specific force plus AHRS-rotated fixed normal gravity in body; not author XSens Ti10 output",
+            "acceleration_interpolation": "linear interpolation of current-sample f=dvel/unrounded_dt at node times; maximum gap gate retained",
+            "author_AHRS_statistical_equivalence_proven": false,
+            "graph_R_GL": "current right-node ECEF position"
+          }
+        }
+      },
+      "output_hashes": {
+        "STATES.csv": "e70b895c4a2fab3530662f2829dd2f77ec8273ab6cc6c8b7fe5c7e03b30689af",
+        "AHRS_INTERVALS.npz": "fdffc19c698b6677077578ab7b2df94bc527787b749f2e966ccf40a3a02cdbbc",
+        "SOLVER.json": "cc7683218d9265ad8f063fc3e53a7b66cd0386a40ae71918a7f1e01dd3fe0b45",
+        "STATE_ARRAYS.npz": "845ed2c2bbce67a77e86772dc8d9d55fd4cd62f73a645d479ccb83f8c4f449f0",
+        "AHRS_PROVENANCE.json": "166c9e51a126b03a32a4da34b5f5b03fb5e425520d257ca8249587b345ccd403"
+      }
+    }
+  },
+  {
+    "sequence": "BY2O",
+    "method": "OISAM",
+    "run_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/RUN.json",
+    "run": {
+      "schema": "fgo_comparison.native.v1",
+      "sequence": "BY2O",
+      "method": "OISAM",
+      "attempt": "PAPER_CONTRACT",
+      "terminal_status": "INPUT_UNSUPPORTED_IMU_GAP",
+      "output_root": "<FGO_ROOT>/runs/BY2O/OISAM/PAPER_CONTRACT",
+      "data_mode": "real_raw_reuse",
+      "synthetic_data_used": false,
+      "semisynthetic_data_used": false,
+      "trace_used_online": false,
+      "receiver_imu_as_body_imu": false,
+      "final_v23_output_solver_input": false,
+      "LegSA_output_solver_input": false,
+      "per_case_tuning": false,
+      "output_only_correction": false,
+      "epoch_deleted_for_metric": false,
+      "old_runtime_input_count": 0,
+      "code_commit": "0625cea2c137859d1319c2e1011178cea19af10a",
+      "config_hash": "e18a6ee7ae316cc78630996f63c58927d33d4b4f48df3609794fced1f8ae09d1",
+      "config_path": "<CODE_ROOT>/configs/paper_rebuild/fgo_comparison/OISAM_PAPER_CONTRACT_20261004.json",
+      "implementation_source_hashes": {
+        "src/legsa_gins/datasets/by2/go2_body_state_parser.py": "3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/__init__.py": "d6f38207b797390b236ae145565bb4fd2bf5f1507a809a55effc7dadd552745c",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/broadcast_identity.py": "404b23476738e747d2abc4608bb5f99c72934f4e40a2ce4107b6967f1695b976",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/ceres_relinearize.py": "49a8b3782931360abe9bdf527b9a0f1a21f289f6b7257807fe06a99b38deb4ce",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/evaluation.py": "823fd2fc81ecac1f33ab503698a4856f87b324fbdfc842bc9855cd896109ea47",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/gnc.py": "4d347d1e745ba330130745490934bfc5b9caab86446d006c5adb7477616ff750",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/obgins_bridge.cc": "de71d58f3f822b9c018cfe8ce1e82ef193ae48255480a80292525f385278d994",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/obgins_preintegration.py": "7d4a211541fe0cfddced87074d19c41adeaf3cc1fc116c88408914dbb03d1aa5",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": "6733fceead5a464dc398610f39e7d0b9aa2223e5b1b67d6d5ad2d9eb004b9862",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/oisam_inputs.py": "9cca453bcef6e355b3e4b2e6ee00075034854c7189a98f7634eaa213279696b6",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/plotting.py": "3f5f75c89c66d196f5dafb151d927173abb0f4b807218146867c6790b7e8c294",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/raw_inputs.py": "ad6de0fd9a1077947d3c852ed10b54a861497d6953f6a66639681dda97bd5e42",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/report.py": "77e24d7f27a6a29dfd166f89f443ac8933da44186839529cf6cdee0ed2a0eb94",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/retained_results.py": "9b7e272e7c8451d0c80ca1d6d382bbb4fd022c6cc0aeb096bc70ec8a1c949739",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/rtklib_corrections.c": "c63abcc4a6cec027a4fb290536211fe67d2aade34b57b00179d9cb371800649e",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/runner.py": "32ef37454667a9da4890178d976fdbf82a615b74be002d0976ecc6a974005415",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/wen_ahrs.py": "29463290c27485ba0f00d88049d69afabfaeb3d797e3318a20c8da65f2735017",
+        "src/legsa_gins/paper_rebuild/fgo_comparison/wen_tc.py": "21799406825343811611cf99dde979d0cd1b28d0031879042bebbee1488b6498",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49"
+      },
+      "source_snapshot_root": "<FGO_ROOT>/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT",
+      "source_identity": "uncommitted per-file overlay plus baseline HEAD; exact bytes sealed in SOURCE_SNAPSHOT",
+      "solver_and_adapter_elapsed_s": 59.31695879600011,
+      "hardware": {
+        "cpu": "Intel(R) Core(TM) Ultra 9 275HX",
+        "logical_cpus": 24,
+        "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+        "python": "3.10.12",
+        "numpy": "1.26.4",
+        "threads": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        }
+      },
+      "mode": "incremental_OiSAM_1Hz_current_node_with_30_40_node_AJSWR_and_Ceres_relinearization",
+      "native_process_count": 1,
+      "evaluator_process_count": 0,
+      "reference_payload_reads": 0,
+      "reference_paths_denied": 3,
+      "input_provenance": {
+        "method_id": "OISAM_2025_PAPER_CONTRACT_20261004",
+        "sequence": "BY2O",
+        "terminal_status": "INPUT_UNSUPPORTED_IMU_GAP",
+        "wall_seconds": 3.401268314000845,
+        "expected_nodes": 420,
+        "actual_rows": 420,
+        "finite_nodes": 97,
+        "unavailable_nodes": 323,
+        "core_counts": {
+          "full_relinearizations": 38,
+          "incremental_updates": 57,
+          "initial_qr_builds": 11,
+          "marginalized_nodes": 59,
+          "imu_factors": 96,
+          "gnss_factors": 97,
+          "heading_factors": 0,
+          "initial_attitude_priors": 1,
+          "givens_rotations": 150030,
+          "nonlinear_max_iterations": 7,
+          "attitude_triggers": 6,
+          "window_triggers": 4,
+          "nonlinear_converged_calls": 38,
+          "nonlinear_usable_limit_calls": 0
+        },
+        "A1_yaw_initialization_count": 1,
+        "maximum_imu_endpoint_wait_s": 0.012966156005859375,
+        "input_provenance": {
+          "sequence": "BY2O",
+          "base_time": 1772780400.0,
+          "evaluation_window_s": [
+            3186.0,
+            3563.0
+          ],
+          "input_provider_hashes": {
+            "imupath": {
+              "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/CALIBRATED_IMU.imu",
+              "sha256": "48943f3e704ceebbf517bfb073856c1c215b5216e3a5d8b6cd91e7ea7586e49b",
+              "rows": 95853
+            },
+            "gnsspath": {
+              "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/CALIBRATED_GNSS.gnss",
+              "sha256": "96ffaa3a88f97d2519381baf20c1e139269665281ff0de2f56fb55f0b2446394",
+              "rows": 2231
+            }
+          },
+          "raw_source_hashes": {
+            "body": {
+              "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by1.txt",
+              "sha256": "0e5c62e0a5af0b6c32c51b535cc90701677276fc73c5623b72abda66cc148f2e"
+            },
+            "status": {
+              "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss1-status.csv",
+              "sha256": "c3958ba9442c1a84b25c3be6ab649cc3aad2e5976c3f525127a2136d9b72255f"
+            },
+            "gnss1": {
+              "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss1-raw.csv",
+              "sha256": "6035d50419eaa0ff29d9a4b053dbed5d715fd2bec38f44ad4b4be02ca54a4ba9"
+            },
+            "gnss2": {
+              "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss2-raw.csv",
+              "sha256": "4f18ec7d618c675238d5c40a868ba01802a9d2da9325877d715f75f2f939119f"
+            }
+          },
+          "raw_hash_status": "BODY_VERIFIED_FROM_SAME_READ_OTHER_ROLES_INHERITED_FROM_FROZEN_BUNDLE",
+          "raw_body_time_reader_counts": {
+            "message_count": 95860,
+            "incomplete_imu_messages": 0
+          },
+          "raw_lock": {
+            "path": "<CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK_CLEAN5.csv",
+            "sha256": "faa31580c7fff73b52fcf6d27c97cfdd9187e67a55968a2ab42e6737b0eabb67"
+          },
+          "execution_contract_sha256": "698ede92e0251b896d488283544421a9f0dc3f689e2168ff841804e0950bc983",
+          "raw_current_sample_interval_identity": "PASS_ALL_PROVIDER_ROWS_WITHIN_0.56_MICROSECOND_ROUNDING",
+          "imu_interval_count": 95853,
+          "imu_dt_source": "unrounded_source_raw_stamps",
+          "provider_bundle_sha256": "a1c608720fc4ae2ea9b3f8c3813896f1ed137c706f65c36ddf4a10351274ede3",
+          "provider_bundle_path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/CALIBRATED_PROVIDER_BUNDLE.json",
+          "provider_code_commit": "d2a9f2a0fab652949e2f981a40ea1d6eb41151e1",
+          "provider_model_sha256": "4ce6ca6c544c2ba39988ea0b0631a60207a4cea36987c3a2139052fedd3a4871",
+          "imu_gaps_s": [
+            [
+              3240.7490525245667,
+              3241.0170600414276
+            ],
+            [
+              3301.2890524864197,
+              3301.3990592956543
+            ],
+            [
+              3362.01304769516,
+              3362.359046459198
+            ],
+            [
+              3392.541158437729,
+              3392.6490621566772
+            ],
+            [
+              3483.751065969467,
+              3483.917062997818
+            ],
+            [
+              3544.833066701889,
+              3544.9870598316193
+            ]
+          ],
+          "imu_transform_reapplied": false,
+          "acceleration_scale_reapplied": false,
+          "receiver_imu_as_body_imu": false
+        },
+        "evaluation_window_s": [
+          3186.0,
+          3563.0
+        ],
+        "manifest_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/RUN_MANIFEST.json",
+        "states_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/STATES.csv"
+      },
+      "output_hashes": {
+        "RUN_MANIFEST.json": "f34d48f818ef27fd4e9c1ab886a1f5c11ee19098c65a658f9f9e688483febb60",
+        "STATES.csv": "04e74b60521e90d1d202443f4c2dc28fe84ce373107f0df30bd2aa9f1ed9f241",
+        "SOLVER_EVENTS.jsonl": "c6e5a3c8724c54f60bde12fa7c38c40c621ea84aa610ad3f043b3ec52643897e"
+      }
+    }
+  }
+]

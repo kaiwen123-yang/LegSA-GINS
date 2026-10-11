@@ -1,0 +1,16 @@
+Nature Figure Rendered Collision Audit
+pdf: /mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/C01.pdf
+pages: 1
+visible text boxes: 72
+stroke paths: 89
+
+[WARN] page 1 text-fill-edge: Text partially overlaps the edge of 1 filled region(s) — '185'
+  text bbox: (417.3540344238281, 327.92584228515625, 429.86517333984375, 335.42584228515625)
+[WARN] page 1 text-image-edge: Text partially overlaps the edge of 2 raster image(s) — '0.10'
+  text bbox: (393.4119873046875, 60.86093521118164, 408.00811767578125, 68.36093139648438)
+[WARN] page 1 text-image-edge: Text partially overlaps the edge of 1 raster image(s) — '10'
+  text bbox: (410.27972412109375, 290.21661376953125, 418.6208801269531, 297.71661376953125)
+
+summary: 0 fail, 3 warn, 12 contained fill overlays, 10 contained image overlays
+verdict: REVIEW REQUIRED
+note: contained overlays can be intentional; WARN findings need final-size visual review

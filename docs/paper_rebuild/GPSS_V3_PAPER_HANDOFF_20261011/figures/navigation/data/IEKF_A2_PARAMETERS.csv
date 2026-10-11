@@ -1,0 +1,4 @@
+method,accel_scale,config,method_label,parameter_source_sha256,initial_std.attitude_deg,initial_std.position_m,initial_std.velocity_mps,noise.accelerometer_m2ps3,noise.gyro_rad2_per_s,source_parameter_sha256,intervals_s,relative_only_updates
+LC01,1,LIT,LC01,a9476f909ed65c9b4760ac19dc3cde3d625fa3d390b2f133cae79182e2293392,60,0.1,0.1,"[0.0289, 0.0225, 0.0576]","[0.0004, 0.0004, 0.000324]",a9476f909ed65c9b4760ac19dc3cde3d625fa3d390b2f133cae79182e2293392,"[[196.2, 216.2]]",0
+EXT05C,1,LIT,EXT05C,a9476f909ed65c9b4760ac19dc3cde3d625fa3d390b2f133cae79182e2293392,60,0.1,0.1,"[0.0289, 0.0225, 0.0576]","[0.0004, 0.0004, 0.000324]",a9476f909ed65c9b4760ac19dc3cde3d625fa3d390b2f133cae79182e2293392,"[[196.2, 216.2]]",0
+LC01-BR,1,LIT,改动过的 LC01,a9476f909ed65c9b4760ac19dc3cde3d625fa3d390b2f133cae79182e2293392,60,0.1,0.1,"[0.0289, 0.0225, 0.0576]","[0.0004, 0.0004, 0.000324]",a9476f909ed65c9b4760ac19dc3cde3d625fa3d390b2f133cae79182e2293392,"[[196.2, 216.2]]",100

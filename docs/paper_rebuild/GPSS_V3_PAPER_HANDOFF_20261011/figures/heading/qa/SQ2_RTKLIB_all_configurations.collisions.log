@@ -1,0 +1,10 @@
+Nature Figure Rendered Collision Audit
+pdf: /mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/heading/SQ2_RTKLIB_all_configurations.pdf
+pages: 1
+visible text boxes: 68
+stroke paths: 4209
+
+
+summary: 0 fail, 0 warn, 0 contained fill overlays, 0 contained image overlays
+verdict: PASS
+note: contained overlays can be intentional; WARN findings need final-size visual review

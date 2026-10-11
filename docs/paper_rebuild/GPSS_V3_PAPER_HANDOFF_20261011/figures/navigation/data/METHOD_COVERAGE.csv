@@ -1,0 +1,9 @@
+method,use,conditions,table
+Two-position IEKF (LC01),"Q3_01, Q3_02, Q3_04","Literature and calibrated parameters, FILE_START/CONTRACT_START, all 16 natural method/config rows retained",IEKF_ALL16_CONDITIONS_WITH_PARAMETERS.csv
+Single-position IEKF (EXT05C),"Q3_02, Q3_04; all natural results table",Same IEKF backbone; GNSS2 retained only for initialization; LIT/S and start conditions retained,IEKF_ALL16_CONDITIONS_WITH_PARAMETERS.csv
+Baseline-retaining IEKF (LC01-BR),Q3_02,"A2, 18/18 finite; negative position result retained",A2_ALL18_MATCHED_RESULTS.csv
+OiSAM strict,Main F02 copied by root from focused package,"Same POI and matched-time precision, full output support, no repeated initialization",Root common-point package
+OiSAM segmented,"Q3_03, Q3_05","Three real runs, 11 preregistered input blocks, prior-only excluded; heading and GNSS1 position definitions kept separate",BY2_OISAM_SEGMENTED_EXISTING_METRICS.csv and BY2H/BY2O counterparts
+Wen TC-FGO,Q3_05,"Raw code and adapted attitude/velocity, GNSS1 position; attitude is not an independently estimated output",EXPERIMENTS.csv
+GNC-FGO,Q3_05,"Raw code+Doppler, GNSS1 position",EXPERIMENTS.csv
+Official GINav SPP/INS,Complete actual-run table,"Native runs on three trials, initialization support and speed-gate failures retained, no full-window fictitious precision",GINAV_ACTUAL_RESULTS.csv

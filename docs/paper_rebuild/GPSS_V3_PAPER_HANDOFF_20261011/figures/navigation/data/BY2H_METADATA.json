@@ -1,0 +1,21 @@
+{
+  "reference_time_min_s": 401.27322602272034,
+  "reference_time_max_s": 697.7021672725677,
+  "reference_clean_epoch_count": 5936,
+  "reference_read_count": 1,
+  "reference_sha256": "8d11fe360753bfcdbc54f7bf793fcb25850c0997b7aaad4ec1c9f10859c0f84f",
+  "reference_interpolation": "frozen linear LLH/RP and unwrap yaw, brackets saved; no extrapolation admitted",
+  "output_interpolation": false,
+  "physical_point": "GNSS1_ANTENNA",
+  "coordinate_frame": "local N/E/Up anchored at registered formal-window start, same for every method",
+  "prior_only_primary_excluded": true,
+  "sequence": "BY2H",
+  "base_time": 1772784000.0,
+  "window_start_s": 413.0,
+  "window_end_s": 683.0,
+  "common_strict_epochs": 0,
+  "common_segmented_heading_epochs": 267,
+  "yaw_definition": "wrapped estimated body NED Euler yaw minus reference body NED Euler yaw, degrees",
+  "v3_availability_scope": "finite retained evaluated output epochs; this export does not infer solver real-time latency",
+  "segmented_position_excluded_from_v3_poi_comparison": true
+}

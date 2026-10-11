@@ -1,0 +1,143 @@
+﻿path,read_depth,rows,purpose
+/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/V3_STORY_20261004/TASK_LEDGER.csv.gz,FULL_CSV_PARSE,6468,existing evidence recovery
+/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/V3_STORY_20261004/METRIC_LEDGER.csv.gz,FULL_CSV_PARSE,12936,existing evidence recovery
+/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/V3_STORY_20261004/NATIVE_ACTION_LEDGER.csv.gz,FULL_CSV_PARSE,6468,existing evidence recovery
+/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/V3_STORY_20261004/NATURAL_METHOD_RESULTS.csv,FULL_CSV_PARSE,66,existing evidence recovery
+/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/V3_STORY_20261004/CONFIG_CONTEXT_STORY.csv,FULL_CSV_PARSE,33,existing evidence recovery
+/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/V3_STORY_20261004/CONFIG_MODEL_FACTORS.json,FULL_JSON_PARSE,33,configuration comparison
+/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/V3_STORY_20261004/METHOD_READER_NAME_MAP.csv,FULL_CSV_PARSE,11,existing evidence recovery
+/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/V3_STORY_20261004/SINGLE_MODULE_PAIRED_DIRECTION.csv,FULL_CSV_PARSE,56,existing evidence recovery
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00001/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00001/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00001/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00001/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00002/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00002/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00002/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00002/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00003/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00003/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00003/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00003/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00004/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00004/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00004/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00004/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00005/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00005/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00005/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00005/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00006/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00006/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00006/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00006/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00007/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00007/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00007/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00007/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00008/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00008/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00008/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00008/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00009/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00009/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00009/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00009/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00010/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00010/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00010/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00010/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00011/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00011/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00011/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00011/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A03/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A03/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A03/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A03/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A04/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A04/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A04/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A04/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A05/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A05/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A05/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A05/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A06/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A06/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A06/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A06/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A07/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A07/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A07/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A07/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A08/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A08/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A08/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A08/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A09/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A09/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A09/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_A09/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F01/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,174,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F01/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F01/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F01/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F02/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F02/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F02/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F02/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F03/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F03/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F03/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F03/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F04/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F04/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F04/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F04/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A03/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A03/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A03/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A03/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A04/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A04/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A04/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A04/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A05/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A05/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A05/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A05/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A06/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A06/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A06/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A06/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A07/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A07/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A07/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A07/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A08/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A08/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A08/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A08/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A09/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A09/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A09/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_A09/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F01/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,174,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F01/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F01/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F01/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F02/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F02/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F02/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F02/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F03/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F03/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F03/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F03/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F04/V3_RUNTIME_CONFIG.yaml,FULL_CONFIG_TEXT,175,actual retained configuration
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F04/ARCHIVE_RECEIPT.json,FULL_JSON_PARSE,,native archive record
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F04/RUN_MANIFEST.json,FULL_JSON_PARSE,,actual runtime role and active input roles
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F04/PORT_INPUT_TIMELINE_SNAPSHOT.json,FULL_JSON_PARSE,,actual input and evaluation window
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/CORE_541_TABLE_V3.csv,FULL_CSV_PARSE,5951,existing evidence recovery
+/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/SEQUENCE_TABLE_V3.csv,FULL_CSV_PARSE,33,existing evidence recovery

@@ -1,0 +1,19 @@
+type,figure_label
+D14,Position noise I
+D21,Position noise II
+D16,Position bias I
+D18,Position bias II
+D03,Position outage I
+D04,Position outage II
+D43,Velocity noise
+D42,Velocity outage I
+D05,Velocity outage II
+D33,Heading noise I
+D35,Heading noise II
+D32,Heading noise III
+D31,Heading outage I
+D06,Heading outage II
+D46,Doppler I
+D47,Doppler II
+D50,Doppler III
+D57,Timestamp shift

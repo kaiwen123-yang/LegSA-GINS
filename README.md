@@ -4,6 +4,8 @@ LegSA-GINS studies short lateral dual-GNSS heading and robot-aided, source-aware
 
 ## Current reading order
 
+**Current V3 manuscript handoff (2026-10-11):** [author-selected scientific question, 15 figure groups, result tables and continuation plan](PAPER_HANDOFF.md). This is the paper-writing entry; the research and provenance records below retain their separate identities.
+
 1. [Heading, FIX and research-direction reassessment (2026-10-06)](docs/paper_rebuild/HEADING_REASSESSMENT_20261006/README.md).
 2. [Research audit and bounded upgrade study (2026-10-06)](docs/paper_rebuild/RESEARCH_AUDIT_20261006/README.md).
 3. [Latest completed manuscript and eight-record transfer results (R5)](docs/paper_rebuild/EXISTING_DATA_R5_20261005/README.md).

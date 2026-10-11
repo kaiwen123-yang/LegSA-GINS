@@ -1,0 +1,22 @@
+{
+  "status": "FIGURES_AND_COVERAGE_VALIDATED",
+  "main_figures": 6,
+  "supplement_figures": 9,
+  "total_figure_groups": 15,
+  "exports_png_pdf_svg": 45,
+  "table_files": 82,
+  "registered_identities": 30,
+  "completed_identities_with_destinations": 18,
+  "additional_control_and_history_rows": 6,
+  "five_questions_covered": [
+    "Q1",
+    "Q2",
+    "Q3",
+    "Q4",
+    "Q5"
+  ],
+  "new_scientific_solver_calls": 0,
+  "new_scientific_evaluator_calls": 0,
+  "new_provider_calls": 0,
+  "errors": []
+}

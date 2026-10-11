@@ -1,0 +1,10 @@
+Nature Figure Rendered Collision Audit
+pdf: /mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_02_heading_retention.pdf
+pages: 1
+visible text boxes: 51
+stroke paths: 272
+
+
+summary: 0 fail, 0 warn, 10 contained fill overlays, 0 contained image overlays
+verdict: PASS
+note: contained overlays can be intentional; WARN findings need final-size visual review

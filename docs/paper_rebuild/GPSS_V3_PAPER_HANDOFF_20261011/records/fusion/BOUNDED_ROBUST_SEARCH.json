@@ -1,0 +1,32 @@
+{
+  "extra_roots": [
+    "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\hext",
+    "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\configs\\paper_rebuild"
+  ],
+  "max_filesize": "2M",
+  "prior_python_search": "stopped read-only recursive search before completion; no conclusion based on uncompleted passes",
+  "purpose": "bounded metadata search for historical robust run/results",
+  "roots": [
+    "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN2_BY2_MODULE_ABLATION_AND_CLASSIC18_FAILED_8E3083F_BASE_PROVIDER_PARITY",
+    "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN2_BY2_MODULE_ABLATION_AND_CLASSIC18_FAILED_8F0678A_EXPORT_PRIVACY_SCANNER_FALSE_POSITIVE",
+    "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN2R2_BY2_ABLATION_AND_FULL_60X9_REBUILD",
+    "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD",
+    "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN2R2A1_RAW_DOPPLER_CANONICAL_PARITY_AND_CLEAN_ABLATION_RESUME",
+    "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX",
+    "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE",
+    "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN3R2_MATH_REPAIR_COUNTER_CONTRACT_ROUTING_REPAIR_AND_S3_RESUME",
+    "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX",
+    "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON"
+  ],
+  "max_depth": 5,
+  "hits": [
+    "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON\\10_LC02_FINAL_CANDIDATE_TRIAGE\\04_GINAV2021\\GINAV2021_OFFICIAL_ROUTE_CONTRACT.yaml",
+    "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON\\10_LC02_FINAL_CANDIDATE_TRIAGE\\05_CROSS_CANDIDATE_DECISION\\LC01_VS_FINAL_CANDIDATES_INFORMATION_STRUCTURE.csv",
+    "G:\\LegSA-GINS-project\\clean_rebuild_202607\\stages\\CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON\\08_LC02_YIN2023_RAEKF\\01_PRIOR_IMPLEMENTATION_AUDIT\\YIN2023_PRIOR_CODE_PROVENANCE.md",
+    "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\configs\\paper_rebuild\\fgo_comparison\\OISAM_PAPER_CONTRACT_20261004.json",
+    "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\hext\\FGO_COMPARISON\\FGO_SELECTION.md",
+    "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\docs\\paper_rebuild\\hext\\FGO_REPRODUCTION_FIX_20261004\\REPRODUCTION_NOTES.md",
+    "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\configs\\paper_rebuild\\horizontal_literature\\lc02_final_candidate_triage\\stage_payload\\04_GINAV2021\\GINAV2021_OFFICIAL_ROUTE_CONTRACT.yaml",
+    "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\configs\\paper_rebuild\\horizontal_literature\\lc02_final_candidate_triage\\stage_payload\\05_CROSS_CANDIDATE_DECISION\\LC01_VS_FINAL_CANDIDATES_INFORMATION_STRUCTURE.csv"
+  ]
+}

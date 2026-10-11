@@ -1,0 +1,156 @@
+{
+  "id": "SQ2_RTKLIB_all_configurations",
+  "caption_en": "RTKLIB moving-base heading errors and output times during nominal walking, large body motion and single-antenna obstruction. Original, Alt. eph., Multi-GNSS and Fix-and-hold denote the original configuration, modified ephemeris, extended constellation selection and fix-and-hold processing, respectively. The upper row shows errors of newly available fixed solutions; the middle row shows errors when the latest heading is held between updates; the lower row marks new-output times.",
+  "caption_zh": "常规行走、大幅机身运动和单侧天线遮挡实验中，RTKLIB动基线航向误差与输出时间。四种配置依次为原始配置、修改星历、扩展星座选择和fix-and-hold处理。上排为新固定解的误差，中排为相邻更新之间保持最近一次航向时的误差，下排标出新解出现的时刻。",
+  "meaning_zh": "将“有一个航向值”与“此刻有新的有效航向解”分开，让长时间保持旧值的误差和稀疏新解都能直接看见。",
+  "sources": [
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/data/BY2_V0_full_saved_heading.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/data/BY2_V0E_full_saved_heading.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/data/BY2_V1_full_saved_heading.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/data/BY2_V2_full_saved_heading.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/data/BY2H_V0_full_saved_heading.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/data/BY2H_V0E_full_saved_heading.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/data/BY2H_V1_full_saved_heading.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/data/BY2H_V2_full_saved_heading.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/data/BY2O_V0_full_saved_heading.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/data/BY2O_V0E_full_saved_heading.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/data/BY2O_V1_full_saved_heading.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_04/data/BY2O_V2_full_saved_heading.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C03_OUTPUT_COUNTS.csv"
+  ],
+  "technical_notes": {
+    "quantity": "Sideways-baseline horizontal projection+90deg against commercial fused Euler yaw; not a complete navigation attitude.",
+    "conditions": "V0 original, V0E ephemeris, V1 constellation, V2 fix-and-hold; all four frozen software conditions retained.",
+    "new_vs_held": "New/native-valid in this contract equals Q1-fixed support; held values are a separate causal diagnostic and never add a new epoch.",
+    "supports": [
+      {
+        "sequence": "BY2",
+        "condition": "V0",
+        "new_count": 153,
+        "hold_count": 1370,
+        "paired_denominator": 1370
+      },
+      {
+        "sequence": "BY2",
+        "condition": "V0E",
+        "new_count": 194,
+        "hold_count": 1370,
+        "paired_denominator": 1370
+      },
+      {
+        "sequence": "BY2",
+        "condition": "V1",
+        "new_count": 154,
+        "hold_count": 1370,
+        "paired_denominator": 1370
+      },
+      {
+        "sequence": "BY2",
+        "condition": "V2",
+        "new_count": 60,
+        "hold_count": 1370,
+        "paired_denominator": 1370
+      },
+      {
+        "sequence": "BY2H",
+        "condition": "V0",
+        "new_count": 179,
+        "hold_count": 1332,
+        "paired_denominator": 1350
+      },
+      {
+        "sequence": "BY2H",
+        "condition": "V0E",
+        "new_count": 217,
+        "hold_count": 1294,
+        "paired_denominator": 1350
+      },
+      {
+        "sequence": "BY2H",
+        "condition": "V1",
+        "new_count": 186,
+        "hold_count": 1339,
+        "paired_denominator": 1350
+      },
+      {
+        "sequence": "BY2H",
+        "condition": "V2",
+        "new_count": 149,
+        "hold_count": 1339,
+        "paired_denominator": 1350
+      },
+      {
+        "sequence": "BY2O",
+        "condition": "V0",
+        "new_count": 112,
+        "hold_count": 1885,
+        "paired_denominator": 1885
+      },
+      {
+        "sequence": "BY2O",
+        "condition": "V0E",
+        "new_count": 231,
+        "hold_count": 1885,
+        "paired_denominator": 1885
+      },
+      {
+        "sequence": "BY2O",
+        "condition": "V1",
+        "new_count": 117,
+        "hold_count": 1885,
+        "paired_denominator": 1885
+      },
+      {
+        "sequence": "BY2O",
+        "condition": "V2",
+        "new_count": 93,
+        "hold_count": 1885,
+        "paired_denominator": 1885
+      }
+    ],
+    "display": "All saved finite new or held heading errors retained; held curves break at gaps>0.41s and angle-wrap jumps>180deg. Condition-specific markers occur every50 vertices for grayscale identification; every saved curve vertex remains.",
+    "held_age": "V0 BY2O held age reached301.4s; support and held age remain in the method table.",
+    "raw_trace_opens": 0
+  },
+  "width_mm": 174.0,
+  "height_mm": 183.99999999999997,
+  "alignment_status": "PASS",
+  "audit_returncodes": {
+    "pdf_text": 0,
+    "collisions": 0
+  },
+  "visual_review": "PASS",
+  "naming_review": {
+    "date": "2026-10-09",
+    "scope": "Scenario and method label consistency, caption synchronization, and label fit in color/grayscale exports. Figure-content review by the author continues.",
+    "by3_condition_source": "Author confirmation: large-amplitude body motions and pronounced vibration along the same route."
+  },
+  "title_zh": "RTKLIB四配置的航向误差与输出连续性",
+  "reused_from": "G:/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/C03.json",
+  "reused_figure_sha256": {
+    "png": "9532b086454c64e8830b5b01b3616502dd4b117ee83952b4c6c567f47499ed92",
+    "pdf": "d6bf6fbbbb4a6922ffb326141ac376964e0aa9b412ef04c1d03e894b51cc4ab2",
+    "svg": "c77fc09c55287bbc963f59e2e74164c1d42da166d54cfe4f524f89b71d55b051"
+  },
+  "reuse_note": "Figure data and layout retained from the completed 2026-10-09 export; all15 saved source tables reread in full for this package. Current color and grayscale visual review required.",
+  "visual_review_receipt": {
+    "date": "2026-10-11",
+    "color": "viewed",
+    "grayscale": "viewed",
+    "assessment": "Panel alignment, uncut labels, retained full error scales and clear independent output rows. CDF panels retain all native-valid samples. Main figure has0–20deg inset and10–22s baseline enlargement.",
+    "export_sha256": {
+      "png": "9532b086454c64e8830b5b01b3616502dd4b117ee83952b4c6c567f47499ed92",
+      "pdf": "d6bf6fbbbb4a6922ffb326141ac376964e0aa9b412ef04c1d03e894b51cc4ab2",
+      "svg": "c77fc09c55287bbc963f59e2e74164c1d42da166d54cfe4f524f89b71d55b051"
+    },
+    "png_size": [
+      4110,
+      4346
+    ],
+    "png_dpi": [
+      599.9988,
+      599.9988
+    ],
+    "pdf_width_mm": 173.99999508327906
+  }
+}

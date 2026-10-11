@@ -1,0 +1,592 @@
+{
+  "id": "Q3_01_IEKF_natural",
+  "caption_en": "Horizontal positioning and heading errors of LegSA-GINS and two-receiver IEKF during nominal walking, large body motion and single-antenna obstruction. The upper and lower rows show horizontal and heading errors, respectively. The two IEKF configurations use literature and calibrated parameters. Gray spans mark the recorded obstruction intervals in the third trial; the insets enlarge the first interval. The dashed black line denotes zero error relative to the reference.",
+  "caption_zh": "常规行走、大幅机身运动和单侧天线遮挡实验中，LegSA-GINS与双接收机IEKF的水平定位及航向误差。上、下排分别为水平误差和航向误差；两种IEKF配置分别采用文献参数和标定参数。第三组中的灰带表示天线遮挡时段，小窗放大第一个遮挡时段；黑色虚线表示相对于参考值的零误差。",
+  "meaning_zh": "这张图把整体误差大小还原为随机器人运动变化的过程，同时让遮挡期间的细微差别可见。",
+  "sources": [
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_F04_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_LC01_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_LC01-S_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_F04_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_LC01_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_LC01-S_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_F04_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_LC01_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_LC01-S_saved_errors.csv.gz"
+  ],
+  "technical_notes": {
+    "curve_count": 9,
+    "curve_rows_total": 584548,
+    "full_curves_available": true,
+    "rmse_saved_error_checks": [
+      {
+        "sequence": "BY2",
+        "method": "F04",
+        "metric": "h_rmse_m",
+        "saved_rmse_token": "0.09790607774950152",
+        "saved_error_series_rmse": 0.09790607774950154,
+        "abs_difference": 1.3877787807814457e-17
+      },
+      {
+        "sequence": "BY2",
+        "method": "F04",
+        "metric": "yaw_rmse_deg",
+        "saved_rmse_token": "1.8862718548526467",
+        "saved_error_series_rmse": 1.8862718548526467,
+        "abs_difference": 0.0
+      },
+      {
+        "sequence": "BY2",
+        "method": "LC01",
+        "metric": "h_rmse_m",
+        "saved_rmse_token": "0.0975479714305497",
+        "saved_error_series_rmse": 0.09754797143054973,
+        "abs_difference": 2.7755575615628914e-17
+      },
+      {
+        "sequence": "BY2",
+        "method": "LC01",
+        "metric": "yaw_rmse_deg",
+        "saved_rmse_token": "2.9948274600591076",
+        "saved_error_series_rmse": 2.9948274600591076,
+        "abs_difference": 0.0
+      },
+      {
+        "sequence": "BY2",
+        "method": "LC01-S",
+        "metric": "h_rmse_m",
+        "saved_rmse_token": "0.10352490362681992",
+        "saved_error_series_rmse": 0.10352490362681993,
+        "abs_difference": 1.3877787807814457e-17
+      },
+      {
+        "sequence": "BY2",
+        "method": "LC01-S",
+        "metric": "yaw_rmse_deg",
+        "saved_rmse_token": "1.5392385536245534",
+        "saved_error_series_rmse": 1.5392385536245534,
+        "abs_difference": 0.0
+      },
+      {
+        "sequence": "BY2H",
+        "method": "F04",
+        "metric": "h_rmse_m",
+        "saved_rmse_token": "0.06836245149191253",
+        "saved_error_series_rmse": 0.06836245149191256,
+        "abs_difference": 2.7755575615628914e-17
+      },
+      {
+        "sequence": "BY2H",
+        "method": "F04",
+        "metric": "yaw_rmse_deg",
+        "saved_rmse_token": "1.93377013508875",
+        "saved_error_series_rmse": 1.93377013508875,
+        "abs_difference": 0.0
+      },
+      {
+        "sequence": "BY2H",
+        "method": "LC01",
+        "metric": "h_rmse_m",
+        "saved_rmse_token": "0.0746064486934978",
+        "saved_error_series_rmse": 0.07460644869349785,
+        "abs_difference": 4.163336342344337e-17
+      },
+      {
+        "sequence": "BY2H",
+        "method": "LC01",
+        "metric": "yaw_rmse_deg",
+        "saved_rmse_token": "2.208612313835051",
+        "saved_error_series_rmse": 2.208612313835051,
+        "abs_difference": 0.0
+      },
+      {
+        "sequence": "BY2H",
+        "method": "LC01-S",
+        "metric": "h_rmse_m",
+        "saved_rmse_token": "0.08373314985151889",
+        "saved_error_series_rmse": 0.08373314985151892,
+        "abs_difference": 2.7755575615628914e-17
+      },
+      {
+        "sequence": "BY2H",
+        "method": "LC01-S",
+        "metric": "yaw_rmse_deg",
+        "saved_rmse_token": "1.9430028350481119",
+        "saved_error_series_rmse": 1.9430028350481119,
+        "abs_difference": 0.0
+      },
+      {
+        "sequence": "BY2O",
+        "method": "F04",
+        "metric": "h_rmse_m",
+        "saved_rmse_token": "0.054543210912875166",
+        "saved_error_series_rmse": 0.05454321091287521,
+        "abs_difference": 4.163336342344337e-17
+      },
+      {
+        "sequence": "BY2O",
+        "method": "F04",
+        "metric": "yaw_rmse_deg",
+        "saved_rmse_token": "2.433814932823714",
+        "saved_error_series_rmse": 2.433814932823714,
+        "abs_difference": 0.0
+      },
+      {
+        "sequence": "BY2O",
+        "method": "LC01",
+        "metric": "h_rmse_m",
+        "saved_rmse_token": "0.05430420090026619",
+        "saved_error_series_rmse": 0.05430420090026623,
+        "abs_difference": 3.469446951953614e-17
+      },
+      {
+        "sequence": "BY2O",
+        "method": "LC01",
+        "metric": "yaw_rmse_deg",
+        "saved_rmse_token": "2.4536970334279924",
+        "saved_error_series_rmse": 2.4536970334279924,
+        "abs_difference": 0.0
+      },
+      {
+        "sequence": "BY2O",
+        "method": "LC01-S",
+        "metric": "h_rmse_m",
+        "saved_rmse_token": "0.06046245535470896",
+        "saved_error_series_rmse": 0.060462455354709,
+        "abs_difference": 3.469446951953614e-17
+      },
+      {
+        "sequence": "BY2O",
+        "method": "LC01-S",
+        "metric": "yaw_rmse_deg",
+        "saved_rmse_token": "4.015602467888004",
+        "saved_error_series_rmse": 4.015602467888004,
+        "abs_difference": 0.0
+      }
+    ],
+    "sources": [
+      {
+        "sequence": "BY2",
+        "method": "F04",
+        "source_file": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00004/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+        "derived_file": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_F04_saved_errors.csv.gz",
+        "source_rows": 56642,
+        "derived_rows": 56642,
+        "source_columns": [
+          "time",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "roll_err_deg",
+          "pitch_err_deg",
+          "yaw_err_deg",
+          "horizontal_3sigma_m",
+          "roll_3sigma_deg",
+          "pitch_3sigma_deg",
+          "yaw_3sigma_deg"
+        ],
+        "derived_columns": [
+          "time",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "yaw_err_deg",
+          "elapsed_s"
+        ],
+        "first_time": "66.005054",
+        "last_time": "339.997056",
+        "window": [
+          66,
+          340
+        ],
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG",
+        "evaluation_status": "COMPLETED",
+        "display_time_transform": "source time minus formal window start; no interpolation/smoothing/downsampling",
+        "source_row_selection": "all saved evaluator error rows",
+        "maximum_saved_time_gap_s": 0.09167600000000675
+      },
+      {
+        "sequence": "BY2",
+        "method": "LC01",
+        "source_file": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_DEGSUBSET_BY2/09_HORIZONTAL_V3/LC01_EXT05A/FROZEN_EVALUATOR/error_series.csv",
+        "derived_file": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_LC01_saved_errors.csv.gz",
+        "source_rows": 58014,
+        "derived_rows": 58014,
+        "source_columns": [
+          "time",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "roll_err_deg",
+          "pitch_err_deg",
+          "yaw_err_deg"
+        ],
+        "derived_columns": [
+          "time",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "yaw_err_deg",
+          "elapsed_s"
+        ],
+        "first_time": "66.0",
+        "last_time": "340.0",
+        "window": [
+          66,
+          340
+        ],
+        "start_convention": "FILE_START",
+        "evaluation_status": "COMPLETED",
+        "display_time_transform": "source time minus formal window start; no interpolation/smoothing/downsampling",
+        "source_row_selection": "all saved evaluator error rows",
+        "maximum_saved_time_gap_s": 0.09167623519903145
+      },
+      {
+        "sequence": "BY2",
+        "method": "LC01-S",
+        "source_file": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2__LC01-S__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz",
+        "derived_file": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_LC01-S_saved_errors.csv.gz",
+        "source_rows": 58014,
+        "derived_rows": 58014,
+        "source_columns": [
+          "time",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "roll_err_deg",
+          "pitch_err_deg",
+          "yaw_err_deg"
+        ],
+        "derived_columns": [
+          "time",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "yaw_err_deg",
+          "elapsed_s"
+        ],
+        "first_time": "66.0",
+        "last_time": "340.0",
+        "window": [
+          66,
+          340
+        ],
+        "start_convention": "FILE_START",
+        "evaluation_status": "COMPLETED",
+        "display_time_transform": "source time minus formal window start; no interpolation/smoothing/downsampling",
+        "source_row_selection": "all saved evaluator error rows",
+        "maximum_saved_time_gap_s": 0.09167623519903145
+      },
+      {
+        "sequence": "BY2H",
+        "method": "F04",
+        "source_file": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F04/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+        "derived_file": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_F04_saved_errors.csv.gz",
+        "source_rows": 58580,
+        "derived_rows": 58580,
+        "source_columns": [
+          "time",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "roll_err_deg",
+          "pitch_err_deg",
+          "yaw_err_deg",
+          "horizontal_3sigma_m",
+          "roll_3sigma_deg",
+          "pitch_3sigma_deg",
+          "yaw_3sigma_deg"
+        ],
+        "derived_columns": [
+          "time",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "yaw_err_deg",
+          "elapsed_s"
+        ],
+        "first_time": "413.047045",
+        "last_time": "682.99505",
+        "window": [
+          413,
+          683
+        ],
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG",
+        "evaluation_status": "COMPLETED",
+        "display_time_transform": "source time minus formal window start; no interpolation/smoothing/downsampling",
+        "source_row_selection": "all saved evaluator error rows",
+        "maximum_saved_time_gap_s": 0.17601200000001427
+      },
+      {
+        "sequence": "BY2H",
+        "method": "LC01",
+        "source_file": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2H__LC01__CONTRACT_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz",
+        "derived_file": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_LC01_saved_errors.csv.gz",
+        "source_rows": 59934,
+        "derived_rows": 59934,
+        "source_columns": [
+          "time",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "roll_err_deg",
+          "pitch_err_deg",
+          "yaw_err_deg"
+        ],
+        "derived_columns": [
+          "time",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "yaw_err_deg",
+          "elapsed_s"
+        ],
+        "first_time": "413.0",
+        "last_time": "683.0",
+        "window": [
+          413,
+          683
+        ],
+        "start_convention": "CONTRACT_START",
+        "evaluation_status": "AVAILABLE_GEOMETRIC_AUDIT_FAIL",
+        "display_time_transform": "source time minus formal window start; no interpolation/smoothing/downsampling",
+        "source_row_selection": "all saved evaluator error rows",
+        "maximum_saved_time_gap_s": 0.0949327945709797
+      },
+      {
+        "sequence": "BY2H",
+        "method": "LC01-S",
+        "source_file": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2H__LC01-S__CONTRACT_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz",
+        "derived_file": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_LC01-S_saved_errors.csv.gz",
+        "source_rows": 59934,
+        "derived_rows": 59934,
+        "source_columns": [
+          "time",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "roll_err_deg",
+          "pitch_err_deg",
+          "yaw_err_deg"
+        ],
+        "derived_columns": [
+          "time",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "yaw_err_deg",
+          "elapsed_s"
+        ],
+        "first_time": "413.0",
+        "last_time": "683.0",
+        "window": [
+          413,
+          683
+        ],
+        "start_convention": "CONTRACT_START",
+        "evaluation_status": "AVAILABLE_GEOMETRIC_AUDIT_FAIL",
+        "display_time_transform": "source time minus formal window start; no interpolation/smoothing/downsampling",
+        "source_row_selection": "all saved evaluator error rows",
+        "maximum_saved_time_gap_s": 0.0949327945709797
+      },
+      {
+        "sequence": "BY2O",
+        "method": "F04",
+        "source_file": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F04/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+        "derived_file": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_F04_saved_errors.csv.gz",
+        "source_rows": 76548,
+        "derived_rows": 76548,
+        "source_columns": [
+          "time",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "roll_err_deg",
+          "pitch_err_deg",
+          "yaw_err_deg",
+          "horizontal_3sigma_m",
+          "roll_3sigma_deg",
+          "pitch_3sigma_deg",
+          "yaw_3sigma_deg"
+        ],
+        "derived_columns": [
+          "time",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "yaw_err_deg",
+          "elapsed_s"
+        ],
+        "first_time": "3186.005234",
+        "last_time": "3562.997055",
+        "window": [
+          3186,
+          3563
+        ],
+        "start_convention": "FROZEN_V21_RUNTIME_CONFIG",
+        "evaluation_status": "COMPLETED",
+        "display_time_transform": "source time minus formal window start; no interpolation/smoothing/downsampling",
+        "source_row_selection": "all saved evaluator error rows",
+        "maximum_saved_time_gap_s": 0.37999900000022535
+      },
+      {
+        "sequence": "BY2O",
+        "method": "LC01",
+        "source_file": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2O__LC01__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz",
+        "derived_file": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_LC01_saved_errors.csv.gz",
+        "source_rows": 78441,
+        "derived_rows": 78441,
+        "source_columns": [
+          "time",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "roll_err_deg",
+          "pitch_err_deg",
+          "yaw_err_deg"
+        ],
+        "derived_columns": [
+          "time",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "yaw_err_deg",
+          "elapsed_s"
+        ],
+        "first_time": "3186.0",
+        "last_time": "3563.0",
+        "window": [
+          3186,
+          3563
+        ],
+        "start_convention": "FILE_START",
+        "evaluation_status": "COMPLETED",
+        "display_time_transform": "source time minus formal window start; no interpolation/smoothing/downsampling",
+        "source_row_selection": "all saved evaluator error rows",
+        "maximum_saved_time_gap_s": 0.20000004768371582
+      },
+      {
+        "sequence": "BY2O",
+        "method": "LC01-S",
+        "source_file": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2O__LC01-S__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz",
+        "derived_file": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_LC01-S_saved_errors.csv.gz",
+        "source_rows": 78441,
+        "derived_rows": 78441,
+        "source_columns": [
+          "time",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "roll_err_deg",
+          "pitch_err_deg",
+          "yaw_err_deg"
+        ],
+        "derived_columns": [
+          "time",
+          "err_n_m",
+          "err_e_m",
+          "err_u_m",
+          "horizontal_err_m",
+          "position_3d_err_m",
+          "yaw_err_deg",
+          "elapsed_s"
+        ],
+        "first_time": "3186.0",
+        "last_time": "3563.0",
+        "window": [
+          3186,
+          3563
+        ],
+        "start_convention": "FILE_START",
+        "evaluation_status": "COMPLETED",
+        "display_time_transform": "source time minus formal window start; no interpolation/smoothing/downsampling",
+        "source_row_selection": "all saved evaluator error rows",
+        "maximum_saved_time_gap_s": 0.20000004768371582
+      }
+    ],
+    "frozen_v3": "7d43b9af26120ed5dde21f53e515386361072ba6",
+    "occlusion_absolute_s": [
+      [
+        3369.94,
+        3411.95
+      ],
+      [
+        3495.94,
+        3508.94
+      ]
+    ],
+    "occlusion_elapsed_s": [
+      [
+        183.94,
+        225.95
+      ],
+      [
+        309.94,
+        322.94
+      ]
+    ],
+    "scientific_solver_calls": 0,
+    "evaluator_calls": 0,
+    "raw_trace_opens": 0,
+    "curve_selection": "no case or epoch performance filtering",
+    "point_contract": "saved v3 declared dual-antenna midpoint; physical point records remain in DATA_NOTES",
+    "captions": "ordinary short figure captions; technical provenance in DATA_NOTES",
+    "connected_segments": "Lines break where saved timestamp separation exceeds0.1s; yaw also breaks at wrap jumps over180deg.",
+    "display": "All584548 saved rows retained; curves rasterized at600dpi within editable-vector axes. Insets excluded from comparable main-axes alignment groups.",
+    "inset": "The first fixed BY2O obstruction [3369.94,3411.95]s is enlarged; both predeclared obstruction spans are shaded.",
+    "table_notes": "LC01 literature/calibrated conditions and the four BY2H geometry exceptions are described in the comparison table, not overlaid on the curves."
+  },
+  "width_mm": 174.0,
+  "height_mm": 136.0,
+  "alignment_status": "PASS",
+  "audit_returncodes": {
+    "pdf_text": 0,
+    "collisions": 0
+  },
+  "visual_review": "PASS",
+  "naming_review": {
+    "date": "2026-10-09",
+    "scope": "Scenario and method label consistency, caption synchronization, and label fit in color/grayscale exports. Figure-content review by the author continues.",
+    "by3_condition_source": "Author confirmation: large-amplitude body motions and pronounced vibration along the same route."
+  },
+  "reused_original_id": "C01",
+  "visual_review_notes": "Inspected actual color and grayscale previews: every panel readable, common units and no clipping, deliberate curve intersections retained. Insets show fixed input-defined windows. Dense native IEKF curves use the retained full sampling and readable local insets.",
+  "title_zh": "自然工况下与双位置IEKF的比较",
+  "question": "Q3",
+  "role": "main",
+  "preview_sha256": "e9189768cd0c9b66871ed91988c17ed07038d5d4ce1ba19cd14f8d8dfa4940c3"
+}

@@ -1,0 +1,28 @@
+{
+  "task_rows": 6468,
+  "unique_runs": 6468,
+  "status_counts": {
+    "COMPLETED": 6185,
+    "ALGORITHM_FAILURE_DIVERGED": 193,
+    "ALGORITHM_FAILURE_NO_VALID_HEADING_INPUT": 90
+  },
+  "domain_counts": {
+    "ADDENDUM": 495,
+    "CORE": 5951,
+    "SEQUENCE": 22
+  },
+  "metric_rows_two_contracts": 12936,
+  "primary_contract_status": {
+    "COMPLETED": 6185,
+    "NOT_RUN_ALGORITHM_FAILURE": 283
+  },
+  "natural_results": 33,
+  "natural_configs_present": 33,
+  "natural_receipts_present": 33,
+  "configuration_comparisons": 18,
+  "original_natural_rows_checked": 33,
+  "source_row_differences": 0,
+  "scientific_solver_calls": 0,
+  "scientific_evaluator_calls": 0,
+  "provider_calls": 0
+}

@@ -1,0 +1,16 @@
+sequence,receiver,satellite,signal,epoch_us,old_full_lli,old_clipped_lli,new_full_lli,new_full_time_system_comparable,full_history_equal,old_full_table_consistent
+BY2,1,C10,7I,1772784084798000,0,1,0,True,True,True
+BY2,1,C08,7I,1772784145998000,2,3,2,True,True,True
+BY2,2,G11,1C,1772784084198000,0,1,0,True,True,True
+BY2,2,R21,2C,1772784085398000,0,1,0,True,True,True
+BY2,2,G22,1C,1772784085598000,0,1,0,True,True,True
+BY2H,1,R20,2C,1772784435198000,0,1,0,True,True,True
+BY2H,1,J07,2L,1772784440398000,1,0,1,True,True,True
+BY2H,2,J04,2L,1772784431798000,1,0,1,True,True,True
+BY2H,2,R20,2C,1772784432998000,0,1,0,True,True,True
+BY2H,2,C27,2I,1772784433398000,0,1,0,True,True,True
+BY2H,2,C42,2I,1772784434198000,0,1,0,True,True,True
+BY2H,2,R21,1C,1772784435198000,0,1,0,True,True,True
+BY2O,1,G14,1C,1772783604998000,2,3,2,True,True,True
+BY2O,1,G11,2L,1772783608998000,1,0,1,True,True,True
+BY2O,2,J02,2L,1772783607198000,1,0,1,True,True,True

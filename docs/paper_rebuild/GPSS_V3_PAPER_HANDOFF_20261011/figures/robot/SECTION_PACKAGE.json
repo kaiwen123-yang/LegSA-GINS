@@ -1,0 +1,28 @@
+{
+  "figures": [
+    {
+      "id": "S01_robot_relative_motion",
+      "title_zh": "接触辅助估计与机载姿态参与积分的相对运动表现",
+      "role": "supplement",
+      "question": "Q1",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/robot/S01_robot_relative_motion.png",
+      "metadata_path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/robot/S01_robot_relative_motion.json"
+    }
+  ],
+  "tables": [
+    {
+      "title": "机器人相对运动完整原指标",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/robot/ROBOT_RELATIVE_METRICS.csv"
+    },
+    {
+      "title": "机器人相对运动论文结果表",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/robot/ROBOT_RELATIVE_RESULTS.csv"
+    }
+  ],
+  "method_coverage": [
+    "Hartley OFF-LIT",
+    "Hartley OFF-DEF",
+    "LEG_DR"
+  ],
+  "new_solver_evaluator_provider_calls": 0
+}
