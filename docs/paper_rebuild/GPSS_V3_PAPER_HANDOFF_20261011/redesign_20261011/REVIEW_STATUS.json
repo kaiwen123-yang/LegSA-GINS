@@ -1,0 +1,23 @@
+{
+  "stage": "LATEST_TEN_FIGURES_REVIEWED",
+  "figures_unchanged": true,
+  "new_scientific_runs": 0,
+  "scientific_presentation_issues": {
+    "F10": "Regroup active RP/HV perturbations versus audit-only/invariant controls; show per-condition failures.",
+    "F5": "Separate input-generation comparison from native observation selection and own-support scoring.",
+    "F9": "Harmonize condition blocks and symbol/metric support semantics.",
+    "F3": "Replace arbitrary0.2s detail with meaningful event-centered intervals.",
+    "F6": "Restore event-aligned detailed comparison; RMSE labels alone do not solve overplotting.",
+    "F8": "Restore time relation between source scaling and errors; distinguish sample denominators."
+  },
+  "F10_verified_example": {
+    "family": "multi_source_mixed",
+    "module": "SA",
+    "registered": 36,
+    "joint_completed": 18,
+    "only_full_completed": 5,
+    "both_failed": 13,
+    "median_paired_H_improvement_percent": -1.4846388570400941
+  },
+  "next_step": "Author discussion before another redraw"
+}

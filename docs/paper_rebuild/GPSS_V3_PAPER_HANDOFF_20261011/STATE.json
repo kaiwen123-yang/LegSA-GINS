@@ -23,7 +23,7 @@
   "attitude_merge_draft_created": true,
   "latest_figure_revision": "revisions/attitude_main_20261011/README.md",
   "final_numbering_complete": false,
-  "next_discussion": "Author review of redesigned ten figures; F1/F2 final production resolution remains open",
+  "next_discussion": "Review scientific presentation issues in latest ten figures before redrawing",
   "all_figure_versions_displayed": 52,
   "featured_review_entries": 24,
   "latest_review": "all_figures_review_20261011/全部图件_逐图审阅.md",
@@ -37,5 +37,7 @@
   "new_figure_edits_this_selection": 0,
   "new_scientific_runs_this_selection": 0,
   "latest_revision": "redesign_20261011",
-  "new_direction_observation_statistics": true
+  "new_direction_observation_statistics": true,
+  "latest_figure_review": "redesign_20261011/当前10图_完整读法与问题审阅.md",
+  "F10_active_perturbation_grouping_requires_revision": true
 }
