@@ -1,0 +1,13 @@
+sequence,method,count,denominator,percentage,definition
+BY2,F04,274,275,99.63636363636364,matched to nominal seconds within 5 ms
+BY2H,F04,269,271,99.2619926199262,matched to nominal seconds within 5 ms
+BY2O,F04,373,378,98.67724867724868,matched to nominal seconds within 5 ms
+BY2,OISAM_STRICT,275,275,100.0,strict finite own states
+BY2H,OISAM_STRICT,0,271,0.0,strict finite own states
+BY2O,OISAM_STRICT,55,378,14.55026455026455,strict finite own states
+BY2,OISAM_RESTART,275,275,100.0,dynamic own states after recorded-gap restarts
+BY2H,OISAM_RESTART,267,271,98.5239852398524,dynamic own states after recorded-gap restarts
+BY2O,OISAM_RESTART,370,378,97.88359788359789,dynamic own states after recorded-gap restarts
+BY2,GINAV,77,275,28.0,ALGORITHM_FAILURE_DIVERGED
+BY2H,GINAV,2,271,0.7380073800738007,COMPLETED_LOW_SUPPORT
+BY2O,GINAV,5,378,1.3227513227513228,ALGORITHM_FAILURE_DIVERGED

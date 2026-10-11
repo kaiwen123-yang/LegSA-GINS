@@ -1,0 +1,40 @@
+{
+  "id": "F09_navigation_all_families",
+  "width_mm": 174,
+  "height_mm": 221.0,
+  "caption_en": "Navigation comparisons with explicitly separated input and output conditions. (a,b) Natural-trial position and heading errors for LegSA-GINS and all four dual/single-position IEKF parameter identities. For large body motion, filled triangles use the registered contract start and open triangles retain file-start sensitivity runs. The failed calibrated single-position file-start run is identified in the text area below the panels and has no assigned RMSE coordinate. (c) OiSAM-to-LegSA-GINS RMSE ratios on identical midpoint and nominal-time supports (274 nominal and 54 initial obstruction epochs; no common dynamic output in large body motion). (d) Native position-output availability on the registered one-hertz slots; output availability does not imply accuracy, and GINav outputs remain visible where the speed gate fails. (e) All 18 registered position-interruption cases, including the baseline-retaining IEKF; circles and squares denote 10 and 20 seconds. (f) FGO positioning at GNSS1 on each method's own valid dynamic outputs, with the input layer stated beside each method; these supports and the physical point differ from the common midpoint comparison in (c). Raw-code methods and solution-level methods are not pooled into one ranking.",
+  "caption_zh": "导航系统横向比较，分开显示输入与输出条件。（a,b）本文及双/单位置IEKF两种参数的全部自然场景结果；大幅运动的实心三角为登记起点，空心三角保留文件起点敏感性结果。标定单位置IEKF的文件起点失败运行在两面板下方单独说明，不给它赋予RMSE坐标。（c）OiSAM与本文在同一中点、同一名义时刻上的RMSE比值：常规274对，遮挡初段54对，大幅运动无共同动态输出。（d）登记一赫兹时刻的输出可用性；有输出不等同于准确，GINav速度检查失败的输出数量也保留。（e）全部18个位置中断条件，纳入保留基线IEKF；圆/方分别为10/20秒。（f）各FGO路线在GNSS1天线点、各自有效动态输出上的水平RMSE；其物理点和支持范围与(c)共同中点比较不同，标签明确输入层。原始码与解级路线不混成一个总排名。",
+  "notes": {
+    "natural_rows": 19,
+    "natural_failures": 1,
+    "geometry_exception": "All four BY2H dual-position IEKF natural start/parameter rows retain AVAILABLE_GEOMETRIC_AUDIT_FAIL",
+    "OiSAM_common": {
+      "BY2": 274,
+      "BY2H": 0,
+      "BY2O": 54
+    },
+    "coverage_definition": "Saved position epochs over registered nominal one-second slots. V3 applies original 5ms nominal gate; OiSAM/GINav native one-Hz states. IEKF high-rate own coverage remains in companion table, not inferred comparable 1Hz slots.",
+    "ginav_accuracy": "BY2 and BY2O speed-gate failure => NA; BY2H only two outputs, H=2.894928 and yaw=11.662263; full values retained in source table",
+    "all_degradation_cases_figure": "Controlled interruption results in panel e; the full 396 logical degradation rows and all 744 paired summaries remain in source tables",
+    "selected_primary_and_alternate_starts": "BY2/BY2O FILE_START; BY2H CONTRACT_START primary and FILE_START alternative; none removed",
+    "no_cross_point_position_overlay": true
+  },
+  "sources": [
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/A2_ALL18_MATCHED_RESULTS.csv",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/FGO_GNSS1_ALL36_RESULTS.csv",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/GINAV_ACTUAL_RESULTS.csv",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/LC_NATIVE_TABLE_READ.csv",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/V3_OISAM_COMMON_POINT.csv",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/BY2H_V3_POI_nominal.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/BY2O_V3_POI_nominal.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/BY2_V3_POI_nominal.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_DATA_NOTES.json"
+  ],
+  "audits": {
+    "text": 0,
+    "collision": 0
+  },
+  "new_solver_evaluator_provider_calls": 0,
+  "scientific_freeze": "7d43b9af26120ed5dde21f53e515386361072ba6",
+  "visual_review": "PASS: every final colour panel visually checked; figure 9 grayscale checked; original saved values, missing states, equal spatial aspect, and paired supports retained."
+}

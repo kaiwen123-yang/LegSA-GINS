@@ -1,0 +1,4 @@
+sequence,target_centre_s,chosen_centre_s,elapsed_centre_s,reference_speed_mps,spatial_window_s,error_window_s,selection,selection_threshold_mps,no_estimator_error_used_in_selection,spatial_epochs,full_epochs
+BY2,203.0,202.997064,136.997064,1.2174645943420284,"[202.897064, 203.097064]","[194.997064, 210.997064]",Nearest reference-moving epoch to the predeclared centre,0.3,True,35,56642
+BY2H,548.0,547.999098,134.999098,1.2442965346135355,"[547.899098, 548.099098]","[539.999098, 555.999098]",Nearest reference-moving epoch to the predeclared centre,0.3,True,43,58580
+BY2O,3390.945,3390.945049,204.94504899999993,0.003378664164240461,"[3390.845049, 3391.045049]","[3382.945049, 3398.945049]",No reference motion >=0.3 m/s in the 30-second neighbourhood; fixed centre retained as a stationary interval,0.3,True,40,76548

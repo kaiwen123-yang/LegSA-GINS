@@ -1,0 +1,43 @@
+{
+  "F03_route_local_comparison": {
+    "pdf_width_mm": 173.99999508327906,
+    "pdf_height_mm": 182.0000020345052,
+    "min_text_pt": 8,
+    "alignment": "PASS",
+    "collision": "PASS",
+    "visual_review": "PASS",
+    "formats": [
+      "PNG 600dpi",
+      "TIFF 600dpi",
+      "PDF",
+      "SVG",
+      "EPS"
+    ],
+    "notes": "Static width parser cannot evaluate WIDTH; actual PDF geometry verifies 174mm."
+  },
+  "F09_navigation_all_families": {
+    "pdf_width_mm": 173.99999508327906,
+    "pdf_height_mm": 220.99999016655815,
+    "min_text_pt": 8,
+    "alignment": "PASS",
+    "collision": "PASS",
+    "visual_review": "PASS",
+    "formats": [
+      "PNG 600dpi",
+      "TIFF 600dpi",
+      "PDF",
+      "SVG",
+      "EPS"
+    ],
+    "notes": "Static width parser cannot evaluate WIDTH; actual PDF geometry verifies 174mm."
+  },
+  "data": {
+    "natural_identity_rows": 19,
+    "finite_natural_rows": 18,
+    "preserved_natural_failures": 1,
+    "interruption_conditions": 18,
+    "fgo_rows": 36,
+    "ginav_native_trials": 3,
+    "new_solver_evaluator_provider_calls": 0
+  }
+}

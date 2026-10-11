@@ -1,0 +1,35 @@
+## F06_attitude
+
+短基线航向和机载倾角观测对姿态估计的作用。三列对应常规行走、大幅机身运动和单侧天线遮挡。(a–c)比较共享初始方向的基础GNSS/INS、基础配置增加航向更新、完整方法；(d–i)比较完整方法保留和关闭倾角辅助的横滚及俯仰误差。各面板上方以曲线同色数字给出全窗RMSE（度），使曲线重合处的真实量差可以直接读取。保留全部原始样本，时间缺口不连线。
+
+Contribution of short-baseline heading and onboard tilt observations to attitude estimation. Columns show nominal walking, large body motion, and antenna obstruction. (a–c) Heading errors for basic GNSS/INS, the same basic configuration with heading updates, and LegSA-GINS. All share the initial direction. (d–i) Roll and pitch errors for LegSA-GINS with and without tilt aiding. Colour-matched values above each panel give the whole-window RMSE in degrees. Every original sample is retained; gaps are broken at 0.1 s. The comparisons isolate heading addition only between the two basic configurations and tilt removal only within the full configuration.
+
+## F07_conditional_translation
+
+实测观测受控中断中机身速度辅助的条件平移收益。每列上方直接列出航向观测和辅助更新状态。(a,b)一处20秒中断及恢复，灰色区间为中断，虚线为GNSS恢复；插图完整展示保留航向时完整方法的中断期误差。(c,d)同一实测路线每个时长全部九个布置的全窗水平RMSE，细线连接相同布置。全部GNSS中断在所评价实现中也暂停辅助更新，因此左右列比较的是实际工作条件，不构成纯航向有无的因果隔离。
+
+Conditional translation benefit of body-velocity aiding during controlled interruptions of recorded observations. (a,b) One 20-s interruption and recovery, with its exact observation and update conditions stated above each column. Grey shading denotes the interrupted interval and the dotted line the restoration of GNSS observations. The inset shows the full-method error during the heading-retained interruption. (c,d) Whole-window horizontal RMSE for all nine interruption placements per duration on one recorded route; lines join the same placement. In the evaluated implementation, complete GNSS loss also pauses the auxiliary updates. Thus the two columns compare operating conditions, not a pure factorial removal of heading. No averaging or smoothing is applied to the time histories.
+
+## F08_quality_tradeoffs
+
+观测质量下降时来源协方差缩放的收益与代价。(a)代表位置加噪回放中的完整航向误差时序；(b)同一例全部历元水平误差的累积分布，展示位置代价；(c)实际来源倍率的全范围（细线）、四分位区间（粗线）和中位数（圆点），倍率增大代表相对降低信任，全部六来源轨迹保存在源数据；(d)每配置全部541个注册结果，包括发散和无初始方向；(e,f)双方均完成的513例中完整方法减关闭加权的RMSE变化累积分布，负值表示完整方法误差较低。横轴为有符号对数，零附近分别为±1毫米和±0.02度的线性区，保留小变化及长尾。新增完成案例不混入共同配对。
+
+Source-dependent covariance scaling under degraded observation quality. (a) Heading error history and (b) the empirical distribution of all horizontal-error epochs in one recorded-data replay with added GNSS position noise (horizontal standard deviation 3 m, vertical 5 m). (c) Ranges (thin lines), interquartile ranges (thick segments), and medians (circles) of the actually recorded covariance multipliers for three observation sources; all six sources are retained in source data. (d) All 541 registered outcomes for each configuration, including divergence and absence of an initial heading. (e,f) Empirical cumulative distributions of full-minus-ablation RMSE in the 513 jointly completed cases; negative changes favour the full configuration. Signed-log horizontal axes retain both small changes and tails, with linear neighbourhoods of ±1 mm and ±0.02 degrees. Extra completions do not enter these paired distributions.
+
+## F10_semisynthetic_complementarity
+
+同一实测路线全部60种观测扰动的受控回放中，四项观测及质量处理的条件贡献。每类扰动九个注册变体，每配置共540个扰动案例。格内为同案例RMSE相对改善率100×(消融−完整)/消融的中位数，正值有利于完整方法，负值有利于消融。列对应原始Doppler、来源加权、倾角、机身速度的单开关控制；行按受扰物理信息分组。数值只使用双方均完成的配对，全部完成和失败成员保留在配表与全配置扩展图。颜色在±40%饱和，数值标注保留原值。本实验是观测层半合成回放，不等同于独立外场重复或硬件在环。
+
+Conditional contribution of four observations and quality handling across all 60 perturbation types in controlled replay of one recorded trajectory. Each type has nine registered variants, yielding 540 perturbed cases per configuration. Cells show the median paired percentage reduction in RMSE, 100(ablation − full)/ablation, for raw Doppler, source weighting, tilt and body-velocity removal, grouped by the perturbed physical information. Positive values favour the full method; negative values favour the corresponding ablation. Only jointly completed cases enter each conditional numerical cell, and all completion and failure memberships are retained in the accompanying source table and extended full-configuration maps. No independent-trial significance claim is made. Colour saturates at ±40%; printed numbers retain the full value.
+
+## E10_all_configurations_horizontal
+
+全部注册扰动类型与全部十一种冻结V3配置。颜色为已完成结果的RMSE中位数（对数色标）；叉表示无完成输出，数字表示九次中完成不足九次的数量；干净条件仅一例。精确扰动定义与每个原生结果保留于源数据。十一列为内部配置，不能当作十一种外部算法。
+
+All registered perturbation types and all eleven frozen-V3 configurations. Cell colour denotes the median RMSE among completed runs on a logarithmic scale. A cross indicates no completed run; a number indicates the number completed out of nine when fewer than nine completed. The clean row has one registered run. Exact type definitions and every native outcome are preserved in source data. These controls use the same recorded route and are not eleven external methods.
+
+## E10_all_configurations_heading
+
+全部注册扰动类型与全部十一种冻结V3配置。颜色为已完成结果的RMSE中位数（对数色标）；叉表示无完成输出，数字表示九次中完成不足九次的数量；干净条件仅一例。精确扰动定义与每个原生结果保留于源数据。十一列为内部配置，不能当作十一种外部算法。
+
+All registered perturbation types and all eleven frozen-V3 configurations. Cell colour denotes the median RMSE among completed runs on a logarithmic scale. A cross indicates no completed run; a number indicates the number completed out of nine when fewer than nine completed. The clean row has one registered run. Exact type definitions and every native outcome are preserved in source data. These controls use the same recorded route and are not eleven external methods.

@@ -1,0 +1,58 @@
+{
+  "purpose": "New figure-layer observation statistics; frozen evaluation tables are not modified.",
+  "reference": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/P02_heading_display_values.csv.gz",
+  "reference_sha256": "2c1e44f7fd2b99afdf4e2725bb428f3dc05cf8222984b38ee7a5501bd57224fe",
+  "heading_convention": "Frozen GNSS18 scalar NED body heading; saved reference heading uses 90 - ENU yaw. Both wrap at 360 degrees.",
+  "reference_alignment": "Linear interpolation of saved already-unwrapped reference heading at receiver time. No extrapolation; reference bracket <= 0.1 s; no optimized time/angle offset.",
+  "error": "wrap(input heading - reference heading) in [-180,180)",
+  "support": "Input valid denominator is all original receiver epochs in [formal_start, formal_end), reproducing native expected input counts 1370/1350/1885. Error uses finite valid reference-supported input only. Accepted means native NORMAL or DOWNWEIGHT update.",
+  "provider_columns": "0=time_s,13=yaw_deg,14=yaw_std_deg,15=position_valid,16=velocity_valid,17=yaw_valid; checked against original providers and GNSS loader.",
+  "difference_from_external": "External retained evaluator times are approximately receiver epoch minus 0.002 s and have their own saved validity; this figure compares processing routes on the same recording/window, not identical timestamps or a common support winner.",
+  "solver_calls": 0,
+  "evaluator_calls": 0,
+  "provider_calls": 0,
+  "source_profile": [
+    {
+      "sequence": "BY2",
+      "provider": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+      "provider_sha256": "fc6dd49c0a35c41208fc7d94da1c78ad63fe6938bd8f599021750c3bf5e20760",
+      "native_trace": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00004/PORT_GNSS_UPDATE_TRACE.csv.gz",
+      "native_trace_rows": 1369,
+      "original_input_rows": 1510,
+      "formal_window": [
+        66.0,
+        340.0
+      ],
+      "valid_unscored": 1,
+      "reference_max_supported_bracket_s": 0.017954000000031556
+    },
+    {
+      "sequence": "BY2H",
+      "provider": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2H__C00_clean_normal__4cd2369e62e4fba4f0b84b00a75c312c53a8e7eac606802837cbc88892278ff5/GNSS18.gnss",
+      "provider_sha256": "4ff6ed07f1d189ab19934bc67c350e9f48f79527170c6fcafc85eba7cf1155bd",
+      "native_trace": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F04/PORT_GNSS_UPDATE_TRACE.csv",
+      "native_trace_rows": 1349,
+      "original_input_rows": 1483,
+      "formal_window": [
+        413.0,
+        683.0
+      ],
+      "valid_unscored": 2,
+      "reference_max_supported_bracket_s": 0.03200200000003406
+    },
+    {
+      "sequence": "BY2O",
+      "provider": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2O__C00_clean_normal__c5212cf72d07afd6d3ae0407fee87f841f2e0d909dfb8c1416bd7f38b0248bb4/GNSS18.gnss",
+      "provider_sha256": "2a0b0ebbcd66b59dd153b84b132c638e9ea31021653e58e3ac125ed21304fa13",
+      "native_trace": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F04/PORT_GNSS_UPDATE_TRACE.csv",
+      "native_trace_rows": 1882,
+      "original_input_rows": 2231,
+      "formal_window": [
+        3186.0,
+        3563.0
+      ],
+      "valid_unscored": 7,
+      "reference_max_supported_bracket_s": 0.0520249999999578
+    }
+  ]
+}
