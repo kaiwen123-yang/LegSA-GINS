@@ -6,7 +6,6 @@
   "scientific_question_zh": "在紧凑四足机器人的 GNSS/INS 中，短基线方向信息与机身运动观测如何共同改善姿态和平移估计，这种互补在什么观测可用性与质量条件下成立，又在何时失效？",
   "status": "EXISTING_FIGURES_COMPLETE_AUTHOR_DISCUSSION_AND_MANUSCRIPT_REORGANIZATION_NEXT",
   "goal_status": "complete",
-  "figure_groups": 15,
   "catalogued_tables": 82,
   "old_labels_retained": true,
   "S9_S8_core_reading": true,
@@ -18,5 +17,11 @@
   "next_entry": "CONTINUATION.md",
   "raw_sensor_data_uploaded": false,
   "full_figure_timeseries_uploaded": false,
-  "derived_results_and_diagnostics_uploaded": true
+  "derived_results_and_diagnostics_uploaded": true,
+  "original_figure_groups": 15,
+  "additional_revision_groups": 1,
+  "attitude_merge_draft_created": true,
+  "latest_figure_revision": "revisions/attitude_main_20261011/README.md",
+  "final_numbering_complete": false,
+  "next_discussion": "attitude figure caption and scientific interpretation"
 }

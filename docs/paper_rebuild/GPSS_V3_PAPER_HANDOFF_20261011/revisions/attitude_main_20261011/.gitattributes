@@ -1,0 +1,2 @@
+# Preserve generated SVG paths and embedded image payload exactly.
+*.svg -text -whitespace

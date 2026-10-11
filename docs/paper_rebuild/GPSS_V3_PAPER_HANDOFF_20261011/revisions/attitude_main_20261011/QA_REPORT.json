@@ -1,0 +1,29 @@
+{
+  "status": "READY_FOR_FIGURE_DISCUSSION",
+  "checks": {
+    "source": 0,
+    "pdf_text": 0,
+    "collisions": 0
+  },
+  "figure_size_mm": [
+    173.99999508327906,
+    176.99999499850801
+  ],
+  "png_pixels": [
+    4110,
+    4181
+  ],
+  "png_dpi": [
+    599.9988,
+    599.9988
+  ],
+  "plotted_series_missing_values": 0,
+  "main_axis_clipped_samples": 0,
+  "visual_review": "Color and grayscale inspected; nine panels and all three insets checked.",
+  "static_warnings_reviewed": [
+    "174/25.4 is parsed incorrectly as 174 inches by the static width heuristic; actual PDF is 174 by 177 mm.",
+    "PDF/SVG and 600-dpi PNG supplied for this discussion draft; TIFF is not required for the present task."
+  ],
+  "data_changes": false,
+  "new_scientific_runs": 0
+}
