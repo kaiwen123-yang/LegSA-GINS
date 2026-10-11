@@ -1,0 +1,10 @@
+figure_number,title_zh,source_key,role,planned_revision,preview
+1,紧凑四足机器人平台与短基线安装,old_M01,说明平台、传感器布局和0.35 m侧向基线。,整理硬件型号、天线次序和已确认的安装标注。,all_figures_review_20261011/assets/old_M01.png
+2,短基线方向与机身观测的共同状态融合,redesign_D01_method_overview,说明观测如何更新同一姿态、速度、位置与偏置状态。,把有效GNSS事件与辅助更新调度关系补入图或图注，明确HV坐标转换所用方向。,all_figures_review_20261011/assets/redesign_D01_method_overview.png
+3,实测路线与沿程机身朝向,redesign_P03_body_heading_along_route,让读者把三场景的位置和机身朝向放到实际空间中理解。,加入少量与后续结果共用的关键事件和局部放大，明确等长箭头表示朝向。,all_figures_review_20261011/assets/redesign_P03_body_heading_along_route.png
+4,机器人自身观测中的绝对方向自由度,current_M1,用同输入多初始方向及奇异值谱解释外部方向约束需求。,减少轨迹视觉拥挤，清楚解释展开航向和四维全局自由度。,all_figures_review_20261011/assets/current_M1.png
+5,短基线方向的输出可用性与物理一致性,current_M2,区分有无新方向输出与已有输出是否满足物理一致性。,补充本文实际位置产品航向链的有效/接纳情况，优先取已有记录，与后续融合结果衔接。,all_figures_review_20261011/assets/current_M2.png
+6,短基线航向与机载倾角对姿态估计的作用,attitude,分别显示yaw、roll、pitch的收益及场景差异。,确认局部窗口与实际运动事件的对应，定稿标题和图注。,all_figures_review_20261011/assets/attitude.png
+7,方向保留条件下的机身速度辅助与平移估计,current_M5,给出内部单开关速度辅助的条件平移收益。,优先标清屏蔽/保留的观测及实际更新状态，区分全窗RMSE与中断末端误差。,all_figures_review_20261011/assets/current_M5.png
+8,观测质量变化下的来源加权收益与代价,current_M6,同时呈现航向保护、位置代价、发散和共同完成样本的取舍。,让代表例位置代价可见，整理完成/发散/无初始化及仍大误差的状态说明。,all_figures_review_20261011/assets/current_M6.png
+9,与OiSAM的导航精度及输出连续性比较,current_M4,将共同时间精度与全程输出支持放在一起检验。,明确单次初始化精度与重初始化时间线的协议差异、IMU缺口及初段54点的范围。,all_figures_review_20261011/assets/current_M4.png

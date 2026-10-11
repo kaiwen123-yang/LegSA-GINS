@@ -1,5 +1,7 @@
 # V3 论文当前交接
 
+**当前作者审阅入口：[正文定选9张图](docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/MAIN_TEXT_FIGURES.md)。** 本轮按此清单讨论补充和修改，全部历史图库仅作来源。
+
 当前入口：[2026-10-11 论文主线、结果与全部图件](docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/README.md)。
 
 科学问题已由作者确定，15 组现有图件及结果恢复已完成。后续按入口中的六段逻辑讨论与整理稿件；冻结 V3 科学版本仍为 `7d43b9af26120ed5dde21f53e515386361072ba6`。
