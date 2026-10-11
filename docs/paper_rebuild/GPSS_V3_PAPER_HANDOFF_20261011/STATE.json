@@ -23,5 +23,13 @@
   "attitude_merge_draft_created": true,
   "latest_figure_revision": "revisions/attitude_main_20261011/README.md",
   "final_numbering_complete": false,
-  "next_discussion": "attitude figure caption and scientific interpretation"
+  "next_discussion": "Review all completed figures, scientific roles and revision priorities",
+  "all_figure_versions_displayed": 52,
+  "featured_review_entries": 24,
+  "latest_review": "all_figures_review_20261011/全部图件_逐图审阅.md",
+  "current_S5_matched_dynamic_counts": [
+    274,
+    267,
+    367
+  ]
 }

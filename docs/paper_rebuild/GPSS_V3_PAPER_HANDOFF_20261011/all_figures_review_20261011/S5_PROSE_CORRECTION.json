@@ -1,0 +1,24 @@
+{
+  "correction": "S5 prose369 ->367; figure/data unchanged",
+  "source": "navigation/data/BY2O_COMMON_SEGMENTED_HEADING.csv.gz",
+  "matching": "nominal second, nearest valid V3 within5 ms, intersection with dynamic OiSAM",
+  "common_dynamic_counts": [
+    274,
+    267,
+    367
+  ],
+  "BY2O_own_OiSAM_support": 370,
+  "BY2O_unmatched_nominal_seconds": [
+    3186,
+    3271,
+    3507
+  ],
+  "nearest_V3_deltas_ms": [
+    5.234,
+    5.075,
+    5.208
+  ],
+  "new_solver_calls": 0,
+  "new_evaluator_calls": 0,
+  "new_provider_calls": 0
+}
