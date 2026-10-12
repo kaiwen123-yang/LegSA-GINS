@@ -1,0 +1,206 @@
+[
+  {
+    "run_id": "RUN_02985",
+    "provider_candidates": [
+      {
+        "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__D31_seed_00__480bddce92e4fbebfa136060dd072d4643a47de14ca3450e510d4dfdaf1e4890/GNSS18.gnss",
+        "exists": true
+      },
+      {
+        "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__D31_seed_00__480bddce92e4fbebfa136060dd072d4643a47de14ca3450e510d4dfdaf1e4890/GNSS18.gnss",
+        "exists": false
+      },
+      {
+        "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/00_CONTROL/ORIGINAL_V3_METADATA/02_PROVIDERS/CASES/BY2__D31_seed_00__480bddce92e4fbebfa136060dd072d4643a47de14ca3450e510d4dfdaf1e4890/GNSS18.gnss",
+        "exists": false
+      }
+    ],
+    "update_trace_rows": 1369,
+    "update_trace_columns": [
+      "update_index",
+      "gnss_time",
+      "imu_pre_time",
+      "imu_cur_time",
+      "res",
+      "position_update",
+      "velocity_update",
+      "yaw_update",
+      "yaw_mode",
+      "yaw_residual_deg",
+      "residual_pos_norm",
+      "residual_vel_norm"
+    ],
+    "yaw_updated": 1269,
+    "yaw_not_updated": 100,
+    "yaw_residual_nonmissing": 0,
+    "weight_trace_columns": [
+      "time",
+      "update_index",
+      "source_id",
+      "policy_version",
+      "mode",
+      "lsim_score",
+      "oim_score",
+      "lsim_R_scale",
+      "oim_R_scale",
+      "combined_R_scale",
+      "residual_norm",
+      "normalized_innovation",
+      "nis",
+      "dof",
+      "innovation_cov_trace",
+      "used_innovation_covariance",
+      "source_cap",
+      "rolling_normalized_median",
+      "rolling_normalized_mad",
+      "relative_anomaly_score",
+      "base_R_trace",
+      "scaled_R_trace",
+      "accepted",
+      "rejected",
+      "go2_readiness_metadata_available",
+      "go2_motion_state",
+      "go2_contact_label",
+      "go2_readiness_score",
+      "go2_readiness_flag",
+      "reason_codes",
+      "metadata_summary"
+    ]
+  },
+  {
+    "run_id": "RUN_03183",
+    "provider_candidates": [
+      {
+        "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__D33_seed_00__e40fbe547a13de784f079bcf8737b6f783a9390ab021434b7363960c15157900/GNSS18.gnss",
+        "exists": true
+      },
+      {
+        "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__D33_seed_00__e40fbe547a13de784f079bcf8737b6f783a9390ab021434b7363960c15157900/GNSS18.gnss",
+        "exists": false
+      },
+      {
+        "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/00_CONTROL/ORIGINAL_V3_METADATA/02_PROVIDERS/CASES/BY2__D33_seed_00__e40fbe547a13de784f079bcf8737b6f783a9390ab021434b7363960c15157900/GNSS18.gnss",
+        "exists": false
+      }
+    ],
+    "update_trace_rows": 1369,
+    "update_trace_columns": [
+      "update_index",
+      "gnss_time",
+      "imu_pre_time",
+      "imu_cur_time",
+      "res",
+      "position_update",
+      "velocity_update",
+      "yaw_update",
+      "yaw_mode",
+      "yaw_residual_deg",
+      "residual_pos_norm",
+      "residual_vel_norm"
+    ],
+    "yaw_updated": 1369,
+    "yaw_not_updated": 0,
+    "yaw_residual_nonmissing": 0,
+    "weight_trace_columns": [
+      "time",
+      "update_index",
+      "source_id",
+      "policy_version",
+      "mode",
+      "lsim_score",
+      "oim_score",
+      "lsim_R_scale",
+      "oim_R_scale",
+      "combined_R_scale",
+      "residual_norm",
+      "normalized_innovation",
+      "nis",
+      "dof",
+      "innovation_cov_trace",
+      "used_innovation_covariance",
+      "source_cap",
+      "rolling_normalized_median",
+      "rolling_normalized_mad",
+      "relative_anomaly_score",
+      "base_R_trace",
+      "scaled_R_trace",
+      "accepted",
+      "rejected",
+      "go2_readiness_metadata_available",
+      "go2_motion_state",
+      "go2_contact_label",
+      "go2_readiness_score",
+      "go2_readiness_flag",
+      "reason_codes",
+      "metadata_summary"
+    ]
+  },
+  {
+    "run_id": "RUN_03381",
+    "provider_candidates": [
+      {
+        "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__D35_seed_00__6ece0f1d001cfaa2cd1576b9de41638edb5b4dd4c9a752b00d13646b796017dd/GNSS18.gnss",
+        "exists": true
+      },
+      {
+        "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__D35_seed_00__6ece0f1d001cfaa2cd1576b9de41638edb5b4dd4c9a752b00d13646b796017dd/GNSS18.gnss",
+        "exists": false
+      },
+      {
+        "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/00_CONTROL/ORIGINAL_V3_METADATA/02_PROVIDERS/CASES/BY2__D35_seed_00__6ece0f1d001cfaa2cd1576b9de41638edb5b4dd4c9a752b00d13646b796017dd/GNSS18.gnss",
+        "exists": false
+      }
+    ],
+    "update_trace_rows": 1369,
+    "update_trace_columns": [
+      "update_index",
+      "gnss_time",
+      "imu_pre_time",
+      "imu_cur_time",
+      "res",
+      "position_update",
+      "velocity_update",
+      "yaw_update",
+      "yaw_mode",
+      "yaw_residual_deg",
+      "residual_pos_norm",
+      "residual_vel_norm"
+    ],
+    "yaw_updated": 1369,
+    "yaw_not_updated": 0,
+    "yaw_residual_nonmissing": 0,
+    "weight_trace_columns": [
+      "time",
+      "update_index",
+      "source_id",
+      "policy_version",
+      "mode",
+      "lsim_score",
+      "oim_score",
+      "lsim_R_scale",
+      "oim_R_scale",
+      "combined_R_scale",
+      "residual_norm",
+      "normalized_innovation",
+      "nis",
+      "dof",
+      "innovation_cov_trace",
+      "used_innovation_covariance",
+      "source_cap",
+      "rolling_normalized_median",
+      "rolling_normalized_mad",
+      "relative_anomaly_score",
+      "base_R_trace",
+      "scaled_R_trace",
+      "accepted",
+      "rejected",
+      "go2_readiness_metadata_available",
+      "go2_motion_state",
+      "go2_contact_label",
+      "go2_readiness_score",
+      "go2_readiness_flag",
+      "reason_codes",
+      "metadata_summary"
+    ]
+  }
+]

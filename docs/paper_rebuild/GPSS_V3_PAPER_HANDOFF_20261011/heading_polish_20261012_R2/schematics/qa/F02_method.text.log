@@ -1,0 +1,8 @@
+Nature Figure PDF Text Audit
+pdf: /mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/schematics/figures/F02_method.pdf
+minimum required: 5 pt
+minimum found: 5.6 pt
+text runs: 78
+below minimum: 0
+verdict: PASS
+note: Tf scanning does not replace final-size visual inspection or account for every PDF transform

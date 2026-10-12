@@ -1,0 +1,6 @@
+*.csv -text -whitespace
+*.svg -text -whitespace
+*.gz binary
+*.pdf binary
+*.png binary
+*.jpg binary

@@ -1,0 +1,697 @@
+{
+  "width_mm": 174,
+  "height_mm": 126,
+  "objects": [
+    {
+      "id": "shared",
+      "kind": "box",
+      "x": 89,
+      "y": 2,
+      "w": 56,
+      "h": 122,
+      "fill": "#F7FAFF",
+      "stroke": "#2563EB",
+      "rounded": true,
+      "dashed": true
+    },
+    {
+      "id": "shared_title",
+      "kind": "text",
+      "x": 117,
+      "y": 6.5,
+      "text": "Shared-state GNSS/INS",
+      "size": 9,
+      "bold": true,
+      "color": "#334155"
+    },
+    {
+      "id": "imu",
+      "kind": "box",
+      "x": 3,
+      "y": 10,
+      "w": 39,
+      "h": 20,
+      "fill": "#F1F5F9",
+      "stroke": "#334155",
+      "rounded": true,
+      "dashed": false
+    },
+    {
+      "id": "imu_title",
+      "kind": "text",
+      "x": 22.5,
+      "y": 15.5,
+      "text": "Body MEMS IMU",
+      "size": 9,
+      "bold": true,
+      "color": "#334155"
+    },
+    {
+      "id": "imu_measurement",
+      "kind": "text",
+      "x": 22.5,
+      "y": 23.5,
+      "text": "Angular rate\nAcceleration",
+      "size": 8,
+      "bold": false,
+      "color": "#334155"
+    },
+    {
+      "id": "gnss",
+      "kind": "box",
+      "x": 3,
+      "y": 39,
+      "w": 39,
+      "h": 29,
+      "fill": "#EBF3FF",
+      "stroke": "#2563EB",
+      "rounded": true,
+      "dashed": false
+    },
+    {
+      "id": "gnss_title",
+      "kind": "text",
+      "x": 22.5,
+      "y": 44.5,
+      "text": "Dual-antenna GNSS",
+      "size": 9,
+      "bold": true,
+      "color": "#334155"
+    },
+    {
+      "id": "gnss_pv",
+      "kind": "text",
+      "x": 22.5,
+      "y": 53,
+      "text": "Position / velocity\nRaw-Doppler velocity",
+      "size": 8,
+      "bold": false,
+      "color": "#334155"
+    },
+    {
+      "id": "gnss_pair",
+      "kind": "text",
+      "x": 22.5,
+      "y": 63,
+      "text": "Position pair (p₁, p₂)",
+      "size": 8,
+      "bold": false,
+      "color": "#334155"
+    },
+    {
+      "id": "robot",
+      "kind": "box",
+      "x": 3,
+      "y": 85,
+      "w": 39,
+      "h": 27,
+      "fill": "#EAF8F5",
+      "stroke": "#009E9A",
+      "rounded": true,
+      "dashed": false
+    },
+    {
+      "id": "robot_title",
+      "kind": "text",
+      "x": 22.5,
+      "y": 91,
+      "text": "Robot observations",
+      "size": 9,
+      "bold": true,
+      "color": "#334155"
+    },
+    {
+      "id": "robot_tilt",
+      "kind": "text",
+      "x": 22.5,
+      "y": 99,
+      "text": "Roll / pitch",
+      "size": 8,
+      "bold": false,
+      "color": "#334155"
+    },
+    {
+      "id": "robot_velocity",
+      "kind": "text",
+      "x": 22.5,
+      "y": 107,
+      "text": "Body velocity",
+      "size": 8,
+      "bold": false,
+      "color": "#334155"
+    },
+    {
+      "id": "propagation",
+      "kind": "box",
+      "x": 94,
+      "y": 14,
+      "w": 46,
+      "h": 17,
+      "fill": "#F1F5F9",
+      "stroke": "#334155",
+      "rounded": true,
+      "dashed": false
+    },
+    {
+      "id": "prop_title",
+      "kind": "text",
+      "x": 117,
+      "y": 19,
+      "text": "Inertial propagation",
+      "size": 9,
+      "bold": true,
+      "color": "#334155"
+    },
+    {
+      "id": "prop_body",
+      "kind": "text",
+      "x": 117,
+      "y": 26,
+      "text": "State / covariance prediction",
+      "size": 8,
+      "bold": false,
+      "color": "#334155"
+    },
+    {
+      "id": "state",
+      "kind": "box",
+      "x": 94,
+      "y": 42,
+      "w": 46,
+      "h": 17,
+      "fill": "#E8F1FF",
+      "stroke": "#2563EB",
+      "rounded": true,
+      "dashed": false
+    },
+    {
+      "id": "state_vector",
+      "kind": "text",
+      "x": 117,
+      "y": 47.5,
+      "text": "x = (R, p, v, b_g, b_a)",
+      "size": 10,
+      "bold": false,
+      "color": "#334155"
+    },
+    {
+      "id": "state_cov",
+      "kind": "text",
+      "x": 117,
+      "y": 54.5,
+      "text": "P",
+      "size": 10,
+      "bold": false,
+      "color": "#334155"
+    },
+    {
+      "id": "update",
+      "kind": "box",
+      "x": 94,
+      "y": 68,
+      "w": 46,
+      "h": 21,
+      "fill": "#E8F1FF",
+      "stroke": "#2563EB",
+      "rounded": true,
+      "dashed": false
+    },
+    {
+      "id": "update_title",
+      "kind": "text",
+      "x": 117,
+      "y": 73,
+      "text": "Observation update",
+      "size": 9,
+      "bold": true,
+      "color": "#334155"
+    },
+    {
+      "id": "update_body",
+      "kind": "text",
+      "x": 117,
+      "y": 82,
+      "text": "GNSS and motion\nobservations",
+      "size": 8,
+      "bold": false,
+      "color": "#334155"
+    },
+    {
+      "id": "quality",
+      "kind": "box",
+      "x": 94,
+      "y": 99,
+      "w": 46,
+      "h": 22,
+      "fill": "#FFF0E9",
+      "stroke": "#E76F51",
+      "rounded": true,
+      "dashed": false
+    },
+    {
+      "id": "quality_title",
+      "kind": "text",
+      "x": 117,
+      "y": 104,
+      "text": "Source quality\nand innovation",
+      "size": 8.4,
+      "bold": true,
+      "color": "#334155"
+    },
+    {
+      "id": "quality_formula",
+      "kind": "text",
+      "x": 117,
+      "y": 112,
+      "text": "Rₛ = λₛ R₀,ₛ",
+      "size": 10,
+      "bold": false,
+      "color": "#334155"
+    },
+    {
+      "id": "bound",
+      "kind": "text",
+      "x": 117,
+      "y": 118.4,
+      "text": "1 ≤ λₛ ≤ λmax,s",
+      "size": 8.5,
+      "bold": false,
+      "color": "#334155"
+    },
+    {
+      "id": "output",
+      "kind": "box",
+      "x": 150,
+      "y": 43,
+      "w": 22,
+      "h": 32,
+      "fill": "#EAF8F5",
+      "stroke": "#009E9A",
+      "rounded": true,
+      "dashed": false
+    },
+    {
+      "id": "output_title",
+      "kind": "text",
+      "x": 161,
+      "y": 48.5,
+      "text": "Output",
+      "size": 9,
+      "bold": true,
+      "color": "#334155"
+    },
+    {
+      "id": "output_body",
+      "kind": "text",
+      "x": 161,
+      "y": 61,
+      "text": "Attitude\nVelocity\nPosition",
+      "size": 8,
+      "bold": false,
+      "color": "#334155"
+    },
+    {
+      "id": "frame",
+      "kind": "box",
+      "x": 55,
+      "y": 101,
+      "w": 23,
+      "h": 13,
+      "fill": "#F1F5F9",
+      "stroke": "#334155",
+      "rounded": true,
+      "dashed": false
+    },
+    {
+      "id": "frame_text",
+      "kind": "text",
+      "x": 66.5,
+      "y": 107.5,
+      "text": "Frame\nrotation",
+      "size": 8.5,
+      "bold": false,
+      "color": "#334155"
+    },
+    {
+      "id": "gate",
+      "kind": "diamond",
+      "x": 81,
+      "y": 75,
+      "w": 6,
+      "h": 6,
+      "fill": "white",
+      "stroke": "#334155"
+    },
+    {
+      "id": "gate_text",
+      "kind": "text",
+      "x": 79,
+      "y": 67.5,
+      "text": "Valid\nGNSS\nevent",
+      "size": 8,
+      "bold": false,
+      "color": "#334155"
+    },
+    {
+      "id": "imu_to_propagation",
+      "kind": "wire",
+      "points": [
+        [
+          42,
+          22.5
+        ],
+        [
+          94,
+          22.5
+        ]
+      ],
+      "color": "#334155",
+      "width": 0.85,
+      "dashed": false,
+      "arrow": true,
+      "both": false
+    },
+    {
+      "id": "propagation_to_state",
+      "kind": "wire",
+      "points": [
+        [
+          117,
+          31
+        ],
+        [
+          117,
+          42
+        ]
+      ],
+      "color": "#334155",
+      "width": 0.85,
+      "dashed": false,
+      "arrow": true,
+      "both": false
+    },
+    {
+      "id": "state_update",
+      "kind": "wire",
+      "points": [
+        [
+          117,
+          59
+        ],
+        [
+          117,
+          68
+        ]
+      ],
+      "color": "#334155",
+      "width": 0.85,
+      "dashed": false,
+      "arrow": true,
+      "both": true
+    },
+    {
+      "id": "state_to_output",
+      "kind": "wire",
+      "points": [
+        [
+          140,
+          50.5
+        ],
+        [
+          150,
+          50.5
+        ]
+      ],
+      "color": "#334155",
+      "width": 0.85,
+      "dashed": false,
+      "arrow": true,
+      "both": false
+    },
+    {
+      "id": "gnss_pv_to_gate",
+      "kind": "wire",
+      "points": [
+        [
+          42,
+          51
+        ],
+        [
+          84,
+          51
+        ],
+        [
+          84,
+          75
+        ]
+      ],
+      "color": "#334155",
+      "width": 0.85,
+      "dashed": false,
+      "arrow": true,
+      "both": false
+    },
+    {
+      "id": "gnss_pv_label",
+      "kind": "text",
+      "x": 63,
+      "y": 46.5,
+      "text": "Position / velocity\nand raw Doppler",
+      "size": 8,
+      "bold": false,
+      "color": "#334155"
+    },
+    {
+      "id": "heading_to_gate",
+      "kind": "wire",
+      "points": [
+        [
+          42,
+          63
+        ],
+        [
+          74,
+          63
+        ],
+        [
+          74,
+          78
+        ],
+        [
+          81,
+          78
+        ]
+      ],
+      "color": "#2563EB",
+      "width": 1.05,
+      "dashed": false,
+      "arrow": true,
+      "both": false
+    },
+    {
+      "id": "heading_construction",
+      "kind": "text",
+      "x": 58,
+      "y": 58.5,
+      "text": "p₂ − p₁ to heading",
+      "size": 8,
+      "bold": false,
+      "color": "#2563EB"
+    },
+    {
+      "id": "heading_selection",
+      "kind": "text",
+      "x": 57.5,
+      "y": 71,
+      "text": "Validity + innovation",
+      "size": 8,
+      "bold": false,
+      "color": "#2563EB"
+    },
+    {
+      "id": "tilt_to_gate",
+      "kind": "wire",
+      "points": [
+        [
+          42,
+          99
+        ],
+        [
+          48,
+          99
+        ],
+        [
+          48,
+          88
+        ],
+        [
+          84,
+          88
+        ]
+      ],
+      "color": "#009E9A",
+      "width": 0.85,
+      "dashed": false,
+      "arrow": false,
+      "both": false
+    },
+    {
+      "id": "tilt_label",
+      "kind": "text",
+      "x": 64,
+      "y": 84.5,
+      "text": "Tilt observations",
+      "size": 8,
+      "bold": false,
+      "color": "#009E9A"
+    },
+    {
+      "id": "body_velocity_to_frame",
+      "kind": "wire",
+      "points": [
+        [
+          42,
+          107.5
+        ],
+        [
+          55,
+          107.5
+        ]
+      ],
+      "color": "#009E9A",
+      "width": 0.85,
+      "dashed": false,
+      "arrow": true,
+      "both": false
+    },
+    {
+      "id": "frame_to_gate",
+      "kind": "wire",
+      "points": [
+        [
+          78,
+          107.5
+        ],
+        [
+          84,
+          107.5
+        ],
+        [
+          84,
+          81
+        ]
+      ],
+      "color": "#009E9A",
+      "width": 0.85,
+      "dashed": false,
+      "arrow": true,
+      "both": false
+    },
+    {
+      "id": "gate_to_update",
+      "kind": "wire",
+      "points": [
+        [
+          87,
+          78
+        ],
+        [
+          94,
+          78
+        ]
+      ],
+      "color": "#334155",
+      "width": 1.0,
+      "dashed": false,
+      "arrow": true,
+      "both": false
+    },
+    {
+      "id": "preprocess_to_frame",
+      "kind": "wire",
+      "points": [
+        [
+          66.5,
+          118
+        ],
+        [
+          66.5,
+          114
+        ]
+      ],
+      "color": "#334155",
+      "width": 0.85,
+      "dashed": true,
+      "arrow": true,
+      "both": false
+    },
+    {
+      "id": "preprocess",
+      "kind": "text",
+      "x": 62.5,
+      "y": 122,
+      "text": "Historical heading + tilt\nused in preprocessing",
+      "size": 8,
+      "bold": false,
+      "color": "#334155"
+    },
+    {
+      "id": "update_innovation",
+      "kind": "wire",
+      "points": [
+        [
+          104,
+          89
+        ],
+        [
+          104,
+          99
+        ]
+      ],
+      "color": "#334155",
+      "width": 0.85,
+      "dashed": false,
+      "arrow": true,
+      "both": false
+    },
+    {
+      "id": "innovation_label",
+      "kind": "text",
+      "x": 114,
+      "y": 95,
+      "text": "Innovation",
+      "size": 8,
+      "bold": false,
+      "color": "#334155"
+    },
+    {
+      "id": "covariance_to_update",
+      "kind": "wire",
+      "points": [
+        [
+          131,
+          99
+        ],
+        [
+          131,
+          89
+        ]
+      ],
+      "color": "#334155",
+      "width": 0.85,
+      "dashed": false,
+      "arrow": true,
+      "both": false
+    },
+    {
+      "id": "covariance_label",
+      "kind": "text",
+      "x": 135.5,
+      "y": 95,
+      "text": "Rₛ",
+      "size": 9,
+      "bold": false,
+      "color": "#334155"
+    }
+  ]
+}

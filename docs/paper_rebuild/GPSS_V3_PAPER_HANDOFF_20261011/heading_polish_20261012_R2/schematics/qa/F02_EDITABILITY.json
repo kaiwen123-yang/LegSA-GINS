@@ -1,0 +1,30 @@
+{
+  "width_mm": 174.0,
+  "height_mm": 126.0,
+  "preview_pixels": [
+    2560,
+    1854
+  ],
+  "publication_dpi": 600,
+  "vector": true,
+  "editable_text": true,
+  "native_shapes": 53,
+  "frame_input_y": 107.5,
+  "frame_output_y": 107.5,
+  "graph_edges": [
+    "imu_to_propagation",
+    "propagation_to_state",
+    "state_update",
+    "state_to_output",
+    "gnss_pv_to_gate",
+    "heading_to_gate",
+    "tilt_to_gate",
+    "body_velocity_to_frame",
+    "frame_to_gate",
+    "gate_to_update",
+    "preprocess_to_frame",
+    "update_innovation",
+    "covariance_to_update"
+  ],
+  "minimum_nominal_font_pt": 8
+}

@@ -1,0 +1,26 @@
+{
+  "width_mm": 174.0,
+  "height_mm": 78.0,
+  "preview_pixels": [
+    2560,
+    1148
+  ],
+  "publication_dpi": 600,
+  "original_photo_sha256": "a5aac11a5cde1e99bd31d0342b5e3351d428e92ae5f74ef5547f9a35508cb64b",
+  "full_platform_crop_xyxy": [
+    520,
+    270,
+    1410,
+    1190
+  ],
+  "installation_crop_xyxy": [
+    890,
+    345,
+    1235,
+    640
+  ],
+  "brightness_contrast_adjustment": false,
+  "ai_image_asset_used": false,
+  "minimum_nominal_font_pt": 8,
+  "geometry_is_abstract": true
+}

@@ -1,0 +1,9 @@
+{
+  "figure": "F08_heading_quality_scaling",
+  "width_mm": 174.0,
+  "height_mm": 205.0,
+  "min_text_pt": 8.0,
+  "text_outside_canvas": [],
+  "data_line_smoothing": false,
+  "png_dpi": 600
+}

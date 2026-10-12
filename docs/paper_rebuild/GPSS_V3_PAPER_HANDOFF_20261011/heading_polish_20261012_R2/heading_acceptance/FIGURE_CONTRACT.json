@@ -1,0 +1,21 @@
+{
+  "question": "Which direction-processing chain provides accurate heading observations over the robot recording?",
+  "claim": "The position-product direction selected by the native V3 update has smaller heading errors on these recordings; a separate project-added cost-ratio screen does not remove every large error in the raw carrier methods.",
+  "archetype": "asymmetric quantitative comparison",
+  "backend": "Python matplotlib",
+  "panels": {
+    "a": "Large body motion: input and used proposed direction, with default RTKLIB output and the same preselected 80-100 s turning zoom.",
+    "b": "Same full recording: original C-LAMBDA/C-WLS estimates and their distinct project-added ratio-screen outputs.",
+    "c-e": "Each complete-record error distribution; native C-L/C-WLS dashed and project-added screen solid; fixed default RTKLIB and DD-KF shown; all RTKLIB variants retained in CSV."
+  },
+  "event": "Reference-confirmed 80-100s turn, shared with F03/F06, selected from reference motion not method error.",
+  "method_scope": "Direction observations, not fused navigation posterior. Different input/validity chains; own support, with separate exact common-support table for raw methods.",
+  "ratio_scope": "project-added ratio screen >=3, preregistered 6a1e536; no integer correctness claim",
+  "full_window_support": "Counts beneath distributions are native output counts, with the full formal window denominator. Error CDF includes finite reference-supported samples.",
+  "displaced_material": "RTKLIB V0E/V1/V2 and DD-KF native diagnostics remain ALL_DIRECTION_ROUTE_METRICS.csv; original candidates remain dashed distributions.",
+  "width_mm": 174,
+  "height_mm": 192,
+  "min_font_pt": 8.0,
+  "no_smoothing": true,
+  "new_native_solver_calls": 0
+}

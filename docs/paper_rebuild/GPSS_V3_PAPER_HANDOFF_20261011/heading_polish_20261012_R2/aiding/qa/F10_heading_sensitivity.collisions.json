@@ -1,0 +1,48 @@
+{
+  "pdf": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/aiding/figures/F10_heading_sensitivity.pdf",
+  "auditable": true,
+  "verdict": "REVIEW REQUIRED",
+  "page_count": 1,
+  "visible_text_box_count": 90,
+  "text_trace_count": 90,
+  "stroke_path_count": 314,
+  "filled_region_count": 286,
+  "image_region_count": 12,
+  "summary": {
+    "fail": 0,
+    "warn": 1,
+    "contained_fill_overlays": 4,
+    "contained_image_overlays": 3
+  },
+  "thresholds": {
+    "text_inset_pt": 0.6,
+    "min_overlap_ratio": 0.05,
+    "clipping_tolerance_pt": 0.5
+  },
+  "findings": [
+    {
+      "severity": "WARN",
+      "kind": "text-image-edge",
+      "page": 1,
+      "message": "Text partially overlaps the edge of 1 raster image(s)",
+      "text": "Direction",
+      "text_bbox": [
+        85.99681854248047,
+        429.4709167480469,
+        117.55804443359375,
+        437.4709167480469
+      ],
+      "other_text": null,
+      "other_bbox": [
+        51.84000015258789,
+        431.5199890136719,
+        168.60000610351562,
+        516.1199951171875
+      ],
+      "object_count": 1,
+      "object_indexes": [
+        6
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+# F03_event_routes_and_heading
+
+较长事件上下文中的路线与航向误差。左列展示参考与本文的米尺度路线，仅保留两支机身航向箭头，小窗定位完整路线；右列上方为同一时段的航向误差，下方为水平位置误差。前两行把原参考确认的80–100秒转弯前后各扩展20秒至60–120秒，第三行把登记遮挡183.94–225.95秒前后各扩展20秒至163.94–245.95秒；灰色仅表示实际遮挡。窗口扩展只依据参考和登记事件，不依据方法误差。曲线保留全部原始样本，缺口断线；箭头表示机身方向而非速度。
+
+Routes and heading errors in extended event contexts. The left column shows metre-scale reference and LegSA-GINS paths with only two body-heading arrows and a full-route locator; the right column shows heading and horizontal-position errors during the same interval. The two reference-confirmed turns at80–100s are expanded to60–120s. The first registered obstruction at183.94–225.95s is shown with20s of context on each side; gray shading marks only the actual obstruction. Context is selected from reference motion and registered events, independently of method errors. All original samples are retained with breaks at gaps. Arrows encode body direction, not speed.
+
+# F09_heading_comparison
+
+航向精度的滤波与因子图比较，并补齐已完成的FGO定位路线。（a–f）三条自然记录中的有符号航向误差和绝对误差累计分布，全部六方法使用共同名义动态时刻274/267/367点。灰带为登记遮挡，缺少动态输出处断线。文献/标定配置与原登记起点保留。（g,h）首个登记20秒位置中断航向过程，以及全部18个条件的全窗航向RMSE；灰色点划线为保留基线IEKF，黑短线为中位数。（i）OiSAM、TC-FGO、GNC-FGO在同一GNSS1天线点的既有水平RMSE，采用它们独立登记的共同动态支持274/267/369点。TC/GNC不自行估计姿态，因此这里只展示其定位；本文现有位置比较点为POI，不混入该天线点面板。原始码与RTK输入不同，完整输入和全窗覆盖在配表中。
+
+Heading accuracy across filtering and factor-graph methods with the completed FGO position routes retained. (a–f) Signed heading errors and absolute-error ECDFs on common nominal dynamic epochs (274/267/367) for the six heading-estimating configurations. Gray shading marks registered obstruction; missing dynamic outputs break curves. Original initialization conventions are retained. (g,h) The first registered20-s position interruption and whole-run heading RMSE for all18 conditions; the gray dash-dot curve is the baseline-retaining IEKF and black ticks indicate medians. (i) Existing horizontal RMSE for OiSAM, TC-FGO and GNC-FGO at the same GNSS1 antenna point and their separately registered common dynamic support (274/267/369). TC/GNC do not estimate attitude in these implementations. LegSA-GINS position metrics are registered at the POI and are not mixed into this antenna-point panel. Raw-code and RTK inputs differ; full input definitions and window coverage accompany the figure.

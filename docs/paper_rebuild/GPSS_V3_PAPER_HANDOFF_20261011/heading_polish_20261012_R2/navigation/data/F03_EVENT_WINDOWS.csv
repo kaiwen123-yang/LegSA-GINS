@@ -1,0 +1,4 @@
+sequence,label,start_s,end_s,elapsed_start_s,elapsed_end_s,active_elapsed_start_s,active_elapsed_end_s,net_reference_turn_deg,endpoint_displacement_m,selection
+BY2,Turn with 20-s context,126.0,186.0,60.0,120.0,80.0,100.0,90.3103677720581,55.729255821781074,"Previous reference-confirmed first 20-s turn, expanded by20s on each side; no estimated errors used."
+BY2H,Turn with 20-s context,473.0,533.0,60.0,120.0,80.0,100.0,93.34655756483693,54.75932565892251,"Previous reference-confirmed first 20-s turn, expanded by20s on each side; no estimated errors used."
+BY2O,Obstruction with 20-s context,3349.94,3431.95,163.94000000000005,245.94999999999982,183.94,225.95,5.558035400376127,18.55451172213629,"Registered first obstruction [183.94,225.95]s with20s before and after; source prepare_external.py."

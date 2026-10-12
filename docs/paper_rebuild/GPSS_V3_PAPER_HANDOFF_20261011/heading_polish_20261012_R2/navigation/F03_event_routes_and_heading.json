@@ -1,0 +1,74 @@
+{
+  "events": [
+    {
+      "sequence": "BY2",
+      "label": "Turn with 20-s context",
+      "start_s": 126.0,
+      "end_s": 186.0,
+      "elapsed_start_s": 60.0,
+      "elapsed_end_s": 120.0,
+      "active_elapsed_start_s": 80.0,
+      "active_elapsed_end_s": 100.0,
+      "net_reference_turn_deg": 90.3103677720581,
+      "endpoint_displacement_m": 55.729255821781074,
+      "selection": "Previous reference-confirmed first 20-s turn, expanded by20s on each side; no estimated errors used."
+    },
+    {
+      "sequence": "BY2H",
+      "label": "Turn with 20-s context",
+      "start_s": 473.0,
+      "end_s": 533.0,
+      "elapsed_start_s": 60.0,
+      "elapsed_end_s": 120.0,
+      "active_elapsed_start_s": 80.0,
+      "active_elapsed_end_s": 100.0,
+      "net_reference_turn_deg": 93.34655756483693,
+      "endpoint_displacement_m": 54.75932565892251,
+      "selection": "Previous reference-confirmed first 20-s turn, expanded by20s on each side; no estimated errors used."
+    },
+    {
+      "sequence": "BY2O",
+      "label": "Obstruction with 20-s context",
+      "start_s": 3349.94,
+      "end_s": 3431.95,
+      "elapsed_start_s": 163.94000000000005,
+      "elapsed_end_s": 245.94999999999982,
+      "active_elapsed_start_s": 183.94,
+      "active_elapsed_end_s": 225.95,
+      "net_reference_turn_deg": 5.558035400376127,
+      "endpoint_displacement_m": 18.55451172213629,
+      "selection": "Registered first obstruction [183.94,225.95]s with20s before and after; source prepare_external.py."
+    }
+  ],
+  "caption_zh": "较长事件上下文中的路线与航向误差。左列展示参考与本文的米尺度路线，仅保留两支机身航向箭头，小窗定位完整路线；右列上方为同一时段的航向误差，下方为水平位置误差。前两行把原参考确认的80–100秒转弯前后各扩展20秒至60–120秒，第三行把登记遮挡183.94–225.95秒前后各扩展20秒至163.94–245.95秒；灰色仅表示实际遮挡。窗口扩展只依据参考和登记事件，不依据方法误差。曲线保留全部原始样本，缺口断线；箭头表示机身方向而非速度。",
+  "caption_en": "Routes and heading errors in extended event contexts. The left column shows metre-scale reference and LegSA-GINS paths with only two body-heading arrows and a full-route locator; the right column shows heading and horizontal-position errors during the same interval. The two reference-confirmed turns at80–100s are expanded to60–120s. The first registered obstruction at183.94–225.95s is shown with20s of context on each side; gray shading marks only the actual obstruction. Context is selected from reference motion and registered events, independently of method errors. All original samples are retained with breaks at gaps. Arrows encode body direction, not speed.",
+  "position_contract": "Local reference and V3 at archived POI. External horizontal errors retain frozen own evaluator contract; no external coordinate path reconstructed.",
+  "no_curve_smoothing": true,
+  "R1_window_relation": "F06 may retain the80–100s turning detail and173.94–235.95s obstruction detail inside these longer contexts.",
+  "width_mm": 174,
+  "height_mm": 204.99999999999997,
+  "min_font_pt": 8,
+  "preview_dpi": 400,
+  "source_paths": [
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/GPSS_V3_FIGURES_20261008/redesign_20261009/data/BY2H_display_pose.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/GPSS_V3_FIGURES_20261008/redesign_20261009/data/BY2O_display_pose.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/GPSS_V3_FIGURES_20261008/redesign_20261009/data/BY2_display_pose.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_F04_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_LC01-S_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_LC01_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_F04_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_LC01-S_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_LC01_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_F04_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_LC01-S_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_LC01_saved_errors.csv.gz"
+  ],
+  "new_solver_evaluator_provider_calls": 0,
+  "frozen_v3": "7d43b9af26120ed5dde21f53e515386361072ba6",
+  "audits": {
+    "text": 0,
+    "collisions": 0
+  },
+  "alignment": "PASS",
+  "visual_review": "PASS: full color and grayscale previews inspected; longer route windows, reduced arrows, added same-point FGO summary; inset tick collision repaired."
+}
