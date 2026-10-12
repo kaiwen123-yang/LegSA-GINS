@@ -1,0 +1,19 @@
+sequence,method,matched_epochs,heading_rmse_deg,absolute_heading_median_deg,absolute_heading_p95_deg,absolute_heading_max_deg,scope
+BY2,F04,274,1.7781761780538738,1.1786017657469472,3.510680444617942,6.516542661437285,Figure-only common nominal support; not replacement frozen native RMSE
+BY2,LC01,274,2.9048197012949384,1.21149426281211,4.647341448609698,15.828350252933518,Figure-only common nominal support; not replacement frozen native RMSE
+BY2,LC01-S,274,1.4690574711415698,0.9573177923236642,2.8400371570362872,4.836425794494573,Figure-only common nominal support; not replacement frozen native RMSE
+BY2,EXT05C,274,11.911609315763247,12.09067983288196,16.16628182186176,19.083441921243804,Figure-only common nominal support; not replacement frozen native RMSE
+BY2,EXT05C-S,274,10.161318211749583,10.35811816267551,12.808951335285732,15.519000765701776,Figure-only common nominal support; not replacement frozen native RMSE
+BY2,OISAM,274,4.6594609942357215,4.042131813511787,7.691441456192047,8.595670618677616,Figure-only common nominal support; not replacement frozen native RMSE
+BY2H,F04,267,1.7972623026270322,1.1164511035646,3.6511771984368746,5.530269781001209,Figure-only common nominal support; not replacement frozen native RMSE
+BY2H,LC01,267,2.027421721002544,1.3610070007439106,4.07911621960313,6.725047227909329,Figure-only common nominal support; not replacement frozen native RMSE
+BY2H,LC01-S,267,1.7892802962440835,1.141634261476895,3.711113048150133,5.3279026965290655,Figure-only common nominal support; not replacement frozen native RMSE
+BY2H,EXT05C,267,20.026697937557635,20.01771841798993,25.027590117178345,27.88248604490471,Figure-only common nominal support; not replacement frozen native RMSE
+BY2H,EXT05C-S,267,7.545001816637444,5.340239315102451,10.414841338387944,35.47944961379284,Figure-only common nominal support; not replacement frozen native RMSE
+BY2H,OISAM,267,2.5349069554937436,1.741836746867932,4.544638371785578,6.893340698251762,Figure-only common nominal support; not replacement frozen native RMSE
+BY2O,F04,367,2.3228839640362455,1.212386446305942,3.549705126573977,12.741993140398847,Figure-only common nominal support; not replacement frozen native RMSE
+BY2O,LC01,367,2.420531014093875,1.2234972008751868,5.130810573646744,9.052385223442457,Figure-only common nominal support; not replacement frozen native RMSE
+BY2O,LC01-S,367,3.902368198270292,2.950619631461961,6.643531429895269,13.50485392200909,Figure-only common nominal support; not replacement frozen native RMSE
+BY2O,EXT05C,367,5.748460148055205,4.452461735310408,10.57163728539607,12.65290136303244,Figure-only common nominal support; not replacement frozen native RMSE
+BY2O,EXT05C-S,367,8.174775052088803,7.147410783749621,13.394778419979367,17.061987703861632,Figure-only common nominal support; not replacement frozen native RMSE
+BY2O,OISAM,367,3.9841256313693663,1.6343043140242912,8.057595935350538,10.729367054645593,Figure-only common nominal support; not replacement frozen native RMSE

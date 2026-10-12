@@ -1,0 +1,63 @@
+{
+  "F06_heading_and_tilt": {
+    "claim": "持续方向更新是自然记录中航向改善的主要来源；倾角观测对roll/pitch另有分量相关作用。",
+    "panels_zh": [
+      "a–c：三条自然记录的航向误差全时序，淡色区为下一排同一窗口。",
+      "d–f：同一时间窗的原始误差样本放大，无平滑；灰→橙检验持续航向，橙→蓝展示完整配置额外变化。",
+      "g–i：同窗之外的全记录roll/pitch RMSE，紫点关闭倾角、蓝点完整，连线仅连接同场景同指标。"
+    ],
+    "limitation": "roll/pitch点图是独立的A05对F04消融；不能把F01对F04解释为纯航向单开关。",
+    "windows": {
+      "BY2": [
+        80.0,
+        100.0,
+        "Reference-confirmed turn"
+      ],
+      "BY2H": [
+        80.0,
+        100.0,
+        "Reference-confirmed turn"
+      ],
+      "BY2O": [
+        173.94000000000003,
+        235.94999999999985,
+        "First registered obstruction"
+      ]
+    }
+  },
+  "F07_heading_retained_translation": {
+    "claim": "方向与辅助更新持续时，机身速度辅助显著限制平移漂移。",
+    "panels_zh": [
+      "最上方状态条：深色有效，浅色暂停；三行分别为位置观测、方向观测、机身辅助更新。",
+      "a–b：同一20秒中断的航向误差。",
+      "c–d：同一时间轴的水平误差；20秒恢复后的下降为观测校正，非真实轨迹凸起。",
+      "e–f：各时长全部九个布置的全窗RMSE，细线配对同一次布置；纵轴对数，不是中断末端误差。"
+    ],
+    "limitation": "左右条件同时改变航向与辅助更新调度，不能解释为独立heading×HV因子实验。HV构造还继承冻结的历史A1方向。"
+  },
+  "F08_heading_quality_scaling": {
+    "claim": "位置观测受扰时，来源协方差调整可维持较好的航向，但不保证同等位置改善。",
+    "panels_zh": [
+      "a：固定D15_seed_00代表例的航向误差，全部原始样本。",
+      "b：同次运行真实R倍率，同一时间轴；增大代表相对降低信任。",
+      "c：同次运行位置RMSE，保留代价但不与航向争夺主图面积。",
+      "d：513个双方均完成案例的yaw RMSE降低量累计分布，正值有利完整方法；有符号对数轴保留小变化和长尾。"
+    ],
+    "case": "D15_seed_00",
+    "noise": "H sigma 3 m, V sigma 5 m; full-sequence source degradation",
+    "status": "541 full configurations: 519 complete, 13 divergence, 9 no heading; weighting off 513/19/9",
+    "limitation": "实际R与误差同轴便于关联，不凭形状推断尚未验证的唯一因果机制；新增完成6例不进入513配对CDF。"
+  },
+  "F10_heading_sensitivity": {
+    "claim": "可用性与方向扰动改变时，持续方向约束的航向收益保持；多源冲突仍存在失败边界。",
+    "panels_zh": [
+      "a：零、5、20秒方向中断下全窗yaw RMSE；位置等其他源仍按登记条件运行。",
+      "b：原始1秒单元实现的方向噪声σ0/1/5度，逐seed点和中位线。",
+      "c：±10度尖峰的登记概率0/5/10%，同样保留全部九个variant；不是独立5Hz抽样。",
+      "d：跨源冲突D59_seed_00的完整航向误差时序，是该族唯一保留时序的配对。",
+      "e：全部九个冲突variant的原始yaw RMSE，线配对同一个variant；蓝点完整，空紫点关闭来源加权。特别标明第3、5例的55.8°、69.3°大误差，完成不等于准确；第5例关闭加权无数值，因为真实发散。"
+    ],
+    "selection": "Physical levels use all registered D30–35 variants. D59_seed_00 is the only retained paired time history. All nine D59 original metrics are shown; unavailable released time histories are not regenerated.",
+    "limitation": "零扰动只有一条真实clean运行，未复制成九次；线连接物理递增强度的中位数，不是置信区间。D59边界无新的失效阈值推断。D51–54实际body先验单独配图；D29/D40/D55/D56没有正式输入变化，单列表格。"
+  }
+}

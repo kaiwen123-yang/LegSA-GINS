@@ -1,0 +1,194 @@
+[
+  {
+    "sequence": "BY2",
+    "lo": 146.0,
+    "hi": 166.0,
+    "elapsed_lo": 80.0,
+    "turn_deg": 86.99782602669983,
+    "displacement_m": 23.195180370904062
+  },
+  {
+    "sequence": "BY2",
+    "lo": 151.0,
+    "hi": 171.0,
+    "elapsed_lo": 85.0,
+    "turn_deg": 98.4452585722439,
+    "displacement_m": 19.714051768874945
+  },
+  {
+    "sequence": "BY2",
+    "lo": 156.0,
+    "hi": 176.0,
+    "elapsed_lo": 90.0,
+    "turn_deg": 94.93946900601759,
+    "displacement_m": 19.08180023553449
+  },
+  {
+    "sequence": "BY2",
+    "lo": 161.0,
+    "hi": 181.0,
+    "elapsed_lo": 95.0,
+    "turn_deg": 78.78155934986427,
+    "displacement_m": 21.719898607147165
+  },
+  {
+    "sequence": "BY2",
+    "lo": 181.0,
+    "hi": 201.0,
+    "elapsed_lo": 115.0,
+    "turn_deg": 90.13970184290741,
+    "displacement_m": 18.138681276258374
+  },
+  {
+    "sequence": "BY2",
+    "lo": 186.0,
+    "hi": 206.0,
+    "elapsed_lo": 120.0,
+    "turn_deg": 85.1149255987815,
+    "displacement_m": 17.362112052372975
+  },
+  {
+    "sequence": "BY2",
+    "lo": 191.0,
+    "hi": 211.0,
+    "elapsed_lo": 125.0,
+    "turn_deg": 89.5270755312468,
+    "displacement_m": 20.06500978475592
+  },
+  {
+    "sequence": "BY2",
+    "lo": 211.0,
+    "hi": 231.0,
+    "elapsed_lo": 145.0,
+    "turn_deg": 93.39888452657812,
+    "displacement_m": 20.917602787410264
+  },
+  {
+    "sequence": "BY2H",
+    "lo": 493.0,
+    "hi": 513.0,
+    "elapsed_lo": 80.0,
+    "turn_deg": 82.85987013559702,
+    "displacement_m": 20.98820718910295
+  },
+  {
+    "sequence": "BY2H",
+    "lo": 498.0,
+    "hi": 518.0,
+    "elapsed_lo": 85.0,
+    "turn_deg": 91.64147961770408,
+    "displacement_m": 19.08924484912336
+  },
+  {
+    "sequence": "BY2H",
+    "lo": 503.0,
+    "hi": 523.0,
+    "elapsed_lo": 90.0,
+    "turn_deg": 84.91488517510459,
+    "displacement_m": 20.778871381838087
+  },
+  {
+    "sequence": "BY2H",
+    "lo": 523.0,
+    "hi": 543.0,
+    "elapsed_lo": 110.0,
+    "turn_deg": 87.83045420591247,
+    "displacement_m": 19.023267469054918
+  },
+  {
+    "sequence": "BY2H",
+    "lo": 528.0,
+    "hi": 548.0,
+    "elapsed_lo": 115.0,
+    "turn_deg": 88.32569295051326,
+    "displacement_m": 17.044746961838765
+  },
+  {
+    "sequence": "BY2H",
+    "lo": 533.0,
+    "hi": 553.0,
+    "elapsed_lo": 120.0,
+    "turn_deg": 85.77157917490348,
+    "displacement_m": 18.998927466121717
+  },
+  {
+    "sequence": "BY2H",
+    "lo": 553.0,
+    "hi": 573.0,
+    "elapsed_lo": 140.0,
+    "turn_deg": 84.7541517271161,
+    "displacement_m": 22.716859127926938
+  },
+  {
+    "sequence": "BY2H",
+    "lo": 558.0,
+    "hi": 578.0,
+    "elapsed_lo": 145.0,
+    "turn_deg": 83.80815527407613,
+    "displacement_m": 18.73202204013086
+  },
+  {
+    "sequence": "BY2O",
+    "lo": 3271.0,
+    "hi": 3291.0,
+    "elapsed_lo": 85.0,
+    "turn_deg": 83.13473875673333,
+    "displacement_m": 20.845705895448514
+  },
+  {
+    "sequence": "BY2O",
+    "lo": 3276.0,
+    "hi": 3296.0,
+    "elapsed_lo": 90.0,
+    "turn_deg": 89.82066492818169,
+    "displacement_m": 18.579875416250626
+  },
+  {
+    "sequence": "BY2O",
+    "lo": 3281.0,
+    "hi": 3301.0,
+    "elapsed_lo": 95.0,
+    "turn_deg": 87.12300023582165,
+    "displacement_m": 19.402770536029447
+  },
+  {
+    "sequence": "BY2O",
+    "lo": 3301.0,
+    "hi": 3321.0,
+    "elapsed_lo": 115.0,
+    "turn_deg": 74.47115939657674,
+    "displacement_m": 21.09519558471283
+  },
+  {
+    "sequence": "BY2O",
+    "lo": 3306.0,
+    "hi": 3326.0,
+    "elapsed_lo": 120.0,
+    "turn_deg": 95.27123667987581,
+    "displacement_m": 17.074708426547154
+  },
+  {
+    "sequence": "BY2O",
+    "lo": 3311.0,
+    "hi": 3331.0,
+    "elapsed_lo": 125.0,
+    "turn_deg": 88.62328530192269,
+    "displacement_m": 12.020802770087412
+  },
+  {
+    "sequence": "BY2O",
+    "lo": 3316.0,
+    "hi": 3336.0,
+    "elapsed_lo": 130.0,
+    "turn_deg": 77.02883922894422,
+    "displacement_m": 7.591252377912781
+  },
+  {
+    "sequence": "BY2O",
+    "lo": 3426.0,
+    "hi": 3446.0,
+    "elapsed_lo": 240.0,
+    "turn_deg": 66.83439649751217,
+    "displacement_m": 22.61909125841527
+  }
+]

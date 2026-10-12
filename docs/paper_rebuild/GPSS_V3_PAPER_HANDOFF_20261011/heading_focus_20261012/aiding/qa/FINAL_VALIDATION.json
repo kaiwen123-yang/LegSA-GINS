@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "checks": {
+    "max_grouped_table_float_roundtrip_difference": 3.552713678800501e-15,
+    "original_results_preserved": 5951,
+    "original_ablation_pairs_preserved": 2164,
+    "all_noncompletions_preserved": 283,
+    "no_active_path_types": [
+      "D29",
+      "D40",
+      "D55",
+      "D56"
+    ],
+    "retained_series_count": 17,
+    "max_csv_roundtrip_difference": 3.552713678800501e-15,
+    "exports_checked": 20,
+    "fonts_min_pt": 8.0,
+    "visual_review": "All five colour previews inspected; final figure 6 obstruction window and figure 7 state strips confirmed.",
+    "new_solver_provider_evaluator_calls": 0
+  },
+  "problems": []
+}

@@ -1,0 +1,20 @@
+{
+  "native_pixels": [
+    1815,
+    866
+  ],
+  "width_mm": 174,
+  "native_ppi": 264.94827586206895,
+  "format": "raster image embedded in PDF, not vector",
+  "visual_wiring_check": "PASS",
+  "publication_typography": "native raster review design; vector typesetting remains",
+  "checked": [
+    "IMU to propagation",
+    "position-pair to heading selection",
+    "tilt direct to event gate",
+    "body velocity to frame rotation",
+    "historical heading and tilt to preprocessing only",
+    "source-quality covariance to update",
+    "shared state to output"
+  ]
+}

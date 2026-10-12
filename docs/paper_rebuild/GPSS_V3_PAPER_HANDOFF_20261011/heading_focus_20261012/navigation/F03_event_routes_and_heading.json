@@ -1,0 +1,71 @@
+{
+  "events": [
+    {
+      "sequence": "BY2",
+      "label": "Reference-confirmed turn",
+      "start_s": 146.0,
+      "end_s": 166.0,
+      "elapsed_start_s": 80.0,
+      "elapsed_end_s": 100.0,
+      "active_elapsed_start_s": 80.0,
+      "active_elapsed_end_s": 100.0,
+      "net_reference_turn_deg": 86.99782602669983,
+      "endpoint_displacement_m": 23.195180370904062,
+      "selection": "First 20-s window on a 5-s grid after initial 10s with absolute net reference heading change >=60 degrees and endpoint displacement >=2m; no estimated errors used."
+    },
+    {
+      "sequence": "BY2H",
+      "label": "Reference-confirmed turn",
+      "start_s": 493.0,
+      "end_s": 513.0,
+      "elapsed_start_s": 80.0,
+      "elapsed_end_s": 100.0,
+      "active_elapsed_start_s": 80.0,
+      "active_elapsed_end_s": 100.0,
+      "net_reference_turn_deg": 82.85987013559702,
+      "endpoint_displacement_m": 20.98820718910295,
+      "selection": "First 20-s window on a 5-s grid after initial 10s with absolute net reference heading change >=60 degrees and endpoint displacement >=2m; no estimated errors used."
+    },
+    {
+      "sequence": "BY2O",
+      "label": "First registered obstruction",
+      "start_s": 3359.94,
+      "end_s": 3421.95,
+      "elapsed_start_s": 173.94000000000005,
+      "elapsed_end_s": 235.94999999999982,
+      "active_elapsed_start_s": 183.94,
+      "active_elapsed_end_s": 225.95,
+      "net_reference_turn_deg": 5.824248564915976,
+      "endpoint_displacement_m": 6.448613302728573,
+      "selection": "Registered first obstruction [183.94,225.95]s with 10s before and after; source prepare_external.py."
+    }
+  ],
+  "caption_zh": "三种场景中与实际运动事件对应的轨迹及航向误差。左列在米尺度展示事件期间参考与本文的局部轨迹，等长箭头为机身航向，小窗定位完整路线；右列上方展示本文与两种双位置IEKF的航向误差，下方给出同一事件的位置误差。前两行使用仅由参考姿态确认的首个20秒转弯；第三行展示首个登记遮挡及前后各10秒，灰色表示实际遮挡。空间误差很小时轨迹重合是预期现象，右列以角度和厘米直接量化。误差保留各方法冻结评价契约，局部窗口不用于重新定义全窗排名。",
+  "caption_en": "Event-aligned routes and navigation errors. The left column shows metre-scale local reference and LegSA-GINS trajectories with body-heading arrows and a small full-route locator. The right panels show heading and horizontal-position errors for LegSA-GINS and both dual-position IEKF parameter settings during the same event. The first two events are the first reference-confirmed 20-s turns; the third spans the first registered antenna obstruction with 10 s of context on each side. Gray shading denotes the registered obstruction. Equal-length arrows encode body direction, not speed. Frozen evaluation contracts are retained; event selection does not use estimator errors.",
+  "position_contract": "Local reference and V3 at archived POI. External horizontal errors retain frozen own evaluator contract; no external coordinate path reconstructed.",
+  "no_curve_smoothing": true,
+  "width_mm": 174,
+  "height_mm": 204.99999999999997,
+  "min_font_pt": 8,
+  "source_paths": [
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/GPSS_V3_FIGURES_20261008/redesign_20261009/data/BY2H_display_pose.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/GPSS_V3_FIGURES_20261008/redesign_20261009/data/BY2O_display_pose.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/GPSS_V3_FIGURES_20261008/redesign_20261009/data/BY2_display_pose.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_F04_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_LC01-S_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_LC01_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_F04_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_LC01-S_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_LC01_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_F04_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_LC01-S_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_LC01_saved_errors.csv.gz"
+  ],
+  "new_solver_evaluator_provider_calls": 0,
+  "frozen_v3": "7d43b9af26120ed5dde21f53e515386361072ba6",
+  "audits": {
+    "text": 0,
+    "collisions": 0
+  },
+  "visual_review": "PASS: actual color preview inspected; event route inset moved away from trajectory, bottom labels separated, all curves and tails retained."
+}

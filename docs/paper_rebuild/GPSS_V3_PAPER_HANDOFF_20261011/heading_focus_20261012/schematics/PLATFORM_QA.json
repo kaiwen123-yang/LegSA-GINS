@@ -1,0 +1,22 @@
+{
+  "figure_size_mm": [
+    174,
+    82
+  ],
+  "min_native_label_pt": 8,
+  "text_outside_canvas": [],
+  "photo_pixels": [
+    1706,
+    1279
+  ],
+  "photo_width_mm": 70,
+  "photo_native_ppi": 619.0342857142857,
+  "illustration_pixels": [
+    1254,
+    1254
+  ],
+  "illustration_width_mm": 52,
+  "illustration_native_ppi": 612.5307692307692,
+  "original_photo_displayed_full": true,
+  "geometry": "abstract body-frame geometry, not a surveyed lever-arm drawing"
+}

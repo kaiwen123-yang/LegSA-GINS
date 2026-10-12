@@ -1,0 +1,10 @@
+{
+  "pdf": "/mnt/g/LegSA-GINS-project/V3航向主线重绘_20261012/navigation/F09_heading_comparison.pdf",
+  "auditable": true,
+  "minimum_required_pt": 8.0,
+  "minimum_found_pt": 8.0,
+  "text_run_count": 95,
+  "below_minimum_count": 0,
+  "below_minimum": [],
+  "warnings": []
+}

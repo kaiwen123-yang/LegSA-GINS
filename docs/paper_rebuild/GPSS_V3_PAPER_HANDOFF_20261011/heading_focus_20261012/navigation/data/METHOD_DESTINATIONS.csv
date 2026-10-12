@@ -1,0 +1,22 @@
+method,sequence,configuration,start,status,destination,reason
+LC01,BY2,LIT,FILE_START,COMPLETED,F09 a–f common heading,primary registered start
+EXT05C,BY2,LIT,FILE_START,COMPLETED,F09 a–f common heading,primary registered start
+LC01-S,BY2,S,FILE_START,COMPLETED,F09 a–f common heading,primary registered start
+EXT05C-S,BY2,S,FILE_START,COMPLETED,F09 a–f common heading,primary registered start
+LC01,BY2H,LIT,FILE_START,AVAILABLE_GEOMETRIC_AUDIT_FAIL,"LC_ALL16_NATIVE_RECORDS.csv: alternate-start sensitivity, all failures retained",not mixed with primary initialization
+LC01,BY2H,LIT,CONTRACT_START,AVAILABLE_GEOMETRIC_AUDIT_FAIL,F09 a–f common heading,primary registered start
+EXT05C,BY2H,LIT,FILE_START,COMPLETED,"LC_ALL16_NATIVE_RECORDS.csv: alternate-start sensitivity, all failures retained",not mixed with primary initialization
+EXT05C,BY2H,LIT,CONTRACT_START,COMPLETED,F09 a–f common heading,primary registered start
+LC01-S,BY2H,S,FILE_START,AVAILABLE_GEOMETRIC_AUDIT_FAIL,"LC_ALL16_NATIVE_RECORDS.csv: alternate-start sensitivity, all failures retained",not mixed with primary initialization
+LC01-S,BY2H,S,CONTRACT_START,AVAILABLE_GEOMETRIC_AUDIT_FAIL,F09 a–f common heading,primary registered start
+EXT05C-S,BY2H,S,FILE_START,NOT_RUN_ALGORITHM_FAILURE,"LC_ALL16_NATIVE_RECORDS.csv: alternate-start sensitivity, all failures retained",not mixed with primary initialization
+EXT05C-S,BY2H,S,CONTRACT_START,COMPLETED,F09 a–f common heading,primary registered start
+LC01,BY2O,LIT,FILE_START,COMPLETED,F09 a–f common heading,primary registered start
+EXT05C,BY2O,LIT,FILE_START,COMPLETED,F09 a–f common heading,primary registered start
+LC01-S,BY2O,S,FILE_START,COMPLETED,F09 a–f common heading,primary registered start
+EXT05C-S,BY2O,S,FILE_START,COMPLETED,F09 a–f common heading,primary registered start
+LC01-BR,,,,,F09 g–h; all 18 registered interruptions,No natural-trial identity invented
+OiSAM single initialization,,,,,OUTPUT_INTERVALS.csv and V3_OISAM_COMMON_POINT.csv companion,Reinitialized dynamic protocol plotted in a–f; original early stop retained separately
+OiSAM recorded-gap reinitialization,,,,,F09 a–f,"Dynamic heading common nominal support, excludes prior-only states"
+GINav,,,,,GINAV_ACTUAL_RESULTS.csv,Only two valid H epochs; B/O speed-gate failure; no reliable whole-run yaw curve
+TC-FGO / GNC-FGO,,,,,FGO_GNSS1_ALL36_RESULTS.csv supplementary position comparison,No matched self-estimated attitude output appropriate for heading main figure

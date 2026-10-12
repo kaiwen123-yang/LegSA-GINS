@@ -1,0 +1,332 @@
+[
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/GPSS_V3_FIGURES_20261008/redesign_20261009/data/BY2_display_pose.csv.gz",
+    "rows": 56642,
+    "columns": [
+      "time_s",
+      "elapsed_s",
+      "route_distance_m",
+      "east_truth_m",
+      "north_truth_m",
+      "east_legsa_m",
+      "north_legsa_m",
+      "heading_truth_ned_deg",
+      "heading_legsa_ned_deg",
+      "heading_f01_ned_deg",
+      "heading_truth_unwrapped_deg",
+      "heading_legsa_unwrapped_deg",
+      "heading_f01_unwrapped_deg",
+      "yaw_error_legsa_deg",
+      "yaw_error_f01_deg"
+    ],
+    "missing": {
+      "time_s": 0,
+      "elapsed_s": 0,
+      "route_distance_m": 0,
+      "east_truth_m": 0,
+      "north_truth_m": 0,
+      "east_legsa_m": 0,
+      "north_legsa_m": 0,
+      "heading_truth_ned_deg": 0,
+      "heading_legsa_ned_deg": 0,
+      "heading_f01_ned_deg": 0,
+      "heading_truth_unwrapped_deg": 0,
+      "heading_legsa_unwrapped_deg": 0,
+      "heading_f01_unwrapped_deg": 0,
+      "yaw_error_legsa_deg": 0,
+      "yaw_error_f01_deg": 0
+    }
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/GPSS_V3_FIGURES_20261008/redesign_20261009/data/BY2H_display_pose.csv.gz",
+    "rows": 58580,
+    "columns": [
+      "time_s",
+      "elapsed_s",
+      "route_distance_m",
+      "east_truth_m",
+      "north_truth_m",
+      "east_legsa_m",
+      "north_legsa_m",
+      "heading_truth_ned_deg",
+      "heading_legsa_ned_deg",
+      "heading_f01_ned_deg",
+      "heading_truth_unwrapped_deg",
+      "heading_legsa_unwrapped_deg",
+      "heading_f01_unwrapped_deg",
+      "yaw_error_legsa_deg",
+      "yaw_error_f01_deg"
+    ],
+    "missing": {
+      "time_s": 0,
+      "elapsed_s": 0,
+      "route_distance_m": 0,
+      "east_truth_m": 0,
+      "north_truth_m": 0,
+      "east_legsa_m": 0,
+      "north_legsa_m": 0,
+      "heading_truth_ned_deg": 0,
+      "heading_legsa_ned_deg": 0,
+      "heading_f01_ned_deg": 0,
+      "heading_truth_unwrapped_deg": 0,
+      "heading_legsa_unwrapped_deg": 0,
+      "heading_f01_unwrapped_deg": 0,
+      "yaw_error_legsa_deg": 0,
+      "yaw_error_f01_deg": 0
+    }
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/GPSS_V3_FIGURES_20261008/redesign_20261009/data/BY2O_display_pose.csv.gz",
+    "rows": 76548,
+    "columns": [
+      "time_s",
+      "elapsed_s",
+      "route_distance_m",
+      "east_truth_m",
+      "north_truth_m",
+      "east_legsa_m",
+      "north_legsa_m",
+      "heading_truth_ned_deg",
+      "heading_legsa_ned_deg",
+      "heading_f01_ned_deg",
+      "heading_truth_unwrapped_deg",
+      "heading_legsa_unwrapped_deg",
+      "heading_f01_unwrapped_deg",
+      "yaw_error_legsa_deg",
+      "yaw_error_f01_deg"
+    ],
+    "missing": {
+      "time_s": 0,
+      "elapsed_s": 0,
+      "route_distance_m": 0,
+      "east_truth_m": 0,
+      "north_truth_m": 0,
+      "east_legsa_m": 0,
+      "north_legsa_m": 0,
+      "heading_truth_ned_deg": 0,
+      "heading_legsa_ned_deg": 0,
+      "heading_f01_ned_deg": 0,
+      "heading_truth_unwrapped_deg": 0,
+      "heading_legsa_unwrapped_deg": 0,
+      "heading_f01_unwrapped_deg": 0,
+      "yaw_error_legsa_deg": 0,
+      "yaw_error_f01_deg": 0
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_LC01_saved_errors.csv.gz",
+    "rows": 58014,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "yaw_err_deg",
+      "elapsed_s"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "yaw_err_deg": 0,
+      "elapsed_s": 0
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_LC01-S_saved_errors.csv.gz",
+    "rows": 58014,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "yaw_err_deg",
+      "elapsed_s"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "yaw_err_deg": 0,
+      "elapsed_s": 0
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_F04_saved_errors.csv.gz",
+    "rows": 56642,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "yaw_err_deg",
+      "elapsed_s"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "yaw_err_deg": 0,
+      "elapsed_s": 0
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_LC01_saved_errors.csv.gz",
+    "rows": 59934,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "yaw_err_deg",
+      "elapsed_s"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "yaw_err_deg": 0,
+      "elapsed_s": 0
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_LC01-S_saved_errors.csv.gz",
+    "rows": 59934,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "yaw_err_deg",
+      "elapsed_s"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "yaw_err_deg": 0,
+      "elapsed_s": 0
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_F04_saved_errors.csv.gz",
+    "rows": 58580,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "yaw_err_deg",
+      "elapsed_s"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "yaw_err_deg": 0,
+      "elapsed_s": 0
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_LC01_saved_errors.csv.gz",
+    "rows": 78441,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "yaw_err_deg",
+      "elapsed_s"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "yaw_err_deg": 0,
+      "elapsed_s": 0
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_LC01-S_saved_errors.csv.gz",
+    "rows": 78441,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "yaw_err_deg",
+      "elapsed_s"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "yaw_err_deg": 0,
+      "elapsed_s": 0
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_F04_saved_errors.csv.gz",
+    "rows": 76548,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "yaw_err_deg",
+      "elapsed_s"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "yaw_err_deg": 0,
+      "elapsed_s": 0
+    }
+  }
+]

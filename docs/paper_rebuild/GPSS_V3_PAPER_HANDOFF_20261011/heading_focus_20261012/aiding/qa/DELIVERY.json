@@ -1,0 +1,59 @@
+{
+  "scope": "frozen V3 saved results only",
+  "solver_calls": 0,
+  "provider_calls": 0,
+  "evaluator_calls": 0,
+  "figures": [
+    {
+      "figure": "F06_heading_and_tilt",
+      "width_mm": 174.0,
+      "height_mm": 174.0,
+      "min_text_pt": 8.0,
+      "text_outside_canvas": [],
+      "data_line_smoothing": false,
+      "png_dpi": 600
+    },
+    {
+      "figure": "F07_heading_retained_translation",
+      "width_mm": 174.0,
+      "height_mm": 204.0,
+      "min_text_pt": 8.0,
+      "text_outside_canvas": [],
+      "data_line_smoothing": false,
+      "png_dpi": 600
+    },
+    {
+      "figure": "F08_heading_quality_scaling",
+      "width_mm": 174.0,
+      "height_mm": 160.0,
+      "min_text_pt": 8.0,
+      "text_outside_canvas": [],
+      "data_line_smoothing": false,
+      "png_dpi": 600
+    },
+    {
+      "figure": "F10_heading_sensitivity",
+      "width_mm": 174.0,
+      "height_mm": 156.0,
+      "min_text_pt": 8.0,
+      "text_outside_canvas": [],
+      "data_line_smoothing": false,
+      "png_dpi": 600
+    },
+    {
+      "figure": "S_actual_body_observation_quality",
+      "width_mm": 174.0,
+      "height_mm": 85.0,
+      "min_text_pt": 8.0,
+      "text_outside_canvas": [],
+      "data_line_smoothing": false,
+      "png_dpi": 600
+    }
+  ],
+  "artwork_titles_removed": [
+    "F06",
+    "F07",
+    "F08",
+    "F10"
+  ]
+}

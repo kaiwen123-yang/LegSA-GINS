@@ -1,0 +1,4 @@
+sequence,label,start_s,end_s,elapsed_start_s,elapsed_end_s,active_elapsed_start_s,active_elapsed_end_s,net_reference_turn_deg,endpoint_displacement_m,selection
+BY2,Reference-confirmed turn,146.0,166.0,80.0,100.0,80.0,100.0,86.99782602669983,23.195180370904062,First 20-s window on a 5-s grid after initial 10s with absolute net reference heading change >=60 degrees and endpoint displacement >=2m; no estimated errors used.
+BY2H,Reference-confirmed turn,493.0,513.0,80.0,100.0,80.0,100.0,82.85987013559702,20.98820718910295,First 20-s window on a 5-s grid after initial 10s with absolute net reference heading change >=60 degrees and endpoint displacement >=2m; no estimated errors used.
+BY2O,First registered obstruction,3359.94,3421.95,173.94000000000005,235.94999999999982,183.94,225.95,5.824248564915976,6.448613302728573,"Registered first obstruction [183.94,225.95]s with 10s before and after; source prepare_external.py."
