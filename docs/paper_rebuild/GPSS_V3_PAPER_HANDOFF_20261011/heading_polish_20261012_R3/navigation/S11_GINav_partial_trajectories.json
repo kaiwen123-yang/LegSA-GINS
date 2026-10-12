@@ -1,0 +1,22 @@
+{
+  "id": "S11_GINav_partial_trajectories",
+  "width_mm": 174,
+  "height_mm": 78.0,
+  "min_font_pt": 8,
+  "preview_dpi": 400,
+  "caption_zh": "GINav原生INS/IMU点的部分输出。圆圈标首个输出，叉号标最后输出，全部有限点保留，超过1.5秒间隔断线。三条记录分别仅77/275、2/271、5/378个输出；常规与遮挡记录触发原速度界限失败。淡灰POI参考路线只作地理背景，评价点不同，不用于计算本图位置误差。图中没有把部分输出称作完整运行。",
+  "caption_en": "Partial GINav outputs at the native INS/IMU point. Circles and crosses identify first and last emitted outputs; all finite points are retained and gaps exceeding1.5s break the curves. Output support is77/275,2/271 and5/378; nominal and obstruction runs triggered the original speed-bound failure. The faint POI reference route provides geographic context only because the physical point differs; it is not used to score these plots.",
+  "notes": {
+    "native_point": "INS_IMU",
+    "reference_role": "POI context only; no same-point accuracy claim",
+    "all_finite_emitted_points": true
+  },
+  "alignment": "PASS",
+  "audits": {
+    "text": 0,
+    "collisions": 0
+  },
+  "new_solver_evaluator_provider_calls": 0,
+  "visual_review": "PASS: complete color and grayscale layouts reviewed; POI insets moved inside empty loop regions, redundant FGO insets removed, support text moved outside paths, relative-scene text moved into two-line titles.",
+  "local_curve_rendering": "Main curves retain vectors; cropped spatial-detail marks rasterized at600dpi inside vector PDF/SVG to preserve exact display clipping; texts and axes remain editable."
+}

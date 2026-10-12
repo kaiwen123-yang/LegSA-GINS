@@ -1,0 +1,38 @@
+{
+  "main_figure_count": 11,
+  "approved_files_unchanged": {
+    "F04_absolute_direction_relative_motion": {
+      "pdf": true,
+      "svg": true,
+      "png": true,
+      "tiff": true
+    },
+    "F06_heading_and_tilt": {
+      "pdf": true,
+      "svg": true,
+      "png": true,
+      "tiff": true
+    },
+    "F07_heading_retained_translation": {
+      "pdf": true,
+      "svg": true,
+      "png": true,
+      "tiff": true
+    },
+    "F10_heading_sensitivity": {
+      "pdf": true,
+      "svg": true,
+      "png": true,
+      "tiff": true
+    }
+  },
+  "all_approved_match": true,
+  "coordinate_sources": 49,
+  "coordinate_rows": 1916717,
+  "coordinate_parity_checks": 18,
+  "max_coordinate_parity_difference_m": 3.889587082972491e-09,
+  "F02_primary_editable": "schematics/editable/F02_method_traced.svg",
+  "F02_transform_aware_font_pass": true,
+  "F02_effective_collision_verdict": "PASS",
+  "new_native_solver_provider_evaluator_calls": 0
+}

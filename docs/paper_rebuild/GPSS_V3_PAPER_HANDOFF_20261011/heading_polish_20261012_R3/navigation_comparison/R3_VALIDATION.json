@@ -1,0 +1,21 @@
+{
+  "width_mm": 173.99999508327906,
+  "height_mm": 212.0000011867947,
+  "min_font_pt": 8.0,
+  "full_png_pixels": [
+    4110,
+    5007
+  ],
+  "preview_pixels": [
+    2740,
+    3338
+  ],
+  "svg_editable_text": true,
+  "visual_review": "PASS: full color and grayscale reviewed",
+  "new_solver_calls": 0,
+  "new_ratio_screen_calls": 0,
+  "panel_h_values": 72,
+  "panel_h_all_methods_n": 18,
+  "old_i_all_nine_metrics_retained": true,
+  "all_common_error_inputs_byte_identical": true
+}

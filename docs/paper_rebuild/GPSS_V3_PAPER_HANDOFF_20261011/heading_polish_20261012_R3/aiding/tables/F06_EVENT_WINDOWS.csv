@@ -1,0 +1,4 @@
+sequence_id,relative_start_s,relative_end_s,event_label
+BY2,80.0,100.0,Reference-confirmed turn
+BY2H,80.0,100.0,Reference-confirmed turn
+BY2O,173.94000000000003,235.94999999999985,First registered obstruction

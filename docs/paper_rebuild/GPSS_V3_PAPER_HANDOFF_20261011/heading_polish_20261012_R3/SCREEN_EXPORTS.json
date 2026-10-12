@@ -1,0 +1,128 @@
+{
+  "main_figures": 11,
+  "all_full_hd_or_higher": true,
+  "ratio_preserved": true,
+  "figures": [
+    {
+      "figure": 1,
+      "id": "F01_platform",
+      "title": "平台照片与恢复插图",
+      "preview": "schematics/preview/F01_platform.png",
+      "pdf": "schematics/figures/F01_platform.pdf",
+      "svg": "schematics/figures/F01_platform.svg",
+      "png": "schematics/figures/F01_platform.png",
+      "width_px": 2560,
+      "height_px": 1206
+    },
+    {
+      "figure": 2,
+      "id": "F02_method",
+      "title": "原构图可编辑描摹",
+      "preview": "schematics/preview/F02_method.png",
+      "pdf": "schematics/figures/F02_method.pdf",
+      "svg": "schematics/figures/F02_method.svg",
+      "png": "schematics/figures/F02_method.png",
+      "width_px": 2560,
+      "height_px": 1221
+    },
+    {
+      "figure": 3,
+      "id": "F03_100s_routes_with_spatial_detail",
+      "title": "100秒路线与空间放大",
+      "preview": "navigation/preview/F03_100s_routes_with_spatial_detail.png",
+      "pdf": "navigation/F03_100s_routes_with_spatial_detail.pdf",
+      "svg": "navigation/F03_100s_routes_with_spatial_detail.svg",
+      "png": "navigation/F03_100s_routes_with_spatial_detail.png",
+      "width_px": 2740,
+      "height_px": 2992
+    },
+    {
+      "figure": 4,
+      "id": "F04_absolute_direction_relative_motion",
+      "title": "已批准：方向与相对路径",
+      "preview": "observability/preview/F04_absolute_direction_relative_motion.png",
+      "pdf": "observability/F04_absolute_direction_relative_motion.pdf",
+      "svg": "observability/F04_absolute_direction_relative_motion.svg",
+      "png": "observability/F04_absolute_direction_relative_motion.png",
+      "width_px": 2740,
+      "height_px": 1984
+    },
+    {
+      "figure": 5,
+      "id": "F05_heading_error_comparison",
+      "title": "方向比较与筛选分布",
+      "preview": "heading_acceptance/preview/F05_heading_error_comparison.png",
+      "pdf": "heading_acceptance/F05_heading_error_comparison.pdf",
+      "svg": "heading_acceptance/F05_heading_error_comparison.svg",
+      "png": "heading_acceptance/F05_heading_error_comparison.png",
+      "width_px": 2740,
+      "height_px": 3023
+    },
+    {
+      "figure": 6,
+      "id": "F06_heading_and_tilt",
+      "title": "已批准：持续航向与倾角",
+      "preview": "aiding/preview/F06_heading_and_tilt.png",
+      "pdf": "aiding/figures/F06_heading_and_tilt.pdf",
+      "svg": "aiding/figures/F06_heading_and_tilt.svg",
+      "png": "aiding/figures/F06_heading_and_tilt.png",
+      "width_px": 3082,
+      "height_px": 3082
+    },
+    {
+      "figure": 7,
+      "id": "F07_heading_retained_translation",
+      "title": "已批准：中断与条件性辅助",
+      "preview": "aiding/preview/F07_heading_retained_translation.png",
+      "pdf": "aiding/figures/F07_heading_retained_translation.pdf",
+      "svg": "aiding/figures/F07_heading_retained_translation.svg",
+      "png": "aiding/figures/F07_heading_retained_translation.png",
+      "width_px": 3200,
+      "height_px": 3751
+    },
+    {
+      "figure": 8,
+      "id": "F08_heading_quality_scaling",
+      "title": "六面板质量案例暂定稿",
+      "preview": "aiding/preview/F08_heading_quality_scaling.png",
+      "pdf": "aiding/figures/F08_heading_quality_scaling.pdf",
+      "svg": "aiding/figures/F08_heading_quality_scaling.svg",
+      "png": "aiding/figures/F08_heading_quality_scaling.png",
+      "width_px": 3082,
+      "height_px": 2675
+    },
+    {
+      "figure": 9,
+      "id": "F09_heading_comparison",
+      "title": "航向比较与18种中断条件",
+      "preview": "navigation_comparison/preview/F09_heading_comparison.png",
+      "pdf": "navigation_comparison/F09_heading_comparison.pdf",
+      "svg": "navigation_comparison/F09_heading_comparison.svg",
+      "png": "navigation_comparison/F09_heading_comparison.png",
+      "width_px": 2740,
+      "height_px": 3338
+    },
+    {
+      "figure": 10,
+      "id": "F10_heading_sensitivity",
+      "title": "方向扰动输入与融合输出",
+      "preview": "aiding/preview/F10_heading_sensitivity.png",
+      "pdf": "aiding/figures/F10_heading_sensitivity.pdf",
+      "svg": "aiding/figures/F10_heading_sensitivity.svg",
+      "png": "aiding/figures/F10_heading_sensitivity.png",
+      "width_px": 3082,
+      "height_px": 3720
+    },
+    {
+      "figure": 11,
+      "id": "F11_full_trajectory_comparison",
+      "title": "新增：完整评价窗轨迹",
+      "preview": "navigation/preview/F11_full_trajectory_comparison.png",
+      "pdf": "navigation/F11_full_trajectory_comparison.pdf",
+      "svg": "navigation/F11_full_trajectory_comparison.svg",
+      "png": "navigation/F11_full_trajectory_comparison.png",
+      "width_px": 2740,
+      "height_px": 3322
+    }
+  ]
+}

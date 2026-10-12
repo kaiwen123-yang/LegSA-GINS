@@ -1,0 +1,26 @@
+[
+  {
+    "stage": "source",
+    "exit_code": 0
+  },
+  {
+    "figure": "F08_heading_quality_scaling",
+    "stage": "font",
+    "exit_code": 0
+  },
+  {
+    "figure": "F08_heading_quality_scaling",
+    "stage": "collision",
+    "exit_code": 0
+  },
+  {
+    "figure": "S_F08_full_heading_histories",
+    "stage": "font",
+    "exit_code": 0
+  },
+  {
+    "figure": "S_F08_full_heading_histories",
+    "stage": "collision",
+    "exit_code": 0
+  }
+]

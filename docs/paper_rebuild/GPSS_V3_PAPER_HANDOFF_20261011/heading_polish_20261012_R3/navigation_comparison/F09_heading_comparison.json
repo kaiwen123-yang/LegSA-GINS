@@ -1,0 +1,45 @@
+{
+  "common_epochs": {
+    "BY2": 274,
+    "BY2H": 267,
+    "BY2O": 367
+  },
+  "matching": "Exact saved R2 common-support tables; no rematching or interpolation. Original nominal matching and at most10ms pairwise separation retained.",
+  "caption_zh": "滤波与因子图方法的航向精度。（a–f）三条自然记录的有符号航向误差及绝对误差累计分布，六种配置使用共同动态时刻274/267/367点。灰带表示登记遮挡，缺少动态输出处断线。（g）首个登记20秒位置中断中的航向误差；20秒时位置观测恢复。（h）同一常规记录上全部18个位置中断条件：10秒和20秒各九个布置。每个点代表一个条件的全窗航向RMSE，黑色短线为18个条件的中位数。四个完整方法名称直接写在对应点列上方。旧版(i)的FGO定位指标移到新轨迹组配表，保留相同GNSS1评价点、共同支持及原始输入说明。",
+  "caption_en": "Heading accuracy across filtering and factor-graph methods. (a–f) Signed heading errors and absolute-error ECDFs at the saved common dynamic epochs (274/267/367) for six configurations. Gray shading marks registered obstruction; missing dynamic outputs break curves. (g) Heading error during the first registered20-s position interruption, with position observations returning at20s. (h) All18 registered interruption conditions on the nominal recording: nine placements at10s and nine at20s. Each dot is a whole-run heading RMSE for one condition; the black mark is the median over18 conditions. Full method names are placed directly above their point rows. The previous FGO position panel is preserved as a companion table to the trajectory figure, retaining its common GNSS1 point, temporal support and input definitions.",
+  "selection": "All original natural common epochs and all18 registered interruption conditions retained.",
+  "source_metric_status": "R2 saved input/error tables reused exactly; no new evaluation or thresholding.",
+  "no_failure_rows_removed": true,
+  "old_panel_i_destination": "METHOD_POSITION_TABLE.csv and METHOD_POSITION_TABLE.md, indexed by new F11 trajectory group",
+  "FGO_common_position_counts": {
+    "BY2": 274,
+    "BY2H": 267,
+    "BY2O": 369
+  },
+  "FGO_method_state": "TC-FGO/GNC-FGO do not estimate yaw; no yaw is filled or plotted for these methods.",
+  "R3_change": "Panel h uses complete method names and explicit dot/median definitions; old i becomes a clear table.",
+  "width_mm": 174,
+  "height_mm": 212.00000000000003,
+  "min_font_pt": 8,
+  "preview_dpi": 400,
+  "source_paths": [
+    "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation_comparison/data/BY2H_COMMON_HEADING.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation_comparison/data/BY2O_COMMON_HEADING.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation_comparison/data/BY2_COMMON_HEADING.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation_comparison/data/EXT05C_A2_20s_seed00.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation_comparison/data/F04_A2_20s_seed00.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation_comparison/data/F09_ALL18_INTERRUPTION_CASES.csv",
+    "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation_comparison/data/FGO_GNSS1_ALL36_RESULTS.csv",
+    "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation_comparison/data/LC01-BR_A2_20s_seed00.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation_comparison/data/LC01_A2_20s_seed00.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation_comparison/data/LC_ALL16_NATIVE_RECORDS.csv"
+  ],
+  "new_solver_evaluator_provider_calls": 0,
+  "frozen_v3": "7d43b9af26120ed5dde21f53e515386361072ba6",
+  "audits": {
+    "text": 0,
+    "collisions": 0
+  },
+  "alignment": "PASS",
+  "visual_review": "PASS: a-g same scientific inputs, h full names and n/median labels clear; old i retained in trajectory companion table."
+}

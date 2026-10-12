@@ -1,0 +1,19 @@
+method,sequence,check,max_abs_difference_m
+F04,BY2,parity with existing display coordinates,2.812089228143577e-09
+F04,BY2H,parity with existing display coordinates,1.3826877420797246e-09
+F04,BY2O,parity with existing display coordinates,1.918991188176733e-09
+LC01,BY2,direct registered NAV minus reference equals saved signed error,3.889580309744678e-09
+EXT05C,BY2,direct registered NAV minus reference equals saved signed error,3.889580713067886e-09
+LC01-S,BY2,direct registered NAV minus reference equals saved signed error,3.889583113925177e-09
+EXT05C-S,BY2,direct registered NAV minus reference equals saved signed error,3.731255547589907e-09
+LC01_ALT,BY2H,direct registered NAV minus reference equals saved signed error,3.889585147021091e-09
+LC01,BY2H,direct registered NAV minus reference equals saved signed error,3.889585147021091e-09
+EXT05C_ALT,BY2H,direct registered NAV minus reference equals saved signed error,3.889580213467525e-09
+EXT05C,BY2H,direct registered NAV minus reference equals saved signed error,3.889586951133506e-09
+LC01-S_ALT,BY2H,direct registered NAV minus reference equals saved signed error,3.88958708297249e-09
+LC01-S,BY2H,direct registered NAV minus reference equals saved signed error,3.8895840819008765e-09
+EXT05C-S,BY2H,direct registered NAV minus reference equals saved signed error,3.8895790269166675e-09
+LC01,BY2O,direct registered NAV minus reference equals saved signed error,3.889586014382829e-09
+EXT05C,BY2O,direct registered NAV minus reference equals saved signed error,3.889584682115199e-09
+LC01-S,BY2O,direct registered NAV minus reference equals saved signed error,3.889582669835967e-09
+EXT05C-S,BY2O,direct registered NAV minus reference equals saved signed error,3.8895814069572765e-09

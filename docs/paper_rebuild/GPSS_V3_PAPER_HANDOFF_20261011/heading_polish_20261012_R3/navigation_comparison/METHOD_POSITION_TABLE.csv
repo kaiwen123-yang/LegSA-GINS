@@ -1,0 +1,10 @@
+sequence_id,scene,method_id,method,observations,physical_point,common_dynamic_epochs,horizontal_rmse_m,full_window_outputs,full_window_expected,full_window_output_coverage,full_window_recorded_rows,full_window_reference_matched,attitude_is_estimated
+BY2,Nominal walking,OISAM,OiSAM (recorded-gap reinitialization),RTK positions + body IMU,GNSS1_ANTENNA,274,0.0980246995103039,275,275,1.0,275,275,True
+BY2,Nominal walking,WEN_TC,TC-FGO,Raw pseudoranges + AHRS / inertial input,GNSS1_ANTENNA,274,7.692119356337471,274,275,0.9963636363636365,274,274,False
+BY2,Nominal walking,GNC,GNC-FGO,Raw pseudoranges + Doppler,GNSS1_ANTENNA,274,2.1735035319671225,274,275,0.9963636363636365,274,274,False
+BY2H,Large body motion,OISAM,OiSAM (recorded-gap reinitialization),RTK positions + body IMU,GNSS1_ANTENNA,267,0.0649568731804322,267,271,0.985239852398524,271,267,True
+BY2H,Large body motion,WEN_TC,TC-FGO,Raw pseudoranges + AHRS / inertial input,GNSS1_ANTENNA,267,7.699610654108969,270,271,0.996309963099631,270,270,False
+BY2H,Large body motion,GNC,GNC-FGO,Raw pseudoranges + Doppler,GNSS1_ANTENNA,267,2.131602308856995,270,271,0.996309963099631,270,270,False
+BY2O,Antenna obstruction,OISAM,OiSAM (recorded-gap reinitialization),RTK positions + body IMU,GNSS1_ANTENNA,369,0.0520606237939192,370,378,0.9788359788359788,378,370,True
+BY2O,Antenna obstruction,WEN_TC,TC-FGO,Raw pseudoranges + AHRS / inertial input,GNSS1_ANTENNA,369,9.442499913068692,377,378,0.9973544973544972,377,377,False
+BY2O,Antenna obstruction,GNC,GNC-FGO,Raw pseudoranges + Doppler,GNSS1_ANTENNA,369,2.7324936315602297,377,378,0.9973544973544972,377,377,False

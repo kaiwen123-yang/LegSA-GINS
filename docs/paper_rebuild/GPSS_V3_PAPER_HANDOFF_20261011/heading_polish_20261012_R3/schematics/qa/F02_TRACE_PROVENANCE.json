@@ -1,0 +1,22 @@
+{
+  "reference_sha256": "c177fba7b80a1b2722cb9e01509d31b508e2932f90c45996b83f7691a34db971",
+  "reference_pixels": [
+    1815,
+    866
+  ],
+  "native_vector": true,
+  "raster_images_in_svg": 0,
+  "scene_objects": 70,
+  "frames": 11,
+  "text_objects": 38,
+  "traced_icons": 5,
+  "deliberate_difference": "Frame inlet elbowed to y568; native fonts and few-pixel text clearances; major node coordinates retained",
+  "figure_mm": [
+    174,
+    83.02148760330579
+  ],
+  "preview_pixels": [
+    2560,
+    1221
+  ]
+}

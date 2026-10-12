@@ -1,0 +1,4 @@
+sequence,point,center_elapsed_s,source_start_s,source_end_s,physical_halfwidth_m,selection
+BY2,POI_MIDPOINT,90.0,88.0,92.0,0.5,same fixed reference event center asF03; method errors not read for selection
+BY2H,POI_MIDPOINT,90.0,88.0,92.0,0.5,same fixed reference event center asF03; method errors not read for selection
+BY2O,POI_MIDPOINT,204.945,199.945,209.945,0.2,same fixed reference event center asF03; method errors not read for selection

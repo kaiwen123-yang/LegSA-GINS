@@ -1,0 +1,19 @@
+{
+  "figure_mm": [
+    174,
+    82
+  ],
+  "restored_previous_imagegen_asset": true,
+  "new_image_generation": false,
+  "original_photo_used_full": true,
+  "illustration_width_mm": 52,
+  "illustration_native_pixels": [
+    1254,
+    1254
+  ],
+  "geometry_text_separated": true,
+  "source_sha256": {
+    "platform_original.jpg": "a5aac11a5cde1e99bd31d0342b5e3351d428e92ae5f74ef5547f9a35508cb64b",
+    "platform_illustration.png": "590b17fad92a1e0c65276d66da3b925b23981a9fc434e3d8ec606e7859a99784"
+  }
+}

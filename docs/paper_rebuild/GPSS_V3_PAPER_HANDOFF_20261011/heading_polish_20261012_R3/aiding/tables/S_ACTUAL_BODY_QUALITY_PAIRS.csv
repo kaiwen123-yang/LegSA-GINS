@@ -1,0 +1,55 @@
+case_id,metric,group,reduction
+D51_seed_00,roll_rmse_deg,D51,0.7390015080277381
+D51_seed_01,roll_rmse_deg,D51,0.7384936575892134
+D51_seed_02,roll_rmse_deg,D51,0.7018569648393091
+D51_seed_03,roll_rmse_deg,D51,0.7521360133525099
+D51_seed_04,roll_rmse_deg,D51,0.7896033564920231
+D51_seed_05,roll_rmse_deg,D51,0.7825373105488507
+D51_seed_06,roll_rmse_deg,D51,0.732794880094584
+D51_seed_07,roll_rmse_deg,D51,0.7188518942715718
+D51_seed_08,roll_rmse_deg,D51,0.7763150197030564
+D51_seed_00,pitch_rmse_deg,D51,0.4776369713035278
+D51_seed_01,pitch_rmse_deg,D51,0.3969182303686587
+D51_seed_02,pitch_rmse_deg,D51,0.4493990285715945
+D51_seed_03,pitch_rmse_deg,D51,0.45675255652386326
+D51_seed_04,pitch_rmse_deg,D51,0.4834925258474718
+D51_seed_05,pitch_rmse_deg,D51,0.44790672774822626
+D51_seed_06,pitch_rmse_deg,D51,0.37065198201339333
+D51_seed_07,pitch_rmse_deg,D51,0.42974148873910556
+D51_seed_08,pitch_rmse_deg,D51,0.4436956141704482
+D52_seed_00,roll_rmse_deg,D52,0.48092790493420434
+D52_seed_01,roll_rmse_deg,D52,0.7319327568180318
+D52_seed_02,roll_rmse_deg,D52,1.122638798743421
+D52_seed_03,roll_rmse_deg,D52,1.2438344212746304
+D52_seed_04,roll_rmse_deg,D52,1.1984920957024179
+D52_seed_05,roll_rmse_deg,D52,1.195115123111664
+D52_seed_06,roll_rmse_deg,D52,1.1985990495753933
+D52_seed_07,roll_rmse_deg,D52,0.4905576063019219
+D52_seed_08,roll_rmse_deg,D52,0.7015897400465589
+D52_seed_00,pitch_rmse_deg,D52,0.5071199701091271
+D52_seed_01,pitch_rmse_deg,D52,0.19424045039035231
+D52_seed_02,pitch_rmse_deg,D52,0.37921722410405456
+D52_seed_03,pitch_rmse_deg,D52,0.7301891313988742
+D52_seed_04,pitch_rmse_deg,D52,0.6806062125861785
+D52_seed_05,pitch_rmse_deg,D52,0.6740604275549846
+D52_seed_06,pitch_rmse_deg,D52,0.6808056798052404
+D52_seed_07,pitch_rmse_deg,D52,0.6214711112384612
+D52_seed_08,pitch_rmse_deg,D52,0.7052910929708567
+D53_seed_00,horizontal_rmse_m,Noise 1 m/s,-0.0010689138882217092
+D53_seed_01,horizontal_rmse_m,Noise 1 m/s,-0.0010019790988598093
+D53_seed_02,horizontal_rmse_m,Noise 1 m/s,-0.0013544240958390102
+D53_seed_03,horizontal_rmse_m,Noise 1 m/s,-0.001879896681598603
+D53_seed_04,horizontal_rmse_m,Noise 1 m/s,-0.0013626627962553123
+D53_seed_05,horizontal_rmse_m,Noise 1 m/s,-0.0006674027440046054
+D53_seed_06,horizontal_rmse_m,Noise 1 m/s,-0.001577105081143504
+D53_seed_07,horizontal_rmse_m,Noise 1 m/s,-0.0014662317137612013
+D53_seed_08,horizontal_rmse_m,Noise 1 m/s,-0.0007282351957848127
+D54_seed_00,horizontal_rmse_m,Scale ×1.5,-0.008004673833656606
+D54_seed_01,horizontal_rmse_m,Scale ×1.5,-0.008004673833656606
+D54_seed_02,horizontal_rmse_m,Scale ×1.5,-0.008004673833656606
+D54_seed_03,horizontal_rmse_m,Scale ×1.5,-0.008004673833656606
+D54_seed_04,horizontal_rmse_m,Dropout 50%,0.001093547695403388
+D54_seed_05,horizontal_rmse_m,Dropout 50%,0.0010888246825667969
+D54_seed_06,horizontal_rmse_m,Dropout 50%,0.0010767891624814951
+D54_seed_07,horizontal_rmse_m,Dropout 50%,0.0010821949038676004
+D54_seed_08,horizontal_rmse_m,Both,-0.00799879668288081

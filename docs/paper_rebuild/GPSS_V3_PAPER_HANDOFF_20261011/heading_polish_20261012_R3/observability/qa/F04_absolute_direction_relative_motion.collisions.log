@@ -1,0 +1,10 @@
+Nature Figure Rendered Collision Audit
+pdf: /mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/observability/F04_absolute_direction_relative_motion.pdf
+pages: 1
+visible text boxes: 38
+stroke paths: 66
+
+
+summary: 0 fail, 0 warn, 1 contained fill overlays, 0 contained image overlays
+verdict: PASS
+note: contained overlays can be intentional; WARN findings need final-size visual review

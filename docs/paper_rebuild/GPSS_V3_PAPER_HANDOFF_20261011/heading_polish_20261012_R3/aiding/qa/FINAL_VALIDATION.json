@@ -1,0 +1,74 @@
+{
+  "status": "PASS",
+  "checks": {
+    "max_grouped_table_float_roundtrip_difference": 3.552713678800501e-15,
+    "original_results_preserved": 5951,
+    "original_ablation_pairs_preserved": 2164,
+    "all_noncompletions_preserved": 283,
+    "no_active_path_types": [
+      "D29",
+      "D40",
+      "D55",
+      "D56"
+    ],
+    "retained_series_count": 28,
+    "max_csv_roundtrip_difference": 3.552713678800501e-15,
+    "exports_checked": 24,
+    "fonts_min_pt": 8.0,
+    "main_preview_pixels": [
+      {
+        "figure": "F06_heading_and_tilt",
+        "width": 3082,
+        "height": 3082
+      },
+      {
+        "figure": "F07_heading_retained_translation",
+        "width": 3200,
+        "height": 3751
+      },
+      {
+        "figure": "F08_heading_quality_scaling",
+        "width": 3082,
+        "height": 2675
+      },
+      {
+        "figure": "F10_heading_sensitivity",
+        "width": 3082,
+        "height": 3720
+      }
+    ],
+    "F07_original_exports_byte_identical": true,
+    "R3_approved_F06_F07_F10_byte_identical_to_R2": {
+      "F06_heading_and_tilt": {
+        "pdf": true,
+        "svg": true,
+        "png": true,
+        "tiff": true
+      },
+      "F07_heading_retained_translation": {
+        "pdf": true,
+        "svg": true,
+        "png": true,
+        "tiff": true
+      },
+      "F10_heading_sensitivity": {
+        "pdf": true,
+        "svg": true,
+        "png": true,
+        "tiff": true
+      }
+    },
+    "figure_layer_observation_error_derivation": {
+      "cases": 3,
+      "input_rows_kept": 4110,
+      "reference_key_failures": 0,
+      "valid_unscored_first_epochs": 3,
+      "original_input_hashes_verified": 3,
+      "new_interpolation": false
+    },
+    "nature_preflight_fonts_collision": "PASS; source warnings reviewed in NATURE_QA_REVIEW.md",
+    "visual_review": "R3 redraws F08 only, six panels with common first120s display and all-nine full-window pairs; complete histories retained. F04/F06/F07/F10 remain approved R2 copies.",
+    "new_solver_provider_evaluator_calls": 0
+  },
+  "problems": []
+}

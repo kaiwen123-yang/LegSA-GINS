@@ -1,0 +1,40 @@
+Nature Figure PDF Text Audit
+pdf: /mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/schematics/figures/F02_method.pdf
+minimum required: 5 pt
+minimum found: 1 pt
+text runs: 32
+below minimum: 32
+verdict: FAIL
+  - stream 1: /f-0-1 1 Tf
+  - stream 1: /f-0-0 1 Tf
+  - stream 1: /f-1-0 1 Tf
+  - stream 1: /f-2-0 1 Tf
+  - stream 1: /f-1-0 1 Tf
+  - stream 1: /f-2-0 1 Tf
+  - stream 1: /f-0-0 1 Tf
+  - stream 1: /f-1-0 1 Tf
+  - stream 1: /f-2-0 1 Tf
+  - stream 1: /f-1-0 1 Tf
+  - stream 1: /f-2-0 1 Tf
+  - stream 1: /f-0-0 1 Tf
+  - stream 1: /f-1-0 1 Tf
+  - stream 1: /f-2-0 1 Tf
+  - stream 1: /f-1-0 1 Tf
+  - stream 1: /f-0-0 1 Tf
+  - stream 1: /f-0-1 1 Tf
+  - stream 1: /f-0-0 1 Tf
+  - stream 1: /f-0-1 1 Tf
+  - stream 1: /f-0-0 1 Tf
+  - stream 1: /f-0-1 1 Tf
+  - stream 1: /f-0-0 1 Tf
+  - stream 1: /f-1-0 1 Tf
+  - stream 1: /f-2-0 1 Tf
+  - stream 1: /f-0-0 1 Tf
+  - stream 1: /f-0-1 1 Tf
+  - stream 1: /f-0-0 1 Tf
+  - stream 1: /f-0-1 1 Tf
+  - stream 1: /f-0-0 1 Tf
+  - stream 1: /f-2-0 1 Tf
+  - stream 1: /f-0-0 1 Tf
+  - stream 1: /f-2-0 1 Tf
+note: Tf scanning does not replace final-size visual inspection or account for every PDF transform

@@ -1,0 +1,4 @@
+case_id,physical_condition,selection,detail_start_elapsed_s,detail_end_elapsed_s
+D15_seed_00,Position noise,first registered variant with retained paired time history; all nine original outcomes shown,20,60
+D38_seed_00,Heading uncertainty,first registered variant with retained paired time history; all nine original outcomes shown,20,60
+D59_seed_00,Position / velocity conflict,first registered variant with retained paired time history; all nine original outcomes shown,20,60
