@@ -1,0 +1,114 @@
+{
+  "id": "F03_integrated_routes_and_heading",
+  "width_mm": 174,
+  "height_mm": 174,
+  "min_font_pt": 8,
+  "preview_dpi": 400,
+  "replaces": [
+    "R3_F03_100s_routes_with_spatial_detail",
+    "R3_F11_full_trajectory_comparison"
+  ],
+  "F11_disposition": "Move old separated-point full-route plate to supplement/archive; do not repeat as a second main figure.",
+  "all_route_methods": [
+    "WEN_TC",
+    "GNC",
+    "LC01",
+    "LC01-S",
+    "EXT05C",
+    "EXT05C-S",
+    "OISAM_RESTART_POI",
+    "F04"
+  ],
+  "local_poi_methods": [
+    "LC01",
+    "LC01-S",
+    "EXT05C",
+    "EXT05C-S",
+    "OISAM_RESTART_POI",
+    "F04"
+  ],
+  "TC_GNC_yaw": "not estimated; no heading curve",
+  "windows": [
+    {
+      "sequence": "BY2",
+      "heading_start_s": 40.0,
+      "heading_end_s": 140.0,
+      "heading_duration_s": 100.0,
+      "detail_start_s": 88.0,
+      "detail_end_s": 92.0,
+      "detail_centre_s": 90.0,
+      "detail_east_reference_m": -102.8037492200184,
+      "detail_north_reference_m": 6.686053769154951,
+      "selection": "BY2/H: prior fixed88–92s reference-defined turning neighbourhood. BY2O: first5s recovery interval after registered obstruction with reference displacement>=2m and median1s chord speed>=0.3m/s; no estimate error inspected.",
+      "local_methods_point": "POI_MIDPOINT",
+      "full_route_point_note": "TC/GNC at native registered GNSS1; all other main trajectories at POI; overview only, not same-point precision ranking.",
+      "rendered_detail_xlim_cm": [
+        -42.657990867579905,
+        42.657990867579905
+      ],
+      "rendered_detail_ylim_cm": [
+        -35.0,
+        35.0
+      ]
+    },
+    {
+      "sequence": "BY2H",
+      "heading_start_s": 40.0,
+      "heading_end_s": 140.0,
+      "heading_duration_s": 100.0,
+      "detail_start_s": 88.0,
+      "detail_end_s": 92.0,
+      "detail_centre_s": 90.0,
+      "detail_east_reference_m": -107.04891205908103,
+      "detail_north_reference_m": 2.6165643949030915,
+      "selection": "BY2/H: prior fixed88–92s reference-defined turning neighbourhood. BY2O: first5s recovery interval after registered obstruction with reference displacement>=2m and median1s chord speed>=0.3m/s; no estimate error inspected.",
+      "local_methods_point": "POI_MIDPOINT",
+      "full_route_point_note": "TC/GNC at native registered GNSS1; all other main trajectories at POI; overview only, not same-point precision ranking.",
+      "rendered_detail_xlim_cm": [
+        -42.65799086757993,
+        42.65799086757993
+      ],
+      "rendered_detail_ylim_cm": [
+        -35.0,
+        35.0
+      ]
+    },
+    {
+      "sequence": "BY2O",
+      "heading_start_s": 154.945,
+      "heading_end_s": 254.945,
+      "heading_duration_s": 100.0,
+      "detail_start_s": 228.0,
+      "detail_end_s": 233.0,
+      "detail_centre_s": 230.5,
+      "detail_east_reference_m": -106.34528348349758,
+      "detail_north_reference_m": -31.817328245968774,
+      "selection": "BY2/H: prior fixed88–92s reference-defined turning neighbourhood. BY2O: first5s recovery interval after registered obstruction with reference displacement>=2m and median1s chord speed>=0.3m/s; no estimate error inspected.",
+      "local_methods_point": "POI_MIDPOINT",
+      "full_route_point_note": "TC/GNC at native registered GNSS1; all other main trajectories at POI; overview only, not same-point precision ranking.",
+      "rendered_detail_xlim_cm": [
+        -42.657990867579905,
+        42.657990867579905
+      ],
+      "rendered_detail_ylim_cm": [
+        -35.0,
+        35.0
+      ]
+    }
+  ],
+  "source_roots": {
+    "R3_coordinates": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/data",
+    "F09_common_heading": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation_comparison/data"
+  },
+  "alignment": "PASS",
+  "audits": {
+    "text": 0,
+    "collisions": 0
+  },
+  "new_solver_evaluator_provider_calls": 0,
+  "frozen_metrics_changed": false,
+  "visual_review": "PASS",
+  "caption_file": "CAPTIONS_ZH_EN.md",
+  "title_zh": "三场景导航路线、空间近景与航向误差",
+  "spatial_viewport": "Explicit common physical viewport, same limits for all local methods; coordinates outside viewport retained in sources and full route."
+}

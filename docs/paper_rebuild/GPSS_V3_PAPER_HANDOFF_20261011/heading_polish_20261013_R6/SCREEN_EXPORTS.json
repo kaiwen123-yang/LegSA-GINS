@@ -1,0 +1,112 @@
+[
+  {
+    "figure": "1",
+    "id": "F01_platform",
+    "title": "保留：平台与短基线",
+    "preview": "../heading_polish_20261013_R4/schematics/preview/F01_platform.png",
+    "pdf": "../heading_polish_20261013_R4/schematics/figures/F01_platform.pdf",
+    "svg": "schematics/figures/F01_platform.svg",
+    "png": "../heading_polish_20261013_R4/schematics/figures/F01_platform.png",
+    "width_px": "2560",
+    "height_px": "1206"
+  },
+  {
+    "figure": "2",
+    "id": "F02_method",
+    "title": "原样式高清与矢量阅读",
+    "preview": "../heading_polish_20261013_R4/schematics/preview/F02_method.png",
+    "pdf": "../heading_polish_20261013_R4/schematics/figures/F02_method.pdf",
+    "svg": "../heading_polish_20261013_R4/schematics/figures/F02_method.svg",
+    "png": "../heading_polish_20261013_R4/schematics/figures/F02_method.png",
+    "width_px": "3840",
+    "height_px": "1832"
+  },
+  {
+    "figure": "3",
+    "id": "F03_integrated_routes_and_heading",
+    "title": "完整路线、空间近景与航向",
+    "preview": "navigation/preview/F03_integrated_routes_and_heading.png",
+    "pdf": "navigation/F03_integrated_routes_and_heading.pdf",
+    "svg": "navigation/F03_integrated_routes_and_heading.svg",
+    "png": "navigation/F03_integrated_routes_and_heading.png",
+    "width_px": "2740",
+    "height_px": "2740"
+  },
+  {
+    "figure": "4",
+    "id": "F04_absolute_direction_relative_motion",
+    "title": "恢复原版：七种初始全局朝向",
+    "preview": "../heading_polish_20261013_R4/observability/preview/F04_absolute_direction_relative_motion.png",
+    "pdf": "../heading_polish_20261013_R4/observability/F04_absolute_direction_relative_motion.pdf",
+    "svg": "observability/F04_absolute_direction_relative_motion.svg",
+    "png": "../heading_polish_20261013_R4/observability/F04_absolute_direction_relative_motion.png",
+    "width_px": "2740",
+    "height_px": "1984"
+  },
+  {
+    "figure": "5",
+    "id": "F05_heading_error_comparison",
+    "title": "保留：方向比较",
+    "preview": "../heading_polish_20261013_R4/heading_acceptance/preview/F05_heading_error_comparison.png",
+    "pdf": "../heading_polish_20261013_R4/heading_acceptance/F05_heading_error_comparison.pdf",
+    "svg": "heading_acceptance/F05_heading_error_comparison.svg",
+    "png": "../heading_polish_20261013_R4/heading_acceptance/F05_heading_error_comparison.png",
+    "width_px": "2740",
+    "height_px": "3023"
+  },
+  {
+    "figure": "6",
+    "id": "F06_heading_and_tilt",
+    "title": "保留：自然场景姿态",
+    "preview": "../heading_polish_20261013_R4/aiding/preview/F06_heading_and_tilt.png",
+    "pdf": "../heading_polish_20261013_R4/aiding/figures/F06_heading_and_tilt.pdf",
+    "svg": "aiding/figures/F06_heading_and_tilt.svg",
+    "png": "../heading_polish_20261013_R4/aiding/figures/F06_heading_and_tilt.png",
+    "width_px": "3082",
+    "height_px": "3082"
+  },
+  {
+    "figure": "7",
+    "id": "F07_heading_retained_translation",
+    "title": "保留：条件性辅助",
+    "preview": "../heading_polish_20261013_R4/aiding/preview/F07_heading_retained_translation.png",
+    "pdf": "../heading_polish_20261013_R4/aiding/figures/F07_heading_retained_translation.pdf",
+    "svg": "aiding/figures/F07_heading_retained_translation.svg",
+    "png": "../heading_polish_20261013_R4/aiding/figures/F07_heading_retained_translation.png",
+    "width_px": "3200",
+    "height_px": "3751"
+  },
+  {
+    "figure": "8",
+    "id": "F08_heading_quality_scaling",
+    "title": "不同退化条件下的质量调整与航向响应",
+    "preview": "aiding/preview/F08_heading_quality_scaling.png",
+    "pdf": "aiding/figures/F08_heading_quality_scaling.pdf",
+    "svg": "aiding/figures/F08_heading_quality_scaling.svg",
+    "png": "aiding/figures/F08_heading_quality_scaling.png",
+    "width_px": "3082",
+    "height_px": "3507"
+  },
+  {
+    "figure": "9",
+    "id": "F09_heading_comparison",
+    "title": "保留：航向横向比较",
+    "preview": "../heading_polish_20261013_R4/navigation_comparison/preview/F09_heading_comparison.png",
+    "pdf": "../heading_polish_20261013_R4/navigation_comparison/F09_heading_comparison.pdf",
+    "svg": "navigation_comparison/F09_heading_comparison.svg",
+    "png": "../heading_polish_20261013_R4/navigation_comparison/F09_heading_comparison.png",
+    "width_px": "2740",
+    "height_px": "3338"
+  },
+  {
+    "figure": "10",
+    "id": "F10_heading_sensitivity",
+    "title": "保留：方向扰动输入与输出",
+    "preview": "../heading_polish_20261013_R4/aiding/preview/F10_heading_sensitivity.png",
+    "pdf": "../heading_polish_20261013_R4/aiding/figures/F10_heading_sensitivity.pdf",
+    "svg": "aiding/figures/F10_heading_sensitivity.svg",
+    "png": "../heading_polish_20261013_R4/aiding/figures/F10_heading_sensitivity.png",
+    "width_px": "3082",
+    "height_px": "3720"
+  }
+]

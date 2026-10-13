@@ -1,0 +1,12 @@
+{
+  "figure_id": "F03",
+  "stem": "F03_integrated_routes_and_heading",
+  "title_zh": "三场景导航路线、空间近景与航向误差",
+  "preview": "preview/F03_integrated_routes_and_heading.png",
+  "caption": "CAPTIONS_ZH_EN.md",
+  "reader": "README.md",
+  "source_mapping": "SOURCE_MAPPING.md",
+  "qa": "DELIVERY_CHECKS.json",
+  "main_figure_count": 1,
+  "F11_decision": "supplement/history"
+}

@@ -1,0 +1,127 @@
+{
+  "source_version": "R5",
+  "source_root": "/mnt/g/LegSA-GINS-project/V3正文精修_20261013_R5/aiding",
+  "files": [
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261013_R5/aiding/SELECTED_CASES.json",
+      "sha256": "10e639f5b754617265d3fcac9475ad7d7eb563a1ecec0db9e44e0c38d5b10dbf"
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261013_R5/aiding/tables/ONE_SECOND_DISPLAY_SUMMARIES.csv",
+      "sha256": "2a50c9e03c40a0ea638d96558462cff37a7b203c1f79455196a194a726f4b7bd"
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261013_R5/aiding/tables/D15_actual_covariance_summary.csv",
+      "sha256": "8984456797cf44b2bef78e73fa7087cb1f5ed56492381029b6d8ebe1d544b6d2"
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261013_R5/aiding/tables/D38_actual_covariance_summary.csv",
+      "sha256": "51df391517ae0942e6cf9ae8e2a61756ab42a85843eb1aa5e615b4aa5ba40d0d"
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261013_R5/aiding/tables/D53_actual_covariance_summary.csv",
+      "sha256": "08d56c7d0a22613029cf6d01b52107e9daa5745abf472ada3b659421e0a81aa4"
+    }
+  ],
+  "used_summaries": [
+    {
+      "case": "D15",
+      "source": "input_change",
+      "bin_rows": 120,
+      "raw_samples_counted": 601,
+      "minimum": 0.192554816329922,
+      "maximum": 20.02240502868436
+    },
+    {
+      "case": "D15",
+      "source": "reported_uncertainty",
+      "bin_rows": 120,
+      "raw_samples_counted": 601,
+      "minimum": 0.0221810730128188,
+      "maximum": 0.0290516780926679
+    },
+    {
+      "case": "D15",
+      "source": "weighting_off",
+      "bin_rows": 120,
+      "raw_samples_counted": 25429,
+      "minimum": -8.533598453423423,
+      "maximum": 161.80284421605586
+    },
+    {
+      "case": "D15",
+      "source": "full",
+      "bin_rows": 120,
+      "raw_samples_counted": 25429,
+      "minimum": -11.907419241611876,
+      "maximum": 6.908283653302476
+    },
+    {
+      "case": "D38",
+      "source": "input_change",
+      "bin_rows": 120,
+      "raw_samples_counted": 601,
+      "minimum": 0.0330950000000029,
+      "maximum": 27.985507000000013
+    },
+    {
+      "case": "D38",
+      "source": "reported_uncertainty",
+      "bin_rows": 120,
+      "raw_samples_counted": 601,
+      "minimum": 0.73329825,
+      "maximum": 2.933193
+    },
+    {
+      "case": "D38",
+      "source": "weighting_off",
+      "bin_rows": 120,
+      "raw_samples_counted": 25429,
+      "minimum": -5.791370964666896,
+      "maximum": 4.117151815803709
+    },
+    {
+      "case": "D38",
+      "source": "full",
+      "bin_rows": 120,
+      "raw_samples_counted": 25429,
+      "minimum": -5.788930380666898,
+      "maximum": 4.085852987803719
+    },
+    {
+      "case": "D53",
+      "source": "input_change",
+      "bin_rows": 120,
+      "raw_samples_counted": 25430,
+      "minimum": 0.0162600099500983,
+      "maximum": 5.025911697287747
+    },
+    {
+      "case": "D53",
+      "source": "reported_uncertainty",
+      "bin_rows": 120,
+      "raw_samples_counted": 25430,
+      "minimum": 0.1878613011985172,
+      "maximum": 0.1878613011985172
+    },
+    {
+      "case": "D53",
+      "source": "weighting_off",
+      "bin_rows": 120,
+      "raw_samples_counted": 25429,
+      "minimum": -5.50972570403394,
+      "maximum": 2.9278768788037155
+    },
+    {
+      "case": "D53",
+      "source": "full",
+      "bin_rows": 120,
+      "raw_samples_counted": 25429,
+      "minimum": -5.524370444033934,
+      "maximum": 2.91408133780368
+    }
+  ],
+  "copying_raw_data": false,
+  "new_solver_provider_evaluator_calls": 0,
+  "visual_only_revision": true
+}

@@ -1,0 +1,17 @@
+{
+  "figure_id": "F08",
+  "stem": "F08_heading_quality_scaling",
+  "title_zh": "三种观测退化下的来源加权与航向响应",
+  "preview": "preview/F08_heading_quality_scaling.png",
+  "caption": "CAPTIONS_ZH_EN.md",
+  "reader": "README_R6.md",
+  "source_mapping": "SOURCE_POINTER.json",
+  "qa": "qa/FINAL_VALIDATION.json",
+  "main_figure_count": 1,
+  "revision_scope": "visual only: palette, column proportions, whitespace and numerical-label placement",
+  "source_version": "R5",
+  "raw_data_copied": false,
+  "no_new_solver": true,
+  "no_new_provider": true,
+  "no_new_evaluator": true
+}

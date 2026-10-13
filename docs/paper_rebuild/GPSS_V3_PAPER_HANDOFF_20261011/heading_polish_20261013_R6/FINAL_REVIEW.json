@@ -1,0 +1,15 @@
+{
+  "main_figures": 10,
+  "revised_pdf_pages": 3,
+  "full_pdf_pages": 10,
+  "missing_gallery_links": [],
+  "retained_files_identical": true,
+  "figure4_restored_from_R4": true,
+  "retained_files": 40,
+  "reviewed_images": [
+    3,
+    4,
+    8
+  ],
+  "new_scientific_calls": 0
+}
