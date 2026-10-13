@@ -4,7 +4,7 @@
   "documentation_base": "077fb725612730d743ff1dd3ba698c43499b4fcb",
   "branch": "docs/v3-paper-handoff-20261011",
   "scientific_question_zh": "在紧凑四足机器人的 GNSS/INS 中，短基线方向信息与机身运动观测如何共同改善姿态和平移估计，这种互补在什么观测可用性与质量条件下成立，又在何时失效？",
-  "status": "R6_LAYOUT_REVISION_AND_FIGURE4_RESTORED",
+  "status": "R6_FIGURE_APPEARANCE_AUTHOR_ACCEPTED",
   "goal_status": "complete",
   "catalogued_tables": 82,
   "old_labels_retained": true,
@@ -23,7 +23,7 @@
   "attitude_merge_draft_created": true,
   "latest_figure_revision": "heading_polish_20261013_R6/README.md",
   "final_numbering_complete": false,
-  "next_discussion": "Review the cleaner F3 layout, the restored F4 seven-initial-orientation explanation, and F8 palette and proportions",
+  "next_discussion": "Use accepted R6 figures to finalize captions, Results interpretation and manuscript claims; preserve current visual layout unless the author requests a specific change.",
   "all_figure_versions_displayed": 52,
   "featured_review_entries": 24,
   "latest_review": "all_figures_review_20261011/全部图件_逐图审阅.md",
@@ -94,5 +94,27 @@
   "figure4_restored_from": "R4 identical publication files",
   "figure4_two_route_comparison_destination": "R5 archived supplementary material; removed from current main Figure 4 at author request",
   "figure3_layout": "Three scenes by three columns: full route, single explicit spatial zoom, 100-s heading",
-  "figure8_layout_only_revision": true
+  "figure8_layout_only_revision": true,
+  "author_accepted_revision": "heading_polish_20261013_R6",
+  "figure_appearance_status": "AUTHOR_ACCEPTED",
+  "author_approval_date": "2026-10-13",
+  "author_approval_quote": "可以了，这次图片我觉得可以了",
+  "author_accepted_main_figures": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "latest_confirmed_figures": [
+    3,
+    4,
+    8
+  ],
+  "author_acceptance_record": "heading_polish_20261013_R6/AUTHOR_ACCEPTANCE.md"
 }
