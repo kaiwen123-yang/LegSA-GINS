@@ -1,0 +1,57 @@
+{
+  "status": "PASS",
+  "figures": [
+    {
+      "id": "F04_proprioceptive_heading_and_two_routes",
+      "role": "main",
+      "preview": "preview/F04_proprioceptive_heading_and_two_routes.png",
+      "width_mm": 173.99999508327906,
+      "height_mm": 161.99999542236327,
+      "minimum_font_pt": 8.0,
+      "preview_pixels": [
+        2740,
+        2551
+      ],
+      "full_png_pixels": [
+        4110,
+        3826
+      ],
+      "alignment": "PASS",
+      "collision_fail": 0,
+      "collision_warn": 0,
+      "pdf_svg_editable": true
+    },
+    {
+      "id": "S04_two_proprioceptive_routes_all_scenes",
+      "role": "supplement",
+      "preview": "preview/S04_two_proprioceptive_routes_all_scenes.png",
+      "width_mm": 173.99999508327906,
+      "height_mm": 138.9999996609158,
+      "minimum_font_pt": 8.0,
+      "preview_pixels": [
+        2740,
+        2188
+      ],
+      "full_png_pixels": [
+        4110,
+        3283
+      ],
+      "alignment": "PASS",
+      "collision_fail": 0,
+      "collision_warn": 0,
+      "pdf_svg_editable": true
+    }
+  ],
+  "native_solver_calls": 0,
+  "evaluator_calls": 0,
+  "provider_calls": 0,
+  "new_alignment_fits": 0,
+  "saved_error_files_byte_identical": true,
+  "all_seven_gauge_histories_retained": true,
+  "primary_routes": 2,
+  "official_InEKF_parameter_variants_retained": 2,
+  "OFF_DEF_scope": "same InEKF parameter sensitivity, included in full table and source data; not a third method",
+  "scientific_scope": "Relative errors after saved initial10s alignment; different input information, no absolute-heading accuracy claim",
+  "reference": "Saved commercial fused reference evaluation, not a newly read trace",
+  "alignment_exemption": "Two gauge panels have equal metric scale and are intentionally narrower than the two time-series panels; within-row alignment passes1.5pt."
+}

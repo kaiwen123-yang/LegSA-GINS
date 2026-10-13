@@ -1,0 +1,15 @@
+{
+  "registered": 541,
+  "joint_complete": 513,
+  "full_lower_yaw": 190,
+  "full_higher_yaw": 323,
+  "median_yaw_reduction_deg": -0.0002579935045803339,
+  "extra_full_completions": 6,
+  "full_source_tables_reference": "/mnt/g/LegSA-GINS-project/V3\u6b63\u6587\u7cbe\u4fee_20261012_R3/aiding/tables",
+  "selected_conditions": [
+    "D15",
+    "D38",
+    "D53"
+  ],
+  "native_calls": 0
+}

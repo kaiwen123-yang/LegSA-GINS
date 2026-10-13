@@ -1,0 +1,14 @@
+{
+  "figure_id": "F03",
+  "stem": "F03_integrated_routes_and_heading",
+  "title_zh": "完整导航路线与同点空间细节",
+  "preview": "preview/F03_integrated_routes_and_heading.png",
+  "caption": "CAPTIONS_ZH_EN.md",
+  "reader": "README.md",
+  "source_mapping": "SOURCE_MAPPING.md",
+  "qa": "DELIVERY_CHECKS.json",
+  "main_figure_count": 1,
+  "F11_decision": "supplement/history; not an additional main figure",
+  "heading_comparison": "Fig. 9",
+  "no_new_solver": true
+}

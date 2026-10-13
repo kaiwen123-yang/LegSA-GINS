@@ -1,0 +1,5 @@
+family,kind,used,relation
+H5/H6 reported-IJRR InEKF,earlier single-algorithm gauge check,F04 a/b only,"one recorded dataset, seven initialization settings"
+Official Hartley contact InEKF,author-confirmed first route,F04 c/d and S04: OFF-LIT,"OFF-DEF is sensitivity of same library, retained in table"
+Contact-kinematic DR,author-confirmed second route,F04 c/d and S04: LEG-DR,Uses onboard attitude; not a separate EKF or validated independent absolute-heading instrument
+Historical LSE02 QEKF-labelled proxy,historical identity candidate before clarification,not plotted,Source/report found; not the user-intended second route; no old numeric promotion

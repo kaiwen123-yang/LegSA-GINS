@@ -1,0 +1,19 @@
+{
+  "claim": "Contact-only InEKF retains its known initial-yaw freedom; the completed InEKF and onboard-attitude-assisted kinematic route show different relative-motion errors after one initial alignment.",
+  "role": "Known-gauge illustration plus the two author-confirmed completed proprioceptive routes.",
+  "a_b": "Retained H5/H6 IJRR-reported backend, seven initialized yaw settings; no new ensemble.",
+  "c_d": "Official contact InEKF literature parameters vs contact-kinematic dead reckoning with onboard attitude, using saved one-time10s-aligned errors.",
+  "main_sequence": "Nominal walking is the preselected primary recording, not chosen for best gap.",
+  "other_sequences": "S04 shows all three recordings and both selected routes; OFF-DEF remains a parameter-sensitivity table.",
+  "input_difference": "LEG-DR uses onboard attitude and foot velocity; contact InEKF estimates attitude from body IMU plus contact/foot-position proxies.",
+  "method_identity_difference": "The gauge experiment backend and later official InEKF evaluation are distinct implementations and protocols; no seven-yaw claim made for OFF-LIT or LEG-DR.",
+  "new_solver_evaluator_provider_calls": 0,
+  "new_alignment_fits": 0,
+  "backend": "Python",
+  "export": {
+    "width_mm": 174,
+    "min_font_pt": 8,
+    "PNG_dpi": 600,
+    "preview_dpi": 400
+  }
+}

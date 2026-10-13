@@ -4,7 +4,7 @@
   "documentation_base": "077fb725612730d743ff1dd3ba698c43499b4fcb",
   "branch": "docs/v3-paper-handoff-20261011",
   "scientific_question_zh": "在紧凑四足机器人的 GNSS/INS 中，短基线方向信息与机身运动观测如何共同改善姿态和平移估计，这种互补在什么观测可用性与质量条件下成立，又在何时失效？",
-  "status": "R4_MERGED_TRAJECTORY_AND_CONDITIONAL_WEIGHTING_REVIEW",
+  "status": "R5_TRAJECTORY_DETAIL_TWO_ROBOT_ROUTES_AND_DISTINCT_DEGRADATIONS",
   "goal_status": "complete",
   "catalogued_tables": 82,
   "old_labels_retained": true,
@@ -14,16 +14,16 @@
   "new_evaluator_runs": 0,
   "new_provider_runs": 0,
   "raw_reference_uploaded": false,
-  "next_entry": "heading_polish_20261013_R4/README.md",
+  "next_entry": "heading_polish_20261013_R5/README.md",
   "raw_sensor_data_uploaded": false,
   "full_figure_timeseries_uploaded": false,
   "derived_results_and_diagnostics_uploaded": true,
   "original_figure_groups": 15,
   "additional_revision_groups": 1,
   "attitude_merge_draft_created": true,
-  "latest_figure_revision": "heading_polish_20261013_R4/README.md",
+  "latest_figure_revision": "heading_polish_20261013_R5/README.md",
   "final_numbering_complete": false,
-  "next_discussion": "Review merged Fig3 and mechanism Fig8; retain approved graphics and corrected Fig4 role",
+  "next_discussion": "Review F3 spatial readability, F4 two-route interpretation, and F8 representative degradation cases",
   "all_figure_versions_displayed": 52,
   "featured_review_entries": 24,
   "latest_review": "all_figures_review_20261011/全部图件_逐图审阅.md",
@@ -33,12 +33,12 @@
     367
   ],
   "main_text_figure_count": 10,
-  "main_text_figure_selection": "heading_polish_20261013_R4/MAIN_FIGURE_CATALOG.csv",
+  "main_text_figure_selection": "heading_polish_20261013_R5/MAIN_FIGURE_CATALOG.csv",
   "new_figure_edits_this_selection": 0,
   "new_scientific_runs_this_selection": 0,
-  "latest_revision": "heading_polish_20261013_R4",
+  "latest_revision": "heading_polish_20261013_R5",
   "new_direction_observation_statistics": true,
-  "latest_figure_review": "heading_polish_20261013_R4/FIGURE_READERS_ZH.md",
+  "latest_figure_review": "heading_polish_20261013_R5/FIGURE_READERS_ZH.md",
   "F10_active_perturbation_grouping_requires_revision": false,
   "new_integer_candidate_screen": false,
   "acceptance_protocol_commit": "6a1e536add2e43a78b48bb3ad29d5106202f2a4a",
@@ -59,7 +59,7 @@
   "figure_2_primary_editable_format": "SVG",
   "approved_figures_unchanged": [
     1,
-    4,
+    2,
     5,
     6,
     7,
@@ -76,8 +76,23 @@
     3664
   ],
   "figure_2_primary_vector_unchanged": true,
-  "figure4_role": "One contact-aided estimator, one recording, seven initial global-frame orientations; expected equivariance illustration",
-  "figure4_origin": "H5 zero-yaw anchor plus six original H6 native replays, not seven methods or seven field trials",
-  "figure8_claim": "Conditional robustness and tradeoff; not uniform typical heading precision improvement",
-  "obstruction_motion_evidence": "Reference nearly stationary with SDK low-speed corroboration; no independent truth claim"
+  "figure4_role": "Two robot-motion routes and the lack of an absolute-direction anchor; initial-yaw equivariance has a separate role",
+  "figure4_origin": "Panels a/b: saved H5 anchor and six H6 initial-yaw replays. Panels c/d: official InEKF and HX05 LEG-DR, with saved initial-10-second relative evaluation.",
+  "figure8_claim": "Compare distinct existing degradation mechanisms, retaining effects, costs and complete denominators",
+  "obstruction_motion_evidence": "Reference nearly stationary with SDK low-speed corroboration; no independent truth claim",
+  "changed_figures": [
+    3,
+    4,
+    8
+  ],
+  "figure4_user_confirmed_methods": [
+    "Contact-aided InEKF",
+    "Leg kinematic dead reckoning"
+  ],
+  "figure3_heading_comparison_destination": "Figure 9",
+  "figure8_selected_conditions": [
+    "D15_seed_00",
+    "D38_seed_00",
+    "D53_seed_00"
+  ]
 }

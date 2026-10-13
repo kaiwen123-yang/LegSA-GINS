@@ -1,0 +1,14 @@
+[
+  {
+    "stage": "source",
+    "exit_code": 0
+  },
+  {
+    "stage": "pdf_font",
+    "exit_code": 0
+  },
+  {
+    "stage": "collision",
+    "exit_code": 0
+  }
+]

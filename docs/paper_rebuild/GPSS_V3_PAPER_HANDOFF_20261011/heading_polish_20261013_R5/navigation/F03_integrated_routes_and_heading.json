@@ -1,0 +1,152 @@
+{
+  "id": "F03_integrated_routes_and_heading",
+  "title_zh": "完整路线与按方法分组的空间细节",
+  "claim_zh": "在完整路线覆盖接近时，按方法组放大的同点空间曲线显示真实局部差异；航向优劣由图9单独检验。",
+  "width_mm": 174,
+  "height_mm": 226,
+  "minimum_font_pt": 8,
+  "preview_dpi": 400,
+  "all_main_configurations": [
+    "WEN_TC",
+    "GNC",
+    "LC01",
+    "LC01-S",
+    "EXT05C",
+    "EXT05C-S",
+    "OISAM_RESTART_POI",
+    "F04"
+  ],
+  "groups": [
+    [
+      "Dual-position IEKF",
+      [
+        "LC01",
+        "LC01-S"
+      ]
+    ],
+    [
+      "Single-position IEKF",
+      [
+        "EXT05C",
+        "EXT05C-S"
+      ]
+    ],
+    [
+      "OiSAM (reinitialized)",
+      [
+        "OISAM_RESTART_POI"
+      ]
+    ]
+  ],
+  "no_local_point_cropping": true,
+  "source_point_counts": "data/SOURCE_POINT_COUNTS.csv",
+  "source_R3_directory": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/data",
+  "source_R4_directory": "/mnt/g/LegSA-GINS-project/V3正文精修_20261013_R4/navigation/data",
+  "windows": [
+    {
+      "sequence": "BY2",
+      "local_start_s": 88.0,
+      "local_end_s": 92.0,
+      "context_start_s": 40.0,
+      "context_end_s": 140.0,
+      "raw_extent_min_cm": [
+        -260.5264806224497,
+        -18.45420660397199
+      ],
+      "raw_extent_max_cm": [
+        256.5004104942844,
+        13.314421891923
+      ],
+      "display_xlim_cm": [
+        -270.5264806224497,
+        266.5004104942844
+      ],
+      "display_ylim_cm": [
+        -43.75325538906755,
+        38.613470677018555
+      ],
+      "same_extent_for_all_three_groups": true,
+      "points_outside_view": 0,
+      "local_plot_width_mm": 89.73891922425155,
+      "local_plot_height_mm": 13.76374460846851,
+      "physical_aspect_ratio": 6.519949459759467
+    },
+    {
+      "sequence": "BY2H",
+      "local_start_s": 88.0,
+      "local_end_s": 92.0,
+      "context_start_s": 40.0,
+      "context_end_s": 140.0,
+      "raw_extent_min_cm": [
+        -248.64314852100904,
+        -41.92992557351336
+      ],
+      "raw_extent_max_cm": [
+        252.03909165307152,
+        35.77035887914
+      ],
+      "display_xlim_cm": [
+        -277.68279009312374,
+        281.0787332251862
+      ],
+      "display_ylim_cm": [
+        -45.92992557351336,
+        39.770358879140005
+      ],
+      "same_extent_for_all_three_groups": true,
+      "points_outside_view": 0,
+      "local_plot_width_mm": 89.73891922425155,
+      "local_plot_height_mm": 13.76374460846851,
+      "physical_aspect_ratio": 6.519949459759467
+    },
+    {
+      "sequence": "BY2O",
+      "local_start_s": 228.0,
+      "local_end_s": 233.0,
+      "context_start_s": 154.945,
+      "context_end_s": 254.945,
+      "raw_extent_min_cm": [
+        -26.95674731558597,
+        -11.325092341610699
+      ],
+      "raw_extent_max_cm": [
+        248.17900266667436,
+        6.871054051602599
+      ],
+      "display_xlim_cm": [
+        -36.95674731558597,
+        258.17900266667436
+      ],
+      "display_ylim_cm": [
+        -24.860304249728486,
+        20.406265959720386
+      ],
+      "same_extent_for_all_three_groups": true,
+      "points_outside_view": 0,
+      "local_plot_width_mm": 89.73891922425155,
+      "local_plot_height_mm": 13.763744608468503,
+      "physical_aspect_ratio": 6.519949459759471
+    }
+  ],
+  "color_palette": {
+    "REFERENCE_POI": "#111111",
+    "F04": "#004B9B",
+    "LC01": "#B13A17",
+    "LC01-S": "#006F6B",
+    "EXT05C": "#7E1E1E",
+    "EXT05C-S": "#6D28A8",
+    "OISAM_RESTART_POI": "#006782",
+    "WEN_TC": "#17632E",
+    "GNC": "#B0005A"
+  },
+  "alignment": "PASS",
+  "audits": {
+    "text": 0,
+    "collisions": 0
+  },
+  "new_solver_evaluator_provider_calls": 0,
+  "frozen_metrics_changed": false,
+  "visual_review": "PASS: color and grayscale read; root reviewed final preview",
+  "caption_file": "CAPTIONS_ZH_EN.md",
+  "qa_file": "DELIVERY_CHECKS.json"
+}

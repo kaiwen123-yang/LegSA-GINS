@@ -1,0 +1,10 @@
+{
+  "width_mm": 174.0,
+  "height_mm": 222.0,
+  "minimum_font_pt": 8.0,
+  "clipped_text": [],
+  "display_aggregation": "Fixed nonoverlapping1s bins; median line and min\u2013max range, all native samples counted; not a seed confidence interval",
+  "fitted_smoothing": false,
+  "navigation_metrics_recomputed": false,
+  "intentional_hero_column": "Right heading-response panels span three GridSpec columns; left/middle each span one equal-width data column, separated by empty gutters."
+}

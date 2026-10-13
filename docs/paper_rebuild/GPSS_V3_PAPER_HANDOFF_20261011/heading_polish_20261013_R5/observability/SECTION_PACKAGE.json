@@ -1,0 +1,49 @@
+{
+  "figures": [
+    {
+      "id": "F04_proprioceptive_heading_and_two_routes",
+      "role": "main",
+      "preview": "preview/F04_proprioceptive_heading_and_two_routes.png",
+      "width_mm": 173.99999508327906,
+      "height_mm": 161.99999542236327,
+      "minimum_font_pt": 8.0,
+      "preview_pixels": [
+        2740,
+        2551
+      ],
+      "full_png_pixels": [
+        4110,
+        3826
+      ],
+      "alignment": "PASS",
+      "collision_fail": 0,
+      "collision_warn": 0,
+      "pdf_svg_editable": true
+    },
+    {
+      "id": "S04_two_proprioceptive_routes_all_scenes",
+      "role": "supplement",
+      "preview": "preview/S04_two_proprioceptive_routes_all_scenes.png",
+      "width_mm": 173.99999508327906,
+      "height_mm": 138.9999996609158,
+      "minimum_font_pt": 8.0,
+      "preview_pixels": [
+        2740,
+        2188
+      ],
+      "full_png_pixels": [
+        4110,
+        3283
+      ],
+      "alignment": "PASS",
+      "collision_fail": 0,
+      "collision_warn": 0,
+      "pdf_svg_editable": true
+    }
+  ],
+  "caption": "CAPTIONS_ZH_EN.md",
+  "reader": "README.md",
+  "qc": "QC_SUMMARY.json",
+  "method_identity": "audit/METHOD_IDENTITY_AND_EXISTING_RESULTS.csv",
+  "table": "source_data/ROBOT_RELATIVE_RESULTS.csv"
+}

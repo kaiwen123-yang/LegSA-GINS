@@ -1,0 +1,4 @@
+type,source,label,n_recorded_updates,minimum,q25,median,q75,maximum
+D15,receiver_position,Position,600,1.0,1.45780806695,2.0801621282,3.133435413625,5.0
+D15,go2_horizontal_velocity,Body v,600,2.0,10.0,10.0,10.0,10.0
+D15,dual_antenna_yaw,Heading,600,1.0,1.0,1.0,1.0,1.0084700151

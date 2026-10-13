@@ -1,0 +1,169 @@
+{
+  "sequence": "BY2O",
+  "role": "INPUT_REFERENCE",
+  "code_commit": "0ebb341dcf968aca71ce7fe057204794935ac1d9",
+  "contract_sha256": "ed19e05415350bda270d34cf390990fc17104eecca95d635214fb97cea1da518",
+  "nav_sha256": "6023cfa17d00f49f10f8c53593ae906ac47ceb47ecac2370d8f58ba02491268b",
+  "metrics": {
+    "alignment": {
+      "epochs": 101,
+      "not_estimated": [
+        "roll",
+        "pitch",
+        "scale",
+        "time_offset"
+      ],
+      "per_epoch_yaw_offset_circular_std_deg": 1.0702101030821687,
+      "rule": "per branch: one least-squares yaw-about-gravity + 3-D translation on the first 10 s of the window from the branch's own output (HX-02 amendment 1); never shared, never re-fitted",
+      "translation_enu_m": [
+        0.24773308240448383,
+        0.22711491589770558,
+        -0.020777034772389964
+      ],
+      "window_seconds": [
+        3186.0,
+        3196.0
+      ],
+      "yaw_offset_deg": -77.09299267547405
+    },
+    "drift_definitions": {
+      "heading": "OLS slope (with intercept) of time-unwrapped wrap-safe NED yaw error versus time in minutes",
+      "position": "OLS slope (with intercept) of horizontal error norm versus cumulative reference horizontal path, x100"
+    },
+    "evaluation_status": "EVALUATED",
+    "heading_drift_deg_per_min": 1.4264538540844323,
+    "horizontal_max_m": 8.96427966152391,
+    "horizontal_rmse_m": 6.322411571899827,
+    "nav_first_rel_s": 3101.5570685863495,
+    "nav_last_rel_s": 3572.8351035118103,
+    "nav_rows": 95859,
+    "position_drift_m_per_100m": -0.37939114728288426,
+    "reference_path_length_m": 337.4220465887643,
+    "relative_pose_error_yaw_translation": {
+      "10s": {
+        "grid_step_ms": 100,
+        "pair_count": 3671,
+        "translation_rmse_m": 0.9671680701882466,
+        "yaw_rmse_deg": 2.6012135586656218
+      },
+      "1s": {
+        "grid_step_ms": 100,
+        "pair_count": 3761,
+        "translation_rmse_m": 0.11457956883119884,
+        "yaw_rmse_deg": 0.883183620632021
+      },
+      "5s": {
+        "grid_step_ms": 100,
+        "pair_count": 3721,
+        "translation_rmse_m": 0.5028460337968366,
+        "yaw_rmse_deg": 2.059052020033062
+      }
+    },
+    "scored_epochs": 3771,
+    "unsupported_grid_epochs": 0,
+    "up_rmse_m": 5.345451032251712,
+    "yaw_rmse_deg": 6.005779065553345,
+    "aligned_horizontal_rmse_m": 6.322411571899827,
+    "aligned_up_rmse_m": 5.345451032251712,
+    "aligned_yaw_rmse_deg": 6.005779065553345
+  },
+  "integration": {
+    "sequence": "BY2O",
+    "epochs": 95859,
+    "cache_sha256": "8786456127571475e88a89a47ab30f118b09a789e521690b82170985e4aaec35",
+    "raw_sha256": "0e5c62e0a5af0b6c32c51b535cc90701677276fc73c5623b72abda66cc148f2e",
+    "integer_ns_match": true,
+    "integration_gaps": {
+      "unobserved_interval_count": 274,
+      "unobserved_duration_s": 1.275670690000041,
+      "policy": "No velocity imputation; zero displacement contribution on unobserved intervals, explicitly incomplete if any."
+    },
+    "zero_contact_epochs": 264,
+    "NAV_placeholder_policy": "Velocity is serialized as zero where unobserved; integration retains NaN gaps. Bias and state_dimension zero mean not estimated."
+  },
+  "C4_metric_gate": {
+    "status": "BY2_ONLY_GATE"
+  },
+  "audit": {
+    "kind": "RELATIVE_POSE",
+    "module": "legsa_gins.paper_rebuild.hext.hx02_relative_pose_evaluation",
+    "passed": true,
+    "failures": [],
+    "trace_open_count": 1,
+    "trace_open_records": [
+      {
+        "path": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/trace_vrtk2_a87c6e_2026-03-06-07-52-22_minimal.csv",
+        "flags": "O_RDONLY|O_CLOEXEC",
+        "return_code": 3,
+        "lexical_path": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/trace_vrtk2_a87c6e_2026-03-06-07-52-22_minimal.csv",
+        "anonymous_pipe": false,
+        "pid": 18019
+      }
+    ],
+    "raw_open_count": 1,
+    "write_scope": {
+      "pass": true,
+      "write_open_count": 2,
+      "write_outside_run_count": 0,
+      "outside_run_write_open_count": 0,
+      "outside_run_write_open_records": [],
+      "write_open_records": [
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/RUNS/BY2O/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_LEG-DR.csv",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/RUNS/BY2O/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_LEG-DR.csv",
+          "anonymous_pipe": false,
+          "pid": 18019
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/RUNS/BY2O/eval/OUTPUT/RELATIVE_POSE_METRICS.json",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/RUNS/BY2O/eval/OUTPUT/RELATIVE_POSE_METRICS.json",
+          "anonymous_pipe": false,
+          "pid": 18019
+        }
+      ],
+      "allowed_device_write_count": 0,
+      "allowed_device_write_records": [],
+      "allowed_anonymous_pipe_write_count": 0,
+      "allowed_anonymous_pipe_write_records": [],
+      "raw_write_open_count": 0,
+      "clean_root_outside_run_write_count": 0,
+      "write_scope_exceptions": [
+        "/dev/null",
+        "/dev/pts/*",
+        "kernel-identified anonymous pipe"
+      ]
+    },
+    "execve_programs": [
+      "/usr/bin/python3"
+    ],
+    "strace_sha256": "ce4fb4829b0b53ccc017cd4f434c41bbbedaa5bd20787debd69254d286affb59",
+    "exit_code": 0,
+    "runtime_seconds": 2.585033638999448,
+    "argv": [
+      "/usr/bin/python3",
+      "-m",
+      "legsa_gins.paper_rebuild.hext.hx02_relative_pose_evaluation",
+      "--spec",
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/RUNS/BY2O/eval/SPEC.json"
+    ],
+    "environment": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "MPLBACKEND": "Agg",
+      "MPLCONFIGDIR": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/RUNS/BY2O/eval/OUTPUT/.matplotlib",
+      "XDG_CACHE_HOME": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/RUNS/BY2O/eval/OUTPUT/.cache",
+      "PYTHONPATH": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/src"
+    },
+    "spec_sha256": "d2e1bb8e4f40322a92bdbd973daac3f08e8fb723a922459dd286b6e19b13e9c1",
+    "trace_read_role": "registered_evaluator_child_only"
+  },
+  "wall_seconds": 8.372833075001836
+}

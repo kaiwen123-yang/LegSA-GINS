@@ -1,0 +1,26 @@
+{
+  "role": "supplement",
+  "recordings": 3,
+  "methods": [
+    "OFF-LIT",
+    "LEG-DR"
+  ],
+  "OFF_DEF_role": "Full metrics retained as parameter sensitivity, not a third algorithm.",
+  "rows_per_route": {
+    "BY2": 2741,
+    "BY2H": 2700,
+    "BY2O": 3771
+  },
+  "all_saved_rows_retained": true,
+  "alignment": "Saved one-time yaw+translation fit in first10s; no refit.",
+  "width_mm": 174,
+  "height_mm": 139.0,
+  "min_font_pt": 8,
+  "audits": {
+    "text": 0,
+    "collisions": 0
+  },
+  "new_solver_evaluator_provider_calls": 0,
+  "new_alignment_fits": 0,
+  "visual_review": "PASS: color and grayscale reviewed; two distinct input routes are labelled and all saved errors retained."
+}

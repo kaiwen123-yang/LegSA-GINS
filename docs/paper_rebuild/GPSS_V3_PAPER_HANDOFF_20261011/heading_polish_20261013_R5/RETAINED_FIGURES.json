@@ -1,0 +1,177 @@
+[
+  {
+    "figure": 1,
+    "path": "schematics/figures/F01_platform.pdf",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 1,
+    "path": "schematics/figures/F01_platform.png",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 1,
+    "path": "schematics/figures/F01_platform.svg",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 1,
+    "path": "schematics/figures/F01_platform.tiff",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 1,
+    "path": "schematics/preview/F01_platform.png",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 2,
+    "path": "schematics/figures/F02_method.pdf",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 2,
+    "path": "schematics/figures/F02_method.png",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 2,
+    "path": "schematics/figures/F02_method.svg",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 2,
+    "path": "schematics/figures/F02_method.tiff",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 2,
+    "path": "schematics/preview/F02_method.png",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 5,
+    "path": "heading_acceptance/F05_heading_error_comparison.pdf",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 5,
+    "path": "heading_acceptance/F05_heading_error_comparison.png",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 5,
+    "path": "heading_acceptance/F05_heading_error_comparison.svg",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 5,
+    "path": "heading_acceptance/F05_heading_error_comparison.tiff",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 5,
+    "path": "heading_acceptance/preview/F05_heading_error_comparison.png",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 6,
+    "path": "aiding/figures/F06_heading_and_tilt.pdf",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 6,
+    "path": "aiding/figures/F06_heading_and_tilt.png",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 6,
+    "path": "aiding/figures/F06_heading_and_tilt.svg",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 6,
+    "path": "aiding/figures/F06_heading_and_tilt.tiff",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 6,
+    "path": "aiding/preview/F06_heading_and_tilt.png",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 7,
+    "path": "aiding/figures/F07_heading_retained_translation.pdf",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 7,
+    "path": "aiding/figures/F07_heading_retained_translation.png",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 7,
+    "path": "aiding/figures/F07_heading_retained_translation.svg",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 7,
+    "path": "aiding/figures/F07_heading_retained_translation.tiff",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 7,
+    "path": "aiding/preview/F07_heading_retained_translation.png",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 9,
+    "path": "navigation_comparison/F09_heading_comparison.pdf",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 9,
+    "path": "navigation_comparison/F09_heading_comparison.png",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 9,
+    "path": "navigation_comparison/F09_heading_comparison.svg",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 9,
+    "path": "navigation_comparison/F09_heading_comparison.tiff",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 9,
+    "path": "navigation_comparison/preview/F09_heading_comparison.png",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 10,
+    "path": "aiding/figures/F10_heading_sensitivity.pdf",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 10,
+    "path": "aiding/figures/F10_heading_sensitivity.png",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 10,
+    "path": "aiding/figures/F10_heading_sensitivity.svg",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 10,
+    "path": "aiding/figures/F10_heading_sensitivity.tiff",
+    "identical_to_R4": true
+  },
+  {
+    "figure": 10,
+    "path": "aiding/preview/F10_heading_sensitivity.png",
+    "identical_to_R4": true
+  }
+]

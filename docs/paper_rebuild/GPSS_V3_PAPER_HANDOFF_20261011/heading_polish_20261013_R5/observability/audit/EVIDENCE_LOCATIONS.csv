@@ -1,0 +1,7 @@
+path,line_start,line_end,meaning
+/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/hext/hx05_leg_dr.py,12,23,Contact-kinematic velocity formula; no SDK velocity shortcut
+/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/hext/hx05_leg_dr.py,36,54,Onboard RPY rotation and integration; saved method uses this additional information
+/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX02E/HX02E_RESULTS.md,5,6,OFF-LIT/OFF-DEF are parameter configurations of the same official library
+/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/hext/hx02_relative_pose_evaluation.py,267,280,Saved one-time per-branch initial10s yaw and translation alignment; no refit in plotting
+/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/build_trajectories.py,119,119,"Previous S11 already contained official InEKF settings and LEG-DR, not a second contact EKF"
+/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/scripts/paper10g_r2a_lse_distinctness_audit.py,341,386,"Historical QEKF-labelled fixed-gain proxy, not selected by author clarification and not introduced as current EKF baseline"
