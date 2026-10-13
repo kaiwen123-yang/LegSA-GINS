@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>图2 · 原构图矢量查看</title>
+<style>*{box-sizing:border-box}body{margin:0;color:#17212b;background:#edf1f5;font:15px/1.5 system-ui,"Microsoft YaHei",sans-serif}header{background:white;padding:14px 20px;border-bottom:1px solid #d5dce4;display:flex;align-items:center;gap:12px;flex-wrap:wrap}h1{font-size:18px;margin:0 15px 0 0}button,a{font:inherit;border:1px solid #d3dce8;border-radius:5px;background:white;padding:6px 12px;color:#1c56b4;cursor:pointer;text-decoration:none}button:hover{background:#edf4ff}#readout{min-width:50px;font-variant-numeric:tabular-nums;color:#465669}#viewport{height:calc(100vh - 82px);overflow:auto;padding:18px;cursor:grab;touch-action:pan-x pan-y}#viewport.dragging{cursor:grabbing}#diagram{display:block;max-width:none;background:white;box-shadow:0 2px 18px #263b4d15;user-select:none;-webkit-user-drag:none}.note{font-size:13px;color:#5e6f80;padding:0 20px;background:white}@media(max-width:700px){header{gap:6px;padding:10px}h1{width:100%;font-size:16px}#viewport{height:calc(100vh - 120px)}}</style>
+<header><h1>图2 · 原构图矢量查看</h1><button id="fit">适合窗口</button><button data-zoom="1">原尺寸</button><button data-zoom="2">200%</button><button data-zoom="4">400%</button><button id="minus" aria-label="缩小">−</button><button id="plus" aria-label="放大">＋</button><span id="readout"></span><a href="editable/F02_method_traced.svg">编辑SVG</a><a href="figures/F02_method_8K.png">7680px PNG</a><a href="figures/F02_method_reading.pdf">放大阅读PDF</a></header>
+<div class="note">使用SVG直接显示，放大后可拖动。按住Ctrl滚轮缩放，双击切换窗口／200%。</div>
+<div id="viewport"><img id="diagram" src="editable/F02_method_traced.svg" alt="GNSS/INS共同状态方法图" draggable="false"></div>
+<script>
+const viewport=document.getElementById('viewport'),diagram=document.getElementById('diagram'),readout=document.getElementById('readout');
+const baseW=1815,baseH=866;let zoom=1,fitMode=true,drag=null;
+function setZoom(z,fit=false){zoom=Math.max(.1,Math.min(6,z));fitMode=fit;diagram.style.width=(baseW*zoom)+'px';diagram.style.height=(baseH*zoom)+'px';readout.textContent=Math.round(zoom*100)+'%';}
+function fit(){setZoom((viewport.clientWidth-36)/baseW,true);viewport.scrollLeft=0;viewport.scrollTop=0;}
+document.getElementById('fit').onclick=fit;
+document.querySelectorAll('[data-zoom]').forEach(b=>b.onclick=()=>setZoom(Number(b.dataset.zoom)));
+document.getElementById('plus').onclick=()=>setZoom(zoom*1.25);
+document.getElementById('minus').onclick=()=>setZoom(zoom/1.25);
+viewport.addEventListener('wheel',e=>{if(e.ctrlKey){e.preventDefault();setZoom(zoom*(e.deltaY<0?1.15:1/1.15));}},{passive:false});
+viewport.onpointerdown=e=>{if(e.pointerType==='mouse'&&e.button===0){drag={x:e.clientX,y:e.clientY,left:viewport.scrollLeft,top:viewport.scrollTop};viewport.setPointerCapture(e.pointerId);viewport.classList.add('dragging')}};
+viewport.onpointermove=e=>{if(drag){viewport.scrollLeft=drag.left+drag.x-e.clientX;viewport.scrollTop=drag.top+drag.y-e.clientY}};
+function end(){drag=null;viewport.classList.remove('dragging')};viewport.onpointerup=end;viewport.onpointercancel=end;
+viewport.ondblclick=()=>fitMode?setZoom(2):fit();window.onresize=()=>{if(fitMode)fit()};diagram.onload=fit;if(diagram.complete)fit();
+</script></html>

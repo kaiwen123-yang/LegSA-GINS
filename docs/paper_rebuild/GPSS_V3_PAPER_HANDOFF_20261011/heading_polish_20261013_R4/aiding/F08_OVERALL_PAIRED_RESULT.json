@@ -1,0 +1,12 @@
+{
+  "registered": 541,
+  "jointly_completed": 513,
+  "lower_yaw_rmse_with_full": 190,
+  "higher_yaw_rmse_with_full": 323,
+  "median_reduction_deg": -0.0002579935045803339,
+  "worst_increase_deg": 1.1504827857711915,
+  "extra_full_completions": 6,
+  "both_noncompleted": 22,
+  "definition": "reduction = weighting-off RMSE minus full RMSE; positive favours full",
+  "interpretation": "conditional robustness benefit with tail gains, not uniform typical precision improvement"
+}

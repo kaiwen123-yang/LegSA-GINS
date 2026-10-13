@@ -1,0 +1,113 @@
+{
+  "id": "F03_integrated_routes_and_heading",
+  "width_mm": 174,
+  "height_mm": 190,
+  "min_font_pt": 8,
+  "preview_dpi": 400,
+  "caption_zh": "三场景导航路线、同点空间局部与航向误差的合图。每行依次展示完整评价窗的地理路线、由参考运动确定的POI局部、以及固定100秒的航向误差。全路图纳入所有主导航输出；本文、IEKF和恢复OiSAM在POI中点，TC/GNC保留原GNSS1位置，因此全路只作空间概览，不作同点精度排名。厘米局部全部统一POI；OiSAM仅用自身估计姿态与已有登记杆臂作显示点变换，没有使用参考姿态。遮挡局部采用参考确认的228–233秒恢复运动，不再将近静止点团称作运动路线。右列使用与图9相同的六方法共同动态时刻；TC/GNC没有自估计航向，不画伪航向曲线。常规/大幅运动的100秒窗口为40–140秒，遮挡为154.945–254.945秒；灰带是原登记遮挡183.94–225.95秒，淡蓝带对应空间细节时间。所有原生轨迹点及共同支持记录保留，缺口断线。",
+  "caption_en": "Integrated navigation routes, same-point spatial details and heading errors for three recordings. Each row shows the complete geographic route, a reference-defined POI detail, and a fixed100-s heading interval. The overview includes all principal navigation outputs: LegSA-GINS, IEKFs and reinitialized OiSAM use the POI midpoint, whereas TC/GNC retain their registered GNSS1 positions; it is therefore a spatial overview rather than a same-point accuracy ranking. Every centimetre-scale detail is at the POI. OiSAM point transport uses only its own estimated attitude and the previously registered lever arm, never reference attitude. The obstruction detail covers reference-confirmed recovery motion at228–233s instead of a nearly stationary interval. Heading uses the same six-method common dynamic support as Fig.9; no heading is invented for TC/GNC. The100-s windows are40–140s for the first two records and154.945–254.945s for obstruction. Gray shading marks the registered183.94–225.95s obstruction; pale blue identifies the spatial-detail interval. All native route points and common-support records are retained, with breaks at gaps.",
+  "replaces": [
+    "R3_F03_100s_routes_with_spatial_detail",
+    "R3_F11_full_trajectory_comparison"
+  ],
+  "F11_disposition": "Move old separated-point full-route plate to supplement/archive; do not repeat as a second main figure.",
+  "all_route_methods": [
+    "WEN_TC",
+    "GNC",
+    "LC01",
+    "LC01-S",
+    "EXT05C",
+    "EXT05C-S",
+    "OISAM_RESTART_POI",
+    "F04"
+  ],
+  "local_poi_methods": [
+    "LC01",
+    "LC01-S",
+    "EXT05C",
+    "EXT05C-S",
+    "OISAM_RESTART_POI",
+    "F04"
+  ],
+  "TC_GNC_yaw": "not estimated; no heading curve",
+  "windows": [
+    {
+      "sequence": "BY2",
+      "heading_start_s": 40.0,
+      "heading_end_s": 140.0,
+      "heading_duration_s": 100.0,
+      "detail_start_s": 88.0,
+      "detail_end_s": 92.0,
+      "detail_centre_s": 90.0,
+      "detail_east_reference_m": -102.8037492200184,
+      "detail_north_reference_m": 6.686053769154951,
+      "selection": "BY2/H: prior fixed88–92s reference-defined turning neighbourhood. BY2O: first5s recovery interval after registered obstruction with reference displacement>=2m and median1s chord speed>=0.3m/s; no estimate error inspected.",
+      "local_methods_point": "POI_MIDPOINT",
+      "full_route_point_note": "TC/GNC at native registered GNSS1; all other main trajectories at POI; overview only, not same-point precision ranking.",
+      "rendered_detail_xlim_cm": [
+        -75.0,
+        75.0
+      ],
+      "rendered_detail_ylim_cm": [
+        -86.3487707702543,
+        86.3487707702543
+      ]
+    },
+    {
+      "sequence": "BY2H",
+      "heading_start_s": 40.0,
+      "heading_end_s": 140.0,
+      "heading_duration_s": 100.0,
+      "detail_start_s": 88.0,
+      "detail_end_s": 92.0,
+      "detail_centre_s": 90.0,
+      "detail_east_reference_m": -107.04891205908103,
+      "detail_north_reference_m": 2.6165643949030915,
+      "selection": "BY2/H: prior fixed88–92s reference-defined turning neighbourhood. BY2O: first5s recovery interval after registered obstruction with reference displacement>=2m and median1s chord speed>=0.3m/s; no estimate error inspected.",
+      "local_methods_point": "POI_MIDPOINT",
+      "full_route_point_note": "TC/GNC at native registered GNSS1; all other main trajectories at POI; overview only, not same-point precision ranking.",
+      "rendered_detail_xlim_cm": [
+        -75.0,
+        75.0
+      ],
+      "rendered_detail_ylim_cm": [
+        -86.3487707702543,
+        86.3487707702543
+      ]
+    },
+    {
+      "sequence": "BY2O",
+      "heading_start_s": 154.945,
+      "heading_end_s": 254.945,
+      "heading_duration_s": 100.0,
+      "detail_start_s": 228.0,
+      "detail_end_s": 233.0,
+      "detail_centre_s": 230.5,
+      "detail_east_reference_m": -106.34528348349758,
+      "detail_north_reference_m": -31.817328245968774,
+      "selection": "BY2/H: prior fixed88–92s reference-defined turning neighbourhood. BY2O: first5s recovery interval after registered obstruction with reference displacement>=2m and median1s chord speed>=0.3m/s; no estimate error inspected.",
+      "local_methods_point": "POI_MIDPOINT",
+      "full_route_point_note": "TC/GNC at native registered GNSS1; all other main trajectories at POI; overview only, not same-point precision ranking.",
+      "rendered_detail_xlim_cm": [
+        -75.0,
+        75.0
+      ],
+      "rendered_detail_ylim_cm": [
+        -86.3487707702543,
+        86.3487707702543
+      ]
+    }
+  ],
+  "source_roots": {
+    "R3_coordinates": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/data",
+    "F09_common_heading": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation_comparison/data"
+  },
+  "alignment": "PASS",
+  "audits": {
+    "text": 0,
+    "collisions": 0
+  },
+  "new_solver_evaluator_provider_calls": 0,
+  "frozen_metrics_changed": false,
+  "visual_review": "PASS: complete color and grayscale image inspected; one total legend, three full-route panels, moving recovery detail, no inset stack; same-point local scope and no artificial trajectory offsets."
+}

@@ -1,0 +1,48 @@
+{
+  "source_vector_unchanged": true,
+  "no_image_rasterization": true,
+  "pages": [
+    {
+      "title": "Figure 2 | Full diagram",
+      "viewbox_px": [
+        0,
+        0,
+        1815,
+        866
+      ],
+      "content_width_mm": 260,
+      "page_mm": [
+        272.6999998304579,
+        142.04676674736868
+      ]
+    },
+    {
+      "title": "Figure 2 | Measurement inputs and frame rotation",
+      "viewbox_px": [
+        28,
+        65,
+        826,
+        795
+      ],
+      "content_width_mm": 220,
+      "page_mm": [
+        232.7000081380208,
+        219.2448001437717
+      ]
+    },
+    {
+      "title": "Figure 2 | Shared estimator and navigation output",
+      "viewbox_px": [
+        826,
+        42,
+        1809,
+        806
+      ],
+      "content_width_mm": 260,
+      "page_mm": [
+        272.6999998304579,
+        220.0669506496853
+      ]
+    }
+  ]
+}

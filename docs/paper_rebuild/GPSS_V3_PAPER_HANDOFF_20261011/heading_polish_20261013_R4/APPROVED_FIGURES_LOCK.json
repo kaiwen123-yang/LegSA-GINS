@@ -1,0 +1,142 @@
+[
+  {
+    "path": "schematics/figures/F01_platform.pdf",
+    "same_as_R3": true,
+    "sha256": "c5137a428820427094587a19bd316c03beaeda0cd084eef11247909d44201f94"
+  },
+  {
+    "path": "schematics/figures/F01_platform.svg",
+    "same_as_R3": true,
+    "sha256": "17045f6703f5c94ca2745c30c1629ba91fecee7cb1ef8b30c5660621ed3bf5aa"
+  },
+  {
+    "path": "schematics/figures/F01_platform.png",
+    "same_as_R3": true,
+    "sha256": "3ef7033a08f6f0b24965c7de34b84ae50f79f696d294cca596c26757e952d9f4"
+  },
+  {
+    "path": "schematics/figures/F01_platform.tiff",
+    "same_as_R3": true,
+    "sha256": "11f09aeb268f3fa2a47f8ef7cc2eb5dd2d72eb469e98ac1687da51300033527f"
+  },
+  {
+    "path": "observability/F04_absolute_direction_relative_motion.pdf",
+    "same_as_R3": true,
+    "sha256": "d2d3a1e4ec9aa8064e6b467ac98e6aeb325a0bf273381c116238df2d35a40cc7"
+  },
+  {
+    "path": "observability/F04_absolute_direction_relative_motion.svg",
+    "same_as_R3": true,
+    "sha256": "fa88a1889e16ddc42b27d1cb68f9e1d1d3fecebc5a25d3dcd7238e0f7dc8a1b7"
+  },
+  {
+    "path": "observability/F04_absolute_direction_relative_motion.png",
+    "same_as_R3": true,
+    "sha256": "4893614e07046b5137a72960869017dbb3eef83f510d8bff34bba68a8e9611db"
+  },
+  {
+    "path": "observability/F04_absolute_direction_relative_motion.tiff",
+    "same_as_R3": true,
+    "sha256": "5a43383bfc154646ac46b18fc90b45c54512ff171e65799dc6778e835ee6fca1"
+  },
+  {
+    "path": "heading_acceptance/F05_heading_error_comparison.pdf",
+    "same_as_R3": true,
+    "sha256": "6eed159f5b069c82f65a6225df1040d3b58933f9b205c820cfe205a243950d48"
+  },
+  {
+    "path": "heading_acceptance/F05_heading_error_comparison.svg",
+    "same_as_R3": true,
+    "sha256": "394265c4bc5fe1018cc2715e7ff190215886a4f996c0fc8a6acfb9b3df7f9944"
+  },
+  {
+    "path": "heading_acceptance/F05_heading_error_comparison.png",
+    "same_as_R3": true,
+    "sha256": "b34e704bd8c2089534208afacb964764e798e17381378719f95262696b7bcfde"
+  },
+  {
+    "path": "heading_acceptance/F05_heading_error_comparison.tiff",
+    "same_as_R3": true,
+    "sha256": "6c3112534f983b77b2c28a0538b5e87915a36df6b8881f364cab7d0e6f0d7619"
+  },
+  {
+    "path": "aiding/figures/F06_heading_and_tilt.pdf",
+    "same_as_R3": true,
+    "sha256": "9b232e9015f20de6a342896d3f9748513463268cc2766eacd548e96fae7d265a"
+  },
+  {
+    "path": "aiding/figures/F06_heading_and_tilt.svg",
+    "same_as_R3": true,
+    "sha256": "e7dd96252c89826ec2509ee557b5a9c6197bf443cc836ead618eb59f820814ba"
+  },
+  {
+    "path": "aiding/figures/F06_heading_and_tilt.png",
+    "same_as_R3": true,
+    "sha256": "af7aa60c301a4af3b3df016fc74a97fe53886a83c3b37adce4e70589dbd337cf"
+  },
+  {
+    "path": "aiding/figures/F06_heading_and_tilt.tiff",
+    "same_as_R3": true,
+    "sha256": "b51e59ec1d175c6cec1f603bb4fec4465bc10c6823076ea7b68c613c03ddd569"
+  },
+  {
+    "path": "aiding/figures/F07_heading_retained_translation.pdf",
+    "same_as_R3": true,
+    "sha256": "d9491dc219ac137f13861b54196aa69b1ad41eb66a29ea555a13f4f95e8326b1"
+  },
+  {
+    "path": "aiding/figures/F07_heading_retained_translation.svg",
+    "same_as_R3": true,
+    "sha256": "315b7cf415c5a2ef57210379e0ce651f002b4b90eac60cd79afcc409e10f40aa"
+  },
+  {
+    "path": "aiding/figures/F07_heading_retained_translation.png",
+    "same_as_R3": true,
+    "sha256": "a7b051adac4e4891e6fdcb51917a431348f0dd09908edfcde38a07a53e8fcb06"
+  },
+  {
+    "path": "aiding/figures/F07_heading_retained_translation.tiff",
+    "same_as_R3": true,
+    "sha256": "ec20ee22fc48c968471f3b7d10f193ecec3bb7f181111d6ca3217c10d4f52c28"
+  },
+  {
+    "path": "navigation_comparison/F09_heading_comparison.pdf",
+    "same_as_R3": true,
+    "sha256": "e8e64d9ec997a829ec00d3b33041dcee06a7d94c69d9ea94b69f79a59aeb84fa"
+  },
+  {
+    "path": "navigation_comparison/F09_heading_comparison.svg",
+    "same_as_R3": true,
+    "sha256": "4e705df0c0c913b18e6f5c170ac2dcc351ab6fb50f951e03ab97aef9f0cf7a08"
+  },
+  {
+    "path": "navigation_comparison/F09_heading_comparison.png",
+    "same_as_R3": true,
+    "sha256": "90aec1d9803a1829c89430836d33a45e748fac49f6671c69ae9cbe2472b75841"
+  },
+  {
+    "path": "navigation_comparison/F09_heading_comparison.tiff",
+    "same_as_R3": true,
+    "sha256": "1cf406ecf2392b0e4c8ebc7adc7fb01c53750666f2693788d6ea18ec7d699a1a"
+  },
+  {
+    "path": "aiding/figures/F10_heading_sensitivity.pdf",
+    "same_as_R3": true,
+    "sha256": "ba4a32a34ded96e8688f4bdae019f2d610b36ab4e75020ef0ab6cbf0cbb29d65"
+  },
+  {
+    "path": "aiding/figures/F10_heading_sensitivity.svg",
+    "same_as_R3": true,
+    "sha256": "e8b2cb374ad14523702f5e00cee49dbde5c1e7c1215951d25db91b2e6899acea"
+  },
+  {
+    "path": "aiding/figures/F10_heading_sensitivity.png",
+    "same_as_R3": true,
+    "sha256": "c2de0ac994b21ca49f10950609aa88484e0e1d2aaed5f653d6b835ef39738c1d"
+  },
+  {
+    "path": "aiding/figures/F10_heading_sensitivity.tiff",
+    "same_as_R3": true,
+    "sha256": "9f3462211c26080ee17b37569572a4167f0bb55379476b0576bef47fe89de4ca"
+  }
+]

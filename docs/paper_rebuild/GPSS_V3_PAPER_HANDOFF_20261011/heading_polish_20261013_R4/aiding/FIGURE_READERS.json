@@ -1,0 +1,19 @@
+{
+  "F08_heading_quality_scaling": {
+    "claim": "来源加权在部分观测退化条件下减少较大航向偏离，属于条件性稳健收益，不是普遍精度提升。",
+    "status": "R4 mechanism-focused author review",
+    "panels_zh": [
+      "a：原位置加噪回放中的位置—预测差，与未改变的GNSS自报标准差范数。灰线是保存的位置创新范数，不是真值误差。",
+      "b：同一前120秒的真实来源协方差倍率；蓝点中位数、粗线IQR、细线全范围。位置约2.08倍、机身速度10倍、方向约1倍。更大协方差减小该来源相对基准的影响，不是卡尔曼增益精确倒数。",
+      "c：同一回放关闭/启用来源加权的航向误差，完整274秒RMSE29.80→2.70度；位置RMSE3.17→3.56米代价明确保留。"
+    ],
+    "selection": "Same first registered position-noise example used since earlier drafts. No new favourable seed selection. Display0–120s retained; full274s histories and all variants accompany.",
+    "overall_evidence": "541 registered;513 joint completions;190 lower and323 higher yawRMSE with full; median reduction-0.0002579935deg; worst increase1.15048deg;6 additional full-only completions.",
+    "supplementary": [
+      "S_F08_all_condition_variants",
+      "S_F08_full_heading_histories",
+      "S_quality_complete_statistics"
+    ],
+    "qualification": "D15/D59 share the dominant position corruption and near-identical weighting histories; they are not independent field confirmations. Combined source-policy ablation does not isolate a single source."
+  }
+}

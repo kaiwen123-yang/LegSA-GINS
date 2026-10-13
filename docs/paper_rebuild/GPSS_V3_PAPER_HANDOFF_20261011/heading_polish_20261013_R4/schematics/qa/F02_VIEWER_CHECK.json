@@ -1,0 +1,14 @@
+{
+  "fit_width": 1564,
+  "zoom_200_width": 3630,
+  "expected_200_width": 3630,
+  "scroll": {
+    "left": 900,
+    "top": 250,
+    "width": 1600,
+    "scrollWidth": 3666
+  },
+  "mobile_fit_width": 354,
+  "js_errors": [],
+  "pass": true
+}

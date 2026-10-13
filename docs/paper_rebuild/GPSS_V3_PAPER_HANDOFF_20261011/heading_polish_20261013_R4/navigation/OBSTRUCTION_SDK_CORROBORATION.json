@@ -1,0 +1,203 @@
+{
+  "scope": "Single BY2O/F04 velocity-provider bundle, windows183.94–233s only; no raw-body text, other sequences, solver or evaluator read/execution",
+  "native_config": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F04/V3_RUNTIME_CONFIG.yaml",
+  "manifest": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F04/RUN_MANIFEST.json",
+  "actual_hv_source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+  "body_support_source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_BODY_SOURCE_SUPPORT.npz",
+  "original_raw_body_source": {
+    "path": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/高层数据/by1.txt",
+    "sha256": "0e5c62e0a5af0b6c32c51b535cc90701677276fc73c5623b72abda66cc148f2e"
+  },
+  "body_support_sha256_matches_bundle": true,
+  "row_identity_HV_to_body_max_abs_time_s": 1.8189894035458565e-12,
+  "body_support_columns": [
+    "time",
+    "roll_rad",
+    "pitch_rad",
+    "sdk_vx",
+    "sdk_vy",
+    "sdk_vz"
+  ],
+  "prior_semantics": "K_HV=1/0.962142 times FLU->FRD roll/pitch plus historicalA1-yaw rotation, horizontal component only. valid=go2_source_valid AND a1_heading_valid. MissingA1 sets valid/update_flag false and reason, not zero vn/ve. Vertical prior vd is intentionally disabled0, not a physical vertical-speed measurement.",
+  "default_zero_semantics": "Body parser represents missing velocity fields by NaN; body support generation retains only fully finite timestamp/rpy/velocity rows. Stored pre-rotation SDK values are checked here; none assumed accurate ground truth.",
+  "quality_flag_semantics": "clean_raw_go2_weak_auxiliary / weak_auxiliary is provider policy, not an independent sensor solution-quality certificate. go2_source_valid is source-side eligibility; valid also includes direction support.",
+  "reference_use": "No reference position/attitude/velocity used to compute these SDK norms",
+  "records": [
+    {
+      "interval": "Registered obstruction",
+      "start_s": 183.94,
+      "end_s": 225.95,
+      "rows": 7613,
+      "first_elapsed_s": 183.9410629272461,
+      "last_elapsed_s": 225.94704818725586,
+      "time_strictly_increasing": true,
+      "median_dt_s": 0.00599360466003418,
+      "max_dt_s": 0.10790371894700002,
+      "valid_counts": {
+        "1": 7613
+      },
+      "go2_source_valid_counts": {
+        "True": 7613
+      },
+      "a1_heading_valid_counts": {
+        "True": 7613
+      },
+      "update_flag_counts": {
+        "True": 7613
+      },
+      "quality_flag_counts": {
+        "clean_raw_go2_weak_auxiliary": 7613
+      },
+      "confidence_level_counts": {
+        "weak_auxiliary": 7613
+      },
+      "reason_codes_counts": {
+        "clean_source_frame_transform_weak_prior": 7613
+      },
+      "source_status_counts": {
+        "active": 7613
+      },
+      "prior_horizontal_median_mps": 0.009520998042038695,
+      "prior_horizontal_p95_mps": 0.02043781021629717,
+      "prior_horizontal_max_mps": 0.04242438370995164,
+      "prior_horizontal_exact_zero_count": 0,
+      "prior_horizontal_nonfinite_count": 0,
+      "prior_horizontal_fraction_below_0p05_mps": 1.0,
+      "prior_horizontal_fraction_below_0p10_mps": 1.0,
+      "sdk_raw_3d_median_mps": 0.023010359553798793,
+      "sdk_raw_3d_p95_mps": 0.029461368629173233,
+      "sdk_raw_3d_max_mps": 0.046207726756013666,
+      "sdk_raw_3d_exact_zero_count": 0,
+      "sdk_raw_3d_nonfinite_count": 0,
+      "sdk_raw_3d_fraction_below_0p05_mps": 1.0,
+      "sdk_raw_3d_fraction_below_0p10_mps": 1.0,
+      "sdk_raw_xy_median_mps": 0.009229349981213953,
+      "sdk_raw_xy_p95_mps": 0.019589254095997065,
+      "sdk_raw_xy_max_mps": 0.04116788099511684,
+      "sdk_raw_xy_exact_zero_count": 0,
+      "sdk_raw_xy_nonfinite_count": 0,
+      "sdk_raw_xy_fraction_below_0p05_mps": 1.0,
+      "sdk_raw_xy_fraction_below_0p10_mps": 1.0
+    },
+    {
+      "interval": "Former local detail",
+      "start_s": 199.945,
+      "end_s": 209.945,
+      "rows": 1828,
+      "first_elapsed_s": 199.9450483322139,
+      "last_elapsed_s": 209.94305849075317,
+      "time_strictly_increasing": true,
+      "median_dt_s": 0.0059924125666839245,
+      "max_dt_s": 0.10790371894700002,
+      "valid_counts": {
+        "1": 1828
+      },
+      "go2_source_valid_counts": {
+        "True": 1828
+      },
+      "a1_heading_valid_counts": {
+        "True": 1828
+      },
+      "update_flag_counts": {
+        "True": 1828
+      },
+      "quality_flag_counts": {
+        "clean_raw_go2_weak_auxiliary": 1828
+      },
+      "confidence_level_counts": {
+        "weak_auxiliary": 1828
+      },
+      "reason_codes_counts": {
+        "clean_source_frame_transform_weak_prior": 1828
+      },
+      "source_status_counts": {
+        "active": 1828
+      },
+      "prior_horizontal_median_mps": 0.008998201384237648,
+      "prior_horizontal_p95_mps": 0.02047043148857863,
+      "prior_horizontal_max_mps": 0.02783360450555254,
+      "prior_horizontal_exact_zero_count": 0,
+      "prior_horizontal_nonfinite_count": 0,
+      "prior_horizontal_fraction_below_0p05_mps": 1.0,
+      "prior_horizontal_fraction_below_0p10_mps": 1.0,
+      "sdk_raw_3d_median_mps": 0.022751224700479092,
+      "sdk_raw_3d_p95_mps": 0.02888189625409999,
+      "sdk_raw_3d_max_mps": 0.03467513581536041,
+      "sdk_raw_3d_exact_zero_count": 0,
+      "sdk_raw_3d_nonfinite_count": 0,
+      "sdk_raw_3d_fraction_below_0p05_mps": 1.0,
+      "sdk_raw_3d_fraction_below_0p10_mps": 1.0,
+      "sdk_raw_xy_median_mps": 0.00872480066869343,
+      "sdk_raw_xy_p95_mps": 0.019661002801342232,
+      "sdk_raw_xy_max_mps": 0.02677162558040905,
+      "sdk_raw_xy_exact_zero_count": 0,
+      "sdk_raw_xy_nonfinite_count": 0,
+      "sdk_raw_xy_fraction_below_0p05_mps": 1.0,
+      "sdk_raw_xy_fraction_below_0p10_mps": 1.0
+    },
+    {
+      "interval": "Recovery motion",
+      "start_s": 228.0,
+      "end_s": 233.0,
+      "rows": 999,
+      "first_elapsed_s": 228.00516486168,
+      "last_elapsed_s": 232.99712586402984,
+      "time_strictly_increasing": true,
+      "median_dt_s": 0.0040749311453964765,
+      "max_dt_s": 0.015990495683126937,
+      "valid_counts": {
+        "1": 999
+      },
+      "go2_source_valid_counts": {
+        "True": 999
+      },
+      "a1_heading_valid_counts": {
+        "True": 999
+      },
+      "update_flag_counts": {
+        "True": 999
+      },
+      "quality_flag_counts": {
+        "clean_raw_go2_weak_auxiliary": 999
+      },
+      "confidence_level_counts": {
+        "weak_auxiliary": 999
+      },
+      "reason_codes_counts": {
+        "clean_source_frame_transform_weak_prior": 999
+      },
+      "source_status_counts": {
+        "active": 999
+      },
+      "prior_horizontal_median_mps": 0.45250979826678217,
+      "prior_horizontal_p95_mps": 1.2436341741957968,
+      "prior_horizontal_max_mps": 1.3628750891767973,
+      "prior_horizontal_exact_zero_count": 0,
+      "prior_horizontal_nonfinite_count": 0,
+      "prior_horizontal_fraction_below_0p05_mps": 0.3163163163163163,
+      "prior_horizontal_fraction_below_0p10_mps": 0.32432432432432434,
+      "sdk_raw_3d_median_mps": 0.44102867854737976,
+      "sdk_raw_3d_p95_mps": 1.198340998900556,
+      "sdk_raw_3d_max_mps": 1.3175591810676295,
+      "sdk_raw_3d_exact_zero_count": 0,
+      "sdk_raw_3d_nonfinite_count": 0,
+      "sdk_raw_3d_fraction_below_0p05_mps": 0.3063063063063063,
+      "sdk_raw_3d_fraction_below_0p10_mps": 0.3233233233233233,
+      "sdk_raw_xy_median_mps": 0.43500724303593347,
+      "sdk_raw_xy_p95_mps": 1.1971154771477142,
+      "sdk_raw_xy_max_mps": 1.3083453503283442,
+      "sdk_raw_xy_exact_zero_count": 0,
+      "sdk_raw_xy_nonfinite_count": 0,
+      "sdk_raw_xy_fraction_below_0p05_mps": 0.3163163163163163,
+      "sdk_raw_xy_fraction_below_0p10_mps": 0.32432432432432434
+    }
+  ],
+  "new_solver_evaluator_provider_calls": 0,
+  "HV_sha256_matches_original_provider_bundle": true,
+  "HV_sha256": "92bbe9165ed4ad6aa3f92c478f4a195ffccc7ec7b652506ba73533bd4190cdd2",
+  "generation_code_read_only": {
+    "prior": "src/legsa_gins/paper_rebuild/clean6_sensor_v21/providers.py:154–194,361–370",
+    "missing_field_parser": "scripts/paper_rebuild/clean6_hv_frame_audit.py:46–75",
+    "finite_source_selection": "scripts/paper_rebuild/clean6_hv_a1_yaw_diagnostic.py:64–74"
+  }
+}

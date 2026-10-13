@@ -1,0 +1,67 @@
+sequence,panel,method,source_rows,finite_rows_plotted,point,selection
+BY2,full_route,WEN_TC,274,274,GNSS1_ANTENNA,complete original evaluation window; no common-time clipping
+BY2,full_route,GNC,274,274,GNSS1_ANTENNA,complete original evaluation window; no common-time clipping
+BY2,full_route,LC01,58014,58014,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2,full_route,LC01-S,58014,58014,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2,full_route,EXT05C,58014,58014,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2,full_route,EXT05C-S,58014,58014,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2,full_route,OISAM_RESTART_POI,275,275,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2,full_route,F04,56642,56642,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2,full_route,REFERENCE_POI,5480,5480,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2,POI_spatial_detail,LC01,740,740,POI_MIDPOINT,fixed reference-defined interval 88.0–92.0s; true spatial viewport; no error magnification
+BY2,POI_spatial_detail,LC01-S,740,740,POI_MIDPOINT,fixed reference-defined interval 88.0–92.0s; true spatial viewport; no error magnification
+BY2,POI_spatial_detail,EXT05C,740,740,POI_MIDPOINT,fixed reference-defined interval 88.0–92.0s; true spatial viewport; no error magnification
+BY2,POI_spatial_detail,EXT05C-S,740,740,POI_MIDPOINT,fixed reference-defined interval 88.0–92.0s; true spatial viewport; no error magnification
+BY2,POI_spatial_detail,OISAM_RESTART_POI,5,5,POI_MIDPOINT,fixed reference-defined interval 88.0–92.0s; true spatial viewport; no error magnification
+BY2,POI_spatial_detail,F04,719,719,POI_MIDPOINT,fixed reference-defined interval 88.0–92.0s; true spatial viewport; no error magnification
+BY2,POI_spatial_detail,REFERENCE_POI,80,80,POI_MIDPOINT,fixed reference-defined interval 88.0–92.0s; true spatial viewport; no error magnification
+BY2,100s_heading,LC01,274,101,body NED yaw,same six-method nominal dynamic support as approved F09; fixed100s display window
+BY2,100s_heading,LC01-S,274,101,body NED yaw,same six-method nominal dynamic support as approved F09; fixed100s display window
+BY2,100s_heading,EXT05C,274,101,body NED yaw,same six-method nominal dynamic support as approved F09; fixed100s display window
+BY2,100s_heading,EXT05C-S,274,101,body NED yaw,same six-method nominal dynamic support as approved F09; fixed100s display window
+BY2,100s_heading,OISAM_RESTART_POI,274,101,body NED yaw,same six-method nominal dynamic support as approved F09; fixed100s display window
+BY2,100s_heading,F04,274,101,body NED yaw,same six-method nominal dynamic support as approved F09; fixed100s display window
+BY2H,full_route,WEN_TC,270,270,GNSS1_ANTENNA,complete original evaluation window; no common-time clipping
+BY2H,full_route,GNC,270,270,GNSS1_ANTENNA,complete original evaluation window; no common-time clipping
+BY2H,full_route,LC01,59934,59934,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2H,full_route,LC01-S,59934,59934,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2H,full_route,EXT05C,59934,59934,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2H,full_route,EXT05C-S,59934,59934,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2H,full_route,OISAM_RESTART_POI,271,267,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2H,full_route,F04,58580,58580,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2H,full_route,REFERENCE_POI,5400,5400,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2H,POI_spatial_detail,LC01,874,874,POI_MIDPOINT,fixed reference-defined interval 88.0–92.0s; true spatial viewport; no error magnification
+BY2H,POI_spatial_detail,LC01-S,874,874,POI_MIDPOINT,fixed reference-defined interval 88.0–92.0s; true spatial viewport; no error magnification
+BY2H,POI_spatial_detail,EXT05C,874,874,POI_MIDPOINT,fixed reference-defined interval 88.0–92.0s; true spatial viewport; no error magnification
+BY2H,POI_spatial_detail,EXT05C-S,874,874,POI_MIDPOINT,fixed reference-defined interval 88.0–92.0s; true spatial viewport; no error magnification
+BY2H,POI_spatial_detail,OISAM_RESTART_POI,5,5,POI_MIDPOINT,fixed reference-defined interval 88.0–92.0s; true spatial viewport; no error magnification
+BY2H,POI_spatial_detail,F04,853,853,POI_MIDPOINT,fixed reference-defined interval 88.0–92.0s; true spatial viewport; no error magnification
+BY2H,POI_spatial_detail,REFERENCE_POI,80,80,POI_MIDPOINT,fixed reference-defined interval 88.0–92.0s; true spatial viewport; no error magnification
+BY2H,100s_heading,LC01,267,101,body NED yaw,same six-method nominal dynamic support as approved F09; fixed100s display window
+BY2H,100s_heading,LC01-S,267,101,body NED yaw,same six-method nominal dynamic support as approved F09; fixed100s display window
+BY2H,100s_heading,EXT05C,267,101,body NED yaw,same six-method nominal dynamic support as approved F09; fixed100s display window
+BY2H,100s_heading,EXT05C-S,267,101,body NED yaw,same six-method nominal dynamic support as approved F09; fixed100s display window
+BY2H,100s_heading,OISAM_RESTART_POI,267,101,body NED yaw,same six-method nominal dynamic support as approved F09; fixed100s display window
+BY2H,100s_heading,F04,267,101,body NED yaw,same six-method nominal dynamic support as approved F09; fixed100s display window
+BY2O,full_route,WEN_TC,377,377,GNSS1_ANTENNA,complete original evaluation window; no common-time clipping
+BY2O,full_route,GNC,377,377,GNSS1_ANTENNA,complete original evaluation window; no common-time clipping
+BY2O,full_route,LC01,78441,78441,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2O,full_route,LC01-S,78441,78441,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2O,full_route,EXT05C,78441,78441,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2O,full_route,EXT05C-S,78441,78441,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2O,full_route,OISAM_RESTART_POI,378,370,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2O,full_route,F04,76548,76548,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2O,full_route,REFERENCE_POI,7540,7540,POI_MIDPOINT,complete original evaluation window; no common-time clipping
+BY2O,POI_spatial_detail,LC01,1025,1025,POI_MIDPOINT,fixed reference-defined interval 228.0–233.0s; true spatial viewport; no error magnification
+BY2O,POI_spatial_detail,LC01-S,1025,1025,POI_MIDPOINT,fixed reference-defined interval 228.0–233.0s; true spatial viewport; no error magnification
+BY2O,POI_spatial_detail,EXT05C,1025,1025,POI_MIDPOINT,fixed reference-defined interval 228.0–233.0s; true spatial viewport; no error magnification
+BY2O,POI_spatial_detail,EXT05C-S,1025,1025,POI_MIDPOINT,fixed reference-defined interval 228.0–233.0s; true spatial viewport; no error magnification
+BY2O,POI_spatial_detail,OISAM_RESTART_POI,6,6,POI_MIDPOINT,fixed reference-defined interval 228.0–233.0s; true spatial viewport; no error magnification
+BY2O,POI_spatial_detail,F04,999,999,POI_MIDPOINT,fixed reference-defined interval 228.0–233.0s; true spatial viewport; no error magnification
+BY2O,POI_spatial_detail,REFERENCE_POI,100,100,POI_MIDPOINT,fixed reference-defined interval 228.0–233.0s; true spatial viewport; no error magnification
+BY2O,100s_heading,LC01,367,98,body NED yaw,same six-method nominal dynamic support as approved F09; fixed100s display window
+BY2O,100s_heading,LC01-S,367,98,body NED yaw,same six-method nominal dynamic support as approved F09; fixed100s display window
+BY2O,100s_heading,EXT05C,367,98,body NED yaw,same six-method nominal dynamic support as approved F09; fixed100s display window
+BY2O,100s_heading,EXT05C-S,367,98,body NED yaw,same six-method nominal dynamic support as approved F09; fixed100s display window
+BY2O,100s_heading,OISAM_RESTART_POI,367,98,body NED yaw,same six-method nominal dynamic support as approved F09; fixed100s display window
+BY2O,100s_heading,F04,367,98,body NED yaw,same six-method nominal dynamic support as approved F09; fixed100s display window

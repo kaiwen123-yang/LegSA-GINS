@@ -1,0 +1,89 @@
+{
+  "status": "PASS",
+  "checks": {
+    "complete_source_counts": {
+      "core": 5951,
+      "four_ablation_pairs": 2164,
+      "noncompleted_core": 283
+    },
+    "weighting_all_cases": {
+      "registered": 541,
+      "jointly_completed": 513,
+      "lower_yaw_rmse_with_full": 190,
+      "higher_yaw_rmse_with_full": 323,
+      "median_reduction_deg": -0.0002579935045803339,
+      "worst_increase_deg": 1.1504827857711915,
+      "extra_full_completions": 6,
+      "both_noncompleted": 22,
+      "definition": "reduction = weighting-off RMSE minus full RMSE; positive favours full",
+      "interpretation": "conditional robustness benefit with tail gains, not uniform typical precision improvement"
+    },
+    "reported_uncertainty_equals_saved_input": {
+      "rows_checked": 600,
+      "provider_columns_0based": [
+        4,
+        5,
+        6
+      ],
+      "quantity": "sum of squared reported position std fields equals actual base_R_trace",
+      "maximum_difference": 1.0842021724855044e-19,
+      "original_provider": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__D15_seed_00__18a349c6d122820244c40bcf78ff92b9221060ceb5a04b1c115b2194402e343c/GNSS18.gnss",
+      "provider_sha256": "8a25655979e9e4b384e2200dafcfd9f8b16e42fa2f26049ee4f55131287496df",
+      "recorded_sha256": "8a25655979e9e4b384e2200dafcfd9f8b16e42fa2f26049ee4f55131287496df",
+      "hash_match": true,
+      "new_provider_calls": 0
+    },
+    "actual_source_median_multipliers": {
+      "receiver_position": 2.0801621282,
+      "go2_horizontal_velocity": 10.0,
+      "dual_antenna_yaw": 1.0
+    },
+    "retained_series": [
+      {
+        "file": "RUN_01401.csv.gz",
+        "rows": 56642,
+        "identical": true
+      },
+      {
+        "file": "RUN_01403.csv.gz",
+        "rows": 56642,
+        "identical": true
+      },
+      {
+        "file": "RUN_03678.csv.gz",
+        "rows": 56642,
+        "identical": true
+      },
+      {
+        "file": "RUN_03680.csv.gz",
+        "rows": 56642,
+        "identical": true
+      },
+      {
+        "file": "RUN_05757.csv.gz",
+        "rows": 56642,
+        "identical": true
+      },
+      {
+        "file": "RUN_05759.csv.gz",
+        "rows": 56642,
+        "identical": true
+      }
+    ],
+    "preview_pixels": [
+      {
+        "name": "F08_heading_quality_scaling",
+        "width": 3082,
+        "height": 2657
+      },
+      {
+        "name": "S_F08_all_condition_variants",
+        "width": 3082,
+        "height": 1523
+      }
+    ],
+    "nature_alignment_pdf_text_collision": "PASS; source warnings reviewed",
+    "new_solver_provider_evaluator_calls": 0
+  },
+  "issues": []
+}

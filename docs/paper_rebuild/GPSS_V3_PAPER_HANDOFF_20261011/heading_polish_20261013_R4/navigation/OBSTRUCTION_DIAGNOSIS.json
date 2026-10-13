@@ -1,0 +1,201 @@
+{
+  "diagnostics": [
+    {
+      "label": "R3 full100s",
+      "start_s": 154.945,
+      "end_s": 254.945,
+      "native_reference_rows": 2000,
+      "net_displacement_m": 29.07122182866927,
+      "exact_interval_endpoint_displacement_m": 29.114012834881727,
+      "east_range_m": 29.079010082209564,
+      "north_range_m": 1.1060505141480164,
+      "native_path_length_m": 29.90905872286629,
+      "one_second_reference_speed_median_mps": 0.0036006731550085177,
+      "one_second_reference_speed_p95_mps": 1.2664334445289473,
+      "one_second_reference_speed_max_mps": 1.2828083595202942,
+      "one_second_samples": 100
+    },
+    {
+      "label": "R3 static spatial detail",
+      "start_s": 199.945,
+      "end_s": 209.945,
+      "native_reference_rows": 200,
+      "net_displacement_m": 0.006133380481087287,
+      "exact_interval_endpoint_displacement_m": 0.006364708653784701,
+      "east_range_m": 0.01639511709448982,
+      "north_range_m": 0.007000725028500909,
+      "native_path_length_m": 0.08656413880298883,
+      "one_second_reference_speed_median_mps": 0.0019405511590424782,
+      "one_second_reference_speed_p95_mps": 0.0028919433328866906,
+      "one_second_reference_speed_max_mps": 0.0031594522922852152,
+      "one_second_samples": 10
+    },
+    {
+      "label": "Registered obstruction",
+      "start_s": 183.94,
+      "end_s": 225.95,
+      "native_reference_rows": 840,
+      "net_displacement_m": 0.01511202420932246,
+      "exact_interval_endpoint_displacement_m": 0.014710011694262984,
+      "east_range_m": 0.02253713577786698,
+      "north_range_m": 0.01475812452448011,
+      "native_path_length_m": 0.38924529654908235,
+      "one_second_reference_speed_median_mps": 0.001939586766969341,
+      "one_second_reference_speed_p95_mps": 0.006004531256283011,
+      "one_second_reference_speed_max_mps": 0.007822744130995343,
+      "one_second_samples": 42
+    },
+    {
+      "label": "First reference-moving recovery5s",
+      "start_s": 228.0,
+      "end_s": 233.0,
+      "native_reference_rows": 100,
+      "net_displacement_m": 2.565081521507603,
+      "exact_interval_endpoint_displacement_m": 2.6996322435448175,
+      "east_range_m": 2.5666532076305373,
+      "north_range_m": 0.13045885996039885,
+      "native_path_length_m": 2.6036821722452133,
+      "one_second_reference_speed_median_mps": 0.3856832928883695,
+      "one_second_reference_speed_p95_mps": 1.181693146369071,
+      "one_second_reference_speed_max_mps": 1.2209054001368034,
+      "one_second_samples": 5
+    }
+  ],
+  "motion_selection_rule": "First5s interval after registered obstruction end225.95s, on1s grid, endpoint displacement>=2m and median1s reference chord speed>=0.3m/s; method estimates not inspected",
+  "candidate_windows": [
+    {
+      "start_s": 228.0,
+      "end_s": 233.0,
+      "displacement_m": 2.6996322435448175,
+      "median_speed_mps": 0.3856832928883695
+    },
+    {
+      "start_s": 229.0,
+      "end_s": 234.0,
+      "displacement_m": 3.967428374968169,
+      "median_speed_mps": 1.0248441312981413
+    },
+    {
+      "start_s": 230.0,
+      "end_s": 235.0,
+      "displacement_m": 5.165441264417788,
+      "median_speed_mps": 1.2209054001368034
+    },
+    {
+      "start_s": 231.0,
+      "end_s": 236.0,
+      "displacement_m": 6.036347981622487,
+      "median_speed_mps": 1.2533164947054578
+    },
+    {
+      "start_s": 232.0,
+      "end_s": 237.0,
+      "displacement_m": 5.994098321370229,
+      "median_speed_mps": 1.2533164947054578
+    },
+    {
+      "start_s": 233.0,
+      "end_s": 238.0,
+      "displacement_m": 5.9951128263920985,
+      "median_speed_mps": 1.2533164947054578
+    },
+    {
+      "start_s": 234.0,
+      "end_s": 239.0,
+      "displacement_m": 5.962960604698969,
+      "median_speed_mps": 1.2355673641523282
+    },
+    {
+      "start_s": 235.0,
+      "end_s": 240.0,
+      "displacement_m": 5.9366920792059785,
+      "median_speed_mps": 1.2355673641523282
+    },
+    {
+      "start_s": 236.0,
+      "end_s": 241.0,
+      "displacement_m": 5.951133604252957,
+      "median_speed_mps": 1.2355673641523282
+    },
+    {
+      "start_s": 237.0,
+      "end_s": 242.0,
+      "displacement_m": 6.226737537045247,
+      "median_speed_mps": 1.2434830083031483
+    },
+    {
+      "start_s": 238.0,
+      "end_s": 243.0,
+      "displacement_m": 6.261001859789863,
+      "median_speed_mps": 1.2536763962755308
+    },
+    {
+      "start_s": 239.0,
+      "end_s": 244.0,
+      "displacement_m": 6.3082750968430625,
+      "median_speed_mps": 1.2609427817033385
+    },
+    {
+      "start_s": 240.0,
+      "end_s": 245.0,
+      "displacement_m": 6.329469892102353,
+      "median_speed_mps": 1.2622639636171111
+    },
+    {
+      "start_s": 241.0,
+      "end_s": 246.0,
+      "displacement_m": 6.180453224419944,
+      "median_speed_mps": 1.2609427817033385
+    },
+    {
+      "start_s": 242.0,
+      "end_s": 247.0,
+      "displacement_m": 6.13270069858847,
+      "median_speed_mps": 1.2536763962755308
+    },
+    {
+      "start_s": 243.0,
+      "end_s": 248.0,
+      "displacement_m": 6.10231719972358,
+      "median_speed_mps": 1.2239090064197873
+    },
+    {
+      "start_s": 244.0,
+      "end_s": 249.0,
+      "displacement_m": 5.972994678418275,
+      "median_speed_mps": 1.2140110784676343
+    },
+    {
+      "start_s": 245.0,
+      "end_s": 250.0,
+      "displacement_m": 5.961790394802616,
+      "median_speed_mps": 1.2140110784676343
+    },
+    {
+      "start_s": 246.0,
+      "end_s": 251.0,
+      "displacement_m": 6.065000391955779,
+      "median_speed_mps": 1.2225419278591918
+    },
+    {
+      "start_s": 247.0,
+      "end_s": 252.0,
+      "displacement_m": 6.132176837253692,
+      "median_speed_mps": 1.2239090064197873
+    },
+    {
+      "start_s": 248.0,
+      "end_s": 253.0,
+      "displacement_m": 5.752636626691622,
+      "median_speed_mps": 1.2225419278591918
+    },
+    {
+      "start_s": 249.0,
+      "end_s": 254.0,
+      "displacement_m": 5.786095513397229,
+      "median_speed_mps": 1.2225419278591918
+    }
+  ],
+  "R3_coordinate_parity_max_m": 3.889587082972491e-09,
+  "why_cloud": "The old fixed10s detail lies inside a nearly stationary reference interval; centimetre coordinate errors/jitter dominate the very small reference motion. It is not an estimate/reference point-conversion bug."
+}
