@@ -12,3 +12,5 @@
 科学问题仍围绕紧凑四足平台中短基线方向与机身运动观测的互补条件，主打航向精度。冻结V3：7d43b9af26120ed5dde21f53e515386361072ba6；本轮无solver/provider/evaluator执行。
 
 [作者图面认可记录](docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/heading_polish_20261013_R6/AUTHOR_ACCEPTANCE.md)。
+
+2026-10-15新增：[正文十图PDF与29页组会汇报记录](docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/group_meeting_20261015/README.md)。当前认可图版仍为R6。

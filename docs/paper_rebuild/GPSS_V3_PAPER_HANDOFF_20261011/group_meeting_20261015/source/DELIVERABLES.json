@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-15",
+  "figure_revision": "R6",
+  "source_paper_commit": "1d7494ecc47a5f8213e39de191f3ffed24da38c5",
+  "frozen_v3": "7d43b9af26120ed5dde21f53e515386361072ba6",
+  "artifacts": [
+    {
+      "kind": "figures_pdf",
+      "path": "output/pdf/最新正文图_R6_完整十图_20261015.pdf",
+      "pages_or_slides": 10,
+      "bytes": 23577697,
+      "sha256": "59f0393a4bc77a69cf55f48e036f96172cc862832a86a8666b3d1750575b7da2"
+    },
+    {
+      "kind": "presentation",
+      "path": "output/pptx/LegSA-GINS_论文组会汇报_20261015.pptx",
+      "pages_or_slides": 29,
+      "bytes": 54419707,
+      "sha256": "0ef3337a85f3e3810e82f9b3e70bdf7b0d18b867d10c14a737982df113bd1843"
+    },
+    {
+      "kind": "presentation_pdf",
+      "path": "output/pdf/LegSA-GINS_组会汇报阅读版_20261015.pdf",
+      "pages_or_slides": 29,
+      "bytes": 7011865,
+      "sha256": "79fec0ced5ca5cc5d4edc0270dc3f5f438a6f94718aca0c1bce3ddbf4d69f4b7"
+    }
+  ],
+  "native_powerpoint_rendered_slides": 29,
+  "figure_pdf_pages": 10,
+  "source_figures_changed": false,
+  "new_scientific_execution": false
+}

@@ -1,0 +1,571 @@
+{
+  "sources": {
+    "tilt": "G:\\LegSA-GINS-project\\V3正文精修_20261012_R2\\aiding\\tables\\F06_TILT_SUMMARY.csv",
+    "aiding": "G:\\LegSA-GINS-project\\V3正文精修_20261012_R2\\aiding\\tables\\F07_ALL45_CASE_PAIRS_SUMMARY.csv",
+    "scientific_narrative": "SCIENCE_BRIEF.md",
+    "external_interruption": "G:\\LegSA-GINS-project\\V3正文精修_20261012_R3\\navigation_comparison\\data\\F09H_MEDIAN_SUMMARY.csv",
+    "quality": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R5\\aiding\\tables\\THREE_CASE_MAIN_METRICS.csv",
+    "natural": "G:\\LegSA-GINS-project\\V3正文精修_20261012_R2\\aiding\\tables\\NATURAL33.csv",
+    "latest_reader": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\FIGURE_READERS_ZH.md",
+    "external_common_heading": "G:\\LegSA-GINS-project\\V3正文精修_20261012_R3\\navigation_comparison\\data\\F09_COMMON_HEADING_STATISTICS.csv",
+    "direction_screen": "G:\\LegSA-GINS-project\\V3正文精修_20261012_R3\\heading_acceptance\\figure_data\\F05B_DISTRIBUTION_SUMMARY.csv"
+  },
+  "github": {
+    "later_paper_update_found": false,
+    "pr": 66,
+    "paper_branch": "docs/v3-paper-handoff-20261011",
+    "paper_head": "1d7494ecc47a5f8213e39de191f3ffed24da38c5",
+    "repo": "kaiwen123-yang/LegSA-GINS",
+    "frozen_v3": "7d43b9af26120ed5dde21f53e515386361072ba6",
+    "repository_pushed_at": "2026-10-13T12:14:37Z",
+    "main": "077fb725612730d743ff1dd3ba698c43499b4fcb",
+    "pr_state": "OPEN"
+  },
+  "metrics": {
+    "external_common_heading": [
+      {
+        "sequence": "BY2",
+        "method": "F04",
+        "matched_epochs": "274",
+        "heading_rmse_deg": "1.7781761780538738",
+        "absolute_heading_median_deg": "1.1786017657469472",
+        "absolute_heading_p95_deg": "3.510680444617942",
+        "absolute_heading_max_deg": "6.516542661437285",
+        "scope": "Figure-only common nominal support; not replacement frozen native RMSE"
+      },
+      {
+        "sequence": "BY2",
+        "method": "LC01",
+        "matched_epochs": "274",
+        "heading_rmse_deg": "2.9048197012949384",
+        "absolute_heading_median_deg": "1.21149426281211",
+        "absolute_heading_p95_deg": "4.647341448609698",
+        "absolute_heading_max_deg": "15.828350252933518",
+        "scope": "Figure-only common nominal support; not replacement frozen native RMSE"
+      },
+      {
+        "sequence": "BY2",
+        "method": "LC01-S",
+        "matched_epochs": "274",
+        "heading_rmse_deg": "1.4690574711415698",
+        "absolute_heading_median_deg": "0.9573177923236642",
+        "absolute_heading_p95_deg": "2.8400371570362872",
+        "absolute_heading_max_deg": "4.836425794494573",
+        "scope": "Figure-only common nominal support; not replacement frozen native RMSE"
+      },
+      {
+        "sequence": "BY2",
+        "method": "EXT05C",
+        "matched_epochs": "274",
+        "heading_rmse_deg": "11.911609315763247",
+        "absolute_heading_median_deg": "12.09067983288196",
+        "absolute_heading_p95_deg": "16.16628182186176",
+        "absolute_heading_max_deg": "19.083441921243804",
+        "scope": "Figure-only common nominal support; not replacement frozen native RMSE"
+      },
+      {
+        "sequence": "BY2",
+        "method": "EXT05C-S",
+        "matched_epochs": "274",
+        "heading_rmse_deg": "10.161318211749583",
+        "absolute_heading_median_deg": "10.35811816267551",
+        "absolute_heading_p95_deg": "12.808951335285732",
+        "absolute_heading_max_deg": "15.519000765701776",
+        "scope": "Figure-only common nominal support; not replacement frozen native RMSE"
+      },
+      {
+        "sequence": "BY2",
+        "method": "OISAM",
+        "matched_epochs": "274",
+        "heading_rmse_deg": "4.6594609942357215",
+        "absolute_heading_median_deg": "4.042131813511787",
+        "absolute_heading_p95_deg": "7.691441456192047",
+        "absolute_heading_max_deg": "8.595670618677616",
+        "scope": "Figure-only common nominal support; not replacement frozen native RMSE"
+      },
+      {
+        "sequence": "BY2H",
+        "method": "F04",
+        "matched_epochs": "267",
+        "heading_rmse_deg": "1.7972623026270322",
+        "absolute_heading_median_deg": "1.1164511035646",
+        "absolute_heading_p95_deg": "3.6511771984368746",
+        "absolute_heading_max_deg": "5.530269781001209",
+        "scope": "Figure-only common nominal support; not replacement frozen native RMSE"
+      },
+      {
+        "sequence": "BY2H",
+        "method": "LC01",
+        "matched_epochs": "267",
+        "heading_rmse_deg": "2.027421721002544",
+        "absolute_heading_median_deg": "1.3610070007439106",
+        "absolute_heading_p95_deg": "4.07911621960313",
+        "absolute_heading_max_deg": "6.725047227909329",
+        "scope": "Figure-only common nominal support; not replacement frozen native RMSE"
+      },
+      {
+        "sequence": "BY2H",
+        "method": "LC01-S",
+        "matched_epochs": "267",
+        "heading_rmse_deg": "1.7892802962440835",
+        "absolute_heading_median_deg": "1.141634261476895",
+        "absolute_heading_p95_deg": "3.711113048150133",
+        "absolute_heading_max_deg": "5.3279026965290655",
+        "scope": "Figure-only common nominal support; not replacement frozen native RMSE"
+      },
+      {
+        "sequence": "BY2H",
+        "method": "EXT05C",
+        "matched_epochs": "267",
+        "heading_rmse_deg": "20.026697937557635",
+        "absolute_heading_median_deg": "20.01771841798993",
+        "absolute_heading_p95_deg": "25.027590117178345",
+        "absolute_heading_max_deg": "27.88248604490471",
+        "scope": "Figure-only common nominal support; not replacement frozen native RMSE"
+      },
+      {
+        "sequence": "BY2H",
+        "method": "EXT05C-S",
+        "matched_epochs": "267",
+        "heading_rmse_deg": "7.545001816637444",
+        "absolute_heading_median_deg": "5.340239315102451",
+        "absolute_heading_p95_deg": "10.414841338387944",
+        "absolute_heading_max_deg": "35.47944961379284",
+        "scope": "Figure-only common nominal support; not replacement frozen native RMSE"
+      },
+      {
+        "sequence": "BY2H",
+        "method": "OISAM",
+        "matched_epochs": "267",
+        "heading_rmse_deg": "2.5349069554937436",
+        "absolute_heading_median_deg": "1.741836746867932",
+        "absolute_heading_p95_deg": "4.544638371785578",
+        "absolute_heading_max_deg": "6.893340698251762",
+        "scope": "Figure-only common nominal support; not replacement frozen native RMSE"
+      },
+      {
+        "sequence": "BY2O",
+        "method": "F04",
+        "matched_epochs": "367",
+        "heading_rmse_deg": "2.3228839640362455",
+        "absolute_heading_median_deg": "1.212386446305942",
+        "absolute_heading_p95_deg": "3.549705126573977",
+        "absolute_heading_max_deg": "12.741993140398847",
+        "scope": "Figure-only common nominal support; not replacement frozen native RMSE"
+      },
+      {
+        "sequence": "BY2O",
+        "method": "LC01",
+        "matched_epochs": "367",
+        "heading_rmse_deg": "2.420531014093875",
+        "absolute_heading_median_deg": "1.2234972008751868",
+        "absolute_heading_p95_deg": "5.130810573646744",
+        "absolute_heading_max_deg": "9.052385223442457",
+        "scope": "Figure-only common nominal support; not replacement frozen native RMSE"
+      },
+      {
+        "sequence": "BY2O",
+        "method": "LC01-S",
+        "matched_epochs": "367",
+        "heading_rmse_deg": "3.902368198270292",
+        "absolute_heading_median_deg": "2.950619631461961",
+        "absolute_heading_p95_deg": "6.643531429895269",
+        "absolute_heading_max_deg": "13.50485392200909",
+        "scope": "Figure-only common nominal support; not replacement frozen native RMSE"
+      },
+      {
+        "sequence": "BY2O",
+        "method": "EXT05C",
+        "matched_epochs": "367",
+        "heading_rmse_deg": "5.748460148055205",
+        "absolute_heading_median_deg": "4.452461735310408",
+        "absolute_heading_p95_deg": "10.57163728539607",
+        "absolute_heading_max_deg": "12.65290136303244",
+        "scope": "Figure-only common nominal support; not replacement frozen native RMSE"
+      },
+      {
+        "sequence": "BY2O",
+        "method": "EXT05C-S",
+        "matched_epochs": "367",
+        "heading_rmse_deg": "8.174775052088803",
+        "absolute_heading_median_deg": "7.147410783749621",
+        "absolute_heading_p95_deg": "13.394778419979367",
+        "absolute_heading_max_deg": "17.061987703861632",
+        "scope": "Figure-only common nominal support; not replacement frozen native RMSE"
+      },
+      {
+        "sequence": "BY2O",
+        "method": "OISAM",
+        "matched_epochs": "367",
+        "heading_rmse_deg": "3.9841256313693663",
+        "absolute_heading_median_deg": "1.6343043140242912",
+        "absolute_heading_p95_deg": "8.057595935350538",
+        "absolute_heading_max_deg": "10.729367054645593",
+        "scope": "Figure-only common nominal support; not replacement frozen native RMSE"
+      }
+    ],
+    "external_interruption": [
+      {
+        "min": "1.879916795701054",
+        "median": "1.884784054725689",
+        "max": "1.8870342824908384",
+        "method_metric": "F04_yaw_rmse_deg"
+      },
+      {
+        "min": "2.9236903587600254",
+        "median": "2.9980624597079233",
+        "max": "3.305615359339911",
+        "method_metric": "LC01_yaw_rmse_deg"
+      },
+      {
+        "min": "8.511537631961962",
+        "median": "12.430566904743648",
+        "max": "35.28000693573544",
+        "method_metric": "EXT05C_yaw_rmse_deg"
+      },
+      {
+        "min": "2.968402950799252",
+        "median": "2.9953496704906852",
+        "max": "3.031448654428384",
+        "method_metric": "LC01-BR_yaw_rmse_deg"
+      }
+    ],
+    "natural": [
+      {
+        "sequence_id": "BY2",
+        "internal_method_id": "F01",
+        "yaw_rmse_deg": "8.089647422454789",
+        "horizontal_rmse_m": "0.09177145533263088",
+        "registered_table_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/CORE_541_TABLE_V3.csv",
+        "registered_table_line": "2"
+      },
+      {
+        "sequence_id": "BY2",
+        "internal_method_id": "F03",
+        "yaw_rmse_deg": "1.9155910498740765",
+        "horizontal_rmse_m": "0.09992032386709424",
+        "registered_table_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/CORE_541_TABLE_V3.csv",
+        "registered_table_line": "4"
+      },
+      {
+        "sequence_id": "BY2",
+        "internal_method_id": "F04",
+        "yaw_rmse_deg": "1.8862718548526467",
+        "horizontal_rmse_m": "0.09790607774950152",
+        "registered_table_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/CORE_541_TABLE_V3.csv",
+        "registered_table_line": "5"
+      },
+      {
+        "sequence_id": "BY2H",
+        "internal_method_id": "F01",
+        "yaw_rmse_deg": "7.137487572272005",
+        "horizontal_rmse_m": "0.06292589316025435",
+        "registered_table_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/SEQUENCE_TABLE_V3.csv",
+        "registered_table_line": "9"
+      },
+      {
+        "sequence_id": "BY2H",
+        "internal_method_id": "F03",
+        "yaw_rmse_deg": "1.9408005859002146",
+        "horizontal_rmse_m": "0.06866690198053112",
+        "registered_table_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/SEQUENCE_TABLE_V3.csv",
+        "registered_table_line": "11"
+      },
+      {
+        "sequence_id": "BY2H",
+        "internal_method_id": "F04",
+        "yaw_rmse_deg": "1.93377013508875",
+        "horizontal_rmse_m": "0.06836245149191253",
+        "registered_table_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/SEQUENCE_TABLE_V3.csv",
+        "registered_table_line": "12"
+      },
+      {
+        "sequence_id": "BY2O",
+        "internal_method_id": "F01",
+        "yaw_rmse_deg": "5.739037942642961",
+        "horizontal_rmse_m": "0.06284210260933396",
+        "registered_table_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/SEQUENCE_TABLE_V3.csv",
+        "registered_table_line": "20"
+      },
+      {
+        "sequence_id": "BY2O",
+        "internal_method_id": "F03",
+        "yaw_rmse_deg": "2.4321841493167162",
+        "horizontal_rmse_m": "0.05470913757288693",
+        "registered_table_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/SEQUENCE_TABLE_V3.csv",
+        "registered_table_line": "22"
+      },
+      {
+        "sequence_id": "BY2O",
+        "internal_method_id": "F04",
+        "yaw_rmse_deg": "2.433814932823714",
+        "horizontal_rmse_m": "0.054543210912875166",
+        "registered_table_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/SEQUENCE_TABLE_V3.csv",
+        "registered_table_line": "23"
+      }
+    ],
+    "aiding": [
+      {
+        "condition": "A1",
+        "duration_s": "10",
+        "pairs": "9",
+        "without_HV_whole_window_median_m": "1.7935030150620086",
+        "full_whole_window_median_m": "1.7943923444462748"
+      },
+      {
+        "condition": "A1",
+        "duration_s": "20",
+        "pairs": "9",
+        "without_HV_whole_window_median_m": "10.300694259078298",
+        "full_whole_window_median_m": "10.292008352167633"
+      },
+      {
+        "condition": "A1",
+        "duration_s": "30",
+        "pairs": "9",
+        "without_HV_whole_window_median_m": "33.63394804154094",
+        "full_whole_window_median_m": "33.59609395544829"
+      },
+      {
+        "condition": "A2",
+        "duration_s": "10",
+        "pairs": "9",
+        "without_HV_whole_window_median_m": "1.603430518010078",
+        "full_whole_window_median_m": "0.1258372295353398"
+      },
+      {
+        "condition": "A2",
+        "duration_s": "20",
+        "pairs": "9",
+        "without_HV_whole_window_median_m": "7.960868926389705",
+        "full_whole_window_median_m": "0.2407591338855341"
+      }
+    ],
+    "tilt": [
+      {
+        "sequence_id": "BY2",
+        "method_id": "A05",
+        "metric": "roll_rmse_deg",
+        "rmse_deg": "3.326343572843144"
+      },
+      {
+        "sequence_id": "BY2",
+        "method_id": "F04",
+        "metric": "roll_rmse_deg",
+        "rmse_deg": "2.254340402339318"
+      },
+      {
+        "sequence_id": "BY2",
+        "method_id": "A05",
+        "metric": "pitch_rmse_deg",
+        "rmse_deg": "2.9293002515054924"
+      },
+      {
+        "sequence_id": "BY2",
+        "method_id": "F04",
+        "metric": "pitch_rmse_deg",
+        "rmse_deg": "2.265490744005314"
+      },
+      {
+        "sequence_id": "BY2H",
+        "method_id": "A05",
+        "metric": "roll_rmse_deg",
+        "rmse_deg": "2.7846061347426403"
+      },
+      {
+        "sequence_id": "BY2H",
+        "method_id": "F04",
+        "metric": "roll_rmse_deg",
+        "rmse_deg": "1.9662527055856236"
+      },
+      {
+        "sequence_id": "BY2H",
+        "method_id": "A05",
+        "metric": "pitch_rmse_deg",
+        "rmse_deg": "1.8816372871765976"
+      },
+      {
+        "sequence_id": "BY2H",
+        "method_id": "F04",
+        "metric": "pitch_rmse_deg",
+        "rmse_deg": "1.6982952989112554"
+      },
+      {
+        "sequence_id": "BY2O",
+        "method_id": "A05",
+        "metric": "roll_rmse_deg",
+        "rmse_deg": "1.8765919211768576"
+      },
+      {
+        "sequence_id": "BY2O",
+        "method_id": "F04",
+        "metric": "roll_rmse_deg",
+        "rmse_deg": "1.5071123881620372"
+      },
+      {
+        "sequence_id": "BY2O",
+        "method_id": "A05",
+        "metric": "pitch_rmse_deg",
+        "rmse_deg": "1.7341540486669456"
+      },
+      {
+        "sequence_id": "BY2O",
+        "method_id": "F04",
+        "metric": "pitch_rmse_deg",
+        "rmse_deg": "1.6950312543923702"
+      }
+    ],
+    "quality": [
+      {
+        "type": "D15",
+        "case_id": "D15_seed_00",
+        "off_yaw_rmse_deg": "29.79852519147967",
+        "full_yaw_rmse_deg": "2.698608937739373",
+        "off_H_rmse_m": "3.165550069309854",
+        "full_H_rmse_m": "3.5569029035745645"
+      },
+      {
+        "type": "D38",
+        "case_id": "D38_seed_00",
+        "off_yaw_rmse_deg": "1.730832347201089",
+        "full_yaw_rmse_deg": "1.6314482701341806",
+        "off_H_rmse_m": "0.0970682443234136",
+        "full_H_rmse_m": "0.0988446607068624"
+      },
+      {
+        "type": "D53",
+        "case_id": "D53_seed_00",
+        "off_yaw_rmse_deg": "1.886239709955484",
+        "full_yaw_rmse_deg": "1.885432097600814",
+        "off_H_rmse_m": "0.1086991951471017",
+        "full_H_rmse_m": "0.1000659618314859"
+      }
+    ],
+    "direction_screen": [
+      {
+        "method_id": "EXT01",
+        "support": "Original",
+        "denominator": "1350",
+        "outputs": "1059",
+        "scored": "1059",
+        "q25_deg": "2.175379933872563",
+        "median_deg": "24.98134353521266",
+        "q75_deg": "118.99886395874393"
+      },
+      {
+        "method_id": "EXT01",
+        "support": "Added ratio screen",
+        "denominator": "1350",
+        "outputs": "269",
+        "scored": "269",
+        "q25_deg": "1.6584351577096754",
+        "median_deg": "4.085056445450505",
+        "q75_deg": "83.28939723697948"
+      },
+      {
+        "method_id": "EXT02",
+        "support": "Original",
+        "denominator": "1350",
+        "outputs": "1029",
+        "scored": "1029",
+        "q25_deg": "2.1431808519332094",
+        "median_deg": "27.003543470742613",
+        "q75_deg": "117.72464437500388"
+      },
+      {
+        "method_id": "EXT02",
+        "support": "Added ratio screen",
+        "denominator": "1350",
+        "outputs": "253",
+        "scored": "253",
+        "q25_deg": "1.55956921474791",
+        "median_deg": "4.044162220978649",
+        "q75_deg": "83.28939723667457"
+      }
+    ]
+  },
+  "figures": [
+    {
+      "preview": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\schematics\\preview\\F01_platform.png",
+      "pdf": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\schematics\\figures\\F01_platform.pdf",
+      "png": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\schematics\\figures\\F01_platform.png",
+      "figure": 1,
+      "id": "F01_platform",
+      "claim": "紧凑短基线平台同时提供绝对方向信息和机身运动观测。"
+    },
+    {
+      "preview": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\schematics\\preview\\F02_method.png",
+      "pdf": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\schematics\\figures\\F02_method.pdf",
+      "png": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\schematics\\figures\\F02_method.png",
+      "figure": 2,
+      "id": "F02_method",
+      "claim": "短基线方向与机身辅助作用于同一共享状态估计器。"
+    },
+    {
+      "preview": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\navigation\\preview\\F03_integrated_routes_and_heading.png",
+      "pdf": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\navigation\\F03_integrated_routes_and_heading.pdf",
+      "png": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\navigation\\F03_integrated_routes_and_heading.png",
+      "figure": 3,
+      "id": "F03_integrated_routes_and_heading",
+      "claim": "三场景完整路线、同点空间近景及事件航向共同展示导航表现。"
+    },
+    {
+      "preview": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\observability\\preview\\F04_absolute_direction_relative_motion.png",
+      "pdf": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\observability\\F04_absolute_direction_relative_motion.pdf",
+      "png": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\observability\\F04_absolute_direction_relative_motion.png",
+      "figure": 4,
+      "id": "F04_absolute_direction_relative_motion",
+      "claim": "相同自身运动观测允许不同全局朝向表达，绝对方向用于约束该自由度。"
+    },
+    {
+      "preview": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\heading_acceptance\\preview\\F05_heading_error_comparison.png",
+      "pdf": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\heading_acceptance\\F05_heading_error_comparison.pdf",
+      "png": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\heading_acceptance\\F05_heading_error_comparison.png",
+      "figure": 5,
+      "id": "F05_heading_error_comparison",
+      "claim": "当前平台的方向误差与输出接受率需联合评价。"
+    },
+    {
+      "preview": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\aiding\\preview\\F06_heading_and_tilt.png",
+      "pdf": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\aiding\\figures\\F06_heading_and_tilt.pdf",
+      "png": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\aiding\\figures\\F06_heading_and_tilt.png",
+      "figure": 6,
+      "id": "F06_heading_and_tilt",
+      "claim": "持续方向更新降低航向误差，机身倾角改善roll/pitch。"
+    },
+    {
+      "preview": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\aiding\\preview\\F07_heading_retained_translation.png",
+      "pdf": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\aiding\\figures\\F07_heading_retained_translation.pdf",
+      "png": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\aiding\\figures\\F07_heading_retained_translation.png",
+      "figure": 7,
+      "id": "F07_heading_retained_translation",
+      "claim": "方向和辅助更新保留时，机身速度抑制平移观测中断误差。"
+    },
+    {
+      "preview": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\aiding\\preview\\F08_heading_quality_scaling.png",
+      "pdf": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\aiding\\figures\\F08_heading_quality_scaling.pdf",
+      "png": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\aiding\\figures\\F08_heading_quality_scaling.png",
+      "figure": 8,
+      "id": "F08_heading_quality_scaling",
+      "claim": "质量调整随退化来源产生强航向保护、小收益或近中性航向响应。"
+    },
+    {
+      "preview": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\navigation_comparison\\preview\\F09_heading_comparison.png",
+      "pdf": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\navigation_comparison\\F09_heading_comparison.pdf",
+      "png": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\navigation_comparison\\F09_heading_comparison.png",
+      "figure": 9,
+      "id": "F09_heading_comparison",
+      "claim": "共同支持下完整方法优于部分比较，但标定双位置IEKF在常规记录更优。"
+    },
+    {
+      "preview": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\aiding\\preview\\F10_heading_sensitivity.png",
+      "pdf": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\aiding\\figures\\F10_heading_sensitivity.pdf",
+      "png": "G:\\LegSA-GINS-project\\V3正文精修_20261013_R6\\aiding\\figures\\F10_heading_sensitivity.png",
+      "figure": 10,
+      "id": "F10_heading_sensitivity",
+      "claim": "方向中断、噪声和尖峰回放给出融合输出对方向质量的响应。"
+    }
+  ],
+  "question": "在紧凑四足机器人的 GNSS/INS 中，短基线方向信息与机身运动观测如何共同改善姿态和平移估计，这种互补在什么观测可用性与质量条件下成立，又在何时失效？",
+  "checked_date": "2026-10-15"
+}

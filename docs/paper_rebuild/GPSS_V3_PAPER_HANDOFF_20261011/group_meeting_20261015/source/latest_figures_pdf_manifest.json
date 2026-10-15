@@ -1,0 +1,205 @@
+{
+  "revision": "R6",
+  "author_acceptance_date": "2026-10-13",
+  "assembly_date": "2026-10-15",
+  "output_pdf": "G:/LegSA-GINS-project/组会汇报_20261015/output/pdf/最新正文图_R6_完整十图_20261015.pdf",
+  "page_count": 10,
+  "bookmark_count": 10,
+  "figure4_matches_restored_r4_pdf": true,
+  "all_merged_pages_render_identical_to_source": true,
+  "figure_pages": [
+    {
+      "page": 1,
+      "figure": "F01_platform",
+      "bookmark": "图1 平台与短基线",
+      "source_pdf": "G:/LegSA-GINS-project/V3正文精修_20261013_R6/schematics/figures/F01_platform.pdf",
+      "page_size_pt": [
+        493.22833251953125,
+        232.44094848632812
+      ],
+      "source_text_chars": 176,
+      "source_vector_paths": 15,
+      "source_raster_images": 1,
+      "render_equal_to_source": true,
+      "preview_png": "G:/LegSA-GINS-project/组会汇报_20261015/source/figure_pages/F01.png",
+      "preview_size_px": [
+        1800,
+        849
+      ]
+    },
+    {
+      "page": 2,
+      "figure": "F02_method",
+      "bookmark": "图2 方法框架",
+      "source_pdf": "G:/LegSA-GINS-project/V3正文精修_20261013_R6/schematics/figures/F02_method.pdf",
+      "page_size_pt": [
+        493.22833251953125,
+        235.3365020751953
+      ],
+      "source_text_chars": 654,
+      "source_vector_paths": 48,
+      "source_raster_images": 0,
+      "render_equal_to_source": true,
+      "preview_png": "G:/LegSA-GINS-project/组会汇报_20261015/source/figure_pages/F02.png",
+      "preview_size_px": [
+        1800,
+        859
+      ]
+    },
+    {
+      "page": 3,
+      "figure": "F03_integrated_routes_and_heading",
+      "bookmark": "图3 完整路线、空间近景与航向",
+      "source_pdf": "G:/LegSA-GINS-project/V3正文精修_20261013_R6/navigation/F03_integrated_routes_and_heading.pdf",
+      "page_size_pt": [
+        493.22833251953125,
+        493.22833251953125
+      ],
+      "source_text_chars": 674,
+      "source_vector_paths": 190,
+      "source_raster_images": 6,
+      "render_equal_to_source": true,
+      "preview_png": "G:/LegSA-GINS-project/组会汇报_20261015/source/figure_pages/F03.png",
+      "preview_size_px": [
+        1800,
+        1800
+      ]
+    },
+    {
+      "page": 4,
+      "figure": "F04_absolute_direction_relative_motion",
+      "bookmark": "图4 七种初始全局朝向",
+      "source_pdf": "G:/LegSA-GINS-project/V3正文精修_20261013_R6/observability/F04_absolute_direction_relative_motion.pdf",
+      "page_size_pt": [
+        493.22833251953125,
+        357.16534423828125
+      ],
+      "source_text_chars": 410,
+      "source_vector_paths": 70,
+      "source_raster_images": 0,
+      "render_equal_to_source": true,
+      "preview_png": "G:/LegSA-GINS-project/组会汇报_20261015/source/figure_pages/F04.png",
+      "preview_size_px": [
+        1800,
+        1304
+      ]
+    },
+    {
+      "page": 5,
+      "figure": "F05_heading_error_comparison",
+      "bookmark": "图5 方向方法比较",
+      "source_pdf": "G:/LegSA-GINS-project/V3正文精修_20261013_R6/heading_acceptance/F05_heading_error_comparison.pdf",
+      "page_size_pt": [
+        493.22833251953125,
+        544.251953125
+      ],
+      "source_text_chars": 1244,
+      "source_vector_paths": 3007,
+      "source_raster_images": 0,
+      "render_equal_to_source": true,
+      "preview_png": "G:/LegSA-GINS-project/组会汇报_20261015/source/figure_pages/F05.png",
+      "preview_size_px": [
+        1632,
+        1800
+      ]
+    },
+    {
+      "page": 6,
+      "figure": "F06_heading_and_tilt",
+      "bookmark": "图6 自然场景姿态",
+      "source_pdf": "G:/LegSA-GINS-project/V3正文精修_20261013_R6/aiding/figures/F06_heading_and_tilt.pdf",
+      "page_size_pt": [
+        493.22833251953125,
+        493.22833251953125
+      ],
+      "source_text_chars": 637,
+      "source_vector_paths": 119,
+      "source_raster_images": 6,
+      "render_equal_to_source": true,
+      "preview_png": "G:/LegSA-GINS-project/组会汇报_20261015/source/figure_pages/F06.png",
+      "preview_size_px": [
+        1800,
+        1800
+      ]
+    },
+    {
+      "page": 7,
+      "figure": "F07_heading_retained_translation",
+      "bookmark": "图7 条件性平移辅助",
+      "source_pdf": "G:/LegSA-GINS-project/V3正文精修_20261013_R6/aiding/figures/F07_heading_retained_translation.pdf",
+      "page_size_pt": [
+        493.22833251953125,
+        578.2677001953125
+      ],
+      "source_text_chars": 799,
+      "source_vector_paths": 273,
+      "source_raster_images": 5,
+      "render_equal_to_source": true,
+      "preview_png": "G:/LegSA-GINS-project/组会汇报_20261015/source/figure_pages/F07.png",
+      "preview_size_px": [
+        1536,
+        1800
+      ]
+    },
+    {
+      "page": 8,
+      "figure": "F08_heading_quality_scaling",
+      "bookmark": "图8 退化条件下的质量调整与航向响应",
+      "source_pdf": "G:/LegSA-GINS-project/V3正文精修_20261013_R6/aiding/figures/F08_heading_quality_scaling.pdf",
+      "page_size_pt": [
+        493.22833251953125,
+        561.2598266601562
+      ],
+      "source_text_chars": 940,
+      "source_vector_paths": 137,
+      "source_raster_images": 6,
+      "render_equal_to_source": true,
+      "preview_png": "G:/LegSA-GINS-project/组会汇报_20261015/source/figure_pages/F08.png",
+      "preview_size_px": [
+        1582,
+        1800
+      ]
+    },
+    {
+      "page": 9,
+      "figure": "F09_heading_comparison",
+      "bookmark": "图9 航向横向比较",
+      "source_pdf": "G:/LegSA-GINS-project/V3正文精修_20261013_R6/navigation_comparison/F09_heading_comparison.pdf",
+      "page_size_pt": [
+        493.22833251953125,
+        600.9448852539062
+      ],
+      "source_text_chars": 1037,
+      "source_vector_paths": 272,
+      "source_raster_images": 0,
+      "render_equal_to_source": true,
+      "preview_png": "G:/LegSA-GINS-project/组会汇报_20261015/source/figure_pages/F09.png",
+      "preview_size_px": [
+        1478,
+        1800
+      ]
+    },
+    {
+      "page": 10,
+      "figure": "F10_heading_sensitivity",
+      "bookmark": "图10 方向扰动输入与输出",
+      "source_pdf": "G:/LegSA-GINS-project/V3正文精修_20261013_R6/aiding/figures/F10_heading_sensitivity.pdf",
+      "page_size_pt": [
+        493.22833251953125,
+        595.2755737304688
+      ],
+      "source_text_chars": 758,
+      "source_vector_paths": 324,
+      "source_raster_images": 12,
+      "render_equal_to_source": true,
+      "preview_png": "G:/LegSA-GINS-project/组会汇报_20261015/source/figure_pages/F10.png",
+      "preview_size_px": [
+        1492,
+        1800
+      ]
+    }
+  ],
+  "publication_figures_modified": false,
+  "notes": "Original page dimensions and content retained. No new captions, labels, cropping, or numerical experiments.",
+  "visual_review": "PASS: all 10 pages reviewed in contact sheet; F03/F04/F08 inspected at individual-page resolution. No new clipping or layout changes from assembly."
+}
