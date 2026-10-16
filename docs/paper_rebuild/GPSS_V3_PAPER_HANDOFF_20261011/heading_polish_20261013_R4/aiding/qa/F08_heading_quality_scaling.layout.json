@@ -1,0 +1,9 @@
+{
+  "figure": "F08_heading_quality_scaling",
+  "width_mm": 174.0,
+  "height_mm": 150.0,
+  "min_font_pt": 8.0,
+  "clipped_text": [],
+  "data_smoothing": false,
+  "nav_series_resampling": false
+}

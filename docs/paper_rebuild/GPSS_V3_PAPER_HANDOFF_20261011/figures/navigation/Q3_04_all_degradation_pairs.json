@@ -1,0 +1,41 @@
+{
+  "id": "Q3_04_all_degradation_pairs",
+  "caption_en": "Paired RMSE differences across all 18 registered degradation types. Filled markers denote the median external-IEKF minus LegSA-GINS difference over jointly finite cases; open markers denote the 95th percentile, with connecting lines showing the median-to-percentile interval. Each type contains nine registered cases. Negative values favour the IEKF. Both IEKFs diverge in all nine cases for each position-noise type; timestamp-shift cases have no valid common pairs. The symmetric-log axis retains small differences and large excursions. Some velocity, Doppler and heading faults act on channels not read by an external filter; these are input-equivalence controls rather than independent robustness demonstrations. Full type definitions, all 396 logical results and all 744 paired summaries accompany the figure.",
+  "caption_zh": "全部18种登记退化类型的配对RMSE差。实心点为共同有限样本中“外部IEKF减LegSA-GINS”的中位数，空心点为95百分位，连线表示二者之间的区间；每种退化登记九个案例。负值表示IEKF误差较低。两种位置噪声下，两种IEKF均各9/9发散；时间戳扰动无有效共同配对。对称对数轴同时保留小差值和大偏离。部分速度、多普勒及航向故障作用于外部滤波器未读取的通道，属于输入等价控制。完整类型定义、396条逻辑结果和744条配对汇总随图交付。",
+  "meaning_zh": "这张补充图保留所有故障类别和反例；它逐类比较，不把异质故障混成一个总排名。",
+  "sources": [
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/DEGRADATION_PAIRED_R2.csv",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/DEGRADATION_EXTERNAL_TABLE_R2.csv",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/CLASSIC18_LABEL_MAP.csv"
+  ],
+  "technical_notes": {
+    "cases_per_type": 9,
+    "types": 18,
+    "pairs_source_rows": 744,
+    "logical_result_rows": 396,
+    "interval": "median to p95, not confidence interval",
+    "sign": "external minus F04",
+    "aliases": "A1 aliases and A2 support are separately retained in full data and Q3_02",
+    "no_op_types": [
+      "D43",
+      "D42",
+      "D46",
+      "D47",
+      "D50"
+    ],
+    "new_solver_evaluator_provider_calls": 0
+  },
+  "width_mm": 174.0,
+  "height_mm": 174.0,
+  "alignment_status": "PASS",
+  "audit_returncodes": {
+    "pdf_text": 0,
+    "collisions": 0
+  },
+  "visual_review": "PASS",
+  "visual_review_notes": "Inspected actual color and grayscale previews: every panel readable, common units and no clipping, deliberate curve intersections retained. Insets show fixed input-defined windows. Dense native IEKF curves use the retained full sampling and readable local insets.",
+  "title_zh": "全部外部退化类型的配对比较",
+  "question": "Q3",
+  "role": "supplement",
+  "preview_sha256": "f43cf8f73846a6466a5c134594d3d14620257c4676119a59cb576ee146246573"
+}

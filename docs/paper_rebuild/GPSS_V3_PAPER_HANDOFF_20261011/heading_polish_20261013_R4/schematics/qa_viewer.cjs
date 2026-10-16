@@ -1,0 +1,26 @@
+const { chromium } = require('C:/Users/ykw/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const fs = require('node:fs');
+const path = require('node:path');
+const { pathToFileURL } = require('node:url');
+(async()=>{
+ const browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});
+ const page=await browser.newPage({viewport:{width:1600,height:1000},deviceScaleFactor:1});
+ const errors=[];page.on('pageerror',e=>errors.push(String(e)));
+ await page.goto(pathToFileURL(path.join(__dirname,'F02_矢量放大查看.html')).href);
+ await page.locator('#diagram').evaluate(el=>el.decode());
+ const fit=await page.locator('#diagram').boundingBox();
+ await page.getByRole('button',{name:'200%',exact:true}).click();
+ const zoomed=await page.locator('#diagram').boundingBox();
+ await page.locator('#viewport').evaluate(el=>{el.scrollLeft=900;el.scrollTop=250});
+ const scroll=await page.locator('#viewport').evaluate(el=>({left:el.scrollLeft,top:el.scrollTop,width:el.clientWidth,scrollWidth:el.scrollWidth}));
+ await page.screenshot({path:path.join(__dirname,'qa/F02_viewer_200percent.png')});
+ await page.getByRole('button',{name:'适合窗口',exact:true}).click();
+ await page.screenshot({path:path.join(__dirname,'qa/F02_viewer_fit.png')});
+ await page.setViewportSize({width:390,height:844});
+ await page.getByRole('button',{name:'适合窗口',exact:true}).click();
+ const mobile=await page.locator('#diagram').boundingBox();
+ const result={fit_width:fit.width,zoom_200_width:zoomed.width,expected_200_width:3630,scroll,mobile_fit_width:mobile.width,js_errors:errors,pass:Math.abs(zoomed.width-3630)<1&&scroll.left>0&&mobile.width<=390&&errors.length===0};
+ fs.writeFileSync(path.join(__dirname,'qa/F02_VIEWER_CHECK.json'),JSON.stringify(result,null,2));
+ console.log(JSON.stringify(result));
+ await browser.close();
+})().catch(e=>{console.error(e);process.exit(1)});

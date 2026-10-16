@@ -1,0 +1,12 @@
+Nature Figure Rendered Collision Audit
+pdf: /mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/aiding/figures/F10_heading_sensitivity.pdf
+pages: 1
+visible text boxes: 90
+stroke paths: 314
+
+[WARN] page 1 text-image-edge: Text partially overlaps the edge of 1 raster image(s) — 'Direction'
+  text bbox: (85.99681854248047, 429.4709167480469, 117.55804443359375, 437.4709167480469)
+
+summary: 0 fail, 1 warn, 4 contained fill overlays, 3 contained image overlays
+verdict: REVIEW REQUIRED
+note: contained overlays can be intentional; WARN findings need final-size visual review

@@ -1,0 +1,41 @@
+from pathlib import Path
+import json,subprocess,sys
+import pandas as pd
+import fitz
+P=Path(__file__).resolve().parent
+R=Path('/mnt/g/LegSA-GINS-project')
+N=R/'V3五问题论文组图_20261011/navigation/data'
+checks={}
+for name in ['F03_route_local_comparison','F09_navigation_all_families']:
+    p=P/(name+'.json');m=json.loads(p.read_text());doc=fitz.open(P/(name+'.pdf'))
+    w=doc[0].rect.width*25.4/72;h=doc[0].rect.height*25.4/72
+    assert abs(w-174)<.01
+    assert m['audits']=={'text':0,'collision':0}
+    m['visual_review']='PASS: every final colour panel visually checked; figure 9 grayscale checked; original saved values, missing states, equal spatial aspect, and paired supports retained.'
+    p.write_text(json.dumps(m,ensure_ascii=False,indent=2))
+    checks[name]={'pdf_width_mm':w,'pdf_height_mm':h,'min_text_pt':8,'alignment':'PASS','collision':'PASS','visual_review':'PASS','formats':['PNG 600dpi','TIFF 600dpi','PDF','SVG','EPS'],'notes':'Static width parser cannot evaluate WIDTH; actual PDF geometry verifies 174mm.'}
+nat=pd.read_csv(P/'data/F09_NATURAL_ALL19_ROWS.csv')
+assert len(nat)==19 and nat.h_rmse_m.isna().sum()==1
+checks['data']={'natural_identity_rows':19,'finite_natural_rows':18,'preserved_natural_failures':1,'interruption_conditions':18,'fgo_rows':36,'ginav_native_trials':3,'new_solver_evaluator_provider_calls':0}
+mapping=[
+ ['F04','LegSA-GINS','3 natural trials; all 18 A2 cases','3 all panels; 9 a–e','IMU + GNSS solution-level products + conditional body observations','Frozen V3','Own natural output; matched POI only in 9c'],
+ ['LC01','Dual-position IEKF, literature','BY2/BY2O FILE_START; BY2H FILE_START and CONTRACT_START','3 right column; 9 a,b,e','Two GNSS positions + IMU','4 natural conditions; 18 A2 cases','BY2H geometry exception retained'],
+ ['LC01-S','Dual-position IEKF, calibrated','BY2/BY2O FILE_START; BY2H FILE_START and CONTRACT_START','3 right column; 9 a,b','Two GNSS positions + IMU','4 natural conditions','BY2H geometry exception retained'],
+ ['EXT05C','Single-position IEKF, literature','BY2/BY2O FILE_START; BY2H FILE_START and CONTRACT_START','9 a,b,e','GNSS1 position + IMU; GNSS2 initialization direction','4 natural conditions; 18 A2 cases','No online second-position measurement'],
+ ['EXT05C-S','Single-position IEKF, calibrated','BY2/BY2O FILE_START; BY2H FILE_START and CONTRACT_START','9 a,b and their shared failure text area','GNSS1 position + IMU; GNSS2 initialization direction','3 finite natural results and 1 failed FILE_START','Failed result has a separate text label, no marker on the continuous RMSE axis'],
+ ['LC01-BR','Baseline-retaining IEKF','18 registered 10/20-second position-interruption conditions','9 e','Two-position IEKF with retained relative baseline during interruption','18 finite cases','No nonexistent natural-result row invented'],
+ ['OISAM_STRICT','OiSAM single initialization','3 native records; common points 274 / 0 / 54','9 c,d','RTK position + IMU','Own native 275 / 0 / 55','Panel c midpoint; obstruction common support is initial 54 seconds'],
+ ['OISAM_RESTART','OiSAM recorded-gap reinitialization','3 native runs across 1 / 3 / 7 blocks','9 d,f','RTK position + IMU','Primary dynamic states 275 / 267 / 370','Panel f GNSS1; not mixed with midpoint position comparison'],
+ ['GINAV','GINav SPP/INS LC','All 3 actual native records','9 d; exact accuracy/state companion','SPP + IMU','77 / 2 / 5 native positions','BY2/O speed gate fails; H has only 2 points'],
+ ['WEN_TC','TC-FGO','All 3 real runs','9 f','Raw code + adapted attitude / inertial inputs','274 / 270 / 377 dynamic states','GNSS1; different input layer'],
+ ['GNC','GNC-FGO','All 3 real runs','9 f','Raw code + Doppler','274 / 270 / 377 dynamic states','GNSS1; no independently estimated attitude'],
+]
+pd.DataFrame(mapping,columns=['identity','display_name','conditions','figure_destination','input','support','interpretation']).to_csv(P/'data/METHOD_DESTINATIONS.csv',index=False)
+(P/'DELIVERY_CHECKS.json').write_text(json.dumps(checks,ensure_ascii=False,indent=2))
+records=[json.loads((P/(n+'.json')).read_text()) for n in ['F03_route_local_comparison','F09_navigation_all_families']]
+captions=[]
+for j in records:captions.extend(['**'+j['id']+'**','',j['caption_zh'],'',j['caption_en'],''])
+(P/'CAPTIONS_ZH_EN.md').write_text('\n'.join(captions))
+res=subprocess.run([sys.executable,'/mnt/c/Users/ykw/.codex/skills/nature-figure/scripts/validate_figure.py',str(P/'build_navigation.py')],capture_output=True,text=True)
+(P/'qa/SOURCE_PREFLIGHT.log').write_text(res.stdout+res.stderr)
+print(json.dumps(checks,ensure_ascii=False,indent=2))

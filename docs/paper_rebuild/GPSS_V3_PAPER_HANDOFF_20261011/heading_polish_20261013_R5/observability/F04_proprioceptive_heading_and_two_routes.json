@@ -1,0 +1,61 @@
+{
+  "role": "main",
+  "gauge_native_histories": 7,
+  "gauge_rows_per_history": 63277,
+  "gauge_residual_max_m": 1.8924919178716387e-07,
+  "main_relative_sequence": "BY2",
+  "main_relative_rows_per_route": 2741,
+  "relative_methods": [
+    "official Hartley OFF-LIT",
+    "HX05 LEG-DR with onboard attitude"
+  ],
+  "relative_window": [
+    66,
+    340
+  ],
+  "saved_alignment_window": [
+    66,
+    76
+  ],
+  "relative_metrics": [
+    {
+      "evaluation_status": "EVALUATED",
+      "horizontal_rmse_m": 50.18730430087597,
+      "up_rmse_m": 4.140141014413928,
+      "yaw_rmse_deg": 62.17349905058363,
+      "horizontal_max_m": 120.94017374193294,
+      "position_drift_m_per_100m": 33.63359978621048,
+      "heading_drift_deg_per_min": 31.04264227100656,
+      "scored_epochs": 2741,
+      "unsupported_grid_epochs": 0,
+      "sequence": "BY2",
+      "condition": "OFF-LIT",
+      "reader_name": "InEKF (literature)"
+    },
+    {
+      "evaluation_status": "EVALUATED",
+      "horizontal_rmse_m": 6.209110916549832,
+      "up_rmse_m": 5.158907636150188,
+      "yaw_rmse_deg": 2.3063053710902515,
+      "horizontal_max_m": 9.691227914369918,
+      "position_drift_m_per_100m": 0.069425808454193,
+      "heading_drift_deg_per_min": 0.1735799700715393,
+      "scored_epochs": 2741,
+      "unsupported_grid_epochs": 0,
+      "sequence": "BY2",
+      "condition": "LEG-DR",
+      "reader_name": "Kinematic integration"
+    }
+  ],
+  "boundary": "Gauge panels use an earlier reported-IJRR backend. Relative comparison uses the later official library and the onboard-attitude-dependent kinematic route; no same seven-yaw experiment exists for those two routes.",
+  "width_mm": 174,
+  "height_mm": 162.0,
+  "min_font_pt": 8,
+  "audits": {
+    "text": 0,
+    "collisions": 0
+  },
+  "new_solver_evaluator_provider_calls": 0,
+  "new_alignment_fits": 0,
+  "visual_review": "PASS: color and grayscale reviewed; two distinct input routes are labelled and all saved errors retained."
+}

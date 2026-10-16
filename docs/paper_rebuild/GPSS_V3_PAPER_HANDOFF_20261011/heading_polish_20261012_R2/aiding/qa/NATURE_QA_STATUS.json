@@ -1,0 +1,46 @@
+[
+  {
+    "stage": "source",
+    "exit_code": 0
+  },
+  {
+    "figure": "F06_heading_and_tilt",
+    "stage": "font",
+    "exit_code": 0
+  },
+  {
+    "figure": "F06_heading_and_tilt",
+    "stage": "collision",
+    "exit_code": 0
+  },
+  {
+    "figure": "F08_heading_quality_scaling",
+    "stage": "font",
+    "exit_code": 0
+  },
+  {
+    "figure": "F08_heading_quality_scaling",
+    "stage": "collision",
+    "exit_code": 0
+  },
+  {
+    "figure": "F10_heading_sensitivity",
+    "stage": "font",
+    "exit_code": 0
+  },
+  {
+    "figure": "F10_heading_sensitivity",
+    "stage": "collision",
+    "exit_code": 0
+  },
+  {
+    "figure": "S_quality_complete_statistics",
+    "stage": "font",
+    "exit_code": 0
+  },
+  {
+    "figure": "S_quality_complete_statistics",
+    "stage": "collision",
+    "exit_code": 0
+  }
+]

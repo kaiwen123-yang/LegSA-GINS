@@ -1,0 +1,57 @@
+{
+  "files": {
+    "CONTACT_EVENT_LEDGER.csv": {
+      "sha256": "0000efb9e94b8dc23f8d4d2180a9afaf0fd95a5256397cfda5c0861aef34d45b",
+      "size": 213672
+    },
+    "CONTACT_STATE.csv": {
+      "sha256": "bd2186d481c20d24c361387e9e0a335b1b940dcb93ad531fb6b72b31a30732fb",
+      "size": 12218382
+    },
+    "COVARIANCE_CHECKPOINTS.npz": {
+      "sha256": "46b505d1d74ca28888c60852347d24abd1a74c7b3d33fb4de476ad1dc16598d8",
+      "size": 15776854
+    },
+    "COVARIANCE_CHECKPOINT_INDEX.csv": {
+      "sha256": "5ecfd5d628cf212e9473e619c61db4f9d695248c4c87b709f261e85d847eea6a",
+      "size": 339414
+    },
+    "COVARIANCE_DIAGONALS.csv": {
+      "sha256": "25ae8252310ef71cb575f0a1a6536db31e4003bb427febede107892bdc449c44",
+      "size": 36696848
+    },
+    "EXECUTION_LEDGER.csv": {
+      "sha256": "c00ea274b35e1b27e9dd747939a49b2a3be973797bf4d340b1eba06374b75e97",
+      "size": 6171238
+    },
+    "KINEMATIC_INNOVATIONS.csv": {
+      "sha256": "38bd885995bd1bbcd8a14646191697a1bb3f259cd3f80bfc49144762952b3369",
+      "size": 8917072
+    },
+    "NATIVE_COMPARISON.csv": {
+      "sha256": "67fe9e752fa2de2a6902f69c1ae844b64ca28f1e41e1acc3a88a5ec697b42d72",
+      "size": 193
+    },
+    "NATIVE_CONFIG.cfg": {
+      "sha256": "511d0a3504a0dc1063ec2bbc23395397abd689f5a6245466c04cace002628992",
+      "size": 721
+    },
+    "NATIVE_SUMMARY.json": {
+      "sha256": "6ea6db7e5cffab31602bf0de6e54f50632f88b8eb5089415f15a1d94f8840fe8",
+      "size": 3119
+    },
+    "NAV.csv": {
+      "sha256": "dc4d95a1e634ea7f7c3aecfcb3cdd50ded8ebf4378dfcd46917ed4875338a600",
+      "size": 30159737
+    },
+    "NIS_DIAGNOSTICS.csv": {
+      "sha256": "0675b6e15f14a6c8aa80f97985aaa3f31edc53d31d32b8602518acb1c1d73755",
+      "size": 2433297
+    },
+    "RUNTIME.csv": {
+      "sha256": "b3cb325cd3c62ccb830003a8ef42f5714c16b2f536ba64131fb2684739a68003",
+      "size": 201
+    }
+  },
+  "schema_version": "hartley.h5.native_freeze.v1"
+}

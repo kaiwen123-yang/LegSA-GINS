@@ -1,0 +1,131 @@
+{
+  "run_id": "BY2__HARTLEY_OFFICIAL__OFF-LIT__C00",
+  "sequence": "BY2",
+  "config": "OFF-LIT",
+  "start_mode": "C00",
+  "failure_flag": "COMPLETED",
+  "returncode": 0,
+  "runtime_seconds": 1.264317905000098,
+  "code_commit": "1fc59f6067ddd326b578a7a3a47e62138ae3abe4",
+  "cache_sha256": "c169e26d66f35fe200bb17a695353cd2d751482df1cd97996a7a8afff8662065",
+  "config_sha256": "9579398d8d907b8fa1957fd6f779c1d41c7773bfecc0519b5f87678cdd77166b",
+  "binary_sha256": "0fa3ca6a3b553ab9bd16acd9b5c8844c4e54600f185d5476bc5028312dbf6944",
+  "native_audit": {
+    "passed": true,
+    "reference_opens": 0,
+    "write_scope": {
+      "pass": true,
+      "write_open_count": 1,
+      "write_outside_run_count": 0,
+      "outside_run_write_open_count": 0,
+      "outside_run_write_open_records": [],
+      "write_open_records": [
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/NAV.csv",
+          "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+          "return_code": 4,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/NAV.csv",
+          "anonymous_pipe": false
+        }
+      ],
+      "allowed_device_write_count": 0,
+      "allowed_device_write_records": [],
+      "allowed_anonymous_pipe_write_count": 0,
+      "allowed_anonymous_pipe_write_records": [],
+      "raw_write_open_count": 0,
+      "clean_root_outside_run_write_count": 0,
+      "write_scope_exceptions": [
+        "/dev/null",
+        "/dev/pts/*",
+        "kernel-identified anonymous pipe"
+      ]
+    },
+    "execve_programs": [
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/BUILD/hx02e_official_driver"
+    ],
+    "strace_sha256": "e46b3c7902696f0f14ebbfb2e403affcbb4b0e7ea253fa63fb945a742b160dd0",
+    "cache_opens": [
+      {
+        "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/01_INPUT_PINS/HARTLEY/BY2/H5_INPUT_CACHE.bin",
+        "flags": "O_RDONLY",
+        "return_code": 4,
+        "lexical_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/01_INPUT_PINS/HARTLEY/BY2/H5_INPUT_CACHE.bin",
+        "anonymous_pipe": false
+      }
+    ]
+  },
+  "synthetic_input": false,
+  "trace_used_online": false,
+  "nav_sha256": "432b1ec55e7a7ff960a93147e46ba76a061824453935d8432cda73826e39dbca",
+  "sanity": {
+    "valid_epochs": 56643,
+    "yaw_minus_raw_gyro_z_drift_deg_per_min": -34.4364035359026,
+    "yaw_minus_raw_gyro_z_rms_deg": 69.56230537118246,
+    "native_path_length_10hz_m": 676.171024037151,
+    "path_grid_epochs": 2741,
+    "yaw_definition": "Unwrapped native FLU/up-world yaw increments minus raw sensor z left-hold integral; evaluation window; OLS per minute",
+    "path_definition": "Native IMU-point horizontal path on the supported HX-02 10 Hz window grid",
+    "reference_path_length_m": 328.4713109046748,
+    "native_to_reference_path_ratio": 2.058539061371426
+  },
+  "metrics": {
+    "alignment": {
+      "epochs": 101,
+      "not_estimated": [
+        "roll",
+        "pitch",
+        "scale",
+        "time_offset"
+      ],
+      "per_epoch_yaw_offset_circular_std_deg": 1.5369314310486908,
+      "rule": "per branch: one least-squares yaw-about-gravity + 3-D translation on the first 10 s of the window from the branch's own output (HX-02 amendment 1); never shared, never re-fitted",
+      "translation_enu_m": [
+        0.18595431708440902,
+        0.4193027587331134,
+        -0.2121018903032685
+      ],
+      "window_seconds": [
+        66.0,
+        76.0
+      ],
+      "yaw_offset_deg": 86.29834864835877
+    },
+    "drift_definitions": {
+      "heading": "OLS slope (with intercept) of time-unwrapped wrap-safe NED yaw error versus time in minutes",
+      "position": "OLS slope (with intercept) of horizontal error norm versus cumulative reference horizontal path, x100"
+    },
+    "evaluation_status": "EVALUATED",
+    "heading_drift_deg_per_min": 31.04264227100656,
+    "horizontal_max_m": 120.94017374193294,
+    "horizontal_rmse_m": 50.18730430087597,
+    "nav_first_rel_s": 44.887078285217285,
+    "nav_last_rel_s": 350.0850489139557,
+    "nav_rows": 63277,
+    "position_drift_m_per_100m": 33.63359978621048,
+    "reference_path_length_m": 328.4713109046748,
+    "relative_pose_error_yaw_translation": {
+      "10s": {
+        "grid_step_ms": 100,
+        "pair_count": 2641,
+        "translation_rmse_m": 7.1693064614493345,
+        "yaw_rmse_deg": 11.416578236658705
+      },
+      "1s": {
+        "grid_step_ms": 100,
+        "pair_count": 2731,
+        "translation_rmse_m": 1.6127974142545467,
+        "yaw_rmse_deg": 2.5461000704301076
+      },
+      "5s": {
+        "grid_step_ms": 100,
+        "pair_count": 2691,
+        "translation_rmse_m": 4.817798019447847,
+        "yaw_rmse_deg": 7.502525687397678
+      }
+    },
+    "scored_epochs": 2741,
+    "unsupported_grid_epochs": 0,
+    "up_rmse_m": 4.140141014413928,
+    "yaw_rmse_deg": 62.17349905058363
+  }
+}

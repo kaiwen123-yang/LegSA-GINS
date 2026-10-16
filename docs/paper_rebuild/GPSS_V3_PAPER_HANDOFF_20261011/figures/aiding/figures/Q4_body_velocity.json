@@ -1,0 +1,36 @@
+{
+  "id": "Q4_body_velocity",
+  "caption_en": "Conditional effect of body-velocity aiding during GNSS interruptions. (a,b) Horizontal error around one 20-s interruption; grey shading marks the interruption. The inset in (b) enlarges the 0–2.5 m range during the interruption. (c,d) Whole-run horizontal RMSE for nine interruption placements per duration on the same recorded route. Lines connect identical placements. Columns show complete GNSS loss and interruption of translational observations with heading retained. Complete GNSS loss also pauses auxiliary updates in the evaluated implementation.",
+  "caption_zh": "机身速度辅助在GNSS中断中的条件作用。（a,b）一处20 s中断及恢复过程的水平误差，灰色为中断区间；（b）插图放大中断期间0–2.5 m误差范围。（c,d）同一实测路线中，每种时长九个中断布置的全窗水平RMSE，细线连接相同布置。两列分别为全部GNSS观测中断与保留航向的平移观测中断。所评价实现中，全部GNSS观测中断同时暂停辅助更新。",
+  "meaning_zh": "先看上排两条误差曲线何时分开，再看下排这种变化是否在九个布置中都出现。",
+  "sources": [
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/GPSS_V3_PAPER_START_20261008/FIGURE_PLAN_INTERNAL/ADD495.csv",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/ADD_RUN_00107/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/ADD_RUN_00103/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/ADD_RUN_00404/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/ADD_RUN_00400/v3/FROZEN_EVALUATOR/error_series.csv.gz"
+  ],
+  "technical_notes": {
+    "example": "D61_20s_seed_00 and D62_20s_seed_00",
+    "plot_window": "[outage_start-5,outage_end+15]",
+    "all_summary_points": 90,
+    "method": "F04 versus A06"
+  },
+  "width_mm": 174.0,
+  "height_mm": 139.0,
+  "alignment_status": "PASS",
+  "audit_returncodes": {
+    "pdf_text": 0,
+    "collisions": 0
+  },
+  "visual_review": "PASS",
+  "visual_review_notes": "彩色/灰度逐面板检查；完整GNSS中断曲线近重合保留；0–2.5 m插图已明确纵轴范围；全部45布置成对显示。插图零刻度位于浅灰中断填充边界，文字可读且无描边碰撞。",
+  "role": "main",
+  "question": "Q4",
+  "title_zh": "保留航向时的机身速度辅助",
+  "export_sha256": {
+    "png": "f1f1f42b5d556830a22c292b145f16b8b21c1155d920d3ddc8824368c2399f0d",
+    "pdf": "e2b41fffea776a330f4ea7b2c96c58641401ebed52581b1bf7547612e65c4a1b",
+    "svg": "451425268560aa5b3872b82d936bc97c71dd9b4d7636d9f41805c41141f98a7f"
+  }
+}

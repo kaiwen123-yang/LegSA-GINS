@@ -1,0 +1,56 @@
+{
+  "common_epochs": {
+    "BY2": 274,
+    "BY2H": 267,
+    "BY2O": 367
+  },
+  "matching": "Existing V3/OiSAM dynamic nominal pairs; nearest retained IEKF error epoch within5ms of same nominal second; intersect all four IEKF supports; no interpolation. Pairwise separation at most10ms.",
+  "caption_zh": "航向精度的滤波与因子图比较，并补齐已完成的FGO定位路线。（a–f）三条自然记录中的有符号航向误差和绝对误差累计分布，全部六方法使用共同名义动态时刻274/267/367点。灰带为登记遮挡，缺少动态输出处断线。文献/标定配置与原登记起点保留。（g,h）首个登记20秒位置中断航向过程，以及全部18个条件的全窗航向RMSE；灰色点划线为保留基线IEKF，黑短线为中位数。（i）OiSAM、TC-FGO、GNC-FGO在同一GNSS1天线点的既有水平RMSE，采用它们独立登记的共同动态支持274/267/369点。TC/GNC不自行估计姿态，因此这里只展示其定位；本文现有位置比较点为POI，不混入该天线点面板。原始码与RTK输入不同，完整输入和全窗覆盖在配表中。",
+  "caption_en": "Heading accuracy across filtering and factor-graph methods with the completed FGO position routes retained. (a–f) Signed heading errors and absolute-error ECDFs on common nominal dynamic epochs (274/267/367) for the six heading-estimating configurations. Gray shading marks registered obstruction; missing dynamic outputs break curves. Original initialization conventions are retained. (g,h) The first registered20-s position interruption and whole-run heading RMSE for all18 conditions; the gray dash-dot curve is the baseline-retaining IEKF and black ticks indicate medians. (i) Existing horizontal RMSE for OiSAM, TC-FGO and GNC-FGO at the same GNSS1 antenna point and their separately registered common dynamic support (274/267/369). TC/GNC do not estimate attitude in these implementations. LegSA-GINS position metrics are registered at the POI and are not mixed into this antenna-point panel. Raw-code and RTK inputs differ; full input definitions and window coverage accompany the figure.",
+  "selection": "Entire common natural support; first registered interruption; all18 conditions; all9 completed FGO same-point common-support results",
+  "source_metric_status": "Descriptive common-support yaw statistics from saved errors; FGO position RMSE reuses registered statistics unchanged",
+  "no_failure_rows_removed": true,
+  "FGO_common_position_counts": {
+    "BY2": 274,
+    "BY2H": 267,
+    "BY2O": 369
+  },
+  "FGO_method_state": "OiSAM attitude estimated; WEN_TC/GNC attitude_is_estimated=False and yaw NA; no input AHRS yaw plotted as output.",
+  "V3_position_absence": "Registered V3 point is POI_MIDPOINT; no already-evaluated GNSS1 V3 result found in companion contracts; no unregistered transport invented.",
+  "width_mm": 174,
+  "height_mm": 234.00000000000003,
+  "min_font_pt": 8,
+  "preview_dpi": 400,
+  "source_paths": [
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2H__EXT05C__CONTRACT_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2H__LC01-S__CONTRACT_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2H__LC01__CONTRACT_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2__EXT05C-S__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2__LC01-S__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_03/07_OFFLINE_EVALUATION/v3/BY2H__EXT05C-S__CONTRACT_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_03/07_OFFLINE_EVALUATION/v3/BY2O__EXT05C-S__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_03/07_OFFLINE_EVALUATION/v3/BY2O__EXT05C__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_03/07_OFFLINE_EVALUATION/v3/BY2O__LC01-S__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_03/07_OFFLINE_EVALUATION/v3/BY2O__LC01__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/A2_ALL18_MATCHED_RESULTS.csv",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2H_COMMON_SEGMENTED_HEADING.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2O_COMMON_SEGMENTED_HEADING.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2_COMMON_SEGMENTED_HEADING.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/EXT05C_A2_20s_seed00.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/F04_A2_20s_seed00.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/FGO_GNSS1_ALL36_RESULTS.csv",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/LC01-BR_A2_20s_seed00.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/LC01_A2_20s_seed00.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/LC_NATIVE_TABLE_READ.csv",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_DEGSUBSET_BY2/09_HORIZONTAL_V3/EXT05C/FROZEN_EVALUATOR/error_series.csv",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_DEGSUBSET_BY2/09_HORIZONTAL_V3/LC01_EXT05A/FROZEN_EVALUATOR/error_series.csv"
+  ],
+  "new_solver_evaluator_provider_calls": 0,
+  "frozen_v3": "7d43b9af26120ed5dde21f53e515386361072ba6",
+  "audits": {
+    "text": 0,
+    "collisions": 0
+  },
+  "alignment": "PASS",
+  "visual_review": "PASS: full color and grayscale previews inspected; longer route windows, reduced arrows, added same-point FGO summary; inset tick collision repaired."
+}

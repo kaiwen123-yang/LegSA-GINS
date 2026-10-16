@@ -1,0 +1,4 @@
+source,display_label,start_elapsed_s,end_elapsed_s,count,minimum,q25,median,q75,maximum
+receiver_position,Position,0,120,600,1.0,1.45780806695,2.0801621282,3.133435413625,5.0
+go2_horizontal_velocity,Body velocity,0,120,600,2.0,10.0,10.0,10.0,10.0
+dual_antenna_yaw,Heading,0,120,600,1.0,1.0,1.0,1.0,1.0084700151

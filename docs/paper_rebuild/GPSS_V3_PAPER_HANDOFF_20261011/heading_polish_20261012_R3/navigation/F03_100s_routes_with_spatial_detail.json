@@ -1,0 +1,66 @@
+{
+  "id": "F03_100s_routes_with_spatial_detail",
+  "width_mm": 174,
+  "height_mm": 190.0,
+  "min_font_pt": 8,
+  "preview_dpi": 400,
+  "caption_zh": "100秒事件路线、真实空间局部差距与同窗航向误差。三行依次为常规行走、大幅机身运动记录和遮挡记录。左列显示100秒完整片段，中列按固定参考中心展示1m或0.4m真实空间方框，坐标单位厘米；不同方法没有相对平移或误差倍率。方框来源分别为固定88–92秒和199.945–209.945秒数据，视窗外按空间轴裁剪。右列为同100秒航向误差，灰色仅标记实际登记遮挡。局部窗口由原参考事件和固定时长确定。",
+  "caption_en": "100-s event trajectories, physical spatial details and heading errors. Rows correspond to nominal walking, large-body-motion and obstruction records. Left: the entire100-s segment. Middle: a fixed1-m or0.4-m spatial square centred on the reference event position, with centimetre axes and no method-dependent shift or error magnification. Original samples from fixed88–92s or199.945–209.945s intervals are clipped only by the stated spatial viewport. Right: heading errors over the same100s; gray shading indicates the registered obstruction. All windows follow fixed reference-event rules.",
+  "notes": {
+    "events": [
+      {
+        "sequence": "BY2",
+        "elapsed_start_s": 40,
+        "elapsed_end_s": 140,
+        "duration_s": 100,
+        "center_s": 90.0,
+        "zoom_source_start_s": 88.0,
+        "zoom_source_end_s": 92.0,
+        "spatial_halfwidth_m": 0.5,
+        "zoom_reference_east_m": -102.8037492200184,
+        "zoom_reference_north_m": 6.686053769154951,
+        "selection": "Fixed100s context around prior reference turn90s / registered obstruction midpoint204.945s; physical box centered on reference only; no method-error selection",
+        "zoom_crop": "All source samples in the fixed4s /10s interval retained; plotted axes clip to the stated1m /0.4m physical square; no error magnification"
+      },
+      {
+        "sequence": "BY2H",
+        "elapsed_start_s": 40,
+        "elapsed_end_s": 140,
+        "duration_s": 100,
+        "center_s": 90.0,
+        "zoom_source_start_s": 88.0,
+        "zoom_source_end_s": 92.0,
+        "spatial_halfwidth_m": 0.5,
+        "zoom_reference_east_m": -107.04891205908103,
+        "zoom_reference_north_m": 2.6165643949030915,
+        "selection": "Fixed100s context around prior reference turn90s / registered obstruction midpoint204.945s; physical box centered on reference only; no method-error selection",
+        "zoom_crop": "All source samples in the fixed4s /10s interval retained; plotted axes clip to the stated1m /0.4m physical square; no error magnification"
+      },
+      {
+        "sequence": "BY2O",
+        "elapsed_start_s": 154.945,
+        "elapsed_end_s": 254.945,
+        "duration_s": 100.0,
+        "center_s": 204.945,
+        "zoom_source_start_s": 199.945,
+        "zoom_source_end_s": 209.945,
+        "spatial_halfwidth_m": 0.2,
+        "zoom_reference_east_m": -106.612018065259,
+        "zoom_reference_north_m": -31.82578294441266,
+        "selection": "Fixed100s context around prior reference turn90s / registered obstruction midpoint204.945s; physical box centered on reference only; no method-error selection",
+        "zoom_crop": "All source samples in the fixed4s /10s interval retained; plotted axes clip to the stated1m /0.4m physical square; no error magnification"
+      }
+    ],
+    "geographic_point": "All spatial curves use the previously registered POI midpoint",
+    "all100s_samples_retained": true,
+    "new_absolute_alignment": false
+  },
+  "alignment": "PASS",
+  "audits": {
+    "text": 0,
+    "collisions": 0
+  },
+  "new_solver_evaluator_provider_calls": 0,
+  "visual_review": "PASS: complete color and grayscale layouts reviewed; POI insets moved inside empty loop regions, redundant FGO insets removed, support text moved outside paths, relative-scene text moved into two-line titles.",
+  "local_curve_rendering": "Main curves retain vectors; cropped spatial-detail marks rasterized at600dpi inside vector PDF/SVG to preserve exact display clipping; texts and axes remain editable."
+}

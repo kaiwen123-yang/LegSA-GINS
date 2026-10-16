@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "method": "Complex rotation z*exp(-i*known_yaw), with unchanged vertical coordinate; no angle fit/translation/scale/time fit",
+  "runs": 7,
+  "rows_per_run": 63277,
+  "all_native_rows": 442939,
+  "maximum_position_difference_m": 1.892491856501891e-07,
+  "maximum_saved_residual_disagreement_m": 1.9694544245559833e-14,
+  "approved_artwork_byte_identical": {
+    "pdf": true,
+    "svg": true,
+    "png": true,
+    "tiff": true
+  },
+  "what_it_means": "Known global-coordinate rotations leave the estimated relative path equivalent under the same proprioceptive observations. Residual is numerical agreement between rotated runs, not geographical position accuracy.",
+  "new_solver_calls": 0
+}

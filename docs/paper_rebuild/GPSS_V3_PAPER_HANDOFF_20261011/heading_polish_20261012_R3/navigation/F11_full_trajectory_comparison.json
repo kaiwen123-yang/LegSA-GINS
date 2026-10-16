@@ -1,0 +1,69 @@
+{
+  "id": "F11_full_trajectory_comparison",
+  "width_mm": 174,
+  "height_mm": 211.00000000000003,
+  "min_font_pt": 8,
+  "preview_dpi": 400,
+  "caption_zh": "全部自然评价窗中的导航轨迹，按真实评价点分列。左列在POI中点显示本文、单/双位置IEKF文献与标定参数，以及单次初始化OiSAM的全部有效轨迹；右列在GNSS1天线点显示按记录缺口重新初始化的OiSAM、TC-FGO和GNC-FGO。参考线使用同一评价点；缺测和重新初始化块边界断线。OiSAM圆圈为首个动态输出，叉号为最后动态输出，左列文字保留输出分母。小窗围绕固定参考事件位置显示真实局部坐标差，没有拟合旋转/平移或人为放大误差。所有原生有效点均保留；零动态输出的方法不虚构轨迹。GINav原生IMU部分输出和相对里程计另页展示。 米尺度轨迹高度重合是实际结果，精度差应结合左列局部和误差配图读取，不将不同方法人为错位。",
+  "caption_en": "Navigation trajectories across the complete natural evaluation windows, separated by physical point. Left: LegSA-GINS, the literature/calibrated single- and dual-position IEKFs, and single-initialization OiSAM at the POI midpoint. Right: recorded-gap-reinitialized OiSAM, TC-FGO and GNC-FGO at GNSS1. Each reference uses the same point. Curves break across output gaps and initialization-block boundaries. Circles and crosses identify OiSAM first and last dynamic outputs; the left panels retain output counts over the full nominal windows. Insets show true spatial differences around fixed reference-defined event locations, without fitted rotations, translations or error magnification. All finite native outputs are retained; no trajectory is invented for zero dynamic support. Native GINav partial outputs and relative-only estimators are shown separately. Metre-scale overlap is expected; inspect the POI insets and companion errors for precision differences. No method-dependent offsets are applied.",
+  "notes": {
+    "point_groups": [
+      "POI_MIDPOINT",
+      "GNSS1_ANTENNA"
+    ],
+    "all_scenes_full_window": true,
+    "methods": [
+      [
+        "LC01",
+        "LC01-S",
+        "EXT05C",
+        "EXT05C-S",
+        "OISAM_STRICT",
+        "F04"
+      ],
+      [
+        "WEN_TC",
+        "GNC",
+        "OISAM_RESTART"
+      ]
+    ],
+    "zoom_windows": [
+      {
+        "sequence": "BY2",
+        "point": "POI_MIDPOINT",
+        "center_elapsed_s": 90.0,
+        "source_start_s": 88.0,
+        "source_end_s": 92.0,
+        "physical_halfwidth_m": 0.5,
+        "selection": "same fixed reference event center asF03; method errors not read for selection"
+      },
+      {
+        "sequence": "BY2H",
+        "point": "POI_MIDPOINT",
+        "center_elapsed_s": 90.0,
+        "source_start_s": 88.0,
+        "source_end_s": 92.0,
+        "physical_halfwidth_m": 0.5,
+        "selection": "same fixed reference event center asF03; method errors not read for selection"
+      },
+      {
+        "sequence": "BY2O",
+        "point": "POI_MIDPOINT",
+        "center_elapsed_s": 204.945,
+        "source_start_s": 199.945,
+        "source_end_s": 209.945,
+        "physical_halfwidth_m": 0.2,
+        "selection": "same fixed reference event center asF03; method errors not read for selection"
+      }
+    ],
+    "source": "data/TRAJECTORY_COVERAGE.csv plus coordinate parity tables"
+  },
+  "alignment": "PASS",
+  "audits": {
+    "text": 0,
+    "collisions": 0
+  },
+  "new_solver_evaluator_provider_calls": 0,
+  "visual_review": "PASS: complete color and grayscale layouts reviewed; POI insets moved inside empty loop regions, redundant FGO insets removed, support text moved outside paths, relative-scene text moved into two-line titles.",
+  "local_curve_rendering": "Main curves retain vectors; cropped spatial-detail marks rasterized at600dpi inside vector PDF/SVG to preserve exact display clipping; texts and axes remain editable."
+}

@@ -1,0 +1,10 @@
+Nature Figure Rendered Collision Audit
+pdf: /mnt/g/LegSA-GINS-project/V3航向主线重绘_20261012/navigation/F03_event_routes_and_heading.pdf
+pages: 1
+visible text boxes: 73
+stroke paths: 129
+
+
+summary: 0 fail, 0 warn, 3 contained fill overlays, 0 contained image overlays
+verdict: PASS
+note: contained overlays can be intentional; WARN findings need final-size visual review

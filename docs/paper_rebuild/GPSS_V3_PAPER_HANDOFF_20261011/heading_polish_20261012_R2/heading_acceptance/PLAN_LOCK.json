@@ -1,0 +1,25 @@
+{
+  "schema": "heading.acceptance.engineering_ratio3.v1",
+  "registered_date_local": "2026-10-12",
+  "purpose": "Add an explicit engineering candidate-separation acceptance layer to completed C-LAMBDA and C-WLS runs without modifying their paper-core solver or frozen V3 results.",
+  "paper_requirement": "Neither source specifies this ratio acceptance layer for the implemented single-baseline estimator. This is a new engineering extension, not a repair of an omitted paper step.",
+  "native_version": "RAW_REPRO_V2__TECH_RETRY_2",
+  "sequences": ["BY2", "BY2H", "BY2O"],
+  "methods": ["EXT01", "EXT02"],
+  "ratio_threshold": 3.0,
+  "threshold_source": "One prespecified project engineering setting, inherited numerically from the already registered DD-KF ratio threshold. Not calibrated against the commercial reference and not asserted to control an integer failure probability.",
+  "EXT01_cost": "Existing exact constrained-ILS best and second objectives, relative to the joint-float residual; require original global best/second certificate.",
+  "EXT02_cost": "Existing full wrapped code/phase objective from every converged saved Algorithm-2 candidate; collapse identical integer vectors by minimum objective, then use best and second distinct integer hypotheses. Original entire-pool convergence is required; this does not create a global C-WLS certificate.",
+  "cost_scales": "The objective offsets differ between EXT01 and EXT02. A common numeric threshold is an engineering comparison, not a shared calibrated statistical guarantee.",
+  "rules": [
+    "Never override a native invalid epoch or search/candidate failure.",
+    "Require two distinct integer hypotheses and finite nonnegative costs in sorted order.",
+    "Best cost exactly zero has undefined finite ratio and is withheld as ZERO_BEST_COST, regardless of reference.",
+    "Accept only when second/best >= 3.0; equality passes.",
+    "Retain all original epochs and native failure reasons in the denominator.",
+    "Freeze acceptance masks before joining the already saved error series.",
+    "No threshold search, reference-driven selection, raw solver rerun, or change to V3."
+  ],
+  "deliverables": ["ACCEPTANCE_FULL_HISTORY.csv", "ACCEPTANCE_SEAL.json", "ACCEPTED_ERROR_SERIES.csv", "ACCEPTANCE_SUMMARY.csv", "AUDIT_REPORT_ZH.md", "TEST_RECEIPT.json"],
+  "known_integer_truth": false
+}

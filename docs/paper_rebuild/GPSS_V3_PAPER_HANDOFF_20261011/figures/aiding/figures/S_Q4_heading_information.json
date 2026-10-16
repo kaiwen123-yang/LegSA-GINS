@@ -1,0 +1,57 @@
+{
+  "id": "S_Q4_heading_information",
+  "caption_en": "Heading errors for basic GNSS/INS, the same basic configuration with dual-antenna heading updates, and LegSA-GINS. Columns correspond to nominal walking, large body motion and single-antenna obstruction. (a–c) Full error histories; shaded intervals are enlarged in (d–f). All three configurations share an initial direction. The first two configurations isolate the addition of the dual-antenna heading chain; LegSA-GINS also includes the other enabled aids.",
+  "caption_zh": "基础GNSS/INS、基础配置加入双天线航向更新以及完整LegSA-GINS的航向误差。三列依次为常规行走、大幅机身运动与单侧天线遮挡。（a–c）完整误差时序，灰色区间在（d–f）放大。三种配置共享初始方向；前两种配置用于解释加入双天线航向链的作用，完整方法还包含其他辅助。",
+  "meaning_zh": "基础配置加入航向链后持续航向误差明显降低，完整方法与该配置的航向曲线接近；二者微小差值不是本文全部收益。",
+  "sources": [
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00001/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00003/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00004/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F01/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F03/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F04/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F01/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F03/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F04/v3/FROZEN_EVALUATOR/error_series.csv.gz"
+  ],
+  "technical_notes": {
+    "methods": [
+      "F01",
+      "F03",
+      "F04"
+    ],
+    "windows_elapsed_s": {
+      "BY2": [
+        125,
+        145
+      ],
+      "BY2H": [
+        125,
+        145
+      ],
+      "BY2O": [
+        194,
+        214
+      ]
+    },
+    "preserved_all_samples": true,
+    "matched_contract": "original saved evaluator_contract_v3 signed yaw error"
+  },
+  "width_mm": 174.0,
+  "height_mm": 127.99999999999999,
+  "alignment_status": "PASS",
+  "audit_returncodes": {
+    "pdf_text": 0,
+    "collisions": 0
+  },
+  "visual_review": "PASS",
+  "visual_review_notes": "彩色/灰度逐面板检查；三条曲线全时序保留；F03/F04近重合为原始结果；局部窗口与浅灰标记一一对应，纵轴跨场景一致。",
+  "role": "supplement",
+  "question": "Q4",
+  "title_zh": "基础GNSS/INS加入双天线航向的作用",
+  "export_sha256": {
+    "png": "da9071e14c08689c7d368a7a4383eee7e26c8f6497e666f35be2ab5c3b8d4a0c",
+    "pdf": "a01623396ae68c4591358e3af240e074d8db3f026be390fa9c1a730eb7304922",
+    "svg": "0fda0676cd3fc582e0747c164eb6d9ac35a7d633b8d5e2635cf70e4eee903ae3"
+  }
+}

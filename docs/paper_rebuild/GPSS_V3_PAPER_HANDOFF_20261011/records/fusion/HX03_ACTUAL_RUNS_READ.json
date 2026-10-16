@@ -1,0 +1,467 @@
+[
+  {
+    "method": "LC01",
+    "command": {
+      "argv": [
+        "strace",
+        "-f",
+        "-yy",
+        "-s",
+        "4096",
+        "-e",
+        "trace=openat,execve",
+        "-o",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__LC01__LIT__D62_20s_seed_00__seed_00/NATIVE_OPENAT.strace",
+        "/usr/bin/python3",
+        "-m",
+        "legsa_gins.paper_rebuild.hext.hx03_native",
+        "--cache",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__LC01__LIT__D62_20s_seed_00__seed_00/CACHE",
+        "--output",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__LC01__LIT__D62_20s_seed_00__seed_00/native",
+        "--method",
+        "LC01",
+        "--parameters",
+        "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/configs/paper_rebuild/horizontal_literature/PHASE5_EXT05_PAVLASEK_CONTRACT_V1.yaml",
+        "--trace-mode",
+        "disabled"
+      ],
+      "cwd": "$W",
+      "environment_whitelist": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "MKL_NUM_THREADS": "1",
+        "MPLBACKEND": "Agg",
+        "MPLCONFIGDIR": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__LC01__LIT__D62_20s_seed_00__seed_00/native/.matplotlib",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/src",
+        "XDG_CACHE_HOME": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__LC01__LIT__D62_20s_seed_00__seed_00/native/.cache"
+      },
+      "native_wait_limit_s": 600,
+      "trace_mode": "disabled"
+    },
+    "params": {
+      "accel_scale": 1,
+      "config": "LIT",
+      "initial_std": {
+        "attitude_deg": 60,
+        "position_m": 0.1,
+        "velocity_mps": 0.1
+      },
+      "method_label": "LC01",
+      "noise": {
+        "accelerometer_m2ps3": [
+          0.0289,
+          0.0225,
+          0.0576
+        ],
+        "gyro_rad2_per_s": [
+          0.0004,
+          0.0004,
+          0.000324
+        ]
+      },
+      "parameter_source_sha256": "a9476f909ed65c9b4760ac19dc3cde3d625fa3d390b2f133cae79182e2293392"
+    },
+    "input": {
+      "arrays": {
+        "accel.npy": "f477eecc06d6b85adc5a0ff4d96eeda1d212a7ed8353c7cb131847a7fc6d611a",
+        "gyro.npy": "69acef7eef56f63ff4e7fa6630a5fded936ade5b8adc75b95b93e40f56e59b6a",
+        "imu_times.npy": "7dbda9fba6be88b66a10562b1903d56e95a9e757943f4161844e86161fd1d259",
+        "p1.npy": "4a3fd5e8e11bcd4aa1117309a39ca06757a61dcad3f0d0c12940e2a631a0c861",
+        "p2.npy": "711507153c86b2197b39d47dec891cff19e22da03ce458508c445d4b5a2c7087",
+        "pacc1.npy": "8be9ab0239de9bfb26cc1b60e89e96e37fe8d754baa181894ccfcdd8c9921a98",
+        "pacc2.npy": "19b959875db84c15d9a788eb9d35f4019541081b0829ec403feb953fe7d6c01a",
+        "relative_only.npy": "8c493cb98749eb840c3682cb94b0568c2fb5f75d9ed1ddfe650f6f3d59691433",
+        "solution_itow.npy": "fb38d3fa035647472b9692be5e3b5fb8ba412e79c6ac915a2f2409b38c80d7e3",
+        "solution_times.npy": "2e98ef5b9d310652e2a135d107ebc0ad4b8fd05f1751c510d3bd5e68cc07a877",
+        "valid1.npy": "6d4c3aac9077a0e2972fa1f4d0b88951527061d5aca46732e43a21920ece05d4",
+        "valid2.npy": "6d4c3aac9077a0e2972fa1f4d0b88951527061d5aca46732e43a21920ece05d4"
+      },
+      "cache_manifest_sha256": "d7dc222566c58592371db7349ee53796313631e9408c5be5bc93023d35c7ba72",
+      "report": {
+        "interval_epochs": 100,
+        "intervals": [
+          [
+            196.2,
+            216.2
+          ]
+        ],
+        "method": "LC01",
+        "operations": [],
+        "relative_only_epochs": 0,
+        "type": "D62"
+      },
+      "sources": [
+        {
+          "path": "$STAGES/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D62_20s_seed_00/PROVIDER_BUNDLE.json",
+          "role": "bundle",
+          "sha256": "9ae70903f3d29d1cba84560b8e51158514f1eba05dca2f67f012d4abe73eeac4"
+        },
+        {
+          "path": "$STAGES/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss",
+          "role": "base_gnss",
+          "sha256": "b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663"
+        },
+        {
+          "path": "$STAGES/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D62_20s_seed_00/GNSS18.gnss",
+          "role": "case_gnss",
+          "sha256": "49656fbb3f44c9337bcd77c796dcbef82fbc3576c1061ad7e3214985454f45cf"
+        }
+      ],
+      "spec_sha256": "34639684000a85c4c3ad42278d82dd3152e11701726caad93bf6427b30f4d8a8"
+    },
+    "native": {
+      "adapter": {
+        "evaluator_nav_sha256": "c0acdfc549f2f4b7b223057300937f4400f1edfc367328fa4876af1ace9b5857",
+        "input_native_nav_sha256": "86fdc1421686791637a82b13c49b636efd358cb50ccdc39ff9ea90dc9e4b18ed",
+        "maximum_dt_seconds": 0.09167623519897461,
+        "median_dt_seconds": 0.00400996208190918,
+        "nonpositive_dt_count": 0,
+        "output_epoch_count": 58014,
+        "p99_dt_seconds": 0.010004491806030273,
+        "position_conversion": "fixed_NED_to_ECEF_to_WGS84_geodetic",
+        "strictly_chronological": true,
+        "time_end_seconds": 340.0,
+        "time_start_seconds": 66.0,
+        "window_seconds": [
+          66.0,
+          340.0
+        ],
+        "window_selection": "CLOSED_FIXED_NATIVE_TIME_NO_ERROR_SELECTION"
+      },
+      "cache_manifest_sha256": "d7dc222566c58592371db7349ee53796313631e9408c5be5bc93023d35c7ba72",
+      "failure": null,
+      "initial_attitude_audit": {
+        "gravity_alignment_error": 1.1108127470407578e-16,
+        "measured_baseline_heading_ned_deg": 271.3364603509171,
+        "pitch_deg": -0.7942504551064933,
+        "roll_deg": 0.9004752449568363,
+        "yaw_ned_deg": 1.3239770781292135
+      },
+      "initial_solution_index": 0,
+      "initial_time": 1772784055.8,
+      "invalid_solution_count": 100,
+      "method": "LC01",
+      "method_label": "LC01",
+      "processed_solution_count": 1372,
+      "reference_opens": 0,
+      "relative_only_update_count": 0,
+      "status": "COMPLETED",
+      "trace_mode": "disabled"
+    },
+    "stderr": ""
+  },
+  {
+    "method": "EXT05C",
+    "command": {
+      "argv": [
+        "strace",
+        "-f",
+        "-yy",
+        "-s",
+        "4096",
+        "-e",
+        "trace=openat,execve",
+        "-o",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__EXT05C__LIT__D62_20s_seed_00__seed_00/NATIVE_OPENAT.strace",
+        "/usr/bin/python3",
+        "-m",
+        "legsa_gins.paper_rebuild.hext.hx03_native",
+        "--cache",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__EXT05C__LIT__D62_20s_seed_00__seed_00/CACHE",
+        "--output",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__EXT05C__LIT__D62_20s_seed_00__seed_00/native",
+        "--method",
+        "EXT05C",
+        "--parameters",
+        "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/configs/paper_rebuild/horizontal_literature/PHASE5_EXT05_PAVLASEK_CONTRACT_V1.yaml",
+        "--trace-mode",
+        "disabled"
+      ],
+      "cwd": "$W",
+      "environment_whitelist": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "MKL_NUM_THREADS": "1",
+        "MPLBACKEND": "Agg",
+        "MPLCONFIGDIR": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__EXT05C__LIT__D62_20s_seed_00__seed_00/native/.matplotlib",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/src",
+        "XDG_CACHE_HOME": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__EXT05C__LIT__D62_20s_seed_00__seed_00/native/.cache"
+      },
+      "native_wait_limit_s": 600,
+      "trace_mode": "disabled"
+    },
+    "params": {
+      "accel_scale": 1,
+      "config": "LIT",
+      "initial_std": {
+        "attitude_deg": 60,
+        "position_m": 0.1,
+        "velocity_mps": 0.1
+      },
+      "method_label": "EXT05C",
+      "noise": {
+        "accelerometer_m2ps3": [
+          0.0289,
+          0.0225,
+          0.0576
+        ],
+        "gyro_rad2_per_s": [
+          0.0004,
+          0.0004,
+          0.000324
+        ]
+      },
+      "parameter_source_sha256": "a9476f909ed65c9b4760ac19dc3cde3d625fa3d390b2f133cae79182e2293392"
+    },
+    "input": {
+      "arrays": {
+        "accel.npy": "f477eecc06d6b85adc5a0ff4d96eeda1d212a7ed8353c7cb131847a7fc6d611a",
+        "gyro.npy": "69acef7eef56f63ff4e7fa6630a5fded936ade5b8adc75b95b93e40f56e59b6a",
+        "imu_times.npy": "7dbda9fba6be88b66a10562b1903d56e95a9e757943f4161844e86161fd1d259",
+        "p1.npy": "4a3fd5e8e11bcd4aa1117309a39ca06757a61dcad3f0d0c12940e2a631a0c861",
+        "p2.npy": "711507153c86b2197b39d47dec891cff19e22da03ce458508c445d4b5a2c7087",
+        "pacc1.npy": "8be9ab0239de9bfb26cc1b60e89e96e37fe8d754baa181894ccfcdd8c9921a98",
+        "pacc2.npy": "19b959875db84c15d9a788eb9d35f4019541081b0829ec403feb953fe7d6c01a",
+        "relative_only.npy": "8c493cb98749eb840c3682cb94b0568c2fb5f75d9ed1ddfe650f6f3d59691433",
+        "solution_itow.npy": "fb38d3fa035647472b9692be5e3b5fb8ba412e79c6ac915a2f2409b38c80d7e3",
+        "solution_times.npy": "2e98ef5b9d310652e2a135d107ebc0ad4b8fd05f1751c510d3bd5e68cc07a877",
+        "valid1.npy": "6d4c3aac9077a0e2972fa1f4d0b88951527061d5aca46732e43a21920ece05d4",
+        "valid2.npy": "8e992ffaad166c0ad01146e293565c24be19d9091988934ec421d467899431fc"
+      },
+      "cache_manifest_sha256": "e007df543513796f21ca3cbdd167295e602efb3e7ce5f88c8641534253026b1a",
+      "report": {
+        "interval_epochs": 100,
+        "intervals": [
+          [
+            196.2,
+            216.2
+          ]
+        ],
+        "method": "EXT05C",
+        "operations": [],
+        "relative_only_epochs": 0,
+        "type": "D62"
+      },
+      "sources": [
+        {
+          "path": "$STAGES/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D62_20s_seed_00/PROVIDER_BUNDLE.json",
+          "role": "bundle",
+          "sha256": "9ae70903f3d29d1cba84560b8e51158514f1eba05dca2f67f012d4abe73eeac4"
+        },
+        {
+          "path": "$STAGES/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss",
+          "role": "base_gnss",
+          "sha256": "b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663"
+        },
+        {
+          "path": "$STAGES/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D62_20s_seed_00/GNSS18.gnss",
+          "role": "case_gnss",
+          "sha256": "49656fbb3f44c9337bcd77c796dcbef82fbc3576c1061ad7e3214985454f45cf"
+        }
+      ],
+      "spec_sha256": "34639684000a85c4c3ad42278d82dd3152e11701726caad93bf6427b30f4d8a8"
+    },
+    "native": {
+      "adapter": {
+        "evaluator_nav_sha256": "dee8c72d0562a3db32b13ab95ba711bc6c45a765edcba765ce9851e450bea6f2",
+        "input_native_nav_sha256": "32757223301cfa60f955f8a43be251e049b0b9c71ae62b1b0b6f6eaf60db8ed3",
+        "maximum_dt_seconds": 0.09167623519897461,
+        "median_dt_seconds": 0.00400996208190918,
+        "nonpositive_dt_count": 0,
+        "output_epoch_count": 58014,
+        "p99_dt_seconds": 0.010004491806030273,
+        "position_conversion": "fixed_NED_to_ECEF_to_WGS84_geodetic",
+        "strictly_chronological": true,
+        "time_end_seconds": 340.0,
+        "time_start_seconds": 66.0,
+        "window_seconds": [
+          66.0,
+          340.0
+        ],
+        "window_selection": "CLOSED_FIXED_NATIVE_TIME_NO_ERROR_SELECTION"
+      },
+      "cache_manifest_sha256": "e007df543513796f21ca3cbdd167295e602efb3e7ce5f88c8641534253026b1a",
+      "failure": null,
+      "initial_attitude_audit": {
+        "gravity_alignment_error": 1.1108127470407578e-16,
+        "measured_baseline_heading_ned_deg": 271.3364603509171,
+        "pitch_deg": -0.7942504551064933,
+        "roll_deg": 0.9004752449568363,
+        "yaw_ned_deg": 1.3239770781292135
+      },
+      "initial_solution_index": 0,
+      "initial_time": 1772784055.8,
+      "invalid_solution_count": 100,
+      "method": "EXT05C",
+      "method_label": "EXT05C",
+      "processed_solution_count": 1372,
+      "reference_opens": 0,
+      "relative_only_update_count": 0,
+      "status": "COMPLETED",
+      "trace_mode": "disabled"
+    },
+    "stderr": ""
+  },
+  {
+    "method": "LC01-BR",
+    "command": {
+      "argv": [
+        "strace",
+        "-f",
+        "-yy",
+        "-s",
+        "4096",
+        "-e",
+        "trace=openat,execve",
+        "-o",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__LC01-BR__LIT__D62_20s_seed_00__seed_00/NATIVE_OPENAT.strace",
+        "/usr/bin/python3",
+        "-m",
+        "legsa_gins.paper_rebuild.hext.hx03_native",
+        "--cache",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__LC01-BR__LIT__D62_20s_seed_00__seed_00/CACHE",
+        "--output",
+        "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__LC01-BR__LIT__D62_20s_seed_00__seed_00/native",
+        "--method",
+        "LC01-BR",
+        "--parameters",
+        "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/configs/paper_rebuild/horizontal_literature/PHASE5_EXT05_PAVLASEK_CONTRACT_V1.yaml",
+        "--trace-mode",
+        "disabled"
+      ],
+      "cwd": "$W",
+      "environment_whitelist": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "MKL_NUM_THREADS": "1",
+        "MPLBACKEND": "Agg",
+        "MPLCONFIGDIR": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__LC01-BR__LIT__D62_20s_seed_00__seed_00/native/.matplotlib",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/src",
+        "XDG_CACHE_HOME": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__LC01-BR__LIT__D62_20s_seed_00__seed_00/native/.cache"
+      },
+      "native_wait_limit_s": 600,
+      "trace_mode": "disabled"
+    },
+    "params": {
+      "accel_scale": 1,
+      "config": "LIT",
+      "initial_std": {
+        "attitude_deg": 60,
+        "position_m": 0.1,
+        "velocity_mps": 0.1
+      },
+      "method_label": "改动过的 LC01",
+      "noise": {
+        "accelerometer_m2ps3": [
+          0.0289,
+          0.0225,
+          0.0576
+        ],
+        "gyro_rad2_per_s": [
+          0.0004,
+          0.0004,
+          0.000324
+        ]
+      },
+      "parameter_source_sha256": "a9476f909ed65c9b4760ac19dc3cde3d625fa3d390b2f133cae79182e2293392"
+    },
+    "input": {
+      "arrays": {
+        "accel.npy": "f477eecc06d6b85adc5a0ff4d96eeda1d212a7ed8353c7cb131847a7fc6d611a",
+        "gyro.npy": "69acef7eef56f63ff4e7fa6630a5fded936ade5b8adc75b95b93e40f56e59b6a",
+        "imu_times.npy": "7dbda9fba6be88b66a10562b1903d56e95a9e757943f4161844e86161fd1d259",
+        "p1.npy": "4a3fd5e8e11bcd4aa1117309a39ca06757a61dcad3f0d0c12940e2a631a0c861",
+        "p2.npy": "711507153c86b2197b39d47dec891cff19e22da03ce458508c445d4b5a2c7087",
+        "pacc1.npy": "8be9ab0239de9bfb26cc1b60e89e96e37fe8d754baa181894ccfcdd8c9921a98",
+        "pacc2.npy": "19b959875db84c15d9a788eb9d35f4019541081b0829ec403feb953fe7d6c01a",
+        "relative_only.npy": "207d06a9af2817bc72c2fb8cf9e2c70b5f3ac6910177a5434fab400eb7e79e21",
+        "solution_itow.npy": "fb38d3fa035647472b9692be5e3b5fb8ba412e79c6ac915a2f2409b38c80d7e3",
+        "solution_times.npy": "2e98ef5b9d310652e2a135d107ebc0ad4b8fd05f1751c510d3bd5e68cc07a877",
+        "valid1.npy": "8e992ffaad166c0ad01146e293565c24be19d9091988934ec421d467899431fc",
+        "valid2.npy": "8e992ffaad166c0ad01146e293565c24be19d9091988934ec421d467899431fc"
+      },
+      "cache_manifest_sha256": "8aa2d6f4af0db5a95eca4fd799044cd8781960c82206208d7031e5d2aa39fda9",
+      "report": {
+        "interval_epochs": 100,
+        "intervals": [
+          [
+            196.2,
+            216.2
+          ]
+        ],
+        "method": "LC01-BR",
+        "operations": [],
+        "relative_only_epochs": 100,
+        "type": "D62"
+      },
+      "sources": [
+        {
+          "path": "$STAGES/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D62_20s_seed_00/PROVIDER_BUNDLE.json",
+          "role": "bundle",
+          "sha256": "9ae70903f3d29d1cba84560b8e51158514f1eba05dca2f67f012d4abe73eeac4"
+        },
+        {
+          "path": "$STAGES/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss",
+          "role": "base_gnss",
+          "sha256": "b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663"
+        },
+        {
+          "path": "$STAGES/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D62_20s_seed_00/GNSS18.gnss",
+          "role": "case_gnss",
+          "sha256": "49656fbb3f44c9337bcd77c796dcbef82fbc3576c1061ad7e3214985454f45cf"
+        }
+      ],
+      "spec_sha256": "34639684000a85c4c3ad42278d82dd3152e11701726caad93bf6427b30f4d8a8"
+    },
+    "native": {
+      "adapter": {
+        "evaluator_nav_sha256": "8f7763b6284f2bb79efce0c8ecbec574659e86c1b73e4bcb5481debf4d0d0714",
+        "input_native_nav_sha256": "15ce938bcdd3b3c543161527d954ecfe9f1dda616ad5e1725a221c7c5827362e",
+        "maximum_dt_seconds": 0.09167623519897461,
+        "median_dt_seconds": 0.00400996208190918,
+        "nonpositive_dt_count": 0,
+        "output_epoch_count": 58014,
+        "p99_dt_seconds": 0.010004491806030273,
+        "position_conversion": "fixed_NED_to_ECEF_to_WGS84_geodetic",
+        "strictly_chronological": true,
+        "time_end_seconds": 340.0,
+        "time_start_seconds": 66.0,
+        "window_seconds": [
+          66.0,
+          340.0
+        ],
+        "window_selection": "CLOSED_FIXED_NATIVE_TIME_NO_ERROR_SELECTION"
+      },
+      "cache_manifest_sha256": "8aa2d6f4af0db5a95eca4fd799044cd8781960c82206208d7031e5d2aa39fda9",
+      "failure": null,
+      "initial_attitude_audit": {
+        "gravity_alignment_error": 1.1108127470407578e-16,
+        "measured_baseline_heading_ned_deg": 271.3364603509171,
+        "pitch_deg": -0.7942504551064933,
+        "roll_deg": 0.9004752449568363,
+        "yaw_ned_deg": 1.3239770781292135
+      },
+      "initial_solution_index": 0,
+      "initial_time": 1772784055.8,
+      "invalid_solution_count": 0,
+      "method": "LC01-BR",
+      "method_label": "改动过的 LC01",
+      "processed_solution_count": 1472,
+      "reference_opens": 0,
+      "relative_only_update_count": 100,
+      "status": "COMPLETED",
+      "trace_mode": "disabled"
+    },
+    "stderr": ""
+  }
+]

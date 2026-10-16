@@ -1,0 +1,46 @@
+{
+  "inputs": [
+    {
+      "run_id": "RUN_00004",
+      "role": "gnsspath",
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+      "sha256": "fc6dd49c0a35c41208fc7d94da1c78ad63fe6938bd8f599021750c3bf5e20760",
+      "native_recorded_sha256": "fc6dd49c0a35c41208fc7d94da1c78ad63fe6938bd8f599021750c3bf5e20760",
+      "hash_match": true
+    },
+    {
+      "run_id": "RUN_00004",
+      "role": "go2_horizontal_velocity_prior_path",
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+      "sha256": "3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e",
+      "native_recorded_sha256": "3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e",
+      "hash_match": true
+    },
+    {
+      "run_id": "RUN_01401",
+      "role": "gnsspath",
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__D15_seed_00__18a349c6d122820244c40bcf78ff92b9221060ceb5a04b1c115b2194402e343c/GNSS18.gnss",
+      "sha256": "8a25655979e9e4b384e2200dafcfd9f8b16e42fa2f26049ee4f55131287496df",
+      "native_recorded_sha256": "8a25655979e9e4b384e2200dafcfd9f8b16e42fa2f26049ee4f55131287496df",
+      "hash_match": true
+    },
+    {
+      "run_id": "RUN_03678",
+      "role": "gnsspath",
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__D38_seed_00__7ba2141486a670a16c83b3dd2cd43083bf865c838728e01a9a3edf3c1aff2fad/GNSS18.gnss",
+      "sha256": "f94460879cc2c6eebc46a1f991f7f79dbf0d55c86abf80edea73a6032f1df405",
+      "native_recorded_sha256": "f94460879cc2c6eebc46a1f991f7f79dbf0d55c86abf80edea73a6032f1df405",
+      "hash_match": true
+    },
+    {
+      "run_id": "RUN_05163",
+      "role": "go2_horizontal_velocity_prior_path",
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D53_seed_00/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+      "sha256": "4a88af49643aa0c015ed115821fb459a3739f990a786a1a4351c4478c304810d",
+      "native_recorded_sha256": "4a88af49643aa0c015ed115821fb459a3739f990a786a1a4351c4478c304810d",
+      "hash_match": true
+    }
+  ],
+  "new_derived_quantity": "Input changes relative to existing clean providers plus reported uncertainty and summaries of saved weighting logs. This is not error against truth and not a new native experiment.",
+  "new_solver_provider_evaluator_calls": 0
+}

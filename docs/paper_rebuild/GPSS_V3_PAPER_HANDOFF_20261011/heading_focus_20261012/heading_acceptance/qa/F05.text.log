@@ -1,0 +1,8 @@
+Nature Figure PDF Text Audit
+pdf: /mnt/g/LegSA-GINS-project/V3航向主线重绘_20261012/heading_acceptance/F05_heading_error_comparison.pdf
+minimum required: 5 pt
+minimum found: 8 pt
+text runs: 92
+below minimum: 0
+verdict: PASS
+note: Tf scanning does not replace final-size visual inspection or account for every PDF transform

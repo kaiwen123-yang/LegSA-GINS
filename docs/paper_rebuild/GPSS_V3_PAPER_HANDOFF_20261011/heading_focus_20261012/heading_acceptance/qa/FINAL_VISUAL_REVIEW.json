@@ -1,0 +1,14 @@
+{
+  "width_mm": 173.99999508327906,
+  "height_mm": 191.9999945746528,
+  "min_font_pt": 8,
+  "collision_fail": 0,
+  "collision_warn": 0,
+  "final_visual_review": true,
+  "cdf_support": "All finite reference-supported samples, original full-window output denominator retained separately",
+  "inset_coverage": "Full tail 0-180 degrees; main 0-15 degrees precision view",
+  "static_warnings_reviewed": {
+    "width": "AST recognizes numerator174 as inches; actual PDF174mm verified",
+    "dropna": "Counts before/after reference support preserved in output/scored metrics"
+  }
+}

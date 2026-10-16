@@ -1,0 +1,102 @@
+{
+  "status": "PASS",
+  "checks": {
+    "screening": {
+      "registered_types_read": 61,
+      "core_rows_read": 5951,
+      "full_weight_logs_read": 60,
+      "full_log_rows_read": 454036,
+      "complete_paired_seed00_series": 58,
+      "selection_not_based_on_max_gain": "All fixed seed00 rows read before choosing physical mechanisms; excluded no-active-path controls and duplicate conditions remain listed.",
+      "solver_calls": 0,
+      "provider_calls": 0,
+      "evaluator_calls": 0
+    },
+    "input_hash_checks": 5,
+    "one_second_bins": [
+      {
+        "case": "D15",
+        "source": "input_change",
+        "samples_counted": 601,
+        "all_extrema_preserved": true
+      },
+      {
+        "case": "D15",
+        "source": "reported_uncertainty",
+        "samples_counted": 601,
+        "all_extrema_preserved": true
+      },
+      {
+        "case": "D15",
+        "source": "weighting_off",
+        "samples_counted": 25429,
+        "all_extrema_preserved": true
+      },
+      {
+        "case": "D15",
+        "source": "full",
+        "samples_counted": 25429,
+        "all_extrema_preserved": true
+      },
+      {
+        "case": "D38",
+        "source": "input_change",
+        "samples_counted": 601,
+        "all_extrema_preserved": true
+      },
+      {
+        "case": "D38",
+        "source": "reported_uncertainty",
+        "samples_counted": 601,
+        "all_extrema_preserved": true
+      },
+      {
+        "case": "D38",
+        "source": "weighting_off",
+        "samples_counted": 25429,
+        "all_extrema_preserved": true
+      },
+      {
+        "case": "D38",
+        "source": "full",
+        "samples_counted": 25429,
+        "all_extrema_preserved": true
+      },
+      {
+        "case": "D53",
+        "source": "input_change",
+        "samples_counted": 25430,
+        "all_extrema_preserved": true
+      },
+      {
+        "case": "D53",
+        "source": "reported_uncertainty",
+        "samples_counted": 25430,
+        "all_extrema_preserved": true
+      },
+      {
+        "case": "D53",
+        "source": "weighting_off",
+        "samples_counted": 25429,
+        "all_extrema_preserved": true
+      },
+      {
+        "case": "D53",
+        "source": "full",
+        "samples_counted": 25429,
+        "all_extrema_preserved": true
+      }
+    ],
+    "paired_denominators": {
+      "overall_registered": 541,
+      "selected_registered": 27
+    },
+    "preview_pixels": [
+      3082,
+      3933
+    ],
+    "rendered_QA": "PASS:1.5pt alignment,8pt PDF text,zero collision FAIL/WARN,one canonical preview",
+    "new_solver_provider_evaluator_calls": 0
+  },
+  "issues": []
+}

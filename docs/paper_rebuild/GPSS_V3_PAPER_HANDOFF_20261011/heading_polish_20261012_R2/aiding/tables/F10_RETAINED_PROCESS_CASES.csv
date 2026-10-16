@@ -1,0 +1,4 @@
+case_id,detail_start_elapsed_s,detail_end_elapsed_s,selection
+D31_seed_00,125.2,160.2,first registered variant; actual registered loss interval with fixed5s before /10s after
+D33_seed_00,80.0,100.0,same preselected reference turn as natural Fig6; no error-based selection
+D35_seed_00,37.0,47.0,"First contiguous executed ±10-degree input-change episode beginning at or after elapsed40s in the evaluation window; display5s before and5s after its start. Selected from input differences only, not from reference or output errors."

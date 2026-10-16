@@ -1,0 +1,5 @@
+# 图9：航向精度比较
+
+滤波与因子图方法的航向精度。（a–f）三条自然记录的有符号航向误差及绝对误差累计分布，六种配置使用共同动态时刻274/267/367点。灰带表示登记遮挡，缺少动态输出处断线。（g）首个登记20秒位置中断中的航向误差；20秒时位置观测恢复。（h）同一常规记录上全部18个位置中断条件：10秒和20秒各九个布置。每个点代表一个条件的全窗航向RMSE，黑色短线为18个条件的中位数。四个完整方法名称直接写在对应点列上方。旧版(i)的FGO定位指标移到新轨迹组配表，保留相同GNSS1评价点、共同支持及原始输入说明。
+
+Heading accuracy across filtering and factor-graph methods. (a–f) Signed heading errors and absolute-error ECDFs at the saved common dynamic epochs (274/267/367) for six configurations. Gray shading marks registered obstruction; missing dynamic outputs break curves. (g) Heading error during the first registered20-s position interruption, with position observations returning at20s. (h) All18 registered interruption conditions on the nominal recording: nine placements at10s and nine at20s. Each dot is a whole-run heading RMSE for one condition; the black mark is the median over18 conditions. Full method names are placed directly above their point rows. The previous FGO position panel is preserved as a companion table to the trajectory figure, retaining its common GNSS1 point, temporal support and input definitions.

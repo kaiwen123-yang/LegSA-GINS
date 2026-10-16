@@ -1,0 +1,61 @@
+sequence,role,group,method,rows_in_source_window,finite_points
+BY2,full_route,overview,WEN_TC,274,274
+BY2,full_route,overview,GNC,274,274
+BY2,full_route,overview,LC01,58014,58014
+BY2,full_route,overview,LC01-S,58014,58014
+BY2,full_route,overview,EXT05C,58014,58014
+BY2,full_route,overview,EXT05C-S,58014,58014
+BY2,full_route,overview,OISAM_RESTART_POI,275,275
+BY2,full_route,overview,F04,56642,56642
+BY2,full_route,overview,REFERENCE_POI,5480,5480
+BY2,complete_local_segment,Dual-position IEKF,REFERENCE_POI,80,80
+BY2,complete_local_segment,Dual-position IEKF,LC01,740,740
+BY2,complete_local_segment,Dual-position IEKF,LC01-S,740,740
+BY2,complete_local_segment,Dual-position IEKF,F04,719,719
+BY2,complete_local_segment,Single-position IEKF,REFERENCE_POI,80,80
+BY2,complete_local_segment,Single-position IEKF,EXT05C,740,740
+BY2,complete_local_segment,Single-position IEKF,EXT05C-S,740,740
+BY2,complete_local_segment,Single-position IEKF,F04,719,719
+BY2,complete_local_segment,OiSAM (reinitialized),REFERENCE_POI,80,80
+BY2,complete_local_segment,OiSAM (reinitialized),OISAM_RESTART_POI,5,5
+BY2,complete_local_segment,OiSAM (reinitialized),F04,719,719
+BY2H,full_route,overview,WEN_TC,270,270
+BY2H,full_route,overview,GNC,270,270
+BY2H,full_route,overview,LC01,59934,59934
+BY2H,full_route,overview,LC01-S,59934,59934
+BY2H,full_route,overview,EXT05C,59934,59934
+BY2H,full_route,overview,EXT05C-S,59934,59934
+BY2H,full_route,overview,OISAM_RESTART_POI,271,267
+BY2H,full_route,overview,F04,58580,58580
+BY2H,full_route,overview,REFERENCE_POI,5400,5400
+BY2H,complete_local_segment,Dual-position IEKF,REFERENCE_POI,80,80
+BY2H,complete_local_segment,Dual-position IEKF,LC01,874,874
+BY2H,complete_local_segment,Dual-position IEKF,LC01-S,874,874
+BY2H,complete_local_segment,Dual-position IEKF,F04,853,853
+BY2H,complete_local_segment,Single-position IEKF,REFERENCE_POI,80,80
+BY2H,complete_local_segment,Single-position IEKF,EXT05C,874,874
+BY2H,complete_local_segment,Single-position IEKF,EXT05C-S,874,874
+BY2H,complete_local_segment,Single-position IEKF,F04,853,853
+BY2H,complete_local_segment,OiSAM (reinitialized),REFERENCE_POI,80,80
+BY2H,complete_local_segment,OiSAM (reinitialized),OISAM_RESTART_POI,5,5
+BY2H,complete_local_segment,OiSAM (reinitialized),F04,853,853
+BY2O,full_route,overview,WEN_TC,377,377
+BY2O,full_route,overview,GNC,377,377
+BY2O,full_route,overview,LC01,78441,78441
+BY2O,full_route,overview,LC01-S,78441,78441
+BY2O,full_route,overview,EXT05C,78441,78441
+BY2O,full_route,overview,EXT05C-S,78441,78441
+BY2O,full_route,overview,OISAM_RESTART_POI,378,370
+BY2O,full_route,overview,F04,76548,76548
+BY2O,full_route,overview,REFERENCE_POI,7540,7540
+BY2O,complete_local_segment,Dual-position IEKF,REFERENCE_POI,100,100
+BY2O,complete_local_segment,Dual-position IEKF,LC01,1025,1025
+BY2O,complete_local_segment,Dual-position IEKF,LC01-S,1025,1025
+BY2O,complete_local_segment,Dual-position IEKF,F04,999,999
+BY2O,complete_local_segment,Single-position IEKF,REFERENCE_POI,100,100
+BY2O,complete_local_segment,Single-position IEKF,EXT05C,1025,1025
+BY2O,complete_local_segment,Single-position IEKF,EXT05C-S,1025,1025
+BY2O,complete_local_segment,Single-position IEKF,F04,999,999
+BY2O,complete_local_segment,OiSAM (reinitialized),REFERENCE_POI,100,100
+BY2O,complete_local_segment,OiSAM (reinitialized),OISAM_RESTART_POI,6,6
+BY2O,complete_local_segment,OiSAM (reinitialized),F04,999,999

@@ -1,0 +1,48 @@
+{
+  "pdf": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/Q5_source_weighting.pdf",
+  "auditable": true,
+  "verdict": "REVIEW REQUIRED",
+  "page_count": 1,
+  "visible_text_box_count": 64,
+  "text_trace_count": 64,
+  "stroke_path_count": 113,
+  "filled_region_count": 95,
+  "image_region_count": 2,
+  "summary": {
+    "fail": 0,
+    "warn": 1,
+    "contained_fill_overlays": 10,
+    "contained_image_overlays": 4
+  },
+  "thresholds": {
+    "text_inset_pt": 0.6,
+    "min_overlap_ratio": 0.05,
+    "clipping_tolerance_pt": 0.5
+  },
+  "findings": [
+    {
+      "severity": "WARN",
+      "kind": "text-image-edge",
+      "page": 1,
+      "message": "Text partially overlaps the edge of 1 raster image(s)",
+      "text": "Median change: +0.98 mm",
+      "text_bbox": [
+        313.0126953125,
+        373.8912048339844,
+        407.9487609863281,
+        381.8912048339844
+      ],
+      "other_text": null,
+      "other_bbox": [
+        322.32000732421875,
+        375.0,
+        474.84002685546875,
+        477.8399963378906
+      ],
+      "object_count": 1,
+      "object_indexes": [
+        0
+      ]
+    }
+  ]
+}

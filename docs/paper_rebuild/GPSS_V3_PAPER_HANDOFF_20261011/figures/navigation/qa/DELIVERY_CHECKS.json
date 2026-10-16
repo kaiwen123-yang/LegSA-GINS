@@ -1,0 +1,80 @@
+[
+  {
+    "id": "Q3_01_IEKF_natural",
+    "png_px": [
+      4110,
+      3212
+    ],
+    "pdf_width_mm": 173.99999508327906,
+    "qa": {
+      "pdf_text": 0,
+      "collisions": 0
+    },
+    "visual": "PASS"
+  },
+  {
+    "id": "Q3_02_heading_retention",
+    "png_px": [
+      4110,
+      3543
+    ],
+    "pdf_width_mm": 173.99999508327906,
+    "qa": {
+      "pdf_text": 0,
+      "collisions": 0
+    },
+    "visual": "PASS"
+  },
+  {
+    "id": "Q3_03_OiSAM_reinitialized_heading",
+    "png_px": [
+      4110,
+      4204
+    ],
+    "pdf_width_mm": 173.99999508327906,
+    "qa": {
+      "pdf_text": 0,
+      "collisions": 0
+    },
+    "visual": "PASS"
+  },
+  {
+    "id": "Q3_04_all_degradation_pairs",
+    "png_px": [
+      4110,
+      4110
+    ],
+    "pdf_width_mm": 173.99999508327906,
+    "qa": {
+      "pdf_text": 0,
+      "collisions": 0
+    },
+    "visual": "PASS"
+  },
+  {
+    "id": "Q3_05_FGO_position",
+    "png_px": [
+      4110,
+      3118
+    ],
+    "pdf_width_mm": 173.99999508327906,
+    "qa": {
+      "pdf_text": 0,
+      "collisions": 0
+    },
+    "visual": "PASS"
+  },
+  {
+    "id": "Q3_oisam_precision_continuity",
+    "png_px": [
+      4110,
+      4133
+    ],
+    "pdf_width_mm": 173.99999508327906,
+    "qa": {
+      "pdf_text": 0,
+      "collisions": 0
+    },
+    "visual": "PASS"
+  }
+]

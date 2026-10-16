@@ -1,0 +1,22 @@
+scene,sequence_id,method,metric,rmse
+Nominal walking,BY2,F01,yaw_rmse_deg,8.089647422454789
+Nominal walking,BY2,F03,yaw_rmse_deg,1.9155910498740765
+Nominal walking,BY2,F04,yaw_rmse_deg,1.8862718548526467
+Nominal walking,BY2,A05,roll_rmse_deg,3.326343572843144
+Nominal walking,BY2,F04,roll_rmse_deg,2.254340402339318
+Nominal walking,BY2,A05,pitch_rmse_deg,2.9293002515054924
+Nominal walking,BY2,F04,pitch_rmse_deg,2.265490744005314
+Large body motion,BY2H,F01,yaw_rmse_deg,7.137487572272005
+Large body motion,BY2H,F03,yaw_rmse_deg,1.9408005859002144
+Large body motion,BY2H,F04,yaw_rmse_deg,1.93377013508875
+Large body motion,BY2H,A05,roll_rmse_deg,2.7846061347426403
+Large body motion,BY2H,F04,roll_rmse_deg,1.9662527055856236
+Large body motion,BY2H,A05,pitch_rmse_deg,1.8816372871765976
+Large body motion,BY2H,F04,pitch_rmse_deg,1.6982952989112554
+Antenna obstruction,BY2O,F01,yaw_rmse_deg,5.739037942642961
+Antenna obstruction,BY2O,F03,yaw_rmse_deg,2.432184149316716
+Antenna obstruction,BY2O,F04,yaw_rmse_deg,2.433814932823714
+Antenna obstruction,BY2O,A05,roll_rmse_deg,1.8765919211768576
+Antenna obstruction,BY2O,F04,roll_rmse_deg,1.5071123881620372
+Antenna obstruction,BY2O,A05,pitch_rmse_deg,1.7341540486669456
+Antenna obstruction,BY2O,F04,pitch_rmse_deg,1.6950312543923702

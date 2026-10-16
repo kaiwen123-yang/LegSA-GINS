@@ -1,0 +1,19 @@
+{
+  "case_id": "D35_seed_00",
+  "source_run": "RUN_03381",
+  "clean_source": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+  "clean_sha256": "fc6dd49c0a35c41208fc7d94da1c78ad63fe6938bd8f599021750c3bf5e20760",
+  "clean_recorded_sha256": "fc6dd49c0a35c41208fc7d94da1c78ad63fe6938bd8f599021750c3bf5e20760",
+  "compared_input_rows": 1510,
+  "timestamp_key_matches": 1510,
+  "spike_rows": 150,
+  "first_selected_event_elapsed_s": 42.0,
+  "last_spike_row_elapsed_s": 42.79999995199999,
+  "event_display_end_s": 42.999999951999996,
+  "detail_start_elapsed_s": 37.0,
+  "detail_end_elapsed_s": 47.0,
+  "signed_change_deg": 10.0,
+  "selection_rule": "First contiguous executed \u00b110-degree input-change episode beginning at or after elapsed40s in the evaluation window; display5s before and5s after its start. Selected from input differences only, not from reference or output errors.",
+  "reconstruction": false,
+  "new_random_sampling": false
+}

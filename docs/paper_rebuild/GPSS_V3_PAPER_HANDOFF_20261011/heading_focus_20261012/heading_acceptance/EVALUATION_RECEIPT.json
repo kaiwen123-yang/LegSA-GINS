@@ -1,0 +1,22 @@
+{
+  "schema": "heading.acceptance.saved_error_evaluation.v1",
+  "utc": "2026-10-12T11:48:39.375704+00:00",
+  "acceptance_seal_sha256": "93f6dfec589d899603323b083b70d87b918d3cb01ff76e9b21e06a4b06ca0b01",
+  "errors": 9210,
+  "acceptance_mask_unchanged": true,
+  "summary_rows": 12,
+  "common_support_rows": 78,
+  "raw_reference_reads": 0,
+  "native_solver_calls": 0,
+  "old_evaluator_calls": 0,
+  "source_error_series_reused": true,
+  "timestamp_matching": "native epoch_index + identical microsecond time_key, one-to-one",
+  "tuning": false,
+  "integer_correctness_established": false,
+  "observation": "Projected lateral-baseline heading versus saved commercial fused Euler-yaw reference",
+  "outputs": {
+    "ACCEPTED_ERROR_SERIES.csv": "3d5958778f7b5cb010e60e27690cf0f6ec2b7c258ccf4d38295d6521b9202f10",
+    "ACCEPTANCE_SUMMARY.csv": "6f08cb034d8e8e9d815e2c9006b8eff8fa1dde8427df4a0c16190f5653225417",
+    "COMMON_SUPPORT_COMPARISON.csv": "abeb17b5befd71fd1a38fab4a3a0c85e2cf51c1ffb49e057706c89181fb0c2f3"
+  }
+}

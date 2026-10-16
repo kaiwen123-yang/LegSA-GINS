@@ -1,0 +1,17 @@
+\\wsl.localhost\Ubuntu-22.04\home\kaiwen\research\LegSA-GINS-WORKTREES\audit-code-xbpg-20261001\configs\paper_rebuild\fgo_comparison\OISAM_PAPER_CONTRACT_20261004.json:1
+\\wsl.localhost\Ubuntu-22.04\home\kaiwen\research\LegSA-GINS-WORKTREES\audit-code-xbpg-20261001\docs\paper_rebuild\hext\FGO_REPRODUCTION_FIX_20261004\REPRODUCTION_NOTES.md:3
+\\wsl.localhost\Ubuntu-22.04\home\kaiwen\research\LegSA-GINS-WORKTREES\audit-code-xbpg-20261001\configs\paper_rebuild\horizontal_literature\lc02_final_candidate_triage\stage_payload\04_GINAV2021\GINAV2021_OFFICIAL_ROUTE_CONTRACT.yaml:1
+\\wsl.localhost\Ubuntu-22.04\home\kaiwen\research\LegSA-GINS-WORKTREES\audit-code-xbpg-20261001\configs\paper_rebuild\horizontal_literature\lc02_final_candidate_triage\stage_payload\05_CROSS_CANDIDATE_DECISION\LC01_VS_FINAL_CANDIDATES_INFORMATION_STRUCTURE.csv:1
+\\wsl.localhost\Ubuntu-22.04\home\kaiwen\research\LegSA-GINS-WORKTREES\audit-code-xbpg-20261001\docs\paper_rebuild\hext\FGO_COMPARISON\FGO_SELECTION.md:2
+G:\LegSA-GINS-project\clean_rebuild_202607\stages\CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON\10_LC02_FINAL_CANDIDATE_TRIAGE\04_GINAV2021\GINAV2021_OFFICIAL_ROUTE_CONTRACT.yaml:1
+G:\LegSA-GINS-project\clean_rebuild_202607\stages\CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON\10_LC02_FINAL_CANDIDATE_TRIAGE\05_CROSS_CANDIDATE_DECISION\LC01_VS_FINAL_CANDIDATES_INFORMATION_STRUCTURE.csv:1
+G:\LegSA-GINS-project\clean_rebuild_202607\stages\CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON\08_LC02_YIN2023_RAEKF\01_PRIOR_IMPLEMENTATION_AUDIT\YIN2023_PRIOR_CODE_PROVENANCE.md:1
+
+11 matches
+9 matched lines
+8 files contained matches
+10601 files searched
+0 bytes printed
+269368539 bytes searched
+1.521697 seconds spent searching
+7.375928 seconds total

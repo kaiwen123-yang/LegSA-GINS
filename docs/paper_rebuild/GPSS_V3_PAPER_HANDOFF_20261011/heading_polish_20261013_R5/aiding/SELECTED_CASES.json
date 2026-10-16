@@ -1,0 +1,116 @@
+[
+  {
+    "type": "D15",
+    "case_id": "D15_seed_00",
+    "full_run": "RUN_01401",
+    "off_run": "RUN_01403",
+    "condition_name": "position_noise_strong",
+    "input_change_definition": "3D Euclidean change in original position input relative to clean input (WGS84 ECEF distance)",
+    "input_unit": "m",
+    "original_input_rows": 1510,
+    "plotted_time_interval_s": [
+      0,
+      120
+    ],
+    "input_display_rows": 601,
+    "input_display_valid_rows": 601,
+    "input_display_invalid_rows": 0,
+    "input_time_keys_identical_to_clean": true,
+    "input_reference": "existing clean provider, not geographical truth",
+    "full_trace_rows": 7930,
+    "display_source_update_counts": {
+      "Position": 600,
+      "Body v": 600,
+      "Heading": 600
+    },
+    "full_window_s": [
+      66,
+      340
+    ],
+    "off_yaw_rmse_deg": 29.79852519147967,
+    "full_yaw_rmse_deg": 2.698608937739373,
+    "yaw_rmse_change_deg": -27.099916253740297,
+    "off_H_rmse_m": 3.165550069309854,
+    "full_H_rmse_m": 3.5569029035745645,
+    "H_rmse_change_m": 0.39135283426471057,
+    "full_completed_of_nine": 9,
+    "off_completed_of_nine": 8,
+    "selection": "Fixed seed00, selected by distinct position/heading/body-velocity mechanism and complete retained logs; not by maximum gain."
+  },
+  {
+    "type": "D38",
+    "case_id": "D38_seed_00",
+    "full_run": "RUN_03678",
+    "off_run": "RUN_03680",
+    "condition_name": "bad_yaw_optimistic_std",
+    "input_change_definition": "Absolute wrapped change in scalar NED body-heading input relative to clean input",
+    "input_unit": "deg",
+    "original_input_rows": 1510,
+    "plotted_time_interval_s": [
+      0,
+      120
+    ],
+    "input_display_rows": 601,
+    "input_display_valid_rows": 601,
+    "input_display_invalid_rows": 0,
+    "input_time_keys_identical_to_clean": true,
+    "input_reference": "existing clean provider, not geographical truth",
+    "full_trace_rows": 7727,
+    "display_source_update_counts": {
+      "Position": 600,
+      "Body v": 600,
+      "Heading": 511
+    },
+    "full_window_s": [
+      66,
+      340
+    ],
+    "off_yaw_rmse_deg": 1.730832347201089,
+    "full_yaw_rmse_deg": 1.6314482701341806,
+    "yaw_rmse_change_deg": -0.09938407706690833,
+    "off_H_rmse_m": 0.0970682443234136,
+    "full_H_rmse_m": 0.0988446607068624,
+    "H_rmse_change_m": 0.0017764163834488034,
+    "full_completed_of_nine": 9,
+    "off_completed_of_nine": 9,
+    "selection": "Fixed seed00, selected by distinct position/heading/body-velocity mechanism and complete retained logs; not by maximum gain."
+  },
+  {
+    "type": "D53",
+    "case_id": "D53_seed_00",
+    "full_run": "RUN_05163",
+    "off_run": "RUN_05165",
+    "condition_name": "go2_horizontal_velocity_noise",
+    "input_change_definition": "Horizontal NED velocity input change norm relative to the unchanged clean body-velocity prior",
+    "input_unit": "m/s",
+    "original_input_rows": 63278,
+    "plotted_time_interval_s": [
+      0,
+      120
+    ],
+    "input_display_rows": 25430,
+    "input_display_valid_rows": 25430,
+    "input_display_invalid_rows": 0,
+    "input_time_keys_identical_to_clean": true,
+    "input_reference": "existing clean provider, not geographical truth",
+    "full_trace_rows": 7932,
+    "display_source_update_counts": {
+      "Position": 600,
+      "Body v": 600,
+      "Heading": 600
+    },
+    "full_window_s": [
+      66,
+      340
+    ],
+    "off_yaw_rmse_deg": 1.886239709955484,
+    "full_yaw_rmse_deg": 1.885432097600814,
+    "yaw_rmse_change_deg": -0.0008076123546698621,
+    "off_H_rmse_m": 0.1086991951471017,
+    "full_H_rmse_m": 0.1000659618314859,
+    "H_rmse_change_m": -0.008633233315615801,
+    "full_completed_of_nine": 9,
+    "off_completed_of_nine": 9,
+    "selection": "Fixed seed00, selected by distinct position/heading/body-velocity mechanism and complete retained logs; not by maximum gain."
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "width_mm": 174,
+  "height_mm": 198,
+  "data_column_width_ratio": [
+    1.15,
+    0.8,
+    1.45
+  ],
+  "minimum_font_pt": 8.0,
+  "clipped_text": [],
+  "palette": {
+    "full": "#175C9E",
+    "off": "#C66B3D",
+    "input": "#4F565E",
+    "reported_uncertainty": "#238B8A"
+  },
+  "range_alpha": 0.1,
+  "data_change": false,
+  "bin_recomputation": false,
+  "input_data_source": "/mnt/g/LegSA-GINS-project/V3\u6b63\u6587\u7cbe\u4fee_20261013_R5/aiding"
+}

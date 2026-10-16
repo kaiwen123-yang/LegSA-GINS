@@ -1,0 +1,20 @@
+{
+  "robot": {
+    "SOURCES_READ.csv": 133,
+    "EXPERIMENTS.csv": 55,
+    "CURVE_INVENTORY.csv": 24
+  },
+  "heading": {
+    "SOURCES_READ.csv": 166,
+    "EXPERIMENTS.csv": 34
+  },
+  "fusion": {
+    "SOURCES_READ.csv": 180,
+    "EXPERIMENTS.csv": 434
+  },
+  "internal": {
+    "SOURCES_READ.csv": 142
+  },
+  "interpretation": "Counts are source reads or evidence records, not independent experiments. See each report for full/selected/array-header reading depth.",
+  "work_scope": "Existing source recovery and paper/figure planning only; no new solver, evaluator, provider or figure rendering."
+}

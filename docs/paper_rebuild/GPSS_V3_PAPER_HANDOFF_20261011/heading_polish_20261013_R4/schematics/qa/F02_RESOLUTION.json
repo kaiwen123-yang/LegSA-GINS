@@ -1,0 +1,24 @@
+{
+  "reference": "R3 approved SVG",
+  "svg_byte_identical": true,
+  "pdf_byte_identical": true,
+  "layout_changes": false,
+  "new_image_generation": false,
+  "raster_images_in_svg": 0,
+  "text_elements_in_svg": 38,
+  "exports": {
+    "preview/F02_method.png": [
+      3840,
+      1832
+    ],
+    "figures/F02_method_4K.png": [
+      3840,
+      1832
+    ],
+    "figures/F02_method_8K.png": [
+      7680,
+      3664
+    ]
+  },
+  "master_sha256": "035f63fa9dfdfe75a288f8a8de517d2c7d0fc35bfd08d2c4d50ee49151772dfa"
+}

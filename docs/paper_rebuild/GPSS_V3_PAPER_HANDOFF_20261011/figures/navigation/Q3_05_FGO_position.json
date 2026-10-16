@@ -1,0 +1,46 @@
+{
+  "id": "Q3_05_FGO_position",
+  "caption_en": "Horizontal and vertical position errors of OiSAM-FGO, TC-FGO and GNC-FGO during nominal walking, large body motion and single-antenna obstruction, evaluated at the GNSS1 antenna. Curves break across missing outputs and OiSAM-FGO segment boundaries. Horizontal errors use logarithmic axes; vertical errors use a symmetric logarithmic scale with a linear region near zero. OiSAM uses reinitialization at recorded IMU gaps, with initialization-only states excluded. OiSAM uses RTK position and IMU, TC-FGO uses raw code and adapted attitude/velocity inputs, and GNC-FGO uses raw code and Doppler; input information is not identical.",
+  "caption_zh": "常规行走、大幅机身运动和单侧天线遮挡实验中，OiSAM-FGO、TC-FGO和GNC-FGO在GNSS1天线位置上的水平与高程误差。缺测和OiSAM-FGO分段边界处断线。水平误差用对数尺度，高程误差用零附近保持线性的对称对数尺度。 OiSAM在实测IMU缺口处重新初始化，仅初始化的状态不计入曲线。OiSAM使用RTK位置与IMU，TC-FGO使用原始码及适配姿态/速度输入，GNC-FGO使用原始码和Doppler；三条路线的输入信息不同。",
+  "meaning_zh": "把三种GNSS信息处理路线的误差变化放到同一场景时钟中，呈现持续误差和局部异常，而不是只给一个整段RMSE。",
+  "sources": [
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/data/BY2_OISAM_primary_saved_errors.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/data/BY2_WEN_TC_primary_saved_errors.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/data/BY2_GNC_primary_saved_errors.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/data/BY2H_OISAM_primary_saved_errors.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/data/BY2H_WEN_TC_primary_saved_errors.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/data/BY2H_GNC_primary_saved_errors.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/data/BY2O_OISAM_primary_saved_errors.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/data/BY2O_WEN_TC_primary_saved_errors.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/data/BY2O_GNC_primary_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C02_RMSE_COMPANION_TABLE.csv"
+  ],
+  "technical_notes": {
+    "output_point": "All plotted positions use the GNSS1 antenna point; Oi uses its own attitude for point transport.",
+    "supports": "Primary dynamic-only own supports Oi275/267/370, Wen/GNC274/270/377 out of275/271/378; every prior-only state excluded and missing state unconnected.",
+    "inputs": "Oi:RTK+IMU with1/3/7 fixed input blocks; TC-FGO:raw code+AHRS/IMU; GNC-FGO:raw code+Doppler. These method conditions belong in the comparison table.",
+    "scales": "Horizontal logarithmic; signed vertical symmetric-log with linear region±0.1m. All observed error scales retained.",
+    "source_identity": "Three new segmented Oi runs and six reused original batch runs. Oi3286s usable-nonconverged output retained.",
+    "display": "All saved valid dynamic states plotted without smoothing or downsampling; gaps and block boundaries break curves.",
+    "original_reference_reads": 0
+  },
+  "width_mm": 174.0,
+  "height_mm": 131.99999999999997,
+  "alignment_status": "PASS",
+  "audit_returncodes": {
+    "pdf_text": 0,
+    "collisions": 0
+  },
+  "visual_review": "PASS",
+  "naming_review": {
+    "date": "2026-10-09",
+    "scope": "Scenario and method label consistency, caption synchronization, and label fit in color/grayscale exports. Figure-content review by the author continues.",
+    "by3_condition_source": "Author confirmation: large-amplitude body motions and pronounced vibration along the same route."
+  },
+  "reused_original_id": "C02",
+  "visual_review_notes": "Inspected actual color and grayscale previews: every panel readable, common units and no clipping, deliberate curve intersections retained. Insets show fixed input-defined windows. Dense native IEKF curves use the retained full sampling and readable local insets.",
+  "title_zh": "不同GNSS信息处理路线的定位结果",
+  "question": "Q3",
+  "role": "supplement",
+  "preview_sha256": "cfed2c0dc4c20d7545030837ec23eeaed58430da0f83b282e4a059e99b72c7e9"
+}

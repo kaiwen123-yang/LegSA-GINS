@@ -1,0 +1,68 @@
+{
+  "F06_heading_and_tilt": {
+    "claim": "持续方向更新是自然记录中航向改善的主要来源；倾角观测对roll/pitch另有分量相关作用。",
+    "panels_zh": [
+      "a–c：三条自然记录的航向误差全时序，淡色区为下一排同一窗口。",
+      "d–f：同一时间窗的原始误差样本放大，无平滑；灰→橙检验持续航向，橙→蓝展示完整配置额外变化。",
+      "g–i：同窗之外的全记录roll/pitch RMSE，紫点关闭倾角、蓝点完整，连线仅连接同场景同指标。"
+    ],
+    "limitation": "roll/pitch点图是独立的A05对F04消融；不能把F01对F04解释为纯航向单开关。",
+    "windows": {
+      "BY2": [
+        80.0,
+        100.0,
+        "Reference-confirmed turn"
+      ],
+      "BY2H": [
+        80.0,
+        100.0,
+        "Reference-confirmed turn"
+      ],
+      "BY2O": [
+        173.94000000000003,
+        235.94999999999985,
+        "First registered obstruction"
+      ]
+    }
+  },
+  "F07_heading_retained_translation": {
+    "claim": "方向与辅助更新持续时，机身速度辅助显著限制平移漂移。",
+    "panels_zh": [
+      "最上方状态条：深色有效，浅色暂停；三行分别为位置观测、方向观测、机身辅助更新。",
+      "a–b：同一20秒中断的航向误差。",
+      "c–d：同一时间轴的水平误差；20秒恢复后的下降为观测校正，非真实轨迹凸起。",
+      "e–f：各时长全部九个布置的全窗RMSE，细线配对同一次布置；纵轴对数，不是中断末端误差。"
+    ],
+    "limitation": "左右条件同时改变航向与辅助更新调度，不能解释为独立heading×HV因子实验。HV构造还继承冻结的历史A1方向。"
+  },
+  "F08_heading_quality_scaling": {
+    "claim": "三个已执行观测质量条件下，用具体航向过程和全部变体说明来源加权收益及边界。",
+    "status": "R3 tentative author-review layout",
+    "panels_zh": [
+      "a–c：保留原D15/D38/D59首个登记variant，统一显示前120秒航向过程；RMSE标注明确来自完整274秒评价窗。",
+      "d–f：各条件全部九个变体的原始整窗yaw RMSE，空紫点关闭加权、蓝点完整，细线配对同一变体；无新选seed。"
+    ],
+    "display_change": "Nine panels reduced to six: removed duplicated20–60s zoom row, retained complete data and all274s histories in S_F08_full_heading_histories.",
+    "same_cases_as_R2": true,
+    "complete_counts": "Full9/9 for each; weighting off8/9,9/9,8/9. Real divergence is not assigned numericalRMSE.",
+    "small_benefit": "D38 representative1.731→1.631deg remains modest; not every moment improves.",
+    "boundary": "D59 full55.8/69.3deg remains, as does every original D15 large error.",
+    "support": "All513 pairs and actual source scaling stay in S_quality_complete_statistics; representative D15 H3.166→3.557m cost retained in tables/readme."
+  },
+  "F10_heading_sensitivity": {
+    "claim": "方向可用性与质量变化下，输入观测误差与融合航向输出共同解释已执行的航向改善。",
+    "panels_zh": [
+      "a–c：全部D30–35的九variant原始整窗航向RMSE；线为物理递增强度中位数，零强度为单个clean记录。",
+      "d–f：读取原冻结GNSS18的真实受扰方向，与保存的reference时间点一对一连接后，比较输入方向误差和完整融合yaw误差；未重建provider。",
+      "g：登记中断前5秒、中断20秒、恢复后10秒，紫色输入在实际100条停更区间保持空白，蓝色为融合输出。",
+      "h：同一参考转弯80–100秒，观察σ5°噪声输入与融合输出。i：评价开始40秒之后第一个实际±10°输入事件，确认在42秒，显示37–47秒，灰色为42–43秒输入尖峰；选择只用原受扰与clean输入差，不用参考或输出误差。"
+    ],
+    "new_derived_statistics": "This revision derives figure-layer observation errors by joining original saved GNSS18 scalar headings to already-saved reference matches at identical receiver times; it does not run or modify the frozen evaluator.",
+    "protocol": "F10_OBSERVATION_MATCH_PROTOCOL.json",
+    "spike_selection": "F10_SPIKE_EVENT_SELECTION.json",
+    "physical_mapping": "D32–35 realised circular disturbances inherited over original1s cells into V3 direction stream; not independent5Hz trials.",
+    "existing_window_stats": "原先已完成WINDOW_SUMMARY的D30/D31实际故障期统计复制到F10_EXISTING_LOSS_AND_RECOVERY_STATISTICS.csv，统计范围与来源不变。",
+    "failure_boundary": "D59全九结果和55.8/69.3°两边界集中在图8(i)，同一证据不重复算新验证。",
+    "all_records": "all5951/all2164 and all283 noncompletions retained; all1370 input rows per case retained, including invalid and unsupported matches."
+  }
+}

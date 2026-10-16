@@ -1,0 +1,13 @@
+sequence method_id        support  full_window_epochs  outputs  coverage_percent  scored  rmse_deg   mae_deg  p95_abs_deg  max_abs_deg  acceptance_rule  original_failure_count  screen_withheld_count
+     BY2     EXT01         native                1370      980         71.532847     980 85.015472 54.152963   171.307367   179.846004             none                     390                    530
+     BY2     EXT01 project_ratio3                1370      450         32.846715     450 84.326949 50.619043   171.764367   179.846004 second/best >= 3                     390                    530
+     BY2     EXT02         native                1370      961         70.145985     961 85.179795 54.282897   171.543415   179.846004             none                     409                    528
+     BY2     EXT02 project_ratio3                1370      433         31.605839     433 85.103772 51.540640   171.723668   179.846004 second/best >= 3                     409                    528
+    BY2H     EXT01         native                1350     1059         78.444444    1059 89.127388 60.163384   172.740777   179.995416             none                     291                    790
+    BY2H     EXT01 project_ratio3                1350      269         19.925926     269 74.499667 44.659565   169.542230   179.590627 second/best >= 3                     291                    790
+    BY2H     EXT02         native                1350     1029         76.222222    1029 89.192923 60.253059   172.821374   179.995416             none                     321                    776
+    BY2H     EXT02 project_ratio3                1350      253         18.740741     253 75.004053 44.757959   169.893307   179.590627 second/best >= 3                     321                    776
+    BY2O     EXT01         native                1885     1173         62.228117    1173 81.273465 53.514334   157.401236   179.344141             none                     712                    791
+    BY2O     EXT01 project_ratio3                1885      382         20.265252     382 54.689578 25.523130   139.285224   172.246181 second/best >= 3                     712                    791
+    BY2O     EXT02         native                1885     1210         64.190981    1210 81.486071 54.416293   155.620541   179.344141             none                     675                    833
+    BY2O     EXT02 project_ratio3                1885      377         20.000000     377 54.855358 25.594530   139.455653   172.246181 second/best >= 3                     675                    833

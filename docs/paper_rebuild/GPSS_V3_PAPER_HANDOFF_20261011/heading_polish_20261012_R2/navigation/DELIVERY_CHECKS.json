@@ -1,0 +1,69 @@
+{
+  "status": "READY_FOR_AUTHOR_REVIEW",
+  "figures": [
+    {
+      "id": "F03_event_routes_and_heading",
+      "width_mm": 174,
+      "height_mm": 204.99999779595268,
+      "preview_pixels": [
+        2740,
+        3228
+      ],
+      "minimum_font_pt": 8,
+      "color": true,
+      "all_curve_points_retained": true,
+      "audits": {
+        "alignment": "PASS",
+        "collisions": "PASS"
+      },
+      "text_audit_returncode": 0,
+      "visual_review": "PASS: full color and grayscale previews inspected; longer route windows, reduced arrows, added same-point FGO summary; inset tick collision repaired.",
+      "files": {
+        "png": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/navigation/F03_event_routes_and_heading.png",
+        "pdf": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/navigation/F03_event_routes_and_heading.pdf",
+        "svg": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/navigation/F03_event_routes_and_heading.svg",
+        "tiff": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/navigation/F03_event_routes_and_heading.tiff"
+      }
+    },
+    {
+      "id": "F09_heading_comparison",
+      "width_mm": 174,
+      "height_mm": 233.99999338785807,
+      "preview_pixels": [
+        2740,
+        3685
+      ],
+      "minimum_font_pt": 8,
+      "color": true,
+      "all_curve_points_retained": true,
+      "audits": {
+        "alignment": "PASS",
+        "collisions": "PASS"
+      },
+      "text_audit_returncode": 0,
+      "visual_review": "PASS: full color and grayscale previews inspected; longer route windows, reduced arrows, added same-point FGO summary; inset tick collision repaired.",
+      "files": {
+        "png": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/navigation/F09_heading_comparison.png",
+        "pdf": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/navigation/F09_heading_comparison.pdf",
+        "svg": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/navigation/F09_heading_comparison.svg",
+        "tiff": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/navigation/F09_heading_comparison.tiff"
+      }
+    }
+  ],
+  "source_paths": 34,
+  "new_solver_evaluator_provider_calls": 0,
+  "all_R1_common_heading_statistics_exactly_unchanged": true,
+  "FGO_attitude_audit": "OiSAM estimates attitude; WEN_TC/GNC do not. No input attitude presented as output.",
+  "heading_common_counts": [
+    274,
+    267,
+    367
+  ],
+  "FGO_common_position_counts": [
+    274,
+    267,
+    369
+  ],
+  "source_preflight_returncode": 0,
+  "source_preflight_warnings_review": "Width arithmetic statically misread; actual174mm verified. All FGO horizontal errors explicitly checked finite and positive before log axis."
+}

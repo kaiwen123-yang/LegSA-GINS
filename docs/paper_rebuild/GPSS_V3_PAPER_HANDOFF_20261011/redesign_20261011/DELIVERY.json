@@ -1,0 +1,20 @@
+{
+  "status": "AUTHOR_REVIEW_DRAFT_COMPLETE",
+  "main_figures": 10,
+  "imagegen_schematics": 2,
+  "quantitative_main_figures": 8,
+  "extended_matrix_figures": 2,
+  "published_files": 161,
+  "published_bytes": 29646836,
+  "new_navigation_solver_runs": 0,
+  "new_evaluator_processes": 0,
+  "new_provider_runs": 0,
+  "new_plot_level_observation_statistics": "Figure5 uses saved GNSS18, native yaw logs and retained reference yaw",
+  "imagegen_native_resolution_only": true,
+  "all_figures_final_submission_ready": false,
+  "remaining_production_item": "High-resolution/editable production artwork for image-generated F1/F2",
+  "literature_pdf_files_indexed": 34,
+  "unique_pdf_contents": 29,
+  "third_party_paper_images_published": 0,
+  "source_files_unchanged": true
+}

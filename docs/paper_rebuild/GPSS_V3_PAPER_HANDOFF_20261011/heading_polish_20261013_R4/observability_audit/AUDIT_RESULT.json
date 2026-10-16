@@ -1,0 +1,21 @@
+{
+  "algorithm_count": 1,
+  "field_recording_count": 1,
+  "retained_state_histories": 7,
+  "h5_anchor_count": 1,
+  "h6_nonzero_native_runs": 6,
+  "temporary_zero_parity_run_additional_not_plotted": true,
+  "native_rows_per_history": 63277,
+  "stored_native_rows_total": 442939,
+  "all_seven_NAV_hashes_match_original_freezes": true,
+  "all_plotted_rows_match_specific_native_NAV": true,
+  "initial_yaw_axis_sign": "plotted conventional +Z yaw = negative registered alpha about downward gravity",
+  "common_cache_live_sha256": "c169e26d66f35fe200bb17a695353cd2d751482df1cd97996a7a8afff8662065",
+  "current_native_executable_matches_runtime_pin": true,
+  "solver_called_during_this_audit": false,
+  "reference_opened": false,
+  "shell_command_history_status": "Individual complete original shell command lines not located; native argument form and exact config/cache identities recovered",
+  "native_wallclock_start_status": "No exact native UTC start field found in read summaries; commit dates are archival dates, not run timestamps",
+  "executor_identity": "Project H5/H6 runner; Git records author kaiwen123-yang, not proof of who manually invoked shell",
+  "source_pin_scope": "Native C++ runner and backend closure blobs checked against runtime hashes; wrapper/report source differences retained in source pin table"
+}

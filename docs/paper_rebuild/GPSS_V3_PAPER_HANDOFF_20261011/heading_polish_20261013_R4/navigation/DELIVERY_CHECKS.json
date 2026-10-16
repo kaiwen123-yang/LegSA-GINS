@@ -1,0 +1,84 @@
+{
+  "status": "READY_FOR_AUTHOR_REVIEW",
+  "id": "F03_integrated_routes_and_heading",
+  "width_mm": 173.99999508327906,
+  "height_mm": 190.0000089857313,
+  "minimum_font_pt": 8,
+  "preview_pixels": [
+    2740,
+    2992
+  ],
+  "checks": {
+    "alignment": "PASS",
+    "collisions": "PASS"
+  },
+  "text_audit_returncode": 0,
+  "visual_review": "PASS: complete color and grayscale image inspected; one total legend, three full-route panels, moving recovery detail, no inset stack; same-point local scope and no artificial trajectory offsets.",
+  "native_source_points_retained": true,
+  "new_solver_evaluator_provider_calls": 0,
+  "frozen_metrics_changed": false,
+  "F11_disposition": "supplement/archive; merged into newF03 for main text",
+  "own_pose_transform_checks": [
+    {
+      "sequence": "BY2",
+      "source_pose": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/BY2_OISAM_SEGMENTED_states.csv.gz",
+      "original_gnss1_trajectory": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/data/BY2__OISAM_RESTART.csv.gz",
+      "registered_transform_manifest": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/06_V3_NAV_INPUTS/BY2__LC01-S__FILE_START/TRANSFORM_MANIFEST.json",
+      "baseline_m": 0.356191491865984,
+      "lever_imu_to_poi_body_m": [
+        0.03,
+        -0.148095745932992,
+        -0.3
+      ],
+      "method_attitude_used": "Own OiSAM roll/pitch/yaw only; no reference attitude",
+      "source_in_window_states": 275,
+      "dynamic_states": 275,
+      "reconstructed_gnss1_vs_original_max_difference_m": 1.3170839526779168e-09,
+      "BY2_poi_vs_existing_strict_max_difference_m": 7.508558818916058e-09,
+      "new_navigation_metrics": 0,
+      "source_metric_files_changed": false
+    },
+    {
+      "sequence": "BY2H",
+      "source_pose": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/BY2H_OISAM_SEGMENTED_states.csv.gz",
+      "original_gnss1_trajectory": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/data/BY2H__OISAM_RESTART.csv.gz",
+      "registered_transform_manifest": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/06_V3_NAV_INPUTS/BY2H__LC01__CONTRACT_START/TRANSFORM_MANIFEST.json",
+      "baseline_m": 0.35418777593777223,
+      "lever_imu_to_poi_body_m": [
+        0.03,
+        -0.14709388796888612,
+        -0.3
+      ],
+      "method_attitude_used": "Own OiSAM roll/pitch/yaw only; no reference attitude",
+      "source_in_window_states": 271,
+      "dynamic_states": 267,
+      "reconstructed_gnss1_vs_original_max_difference_m": 1.0412590519812925e-09,
+      "BY2_poi_vs_existing_strict_max_difference_m": null,
+      "new_navigation_metrics": 0,
+      "source_metric_files_changed": false
+    },
+    {
+      "sequence": "BY2O",
+      "source_pose": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/BY2O_OISAM_SEGMENTED_states.csv.gz",
+      "original_gnss1_trajectory": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/data/BY2O__OISAM_RESTART.csv.gz",
+      "registered_transform_manifest": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/06_V3_NAV_INPUTS/BY2O__LC01__FILE_START/TRANSFORM_MANIFEST.json",
+      "baseline_m": 0.35013463864843675,
+      "lever_imu_to_poi_body_m": [
+        0.03,
+        -0.14506731932421837,
+        -0.3
+      ],
+      "method_attitude_used": "Own OiSAM roll/pitch/yaw only; no reference attitude",
+      "source_in_window_states": 378,
+      "dynamic_states": 370,
+      "reconstructed_gnss1_vs_original_max_difference_m": 1.0412553198618803e-09,
+      "BY2_poi_vs_existing_strict_max_difference_m": null,
+      "new_navigation_metrics": 0,
+      "source_metric_files_changed": false
+    }
+  ],
+  "static_preflight_returncode": 0,
+  "original_coordinate_sources": 49,
+  "coordinate_destination_rows_including_display_transform": 52,
+  "all_registered_identity_rows": 36
+}

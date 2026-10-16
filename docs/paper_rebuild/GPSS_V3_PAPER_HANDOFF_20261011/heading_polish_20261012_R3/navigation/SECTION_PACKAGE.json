@@ -1,0 +1,101 @@
+{
+  "id": "navigation_R3_20261012",
+  "figures": [
+    {
+      "id": "F03_100s_routes_with_spatial_detail",
+      "role": "main candidate",
+      "width_mm": 173.99999508327906,
+      "height_mm": 190.0000089857313,
+      "minimum_font_pt": 8,
+      "preview_pixels": [
+        2740,
+        2992
+      ],
+      "audits": {
+        "alignment": "PASS",
+        "collisions": "PASS"
+      },
+      "text_audit": 0,
+      "visual_review": "PASS: complete color and grayscale layouts reviewed; POI insets moved inside empty loop regions, redundant FGO insets removed, support text moved outside paths, relative-scene text moved into two-line titles.",
+      "files": {
+        "png": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/F03_100s_routes_with_spatial_detail.png",
+        "pdf": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/F03_100s_routes_with_spatial_detail.pdf",
+        "svg": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/F03_100s_routes_with_spatial_detail.svg",
+        "tiff": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/F03_100s_routes_with_spatial_detail.tiff"
+      }
+    },
+    {
+      "id": "F11_full_trajectory_comparison",
+      "role": "main candidate",
+      "width_mm": 173.99999508327906,
+      "height_mm": 210.9999976264106,
+      "minimum_font_pt": 8,
+      "preview_pixels": [
+        2740,
+        3322
+      ],
+      "audits": {
+        "alignment": "PASS",
+        "collisions": "PASS"
+      },
+      "text_audit": 0,
+      "visual_review": "PASS: complete color and grayscale layouts reviewed; POI insets moved inside empty loop regions, redundant FGO insets removed, support text moved outside paths, relative-scene text moved into two-line titles.",
+      "files": {
+        "png": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/F11_full_trajectory_comparison.png",
+        "pdf": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/F11_full_trajectory_comparison.pdf",
+        "svg": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/F11_full_trajectory_comparison.svg",
+        "tiff": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/F11_full_trajectory_comparison.tiff"
+      }
+    },
+    {
+      "id": "S11_GINav_partial_trajectories",
+      "role": "supporting trajectory plate",
+      "width_mm": 173.99999508327906,
+      "height_mm": 77.9999977959527,
+      "minimum_font_pt": 8,
+      "preview_pixels": [
+        2740,
+        1228
+      ],
+      "audits": {
+        "alignment": "PASS",
+        "collisions": "PASS"
+      },
+      "text_audit": 0,
+      "visual_review": "PASS: complete color and grayscale layouts reviewed; POI insets moved inside empty loop regions, redundant FGO insets removed, support text moved outside paths, relative-scene text moved into two-line titles.",
+      "files": {
+        "png": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/S11_GINav_partial_trajectories.png",
+        "pdf": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/S11_GINav_partial_trajectories.pdf",
+        "svg": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/S11_GINav_partial_trajectories.svg",
+        "tiff": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/S11_GINav_partial_trajectories.tiff"
+      }
+    },
+    {
+      "id": "S11_native_relative_trajectories",
+      "role": "supporting trajectory plate",
+      "width_mm": 173.99999508327906,
+      "height_mm": 173.99999508327906,
+      "minimum_font_pt": 8,
+      "preview_pixels": [
+        2740,
+        2740
+      ],
+      "audits": {
+        "alignment": "PASS",
+        "collisions": "PASS"
+      },
+      "text_audit": 0,
+      "visual_review": "PASS: complete color and grayscale layouts reviewed; POI insets moved inside empty loop regions, redundant FGO insets removed, support text moved outside paths, relative-scene text moved into two-line titles.",
+      "files": {
+        "png": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/S11_native_relative_trajectories.png",
+        "pdf": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/S11_native_relative_trajectories.pdf",
+        "svg": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/S11_native_relative_trajectories.svg",
+        "tiff": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/navigation/S11_native_relative_trajectories.tiff"
+      }
+    }
+  ],
+  "readme": "README.md",
+  "captions": "CAPTIONS_ZH_EN.md",
+  "data_directory": "data",
+  "new_solver_evaluator_provider_calls": 0
+}

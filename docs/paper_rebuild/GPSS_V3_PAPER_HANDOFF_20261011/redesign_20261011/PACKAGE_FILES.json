@@ -1,0 +1,646 @@
+[
+  {
+    "path": ".gitattributes",
+    "bytes": 124
+  },
+  {
+    "path": "DELIVERY.json",
+    "bytes": 767
+  },
+  {
+    "path": "LITERATURE_STYLE_NOTES.md",
+    "bytes": 2095
+  },
+  {
+    "path": "MAIN_FIGURE_CATALOG.csv",
+    "bytes": 3910
+  },
+  {
+    "path": "READER_LINK_CHECK.json",
+    "bytes": 52
+  },
+  {
+    "path": "README_正文重绘与逐图说明.md",
+    "bytes": 7429
+  },
+  {
+    "path": "REVISION_PLAN.md",
+    "bytes": 3334
+  },
+  {
+    "path": "aiding/CAPTIONS.json",
+    "bytes": 7656
+  },
+  {
+    "path": "aiding/CAPTIONS.md",
+    "bytes": 7466
+  },
+  {
+    "path": "aiding/DELIVERY.json",
+    "bytes": 2115
+  },
+  {
+    "path": "aiding/FIGURE_CATALOG.csv",
+    "bytes": 1718
+  },
+  {
+    "path": "aiding/README.md",
+    "bytes": 6804
+  },
+  {
+    "path": "aiding/SOURCES.json",
+    "bytes": 4108
+  },
+  {
+    "path": "aiding/audit_and_package.py",
+    "bytes": 2046
+  },
+  {
+    "path": "aiding/build_revised_aiding.py",
+    "bytes": 29706
+  },
+  {
+    "path": "aiding/figures/E10_all_configurations_heading.pdf",
+    "bytes": 149867
+  },
+  {
+    "path": "aiding/figures/E10_all_configurations_heading.svg",
+    "bytes": 144423
+  },
+  {
+    "path": "aiding/figures/E10_all_configurations_horizontal.pdf",
+    "bytes": 148346
+  },
+  {
+    "path": "aiding/figures/E10_all_configurations_horizontal.svg",
+    "bytes": 145685
+  },
+  {
+    "path": "aiding/figures/F06_attitude.pdf",
+    "bytes": 553407
+  },
+  {
+    "path": "aiding/figures/F06_attitude.svg",
+    "bytes": 839556
+  },
+  {
+    "path": "aiding/figures/F07_conditional_translation.pdf",
+    "bytes": 104561
+  },
+  {
+    "path": "aiding/figures/F07_conditional_translation.svg",
+    "bytes": 185668
+  },
+  {
+    "path": "aiding/figures/F08_quality_tradeoffs.pdf",
+    "bytes": 951879
+  },
+  {
+    "path": "aiding/figures/F08_quality_tradeoffs.svg",
+    "bytes": 2876384
+  },
+  {
+    "path": "aiding/figures/F10_semisynthetic_complementarity.pdf",
+    "bytes": 47795
+  },
+  {
+    "path": "aiding/figures/F10_semisynthetic_complementarity.svg",
+    "bytes": 98487
+  },
+  {
+    "path": "aiding/finalize_delivery.py",
+    "bytes": 4143
+  },
+  {
+    "path": "aiding/preview/E10_all_configurations_heading.png",
+    "bytes": 234538
+  },
+  {
+    "path": "aiding/preview/E10_all_configurations_heading_gray.png",
+    "bytes": 96408
+  },
+  {
+    "path": "aiding/preview/E10_all_configurations_horizontal.png",
+    "bytes": 233802
+  },
+  {
+    "path": "aiding/preview/E10_all_configurations_horizontal_gray.png",
+    "bytes": 96504
+  },
+  {
+    "path": "aiding/preview/F06_attitude.png",
+    "bytes": 460255
+  },
+  {
+    "path": "aiding/preview/F06_attitude_gray.png",
+    "bytes": 197403
+  },
+  {
+    "path": "aiding/preview/F07_conditional_translation.png",
+    "bytes": 268488
+  },
+  {
+    "path": "aiding/preview/F07_conditional_translation_gray.png",
+    "bytes": 112932
+  },
+  {
+    "path": "aiding/preview/F08_quality_tradeoffs.png",
+    "bytes": 304415
+  },
+  {
+    "path": "aiding/preview/F08_quality_tradeoffs_gray.png",
+    "bytes": 129908
+  },
+  {
+    "path": "aiding/preview/F10_semisynthetic_complementarity.png",
+    "bytes": 381164
+  },
+  {
+    "path": "aiding/preview/F10_semisynthetic_complementarity_gray.png",
+    "bytes": 158504
+  },
+  {
+    "path": "aiding/qa/AUDIT_INDEX.json",
+    "bytes": 817
+  },
+  {
+    "path": "aiding/qa/E10_all_configurations_heading.alignment.json",
+    "bytes": 943
+  },
+  {
+    "path": "aiding/qa/E10_all_configurations_heading.collision.json",
+    "bytes": 566
+  },
+  {
+    "path": "aiding/qa/E10_all_configurations_heading.collision.log",
+    "bytes": 377
+  },
+  {
+    "path": "aiding/qa/E10_all_configurations_heading.text.json",
+    "bytes": 287
+  },
+  {
+    "path": "aiding/qa/E10_all_configurations_horizontal.alignment.json",
+    "bytes": 943
+  },
+  {
+    "path": "aiding/qa/E10_all_configurations_horizontal.collision.json",
+    "bytes": 569
+  },
+  {
+    "path": "aiding/qa/E10_all_configurations_horizontal.collision.log",
+    "bytes": 380
+  },
+  {
+    "path": "aiding/qa/E10_all_configurations_horizontal.text.json",
+    "bytes": 290
+  },
+  {
+    "path": "aiding/qa/F06_attitude.alignment.json",
+    "bytes": 4170
+  },
+  {
+    "path": "aiding/qa/F06_attitude.collision.json",
+    "bytes": 548
+  },
+  {
+    "path": "aiding/qa/F06_attitude.collision.log",
+    "bytes": 359
+  },
+  {
+    "path": "aiding/qa/F06_attitude.text.json",
+    "bytes": 268
+  },
+  {
+    "path": "aiding/qa/F07_conditional_translation.alignment.json",
+    "bytes": 2291
+  },
+  {
+    "path": "aiding/qa/F07_conditional_translation.collision.json",
+    "bytes": 566
+  },
+  {
+    "path": "aiding/qa/F07_conditional_translation.collision.log",
+    "bytes": 376
+  },
+  {
+    "path": "aiding/qa/F07_conditional_translation.text.json",
+    "bytes": 283
+  },
+  {
+    "path": "aiding/qa/F08_quality_tradeoffs.alignment.json",
+    "bytes": 3057
+  },
+  {
+    "path": "aiding/qa/F08_quality_tradeoffs.collision.json",
+    "bytes": 1145
+  },
+  {
+    "path": "aiding/qa/F08_quality_tradeoffs.collision.log",
+    "bytes": 584
+  },
+  {
+    "path": "aiding/qa/F08_quality_tradeoffs.text.json",
+    "bytes": 277
+  },
+  {
+    "path": "aiding/qa/F10_semisynthetic_complementarity.alignment.json",
+    "bytes": 2288
+  },
+  {
+    "path": "aiding/qa/F10_semisynthetic_complementarity.collision.json",
+    "bytes": 574
+  },
+  {
+    "path": "aiding/qa/F10_semisynthetic_complementarity.collision.log",
+    "bytes": 384
+  },
+  {
+    "path": "aiding/qa/F10_semisynthetic_complementarity.text.json",
+    "bytes": 290
+  },
+  {
+    "path": "aiding/qa/source_validation.json",
+    "bytes": 4163
+  },
+  {
+    "path": "aiding/tables/ADD495.csv",
+    "bytes": 268501
+  },
+  {
+    "path": "aiding/tables/ALL61_TYPES_ALL11_CONFIGURATIONS.csv",
+    "bytes": 42584
+  },
+  {
+    "path": "aiding/tables/CONFIGURATION_CONTRASTS.csv",
+    "bytes": 6863
+  },
+  {
+    "path": "aiding/tables/CORE5951.csv",
+    "bytes": 2991610
+  },
+  {
+    "path": "aiding/tables/D15_SOURCE_WEIGHT_TRACE_ALL.csv",
+    "bytes": 4983455
+  },
+  {
+    "path": "aiding/tables/F06_NATURAL_ATTITUDE_RMSE.csv",
+    "bytes": 1277
+  },
+  {
+    "path": "aiding/tables/F07_ALL_NINE_PLACEMENTS_SUMMARY.csv",
+    "bytes": 291
+  },
+  {
+    "path": "aiding/tables/F08_ALL_513_MATCHED_CASES.csv",
+    "bytes": 256541
+  },
+  {
+    "path": "aiding/tables/F08_PAIRED_MEDIANS.csv",
+    "bytes": 131
+  },
+  {
+    "path": "aiding/tables/F10_FAMILY_PAIRED_EFFECTS.csv",
+    "bytes": 9360
+  },
+  {
+    "path": "aiding/tables/FULL_OUTCOME55.csv",
+    "bytes": 19017
+  },
+  {
+    "path": "aiding/tables/METHOD_CONFIGURATION_MAP.csv",
+    "bytes": 1456
+  },
+  {
+    "path": "aiding/tables/NATURAL33.csv",
+    "bytes": 22200
+  },
+  {
+    "path": "aiding/tables/REGISTERED_541_CASE_DEFINITIONS.csv",
+    "bytes": 360738
+  },
+  {
+    "path": "aiding/tables/REGISTERED_61_TYPE_DEFINITIONS.csv",
+    "bytes": 40754
+  },
+  {
+    "path": "aiding/tables/SA_SIX_EXTRA_COMPLETIONS.csv",
+    "bytes": 2286
+  },
+  {
+    "path": "aiding/tables/SINGLEMODULE_CASE_PAIRS2164.csv",
+    "bytes": 1101633
+  },
+  {
+    "path": "heading/BY2H_input_path.json",
+    "bytes": 326
+  },
+  {
+    "path": "heading/BY2O_input_path.json",
+    "bytes": 326
+  },
+  {
+    "path": "heading/BY2_input_path.json",
+    "bytes": 300
+  },
+  {
+    "path": "heading/CAPTIONS.md",
+    "bytes": 4255
+  },
+  {
+    "path": "heading/F4_relative_motion_global_heading.json",
+    "bytes": 1152
+  },
+  {
+    "path": "heading/F4_relative_motion_global_heading.pdf",
+    "bytes": 408047
+  },
+  {
+    "path": "heading/F4_relative_motion_global_heading.svg",
+    "bytes": 740657
+  },
+  {
+    "path": "heading/F5_heading_accuracy_availability.json",
+    "bytes": 1116
+  },
+  {
+    "path": "heading/F5_heading_accuracy_availability.pdf",
+    "bytes": 26993
+  },
+  {
+    "path": "heading/F5_heading_accuracy_availability.svg",
+    "bytes": 1179852
+  },
+  {
+    "path": "heading/FIGURE_CONTRACT.json",
+    "bytes": 1510
+  },
+  {
+    "path": "heading/INPUT_HEADING_MATCH_PROTOCOL.json",
+    "bytes": 3661
+  },
+  {
+    "path": "heading/RESULTS_ZH.md",
+    "bytes": 3425
+  },
+  {
+    "path": "heading/SOURCE_PROFILE.json",
+    "bytes": 21460
+  },
+  {
+    "path": "heading/build_heading_revision.py",
+    "bytes": 12926
+  },
+  {
+    "path": "heading/inspect_inputs.py",
+    "bytes": 1058
+  },
+  {
+    "path": "heading/inspect_sources.py",
+    "bytes": 1583
+  },
+  {
+    "path": "heading/prepare_input_heading.py",
+    "bytes": 4553
+  },
+  {
+    "path": "heading/preview/F4_relative_motion_global_heading.png",
+    "bytes": 405536
+  },
+  {
+    "path": "heading/preview/F5_heading_accuracy_availability.png",
+    "bytes": 216711
+  },
+  {
+    "path": "heading/qa/F4.collisions.json",
+    "bytes": 562
+  },
+  {
+    "path": "heading/qa/F4.collisions.pdf",
+    "bytes": 408272
+  },
+  {
+    "path": "heading/qa/F4_relative_motion_global_heading.alignment.json",
+    "bytes": 2309
+  },
+  {
+    "path": "heading/qa/F4_relative_motion_global_heading.alignment.svg",
+    "bytes": 1157
+  },
+  {
+    "path": "heading/qa/F5.collisions.json",
+    "bytes": 565
+  },
+  {
+    "path": "heading/qa/F5.collisions.pdf",
+    "bytes": 27721
+  },
+  {
+    "path": "heading/qa/F5_heading_accuracy_availability.alignment.json",
+    "bytes": 3093
+  },
+  {
+    "path": "heading/qa/F5_heading_accuracy_availability.alignment.svg",
+    "bytes": 1584
+  },
+  {
+    "path": "heading/qa/FINAL_VISUAL_CHECK.json",
+    "bytes": 1033
+  },
+  {
+    "path": "heading/source_data/BY2H_input_heading_figure_match.csv.gz",
+    "bytes": 62699
+  },
+  {
+    "path": "heading/source_data/BY2O_input_heading_figure_match.csv.gz",
+    "bytes": 83254
+  },
+  {
+    "path": "heading/source_data/BY2_input_heading_figure_match.csv.gz",
+    "bytes": 63579
+  },
+  {
+    "path": "heading/source_data/F4_equivalence.csv",
+    "bytes": 9071
+  },
+  {
+    "path": "heading/source_data/F4_full_spectrum.csv",
+    "bytes": 3672
+  },
+  {
+    "path": "heading/source_data/F4_rank_counts.csv",
+    "bytes": 113
+  },
+  {
+    "path": "heading/source_data/F5_ALL_DIRECTION_ROUTES.csv",
+    "bytes": 3185
+  },
+  {
+    "path": "heading/source_data/INPUT_HEADING_SUMMARY.csv",
+    "bytes": 655
+  },
+  {
+    "path": "literature/FIGURE_PAGE_INDEX.csv",
+    "bytes": 32704
+  },
+  {
+    "path": "literature/PDF_INVENTORY.csv",
+    "bytes": 11319
+  },
+  {
+    "path": "navigation/CAPTIONS_ZH_EN.md",
+    "bytes": 3607
+  },
+  {
+    "path": "navigation/DELIVERY_CHECKS.json",
+    "bytes": 1086
+  },
+  {
+    "path": "navigation/F03_route_local_comparison.json",
+    "bytes": 5657
+  },
+  {
+    "path": "navigation/F03_route_local_comparison.pdf",
+    "bytes": 517264
+  },
+  {
+    "path": "navigation/F03_route_local_comparison.svg",
+    "bytes": 905847
+  },
+  {
+    "path": "navigation/F09_navigation_all_families.json",
+    "bytes": 4718
+  },
+  {
+    "path": "navigation/F09_navigation_all_families.pdf",
+    "bytes": 31130
+  },
+  {
+    "path": "navigation/F09_navigation_all_families.svg",
+    "bytes": 71599
+  },
+  {
+    "path": "navigation/README.md",
+    "bytes": 4602
+  },
+  {
+    "path": "navigation/SOURCE_PATHS.json",
+    "bytes": 2559
+  },
+  {
+    "path": "navigation/SOURCE_READOUT.json",
+    "bytes": 21724
+  },
+  {
+    "path": "navigation/build_navigation.py",
+    "bytes": 22257
+  },
+  {
+    "path": "navigation/data/F03_WINDOWS.csv",
+    "bytes": 820
+  },
+  {
+    "path": "navigation/data/F09_FGO_ALL36_ROWS.csv",
+    "bytes": 24657
+  },
+  {
+    "path": "navigation/data/F09_GINAV_ALL_RESULTS.csv",
+    "bytes": 26242
+  },
+  {
+    "path": "navigation/data/F09_INTERRUPTION_ALL18.csv",
+    "bytes": 3044
+  },
+  {
+    "path": "navigation/data/F09_NATURAL_ALL19_ROWS.csv",
+    "bytes": 23009
+  },
+  {
+    "path": "navigation/data/F09_OISAM_COMMON_PRECISION.csv",
+    "bytes": 375
+  },
+  {
+    "path": "navigation/data/F09_OUTPUT_COVERAGE.csv",
+    "bytes": 885
+  },
+  {
+    "path": "navigation/data/METHOD_DESTINATIONS.csv",
+    "bytes": 2318
+  },
+  {
+    "path": "navigation/finish_delivery.py",
+    "bytes": 4616
+  },
+  {
+    "path": "navigation/preview/F03_route_local_comparison.png",
+    "bytes": 572601
+  },
+  {
+    "path": "navigation/preview/F03_route_local_comparison_gray.png",
+    "bytes": 234691
+  },
+  {
+    "path": "navigation/preview/F09_navigation_all_families.png",
+    "bytes": 345683
+  },
+  {
+    "path": "navigation/preview/F09_navigation_all_families_gray.png",
+    "bytes": 147036
+  },
+  {
+    "path": "navigation/qa/F03_route_local_comparison.alignment.json",
+    "bytes": 4211
+  },
+  {
+    "path": "navigation/qa/F03_route_local_comparison.collision.log",
+    "bytes": 369
+  },
+  {
+    "path": "navigation/qa/F03_route_local_comparison.collisions.json",
+    "bytes": 558
+  },
+  {
+    "path": "navigation/qa/F03_route_local_comparison.text.log",
+    "bytes": 278
+  },
+  {
+    "path": "navigation/qa/F09_navigation_all_families.alignment.json",
+    "bytes": 3086
+  },
+  {
+    "path": "navigation/qa/F09_navigation_all_families.collision.log",
+    "bytes": 371
+  },
+  {
+    "path": "navigation/qa/F09_navigation_all_families.collisions.json",
+    "bytes": 561
+  },
+  {
+    "path": "navigation/qa/F09_navigation_all_families.text.log",
+    "bytes": 279
+  },
+  {
+    "path": "navigation/qa/SOURCE_PREFLIGHT.log",
+    "bytes": 2004
+  },
+  {
+    "path": "schematics/Fig01_platform_image.png",
+    "bytes": 1766509
+  },
+  {
+    "path": "schematics/Fig02_method_image.png",
+    "bytes": 1648408
+  },
+  {
+    "path": "schematics/IMAGEGEN_RECORD.md",
+    "bytes": 4450
+  },
+  {
+    "path": "schematics/references/platform_original.jpg",
+    "bytes": 309781
+  },
+  {
+    "path": "正文重绘10图_连续浏览.html",
+    "bytes": 6591
+  }
+]

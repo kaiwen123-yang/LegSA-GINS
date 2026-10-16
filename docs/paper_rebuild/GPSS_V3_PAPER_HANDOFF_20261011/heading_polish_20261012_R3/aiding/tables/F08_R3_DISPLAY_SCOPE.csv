@@ -1,0 +1,7 @@
+condition,representative_case,method,run_id,plotted_interval_start_s,plotted_interval_end_s,RMSE_interval_start_s,RMSE_interval_end_s,whole_window_yaw_RMSE_deg,plot_selection,display_samples,whole_series_samples
+D15,D15_seed_00,A04,RUN_01403,0,120,0,274,29.79852519147967,Same first120s for every condition; no new representative/seed choice,25429,56642
+D15,D15_seed_00,F04,RUN_01401,0,120,0,274,2.698608937739373,Same first120s for every condition; no new representative/seed choice,25429,56642
+D38,D38_seed_00,A04,RUN_03680,0,120,0,274,1.730832347201089,Same first120s for every condition; no new representative/seed choice,25429,56642
+D38,D38_seed_00,F04,RUN_03678,0,120,0,274,1.6314482701341806,Same first120s for every condition; no new representative/seed choice,25429,56642
+D59,D59_seed_00,A04,RUN_05759,0,120,0,274,28.276671824147897,Same first120s for every condition; no new representative/seed choice,25429,56642
+D59,D59_seed_00,F04,RUN_05757,0,120,0,274,2.7034286882599177,Same first120s for every condition; no new representative/seed choice,25429,56642

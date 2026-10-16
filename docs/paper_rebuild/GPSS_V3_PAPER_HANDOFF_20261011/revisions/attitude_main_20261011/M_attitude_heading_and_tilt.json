@@ -1,0 +1,45 @@
+{
+  "figure_id": "M_attitude_heading_and_tilt",
+  "source_figures": [
+    "S9",
+    "S8"
+  ],
+  "width_mm": 174,
+  "height_mm": 177,
+  "layout": "three scenes by heading/roll/pitch",
+  "heading_methods": [
+    "F01",
+    "F03",
+    "F04"
+  ],
+  "tilt_methods": [
+    "A05",
+    "F04"
+  ],
+  "inset_windows_elapsed_s": {
+    "BY2": [
+      125,
+      145
+    ],
+    "BY2H": [
+      125,
+      145
+    ],
+    "BY2O": [
+      194,
+      214
+    ]
+  },
+  "line_gap_break_s": 0.1,
+  "smoothing": false,
+  "downsampling": false,
+  "full_history_rasterized_dpi": 600,
+  "inset_lines_vector": true,
+  "frozen_science_commit": "7d43b9af26120ed5dde21f53e515386361072ba6",
+  "scientific_runs": 0,
+  "caption_status": "DRAFT_FOR_AUTHOR_DISCUSSION",
+  "alignment_status": "PASS",
+  "alignment_scope": "Nine main axes; the three different-scale heading insets are outside comparable groups.",
+  "visual_review": "PASSED_FOR_DISCUSSION",
+  "qa_report": "QA_REPORT.json"
+}

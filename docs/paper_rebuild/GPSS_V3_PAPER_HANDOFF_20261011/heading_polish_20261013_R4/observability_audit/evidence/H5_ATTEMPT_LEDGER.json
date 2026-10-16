@@ -1,0 +1,30 @@
+{
+  "attempts": [
+    {
+      "attempt_id": "LSE01_H5_BY2_NATIVE_B1B3B0E_V1",
+      "disposition": "REJECTED_BEFORE_PROVIDER_AND_FILTER",
+      "filter_run_count": 0,
+      "raw_source_open_count": 0,
+      "reason": "attempt root already existed because it contained the verified build"
+    },
+    {
+      "attempt_id": "LSE01_H5_BY2_NATIVE_B1B3B0E_V2",
+      "disposition": "REJECTED_AFTER_PROVIDER_BEFORE_FILTER",
+      "filter_run_count": 0,
+      "other_method_solver_call_count": 0,
+      "reason": "file-access audit detected an eager EXT01 package-import path; H5 import isolation was repaired before native execution"
+    },
+    {
+      "attempt_id": "LSE01_H5_BY2_NATIVE_B1B3B0E_V3",
+      "disposition": "ACCEPTED_NATIVE_FREEZE",
+      "filter_run_count": 4,
+      "other_method_solver_call_count": 0,
+      "provider_cache_sha256": "c169e26d66f35fe200bb17a695353cd2d751482df1cd97996a7a8afff8662065",
+      "reference_open_count": 0,
+      "trajectory_trace_open_count": 0
+    }
+  ],
+  "failed_attempts_preserved_locally": true,
+  "real_BY2_filter_run_count_total": 4,
+  "schema_version": "hartley.h5.attempt_ledger.v1"
+}

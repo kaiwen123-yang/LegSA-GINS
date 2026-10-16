@@ -1,0 +1,7 @@
+{
+  "question_zh": "在紧凑四足机器人的 GNSS/INS 中，短基线方向信息与机身运动观测如何共同改善姿态和平移估计，这种互补在什么观测可用性与质量条件下成立，又在何时失效？",
+  "source": "author instruction in current conversation",
+  "results_outline": "选定科学问题_结果正文结构.md",
+  "figure_reader": "逐图讲解_从坐标轴到科学结论.md",
+  "data_or_figure_changes": false
+}

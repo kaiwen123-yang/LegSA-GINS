@@ -1,0 +1,70 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V3 正文图 R5</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f4f6f9;color:#17212b;font:16px/1.8 system-ui,"Microsoft YaHei",sans-serif}
+header,main{max-width:1450px;margin:auto;padding:28px}h1{font-size:28px}h2{font-size:23px;margin-top:0}a{color:#174eaa}
+nav{position:sticky;top:0;background:#fffffff5;z-index:2;padding:10px;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;border-block:1px solid #dde2e8}
+section{background:white;border:1px solid #dde2e8;padding:26px;margin-bottom:28px;scroll-margin-top:76px}
+.figure{display:block;width:100%;height:auto;cursor:zoom-in;margin:20px 0}.links{display:flex;gap:20px;flex-wrap:wrap}small{color:#536274}
+details{border-top:1px solid #dde2e8;padding-top:14px;margin-top:18px}summary{font-weight:650;cursor:pointer}.reader{white-space:pre-wrap}
+dialog{border:0;padding:0;width:96vw;height:94vh;max-width:96vw;max-height:94vh}
+#controls{padding:8px;background:white;border-bottom:1px solid #d5dce4;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+button{cursor:pointer;padding:6px 12px;border:1px solid #ccd6e1;background:#fff;border-radius:4px;font:inherit;color:#174eaa}
+#zoomview{height:calc(100% - 56px);overflow:auto;padding:12px;background:#f1f3f6}#zoomimg{max-width:none;display:block;background:white}
+dialog::backdrop{background:#0f172acc}@media(max-width:700px){header,main{padding:14px 10px}section{padding:15px 10px}h1{font-size:24px}}
+</style><header><h1>正文图 R5 · 轨迹细节、两种运动估计与多种退化</h1>
+<p>本轮修改图3、4、8。其余正文图保持上一轮版本。点击图可按原始像素继续放大。</p>
+<p><a href="README.md">本轮修改说明</a>　<a href="FIGURE_READERS_ZH.md">正文十图说明</a>　<a href="FIGURE_READERS_ZH.md">逐图解释</a>　<a href="../heading_polish_20261013_R4/schematics/F02_矢量放大查看.html">图2矢量阅读</a></p></header><nav>
+<a href="#f1">图1</a>
+<a href="#f2">图2</a>
+<a href="#f3">图3</a>
+<a href="#f4">图4</a>
+<a href="#f5">图5</a>
+<a href="#f6">图6</a>
+<a href="#f7">图7</a>
+<a href="#f8">图8</a>
+<a href="#f9">图9</a>
+<a href="#f10">图10</a>
+</nav><main>
+<section id="f1"><h2>图1　保留：平台与短基线</h2><small>2560 × 1206 px</small><img class="figure" loading="lazy" src="../heading_polish_20261013_R4/schematics/preview/F01_platform.png" data-full="../heading_polish_20261013_R4/schematics/figures/F01_platform.png" alt="保留：平台与短基线"><div class="links"><a href="../heading_polish_20261013_R4/schematics/figures/F01_platform.png">原尺寸PNG</a><a href="../heading_polish_20261013_R4/schematics/figures/F01_platform.pdf">矢量PDF</a><a href="../heading_polish_20261013_R4/schematics/figures/F01_platform.pdf">矢量PDF</a></div><details><summary>解释与修改理由</summary><div class="reader">保留作者认可的平台照片、生成插图和短基线几何版式，图面不变。</div></details></section>
+<section id="f2"><h2>图2　原样式高清与矢量阅读</h2><small>3840 × 1832 px</small><img class="figure" loading="lazy" src="../heading_polish_20261013_R4/schematics/preview/F02_method.png" data-full="../heading_polish_20261013_R4/schematics/figures/F02_method.png" alt="原样式高清与矢量阅读"><div class="links"><a href="../heading_polish_20261013_R4/schematics/figures/F02_method.png">原尺寸PNG</a><a href="../heading_polish_20261013_R4/schematics/figures/F02_method.pdf">矢量PDF</a><a href="../heading_polish_20261013_R4/schematics/figures/F02_method.pdf">矢量PDF</a></div><details><summary>解释与修改理由</summary><div class="reader">沿用R4的构图及可编辑矢量母版。图说明IMU传播、GNSS位置/速度与短基线方向、机身姿态/速度辅助如何更新共同状态，以及来源质量与新息怎样调整观测协方差。
+
+[7680px PNG](../heading_polish_20261013_R4/schematics/figures/F02_method_8K.png) · [真正可缩放的矢量阅读页](../heading_polish_20261013_R4/schematics/F02_矢量放大查看.html) · [放大阅读PDF](../heading_polish_20261013_R4/schematics/figures/F02_method_reading.pdf) · [编辑SVG](../heading_polish_20261013_R4/schematics/editable/F02_method_traced.svg)</div></details></section>
+<section id="f3"><h2>图3　完整轨迹与分组空间细节</h2><small>2740 × 3559 px</small><img class="figure" loading="lazy" src="navigation/preview/F03_integrated_routes_and_heading.png" data-full="navigation/F03_integrated_routes_and_heading.png" alt="完整轨迹与分组空间细节"><div class="links"><a href="navigation/F03_integrated_routes_and_heading.png">原尺寸PNG</a><a href="navigation/F03_integrated_routes_and_heading.pdf">矢量PDF</a><a href="navigation/F03_integrated_routes_and_heading.pdf">矢量PDF</a></div><details><summary>解释与修改理由</summary><div class="reader">原图把八个主配置、狭窄局部和航向曲线放在同一张三列图中。地图线条互相覆盖，厘米局部又用了大量纵向留白；R5将图面重心调整为空间轨迹，航向比较由图9承担。
+
+每个场景保留完整路线作为位置索引，局部按双位置IEKF、单位置IEKF、OiSAM分组。各组重复同一参考与LegSA-GINS，以少量深色实线、虚线直接比较；重复锚点不是增加独立运行。空间视图采用相同真实坐标，不人为平移方法结果或夸大误差。
+
+完整路线纳入八个主配置：LegSA-GINS、双位置IEKF两配置、单位置IEKF两配置、恢复协议OiSAM、TC-FGO、GNC-FGO。TC/GNC现有输出位于GNSS1，其余路线经已有合法变换到POI；完整图用于米尺度概览，同点厘米细节不混入无法转换的TC/GNC轨迹。GINav部分路线与机器人本地坐标路线仍有补充图。
+
+三场景分别为正常行走、大幅机身运动、单天线遮挡。保留此前100s上下文；遮挡期间原局部的参考近静止且SDK低速读数一致，因此空间局部沿用228–233s恢复运动段，而非将近静止点团称为行走路线。全部方法和窗口的确切对应见navigation的图注和数据映射。</div></details></section>
+<section id="f4"><h2>图4　两种机器人运动估计与绝对方向</h2><small>2740 × 2551 px</small><img class="figure" loading="lazy" src="observability/preview/F04_proprioceptive_heading_and_two_routes.png" data-full="observability/F04_proprioceptive_heading_and_two_routes.png" alt="两种机器人运动估计与绝对方向"><div class="links"><a href="observability/F04_proprioceptive_heading_and_two_routes.png">原尺寸PNG</a><a href="observability/F04_proprioceptive_heading_and_two_routes.pdf">矢量PDF</a><a href="observability/F04_proprioceptive_heading_and_two_routes.pdf">矢量PDF</a></div><details><summary>解释与修改理由</summary><div class="reader">作者确认要比较的两条路线是接触辅助InEKF、足端运动学航位推算，不是另一种EKF，也不是把同一方法的两套参数称为两个算法。
+
+前两个面板保留同一既有实现、同一输入、七个初始全局朝向的轨迹和逆旋转后的重合。这个结果说明已知全局旋转自由度在该实现中的一致性；数值重合残差不是定位误差。后两个面板新增官方接触InEKF与足端航位推算的已完成相对误差时序。
+
+常规行走示例采用两条路线原有的起始10s一次对齐，未重新拟合。原冻结表中的水平RMSE为InEKF 50.19m、航位推算6.21m，对齐后航向RMSE为62.17°、2.31°。曲线说明在该平台已有输入配置下，后续相对运动和朝向变化如何累积偏差。另有三场景完整配图与方法配置表。
+
+两条路线的信息不同：InEKF由机体IMU与接触/足位代理估计姿态；航位推算利用机载姿态旋转足端运动学速度后积分。较小的对齐后航向误差不能直接解释为航位推算独立估计了全球绝对朝向。前两个面板是结构性质说明，后两个是现有两路线的实际相对表现，不能互相替代。</div></details></section>
+<section id="f5"><h2>图5　保留：方向比较</h2><small>2740 × 3023 px</small><img class="figure" loading="lazy" src="../heading_polish_20261013_R4/heading_acceptance/preview/F05_heading_error_comparison.png" data-full="../heading_polish_20261013_R4/heading_acceptance/F05_heading_error_comparison.png" alt="保留：方向比较"><div class="links"><a href="../heading_polish_20261013_R4/heading_acceptance/F05_heading_error_comparison.png">原尺寸PNG</a><a href="../heading_polish_20261013_R4/heading_acceptance/F05_heading_error_comparison.pdf">矢量PDF</a><a href="../heading_polish_20261013_R4/heading_acceptance/F05_heading_error_comparison.pdf">矢量PDF</a></div><details><summary>解释与修改理由</summary><div class="reader">保留作者通过的方向比较、历元接受状态和筛选前后误差分布，未改变算法结果、配色和图面。</div></details></section>
+<section id="f6"><h2>图6　保留：自然场景姿态</h2><small>3082 × 3082 px</small><img class="figure" loading="lazy" src="../heading_polish_20261013_R4/aiding/preview/F06_heading_and_tilt.png" data-full="../heading_polish_20261013_R4/aiding/figures/F06_heading_and_tilt.png" alt="保留：自然场景姿态"><div class="links"><a href="../heading_polish_20261013_R4/aiding/figures/F06_heading_and_tilt.png">原尺寸PNG</a><a href="../heading_polish_20261013_R4/aiding/figures/F06_heading_and_tilt.pdf">矢量PDF</a><a href="../heading_polish_20261013_R4/aiding/figures/F06_heading_and_tilt.pdf">矢量PDF</a></div><details><summary>解释与修改理由</summary><div class="reader">保留自然场景下的航向与倾角结果，用于观察短基线方向与机身姿态辅助的实际作用。</div></details></section>
+<section id="f7"><h2>图7　保留：条件性辅助</h2><small>3200 × 3751 px</small><img class="figure" loading="lazy" src="../heading_polish_20261013_R4/aiding/preview/F07_heading_retained_translation.png" data-full="../heading_polish_20261013_R4/aiding/figures/F07_heading_retained_translation.png" alt="保留：条件性辅助"><div class="links"><a href="../heading_polish_20261013_R4/aiding/figures/F07_heading_retained_translation.png">原尺寸PNG</a><a href="../heading_polish_20261013_R4/aiding/figures/F07_heading_retained_translation.pdf">矢量PDF</a><a href="../heading_polish_20261013_R4/aiding/figures/F07_heading_retained_translation.pdf">矢量PDF</a></div><details><summary>解释与修改理由</summary><div class="reader">保留观测可用性与机身辅助的条件性结果。</div></details></section>
+<section id="f8"><h2>图8　不同退化条件下的质量调整与航向响应</h2><small>3082 × 3933 px</small><img class="figure" loading="lazy" src="aiding/preview/F08_heading_quality_scaling.png" data-full="aiding/figures/F08_heading_quality_scaling.png" alt="不同退化条件下的质量调整与航向响应"><div class="links"><a href="aiding/figures/F08_heading_quality_scaling.png">原尺寸PNG</a><a href="aiding/figures/F08_heading_quality_scaling.pdf">矢量PDF</a><a href="aiding/figures/F08_heading_quality_scaling.pdf">矢量PDF</a></div><details><summary>解释与修改理由</summary><div class="reader">使用三个物理机制不同且有完整时序的既有seed00案例：位置噪声、方向噪声伴随乐观精度上报、机身速度噪声。固定种子来自原保留规则，没有为更大收益更换种子。没有把共同坏位置成分主导的两个案例当成不同机理重复展示。
+
+每行按相同顺序阅读：实际输入扰动、记录中的来源协方差倍率、完整方法与关闭来源加权的航向响应。左列直接比较已保存的受扰输入与原始干净输入：位置用三维距离，方向用圆周角差的绝对值，机身速度用水平速度差的模长；这些量说明实际注入了什么。中列的点、粗线、细线分别为实际更新倍率的中位数、四分位距和范围。
+
+右列三组均采用每秒中位线与最小—最大范围带，防止高频曲线互相遮盖；统计包括各时间箱内的全部原始样本，范围带表示时间内波动，并非跨种子置信区间。主图展示前120s，所标RMSE沿用完整274s的冻结指标。协方差倍率反映对同一来源影响的调整，不是卡尔曼增益的精确倒数。
+
+位置噪声案例航向RMSE从29.7985°降至2.6986°，水平位置RMSE从3.16555m升至3.55690m。方向质量失配案例航向从1.7308°降至1.6314°，水平位置从0.09707m升至0.09884m。机身速度噪声案例航向为1.886240°与1.885432°，基本不变，而水平位置从0.108699m降至0.100066m。
+
+这些案例共同说明质量调整的效果取决于受损来源及其与当前状态的耦合：可出现显著航向保护、小幅收益，或航向接近中性而位置改善。不能把三个例子统称为同样显著的航向增益。
+
+整体统计仍保留：541登记配对中513组双方完成，190组完整方法航向RMSE较低、323组较高；另6组仅完整方法完成、22组双方未完成。该图比较整套来源加权开关，不能把结果归因于单独某个倍率。曲线时间窗、完整指标时间窗和各来源有效更新样本数见aiding图注。</div></details></section>
+<section id="f9"><h2>图9　保留：航向横向比较</h2><small>2740 × 3338 px</small><img class="figure" loading="lazy" src="../heading_polish_20261013_R4/navigation_comparison/preview/F09_heading_comparison.png" data-full="../heading_polish_20261013_R4/navigation_comparison/F09_heading_comparison.png" alt="保留：航向横向比较"><div class="links"><a href="../heading_polish_20261013_R4/navigation_comparison/F09_heading_comparison.png">原尺寸PNG</a><a href="../heading_polish_20261013_R4/navigation_comparison/F09_heading_comparison.pdf">矢量PDF</a><a href="../heading_polish_20261013_R4/navigation_comparison/F09_heading_comparison.pdf">矢量PDF</a></div><details><summary>解释与修改理由</summary><div class="reader">保留自然场景六方法与18个中断条件的航向比较。图3现在主要负责空间路线可读性，图9继续承担完整的航向横向比较。</div></details></section>
+<section id="f10"><h2>图10　保留：方向扰动输入与输出</h2><small>3082 × 3720 px</small><img class="figure" loading="lazy" src="../heading_polish_20261013_R4/aiding/preview/F10_heading_sensitivity.png" data-full="../heading_polish_20261013_R4/aiding/figures/F10_heading_sensitivity.png" alt="保留：方向扰动输入与输出"><div class="links"><a href="../heading_polish_20261013_R4/aiding/figures/F10_heading_sensitivity.png">原尺寸PNG</a><a href="../heading_polish_20261013_R4/aiding/figures/F10_heading_sensitivity.pdf">矢量PDF</a><a href="../heading_polish_20261013_R4/aiding/figures/F10_heading_sensitivity.pdf">矢量PDF</a></div><details><summary>解释与修改理由</summary><div class="reader">保留方向缺失、方向噪声和尖峰的整体结果与输入—输出过程。</div></details></section>
+</main><dialog id="zoom"><div id="controls"><button id="close">关闭 ×</button><button id="fit">适合窗口</button><button id="plus">放大 ＋</button><button id="minus">缩小 −</button><button id="native">原始像素</button><span id="ratio"></span></div><div id="zoomview"><img id="zoomimg" alt="原图放大"></div></dialog><script>
+const d=document.getElementById('zoom'),im=document.getElementById('zoomimg'),v=document.getElementById('zoomview');let scale=1;
+function apply(){im.style.width=(im.naturalWidth*scale)+'px';im.style.height='auto';document.getElementById('ratio').textContent=Math.round(scale*100)+'%'}
+function fit(){scale=Math.min(1,(v.clientWidth-24)/im.naturalWidth);apply();v.scrollLeft=v.scrollTop=0}
+document.querySelectorAll('.figure').forEach(x=>x.onclick=()=>{im.onload=fit;im.src=x.dataset.full;d.showModal();if(im.complete&&im.naturalWidth)fit()});
+document.getElementById('close').onclick=()=>d.close();document.getElementById('fit').onclick=fit;document.getElementById('native').onclick=()=>{scale=1;apply()};
+document.getElementById('plus').onclick=()=>{scale=Math.min(3,scale*1.4);apply()};document.getElementById('minus').onclick=()=>{scale=Math.max(.05,scale/1.4);apply()};d.onclick=e=>{if(e.target===d)d.close()};
+</script></html>

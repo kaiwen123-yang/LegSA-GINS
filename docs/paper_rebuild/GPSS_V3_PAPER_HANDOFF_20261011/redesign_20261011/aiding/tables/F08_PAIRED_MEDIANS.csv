@@ -1,0 +1,3 @@
+metric,n_pairs,median_full_minus_ablation
+delta_horizontal_rmse_m,513,0.0009812100913899
+delta_yaw_rmse_deg,513,0.0002579935045803

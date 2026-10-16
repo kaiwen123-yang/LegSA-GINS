@@ -1,0 +1,4 @@
+*.csv -text -whitespace
+*.gz binary
+*.png binary
+*.pdf binary

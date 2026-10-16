@@ -1,0 +1,5 @@
+# Preserve existing evidence snapshots byte-for-byte, including embedded log/config whitespace.
+*.csv -text whitespace=cr-at-eol
+figures/** -text -whitespace
+records/** -text -whitespace
+plot_sources/** -text -whitespace

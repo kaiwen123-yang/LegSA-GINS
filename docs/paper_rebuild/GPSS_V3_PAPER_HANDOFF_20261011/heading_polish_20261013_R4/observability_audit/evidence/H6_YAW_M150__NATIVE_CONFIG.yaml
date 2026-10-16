@@ -1,0 +1,69 @@
+schema_version: hartley.h6.native_config.v1
+run_id: H6_YAW_M150
+method_id: LSE01_HARTLEY_CONTACT_AIDED_INEKF
+backend_id: HARTLEY_IJRR2020_REPORTED_BACKEND
+process_profile: GO2_IMU_ALLAN_90MIN_RECOVERED_V1_PLUS_PAPER_NATIVE_CONTACT_EQ61
+sigma_fk_m: 0.01
+initial_gauge_yaw_deg: -150.0
+gauge_axis: NORMALIZED_WORLD_GRAVITY_NEGATIVE_Z
+expected_native_euler_yaw_offset_deg: 150.0
+left_multiplication: true
+raw_sha256: 95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278
+complete_prefix_sha256: 03cd96cd65d7f5af30f6a0c78d37f07ae4d32c65e78531807db7192454dff097
+provider_cache_sha256: c169e26d66f35fe200bb17a695353cd2d751482df1cd97996a7a8afff8662065
+contact_event_input_ledger_sha256: 8e80cde9b90ade49753d8fd97e554af3c032c664d1d336f663838cbb68204358
+threads:
+  OMP_NUM_THREADS: 1
+  MKL_NUM_THREADS: 1
+  OPENBLAS_NUM_THREADS: 1
+  NUMEXPR_NUM_THREADS: 1
+chronological_single_sequence: true
+epoch_parallelism: 1
+native_config_metadata:
+  run_id: H6_YAW_M150
+  backend_id: HARTLEY_IJRR2020_REPORTED_BACKEND
+  process_policy: GO2_CONTINUOUS_IMU_PAPER_NATIVE_CONTACT_EQ61
+  sigma_fk_m: '0.010'
+  expected_records: '63277'
+  cache_sha256: c169e26d66f35fe200bb17a695353cd2d751482df1cd97996a7a8afff8662065
+  code_commit: 4b25fa6337f4760557f501f102a38a1ac65c766e
+  task_start_head: 4b25fa6337f4760557f501f102a38a1ac65c766e
+  task_start_dirty_or_precommit: 'true'
+  scoped_source_manifest_sha256: 95e72d4f538860ca824edd430dd5a6cdec1b7cceda7fcabceeed451cba0c0221
+  native_executable_sha256: 1777142f20c97048e4cf4ce9e256b4599a8c62bfee1c48bb7241de7b73e4500f
+  later_final_commit_mapping: NOT_AVAILABLE_PRECOMMIT
+  execution_phase: H6_GAUGE_ENSEMBLE
+  initial_gauge_yaw_deg: '-150.0'
+  config_hash: 2e4d727605c7d876a53758ed55145089738c14b01241fc6cf6b539425e96939e
+  cache_path: /home/kaiwen/research/LegSA-GINS-RUNS/LSE01_H5_BY2_NATIVE_B1B3B0E_V3/00_PROVIDER/H5_INPUT_CACHE.bin
+  scoped_source_files:
+    scripts/paper_rebuild/run_hartley_h6.py:
+      size: 6029
+      sha256: 1f53132e98e7a8a4e0b13b585fc3440b0c724bf19441494e61c80bd71ec6aa05
+    src/legsa_gins/paper_rebuild/horizontal_literature/hartley_h6.py:
+      size: 100661
+      sha256: 7c668ac3f009d9d0c4cb44da57f24a61a5df01cade95eefdcf3d49100dc8c0eb
+    src/legsa_gins/paper_rebuild/horizontal_literature/hartley_h5.py:
+      size: 28076
+      sha256: 3b9e57d5470cf33360564b0736a81a31ee67c1274c9a87b7e335921f58a399c2
+    src/legsa_gins/paper_rebuild/horizontal_literature/hartley_inekf/tools/run_h5.cpp:
+      size: 31833
+      sha256: fe0a4891e0ca1c9c9b1bea831bca5aa115ad4a4199fdcf695b78bae7459bf395
+    src/legsa_gins/paper_rebuild/horizontal_literature/hartley_inekf/src/backend.cpp:
+      size: 53205
+      sha256: a84f143d88af2cabbbf6536fb93b8de483946ed9e00a729eaeeab40665522bc3
+    src/legsa_gins/paper_rebuild/horizontal_literature/hartley_inekf/include/hartley_inekf/backend.hpp:
+      size: 11752
+      sha256: 271a579c716a9c398e16152db923d1730298063a582bf9e048415af49f5bb94a
+    configs/paper_rebuild/horizontal_literature/hartley/stage_payload/04_METHOD_CONTRACTS/HARTLEY_H6_EXECUTION_CONTRACT.yaml:
+      size: 5459
+      sha256: bc1f245691faef43eac9debcda23b4c5d2c3338224234e08c3f6fdecca517c09
+  launcher_wall_seconds: 2.3382727939997494
+  native_stdout: PASS_HARTLEY_H5_NATIVE run_id=H6_YAW_M150 rows=63277
+  native_stderr: ''
+reference_open_count: 0
+trace_open_count: 0
+GNSS_input_count: 0
+Go2_onboard_pose_or_yaw_input_count: 0
+LegSA_output_input_count: 0
+EXT_output_input_count: 0

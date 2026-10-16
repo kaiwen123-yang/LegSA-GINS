@@ -1,0 +1,15 @@
+{
+  "rows_checked": 600,
+  "provider_columns_0based": [
+    4,
+    5,
+    6
+  ],
+  "quantity": "sum of squared reported position std fields equals actual base_R_trace",
+  "maximum_difference": 1.0842021724855044e-19,
+  "original_provider": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN8_PROTOCOL_V3/02_PROVIDERS/CASES/BY2__D15_seed_00__18a349c6d122820244c40bcf78ff92b9221060ceb5a04b1c115b2194402e343c/GNSS18.gnss",
+  "provider_sha256": "8a25655979e9e4b384e2200dafcfd9f8b16e42fa2f26049ee4f55131287496df",
+  "recorded_sha256": "8a25655979e9e4b384e2200dafcfd9f8b16e42fa2f26049ee4f55131287496df",
+  "hash_match": true,
+  "new_provider_calls": 0
+}

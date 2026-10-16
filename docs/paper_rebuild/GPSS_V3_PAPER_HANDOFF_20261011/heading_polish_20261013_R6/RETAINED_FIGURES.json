@@ -1,0 +1,242 @@
+[
+  {
+    "figure": 1,
+    "path": "schematics/figures/F01_platform.pdf",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 1,
+    "path": "schematics/figures/F01_platform.png",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 1,
+    "path": "schematics/figures/F01_platform.svg",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 1,
+    "path": "schematics/figures/F01_platform.tiff",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 1,
+    "path": "schematics/preview/F01_platform.png",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 2,
+    "path": "schematics/figures/F02_method.pdf",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 2,
+    "path": "schematics/figures/F02_method.png",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 2,
+    "path": "schematics/figures/F02_method.svg",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 2,
+    "path": "schematics/figures/F02_method.tiff",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 2,
+    "path": "schematics/preview/F02_method.png",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 5,
+    "path": "heading_acceptance/F05_heading_error_comparison.pdf",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 5,
+    "path": "heading_acceptance/F05_heading_error_comparison.png",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 5,
+    "path": "heading_acceptance/F05_heading_error_comparison.svg",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 5,
+    "path": "heading_acceptance/F05_heading_error_comparison.tiff",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 5,
+    "path": "heading_acceptance/preview/F05_heading_error_comparison.png",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 6,
+    "path": "aiding/figures/F06_heading_and_tilt.pdf",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 6,
+    "path": "aiding/figures/F06_heading_and_tilt.png",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 6,
+    "path": "aiding/figures/F06_heading_and_tilt.svg",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 6,
+    "path": "aiding/figures/F06_heading_and_tilt.tiff",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 6,
+    "path": "aiding/preview/F06_heading_and_tilt.png",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 7,
+    "path": "aiding/figures/F07_heading_retained_translation.pdf",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 7,
+    "path": "aiding/figures/F07_heading_retained_translation.png",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 7,
+    "path": "aiding/figures/F07_heading_retained_translation.svg",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 7,
+    "path": "aiding/figures/F07_heading_retained_translation.tiff",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 7,
+    "path": "aiding/preview/F07_heading_retained_translation.png",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 9,
+    "path": "navigation_comparison/F09_heading_comparison.pdf",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 9,
+    "path": "navigation_comparison/F09_heading_comparison.png",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 9,
+    "path": "navigation_comparison/F09_heading_comparison.svg",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 9,
+    "path": "navigation_comparison/F09_heading_comparison.tiff",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 9,
+    "path": "navigation_comparison/preview/F09_heading_comparison.png",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 10,
+    "path": "aiding/figures/F10_heading_sensitivity.pdf",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 10,
+    "path": "aiding/figures/F10_heading_sensitivity.png",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 10,
+    "path": "aiding/figures/F10_heading_sensitivity.svg",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 10,
+    "path": "aiding/figures/F10_heading_sensitivity.tiff",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 10,
+    "path": "aiding/preview/F10_heading_sensitivity.png",
+    "source_revision": "R5",
+    "identical": true
+  },
+  {
+    "figure": 4,
+    "path": "observability/F04_absolute_direction_relative_motion.pdf",
+    "source_revision": "R4",
+    "identical": true
+  },
+  {
+    "figure": 4,
+    "path": "observability/F04_absolute_direction_relative_motion.svg",
+    "source_revision": "R4",
+    "identical": true
+  },
+  {
+    "figure": 4,
+    "path": "observability/F04_absolute_direction_relative_motion.png",
+    "source_revision": "R4",
+    "identical": true
+  },
+  {
+    "figure": 4,
+    "path": "observability/F04_absolute_direction_relative_motion.tiff",
+    "source_revision": "R4",
+    "identical": true
+  },
+  {
+    "figure": 4,
+    "path": "observability/preview/F04_absolute_direction_relative_motion.png",
+    "source_revision": "R4",
+    "identical": true
+  }
+]

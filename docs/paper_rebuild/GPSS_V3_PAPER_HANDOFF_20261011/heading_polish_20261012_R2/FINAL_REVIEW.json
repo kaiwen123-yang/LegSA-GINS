@@ -1,0 +1,45 @@
+{
+  "main_figures": 10,
+  "all_previews_full_hd_or_higher": true,
+  "F07_original_exports_byte_identical": {
+    "pdf": true,
+    "svg": true,
+    "png": true,
+    "tiff": true
+  },
+  "F02_native_vector": {
+    "status": "PASS",
+    "drawio_vertices": 40,
+    "drawio_edges": 13,
+    "attached_edges": 11,
+    "unknown_node_links": [],
+    "svg_text_elements": 40,
+    "svg_raster_images": 0,
+    "pages": {
+      "F01_platform": {
+        "mm": [
+          173.99999508327906,
+          77.99999779595268
+        ],
+        "preview_pixels": [
+          2560,
+          1147
+        ]
+      },
+      "F02_method": {
+        "mm": [
+          173.99999508327906,
+          125.99999643961587
+        ],
+        "preview_pixels": [
+          2560,
+          1853
+        ]
+      }
+    },
+    "drawio_render": "XML structure and link identities checked; final PDF and PNG visually inspected"
+  },
+  "all_main_figures_visually_inspected": true,
+  "new_original_solver_calls": 0,
+  "new_observation_error_derivation": true
+}

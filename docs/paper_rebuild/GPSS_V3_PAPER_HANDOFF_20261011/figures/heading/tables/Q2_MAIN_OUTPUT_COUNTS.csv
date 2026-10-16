@@ -1,0 +1,4 @@
+sequence,scenario,new_outputs,paired_epochs,new_output_fraction
+BY2,Nominal walking,153,1370,0.11167883211678832
+BY2H,Large body motion,179,1350,0.1325925925925926
+BY2O,Antenna obstruction,112,1885,0.059416445623342175

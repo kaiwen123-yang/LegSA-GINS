@@ -1,0 +1,37 @@
+{
+  "status": "VALIDATED_DISCUSSION_DRAFT",
+  "main_figures": 4,
+  "extended_figures": 2,
+  "scientific_native_runs": 0,
+  "new_evaluator_runs": 0,
+  "new_provider_runs": 0,
+  "core_runs_read": 5951,
+  "additional_runs_read": 495,
+  "case_pairs_read": 2164,
+  "core_types_including_clean": 61,
+  "registered_variants_per_perturbed_type": 9,
+  "configurations": 11,
+  "core_registered_case_definitions_recovered": 541,
+  "source_series_count": 18,
+  "width_mm": 174,
+  "min_font_pt": 8,
+  "dpi": 600,
+  "source_validator_fail": 0,
+  "collision_fail": 0,
+  "alignment_fail": 0,
+  "visual_review": "All six colour previews inspected; source series retain every plotted sample and real gaps. No smoothing or value clipping. Full matrix blanks correspond only to no completed runs.",
+  "reviewed_warnings": [
+    "F08 heading RMSE label lies within blank space inside the bounding rectangle of a rasterized line artist, but it covers no trajectory. PDF geometry flags image-edge overlap because it cannot inspect the white pixels. This was visually checked.",
+    "Static source-width parser misreads 174/25.4; final PDF media boxes correspond to exactly 174 mm.",
+    "All F07 log-axis samples are explicitly asserted finite and strictly positive. Full-matrix LogNorm inputs are the finite positive saved RMSE values.",
+    "Family cells are descriptive medians of registered variants of the same measured route, with all per-case outcomes provided. No confidence interval or independent-field-trial claim is made.",
+    "Rotated heatmap labels passed final-PDF collision and page-clipping checks."
+  ],
+  "data_boundaries": [
+    "Semisynthetic observed-data replay, no demonstrated online hardware-in-loop.",
+    "Core nine variants may differ by random seed, placement, or ineffective seed, as specified by registry.",
+    "A1 total GNSS loss pauses auxiliary updates; it is not a pure heading factorial.",
+    "Source-weighting extra completions remain outside the 513 joint-finite distributions.",
+    "Literature reading screenshots are local review material and must not be copied into the GitHub package."
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "claim": "Position-derived direction and native quality selection achieve a different accuracy-availability balance than the tested direct dual-antenna processing routes.",
+  "no_posterior_yaw_in_figure": true,
+  "all_rtklib_configurations": [
+    "V0",
+    "V0E",
+    "V1",
+    "V2"
+  ],
+  "raw_methods": [
+    "EXT01",
+    "EXT02",
+    "EXT03"
+  ],
+  "FAR_PAR": "Zero accepted in all original runs; own full native domains 1509/1423/2231, RMSE NA. They cannot be assigned an artificial error at y=0.",
+  "observation_statistics": "New figure-layer derived statistics; see INPUT_HEADING_MATCH_PROTOCOL.json. Saved external errors unchanged.",
+  "selection": "Used heading error is conditional on the native estimator decision; it is a selected observation diagnostic, not stand-alone external AR integer fixing.",
+  "fairness": "Same real recordings/formal windows but different processing inputs, validity tests, native timestamp grids and reference-supported error counts. Full joint support was not imposed.",
+  "new_solver_evaluator_provider_calls": 0,
+  "figure_width_mm": 174,
+  "figure_height_mm": 160
+}

@@ -1,0 +1,190 @@
+"""Heading-front-end comparison: saved errors and preregistered ratio masks."""
+from pathlib import Path
+import sys, json, hashlib
+import numpy as np
+import pandas as pd
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
+
+O=Path(__file__).parent
+SK=Path('/mnt/c/Users/ykw/.codex/skills/nature-figure/scripts')
+sys.path.insert(0,str(SK))
+from audit_panel_alignment import require_matplotlib_panel_alignment
+
+for name in ['preview','qa','figure_data']:(O/name).mkdir(exist_ok=True)
+OLD=O/'source_data/external'
+OWN=O/'source_data/ours'
+NEW=pd.read_csv(O/'ACCEPTED_ERROR_SERIES.csv')
+SUM=pd.read_csv(O/'ACCEPTANCE_SUMMARY.csv')
+SEQ=['BY2','BY2H','BY2O']
+NAMES=['Nominal walking','Large body motion','Antenna obstruction']
+START={'BY2':66,'BY2H':413,'BY2O':3186}
+COL={'own':'#2563EB','input':'#64748B','rtk':'#E76F51','EXT01':'#009E9A','EXT02':'#8B5CF6','dd':'#4B5563'}
+PROFILE=[]
+
+def read(p):
+    d=pd.read_csv(p)
+    PROFILE.append(dict(path=str(p),rows=len(d),columns=list(d),sha256=hashlib.sha256(p.read_bytes()).hexdigest()))
+    return d
+
+OWN_DATA={s:read(OWN/f'{s}_input_heading_figure_match.csv.gz') for s in SEQ}
+RTK={s:{v:read(OLD/f'{s}_{v}_full_saved_heading.csv.gz') for v in ['V0','V0E','V1','V2']} for s in SEQ}
+RAW={s:read(OLD/f'{s}_all_methods_all_window_epochs.csv.gz') for s in SEQ}
+
+CONTRACT={
+ 'question':'Which direction-processing chain provides accurate heading observations over the robot recording?',
+ 'claim':'The position-product direction selected by the native V3 update has smaller heading errors on these recordings; a separate project-added cost-ratio screen does not remove every large error in the raw carrier methods.',
+ 'archetype':'asymmetric quantitative comparison',
+ 'backend':'Python matplotlib',
+ 'panels':{'a':'Large body motion: input and used proposed direction, with default RTKLIB output and the same preselected 80-100 s turning zoom.',
+           'b':'Two separate method panels: all absolute errors before and after the frozen ratio screen, box quartiles and every scored epoch; counts use the full evaluation window.',
+           'c-e':'Each complete-record error distribution; native C-L/C-WLS dashed and project-added screen solid; fixed default RTKLIB and DD-KF shown; all RTKLIB variants retained in CSV.'},
+ 'event':'Reference-confirmed 80-100s turn, shared with F03/F06, selected from reference motion not method error.',
+ 'method_scope':'Direction observations, not fused navigation posterior. Different input/validity chains; own support, with separate exact common-support table for raw methods.',
+ 'ratio_scope':'project-added ratio screen >=3, preregistered 6a1e536; no integer correctness claim',
+ 'full_window_support':'Counts beneath distributions are native output counts, with the full formal window denominator. Error CDF includes finite reference-supported samples.',
+ 'displaced_material':'RTKLIB V0E/V1/V2 and DD-KF native diagnostics remain ALL_DIRECTION_ROUTE_METRICS.csv; original candidates remain dashed distributions.',
+ 'width_mm':174,'height_mm':192,'min_font_pt':8.0,'no_smoothing':True,'new_native_solver_calls':0
+}
+(O/'FIGURE_CONTRACT.json').write_text(json.dumps(CONTRACT,ensure_ascii=False,indent=2)+'\n')
+
+plt.rcParams.update({'font.family':'sans-serif','font.sans-serif':['DejaVu Sans'],
+ 'font.size':8,'axes.titlesize':8.5,'axes.labelsize':8,'xtick.labelsize':8,'ytick.labelsize':8,
+ 'legend.fontsize':8,'axes.spines.top':False,'axes.spines.right':False,'axes.linewidth':.6,
+ 'pdf.fonttype':42,'svg.fonttype':'none','path.simplify':False,'legend.frameon':False})
+
+def ecdf(ax,e,color,lw=1,ls='-',alpha=1,zorder=3,limit=15):
+    e=np.sort(np.abs(np.asarray(e,dtype=float)));e=e[np.isfinite(e)]
+    if len(e):
+        n=np.searchsorted(e,limit,side='right')
+        ax.step(np.r_[0,e[:n],limit],np.r_[0,np.arange(1,n+1)/len(e),n/len(e)],where='post',color=color,lw=lw,ls=ls,alpha=alpha,zorder=zorder)
+
+
+fig=plt.figure(figsize=(174/25.4,192/25.4))
+gs=fig.add_gridspec(3,3,left=.102,right=.976,bottom=.215,top=.875,
+                    hspace=.72,wspace=.38,height_ratios=[1.,1.,1.08])
+a=fig.add_subplot(gs[0,:2]);ins=fig.add_subplot(gs[0,2])
+bg=gs[1,:].subgridspec(1,2,wspace=.36)
+bs=[fig.add_subplot(bg[0,j]) for j in range(2)]
+cs=[fig.add_subplot(gs[2,j]) for j in range(3)]
+own=OWN_DATA['BY2H'];rtk=RTK['BY2H']['V0']
+a.plot(own.elapsed_s,own.input_error_deg.where(own.input_heading_valid),color=COL['input'],lw=.8,ls='--',alpha=1,zorder=1)
+a.plot(own.elapsed_s,own.input_error_deg.where(own.accepted),color=COL['own'],lw=1.55,zorder=5)
+a.scatter(rtk.loc[rtk.valid.eq(1),'t_rel_s']-413,rtk.loc[rtk.valid.eq(1),'error_valid_deg'],
+          marker='s',s=6,facecolors='none',edgecolors=COL['rtk'],linewidths=.6,zorder=3)
+a.axvspan(80,100,color='#CED9DE',alpha=.45,zorder=0)
+a.set_title('(a) Large body motion: full recording',loc='left',pad=6)
+a.set(xlim=(0,270),ylim=(-185,185),yticks=[-180,0,180],ylabel='Heading error (deg)',xlabel='Time (s)')
+a.axhline(0,color='#CCCCCC',lw=.4,zorder=0)
+# Same reference-selected turn used by F03 and F06; no error-based window search.
+ins.set_facecolor('white')
+zz=own.elapsed_s.between(80,100);zr=(rtk.t_rel_s-413).between(80,100)&rtk.valid.eq(1)
+ins.plot(own.loc[zz,'elapsed_s'],own.loc[zz,'input_error_deg'].where(own.loc[zz,'accepted']),color=COL['own'],lw=1.4)
+ins.scatter(rtk.loc[zr,'t_rel_s']-413,rtk.loc[zr,'error_valid_deg'],marker='s',s=5,facecolors='none',edgecolors=COL['rtk'],linewidths=.6)
+values=np.r_[own.loc[zz&own.accepted,'input_error_deg'].dropna(),rtk.loc[zr,'error_valid_deg'].dropna()]
+lo=min(-2,float(np.min(values))-1);hi=max(2,float(np.max(values))+1)
+ins.set(xlim=(80,100),ylim=(lo,hi),xticks=[80,90,100]);ins.tick_params(labelsize=8,length=2,pad=1)
+ins.set_yticks([-5,0,5])
+ins.set_title('Turning interval',loc='left',fontsize=8.5,pad=6)
+ins.set_xlabel('Time (s)');ins.set_ylabel('Heading error (deg)',labelpad=1)
+for sp in ins.spines.values():sp.set_visible(True);sp.set_color('#8B969C');sp.set_linewidth(.5)
+
+b_source=[];b_summary=[]
+for method_index,(b,m,label) in enumerate(zip(bs,['EXT01','EXT02'],['C-LAMBDA','C-WLS'])):
+    d=NEW[NEW.sequence.eq('BY2H')&NEW.method_id.eq(m)]
+    categories=[('Original',d.native_valid,'error_valid_deg'),('Added ratio screen',d.accepted,'error_accepted_deg')]
+    vectors=[];ticks=[]
+    for j,(support,mask,error_column) in enumerate(categories):
+        q=d.loc[mask & d[error_column].notna(),['epoch_index',error_column]].copy()
+        v=np.abs(q[error_column].to_numpy());vectors.append(v)
+        # Fixed display jitter preserves each saved error and introduces no pairing claim.
+        jitter=np.random.default_rng(731+method_index*2+j).uniform(-.13,.13,len(v))
+        b.scatter(np.full(len(v),j)+jitter,v,s=3.5,color=COL[m],alpha=.45,
+                  linewidths=0,zorder=2,rasterized=False)
+        ticks.append(f'{support}\n{int(mask.sum())} / {len(d)} outputs')
+        b_source.extend(dict(method_id=m,support=support,epoch_index=int(k),absolute_error_deg=float(e))
+                        for k,e in zip(q.epoch_index,v))
+        b_summary.append(dict(method_id=m,support=support,denominator=len(d),outputs=int(mask.sum()),scored=len(v),
+                              q25_deg=float(np.quantile(v,.25)),median_deg=float(np.median(v)),q75_deg=float(np.quantile(v,.75))))
+    bp=b.boxplot(vectors,positions=[0,1],widths=.43,showfliers=False,patch_artist=True,
+                 medianprops={'color':'#111827','linewidth':1.15},
+                 whiskerprops={'color':COL[m],'linewidth':.85},capprops={'color':COL[m],'linewidth':.85},
+                 boxprops={'edgecolor':COL[m],'linewidth':1.1,'facecolor':'none'},zorder=4)
+    b.set_xticks([0,1],ticks);b.tick_params(axis='x',length=0,pad=4)
+    b.set(xlim=(-.45,1.45),ylim=(-5,185),yticks=[0,90,180],ylabel='Absolute heading error (deg)')
+    b.set_title(('(b) ' if method_index==0 else '')+label+' — large body motion',loc='left',pad=6)
+    b.grid(axis='y',color='#E5E7EB',lw=.45,zorder=0)
+pd.DataFrame(b_source).to_csv(O/'figure_data/F05B_ALL_EPOCH_ERRORS.csv',index=False)
+pd.DataFrame(b_summary).to_csv(O/'figure_data/F05B_DISTRIBUTION_SUMMARY.csv',index=False)
+
+metrics=[]
+def metric(seq,method,support,d,valid,errorcol):
+    e=d.loc[valid,errorcol].dropna().to_numpy()
+    metrics.append(dict(sequence=seq,method=method,support=support,denominator=len(d),outputs=int(valid.sum()),
+                        scored=len(e),coverage_percent=100*valid.mean(),rmse_deg=float(np.sqrt(np.mean(e**2))) if len(e) else np.nan,
+                        p95_abs_deg=float(np.percentile(np.abs(e),95)) if len(e) else np.nan))
+    return e
+
+for j,(seq,name,ax) in enumerate(zip(SEQ,NAMES,cs)):
+    own=OWN_DATA[seq]
+    oe=metric(seq,'Proposed direction','native used observations',own,own.accepted,'input_error_deg')
+    metric(seq,'Proposed direction','input before native selection',own,own.input_heading_valid,'input_error_deg')
+    rtk=RTK[seq]['V0']; re=metric(seq,'RTKLIB V0','native fixed',rtk,rtk.valid.eq(1),'error_valid_deg')
+    dd=RAW[seq][RAW[seq].method_id.eq('EXT03')].copy()
+    de=metric(seq,'DD-KF','native ratio fixed',dd,dd.error_ratio_fixed_deg.notna(),'error_ratio_fixed_deg')
+    curves=[(oe,COL['own'],1.9,'-',1,8),(re,COL['rtk'],1.2,'-',1,6),(de,COL['dd'],1.05,'-.',1,2)]
+    counts=[f'Ours: {int(own.accepted.sum())}/{len(own)}',f'RTKLIB: {int(rtk.valid.eq(1).sum())}/{len(rtk)}']
+    for m,label in [('EXT01','C-L'),('EXT02','C-WLS')]:
+        d=NEW[NEW.sequence.eq(seq)&NEW.method_id.eq(m)]
+        e=metric(seq,label,'native original',d,d.native_valid,'error_valid_deg')
+        es=metric(seq,label,'project-added ratio screen >=3',d,d.accepted,'error_accepted_deg')
+        curves += [(e,COL[m],1.0,'--',.90,1),(es,COL[m],1.3,'-',1,5)]
+        counts.append(f'{label}: {int(d.native_valid.sum())}→{int(d.accepted.sum())}/{len(d)}')
+    counts.append(f'DD-KF: {int(dd.error_ratio_fixed_deg.notna().sum())}/{len(dd)}')
+    for e,c,lw,ls,alpha,z in curves:ecdf(ax,e,c,lw,ls,alpha,z)
+    ax.set(xlim=(0,15),ylim=(0,1.025),xticks=[0,5,10,15],yticks=[0,.5,1],xlabel='Absolute heading error (deg)')
+    ax.set_title(f'({chr(99+j)}) {name}',loc='left',pad=7)
+    if j==0:ax.set_ylabel('Cumulative fraction')
+    ax.grid(axis='y',color='#E5E5E5',lw=.4)
+    # Full 0–180° tail remains visible; main axis is the explicitly labelled precision view.
+    inset=ax.inset_axes([.49,.14,.48,.30]);inset.set_facecolor('white')
+    for e,c,lw,ls,alpha,z in curves:ecdf(inset,e,c,.8 if lw<1.5 else 1.15,ls,alpha,z,limit=180)
+    inset.set(xlim=(0,180),ylim=(0,1.025),xticks=[0,180],yticks=[]);inset.tick_params(labelsize=8,length=2,pad=1)
+    inset.get_xticklabels()[0].set_ha('left');inset.get_xticklabels()[-1].set_ha('right')
+    for sp in inset.spines.values():sp.set_visible(True);sp.set_linewidth(.45);sp.set_color('#777777')
+    ax.text(0,-.35,'Outputs / full window',transform=ax.transAxes,fontsize=8,weight='bold',va='top')
+    for k,txt in enumerate(counts):ax.text(0,-.47-.112*k,txt,transform=ax.transAxes,fontsize=8,va='top',color='#444444')
+    # Full RTKLIB four-variant metrics remain explicit, not best-of-four chosen.
+    for v in ['V0E','V1','V2']:
+        d=RTK[seq][v];metric(seq,'RTKLIB '+v,'native fixed',d,d.valid.eq(1),'error_valid_deg')
+
+ours_handles=[Line2D([],[],color=COL['own'],lw=1.9,label='Ours: selected direction'),
+         Line2D([],[],color=COL['input'],lw=.85,ls='--',label='Ours: input before selection')]
+baseline_handles=[Line2D([],[],marker='s',mfc='none',mec=COL['rtk'],color=COL['rtk'],lw=1.2,ms=3.5,label='RTKLIB (default)'),
+         Line2D([],[],color=COL['EXT01'],lw=1.3,label='C-LAMBDA'),
+         Line2D([],[],color=COL['EXT02'],lw=1.3,label='C-WLS'),
+         Line2D([],[],color=COL['dd'],ls='-.',lw=.9,label='DD-KF (native ratio fixed)')]
+fig.legend(handles=ours_handles,loc='upper left',bbox_to_anchor=(.09,.995),ncol=1,
+           handlelength=2.5,labelspacing=.6,title='Our direction observations',title_fontsize=8)
+fig.legend(handles=baseline_handles,loc='upper right',bbox_to_anchor=(.99,.995),ncol=2,
+           columnspacing=1.0,handlelength=2.2,labelspacing=.6,title='Baselines',title_fontsize=8)
+fig.text(.54,.019,'C-LAMBDA / C-WLS in (c–e): dashed = original; solid = added ratio screen (≥3).',
+         ha='center',fontsize=8)
+fig.canvas.draw()
+require_matplotlib_panel_alignment(fig,axes=[a,ins,*bs,*cs],json_out=str(O/'qa/F05.alignment.json'),
+                                   overlay_svg=str(O/'qa/F05.alignment.svg'),tolerance_pt=1.5,
+                                   gutter_tolerance_pt=1.5,strict=True)
+name='F05_heading_error_comparison'
+fig.savefig(O/f'{name}.pdf',dpi=600)
+fig.savefig(O/f'{name}.svg',dpi=600)
+fig.savefig(O/f'{name}.png',dpi=600)
+fig.savefig(O/f'{name}.tiff',dpi=600,pil_kwargs={'compression':'tiff_lzw'})
+fig.savefig(O/'preview'/f'{name}.png',dpi=400)
+plt.close(fig)
+from PIL import Image
+Image.open(O/'preview'/f'{name}.png').convert('L').save(O/'preview'/f'{name}_gray.png')
+pd.DataFrame(metrics).to_csv(O/'ALL_DIRECTION_ROUTE_METRICS.csv',index=False)
+(O/'SOURCE_PROFILE.json').write_text(json.dumps(PROFILE,ensure_ascii=False,indent=2)+'\n')
+print(name)

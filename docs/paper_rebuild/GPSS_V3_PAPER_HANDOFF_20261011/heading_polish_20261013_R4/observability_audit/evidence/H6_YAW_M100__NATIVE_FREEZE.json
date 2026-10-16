@@ -1,0 +1,46 @@
+{
+  "contact_event_ledger_duplicated": false,
+  "contact_state_csv_duplicated": false,
+  "files": {
+    "COVARIANCE_CHECKPOINTS.npz": {
+      "sha256": "dc62f1e20cda785287b7010a338c187f788c1c6fa928ef16041466dd9d5ef78f",
+      "size": 15776854
+    },
+    "COVARIANCE_CHECKPOINT_INDEX.csv": {
+      "sha256": "5ecfd5d628cf212e9473e619c61db4f9d695248c4c87b709f261e85d847eea6a",
+      "size": 339414
+    },
+    "GAUGE_COVARIANCE_DIAGONALS.csv": {
+      "sha256": "523a81aef621b1a5fa0f9f2540d684af3117b2817c600811863313a08e1a4449",
+      "size": 28098302
+    },
+    "GAUGE_INNOVATION_NORMS.csv": {
+      "sha256": "b272a8cec75ae9e586fa3c605d84e8c42d1ab7665b22075e7b6a8e414fb50acc",
+      "size": 4910926
+    },
+    "NATIVE_CONFIG.yaml": {
+      "sha256": "cbd4ff7b9997fa3d8828c9eaed19cabf1569adbdf207386ca079bcfc6a518e5c",
+      "size": 3448
+    },
+    "NATIVE_SUMMARY.json": {
+      "sha256": "1b521a8b091b3d26762493f27e6bbc4ee3e4aab277f4867f9571aebc2ae8ecea",
+      "size": 4840
+    },
+    "NAV.csv": {
+      "sha256": "99dfba903801c0d3ea32acf15d2c3bb8a5050c26efd56b19ee5f69ce0e533b69",
+      "size": 30174816
+    },
+    "RUNTIME.csv": {
+      "sha256": "153e713572cd40d2e749bf6872cda89b08fa2eb687a1299d6e8fb3e871d4878c",
+      "size": 181
+    }
+  },
+  "full_innovation_csv_duplicated": false,
+  "initial_gauge_yaw_deg": -100.0,
+  "provider_cache_duplicated": false,
+  "reference_open_count": 0,
+  "run_id": "H6_YAW_M100",
+  "schema_version": "hartley.h6.native_freeze.v1",
+  "state_rows": 63277,
+  "trace_open_count": 0
+}

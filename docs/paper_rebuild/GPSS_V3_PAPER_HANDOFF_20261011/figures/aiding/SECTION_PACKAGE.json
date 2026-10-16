@@ -1,0 +1,150 @@
+{
+  "section": "Q4_Q5",
+  "scientific_commit": "7d43b9af26120ed5dde21f53e515386361072ba6",
+  "figures": [
+    {
+      "id": "Q4_body_velocity",
+      "title_zh": "保留航向时的机身速度辅助",
+      "role": "main",
+      "question": "Q4",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/Q4_body_velocity.png",
+      "preview_path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/preview/Q4_body_velocity.png",
+      "metadata_path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/Q4_body_velocity.json",
+      "audit_returncodes": {
+        "pdf_text": 0,
+        "collisions": 0
+      },
+      "visual_review": "PASS"
+    },
+    {
+      "id": "Q5_source_weighting",
+      "title_zh": "来源加权的收益与精度代价",
+      "role": "main",
+      "question": "Q5",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/Q5_source_weighting.png",
+      "preview_path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/preview/Q5_source_weighting.png",
+      "metadata_path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/Q5_source_weighting.json",
+      "audit_returncodes": {
+        "pdf_text": 0,
+        "collisions": 0
+      },
+      "visual_review": "PASS"
+    },
+    {
+      "id": "S_Q4_tilt_aiding",
+      "title_zh": "机载倾角辅助与姿态误差",
+      "role": "supplement",
+      "question": "Q4",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/S_Q4_tilt_aiding.png",
+      "preview_path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/preview/S_Q4_tilt_aiding.png",
+      "metadata_path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/S_Q4_tilt_aiding.json",
+      "audit_returncodes": {
+        "pdf_text": 0,
+        "collisions": 0
+      },
+      "visual_review": "PASS"
+    },
+    {
+      "id": "S_Q4_heading_information",
+      "title_zh": "基础GNSS/INS加入双天线航向的作用",
+      "role": "supplement",
+      "question": "Q4",
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/S_Q4_heading_information.png",
+      "preview_path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/preview/S_Q4_heading_information.png",
+      "metadata_path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/S_Q4_heading_information.json",
+      "audit_returncodes": {
+        "pdf_text": 0,
+        "collisions": 0
+      },
+      "visual_review": "PASS"
+    }
+  ],
+  "tables": [
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/ADD495.csv",
+      "rows": 495
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/ALL_DURATION_ALL11_SUMMARY.csv",
+      "rows": 55
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/CONFIGURATION_CONTRASTS.csv",
+      "rows": 18
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/CORE5951.csv",
+      "rows": 5951
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/CORE_SUMMARY77.csv",
+      "rows": 77
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/D15_SOURCE_WEIGHT_SUMMARY.csv",
+      "rows": 6
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/D15_SOURCE_WEIGHT_TRACE_ALL.csv",
+      "rows": 7930
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/ERROR_SERIES_AVAILABILITY6468.csv",
+      "rows": 6468
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/FULL_OUTCOME55.csv",
+      "rows": 55
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/METHOD_CONFIGURATION_MAP.csv",
+      "rows": 11
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/MODULE56.csv",
+      "rows": 56
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/NATURAL33.csv",
+      "rows": 33
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/SA_SIX_EXTRA_COMPLETIONS.csv",
+      "rows": 6
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/SINGLEMODULE_CASE_PAIRS2164.csv",
+      "rows": 2164
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/SOURCE_TABLE_INVENTORY.csv",
+      "rows": 9
+    }
+  ],
+  "configuration_coverage": {
+    "unique_runs": 6468,
+    "core_runs": 5951,
+    "natural_rows": 33,
+    "addendum_runs": 495,
+    "effective_configurations": 11,
+    "singlemodule_case_pairs": 2164,
+    "full_duration_combinations": 55,
+    "addendum_placements": 45,
+    "full_loss_duration_s": [
+      10,
+      20,
+      30
+    ],
+    "heading_retained_duration_s": [
+      10,
+      20
+    ],
+    "placements_per_duration": 9,
+    "source_weight_trace_rows": 7930
+  },
+  "new_solver_runs": 0,
+  "new_evaluator_runs": 0,
+  "figure_sources_read_in_full": true,
+  "results": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/RESULTS_ZH.md",
+  "captions": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/CAPTIONS.md"
+}

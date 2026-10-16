@@ -1,0 +1,45 @@
+{
+  "claim": "The same proprioceptive inputs determine equivalent relative motion in different global headings.",
+  "native_runs": 7,
+  "native_rows": 442939,
+  "alignment": "Remove exactly the known initial z rotation; no scale, translation, temporal, or fitted-yaw alignment.",
+  "max_display_horizontal_difference_m": 1.8911830465609163e-07,
+  "window": "WIN003 chosen from inputs in previous experiment; all 43 rows retained",
+  "rank_threshold": 1e-09,
+  "rank_counts": [
+    {
+      "window": "WIN000",
+      "contacts": 4,
+      "unresolved": 4,
+      "state_dimension": 27
+    },
+    {
+      "window": "WIN001",
+      "contacts": 4,
+      "unresolved": 4,
+      "state_dimension": 27
+    },
+    {
+      "window": "WIN002",
+      "contacts": 2,
+      "unresolved": 4,
+      "state_dimension": 21
+    },
+    {
+      "window": "WIN003",
+      "contacts": 2,
+      "unresolved": 4,
+      "state_dimension": 21
+    },
+    {
+      "window": "WIN004",
+      "contacts": 2,
+      "unresolved": 4,
+      "state_dimension": 21
+    }
+  ],
+  "all_spectra_preserved": true,
+  "new_scientific_calls": 0,
+  "figure_width_mm": 174,
+  "figure_height_mm": 149
+}

@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "alignment": "PASS both figures",
+  "collision_audit": "PASS both figures; zero warnings",
+  "visual_review": "Actual final color previews viewed; no text clipping; F4 trajectory metric scale equal; F5 log-axis symbols and three availability layers readable.",
+  "static_preflight": "0 FAIL; 2 heuristic WARN. Actual page width174mm; all validity/error counts are in source_data/F5_ALL_DIRECTION_ROUTES.csv.",
+  "figures": {
+    "F4_relative_motion_global_heading": {
+      "width_mm": 173.99999508327906,
+      "height_mm": 149.00000296698676,
+      "minimum_font_pt": 8.0
+    },
+    "F5_heading_accuracy_availability": {
+      "width_mm": 173.99999508327906,
+      "height_mm": 159.99999906751844,
+      "minimum_font_pt": 8.0
+    }
+  },
+  "F4_last_text_revision": "Identical IMU/contact inputs; different initial headings",
+  "F4_last_revision_checks": {
+    "alignment": "PASS",
+    "collision": "PASS 0 FAIL 0 WARN",
+    "pdf_text": "PASS minimum 8 pt",
+    "visual": "Final updated preview viewed"
+  }
+}

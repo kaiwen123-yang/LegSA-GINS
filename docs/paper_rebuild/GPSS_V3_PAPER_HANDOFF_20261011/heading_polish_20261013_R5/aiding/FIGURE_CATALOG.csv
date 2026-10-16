@@ -1,0 +1,2 @@
+figure_id,role,claim_zh,preview,pdf,svg,tiff
+F08_heading_quality_scaling,main,来源加权对位置、方向和机身速度三种退化产生不同响应：大幅航向保护、小幅收益以及航向近中性，属于条件性稳健效果。,preview/F08_heading_quality_scaling.png,figures/F08_heading_quality_scaling.pdf,figures/F08_heading_quality_scaling.svg,figures/F08_heading_quality_scaling.tiff

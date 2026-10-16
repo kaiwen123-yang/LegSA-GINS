@@ -1,0 +1,12 @@
+method_id,case_id,policy_identity,parameter,source,trace_tuned,unit,value
+EXT04_WU2025,C00,STOCHASTIC_REGISTRY,baseline_length,paper/project physical contract,false,m,0.35
+EXT04_WU2025,C00,STOCHASTIC_REGISTRY,minimum_CNO,audited shared raw backend policy,false,dB-Hz,20.0
+EXT04_WU2025,C00,STOCHASTIC_REGISTRY,elevation_mask,audited Phase1R raw DD policy,false,deg,10.0
+EXT04_WU2025,C00,STOCHASTIC_REGISTRY,pseudorange_sigma,shared_raw_backend.rawx_standard_deviations,false,m,"max(0.50,0.01*2^prStdev)"
+EXT04_WU2025,C00,STOCHASTIC_REGISTRY,carrier_sigma,shared_raw_backend.rawx_standard_deviations,false,cycles,"max(0.004,0.004*cpStdev)"
+EXT04_WU2025,C00,STOCHASTIC_REGISTRY,DD_covariance,shared raw backend,false,m2,diag(nonpivot_SD_variance)+pivot_SD_variance*11T
+EXT04_WU2025,C00,STOCHASTIC_REGISTRY,DD_troposphere_relative_humidity,Phase3 audited RTKLIB-zdres equivalent,false,1,0.0
+EXT04_WU2025,C00,STOCHASTIC_REGISTRY,search_timeout_per_subset,declared resource policy,false,s,1.0
+EXT04_WU2025,C00,STOCHASTIC_REGISTRY,search_timeout_clock,declared worker-determinism resource policy,false,clock,PARENT_PROCESS_CPU_TIME
+EXT04_WU2025,C00,STOCHASTIC_REGISTRY,search_node_limit,strict no-cap contract,false,node,NONE
+EXT04_WU2025,C00,STOCHASTIC_REGISTRY,phase_bias_calibration,frozen prohibition,false,bool,NONE

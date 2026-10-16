@@ -1,0 +1,56 @@
+[
+  {
+    "run_id": "RUN_01401",
+    "kind": "retained navigation-error series",
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/aiding/data/RUN_01401.csv.gz",
+    "rows": 56642
+  },
+  {
+    "run_id": "RUN_01403",
+    "kind": "retained navigation-error series",
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/aiding/data/RUN_01403.csv.gz",
+    "rows": 56642
+  },
+  {
+    "run_id": "RUN_01401",
+    "kind": "actual source-weighting log",
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/RUN_01401/SOURCE_AWARE_WEIGHT_TRACE.csv.gz",
+    "rows": 7930
+  },
+  {
+    "run_id": "RUN_03678",
+    "kind": "actual source-weighting log",
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/RUN_03678/SOURCE_AWARE_WEIGHT_TRACE.csv.gz",
+    "rows": 7727
+  },
+  {
+    "run_id": "RUN_05757",
+    "kind": "actual source-weighting log",
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/RUN_05757/SOURCE_AWARE_WEIGHT_TRACE.csv.gz",
+    "rows": 7930
+  },
+  {
+    "run_id": "RUN_03678",
+    "kind": "retained navigation-error series",
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/aiding/data/RUN_03678.csv.gz",
+    "rows": 56642
+  },
+  {
+    "run_id": "RUN_03680",
+    "kind": "retained navigation-error series",
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/aiding/data/RUN_03680.csv.gz",
+    "rows": 56642
+  },
+  {
+    "run_id": "RUN_05757",
+    "kind": "retained navigation-error series",
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/aiding/data/RUN_05757.csv.gz",
+    "rows": 56642
+  },
+  {
+    "run_id": "RUN_05759",
+    "kind": "retained navigation-error series",
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/aiding/data/RUN_05759.csv.gz",
+    "rows": 56642
+  }
+]

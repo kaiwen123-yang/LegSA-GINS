@@ -1,0 +1,8 @@
+"plotted_positive_z_euler_yaw_deg","run_id","algorithm","stage","state_rows"
+"-150","H6_YAW_P150","HARTLEY_IJRR2020_REPORTED_BACKEND","H6 six nonzero replays; base native anchor reused","63277"
+"-100","H6_YAW_P100","HARTLEY_IJRR2020_REPORTED_BACKEND","H6 six nonzero replays; base native anchor reused","63277"
+"-50","H6_YAW_P050","HARTLEY_IJRR2020_REPORTED_BACKEND","H6 six nonzero replays; base native anchor reused","63277"
+"0","H5_PRIMARY_GO2_ALLAN_EQ61_FK10MM","HARTLEY_IJRR2020_REPORTED_BACKEND","H5 frozen primary run reused as zero-yaw member","63277"
+"50","H6_YAW_M050","HARTLEY_IJRR2020_REPORTED_BACKEND","H6 six nonzero replays; base native anchor reused","63277"
+"100","H6_YAW_M100","HARTLEY_IJRR2020_REPORTED_BACKEND","H6 six nonzero replays; base native anchor reused","63277"
+"150","H6_YAW_M150","HARTLEY_IJRR2020_REPORTED_BACKEND","H6 six nonzero replays; base native anchor reused","63277"

@@ -1,0 +1,25 @@
+{
+  "width_mm": 173.99999508327906,
+  "height_mm": 125.99999643961587,
+  "minimum_font_pt": 8.0,
+  "full_png_pixels": [
+    4110,
+    2976
+  ],
+  "full_png_dpi": [
+    599.9988,
+    599.9988
+  ],
+  "preview_pixels": [
+    2740,
+    1984
+  ],
+  "svg_editable_text": true,
+  "exact_numerical_parity": true,
+  "parity_checks": [
+    "all 63277 x 15 alignment residual table cells",
+    "seven-run summary"
+  ],
+  "new_native_solver_calls": 0,
+  "visual_review": "PASS: color and grayscale, no clipping, legend and line-role identities retained"
+}

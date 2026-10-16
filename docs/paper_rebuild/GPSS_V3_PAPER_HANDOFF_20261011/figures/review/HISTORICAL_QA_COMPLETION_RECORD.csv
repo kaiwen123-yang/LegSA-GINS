@@ -1,0 +1,6 @@
+topic,category,evidence,status,paper_use,source
+QA method count,MAIN_TEXT_ALLOWED,"PAPER2A selected 7 recognized GNSS/INS QA methods: NIS chi-square FDE, RAIM residual FDE, Huber IRLS, IGG-III, GNC Geman-McClure, robust adaptive KF, Doppler consistency QC.",SUPPORTED,main text method overview,"PAPER2A_METHOD_SELECTION_TABLE.csv"
+QA matrix coverage,MAIN_TEXT_ALLOWED,"PAPER2A completed BY2 840/840, BY3 497/497, XB 560/560, total 1897 completed evaluable rows.",SUPPORTED,main text coverage table,"PAPER2A_SUPERVISOR_FINAL_REPORT.md"
+Trace online policy,MAIN_TEXT_ALLOWED,"PAPER2A reports trace_used_online=false for all rows.",SUPPORTED,claim boundary table,"PAPER2A_SUPERVISOR_FINAL_REPORT.md"
+Receiver IMU policy,MAIN_TEXT_ALLOWED,"PAPER2A reports receiver_imu_data_as_body_imu=false for all rows.",SUPPORTED,claim boundary table,"PAPER2A_SUPERVISOR_FINAL_REPORT.md"
+Method-specific performance rows,APPENDIX_ALLOWED,"PAPER2A row-level outputs are common-backend QA-wrapper evidence, not exact external QA systems or superiority evidence.",SUPPORTED_WITH_LIMIT,appendix tables,"PAPER2A_ROW_LEVEL_MASTER_TABLE.csv"

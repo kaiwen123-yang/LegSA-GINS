@@ -1,0 +1,57 @@
+{
+  "status": "READY_FOR_AUTHOR_REVIEW",
+  "new_solver_evaluator_provider_calls": 0,
+  "figures": [
+    {
+      "id": "F03_event_routes_and_heading",
+      "width_mm": 173.99999508327906,
+      "height_mm": 204.99999779595268,
+      "png_pixels": [
+        4110,
+        4842
+      ],
+      "preview_pixels": [
+        2055,
+        2421
+      ],
+      "pdf_text_audit_returncode": 0,
+      "collision_audit": "PASS",
+      "visual_review": "PASS: actual color preview inspected; event route inset moved away from trajectory, bottom labels separated, all curves and tails retained.",
+      "paths": {
+        "png": "/mnt/g/LegSA-GINS-project/V3航向主线重绘_20261012/navigation/F03_event_routes_and_heading.png",
+        "pdf": "/mnt/g/LegSA-GINS-project/V3航向主线重绘_20261012/navigation/F03_event_routes_and_heading.pdf",
+        "svg": "/mnt/g/LegSA-GINS-project/V3航向主线重绘_20261012/navigation/F03_event_routes_and_heading.svg",
+        "tiff": "/mnt/g/LegSA-GINS-project/V3航向主线重绘_20261012/navigation/F03_event_routes_and_heading.tiff"
+      }
+    },
+    {
+      "id": "F09_heading_comparison",
+      "width_mm": 173.99999508327906,
+      "height_mm": 221.99999372694228,
+      "png_pixels": [
+        4110,
+        5244
+      ],
+      "preview_pixels": [
+        2055,
+        2622
+      ],
+      "pdf_text_audit_returncode": 0,
+      "collision_audit": "PASS",
+      "visual_review": "PASS: actual color preview inspected; event route inset moved away from trajectory, bottom labels separated, all curves and tails retained.",
+      "paths": {
+        "png": "/mnt/g/LegSA-GINS-project/V3航向主线重绘_20261012/navigation/F09_heading_comparison.png",
+        "pdf": "/mnt/g/LegSA-GINS-project/V3航向主线重绘_20261012/navigation/F09_heading_comparison.pdf",
+        "svg": "/mnt/g/LegSA-GINS-project/V3航向主线重绘_20261012/navigation/F09_heading_comparison.svg",
+        "tiff": "/mnt/g/LegSA-GINS-project/V3航向主线重绘_20261012/navigation/F09_heading_comparison.tiff"
+      }
+    }
+  ],
+  "source_path_count": 33,
+  "common_heading_epochs": {
+    "BY2": 274,
+    "BY2H": 267,
+    "BY2O": 367
+  },
+  "failed_source_rows_retained": true
+}

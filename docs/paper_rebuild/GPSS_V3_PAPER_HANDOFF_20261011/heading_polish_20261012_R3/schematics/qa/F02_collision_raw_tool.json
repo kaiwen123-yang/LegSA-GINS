@@ -1,0 +1,112 @@
+{
+  "pdf": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/schematics/figures/F02_method.pdf",
+  "auditable": true,
+  "verdict": "FIX BEFORE DELIVERY",
+  "page_count": 1,
+  "visible_text_box_count": 37,
+  "text_trace_count": 60,
+  "stroke_path_count": 27,
+  "filled_region_count": 22,
+  "image_region_count": 0,
+  "summary": {
+    "fail": 4,
+    "warn": 0,
+    "contained_fill_overlays": 0,
+    "contained_image_overlays": 0
+  },
+  "thresholds": {
+    "text_inset_pt": 0.6,
+    "min_overlap_ratio": 0.05,
+    "clipping_tolerance_pt": 0.5
+  },
+  "findings": [
+    {
+      "severity": "FAIL",
+      "kind": "text-text",
+      "page": 1,
+      "message": "Text boxes overlap by 98.0% of the smaller box",
+      "text": "Angular rate /",
+      "text_bbox": [
+        70.65625,
+        40.19611740112305,
+        113.04825592041016,
+        55.68742370605469
+      ],
+      "other_text": "acceleration",
+      "other_bbox": [
+        70.65625,
+        47.957252502441406,
+        108.7394790649414,
+        55.842384338378906
+      ],
+      "object_count": 1,
+      "object_indexes": []
+    },
+    {
+      "severity": "FAIL",
+      "kind": "text-text",
+      "page": 1,
+      "message": "Text boxes overlap by 98.0% of the smaller box",
+      "text": "Position / velocity",
+      "text_bbox": [
+        142.125,
+        70.90315246582031,
+        196.6779327392578,
+        86.12102508544922
+      ],
+      "other_text": "and raw-Doppler",
+      "other_bbox": [
+        142.125,
+        78.39085388183594,
+        194.34634399414062,
+        86.27598571777344
+      ],
+      "object_count": 1,
+      "object_indexes": []
+    },
+    {
+      "severity": "FAIL",
+      "kind": "text-text",
+      "page": 1,
+      "message": "Text boxes overlap by 98.0% of the smaller box",
+      "text": "Frame",
+      "text_bbox": [
+        158.34765625,
+        148.6258087158203,
+        181.89813232421875,
+        163.5702362060547
+      ],
+      "other_text": "rotation",
+      "other_bbox": [
+        158.34765625,
+        155.84007263183594,
+        181.89706420898438,
+        163.72520446777344
+      ],
+      "object_count": 1,
+      "object_indexes": []
+    },
+    {
+      "severity": "FAIL",
+      "kind": "text-text",
+      "page": 1,
+      "message": "Text boxes overlap by 98.0% of the smaller box",
+      "text": "Incorporate GNSS and",
+      "text_bbox": [
+        280.21484375,
+        140.25308227539062,
+        354.3959655761719,
+        156.2856903076172
+      ],
+      "other_text": "motion observations",
+      "other_bbox": [
+        284.47265625,
+        148.25819396972656,
+        350.1047058105469,
+        156.4466094970703
+      ],
+      "object_count": 1,
+      "object_indexes": []
+    }
+  ]
+}

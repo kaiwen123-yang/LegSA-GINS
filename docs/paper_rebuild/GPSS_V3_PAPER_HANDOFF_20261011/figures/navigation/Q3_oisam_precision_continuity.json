@@ -1,0 +1,62 @@
+{
+  "id": "Q3_oisam_precision_continuity",
+  "caption_en": "Accuracy and output continuity of LegSA-GINS and OiSAM-FGO. (a–d) Horizontal positioning and heading errors at the same evaluation point and matched times: 274 epochs during nominal walking and 54 epochs at the beginning of the antenna-obstruction trial. The error curves use OiSAM with a single initialization. (e) Available output over each complete trial for LegSA-GINS, OiSAM with a single initialization, and OiSAM reinitialized at recorded IMU gaps. Open circles on the reinitialized OiSAM row mark initialization-only states; line segments mark available dynamic output. Within each trial the rows follow the legend order. (f) Enlargement of the boxed interval in the antenna-obstruction trial; gray shading marks the first IMU input gap. Elapsed time is measured from the start of each evaluation window.",
+  "caption_zh": "LegSA-GINS与OiSAM-FGO的精度及输出连续性。（a–d）在同一评价点与匹配时刻比较水平定位和航向误差：常规行走为274个历元，单侧天线遮挡记录起始阶段为54个历元；精度曲线采用仅初始化一次的OiSAM。（e）三条完整记录中，LegSA-GINS、仅初始化一次的OiSAM，以及在实测IMU缺口处分段重新初始化的OiSAM的输出时段。重新初始化的OiSAM行中，空心圆表示仅初始化的状态，线段表示有效动态输出；每个场景内三行按图例顺序排列。（f）放大单侧天线遮挡记录中方框标出的时段，灰带表示首次IMU输入缺口。时间均相对于各评价窗口起点。",
+  "meaning_zh": "上部比较相同时刻的精度，下部交代这些时刻覆盖了多少实际运行时间；右下放大首次输入缺口后的输出变化。",
+  "sources": [
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/BY2_COMMON_POI.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/BY2H_COMMON_POI.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/BY2O_COMMON_POI.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/OUTPUT_EPOCHS.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/OUTPUT_INTERVALS.csv",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/GAPS.csv",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/EXISTING_COMMON_POI_METRICS.csv"
+  ],
+  "technical_notes": {
+    "claim": "Accuracy on shared support and continuity over the full trial must be read together.",
+    "precision_support": {
+      "BY2": 274,
+      "BY2H": 0,
+      "BY2O": 54
+    },
+    "position_point": "POI_MIDPOINT; strict OiSAM and frozen V3, as already evaluated.",
+    "all_common_points_drawn": true,
+    "curve_smoothing": false,
+    "paired_error_columns": [
+      "horizontal_err_m",
+      "yaw_err_deg"
+    ],
+    "availability": "All saved finite dynamic output, split at actual timestamp gaps; prior-only states are separate markers.",
+    "interval_plot_definition": "Consecutive valid timestamps connected only within the archived cadence threshold (V3 0.1s; OiSAM 1.001s); no hold across a gap.",
+    "availability_zoom": {
+      "sequence": "BY2O",
+      "elapsed_window_s": [
+        52,
+        60
+      ],
+      "selection": "First recorded input gap, independent of error magnitude",
+      "imu_gap_elapsed_s": [
+        54.74905252456665,
+        55.01706004142807
+      ]
+    },
+    "panel_axis_scales": "Within each scenario methods share axes; position and heading limits differ between scenarios and are explicitly ticked.",
+    "strict_vs_segmented": "Segmented accuracy at GNSS1 is not mixed into the POI precision panels; it contributes full-trial availability only.",
+    "new_solver_calls": 0,
+    "new_evaluator_calls": 0,
+    "new_provider_calls": 0,
+    "metrics_verification": "COMMON_METRIC_VERIFICATION.csv matches all admitted existing RMSE values to <1e-12.",
+    "reused_reviewed_figure": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/F02_precision_and_continuity.json",
+    "this_goal_redrawn": false,
+    "source_plot_script": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/plot_precision_continuity.py"
+  },
+  "width_mm": 174.0,
+  "height_mm": 175.0,
+  "alignment_status": "PASS",
+  "audit_returncodes": {
+    "pdf_text": 0,
+    "collisions": 0
+  },
+  "visual_review": "PASS",
+  "visual_review_notes": "Final color and grayscale inspected. All matched points retained; prior-only outputs separated; true output gaps retained; initial obstruction-trial interval labelled explicitly. Availability bands use solid segments so line-style dashes cannot be mistaken for missing output."
+}

@@ -1,0 +1,22 @@
+{
+  "backend": "Python matplotlib",
+  "journal": "GPS Solutions",
+  "width_mm": 174,
+  "minimum_font_pt": 8,
+  "formats": ["PNG 600 dpi", "TIFF 600 dpi LZW", "PDF editable text", "SVG editable text"],
+  "figure4": {
+    "question": "Why is external absolute direction required despite proprioceptive motion constraints?",
+    "claim": "Same proprioceptive inputs preserve relative motion while permitting different global headings.",
+    "panels": {"a": "different initial global headings", "b": "known inverse rotation reveals identical relative path", "c": "identical local heading increments", "d": "saved rank result: 3 translations and 1 yaw"},
+    "archetype": "quantitative grid"
+  },
+  "figure5": {
+    "question": "How do the available direction-processing routes trade directional error against availability?",
+    "claim": "The proposed valid-input and native-used-input layers occupy different accuracy-availability regimes than the tested direct raw-processing routes.",
+    "panels": {"abc": "error versus coverage, all three recorded scenes", "def": "native direction-availability timeline"},
+    "archetype": "quantitative grid",
+    "truth_scope": "Fixposition-derived reference; does not establish independent ground truth",
+    "posterior_heading_used": false
+  },
+  "publication_exclusions": ["literature/ full-text extractions and rendered pages are local review assets and should not be pushed to GitHub", "inspect_readout.txt is exploratory source readout and not manuscript content"]
+}

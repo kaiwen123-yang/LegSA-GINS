@@ -1,0 +1,77 @@
+{
+  "id": "Q2_heading_availability_and_consistency",
+  "caption_en": "Availability and physical consistency of short-baseline heading from the original RTKLIB moving-base configuration. (a) Cumulative distributions of absolute heading errors at newly available fixed outputs for the three trials; the inset enlarges 0–20° without renormalizing. (b) New-output times; percentages refer to all paired epochs within each trial. (c) Baseline lengths of all 153 fixed outputs in the nominal-walking evaluation window, including 35 with a logged length residual above 4σ. The dashed line is the installed length of 0.35 m, and the gray band is ±4σ with the configured length standard deviation σ = 0.01 m. (d) Enlargement of the shaded 10–22 s interval in (c). All panels use the saved trial windows; the heading quantity is obtained from the horizontal projection of the lateral baseline and compared with the reference yaw.",
+  "caption_zh": "原始RTKLIB动基线配置下，短基线航向的输出可用性与物理一致性。(a) 三种工况中新固定输出的绝对航向误差累积分布，小窗放大0–20°，保持原累积分布分母。(b) 新固定输出的时刻；百分比以各实验窗内的全部配对历元为分母。(c) 常规行走评价窗内全部153个固定输出的基线长度，其中35个日志长度残差超过4σ。虚线为安装长度0.35 m，灰带为配置长度标准差σ=0.01 m所对应的±4σ范围。(d) 放大(c)中的10–22 s着色区间。所有面板均使用保存的实验窗口；航向由横向基线的水平投影换算，并与参考航向比较。",
+  "meaning_zh": "新固定输出的覆盖率与输出后的物理一致性是两个问题：本组数据中固定解稀疏，且固定状态仍可能伴随显著长度残差。",
+  "sources": [
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2_V0_full_saved_heading.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2H_V0_full_saved_heading.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2O_V0_full_saved_heading.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/RTKLIB_EPOCH_DIAGNOSTICS.csv"
+  ],
+  "technical_notes": {
+    "saved_result_only": true,
+    "paired_counts": [
+      {
+        "sequence": "BY2",
+        "scenario": "Nominal walking",
+        "new_outputs": 153,
+        "paired_epochs": 1370,
+        "new_output_fraction": 0.11167883211678832
+      },
+      {
+        "sequence": "BY2H",
+        "scenario": "Large body motion",
+        "new_outputs": 179,
+        "paired_epochs": 1350,
+        "new_output_fraction": 0.1325925925925926
+      },
+      {
+        "sequence": "BY2O",
+        "scenario": "Antenna obstruction",
+        "new_outputs": 112,
+        "paired_epochs": 1885,
+        "new_output_fraction": 0.059416445623342175
+      }
+    ],
+    "trace_window_Q1": 153,
+    "trace_window_large_length_Q1": 35,
+    "trace_full_history_Q1": 177,
+    "trace_full_history_epochs": 1509,
+    "conditional_CDF": "Each CDF uses native-valid outputs only. Coverage shown separately. No held values or interpolation.",
+    "time_convention": "Upper panels elapsed from each evaluation start; lower panels use clock-corrected output time minus66s, selected by saved observation time.",
+    "mechanism": "All35 Q1 length warnings had at least one successful float update with the length pseudo-observation. Fixed postfit logs but does not reject these residuals. No unique physical-cause inference.",
+    "zoom_selection": "10–22s displays the saved cluster including maximum length0.7077479565m at16s; preexisting diagnostic case, not a new run.",
+    "reference_quantity": "Lateral-baseline projected heading compared with commercial fused Euler yaw; under roll/pitch the quantities differ.",
+    "no_new_scientific_calls": true
+  },
+  "width_mm": 174.0,
+  "height_mm": 150.0,
+  "alignment_status": "PASS",
+  "audit_returncodes": {
+    "pdf_text": 0,
+    "collisions": 0
+  },
+  "visual_review": "PASS",
+  "title_zh": "RTKLIB原配置下短基线航向的输出与物理一致性",
+  "visual_review_receipt": {
+    "date": "2026-10-11",
+    "color": "viewed",
+    "grayscale": "viewed",
+    "assessment": "Panel alignment, uncut labels, retained full error scales and clear independent output rows. CDF panels retain all native-valid samples. Main figure has0–20deg inset and10–22s baseline enlargement.",
+    "export_sha256": {
+      "png": "41599b6d7087c1d448f62c27c700407dc0058170aaa1d80deeefddbc51e4401b",
+      "pdf": "aa289fb3d278574e587d554f6c290bf00f17a0d0c0ef8387c0e6bdd781db591e",
+      "svg": "8391364b339a452042e23c928297483ebdf16ae0613dbc5e2462aca995dccaee"
+    },
+    "png_size": [
+      4110,
+      3543
+    ],
+    "png_dpi": [
+      599.9988,
+      599.9988
+    ],
+    "pdf_width_mm": 173.99999508327906
+  }
+}

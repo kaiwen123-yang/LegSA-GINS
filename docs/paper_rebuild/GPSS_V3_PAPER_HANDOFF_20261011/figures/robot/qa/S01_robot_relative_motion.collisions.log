@@ -1,0 +1,12 @@
+Nature Figure Rendered Collision Audit
+pdf: /mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/robot/S01_robot_relative_motion.pdf
+pages: 1
+visible text boxes: 63
+stroke paths: 73
+
+[WARN] page 1 text-fill-edge: Text partially overlaps the edge of 1 filled region(s) — 'First 40 s'
+  text bbox: (89.05313873291016, 54.43177032470703, 117.83714294433594, 61.43177032470703)
+
+summary: 0 fail, 1 warn, 6 contained fill overlays, 5 contained image overlays
+verdict: REVIEW REQUIRED
+note: contained overlays can be intentional; WARN findings need final-size visual review

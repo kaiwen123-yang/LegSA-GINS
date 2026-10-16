@@ -1,0 +1,10 @@
+﻿reading_order,current_figure,result_role,priority,title_zh,path
+1,M1,方向约束的需求,core,机器人自身观测与绝对航向,G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/Q1_proprioception_absolute_heading.png
+2,M2,方向信息的可用性与质量,core,RTKLIB原配置下短基线航向的输出与物理一致性,G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/Q2_heading_availability_and_consistency.png
+3,S9,航向改善,core,基础GNSS/INS加入双天线航向的作用,G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/S_Q4_heading_information.png
+4,S8,横滚和俯仰改善,core,机载倾角辅助与姿态误差,G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/S_Q4_tilt_aiding.png
+5,M5,平移互补与可用性边界,core,保留航向时的机身速度辅助,G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/Q4_body_velocity.png
+6,S4,方向保留的外部连接证据,support,保留方向与位置中断中的导航表现,G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_02_heading_retention.png
+7,M6,质量变化下的收益和失效,core,来源加权的收益与精度代价,G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/Q5_source_weighting.png
+8,M3,滤波类系统表现,validation,自然工况下与双位置IEKF的比较,G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_01_IEKF_natural.png
+9,M4,因子图精度与连续性,validation,LegSA-GINS与OiSAM的精度及输出连续性,G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_oisam_precision_continuity.png

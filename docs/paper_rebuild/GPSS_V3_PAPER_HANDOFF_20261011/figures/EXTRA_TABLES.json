@@ -1,0 +1,38 @@
+[
+  {
+    "section": "navigation",
+    "title": "FGO_GNSS1_ALL36_RESULTS",
+    "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/FGO_GNSS1_ALL36_RESULTS.csv",
+    "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/data/all_36_saved_metrics.csv.gz"
+  },
+  {
+    "section": "navigation",
+    "title": "FGO_STRICT_COMPARISON_TABLE",
+    "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/FGO_STRICT_COMPARISON_TABLE.csv",
+    "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/FGO_REPRODUCTION_FIX_20261004/COMPARISON_TABLE.csv"
+  },
+  {
+    "section": "navigation",
+    "title": "V3_OISAM_COMMON_POINT",
+    "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/V3_OISAM_COMMON_POINT.csv",
+    "source": "/mnt/g/LegSA-GINS-project/V3研究记录梳理_20261011/fusion/V3_OISAM_EXISTING_COMMON_POINT.csv"
+  },
+  {
+    "section": "additional_context",
+    "title": "HISTORICAL_QA_COMPLETION_RECORD",
+    "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/review/HISTORICAL_QA_COMPLETION_RECORD.csv",
+    "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/suanfahengxiangduibi/PAPER4A_WRITE_READY_EVIDENCE_PACKAGE_AND_CONTEXT_SYNC/02_evidence_consolidation/qa_full_matrix_evidence.csv"
+  },
+  {
+    "section": "additional_context",
+    "title": "LATER_TRANSFER_RESULTS",
+    "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/review/LATER_TRANSFER_RESULTS.csv",
+    "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/EXISTING_DATA_R5_20261005/new_data/RESULTS.csv"
+  },
+  {
+    "section": "additional_context",
+    "title": "LATER_TRANSFER_RESULTS_AND_USE",
+    "path": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/review/LATER_TRANSFER_RESULTS_AND_USE.md",
+    "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/EXISTING_DATA_R5_20261005/new_data/RESULTS_AND_USE.md"
+  }
+]

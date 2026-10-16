@@ -1,0 +1,13 @@
+{
+  "figures": 10,
+  "pdf_pages": 10,
+  "all_preview_exists": true,
+  "all_pdf_exists": true,
+  "all_png_exists": true,
+  "direct_visual_review": "10/10 checked by root; individual QA under sections",
+  "new_original_solvers": 0,
+  "new_V3_evaluators": 0,
+  "new_acceptance_layer": true,
+  "figure_2_native_raster": true,
+  "full_result_denominators_retained": true
+}

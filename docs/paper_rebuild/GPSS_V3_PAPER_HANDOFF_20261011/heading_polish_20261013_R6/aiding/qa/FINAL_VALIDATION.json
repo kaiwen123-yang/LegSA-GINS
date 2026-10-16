@@ -1,0 +1,133 @@
+{
+  "status": "PASS",
+  "data_reused_from": "R5 one-second summary CSV and original case-metric JSON",
+  "data_changed": false,
+  "one_second_statistics_recomputed": false,
+  "source_pointer_hash_checks": 5,
+  "source_sample_counts_and_extrema": [
+    {
+      "case": "D15",
+      "source": "input_change",
+      "bin_rows": 120,
+      "raw_samples_counted": 601,
+      "minimum": 0.192554816329922,
+      "maximum": 20.02240502868436
+    },
+    {
+      "case": "D15",
+      "source": "reported_uncertainty",
+      "bin_rows": 120,
+      "raw_samples_counted": 601,
+      "minimum": 0.0221810730128188,
+      "maximum": 0.0290516780926679
+    },
+    {
+      "case": "D15",
+      "source": "weighting_off",
+      "bin_rows": 120,
+      "raw_samples_counted": 25429,
+      "minimum": -8.533598453423423,
+      "maximum": 161.80284421605586
+    },
+    {
+      "case": "D15",
+      "source": "full",
+      "bin_rows": 120,
+      "raw_samples_counted": 25429,
+      "minimum": -11.907419241611876,
+      "maximum": 6.908283653302476
+    },
+    {
+      "case": "D38",
+      "source": "input_change",
+      "bin_rows": 120,
+      "raw_samples_counted": 601,
+      "minimum": 0.0330950000000029,
+      "maximum": 27.985507000000013
+    },
+    {
+      "case": "D38",
+      "source": "reported_uncertainty",
+      "bin_rows": 120,
+      "raw_samples_counted": 601,
+      "minimum": 0.73329825,
+      "maximum": 2.933193
+    },
+    {
+      "case": "D38",
+      "source": "weighting_off",
+      "bin_rows": 120,
+      "raw_samples_counted": 25429,
+      "minimum": -5.791370964666896,
+      "maximum": 4.117151815803709
+    },
+    {
+      "case": "D38",
+      "source": "full",
+      "bin_rows": 120,
+      "raw_samples_counted": 25429,
+      "minimum": -5.788930380666898,
+      "maximum": 4.085852987803719
+    },
+    {
+      "case": "D53",
+      "source": "input_change",
+      "bin_rows": 120,
+      "raw_samples_counted": 25430,
+      "minimum": 0.0162600099500983,
+      "maximum": 5.025911697287747
+    },
+    {
+      "case": "D53",
+      "source": "reported_uncertainty",
+      "bin_rows": 120,
+      "raw_samples_counted": 25430,
+      "minimum": 0.1878613011985172,
+      "maximum": 0.1878613011985172
+    },
+    {
+      "case": "D53",
+      "source": "weighting_off",
+      "bin_rows": 120,
+      "raw_samples_counted": 25429,
+      "minimum": -5.50972570403394,
+      "maximum": 2.9278768788037155
+    },
+    {
+      "case": "D53",
+      "source": "full",
+      "bin_rows": 120,
+      "raw_samples_counted": 25429,
+      "minimum": -5.524370444033934,
+      "maximum": 2.91408133780368
+    }
+  ],
+  "layout": {
+    "width_mm": 174,
+    "height_mm": 198,
+    "data_column_width_ratio": [
+      1.15,
+      0.8,
+      1.45
+    ],
+    "minimum_font_pt": 8.0,
+    "clipped_text": [],
+    "palette": {
+      "full": "#175C9E",
+      "off": "#C66B3D",
+      "input": "#4F565E",
+      "reported_uncertainty": "#238B8A"
+    },
+    "range_alpha": 0.1,
+    "data_change": false,
+    "bin_recomputation": false,
+    "input_data_source": "/mnt/g/LegSA-GINS-project/V3正文精修_20261013_R5/aiding"
+  },
+  "preview_pixels": [
+    3082,
+    3507
+  ],
+  "rendered_QA": "1.5pt alignment,8pt PDF text,zero collision FAIL/WARN",
+  "new_solver_provider_evaluator_calls": 0,
+  "issues": []
+}

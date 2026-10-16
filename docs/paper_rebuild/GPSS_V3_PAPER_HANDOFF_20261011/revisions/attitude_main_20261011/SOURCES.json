@@ -1,0 +1,86 @@
+[
+  {
+    "sequence_id": "BY2",
+    "method_id": "F01",
+    "run_id": "RUN_00001",
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00001/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "rows": 56642
+  },
+  {
+    "sequence_id": "BY2",
+    "method_id": "F03",
+    "run_id": "RUN_00003",
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00003/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "rows": 56642
+  },
+  {
+    "sequence_id": "BY2",
+    "method_id": "F04",
+    "run_id": "RUN_00004",
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00004/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "rows": 56642
+  },
+  {
+    "sequence_id": "BY2",
+    "method_id": "A05",
+    "run_id": "RUN_00007",
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00007/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "rows": 56642
+  },
+  {
+    "sequence_id": "BY2H",
+    "method_id": "F01",
+    "run_id": "SEQUENCE_BY2H_F01",
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F01/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "rows": 58580
+  },
+  {
+    "sequence_id": "BY2H",
+    "method_id": "F03",
+    "run_id": "SEQUENCE_BY2H_F03",
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F03/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "rows": 58580
+  },
+  {
+    "sequence_id": "BY2H",
+    "method_id": "F04",
+    "run_id": "SEQUENCE_BY2H_F04",
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F04/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "rows": 58580
+  },
+  {
+    "sequence_id": "BY2H",
+    "method_id": "A05",
+    "run_id": "SEQUENCE_BY2H_A05",
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_A05/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "rows": 58580
+  },
+  {
+    "sequence_id": "BY2O",
+    "method_id": "F01",
+    "run_id": "SEQUENCE_BY2O_F01",
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F01/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "rows": 76548
+  },
+  {
+    "sequence_id": "BY2O",
+    "method_id": "F03",
+    "run_id": "SEQUENCE_BY2O_F03",
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F03/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "rows": 76548
+  },
+  {
+    "sequence_id": "BY2O",
+    "method_id": "F04",
+    "run_id": "SEQUENCE_BY2O_F04",
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F04/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "rows": 76548
+  },
+  {
+    "sequence_id": "BY2O",
+    "method_id": "A05",
+    "run_id": "SEQUENCE_BY2O_A05",
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_A05/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "rows": 76548
+  }
+]

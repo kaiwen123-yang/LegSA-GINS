@@ -1,0 +1,48 @@
+{
+  "pdf": "/mnt/g/LegSA-GINS-project/V3正文重绘_20261011/aiding/figures/F08_quality_tradeoffs.pdf",
+  "auditable": true,
+  "verdict": "REVIEW REQUIRED",
+  "page_count": 1,
+  "visible_text_box_count": 77,
+  "text_trace_count": 77,
+  "stroke_path_count": 78,
+  "filled_region_count": 67,
+  "image_region_count": 1,
+  "summary": {
+    "fail": 0,
+    "warn": 1,
+    "contained_fill_overlays": 14,
+    "contained_image_overlays": 0
+  },
+  "thresholds": {
+    "text_inset_pt": 0.6,
+    "min_overlap_ratio": 0.05,
+    "clipping_tolerance_pt": 0.5
+  },
+  "findings": [
+    {
+      "severity": "WARN",
+      "kind": "text-image-edge",
+      "page": 1,
+      "message": "Text partially overlaps the edge of 1 raster image(s)",
+      "text": "RMSE: 29.80 → 2.70",
+      "text_bbox": [
+        155.38067626953125,
+        50.16750717163086,
+        230.97390747070312,
+        58.16750717163086
+      ],
+      "other_text": null,
+      "other_bbox": [
+        59.15999984741211,
+        51.96000671386719,
+        238.1999969482422,
+        148.32000732421875
+      ],
+      "object_count": 1,
+      "object_indexes": [
+        0
+      ]
+    }
+  ]
+}

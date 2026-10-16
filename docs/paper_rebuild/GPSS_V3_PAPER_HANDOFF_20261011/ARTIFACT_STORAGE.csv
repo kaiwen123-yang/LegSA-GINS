@@ -1,0 +1,384 @@
+source_path,repository_path,storage,bytes,reason
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/AUTHOR_SELECTED_QUESTION.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/AUTHOR_SELECTED_QUESTION.json,git,459,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/CAPTIONS_ZH_EN.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/CAPTIONS_ZH_EN.md,git,18272,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/COMPARISON_USE_MAP.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/COMPARISON_USE_MAP.csv,git,15693,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/DELIVERY_CHECKS.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/DELIVERY_CHECKS.json,git,501,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/EXTRA_TABLES.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/EXTRA_TABLES.json,git,2178,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/FIGURE_CATALOG.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/FIGURE_CATALOG.csv,git,29584,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/GOAL_PROGRESS.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/GOAL_PROGRESS.json,git,894,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/METHODS_AND_EVALUATION.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/METHODS_AND_EVALUATION.csv,git,8618,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/METHODS_CONTEXT.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/METHODS_CONTEXT.md,git,2898,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/PLAN.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/PLAN.md,git,1822,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/README_从这里开始.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/README_从这里开始.md,git,4173,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/RESULTS_AND_DISCUSSION_ZH.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/RESULTS_AND_DISCUSSION_ZH.md,git,7477,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/RESULTS_EN.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/RESULTS_EN.md,git,5727,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/REUSED_FIGURES.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/REUSED_FIGURES.json,git,811,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/SELECTED_QUESTION_READING_ORDER.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/SELECTED_QUESTION_READING_ORDER.csv,git,1671,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/TABLE_CATALOG.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/TABLE_CATALOG.csv,git,11283,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/CAPTIONS.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/CAPTIONS.md,git,3660,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/FIGURE_PLAN.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/FIGURE_PLAN.md,git,2077,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/RESULTS_ZH.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/RESULTS_ZH.md,git,3296,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/SECTION_PACKAGE.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/SECTION_PACKAGE.json,git,5617,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/Q4_body_velocity.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/Q4_body_velocity.json,git,3001,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/Q4_body_velocity.pdf,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/Q4_body_velocity.pdf,git,303346,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/Q4_body_velocity.png,,local_only,483472,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/Q4_body_velocity.svg,,local_only,856451,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/Q5_source_weighting.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/Q5_source_weighting.json,git,3658,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/Q5_source_weighting.pdf,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/Q5_source_weighting.pdf,git,2042293,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/Q5_source_weighting.png,,local_only,1375143,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/Q5_source_weighting.svg,,local_only,5772544,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/S_Q4_heading_information.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/S_Q4_heading_information.json,git,3676,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/S_Q4_heading_information.pdf,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/S_Q4_heading_information.pdf,git,5248620,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/S_Q4_heading_information.png,,local_only,866339,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/S_Q4_heading_information.svg,,local_only,14972954,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/S_Q4_tilt_aiding.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/S_Q4_tilt_aiding.json,git,2451,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/S_Q4_tilt_aiding.pdf,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/S_Q4_tilt_aiding.pdf,git,6632134,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/S_Q4_tilt_aiding.png,,local_only,570153,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/S_Q4_tilt_aiding.svg,,local_only,18763496,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/preview/Q4_body_velocity.png,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/preview/Q4_body_velocity.png,git,220718,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/preview/Q4_body_velocity_gray.png,,local_only,92831,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/preview/Q5_source_weighting.png,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/preview/Q5_source_weighting.png,git,660939,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/preview/Q5_source_weighting_gray.png,,local_only,285542,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/preview/S_Q4_heading_information.png,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/preview/S_Q4_heading_information.png,git,404435,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/preview/S_Q4_heading_information_gray.png,,local_only,174373,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/preview/S_Q4_tilt_aiding.png,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/preview/S_Q4_tilt_aiding.png,git,262459,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/preview/S_Q4_tilt_aiding_gray.png,,local_only,115454,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/qa/Q4_body_velocity.alignment.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/qa/Q4_body_velocity.alignment.json,git,2318,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/qa/Q4_body_velocity.collisions.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/qa/Q4_body_velocity.collisions.json,git,1130,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/qa/Q4_body_velocity.collisions.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/qa/Q4_body_velocity.collisions.log,git,570,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/qa/Q4_body_velocity.pdf_text.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/qa/Q4_body_velocity.pdf_text.log,git,281,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/qa/Q5_source_weighting.alignment.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/qa/Q5_source_weighting.alignment.json,git,2947,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/qa/Q5_source_weighting.collisions.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/qa/Q5_source_weighting.collisions.json,git,1140,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/qa/Q5_source_weighting.collisions.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/qa/Q5_source_weighting.collisions.log,git,590,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/qa/Q5_source_weighting.pdf_text.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/qa/Q5_source_weighting.pdf_text.log,git,284,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/qa/QA_REVIEW.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/qa/QA_REVIEW.md,git,1258,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/qa/S_Q4_heading_information.alignment.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/qa/S_Q4_heading_information.alignment.json,git,3087,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/qa/S_Q4_heading_information.collisions.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/qa/S_Q4_heading_information.collisions.json,git,570,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/qa/S_Q4_heading_information.collisions.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/qa/S_Q4_heading_information.collisions.log,git,381,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/qa/S_Q4_heading_information.pdf_text.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/qa/S_Q4_heading_information.pdf_text.log,git,289,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/qa/S_Q4_tilt_aiding.alignment.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/qa/S_Q4_tilt_aiding.alignment.json,git,3084,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/qa/S_Q4_tilt_aiding.collisions.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/qa/S_Q4_tilt_aiding.collisions.json,git,562,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/qa/S_Q4_tilt_aiding.collisions.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/qa/S_Q4_tilt_aiding.collisions.log,git,373,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/qa/S_Q4_tilt_aiding.pdf_text.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/qa/S_Q4_tilt_aiding.pdf_text.log,git,281,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/qa/assembled_source_for_static_check.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/qa/assembled_source_for_static_check.py,git,27562,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/qa/static_validation.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/figures/qa/static_validation.log,git,2131,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/plot_code/build_aiding_figures.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/plot_code/build_aiding_figures.py,git,11120,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/plot_code/build_section.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/plot_code/build_section.py,git,11664,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/plot_code/finalize_section.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/plot_code/finalize_section.py,git,4192,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/plot_code/paper_names.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/plot_code/paper_names.py,git,1272,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/plot_code/paper_style.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/plot_code/paper_style.py,git,4776,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/ADD495.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/tables/ADD495.csv,git,268501,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/ALL_DURATION_ALL11_SUMMARY.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/tables/ALL_DURATION_ALL11_SUMMARY.csv,git,19559,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/CONFIGURATION_CONTRASTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/tables/CONFIGURATION_CONTRASTS.csv,git,6863,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/CORE5951.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/tables/CORE5951.csv,git,2991610,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/CORE_SUMMARY77.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/tables/CORE_SUMMARY77.csv,git,11863,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/D15_SOURCE_WEIGHT_SUMMARY.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/tables/D15_SOURCE_WEIGHT_SUMMARY.csv,git,291,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/D15_SOURCE_WEIGHT_TRACE_ALL.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/tables/D15_SOURCE_WEIGHT_TRACE_ALL.csv,git,4983455,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/ERROR_SERIES_AVAILABILITY6468.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/tables/ERROR_SERIES_AVAILABILITY6468.csv,git,2815543,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/FULL_OUTCOME55.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/tables/FULL_OUTCOME55.csv,git,19017,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/METHOD_CONFIGURATION_MAP.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/tables/METHOD_CONFIGURATION_MAP.csv,git,1456,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/MODULE56.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/tables/MODULE56.csv,git,16513,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/NATURAL33.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/tables/NATURAL33.csv,git,22200,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/SA_SIX_EXTRA_COMPLETIONS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/tables/SA_SIX_EXTRA_COMPLETIONS.csv,git,2286,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/SINGLEMODULE_CASE_PAIRS2164.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/tables/SINGLEMODULE_CASE_PAIRS2164.csv,git,1101633,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/tables/SOURCE_TABLE_INVENTORY.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/aiding/tables/SOURCE_TABLE_INVENTORY.csv,git,2244,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/assemble_paper_figures.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/assemble_paper_figures.py,git,12614,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/CAPTIONS.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/CAPTIONS.md,git,4227,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/METHOD_COVERAGE.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/METHOD_COVERAGE.csv,git,2276,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/Q2_heading_availability_and_consistency.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/Q2_heading_availability_and_consistency.json,git,4914,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/Q2_heading_availability_and_consistency.pdf,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/Q2_heading_availability_and_consistency.pdf,git,35469,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/Q2_heading_availability_and_consistency.png,,local_only,538513,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/Q2_heading_availability_and_consistency.svg,,local_only,159217,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/RESULTS_ZH.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/RESULTS_ZH.md,git,4111,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/SECTION_PACKAGE.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/SECTION_PACKAGE.json,git,12975,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/SOURCES_READ.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/SOURCES_READ.csv,git,12660,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/SOURCE_NOTES.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/SOURCE_NOTES.md,git,3969,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/SQ2_RTKLIB_all_configurations.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/SQ2_RTKLIB_all_configurations.json,git,7983,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/SQ2_RTKLIB_all_configurations.pdf,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/SQ2_RTKLIB_all_configurations.pdf,git,227687,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/SQ2_RTKLIB_all_configurations.png,,local_only,691455,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/SQ2_RTKLIB_all_configurations.svg,,local_only,1062735,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/SQ2_raw_dual_antenna_methods.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/SQ2_raw_dual_antenna_methods.json,git,4588,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/SQ2_raw_dual_antenna_methods.pdf,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/SQ2_raw_dual_antenna_methods.pdf,git,106786,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/SQ2_raw_dual_antenna_methods.png,,local_only,349826,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/SQ2_raw_dual_antenna_methods.svg,,local_only,1365852,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/build_heading_section.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/build_heading_section.py,git,17336,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2H_V0E_full_saved_heading.csv.gz,,local_only,21363,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2H_V0_full_saved_heading.csv.gz,,local_only,21727,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2H_V1_full_saved_heading.csv.gz,,local_only,21688,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2H_V2_full_saved_heading.csv.gz,,local_only,21602,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2H_all_methods_all_window_epochs.csv.gz,,local_only,294409,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2O_V0E_full_saved_heading.csv.gz,,local_only,29969,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2O_V0_full_saved_heading.csv.gz,,local_only,29170,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2O_V1_full_saved_heading.csv.gz,,local_only,29478,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2O_V2_full_saved_heading.csv.gz,,local_only,29326,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2O_all_methods_all_window_epochs.csv.gz,,local_only,358474,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2_V0E_full_saved_heading.csv.gz,,local_only,22106,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2_V0_full_saved_heading.csv.gz,,local_only,22000,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2_V1_full_saved_heading.csv.gz,,local_only,21993,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2_V2_full_saved_heading.csv.gz,,local_only,21824,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/BY2_all_methods_all_window_epochs.csv.gz,,local_only,293977,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/data/NOMINAL_Q1_BASELINE_DISPLAY.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/data/NOMINAL_Q1_BASELINE_DISPLAY.csv,git,36575,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/finalize_heading_section.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/finalize_heading_section.py,git,6616,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/preview/Q2_heading_availability_and_consistency.png,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/preview/Q2_heading_availability_and_consistency.png,git,244774,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/preview/Q2_heading_availability_and_consistency_gray.png,,local_only,104719,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/preview/SQ2_RTKLIB_all_configurations.png,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/preview/SQ2_RTKLIB_all_configurations.png,git,322794,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/preview/SQ2_RTKLIB_all_configurations_gray.png,,local_only,132591,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/preview/SQ2_raw_dual_antenna_methods.png,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/preview/SQ2_raw_dual_antenna_methods.png,git,165095,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/preview/SQ2_raw_dual_antenna_methods_gray.png,,local_only,71009,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/qa/Q2_heading_availability_and_consistency.alignment.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/qa/Q2_heading_availability_and_consistency.alignment.json,git,2315,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/qa/Q2_heading_availability_and_consistency.collisions.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/qa/Q2_heading_availability_and_consistency.collisions.json,git,580,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/qa/Q2_heading_availability_and_consistency.collisions.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/qa/Q2_heading_availability_and_consistency.collisions.log,git,390,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/qa/Q2_heading_availability_and_consistency.pdf_text.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/qa/Q2_heading_availability_and_consistency.pdf_text.log,git,297,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/qa/SQ2_RTKLIB_all_configurations.collisions.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/qa/SQ2_RTKLIB_all_configurations.collisions.json,git,571,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/qa/SQ2_RTKLIB_all_configurations.collisions.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/qa/SQ2_RTKLIB_all_configurations.collisions.log,git,380,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/qa/SQ2_RTKLIB_all_configurations.original_alignment.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/qa/SQ2_RTKLIB_all_configurations.original_alignment.json,git,4211,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/qa/SQ2_RTKLIB_all_configurations.original_collisions.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/qa/SQ2_RTKLIB_all_configurations.original_collisions.json,git,554,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/qa/SQ2_RTKLIB_all_configurations.original_collisions.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/qa/SQ2_RTKLIB_all_configurations.original_collisions.log,git,363,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/qa/SQ2_RTKLIB_all_configurations.original_pdf_text.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/qa/SQ2_RTKLIB_all_configurations.original_pdf_text.log,git,270,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/qa/SQ2_RTKLIB_all_configurations.pdf_text.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/qa/SQ2_RTKLIB_all_configurations.pdf_text.log,git,287,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/qa/SQ2_raw_dual_antenna_methods.alignment.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/qa/SQ2_raw_dual_antenna_methods.alignment.json,git,3092,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/qa/SQ2_raw_dual_antenna_methods.collisions.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/qa/SQ2_raw_dual_antenna_methods.collisions.json,git,570,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/qa/SQ2_raw_dual_antenna_methods.collisions.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/qa/SQ2_raw_dual_antenna_methods.collisions.log,git,379,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/qa/SQ2_raw_dual_antenna_methods.pdf_text.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/qa/SQ2_raw_dual_antenna_methods.pdf_text.log,git,286,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/ALL_HEADING_EXPERIMENTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/ALL_HEADING_EXPERIMENTS.csv,git,22149,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2H_EXT04_C00_FAILURE_LEDGER.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/BY2H_EXT04_C00_FAILURE_LEDGER.csv,git,651808,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2H_EXT04_C00_POLICY_SUMMARY.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/BY2H_EXT04_C00_POLICY_SUMMARY.csv,git,4656,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2H_EXT04_POLICY_PARAMETER_REGISTRY.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/BY2H_EXT04_POLICY_PARAMETER_REGISTRY.csv,git,8357,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2H_EXT04_STOCHASTIC_PARAMETER_REGISTRY.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/BY2H_EXT04_STOCHASTIC_PARAMETER_REGISTRY.csv,git,1326,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2O_EXT04_C00_FAILURE_LEDGER.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/BY2O_EXT04_C00_FAILURE_LEDGER.csv,git,1076335,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2O_EXT04_C00_POLICY_SUMMARY.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/BY2O_EXT04_C00_POLICY_SUMMARY.csv,git,4767,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2O_EXT04_POLICY_PARAMETER_REGISTRY.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/BY2O_EXT04_POLICY_PARAMETER_REGISTRY.csv,git,8357,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2O_EXT04_STOCHASTIC_PARAMETER_REGISTRY.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/BY2O_EXT04_STOCHASTIC_PARAMETER_REGISTRY.csv,git,1326,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2_EXT04_C00_FAILURE_LEDGER.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/BY2_EXT04_C00_FAILURE_LEDGER.csv,git,684401,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2_EXT04_C00_POLICY_SUMMARY.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/BY2_EXT04_C00_POLICY_SUMMARY.csv,git,4670,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2_EXT04_POLICY_PARAMETER_REGISTRY.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/BY2_EXT04_POLICY_PARAMETER_REGISTRY.csv,git,8357,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2_EXT04_STOCHASTIC_PARAMETER_REGISTRY.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/BY2_EXT04_STOCHASTIC_PARAMETER_REGISTRY.csv,git,1326,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/CLASSIC_QUALIFICATION_RESULTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/CLASSIC_QUALIFICATION_RESULTS.csv,git,3880,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/COMMON_SUPPORT_ALL.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/COMMON_SUPPORT_ALL.csv,git,296494,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/DG01R_CLOCK_OFFSET.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/DG01R_CLOCK_OFFSET.csv,git,2798,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/DG01R_RINEX_CROSSCHECK.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/DG01R_RINEX_CROSSCHECK.csv,git,25630,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/DG01R_VERSION_COMPARISON.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/DG01R_VERSION_COMPARISON.csv,git,4565,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/DG01_FIX_STATUS_TIMELINE.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/DG01_FIX_STATUS_TIMELINE.csv,git,1131,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/DG01_OVERVIEW.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/DG01_OVERVIEW.csv,git,1026,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/DG01_RTKLIB_CONFIG_AUDIT.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/DG01_RTKLIB_CONFIG_AUDIT.csv,git,27603,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/EXISTING_HEADING_METRICS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/EXISTING_HEADING_METRICS.csv,git,61008,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/FAR_PAR_ALL_THREE_TRIALS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/FAR_PAR_ALL_THREE_TRIALS.csv,git,12695,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/FAR_PAR_READER_TABLE.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/FAR_PAR_READER_TABLE.csv,git,470,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/HEADING_METRICS_READER_TABLE.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/HEADING_METRICS_READER_TABLE.csv,git,6560,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/HX07R_BY2O_SEGMENTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/HX07R_BY2O_SEGMENTS.csv,git,6894,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/HX07R_MANUSCRIPT_ROWS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/HX07R_MANUSCRIPT_ROWS.csv,git,1585,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/HX07R_SUPPLEMENT_ROWS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/HX07R_SUPPLEMENT_ROWS.csv,git,6341,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/INPUT_AUDIT_DIFFERENCES.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/INPUT_AUDIT_DIFFERENCES.csv,git,65,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/INPUT_AUDIT_OLD_LLI.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/INPUT_AUDIT_OLD_LLI.csv,git,938,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/INPUT_AUDIT_SUMMARY.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/INPUT_AUDIT_SUMMARY.json,git,69150,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/MOTION_PAIR_RESULTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/MOTION_PAIR_RESULTS.csv,git,3180,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/NATIVE_RUN_SUMMARY.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/NATIVE_RUN_SUMMARY.csv,git,3965,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/Q2_MAIN_OUTPUT_COUNTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/Q2_MAIN_OUTPUT_COUNTS.csv,git,219,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/RAW_METHOD_OUTPUT_COUNTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/RAW_METHOD_OUTPUT_COUNTS.csv,git,219,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/RTKLIB_DIAGNOSTIC_SUMMARY.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/RTKLIB_DIAGNOSTIC_SUMMARY.json,git,7164,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/RTKLIB_EPOCH_DIAGNOSTICS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/RTKLIB_EPOCH_DIAGNOSTICS.csv,git,247543,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/RTKLIB_Q1_LARGE_LENGTH_DIAGNOSTICS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/RTKLIB_Q1_LARGE_LENGTH_DIAGNOSTICS.csv,git,8117,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/V1_V2_SAME_METHOD_COMMON_SUPPORT.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/heading/tables/V1_V2_SAME_METHOD_COMMON_SUPPORT.csv,git,7800,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/CAPTIONS.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/CAPTIONS.md,git,6061,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_01_IEKF_natural.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/Q3_01_IEKF_natural.json,git,22145,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_01_IEKF_natural.pdf,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/Q3_01_IEKF_natural.pdf,git,649816,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_01_IEKF_natural.png,,local_only,718319,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_01_IEKF_natural.svg,,local_only,994810,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_02_heading_retention.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/Q3_02_heading_retention.json,git,3111,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_02_heading_retention.pdf,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/Q3_02_heading_retention.pdf,git,602600,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_02_heading_retention.png,,local_only,934778,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_02_heading_retention.svg,,local_only,1634315,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_03_OiSAM_reinitialized_heading.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/Q3_03_OiSAM_reinitialized_heading.json,git,3052,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_03_OiSAM_reinitialized_heading.pdf,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/Q3_03_OiSAM_reinitialized_heading.pdf,git,38306,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_03_OiSAM_reinitialized_heading.png,,local_only,1085403,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_03_OiSAM_reinitialized_heading.svg,,local_only,83659,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_04_all_degradation_pairs.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/Q3_04_all_degradation_pairs.json,git,3056,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_04_all_degradation_pairs.pdf,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/Q3_04_all_degradation_pairs.pdf,git,31511,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_04_all_degradation_pairs.png,,local_only,436589,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_04_all_degradation_pairs.svg,,local_only,58374,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_05_FGO_position.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/Q3_05_FGO_position.json,git,5092,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_05_FGO_position.pdf,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/Q3_05_FGO_position.pdf,git,130748,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_05_FGO_position.png,,local_only,1057165,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_05_FGO_position.svg,,local_only,786398,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_oisam_precision_continuity.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/Q3_oisam_precision_continuity.json,git,4883,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_oisam_precision_continuity.pdf,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/Q3_oisam_precision_continuity.pdf,git,38980,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_oisam_precision_continuity.png,,local_only,1019759,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/Q3_oisam_precision_continuity.svg,,local_only,126356,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/RESULTS_ZH.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/RESULTS_ZH.md,git,6055,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/SECTION_PACKAGE.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/SECTION_PACKAGE.json,git,7815,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/A2_ALL18_MATCHED_RESULTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/A2_ALL18_MATCHED_RESULTS.csv,git,3044,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/A2_F04_existing.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/A2_F04_existing.csv,git,9516,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/ALL_DEGRADATION_CASE_DEFINITIONS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/ALL_DEGRADATION_CASE_DEFINITIONS.csv,git,122556,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2H_COMMON_SEGMENTED_HEADING.csv.gz,,local_only,8548,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2H_METADATA.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/BY2H_METADATA.json,git,1038,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2H_OISAM_SEGMENTED_EXISTING_METRICS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/BY2H_OISAM_SEGMENTED_EXISTING_METRICS.csv,git,3616,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2H_OISAM_SEGMENTED_heading.csv.gz,,local_only,11646,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2O_COMMON_SEGMENTED_HEADING.csv.gz,,local_only,11834,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2O_METADATA.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/BY2O_METADATA.json,git,1041,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2O_OISAM_SEGMENTED_EXISTING_METRICS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/BY2O_OISAM_SEGMENTED_EXISTING_METRICS.csv,git,3659,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2O_OISAM_SEGMENTED_heading.csv.gz,,local_only,15887,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2_COMMON_SEGMENTED_HEADING.csv.gz,,local_only,8649,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2_METADATA.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/BY2_METADATA.json,git,1038,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2_OISAM_SEGMENTED_EXISTING_METRICS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/BY2_OISAM_SEGMENTED_EXISTING_METRICS.csv,git,3572,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/BY2_OISAM_SEGMENTED_heading.csv.gz,,local_only,11754,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/CLASSIC18_LABEL_MAP.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/CLASSIC18_LABEL_MAP.csv,git,382,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/DEGRADATION_EXTERNAL_SUMMARY_R2.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/DEGRADATION_EXTERNAL_SUMMARY_R2.csv,git,46588,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/DEGRADATION_EXTERNAL_TABLE_R2.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/DEGRADATION_EXTERNAL_TABLE_R2.csv,git,158167,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/DEGRADATION_PAIRED_R2.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/DEGRADATION_PAIRED_R2.csv,git,225606,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/EXPERIMENTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/EXPERIMENTS.csv,git,367437,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/EXT05C_A2_20s_seed00.csv.gz,,local_only,4486835,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/F04_A2_20s_seed00.csv.gz,,local_only,5479144,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/FGO_GNSS1_ALL36_RESULTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/FGO_GNSS1_ALL36_RESULTS.csv,git,24892,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/FGO_STRICT_COMPARISON_TABLE.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/FGO_STRICT_COMPARISON_TABLE.csv,git,71262,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/FULL_RESULT_PROFILE.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/FULL_RESULT_PROFILE.json,git,77734,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/GAPS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/GAPS.csv,git,1742,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/GINAV_ACTUAL_RESULTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/GINAV_ACTUAL_RESULTS.csv,git,26278,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/GINAV_FULL_RECORDS.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/GINAV_FULL_RECORDS.json,git,56384,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/HX03_CASES.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/HX03_CASES.json,git,176186,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/HX03_CONTRACT.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/HX03_CONTRACT.json,git,2365,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/IEKF_A2_PARAMETERS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/IEKF_A2_PARAMETERS.csv,git,966,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/IEKF_ALL16_CONDITIONS_WITH_PARAMETERS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/IEKF_ALL16_CONDITIONS_WITH_PARAMETERS.csv,git,234358,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/LC01-BR_A2_20s_seed00.csv.gz,,local_only,4490808,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/LC01_A2_20s_seed00.csv.gz,,local_only,4491062,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/LC_NATIVE_TABLE_READ.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/LC_NATIVE_TABLE_READ.csv,git,22685,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/METHOD_COVERAGE.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/METHOD_COVERAGE.csv,git,1358,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/OUTPUT_INTERVALS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/OUTPUT_INTERVALS.csv,git,1417,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/PHASE5_EXT05_PAVLASEK_CONTRACT_V1.yaml,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/PHASE5_EXT05_PAVLASEK_CONTRACT_V1.yaml,git,6164,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/SOURCE_BLOCKS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/SOURCE_BLOCKS.csv,git,862,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/SOURCE_MANIFEST.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/SOURCE_MANIFEST.csv,git,15732,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/data/V3_OISAM_COMMON_POINT.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/data/V3_OISAM_COMMON_POINT.csv,git,13233,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/finalize_navigation.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/finalize_navigation.py,git,5880,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/paper_names.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/paper_names.py,git,1272,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/paper_style.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/paper_style.py,git,4776,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/plot_navigation.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/plot_navigation.py,git,13899,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/prepare_navigation.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/prepare_navigation.py,git,6304,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/preview/Q3_01_IEKF_natural.png,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/preview/Q3_01_IEKF_natural.png,git,322199,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/preview/Q3_01_IEKF_natural_gray.png,,local_only,134123,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/preview/Q3_02_heading_retention.png,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/preview/Q3_02_heading_retention.png,git,417273,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/preview/Q3_02_heading_retention_gray.png,,local_only,170607,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/preview/Q3_03_OiSAM_reinitialized_heading.png,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/preview/Q3_03_OiSAM_reinitialized_heading.png,git,484840,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/preview/Q3_03_OiSAM_reinitialized_heading_gray.png,,local_only,208365,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/preview/Q3_04_all_degradation_pairs.png,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/preview/Q3_04_all_degradation_pairs.png,git,193776,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/preview/Q3_04_all_degradation_pairs_gray.png,,local_only,81450,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/preview/Q3_05_FGO_position.png,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/preview/Q3_05_FGO_position.png,git,523406,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/preview/Q3_05_FGO_position_gray.png,,local_only,239228,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/preview/Q3_oisam_precision_continuity.png,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/preview/Q3_oisam_precision_continuity.png,git,451739,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/preview/Q3_oisam_precision_continuity_gray.png,,local_only,192517,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/DELIVERY_CHECKS.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/DELIVERY_CHECKS.json,git,1302,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_01_IEKF_natural.alignment.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_01_IEKF_natural.alignment.json,git,3091,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_01_IEKF_natural.collisions.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_01_IEKF_natural.collisions.json,git,2251,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_01_IEKF_natural.collisions.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_01_IEKF_natural.collisions.log,git,936,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_01_IEKF_natural.pdf_text.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_01_IEKF_natural.pdf_text.log,git,270,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_02_heading_retention.alignment.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_02_heading_retention.alignment.json,git,2315,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_02_heading_retention.collisions.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_02_heading_retention.collisions.json,git,567,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_02_heading_retention.collisions.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_02_heading_retention.collisions.log,git,377,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_02_heading_retention.pdf_text.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_02_heading_retention.pdf_text.log,git,284,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_03_OiSAM_reinitialized_heading.alignment.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_03_OiSAM_reinitialized_heading.alignment.json,git,3089,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_03_OiSAM_reinitialized_heading.collisions.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_03_OiSAM_reinitialized_heading.collisions.json,git,575,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_03_OiSAM_reinitialized_heading.collisions.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_03_OiSAM_reinitialized_heading.collisions.log,git,386,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_03_OiSAM_reinitialized_heading.pdf_text.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_03_OiSAM_reinitialized_heading.pdf_text.log,git,294,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_04_all_degradation_pairs.alignment.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_04_all_degradation_pairs.alignment.json,git,1345,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_04_all_degradation_pairs.collisions.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_04_all_degradation_pairs.collisions.json,git,570,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_04_all_degradation_pairs.collisions.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_04_all_degradation_pairs.collisions.log,git,380,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_04_all_degradation_pairs.pdf_text.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_04_all_degradation_pairs.pdf_text.log,git,288,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_05_FGO_position.alignment.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_05_FGO_position.alignment.json,git,3094,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_05_FGO_position.collisions.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_05_FGO_position.collisions.json,git,554,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_05_FGO_position.collisions.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_05_FGO_position.collisions.log,git,363,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/Q3_05_FGO_position.pdf_text.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/Q3_05_FGO_position.pdf_text.log,git,270,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/source_validation.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/source_validation.log,git,2107,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/navigation/qa/source_validation.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/navigation/qa/source_validation.py,git,18676,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/review/HISTORICAL_QA_COMPLETION_RECORD.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/review/HISTORICAL_QA_COMPLETION_RECORD.csv,git,1118,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/review/LATER_TRANSFER_RESULTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/review/LATER_TRANSFER_RESULTS.csv,git,3856,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/review/LATER_TRANSFER_RESULTS_AND_USE.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/review/LATER_TRANSFER_RESULTS_AND_USE.md,git,6535,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/review/robot_relative_static_source.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/review/robot_relative_static_source.py,git,10940,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/review/robot_static_audit.txt,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/review/robot_static_audit.txt,git,2016,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/CAPTIONS.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/robot/CAPTIONS.md,git,909,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/Q1_proprioception_absolute_heading.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/robot/Q1_proprioception_absolute_heading.json,git,8745,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/Q1_proprioception_absolute_heading.pdf,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/robot/Q1_proprioception_absolute_heading.pdf,git,784115,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/Q1_proprioception_absolute_heading.png,,local_only,1723034,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/Q1_proprioception_absolute_heading.svg,,local_only,1532676,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/ROBOT_RELATIVE_METRICS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/robot/ROBOT_RELATIVE_METRICS.csv,git,24811,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/ROBOT_RELATIVE_RESULTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/robot/ROBOT_RELATIVE_RESULTS.csv,git,3197,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/S01_robot_relative_motion.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/robot/S01_robot_relative_motion.json,git,5458,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/S01_robot_relative_motion.pdf,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/robot/S01_robot_relative_motion.pdf,git,254565,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/S01_robot_relative_motion.png,,local_only,631607,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/S01_robot_relative_motion.svg,,local_only,449779,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/SECTION_PACKAGE.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/robot/SECTION_PACKAGE.json,git,950,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/SOURCE_PROFILE.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/robot/SOURCE_PROFILE.csv,git,857,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/build_relative_motion.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/robot/build_relative_motion.py,git,6163,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/data/BY2H_LEG-DR_relative_errors.csv.gz,,local_only,160657,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/data/BY2H_OFF-DEF_relative_errors.csv.gz,,local_only,160794,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/data/BY2H_OFF-LIT_relative_errors.csv.gz,,local_only,161524,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/data/BY2O_LEG-DR_relative_errors.csv.gz,,local_only,218657,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/data/BY2O_OFF-DEF_relative_errors.csv.gz,,local_only,220941,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/data/BY2O_OFF-LIT_relative_errors.csv.gz,,local_only,220807,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/data/BY2_LEG-DR_relative_errors.csv.gz,,local_only,161035,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/data/BY2_OFF-DEF_relative_errors.csv.gz,,local_only,161827,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/data/BY2_OFF-LIT_relative_errors.csv.gz,,local_only,162549,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/preview/Q1_proprioception_absolute_heading.png,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/robot/preview/Q1_proprioception_absolute_heading.png,git,759687,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/preview/Q1_proprioception_absolute_heading_gray.png,,local_only,302464,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/preview/S01_robot_relative_motion.png,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/robot/preview/S01_robot_relative_motion.png,git,276198,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/preview/S01_robot_relative_motion_gray.png,,local_only,117886,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/qa/S01_robot_relative_motion.alignment.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/robot/qa/S01_robot_relative_motion.alignment.json,git,3049,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/qa/S01_robot_relative_motion.collisions.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/robot/qa/S01_robot_relative_motion.collisions.json,git,1136,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/qa/S01_robot_relative_motion.collisions.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/robot/qa/S01_robot_relative_motion.collisions.log,git,576,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/robot/qa/S01_robot_relative_motion.pdf_text.log,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/robot/qa/S01_robot_relative_motion.pdf_text.log,git,281,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/五问题图件总览.html,,local_only,29251,"large time series, duplicate raster/vector export, or local gallery"
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/历史研究与暂未使用项.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/历史研究与暂未使用项.md,git,2278,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/完整图件与读法.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/完整图件与读法.md,git,16641,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/选定科学问题_结果正文结构.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/选定科学问题_结果正文结构.md,git,6287,
+G:/LegSA-GINS-project/V3五问题论文组图_20261011/逐图讲解_从坐标轴到科学结论.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/figures/逐图讲解_从坐标轴到科学结论.md,git,13404,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/CLAIM_EVIDENCE_MAP.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/CLAIM_EVIDENCE_MAP.csv,git,2952,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/FOLLOW_UP_RECORDS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/FOLLOW_UP_RECORDS.csv,git,789,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/READING_COVERAGE.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/READING_COVERAGE.csv,git,197452,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/README_已有研究与论文组织.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/README_已有研究与论文组织.md,git,11281,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/REVIEW_SCOPE.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/REVIEW_SCOPE.json,git,597,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/collect_internal_records.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/collect_internal_records.py,git,7045,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/fusion/ACTUAL_RECORD_CHECKS.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/fusion/ACTUAL_RECORD_CHECKS.json,git,30144,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/fusion/BOUNDED_ROBUST_SEARCH.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/fusion/BOUNDED_ROBUST_SEARCH.json,git,3485,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/fusion/BOUNDED_ROBUST_SEARCH_STATS.txt,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/fusion/BOUNDED_ROBUST_SEARCH_STATS.txt,git,1752,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/fusion/EXPERIMENTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/fusion/EXPERIMENTS.csv,git,370819,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/fusion/FUSION_RECORDS.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/fusion/FUSION_RECORDS.md,git,21571,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/fusion/HX03_ACTUAL_RUNS_READ.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/fusion/HX03_ACTUAL_RUNS_READ.json,git,18778,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/fusion/HX03_R2_A2_AND_FAMILY_READ.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/fusion/HX03_R2_A2_AND_FAMILY_READ.csv,git,17663,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/fusion/HX03_R2_EXISTING_PAIRS_READ.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/fusion/HX03_R2_EXISTING_PAIRS_READ.csv,git,84097,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/fusion/LC_NATIVE_TABLE_READ.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/fusion/LC_NATIVE_TABLE_READ.csv,git,22705,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/fusion/SEGMENTED_RUN_RECORDS_READ.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/fusion/SEGMENTED_RUN_RECORDS_READ.json,git,474403,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/fusion/SOURCES_READ.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/fusion/SOURCES_READ.csv,git,55276,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/fusion/STRICT_RUN_RECORDS_READ.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/fusion/STRICT_RUN_RECORDS_READ.json,git,90414,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/fusion/V3_OISAM_EXISTING_COMMON_POINT.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/fusion/V3_OISAM_EXISTING_COMMON_POINT.csv,git,13233,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/fusion/bounded_followup.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/fusion/bounded_followup.py,git,2895,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/fusion/export_existing_commonpoint.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/fusion/export_existing_commonpoint.py,git,3027,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/fusion/inspect_records.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/fusion/inspect_records.py,git,15472,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/heading/EXISTING_HEADING_METRICS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/heading/EXISTING_HEADING_METRICS.csv,git,61008,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/heading/EXPERIMENTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/heading/EXPERIMENTS.csv,git,22149,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/heading/HEADING_RECORDS.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/heading/HEADING_RECORDS.md,git,12104,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/heading/READOUT.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/heading/READOUT.json,git,87935,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/heading/SOURCES_READ.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/heading/SOURCES_READ.csv,git,64172,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/heading/read_existing_records.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/heading/read_existing_records.py,git,13015,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/internal/ADDENDUM_RELEVANT_RESULTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/internal/ADDENDUM_RELEVANT_RESULTS.csv,git,69653,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/internal/CONFIGURATION_CONTRASTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/internal/CONFIGURATION_CONTRASTS.csv,git,6863,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/internal/INTERNAL_RECORDS.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/internal/INTERNAL_RECORDS.md,git,5466,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/internal/METHOD_CONFIGURATION_MAP.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/internal/METHOD_CONFIGURATION_MAP.csv,git,1456,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/internal/NATURAL_ACTIONS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/internal/NATURAL_ACTIONS.csv,git,78276,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/internal/NATURAL_RESULTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/internal/NATURAL_RESULTS.csv,git,22203,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/internal/NATURAL_SOURCE_BINDINGS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/internal/NATURAL_SOURCE_BINDINGS.csv,git,23927,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/internal/RECOVERY_SUMMARY.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/internal/RECOVERY_SUMMARY.json,git,691,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/internal/RUN_COVERAGE.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/internal/RUN_COVERAGE.csv,git,1848,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/internal/SINGLE_MODULE_RESULTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/internal/SINGLE_MODULE_RESULTS.csv,git,8392,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/internal/SOURCES_READ.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/internal/SOURCES_READ.csv,git,26207,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/internal/SOURCE_ROW_CHECKS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/internal/SOURCE_ROW_CHECKS.csv,git,4402,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/make_review_index.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/make_review_index.py,git,5883,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/robot/CURVE_INVENTORY.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/robot/CURVE_INVENTORY.csv,git,29011,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/robot/EXPERIMENTS.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/robot/EXPERIMENTS.csv,git,60971,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/robot/READOUT.json,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/robot/READOUT.json,git,568512,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/robot/ROBOT_RECORDS.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/robot/ROBOT_RECORDS.md,git,15424,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/robot/SOURCES_READ.csv,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/robot/SOURCES_READ.csv,git,44359,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/robot/read_saved_robot_records.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/robot/read_saved_robot_records.py,git,13887,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/横向比较组织.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/横向比较组织.md,git,3879,
+G:/LegSA-GINS-project/V3研究记录梳理_20261011/组图重组方案.md,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/records/组图重组方案.md,git,5588,
+/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/GPSS_V3_FIGURES_20261008/redesign_20261009/paper_style.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/plot_sources/style/paper_style.py,git,4776,plot source dependency snapshot
+/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/GPSS_V3_FIGURES_20261008/redesign_20261009/paper_names.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/plot_sources/style/paper_names.py,git,1272,plot source dependency snapshot
+G:/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/robot/build_robot_heading.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/plot_sources/reused_M1/build_robot_heading.py,git,9243,plot source dependency snapshot
+G:/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/robot/profile_robot.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/plot_sources/reused_M1/profile_robot.py,git,3645,plot source dependency snapshot
+G:/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/plot_precision_continuity.py,docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/plot_sources/reused_M4/plot_precision_continuity.py,git,10645,plot source dependency snapshot

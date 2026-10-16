@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "applicable": true,
+  "auditable": true,
+  "verdict": "PASS",
+  "backend": "python-matplotlib",
+  "summary": {
+    "fail": 0,
+    "warn": 0,
+    "comparisons": 3,
+    "exemptions": 1
+  },
+  "tolerances": {
+    "alignment_pt": 1.5,
+    "gutter_pt": 1.5
+  },
+  "layout": {
+    "schema_version": 1,
+    "backend": "python-matplotlib",
+    "figure": {
+      "width_pt": 493.2283464566929,
+      "height_pt": 581.1023622047244
+    },
+    "panels": [
+      {
+        "id": "a",
+        "bbox_pt": [
+          46.85669291338583,
+          413.6722440944882,
+          194.32397378899066,
+          531.7086614173228
+        ],
+        "grid_id": "matplotlib-grid-1",
+        "row_start": 0,
+        "row_stop": 1,
+        "col_start": 0,
+        "col_stop": 1
+      },
+      {
+        "id": "b",
+        "bbox_pt": [
+          272.00236399021543,
+          472.2547994570587,
+          485.8299212598425,
+          531.7086614173228
+        ],
+        "grid_id": "matplotlib-grid-2",
+        "row_start": 0,
+        "row_stop": 1,
+        "col_start": 0,
+        "col_stop": 1
+      },
+      {
+        "id": "c",
+        "bbox_pt": [
+          272.00236399021543,
+          413.6722440944882,
+          485.8299212598425,
+          454.67490751536
+        ],
+        "grid_id": "matplotlib-grid-2",
+        "row_start": 1,
+        "row_stop": 2,
+        "col_start": 0,
+        "col_stop": 1
+      },
+      {
+        "id": "d",
+        "bbox_pt": [
+          46.85669291338583,
+          227.17470472440948,
+          194.32397378899066,
+          345.2111220472441
+        ],
+        "grid_id": "matplotlib-grid-1",
+        "row_start": 1,
+        "row_stop": 2,
+        "col_start": 0,
+        "col_stop": 1
+      },
+      {
+        "id": "e",
+        "bbox_pt": [
+          272.00236399021543,
+          285.75726008698007,
+          485.8299212598425,
+          345.2111220472441
+        ],
+        "grid_id": "matplotlib-grid-3",
+        "row_start": 0,
+        "row_stop": 1,
+        "col_start": 0,
+        "col_stop": 1
+      },
+      {
+        "id": "f",
+        "bbox_pt": [
+          272.00236399021543,
+          227.17470472440948,
+          485.8299212598425,
+          268.17736814528126
+        ],
+        "grid_id": "matplotlib-grid-3",
+        "row_start": 1,
+        "row_stop": 2,
+        "col_start": 0,
+        "col_stop": 1
+      },
+      {
+        "id": "g",
+        "bbox_pt": [
+          46.85669291338583,
+          40.67716535433075,
+          194.32397378899066,
+          158.7135826771654
+        ],
+        "grid_id": "matplotlib-grid-1",
+        "row_start": 2,
+        "row_stop": 3,
+        "col_start": 0,
+        "col_stop": 1
+      },
+      {
+        "id": "h",
+        "bbox_pt": [
+          272.00236399021543,
+          99.25972071690131,
+          485.8299212598425,
+          158.7135826771654
+        ],
+        "grid_id": "matplotlib-grid-4",
+        "row_start": 0,
+        "row_stop": 1,
+        "col_start": 0,
+        "col_stop": 1
+      },
+      {
+        "id": "i",
+        "bbox_pt": [
+          272.00236399021543,
+          40.67716535433076,
+          485.8299212598425,
+          81.67982877520254
+        ],
+        "grid_id": "matplotlib-grid-4",
+        "row_start": 1,
+        "row_stop": 2,
+        "col_start": 0,
+        "col_stop": 1
+      }
+    ],
+    "row_groups": [],
+    "column_groups": [
+      {
+        "id": "column-1",
+        "panels": [
+          "a",
+          "d",
+          "g"
+        ]
+      },
+      {
+        "id": "column-2",
+        "panels": [
+          "b",
+          "e",
+          "h"
+        ]
+      },
+      {
+        "id": "column-3",
+        "panels": [
+          "c",
+          "f",
+          "i"
+        ]
+      }
+    ],
+    "boundary_groups": [],
+    "exemptions": [
+      {
+        "panels": [
+          "a",
+          "d",
+          "g"
+        ],
+        "checks": [
+          "panel-width"
+        ],
+        "reason": "Spatial route spans both error rows; equal metric scale maintained; compare route column separately from wider time-series column."
+      }
+    ]
+  },
+  "findings": []
+}

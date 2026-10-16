@@ -1,0 +1,15 @@
+{
+  "main_figures": 10,
+  "revised_pdf_pages": 3,
+  "full_pdf_pages": 10,
+  "broken_local_gallery_links": [],
+  "retained_files_identical": true,
+  "retained_files": 35,
+  "reviewed_final_images": [
+    3,
+    4,
+    8
+  ],
+  "figure8_delta_rmse_label": true,
+  "native_solver_provider_evaluator_calls": 0
+}

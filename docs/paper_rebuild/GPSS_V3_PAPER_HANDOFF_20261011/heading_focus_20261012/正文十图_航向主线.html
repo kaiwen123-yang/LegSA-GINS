@@ -1,0 +1,149 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V3 航向主线 · 最新十图</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#f3f5f7;color:#18232d;font:16px/1.85 system-ui,"Microsoft YaHei",sans-serif}header,main{max-width:1250px;margin:auto;padding:26px 36px}header{padding-top:45px}h1{font-size:30px;line-height:1.45;margin:0 0 14px}p{margin:12px 0}nav{position:sticky;top:0;z-index:2;background:#ffffffef;border-block:1px solid #dce2e8;padding:9px 20px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}nav a{color:#22638a;text-decoration:none;padding:2px 9px}section{background:white;padding:26px 32px;margin:0 0 32px;scroll-margin-top:70px;border:1px solid #dce2e8;border-radius:5px}h2{font-size:24px;line-height:1.5;margin:0 0 12px}.claim{font-size:18px;color:#22638a}.figure{display:block;width:100%;height:auto;cursor:zoom-in;margin:25px 0}.links{font-size:14px;display:flex;gap:22px}.links a{color:#22638a}details{margin-top:20px;border-top:1px solid #e1e5eb;padding-top:14px}summary{cursor:pointer;font-weight:650}.reader{white-space:pre-wrap;font-family:inherit;margin-top:14px}code{font-family:inherit;background:#f1f3f5;padding:1px 4px}dialog{border:0;padding:12px;max-width:98vw;max-height:96vh}dialog img{max-width:90vw;height:auto}dialog button{position:sticky;top:0;float:right;padding:8px 16px;cursor:pointer}dialog::backdrop{background:#101820cc}.note{color:#626b74;font-size:14px}@media(max-width:700px){header,main{padding:18px 12px}section{padding:18px 12px}h1{font-size:25px}h2{font-size:21px}nav{padding:7px}nav a{padding:1px 6px}dialog img{max-width:none;width:1600px}}</style>
+<header><h1>航向精度为主线：本轮完成的十张正文图</h1><p>2026-10-12 · 短基线方向提供绝对朝向，机身观测在可用性与质量条件下形成互补。每张只展示本轮最新版本，点击图片放大，下方展开完整读法。</p><p class="note">定量图使用已完成结果。本轮新增C-LAMBDA/C-WLS成本比筛选；冻结V3与原始结果保持原身份。图2为已完成的image设计稿，最终出版文字/线条矢量化尚待完成。</p></header><nav>
+<a href="#f1">图1</a>
+<a href="#f2">图2</a>
+<a href="#f3">图3</a>
+<a href="#f4">图4</a>
+<a href="#f5">图5</a>
+<a href="#f6">图6</a>
+<a href="#f7">图7</a>
+<a href="#f8">图8</a>
+<a href="#f9">图9</a>
+<a href="#f10">图10</a>
+</nav><main>
+<section id="f1"><h2>图1　紧凑四足平台与短基线安装</h2><p class="claim">照片与名义几何共同定义紧凑平台上的方向来源。</p><img class="figure" src="schematics/preview/F01_platform.png" alt="图1 紧凑四足平台与短基线安装"><div class="links"><a href="schematics/figures/F01_platform.pdf">打开本图PDF</a><a href="schematics/figures/F01_platform.png">打开原尺寸PNG</a></div><details><summary>逐面板解释、结果与下一步</summary><div class="reader"><strong>(a)真实照片，(b)平台插图，(c)几何定义。</strong> (a)完整显示真实采集照片；(b)依实物照片调用image绘制，帮助看清机身与上方装配；(c)用矢量标明p1、p2、b=p2−p1、名义0.35m基线及机体坐标轴。三部分分别交代实物、结构与方向观测来源。
+
+<strong>正文主张：</strong> 紧凑平台上的短基线提供方向信息。照片保留实物证据，插图用于说明，几何图连接方法定义。
+
+<strong>下一步：</strong> 按论文方法统一器件称呼、基线方位到机身航向的安装角约定。抽象坐标原点不表示已测量的IMU位置；不能从照片推断相位中心或杆臂。图1为174×82mm，文字最小8pt，矢量几何与实际照片分开保存。</div></details></section>
+<section id="f2"><h2>图2　方向与机身观测的共同状态融合</h2><p class="claim">方向质量选择与辅助门控作用于真实更新路径。</p><img class="figure" src="schematics/preview/F02_method.png" alt="图2 方向与机身观测的共同状态融合"><div class="links"><a href="schematics/figures/F02_method.pdf">打开本图PDF</a><a href="schematics/figures/F02_method.png">打开原尺寸PNG</a></div><details><summary>逐面板解释、结果与下一步</summary><div class="reader"><strong>沿箭头从左到右读。</strong> MEMS IMU传播共同状态；GNSS位置对在实际支路构造方向并做有效性/新息选择；roll/pitch直接走倾角支路，body velocity经过坐标旋转。观测进入更新前的菱形标明冻结V3的有效GNSS事件调度。更新下方的质量/新息控制协方差，再返回真正使用它的更新步骤。
+
+历史heading+tilt只以虚线连接预处理坐标旋转，没有画成当前估计状态的实时反馈。已纠正一个接线问题：roll/pitch不再进入Frame rotation，而是沿独立倾角箭头直接进入更新门。
+
+<strong>正文主张：</strong> 不同观测校正同一个姿态、位置、速度与零偏状态；方向选择、坐标转换、更新调度各自位于实际作用路径。
+
+<strong>下一步：</strong> 本轮image信息关系与设计已完成。原生1816×866像素的图2已保存PNG及原像素嵌入PDF；174mm下约265ppi，出版排版仍需矢量化文字和线条，不能把PDF封装当作矢量成图。完整箭头解释和英文图注见schematics/README.md。</div></details></section>
+<section id="f3"><h2>图3　沿真实事件看路线与航向误差</h2><p class="claim">把转弯和遮挡中的航向精度与空间过程联系起来。</p><img class="figure" src="navigation/preview/F03_event_routes_and_heading.png" alt="图3 沿真实事件看路线与航向误差"><div class="links"><a href="navigation/F03_event_routes_and_heading.pdf">打开本图PDF</a><a href="navigation/F03_event_routes_and_heading.png">打开原尺寸PNG</a></div><details><summary>逐面板解释、结果与下一步</summary><div class="reader"><strong>先看左列路线，再沿同一行看右列误差。</strong> 三行分别为常规行走、大幅机身运动记录和单侧天线遮挡记录。
+
+- <strong>(a,d,g)</strong>：米尺度的事件路线。灰黑参考与蓝色本文轨迹高度重合时，说明位置差相对运动距离较小；等长箭头表示机身朝向，白圆为事件首点。右下小窗用完整路线定位事件。
+- <strong>(b,e,h)</strong>：同一事件中本文与双位置IEKF两种参数的航向误差。接近零越好；不需要从轨迹细线之间猜测角度差。
+- <strong>(c,f,i)</strong>：同一时间轴的水平位置误差，单位厘米，使姿态表现与位置表现能够对应。
+
+前两行是评价窗80–100s的首个参考确认转弯，净方向变化约87°和83°，位移约23.2m和21.0m。选择只看参考运动，不看哪种方法误差更小。第三行显示173.94–235.95s；其中灰带183.94–225.95s是原登记遮挡，前后各保留10s上下文。
+
+<strong>正文主张：</strong> 航向精度的差别可以放回具体转弯和遮挡过程观察。常规转弯中各方案都有相近波动；这段遮挡中本文较好地保持方向，双位置IEKF出现持续偏移。
+
+<strong>适用范围：</strong> 大幅运动是整条记录的场景名，80–100s只被参考确认是转弯，不能说它有人工确认的特定动作标签。局部路线使用已有参考/本文物理点；外部位置误差沿用原评价定义，不在图上拼造外部空间轨迹。
+
+<strong>下一步：</strong> 重点判断当前转弯、遮挡两类事件是否已足以交代平台特征。图6使用相同窗口，后续应统一在正文中引用这些事件。</div></details></section>
+<section id="f4"><h2>图4　不同绝对朝向与相同相对运动</h2><p class="claim">同一自身观测保留全局方向自由度，需要绝对方向约束。</p><img class="figure" src="observability/preview/F04_absolute_direction_relative_motion.png" alt="图4 不同绝对朝向与相同相对运动"><div class="links"><a href="observability/F04_absolute_direction_relative_motion.pdf">打开本图PDF</a><a href="observability/F04_absolute_direction_relative_motion.png">打开原尺寸PNG</a></div><details><summary>逐面板解释、结果与下一步</summary><div class="reader"><strong>它是一张方向自由度图，不是定位精度图。</strong> 局部xy坐标也不是地理东、北坐标。
+
+- <strong>(a)</strong>：完全相同的IMU和足端接触输入，仅改变已知初始航向，得到七条整体朝向不同的轨迹。0°、±100°突出，其余四条淡灰。起点三根箭头使用真实已知的初始Euler yaw，颜色对应图例。
+- <strong>(b)</strong>：只消除每条运行已知的初始旋转，七条路径重合。没有再拟合角度、尺度、平移或时间。
+- <strong>(c)</strong>：在相同原生时刻比较旋转校正后的三维位置。最大差为约<strong>1.89×10⁻⁷m</strong>，因此(b)看上去只有一条蓝线。这个数是运行之间的等价性残差，不能解释成亚微米定位精度。
+
+<strong>正文主张：</strong> 自身观测能够限定相对运动，却允许多个等价的全局方向；外部方向约束用于确定全局朝向。
+
+<strong>适用范围：</strong> 这是已有可观测性结构在当前数据与实现中的检验，不把它包装成新发现的不可观测性定理。完整秩谱、不同接触窗口和阈值结果仍在配套材料中。
+
+<strong>下一步：</strong> 作者主要确认“a中的不同方向—b中的相同运动—c中的实际重合程度”是否已经直观。若继续减版面，应保留a/b，不再添加重复的维数点图。</div></details></section>
+<section id="f5"><h2>图5　短基线方向处理路线的误差比较</h2><p class="claim">本文方向观测更集中于小误差；新增工程筛选后的原始处理路线仍有限制。</p><img class="figure" src="heading_acceptance/preview/F05_heading_error_comparison.png" alt="图5 短基线方向处理路线的误差比较"><div class="links"><a href="heading_acceptance/F05_heading_error_comparison.pdf">打开本图PDF</a><a href="heading_acceptance/F05_heading_error_comparison.png">打开原尺寸PNG</a></div><details><summary>逐面板解释、结果与下一步</summary><div class="reader"><strong>本图现在先展示误差过程，再用完整记录的误差分布比较。</strong> 蓝线是融合器采用的方向观测，图6才是融合后的机身航向。
+
+- <strong>(a)</strong>：大幅机身运动整条记录中，灰蓝细线是选择前的方向输入，蓝线是原生更新实际采用的方向，橙色方点是预先指定的RTKLIB默认动基线固定输出。完整图保留约205s的大输入异常；右侧单独放大80–100s转弯，与图3、6对应。
+- <strong>(b)</strong>：C-LAMBDA、C-WLS原始估计用淡点保留，绿色圆和紫色叉标出本轮新增成本比筛选留下的历元。筛选没有重新改写航向，只决定是否保留该次输出。
+- <strong>(c–e)</strong>：三条完整记录的绝对航向误差累积分布。横坐标误差越小越好；同一个误差阈值下，曲线越高，表示更多有效输出达到了该精度。主轴展开0–15°，小窗保留完整0–180°尾部。下方的数量说明该曲线背后有多少输出，防止只看精度而忽略稀疏输出。
+
+<strong>先纠正“没做整数接受检验”的含义。</strong> 既有实现已经完成两篇文献的单基线核心求解。原文没有规定本轮增加的<code>ratio≥3</code>在线接受步骤，因此这不是补回漏做的文献步骤。找出本次搜索最好的整数/方向答案，与判断该答案是否足够可信，是两个不同环节。
+
+用户要求进一步做完质量判断后，本轮已完成一套<strong>项目新增成本比筛选</strong>：比较最佳与第二个不同整数答案的成本，阈值先固定为3，再跨三条记录生成全部接受状态，之后才连接已有参考误差。C-WLS先合并重复的整数答案，避免把同一个答案的两个拷贝当作第一、第二名。原有搜索失败继续保持失败。不同方法成本定义不完全相同，所以这个工程阈值也不是相同错误固定概率的标定值。
+
+筛选后的C-LAMBDA/C-WLS在大幅运动记录中的RMSE约从89°降到74.5°/75.0°，遮挡记录从约81°降到54.7°/54.9°；相应保留输出比例降至约19%–20%。常规记录改善很小。这说明它筛掉了一部分历元，但仍接受了部分大误差答案。完整状态为10446个历史历元中2484接受、4988因成本比拒绝、2974原生无效；评价窗统计单独使用1370/1350/1885的固定分母。
+
+<strong>正文主张：</strong> 在本平台的这些记录中，位置产品形成的方向结合原生质量选择提供了更集中于小误差、也更连续的方向观测。原始双天线路线加上明确筛选后仍存在误差和支持上的不足，因此本图为本文采用的方向观测路线提供依据，而非仅仅“证明别人的算法无效”。
+
+<strong>适用范围：</strong> 这些路线来自同批记录，但处理输入、输出接受条件与有效时刻不同。原始基线的水平投影方向和商业融合Euler yaw在较大roll/pitch下也不完全相同；同时间配对结果已经另表保存。不能将本图写成完全相同输入的整数求解器统一竞赛。
+
+<strong>下一步：</strong> 讨论正文最需要保留哪几条方向路线。RTKLIB其余三种配置和全部原始/筛选指标已保存，正文当前使用事先确定的默认配置，没有按结果挑最佳配置。</div></details></section>
+<section id="f6"><h2>图6　持续方向更新的航向收益</h2><p class="claim">持续方向更新贡献自然场景中主要航向收益；倾角对其他姿态分量另有作用。</p><img class="figure" src="aiding/preview/F06_heading_and_tilt.png" alt="图6 持续方向更新的航向收益"><div class="links"><a href="aiding/figures/F06_heading_and_tilt.pdf">打开本图PDF</a><a href="aiding/figures/F06_heading_and_tilt.png">打开原尺寸PNG</a></div><details><summary>逐面板解释、结果与下一步</summary><div class="reader"><strong>这张是自然场景下的核心航向结果。</strong> 蓝色是完整方法，橙色是基础配置加入持续方向，灰色是基础GNSS/INS。
+
+- <strong>(a–c)</strong>：三条记录的全部航向误差。灰、橙共享初始方向，因此它们的区别展示运行期间持续方向更新的作用。
+- <strong>(d–f)</strong>：图3同一事件的放大。前两列80–100s转弯，第三列首段遮挡及恢复。可以直接看出基础配置的偏移，以及加入方向后曲线如何接近零。
+- <strong>(g–i)</strong>：倾角辅助的独立消融。每个roll/pitch分量，紫点为关闭倾角，蓝点为完整方法；横坐标是全窗RMSE，越靠左越好。这一排用于说明其他姿态分量，不再用六幅密集时序与航向争夺版面。
+
+基础→加入方向的航向RMSE分别为<strong>8.090°→1.916°、7.137°→1.941°、5.739°→2.432°</strong>。完整方法与仅加方向的自然航向接近，正说明持续方向更新贡献了主要航向收益。倾角的作用随分量和场景变化，遮挡记录俯仰只改善约0.039°。
+
+<strong>正文主张：</strong> 短基线方向更新显著减小自然记录中的航向偏离；机载倾角观测对roll/pitch另有分量相关的作用。
+
+<strong>适用范围：</strong> 灰—蓝之间还改变了其他辅助，不能全部归因于一个航向开关；真正的方向对照是灰—橙，倾角对照是最后一排的紫—蓝。曲线重叠是已保存结果接近，不是漏画。
+
+<strong>下一步：</strong> 以这张确定航向主结论的表述，并与图5衔接：“观测方向更好”是否真正转化为“融合航向更好”。</div></details></section>
+<section id="f7"><h2>图7　方向保持条件下的平移作用</h2><p class="claim">方向与辅助更新持续时，机身速度显著限制位置漂移。</p><img class="figure" src="aiding/preview/F07_heading_retained_translation.png" alt="图7 方向保持条件下的平移作用"><div class="links"><a href="aiding/figures/F07_heading_retained_translation.pdf">打开本图PDF</a><a href="aiding/figures/F07_heading_retained_translation.png">打开原尺寸PNG</a></div><details><summary>逐面板解释、结果与下一步</summary><div class="reader"><strong>先看顶部状态条，再看曲线。</strong> 三条状态线依次为位置观测、方向观测、机身辅助更新。深色表示持续，浅色表示中断；状态条描述完整方法。
+
+- <strong>左列</strong>：全部GNSS中断，方向不可用，辅助更新也暂停。
+- <strong>右列</strong>：平移观测中断，方向与相关辅助更新持续。
+- <strong>(a,b)</strong>：两种条件中的航向误差。
+- <strong>(c,d)</strong>：同一20s过程中的位置误差。灰色为中断，20s恢复GNSS。误差上升和下降表示漂移积累与观测恢复后的校正，不是机器人实际走了一段“凸起路线”。右侧小窗展开完整方法的米级误差。
+- <strong>(e,f)</strong>：各时长全部九个布置的全窗水平RMSE，细线连接同一个布置。纵轴为对数，不能用高度差当作线性差值。
+
+右列代表例在恢复前，关闭速度辅助的位置误差约88.0m，完整方法约1.38m；该例全窗RMSE则约10.50m与0.20m。20s全部九个布置的全窗中位数约7.961m与0.241m。它们分别是瞬时末端、单例全窗和多例中位数，含义不同。
+
+<strong>正文主张：</strong> 在方向和有效辅助更新持续的条件下，机身速度显著限制平移漂移；这是航向与机身运动互补作用的空间结果。
+
+<strong>适用范围：</strong> 左右列同时改变方向可用性与辅助调度；当前机身速度构造还继承历史方向旋转关系。因此本图展示现有实现的运行条件，不单独分离纯方向开关的因果效应。
+
+<strong>下一步：</strong> 看作者是否能只凭状态条和恢复线读懂两种条件。正文将重点解释右列，并用左列说明该互补不能随意外推到全部GNSS丢失。</div></details></section>
+<section id="f8"><h2>图8　质量变化下的航向保持与位置代价</h2><p class="claim">来源质量处理可保护航向，但并非所有状态同时改善。</p><img class="figure" src="aiding/preview/F08_heading_quality_scaling.png" alt="图8 质量变化下的航向保持与位置代价"><div class="links"><a href="aiding/figures/F08_heading_quality_scaling.pdf">打开本图PDF</a><a href="aiding/figures/F08_heading_quality_scaling.png">打开原尺寸PNG</a></div><details><summary>逐面板解释、结果与下一步</summary><div class="reader"><strong>先看(a)的航向，再沿同一时间看(b)的来源调整。</strong> 本图保留一个具体过程和一项完整集合统计。
+
+- <strong>(a)</strong>：整条位置输入加入水平σ=3m、垂直σ=5m噪声的既有代表例。关闭来源加权与完整方法的航向RMSE为<strong>29.80°与2.70°</strong>。
+- <strong>(b)</strong>：同次运行实际保存的位置、方向、机身速度协方差倍率。倍率越大，表示相对降低该来源信任。它与(a)共时间轴，便于查看何时采用怎样的处理。
+- <strong>(c)</strong>：同一案例的位置代价：水平RMSE约<strong>3.17m→3.56m</strong>。航向改善明显，但位置并未同时变好。
+- <strong>(d)</strong>：全部513个双方均完成案例的航向RMSE降低量分布。横轴为“关闭加权−完整”，正值有利于完整方法；零附近±0.02°线性，其余采用有符号对数尺度。
+
+<strong>正文主张：</strong> 来源质量处理可以在位置观测受扰时保护航向，但收益不会对所有状态和所有案例同时发生。
+
+<strong>适用范围：</strong> 实际倍率与误差同轴便于解释，不能仅凭两条曲线形状断言唯一因果机制。513对不包含新增完成的六例；完整分母仍为541，关闭加权513完成/19发散/9无初始方向，完整方法519/13/9。
+
+<strong>下一步：</strong> 重点确认(a,b)是否已经清楚说明来源质量变化与航向表现，正文只用一两句话保留位置代价与总体配对结果。</div></details></section>
+<section id="f9"><h2>图9　滤波与因子图方法的航向比较</h2><p class="claim">航向优势随输入和场景变化，保留标定双位置IEKF的反例。</p><img class="figure" src="navigation/preview/F09_heading_comparison.png" alt="图9 滤波与因子图方法的航向比较"><div class="links"><a href="navigation/F09_heading_comparison.pdf">打开本图PDF</a><a href="navigation/F09_heading_comparison.png">打开原尺寸PNG</a></div><details><summary>逐面板解释、结果与下一步</summary><div class="reader"><strong>同一场景左边看航向随时间怎样变化，右边看整段误差分布。</strong> 颜色始终对应同一方法，文献/标定参数用不同线型。
+
+- <strong>(a,c,e)</strong>：三条自然记录中，本文、双位置IEKF文献/标定、单位置IEKF文献/标定、重新初始化OiSAM的航向误差。灰带为已登记遮挡，动态输出缺失处断线。
+- <strong>(b,d,f)</strong>：同一批共同历元的绝对航向误差分布。越靠左上表示小误差时刻占比越高。大幅运动面板附0–10°细节，完整尾部仍在主轴中。
+- <strong>(g)</strong>：首个登记20s位置中断的航向过程。金色点划线为保留基线IEKF，20s恢复位置。
+- <strong>(h)</strong>：全部18个中断条件的全窗航向RMSE；每点是一例，黑短线是中位数。它与上三行自然条件分开解释。
+
+自然场景所有方法使用相同名义动态时刻，共<strong>274/267/367</strong>点；既有误差按距名义秒≤5ms匹配，不插值。这是同图所需的1Hz共同支持统计，原全频率评价继续保留。
+
+| 方法 | 常规行走 | 大幅机身运动 | 天线遮挡 |
+|---|---:|---:|---:|
+| 本文 | 1.778° | 1.797° | 2.323° |
+| 双位置IEKF，文献 | 2.905° | 2.027° | 2.421° |
+| 双位置IEKF，标定 | <strong>1.469°</strong> | <strong>1.789°</strong> | 3.902° |
+| 单位置IEKF，文献 | 11.912° | 20.027° | 5.748° |
+| 单位置IEKF，标定 | 10.161° | 7.545° | 8.175° |
+| OiSAM，按记录缺口恢复 | 4.659° | 2.535° | 3.984° |
+
+<strong>正文主张：</strong> 本文相对单位置方法及当前OiSAM设置有明显航向优势，遮挡时相对双位置标定方案也更稳；<strong>常规场景标定双位置IEKF更好，大幅运动中两者近似</strong>。论文不能写成所有场景全面优胜。
+
+<strong>适用范围：</strong> 大幅运动的双位置方法几何审查例外和不同初始化结果仍在完整表。GINav只有2个有效支持点的场景不足以形成可靠全窗航向曲线；其余速度门限失败也留表。原始码TC/GNC-FGO没有适合当前共同航向比较的自估计姿态输出，因此回到定位补充。全部已执行解级方法都有去向，正文不再混合不同物理点的位置排名。
+
+<strong>下一步：</strong> 将系统比较结论写成按场景成立的航向收益，并在方法比较表中用简短列说明每个方法的方向、位置和辅助输入。</div></details></section>
+<section id="f10"><h2>图10　航向质量条件与跨源冲突边界</h2><p class="claim">已测方向扰动范围内收益保持，跨源冲突仍有两个重点精度边界。</p><img class="figure" src="aiding/preview/F10_heading_sensitivity.png" alt="图10 航向质量条件与跨源冲突边界"><div class="links"><a href="aiding/figures/F10_heading_sensitivity.pdf">打开本图PDF</a><a href="aiding/figures/F10_heading_sensitivity.png">打开原尺寸PNG</a></div><details><summary>逐面板解释、结果与下一步</summary><div class="reader"><strong>上排看方向可用性和质量变化，下排看跨来源冲突。</strong> 这些来自实测记录上的既有受控观测扰动，不是九次独立重新采集的实地实验。
+
+- <strong>(a)</strong>：方向中断0、5、20s时的全窗航向RMSE。每个非零条件保留全部九个登记布置。
+- <strong>(b)</strong>：方向噪声参数σ=0、1、5°。点是单次实现，线连接该强度的中位数。
+- <strong>(c)</strong>：±10°方向尖峰概率0、5%、10%。零条件只有一条真实干净运行，没有复制成九次。
+- <strong>(d)</strong>：位置/速度来源冲突的第一条保留航向时序。该族仅此变体按历史协议保留双方时序，因此用它展示过程，再由(e)展示全部变体。
+- <strong>(e)</strong>：全部九个冲突变体的原始航向RMSE。蓝点完整，空紫点关闭来源加权，细线配对相同变体。第三、第五例完整方法仍有<strong>55.8°、69.3°</strong>误差，这两个是正文重点展示的精度边界。第五例关闭加权真实发散，因此没有伪造一个数值点。
+
+上排中基础GNSS/INS约8°且近乎不变，是因为它不采用持续方向观测；其输入没有暴露于这些方向扰动。橙、蓝约2°且接近，说明在已测强度范围内，持续方向约束的主要收益仍在；5°噪声使误差和分散程度有所增加。不能由这些点外推无限大的噪声或任意长中断。
+
+<strong>正文主张：</strong> 持续方向更新的航向收益在已执行的可用性和质量变化范围内保持；跨来源冲突仍可能导致严重航向错误。
+
+<strong>适用范围：</strong> 方向扰动沿用原始1s单元的实现，并非新增独立5Hz噪声。中位线不是置信区间。下排完整9/9完成、关闭加权8/9完成，所有九例都在，<strong>只突出两例边界，没有从统计分母中删除其他失败或大误差</strong>。
+
+完整受控证据继续保留：5951行核心结果、2164条四项单开关配对、全部未完成及61类×11配置的状态与航向表。实际改变RP、HV的条件分别整理；输入没有变化的对照单列，避免把它们当成抗扰证据。正文不再把全部异质条件压成一张难读的热图。
+
+<strong>下一步：</strong> 讨论这两个精度边界是否足以说明当前方法失效的性质。后续结论使用“在所测强度范围内保持收益、在部分跨源冲突中仍失效”，不从两例推导新的精确失效阈值。
+</div></details></section>
+<p class="note">全部记录与数据入口：FIGURE_READERS_ZH.md、MAIN_FIGURE_CATALOG.csv及各子目录说明。完整失败与非正文方法保存于源表，不因正文选图而删除。</p></main><dialog id="zoom"><button onclick="document.getElementById('zoom').close()">关闭 ×</button><img alt="放大图"></dialog><script>document.querySelectorAll('.figure').forEach(x=>x.addEventListener('click',()=>{let d=document.getElementById('zoom');d.querySelector('img').src=x.src;d.querySelector('img').alt=x.alt;d.showModal()}));document.getElementById('zoom').addEventListener('click',e=>{if(e.target.tagName==='DIALOG')e.currentTarget.close()});</script></html>

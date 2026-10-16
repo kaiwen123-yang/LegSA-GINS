@@ -1,0 +1,11 @@
+{
+  "registered_types_read": 61,
+  "core_rows_read": 5951,
+  "full_weight_logs_read": 60,
+  "full_log_rows_read": 454036,
+  "complete_paired_seed00_series": 58,
+  "selection_not_based_on_max_gain": "All fixed seed00 rows read before choosing physical mechanisms; excluded no-active-path controls and duplicate conditions remain listed.",
+  "solver_calls": 0,
+  "provider_calls": 0,
+  "evaluator_calls": 0
+}

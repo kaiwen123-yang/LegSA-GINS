@@ -1,0 +1,7 @@
+source_id,n,min_scale,max_scale,source_cap
+dual_antenna_yaw,1346,1.0,1.0932115138,10.0
+go2_attitude_roll_pitch,1369,1.5,6.0146888015,10.0
+go2_horizontal_velocity,1369,2.0,10.0,10.0
+raw_doppler_velocity,1108,1.0,15.0,15.0
+receiver_position,1369,1.0,5.0,5.0
+receiver_velocity,1369,1.0,8.0,8.0

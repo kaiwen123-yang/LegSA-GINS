@@ -1,0 +1,57 @@
+{
+  "id": "navigation_R2_20261012",
+  "figures": [
+    {
+      "id": "F03_event_routes_and_heading",
+      "width_mm": 174,
+      "height_mm": 204.99999779595268,
+      "preview_pixels": [
+        2740,
+        3228
+      ],
+      "minimum_font_pt": 8,
+      "color": true,
+      "all_curve_points_retained": true,
+      "audits": {
+        "alignment": "PASS",
+        "collisions": "PASS"
+      },
+      "text_audit_returncode": 0,
+      "visual_review": "PASS: full color and grayscale previews inspected; longer route windows, reduced arrows, added same-point FGO summary; inset tick collision repaired.",
+      "files": {
+        "png": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/navigation/F03_event_routes_and_heading.png",
+        "pdf": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/navigation/F03_event_routes_and_heading.pdf",
+        "svg": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/navigation/F03_event_routes_and_heading.svg",
+        "tiff": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/navigation/F03_event_routes_and_heading.tiff"
+      }
+    },
+    {
+      "id": "F09_heading_comparison",
+      "width_mm": 174,
+      "height_mm": 233.99999338785807,
+      "preview_pixels": [
+        2740,
+        3685
+      ],
+      "minimum_font_pt": 8,
+      "color": true,
+      "all_curve_points_retained": true,
+      "audits": {
+        "alignment": "PASS",
+        "collisions": "PASS"
+      },
+      "text_audit_returncode": 0,
+      "visual_review": "PASS: full color and grayscale previews inspected; longer route windows, reduced arrows, added same-point FGO summary; inset tick collision repaired.",
+      "files": {
+        "png": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/navigation/F09_heading_comparison.png",
+        "pdf": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/navigation/F09_heading_comparison.pdf",
+        "svg": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/navigation/F09_heading_comparison.svg",
+        "tiff": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R2/navigation/F09_heading_comparison.tiff"
+      }
+    }
+  ],
+  "readme": "README.md",
+  "captions": "CAPTIONS_ZH_EN.md",
+  "table_directory": "data",
+  "new_solver_evaluator_provider_calls": 0
+}

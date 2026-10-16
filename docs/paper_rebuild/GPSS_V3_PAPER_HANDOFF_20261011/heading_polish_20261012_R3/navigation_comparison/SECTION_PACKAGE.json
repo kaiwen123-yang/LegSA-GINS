@@ -1,0 +1,13 @@
+{
+  "revision": "R3 visual explanation",
+  "figure": "F09_heading_comparison",
+  "preview": "preview/F09_heading_comparison.png",
+  "caption": "CAPTIONS_ZH_EN.md",
+  "reader_guide": "READER_GUIDE_R3.md",
+  "validation": "R3_VALIDATION.json",
+  "change": "Panels a-g retain scientific inputs. Panel h directly labels complete method names, 18 cases per method, dots and median. Previous panel i is a complete GNSS1 position companion table to the new trajectory group.",
+  "position_companion": "METHOD_POSITION_TABLE.md",
+  "position_companion_csv": "METHOD_POSITION_TABLE.csv",
+  "scientific_rerun": false,
+  "git_handled_by_root": true
+}

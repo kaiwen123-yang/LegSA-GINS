@@ -1,0 +1,11 @@
+{
+  "revision": "R3 visual explanation",
+  "figure": "F05_heading_error_comparison",
+  "preview": "preview/F05_heading_error_comparison.png",
+  "caption": "CAPTIONS_ZH_EN.md",
+  "reader_guide": "READER_GUIDE_R3.md",
+  "validation": "R3_VALIDATION.json",
+  "change": "Only panel b replaces the overlapping time scatter with separated method-wise original/screened absolute-error distributions and output counts. Panels a and c-e retain their input data and ranges.",
+  "scientific_rerun": false,
+  "git_handled_by_root": true
+}

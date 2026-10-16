@@ -1,0 +1,15 @@
+{
+  "F08_heading_quality_scaling": {
+    "claim": "来源加权对位置、方向和机身速度三种退化产生不同响应：大幅航向保护、小幅收益以及航向近中性，属于条件性稳健效果。",
+    "panels_zh": [
+      "a–c：位置噪声H/V σ3/5m，原输入变化明显超过原自报不确定度；位置和机身速度协方差调整较强，方向大致保留。原整窗yaw RMSE29.7985→2.6986度，H3.16555→3.55690m。",
+      "d–f：方向σ10度噪声和原登记的乐观std，实际记录的方向倍率在部分更新增大；yaw1.7308→1.6314度，H0.09707→0.09884m，小收益与代价均保留。",
+      "g–i：机身速度σ1m/s噪声，机身速度倍率出现更大范围；yaw1.886240→1.885432度，差约−0.0008度，近中性；H0.108699→0.100066m。"
+    ],
+    "selection": "After all61 registered types and60 actual seed00 logs were screened, choose fixed first registered representatives for distinct position/heading/body-velocity mechanisms. No maximum-win or new seed selection.",
+    "display_summary": "Left and right columns use fixed1s medians with min–max bands, each native sample counted and extrema preserved. The bands are within-time ranges, not confidence intervals across realizations.",
+    "data_roles": "Input change is a comparison to existing clean input, not truth error or innovation. Covariance summaries are recorded update statistics, not inverse Kalman gains. Original native heading RMSE is unchanged.",
+    "main_metrics_csv": "tables/THREE_CASE_MAIN_METRICS.csv",
+    "scope": "All curves first120s; all RMSE annotations original full274s. Complete27 selected variants and541 global weighting pairs preserved."
+  }
+}

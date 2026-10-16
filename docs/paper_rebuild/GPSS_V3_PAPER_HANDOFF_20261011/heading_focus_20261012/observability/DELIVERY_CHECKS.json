@@ -1,0 +1,23 @@
+{
+  "status": "READY_FOR_AUTHOR_REVIEW",
+  "figure": {
+    "id": "F04_absolute_direction_relative_motion",
+    "width_mm": 173.99999508327906,
+    "height_mm": 125.99999643961587,
+    "png_pixels": [
+      4110,
+      2976
+    ],
+    "formats": [
+      "png",
+      "pdf",
+      "svg",
+      "tiff"
+    ],
+    "text_audit": 0,
+    "collision_audit": 0,
+    "visual_review": "PASS: color and grayscale viewed; glyphs, arrow-label overlap, transformation-arrow crossing and residual annotation fixed; same metric scales verified.",
+    "source_native_rows": 442939,
+    "new_solver_evaluator_provider_calls": 0
+  }
+}

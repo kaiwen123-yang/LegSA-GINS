@@ -1,0 +1,3 @@
+Relative-motion errors from contact-aided state estimation. Each column corresponds to one trial; the upper and lower rows show horizontal and heading errors after a single translation and yaw alignment over the first 10 s of the evaluation window. The official contact-aided InEKF is shown with literature and example noise settings. Kinematic integration uses contact-foot velocity and onboard attitude. The inset enlarges the first 40 s of nominal walking. All curves retain the completed evaluation times.
+
+接触辅助状态估计的相对运动误差。各列分别对应一种工况；在评价窗开始的10 s内进行一次平移与航向对齐后，上、下排分别为水平和航向误差。官方接触辅助InEKF分别采用文献与示例噪声设置；接触运动学积分使用接触足速度和机载姿态。小窗放大常规行走的前40 s。曲线采用已完成评价的原时刻。

@@ -1,0 +1,70 @@
+{
+  "id": "Q1_proprioception_absolute_heading",
+  "caption_en": "Absolute heading freedom under proprioceptive sensing. (a) Seven stored runs of the same IMU and foot-contact data, initialized at yaw angles from −150° to +150°, give rotated trajectories in an arbitrary local frame. The 0° and ±100° runs are highlighted; dots denote the common start and individual endpoints. (b) Their unwrapped yaw histories retain the initial offsets. The inset shows yaw increments over an input-selected 0.216 s two-contact interval; all seven curves overlap. (c) The saved observability spectra of the bias-augmented model for five preselected contact intervals, each divided by its own largest singular value and ordered from smallest to largest. Two four-contact and three two-contact windows contain 27 and 21 state dimensions, respectively. The first four singular directions fall below the relative rank threshold (dashed line, 10⁻⁹), consistently with three global translations and one global yaw degree of freedom. Different markers denote different windows. Removing only each run’s initial rotation gives a maximum position discrepancy of 1.90 × 10⁻⁷ m. The experiment demonstrates equivalent global orientations under the same proprioceptive observations.",
+  "caption_zh": "机器人自身观测下的绝对航向自由度。（a）同一组 IMU 与足端接触数据的七次已保存运行，初始航向覆盖 −150° 至 +150°，在任意局部坐标系中形成相互旋转的轨迹。彩色突出 0° 与 ±100°，圆点表示共同起点与各轨迹终点。（b）展开后的航向演化保留初始方向差异；插图为预先根据输入选定的 0.216 s 双接触窗口内航向增量，七条曲线重合。（c）含偏置模型在五个预选接触窗口的已保存可观测性奇异值，分别除以各自最大奇异值，并按从小到大排序。两段四接触与三段双接触窗口分别对应 27 维和 21 维状态；前四个方向均低于相对秩阈值（虚线，10⁻⁹），对应三维全局平移与一维全局航向自由度。不同标记表示不同窗口。仅消除各运行初始旋转后，最大位置差为 1.90 × 10⁻⁷ m。该组实验验证同一自身观测下全局方向的等价性。",
+  "meaning_zh": "读图顺序：左图说明同样自身观测可以对应多个全局方向；右上说明初始方向差异在时间中保留，而局部航向变化相同；右下给出这一现象的结构来源。它支持论文对外部绝对方向约束的需求。",
+  "sources": [
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/07_LSE01_HARTLEY_CONTACT_INEKF/08_BY2_NATIVE/01_PRIMARY_GO2_ALLAN_EQ61_FK10MM/NAV.csv",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/07_LSE01_HARTLEY_CONTACT_INEKF/09_GAUGE_ENSEMBLE/01_YAW_M150/NAV.csv",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/07_LSE01_HARTLEY_CONTACT_INEKF/09_GAUGE_ENSEMBLE/02_YAW_M100/NAV.csv",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/07_LSE01_HARTLEY_CONTACT_INEKF/09_GAUGE_ENSEMBLE/03_YAW_M050/NAV.csv",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/07_LSE01_HARTLEY_CONTACT_INEKF/09_GAUGE_ENSEMBLE/05_YAW_P050/NAV.csv",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/07_LSE01_HARTLEY_CONTACT_INEKF/09_GAUGE_ENSEMBLE/06_YAW_P100/NAV.csv",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/07_LSE01_HARTLEY_CONTACT_INEKF/09_GAUGE_ENSEMBLE/07_YAW_P150/NAV.csv",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/07_LSE01_HARTLEY_CONTACT_INEKF/10_OBSERVABILITY_R1/01_IDEAL_BIAS_FREE/OBSERVABILITY_SINGULAR_VALUES_R1.csv",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/07_LSE01_HARTLEY_CONTACT_INEKF/10_OBSERVABILITY_R1/01_IDEAL_BIAS_FREE/OBSERVABILITY_RANK_SENSITIVITY_R1.csv",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/07_LSE01_HARTLEY_CONTACT_INEKF/10_OBSERVABILITY_R1/00_WINDOW_REUSE/H6_OBSERVABILITY_WINDOW_SELECTION.csv",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/07_LSE01_HARTLEY_CONTACT_INEKF/09_GAUGE_ENSEMBLE_R1_FULL_PRECISION_CONTACT/09_EQUIVALENCE/H6R_GAUGE_EQUIVALENCE_SUMMARY.csv",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/07_LSE01_HARTLEY_CONTACT_INEKF/10_OBSERVABILITY_R1/01_IDEAL_BIAS_FREE/OBSERVABILITY_NULLSPACE_SUMMARY_R1.json"
+  ],
+  "technical_notes": {
+    "claim": "The IMU/contact system constrains relative motion but has a global yaw gauge freedom.",
+    "native_points": 442939,
+    "all_native_rows_plotted": true,
+    "absolute_yaw_definition": "degrees(unwrap(atan2(R10,R00))); conventional local Euler yaw, opposite the archived angle around the downward gravity vector.",
+    "trajectory_frame": "arbitrary local x/y; not geodetic East/North",
+    "inset_definition": "psi(t)-psi(t_window_start), input-selected highest-excitation two-contact interval WIN003",
+    "inset_original_rows": [
+      57423,
+      57465
+    ],
+    "inset_elapsed_s": [
+      277.311960222,
+      277.527954458
+    ],
+    "spectrum": "all singular values of the stored bias-augmented raw structural model; per-window largest-value normalization; ascending rank does not denote matching physical modes across dimensions",
+    "other_read_spectra": "bias-free and column-normalized diagnostic spectra fully read in profile, not drawn to avoid repeating the same structural claim",
+    "native_relative_yaw_difference_max_deg": 1.273122052225517e-07,
+    "solver_evaluator_provider_calls": [
+      0,
+      0,
+      0
+    ],
+    "reused_reviewed_figure": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/robot/R01_proprioception_absolute_heading.json",
+    "this_goal_redrawn": false,
+    "source_plot_script": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/robot/build_robot_heading.py"
+  },
+  "width_mm": 174.0,
+  "height_mm": 130.0,
+  "alignment_status": "PASS",
+  "audit_returncodes": {
+    "pdf_text": 0,
+    "collisions": 0
+  },
+  "visual_review": "PASS",
+  "visual_review_notes": {
+    "a": "Seven real saved native trajectories are all shown. Initial-yaw legend uses distinct line styles, with blue zero-yaw anchor. World axes are arbitrary, equal metric scale; no reference trajectory or accuracy claim.",
+    "b": "Seven native unwrapped yaw histories show the initial offsets. Inset shows all 43 samples in a preselected input window, each subtracting its own window-start yaw. Curves overlap at plotting resolution. Insets do not cover main curves.",
+    "c": "All 117 singular values of the bias-augmented raw structural model are displayed across five windows. Relative threshold, four smallest directions and different state dimensions are explicit. Blue/orange families also use distinct marker families in grayscale.",
+    "grayscale": "Actually viewed the grayscale preview. Pattern and marker redundancy remain legible; seven yaw traces are distinguished by their offsets and line styles.",
+    "collision_warning": "The sole text-image-edge warning concerns inset tick 4 against the rectangular bounding box of a rasterized parent-curve layer. Actual curves are absent behind this tick; confirmed in color/grayscale previews. No text-text or text-stroke failure.",
+    "source_validator": "Validated the concatenation of the actual local export helper and builder because static validator cannot resolve imported helper calls. 0 FAIL. WARN: PNG chosen per request rather than TIFF; literal 174/25.4 misparsed by width heuristic (PDF page verified 174 x 130 mm); positivity asserted with np.all(vals>0) before log plotting."
+  },
+  "delivered_sha256": {
+    "R01_proprioception_absolute_heading.png": "019a14a20059ef32291a3851cac60437be616a50e4917b88e1ace162030c362c",
+    "R01_proprioception_absolute_heading.pdf": "4e4055c64c8ac27853b0f86f31e14ebd1498f4abd856a2cf1162e4cff18c061d",
+    "R01_proprioception_absolute_heading.svg": "ba5d5627cd065550624b49bc5ca6e39dda57cdd510d5bd3f8d05ce70f801bba2",
+    "preview/R01_proprioception_absolute_heading.png": "4c59999916e8584d6fc2948872242e0785d7254451e2c57c91fc49c2c810b1bd",
+    "preview/R01_proprioception_absolute_heading_gray.png": "a4da287fe4c3123ec568817f52f1cc2d451f9cdf31f7c930b1ebedab2fd0c7bf"
+  }
+}

@@ -1,0 +1,353 @@
+[
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/heading_acceptance/source_data/ours/BY2_input_heading_figure_match.csv.gz",
+    "rows": 1370,
+    "columns": [
+      "sequence",
+      "receiver_time_s",
+      "elapsed_s",
+      "input_heading_deg",
+      "input_heading_valid",
+      "reference_heading_unwrapped_deg",
+      "reference_supported",
+      "reference_left_time_s",
+      "reference_right_time_s",
+      "reference_bracket_s",
+      "input_error_deg",
+      "yaw_mode",
+      "accepted"
+    ],
+    "sha256": "0a50e79696899799be476b3ab79a0061a18c5cafec3a3606bff2c67c9b43ca03"
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/heading_acceptance/source_data/ours/BY2H_input_heading_figure_match.csv.gz",
+    "rows": 1350,
+    "columns": [
+      "sequence",
+      "receiver_time_s",
+      "elapsed_s",
+      "input_heading_deg",
+      "input_heading_valid",
+      "reference_heading_unwrapped_deg",
+      "reference_supported",
+      "reference_left_time_s",
+      "reference_right_time_s",
+      "reference_bracket_s",
+      "input_error_deg",
+      "yaw_mode",
+      "accepted"
+    ],
+    "sha256": "53d91457a80f4340ba868fed4a14e6f9595d40edf0dcaaf1781812d3bcb174a8"
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/heading_acceptance/source_data/ours/BY2O_input_heading_figure_match.csv.gz",
+    "rows": 1885,
+    "columns": [
+      "sequence",
+      "receiver_time_s",
+      "elapsed_s",
+      "input_heading_deg",
+      "input_heading_valid",
+      "reference_heading_unwrapped_deg",
+      "reference_supported",
+      "reference_left_time_s",
+      "reference_right_time_s",
+      "reference_bracket_s",
+      "input_error_deg",
+      "yaw_mode",
+      "accepted"
+    ],
+    "sha256": "d95fc08f165d0fd94b80d6a99bec5e01f2af6afa1e565e2be964a866f6f9b137"
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/heading_acceptance/source_data/external/BY2_V0_full_saved_heading.csv.gz",
+    "rows": 1370,
+    "columns": [
+      "epoch_index",
+      "t_rel_s",
+      "valid",
+      "reference_supported",
+      "error_valid_deg",
+      "hold_available",
+      "error_hold_deg",
+      "rtklib_q"
+    ],
+    "sha256": "a01f65c44060ccb37d3b8d659cbafdb756225279f146b006043b7fd26ab105cb"
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/heading_acceptance/source_data/external/BY2_V0E_full_saved_heading.csv.gz",
+    "rows": 1370,
+    "columns": [
+      "epoch_index",
+      "t_rel_s",
+      "valid",
+      "reference_supported",
+      "error_valid_deg",
+      "hold_available",
+      "error_hold_deg",
+      "rtklib_q"
+    ],
+    "sha256": "bb44910e654b8410470236a51d4f9a349fbc211206e2437d054ec239f829e868"
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/heading_acceptance/source_data/external/BY2_V1_full_saved_heading.csv.gz",
+    "rows": 1370,
+    "columns": [
+      "epoch_index",
+      "t_rel_s",
+      "valid",
+      "reference_supported",
+      "error_valid_deg",
+      "hold_available",
+      "error_hold_deg",
+      "rtklib_q"
+    ],
+    "sha256": "bd42c6ea5a1b5bbbd7f803ba9ba8358fa90e726fcfed15047d098ebf88517b6f"
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/heading_acceptance/source_data/external/BY2_V2_full_saved_heading.csv.gz",
+    "rows": 1370,
+    "columns": [
+      "epoch_index",
+      "t_rel_s",
+      "valid",
+      "reference_supported",
+      "error_valid_deg",
+      "hold_available",
+      "error_hold_deg",
+      "rtklib_q"
+    ],
+    "sha256": "4487192df2b113d4912a774e9ce74418138f05d46ddb394326284dbe5aa4228b"
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/heading_acceptance/source_data/external/BY2H_V0_full_saved_heading.csv.gz",
+    "rows": 1350,
+    "columns": [
+      "epoch_index",
+      "t_rel_s",
+      "valid",
+      "reference_supported",
+      "error_valid_deg",
+      "hold_available",
+      "error_hold_deg",
+      "rtklib_q"
+    ],
+    "sha256": "9703befc72207ba6453eef96507f06139355784f295261763f5faa6df9b414c0"
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/heading_acceptance/source_data/external/BY2H_V0E_full_saved_heading.csv.gz",
+    "rows": 1350,
+    "columns": [
+      "epoch_index",
+      "t_rel_s",
+      "valid",
+      "reference_supported",
+      "error_valid_deg",
+      "hold_available",
+      "error_hold_deg",
+      "rtklib_q"
+    ],
+    "sha256": "a2a7bd082815a7b2b19610e14a8655a8779a9deff2e9626a01e6676bb6ccb622"
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/heading_acceptance/source_data/external/BY2H_V1_full_saved_heading.csv.gz",
+    "rows": 1350,
+    "columns": [
+      "epoch_index",
+      "t_rel_s",
+      "valid",
+      "reference_supported",
+      "error_valid_deg",
+      "hold_available",
+      "error_hold_deg",
+      "rtklib_q"
+    ],
+    "sha256": "360dd09a1ba02b9d08de26e9460c414216df2da7f938cf436a6bd8d0fdbd137d"
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/heading_acceptance/source_data/external/BY2H_V2_full_saved_heading.csv.gz",
+    "rows": 1350,
+    "columns": [
+      "epoch_index",
+      "t_rel_s",
+      "valid",
+      "reference_supported",
+      "error_valid_deg",
+      "hold_available",
+      "error_hold_deg",
+      "rtklib_q"
+    ],
+    "sha256": "a51530f0600d2de9dd7cd1a070ac4846f8930f9cd3500466c838a1cf3a51d083"
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/heading_acceptance/source_data/external/BY2O_V0_full_saved_heading.csv.gz",
+    "rows": 1885,
+    "columns": [
+      "epoch_index",
+      "t_rel_s",
+      "valid",
+      "reference_supported",
+      "error_valid_deg",
+      "hold_available",
+      "error_hold_deg",
+      "rtklib_q"
+    ],
+    "sha256": "1d55884fb332714ce73c6fd1761190bcc1baf85e66b5e6b1b3adf93308a23cdb"
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/heading_acceptance/source_data/external/BY2O_V0E_full_saved_heading.csv.gz",
+    "rows": 1885,
+    "columns": [
+      "epoch_index",
+      "t_rel_s",
+      "valid",
+      "reference_supported",
+      "error_valid_deg",
+      "hold_available",
+      "error_hold_deg",
+      "rtklib_q"
+    ],
+    "sha256": "fb2e1be8840e53300c3a44a8a0cac3390267bb0d034201a2ba9e6da80f1b08a8"
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/heading_acceptance/source_data/external/BY2O_V1_full_saved_heading.csv.gz",
+    "rows": 1885,
+    "columns": [
+      "epoch_index",
+      "t_rel_s",
+      "valid",
+      "reference_supported",
+      "error_valid_deg",
+      "hold_available",
+      "error_hold_deg",
+      "rtklib_q"
+    ],
+    "sha256": "eee2f2417d9ead6e4cab12edb783e64f9d4607befe58a6b31101686c16e33762"
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/heading_acceptance/source_data/external/BY2O_V2_full_saved_heading.csv.gz",
+    "rows": 1885,
+    "columns": [
+      "epoch_index",
+      "t_rel_s",
+      "valid",
+      "reference_supported",
+      "error_valid_deg",
+      "hold_available",
+      "error_hold_deg",
+      "rtklib_q"
+    ],
+    "sha256": "ae05663af7f0527dfbc392a6be02852252e9fccfbe7c0c9baa1eec75367ad1bc"
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/heading_acceptance/source_data/external/BY2_all_methods_all_window_epochs.csv.gz",
+    "rows": 4110,
+    "columns": [
+      "epoch_index",
+      "time_unix_s",
+      "t_rel_s",
+      "valid",
+      "reference_supported",
+      "error_valid_deg",
+      "hold_available",
+      "hold_source_epoch_index",
+      "error_hold_deg",
+      "method_id",
+      "time_key_us",
+      "native_body_yaw_deg",
+      "solution_state",
+      "failure_code",
+      "held_body_yaw_deg",
+      "hold_source_time_unix_s",
+      "held_age_s",
+      "reference_yaw_ned_deg",
+      "source_heading_epoch_index",
+      "error_ratio_fixed_deg",
+      "baseline_n_m",
+      "baseline_e_m",
+      "baseline_d_m",
+      "baseline_length_m",
+      "float_solved",
+      "search_attempted",
+      "search_complete",
+      "candidate_returned",
+      "acceptance_test_defined",
+      "ratio_fixed"
+    ],
+    "sha256": "c53ba8e30d8db5492038c80bbe9d15de580d10b43627433bba369cf1d0c27c0e"
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/heading_acceptance/source_data/external/BY2H_all_methods_all_window_epochs.csv.gz",
+    "rows": 4050,
+    "columns": [
+      "epoch_index",
+      "time_unix_s",
+      "t_rel_s",
+      "valid",
+      "reference_supported",
+      "error_valid_deg",
+      "hold_available",
+      "hold_source_epoch_index",
+      "error_hold_deg",
+      "method_id",
+      "time_key_us",
+      "native_body_yaw_deg",
+      "solution_state",
+      "failure_code",
+      "held_body_yaw_deg",
+      "hold_source_time_unix_s",
+      "held_age_s",
+      "reference_yaw_ned_deg",
+      "source_heading_epoch_index",
+      "error_ratio_fixed_deg",
+      "baseline_n_m",
+      "baseline_e_m",
+      "baseline_d_m",
+      "baseline_length_m",
+      "float_solved",
+      "search_attempted",
+      "search_complete",
+      "candidate_returned",
+      "acceptance_test_defined",
+      "ratio_fixed"
+    ],
+    "sha256": "1e1ecd1ae6c71dfeb4cab2339a40d0ce81dded2c82904406df300e00747a7de6"
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3正文精修_20261012_R3/heading_acceptance/source_data/external/BY2O_all_methods_all_window_epochs.csv.gz",
+    "rows": 5655,
+    "columns": [
+      "epoch_index",
+      "time_unix_s",
+      "t_rel_s",
+      "valid",
+      "reference_supported",
+      "error_valid_deg",
+      "hold_available",
+      "hold_source_epoch_index",
+      "error_hold_deg",
+      "method_id",
+      "time_key_us",
+      "native_body_yaw_deg",
+      "solution_state",
+      "failure_code",
+      "held_body_yaw_deg",
+      "hold_source_time_unix_s",
+      "held_age_s",
+      "reference_yaw_ned_deg",
+      "source_heading_epoch_index",
+      "error_ratio_fixed_deg",
+      "baseline_n_m",
+      "baseline_e_m",
+      "baseline_d_m",
+      "baseline_length_m",
+      "float_solved",
+      "search_attempted",
+      "search_complete",
+      "candidate_returned",
+      "acceptance_test_defined",
+      "ratio_fixed"
+    ],
+    "sha256": "feb10fb7efb6ac0bd70551b649ee9d6ce2bd98ebdeb3c71e1f18b5a413c97211"
+  }
+]

@@ -1,0 +1,3519 @@
+[
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_F04_saved_errors.csv.gz",
+    "rows": 56642,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "yaw_err_deg",
+      "elapsed_s"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "yaw_err_deg": 0,
+      "elapsed_s": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        66.005054,
+        339.997056
+      ],
+      "err_n_m": [
+        -0.4249584267570179,
+        0.186332785319216
+      ],
+      "err_e_m": [
+        -0.185670490960648,
+        0.5177716405465098
+      ],
+      "err_u_m": [
+        -0.1845114878754685,
+        0.3415064349426196
+      ],
+      "horizontal_err_m": [
+        7.394428791593372e-05,
+        0.5413779544115519
+      ],
+      "position_3d_err_m": [
+        0.0018118752852012,
+        0.5741853624510063
+      ],
+      "yaw_err_deg": [
+        -8.770338719238396,
+        3.838451921265289
+      ],
+      "elapsed_s": [
+        0.0050540000000012,
+        273.997056
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_LC01_saved_errors.csv.gz",
+    "rows": 58014,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "yaw_err_deg",
+      "elapsed_s"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "yaw_err_deg": 0,
+      "elapsed_s": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        66.0,
+        340.0
+      ],
+      "err_n_m": [
+        -0.2172921766393898,
+        0.2163835168982331
+      ],
+      "err_e_m": [
+        -0.1499571647064659,
+        0.5203829157389706
+      ],
+      "err_u_m": [
+        -0.2216564992267748,
+        0.1383888918021636
+      ],
+      "horizontal_err_m": [
+        0.000252323118232,
+        0.5502162403070044
+      ],
+      "position_3d_err_m": [
+        0.0023180644739656,
+        0.5520858972922876
+      ],
+      "yaw_err_deg": [
+        -16.103816698287176,
+        5.588943654298532
+      ],
+      "elapsed_s": [
+        0.0,
+        274.0
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_LC01-S_saved_errors.csv.gz",
+    "rows": 58014,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "yaw_err_deg",
+      "elapsed_s"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "yaw_err_deg": 0,
+      "elapsed_s": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        66.0,
+        340.0
+      ],
+      "err_n_m": [
+        -0.3387323953921779,
+        0.179019952441493
+      ],
+      "err_e_m": [
+        -0.1052464407306956,
+        0.5142444345878943
+      ],
+      "err_u_m": [
+        -0.2124186932188401,
+        0.156329722236876
+      ],
+      "horizontal_err_m": [
+        1.4463952766272082e-05,
+        0.5249727552121382
+      ],
+      "position_3d_err_m": [
+        0.0014158406949739,
+        0.5254092751170354
+      ],
+      "yaw_err_deg": [
+        -8.229043673109345,
+        5.344041306519756
+      ],
+      "elapsed_s": [
+        0.0,
+        274.0
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_F04_saved_errors.csv.gz",
+    "rows": 58580,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "yaw_err_deg",
+      "elapsed_s"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "yaw_err_deg": 0,
+      "elapsed_s": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        413.047045,
+        682.99505
+      ],
+      "err_n_m": [
+        -0.202400457505405,
+        0.2258416215237488
+      ],
+      "err_e_m": [
+        -0.323588238576427,
+        0.2092810028529328
+      ],
+      "err_u_m": [
+        -0.2136340566838845,
+        0.294653816848621
+      ],
+      "horizontal_err_m": [
+        0.0002064544439606,
+        0.3415174128139812
+      ],
+      "position_3d_err_m": [
+        0.0006119576201303,
+        0.3813576142516739
+      ],
+      "yaw_err_deg": [
+        -7.168171200847382,
+        7.92404087961421
+      ],
+      "elapsed_s": [
+        0.0470450000000255,
+        269.99505
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_LC01_saved_errors.csv.gz",
+    "rows": 59934,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "yaw_err_deg",
+      "elapsed_s"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "yaw_err_deg": 0,
+      "elapsed_s": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        413.0,
+        683.0
+      ],
+      "err_n_m": [
+        -0.2417346415772883,
+        0.2358266372959576
+      ],
+      "err_e_m": [
+        -0.3672454959297653,
+        0.2151962562743179
+      ],
+      "err_u_m": [
+        -0.1531705111119649,
+        0.1507899666281638
+      ],
+      "horizontal_err_m": [
+        5.140074048492424e-05,
+        0.3854747068351595
+      ],
+      "position_3d_err_m": [
+        0.0005877967170316,
+        0.3931877897235539
+      ],
+      "yaw_err_deg": [
+        -9.60264187291881,
+        8.207420186591662
+      ],
+      "elapsed_s": [
+        0.0,
+        270.0
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_LC01-S_saved_errors.csv.gz",
+    "rows": 59934,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "yaw_err_deg",
+      "elapsed_s"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "yaw_err_deg": 0,
+      "elapsed_s": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        413.0,
+        683.0
+      ],
+      "err_n_m": [
+        -0.3469117177368019,
+        0.2135382927288986
+      ],
+      "err_e_m": [
+        -0.3009063369043803,
+        0.1986878964448521
+      ],
+      "err_u_m": [
+        -0.1394003167045069,
+        0.1587468890451511
+      ],
+      "horizontal_err_m": [
+        9.560780841684031e-05,
+        0.3471657346800449
+      ],
+      "position_3d_err_m": [
+        0.0013275835725695,
+        0.3479933832571733
+      ],
+      "yaw_err_deg": [
+        -6.566777282845351,
+        8.56523374214487
+      ],
+      "elapsed_s": [
+        0.0,
+        270.0
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_F04_saved_errors.csv.gz",
+    "rows": 76548,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "yaw_err_deg",
+      "elapsed_s"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "yaw_err_deg": 0,
+      "elapsed_s": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        3186.005234,
+        3562.997055
+      ],
+      "err_n_m": [
+        -0.1003347646807526,
+        0.5060107149204924
+      ],
+      "err_e_m": [
+        -0.201675551562019,
+        0.2160139298095771
+      ],
+      "err_u_m": [
+        -0.7456734835583303,
+        0.2755052986523901
+      ],
+      "horizontal_err_m": [
+        0.0001887136149666,
+        0.5299847518923086
+      ],
+      "position_3d_err_m": [
+        0.0017359639612108,
+        0.7461955123382026
+      ],
+      "yaw_err_deg": [
+        -5.079139322884572,
+        13.626087646725525
+      ],
+      "elapsed_s": [
+        0.0052340000002004,
+        376.9970549999998
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_LC01_saved_errors.csv.gz",
+    "rows": 78441,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "yaw_err_deg",
+      "elapsed_s"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "yaw_err_deg": 0,
+      "elapsed_s": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        3186.0,
+        3563.0
+      ],
+      "err_n_m": [
+        -0.1095408022917894,
+        0.508963843864592
+      ],
+      "err_e_m": [
+        -0.2090375103479829,
+        0.2513928794888436
+      ],
+      "err_u_m": [
+        -0.2209838246888686,
+        0.1087103417349286
+      ],
+      "horizontal_err_m": [
+        0.0003770281940102,
+        0.5242028346675499
+      ],
+      "position_3d_err_m": [
+        0.0016793585324309,
+        0.5246661290532526
+      ],
+      "yaw_err_deg": [
+        -8.342754806962233,
+        9.803552612725014
+      ],
+      "elapsed_s": [
+        0.0,
+        377.0
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_LC01-S_saved_errors.csv.gz",
+    "rows": 78441,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "yaw_err_deg",
+      "elapsed_s"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "yaw_err_deg": 0,
+      "elapsed_s": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        3186.0,
+        3563.0
+      ],
+      "err_n_m": [
+        -0.1420460401480241,
+        0.4860372869288198
+      ],
+      "err_e_m": [
+        -0.1481030341799822,
+        0.2581225465593242
+      ],
+      "err_u_m": [
+        -0.2121606919211949,
+        0.1242417077013762
+      ],
+      "horizontal_err_m": [
+        0.000118859913986,
+        0.5037468883424943
+      ],
+      "position_3d_err_m": [
+        0.0019562496036243,
+        0.5063865459162178
+      ],
+      "yaw_err_deg": [
+        -6.04731031383551,
+        14.509133573132884
+      ],
+      "elapsed_s": [
+        0.0,
+        377.0
+      ]
+    }
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/data/BY2_OISAM_primary_saved_errors.csv.gz",
+    "rows": 275,
+    "columns": [
+      "time",
+      "expected_second",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "valid",
+      "prior_only",
+      "native_status",
+      "reference_left_s",
+      "reference_right_s",
+      "reference_bracket_span_s",
+      "block_id",
+      "yaw_err_deg"
+    ],
+    "missing": {
+      "time": 0,
+      "expected_second": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "valid": 0,
+      "prior_only": 0,
+      "native_status": 0,
+      "reference_left_s": 0,
+      "reference_right_s": 0,
+      "reference_bracket_span_s": 0,
+      "block_id": 0,
+      "yaw_err_deg": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        66.0,
+        340.0
+      ],
+      "expected_second": [
+        66.0,
+        340.0
+      ],
+      "err_n_m": [
+        -0.164872733598092,
+        0.1686250385804455
+      ],
+      "err_e_m": [
+        -0.1010680927131678,
+        0.413278338555368
+      ],
+      "err_u_m": [
+        -0.1187991058219574,
+        0.125485787139253
+      ],
+      "horizontal_err_m": [
+        0.0024404428657042,
+        0.4311472985649804
+      ],
+      "position_3d_err_m": [
+        0.0120681356626853,
+        0.4331215348058872
+      ],
+      "valid": [
+        1.0,
+        1.0
+      ],
+      "prior_only": [
+        0.0,
+        0.0
+      ],
+      "reference_left_s": [
+        65.9014241695404,
+        339.9018085002899
+      ],
+      "reference_right_s": [
+        66.00169491767883,
+        340.0023012161255
+      ],
+      "reference_bracket_span_s": [
+        0.0942957401275634,
+        0.1049110889434814
+      ],
+      "block_id": [
+        1.0,
+        1.0
+      ],
+      "yaw_err_deg": [
+        -2.0851099145919534,
+        8.595670618677616
+      ]
+    }
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/data/BY2_WEN_TC_primary_saved_errors.csv.gz",
+    "rows": 274,
+    "columns": [
+      "time",
+      "expected_second",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "valid",
+      "prior_only",
+      "native_status",
+      "reference_left_s",
+      "reference_right_s",
+      "reference_bracket_span_s"
+    ],
+    "missing": {
+      "time": 0,
+      "expected_second": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "valid": 0,
+      "prior_only": 0,
+      "native_status": 0,
+      "reference_left_s": 0,
+      "reference_right_s": 0,
+      "reference_bracket_span_s": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        66.99799990653992,
+        339.9979999065399
+      ],
+      "expected_second": [
+        67.0,
+        340.0
+      ],
+      "err_n_m": [
+        -14.28303616481832,
+        22.524602776518147
+      ],
+      "err_e_m": [
+        -10.555039911841462,
+        10.223765969841727
+      ],
+      "err_u_m": [
+        -16.978837421344824,
+        24.98634081855798
+      ],
+      "horizontal_err_m": [
+        0.4525046728861716,
+        22.588276030607723
+      ],
+      "position_3d_err_m": [
+        1.1022132490606589,
+        27.572722877814968
+      ],
+      "valid": [
+        1.0,
+        1.0
+      ],
+      "prior_only": [
+        0.0,
+        0.0
+      ],
+      "reference_left_s": [
+        66.90172982215881,
+        339.9018085002899
+      ],
+      "reference_right_s": [
+        67.00191569328308,
+        340.0023012161255
+      ],
+      "reference_bracket_span_s": [
+        0.0942957401275634,
+        0.1049110889434814
+      ]
+    }
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/data/BY2_GNC_primary_saved_errors.csv.gz",
+    "rows": 274,
+    "columns": [
+      "time",
+      "expected_second",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "valid",
+      "prior_only",
+      "native_status",
+      "reference_left_s",
+      "reference_right_s",
+      "reference_bracket_span_s"
+    ],
+    "missing": {
+      "time": 0,
+      "expected_second": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "valid": 0,
+      "prior_only": 0,
+      "native_status": 0,
+      "reference_left_s": 0,
+      "reference_right_s": 0,
+      "reference_bracket_span_s": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        66.99799990653992,
+        339.9979999065399
+      ],
+      "expected_second": [
+        67.0,
+        340.0
+      ],
+      "err_n_m": [
+        -0.6502504392749002,
+        4.465761959525922
+      ],
+      "err_e_m": [
+        -0.4061123272382532,
+        3.557169660093204
+      ],
+      "err_u_m": [
+        2.1552820566389377,
+        8.107098876497094
+      ],
+      "horizontal_err_m": [
+        0.1756078463502517,
+        4.875438505550383
+      ],
+      "position_3d_err_m": [
+        2.694655201031776,
+        8.138397818988253
+      ],
+      "valid": [
+        1.0,
+        1.0
+      ],
+      "prior_only": [
+        0.0,
+        0.0
+      ],
+      "reference_left_s": [
+        66.90172982215881,
+        339.9018085002899
+      ],
+      "reference_right_s": [
+        67.00191569328308,
+        340.0023012161255
+      ],
+      "reference_bracket_span_s": [
+        0.0942957401275634,
+        0.1049110889434814
+      ]
+    }
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/data/BY2H_OISAM_primary_saved_errors.csv.gz",
+    "rows": 271,
+    "columns": [
+      "time",
+      "expected_second",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "valid",
+      "prior_only",
+      "native_status",
+      "reference_left_s",
+      "reference_right_s",
+      "reference_bracket_span_s",
+      "block_id",
+      "yaw_err_deg"
+    ],
+    "missing": {
+      "time": 0,
+      "expected_second": 0,
+      "err_n_m": 4,
+      "err_e_m": 4,
+      "err_u_m": 4,
+      "horizontal_err_m": 4,
+      "position_3d_err_m": 4,
+      "valid": 0,
+      "prior_only": 0,
+      "native_status": 0,
+      "reference_left_s": 0,
+      "reference_right_s": 0,
+      "reference_bracket_span_s": 0,
+      "block_id": 2,
+      "yaw_err_deg": 4
+    },
+    "numeric_ranges": {
+      "time": [
+        413.0,
+        683.0
+      ],
+      "expected_second": [
+        413.0,
+        683.0
+      ],
+      "err_n_m": [
+        -0.1486896165001624,
+        0.1753814913947149
+      ],
+      "err_e_m": [
+        -0.2858934082930104,
+        0.1989178473746759
+      ],
+      "err_u_m": [
+        -0.1084545559116118,
+        0.1786198775150323
+      ],
+      "horizontal_err_m": [
+        0.0051798545592994,
+        0.3159490319660685
+      ],
+      "position_3d_err_m": [
+        0.0070800083238437,
+        0.3429503197793249
+      ],
+      "valid": [
+        0.0,
+        1.0
+      ],
+      "prior_only": [
+        0.0,
+        1.0
+      ],
+      "reference_left_s": [
+        412.9025537967682,
+        682.9021453857422
+      ],
+      "reference_right_s": [
+        413.0015459060669,
+        683.0023539066315
+      ],
+      "reference_bracket_span_s": [
+        0.094888687133789,
+        0.1031663417816162
+      ],
+      "block_id": [
+        2.0,
+        3.0
+      ],
+      "yaw_err_deg": [
+        -5.039024414366025,
+        6.893340698251762
+      ]
+    }
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/data/BY2H_WEN_TC_primary_saved_errors.csv.gz",
+    "rows": 270,
+    "columns": [
+      "time",
+      "expected_second",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "valid",
+      "prior_only",
+      "native_status",
+      "reference_left_s",
+      "reference_right_s",
+      "reference_bracket_span_s"
+    ],
+    "missing": {
+      "time": 0,
+      "expected_second": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "valid": 0,
+      "prior_only": 0,
+      "native_status": 0,
+      "reference_left_s": 0,
+      "reference_right_s": 0,
+      "reference_bracket_span_s": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        413.9979999065399,
+        682.9979999065399
+      ],
+      "expected_second": [
+        414.0,
+        683.0
+      ],
+      "err_n_m": [
+        -8.910323600916994,
+        29.535708056909364
+      ],
+      "err_e_m": [
+        -9.23118166023838,
+        15.128210896379592
+      ],
+      "err_u_m": [
+        -27.679490158082345,
+        26.65240172922448
+      ],
+      "horizontal_err_m": [
+        0.3049808690895559,
+        29.618120533804905
+      ],
+      "position_3d_err_m": [
+        0.8284734069082506,
+        30.502843249901108
+      ],
+      "valid": [
+        1.0,
+        1.0
+      ],
+      "prior_only": [
+        0.0,
+        0.0
+      ],
+      "reference_left_s": [
+        413.9028732776642,
+        682.9021453857422
+      ],
+      "reference_right_s": [
+        414.0023550987244,
+        683.0023539066315
+      ],
+      "reference_bracket_span_s": [
+        0.094888687133789,
+        0.1031663417816162
+      ]
+    }
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/data/BY2H_GNC_primary_saved_errors.csv.gz",
+    "rows": 270,
+    "columns": [
+      "time",
+      "expected_second",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "valid",
+      "prior_only",
+      "native_status",
+      "reference_left_s",
+      "reference_right_s",
+      "reference_bracket_span_s"
+    ],
+    "missing": {
+      "time": 0,
+      "expected_second": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "valid": 0,
+      "prior_only": 0,
+      "native_status": 0,
+      "reference_left_s": 0,
+      "reference_right_s": 0,
+      "reference_bracket_span_s": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        413.9979999065399,
+        682.9979999065399
+      ],
+      "expected_second": [
+        414.0,
+        683.0
+      ],
+      "err_n_m": [
+        -0.741808113550984,
+        3.889577689505396
+      ],
+      "err_e_m": [
+        -0.7762689216459717,
+        1.9243291687913744
+      ],
+      "err_u_m": [
+        2.108460053048436,
+        8.974436472418539
+      ],
+      "horizontal_err_m": [
+        0.1914156303879755,
+        4.235556477363319
+      ],
+      "position_3d_err_m": [
+        2.9103631608308573,
+        9.08745431425014
+      ],
+      "valid": [
+        1.0,
+        1.0
+      ],
+      "prior_only": [
+        0.0,
+        0.0
+      ],
+      "reference_left_s": [
+        413.9028732776642,
+        682.9021453857422
+      ],
+      "reference_right_s": [
+        414.0023550987244,
+        683.0023539066315
+      ],
+      "reference_bracket_span_s": [
+        0.094888687133789,
+        0.1031663417816162
+      ]
+    }
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/data/BY2O_OISAM_primary_saved_errors.csv.gz",
+    "rows": 378,
+    "columns": [
+      "time",
+      "expected_second",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "valid",
+      "prior_only",
+      "native_status",
+      "reference_left_s",
+      "reference_right_s",
+      "reference_bracket_span_s",
+      "block_id",
+      "yaw_err_deg"
+    ],
+    "missing": {
+      "time": 0,
+      "expected_second": 0,
+      "err_n_m": 8,
+      "err_e_m": 8,
+      "err_u_m": 8,
+      "horizontal_err_m": 8,
+      "position_3d_err_m": 8,
+      "valid": 0,
+      "prior_only": 0,
+      "native_status": 0,
+      "reference_left_s": 0,
+      "reference_right_s": 0,
+      "reference_bracket_span_s": 0,
+      "block_id": 1,
+      "yaw_err_deg": 8
+    },
+    "numeric_ranges": {
+      "time": [
+        3186.0,
+        3563.0
+      ],
+      "expected_second": [
+        3186.0,
+        3563.0
+      ],
+      "err_n_m": [
+        -0.0817811717914954,
+        0.4930497175854079
+      ],
+      "err_e_m": [
+        -0.1628263880806381,
+        0.1859317733165203
+      ],
+      "err_u_m": [
+        -0.1833237032827366,
+        0.0882092831741432
+      ],
+      "horizontal_err_m": [
+        0.0032094044739568,
+        0.5192402687257963
+      ],
+      "position_3d_err_m": [
+        0.0059002897214554,
+        0.5196245787749791
+      ],
+      "valid": [
+        0.0,
+        1.0
+      ],
+      "prior_only": [
+        0.0,
+        1.0
+      ],
+      "reference_left_s": [
+        3185.902235031128,
+        3562.9015073776245
+      ],
+      "reference_right_s": [
+        3186.002345561981,
+        3563.002159357071
+      ],
+      "reference_bracket_span_s": [
+        0.0915689468383789,
+        0.1058225631713867
+      ],
+      "block_id": [
+        1.0,
+        7.0
+      ],
+      "yaw_err_deg": [
+        -5.959356210984197,
+        10.729367054645593
+      ]
+    }
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/data/BY2O_WEN_TC_primary_saved_errors.csv.gz",
+    "rows": 377,
+    "columns": [
+      "time",
+      "expected_second",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "valid",
+      "prior_only",
+      "native_status",
+      "reference_left_s",
+      "reference_right_s",
+      "reference_bracket_span_s"
+    ],
+    "missing": {
+      "time": 0,
+      "expected_second": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "valid": 0,
+      "prior_only": 0,
+      "native_status": 0,
+      "reference_left_s": 0,
+      "reference_right_s": 0,
+      "reference_bracket_span_s": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        3186.99799990654,
+        3562.99799990654
+      ],
+      "expected_second": [
+        3187.0,
+        3563.0
+      ],
+      "err_n_m": [
+        -12.073011045639053,
+        29.27878296492152
+      ],
+      "err_e_m": [
+        -10.346265727666374,
+        22.61390256267628
+      ],
+      "err_u_m": [
+        -32.19106159431948,
+        74.74344788454783
+      ],
+      "horizontal_err_m": [
+        0.1963489618668638,
+        29.810518843671588
+      ],
+      "position_3d_err_m": [
+        1.217727215583283,
+        75.68790569576804
+      ],
+      "valid": [
+        1.0,
+        1.0
+      ],
+      "prior_only": [
+        0.0,
+        0.0
+      ],
+      "reference_left_s": [
+        3186.9034373760223,
+        3562.9015073776245
+      ],
+      "reference_right_s": [
+        3187.0018503665924,
+        3563.002159357071
+      ],
+      "reference_bracket_span_s": [
+        0.0915689468383789,
+        0.1058225631713867
+      ]
+    }
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_07/data/BY2O_GNC_primary_saved_errors.csv.gz",
+    "rows": 377,
+    "columns": [
+      "time",
+      "expected_second",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "valid",
+      "prior_only",
+      "native_status",
+      "reference_left_s",
+      "reference_right_s",
+      "reference_bracket_span_s"
+    ],
+    "missing": {
+      "time": 0,
+      "expected_second": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "valid": 0,
+      "prior_only": 0,
+      "native_status": 0,
+      "reference_left_s": 0,
+      "reference_right_s": 0,
+      "reference_bracket_span_s": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        3186.99799990654,
+        3562.99799990654
+      ],
+      "expected_second": [
+        3187.0,
+        3563.0
+      ],
+      "err_n_m": [
+        -0.3452944748612085,
+        3.836900468463364
+      ],
+      "err_e_m": [
+        -0.6967965241718307,
+        3.879143274338119
+      ],
+      "err_u_m": [
+        -0.7276618597729274,
+        6.286903417541167
+      ],
+      "horizontal_err_m": [
+        0.1076249946599782,
+        4.618593237037654
+      ],
+      "position_3d_err_m": [
+        2.677571166877987,
+        6.328951288722662
+      ],
+      "valid": [
+        1.0,
+        1.0
+      ],
+      "prior_only": [
+        0.0,
+        0.0
+      ],
+      "reference_left_s": [
+        3186.9034373760223,
+        3562.9015073776245
+      ],
+      "reference_right_s": [
+        3187.0018503665924,
+        3563.002159357071
+      ],
+      "reference_bracket_span_s": [
+        0.0915689468383789,
+        0.1058225631713867
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C02_RMSE_COMPANION_TABLE.csv",
+    "rows": 9,
+    "columns": [
+      "sequence_id",
+      "method_id",
+      "support_role",
+      "support",
+      "physical_point",
+      "status",
+      "expected_epoch_count",
+      "actual_epoch_count",
+      "finite_epoch_count",
+      "matched_epoch_count",
+      "missing_or_invalid_count",
+      "coverage_fraction",
+      "prior_only_native_count",
+      "prior_only_primary_excluded_count",
+      "first_output_s",
+      "last_output_s",
+      "window_start_s",
+      "window_end_s",
+      "reference_bracket_max_s_on_support",
+      "original_native_identity_reused",
+      "attitude_is_estimated",
+      "input_layer",
+      "solver_and_adapter_elapsed_s",
+      "comparison_boundary",
+      "horizontal_rmse_m",
+      "horizontal_p50_m",
+      "horizontal_p95_m",
+      "horizontal_max_m",
+      "vertical_rmse_m",
+      "vertical_p50_m",
+      "vertical_p95_m",
+      "vertical_max_m",
+      "position_3d_rmse_m",
+      "position_3d_p50_m",
+      "position_3d_p95_m",
+      "position_3d_max_m",
+      "yaw_rmse_deg",
+      "yaw_p50_deg",
+      "yaw_p95_deg",
+      "yaw_max_deg",
+      "native_run_sha256",
+      "own_matched_epoch_count",
+      "common_time_tolerance_s"
+    ],
+    "missing": {
+      "sequence_id": 0,
+      "method_id": 0,
+      "support_role": 0,
+      "support": 0,
+      "physical_point": 0,
+      "status": 0,
+      "expected_epoch_count": 0,
+      "actual_epoch_count": 0,
+      "finite_epoch_count": 0,
+      "matched_epoch_count": 0,
+      "missing_or_invalid_count": 0,
+      "coverage_fraction": 0,
+      "prior_only_native_count": 0,
+      "prior_only_primary_excluded_count": 0,
+      "first_output_s": 0,
+      "last_output_s": 0,
+      "window_start_s": 0,
+      "window_end_s": 0,
+      "reference_bracket_max_s_on_support": 0,
+      "original_native_identity_reused": 0,
+      "attitude_is_estimated": 0,
+      "input_layer": 0,
+      "solver_and_adapter_elapsed_s": 0,
+      "comparison_boundary": 0,
+      "horizontal_rmse_m": 0,
+      "horizontal_p50_m": 0,
+      "horizontal_p95_m": 0,
+      "horizontal_max_m": 0,
+      "vertical_rmse_m": 0,
+      "vertical_p50_m": 0,
+      "vertical_p95_m": 0,
+      "vertical_max_m": 0,
+      "position_3d_rmse_m": 0,
+      "position_3d_p50_m": 0,
+      "position_3d_p95_m": 0,
+      "position_3d_max_m": 0,
+      "yaw_rmse_deg": 6,
+      "yaw_p50_deg": 6,
+      "yaw_p95_deg": 6,
+      "yaw_max_deg": 6,
+      "native_run_sha256": 0,
+      "own_matched_epoch_count": 9,
+      "common_time_tolerance_s": 9
+    },
+    "numeric_ranges": {
+      "expected_epoch_count": [
+        271.0,
+        378.0
+      ],
+      "actual_epoch_count": [
+        270.0,
+        378.0
+      ],
+      "finite_epoch_count": [
+        267.0,
+        377.0
+      ],
+      "matched_epoch_count": [
+        267.0,
+        377.0
+      ],
+      "missing_or_invalid_count": [
+        0.0,
+        8.0
+      ],
+      "coverage_fraction": [
+        0.9788359788359788,
+        1.0
+      ],
+      "prior_only_native_count": [
+        0.0,
+        6.0
+      ],
+      "prior_only_primary_excluded_count": [
+        0.0,
+        6.0
+      ],
+      "first_output_s": [
+        66.0,
+        3186.99799990654
+      ],
+      "last_output_s": [
+        339.9979999065399,
+        3563.0
+      ],
+      "window_start_s": [
+        66.0,
+        3186.0
+      ],
+      "window_end_s": [
+        340.0,
+        3563.0
+      ],
+      "reference_bracket_max_s_on_support": [
+        0.1031663417816162,
+        0.1058225631713867
+      ],
+      "solver_and_adapter_elapsed_s": [
+        0.4990279670000745,
+        58.54360654700031
+      ],
+      "horizontal_rmse_m": [
+        0.0520455994239885,
+        9.58372420602436
+      ],
+      "horizontal_p50_m": [
+        0.0290603440245007,
+        5.494257159311466
+      ],
+      "horizontal_p95_m": [
+        0.0620332366527064,
+        20.069936236433847
+      ],
+      "horizontal_max_m": [
+        0.3159490319660685,
+        29.810518843671588
+      ],
+      "vertical_rmse_m": [
+        0.0386476670565172,
+        16.424585988489145
+      ],
+      "vertical_p50_m": [
+        0.0204827072181235,
+        9.276445351599666
+      ],
+      "vertical_p95_m": [
+        0.0774110890675938,
+        35.191119243612135
+      ],
+      "vertical_max_m": [
+        0.125485787139253,
+        74.74344788454783
+      ],
+      "position_3d_rmse_m": [
+        0.0648258172976916,
+        19.01617192156221
+      ],
+      "position_3d_p50_m": [
+        0.0433555927360021,
+        11.971891103509464
+      ],
+      "position_3d_p95_m": [
+        0.1035557921673023,
+        39.78084486245298
+      ],
+      "position_3d_max_m": [
+        0.3429503197793249,
+        75.68790569576804
+      ],
+      "yaw_rmse_deg": [
+        2.534906955493744,
+        4.652920679592655
+      ],
+      "yaw_p50_deg": [
+        1.6404910065835168,
+        4.03705833684046
+      ],
+      "yaw_p95_deg": [
+        4.544638371785578,
+        8.055405031085154
+      ],
+      "yaw_max_deg": [
+        6.893340698251762,
+        10.729367054645593
+      ]
+    }
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX03R2/DEGRADATION_EXTERNAL_TABLE_R2.csv",
+    "rows": 396,
+    "columns": [
+      "case_id",
+      "family",
+      "type",
+      "seed",
+      "method",
+      "config",
+      "yaw_rmse_deg",
+      "horizontal_rmse_m",
+      "up_rmse_m",
+      "yaw_p95_deg",
+      "failure_class",
+      "pre_failure_yaw",
+      "pre_failure_h",
+      "pre_failure_up",
+      "input_identity_note",
+      "source_run_dir",
+      "output_sha256",
+      "audit_status_R1",
+      "audit_status_R2",
+      "observer_discrepancy_R2"
+    ],
+    "missing": {
+      "case_id": 0,
+      "family": 0,
+      "type": 0,
+      "seed": 0,
+      "method": 0,
+      "config": 0,
+      "yaw_rmse_deg": 36,
+      "horizontal_rmse_m": 36,
+      "up_rmse_m": 36,
+      "yaw_p95_deg": 36,
+      "failure_class": 0,
+      "pre_failure_yaw": 388,
+      "pre_failure_h": 388,
+      "pre_failure_up": 388,
+      "input_identity_note": 164,
+      "source_run_dir": 0,
+      "output_sha256": 28,
+      "audit_status_R1": 0,
+      "audit_status_R2": 0,
+      "observer_discrepancy_R2": 28
+    },
+    "numeric_ranges": {
+      "yaw_rmse_deg": [
+        2.9236903587600254,
+        60.9658638424264
+      ],
+      "horizontal_rmse_m": [
+        0.0877508129138417,
+        14.158956594632556
+      ],
+      "up_rmse_m": [
+        0.0498047968823557,
+        12.135817390870352
+      ],
+      "yaw_p95_deg": [
+        4.824808545801253,
+        86.93212763532725
+      ],
+      "pre_failure_yaw": [
+        9.628908440045482,
+        85.07571476309903
+      ],
+      "pre_failure_h": [
+        1.0766932203463924,
+        21.07274720237304
+      ],
+      "pre_failure_up": [
+        2.0570110546385103,
+        28.829316097347117
+      ]
+    }
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX03R2/DEGRADATION_PAIRED_R2.csv",
+    "rows": 744,
+    "columns": [
+      "level",
+      "group",
+      "method",
+      "method_label",
+      "metric",
+      "reference_method",
+      "registered_n",
+      "paired_n",
+      "difference_median",
+      "difference_p95",
+      "difference_definition",
+      "source",
+      "audit_status_R1",
+      "audit_status_R2",
+      "observer_discrepancy_R2"
+    ],
+    "missing": {
+      "level": 0,
+      "group": 0,
+      "method": 0,
+      "method_label": 0,
+      "metric": 0,
+      "reference_method": 0,
+      "registered_n": 0,
+      "paired_n": 0,
+      "difference_median": 120,
+      "difference_p95": 120,
+      "difference_definition": 0,
+      "source": 0,
+      "audit_status_R1": 0,
+      "audit_status_R2": 0,
+      "observer_discrepancy_R2": 24
+    },
+    "numeric_ranges": {
+      "registered_n": [
+        9.0,
+        27.0
+      ],
+      "paired_n": [
+        0.0,
+        27.0
+      ],
+      "difference_median": [
+        -8.241601963390083,
+        11.217547720253672
+      ],
+      "difference_p95": [
+        -1.2960867367116564,
+        25.598031634834403
+      ]
+    }
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX03R2/DEGRADATION_EXTERNAL_SUMMARY_R2.csv",
+    "rows": 186,
+    "columns": [
+      "level",
+      "group",
+      "method",
+      "method_label",
+      "metric",
+      "registered_n",
+      "failure_n",
+      "finite_n",
+      "median",
+      "p95",
+      "max",
+      "audit_status_R1",
+      "audit_status_R2",
+      "observer_discrepancy_R2"
+    ],
+    "missing": {
+      "level": 0,
+      "group": 0,
+      "method": 0,
+      "method_label": 0,
+      "metric": 0,
+      "registered_n": 0,
+      "failure_n": 0,
+      "finite_n": 0,
+      "median": 18,
+      "p95": 18,
+      "max": 18,
+      "audit_status_R1": 0,
+      "audit_status_R2": 0,
+      "observer_discrepancy_R2": 6
+    },
+    "numeric_ranges": {
+      "registered_n": [
+        9.0,
+        27.0
+      ],
+      "failure_n": [
+        0.0,
+        18.0
+      ],
+      "finite_n": [
+        0.0,
+        27.0
+      ],
+      "median": [
+        0.0503460362196766,
+        19.361007658493254
+      ],
+      "p95": [
+        0.0505464517579895,
+        60.63936678910384
+      ],
+      "max": [
+        0.0505543866099318,
+        60.9658638424264
+      ]
+    }
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/GPSS_V3_PAPER_START_20261008/FIGURE_PLAN_INTERNAL/ADD495.csv",
+    "rows": 495,
+    "columns": [
+      "run_id",
+      "internal_method_id",
+      "paper_reader_name",
+      "sequence_id",
+      "domain",
+      "case_id",
+      "case_family",
+      "degradation_type_id",
+      "seed_index",
+      "data_mode",
+      "evaluator_contract",
+      "evaluation_status",
+      "failure_classification",
+      "matched_epoch_count",
+      "output_epoch_count",
+      "coverage_ratio",
+      "reference_epoch_count",
+      "time_start",
+      "time_end",
+      "horizontal_rmse_m",
+      "up_rmse_m",
+      "position_3d_rmse_m",
+      "roll_rmse_deg",
+      "pitch_rmse_deg",
+      "yaw_rmse_deg",
+      "yaw_p95_absolute_deg",
+      "horizontal_p95_m",
+      "horizontal_max_m",
+      "yaw_max_absolute_deg",
+      "registered_table_path",
+      "registered_table_line",
+      "duration_s",
+      "outage_start_s",
+      "outage_end_s",
+      "anchor_time_s"
+    ],
+    "missing": {
+      "run_id": 0,
+      "internal_method_id": 0,
+      "paper_reader_name": 0,
+      "sequence_id": 0,
+      "domain": 0,
+      "case_id": 0,
+      "case_family": 0,
+      "degradation_type_id": 0,
+      "seed_index": 0,
+      "data_mode": 0,
+      "evaluator_contract": 0,
+      "evaluation_status": 0,
+      "failure_classification": 0,
+      "matched_epoch_count": 0,
+      "output_epoch_count": 0,
+      "coverage_ratio": 0,
+      "reference_epoch_count": 0,
+      "time_start": 0,
+      "time_end": 0,
+      "horizontal_rmse_m": 0,
+      "up_rmse_m": 0,
+      "position_3d_rmse_m": 0,
+      "roll_rmse_deg": 0,
+      "pitch_rmse_deg": 0,
+      "yaw_rmse_deg": 0,
+      "yaw_p95_absolute_deg": 0,
+      "horizontal_p95_m": 0,
+      "horizontal_max_m": 0,
+      "yaw_max_absolute_deg": 0,
+      "registered_table_path": 0,
+      "registered_table_line": 0,
+      "duration_s": 0,
+      "outage_start_s": 0,
+      "outage_end_s": 0,
+      "anchor_time_s": 0
+    },
+    "numeric_ranges": {
+      "matched_epoch_count": [
+        56642.0,
+        56642.0
+      ],
+      "output_epoch_count": [
+        56642.0,
+        56642.0
+      ],
+      "coverage_ratio": [
+        1.0,
+        1.0
+      ],
+      "reference_epoch_count": [
+        5480.0,
+        5480.0
+      ],
+      "time_start": [
+        66.005054,
+        66.005054
+      ],
+      "time_end": [
+        339.997056,
+        339.997056
+      ],
+      "horizontal_rmse_m": [
+        0.1071997134365337,
+        53.55678451552981
+      ],
+      "up_rmse_m": [
+        0.0970312427917893,
+        4.888513738651111
+      ],
+      "position_3d_rmse_m": [
+        0.1651757327482391,
+        53.56390044151061
+      ],
+      "roll_rmse_deg": [
+        2.055491761938448,
+        3.5327222850434814
+      ],
+      "pitch_rmse_deg": [
+        2.136006577511815,
+        3.0975404526673844
+      ],
+      "yaw_rmse_deg": [
+        1.811302431986317,
+        8.613380910117861
+      ],
+      "yaw_p95_absolute_deg": [
+        3.3773271339715643,
+        13.23648664358406
+      ],
+      "horizontal_p95_m": [
+        0.2914520185492066,
+        117.32717308102876
+      ],
+      "horizontal_max_m": [
+        0.5413662548221739,
+        348.943042441565
+      ],
+      "yaw_max_absolute_deg": [
+        8.676348222238403,
+        19.256557932238422
+      ],
+      "registered_table_line": [
+        2.0,
+        496.0
+      ],
+      "duration_s": [
+        10.0,
+        30.0
+      ],
+      "outage_start_s": [
+        92.20639,
+        294.203403
+      ],
+      "outage_end_s": [
+        112.20639,
+        314.203403
+      ],
+      "anchor_time_s": [
+        107.20639,
+        299.203403
+      ]
+    }
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/GPSS_V3_PAPER_START_20261008/FIGURE_PLAN_INTERNAL/ERROR_SERIES_AVAILABILITY6468.csv",
+    "rows": 6468,
+    "columns": [
+      "run_id",
+      "sequence_id",
+      "domain",
+      "case_id",
+      "method_id",
+      "native_status",
+      "evaluation_status",
+      "expected_retained",
+      "current_state",
+      "path",
+      "bytes",
+      "reader_encoding",
+      "time_field",
+      "columns"
+    ],
+    "missing": {
+      "run_id": 0,
+      "sequence_id": 0,
+      "domain": 0,
+      "case_id": 0,
+      "method_id": 0,
+      "native_status": 0,
+      "evaluation_status": 0,
+      "expected_retained": 0,
+      "current_state": 0,
+      "path": 0,
+      "bytes": 5314,
+      "reader_encoding": 0,
+      "time_field": 0,
+      "columns": 0
+    },
+    "numeric_ranges": {
+      "bytes": [
+        5557599.0,
+        7794926.0
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX03R2_AUDIT_REEVAL/RUNS/BY2__LC01__LIT__D62_20s_seed_00__seed_00/v3_R2/error_series_R2.csv.gz",
+    "rows": 58014,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "roll_err_deg",
+      "pitch_err_deg",
+      "yaw_err_deg"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "roll_err_deg": 0,
+      "pitch_err_deg": 0,
+      "yaw_err_deg": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        66.0,
+        340.0
+      ],
+      "err_n_m": [
+        -31.897061462864414,
+        2.1716454255855773
+      ],
+      "err_e_m": [
+        -2.141542089974408,
+        56.65580901201365
+      ],
+      "err_u_m": [
+        -71.93377015919549,
+        1.821360100047821
+      ],
+      "horizontal_err_m": [
+        0.000252323118232,
+        65.01771469969948
+      ],
+      "position_3d_err_m": [
+        0.0018280324873726,
+        96.96272744765116
+      ],
+      "roll_err_deg": [
+        -88.1845572224836,
+        11.094489095074778
+      ],
+      "pitch_err_deg": [
+        -12.197899497006006,
+        55.15210032872301
+      ],
+      "yaw_err_deg": [
+        -54.10688199334014,
+        9.277769140810108
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX03R2_AUDIT_REEVAL/RUNS/BY2__EXT05C__LIT__D62_20s_seed_00__seed_00/v3_R2/error_series_R2.csv.gz",
+    "rows": 58014,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "roll_err_deg",
+      "pitch_err_deg",
+      "yaw_err_deg"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "roll_err_deg": 0,
+      "pitch_err_deg": 0,
+      "yaw_err_deg": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        66.0,
+        340.0
+      ],
+      "err_n_m": [
+        -36.69198112313912,
+        1.6795144866362968
+      ],
+      "err_e_m": [
+        -2.127167840370845,
+        67.20242941273418
+      ],
+      "err_u_m": [
+        -72.52256384185509,
+        2.0258823498234246
+      ],
+      "horizontal_err_m": [
+        5.781854614510712e-05,
+        76.56675517294903
+      ],
+      "position_3d_err_m": [
+        0.0016981723556169,
+        105.46084706615184
+      ],
+      "roll_err_deg": [
+        -62.85563287719231,
+        12.92365238010902
+      ],
+      "pitch_err_deg": [
+        -10.236916669620058,
+        27.12698243210224
+      ],
+      "yaw_err_deg": [
+        -32.80894262187178,
+        0.9344485412415224
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX03R2_AUDIT_REEVAL/RUNS/BY2__LC01-BR__LIT__D62_20s_seed_00__seed_00/v3_R2/error_series_R2.csv.gz",
+    "rows": 58014,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "roll_err_deg",
+      "pitch_err_deg",
+      "yaw_err_deg"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "roll_err_deg": 0,
+      "pitch_err_deg": 0,
+      "yaw_err_deg": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        66.0,
+        340.0
+      ],
+      "err_n_m": [
+        -28.276499067286174,
+        3.921597354829324
+      ],
+      "err_e_m": [
+        -1.232760950909224,
+        41.76143789296426
+      ],
+      "err_u_m": [
+        -72.70695201048495,
+        0.385858285257882
+      ],
+      "horizontal_err_m": [
+        0.000252323118232,
+        50.43389826684179
+      ],
+      "position_3d_err_m": [
+        0.0023180644739656,
+        88.48660330832634
+      ],
+      "roll_err_deg": [
+        -5.559420002942943,
+        6.311802411604219
+      ],
+      "pitch_err_deg": [
+        -8.989560328478035,
+        34.47690083537992
+      ],
+      "yaw_err_deg": [
+        -16.10381669828263,
+        5.588943654298532
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/ADD_RUN_00400/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "rows": 56642,
+    "columns": [
+      "time",
+      "err_n_m",
+      "err_e_m",
+      "err_u_m",
+      "horizontal_err_m",
+      "position_3d_err_m",
+      "roll_err_deg",
+      "pitch_err_deg",
+      "yaw_err_deg",
+      "horizontal_3sigma_m",
+      "roll_3sigma_deg",
+      "pitch_3sigma_deg",
+      "yaw_3sigma_deg"
+    ],
+    "missing": {
+      "time": 0,
+      "err_n_m": 0,
+      "err_e_m": 0,
+      "err_u_m": 0,
+      "horizontal_err_m": 0,
+      "position_3d_err_m": 0,
+      "roll_err_deg": 0,
+      "pitch_err_deg": 0,
+      "yaw_err_deg": 0,
+      "horizontal_3sigma_m": 0,
+      "roll_3sigma_deg": 0,
+      "pitch_3sigma_deg": 0,
+      "yaw_3sigma_deg": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        66.005054,
+        339.997056
+      ],
+      "err_n_m": [
+        -0.4249584267570179,
+        1.369604025727977
+      ],
+      "err_e_m": [
+        -0.2893598502308236,
+        0.5177807381144746
+      ],
+      "err_u_m": [
+        -0.1845219872774599,
+        13.43654891507118
+      ],
+      "horizontal_err_m": [
+        0.0001654356781642,
+        1.3946346248213224
+      ],
+      "position_3d_err_m": [
+        0.0018098161341027,
+        13.506930106098691
+      ],
+      "roll_err_deg": [
+        -4.086152222563271,
+        6.871291905296573
+      ],
+      "pitch_err_deg": [
+        -8.568337323754463,
+        8.513640839542632
+      ],
+      "yaw_err_deg": [
+        -8.765617806238424,
+        3.851520604265289
+      ],
+      "horizontal_3sigma_m": [
+        0.0456630762046876,
+        42.43457969268709
+      ],
+      "roll_3sigma_deg": [
+        0.323068584,
+        6.000039819
+      ],
+      "pitch_3sigma_deg": [
+        0.325230468,
+        6.000039819
+      ],
+      "yaw_3sigma_deg": [
+        0.544788072,
+        6.000039819
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/BY2_COMMON_SEGMENTED_HEADING.csv.gz",
+    "rows": 274,
+    "columns": [
+      "nominal",
+      "elapsed_s",
+      "v3_time",
+      "oisam_time",
+      "v3_yaw_err_deg",
+      "oisam_yaw_err_deg",
+      "block_id"
+    ],
+    "missing": {
+      "nominal": 0,
+      "elapsed_s": 0,
+      "v3_time": 0,
+      "oisam_time": 0,
+      "v3_yaw_err_deg": 0,
+      "oisam_yaw_err_deg": 0,
+      "block_id": 0
+    },
+    "numeric_ranges": {
+      "nominal": [
+        67.0,
+        340.0
+      ],
+      "elapsed_s": [
+        1.0,
+        274.0
+      ],
+      "v3_time": [
+        67.001044,
+        339.997056
+      ],
+      "oisam_time": [
+        67.0,
+        340.0
+      ],
+      "v3_yaw_err_deg": [
+        -6.516542661437285,
+        2.961199242763996
+      ],
+      "oisam_yaw_err_deg": [
+        -2.0851099145919534,
+        8.595670618677616
+      ],
+      "block_id": [
+        1.0,
+        1.0
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/BY2_OISAM_SEGMENTED_heading.csv.gz",
+    "rows": 275,
+    "columns": [
+      "time",
+      "elapsed_s",
+      "yaw_err_deg",
+      "valid",
+      "prior_only",
+      "native_status",
+      "block_id",
+      "reference_left_s",
+      "reference_right_s",
+      "reference_bracket_span_s"
+    ],
+    "missing": {
+      "time": 0,
+      "elapsed_s": 0,
+      "yaw_err_deg": 0,
+      "valid": 0,
+      "prior_only": 0,
+      "native_status": 0,
+      "block_id": 0,
+      "reference_left_s": 0,
+      "reference_right_s": 0,
+      "reference_bracket_span_s": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        66.0,
+        340.0
+      ],
+      "elapsed_s": [
+        0.0,
+        274.0
+      ],
+      "yaw_err_deg": [
+        -2.0851099145919534,
+        8.595670618677616
+      ],
+      "valid": [
+        1.0,
+        1.0
+      ],
+      "prior_only": [
+        0.0,
+        0.0
+      ],
+      "block_id": [
+        1.0,
+        1.0
+      ],
+      "reference_left_s": [
+        65.9014241695404,
+        339.9018085002899
+      ],
+      "reference_right_s": [
+        66.00169491767883,
+        340.0023012161255
+      ],
+      "reference_bracket_span_s": [
+        0.0942957401275634,
+        0.1049110889434814
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/BY2_OISAM_SEGMENTED_EXISTING_METRICS.csv",
+    "rows": 4,
+    "columns": [
+      "sequence_id",
+      "method_id",
+      "support_role",
+      "support",
+      "physical_point",
+      "status",
+      "expected_epoch_count",
+      "actual_epoch_count",
+      "finite_epoch_count",
+      "matched_epoch_count",
+      "missing_or_invalid_count",
+      "coverage_fraction",
+      "prior_only_native_count",
+      "prior_only_primary_excluded_count",
+      "first_output_s",
+      "last_output_s",
+      "window_start_s",
+      "window_end_s",
+      "reference_bracket_max_s_on_support",
+      "original_native_identity_reused",
+      "attitude_is_estimated",
+      "input_layer",
+      "solver_and_adapter_elapsed_s",
+      "comparison_boundary",
+      "horizontal_rmse_m",
+      "horizontal_p50_m",
+      "horizontal_p95_m",
+      "horizontal_max_m",
+      "vertical_rmse_m",
+      "vertical_p50_m",
+      "vertical_p95_m",
+      "vertical_max_m",
+      "position_3d_rmse_m",
+      "position_3d_p50_m",
+      "position_3d_p95_m",
+      "position_3d_max_m",
+      "yaw_rmse_deg",
+      "yaw_p50_deg",
+      "yaw_p95_deg",
+      "yaw_max_deg",
+      "native_run_sha256",
+      "own_matched_epoch_count",
+      "common_time_tolerance_s"
+    ],
+    "missing": {
+      "sequence_id": 0,
+      "method_id": 0,
+      "support_role": 0,
+      "support": 0,
+      "physical_point": 0,
+      "status": 0,
+      "expected_epoch_count": 0,
+      "actual_epoch_count": 0,
+      "finite_epoch_count": 0,
+      "matched_epoch_count": 0,
+      "missing_or_invalid_count": 0,
+      "coverage_fraction": 0,
+      "prior_only_native_count": 0,
+      "prior_only_primary_excluded_count": 0,
+      "first_output_s": 0,
+      "last_output_s": 0,
+      "window_start_s": 0,
+      "window_end_s": 0,
+      "reference_bracket_max_s_on_support": 0,
+      "original_native_identity_reused": 0,
+      "attitude_is_estimated": 0,
+      "input_layer": 0,
+      "solver_and_adapter_elapsed_s": 0,
+      "comparison_boundary": 0,
+      "horizontal_rmse_m": 0,
+      "horizontal_p50_m": 0,
+      "horizontal_p95_m": 0,
+      "horizontal_max_m": 0,
+      "vertical_rmse_m": 0,
+      "vertical_p50_m": 0,
+      "vertical_p95_m": 0,
+      "vertical_max_m": 0,
+      "position_3d_rmse_m": 0,
+      "position_3d_p50_m": 0,
+      "position_3d_p95_m": 0,
+      "position_3d_max_m": 0,
+      "yaw_rmse_deg": 0,
+      "yaw_p50_deg": 0,
+      "yaw_p95_deg": 0,
+      "yaw_max_deg": 0,
+      "native_run_sha256": 0,
+      "own_matched_epoch_count": 2,
+      "common_time_tolerance_s": 2
+    },
+    "numeric_ranges": {
+      "expected_epoch_count": [
+        275.0,
+        275.0
+      ],
+      "actual_epoch_count": [
+        275.0,
+        275.0
+      ],
+      "finite_epoch_count": [
+        274.0,
+        275.0
+      ],
+      "matched_epoch_count": [
+        274.0,
+        275.0
+      ],
+      "missing_or_invalid_count": [
+        0.0,
+        1.0
+      ],
+      "coverage_fraction": [
+        0.9963636363636365,
+        1.0
+      ],
+      "prior_only_native_count": [
+        0.0,
+        0.0
+      ],
+      "prior_only_primary_excluded_count": [
+        0.0,
+        0.0
+      ],
+      "first_output_s": [
+        66.0,
+        67.0
+      ],
+      "last_output_s": [
+        340.0,
+        340.0
+      ],
+      "window_start_s": [
+        66.0,
+        66.0
+      ],
+      "window_end_s": [
+        340.0,
+        340.0
+      ],
+      "reference_bracket_max_s_on_support": [
+        0.1049110889434814,
+        0.1049110889434814
+      ],
+      "solver_and_adapter_elapsed_s": [
+        36.827229837,
+        36.827229837
+      ],
+      "horizontal_rmse_m": [
+        0.0978669669634025,
+        0.0980246995103039
+      ],
+      "horizontal_p50_m": [
+        0.0353864987808533,
+        0.0354192994034134
+      ],
+      "horizontal_p95_m": [
+        0.298718036429758,
+        0.2988519403122181
+      ],
+      "horizontal_max_m": [
+        0.4311472985649804,
+        0.4311472985649804
+      ],
+      "vertical_rmse_m": [
+        0.0447043379528656,
+        0.0447723681348186
+      ],
+      "vertical_p50_m": [
+        0.0262347324419385,
+        0.0270706436112999
+      ],
+      "vertical_p95_m": [
+        0.0957170680807478,
+        0.0958222881137609
+      ],
+      "vertical_max_m": [
+        0.125485787139253,
+        0.125485787139253
+      ],
+      "position_3d_rmse_m": [
+        0.1075937779540236,
+        0.1077655170380818
+      ],
+      "position_3d_p50_m": [
+        0.049301374650107,
+        0.0494053493238544
+      ],
+      "position_3d_p95_m": [
+        0.3054017112711366,
+        0.3055546367456063
+      ],
+      "position_3d_max_m": [
+        0.4331215348058872,
+        0.4331215348058872
+      ],
+      "yaw_rmse_deg": [
+        4.652920679592655,
+        4.6594609942357215
+      ],
+      "yaw_p50_deg": [
+        4.03705833684046,
+        4.042131813511787
+      ],
+      "yaw_p95_deg": [
+        7.69002819174913,
+        7.691441456192047
+      ],
+      "yaw_max_deg": [
+        8.595670618677616,
+        8.595670618677616
+      ],
+      "own_matched_epoch_count": [
+        275.0,
+        275.0
+      ],
+      "common_time_tolerance_s": [
+        0.005,
+        0.005
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/BY2H_COMMON_SEGMENTED_HEADING.csv.gz",
+    "rows": 267,
+    "columns": [
+      "nominal",
+      "elapsed_s",
+      "v3_time",
+      "oisam_time",
+      "v3_yaw_err_deg",
+      "oisam_yaw_err_deg",
+      "block_id"
+    ],
+    "missing": {
+      "nominal": 0,
+      "elapsed_s": 0,
+      "v3_time": 0,
+      "oisam_time": 0,
+      "v3_yaw_err_deg": 0,
+      "oisam_yaw_err_deg": 0,
+      "block_id": 0
+    },
+    "numeric_ranges": {
+      "nominal": [
+        417.0,
+        683.0
+      ],
+      "elapsed_s": [
+        4.0,
+        270.0
+      ],
+      "v3_time": [
+        416.995049,
+        682.99505
+      ],
+      "oisam_time": [
+        417.0,
+        683.0
+      ],
+      "v3_yaw_err_deg": [
+        -5.530269781001209,
+        4.654006318083049
+      ],
+      "oisam_yaw_err_deg": [
+        -5.039024414366025,
+        6.893340698251762
+      ],
+      "block_id": [
+        3.0,
+        3.0
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/BY2H_OISAM_SEGMENTED_heading.csv.gz",
+    "rows": 271,
+    "columns": [
+      "time",
+      "elapsed_s",
+      "yaw_err_deg",
+      "valid",
+      "prior_only",
+      "native_status",
+      "block_id",
+      "reference_left_s",
+      "reference_right_s",
+      "reference_bracket_span_s"
+    ],
+    "missing": {
+      "time": 0,
+      "elapsed_s": 0,
+      "yaw_err_deg": 4,
+      "valid": 0,
+      "prior_only": 0,
+      "native_status": 0,
+      "block_id": 2,
+      "reference_left_s": 0,
+      "reference_right_s": 0,
+      "reference_bracket_span_s": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        413.0,
+        683.0
+      ],
+      "elapsed_s": [
+        0.0,
+        270.0
+      ],
+      "yaw_err_deg": [
+        -5.039024414366025,
+        6.893340698251762
+      ],
+      "valid": [
+        0.0,
+        1.0
+      ],
+      "prior_only": [
+        0.0,
+        1.0
+      ],
+      "block_id": [
+        2.0,
+        3.0
+      ],
+      "reference_left_s": [
+        412.9025537967682,
+        682.9021453857422
+      ],
+      "reference_right_s": [
+        413.0015459060669,
+        683.0023539066315
+      ],
+      "reference_bracket_span_s": [
+        0.094888687133789,
+        0.1031663417816162
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/BY2H_OISAM_SEGMENTED_EXISTING_METRICS.csv",
+    "rows": 4,
+    "columns": [
+      "sequence_id",
+      "method_id",
+      "support_role",
+      "support",
+      "physical_point",
+      "status",
+      "expected_epoch_count",
+      "actual_epoch_count",
+      "finite_epoch_count",
+      "matched_epoch_count",
+      "missing_or_invalid_count",
+      "coverage_fraction",
+      "prior_only_native_count",
+      "prior_only_primary_excluded_count",
+      "first_output_s",
+      "last_output_s",
+      "window_start_s",
+      "window_end_s",
+      "reference_bracket_max_s_on_support",
+      "original_native_identity_reused",
+      "attitude_is_estimated",
+      "input_layer",
+      "solver_and_adapter_elapsed_s",
+      "comparison_boundary",
+      "horizontal_rmse_m",
+      "horizontal_p50_m",
+      "horizontal_p95_m",
+      "horizontal_max_m",
+      "vertical_rmse_m",
+      "vertical_p50_m",
+      "vertical_p95_m",
+      "vertical_max_m",
+      "position_3d_rmse_m",
+      "position_3d_p50_m",
+      "position_3d_p95_m",
+      "position_3d_max_m",
+      "yaw_rmse_deg",
+      "yaw_p50_deg",
+      "yaw_p95_deg",
+      "yaw_max_deg",
+      "native_run_sha256",
+      "own_matched_epoch_count",
+      "common_time_tolerance_s"
+    ],
+    "missing": {
+      "sequence_id": 0,
+      "method_id": 0,
+      "support_role": 0,
+      "support": 0,
+      "physical_point": 0,
+      "status": 0,
+      "expected_epoch_count": 0,
+      "actual_epoch_count": 0,
+      "finite_epoch_count": 0,
+      "matched_epoch_count": 0,
+      "missing_or_invalid_count": 0,
+      "coverage_fraction": 0,
+      "prior_only_native_count": 0,
+      "prior_only_primary_excluded_count": 0,
+      "first_output_s": 0,
+      "last_output_s": 0,
+      "window_start_s": 0,
+      "window_end_s": 0,
+      "reference_bracket_max_s_on_support": 0,
+      "original_native_identity_reused": 0,
+      "attitude_is_estimated": 0,
+      "input_layer": 0,
+      "solver_and_adapter_elapsed_s": 0,
+      "comparison_boundary": 0,
+      "horizontal_rmse_m": 0,
+      "horizontal_p50_m": 0,
+      "horizontal_p95_m": 0,
+      "horizontal_max_m": 0,
+      "vertical_rmse_m": 0,
+      "vertical_p50_m": 0,
+      "vertical_p95_m": 0,
+      "vertical_max_m": 0,
+      "position_3d_rmse_m": 0,
+      "position_3d_p50_m": 0,
+      "position_3d_p95_m": 0,
+      "position_3d_max_m": 0,
+      "yaw_rmse_deg": 0,
+      "yaw_p50_deg": 0,
+      "yaw_p95_deg": 0,
+      "yaw_max_deg": 0,
+      "native_run_sha256": 0,
+      "own_matched_epoch_count": 2,
+      "common_time_tolerance_s": 2
+    },
+    "numeric_ranges": {
+      "expected_epoch_count": [
+        271.0,
+        271.0
+      ],
+      "actual_epoch_count": [
+        271.0,
+        271.0
+      ],
+      "finite_epoch_count": [
+        267.0,
+        269.0
+      ],
+      "matched_epoch_count": [
+        267.0,
+        269.0
+      ],
+      "missing_or_invalid_count": [
+        2.0,
+        4.0
+      ],
+      "coverage_fraction": [
+        0.985239852398524,
+        0.992619926199262
+      ],
+      "prior_only_native_count": [
+        2.0,
+        2.0
+      ],
+      "prior_only_primary_excluded_count": [
+        0.0,
+        2.0
+      ],
+      "first_output_s": [
+        414.0,
+        417.0
+      ],
+      "last_output_s": [
+        683.0,
+        683.0
+      ],
+      "window_start_s": [
+        413.0,
+        413.0
+      ],
+      "window_end_s": [
+        683.0,
+        683.0
+      ],
+      "reference_bracket_max_s_on_support": [
+        0.1031663417816162,
+        0.1031663417816162
+      ],
+      "solver_and_adapter_elapsed_s": [
+        36.328165378,
+        36.328165378
+      ],
+      "horizontal_rmse_m": [
+        0.0647528356842041,
+        0.0649568731804322
+      ],
+      "horizontal_p50_m": [
+        0.0343771048102314,
+        0.0343771048102314
+      ],
+      "horizontal_p95_m": [
+        0.1355605940658845,
+        0.136217019663607
+      ],
+      "horizontal_max_m": [
+        0.3159490319660685,
+        0.3159490319660685
+      ],
+      "vertical_rmse_m": [
+        0.0417555235931468,
+        0.0417588200639424
+      ],
+      "vertical_p50_m": [
+        0.0204827072181235,
+        0.0205205805634671
+      ],
+      "vertical_p95_m": [
+        0.077160397511357,
+        0.0774110890675938
+      ],
+      "vertical_max_m": [
+        0.1786198775150323,
+        0.1786198775150323
+      ],
+      "position_3d_rmse_m": [
+        0.0770483840173392,
+        0.0772217225041729
+      ],
+      "position_3d_p50_m": [
+        0.0483646004059307,
+        0.0483646004059307
+      ],
+      "position_3d_p95_m": [
+        0.1469429444603811,
+        0.1476089499379178
+      ],
+      "position_3d_max_m": [
+        0.3429503197793249,
+        0.3429503197793249
+      ],
+      "yaw_rmse_deg": [
+        2.534906955493744,
+        2.55230271700269
+      ],
+      "yaw_p50_deg": [
+        1.741836746867932,
+        1.7620040595098203
+      ],
+      "yaw_p95_deg": [
+        4.543128530299873,
+        4.544638371785578
+      ],
+      "yaw_max_deg": [
+        6.893340698251762,
+        6.893340698251762
+      ],
+      "own_matched_epoch_count": [
+        267.0,
+        269.0
+      ],
+      "common_time_tolerance_s": [
+        0.005,
+        0.005
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/BY2O_COMMON_SEGMENTED_HEADING.csv.gz",
+    "rows": 367,
+    "columns": [
+      "nominal",
+      "elapsed_s",
+      "v3_time",
+      "oisam_time",
+      "v3_yaw_err_deg",
+      "oisam_yaw_err_deg",
+      "block_id"
+    ],
+    "missing": {
+      "nominal": 0,
+      "elapsed_s": 0,
+      "v3_time": 0,
+      "oisam_time": 0,
+      "v3_yaw_err_deg": 0,
+      "oisam_yaw_err_deg": 0,
+      "block_id": 0
+    },
+    "numeric_ranges": {
+      "nominal": [
+        3187.0,
+        3563.0
+      ],
+      "elapsed_s": [
+        1.0,
+        377.0
+      ],
+      "v3_time": [
+        3186.999073,
+        3562.997055
+      ],
+      "oisam_time": [
+        3187.0,
+        3563.0
+      ],
+      "v3_yaw_err_deg": [
+        -4.584038134157879,
+        12.741993140398847
+      ],
+      "oisam_yaw_err_deg": [
+        -5.959356210984197,
+        10.729367054645593
+      ],
+      "block_id": [
+        1.0,
+        7.0
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/BY2O_OISAM_SEGMENTED_heading.csv.gz",
+    "rows": 378,
+    "columns": [
+      "time",
+      "elapsed_s",
+      "yaw_err_deg",
+      "valid",
+      "prior_only",
+      "native_status",
+      "block_id",
+      "reference_left_s",
+      "reference_right_s",
+      "reference_bracket_span_s"
+    ],
+    "missing": {
+      "time": 0,
+      "elapsed_s": 0,
+      "yaw_err_deg": 8,
+      "valid": 0,
+      "prior_only": 0,
+      "native_status": 0,
+      "block_id": 1,
+      "reference_left_s": 0,
+      "reference_right_s": 0,
+      "reference_bracket_span_s": 0
+    },
+    "numeric_ranges": {
+      "time": [
+        3186.0,
+        3563.0
+      ],
+      "elapsed_s": [
+        0.0,
+        377.0
+      ],
+      "yaw_err_deg": [
+        -5.959356210984197,
+        10.729367054645593
+      ],
+      "valid": [
+        0.0,
+        1.0
+      ],
+      "prior_only": [
+        0.0,
+        1.0
+      ],
+      "block_id": [
+        1.0,
+        7.0
+      ],
+      "reference_left_s": [
+        3185.902235031128,
+        3562.9015073776245
+      ],
+      "reference_right_s": [
+        3186.002345561981,
+        3563.002159357071
+      ],
+      "reference_bracket_span_s": [
+        0.0915689468383789,
+        0.1058225631713867
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/BY2O_OISAM_SEGMENTED_EXISTING_METRICS.csv",
+    "rows": 4,
+    "columns": [
+      "sequence_id",
+      "method_id",
+      "support_role",
+      "support",
+      "physical_point",
+      "status",
+      "expected_epoch_count",
+      "actual_epoch_count",
+      "finite_epoch_count",
+      "matched_epoch_count",
+      "missing_or_invalid_count",
+      "coverage_fraction",
+      "prior_only_native_count",
+      "prior_only_primary_excluded_count",
+      "first_output_s",
+      "last_output_s",
+      "window_start_s",
+      "window_end_s",
+      "reference_bracket_max_s_on_support",
+      "original_native_identity_reused",
+      "attitude_is_estimated",
+      "input_layer",
+      "solver_and_adapter_elapsed_s",
+      "comparison_boundary",
+      "horizontal_rmse_m",
+      "horizontal_p50_m",
+      "horizontal_p95_m",
+      "horizontal_max_m",
+      "vertical_rmse_m",
+      "vertical_p50_m",
+      "vertical_p95_m",
+      "vertical_max_m",
+      "position_3d_rmse_m",
+      "position_3d_p50_m",
+      "position_3d_p95_m",
+      "position_3d_max_m",
+      "yaw_rmse_deg",
+      "yaw_p50_deg",
+      "yaw_p95_deg",
+      "yaw_max_deg",
+      "native_run_sha256",
+      "own_matched_epoch_count",
+      "common_time_tolerance_s"
+    ],
+    "missing": {
+      "sequence_id": 0,
+      "method_id": 0,
+      "support_role": 0,
+      "support": 0,
+      "physical_point": 0,
+      "status": 0,
+      "expected_epoch_count": 0,
+      "actual_epoch_count": 0,
+      "finite_epoch_count": 0,
+      "matched_epoch_count": 0,
+      "missing_or_invalid_count": 0,
+      "coverage_fraction": 0,
+      "prior_only_native_count": 0,
+      "prior_only_primary_excluded_count": 0,
+      "first_output_s": 0,
+      "last_output_s": 0,
+      "window_start_s": 0,
+      "window_end_s": 0,
+      "reference_bracket_max_s_on_support": 0,
+      "original_native_identity_reused": 0,
+      "attitude_is_estimated": 0,
+      "input_layer": 0,
+      "solver_and_adapter_elapsed_s": 0,
+      "comparison_boundary": 0,
+      "horizontal_rmse_m": 0,
+      "horizontal_p50_m": 0,
+      "horizontal_p95_m": 0,
+      "horizontal_max_m": 0,
+      "vertical_rmse_m": 0,
+      "vertical_p50_m": 0,
+      "vertical_p95_m": 0,
+      "vertical_max_m": 0,
+      "position_3d_rmse_m": 0,
+      "position_3d_p50_m": 0,
+      "position_3d_p95_m": 0,
+      "position_3d_max_m": 0,
+      "yaw_rmse_deg": 0,
+      "yaw_p50_deg": 0,
+      "yaw_p95_deg": 0,
+      "yaw_max_deg": 0,
+      "native_run_sha256": 0,
+      "own_matched_epoch_count": 2,
+      "common_time_tolerance_s": 2
+    },
+    "numeric_ranges": {
+      "expected_epoch_count": [
+        378.0,
+        378.0
+      ],
+      "actual_epoch_count": [
+        378.0,
+        378.0
+      ],
+      "finite_epoch_count": [
+        369.0,
+        376.0
+      ],
+      "matched_epoch_count": [
+        369.0,
+        376.0
+      ],
+      "missing_or_invalid_count": [
+        2.0,
+        9.0
+      ],
+      "coverage_fraction": [
+        0.9761904761904762,
+        0.9947089947089948
+      ],
+      "prior_only_native_count": [
+        6.0,
+        6.0
+      ],
+      "prior_only_primary_excluded_count": [
+        0.0,
+        6.0
+      ],
+      "first_output_s": [
+        3186.0,
+        3187.0
+      ],
+      "last_output_s": [
+        3563.0,
+        3563.0
+      ],
+      "window_start_s": [
+        3186.0,
+        3186.0
+      ],
+      "window_end_s": [
+        3563.0,
+        3563.0
+      ],
+      "reference_bracket_max_s_on_support": [
+        0.10435152053833,
+        0.1058225631713867
+      ],
+      "solver_and_adapter_elapsed_s": [
+        55.14347318299997,
+        55.14347318299997
+      ],
+      "horizontal_rmse_m": [
+        0.0520455994239885,
+        0.0528554173156285
+      ],
+      "horizontal_p50_m": [
+        0.0290437140125451,
+        0.0291667333309551
+      ],
+      "horizontal_p95_m": [
+        0.0620332366527064,
+        0.0626697974204819
+      ],
+      "horizontal_max_m": [
+        0.5192402687257963,
+        0.5192402687257963
+      ],
+      "vertical_rmse_m": [
+        0.0385675372886566,
+        0.038694302690424
+      ],
+      "vertical_p50_m": [
+        0.022431630746573,
+        0.0225405305176383
+      ],
+      "vertical_p95_m": [
+        0.0782863681295754,
+        0.0786813668360665
+      ],
+      "vertical_max_m": [
+        0.1833237032827366,
+        0.1833237032827366
+      ],
+      "position_3d_rmse_m": [
+        0.0648258172976916,
+        0.0654574881456831
+      ],
+      "position_3d_p50_m": [
+        0.0433407752975408,
+        0.0437026509740442
+      ],
+      "position_3d_p95_m": [
+        0.1035557921673023,
+        0.1060403352133929
+      ],
+      "position_3d_max_m": [
+        0.5196245787749791,
+        0.5196245787749791
+      ],
+      "yaw_rmse_deg": [
+        3.960934523302991,
+        3.977059234895784
+      ],
+      "yaw_p50_deg": [
+        1.6404910065835168,
+        1.6466776991427423
+      ],
+      "yaw_p95_deg": [
+        8.051023222554392,
+        8.05613533250695
+      ],
+      "yaw_max_deg": [
+        10.729367054645593,
+        10.729367054645593
+      ],
+      "own_matched_epoch_count": [
+        370.0,
+        376.0
+      ],
+      "common_time_tolerance_s": [
+        0.005,
+        0.005
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/GAPS.csv",
+    "rows": 21,
+    "columns": [
+      "sequence",
+      "method",
+      "left_s",
+      "right_s",
+      "gap_s",
+      "kind"
+    ],
+    "missing": {
+      "sequence": 0,
+      "method": 0,
+      "left_s": 0,
+      "right_s": 0,
+      "gap_s": 0,
+      "kind": 0
+    },
+    "numeric_ranges": {
+      "left_s": [
+        407.0170583724976,
+        3544.833067
+      ],
+      "right_s": [
+        413.0370919704437,
+        3546.0
+      ],
+      "gap_s": [
+        0.1079037189483642,
+        6.020033597946167
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/SOURCE_BLOCKS.csv",
+    "rows": 11,
+    "columns": [
+      "sequence",
+      "block_id",
+      "start_s",
+      "end_s",
+      "first_node_s",
+      "last_node_s",
+      "scheduled_nodes",
+      "actual_rows",
+      "prior_only_count",
+      "dynamic_valid_nodes"
+    ],
+    "missing": {
+      "sequence": 0,
+      "block_id": 0,
+      "start_s": 0,
+      "end_s": 0,
+      "first_node_s": 0,
+      "last_node_s": 0,
+      "scheduled_nodes": 0,
+      "actual_rows": 0,
+      "prior_only_count": 0,
+      "dynamic_valid_nodes": 0
+    },
+    "numeric_ranges": {
+      "block_id": [
+        1.0,
+        7.0
+      ],
+      "start_s": [
+        44.88707804679871,
+        3544.9870598316197
+      ],
+      "end_s": [
+        350.0910494327545,
+        3572.8390576839447
+      ],
+      "first_node_s": [
+        56.0,
+        3545.0
+      ],
+      "last_node_s": [
+        340.0,
+        3563.0
+      ],
+      "scheduled_nodes": [
+        1.0,
+        285.0
+      ],
+      "actual_rows": [
+        1.0,
+        285.0
+      ],
+      "prior_only_count": [
+        1.0,
+        1.0
+      ],
+      "dynamic_valid_nodes": [
+        0.0,
+        284.0
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/focused_20261011/comparison/data/OUTPUT_INTERVALS.csv",
+    "rows": 21,
+    "columns": [
+      "sequence",
+      "method",
+      "first_time",
+      "last_time",
+      "elapsed_start_s",
+      "elapsed_end_s",
+      "epochs",
+      "split_gap_threshold_s"
+    ],
+    "missing": {
+      "sequence": 0,
+      "method": 0,
+      "first_time": 0,
+      "last_time": 0,
+      "elapsed_start_s": 0,
+      "elapsed_end_s": 0,
+      "epochs": 0,
+      "split_gap_threshold_s": 0
+    },
+    "numeric_ranges": {
+      "first_time": [
+        66.0,
+        3546.0
+      ],
+      "last_time": [
+        339.997056,
+        3563.0
+      ],
+      "elapsed_start_s": [
+        0.0,
+        360.0
+      ],
+      "elapsed_end_s": [
+        1.905066999999974,
+        377.0
+      ],
+      "epochs": [
+        18.0,
+        58251.0
+      ],
+      "split_gap_threshold_s": [
+        0.1,
+        1.001
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3研究记录梳理_20261011/fusion/LC_NATIVE_TABLE_READ.csv",
+    "rows": 16,
+    "columns": [
+      "sequence_id",
+      "method_id",
+      "config",
+      "start_convention",
+      "main_row",
+      "manuscript_row",
+      "failure_classification",
+      "evaluation_status",
+      "geometric_audit_status",
+      "h_rmse_m",
+      "position_3d_rmse_m",
+      "up_rmse_m",
+      "yaw_rmse_deg",
+      "yaw_p95_absolute_deg",
+      "roll_rmse_deg",
+      "pitch_rmse_deg",
+      "body_forward_bias_m",
+      "body_right_bias_m",
+      "body_up_bias_m",
+      "output_epoch_count",
+      "matched_epoch_count",
+      "coverage_ratio",
+      "gap_events_in_window",
+      "gnss2_pacc_inflated_epochs",
+      "gnss2_float_epochs",
+      "evaluator_contract",
+      "source_nav_sha256",
+      "evaluator_nav_sha256",
+      "error_series_source",
+      "code_commit",
+      "notes"
+    ],
+    "missing": {
+      "sequence_id": 0,
+      "method_id": 0,
+      "config": 0,
+      "start_convention": 0,
+      "main_row": 0,
+      "manuscript_row": 0,
+      "failure_classification": 0,
+      "evaluation_status": 0,
+      "geometric_audit_status": 0,
+      "h_rmse_m": 0,
+      "position_3d_rmse_m": 0,
+      "up_rmse_m": 0,
+      "yaw_rmse_deg": 0,
+      "yaw_p95_absolute_deg": 0,
+      "roll_rmse_deg": 0,
+      "pitch_rmse_deg": 0,
+      "body_forward_bias_m": 0,
+      "body_right_bias_m": 0,
+      "body_up_bias_m": 0,
+      "output_epoch_count": 0,
+      "matched_epoch_count": 0,
+      "coverage_ratio": 0,
+      "gap_events_in_window": 0,
+      "gnss2_pacc_inflated_epochs": 0,
+      "gnss2_float_epochs": 0,
+      "evaluator_contract": 0,
+      "source_nav_sha256": 0,
+      "evaluator_nav_sha256": 0,
+      "error_series_source": 0,
+      "code_commit": 0,
+      "notes": 0
+    },
+    "numeric_ranges": {
+      "gap_events_in_window": [
+        0.0,
+        6.0
+      ],
+      "gnss2_pacc_inflated_epochs": [
+        20.0,
+        52.0
+      ],
+      "gnss2_float_epochs": [
+        0.0,
+        57.0
+      ]
+    }
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/V3研究记录梳理_20261011/fusion/EXPERIMENTS.csv",
+    "rows": 434,
+    "columns": [
+      "stage",
+      "sequence",
+      "method",
+      "configuration",
+      "case_id",
+      "seed",
+      "comparison_role",
+      "status",
+      "input_scope",
+      "support",
+      "yaw_rmse_deg",
+      "horizontal_rmse_m",
+      "up_rmse_m",
+      "source_table",
+      "native_record",
+      "error_series",
+      "reading_depth",
+      "reuse_note"
+    ],
+    "missing": {
+      "stage": 0,
+      "sequence": 0,
+      "method": 0,
+      "configuration": 1,
+      "case_id": 0,
+      "seed": 38,
+      "comparison_role": 0,
+      "status": 0,
+      "input_scope": 164,
+      "support": 396,
+      "yaw_rmse_deg": 52,
+      "horizontal_rmse_m": 40,
+      "up_rmse_m": 41,
+      "source_table": 0,
+      "native_record": 1,
+      "error_series": 1,
+      "reading_depth": 0,
+      "reuse_note": 0
+    },
+    "numeric_ranges": {}
+  }
+]

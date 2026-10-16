@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "applicable": true,
+  "auditable": true,
+  "verdict": "PASS",
+  "backend": "python-matplotlib",
+  "summary": {
+    "fail": 0,
+    "warn": 0,
+    "comparisons": 7,
+    "exemptions": 0
+  },
+  "tolerances": {
+    "alignment_pt": 1.5,
+    "gutter_pt": 1.5
+  },
+  "layout": {
+    "schema_version": 1,
+    "backend": "python-matplotlib",
+    "figure": {
+      "width_pt": 493.2283464566929,
+      "height_pt": 544.2519685039371
+    },
+    "panels": [
+      {
+        "id": "a",
+        "bbox_pt": [
+          50.309291338582675,
+          397.4195117502204,
+          323.1747562405763,
+          476.22047244094495
+        ],
+        "grid_id": "matplotlib-grid-1",
+        "row_start": 0,
+        "row_stop": 1,
+        "col_start": 0,
+        "col_stop": 2
+      },
+      {
+        "id": "b",
+        "bbox_pt": [
+          366.74151114089466,
+          397.4195117502204,
+          481.39086614173226,
+          476.22047244094495
+        ],
+        "grid_id": "matplotlib-grid-1",
+        "row_start": 0,
+        "row_stop": 1,
+        "col_start": 2,
+        "col_stop": 3
+      },
+      {
+        "id": "c",
+        "bbox_pt": [
+          50.309291338582675,
+          260.36888091691236,
+          481.39086614173226,
+          339.1698416076369
+        ],
+        "grid_id": "matplotlib-grid-1",
+        "row_start": 1,
+        "row_stop": 2,
+        "col_start": 0,
+        "col_stop": 3
+      },
+      {
+        "id": "d",
+        "bbox_pt": [
+          50.309291338582675,
+          117.0141732283464,
+          164.95864633942034,
+          202.11921077432885
+        ],
+        "grid_id": "matplotlib-grid-1",
+        "row_start": 2,
+        "row_stop": 3,
+        "col_start": 0,
+        "col_stop": 1
+      },
+      {
+        "id": "e",
+        "bbox_pt": [
+          208.52540123973864,
+          117.0141732283464,
+          323.1747562405763,
+          202.11921077432885
+        ],
+        "grid_id": "matplotlib-grid-1",
+        "row_start": 2,
+        "row_stop": 3,
+        "col_start": 1,
+        "col_stop": 2
+      },
+      {
+        "id": "f",
+        "bbox_pt": [
+          366.74151114089466,
+          117.0141732283464,
+          481.39086614173226,
+          202.11921077432885
+        ],
+        "grid_id": "matplotlib-grid-1",
+        "row_start": 2,
+        "row_stop": 3,
+        "col_start": 2,
+        "col_stop": 3
+      }
+    ],
+    "row_groups": [
+      {
+        "id": "inferred-row-1",
+        "panels": [
+          "a",
+          "b"
+        ]
+      },
+      {
+        "id": "inferred-row-3",
+        "panels": [
+          "d",
+          "e",
+          "f"
+        ]
+      }
+    ],
+    "column_groups": [
+      {
+        "id": "inferred-column-2",
+        "panels": [
+          "b",
+          "f"
+        ]
+      }
+    ],
+    "boundary_groups": [
+      {
+        "id": "inferred-shared-left-1",
+        "edge": "left",
+        "panels": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      {
+        "id": "inferred-shared-right-1",
+        "edge": "right",
+        "panels": [
+          "a",
+          "e"
+        ]
+      },
+      {
+        "id": "inferred-shared-right-2",
+        "edge": "right",
+        "panels": [
+          "b",
+          "c",
+          "f"
+        ]
+      }
+    ],
+    "exemptions": []
+  },
+  "findings": []
+}

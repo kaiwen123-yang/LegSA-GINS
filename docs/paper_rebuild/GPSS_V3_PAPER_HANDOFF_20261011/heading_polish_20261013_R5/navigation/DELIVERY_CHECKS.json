@@ -1,0 +1,44 @@
+{
+  "figure": "F03_integrated_routes_and_heading",
+  "status": "PASS",
+  "root_visual_review": "PASS; no further figure edit requested",
+  "color_and_grayscale_visual_review": "PASS",
+  "width_mm": 173.99999508327906,
+  "height_mm": 226.0000079684787,
+  "minimum_font_pt": 8.0,
+  "collision_verdict": "PASS",
+  "collision_counts": {
+    "fail": 0,
+    "warn": 0,
+    "contained_fill_overlays": 3,
+    "contained_image_overlays": 0
+  },
+  "alignment_verdict": "PASS",
+  "preview_pixels": [
+    2740,
+    3559
+  ],
+  "pdf_images": 0,
+  "main_configurations_per_scene": 8,
+  "reference_configurations_per_scene": 1,
+  "coordinate_identity_destinations": 52,
+  "registered_identity_destinations": 36,
+  "all_source_rows_and_valid_points_match": true,
+  "local_valid_points_outside_view": 0,
+  "source_preflight": {
+    "ready": true,
+    "strict": false,
+    "counts": {
+      "PASS": 19,
+      "WARN": 2,
+      "FAIL": 0
+    }
+  },
+  "source_preflight_warning_resolution": {
+    "FINAL-WIDTH": "Static literal parser does not evaluate 174/25.4. Final PDF is 174 x 226 mm.",
+    "INTERP-MONOTONIC": "The read() function asserts increasing time_s. Elapsed time is the same fixed-origin grid; independently checked increasing for every actual plotted source in this finalizer."
+  },
+  "new_solver_provider_evaluator_calls": 0,
+  "frozen_metrics_changed": false,
+  "old_directories_modified": false
+}

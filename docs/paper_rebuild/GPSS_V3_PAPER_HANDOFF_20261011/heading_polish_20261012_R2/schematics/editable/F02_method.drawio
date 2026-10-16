@@ -1,0 +1,223 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="legsa-v3-r2" name="Figure 2 editable">
+    <mxGraphModel dx="1200" dy="850" grid="1" gridSize="6" page="1" pageWidth="1044.0" pageHeight="756.0" math="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="shared" value="" style="shape=rectangle;rounded=1;arcSize=10;whiteSpace=wrap;html=0;fillColor=#F7FAFF;strokeColor=#2563EB;strokeWidth=1.6;dashed=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="534.0" y="12.0" width="336.0" height="732.0" />
+        </mxCell>
+        <mxCell id="shared_title" value="Shared-state GNSS/INS" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=19.05;fontColor=#334155;fontStyle=1;spacing=0;" vertex="1" parent="shared">
+          <mxGeometry as="geometry" x="65.94000000000005" y="11.04" width="204.11999999999998" height="31.92" />
+        </mxCell>
+        <mxCell id="imu" value="" style="shape=rectangle;rounded=1;arcSize=10;whiteSpace=wrap;html=0;fillColor=#F1F5F9;strokeColor=#334155;strokeWidth=1.6;dashed=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="18.0" y="60.0" width="234.0" height="120.0" />
+        </mxCell>
+        <mxCell id="imu_title" value="Body MEMS IMU" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=19.05;fontColor=#334155;fontStyle=1;spacing=0;" vertex="1" parent="imu">
+          <mxGeometry as="geometry" x="53.82000000000001" y="17.04" width="126.35999999999999" height="31.92" />
+        </mxCell>
+        <mxCell id="imu_measurement" value="Angular rate&#10;Acceleration" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=16.93;fontColor=#334155;fontStyle=0;spacing=0;" vertex="1" parent="imu">
+          <mxGeometry as="geometry" x="63.0" y="54.96" width="108.0" height="52.08" />
+        </mxCell>
+        <mxCell id="gnss" value="" style="shape=rectangle;rounded=1;arcSize=10;whiteSpace=wrap;html=0;fillColor=#EBF3FF;strokeColor=#2563EB;strokeWidth=1.6;dashed=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="18.0" y="234.0" width="234.0" height="174.0" />
+        </mxCell>
+        <mxCell id="gnss_title" value="Dual-antenna GNSS" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=19.05;fontColor=#334155;fontStyle=1;spacing=0;" vertex="1" parent="gnss">
+          <mxGeometry as="geometry" x="34.38" y="17.04000000000002" width="165.24" height="31.92" />
+        </mxCell>
+        <mxCell id="gnss_pv" value="Position / velocity&#10;Raw-Doppler velocity" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=16.93;fontColor=#334155;fontStyle=0;spacing=0;" vertex="1" parent="gnss">
+          <mxGeometry as="geometry" x="30.60000000000001" y="57.95999999999998" width="172.79999999999998" height="52.08" />
+        </mxCell>
+        <mxCell id="gnss_pair" value="Position pair (p₁, p₂)" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=16.93;fontColor=#334155;fontStyle=0;spacing=0;" vertex="1" parent="gnss">
+          <mxGeometry as="geometry" x="21.96" y="129.48" width="190.07999999999998" height="29.04" />
+        </mxCell>
+        <mxCell id="robot" value="" style="shape=rectangle;rounded=1;arcSize=10;whiteSpace=wrap;html=0;fillColor=#EAF8F5;strokeColor=#009E9A;strokeWidth=1.6;dashed=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="18.0" y="510.0" width="234.0" height="162.0" />
+        </mxCell>
+        <mxCell id="robot_title" value="Robot observations" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=19.05;fontColor=#334155;fontStyle=1;spacing=0;" vertex="1" parent="robot">
+          <mxGeometry as="geometry" x="29.52" y="20.04000000000002" width="174.96" height="31.92" />
+        </mxCell>
+        <mxCell id="robot_tilt" value="Roll / pitch" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=16.93;fontColor=#334155;fontStyle=0;spacing=0;" vertex="1" parent="robot">
+          <mxGeometry as="geometry" x="63.0" y="69.47999999999999" width="108.0" height="29.04" />
+        </mxCell>
+        <mxCell id="robot_velocity" value="Body velocity" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=16.93;fontColor=#334155;fontStyle=0;spacing=0;" vertex="1" parent="robot">
+          <mxGeometry as="geometry" x="60.84" y="117.47999999999999" width="112.32" height="29.04" />
+        </mxCell>
+        <mxCell id="propagation" value="" style="shape=rectangle;rounded=1;arcSize=10;whiteSpace=wrap;html=0;fillColor=#F1F5F9;strokeColor=#334155;strokeWidth=1.6;dashed=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="564.0" y="84.0" width="276.0" height="102.0" />
+        </mxCell>
+        <mxCell id="prop_title" value="Inertial propagation" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=19.05;fontColor=#334155;fontStyle=1;spacing=0;" vertex="1" parent="propagation">
+          <mxGeometry as="geometry" x="40.79999999999998" y="14.04" width="194.39999999999998" height="31.92" />
+        </mxCell>
+        <mxCell id="prop_body" value="State / covariance prediction" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=16.93;fontColor=#334155;fontStyle=0;spacing=0;" vertex="1" parent="propagation">
+          <mxGeometry as="geometry" x="12.720000000000027" y="57.47999999999999" width="250.56" height="29.04" />
+        </mxCell>
+        <mxCell id="state" value="" style="shape=rectangle;rounded=1;arcSize=10;whiteSpace=wrap;html=0;fillColor=#E8F1FF;strokeColor=#2563EB;strokeWidth=1.6;dashed=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="564.0" y="252.0" width="276.0" height="102.0" />
+        </mxCell>
+        <mxCell id="state_vector" value="x = (R, p, v, b_g, b_a)" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=21.17;fontColor=#334155;fontStyle=0;spacing=0;" vertex="1" parent="state">
+          <mxGeometry as="geometry" x="13.799999999999983" y="15.600000000000009" width="248.39999999999998" height="34.8" />
+        </mxCell>
+        <mxCell id="state_cov" value="P" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=21.17;fontColor=#334155;fontStyle=0;spacing=0;" vertex="1" parent="state">
+          <mxGeometry as="geometry" x="84.0" y="57.60000000000001" width="108.0" height="34.8" />
+        </mxCell>
+        <mxCell id="update" value="" style="shape=rectangle;rounded=1;arcSize=10;whiteSpace=wrap;html=0;fillColor=#E8F1FF;strokeColor=#2563EB;strokeWidth=1.6;dashed=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="564.0" y="408.0" width="276.0" height="126.0" />
+        </mxCell>
+        <mxCell id="update_title" value="Observation update" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=19.05;fontColor=#334155;fontStyle=1;spacing=0;" vertex="1" parent="update">
+          <mxGeometry as="geometry" x="50.52000000000001" y="14.04000000000002" width="174.96" height="31.92" />
+        </mxCell>
+        <mxCell id="update_body" value="GNSS and motion&#10;observations" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=16.93;fontColor=#334155;fontStyle=0;spacing=0;" vertex="1" parent="update">
+          <mxGeometry as="geometry" x="73.20000000000002" y="57.95999999999998" width="129.6" height="52.08" />
+        </mxCell>
+        <mxCell id="quality" value="" style="shape=rectangle;rounded=1;arcSize=10;whiteSpace=wrap;html=0;fillColor=#FFF0E9;strokeColor=#E76F51;strokeWidth=1.6;dashed=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="564.0" y="594.0" width="276.0" height="132.0" />
+        </mxCell>
+        <mxCell id="quality_title" value="Source quality&#10;and innovation" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=17.78;fontColor=#334155;fontStyle=1;spacing=0;" vertex="1" parent="quality">
+          <mxGeometry as="geometry" x="74.49599999999998" y="2.808000000000021" width="127.008" height="54.384" />
+        </mxCell>
+        <mxCell id="quality_formula" value="Rₛ = λₛ R₀,ₛ" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=21.17;fontColor=#334155;fontStyle=0;spacing=0;" vertex="1" parent="quality">
+          <mxGeometry as="geometry" x="73.20000000000002" y="60.599999999999966" width="129.6" height="34.8" />
+        </mxCell>
+        <mxCell id="bound" value="1 ≤ λₛ ≤ λmax,s" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=17.99;fontColor=#334155;fontStyle=0;spacing=0;" vertex="1" parent="quality">
+          <mxGeometry as="geometry" x="69.15000000000003" y="101.16" width="137.7" height="30.48" />
+        </mxCell>
+        <mxCell id="output" value="" style="shape=rectangle;rounded=1;arcSize=10;whiteSpace=wrap;html=0;fillColor=#EAF8F5;strokeColor=#009E9A;strokeWidth=1.6;dashed=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="900.0" y="258.0" width="132.0" height="192.0" />
+        </mxCell>
+        <mxCell id="output_title" value="Output" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=19.05;fontColor=#334155;fontStyle=1;spacing=0;" vertex="1" parent="output">
+          <mxGeometry as="geometry" x="12.0" y="17.04000000000002" width="108.0" height="31.92" />
+        </mxCell>
+        <mxCell id="output_body" value="Attitude&#10;Velocity&#10;Position" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=16.93;fontColor=#334155;fontStyle=0;spacing=0;" vertex="1" parent="output">
+          <mxGeometry as="geometry" x="12.0" y="70.44000000000001" width="108.0" height="75.12" />
+        </mxCell>
+        <mxCell id="frame" value="" style="shape=rectangle;rounded=1;arcSize=10;whiteSpace=wrap;html=0;fillColor=#F1F5F9;strokeColor=#334155;strokeWidth=1.6;dashed=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="330.0" y="606.0" width="138.0" height="78.0" />
+        </mxCell>
+        <mxCell id="frame_text" value="Frame&#10;rotation" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=17.99;fontColor=#334155;fontStyle=0;spacing=0;" vertex="1" parent="frame">
+          <mxGeometry as="geometry" x="15.0" y="11.52000000000001" width="108.0" height="54.96" />
+        </mxCell>
+        <mxCell id="gate" value="" style="shape=rhombus;rounded=0;arcSize=10;whiteSpace=wrap;html=0;fillColor=white;strokeColor=#334155;strokeWidth=1.6;dashed=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="486.0" y="450.0" width="36.0" height="36.0" />
+        </mxCell>
+        <mxCell id="gate_text" value="Valid&#10;GNSS&#10;event" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=16.93;fontColor=#334155;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="420.0" y="367.44" width="108.0" height="75.12" />
+        </mxCell>
+        <mxCell id="imu_to_propagation" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#334155;strokeWidth=1.785;dashed=0;exitX=1;exitY=0.625;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;" edge="1" parent="1" source="imu" target="propagation">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="252.0" y="135.0" />
+            <mxPoint as="targetPoint" x="564.0" y="135.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="propagation_to_state" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#334155;strokeWidth=1.785;dashed=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;exitPerimeter=0;entryPerimeter=0;" edge="1" parent="1" source="propagation" target="state">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="702.0" y="186.0" />
+            <mxPoint as="targetPoint" x="702.0" y="252.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="state_update" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;startArrow=block;strokeColor=#334155;strokeWidth=1.785;dashed=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;exitPerimeter=0;entryPerimeter=0;" edge="1" parent="1" source="state" target="update">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="702.0" y="354.0" />
+            <mxPoint as="targetPoint" x="702.0" y="408.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="state_to_output" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#334155;strokeWidth=1.785;dashed=0;exitX=1;exitY=0.5;entryX=0;entryY=0.234375;exitPerimeter=0;entryPerimeter=0;" edge="1" parent="1" source="state" target="output">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="840.0" y="303.0" />
+            <mxPoint as="targetPoint" x="900.0" y="303.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gnss_pv_to_gate" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#334155;strokeWidth=1.785;dashed=0;exitX=1;exitY=0.41379310344827586;entryX=0.5;entryY=0;exitPerimeter=0;entryPerimeter=0;" edge="1" parent="1" source="gnss" target="gate">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="252.0" y="306.0" />
+            <mxPoint as="targetPoint" x="504.0" y="450.0" />
+            <Array as="points">
+              <mxPoint x="504.0" y="306.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gnss_pv_label" value="Position / velocity&#10;and raw Doppler" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=16.93;fontColor=#334155;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="295.92" y="252.95999999999998" width="164.16" height="52.08" />
+        </mxCell>
+        <mxCell id="heading_to_gate" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#2563EB;strokeWidth=2.205;dashed=0;exitX=1;exitY=0.8275862068965517;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;" edge="1" parent="1" source="gnss" target="gate">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="252.0" y="378.0" />
+            <mxPoint as="targetPoint" x="486.0" y="468.0" />
+            <Array as="points">
+              <mxPoint x="444.0" y="378.0" />
+              <mxPoint x="444.0" y="468.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="heading_construction" value="p₂ − p₁ to heading" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=16.93;fontColor=#2563EB;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="270.24" y="336.48" width="155.51999999999998" height="29.04" />
+        </mxCell>
+        <mxCell id="heading_selection" value="Validity + innovation" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=16.93;fontColor=#2563EB;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="254.28000000000003" y="411.48" width="181.44" height="29.04" />
+        </mxCell>
+        <mxCell id="tilt_to_gate" style="edgeStyle=none;rounded=0;html=0;endArrow=none;endFill=1;startArrow=none;strokeColor=#009E9A;strokeWidth=1.785;dashed=0;" edge="1" parent="1">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="252.0" y="594.0" />
+            <mxPoint as="targetPoint" x="504.0" y="528.0" />
+            <Array as="points">
+              <mxPoint x="288.0" y="594.0" />
+              <mxPoint x="288.0" y="528.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tilt_label" value="Tilt observations" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=16.93;fontColor=#009E9A;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="310.56" y="492.48" width="146.88" height="29.04" />
+        </mxCell>
+        <mxCell id="body_velocity_to_frame" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#009E9A;strokeWidth=1.785;dashed=0;exitX=1;exitY=0.8333333333333334;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;" edge="1" parent="1" source="robot" target="frame">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="252.0" y="645.0" />
+            <mxPoint as="targetPoint" x="330.0" y="645.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="frame_to_gate" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#009E9A;strokeWidth=1.785;dashed=0;exitX=1;exitY=0.5;entryX=0.5;entryY=1;exitPerimeter=0;entryPerimeter=0;" edge="1" parent="1" source="frame" target="gate">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="468.0" y="645.0" />
+            <mxPoint as="targetPoint" x="504.0" y="486.0" />
+            <Array as="points">
+              <mxPoint x="504.0" y="645.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gate_to_update" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#334155;strokeWidth=2.1;dashed=0;exitX=1;exitY=0.5;entryX=0;entryY=0.47619047619047616;exitPerimeter=0;entryPerimeter=0;" edge="1" parent="1" source="gate" target="update">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="522.0" y="468.0" />
+            <mxPoint as="targetPoint" x="564.0" y="468.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="preprocess_to_frame" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#334155;strokeWidth=1.785;dashed=1;" edge="1" parent="1">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="399.0" y="708.0" />
+            <mxPoint as="targetPoint" x="399.0" y="684.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="preprocess" value="Historical heading + tilt&#10;used in preprocessing" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=16.93;fontColor=#334155;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="267.0" y="705.96" width="216.0" height="52.08" />
+        </mxCell>
+        <mxCell id="update_innovation" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#334155;strokeWidth=1.785;dashed=0;exitX=0.21739130434782608;exitY=1;entryX=0.21739130434782608;entryY=0;exitPerimeter=0;entryPerimeter=0;" edge="1" parent="1" source="update" target="quality">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="624.0" y="534.0" />
+            <mxPoint as="targetPoint" x="624.0" y="594.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="innovation_label" value="Innovation" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=16.93;fontColor=#334155;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="630.0" y="555.48" width="108.0" height="29.04" />
+        </mxCell>
+        <mxCell id="covariance_to_update" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#334155;strokeWidth=1.785;dashed=0;exitX=0.8043478260869565;exitY=0;entryX=0.8043478260869565;entryY=1;exitPerimeter=0;entryPerimeter=0;" edge="1" parent="1" source="quality" target="update">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="786.0" y="594.0" />
+            <mxPoint as="targetPoint" x="786.0" y="534.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="covariance_label" value="Rₛ" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=19.05;fontColor=#334155;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="759.0" y="554.04" width="108.0" height="31.92" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

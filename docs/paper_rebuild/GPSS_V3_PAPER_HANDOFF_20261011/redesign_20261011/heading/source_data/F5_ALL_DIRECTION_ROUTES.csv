@@ -1,0 +1,34 @@
+sequence,method,rmse_deg,available,denominator,coverage_percent,scored,level
+BY2,Position-derived input,3.906305437901525,1370,1370,100.0,1369,input-valid direction
+BY2,Used heading observations,2.8458960981481005,1348,1370,98.3941605839416,1348,"input direction selected by native update, not posterior"
+BY2,RTKLIB default,14.566166015767248,153,1370,11.167883211678832,153,RTKLIB fixed output
+BY2,RTKLIB + BRDC,20.646991249762408,194,1370,14.16058394160584,194,RTKLIB fixed output
+BY2,RTKLIB + constellations,14.611254467126965,154,1370,11.24087591240876,154,RTKLIB fixed output
+BY2,RTKLIB fix-and-hold,4.511760777149032,60,1370,4.37956204379562,60,RTKLIB fixed output
+BY2,C-LAMBDA,85.01547170149344,980,1370,71.53284671532846,980,"directional candidate, no acceptance test"
+BY2,C-WLS,85.17979534428157,961,1370,70.14598540145985,961,"directional candidate, no acceptance test"
+BY2,DD-KF,79.93184477512393,541,1370,39.48905109489051,541,valid DD-KF output
+BY2,FAR,,0,1509,0.0,0,accepted solution; full native recorded domain
+BY2,PAR,,0,1509,0.0,0,accepted solution; full native recorded domain
+BY2H,Position-derived input,15.745396683457573,1350,1350,100.0,1348,input-valid direction
+BY2H,Used heading observations,2.6145437562359786,1334,1350,98.8148148148148,1333,"input direction selected by native update, not posterior"
+BY2H,RTKLIB default,27.0111690896743,179,1350,13.25925925925926,179,RTKLIB fixed output
+BY2H,RTKLIB + BRDC,31.263814132161954,217,1350,16.074074074074073,217,RTKLIB fixed output
+BY2H,RTKLIB + constellations,12.732971393509587,186,1350,13.777777777777779,186,RTKLIB fixed output
+BY2H,RTKLIB fix-and-hold,10.62299168537043,149,1350,11.037037037037036,149,RTKLIB fixed output
+BY2H,C-LAMBDA,89.12738833212403,1059,1350,78.44444444444444,1059,"directional candidate, no acceptance test"
+BY2H,C-WLS,89.19292278722824,1029,1350,76.22222222222223,1029,"directional candidate, no acceptance test"
+BY2H,DD-KF,63.994556414042364,467,1350,34.592592592592595,467,valid DD-KF output
+BY2H,FAR,,0,1423,0.0,0,accepted solution; full native recorded domain
+BY2H,PAR,,0,1423,0.0,0,accepted solution; full native recorded domain
+BY2O,Position-derived input,2.3431197857476973,1594,1885,84.56233421750663,1587,input-valid direction
+BY2O,Used heading observations,2.091132437251804,1586,1885,84.13793103448276,1582,"input direction selected by native update, not posterior"
+BY2O,RTKLIB default,23.138949511295703,112,1885,5.941644562334218,112,RTKLIB fixed output
+BY2O,RTKLIB + BRDC,20.40291146083135,231,1885,12.254641909814323,231,RTKLIB fixed output
+BY2O,RTKLIB + constellations,21.78190065953815,117,1885,6.206896551724138,117,RTKLIB fixed output
+BY2O,RTKLIB fix-and-hold,19.205502081410785,93,1885,4.93368700265252,93,RTKLIB fixed output
+BY2O,C-LAMBDA,81.27346536636341,1173,1885,62.228116710875334,1173,"directional candidate, no acceptance test"
+BY2O,C-WLS,81.48607092261156,1210,1885,64.19098143236074,1210,"directional candidate, no acceptance test"
+BY2O,DD-KF,103.75420005976044,269,1885,14.270557029177718,269,valid DD-KF output
+BY2O,FAR,,0,2231,0.0,0,accepted solution; full native recorded domain
+BY2O,PAR,,0,2231,0.0,0,accepted solution; full native recorded domain

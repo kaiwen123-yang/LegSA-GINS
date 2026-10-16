@@ -1,0 +1,12 @@
+Nature Figure Rendered Collision Audit
+pdf: /mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/Q4_body_velocity.pdf
+pages: 1
+visible text boxes: 48
+stroke paths: 232
+
+[WARN] page 1 text-fill-edge: Text partially overlaps the edge of 1 filled region(s) — '0'
+  text bbox: (325.6962585449219, 108.95490264892578, 329.5893249511719, 115.95490264892578)
+
+summary: 0 fail, 1 warn, 10 contained fill overlays, 0 contained image overlays
+verdict: REVIEW REQUIRED
+note: contained overlays can be intentional; WARN findings need final-size visual review

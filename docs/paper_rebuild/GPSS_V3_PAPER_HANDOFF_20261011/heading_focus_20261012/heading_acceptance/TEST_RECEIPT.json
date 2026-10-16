@@ -1,0 +1,12 @@
+{
+  "command": "python3 -m pytest -q test_acceptance.py --junitxml=TEST_RESULTS.xml",
+  "tests": 21,
+  "failures": 0,
+  "errors": 0,
+  "source_sha256": {
+    "acceptance.py": "9658fa252d1b8042f23fc87ed2825c0d07a0ec38dc5e0a04252b413a0ddaf3a5",
+    "test_acceptance.py": "3f94e0b20ae98f84289172d917f9bb6d236d9a38a0d106b77dcdb7a19463df73",
+    "PLAN_LOCK.json": "2d5531d2b0ea07ebabf0636474caa3e59d53c605edbb5b60b1e5f9c923c1eaba"
+  },
+  "native_scientific_calls": 0
+}

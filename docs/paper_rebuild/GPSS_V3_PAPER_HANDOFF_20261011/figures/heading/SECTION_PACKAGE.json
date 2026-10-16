@@ -1,0 +1,339 @@
+{
+  "question": "Q2",
+  "title_zh": "短基线GNSS方向何时可靠",
+  "claim_zh": "当前0.35m安装中，新固定输出的连续性与已输出方向的物理一致性需要分别判断。",
+  "figures": [
+    {
+      "id": "Q2_heading_availability_and_consistency",
+      "title_zh": "RTKLIB原配置下短基线航向的输出与物理一致性",
+      "role": "main",
+      "question": "Q2",
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/Q2_heading_availability_and_consistency.png",
+      "preview_path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/preview/Q2_heading_availability_and_consistency.png",
+      "metadata_path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/Q2_heading_availability_and_consistency.json"
+    },
+    {
+      "id": "SQ2_RTKLIB_all_configurations",
+      "title_zh": "RTKLIB四配置的航向误差与输出连续性",
+      "role": "supplement",
+      "question": "Q2",
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/SQ2_RTKLIB_all_configurations.png",
+      "preview_path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/preview/SQ2_RTKLIB_all_configurations.png",
+      "metadata_path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/SQ2_RTKLIB_all_configurations.json"
+    },
+    {
+      "id": "SQ2_raw_dual_antenna_methods",
+      "title_zh": "三种原始双天线处理路线的误差分布与输出",
+      "role": "supplement",
+      "question": "Q2",
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/SQ2_raw_dual_antenna_methods.png",
+      "preview_path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/preview/SQ2_raw_dual_antenna_methods.png",
+      "metadata_path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/SQ2_raw_dual_antenna_methods.json"
+    }
+  ],
+  "tables": [
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/ALL_HEADING_EXPERIMENTS.csv",
+      "rows": 34
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2H_EXT04_C00_FAILURE_LEDGER.csv",
+      "rows": 2846
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2H_EXT04_C00_POLICY_SUMMARY.csv",
+      "rows": 2
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2H_EXT04_POLICY_PARAMETER_REGISTRY.csv",
+      "rows": 38
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2H_EXT04_STOCHASTIC_PARAMETER_REGISTRY.csv",
+      "rows": 11
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2O_EXT04_C00_FAILURE_LEDGER.csv",
+      "rows": 4462
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2O_EXT04_C00_POLICY_SUMMARY.csv",
+      "rows": 2
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2O_EXT04_POLICY_PARAMETER_REGISTRY.csv",
+      "rows": 38
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2O_EXT04_STOCHASTIC_PARAMETER_REGISTRY.csv",
+      "rows": 11
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2_EXT04_C00_FAILURE_LEDGER.csv",
+      "rows": 3018
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2_EXT04_C00_POLICY_SUMMARY.csv",
+      "rows": 2
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2_EXT04_POLICY_PARAMETER_REGISTRY.csv",
+      "rows": 38
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/BY2_EXT04_STOCHASTIC_PARAMETER_REGISTRY.csv",
+      "rows": 11
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/CLASSIC_QUALIFICATION_RESULTS.csv",
+      "rows": 12
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/COMMON_SUPPORT_ALL.csv",
+      "rows": 450
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/DG01R_CLOCK_OFFSET.csv",
+      "rows": 6
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/DG01R_RINEX_CROSSCHECK.csv",
+      "rows": 74
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/DG01R_VERSION_COMPARISON.csv",
+      "rows": 24
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/DG01_FIX_STATUS_TIMELINE.csv",
+      "rows": 12
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/DG01_OVERVIEW.csv",
+      "rows": 6
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/DG01_RTKLIB_CONFIG_AUDIT.csv",
+      "rows": 78
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/EXISTING_HEADING_METRICS.csv",
+      "rows": 63
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/FAR_PAR_ALL_THREE_TRIALS.csv",
+      "rows": 6
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/FAR_PAR_READER_TABLE.csv",
+      "rows": 6
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/HEADING_METRICS_READER_TABLE.csv",
+      "rows": 63
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/HX07R_BY2O_SEGMENTS.csv",
+      "rows": 20
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/HX07R_MANUSCRIPT_ROWS.csv",
+      "rows": 2
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/HX07R_SUPPLEMENT_ROWS.csv",
+      "rows": 12
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/INPUT_AUDIT_DIFFERENCES.csv",
+      "rows": 0
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/INPUT_AUDIT_OLD_LLI.csv",
+      "rows": 15
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/MOTION_PAIR_RESULTS.csv",
+      "rows": 16
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/NATIVE_RUN_SUMMARY.csv",
+      "rows": 9
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/Q2_MAIN_OUTPUT_COUNTS.csv",
+      "rows": 3
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/RAW_METHOD_OUTPUT_COUNTS.csv",
+      "rows": 9
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/RTKLIB_EPOCH_DIAGNOSTICS.csv",
+      "rows": 1509
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/RTKLIB_Q1_LARGE_LENGTH_DIAGNOSTICS.csv",
+      "rows": 35
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/V1_V2_SAME_METHOD_COMMON_SUPPORT.csv",
+      "rows": 27
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/INPUT_AUDIT_SUMMARY.json",
+      "type": "structured_diagnostic"
+    },
+    {
+      "path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/tables/RTKLIB_DIAGNOSTIC_SUMMARY.json",
+      "type": "structured_diagnostic"
+    }
+  ],
+  "method_coverage": [
+    {
+      "method": "RTKLIB V0",
+      "version": "HX07R",
+      "scope": "3 trials",
+      "status": "completed",
+      "used_in": "SQ2_RTKLIB_all_configurations + Q2_heading_availability_and_consistency",
+      "source_table": "tables/EXISTING_HEADING_METRICS.csv",
+      "role": "heading_output_comparison"
+    },
+    {
+      "method": "RTKLIB V0E",
+      "version": "HX07R",
+      "scope": "3 trials",
+      "status": "completed",
+      "used_in": "SQ2_RTKLIB_all_configurations",
+      "source_table": "tables/EXISTING_HEADING_METRICS.csv",
+      "role": "heading_output_comparison"
+    },
+    {
+      "method": "RTKLIB V1",
+      "version": "HX07R",
+      "scope": "3 trials",
+      "status": "completed",
+      "used_in": "SQ2_RTKLIB_all_configurations",
+      "source_table": "tables/EXISTING_HEADING_METRICS.csv",
+      "role": "heading_output_comparison"
+    },
+    {
+      "method": "RTKLIB V2",
+      "version": "HX07R",
+      "scope": "3 trials",
+      "status": "completed",
+      "used_in": "SQ2_RTKLIB_all_configurations",
+      "source_table": "tables/EXISTING_HEADING_METRICS.csv",
+      "role": "heading_output_comparison"
+    },
+    {
+      "method": "EXT01 C-LAMBDA",
+      "version": "EXT V2 generation2",
+      "scope": "3 trials",
+      "status": "completed",
+      "used_in": "SQ2_raw_dual_antenna_methods",
+      "source_table": "tables/EXISTING_HEADING_METRICS.csv",
+      "role": "candidate_direction_comparison"
+    },
+    {
+      "method": "EXT02 C-WLS",
+      "version": "EXT V2 generation2",
+      "scope": "3 trials",
+      "status": "completed",
+      "used_in": "SQ2_raw_dual_antenna_methods",
+      "source_table": "tables/EXISTING_HEADING_METRICS.csv",
+      "role": "candidate_direction_comparison"
+    },
+    {
+      "method": "EXT03 DD-KF",
+      "version": "EXT V2 generation2",
+      "scope": "3 trials",
+      "status": "completed",
+      "used_in": "SQ2_raw_dual_antenna_methods",
+      "source_table": "tables/EXISTING_HEADING_METRICS.csv",
+      "role": "candidate_direction_comparison"
+    },
+    {
+      "method": "EXT04 FAR",
+      "version": "HX02 declared policies",
+      "scope": "3 trials",
+      "status": "completed_zero_accepted",
+      "used_in": "Supplemental result table",
+      "source_table": "tables/FAR_PAR_ALL_THREE_TRIALS.csv",
+      "role": "acceptance_outcome"
+    },
+    {
+      "method": "EXT04 PAR",
+      "version": "HX02 declared policies",
+      "scope": "3 trials",
+      "status": "completed_zero_accepted",
+      "used_in": "Supplemental result table",
+      "source_table": "tables/FAR_PAR_ALL_THREE_TRIALS.csv",
+      "role": "acceptance_outcome"
+    },
+    {
+      "method": "DG01",
+      "version": "Saved completed results",
+      "scope": "See source table",
+      "status": "completed",
+      "used_in": "Supplemental evidence table",
+      "source_table": "tables/DG01_OVERVIEW.csv",
+      "role": "input_conditions"
+    },
+    {
+      "method": "DG01R",
+      "version": "Saved completed results",
+      "scope": "See source table",
+      "status": "completed",
+      "used_in": "Supplemental evidence table",
+      "source_table": "tables/DG01R_VERSION_COMPARISON.csv",
+      "role": "clock_and_halfcycle_diagnosis"
+    },
+    {
+      "method": "RTKLIB trace4",
+      "version": "Saved completed results",
+      "scope": "See source table",
+      "status": "completed",
+      "used_in": "Q2_heading_availability_and_consistency",
+      "source_table": "tables/RTKLIB_EPOCH_DIAGNOSTICS.csv",
+      "role": "main_figure_mechanism"
+    },
+    {
+      "method": "Input history",
+      "version": "Saved completed results",
+      "scope": "See source table",
+      "status": "completed",
+      "used_in": "Supplemental evidence table",
+      "source_table": "tables/INPUT_AUDIT_SUMMARY.json",
+      "role": "input_equivalence"
+    },
+    {
+      "method": "Classic candidate qualification",
+      "version": "Saved completed results",
+      "scope": "See source table",
+      "status": "completed",
+      "used_in": "Supplemental evidence table",
+      "source_table": "tables/CLASSIC_QUALIFICATION_RESULTS.csv",
+      "role": "synthetic_implementation_qualification"
+    },
+    {
+      "method": "Two-epoch motion prototype",
+      "version": "Saved completed results",
+      "scope": "See source table",
+      "status": "completed",
+      "used_in": "Supplemental evidence table",
+      "source_table": "tables/MOTION_PAIR_RESULTS.csv",
+      "role": "separate_research_branch"
+    }
+  ],
+  "method_coverage_path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/METHOD_COVERAGE.csv",
+  "results_path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/RESULTS_ZH.md",
+  "captions_path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/CAPTIONS.md",
+  "source_notes_path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/SOURCE_NOTES.md",
+  "source_reads_path": "G:/LegSA-GINS-project/V3五问题论文组图_20261011/heading/SOURCES_READ.csv",
+  "new_solver_calls": 0,
+  "new_evaluator_calls": 0,
+  "new_provider_calls": 0,
+  "validation": "PASS: actual color/grayscale review, panel alignment, PDF text, PDF collisions,174mm and600dpi checks",
+  "status": "COMPLETE"
+}

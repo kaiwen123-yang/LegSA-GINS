@@ -1,0 +1,38 @@
+[
+  {
+    "figure": "E10_all_configurations_heading",
+    "pdf_text_exit": 0,
+    "collision_exit": 0,
+    "collision_verdict": "PASS"
+  },
+  {
+    "figure": "E10_all_configurations_horizontal",
+    "pdf_text_exit": 0,
+    "collision_exit": 0,
+    "collision_verdict": "PASS"
+  },
+  {
+    "figure": "F06_attitude",
+    "pdf_text_exit": 0,
+    "collision_exit": 0,
+    "collision_verdict": "PASS"
+  },
+  {
+    "figure": "F07_conditional_translation",
+    "pdf_text_exit": 0,
+    "collision_exit": 0,
+    "collision_verdict": "PASS"
+  },
+  {
+    "figure": "F08_quality_tradeoffs",
+    "pdf_text_exit": 0,
+    "collision_exit": 0,
+    "collision_verdict": "REVIEW REQUIRED"
+  },
+  {
+    "figure": "F10_semisynthetic_complementarity",
+    "pdf_text_exit": 0,
+    "collision_exit": 0,
+    "collision_verdict": "PASS"
+  }
+]

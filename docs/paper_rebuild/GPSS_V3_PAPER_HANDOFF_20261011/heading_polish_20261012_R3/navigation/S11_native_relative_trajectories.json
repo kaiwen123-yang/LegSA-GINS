@@ -1,0 +1,22 @@
+{
+  "id": "S11_native_relative_trajectories",
+  "width_mm": 174,
+  "height_mm": 174.0,
+  "min_font_pt": 8,
+  "preview_dpi": 400,
+  "caption_zh": "相对状态估计方法的原生局部轨迹。各行对应三条场景记录，各列为官方接触InEKF文献参数、示例参数、接触运动学积分。各方法保留自身局部坐标和初始方向，不额外拟合到地理参考，因此本图是完整输出形状与范围展示，而非同一绝对坐标中的精度比较。圆圈和叉号分别为评价窗内首末状态；相关一次10秒对齐的误差评价在既有相对运动表中保留。",
+  "caption_en": "Native local trajectories of the relative-motion estimators. Rows denote the three recordings; columns show the official contact InEKF with literature and default settings and contact-kinematic integration. Every method retains its own native local gauge, without a new fit to the geographic reference. These panels show complete output shape and extent rather than absolute-position accuracy in one shared frame. Circles and crosses mark the first and last in-window states. The previously evaluated one-time10-s alignment errors remain in the companion relative-motion results.",
+  "notes": {
+    "new_fit_applied": false,
+    "coordinate_gauges": "native per method, no cross-method absolute ranking",
+    "all_native_in_window_rows_retained": true
+  },
+  "alignment": "PASS",
+  "audits": {
+    "text": 0,
+    "collisions": 0
+  },
+  "new_solver_evaluator_provider_calls": 0,
+  "visual_review": "PASS: complete color and grayscale layouts reviewed; POI insets moved inside empty loop regions, redundant FGO insets removed, support text moved outside paths, relative-scene text moved into two-line titles.",
+  "local_curve_rendering": "Main curves retain vectors; cropped spatial-detail marks rasterized at600dpi inside vector PDF/SVG to preserve exact display clipping; texts and axes remain editable."
+}

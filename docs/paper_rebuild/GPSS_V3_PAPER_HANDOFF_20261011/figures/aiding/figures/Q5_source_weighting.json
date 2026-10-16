@@ -1,0 +1,47 @@
+{
+  "id": "Q5_source_weighting",
+  "caption_en": "Benefits and costs of source-dependent weighting. (a,b) Horizontal and heading errors in a saved GNSS position-noise case (horizontal standard deviation 3 m, vertical 5 m). (c) Recorded covariance multipliers for three observation sources in the same run. (d) Divergent runs across 541 cases; both configurations additionally have nine cases without valid initial heading. (e) Whole-run horizontal RMSE for the 513 cases completed by both configurations. Points below the identity line favour LegSA-GINS; the inset enlarges the nominal error range. The cases reuse one recorded route with controlled observation perturbations.",
+  "caption_zh": "来源加权的收益与位置精度代价。（a,b）已保存的GNSS位置加噪案例中的水平和航向误差，水平标准差3 m、竖直5 m。（c）同次运行三个观测来源的实际协方差放大倍数。（d）541个案例的发散次数；两种配置各另有九例缺少有效初始航向。（e）双方均完成的513例的全窗水平RMSE。等值线下方表示完整方法误差更小，插图放大正常误差量级。案例来自同一实测路线的受控观测扰动。",
+  "meaning_zh": "权重轨迹说明各来源受到不同程度的降权；误差轨迹与完整案例集合共同显示，发散和大航向偏离减少，同时保留位置精度代价。",
+  "sources": [
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/GPSS_V3_PAPER_START_20261008/FIGURE_PLAN_INTERNAL/SINGLEMODULE_CASE_PAIRS2164.csv",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/GPSS_V3_PAPER_START_20261008/FIGURE_PLAN_INTERNAL/CORE5951.csv",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/RUN_01401/SOURCE_AWARE_WEIGHT_TRACE.csv.gz",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/RUN_01401/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/RUN_01403/v3/FROZEN_EVALUATOR/error_series.csv.gz"
+  ],
+  "technical_notes": {
+    "representative_case": "D15_seed_00",
+    "source_trace_rows": 7930,
+    "source_trace_plot": [
+      "receiver_position",
+      "dual_antenna_yaw",
+      "go2_horizontal_velocity"
+    ],
+    "other_sources": "All six sources retained in D15_SOURCE_WEIGHT_TRACE_ALL.csv",
+    "candidate_run_id": "RUN_01401",
+    "ablation_run_id": "RUN_01403",
+    "common_completed": 513,
+    "median_h_cost_mm": 0.9812100913904054,
+    "no_valid_heading_each": 9,
+    "reuse_level": "structural adaptation of existing A03, adding actual retained weighting trace",
+    "inset_alignment": "different-scale inset excluded; five main axes measured"
+  },
+  "width_mm": 174.0,
+  "height_mm": 188.0,
+  "alignment_status": "PASS",
+  "audit_returncodes": {
+    "pdf_text": 0,
+    "collisions": 0
+  },
+  "visual_review": "PASS",
+  "visual_review_notes": "彩色/灰度逐面板检查；来源图例置于真实权重最大值上方；实际6来源保留表、图选3来源；513个成对点全部保留。中位差文字与散点栅格图层包围框重叠但不遮任何数据点。",
+  "role": "main",
+  "question": "Q5",
+  "title_zh": "来源加权的收益与精度代价",
+  "export_sha256": {
+    "png": "0ba1ef2f36ca8e2444eb395807c9991410d884d88db675361db905ec48614bc0",
+    "pdf": "526458977d51d8fc82d3bc8fc1b3ac316b7ab8428904f13e384fd219d7c26e58",
+    "svg": "8a208bdae0f148d4146ed562d26f348ed0473326b121315fb3115e62250b3fdb"
+  }
+}

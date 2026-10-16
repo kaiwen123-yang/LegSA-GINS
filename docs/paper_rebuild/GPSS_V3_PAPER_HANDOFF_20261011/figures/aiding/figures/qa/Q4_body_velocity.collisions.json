@@ -1,0 +1,48 @@
+{
+  "pdf": "/mnt/g/LegSA-GINS-project/V3五问题论文组图_20261011/aiding/figures/Q4_body_velocity.pdf",
+  "auditable": true,
+  "verdict": "REVIEW REQUIRED",
+  "page_count": 1,
+  "visible_text_box_count": 48,
+  "text_trace_count": 48,
+  "stroke_path_count": 232,
+  "filled_region_count": 177,
+  "image_region_count": 0,
+  "summary": {
+    "fail": 0,
+    "warn": 1,
+    "contained_fill_overlays": 10,
+    "contained_image_overlays": 0
+  },
+  "thresholds": {
+    "text_inset_pt": 0.6,
+    "min_overlap_ratio": 0.05,
+    "clipping_tolerance_pt": 0.5
+  },
+  "findings": [
+    {
+      "severity": "WARN",
+      "kind": "text-fill-edge",
+      "page": 1,
+      "message": "Text partially overlaps the edge of 1 filled region(s)",
+      "text": "0",
+      "text_bbox": [
+        325.6962585449219,
+        108.95490264892578,
+        329.5893249511719,
+        115.95490264892578
+      ],
+      "other_text": null,
+      "other_bbox": [
+        326.732421875,
+        45.311798095703125,
+        417.6452941894531,
+        166.78701782226562
+      ],
+      "object_count": 1,
+      "object_indexes": [
+        16
+      ]
+    }
+  ]
+}

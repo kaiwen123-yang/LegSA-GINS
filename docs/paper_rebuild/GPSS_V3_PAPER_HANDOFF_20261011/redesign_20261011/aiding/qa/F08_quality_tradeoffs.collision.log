@@ -1,0 +1,12 @@
+Nature Figure Rendered Collision Audit
+pdf: /mnt/g/LegSA-GINS-project/V3正文重绘_20261011/aiding/figures/F08_quality_tradeoffs.pdf
+pages: 1
+visible text boxes: 77
+stroke paths: 78
+
+[WARN] page 1 text-image-edge: Text partially overlaps the edge of 1 raster image(s) — 'RMSE: 29.80 → 2.70'
+  text bbox: (155.38067626953125, 50.16750717163086, 230.97390747070312, 58.16750717163086)
+
+summary: 0 fail, 1 warn, 14 contained fill overlays, 0 contained image overlays
+verdict: REVIEW REQUIRED
+note: contained overlays can be intentional; WARN findings need final-size visual review

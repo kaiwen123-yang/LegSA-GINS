@@ -1,0 +1,180 @@
+{
+  "status": "PASS_READ_ONLY_CLOCK_AWARE_DERIVATION",
+  "native_receipt": {
+    "returncode": 0,
+    "elapsed_instrumented_s": 96.613618498,
+    "error": null,
+    "native_calls": 1,
+    "evaluation_calls": 0,
+    "retries": 0,
+    "not_an_online_runtime_benchmark": true,
+    "solution.pos_byte_equal": true,
+    "solution.pos.stat_byte_equal": true,
+    "forbidden_raw_reference_open_lines": [],
+    "output_sha256": {
+      "solution.pos.stat": "cf40c88259f979b21f1a2f3f93076f39d5d12489ef70e07866a94e715765d9e0",
+      "solution.pos.trace": "5cc8eac7ac81e6e99ad567f999af3dbced1d877783ca3d7073b97a65c84af8c3",
+      "OPENAT.strace": "c22b5d04d80e005a33af75ba9f5547242d2471aeff0415cdfe6d07f1a8478887",
+      "INVOCATION.json": "18f71d9b97788e5edb2fd58706c7de6e49afc83c0d5ddcf4eded9b48bb6ca047",
+      "solution.pos": "ecea49618f532fbf5a0cfb61c47377c1647bfc986297cdaec6cff24d96563199",
+      "stderr.log": "1fd3c6e8bf5870832a86847746cc8cda758239a22d14c753e16bc38730b96205",
+      "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "status": "PASS_SCIENTIFIC_BYTES_IDENTICAL"
+  },
+  "registration_commit": "3d0dbcf65ff390e1fe34c12be5bd7236c130fe6c",
+  "derivation_attempt01": {
+    "stage": "DERIVATION_ATTEMPT01",
+    "native_failed": false,
+    "exception": "AssertionError: Output without trace epoch",
+    "frozen_parser_sha256": "045ef075c57b0c418ebfd1908c633903d3d41b0e624f918dc4a546881a1ef918",
+    "reason": "original derivation incorrectly equated receiver-local observation time and clock-corrected solution time",
+    "repair": "new read-only parser joins via saved receiver-1 clock; original runner and all native products unchanged",
+    "additional_native_calls": 0
+  },
+  "derivation_script_sha256": "06027f0a8d7768dcc1e811e67bb38d73062db00fcd9e57a6449d7b6d2bd196e4",
+  "derivation_scope": "sealed original native outputs and source semantics; no reference, no estimator",
+  "clock_join": {
+    "receiver1_source": "first observation file GNSS2 is RTKLIB rover receiver 1; not physical GNSS1",
+    "clock_field": "$CLK fifth data field: sol.dtr[0]*1e9 in nanoseconds",
+    "formula": "raw observation time = clock-corrected output time + rover clock ns * 1e-9",
+    "clock_source": "rtkpos.c:251-253; pntpos.c:408-409",
+    "time_tolerance_basis": "two independently rounded millisecond tags, interval sum <=1 ms; plus 1e-6 ms numerical margin",
+    "matching_uses_heading_or_reference": false,
+    "output_count": 660,
+    "clock_count": 660,
+    "unique_matched_output_count": 660,
+    "strict_monotonicity": true,
+    "unmatched_output_rows": [],
+    "trace_epochs_without_output_count": 849,
+    "trace_epochs_without_output_explicit_csv": "RTKLIB_EPOCH_DIAGNOSTICS.csv output_present=False",
+    "max_abs_raw_reconstructed_minus_trace_time_ms": 0.29807382822036743
+  },
+  "full_native": {
+    "trace_epoch_count": 1509,
+    "output_rows": 660,
+    "q_counts": {
+      "None": 849,
+      "1": 177,
+      "2": 483
+    },
+    "relative_solver_entered_count": 661,
+    "ar_result_counts": {
+      "NOT_ATTEMPTED": 849,
+      "RATIO_PASS_AND_FIXED_CONDITIONING_SUCCESS": 178,
+      "RATIO_FAILED": 482
+    },
+    "q1_with_any_fixed_large_residual": 43,
+    "q1_with_fixed_large_length_residual": 35,
+    "q1_large_length_also_float_update_skipped": 32,
+    "q1_large_length_also_float_update_added": 35,
+    "q1_all_float_update_skipped": 169,
+    "q1_all_float_update_added": 177,
+    "q1_max_abs_length_residual_m": 0.357747956549505,
+    "q1_large_length_ratio_minmax": [
+      3.0,
+      52.6
+    ]
+  },
+  "observation_time_66_340": {
+    "trace_epoch_count": 1370,
+    "output_rows": 569,
+    "q_counts": {
+      "None": 801,
+      "1": 153,
+      "2": 416
+    },
+    "relative_solver_entered_count": 570,
+    "ar_result_counts": {
+      "NOT_ATTEMPTED": 801,
+      "RATIO_PASS_AND_FIXED_CONDITIONING_SUCCESS": 154,
+      "RATIO_FAILED": 415
+    },
+    "q1_with_any_fixed_large_residual": 43,
+    "q1_with_fixed_large_length_residual": 35,
+    "q1_large_length_also_float_update_skipped": 32,
+    "q1_large_length_also_float_update_added": 35,
+    "q1_all_float_update_skipped": 145,
+    "q1_all_float_update_added": 153,
+    "q1_max_abs_length_residual_m": 0.357747956549505,
+    "q1_large_length_ratio_minmax": [
+      3.0,
+      52.6
+    ]
+  },
+  "execution_error_counts": {
+    "point pos error": 680,
+    "base station position error": 168
+  },
+  "spp_chi_square_failure_counts": {
+    "point pos error": 680,
+    "base station position error": 168
+  },
+  "relative_solver_entered_but_no_AR_rows": [
+    {
+      "observation_week_tow_ms_key": "2408:460904598",
+      "observation_time_gpst": "2026/03/06 08:01:44.598",
+      "observation_relative_s": 86.59799999999814,
+      "output_key": null,
+      "output_present": false,
+      "output_relative_s": null,
+      "receiver1_clock_ns": null,
+      "q": null,
+      "baseline_length_m": null,
+      "ratio_output": null,
+      "relative_solver_entered": true,
+      "ar_attempted": false,
+      "ar_result": "NOT_ATTEMPTED",
+      "ar_dd_dimension": null,
+      "ratio_trace": null,
+      "successful_float_update_constbl_added_calls": 1,
+      "successful_float_update_constbl_skipped_calls": 2,
+      "float_postfit_constbl_added_calls": 0,
+      "float_postfit_constbl_skipped_calls": 1,
+      "fixed_postfit_constbl_added_calls": 0,
+      "float_large_residual_count": 0,
+      "fixed_large_residual_count": 0,
+      "fixed_large_length_residual_count": 0,
+      "execution_error_categories": "",
+      "trace_start_line": 512187
+    }
+  ],
+  "dd_call_counts": {
+    "FLOAT_UPDATE:ADDED": 1451,
+    "FLOAT_UPDATE:SKIPPED_NONLINEARITY": 532,
+    "FLOAT_POSTFIT:SKIPPED_NONLINEARITY": 310,
+    "FIXED_POSTFIT:ADDED": 177,
+    "FLOAT_POSTFIT:ADDED": 351
+  },
+  "ar_pass_without_fixed_postfit_rows": [
+    {
+      "observation_week_tow_ms_key": "2408:460934198",
+      "observation_time_gpst": "2026/03/06 08:02:14.198",
+      "observation_relative_s": 116.19799999997485,
+      "output_key": "2408:460934200",
+      "output_present": true,
+      "output_relative_s": 116.20000000001164,
+      "receiver1_clock_ns": -2296509.688,
+      "q": 2,
+      "baseline_length_m": 0.6055336571983426,
+      "ratio_output": 4.2,
+      "relative_solver_entered": true,
+      "ar_attempted": true,
+      "ar_result": "RATIO_PASS_AND_FIXED_CONDITIONING_SUCCESS",
+      "ar_dd_dimension": 1,
+      "ratio_trace": 4.23,
+      "successful_float_update_constbl_added_calls": 1,
+      "successful_float_update_constbl_skipped_calls": 2,
+      "float_postfit_constbl_added_calls": 0,
+      "float_postfit_constbl_skipped_calls": 1,
+      "fixed_postfit_constbl_added_calls": 0,
+      "float_large_residual_count": 0,
+      "fixed_large_residual_count": 0,
+      "fixed_large_length_residual_count": 0,
+      "execution_error_categories": "",
+      "trace_start_line": 646373
+    }
+  ],
+  "trace_quantization": "branch identity exact; numerical fields rounded by original RTKLIB trace formats",
+  "conclusion_boundary": "trace proves execution mechanisms, not unique physical cause, correct integers, calibrated false-fix risk or counterfactual benefit of a repair"
+}

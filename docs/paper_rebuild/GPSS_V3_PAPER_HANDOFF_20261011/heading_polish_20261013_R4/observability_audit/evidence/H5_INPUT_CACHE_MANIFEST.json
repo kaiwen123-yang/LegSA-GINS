@@ -1,0 +1,92 @@
+{
+  "cache_header_size": 256,
+  "cache_record_size": 192,
+  "cache_schema": {
+    "byte_order": "little_endian",
+    "float64_value_count": 22,
+    "header_bytes": 256,
+    "record_bytes": 192
+  },
+  "cache_sha256": "c169e26d66f35fe200bb17a695353cd2d751482df1cd97996a7a8afff8662065",
+  "cache_size_bytes": 12149440,
+  "canonical_foot_order": [
+    "FL",
+    "FR",
+    "RL",
+    "RR"
+  ],
+  "event_ledger_sha256": "8e80cde9b90ade49753d8fd97e554af3c032c664d1d336f663838cbb68204358",
+  "first_timestamp_ns": 1772784044887078145,
+  "frozen_transition_event_count_excluding_initial_add": 4706,
+  "initial_add_event_count": 4,
+  "last_timestamp_ns": 1772784350085048802,
+  "no_imputation": true,
+  "no_interpolation": true,
+  "prefix_interval": [
+    0,
+    92351234
+  ],
+  "prefix_sha256": "03cd96cd65d7f5af30f6a0c78d37f07ae4d32c65e78531807db7192454dff097",
+  "raw_identity_after_cache": {
+    "prefix_end_exclusive": 92351234,
+    "prefix_sha256": "03cd96cd65d7f5af30f6a0c78d37f07ae4d32c65e78531807db7192454dff097",
+    "sha256": "95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278",
+    "size": 92352512
+  },
+  "raw_identity_before_after_cache_equal": true,
+  "raw_identity_before_cache": {
+    "prefix_end_exclusive": 92351234,
+    "prefix_sha256": "03cd96cd65d7f5af30f6a0c78d37f07ae4d32c65e78531807db7192454dff097",
+    "sha256": "95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278",
+    "size": 92352512
+  },
+  "raw_sha256": "95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278",
+  "record_count": 63277,
+  "schema_version": "hartley.h5.cache_manifest.v1",
+  "scoped_source_manifest": {
+    "files": {
+      "scripts/paper_rebuild/run_hartley_h5_by2.py": {
+        "sha256": "e97e86965db2e31ffc091272eb73920b6929df60475c597b4bf25b8c3c885f16",
+        "size": 28336
+      },
+      "src/legsa_gins/paper_rebuild/horizontal_literature/hartley_h5.py": {
+        "sha256": "3b9e57d5470cf33360564b0736a81a31ee67c1274c9a87b7e335921f58a399c2",
+        "size": 28076
+      },
+      "src/legsa_gins/paper_rebuild/horizontal_literature/hartley_inekf/CMakeLists.txt": {
+        "sha256": "77812d0814872bac0913c50c5eb97dbf88a91ba6de4d498a273540869d382ed4",
+        "size": 1186
+      },
+      "src/legsa_gins/paper_rebuild/horizontal_literature/hartley_inekf/include/hartley_inekf/backend.hpp": {
+        "sha256": "5d730c7ce0feebef69503a78526c86aa6e07a3a886b7560fdc152d49fddcb56c",
+        "size": 11686
+      },
+      "src/legsa_gins/paper_rebuild/horizontal_literature/hartley_inekf/src/backend.cpp": {
+        "sha256": "bf611ad2ddc9d7cd891ff64b97879874e09b29e1329b75517932c68014447e06",
+        "size": 52243
+      },
+      "src/legsa_gins/paper_rebuild/horizontal_literature/hartley_inekf/tools/run_h5.cpp": {
+        "sha256": "8ca181da58ebc03c9ca77a13700c784be6855fe5d6f9ab12ebc1e5355d16fddb",
+        "size": 27689
+      }
+    },
+    "later_final_commit_mapping": null,
+    "manifest_sha256": "2b07eab6675b691c11994bf935d2ff1a331ceba30be7c9804bd8e83653c09c1d",
+    "task_start_dirty_or_precommit": true,
+    "task_start_head": "b1b3b0ec5e5d811c1658541a98b660f326500ac3"
+  },
+  "semantic_read_counters": {
+    "accel_values": 189831,
+    "foot_force_values": 253108,
+    "foot_position_values": 759324,
+    "forbidden_or_audit_values_decoded": 0,
+    "gyro_values": 189831,
+    "lexically_skipped_lines": 2720911,
+    "timestamp_values": 126554
+  },
+  "sensor_to_body_rpy_deg": [
+    -1.0,
+    0.0,
+    0.0
+  ]
+}

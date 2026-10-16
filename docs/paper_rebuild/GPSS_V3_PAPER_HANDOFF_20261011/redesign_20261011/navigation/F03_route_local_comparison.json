@@ -1,0 +1,96 @@
+{
+  "id": "F03_route_local_comparison",
+  "width_mm": 174,
+  "height_mm": 182.0,
+  "caption_en": "Recorded routes, local position detail and external-filter errors. Rows represent nominal walking, large body motion and antenna obstruction. Left: complete reference and LegSA-GINS paths; arrows show body heading and the purple ring locates the detail. Middle: a 0.2-second view in centimetres, referred to the reference position at its centre; circles denote its first epoch. Right: retained horizontal errors of LegSA-GINS and dual-position IEKFs over the same 16-second neighbourhood; shading denotes the middle-panel interval. The first two centres lie at the temporal midpoint during motion; the third lies at the midpoint of the first registered obstruction and is nearly stationary. Centre selection uses reference motion only; axes preserve equal spatial scale.",
+  "caption_zh": "三场景的完整路线、局部空间误差与外部滤波误差。左列保留参考与本文全部轨迹，箭头表示机身航向，紫圈定位中列路段；中列放大0.2秒轨迹，以中心时刻参考位置为原点、单位厘米，圆圈为该片段首时刻；右列在同一16秒邻域展示本文与双位置IEKF文献/标定参数的原始水平误差，浅带为中列区间。前两场景采用评价窗中点的运动时刻，第三场景采用首个登记遮挡中点、当时参考位置近乎静止。中心选择仅依据参考运动，空间轴保持等比例。",
+  "notes": {
+    "windows": [
+      {
+        "sequence": "BY2",
+        "target_centre_s": 203.0,
+        "chosen_centre_s": 202.997064,
+        "elapsed_centre_s": 136.997064,
+        "reference_speed_mps": 1.2174645943420284,
+        "spatial_window_s": [
+          202.897064,
+          203.097064
+        ],
+        "error_window_s": [
+          194.997064,
+          210.997064
+        ],
+        "selection": "Nearest reference-moving epoch to the predeclared centre",
+        "selection_threshold_mps": 0.3,
+        "no_estimator_error_used_in_selection": true,
+        "spatial_epochs": 35,
+        "full_epochs": 56642
+      },
+      {
+        "sequence": "BY2H",
+        "target_centre_s": 548.0,
+        "chosen_centre_s": 547.999098,
+        "elapsed_centre_s": 134.999098,
+        "reference_speed_mps": 1.2442965346135355,
+        "spatial_window_s": [
+          547.899098,
+          548.099098
+        ],
+        "error_window_s": [
+          539.999098,
+          555.999098
+        ],
+        "selection": "Nearest reference-moving epoch to the predeclared centre",
+        "selection_threshold_mps": 0.3,
+        "no_estimator_error_used_in_selection": true,
+        "spatial_epochs": 43,
+        "full_epochs": 58580
+      },
+      {
+        "sequence": "BY2O",
+        "target_centre_s": 3390.945,
+        "chosen_centre_s": 3390.945049,
+        "elapsed_centre_s": 204.94504899999993,
+        "reference_speed_mps": 0.003378664164240461,
+        "spatial_window_s": [
+          3390.845049,
+          3391.045049
+        ],
+        "error_window_s": [
+          3382.945049,
+          3398.945049
+        ],
+        "selection": "No reference motion >=0.3 m/s in the 30-second neighbourhood; fixed centre retained as a stationary interval",
+        "selection_threshold_mps": 0.3,
+        "no_estimator_error_used_in_selection": true,
+        "spatial_epochs": 40,
+        "full_epochs": 76548
+      }
+    ],
+    "all_curve_points_retained": true,
+    "arrow_length_meaning": "Graphical direction glyph; not speed",
+    "physical_point": "Reference and LegSA reconstructed at original POI; IEKF error series retains its frozen evaluator contract",
+    "new_accuracy_metrics": 0
+  },
+  "sources": [
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/GPSS_V3_FIGURES_20261008/redesign_20261009/data/BY2H_display_pose.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/GPSS_V3_FIGURES_20261008/redesign_20261009/data/BY2O_display_pose.csv.gz",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/GPSS_V3_FIGURES_20261008/redesign_20261009/data/BY2_display_pose.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_F04_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_LC01-S_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2H_LC01_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_F04_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_LC01-S_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2O_LC01_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_F04_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_LC01-S_saved_errors.csv.gz",
+    "/mnt/g/LegSA-GINS-project/V3论文组图_20261008/redesign_20261009/figures/data/C01_BY2_LC01_saved_errors.csv.gz"
+  ],
+  "audits": {
+    "text": 0,
+    "collision": 0
+  },
+  "new_solver_evaluator_provider_calls": 0,
+  "scientific_freeze": "7d43b9af26120ed5dde21f53e515386361072ba6",
+  "visual_review": "PASS: every final colour panel visually checked; figure 9 grayscale checked; original saved values, missing states, equal spatial aspect, and paired supports retained."
+}

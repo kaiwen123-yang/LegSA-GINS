@@ -1,0 +1,5 @@
+*.csv -text whitespace=cr-at-eol
+*.svg -text -whitespace
+**/tables/** -text -whitespace
+**/source_data/** -text -whitespace
+**/data/** -text -whitespace
