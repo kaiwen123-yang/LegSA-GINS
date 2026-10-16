@@ -120,5 +120,9 @@
   "latest_group_meeting_date": "2026-10-15",
   "latest_group_meeting_record": "group_meeting_20261015/README.md",
   "latest_group_meeting_slides": 29,
-  "latest_main_figure_pdf_pages": 10
+  "latest_main_figure_pdf_pages": 10,
+  "latest_group_meeting_script_date": "2026-10-16",
+  "latest_group_meeting_script": "group_meeting_script_20261016/README.md",
+  "group_meeting_script_slide_count": 29,
+  "group_meeting_script_qa_count": 8
 }

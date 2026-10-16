@@ -14,3 +14,5 @@
 [作者图面认可记录](docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/heading_polish_20261013_R6/AUTHOR_ACCEPTANCE.md)。
 
 2026-10-15新增：[正文十图PDF与29页组会汇报记录](docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/group_meeting_20261015/README.md)。当前认可图版仍为R6。
+
+2026-10-16新增：[29页组会逐页口播稿与8项答疑](docs/paper_rebuild/GPSS_V3_PAPER_HANDOFF_20261011/group_meeting_script_20261016/README.md)。对应已交付组会PPT，主讲约30分钟。
